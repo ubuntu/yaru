@@ -1,5 +1,3 @@
-GETTEXT_DOMAIN=suru-icon-theme
-
 build:
 	echo "Nothing to build"
 
@@ -11,7 +9,6 @@ install:
 		install -D -m 644 '{}' /usr/share/icons/'{}' \;
 
 uninstall:
-	find /usr/share/icons/Suru -exec \
-		rm -r '{}' \;
+	rm -r /usr/share/icons/Suru
 
 .PHONY: build clean install uninstall
