@@ -13,4 +13,4 @@ Many of the original Ubuntu generic app icons and Unity8 symbolic icons have bee
 
 ## Copying or Reusing
 
-This project is licenced under the terms of the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt).
+This project is licenced under the terms of the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt), so you are free to copy and reuse accordingly.
