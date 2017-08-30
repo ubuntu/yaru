@@ -7,9 +7,9 @@ Many of the original Ubuntu generic app icons and Unity8 symbolic icons have bee
 
 ## Notes
 
-This set is designed specifically for desktop environment coverage only, pull requests or issues regarding branded icons or theming third-party applications (for example, Chrome or Inkscape) will be rejected. Any issues or pull requests regarding icons specifically for desktop environments, such as MATE, XFCE, etc., will be attended to as they come.
-
-A theme that includes icons for third-party apps and branded icons is under development but is separate from this set.
+ - This set is designed for desktop environment coverage only, pull requests or issues regarding branded icons or theming third-party applications (for example, Firefox) will be rejected.
+ - Any issues or pull requests regarding icons specifically for desktop environments, such as MATE, XFCE, etc., will be attended to as they come.
+ - A theme that includes icons for third-party apps and branded icons is under development but is separate from this set.
 
 ## Copying or Reusing
 
