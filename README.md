@@ -30,4 +30,4 @@ You can install Suru system-wide with `sudo make install-root` but you needn't d
 
 ### Removing Suru
 
-Removing Suru is as simple as running `make uninstall` or `sudo make uninstall-root` depending on whether or not you installed it with superuser priveleges.
+To remove Suru, simply run: `make uninstall` or, depending on whether or not you installed it with superuser priveleges: `sudo make uninstall-root` 
