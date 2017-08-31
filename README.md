@@ -15,11 +15,13 @@ Many of the original Ubuntu generic app icons and Unity8 symbolic icons have bee
 
 This project is licenced under the terms of the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt), so you are free to copy and reuse accordingly.
 
-## Installing
+## Installing & Using
 
-There are no packages or releases yet but you can install this theme from source with the provided [Makefile](/makefile).
+There are no official packages or releases (yet) but you can install this theme from source with the provided [Makefile](/Makefile) and a few commands.
 
-To install locally you can run `make install` from the root directory of this repository or to install system-wide you can run `sudo make install-root` after which you can choose the theme in a Tweak tool or set with:
+First clone this repositoy and from the root directory, run `make install` to install Suru to your home folder or to install system-wide you can run `sudo make install-root`.
+
+After which you should be able to choose the theme in a Tweak tool or set with:
 
     gsettings set org.gnome.desktop.interface icon-theme Suru
     
