@@ -19,10 +19,10 @@ This project is licenced under the terms of the [GNU General Public License, ver
 
 There are no official packages or releases (yet) but you can install this theme from source with the provided [Makefile](/Makefile) and a few commands.
 
-First clone this repositoy and from the root directory, run `make install` to install Suru to your home folder or to install system-wide you can run `sudo make install-root`.
+First, clone this repository and from the root directory run `make install` to install Suru to your home folder or to install system-wide you can run `sudo make install-root`.
 
-After which you should be able to choose the theme in a Tweak tool or set with:
+After which you should be able to choose Suru in whichever theme settings you use or set with:
 
     gsettings set org.gnome.desktop.interface icon-theme Suru
     
-Uninstallation is as easy as `make uninstall` or `sudo make uninstall-root` depending on where you installed it.
+Uninstallation is as simple as `make uninstall` or `sudo make uninstall-root` depending on where you installed it.
