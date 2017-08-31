@@ -10,6 +10,7 @@ Many of the original Ubuntu generic app icons and Unity8 symbolic icons have bee
  - This set is designed for desktop environment coverage only, pull requests or issues regarding branded icons or theming third-party applications (for example, Firefox) will be rejected.
  - Any issues or pull requests regarding icons specifically for desktop environments, such as MATE, XFCE, etc., will be attended to as they come.
  - A theme that includes icons for third-party apps and branded icons is under development but is separate from this set.
+ - This icon set inherits icons from Humanity icon theme (if installed) to fill in the gaps
 
 ## Copying or Reusing
 
@@ -27,4 +28,6 @@ From the root directory of this repository running `make install` will install S
 
 You can install Suru system-wide with `sudo make install-root` but you needn't do that if you're the only user.
 
-Uninstallation is as simple as `make uninstall` or `sudo make uninstall-root` depending on where you installed it.
+### Removing Suru
+
+Removing Suru is as simple as running `make uninstall` or `sudo make uninstall-root` depending on whether or not you installed it with superuser priveleges.
