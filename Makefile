@@ -9,6 +9,7 @@ install:
 install-root:
 	find Suru/[1-9]* Suru/scalable Suru/index.theme -exec \
 		install -D -m 644 '{}' /usr/share/icons/'{}' \;
+	gtk-update-icon-cache /usr/share/icons/Suru
 
 uninstall:
 	rm -r ~/.local/share/icons/Suru
