@@ -17,6 +17,8 @@ This project is licenced under the terms of the [GNU General Public License, ver
 
 ## Installing & Using
 
+**Please note: this icon theme is in development, it will not be a perfect experience on your desktop**
+
 There are no official packages or releases (yet) but you can install this theme from source with the provided [Makefile](/Makefile) and a few commands.
 
 First, clone this repository and from the root directory run `make install` to install Suru to your home folder or to install system-wide you can run `sudo make install-root`.
