@@ -3,6 +3,7 @@ build:
 clean:
 
 install:
+	mkdir -p ~/.local/share/icons/
 	find Suru/[1-9]* Suru/scalable Suru/index.theme -exec \
 		install -D '{}' ~/.local/share/icons/'{}' \;
 
