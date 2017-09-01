@@ -23,7 +23,7 @@ require "fileutils"
 include REXML
 
 INKSCAPE = '/usr/bin/inkscape'
-SRC = "source-symbolic.svg"
+SRC = "./symbolic/source-plate.svg"
 PREFIX = "../Suru/scalable"
 
 # install with `sudo npm install -g svgo`

@@ -18,7 +18,7 @@ This project is licenced under the terms of the [GNU General Public License, ver
 
 ## Installing & Using
 
-**Please note: this icon theme is in development, it will not be a perfect experience on your desktop**
+**Please note: this icon theme is in development, as such there are plenty of icons that are "missing" or incomplete**
 
 There are no official packages or releases (yet) but you can install this theme from source with the provided [Makefile](/Makefile) and a few commands.
 
@@ -31,3 +31,8 @@ You can install Suru system-wide with `sudo make install-root` but you needn't d
 ### Removing Suru
 
 To remove Suru, simply run: `make uninstall` or, depending on whether or not you installed it with superuser priveleges: `sudo make uninstall-root` 
+
+## Support
+
+The development of Suru is, in part, supported by [Patreon](http://patreon.com/snwh/), your patronage is much appreciated. &#x1F60A;
+
