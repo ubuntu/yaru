@@ -1,6 +1,6 @@
 ## Icon Sources
 
-Notes:
+**Notes:**
 * Do not edit the icon assets of the theme directly, instead edit source files in this directory and render them with the appropriate script.
 * To edit the icons will need `inkscape` installed and you use the render scripts you'll need `python` and `ruby` installed 
 
