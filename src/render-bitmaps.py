@@ -27,7 +27,7 @@ INKSCAPE = '/usr/bin/inkscape'
 OPTIPNG = '/usr/bin/optipng'
 MAINDIR = '../Suru'
 # SRC = 'fullcolor'
-SOURCES = ('fullcolor/apps', 'fullcolor/categories', 'fullcolor/mimetypes', 'fullcolor/places', 'mixed/apps', 'mixed/categories', 'mixed/devices', 'mixed/emblems')
+SOURCES = ('fullcolor/apps', 'fullcolor/categories', 'fullcolor/mimetypes', 'fullcolor/places')
 
 # the resolution that non-hi-dpi icons are rendered at
 DPI_1_TO_1 = 96
