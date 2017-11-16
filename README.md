@@ -1,16 +1,15 @@
 Suru Icon Theme
 ================
 
-Suru is a FreeDesktop icon theme whose design is based upon and around the original Suru icon guidelines for Ubuntu mobile applications.
+Suru is a FreeDesktop icon theme based upon the defunct Ubuntu mobile icon set and is designed with the original Suru icon guidelines and palette in mind.
 
-Many of the original Ubuntu generic app icons and Unity8 symbolic icons have been repurposed for desktop use, however the icon set has extensive additions such as icons for folders, devices, file types, application categories, and other system toolbar and status icons.
+Many of the original generic app icons and symbolic icons have been repurposed, however this icon set has extensive additions such as icons for additional apps, as well as icons for folders, devices, file types, application categories, and other system toolbar and status icons.
 
-## Notes
+## Contributor Notes
 
- - This set is designed for desktop environment coverage only, pull requests or issues regarding branded icons or theming third-party applications (for example, Firefox) will be rejected.
- - Any issues or pull requests regarding icons specifically for desktop environments, such as MATE, XFCE, etc., will be attended to as they come.
- - A theme that includes icons for third-party apps and branded icons is under development but is separate from this set.
- - This icon set inherits icons from Humanity icon theme (if installed) to fill in the gaps
+ - Pull requests for branded third-party applications (for example, Google Chrome) will be rejected. Infringing upon brands is a no-no.
+ - This set is focused on targeting the GNOME desktop changes regarding other desktop environments, will be considered.
+ - The Humanity icon theme (if installed) is used as a fallback icon theme to fill any gaps.
 
 ## Copying or Reusing
 
@@ -18,7 +17,7 @@ This project is licenced under the terms of the [GNU General Public License, ver
 
 ## Installing & Using
 
-**Please note: this icon theme is in development, as such there are plenty of icons that are "missing" or incomplete**
+**Please note: this icon theme is in-development, you may find there are several "missing" icons**
 
 There are no official packages or releases (yet) but you can install this theme from source with the provided [Makefile](/Makefile) and a few commands.
 
@@ -34,5 +33,5 @@ To remove Suru, simply run: `make uninstall` or, depending on whether or not you
 
 ## Support
 
-The development of Suru is, in part, supported by [Patreon](http://patreon.com/snwh/), your patronage is much appreciated. &#x1F60A;
+The development of Suru is, supported by [Patreon](http://patreon.com/snwh/), your patronage is much appreciated. &#x1F60A;
 
