@@ -11,26 +11,29 @@ The sources for all the different icons are kept organized in this `src` folder 
 
 #### `fullcolor`
  - sources for all full color icons.
-
-#### `Template.svg`
- - a blank template file for the fullcolor Suru icons
- - the template has as _Baseplate_ layer which will contain the necessary metadata for rendering an icon. 
- - You **must** change the `context` and `icon-name` labels on the _Baseplate_ for an icon to render properly (and also hide the layer).
+ - divided into subfolders that organize the icons sources by `context`
 
 #### `symbolic/source-plate.svg`
- - the source plate for all of the symbolic icons. Each icon should be grouped within an empty 16x16 pixel square and the group should be given a label which is the icon name.
+ - the source plate for all of the symbolic icons
+ - layers on the source plate correspond to an icons `context` and the icons are sorted accordingly
+ - each icon should be contained within an empty 16x16 pixel square and given a label which is its `icon-name`
 
 ### Render Scripts
 
 For simplified development, has various scripts to extract or render icons from the larger SVG source files.
 
-`extract-symbolic-icons.rb`
- - This script will extract any new symbolic icons from the [source SVG](./symbolic/source-plate.svg)` or extract individual icons when passed the icon name: `./extract-symbolic-icons.rb <icon-name>`. 
+#### `extract-symbolic-icons.rb`
+ - This script will extract any new symbolic icons from the [source SVG](./symbolic/source-plate.svg) or extract individual icons when passed the icon name: `./extract-symbolic-icons.rb <icon-name>`. 
 
-`render-bitmaps.py`
-- This script with render PNG icons, provided there are source changes, in both @1x and @2x (HiDPi) resolutions from the source files. 
+#### `render-bitmaps.py`
+- This script will render PNG icons, provided there are source changes, in both @1x and @2x (HiDPi) resolutions from the source files. 
 
 ### Resources
 
 `Suru.gpl`
 - The Inkscape colour palette for the Suru icons. You can copy it to `.config/inkscape/palettes` and restart Inkscape to able to choose it from the palette menu.
+
+#### `Template.svg`
+ - a blank template file for the fullcolor Suru icons
+ - the template has as _Baseplate_ layer which will contain the necessary metadata for rendering an icon
+ - You **must** change the `context` and `icon-name` labels on the _Baseplate_ for an icon to render properly (also hide the layer)
