@@ -14,8 +14,8 @@ The sources for all the different icons are kept organized in this `src` folder 
 
 #### `Template.svg`
  - a blank template file for the fullcolor Suru icons
- - the template has as "Baseplate" layer which will contain the necessary metadata for rendering an icon. 
- - You **must** change the `context` (e.g. places) and `icon-name` (e.g. folder) labels on the Baseplate for an icon to render properly (and also hide the layer).
+ - the template has as _Baseplate_ layer which will contain the necessary metadata for rendering an icon. 
+ - You **must** change the `context` and `icon-name` labels on the _Baseplate_ for an icon to render properly (and also hide the layer).
 
 #### `symbolic/source-plate.svg`
  - the source plate for all of the symbolic icons. Each icon should be grouped within an empty 16x16 pixel square and the group should be given a label which is the icon name.
