@@ -7,9 +7,9 @@ Many of the original generic app icons and symbolic icons have been repurposed, 
 
 ## Contributor Notes
 
- - Pull requests for branded third-party applications (for example, Google Chrome) will be rejected. Infringing upon brands is a no-no.
- - This set is focused on targeting the GNOME desktop changes regarding other desktop environments, will be considered.
- - The Humanity icon theme (if installed) is used as a fallback icon theme to fill any gaps.
+ - Pull requests regarding branded, third-party application icons (for example, Google Chrome) will be rejected. Infringing upon third-party brands is a no-no in this set.
+ - Development is focused on targeting the GNOME desktop, changes regarding other desktop environments (such as MATE or KDE) are not currently a priority.
+ - See the README in the [icon sources folder](/src) for more about how to contribute or modify icons
 
 ## Copying or Reusing
 

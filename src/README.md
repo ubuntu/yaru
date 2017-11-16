@@ -1,8 +1,9 @@
 ## Icon Sources
 
-**Notes:**
-* Do not edit the icon assets of the theme directly, instead edit source files in this directory and render them with the appropriate script.
-* To edit the icons will need `inkscape` installed and you use the render scripts you'll need `python` and `ruby` installed 
+### Notes
+- Do not edit icon assets directly (i.e. those in the "Suru" folder)! 
+- To modify an icon, edit source SVG files found in this directory (or create a new one using the [Template](Template.svg)) and render them with the appropriate script.
+- To edit the icons you will need `inkscape` installed and to use the render scripts you'll need both `python` (to render PNG assets) and `ruby` (to render SVG assets) installed.
 
 ### Source Files
 
@@ -10,6 +11,11 @@ The sources for all the different icons are kept organized in this `src` folder 
 
 `fullcolor`
  - sources for all full color icons.
+
+`Template.svg`
+ - a blank template file for the fullcolor Suru icons
+ - the template has as "Baseplate" layer which will contain the necessary metadata for rendering an icon. 
+ - You **must** change the `context` (e.g. places) and `icon-name` (e.g. folder) labels on the Baseplate for an icon to render properly (and also hide the layer).
 
 `symbolic/source-plate.svg`
  - the source plate for all of the symbolic icons. Each icon should be grouped within an empty 16x16 pixel square and the group should be given a label which is the icon name.
