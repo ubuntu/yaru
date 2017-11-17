@@ -29,8 +29,6 @@ MAINDIR = '../Suru'
 # SRC = 'fullcolor'
 SOURCES = ('fullcolor/apps', 'fullcolor/categories', 'fullcolor/devices', 'fullcolor/mimetypes', 'fullcolor/places')
 
-# the resolution that non-hi-dpi icons are rendered at
-DPI_1_TO_1 = 96
 # DPI multipliers to render at
 DPIS = [1, 2]
 
@@ -153,7 +151,7 @@ def main(args, SRC):
                         width = rect['width']
                         height = rect['height']
                         id = rect['id']
-                        dpi = DPI_1_TO_1 * dpi_factor
+                        dpi = 96 * dpi_factor
 
                         size_str = "%sx%s" % (width, height)
                         if dpi_factor != 1:
