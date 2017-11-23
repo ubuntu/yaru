@@ -5,7 +5,7 @@ waylandfiles = [
     'ubuntu-communitheme.desktop',
 ]
 gnome_shell_modes = [
-    'ubuntu-communitheme.js',
+    'ubuntu-communitheme.json',
 ]
 
 # install Xorg files with symlink
