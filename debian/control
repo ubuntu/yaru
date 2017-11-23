@@ -1,0 +1,37 @@
+Source: gnome-shell-ubuntu-communitheme
+Section: misc
+Priority: optional
+Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
+Build-Depends: debhelper (>= 10.3),
+               meson,
+               sass,
+Standards-Version: 4.1.1
+Homepage: https://github.com/ubuntu/gnome-shell-communitheme
+
+Package: gnome-shell-ubuntu-communitheme
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+Description: GNOME Shell Ubuntu Community Theme
+ This is the theme that is shaped by the community on the Ubuntu hub.
+ .
+ This package contains the GNOME Shell theme part
+ .
+ More information if you want to follow the development on
+ https://community.ubuntu.com/c/desktop/theme-refresh.
+
+Package: ubuntu-communitheme-session
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         gnome-shell-ubuntu-communitheme (= ${source:Version}),
+Description: session starting Ubuntu Community Theme
+ This is the session enabling starting easily the theme
+ that is shaped by the community on the Ubuntu hub.
+ .
+ This package contains the session part, adding an "Ubuntu CommuniTheme"
+ session to GDM. It has the same caracterists than the ubuntu session,
+ apart from the default themes (GNOME Shell, GTK, GDM…)
+ .
+ More information if you want to follow the development on
+ https://community.ubuntu.com/c/desktop/theme-refresh.
