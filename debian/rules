@@ -3,3 +3,6 @@
 
 %:
 	dh $@ --buildsystem=meson -- --fail-missing
+
+override_dh_installgsettings:
+	dh_installgsettings --priority=15
