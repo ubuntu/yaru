@@ -17,8 +17,6 @@ This project is licenced under the terms of the [GNU General Public License, ver
 
 ## Installing & Using
 
-**Please note: this icon theme is in-development, you may find there are several "missing" icons**
-
 There are no official packages or releases (yet) but you can install this theme from source with the provided [Makefile](/Makefile) and a few commands.
 
 From the root directory of this repository running `make install` will install Suru to your home folder. After which you should be able to pick Suru as your icon theme or set it with:
@@ -31,7 +29,7 @@ You can install Suru system-wide with `sudo make install-root` but you needn't d
 
 To remove Suru, simply run: `make uninstall` or, depending on whether or not you installed it with superuser priveleges: `sudo make uninstall-root` 
 
-## Support
+## Donate
 
-The development of Suru is, supported by [Patreon](http://patreon.com/snwh/), your patronage is much appreciated. &#x1F60A;
+You can [donate](https://snwh.org/donate) to support the development of Suru or become a patron one [Patreon](http://patreon.com/snwh/). Both are much appreciated. &#x1F60A;
 
