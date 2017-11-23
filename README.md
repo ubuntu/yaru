@@ -16,7 +16,7 @@ Restart your computer, the login screen will have this theme by default, and a n
 We are using `meson` and `ninja` to build and install it. GNOME Shell only recognizes themes in its path by default, so you need to install it in `/usr/share/gnome-shell/theme` by default.
 
 ```sh
-meson build
+meson build --prefix=/usr
 cd build
 sudo ninja install
 # you can do any modifications in <project_dir>/communitheme
