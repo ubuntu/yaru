@@ -1,9 +1,7 @@
 Suru Icon Theme
 ================
 
-Suru is a FreeDesktop icon theme based upon the defunct Ubuntu mobile icon set and is designed with the original Suru icon guidelines and palette in mind.
-
-Many of the original generic app icons and symbolic icons have been repurposed, however this icon set has extensive additions such as icons for additional apps, as well as icons for folders, devices, file types, application categories, and other system toolbar and status icons.
+This project is a revitalization of the Suru icon set that was designed for Ubuntu Touch. The principles and styles created for Suru now serve as the basis for a new FreeDesktop icon theme.
 
 ## Contributor Notes
 
