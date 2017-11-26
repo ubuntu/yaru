@@ -15,22 +15,24 @@ This project is licenced under the terms of the [GNU General Public License, ver
 
 ## Installing & Using
 
-There are no official packages or releases (yet) but you can install this theme from source with the provided Meson build system.
+You can install Suru from source using the Meson build system.
 
 ```shell
 meson builddir --prefix=/usr
 sudo ninja -C builddir install
 ```
 
-You can use a different prefix like: `/usr/local` or `$HOME/.local`
+By default it installs to `/usr/` but you can specify a different directory with a prefix like: `/usr/local` or `$HOME/.local`.
 
 After which you should be able to pick Suru as your icon theme or set it with:
 
     gsettings set org.gnome.desktop.interface icon-theme Suru
 
-### Removing Suru
+### Uninstalling Suru
 
-To remove Suru, simply run: `ninja -C builddir uninstall` or, depending on whether or not you installed it with superuser priveleges: `sudo ninja -C builddir uninstall` 
+To uninstall Suru, simply run: `sudo ninja -C builddir uninstall` or, if you installed it without superuser priveleges: `ninja -C builddir uninstall` and you can reset your icon theme to the default:
+
+    gsettings reset org.gnome.desktop.interface icon-theme
 
 ## Donate
 
