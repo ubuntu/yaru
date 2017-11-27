@@ -1,0 +1,11 @@
+# Meson build directories (local and package)
+/build/
+/obj-*/
+
+# Packaging generated content
+debian/*debhelper*
+debian/files
+debian/*.substvars
+debian/gnome-shell-ubuntu-communitheme/
+debian/tmp/
+debian/ubuntu-communitheme-session/
