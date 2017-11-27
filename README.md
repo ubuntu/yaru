@@ -19,8 +19,13 @@ We are using `meson` and `ninja` to build and install it. GNOME Shell only recog
 meson build --prefix=/usr
 cd build
 sudo ninja install
-# you can do any modifications in <project_dir>/communitheme
-# after each modification you want to test:
+```
+
+Log now into the Ubuntu CommuniTheme session.
+
+You can do any modification in `<project_dir>/communitheme`. Now, after any modifications you want to test, being in the `build` directory:
+
+```sh
 sudo ninja install
 # <Alt-F2>, 'rt', <Enter>
 ```
