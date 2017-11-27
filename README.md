@@ -1,4 +1,4 @@
-# Ubuntu GTK+ 2 and 3 CommuniTheme
+# Ubuntu GTK+ 2 and 3 Communitheme
 
 Ubuntu GTK+ 2 and 3 community theme.
 
@@ -6,13 +6,13 @@ Ubuntu GTK+ 2 and 3 community theme.
 
 You can build the theme from source to test it locally. We're working on setting up a ppa and a Gnome session.
 
-<!-- We have a set of packages creating a new "Ubuntu CommuniTheme session". Just install:
+<!-- We have a set of packages creating a new "Ubuntu Communitheme session". Just install:
 
 ```sh
 sudo apt install ubuntu-communitheme-session
 ```
 
-Restart your computer, the login screen will have this theme by default, and a new session will be selectable in GDM named "Ubuntu CommuniTheme". This will start the GNOME-Shell, GTK2, GTK3 themes and icon themes. -->
+Restart your computer, the login screen will have this theme by default, and a new session will be selectable in GDM named "Ubuntu Communitheme". This will start the GNOME-Shell, GTK2, GTK3 themes and icon themes. -->
 
 ## How to build from source and install it?
 
