@@ -1,15 +1,15 @@
-# Ubuntu GNOME Shell CommuniTheme
+# Ubuntu GNOME Shell Communitheme
 ubuntu GNOME Shell community theme
 
 ## How to test it?
 
-We have a set of packages creating a new "Ubuntu CommuniTheme session". Just install:
+We have a set of packages creating a new "Ubuntu Communitheme session". Just install:
 
 ```sh
 sudo apt install ubuntu-communitheme-session
 ```
 
-Restart your computer, the login screen will have this theme by default, and a new session will be selectable in GDM named "Ubuntu CommuniTheme". This will start the GNOME-Shell, GTK2, GTK3 themes and icon themes.
+Restart your computer, the login screen will have this theme by default, and a new session will be selectable in GDM named "Ubuntu Communitheme". This will start the GNOME-Shell, GTK2, GTK3 themes and icon themes.
 
 ## How to build from source and install it?
 
@@ -21,7 +21,7 @@ cd build
 sudo ninja install
 ```
 
-Log now into the Ubuntu CommuniTheme session.
+Log now into the Ubuntu Communitheme session.
 
 You can do any modification in `<project_dir>/communitheme`. Now, after any modifications you want to test, being in the `build` directory:
 
@@ -47,4 +47,3 @@ We remove on new version import:
 * upstream `gnome-shell*.css`: they are generated them with our modifications
 * upstream `meson.build`: we define our own
 * `data/theme/parse-sass.sh`: we handle building directly with meson.
-
