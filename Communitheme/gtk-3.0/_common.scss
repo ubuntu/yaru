@@ -153,7 +153,7 @@ flowbox {
   background-color: if($variant=='light', transparent, black);
   border-radius: 0;
   padding: 0;
-  
+
   &:backdrop { background-color: if($variant=='light', transparent, darken($backdrop_base_color,5%)); }
   &:active, &:selected { background-color: if($variant=='light', transparent, $selected_bg_color); }
   &:disabled { background-color: if($variant=='light', transparent, $insensitive_bg_color); }
@@ -2597,6 +2597,7 @@ treeview ~ scrollbar.vertical {
  * Switch *
  **********/
 switch {
+  $c: $success_color;
   font-weight: bold;
   font-size: smaller;
   outline-offset: -4px;
@@ -2610,9 +2611,9 @@ switch {
 
   &:checked {
     color: $selected_fg_color;
-    border-color: $selected_borders_color;
-    background-color: $selected_bg_color;
-    text-shadow: 0 1px transparentize($selected_borders_color, 0.5),
+    border-color: _border_color($c);
+    background-color: $c;
+    text-shadow: 0 1px transparentize(_border_color($c), 0.5),
                  0 0 2px transparentize(white, 0.4);
   }
 
@@ -2632,9 +2633,9 @@ switch {
 
     &:checked {
       @if $variant == 'light' { color: $backdrop_bg_color; }
-      border-color: if($variant == 'light', $selected_bg_color,
-                                            $selected_borders_color);
-      background-color: $selected_bg_color;
+      border-color: if($variant == 'light', $c,
+                                            _border_color($c));
+      background-color: $c;
     }
 
     &:disabled {
@@ -2657,7 +2658,7 @@ switch {
 
   &:hover slider { @include button(hover-alt, $edge: $shadow_color); }
 
-  &:checked slider { border: 1px solid $selected_borders_color; }
+  &:checked slider { border: 1px solid _border_color($c); }
 
   &:disabled slider { @include button(insensitive); }
 
@@ -2668,7 +2669,7 @@ switch {
       @include button(backdrop);
     }
 
-    &:checked slider { border-color: if($variant == 'light', $selected_bg_color, $selected_borders_color); }
+    &:checked slider { border-color: if($variant == 'light', $c, _border_color($c)); }
 
     &:disabled slider { @include button(backdrop-insensitive); }
   }
@@ -2676,14 +2677,14 @@ switch {
   row:selected & {
     @if $variant == 'light' {
       box-shadow: none;
-      border-color: $selected_borders_color;
+      border-color: _border_color($c);
 
-      &:backdrop { border-color: $selected_borders_color; }
+      &:backdrop { border-color: _border_color($c); }
 
       slider:dir(rtl) { border-left-color: $borders_color; }
       slider:dir(ltr) { border-right-color: $borders_color; }
 
-      slider { &:checked, & { border-color: $selected_borders_color; } }
+      slider { &:checked, & { border-color: _border_color($c); } }
     }
   }
 }
@@ -2897,9 +2898,10 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
 }
 
 %scale_highlight {
-  border: 1px solid $selected_borders_color;
+  $c: $neutral_color;
+  border: 1px solid _border_color($c);
   border-radius: 3px;
-  background-color: $selected_bg_color;
+  background-color: $c;
 
   &:disabled {
     background-color: transparent;
@@ -2907,8 +2909,8 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
   }
 
   &:backdrop {
-    border-color: if($variant=='light', $selected_bg_color,
-                                        $selected_borders_color);
+    border-color: if($variant=='light', $c,
+                                        _border_color($c));
     &:disabled {
       background-color: transparent;
       border-color: transparent;
@@ -2916,7 +2918,7 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
   }
 
   // ...on selected list rows
-  row:selected & { &:disabled, & { border-color: $selected_borders_color; }}
+  row:selected & { &:disabled, & { border-color: _border_color($c); }}
 
   // OSD
   .osd & {
@@ -3011,6 +3013,7 @@ scale {
   }
 
   slider {
+    $c: $neutral_color;
     @include button(normal-alt, $edge: $shadow_color);
 
     border: 1px solid darken($alt_borders_color, 3%);
@@ -3020,7 +3023,7 @@ scale {
 
     &:hover { @include button(hover-alt, $edge: $shadow_color); }
 
-    &:active { border-color: $selected_borders_color; }
+    &:active { border-color: _border_color($c); }
 
     &:disabled { @include button(insensitive); }
 
@@ -3033,7 +3036,7 @@ scale {
     }
 
     // ...on selected list rows
-    row:selected & { &:disabled, & { border-color: $selected_borders_color; } }
+    row:selected & { &:disabled, & { border-color: _border_color($c); } }
 
     // OSD
     .osd & {
@@ -3352,8 +3355,39 @@ progressbar {
 
   &:backdrop trough { @extend %scale_trough:backdrop; } // looks like states are not passed to the trough component here
 
+  %progressbar_highlight {
+    $c: $success_color;
+    border: 1px solid _border_color($c);
+    border-radius: 3px;
+    background-color: $c;
+
+    &:disabled {
+      background-color: transparent;
+      border-color: transparent;
+    }
+
+    &:backdrop {
+      border-color: if($variant=='light', $c,
+                                          _border_color($c));
+      &:disabled {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+
+    // ...on selected list rows
+    row:selected & { &:disabled, & { border-color: _border_color($c); }}
+
+    // OSD
+    .osd & {
+      border-color: $osd_borders_color;
+
+      &:disabled { border-color: transparent; }
+    }
+  }
+
   progress {
-    @extend %scale_highlight;
+    @extend %progressbar_highlight;
 
     border-radius: 1.5px;
 
@@ -3378,7 +3412,7 @@ progressbar {
     }
   }
 
-  &:backdrop progress { @extend %scale_highlight:backdrop; } // states not passed here as well
+  &:backdrop progress { @extend %progressbar_highlight:backdrop; } // states not passed here as well
 
   &.osd { // progressbar.osd used for epiphany page loading progress
     min-width: 3px;
@@ -3443,26 +3477,24 @@ levelbar {
     border: 1px solid;
     border-radius: 1px;
 
-    &.low {
-      border-color: if($variant == 'light', darken($warning_color, 20%), $warning_color);
-      background-color: $warning_color;
+    @mixin block_highlight($c) {
+      border-color: if($variant == 'light', _border_color($c), $c);
+      background-color: $c;
 
-      &:backdrop { border-color: $warning_color; };
+      &:backdrop { border-color: $c; };
+    }
+
+    &.low {
+      @include block_highlight($warning_color);
     }
 
     &.high,
     &:not(.empty) {
-      border-color: if($variant == 'light', darken($selected_bg_color, 20%), $selected_bg_color);
-      background-color: $selected_bg_color;
-
-      &:backdrop { border-color: $selected_bg_color; }
+      @include block_highlight($neutral_color);
     }
 
     &.full {
-      border-color: if($variant == 'light', darken($success_color, 20%), $success_color);
-      background-color: $success_color;
-
-      &:backdrop { border-color: $success_color; };
+      @include block_highlight($success_color);
     }
 
     &.empty {
@@ -3844,7 +3876,7 @@ stacksidebar {
 $_placesidebar_icons_opacity: 0.7;
 
 row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sidebar icons
-                                                                  // see bug #786613 for details 
+                                                                  // see bug #786613 for details
                                                                   // on this oddity
 
 placessidebar {
