@@ -46,7 +46,7 @@ $button_transition: all 200ms $ease-out-quad;
  ***************/
 .background {
   color: $fg_color;
-  background-color: $bg_color;
+  background-color: transparentize($bg_color, 0.001);
 
   &:backdrop {
     color: $backdrop_fg_color;
@@ -698,7 +698,7 @@ button {
   }
 
   // Suggested and Destructive Action buttons
-  @each $b_type, $b_color in (suggested-action, $selected_bg_color),
+  @each $b_type, $b_color in (suggested-action, /*$selected_bg_color*/ $success_color),
                              (destructive-action, $destructive_color) {
     &.#{$b_type} {
       @include button(normal, $b_color, white);
@@ -1438,17 +1438,21 @@ headerbar {
   min-height: 46px;
   border-width: 0 0 1px;
   border-style: solid;
-  border-color: $alt_borders_color;
+  // border-color: $alt_borders_color;
+  border-color: _border_color($headerbar_bg_color);
   border-radius: 0;
 
-  @include headerbar_fill;
+  // @include headerbar_fill;
+  background-color: transparentize($headerbar_bg_color, 0.05);
 
   &:backdrop {
-    border-color: $backdrop_borders_color;
-    background-color: $bg_color;
-    background-image: none;
-    box-shadow: inset 0 1px $top_hilight;
-
+    $c: lighten($headerbar_bg_color, 1%);
+    // border-color: $backdrop_borders_color;
+    // background-color: $bg_color;
+    // background-image: none;
+    // box-shadow: inset 0 1px $top_hilight;
+    border-color: _border_color($c);
+    background-color: $c;
     transition: $backdrop_transition;
   }
 
@@ -1466,6 +1470,46 @@ headerbar {
     @extend .dim-label;
   }
 
+  ~ separator {
+    background-image: image(_border_color($headerbar_bg_color));
+  }
+
+  & {
+    $_bg: $headerbar_bg_color;
+    $_fg: $headerbar_fg_color;
+
+    button {
+      // make buttons flat
+      @extend %undecorated_button;
+      @include reload_button_styles;
+
+      color: $_fg;
+
+      &:backdrop {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+
+    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button {
+      @include button(normal, $_bg, $_fg);
+
+      &.text-button, &.image-button, &.text-button.image-button, &.titlebutton:not(.close) {
+        // specificity bump
+        @include reload_button_styles($retain_borders: true);
+      }
+    }
+  }
+
+    &:backdrop {
+      // border-color: $backdrop_borders_color;
+      // background-color: $bg_color;
+      // background-image: none;
+      // box-shadow: inset 0 1px $top_hilight;
+      background-color: opacify(lighten($headerbar_bg_color, 1%), 1);
+      transition: $backdrop_transition;
+    }
+
   &.selection-mode {
     $_hc: mix($top_hilight,$selected_bg_color, 50%); // hilight color
 
@@ -1473,7 +1517,8 @@ headerbar {
     border-color: $selected_borders_color;
     text-shadow: 0 -1px transparentize(black, 0.5);
 
-    @include headerbar_fill($selected_bg_color, $_hc);
+    // @include headerbar_fill($selected_bg_color, $_hc);
+    background-color: $selected_bg_color;
 
     &:backdrop {
       background-color: $selected_bg_color;
@@ -1595,6 +1640,7 @@ headerbar {
   .tiled-left &,
   .maximized &,
   .fullscreen & {
+    background-color: $headerbar_bg_color; // opaque headerbar when maximized
     &:backdrop, & {
       border-radius: 0;
     }
@@ -4385,11 +4431,16 @@ decoration {
 
 // Window Close button
 button.titlebutton {
-  @extend %button_basic;
+  // @extend %button_basic;
+  // @extend %button_basic.flat;
+  // @include _button_text_shadow;
+  border-radius: 100%;
 
-  @extend %button_basic.flat;
+  &.close {
+    @include button(normal, $selected_bg_color, white);
 
-  @include _button_text_shadow;
+    @include reload_button_styles($selected_bg_color, white, $retain_borders: true);
+  }
 
   .selection-mode & {
     @extend %button.flat.suggested-action;
