@@ -80,8 +80,8 @@
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
     box-shadow: none;
-    text-shadow: 0 1px black;
-    -gtk-icon-shadow: 0 1px black;
+    // text-shadow: 0 1px black;
+    // -gtk-icon-shadow: 0 1px black;
   }
   @if $t==osd-focus {
     color: $osd_text_color;
@@ -89,8 +89,8 @@
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
     box-shadow: entry_focus_shadow($fc);
-    text-shadow: 0 1px black;
-    -gtk-icon-shadow: 0 1px black;
+    // text-shadow: 0 1px black;
+    // -gtk-icon-shadow: 0 1px black;
   }
   @if $t==osd-insensitive {
     color: $osd_insensitive_fg_color;
@@ -98,8 +98,8 @@
     background-color: $osd_insensitive_bg_color;
     background-clip: padding-box;
     box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
   }
   @if $t==osd-backdrop {
     color: $osd_text_color;
@@ -107,8 +107,8 @@
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
     box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
   }
 }
 
@@ -119,33 +119,33 @@
   @else { @return darken($c, 20%); }
 }
 
-@function _text_shadow_color ($tc: $fg_color, $bg: $bg_color) {
+// @function _text_shadow_color ($tc: $fg_color, $bg: $bg_color) {
 //
 // calculate the color of text shadows
 //
 // $tc is the text color
 // $bg is the background color
 //
-  $_lbg: lightness($bg)/100%;
-  @if lightness($tc)<50% { @return transparentize(white, 1-$_lbg/($_lbg*1.3)); }
-  @else { @return transparentize(black, $_lbg*0.8); }
-}
+//   $_lbg: lightness($bg)/100%;
+//   @if lightness($tc)<50% { @return transparentize(white, 1-$_lbg/($_lbg*1.3)); }
+//   @else { @return transparentize(black, $_lbg*0.8); }
+// }
 
-@function _button_hilight_color($c) {
+// @function _button_hilight_color($c) {
 //
 // calculate the right top hilight color for buttons
 //
 // $c: base color;
 //
-  @if lightness($c)>95% { @return white; }
-  @else if lightness($c)>90% { @return transparentize(white, 0.2); }
-  @else if lightness($c)>80% { @return transparentize(white, 0.4); }
-  @else if lightness($c)>50% { @return transparentize(white, 0.6); }
-  @else if lightness($c)>40% { @return transparentize(white, 0.8); }
-  @else { @return transparentize(white, 0.95); }
-}
+  // @if lightness($c)>95% { @return white; }
+  // @else if lightness($c)>90% { @return transparentize(white, 0.2); }
+  // @else if lightness($c)>80% { @return transparentize(white, 0.4); }
+  // @else if lightness($c)>50% { @return transparentize(white, 0.6); }
+  // @else if lightness($c)>40% { @return transparentize(white, 0.8); }
+  // @else { @return transparentize(white, 0.95); }
+// }
 
-@mixin _button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
+// @mixin _button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
 //
 // helper function for the text emboss effect
 //
@@ -153,20 +153,20 @@
 //
 // TODO: this functions needs a way to deal with special cases
 //
+//
+//   $_shadow: _text_shadow_color($tc, $bg);
+//
+//   @if lightness($tc)<50% {
+//     text-shadow: 0 1px $_shadow;
+//     -gtk-icon-shadow: 0 1px $_shadow;
+//   }
+//   @else {
+//     text-shadow: 0 -1px $_shadow;
+//     -gtk-icon-shadow: 0 -1px $_shadow;
+//   }
+// }
 
-  $_shadow: _text_shadow_color($tc, $bg);
-
-  @if lightness($tc)<50% {
-    text-shadow: 0 1px $_shadow;
-    -gtk-icon-shadow: 0 1px $_shadow;
-  }
-  @else {
-    text-shadow: 0 -1px $_shadow;
-    -gtk-icon-shadow: 0 -1px $_shadow;
-  }
-}
-
-@mixin button($t, $c:$bg_color, $tc:$fg_color, $edge: none) {
+@mixin button($t, $c:darken($bg_color, 5%), $tc:$fg_color, $edge: none) {
 //
 // Button drawing function
 //
@@ -194,12 +194,13 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
-    border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    $button_fill: if($variant == 'light', linear-gradient(to bottom, $c, darken($c, 4%) 60%, darken($c, 10%)),
-                                          linear-gradient(to bottom, darken($c, 2%), darken($c, 4%) 60%, darken($c, 6%))) !global;
-    background-image: $button_fill;
-    @include _button_text_shadow($tc, $c);
-    @include _shadows(inset 0 1px $_hilight_color, $_button_edge);
+    background-color: $c;
+    // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
+    // $button_fill: if($variant == 'light', linear-gradient(to bottom, $c, darken($c, 4%) 60%, darken($c, 10%)),
+    //                                      linear-gradient(to bottom, darken($c, 2%), darken($c, 4%) 60%, darken($c, 6%))) !global;
+    // background-image: $button_fill;
+    // @include _button_text_shadow($tc, $c);
+    // @include _shadows(inset 0 1px $_hilight_color, $_button_edge);
   }
 
   @else if $t==hover {
@@ -209,18 +210,18 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
-    border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    @if $variant == 'light' {
-      $button_fill: linear-gradient(to bottom, lighten($c, 6%), $c 60%, darken($c, 4%)) !global;
-      @include _button_text_shadow($tc, lighten($c, 6%));
-      @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)), $_button_edge);
-    }
-    @else {
-      $button_fill: linear-gradient(to bottom, lighten($c, 1%), darken($c, 2%) 60%, darken($c, 4%)) !global;
-      @include _button_text_shadow($tc,lighten($c, 6%));
-      @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge);
-    }
-    background-image: $button_fill;
+    background-color: darken($c, 5%);
+    // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
+    // @if $variant == 'light' {
+    //  $button_fill: linear-gradient(to bottom, lighten($c, 6%), $c 60%, darken($c, 4%)) !global;
+    //  @include _button_text_shadow($tc, lighten($c, 6%));
+    //  @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)), $_button_edge);
+    // }
+    // @else {
+    //  $button_fill: linear-gradient(to bottom, lighten($c, 1%), darken($c, 2%) 60%, darken($c, 4%)) !global;
+    //  @include _button_text_shadow($tc,lighten($c, 6%));
+    //  @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge);
+    // background-image: $button_fill;
   }
 
   @if $t==normal-alt {
@@ -230,22 +231,22 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    @include _button_text_shadow($tc, $c);
-    @if $variant == 'light' {
-      background-image: linear-gradient(to bottom, lighten($c, 5%) 20%, $c 90%);
-      @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
-                        inset 0 -2px lighten($c, 2%),
-                        inset 0 -1px darken($c, 12%),
-                        $_button_edge);
+    background-color: $c;
+    // @include _button_text_shadow($tc, $c);
+    // @if $variant == 'light' {
+    //  background-image: linear-gradient(to bottom, lighten($c, 5%) 20%, $c 90%);
+    //  @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
+    //                    inset 0 -2px lighten($c, 2%),
+    //                    inset 0 -1px darken($c, 12%),
+    //                    $_button_edge);
+    // }
+    // @else {
+    // background-image: linear-gradient(to bottom, darken($c, 3%) 20%, darken($c, 6%) 90%);
+    //  @include _shadows(inset 0 1px $_hilight_color,
+    //                    inset 0 -2px darken($c, 4%),
+    //                    inset 0 -1px darken($c, 9%),
+    //                    $_button_edge);
     }
-    @else {
-      background-image: linear-gradient(to bottom, darken($c, 3%) 20%, darken($c, 6%) 90%);
-      @include _shadows(inset 0 1px $_hilight_color,
-                        inset 0 -2px darken($c, 4%),
-                        inset 0 -1px darken($c, 9%),
-                        $_button_edge);
-    }
-  }
 
   @else if $t==hover-alt {
   //
@@ -254,21 +255,22 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    @if $variant == 'light' {
-      $button_fill: linear-gradient(to bottom, lighten($c, 9%) 10%, lighten($c, 4%) 90%) !global;
-      @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
-                        inset 0 -2px lighten($c, 5%),
-                        inset 0 -1px darken($c, 10%),
-                        $_button_edge);
-    }
-    @else {
-      $button_fill: linear-gradient(to bottom, $c 20%, darken($c, 4%) 90%) !global;
-      @include _shadows(inset 0 1px $_hilight_color,
-                        inset 0 -2px darken($c, 3%),
-                        inset 0 -1px darken($c, 6%),
-                        $_button_edge);
-    }
-    background-image: $button_fill;
+    background-color: lighten($c, 6%);
+    // @if $variant == 'light' {
+    //  $button_fill: linear-gradient(to bottom, lighten($c, 9%) 10%, lighten($c, 4%) 90%) !global;
+    //  @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
+    //                    inset 0 -2px lighten($c, 5%),
+    //                    inset 0 -1px darken($c, 10%),
+    //                    $_button_edge);
+    // }
+    // @else {
+      // $button_fill: linear-gradient(to bottom, $c 20%, darken($c, 4%) 90%) !global;
+      // @include _shadows(inset 0 1px $_hilight_color,
+      //                  inset 0 -2px darken($c, 3%),
+      //                  inset 0 -1px darken($c, 6%),
+      //                  $_button_edge);
+    // }
+    // background-image: $button_fill;
   }
 
   @else if $t==active {
@@ -278,12 +280,13 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
-    $button_fill: image(darken($c, 6%)) !global;
-    background-image: $button_fill;
-    @include _shadows(inset 0 1px transparentize($_hilight_color, 1), $_button_edge);
+    background-color: darken($c, 8%);
+    // $button_fill: image(darken($c, 6%)) !global;
+    // background-image: $button_fill;
+    // @include _shadows(inset 0 1px transparentize($_hilight_color, 1), $_button_edge);
 
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
   }
 
   @else if $t==insensitive {
@@ -295,13 +298,14 @@
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color); }
 
     border-color: if($c != $bg_color, _border_color($c), $insensitive_borders_color);
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    background-color: $_bg;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
-    @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);
+    // @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);
   }
 
   @else if $t==insensitive-active {
@@ -314,11 +318,12 @@
     label, & { color: if($c != $bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color); }
 
     border-color: $_bc;
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
+    background-color: $_bg;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
-    @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);
+    // @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);
   }
 
   @else if $t==backdrop {
@@ -331,11 +336,12 @@
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
 
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
-    @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    background-color: $_bg;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
+    // @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
   }
 
   @else if $t==backdrop-active {
@@ -348,9 +354,10 @@
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
 
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    background-color: $_bg;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
   }
 
   @else if $t==backdrop-insensitive {
@@ -364,13 +371,14 @@
     label, & { color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
 
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    background-color: $_bg;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
-    @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    // @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
   }
 
   @else if $t==backdrop-insensitive-active {
@@ -384,9 +392,10 @@
     label { color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
 
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    background-color: $_bg;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
   }
 
   @else if $t==osd {
@@ -397,13 +406,14 @@
 
     color: $osd_fg_color;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    background-clip: padding-box;
-    box-shadow: inset 0 1px transparentize(white, 0.9);
-    text-shadow: 0 1px black;
-    -gtk-icon-shadow: 0 1px black;
+    background-color: $_bg;
+    // background-color: transparent;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // background-clip: padding-box;
+    // box-shadow: inset 0 1px transparentize(white, 0.9);
+    // text-shadow: 0 1px black;
+    // -gtk-icon-shadow: 0 1px black;
     outline-color: transparentize($osd_fg_color, 0.7);
   }
 
@@ -415,13 +425,14 @@
 
     color: white;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    background-clip: padding-box;
-    box-shadow: inset 0 1px transparentize(white, 0.9);
-    text-shadow: 0 1px black;
-    -gtk-icon-shadow: 0 1px black;
+    background-color: $_bg;
+    // background-color: transparent;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // background-clip: padding-box;
+    // box-shadow: inset 0 1px transparentize(white, 0.9);
+    // text-shadow: 0 1px black;
+    // -gtk-icon-shadow: 0 1px black;
     outline-color: transparentize($osd_fg_color, 0.7);
   }
 
@@ -433,14 +444,15 @@
 
     color: white;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    background-clip: padding-box;
-    box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
-    outline-color: transparentize($osd_fg_color, 0.7);
+    background-color: $_bg;
+    // background-color: transparent;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // background-clip: padding-box;
+    // box-shadow: none;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
+    // outline-color: transparentize($osd_fg_color, 0.7);
   }
 
   @else if $t==osd-insensitive {
@@ -449,13 +461,14 @@
   //
     color: $osd_insensitive_fg_color;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    $button_fill: image($osd_insensitive_bg_color) !global;
-    background-image: $button_fill;
-    background-clip: padding-box;
-    box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    background-color: $osd_insensitive_bg_color;
+    // background-color: transparent;
+    // $button_fill: image($osd_insensitive_bg_color) !global;
+    // background-image: $button_fill;
+    // background-clip: padding-box;
+    // box-shadow: none;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
   }
 
   @else if $t==osd-backdrop {
@@ -466,13 +479,14 @@
 
     color: $osd_fg_color;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    $button_fill: image($_bg) !global;
-    background-image: $button_fill;
-    background-clip: padding-box;
-    box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    background-color: $_bg;
+    // background-color: transparent;
+    // $button_fill: image($_bg) !global;
+    // background-image: $button_fill;
+    // background-clip: padding-box;
+    // box-shadow: none;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
   }
 
   @else if $t==undecorated {
@@ -481,13 +495,13 @@
   //
     border-color: transparent;
     background-color: transparent;
-    $button_fill: none !global;
-    background-image: $button_fill;
-
-    @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
-
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    // $button_fill: none !global;
+    // background-image: $button_fill;
+    //
+    // @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    //
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
   }
 }
 
