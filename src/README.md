@@ -22,32 +22,10 @@ The sources for all the different icons are kept organized in this `src` folder 
 For simplified development, has various scripts to extract or render icons from the larger SVG source files.
 
 **[extract-symbolic-icons.rb](./extract-symbolic-icons.rb)**
-<<<<<<< HEAD
  - This script will extract any new symbolic icons from the [source SVG](./source-symbolic.svg) or extract individual icons when passed the icon name: `./extract-symbolic-icons.rb <icon-name>`. 
-=======
- - This script will extract any new symbolic icons from the [source SVG](./symbolic/source-plate.svg) or extract individual icons when passed the icon name. 
-
-```shell
-# enter source folder 
-cd src
-# extract any new symbolic icons
-./extract-symbolic-icons.rb
-# extract a specific icon by passing the icon-name to the script
-./extract-symbolic-icons.rb <icon-name>
-```
->>>>>>> c3e6e89d24418f7724fe82824a0c744a153a76ea
 
 **[render-bitmaps.py](./render-bitmaps.py)**
-- This script will render PNG icons, provided there are source changes, in both @1x and @2x (HiDPi) resolutions from the source files in [fullcolor](./fullcolor). 
-
-```shell
-# enter source folder
-cd src
-# render any new or changed icons
-./render-bitmaps.py
-# render a specific icon by passing the filename of the icon source
-./render-bitmaps.py <file-name>
-```
+- This script will render PNG icons, provided there are source changes, in both @1x and @2x (HiDPi) resolutions from the source files. 
 
 ## Resources
 
@@ -57,4 +35,4 @@ cd src
 **[Template.svg](./Template.svg)**
  - a blank template file for the fullcolor Suru icons
  - the template has as _Baseplate_ layer which will contain the necessary metadata for rendering an icon
- - You **must** change the `context` and `icon-name` labels on the _Baseplate_ layer for an icon to render properly (also hide the Baseplate)
+ - You **must** change the `context` and `icon-name` labels on the _Baseplate_ for an icon to render properly (also hide the layer)
