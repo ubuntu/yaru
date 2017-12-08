@@ -265,6 +265,7 @@ entry {
     padding-right: 8px;
     border: 1px solid;
     border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.025);
     transition: all 200ms $ease-out-quad;
 
     @include entry(normal);
@@ -844,18 +845,19 @@ button {
     // so on relevant states we an additional background-image with a gradient clipped on the border-box,
     // so setting a transparent border would reveal it.
     // FIXME: take care of colored circular button.
-    $_border_bg: linear-gradient(to top, $alt-borders-color 25%, $borders-color 50%);
+    // $_border_bg: linear-gradient(to top, $alt-borders-color 25%, $borders-color 50%);
+    border: 1px solid $borders_color;
 
     &:not(.flat):not(:checked):not(:active):not(:disabled):not(:backdrop) {
       @include button(normal);
       // background-image: $button_fill, $_border_bg;
-      border-color: transparent;
+      // border-color: transparent;
     }
 
     &:hover:not(:checked):not(:active):not(:disabled):not(:backdrop) {
       @include button(hover);
       // background-image: $button_fill, $_border_bg;
-      border-color: transparent;
+      // border-color: transparent;
     }
 
     background-origin: padding-box, border-box;
@@ -2363,7 +2365,7 @@ notebook {
         color: mix($insensitive_fg_color, $fg_color, 50%);
 
         &.reorderable-page {
-          border-color: transparentize($borders_color, 0.7);
+border-color: transparentize($borders_color, 0.7);
           background-color: transparentize($bg_color, 0.8);
         }
       }
@@ -2426,7 +2428,7 @@ notebook {
       tabs {
         padding-left: 4px;
         padding-right: 4px;
-
+border-l
         &:not(:only-child) {
           margin-left: 3px;
           margin-right: 3px;
@@ -2667,13 +2669,13 @@ switch {
 
   // similar to the .scale
   border: 1px solid $borders_color;
-  border-radius: 3px;
-  color: $fg_color;
+  border-radius: 5px;
+  color: transparent; // $fg_color;
   background-color: $dark_fill;
   // text-shadow: 0 1px transparentize(black, 0.9);
 
   &:checked {
-    color: $selected_fg_color;
+    color: transparent; // $selected_fg_color;
     border-color: _border_color($c);
     background-color: $c;
     // text-shadow: 0 1px transparentize(_border_color($c), 0.5),
@@ -2681,14 +2683,14 @@ switch {
   }
 
   &:disabled {
-    color: $insensitive_fg_color;
+    color: transparent; // $insensitive_fg_color;
     border-color: $borders_color;
     background-color: $insensitive_bg_color;
     // text-shadow: none;
   }
 
   &:backdrop {
-    color: $backdrop_fg_color;
+    color: transparent; // $backdrop_fg_color;
     border-color: $backdrop_borders_color;
     background-color: $backdrop_dark_fill;
     // text-shadow: none;
@@ -2702,7 +2704,7 @@ switch {
     }
 
     &:disabled {
-      color: $backdrop_insensitive_color;
+      color: transparent; // $backdrop_insensitive_color;
       border-color: $backdrop_borders_color;
       background-color: $insensitive_bg_color;
     }
@@ -2710,16 +2712,17 @@ switch {
 
   slider {
     margin: -1px;
-    min-width: 44px;
+    min-width: 32px; // 44px;
     min-height: 26px;
     border: 1px solid;
-    border-radius: 3px;
+    border-radius: 5px;
     transition: $button_transition;
 
-    @include button(normal-alt, $porcelain, $edge: $shadow_color);
+    @include button(normal-alt, white, $edge: $shadow_color);
+    border-color: darken($borders_color, 10%);
   }
 
-  &:hover slider { @include button(hover-alt, $porcelain, $edge: $shadow_color); }
+  &:hover slider { @include button(hover-alt, white, $edge: $shadow_color); border-color: darken($borders_color, 15%); }
 
   &:checked slider { border: 1px solid _border_color($c); }
 
@@ -2818,9 +2821,9 @@ radio {
   border: 1px solid;
   -gtk-icon-source: none;
 
-  @include button(normal-alt, $porcelain, $edge: $shadow_color);
+  @include button(normal-alt, white, $edge: $shadow_color);
 
-  &:hover { @include button(hover-alt, $porcelain, $edge: $shadow_color); }
+  &:hover { @include button(hover-alt, white, $edge: $shadow_color); }
   &:active { @include button(active); }
   &:disabled { @include button(insensitive); }
   &:backdrop {
@@ -2864,24 +2867,68 @@ radio {
 
 %check,
 check {
+  -gtk-icon-source: none;
   border-radius: 3px;
+  padding: 2px;
 
-  &:checked { -gtk-icon-source: image(-gtk-recolor(url("assets/check-symbolic.svg")),
-                                      -gtk-recolor(url("assets/check-symbolic.symbolic.png"))); }
+  @include button(normal-alt, $dark_fill);
 
-  &:indeterminate { -gtk-icon-source: image(-gtk-recolor(url("assets/dash-symbolic.svg")),
-                                            -gtk-recolor(url("assets/dash-symbolic.symbolic.png"))); }
+  &:hover { @include button(hover-alt , $dark_fill); }
+  &:active { @include button(active, $dark_fill); }
+  &:disabled { @include button(insensitive, $dark_fill); }
+  &:backdrop {
+    @include button(backdrop, $dark_fill);
+    &:disabled { @include button(backdrop-insensitive, $dark_fill); }
+  }
+
+  &:checked:not(:indeterminate) {
+    $c: $success_color;
+    -gtk-icon-source: -gtk-icontheme('emblem-ok-symbolic');
+    @include button(normal, $c, white);
+    &:active { @include button(active, $c, white); }
+    &:backdrop { @include button(backdrop, $c, white); }
+    &:disabled { @include button(insensitive-active, $c, white); }
+  }
+
+  &:indeterminate {
+    $c: $warning_color;
+    -gtk-icon-source: -gtk-icontheme('list-remove-symbolic');
+    @include button(normal, $c, white);
+    &:active { @include button(active, $c, white); }
+    &:backdrop { @include button(backdrop, $c, white); }
+    &:disabled { @include button(insensitive-active, $c, white); }
+  }
 }
 
 %radio,
 radio {
   border-radius: 100%;
+  padding: 2px;
 
-  &:checked { -gtk-icon-source: image(-gtk-recolor(url("assets/bullet-symbolic.svg")),
-                                      -gtk-recolor(url("assets/bullet-symbolic.symbolic.png"))); }
+  @include button(normal-alt, $dark_fill);
 
-  &:indeterminate { -gtk-icon-source: image(-gtk-recolor(url("assets/dash-symbolic.svg")),
-                                            -gtk-recolor(url("assets/dash-symbolic.symbolic.png"))); }
+  &:hover { @include button(hover-alt , $dark_fill); }
+  &:active { @include button(active, $dark_fill); }
+  &:disabled { @include button(insensitive, $dark_fill); }
+  &:backdrop {
+    @include button(backdrop, $dark_fill);
+    &:disabled { @include button(backdrop-insensitive, $dark_fill); }
+  }
+
+  &:checked:not(:indeterminate) { -gtk-icon-source: -gtk-icontheme('emblem-ok-symbolic'); @include button(normal, $success_color, white);
+    &:active { @include button(active, $success_color, white); }
+    &:backdrop { @include button(backdrop, $success_color, white); }
+    &:disabled { @include button(insensitive-active, $success_color, white); }
+  }
+
+  &:indeterminate {
+    $c: $warning_color;
+    -gtk-icon-source: -gtk-icontheme('list-remove-symbolic');
+    @include button(normal, $c, white);
+    &:active { @include button(active, $c, white); }
+    &:backdrop { @include button(backdrop, $c, white); }
+    &:disabled { @include button(insensitive-active, $c, white); }
+  }
 }
 
 // ANIMATION:
@@ -2961,7 +3008,7 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
 }
 
 %scale_highlight {
-  $c: $neutral_color;
+  $c: $selected_bg_color;
   border: 1px solid _border_color($c);
   border-radius: 3px;
   background-color: $c;
@@ -3076,15 +3123,15 @@ scale {
   }
 
   slider {
-    $c: $neutral_color;
-    @include button(normal-alt, $porcelain, $edge: $shadow_color);
+    $c: $selected_bg_color;
+    @include button(normal-alt, white, $edge: $shadow_color);
 
     border: 1px solid darken($alt_borders_color, 3%);
     border-radius: 100%;
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
-    &:hover { @include button(hover-alt, $porcelain, $edge: $shadow_color); }
+    &:hover { @include button(hover-alt, white, $edge: $shadow_color); border-color: $borders_color; }
 
     &:active { border-color: _border_color($c); }
 
@@ -3553,7 +3600,7 @@ levelbar {
 
     &.high,
     &:not(.empty) {
-      @include block_highlight($neutral_color);
+      @include block_highlight($selected_bg_color);
     }
 
     &.full {
