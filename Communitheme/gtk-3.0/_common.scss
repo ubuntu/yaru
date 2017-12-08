@@ -1140,8 +1140,8 @@ spinbutton {
       padding-bottom: 0;
       padding-top: 0;
       color: mix($fg_color, $base_color, 90%);
-      background-image: none;
       border-style: none none none solid;
+      background-color: transparent;
       border-color: transparentize($borders_color, 0.7);
       border-radius: 0;
       box-shadow: none;
@@ -1479,6 +1479,20 @@ headerbar {
     $_bg: $headerbar_bg_color;
     $_fg: $headerbar_fg_color;
 
+    entry {
+      @include entry(normal, $bg: $_bg, $tc: $headerbar_fg_color);
+
+      &:disabled { @include entry(insensitive, $bg: $_bg, $tc: $headerbar_fg_color); }
+
+      &:backdrop {
+        @include entry(backdrop, $bg: $_bg, $tc: $headerbar_fg_color);
+
+        transition: $backdrop_transition;
+      }
+
+      &:backdrop:disabled { @include entry(backdrop-insensitive, $bg: $_bg, $tc: $headerbar_fg_color); }
+    }
+
     button {
       // make buttons flat
       @extend %undecorated_button;
@@ -1486,7 +1500,7 @@ headerbar {
 
       color: $_fg;
 
-      &:backdrop {
+      &:backdrop, &:backdrop:disabled, &:disabled {
         background-color: transparent;
         border-color: transparent;
       }
