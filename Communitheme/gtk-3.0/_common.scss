@@ -1517,7 +1517,9 @@ headerbar {
       }
     }
 
-    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button {
+    stackswitcher.horizontal.linked.stack-switcher button.text-button { @extend %underline_focus; border-radius: 0; }
+
+    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button, .linked.path-bar button.slider-button { // TODO: tidy this up
       @include button(normal, $_bg, $_fg);
 
       &.text-button, &.image-button, &.text-button.image-button, &.titlebutton:not(.close) {
@@ -1789,6 +1791,17 @@ headerbar { // headerbar border rounding
 /************
  * Pathbars *
  ************/
+ %underline_focus {
+   &:checked {
+     font-weight: bold;
+     box-shadow: inset 0 -2px $selected_bg_color;
+   }
+
+   &:not(:checked):hover {
+     box-shadow: inset 0 -2px $insensitive_fg_color;
+   }
+
+ }
 .path-bar button {
   &.text-button, &.image-button, & {
     padding-left: 4px;
@@ -1804,6 +1817,10 @@ headerbar { // headerbar border rounding
     label:last-child { padding-right: 8px; }
     label:first-child { padding-left: 8px; }
   }
+
+  &.text-button { @extend %underline_focus; }
+  &.text-button { @extend %underline_focus; }
+  &.text-button { @extend %underline_focus; }
 
   image {
     padding-left: 4px;
@@ -2247,8 +2264,8 @@ notebook {
           // &:backdrop { box-shadow: none; }
           //
           // &:checked { box-shadow: inset 0 -3px $selected_bg_color; }
-          border-radius: 6px 6px 0 0;
-          &:hover, &:checked { border-bottom-color: transparent; }
+          border-radius: 0 6px 0 0;
+          &:checked { border-bottom-color: transparent; }
         }
       }
     }
@@ -2264,8 +2281,8 @@ notebook {
           // &:backdrop { box-shadow: none; }
           //
           // &:checked { box-shadow: inset 0 3px $selected_bg_color; }
-          border-radius: 0 0 6px 6px;
-          &:hover, &:checked { border-top-color: transparent; }
+          border-radius: 0 0 6px 0;
+          &:checked { border-top-color: transparent; }
         }
       }
     }
@@ -2281,8 +2298,8 @@ notebook {
           // &:backdrop { box-shadow: none; }
           //
           // &:checked { box-shadow: inset -3px 0 $selected_bg_color; }
-          border-radius: 6px 0 0 6px;
-          &:hover, &:checked { border-right-color: transparent; }
+          border-radius: 0 0 0 6px;
+          &:checked { border-right-color: transparent; }
         }
       }
     }
@@ -2298,8 +2315,8 @@ notebook {
           // &:backdrop { box-shadow: none; }
           //
           // &:checked { box-shadow: inset 3px 0 $selected_bg_color; }
-          border-radius: 0 6px 6px 0;
-          &:hover, &:checked { border-left-color: transparent; }
+          border-radius: 0 0 6px 0;
+          &:checked { border-left-color: transparent; }
         }
       }
     }
@@ -2381,12 +2398,13 @@ notebook {
       // font-weight: bold;
       // background-color: $insensitive_bg_color;
       border: 1px solid transparent;
+      background-color: $insensitive_bg_color;
+      border-color: $borders_color;
       // border-width: 1px;         // for reorderable tabs
       // border-color: transparent; //
 
       &:hover {
-        background-color: mix($insensitive_bg_color, $base_color, 50%);
-        border-color: $borders_color;
+        background-color: mix($insensitive_bg_color, $base_color, 25%);
         // color: mix($insensitive_fg_color, $fg_color, 50%);
         //
         // &.reorderable-page {
@@ -2454,22 +2472,25 @@ notebook {
     &.top,
     &.bottom {
       tabs {
-        padding-left: 4px;
+        // padding-left: 4px;
         padding-right: 4px;
 
         &:not(:only-child) {
-          margin-left: 3px;
+          // margin-left: 3px;
           margin-right: 3px;
 
-          &:first-child { margin-left: -1px; }
-          &:last-child { margin-right: -1px; }
+          // &:first-child { margin-left: -1px; }
+          // &:last-child { margin-right: -1px; }
         }
 
         tab {
-          margin-left: 4px;
-          margin-right: 4px;
+          // margin-left: 4px;
+          // margin-right: 4px;
 
-          &.reorderable-page { border-style: none solid; }
+          // &.reorderable-page { border-style: none solid; }
+          border-left-style: none;
+          &:last-child { margin-right: 4px; }
+          &:not(:first-child){ margin-left: -4px; border-left-style: solid; }
         }
       }
     }
@@ -2477,22 +2498,25 @@ notebook {
     &.left,
     &.right {
       tabs {
-        padding-top: 4px;
+        // padding-top: 4px;
         padding-bottom: 4px;
 
         &:not(:only-child) {
-          margin-top: 3px;
+          // margin-top: 3px;
           margin-bottom: 3px;
 
-          &:first-child { margin-top: -1px; }
-          &:last-child { margin-bottom: -1px; }
+          // &:first-child { margin-top: -1px; }
+          // &:last-child { margin-bottom: -1px; }
         }
 
         tab {
-          margin-top: 4px;
-          margin-bottom: 4px;
-
-          &.reorderable-page { border-style: solid none; }
+          // margin-top: 4px;
+          // margin-bottom: 4px;
+          //
+          // &.reorderable-page { border-style: solid none; }
+          border-top-style: none;
+          &:last-child { margin-bottom: 4px; }
+          &:not(:first-child){ margin-top: -4px; border-top-style: solid; }
         }
       }
     }
