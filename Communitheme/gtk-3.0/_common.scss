@@ -513,7 +513,8 @@ button {
     min-width: 16px;
     padding: 4px 8px;
     border: 1px solid;
-    border-radius: 3px;
+    // box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.025);
+    border-radius: 5px;
     transition: $button_transition;
 
     @include button(normal);
@@ -1506,6 +1507,14 @@ headerbar {
         background-color: transparent;
         border-color: transparent;
       }
+
+      @each $b_type, $b_color in (suggested-action, /*$selected_bg_color*/ $success_color),
+                                  (destructive-action, $destructive_color) {
+        &.#{$b_type} {
+          @include button(normal, $b_color, white);
+          @include reload_button_styles($b_color, white);
+        }
+      }
     }
 
     .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button {
@@ -1896,26 +1905,27 @@ treeview.view {
     @if $variant == light { color: $base_color; }
 
     border: 1px solid $selected_borders_color;
-    border-radius: 4px;
+    // border-radius: 4px;
     background-color: $selected_bg_color;
-    background-image: linear-gradient(to bottom,
-                                      $selected_bg_color,
-                                      darken($selected_bg_color, 10%));
-    box-shadow: inset 0 1px if($variant=='light', transparentize(white, 0.7), transparentize(white, 0.85)),
-                      0 1px if($variant=='light', transparentize(black, 0.8), transparentize(black, 0.9));
+    // background-image: linear-gradient(to bottom,
+    //                                  $selected_bg_color,
+    //                                  darken($selected_bg_color, 10%));
+    // box-shadow: inset 0 1px if($variant=='light', transparentize(white, 0.7), transparentize(white, 0.85)),
+    //                  0 1px if($variant=='light', transparentize(black, 0.8), transparentize(black, 0.9));
 
     &:selected {
       &:focus, & {
-        border-radius: 4px;
+        // border-radius: 4px;
 
         @if $variant == 'light' {
           color: $selected_bg_color;
           box-shadow: none;
         }
 
-        @else { box-shadow: inset 0 1px transparentize(white, 0.95); }
+        // @else { box-shadow: inset 0 1px transparentize(white, 0.95); }
 
-        background-image: linear-gradient(to bottom, $base_color, darken($base_color,10%));
+        // background-image: linear-gradient(to bottom, $base_color, darken($base_color,10%));
+        background-color: $base_color;
 
         &:backdrop {
           @if $variant == 'light' {
@@ -1923,7 +1933,7 @@ treeview.view {
             border-color: $selected_borders_color; // otherwise it gets inherited by .view(?!?)
           }
 
-          @else { border-color: $backdrop_base_color; }
+          // @else { border-color: $backdrop_base_color; }
 
           background-color: $backdrop_base_color;
         }
@@ -1933,7 +1943,7 @@ treeview.view {
     &:backdrop {
       @if $variant == 'light' { color: $backdrop_base_color; }
 
-      @else { border-color: $backdrop_base_color; }
+      // @else { border-color: $backdrop_base_color; }
 
       background-image: none;
       box-shadow: none;
@@ -1942,7 +1952,7 @@ treeview.view {
 
   &.trough { // progress bar trough in treeviews
     background-color: transparentize($fg_color,0.9);
-    border-radius: 4px;
+    // border-radius: 4px;
 
     &:selected {
       &:focus, & {
@@ -1967,7 +1977,7 @@ treeview.view {
       @extend %column_header_button;
 
       color: $_column_header_color;
-      background-color: $base_color;
+      // background-color: $base_color;
       font-weight: bold;
       // text-shadow: none;
       box-shadow: none;
@@ -2229,13 +2239,16 @@ notebook {
     &.top {
       border-bottom-style: solid;
       > tabs {
+        padding-top: 4px;
         margin-bottom: -2px;
         > tab {
-          &:hover { box-shadow: inset 0 -3px $borders_color; }
-
-          &:backdrop { box-shadow: none; }
-
-          &:checked { box-shadow: inset 0 -3px $selected_bg_color; }
+          // &:hover { box-shadow: inset 0 -3px $borders_color; }
+          //
+          // &:backdrop { box-shadow: none; }
+          //
+          // &:checked { box-shadow: inset 0 -3px $selected_bg_color; }
+          border-radius: 6px 6px 0 0;
+          &:hover, &:checked { border-bottom-color: transparent; }
         }
       }
     }
@@ -2243,13 +2256,16 @@ notebook {
     &.bottom {
       border-top-style: solid;
       > tabs {
+        padding-bottom: 4px;
         margin-top: -2px;
         > tab {
-          &:hover { box-shadow: inset 0 3px $borders_color; }
-
-          &:backdrop { box-shadow: none; }
-
-          &:checked { box-shadow: inset 0 3px $selected_bg_color; }
+          // &:hover { box-shadow: inset 0 3px $borders_color; }
+          //
+          // &:backdrop { box-shadow: none; }
+          //
+          // &:checked { box-shadow: inset 0 3px $selected_bg_color; }
+          border-radius: 0 0 6px 6px;
+          &:hover, &:checked { border-top-color: transparent; }
         }
       }
     }
@@ -2257,13 +2273,16 @@ notebook {
     &.left {
       border-right-style: solid;
       > tabs {
+        padding-left: 4px;
         margin-right: -2px;
         > tab {
-          &:hover { box-shadow: inset -3px 0 $borders_color; }
-
-          &:backdrop { box-shadow: none; }
-
-          &:checked { box-shadow: inset -3px 0 $selected_bg_color; }
+          // &:hover { box-shadow: inset -3px 0 $borders_color; }
+          //
+          // &:backdrop { box-shadow: none; }
+          //
+          // &:checked { box-shadow: inset -3px 0 $selected_bg_color; }
+          border-radius: 6px 0 0 6px;
+          &:hover, &:checked { border-right-color: transparent; }
         }
       }
     }
@@ -2271,13 +2290,16 @@ notebook {
     &.right {
       border-left-style: solid;
       > tabs {
+        padding-right: 4px;
         margin-left: -2px;
         > tab {
-          &:hover { box-shadow: inset 3px 0 $borders_color; }
-
-          &:backdrop { box-shadow: none; }
-
-          &:checked { box-shadow: inset 3px 0 $selected_bg_color; }
+          // &:hover { box-shadow: inset 3px 0 $borders_color; }
+          //
+          // &:backdrop { box-shadow: none; }
+          //
+          // &:checked { box-shadow: inset 3px 0 $selected_bg_color; }
+          border-radius: 0 6px 6px 0;
+          &:hover, &:checked { border-left-color: transparent; }
         }
       }
     }
@@ -2356,46 +2378,52 @@ notebook {
       outline-offset: -5px;
 
       color: $insensitive_fg_color;
-      font-weight: bold;
-
-      border-width: 1px;         // for reorderable tabs
-      border-color: transparent; //
+      // font-weight: bold;
+      // background-color: $insensitive_bg_color;
+      border: 1px solid transparent;
+      // border-width: 1px;         // for reorderable tabs
+      // border-color: transparent; //
 
       &:hover {
-        color: mix($insensitive_fg_color, $fg_color, 50%);
-
-        &.reorderable-page {
-border-color: transparentize($borders_color, 0.7);
-          background-color: transparentize($bg_color, 0.8);
-        }
+        background-color: mix($insensitive_bg_color, $base_color, 50%);
+        border-color: $borders_color;
+        // color: mix($insensitive_fg_color, $fg_color, 50%);
+        //
+        // &.reorderable-page {
+        //   border-color: transparentize($borders_color, 0.7);
+        //   background-color: transparentize($bg_color, 0.8);
+        // }
       }
 
       &:backdrop {
         color: mix($backdrop_fg_color, $backdrop_bg_color, 60%);
 
-        &.reorderable-page {
-          border-color: transparent;
-          background-color: transparent;
-        }
+        // &.reorderable-page {
+        //   border-color: transparent;
+        //   background-color: transparent;
+        // }
       }
 
       &:checked {
         color: $fg_color;
-        &.reorderable-page {
-          border-color: transparentize($borders_color, 0.5);
-          background-color: transparentize($bg_color, 0.5);
-
-          &:hover { background-color: transparentize($bg_color, 0.3); }
-        }
+        font-weight: bold;
+        background-color: $base_color;
+        border-color: $borders_color;
+        // &.reorderable-page {
+        //   border-color: transparentize($borders_color, 0.5);
+        //   background-color: transparentize($bg_color, 0.5);
+        //
+        //   &:hover { background-color: transparentize($bg_color, 0.3); }
+        // }
       }
 
       &:backdrop:checked {
         color: $backdrop_fg_color;
 
-        &.reorderable-page {
-          border-color: $backdrop_borders_color;
-          background-color: $backdrop_bg_color;
-        }
+        // &.reorderable-page {
+        //   border-color: $backdrop_borders_color;
+        //   background-color: $backdrop_bg_color;
+        // }
       }
 
       // colors the button like the label, overridden otherwise
@@ -2428,7 +2456,7 @@ border-color: transparentize($borders_color, 0.7);
       tabs {
         padding-left: 4px;
         padding-right: 4px;
-border-l
+
         &:not(:only-child) {
           margin-left: 3px;
           margin-right: 3px;
@@ -2982,7 +3010,7 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
  ************/
 %scale_trough {
   border: 1px solid $borders_color;
-  border-radius: 3px;
+  // border-radius: 3px;
   background-color: $dark_fill;
 
   &:disabled { background-color: $insensitive_bg_color; }
@@ -2996,7 +3024,7 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
   }
 
   // ...on selected list rows
-  row:selected & { &:disabled, & { border-color: $selected_borders_color; }}
+  row:selected & { &:disabled, & { border-color: $neutral_color; }}
 
   // OSD
   .osd & {
@@ -3008,9 +3036,9 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
 }
 
 %scale_highlight {
-  $c: $selected_bg_color;
+  $c: $neutral_color;
   border: 1px solid _border_color($c);
-  border-radius: 3px;
+  // border-radius: 3px;
   background-color: $c;
 
   &:disabled {
@@ -3123,15 +3151,15 @@ scale {
   }
 
   slider {
-    $c: $selected_bg_color;
+    $c: $neutral_color;
     @include button(normal-alt, white, $edge: $shadow_color);
 
     border: 1px solid darken($alt_borders_color, 3%);
-    border-radius: 100%;
+    border-radius: 6px;
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
-    &:hover { @include button(hover-alt, white, $edge: $shadow_color); border-color: $borders_color; }
+    &:hover { @include button(hover-alt, white, $edge: $shadow_color); border-color: $borders_color; } // TODO:
 
     &:active { border-color: _border_color($c); }
 
@@ -3468,7 +3496,7 @@ progressbar {
   %progressbar_highlight {
     $c: $success_color;
     border: 1px solid _border_color($c);
-    border-radius: 3px;
+    // border-radius: 3px;
     background-color: $c;
 
     &:disabled {
@@ -3577,7 +3605,7 @@ levelbar {
   trough {
     border: 1px solid;
     padding: 2px;
-    border-radius: 3px;
+    // border-radius: 3px;
     @include entry(normal);
 
     &:backdrop { @include entry(backdrop); }
@@ -3585,7 +3613,7 @@ levelbar {
 
   block {
     border: 1px solid;
-    border-radius: 1px;
+    // border-radius: 1px;
 
     @mixin block_highlight($c) {
       border-color: if($variant == 'light', _border_color($c), $c);
@@ -3600,7 +3628,7 @@ levelbar {
 
     &.high,
     &:not(.empty) {
-      @include block_highlight($selected_bg_color);
+      @include block_highlight($neutral_color);
     }
 
     &.full {

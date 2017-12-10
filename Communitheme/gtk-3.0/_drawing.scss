@@ -27,7 +27,7 @@
   @else { @return if($fc==$selected_bg_color, $selected_borders_color, darken($fc, 35%)); }
 }
 
-@function entry_focus_shadow($fc:$selected_bg_color) { @return 0 0 2px 2px rgba(0, 0, 0, 0.025), inset 0 0 0 1px $fc; }
+@function entry_focus_shadow($fc:$selected_bg_color) { @return /*0 0 2px 2px rgba(0, 0, 0, 0.025),*/ inset 0 0 0 1px $fc; }
 
 @mixin entry($t, $fc:$selected_bg_color, $bg: $base_color, $tc: $text_color, $edge: none) {
 //
@@ -168,7 +168,7 @@
 //   }
 // }
 
-$button_bg_color: darken($bg_color, if($variant == "light", 10%, 5%));
+$button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
 @mixin button($t, $c:$button_bg_color, $tc:$fg_color, $edge: none) {
 //
 // Button drawing function
@@ -510,21 +510,25 @@ $button_bg_color: darken($bg_color, if($variant == "light", 10%, 5%));
 
 @mixin reload_button_styles($_bg: $headerbar_bg_color, $_fg: $headerbar_fg_color, $retain_borders: false) {
   // reloads button styles for headerbar buttons
+  $bc: if($retain_borders == true, _border_color($_bg), transparent);
+  border-color: $bc;
 
   &:hover {
     @include button(hover, $_bg, $_fg);
+    border-color: $bc;
   }
 
   &:active, &:checked {
     @include button(active, $_bg, $_fg);
+    border-color: $bc;
   }
 
   &:disabled {
     @include button(insensitive, $_bg, $_fg);
+    border-color: $bc;
   }
 
   &:backdrop {
-    $bc: if($retain_borders == true, _border_color($_bg), transparent);
     // $bc is the same thing as _borders_color($_bg)
     // that won't work here for some reason though
     @include button(backdrop, $_bg, $_fg);

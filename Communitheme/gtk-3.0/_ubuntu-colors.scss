@@ -24,7 +24,7 @@ $headerbar_fg_color: $porcelain;
 //
 // $ubuntu_base_color: if($variant == 'light', #FAFAFA, #1C1B21);
 // $ubuntu_bg_color: if($variant == 'light', #fdfdfd, #292933);
-$ubuntu_base_color: if($variant == 'light', #ECECEC, #1C1B21);
-$ubuntu_bg_color: if($variant == 'light', #F5F5F5, #292933);
+$ubuntu_base_color: if($variant == 'light', #F7F7F7, #1C1B21);
+$ubuntu_bg_color: if($variant == 'light', #FDFDFD, #292933);
 $ubuntu_fg_color: if($variant == 'light', $slate, $porcelain);
 $ubuntu_text_color: transparentize($ubuntu_fg_color, .1);
