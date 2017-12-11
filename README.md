@@ -33,7 +33,7 @@ sudo ninja install
 Finally, if you want to change the GDM look and point to the same stylesheet:
 
 ```sh
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/ubuntu-communitheme/gnome-shell.css 15
+update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/communitheme/gnome-shell.css 15
 ```
 
 ## Why do we import from package content and not from upstream git repository?

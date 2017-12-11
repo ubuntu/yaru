@@ -1,4 +1,4 @@
-project('gnome-shell-ubuntu-communitheme')
+project('gnome-shell-communitheme')
 
 gnomeshell_dir = join_paths(get_option('datadir'), 'gnome-shell')
 gnomeshell_mode_dir = join_paths(gnomeshell_dir, 'modes')
