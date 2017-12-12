@@ -1,0 +1,30 @@
+// Blacks
+$jet: #181818;
+$inkstone: #3D3D3D;
+$slate: #5D5D5D;
+$graphite: #666666;
+
+// Whites
+$white: #FFFFFF;
+$porcelain: #F7F7F7;
+$silk: #CCC;
+$ash: #878787;
+
+// Utility
+$red: #E9384B;
+$orange: #E55730;
+$yellow: #F89B0F;
+$green: #46B258;
+$blue: #30B3EA;
+$purple: #74296F;
+
+// Widget Colors
+$headerbar_bg_color: #252525;
+$headerbar_fg_color: $porcelain;
+//
+// $ubuntu_base_color: if($variant == 'light', #FAFAFA, #1C1B21);
+// $ubuntu_bg_color: if($variant == 'light', #fdfdfd, #292933);
+$ubuntu_base_color: if($variant == 'light', #F7F7F7, #1C1B21);
+$ubuntu_bg_color: if($variant == 'light', #FDFDFD, #292933);
+$ubuntu_fg_color: if($variant == 'light', $slate, $porcelain);
+$ubuntu_text_color: transparentize($ubuntu_fg_color, .1);
