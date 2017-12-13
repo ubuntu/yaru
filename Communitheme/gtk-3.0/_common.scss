@@ -996,8 +996,8 @@ toolbar.inline-toolbar toolbutton:backdrop {
   background-color: transparent;
   background-image: none;
   border-color: transparent;
-  box-shadow: inset 0 1px transparentize(white, 1),
-              0 1px transparentize(white, 1);
+  // box-shadow: inset 0 1px transparentize(white, 1),
+  //            0 1px transparentize(white, 1);
   // text-shadow: none;
   // -gtk-icon-shadow: none;
 }
@@ -1479,29 +1479,29 @@ headerbar {
   }
 
   & {
-    $_bg: $headerbar_bg_color;
+    $_bg: lighten($headerbar_bg_color, 5%);
     $_fg: $headerbar_fg_color;
 
     entry {
-      @include entry(normal, $bg: $_bg, $tc: $headerbar_fg_color);
+      @include entry(normal, $bg: $_bg, $tc: $_fg);
 
-      &:disabled { @include entry(insensitive, $bg: $_bg, $tc: $headerbar_fg_color); }
+      &:disabled { @include entry(insensitive, $bg: $_bg, $tc: $_fg); }
 
       &:backdrop {
-        @include entry(backdrop, $bg: $_bg, $tc: $headerbar_fg_color);
+        @include entry(backdrop, $bg: $_bg, $tc: $_fg);
 
         transition: $backdrop_transition;
       }
 
-      &:backdrop:disabled { @include entry(backdrop-insensitive, $bg: $_bg, $tc: $headerbar_fg_color); }
+      &:backdrop:disabled { @include entry(backdrop-insensitive, $bg: $_bg, $tc: $_fg); }
     }
 
     button {
       // make buttons flat
+      color: $_fg;
       @extend %undecorated_button;
       @include reload_button_styles;
 
-      color: $_fg;
 
       &:backdrop, &:backdrop:disabled, &:disabled {
         background-color: transparent;
@@ -1551,7 +1551,7 @@ headerbar {
     &:backdrop {
       background-color: $selected_bg_color;
       background-image: none;
-      box-shadow: inset 0 1px mix($top_hilight, $selected_bg_color, 60%);
+      // box-shadow: inset 0 1px mix($top_hilight, $selected_bg_color, 60%);
     }
 
     .subtitle:link { @extend *:link:selected;  }
@@ -2764,8 +2764,8 @@ switch {
 
   slider {
     margin: -1px;
-    min-width: 32px; // 44px;
-    min-height: 26px;
+    min-width: 22px; // 32px; // 44px;
+    min-height: 24px; // 20px; // 26px;
     border: 1px solid;
     border-radius: 5px;
     transition: $button_transition;
@@ -2776,7 +2776,7 @@ switch {
 
   &:hover slider { @include button(hover-alt, white, $edge: $shadow_color); border-color: darken($borders_color, 15%); }
 
-  &:checked slider { border: 1px solid _border_color($c); }
+  &:checked slider { border: 1px solid $borders_color; /*_border_color($c);*/ }
 
   &:disabled slider { @include button(insensitive); }
 
@@ -4539,9 +4539,9 @@ decoration {
     background-color: $borders_color;
     border: solid 1px $borders_color;
     border-radius: 0;
-    box-shadow: inset 0 0 0 3px $headerbar_color, inset 0 1px $top_hilight;
+    box-shadow: inset 0 0 0 3px $headerbar_color; //, inset 0 1px $top_hilight;
 
-    &:backdrop { box-shadow: inset 0 0 0 3px $backdrop_bg_color, inset 0 1px $top_hilight; }
+    &:backdrop { box-shadow: inset 0 0 0 3px $backdrop_bg_color; /*, inset 0 1px $top_hilight;*/ }
   }
 }
 

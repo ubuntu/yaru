@@ -508,46 +508,46 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
   }
 }
 
-@mixin reload_button_styles($_bg: $headerbar_bg_color, $_fg: $headerbar_fg_color, $retain_borders: false) {
+@mixin reload_button_styles($_bg: lighten($headerbar_bg_color, 5%), $_fg: $headerbar_fg_color, $retain_borders: false) {
   // reloads button styles for headerbar buttons
   $bc: if($retain_borders == true, _border_color($_bg), transparent);
   border-color: $bc;
 
   &:hover {
     @include button(hover, $_bg, $_fg);
-    border-color: $bc;
+    @if $retain_borders == true { border-color: $bc; }
   }
 
   &:active, &:checked {
     @include button(active, $_bg, $_fg);
-    border-color: $bc;
+    @if $retain_borders == true { border-color: $bc; }
   }
 
   &:disabled {
     @include button(insensitive, $_bg, $_fg);
-    border-color: $bc;
+    @if $retain_borders == true { border-color: $bc; }
   }
 
   &:backdrop {
     // $bc is the same thing as _borders_color($_bg)
     // that won't work here for some reason though
     @include button(backdrop, $_bg, $_fg);
-    border-color: $bc;
+    @if $retain_borders == true { border-color: $bc; }
 
     &:active,
     &:checked {
       @include button(backdrop-active, $_bg, $_fg);
-      border-color: $bc;
+      @if $retain_borders == true { border-color: $bc; }
     }
 
     &:disabled {
       @include button(backdrop-insensitive, $_bg, $_fg);
-      border-color: $bc;
+      @if $retain_borders == true { border-color: $bc; }
 
       &:active,
       &:checked {
         @include button(backdrop-insensitive-active, $_bg, $_fg);
-        border-color: $bc;
+        @if $retain_borders == true { border-color: $bc; }
       }
     }
   }
