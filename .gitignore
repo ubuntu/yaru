@@ -1,1 +1,12 @@
 builddir/
+
+# Meson build directories (local and package)
+/build/
+/obj-*/
+
+# Packaging generated content
+debian/*debhelper*
+debian/files
+debian/*.substvars
+debian/suru-icon-theme/
+debian/tmp/
