@@ -5,8 +5,11 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
 @import "_ubuntu-colors";
 $panel-corner-radius: 0; // 6px;
-$panel-alpha-value: 0.15; // analogous to dash
+$panel-alpha-value: 0.1; // analogous to dash
 $popover-alpha-value: 0.05;
+//
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$button_transition: all 200ms $ease-out-quad;
 
 /* Copyright 2009, 2015 Red Hat, Inc.
  *
@@ -1148,11 +1151,12 @@ StScrollBar {
   }
 
   .system-menu-action {
-    @include button(normal);
     color: $fg_color;
+    transition-duration: 200ms;
     border-radius: 6px; // 32px; /* wish we could do 50% */
     padding: 13px;
-    border: 1px solid lighten($borders_color,5%);
+    border: 1px solid $osd_borders_color; // lighten($borders_color,5%);
+    border-bottom-width: 2px;
 
     &:hover, &:focus {
       @include button(hover);
@@ -1453,37 +1457,6 @@ StScrollBar {
     transition-duration: 100ms;
   }
 
-  .show-apps {
-    // Ubuntu Launcher
-      & {
-        // reset
-      &:hover,
-      &:focus,
-      &:checked {
-        .overview-icon { background-color: transparent; }
-      }
-
-      & .show-apps-icon,
-      &:checked .show-apps-icon,
-      &:focus .show-apps-icon {
-        color: transparent;
-        background-color: transparent;
-        transition-duration: 100ms;
-      }
-    }
-
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); // doesn't work?
-    background-color: #e95420;
-
-    &:focus, &:hover { background-color: lighten(#e95420, 2%) }
-    &:active, &:checked { background-color: darken(#e95420, 2%) }
-
-    &, &:focus, &:hover, &:active, &:checked {
-      .overview-icon { background-image: url("ubuntu-logo-icon.svg"); background-size: contain; }
-    }
-  }
-
-
   // Collections
   .app-folder-popup { //expanded collection
     -arrow-border-radius: 8px;
@@ -1780,9 +1753,21 @@ StScrollBar {
   border: none;
   background-color: transparent;
 
+  StEntry {
+    color: $slate;
+    @include entry(normal, $c: $porcelain);
+    &:focus { @include entry(focus, $c: $porcelain, $fc:transparentize($fg_color,0.5));}
+    &:insensitive { @include entry(insensitive, $c: $porcelain);}
+  }
+
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 3px 18px;
+    $bg: transparentize($osd_bg_color, 0.3);
+    @include button(normal, $bg);
+    &:hover,&:focus { @include button(hover,$c:$bg); }
+    &:active { @include button(active,$c:$bg); }
+    &:insensitive { @include button(insensitive); }
     &:default {
       $bg: $success_color;
       @include button(normal,$c:$bg);
@@ -1935,7 +1920,7 @@ StScrollBar {
 
 .screen-shield-notification-count-text { padding: 0px 0px 0px 12px; }
 
-#panel.lock-screen { background-color: transparentize($_bubble_bg_color, 0.5); }
+#panel.lock-screen { background-color: transparent; /*transparentize($_bubble_bg_color, 0.5);*/ }
 
 .screen-shield-background { //just the shadow, really
   background: black;
@@ -1943,8 +1928,11 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  background: #2e3436 url(resource:///org/gnome/shell/theme/noise-texture.png);
-  background-repeat: repeat;
+  // background: #2e3436 url(resource:///org/gnome/shell/theme/noise-texture.png);
+  background: #2c001e url("/usr/share/gnome-shell/theme/ubuntu-communitheme/lock-gradient.svg");
+  background-size: cover; // 40px;
+  background-position: top left;
+  background-repeat: no-repeat; // repeat;
 }
 
 #screenShieldNotifications {

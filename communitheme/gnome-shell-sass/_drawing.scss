@@ -25,7 +25,7 @@
 
 // entries
 
-@mixin entry($t, $fc:$selected_bg_color, $edge: $borders_edge) {
+@mixin entry($t, $c: $base_color, $fc:$selected_bg_color, $edge: $borders_edge) {
 //
 // Entries drawing function
 //
@@ -37,11 +37,11 @@
 // possible $t values:
 // normal, focus, insensitive
 //
-  $_inner_shadows: inset 0 2px 4px transparentize(black, 0.6);
+  $_inner_shadows: none; // inset 0 2px 4px transparentize(black, 0.6);
 
   @if $t==normal {
-    background-color: $base_color;
-    border-color: $borders_color;
+    background-color: $c;
+    border-color: if($c != $base_color, _border_color($c), $borders_color);
     @include _shadows($_inner_shadows);
 
   }
@@ -53,7 +53,9 @@
   }
   @if $t==hover { }
   @if $t==insensitive {
+    $_bg: transparentize(mix($insensitive_fg_color,$c,20%),0.3); // transparentize(mix($insensitive_fg_color,$osd_bg_color,20%),0.3);
     color: $insensitive_fg_color;
+    background-color: $_bg;
     border-color: $insensitive_bg_color;
     box-shadow: none;
   }
@@ -113,6 +115,7 @@
 
 @mixin button($t, $c:lighten($osd_bg_color, 5%), $tc:$fg_color/*, $edge: $borders_edge*/) {
   $default_bg_color: lighten($osd_bg_color, 5%);
+  transition-duration: 200ms;
 //
 // Button drawing function
 //
@@ -131,7 +134,6 @@
   // $_hilight_color: _button_hilight_color($c);
   // $_button_edge: if($edge == none, none, _widget_edge($edge));
   // $_blank_edge: if($edge == none, none, _widget_edge(transparentize($edge,1)));
-
 
   @if $t==normal {
   //
