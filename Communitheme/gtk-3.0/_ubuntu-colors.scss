@@ -21,12 +21,12 @@ $purple: #74296F;
 // Widget Colors
 // $headerbar_bg_color: #252525;
 // $headerbar_bg_color: #2B2B2B;
-$headerbar_bg_color: #313130;
+$headerbar_bg_color: #333230;
 $headerbar_fg_color: $porcelain;
 //
 // $ubuntu_base_color: if($variant == 'light', #FAFAFA, #1C1B21);
 // $ubuntu_bg_color: if($variant == 'light', #fdfdfd, #292933);
-$ubuntu_base_color: if($variant == 'light', #F7F7F7, #1C1B21);
-$ubuntu_bg_color: if($variant == 'light', #FDFDFD, #292933);
+$ubuntu_base_color: if($variant == 'light', #F7F7F7, #302E2E);
+$ubuntu_bg_color: if($variant == 'light', #FDFDFD, #302E2E);
 $ubuntu_fg_color: if($variant == 'light', $slate, $porcelain);
 $ubuntu_text_color: transparentize($ubuntu_fg_color, .1);

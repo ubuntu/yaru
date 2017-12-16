@@ -513,6 +513,7 @@ button {
     min-width: 16px;
     padding: 4px 8px;
     border: 1px solid;
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.13);
     // box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.025);
     border-radius: 5px;
     transition: $button_transition;
@@ -996,6 +997,7 @@ toolbar.inline-toolbar toolbutton:backdrop {
   background-color: transparent;
   background-image: none;
   border-color: transparent;
+  box-shadow: none;
   // box-shadow: inset 0 1px transparentize(white, 1),
   //            0 1px transparentize(white, 1);
   // text-shadow: none;
@@ -1521,10 +1523,11 @@ headerbar {
 
     .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button, .linked.path-bar button.slider-button { // TODO: tidy this up
       @include button(normal, $_bg, $_fg);
+      border-color: _border_color($_bg);
 
       &.text-button, &.image-button, &.text-button.image-button, &.titlebutton:not(.close) {
         // specificity bump
-        @include reload_button_styles($retain_borders: true);
+        @include reload_button_styles($_bg, $_fg, $retain_borders: true);
       }
     }
   }
@@ -2770,11 +2773,11 @@ switch {
     border-radius: 5px;
     transition: $button_transition;
 
-    @include button(normal-alt, white, $edge: $shadow_color);
+    @include button(normal-alt, white);
     border-color: darken($borders_color, 10%);
   }
 
-  &:hover slider { @include button(hover-alt, white, $edge: $shadow_color); border-color: darken($borders_color, 15%); }
+  &:hover slider { @include button(hover-alt, white); border-color: darken($borders_color, 15%); }
 
   &:checked slider { border: 1px solid $borders_color; /*_border_color($c);*/ }
 
@@ -2873,9 +2876,9 @@ radio {
   border: 1px solid;
   -gtk-icon-source: none;
 
-  @include button(normal-alt, white, $edge: $shadow_color);
+  @include button(normal-alt, white);
 
-  &:hover { @include button(hover-alt, white, $edge: $shadow_color); }
+  &:hover { @include button(hover-alt, white); }
   &:active { @include button(active); }
   &:disabled { @include button(insensitive); }
   &:backdrop {
@@ -2921,6 +2924,7 @@ radio {
 check {
   -gtk-icon-source: none;
   border-radius: 3px;
+  border-width: 1px;
   padding: 2px;
 
   @include button(normal-alt, $dark_fill);
@@ -2955,6 +2959,7 @@ check {
 %radio,
 radio {
   border-radius: 100%;
+  border-width: 1px;
   padding: 2px;
 
   @include button(normal-alt, $dark_fill);
@@ -3176,14 +3181,14 @@ scale {
 
   slider {
     $c: $neutral_color;
-    @include button(normal-alt, white, $edge: $shadow_color);
+    @include button(normal-alt, white);
 
     border: 1px solid darken($alt_borders_color, 3%);
     border-radius: 6px;
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
-    &:hover { @include button(hover-alt, white, $edge: $shadow_color); border-color: $borders_color; } // TODO:
+    &:hover { @include button(hover-alt, white); border-color: $borders_color; } // TODO:
 
     &:active { border-color: _border_color($c); }
 
@@ -4555,6 +4560,8 @@ button.titlebutton {
   min-height: 20px;
   margin: 0;
   padding: 0;
+
+  &, &:hover, &:active { border-width: 1px; }
 
   &.close {
     @include button(normal, $selected_bg_color, white);

@@ -1,7 +1,7 @@
 // When color definition differs for dark and light variant
 // it gets @if ed depending on $variant
 
-
+@import 'ubuntu-colors';
 // $base_color: if($variant == 'light', #ffffff, #232729);
 // $text_color: if($variant == 'light', black, white);
 // $bg_color: if($variant == 'light', #e8e8e7, #33393b);
@@ -26,12 +26,13 @@ $headerbar_color: if($variant == 'light', lighten($bg_color, 5%), darken($bg_col
 $menu_color: if($variant == 'light', $base_color, mix($bg_color, $base_color, 20%));
 $popover_bg_color: $bg_color;
 $popover_hover_color: lighten($bg_color, 5%);
-
+//
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
 $scrollbar_slider_hover_color: mix($fg_color, $bg_color, 80%);
 $scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 10%));
-
+//
+$button_bg_color: darken($bg_color, if($variant == "light", 10%, 5%));
 // $warning_color: #f57900;
 // $error_color: #cc0000;
 // $success_color: if($variant == 'light', #73d216, darken(#73d216, 10%));
