@@ -17,3 +17,13 @@ $yellow: #F89B0F;
 $green: #46B258;
 $blue: #30B3EA;
 $purple: #74296F;
+
+// Widget Colors
+$panel_bg_color: $jet;
+$panel_fg_color: $porcelain;
+$menu_color: #252525;
+//
+$ubuntu_base_color: if($variant == 'light', #FAFAFA, $jet);
+$ubuntu_bg_color: if($variant == 'light', #fdfdfd, #252525);
+$ubuntu_fg_color: if($variant == 'light', $slate, $porcelain);
+$ubuntu_text_color: transparentize($ubuntu_fg_color, .1);

@@ -1,0 +1,117 @@
+/* Shrink the dash by reducing padding and border radius */
+
+#dashtodockContainer {
+  &.shrink #dash, &.dashtodock #dash {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75); // TODO: can you stack box-shadows in the shell?
+    padding: 0px;
+  }
+  &.shrink.left #dash, &.dashtodock.left #dash {
+    // border-left: 0px;
+    box-shadow: inset -1px 0 $osd_borders_color;
+    border-radius: 0px 9px 9px 0px;
+  }
+  &.shrink.right #dash, &.dashtodock.right #dash {
+    // border-right: 0px;
+    box-shadow: inset 1px 0 $osd_borders_color;
+    border-radius: 9px 0px 0px 9px;
+  }
+  &.shrink.top #dash, &.dashtodock.top #dash {
+    // border-top: 0px;
+    box-shadow: inset 0 1px $osd_borders_color;
+    border-radius: 0px 0px 9px 9px;
+  }
+  &.shrink.bottom #dash, &.dashtodock.bottom #dash {
+    // border-bottom: 0px;
+    box-shadow: inset 0 -1px $osd_borders_color;
+    border-radius: 9px 9px 0px 0px;
+  }
+  &.straight-corner #dash, &.shrink.straight-corner #dash {
+    border-radius: 0px;
+  }
+}
+
+#dash .app-well-app {
+  & .overview-icon {
+  border-radius: 0px !important;
+  border: none !important;
+  }
+}
+
+/* Scrollview style */
+
+.bottom #dashtodockDashScrollview, .top #dashtodockDashScrollview {
+  -st-hfade-offset: 24px;
+}
+
+.left #dashtodockDashScrollview, .right #dashtodockDashScrollview {
+  -st-vfade-offset: 24px;
+}
+
+#dashtodockContainer {
+  &.running-dots .dash-item-container > StButton, &.dashtodock .dash-item-container > StButton {
+    transition-duration: 250;
+    background-size: contain;
+  }
+  &.shrink .dash-item-container > StButton, &.dashtodock .dash-item-container > StButton {
+    padding: 1px 2px;
+  }
+  &.extended {
+    &.top #dash, &.right #dash, &.bottom #dash, &.left #dash {
+      border-radius: 0;
+    }
+    &.top #dash, &.bottom #dash {
+      border-left: 0px;
+      border-right: 0px;
+    }
+    &.right #dash, &.left #dash {
+      border-top: 0px;
+      border-bottom: 0px;
+    }
+  }
+  &.running-dots .app-well-app.running > .overview-icon, &.dashtodock .app-well-app.running > .overview-icon {
+    background-image: none;
+  }
+  &.running-dots .app-well-app.focused .overview-icon {
+    background-color: rgba(238, 238, 236, 0.1);
+  }
+  &.dashtodock {
+    .app-well-app.focused .overview-icon {
+      background-color: rgba(238, 238, 236, 0.1);
+    }
+    #dash {
+      background: #2e3436;
+    }
+  }
+  &.opaque {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color: rgba(0, 0, 0, 0.4);
+    transition-duration: 300ms;
+  }
+  &.transparent {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    transition-duration: 500ms;
+  }
+  .number-overlay {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+  }
+  .notification-badge {
+    color: rgba(255, 255, 255, 1);
+    background-color: #e95420;
+    padding: 0.2em 0.5em;
+    border-radius: 1em;
+    font-weight: bold;
+    text-align: center;
+    margin: 2px;
+  }
+}
+
+#dashtodockPreviewSeparator.popup-separator-menu-item-horizontal {
+  width: 1px;
+  height: auto;
+  border-right-width: 1px;
+  margin: 32px 0px;
+}

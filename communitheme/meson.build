@@ -7,6 +7,7 @@ theme_files = [
 theme_sources = [
   'gnome-shell-sass/_colors.scss',
   'gnome-shell-sass/_common.scss',
+  'gnome-shell-sass/_dock.scss',
   'gnome-shell-sass/_drawing.scss',
   'gnome-shell-sass/_high-contrast-colors.scss',
 ]
