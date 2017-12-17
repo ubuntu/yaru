@@ -1526,6 +1526,12 @@ headerbar {
         // specificity bump
         @include reload_button_styles($retain_borders: true);
       }
+
+      &:hover {
+        @include button(hover, $headerbar_bg_color);
+        color: $headerbar_fg_color;
+        -gtk-icon-effect: highlight;
+      }
     }
   }
 
