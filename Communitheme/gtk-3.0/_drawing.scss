@@ -196,7 +196,7 @@
   //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
-    border-color: _border_color($c);
+    // border-color: _border_color($c);
     border-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
     border-bottom-color: _border_color($c, $darker: true);
     background-color: $c;
@@ -287,7 +287,8 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
-    box-shadow: none;
+    // box-shadow: none;
+    box-shadow: inset 0 1px 3px -1px transparentize(black, 0.5);
     background-color: darken($c, 9%);
     // $button_fill: image(darken($c, 6%)) !global;
     // background-image: $button_fill;
@@ -522,44 +523,44 @@
 
 @mixin reload_button_styles($_bg: lighten($headerbar_bg_color, 5%), $_fg: $headerbar_fg_color, $retain_borders: false) {
   // reloads button styles for headerbar buttons
-  $bc: if($retain_borders == true, _border_color($_bg), transparent);
-  border-color: $bc;
+  $bc: _border_color($_bg, true);
+  border-color: if($retain_borders == true, $bc, transparent);
 
   &:hover {
     @include button(hover, $_bg, $_fg);
-    border-color: _border_color($_bg);
+    border-color: $bc;
   }
 
   &:active, &:checked {
     @include button(active, $_bg, $_fg);
-    border-color: _border_color($_bg);
+    border-color: $bc;
   }
 
   &:disabled {
     @include button(insensitive, $_bg, $_fg);
-    border-color: _border_color($_bg);
+    border-color: $bc;
   }
 
   &:backdrop {
     // $bc is the same thing as _borders_color($_bg)
     // that won't work here for some reason though
     @include button(backdrop, $_bg, $_fg);
-    border-color: _border_color($_bg);
+    border-color: $bc;
 
     &:active,
     &:checked {
       @include button(backdrop-active, $_bg, $_fg);
-      border-color: _border_color($_bg);
+      border-color: $bc;
     }
 
     &:disabled {
       @include button(backdrop-insensitive, $_bg, $_fg);
-      border-color: _border_color($_bg);
+      border-color: $bc;
 
       &:active,
       &:checked {
         @include button(backdrop-insensitive-active, $_bg, $_fg);
-        border-color: _border_color($_bg);
+        border-color: $bc;
       }
     }
   }

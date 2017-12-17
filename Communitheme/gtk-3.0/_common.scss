@@ -200,11 +200,11 @@ label {
 
 assistant {
   .sidebar {
-    background-color: $base_color;
+    background-color: $sidebar_bg_color; // $base_color;
     border-top: 1px solid $borders_color;
 
     &:backdrop {
-      background-color: $backdrop_base_color;
+      background-color: $backdrop_sidebar_bg_color; // $backdrop_base_color;
       border-color: $backdrop_borders_color;
     }
   }
@@ -408,6 +408,12 @@ entry {
       + button,
       + combobox > box > button.combo { border-top-color: $drop_target_color; }
     }
+  }
+
+  ~ button { // TODO: feasible?
+    border-top-color: $borders_color;
+    border-left-color: $borders_color;
+    border-right-color: $borders_color;
   }
 }
 
@@ -951,6 +957,11 @@ toolbar.inline-toolbar toolbutton:backdrop {
 %linked {
   @extend %linked_middle;
 
+  &:not(:first-child) {
+    // fix problem with linked button borders being close to invisible
+    border-left-color: $borders_color;
+  }
+
   &:first-child {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
@@ -1337,9 +1348,13 @@ combobox {
   // the combo is a composite widget so the way we do button linking doesn't
   // work, special case needed. See
   // https://bugzilla.gnome.org/show_bug.cgi?id=733979
-
   &:dir(ltr),
   &:dir(rtl) { @extend %linked_middle; } // specificity bump
+}
+
+.linked > combobox:not(:first-child) > box > button.combo {
+  // fix problem with linked button borders being close to invisible
+  border-left-color: $borders_color;
 }
 
 .linked:not(.vertical) > combobox:first-child > box > button.combo { @extend %linked:first-child; }
@@ -1521,9 +1536,9 @@ headerbar {
 
     stackswitcher.horizontal.linked.stack-switcher button.text-button { @extend %underline_focus; border-radius: 0; }
 
-    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button, .linked.path-bar button.slider-button { // TODO: tidy this up
+    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button, .path-bar button.slider-button { // TODO: tidy this up
       @include button(normal, $_bg, $_fg);
-      border-color: _border_color($_bg);
+      border-color: _border_color($_bg, true);
 
       &.text-button, &.image-button, &.text-button.image-button, &.titlebutton:not(.close) {
         // specificity bump
@@ -1794,17 +1809,22 @@ headerbar { // headerbar border rounding
 /************
  * Pathbars *
  ************/
- %underline_focus {
-   &:checked {
-     font-weight: bold;
-     box-shadow: inset 0 -2px $selected_bg_color;
-   }
+%underline_focus {
+  // indeterminate is there to lazily force the style
+  &:checked:not(:indeterminate) {
+    &, &:backdrop {
+      font-weight: bold;
+      box-shadow: inset 0 -2px $selected_bg_color;
+    }
+  }
 
-   &:not(:checked):hover {
-     box-shadow: inset 0 -2px $insensitive_fg_color;
-   }
+  &:not(:checked):hover:not(:indeterminate) {
+    &, &:backdrop {
+      box-shadow: inset 0 -2px $insensitive_fg_color;
+    }
+  }
+}
 
- }
 .path-bar button {
   &.text-button, &.image-button, & {
     padding-left: 4px;
@@ -1821,9 +1841,7 @@ headerbar { // headerbar border rounding
     label:first-child { padding-left: 8px; }
   }
 
-  &.text-button { @extend %underline_focus; }
-  &.text-button { @extend %underline_focus; }
-  &.text-button { @extend %underline_focus; }
+  &.text-button, &.toggle.image-button.toggle { @extend %underline_focus; }
 
   image {
     padding-left: 4px;
@@ -2779,7 +2797,7 @@ switch {
 
   &:hover slider { @include button(hover-alt, white); border-color: darken($borders_color, 15%); }
 
-  &:checked slider { border: 1px solid $borders_color; /*_border_color($c);*/ }
+  &:checked slider { border: 1px solid _border_color($c); }
 
   &:disabled slider { @include button(insensitive); }
 
@@ -3190,7 +3208,7 @@ scale {
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
-    &:hover { @include button(hover-alt, white); border-color: $borders_color; } // TODO:
+    &:hover { @include button(hover-alt, white); border-color: $borders_color; } // TODO: what should the focused slider look like?
 
     &:active { border-color: _border_color($c); }
 
@@ -3667,7 +3685,7 @@ levelbar {
     }
 
     &.empty {
-      background-color: _border_color($dark_fill, true);
+      background-color: lighten($dark_fill, 10%);
       // border-color: if($variant == 'light', transparentize($fg_color,0.8), transparentize($fg_color,0.9));
 
       &:backdrop { background-color: transparent; }
@@ -3792,11 +3810,11 @@ separator {
  *********/
 list {
   color: $text_color;
-  background-color: $base_color;
+  background-color: $sidebar_bg_color; // $base_color;
   border-color: $borders_color;
 
   &:backdrop {
-    background-color: $backdrop_base_color;
+    background-color: $backdrop_sidebar_bg_color; // $backdrop_base_color;
     border-color: $backdrop_borders_color;
   }
 
