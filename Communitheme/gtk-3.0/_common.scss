@@ -1496,6 +1496,7 @@ headerbar {
   }
 
   & {
+    // style headerbar buttons and entries using the appropriate headerbar colors
     $_bg: lighten($headerbar_bg_color, 5%);
     $_fg: $headerbar_fg_color;
 
@@ -1514,35 +1515,34 @@ headerbar {
     }
 
     button {
-      // make buttons flat
+      // make headerbar buttons flat
       color: $_fg;
       @extend %undecorated_button;
-      @include reload_button_styles;
-
+      @include restyle_button_states($_bg, $_fg);
 
       &:backdrop, &:backdrop:disabled, &:disabled {
         background-color: transparent;
         border-color: transparent;
       }
 
-      @each $b_type, $b_color in (suggested-action, /*$selected_bg_color*/ $success_color),
+      @each $b_type, $b_color in (suggested-action, $success_color),
                                   (destructive-action, $destructive_color) {
         &.#{$b_type} {
-          @include button(normal, $b_color, white);
-          @include reload_button_styles($b_color, white);
+          @include button(normal, $b_color, white); // special buttons are not flat
+          @include restyle_button_states($b_color, white);
         }
       }
     }
 
-    stackswitcher.horizontal.linked.stack-switcher button.text-button { @extend %underline_focus; border-radius: 0; }
+    stackswitcher.horizontal.linked.stack-switcher button.text-button { @extend %underline_focus; border-radius: 0; } // style the stackswitcher
 
-    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button, .path-bar button.slider-button { // TODO: tidy this up
-      @include button(normal, $_bg, $_fg);
-      border-color: _border_color($_bg, true);
+    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button, .path-bar button.slider-button { // TODO: is this messy specificity bump necessary?
+      @include button(normal, $_bg, $_fg); // linked buttons are not flat
+      border-color: _border_color($_bg, true); // darker border colors for visibility purposes
 
       &.text-button, &.image-button, &.text-button.image-button, &.titlebutton:not(.close) {
         // specificity bump
-        @include reload_button_styles($_bg, $_fg, $retain_borders: true);
+        @include restyle_button_states($_bg, $_fg, $retain_borders: true);
       }
     }
   }
@@ -4588,7 +4588,7 @@ button.titlebutton {
   &.close {
     @include button(normal, $selected_bg_color, white);
 
-    @include reload_button_styles($selected_bg_color, white, $retain_borders: true);
+    @include restyle_button_states($selected_bg_color, white, $retain_borders: true);
   }
 
   .selection-mode & {

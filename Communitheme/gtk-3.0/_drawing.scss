@@ -521,9 +521,10 @@
   }
 }
 
-@mixin reload_button_styles($_bg: lighten($headerbar_bg_color, 5%), $_fg: $headerbar_fg_color, $retain_borders: false) {
-  // reloads button styles for headerbar buttons
-  $bc: _border_color($_bg, true);
+@mixin restyle_button_states($_bg: lighten($headerbar_bg_color, 5%), $_fg: $headerbar_fg_color, $retain_borders: false) {
+  // restyles button states
+  // used to quickly loop through each state for headerbar buttons
+  $bc: _border_color($_bg, true); // use a darker border color for visibility reasons
   border-color: if($retain_borders == true, $bc, transparent);
 
   &:hover {
@@ -542,8 +543,6 @@
   }
 
   &:backdrop {
-    // $bc is the same thing as _borders_color($_bg)
-    // that won't work here for some reason though
     @include button(backdrop, $_bg, $_fg);
     border-color: $bc;
 
