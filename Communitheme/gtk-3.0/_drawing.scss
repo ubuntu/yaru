@@ -196,6 +196,7 @@
   //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
+    border-color: _border_color($c);
     border-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
     border-bottom-color: _border_color($c, $darker: true);
     background-color: $c;
@@ -213,7 +214,8 @@
   //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
-    border-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
+    border-color: _border_color($c);
+    border-top-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
     border-bottom-color: _border_color($c, $darker: true);
     background-color: darken($c, 7%);
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);

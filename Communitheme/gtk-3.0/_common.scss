@@ -3038,22 +3038,24 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
  * GtkScale *
  ************/
 %scale_trough {
-  border: 1px solid $borders_color;
+  // border: 1px solid $borders_color;
   // border-radius: 3px;
   background-color: $dark_fill;
+  min-width: 4px;
+  min-height: 4px;
 
   &:disabled { background-color: $insensitive_bg_color; }
 
   &:backdrop {
     background-color: $backdrop_dark_fill;
-    border-color: $backdrop_borders_color;
+    // border-color: $backdrop_borders_color;
     transition: $backdrop_transition;
 
     &:disabled { background-color: $insensitive_bg_color; }
   }
 
   // ...on selected list rows
-  row:selected & { &:disabled, & { border-color: $neutral_color; }}
+  row:selected & { &:disabled, & { border-color: $neutral_color; }} // TODO: what program uses this so it can be tested out?
 
   // OSD
   .osd & {
@@ -3066,32 +3068,32 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
 
 %scale_highlight {
   $c: $neutral_color;
-  border: 1px solid _border_color($c);
+  // border: 1px solid _border_color($c);
   // border-radius: 3px;
   background-color: $c;
 
   &:disabled {
     background-color: transparent;
-    border-color: transparent;
+    // border-color: transparent;
   }
 
   &:backdrop {
-    border-color: if($variant=='light', $c,
-                                        _border_color($c));
+    //border-color: if($variant=='light', $c,
+    //                                    _border_color($c));
     &:disabled {
       background-color: transparent;
-      border-color: transparent;
+      // border-color: transparent;
     }
   }
 
   // ...on selected list rows
-  row:selected & { &:disabled, & { border-color: _border_color($c); }}
+  row:selected & { &:disabled, & { border-color: $c; /*_border_color($c);*/ }}
 
   // OSD
   .osd & {
-    border-color: $osd_borders_color;
+    // border-color: $osd_borders_color;
 
-    &:disabled { border-color: transparent; }
+    // &:disabled { border-color: transparent; }
   }
 }
 
@@ -3105,8 +3107,8 @@ scale {
   padding: 12px;
 
   // those are inside the trough node, I need them to show their own border over the trough one, so negative margin
-  fill,
-  highlight { margin: -1px; }
+  // fill,
+  // highlight { margin: -1px; }
 
   // the slider is inside the trough, so to have make it bigger there's a negative margin
 
@@ -3497,16 +3499,16 @@ progressbar {
   // sizing
   &.horizontal {
     trough,
-    progress { min-height: 2px; }
+    progress { min-height: 4px; }
   }
 
   &.vertical {
     trough,
-    progress { min-width: 2px; }
+    progress { min-width: 4px; }
   }
 
-  &.horizontal progress { margin: 0 -1px; } // the progress node is positioned after the trough border
-  &.vertical progress { margin: -1px 0; }   // this moves it over it.
+  // &.horizontal progress { margin: 0 -1px; } // the progress node is positioned after the trough border
+  // &.vertical progress { margin: -1px 0; }   // this moves it over it.
 
 
   // FIXME: insensitive state missing and some other state should be set probably
@@ -3524,32 +3526,32 @@ progressbar {
 
   %progressbar_highlight {
     $c: $success_color;
-    border: 1px solid _border_color($c);
+    // border: 1px solid _border_color($c);
     // border-radius: 3px;
     background-color: $c;
 
     &:disabled {
       background-color: transparent;
-      border-color: transparent;
+      // border-color: transparent;
     }
 
     &:backdrop {
-      border-color: if($variant=='light', $c,
-                                          _border_color($c));
+      // border-color: if($variant=='light', $c,
+      //                                    _border_color($c));
       &:disabled {
         background-color: transparent;
-        border-color: transparent;
+        // border-color: transparent;
       }
     }
 
     // ...on selected list rows
-    row:selected & { &:disabled, & { border-color: _border_color($c); }}
+    row:selected & { &:disabled, & { border-color: $c /*_border_color($c);*/ }} // TODO: what program uses this so it can be tested out?
 
     // OSD
     .osd & {
-      border-color: $osd_borders_color;
+      // border-color: $osd_borders_color;
 
-      &:disabled { border-color: transparent; }
+      // &:disabled { border-color: transparent; }
     }
   }
 
@@ -3609,7 +3611,7 @@ progressbar {
 levelbar {
   &.horizontal {
     block {
-      min-height: 1px;
+      min-height: 4px;
     }
 
     &.discrete block {
@@ -3620,7 +3622,7 @@ levelbar {
 
   &.vertical {
     block {
-      min-width: 1px;
+      min-width: 4px;
     }
 
     &.discrete block {
@@ -3632,23 +3634,23 @@ levelbar {
   &:backdrop { transition: $backdrop_transition; }
 
   trough {
-    border: 1px solid;
+    // border: 1px solid;
     padding: 2px;
-    // border-radius: 3px;
-    @include entry(normal);
+    border-radius: 3px;
+    @include entry(normal, $bg: $dark_fill);
 
-    &:backdrop { @include entry(backdrop); }
+    &:backdrop { @include entry(backdrop, $bg: $dark_fill); }
   }
 
   block {
-    border: 1px solid;
-    // border-radius: 1px;
+    // border: 1px solid;
+    border-radius: 3px;
 
     @mixin block_highlight($c) {
-      border-color: if($variant == 'light', _border_color($c), $c);
+      // border-color: if($variant == 'light', _border_color($c), $c);
       background-color: $c;
 
-      &:backdrop { border-color: $c; };
+      &:backdrop { /*border-color: $c;*/ };
     }
 
     &.low {
@@ -3665,10 +3667,10 @@ levelbar {
     }
 
     &.empty {
-      background-color: transparent;
-      border-color: if($variant == 'light', transparentize($fg_color,0.8), transparentize($fg_color,0.9));
+      background-color: _border_color($dark_fill, true);
+      // border-color: if($variant == 'light', transparentize($fg_color,0.8), transparentize($fg_color,0.9));
 
-      &:backdrop { border-color: transparentize($backdrop_fg_color,0.85); }
+      &:backdrop { background-color: transparent; }
     }
   }
 }
@@ -3984,7 +3986,7 @@ filechooserbutton:drop(active) {
  ***********/
 .sidebar {
   border-style: none;
-  background-color: mix($bg_color, $base_color, 50%);
+  background-color: $sidebar_bg_color;
 
   @at-root %sidebar_left,
   &:dir(ltr),
