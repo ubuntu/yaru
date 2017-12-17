@@ -1491,9 +1491,7 @@ headerbar {
     @extend .dim-label;
   }
 
-  ~ separator {
-    background-image: image(_border_color($headerbar_bg_color));
-  }
+  ~ separator, separator { background-image: image(_border_color($headerbar_bg_color)); }
 
   & {
     // style headerbar buttons and entries using the appropriate headerbar colors
