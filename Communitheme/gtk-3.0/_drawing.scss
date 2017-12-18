@@ -114,10 +114,11 @@
 
 // buttons
 
-@function _border_color($c, $darker: false) {
+@function _border_color($c, $darker: false, $lighter: false) {
   // @if $darker == true { @return darken($c, 30%); }
   // @else { @return darken($c, 20%); }
   @if $darker == true { @return darken($c, 10%); }
+  @if $lighter == true { @return darken($c, 2.5%); }
   @else { @return darken($c, 5%); }
 }
 
@@ -167,7 +168,6 @@
 //   }
 // }
 
-$button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
 @mixin button($t, $c:$button_bg_color, $tc:$fg_color, $edge: none) {
 //
 // Button drawing function
@@ -195,7 +195,9 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
   //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
-    border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
+    // border-color: _border_color($c);
+    border-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
+    border-bottom-color: _border_color($c, $darker: true);
     background-color: $c;
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     // $button_fill: if($variant == 'light', linear-gradient(to bottom, $c, darken($c, 4%) 60%, darken($c, 10%)),
@@ -211,8 +213,10 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
   //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
-    border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
-    background-color: darken($c, 5%);
+    border-color: _border_color($c);
+    border-top-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
+    border-bottom-color: _border_color($c, $darker: true);
+    background-color: darken($c, 7%);
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     // @if $variant == 'light' {
     //  $button_fill: linear-gradient(to bottom, lighten($c, 6%), $c 60%, darken($c, 4%)) !global;
@@ -281,8 +285,10 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
   //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
-    border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
-    background-color: darken($c, 8%);
+    border-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
+    // box-shadow: none;
+    box-shadow: inset 0 1px 3px -1px transparentize(black, 0.5);
+    background-color: darken($c, 9%);
     // $button_fill: image(darken($c, 6%)) !global;
     // background-image: $button_fill;
     // @include _shadows(inset 0 1px transparentize($_hilight_color, 1), $_button_edge);
@@ -301,6 +307,7 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
 
     border-color: if($c != $button_bg_color, _border_color($c), $insensitive_borders_color);
     background-color: $_bg;
+    box-shadow: none;
     // $button_fill: image($_bg) !global;
     // background-image: $button_fill;
     // text-shadow: none;
@@ -321,6 +328,7 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
 
     border-color: $_bc;
     background-color: $_bg;
+    box-shadow: none;
     // $button_fill: image($_bg) !global;
     // background-image: $button_fill;
     // white with 0 alpha to avoid an ugly transition, since no color means
@@ -339,6 +347,7 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
 
     border-color: if($c != $button_bg_color, $_bc, $backdrop_borders_color);
     background-color: $_bg;
+    box-shadow: none;
     // $button_fill: image($_bg) !global;
     // background-image: $button_fill;
     // text-shadow: none;
@@ -357,6 +366,7 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
 
     border-color: if($c != $button_bg_color, $_bc, $backdrop_borders_color);
     background-color: $_bg;
+    box-shadow: none;
     // $button_fill: image($_bg) !global;
     // background-image: $button_fill;
     // @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
@@ -374,6 +384,7 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
 
     border-color: if($c != $button_bg_color, $_bc, $backdrop_borders_color);
     background-color: $_bg;
+    box-shadow: none;
     // $button_fill: image($_bg) !global;
     // background-image: $button_fill;
     // text-shadow: none;
@@ -395,6 +406,7 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
 
     border-color: if($c != $button_bg_color, $_bc, $backdrop_borders_color);
     background-color: $_bg;
+    box-shadow: none;
     // $button_fill: image($_bg) !global;
     // background-image: $button_fill;
     // @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
@@ -496,6 +508,7 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
   // reset
   //
     border-color: transparent;
+    box-shadow: none;
     background-color: transparent;
     // $button_fill: none !global;
     // background-image: $button_fill;
@@ -507,10 +520,11 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
   }
 }
 
-@mixin reload_button_styles($_bg: $headerbar_bg_color, $_fg: $headerbar_fg_color, $retain_borders: false) {
-  // reloads button styles for headerbar buttons
-  $bc: if($retain_borders == true, _border_color($_bg), transparent);
-  border-color: $bc;
+@mixin restyle_button_states($_bg: lighten($headerbar_bg_color, 5%), $_fg: $headerbar_fg_color, $retain_borders: false) {
+  // restyles button states
+  // used to quickly loop through each state for headerbar buttons
+  $bc: _border_color($_bg, true); // use a darker border color for visibility reasons
+  border-color: if($retain_borders == true, $bc, transparent);
 
   &:hover {
     @include button(hover, $_bg, $_fg);
@@ -528,8 +542,6 @@ $button_bg_color: darken($bg_color, if($variant == "light", 6%, 5%));
   }
 
   &:backdrop {
-    // $bc is the same thing as _borders_color($_bg)
-    // that won't work here for some reason though
     @include button(backdrop, $_bg, $_fg);
     border-color: $bc;
 
