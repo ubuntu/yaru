@@ -3,7 +3,6 @@
 //let's start by telling people not to edit the generated CSS:
 $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
-@import "_ubuntu-colors";
 $panel-corner-radius: 0; // 6px;
 $panel-alpha-value: 0.1; // analogous to dash
 $popover-alpha-value: 0.05;
@@ -57,14 +56,16 @@ stage {
 }
 
 .modal-dialog-linked-button {
+  $_bg: darken($dialog_bg_color, 10%);
+  $_fg: $dialog_fg_color;
   border-right-width: 1px;
   box-shadow: inset 0 -1px $osd_borders_color; // aliasing
   border-top: 1px solid;
-  @include button(normal);
-  &:insensitive { @include button(insensitive); }
-  &:active { @include button(hover); }
-  &:active { @include button(active); }
-  &:focus { @include button(focus); }
+  @include button(normal, $_bg, $_fg);
+  &:insensitive { @include button(insensitive, $_bg, $_fg); }
+  &:active { @include button(hover, $_bg, $_fg); }
+  &:active { @include button(active, $_bg, $_fg); }
+  &:focus { @include button(focus, $_bg, $_fg); }
   padding: 12px;
 
   &:first-child {
@@ -182,15 +183,29 @@ StScrollBar {
 .lightbox { background-color: black; }
 .flashspot { background-color: white; }
 
+%dialog-window {
+  color: $dialog_fg_color;
+  background-color: $dialog_bg_color;
+  border: 1px solid $dialog_borders_color;
+}
+
 .modal-dialog {
+  $_fg: $dialog_fg_color;
+  @extend %dialog-window;
   border-radius: 9px;
-  color: $osd_fg_color;
-  background-color: $_bubble_bg_color;
-  border: 1px solid $osd_borders_color;
+  // color: $osd_fg_color;
+  // background-color: $_bubble_bg_color;
+  // border: 1px solid $osd_borders_color;
   .modal-dialog-content-box {
     padding: 24px;
   }
-  .run-dialog-entry { width: 20em; margin-bottom: 6px; }
+  .run-dialog-entry {
+    width: 20em;
+    margin-bottom: 6px;
+    @include entry(normal, $tc: $slate, $c: $porcelain);
+    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.5));}
+    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);}
+  }
   .run-dialog-error-box {
     padding-top: 16px;
     spacing: 6px;
@@ -198,8 +213,8 @@ StScrollBar {
   .run-dialog-button-box { padding-top: 1em; }
   .run-dialog-label {
     @include fontsize($font-size + 1.1);
-    font-weight: bold;
-    color: darken($osd_fg_color,10%);
+    font-weight: normal; // bold;
+    color: darken($_fg, 10%); // darken($osd_fg_color,10%);
     padding-bottom: .4em;
   }
 
@@ -237,8 +252,10 @@ StScrollBar {
 
 /* End Session Dialog */
 .end-session-dialog {
+  @extend %dialog-window;
   spacing: 42px;
-  border: 1px solid $osd_borders_color;
+  // border: 1px solid $osd_borders_color;
+  border: none;
 
   .modal-dialog-linked-button:last-child {
     // Power off button
@@ -284,7 +301,7 @@ StScrollBar {
   }
 
   .end-session-dialog-shutdown-icon {
-    color: $fg_color;
+    color: $dialog_fg_color; // $fg_color;
     width: 48px;
     height: 48px;
   }
@@ -317,7 +334,7 @@ StScrollBar {
   }
 
   .end-session-dialog-app-list-item-description {
-    color: darken($fg_color,5%);
+    color: darken($dialog_fg_color,5%); // darken($fg_color,5%);
     font-size: 10pt;
   }
 
@@ -325,6 +342,7 @@ StScrollBar {
 .shell-mount-operation-icon { icon-size: 48px; }
 
   .mount-dialog {
+    @extend %dialog-window;
     spacing: 24px;
 
     .message-dialog-title {
@@ -363,8 +381,8 @@ StScrollBar {
   }
 
   .mount-dialog-app-list-item {
-    color: darken($fg_color,10%);
-    &:hover { color: $fg_color; }
+    color: darken($dialog_fg_color,10%); // darken($fg_color,10%);
+    &:hover { color: $dialog_fg_color /*$fg_color*/; }
     &:ltr { padding-right: 1em; }
     &:rtl { padding-left: 1em; }
   }
@@ -383,12 +401,19 @@ StScrollBar {
 
 .prompt-dialog {
   //this is the width of the entire modal popup
+  @extend %dialog-window;
   width: 34em;
-  border: 3px solid $osd_borders_color;
+  // border: 3px solid $osd_borders_color;
 
   .message-dialog-main-layout { spacing: 24px; padding: 10px; }
   .message-dialog-content { spacing: 16px; }
-  .message-dialog-title { color: darken($osd_fg_color,25%); }
+  .message-dialog-title { color: darken($dialog_fg_color,10%); /*(darken($osd_fg_color,25%);*/ }
+
+  StEntry {
+    @include entry(normal, $tc: $slate, $c: $porcelain);
+    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.5));}
+    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);}
+  }
 }
 
   .prompt-dialog-description:rtl {
@@ -445,6 +470,7 @@ StScrollBar {
 
 /* Audio selection dialog */
 .audio-device-selection-dialog {
+  @extend %dialog-window;
   spacing: 30px;
 }
 
@@ -463,7 +489,7 @@ StScrollBar {
   }
 
   .audio-selection-device {
-    border: 1px solid $osd_borders_color;
+    border: 1px solid $dialog_borders_color; // $osd_borders_color;
     border-radius: 12px;
     &:active,&:hover,&:focus { background-color: $selected_bg_color; }
   }
@@ -479,6 +505,7 @@ StScrollBar {
 
 /* Access Dialog */
 .access-dialog {
+  @extend %dialog-window;
   spacing: 30px;
 }
 
@@ -489,12 +516,14 @@ StScrollBar {
 
 /* Extension Dialog */
 .extension-dialog {
+  @extend %dialog-window;
   .message-dialog-main-layout { spacing: 24px; padding: 10px; }
-  .message-dialog-title { color: darken($osd_fg_color,25%); }
+  .message-dialog-title { color: darken($dialog_fg_color,25%); /*darken($osd_fg_color,25%);*/ }
 }
 
 /* Inhibit-Shortcuts Dialog */
 .inhibit-shortcuts-dialog {
+  @extend %dialog-window;
   spacing: 30px;
 }
 
@@ -603,7 +632,7 @@ StScrollBar {
   .level {
     height: 0.6em;
     border-radius: 0.3em;
-    background-color: transparentize(darken($osd_bg_color,15%),0.5);
+    background-color: $borders_color; // transparentize(darken($osd_bg_color,15%),0.5);
     color: $osd_fg_color;
   }
   .level-bar {
@@ -1200,6 +1229,7 @@ StScrollBar {
 /* NETWORK DIALOGS */
 
 .nm-dialog {
+  @extend %dialog-window;
   max-height: 34em;
   min-height: 31em;
   min-width: 32em;
@@ -1217,14 +1247,14 @@ StScrollBar {
     text-align: center;
   }
 
-  .nm-dialog-airplane-text { color: $fg_color; }
+  .nm-dialog-airplane-text { color: $dialog_fg_color; /*$fg_color;*/ }
   .nm-dialog-header-icon { icon-size: 32px; }
-  .nm-dialog-scroll-view { border: 2px solid $borders_color; }
+  .nm-dialog-scroll-view { border: 1px solid $dialog_borders_color; } // 2px solid $borders_color; }
   .nm-dialog-header { font-weight: bold; }
 
   .nm-dialog-item {
     font-size: 110%;
-    border-bottom: 1px solid $borders_color;
+    border-bottom: 1px solid $dialog_borders_color; // $borders_color;
     padding: 12px;
     spacing: 20px;
   }
@@ -1760,10 +1790,11 @@ StScrollBar {
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 3px 18px;
-    $bg: transparentize($osd_bg_color, 0.3);
-    @include button(normal, $bg);
-    &:hover,&:focus { @include button(hover,$c:$bg); }
-    &:active { @include button(active,$c:$bg); }
+    $_bg: $porcelain;
+    $_fg: $slate;
+    @include button(normal, $_bg, $_fg);
+    &:hover,&:focus { @include button(hover,$_bg, $_fg); }
+    &:active { @include button(active,$_bg, $_fg); }
     &:insensitive { @include button(insensitive); }
     &:default {
       $bg: $success_color;
