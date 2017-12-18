@@ -1,1 +1,31 @@
-list.tweak-categories separator { background: transparent; }
+/***********
+ * Tweak Tool *
+ ***********/
+list.tweak-categories separator {
+  // hide sidebar separators
+  background: transparent;
+}
+
+/***********
+ * Nautilus *
+ ***********/
+.nautilus-window {
+  // keep details box visible
+  paned box.floating-bar {
+    background: $bg_color;
+    border: 1px solid $borders_color;
+  }
+}
+
+.nautilus-desktop-window {
+  // get rid of white line on the desktop if desktop icons are enabled
+.searchbar-container searchbar {
+    margin: -1px;
+  }
+
+  .nautilus-desktop.view {
+    // white text on desktop instead of the variant dependant fg color
+    color: $selected_fg_color;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+  }
+}
