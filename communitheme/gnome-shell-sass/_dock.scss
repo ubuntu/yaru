@@ -1,0 +1,153 @@
+/* Shrink the dash by reducing padding and border radius */
+
+#dashtodockContainer {
+  &.shrink #dash, &.dashtodock #dash {
+    box-shadow: inset 0 4px 8px rgba(0,0,0,0.75);
+    border: 1px;
+    padding: 0px;
+  }
+  &.shrink.left #dash, &.dashtodock.left #dash {
+    border-left: 0px;
+    border-radius: 0px 9px 9px 0px;
+  }
+  &.shrink.right #dash, &.dashtodock.right #dash {
+    border-right: 0px;
+    border-radius: 9px 0px 0px 9px;
+  }
+  &.shrink.top #dash, &.dashtodock.top #dash {
+    border-top: 0px;
+    border-radius: 0px 0px 9px 9px;
+  }
+  &.shrink.bottom #dash, &.dashtodock.bottom #dash {
+    border-bottom: 0px;
+    border-radius: 9px 9px 0px 0px;
+  }
+  &.straight-corner #dash, &.shrink.straight-corner #dash {
+    border-radius: 0px;
+  }
+
+  .show-apps {
+    // Ubuntu Launcher
+    $_bg: #e95420;
+    & {
+      // reset
+      &:hover,
+      &:focus,
+      &:checked {
+        .overview-icon { background-color: transparent; box-shadow: none; }
+      }
+
+      & .show-apps-icon,
+      &:checked .show-apps-icon,
+      &:focus .show-apps-icon {
+        color: transparent;
+        background-color: transparent;
+        transition-duration: 100ms;
+      }
+    }
+
+    transition-duration: 200ms;
+    background-color: $_bg;
+    box-shadow: 1px 0 $_bg; // the box-shadow is there to overlap the dock's border
+
+    &:focus, &:hover { background-color: lighten($_bg, 2%); box-shadow: 1px 0 lighten($_bg, 2%); }
+    &:active, &:checked { background-color: darken($_bg, 5%); box-shadow: 1px 0 darken($_bg, 5%); }
+
+    &,
+    &:focus,
+    &:hover,
+    &:active,
+    &:checked {
+      .overview-icon {
+        background-image: url("ubuntu-logo-icon.svg");
+        background-size: contain;
+      }
+    }
+  }
+}
+
+/* Scrollview style */
+
+.bottom #dashtodockDashScrollview, .top #dashtodockDashScrollview {
+  -st-hfade-offset: 24px;
+}
+
+.left #dashtodockDashScrollview, .right #dashtodockDashScrollview {
+  -st-vfade-offset: 24px;
+}
+
+#dashtodockContainer {
+  &.running-dots .dash-item-container > StButton, &.dashtodock .dash-item-container > StButton {
+    transition-duration: 250;
+    background-size: contain;
+  }
+  &.shrink .dash-item-container > StButton, &.dashtodock .dash-item-container > StButton {
+    padding: 1px 2px;
+  }
+  &.extended {
+    &.top #dash, &.right #dash, &.bottom #dash, &.left #dash {
+      border-radius: 0;
+    }
+    &.top #dash, &.bottom #dash {
+      border-left: 0px;
+      border-right: 0px;
+    }
+    &.right #dash, &.left #dash {
+      border-top: 0px;
+      border-bottom: 0px;
+    }
+  }
+  &.running-dots .app-well-app.running > .overview-icon, &.dashtodock .app-well-app.running > .overview-icon {
+    background-image: none;
+  }
+  &.running-dots .app-well-app.focused .overview-icon {
+    background-color: rgba(238, 238, 236, 0.1);
+  }
+  &.dashtodock {
+    .app-well-app.focused .overview-icon {
+      background-color: rgba(238, 238, 236, 0.1);
+    }
+    #dash {
+      background: #2e3436;
+    }
+  }
+  &.opaque {
+    background-color: transparentize($panel_bg_color, $panel-alpha-value);
+    border-color: rgba(0, 0, 0, 0.4);
+    transition-duration: 300ms;
+  }
+  &.transparent {
+    background-color: transparentize($panel_bg_color, $panel-alpha-value);
+    border-color: rgba(0, 0, 0, 0.1);
+    transition-duration: 500ms;
+  }
+  .number-overlay {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+  }
+  .notification-badge {
+    color: rgba(255, 255, 255, 1);
+    background-color: #e95420;
+    padding: 0.2em 0.5em;
+    border-radius: 1em;
+    font-weight: bold;
+    text-align: center;
+    margin: 2px;
+  }
+}
+
+/* Dash height extended to the whole available vertical space */
+
+/* Running and focused application style */
+
+/* Only alpha value is used */
+
+/* Only alpha value is used */
+
+#dashtodockPreviewSeparator.popup-separator-menu-item-horizontal {
+  width: 1px;
+  height: auto;
+  border-right-width: 1px;
+  margin: 32px 0px;
+}

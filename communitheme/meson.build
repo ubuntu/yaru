@@ -7,6 +7,7 @@ theme_files = [
 theme_sources = [
   'gnome-shell-sass/_colors.scss',
   'gnome-shell-sass/_common.scss',
+  'gnome-shell-sass/_dock.scss',
   'gnome-shell-sass/_drawing.scss',
   'gnome-shell-sass/_high-contrast-colors.scss',
 ]
@@ -27,9 +28,11 @@ data_sources = [
   'corner-ripple-ltr.png',
   'corner-ripple-rtl.png',
   'dash-placeholder.svg',
+  'dots.svg',
   'filter-selected-ltr.svg',
   'filter-selected-rtl.svg',
   'logged-in-indicator.svg',
+  'lock-gradient.svg',
   'message-indicator-symbolic.svg',
   'no-events.svg',
   'noise-texture.png',
