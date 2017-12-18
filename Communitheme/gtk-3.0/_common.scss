@@ -200,11 +200,11 @@ label {
 
 assistant {
   .sidebar {
-    background-color: $base_color;
+    background-color: $sidebar_bg_color; // $base_color;
     border-top: 1px solid $borders_color;
 
     &:backdrop {
-      background-color: $backdrop_base_color;
+      background-color: $backdrop_sidebar_bg_color; // $backdrop_base_color;
       border-color: $backdrop_borders_color;
     }
   }
@@ -409,6 +409,12 @@ entry {
       + combobox > box > button.combo { border-top-color: $drop_target_color; }
     }
   }
+
+  ~ button { // TODO: feasible?
+    border-top-color: $borders_color;
+    border-left-color: $borders_color;
+    border-right-color: $borders_color;
+  }
 }
 
 treeview entry {
@@ -513,6 +519,7 @@ button {
     min-width: 16px;
     padding: 4px 8px;
     border: 1px solid;
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.13);
     // box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.025);
     border-radius: 5px;
     transition: $button_transition;
@@ -950,6 +957,11 @@ toolbar.inline-toolbar toolbutton:backdrop {
 %linked {
   @extend %linked_middle;
 
+  &:not(:first-child) {
+    // fix problem with linked button borders being close to invisible
+    border-left-color: $borders_color;
+  }
+
   &:first-child {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
@@ -996,8 +1008,9 @@ toolbar.inline-toolbar toolbutton:backdrop {
   background-color: transparent;
   background-image: none;
   border-color: transparent;
-  box-shadow: inset 0 1px transparentize(white, 1),
-              0 1px transparentize(white, 1);
+  box-shadow: none;
+  // box-shadow: inset 0 1px transparentize(white, 1),
+  //            0 1px transparentize(white, 1);
   // text-shadow: none;
   // -gtk-icon-shadow: none;
 }
@@ -1335,9 +1348,13 @@ combobox {
   // the combo is a composite widget so the way we do button linking doesn't
   // work, special case needed. See
   // https://bugzilla.gnome.org/show_bug.cgi?id=733979
-
   &:dir(ltr),
   &:dir(rtl) { @extend %linked_middle; } // specificity bump
+}
+
+.linked > combobox:not(:first-child) > box > button.combo {
+  // fix problem with linked button borders being close to invisible
+  border-left-color: $borders_color;
 }
 
 .linked:not(.vertical) > combobox:first-child > box > button.combo { @extend %linked:first-child; }
@@ -1474,57 +1491,56 @@ headerbar {
     @extend .dim-label;
   }
 
-  ~ separator {
-    background-image: image(_border_color($headerbar_bg_color));
-  }
+  ~ separator, separator { background-image: image(_border_color($headerbar_bg_color)); }
 
   & {
-    $_bg: $headerbar_bg_color;
+    // style headerbar buttons and entries using the appropriate headerbar colors
+    $_bg: lighten($headerbar_bg_color, 5%);
     $_fg: $headerbar_fg_color;
 
     entry {
-      @include entry(normal, $bg: $_bg, $tc: $headerbar_fg_color);
+      @include entry(normal, $bg: $_bg, $tc: $_fg);
 
-      &:disabled { @include entry(insensitive, $bg: $_bg, $tc: $headerbar_fg_color); }
+      &:disabled { @include entry(insensitive, $bg: $_bg, $tc: $_fg); }
 
       &:backdrop {
-        @include entry(backdrop, $bg: $_bg, $tc: $headerbar_fg_color);
+        @include entry(backdrop, $bg: $_bg, $tc: $_fg);
 
         transition: $backdrop_transition;
       }
 
-      &:backdrop:disabled { @include entry(backdrop-insensitive, $bg: $_bg, $tc: $headerbar_fg_color); }
+      &:backdrop:disabled { @include entry(backdrop-insensitive, $bg: $_bg, $tc: $_fg); }
     }
 
     button {
-      // make buttons flat
-      @extend %undecorated_button;
-      @include reload_button_styles;
-
+      // make headerbar buttons flat
       color: $_fg;
+      @extend %undecorated_button;
+      @include restyle_button_states($_bg, $_fg);
 
       &:backdrop, &:backdrop:disabled, &:disabled {
         background-color: transparent;
         border-color: transparent;
       }
 
-      @each $b_type, $b_color in (suggested-action, /*$selected_bg_color*/ $success_color),
+      @each $b_type, $b_color in (suggested-action, $success_color),
                                   (destructive-action, $destructive_color) {
         &.#{$b_type} {
-          @include button(normal, $b_color, white);
-          @include reload_button_styles($b_color, white);
+          @include button(normal, $b_color, white); // special buttons are not flat
+          @include restyle_button_states($b_color, white);
         }
       }
     }
 
-    stackswitcher.horizontal.linked.stack-switcher button.text-button { @extend %underline_focus; border-radius: 0; }
+    stackswitcher.horizontal.linked.stack-switcher button.text-button { @extend %underline_focus; border-radius: 0; } // style the stackswitcher
 
-    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button, .linked.path-bar button.slider-button { // TODO: tidy this up
-      @include button(normal, $_bg, $_fg);
+    .linked button, stackswitcher.horizontal.linked.stack-switcher button.text-button, .path-bar button.slider-button { // TODO: is this messy specificity bump necessary?
+      @include button(normal, $_bg, $_fg); // linked buttons are not flat
+      border-color: _border_color($_bg, true); // darker border colors for visibility purposes
 
       &.text-button, &.image-button, &.text-button.image-button, &.titlebutton:not(.close) {
         // specificity bump
-        @include reload_button_styles($retain_borders: true);
+        @include restyle_button_states($_bg, $_fg, $retain_borders: true);
       }
     }
   }
@@ -1551,7 +1567,7 @@ headerbar {
     &:backdrop {
       background-color: $selected_bg_color;
       background-image: none;
-      box-shadow: inset 0 1px mix($top_hilight, $selected_bg_color, 60%);
+      // box-shadow: inset 0 1px mix($top_hilight, $selected_bg_color, 60%);
     }
 
     .subtitle:link { @extend *:link:selected;  }
@@ -1791,17 +1807,22 @@ headerbar { // headerbar border rounding
 /************
  * Pathbars *
  ************/
- %underline_focus {
-   &:checked {
-     font-weight: bold;
-     box-shadow: inset 0 -2px $selected_bg_color;
-   }
+%underline_focus {
+  // indeterminate is there to lazily force the style
+  &:checked:not(:indeterminate) {
+    &, &:backdrop {
+      font-weight: bold;
+      box-shadow: inset 0 -2px $selected_bg_color;
+    }
+  }
 
-   &:not(:checked):hover {
-     box-shadow: inset 0 -2px $insensitive_fg_color;
-   }
+  &:not(:checked):hover:not(:indeterminate) {
+    &, &:backdrop {
+      box-shadow: inset 0 -2px $insensitive_fg_color;
+    }
+  }
+}
 
- }
 .path-bar button {
   &.text-button, &.image-button, & {
     padding-left: 4px;
@@ -1818,9 +1839,7 @@ headerbar { // headerbar border rounding
     label:first-child { padding-left: 8px; }
   }
 
-  &.text-button { @extend %underline_focus; }
-  &.text-button { @extend %underline_focus; }
-  &.text-button { @extend %underline_focus; }
+  &.text-button, &.toggle.image-button.toggle { @extend %underline_focus; }
 
   image {
     padding-left: 4px;
@@ -2764,17 +2783,17 @@ switch {
 
   slider {
     margin: -1px;
-    min-width: 32px; // 44px;
-    min-height: 26px;
+    min-width: 22px; // 32px; // 44px;
+    min-height: 24px; // 20px; // 26px;
     border: 1px solid;
     border-radius: 5px;
     transition: $button_transition;
 
-    @include button(normal-alt, white, $edge: $shadow_color);
+    @include button(normal-alt, white);
     border-color: darken($borders_color, 10%);
   }
 
-  &:hover slider { @include button(hover-alt, white, $edge: $shadow_color); border-color: darken($borders_color, 15%); }
+  &:hover slider { @include button(hover-alt, white); border-color: darken($borders_color, 15%); }
 
   &:checked slider { border: 1px solid _border_color($c); }
 
@@ -2873,9 +2892,9 @@ radio {
   border: 1px solid;
   -gtk-icon-source: none;
 
-  @include button(normal-alt, white, $edge: $shadow_color);
+  @include button(normal-alt, white);
 
-  &:hover { @include button(hover-alt, white, $edge: $shadow_color); }
+  &:hover { @include button(hover-alt, white); }
   &:active { @include button(active); }
   &:disabled { @include button(insensitive); }
   &:backdrop {
@@ -2921,6 +2940,7 @@ radio {
 check {
   -gtk-icon-source: none;
   border-radius: 3px;
+  border-width: 1px;
   padding: 2px;
 
   @include button(normal-alt, $dark_fill);
@@ -2955,6 +2975,7 @@ check {
 %radio,
 radio {
   border-radius: 100%;
+  border-width: 1px;
   padding: 2px;
 
   @include button(normal-alt, $dark_fill);
@@ -3033,22 +3054,24 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
  * GtkScale *
  ************/
 %scale_trough {
-  border: 1px solid $borders_color;
+  // border: 1px solid $borders_color;
   // border-radius: 3px;
   background-color: $dark_fill;
+  min-width: 4px;
+  min-height: 4px;
 
   &:disabled { background-color: $insensitive_bg_color; }
 
   &:backdrop {
     background-color: $backdrop_dark_fill;
-    border-color: $backdrop_borders_color;
+    // border-color: $backdrop_borders_color;
     transition: $backdrop_transition;
 
     &:disabled { background-color: $insensitive_bg_color; }
   }
 
   // ...on selected list rows
-  row:selected & { &:disabled, & { border-color: $neutral_color; }}
+  row:selected & { &:disabled, & { border-color: $neutral_color; }} // TODO: what program uses this so it can be tested out?
 
   // OSD
   .osd & {
@@ -3061,32 +3084,32 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
 
 %scale_highlight {
   $c: $neutral_color;
-  border: 1px solid _border_color($c);
+  // border: 1px solid _border_color($c);
   // border-radius: 3px;
   background-color: $c;
 
   &:disabled {
     background-color: transparent;
-    border-color: transparent;
+    // border-color: transparent;
   }
 
   &:backdrop {
-    border-color: if($variant=='light', $c,
-                                        _border_color($c));
+    //border-color: if($variant=='light', $c,
+    //                                    _border_color($c));
     &:disabled {
       background-color: transparent;
-      border-color: transparent;
+      // border-color: transparent;
     }
   }
 
   // ...on selected list rows
-  row:selected & { &:disabled, & { border-color: _border_color($c); }}
+  row:selected & { &:disabled, & { border-color: $c; /*_border_color($c);*/ }}
 
   // OSD
   .osd & {
-    border-color: $osd_borders_color;
+    // border-color: $osd_borders_color;
 
-    &:disabled { border-color: transparent; }
+    // &:disabled { border-color: transparent; }
   }
 }
 
@@ -3100,8 +3123,8 @@ scale {
   padding: 12px;
 
   // those are inside the trough node, I need them to show their own border over the trough one, so negative margin
-  fill,
-  highlight { margin: -1px; }
+  // fill,
+  // highlight { margin: -1px; }
 
   // the slider is inside the trough, so to have make it bigger there's a negative margin
 
@@ -3176,14 +3199,14 @@ scale {
 
   slider {
     $c: $neutral_color;
-    @include button(normal-alt, white, $edge: $shadow_color);
+    @include button(normal-alt, white);
 
     border: 1px solid darken($alt_borders_color, 3%);
     border-radius: 6px;
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
-    &:hover { @include button(hover-alt, white, $edge: $shadow_color); border-color: $borders_color; } // TODO:
+    &:hover { @include button(hover-alt, white); border-color: $borders_color; } // TODO: what should the focused slider look like?
 
     &:active { border-color: _border_color($c); }
 
@@ -3492,16 +3515,16 @@ progressbar {
   // sizing
   &.horizontal {
     trough,
-    progress { min-height: 2px; }
+    progress { min-height: 4px; }
   }
 
   &.vertical {
     trough,
-    progress { min-width: 2px; }
+    progress { min-width: 4px; }
   }
 
-  &.horizontal progress { margin: 0 -1px; } // the progress node is positioned after the trough border
-  &.vertical progress { margin: -1px 0; }   // this moves it over it.
+  // &.horizontal progress { margin: 0 -1px; } // the progress node is positioned after the trough border
+  // &.vertical progress { margin: -1px 0; }   // this moves it over it.
 
 
   // FIXME: insensitive state missing and some other state should be set probably
@@ -3519,32 +3542,32 @@ progressbar {
 
   %progressbar_highlight {
     $c: $success_color;
-    border: 1px solid _border_color($c);
+    // border: 1px solid _border_color($c);
     // border-radius: 3px;
     background-color: $c;
 
     &:disabled {
       background-color: transparent;
-      border-color: transparent;
+      // border-color: transparent;
     }
 
     &:backdrop {
-      border-color: if($variant=='light', $c,
-                                          _border_color($c));
+      // border-color: if($variant=='light', $c,
+      //                                    _border_color($c));
       &:disabled {
         background-color: transparent;
-        border-color: transparent;
+        // border-color: transparent;
       }
     }
 
     // ...on selected list rows
-    row:selected & { &:disabled, & { border-color: _border_color($c); }}
+    row:selected & { &:disabled, & { border-color: $c /*_border_color($c);*/ }} // TODO: what program uses this so it can be tested out?
 
     // OSD
     .osd & {
-      border-color: $osd_borders_color;
+      // border-color: $osd_borders_color;
 
-      &:disabled { border-color: transparent; }
+      // &:disabled { border-color: transparent; }
     }
   }
 
@@ -3604,7 +3627,7 @@ progressbar {
 levelbar {
   &.horizontal {
     block {
-      min-height: 1px;
+      min-height: 4px;
     }
 
     &.discrete block {
@@ -3615,7 +3638,7 @@ levelbar {
 
   &.vertical {
     block {
-      min-width: 1px;
+      min-width: 4px;
     }
 
     &.discrete block {
@@ -3627,23 +3650,23 @@ levelbar {
   &:backdrop { transition: $backdrop_transition; }
 
   trough {
-    border: 1px solid;
+    // border: 1px solid;
     padding: 2px;
-    // border-radius: 3px;
-    @include entry(normal);
+    border-radius: 3px;
+    @include entry(normal, $bg: $dark_fill);
 
-    &:backdrop { @include entry(backdrop); }
+    &:backdrop { @include entry(backdrop, $bg: $dark_fill); }
   }
 
   block {
-    border: 1px solid;
-    // border-radius: 1px;
+    // border: 1px solid;
+    border-radius: 3px;
 
     @mixin block_highlight($c) {
-      border-color: if($variant == 'light', _border_color($c), $c);
+      // border-color: if($variant == 'light', _border_color($c), $c);
       background-color: $c;
 
-      &:backdrop { border-color: $c; };
+      &:backdrop { /*border-color: $c;*/ };
     }
 
     &.low {
@@ -3660,10 +3683,10 @@ levelbar {
     }
 
     &.empty {
-      background-color: transparent;
-      border-color: if($variant == 'light', transparentize($fg_color,0.8), transparentize($fg_color,0.9));
+      background-color: lighten($dark_fill, 10%);
+      // border-color: if($variant == 'light', transparentize($fg_color,0.8), transparentize($fg_color,0.9));
 
-      &:backdrop { border-color: transparentize($backdrop_fg_color,0.85); }
+      &:backdrop { background-color: transparent; }
     }
   }
 }
@@ -3785,11 +3808,11 @@ separator {
  *********/
 list {
   color: $text_color;
-  background-color: $base_color;
+  background-color: $sidebar_bg_color; // $base_color;
   border-color: $borders_color;
 
   &:backdrop {
-    background-color: $backdrop_base_color;
+    background-color: $backdrop_sidebar_bg_color; // $backdrop_base_color;
     border-color: $backdrop_borders_color;
   }
 
@@ -3926,6 +3949,8 @@ messagedialog { // Message Dialog styling
     border-style: none;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
+
+    &:backdrop { background-color: $bg_color; }
   }
 
   &.csd { // rounded bottom border styling for csd version
@@ -3977,7 +4002,7 @@ filechooserbutton:drop(active) {
  ***********/
 .sidebar {
   border-style: none;
-  background-color: mix($bg_color, $base_color, 50%);
+  background-color: $sidebar_bg_color;
 
   @at-root %sidebar_left,
   &:dir(ltr),
@@ -4539,9 +4564,9 @@ decoration {
     background-color: $borders_color;
     border: solid 1px $borders_color;
     border-radius: 0;
-    box-shadow: inset 0 0 0 3px $headerbar_color, inset 0 1px $top_hilight;
+    box-shadow: inset 0 0 0 3px $headerbar_color; //, inset 0 1px $top_hilight;
 
-    &:backdrop { box-shadow: inset 0 0 0 3px $backdrop_bg_color, inset 0 1px $top_hilight; }
+    &:backdrop { box-shadow: inset 0 0 0 3px $backdrop_bg_color; /*, inset 0 1px $top_hilight;*/ }
   }
 }
 
@@ -4556,10 +4581,12 @@ button.titlebutton {
   margin: 0;
   padding: 0;
 
+  &, &:hover, &:active { border-width: 1px; }
+
   &.close {
     @include button(normal, $selected_bg_color, white);
 
-    @include reload_button_styles($selected_bg_color, white, $retain_borders: true);
+    @include restyle_button_states($selected_bg_color, white, $retain_borders: true);
   }
 
   .selection-mode & {
