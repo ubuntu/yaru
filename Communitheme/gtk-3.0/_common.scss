@@ -844,7 +844,6 @@ button {
   &.circular { // The Bloody Circul Button
     border-radius: 9999px;
     -gtk-outline-radius: 9999px;
-box-shadow: none;
 
     label { padding: 0; }
 
@@ -854,16 +853,21 @@ box-shadow: none;
     // so setting a transparent border would reveal it.
     // FIXME: take care of colored circular button.
     // $_border_bg: linear-gradient(to top, $alt-borders-color 25%, $borders-color 50%);
-    border: 1px solid $borders_color;
 
     &:not(.flat):not(:checked):not(:active):not(:disabled):not(:backdrop) {
-      @include button(normal);
+      @include button(normal, $raised: false);
       // background-image: $button_fill, $_border_bg;
       // border-color: transparent;
     }
 
     &:hover:not(:checked):not(:active):not(:disabled):not(:backdrop) {
-      @include button(hover);
+      @include button(hover, $raised: false);
+      // background-image: $button_fill, $_border_bg;
+      // border-color: transparent;
+    }
+
+    &:checked, &:active {
+      box-shadow: none;
       // background-image: $button_fill, $_border_bg;
       // border-color: transparent;
     }
@@ -2948,32 +2952,32 @@ check {
   border-width: 1px;
   padding: 2px;
 
-  @include button(normal, $dark_fill, $edge: none);
+  @include button(normal, $dark_fill, $raised: false);
 
-  &:hover { @include button(hover-alt, $dark_fill, $edge: none); }
-  &:active { @include button(active, $dark_fill, $edge: none); }
-  &:disabled { @include button(insensitive, $dark_fill, $edge: none); }
+  &:hover { @include button(hover-alt, $dark_fill, $raised: false); }
+  &:active { @include button(active, $dark_fill, $raised: false); }
+  &:disabled { @include button(insensitive, $dark_fill, $raised: false); }
   &:backdrop {
-    @include button(backdrop, $dark_fill, $edge: none);
-    &:disabled { @include button(backdrop-insensitive, $dark_fill, $edge: none); }
+    @include button(backdrop, $dark_fill, $raised: false);
+    &:disabled { @include button(backdrop-insensitive, $dark_fill, $raised: false); }
   }
 
   &:checked:not(:indeterminate) {
     $c: $success_color;
     -gtk-icon-source: -gtk-icontheme('emblem-ok-symbolic');
-    @include button(normal, $c, white, $edge: none);
-    &:active { @include button(active, $c, white, $edge: none); }
-    &:backdrop { @include button(backdrop, $c, white, $edge: none); }
-    &:disabled { @include button(insensitive-active, $c, white, $edge: none); }
+    @include button(normal, $c, white, $raised: false);
+    &:active { @include button(active, $c, white, $raised: false); }
+    &:backdrop { @include button(backdrop, $c, white, $raised: false); }
+    &:disabled { @include button(insensitive-active, $c, white, $raised: false); }
   }
 
   &:indeterminate {
     $c: $warning_color;
     -gtk-icon-source: -gtk-icontheme('list-remove-symbolic');
-    @include button(normal, $c, white, $edge: none);
-    &:active { @include button(active, $c, white, $edge: none); }
-    &:backdrop { @include button(backdrop, $c, white, $edge: none); }
-    &:disabled { @include button(insensitive-active, $c, white, $edge: none); }
+    @include button(normal, $c, white, $raised: false);
+    &:active { @include button(active, $c, white, $raised: false); }
+    &:backdrop { @include button(backdrop, $c, white, $raised: false); }
+    &:disabled { @include button(insensitive-active, $c, white, $raised: false); }
   }
 }
 
@@ -2983,29 +2987,29 @@ radio {
   border-width: 1px;
   padding: 2px;
 
-  @include button(normal, $dark_fill, $edge: none);
+  @include button(normal, $dark_fill, $raised: false);
 
-  &:hover { @include button(hover-alt, $dark_fill, $edge: none); }
-  &:active { @include button(active, $dark_fill, $edge: none); }
-  &:disabled { @include button(insensitive, $dark_fill, $edge: none); }
+  &:hover { @include button(hover-alt, $dark_fill, $raised: false); }
+  &:active { @include button(active, $dark_fill, $raised: false); }
+  &:disabled { @include button(insensitive, $dark_fill, $raised: false); }
   &:backdrop {
-    @include button(backdrop, $dark_fill, $edge: none);
-    &:disabled { @include button(backdrop-insensitive, $dark_fill, $edge: none); }
+    @include button(backdrop, $dark_fill, $raised: false);
+    &:disabled { @include button(backdrop-insensitive, $dark_fill, $raised: false); }
   }
 
-  &:checked:not(:indeterminate) { -gtk-icon-source: -gtk-icontheme('emblem-ok-symbolic'); @include button(normal, $success_color, white, $edge: none);
-    &:active { @include button(active, $success_color, white, $edge: none); }
-    &:backdrop { @include button(backdrop, $success_color, white, $edge: none); }
-    &:disabled { @include button(insensitive-active, $success_color, white, $edge: none); }
+  &:checked:not(:indeterminate) { -gtk-icon-source: -gtk-icontheme('emblem-ok-symbolic'); @include button(normal, $success_color, white, $raised: false);
+    &:active { @include button(active, $success_color, white, $raised: false); }
+    &:backdrop { @include button(backdrop, $success_color, white, $raised: false); }
+    &:disabled { @include button(insensitive-active, $success_color, white, $raised: false); }
   }
 
   &:indeterminate {
     $c: $warning_color;
     -gtk-icon-source: -gtk-icontheme('list-remove-symbolic');
-    @include button(normal, $c, white, $edge: none);
-    &:active { @include button(active, $c, white, $edge: none); }
-    &:backdrop { @include button(backdrop, $c, white, $edge: none); }
-    &:disabled { @include button(insensitive-active, $c, white, $edge: none); }
+    @include button(normal, $c, white, $raised: false);
+    &:active { @include button(active, $c, white, $raised: false); }
+    &:backdrop { @include button(backdrop, $c, white, $raised: false); }
+    &:disabled { @include button(insensitive-active, $c, white, $raised: false); }
   }
 }
 

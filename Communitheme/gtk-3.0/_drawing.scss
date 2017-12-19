@@ -179,14 +179,14 @@
 //   }
 // }
 
-@mixin button($t, $c:$button_bg_color, $tc:$fg_color, $edge: true) {
+@mixin button($t, $c:$button_bg_color, $tc:$fg_color, $raised: true) {
 //
 // Button drawing function
 //
 // $t:    button type,
 // $c:    base button color for colored* types
 // $tc:   optional text color for colored* types
-// $edge: set to none to not draw the 3d effect
+// $raised: sets the 3d effect
 //
 // possible $t values:
 // normal, hover, active, insensitive, insensitive-active,
@@ -208,9 +208,14 @@
     background-color: $c;
     border-color: _border_color($c, $lighter:true);
 
-    @if $edge == true {
+    @if $raised == true {
     border-bottom-color: _border_color($c, $darker: true);
     box-shadow: inset 0 -1px 0 0 _border_color($c, $darker: true);
+    }
+
+    @else {
+      box-shadow: none;
+      border-bottom-color: _border_color($c, $lighter:true);
     }
 
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
@@ -231,9 +236,14 @@
     background-color: $_bg;
     border-color: _border_color($_bg, $lighter: true);
 
-    @if $edge == true {
+    @if $raised == true {
       border-bottom-color: _border_color($_bg, $darker: true);
       box-shadow: inset 0 -1px 0 0 _border_color($_bg, $darker: true);
+    }
+
+    @else {
+      box-shadow: none;
+      border-bottom-color: _border_color($c, $lighter:true);
     }
 
     // @if $variant == 'light' {
@@ -306,8 +316,12 @@
     outline-color: transparentize($tc, 0.7);
     border-color: _border_color($_bg, $lighter:true);
 
-    @if $edge == true {
+    @if $raised == true {
       box-shadow: inset 0 1px 3px -1px transparentize(black, 0.5);
+    }
+
+    @else {
+      box-shadow: none;
     }
 
     background-color: $_bg;
@@ -546,41 +560,41 @@
   // restyles button states
   // used to quickly loop through each state for headerbar buttons
   $bc: _border_color($_bg, true); // use a darker border color for visibility reasons
-  border-color: if($retain_borders == true, $bc, transparent);
+  @if $_bg == $_bg and $retain_borders == true { border-color: $bc; } @elif $_bg != $_ { border-color: transparent; }
 
   &:hover {
     @include button(hover, $_bg, $_fg);
-    border-color: $bc;
+    @if $_bg == $_bg { border-color: $bc; }
   }
 
   &:active, &:checked {
     @include button(active, $_bg, $_fg);
-    border-color: $bc;
+    @if $_bg == $_bg { border-color: $bc; }
   }
 
   &:disabled {
     @include button(insensitive, $_bg, $_fg);
-    border-color: $bc;
+    @if $_bg == $_bg { border-color: $bc; }
   }
 
   &:backdrop {
     @include button(backdrop, $_bg, $_fg);
-    border-color: $bc;
+    @if $_bg == $_bg { border-color: $bc; }
 
     &:active,
     &:checked {
       @include button(backdrop-active, $_bg, $_fg);
-      border-color: $bc;
+      @if $_bg == $_bg { border-color: $bc; }
     }
 
     &:disabled {
       @include button(backdrop-insensitive, $_bg, $_fg);
-      border-color: $bc;
+      @if $_bg == $_bg { border-color: $bc; }
 
       &:active,
       &:checked {
         @include button(backdrop-insensitive-active, $_bg, $_fg);
-        border-color: $bc;
+        @if $_bg == $_bg { border-color: $bc; }
       }
     }
   }
