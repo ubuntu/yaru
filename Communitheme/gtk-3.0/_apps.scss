@@ -20,7 +20,8 @@ list.tweak-categories separator {
 .nautilus-desktop-window {
   // get rid of white line on the desktop if desktop icons are enabled
 .searchbar-container searchbar {
-    margin: -1px;
+    background: transparent;
+    border-color: transparent;
   }
 
   .nautilus-desktop.view {
