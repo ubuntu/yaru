@@ -48,7 +48,9 @@
 
     transition-duration: 200ms;
     background-color: $_bg;
-    box-shadow: 1px 0 $_bg; // the box-shadow is there to overlap the dock's border
+    box-shadow: 1px 0 $_bg; // the box-shadow is there to overlap the dock's border BUT
+    // there's no border until the dash is opaque, so the launcher looks to be one pixel out of bounds
+    // how do we fix this?
 
     &:focus, &:hover { background-color: lighten($_bg, 2%); box-shadow: 1px 0 lighten($_bg, 2%); }
     &:active, &:checked { background-color: darken($_bg, 5%); box-shadow: 1px 0 darken($_bg, 5%); }

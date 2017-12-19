@@ -32,7 +32,7 @@ data_sources = [
   'filter-selected-ltr.svg',
   'filter-selected-rtl.svg',
   'logged-in-indicator.svg',
-  'lock-gradient.svg',
+  'lockscreen-gradient.svg',
   'message-indicator-symbolic.svg',
   'no-events.svg',
   'noise-texture.png',
@@ -52,8 +52,9 @@ data_sources = [
   'toggle-on-hc.svg',
   'toggle-on-intl.svg',
   'toggle-on-us.svg',
-  'ws-switch-arrow-down.png',
-  'ws-switch-arrow-up.png',
+  'ubuntu-logo-icon.svg',
+  'ws-switch-arrow-down.svg',
+  'ws-switch-arrow-up.svg',
 ]
 
 # destination directory
