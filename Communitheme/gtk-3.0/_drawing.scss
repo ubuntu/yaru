@@ -2,6 +2,16 @@
 
 // generic drawing of more complex things
 
+@function _backdrop_color($c) {
+// returns backdrop shade
+@if variant == 'light' {
+  @return lighten($c, 2%);
+}
+@else {
+  @return darken($c, 2%);
+  }
+}
+
 @function _widget_edge($c:$borders_edge) {
 // outer highlight "used" on most widgets
   @if $c == none { @return none; }
@@ -169,15 +179,14 @@
 //   }
 // }
 
-@mixin button($t, $c:$button_bg_color, $tc:$fg_color, $edge: none) {
+@mixin button($t, $c:$button_bg_color, $tc:$fg_color, $edge: true) {
 //
 // Button drawing function
 //
 // $t:    button type,
 // $c:    base button color for colored* types
 // $tc:   optional text color for colored* types
-// $edge: set to none to not draw the bottom edge or specify a color to not
-//        use the default one
+// $edge: set to none to not draw the 3d effect
 //
 // possible $t values:
 // normal, hover, active, insensitive, insensitive-active,
@@ -196,10 +205,14 @@
   //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
-    // border-color: _border_color($c);
-    border-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
-    border-bottom-color: _border_color($c, $darker: true);
     background-color: $c;
+    border-color: _border_color($c, $lighter:true);
+
+    @if $edge == true {
+    border-bottom-color: _border_color($c, $darker: true);
+    box-shadow: inset 0 -1px 0 0 _border_color($c, $darker: true);
+    }
+
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     // $button_fill: if($variant == 'light', linear-gradient(to bottom, $c, darken($c, 4%) 60%, darken($c, 10%)),
     //                                      linear-gradient(to bottom, darken($c, 2%), darken($c, 4%) 60%, darken($c, 6%))) !global;
@@ -212,13 +225,17 @@
   //
   // hovered button
   //
+    $_bg: if(lightness($c)>50%, darken($c, 6%), lighten($c, 5%));
     color: $tc;
     outline-color: transparentize($tc, 0.7);
-    border-color: _border_color($c);
-    border-top-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
-    border-bottom-color: _border_color($c, $darker: true);
-    background-color: darken($c, 7%);
-    // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
+    background-color: $_bg;
+    border-color: _border_color($_bg, $lighter: true);
+
+    @if $edge == true {
+      border-bottom-color: _border_color($_bg, $darker: true);
+      box-shadow: inset 0 -1px 0 0 _border_color($_bg, $darker: true);
+    }
+
     // @if $variant == 'light' {
     //  $button_fill: linear-gradient(to bottom, lighten($c, 6%), $c 60%, darken($c, 4%)) !global;
     //  @include _button_text_shadow($tc, lighten($c, 6%));
@@ -284,12 +301,16 @@
   //
   // pushed button
   //
+    $_bg: if(lightness($c)>50%, darken($c, 8%), darken($c, 4%));
     color: $tc;
     outline-color: transparentize($tc, 0.7);
-    border-color: _border_color($c, $lighter:true); // border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
-    // box-shadow: none;
-    box-shadow: inset 0 1px 3px -1px transparentize(black, 0.5);
-    background-color: darken($c, 9%);
+    border-color: _border_color($_bg, $lighter:true);
+
+    @if $edge == true {
+      box-shadow: inset 0 1px 3px -1px transparentize(black, 0.5);
+    }
+
+    background-color: $_bg;
     // $button_fill: image(darken($c, 6%)) !global;
     // background-image: $button_fill;
     // @include _shadows(inset 0 1px transparentize($_hilight_color, 1), $_button_edge);
@@ -521,7 +542,7 @@
   }
 }
 
-@mixin restyle_button_states($_bg: lighten($headerbar_bg_color, 5%), $_fg: $headerbar_fg_color, $retain_borders: false) {
+@mixin restyle_button_states($_bg: $headerbar_bg_color, $_fg: $headerbar_fg_color, $retain_borders: false) {
   // restyles button states
   // used to quickly loop through each state for headerbar buttons
   $bc: _border_color($_bg, true); // use a darker border color for visibility reasons
@@ -564,24 +585,6 @@
     }
   }
 }
-
-// @mixin headerbar_fill($c:$headerbar_color, $hc:$top_hilight, $ov: none) {
-//
-// headerbar fill
-//
-// $c:  base color
-// $hc: top highlight color
-// $ov: a background layer for background shorthand (hence no commas!)
-//
-//   $gradient: linear-gradient(to top, darken($c, 13%), darken($c, 2%) 2px, $c 3px);
-//
-//   @if $variant == 'dark' { $gradient: linear-gradient(to top, darken($c, 3%), darken($c, 1%) 2px, $c 3px); }
-//
-//   @if $ov != none { background: $c $ov, $gradient; }
-//   @else { background: $c $gradient; }
-//
-//   box-shadow: inset 0 1px $hc; // top highlight
-// }
 
 @mixin overshoot($p, $t:normal, $c:$fg_color) {
 //
@@ -700,4 +703,38 @@
   background-position: $_bg_pos;
   border: none;
   box-shadow: none;
+}
+
+@mixin infobar($c) {
+//
+// styles infobar
+//
+    &:backdrop, & {
+      label, & { color: $selected_fg_color; }
+      background-color: $c;
+      border-color: darken($c, 10%);
+    }
+
+    &:backdrop { background-color: lighten($c, 1%); }
+
+    button {
+      @include button(normal, $c, $selected_fg_color, none);
+      &:hover { @include button(hover, $c, $selected_fg_color, none); }
+      &:active,
+      &:checked { @include button(active, $c, $selected_fg_color, none); }
+      &:disabled { @include button(insensitive,$c,$selected_fg_color,none); }
+
+      &:backdrop {
+        @include button(backdrop, $c, $selected_fg_color, none);
+        border-color: _border_color($c);
+
+        &:disabled {
+          @include button(backdrop-insensitive, $c,
+                          $selected_fg_color, none);
+          border-color: _border_color($c);
+        }
+      }
+    }
+
+    selection { background-color: darken($c, 10%); }
 }
