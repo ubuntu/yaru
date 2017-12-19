@@ -2,12 +2,15 @@
 // it gets @if ed depending on $variant
 
 
-$base_color: if($variant =='light', #ffffff, #292929);
-$bg_color: if($variant =='light', #ededed, #393f3f);
-$fg_color: if($variant =='light', #2e3436, #eeeeec);
+// $base_color: if($variant =='light', #ffffff, #292929);
+// $bg_color: if($variant =='light', #ededed, #393f3f);
+// $fg_color: if($variant =='light', #2e3436, #eeeeec);
+$base_color: if($variant =='light', #ffffff, $ubuntu_base_color);
+$bg_color: if($variant =='light', #ededed, $ubuntu_bg_color);
+$fg_color: if($variant =='light', #2e3436, $ubuntu_fg_color);
 
 $selected_fg_color: #ffffff;
-$selected_bg_color: if($variant == 'light', #4a90d9, darken(#4a90d9,20%));
+$selected_bg_color: $orange; // if($variant == 'light', #4a90d9, darken(#4a90d9,20%));
 $selected_borders_color: if($variant=='light', darken($selected_bg_color, 30%),
                                                darken($selected_bg_color, 20%));
 $borders_color: if($variant =='light', darken($bg_color,30%), darken($bg_color,12%));
@@ -18,17 +21,25 @@ $link_visited_color: if($variant == 'light', darken($selected_bg_color,20%),
                                      lighten($selected_bg_color,10%));
 $top_hilight: $borders_edge;
 
-$warning_color: #f57900;
-$error_color: #cc0000;
-$success_color: if($variant =='light', #73d216, darken(#73d216,10%));
-$destructive_color: if($variant =='light', #ef2929, darken(#ef2929,10%));
+$warning_color: $yellow;
+$error_color: $red;
+$success_color: $green;
+$destructive_color: darken($red, 10%);
+$neutral_color: $blue;
 
-$osd_fg_color: #eeeeec;
-$osd_bg_color: #2e3436;
-$osd_borders_color: transparentize(black, 0.3);
-$osd_outer_borders_color: transparentize(white, 0.9);
+// $osd_fg_color: #eeeeec;
+// $osd_bg_color: #2e3436;
+// $osd_borders_color: transparentize(black, 0.3);
+// $osd_outer_borders_color: transparentize(white, 0.9);
+$osd_fg_color: $fg_color;
+$osd_bg_color: $jet;
+$osd_borders_color: lighten($borders_color, 15%);
+//
+$base_hover_color: transparentize($fg_color, 0.95);
+$base_active_color: transparentize($fg_color, 0.90);
+$active_fg_color: transparentize($selected_fg_color, .5);
 
-$tooltip_borders_color: $osd_outer_borders_color;
+// $tooltip_borders_color: $osd_outer_borders_color; // is this being used?
 
 //insensitive state derived colors
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
