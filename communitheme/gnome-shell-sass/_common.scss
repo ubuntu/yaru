@@ -43,7 +43,7 @@ stage {
 
 /* Buttons */
 .button {
-  border-radius: 3px;
+  border-radius: 5px;
   border-width: 1px;
   border-bottom-style: none;
   min-height: 22px; // make just a little taller
@@ -563,7 +563,7 @@ StScrollBar {
   }
   .popup-menu-boxpointer,
   .candidate-popup-boxpointer {
-    -arrow-border-radius: 3px;
+    -arrow-border-radius: 5px;
     -arrow-background-color: transparentize($osd_bg_color, $popover-alpha-value);
     -arrow-border-width: 1px;
     -arrow-border-color: $osd_borders_color;
@@ -924,7 +924,7 @@ StScrollBar {
       &:hover,&:focus { background-color: $base_hover_color; }
       &:active {
         color: $active_fg_color;
-        background-color: $base_hover_color;
+        background-color: $base_active_color;
       }
     }
 
@@ -964,12 +964,13 @@ StScrollBar {
     }
 
     .pager-button {
-      color: white;
+      transition-duration: 100ms;
+      color: $fg_color;
       background-color: transparent;
       width: 32px;
       border-radius: 4px;
-      &:hover, &:focus { background-color: transparentize($fg_color,0.95); }
-      &:active { background-color: transparentize($bg_color,0.95); }
+      &:hover, &:focus { background-color: $base_hover_color; }
+      &:active { background-color: $base_active_color; }
     }
 
       .calendar-change-month-back { //arrow back
@@ -1063,6 +1064,7 @@ StScrollBar {
           background-color: $osd_bg_color;
           border: 1px solid $osd_borders_color;
           &:hover,&:focus { background-color: opacify(mix($osd_bg_color, $base_hover_color), 1); }
+          &:active { background-color: $base_active_color; }
           &:active { .message-title, .message-content { color: $active_fg_color; } }
           border-radius: 6px; // 3px;
 
@@ -1158,19 +1160,18 @@ StScrollBar {
   .system-menu-action {
     color: $fg_color;
     transition-duration: 200ms;
-    border-radius: 6px; // 32px; /* wish we could do 50% */
+    border-radius: 32px; /* wish we could do 50% */
     padding: 13px;
-    border: 1px solid $osd_borders_color; // lighten($borders_color,5%);
-    border-bottom-width: 2px;
+    border: none; // 1px solid transparent; //  $osd_borders_color; // lighten($borders_color,5%);
 
     &:hover, &:focus {
-      @include button(hover);
-      // background-color: transparentize($fg_color,0.9);
-      // color: $fg_color;
-      // border: none;
-      // padding: 13px; // 14px;
+      color: $fg_color;
+      background-color: $base_hover_color;
+      border: none; // 1px solid $osd_borders_color;
+      padding: 13px; // 14px;
     }
-    &:active { @include button(active); /*background-color: $selected_bg_color; color: $selected_fg_color;*/ }
+
+    &:active { color: $active_fg_color; border: none; /* 1px solid $osd_borders_color; */ background-color: $base_active_color; }
 
     & > StIcon { icon-size: 16px; }
   }
@@ -1425,13 +1426,17 @@ StScrollBar {
     }
     &:active .overview-icon,
     &:checked .overview-icon {
-      background-color: transparentize(darken($osd_bg_color,10%),.1);
+      // when clicking on an app or a folder is active
+      $_bg: darken($osd_fg_color, 10%);
+      background-color: transparentize($_bg,.7) !important; // transparentize($osd_bg_color,.6);
       box-shadow: inset 0 1px 2px $osd_borders_color;
     }
     &:hover .overview-icon,
     &:focus .overview-icon,
     &:selected .overview-icon {
-      background-color: transparentize($osd_fg_color,.9);
+      // when hovering over an app
+      $_bg: $osd_fg_color;
+      background-color: transparentize($_bg,.7); // transparentize($osd_bg_color,.6);
       transition-duration: 0ms;
       border-image: none;
       background-image: none;
@@ -1446,6 +1451,7 @@ StScrollBar {
   }
 
   %icon_tile {
+    // appeareance of apps
     color: $osd_fg_color;
     border-radius: 4px;
     padding: 6px;
@@ -1455,7 +1461,10 @@ StScrollBar {
   }
 
   .app-well-app.app-folder > .overview-icon {
-    background-color: transparentize($osd_bg_color,.6);
+    // app folder
+    $_bg: darken($osd_fg_color, 25%); // $osd_bg_color;
+    background-color: transparentize($_bg,.5);
+    box-shadow: inset 0 0 0 1px transparentize($_bg,.6);
   }
 
   .show-apps:checked .show-apps-icon,
@@ -1466,8 +1475,12 @@ StScrollBar {
 
   // Collections
   .app-folder-popup { //expanded collection
-    -arrow-border-radius: 8px;
-    -arrow-background-color: transparentize($osd_bg_color,0.7);
+    $_bg: $osd_fg_color;
+    -arrow-border-radius: 5px;
+    // -arrow-background-color: transparentize($osd_bg_color,0.7);
+    -arrow-background-color: transparentize($_bg,.7);
+    -arrow-border-width: 1px;
+    -arrow-border-color: transparentize($_bg,.5);
     -arrow-base: 24px;
     -arrow-rise: 11px;
   }
@@ -1538,7 +1551,7 @@ StScrollBar {
 
 /* NOTIFICATIONS & MESSAGE TRAY */
 
-  .url-highlighter { link-color: lighten($selected_bg_color,10%); }
+  .url-highlighter { link-color: $link_color; /*lighten($selected_bg_color,10%);*/ }
 
   // Banners
   .notification-banner {
@@ -1558,15 +1571,18 @@ StScrollBar {
     .secondary-icon { icon-size: 1.09em; }
     .notification-actions {
       background-color: $osd_borders_color; // $borders_color;
-      padding-top: 2px;
+      padding-top: 1px;
       spacing: 1px;
     }
     .notification-button {
-      padding: 4px 4px 5px;
+      // padding: 4px 4px 5px;
+      min-height: 22px; // make just a little taller
+      padding: 4px 32px;
       background-color: darken($_bubble_bg_color,5%);
       &:first-child { border-radius: 0 0 0 6px; }
       &:last-child { border-radius: 0 0 6px 0; }
-      &:hover, &focus { background-color: darken($_bubble_bg_color,2%); }
+      &:hover, &:focus { background-color: darken($_bubble_bg_color,2%); }
+      &:active { background-color: darken($_bubble_bg_color, 5%); }
     }
   }
   .summary-source-counter {
