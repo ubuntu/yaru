@@ -1498,6 +1498,7 @@ style "default" {
 style "menubar" {
 
   # Needed to fix Firefox's menubar text
+  bg[NORMAL]   = @menubar_bg
   bg[SELECTED] = @selected_fg_color
   fg[SELECTED] = @link_color
 
@@ -1508,7 +1509,8 @@ style "menubar_item" {
   xthickness = 3
   ythickness = 4
 
-  fg[PRELIGHT] = @link_color
+  fg[NORMAL]   = @menubar_fg
+  fg[PRELIGHT] = @selected_bg_color
 
   engine "pixmap" {
     image {
