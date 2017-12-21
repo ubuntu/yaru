@@ -61,9 +61,10 @@
 
 // buttons
 
-@function _border_color ($c) { @return darken($c,25%); } // colored buttons want
-                                                         // the border form the
-                                                         // base color
+@function _border_color($c, $darker: false) {
+  @if $darker == true { @return darken($c, 15%); }
+  @else { @return darken($c, 10%); }
+}
 
 // @function _text_shadow_color ($tc:$fg_color, $bg:$bg_color) {
 //
@@ -77,18 +78,16 @@
 //   @else { @return transparentize(black,$_lbg*0.8); }
 // }
 
-// @function _button_hilight_color($c) {
-//
+@function _button_hilight_color($c) {
+
 // calculate the right top hilight color for buttons
-//
-// $c: base color;
-//
-//   @if lightness($c)>90% { @return white; }
-//   @else if lightness($c)>80% { @return transparentize(white, 0.3); }
-//   @else if lightness($c)>50% { @return transparentize(white, 0.5); }
-//   @else if lightness($c)>40% { @return transparentize(white, 0.7); }
-//   @else { @return transparentize(white, 0.9); }
-// }
+
+  @if lightness($c)>90% { @return transparentize(black, 0.1); }
+  @else if lightness($c)>80% { @return transparentize(black, 0.3); }
+  @else if lightness($c)>50% { @return transparentize(black, 0.5); }
+  @else if lightness($c)>40% { @return transparentize(black, 0.8); }
+  @else { @return transparentize(white, 0.9); }
+}
 
 // @mixin _button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
 //
@@ -111,8 +110,7 @@
 //   }
 // }
 
-@mixin button($t, $c:lighten($osd_bg_color, 5%), $tc:$osd_fg_color/*, $edge: $borders_edge*/) {
-  $default_bg_color: lighten($osd_bg_color, 5%);
+@mixin button($t, $c:lighten($osd_bg_color, 10%), $tc:$osd_fg_color, $modal: false) {
   transition-duration: 200ms;
 //
 // Button drawing function
@@ -137,70 +135,60 @@
   //
   // normal button
   //
-    // $_bg: if($c!=$default_bg_color, transparentize($c, 0.5),
-    //                         $osd_bg_color);
-
     color: $tc;
-    background-color: $c; // $_bg;
-    border-color: if($c!=$default_bg_color, _border_color($c), $osd_borders_color);
-    box-shadow: none; // inset 0 1px lighten($osd_bg_color,10%);
-    text-shadow: none; // 0 1px black;
-    icon-shadow: none; // 0 1px black;
+    background-color: $c;
+    border-color: _border_color($c);
+    @if $modal == false { box-shadow: inset 0 -1px 0 0 _button_hilight_color($c); }
+    @else { box-shadow: inset 0 -1px $osd_borders_color;}
+    text-shadow: none;
+    icon-shadow: none;
   }
+
   // @if $t==focus {
-  // //
-  // // focused button
-  // //
-  //   $_bg: if($c!=$default_bg_color, transparentize($c, 0.5),
-  //                         $osd_bg_color);
   //
-  //   color: $osd_fg_color;
-  //   text-shadow: 0 1px black;
-  //   icon-shadow: 0 1px black;
-  //   box-shadow: inset 0px 0px 0px 1px $selected_bg_color;
+  // focused button
+  //
+    // $_bg: if($c!=$c, transparentize($c, 0.5),
+    //                       $osd_bg_color);
+    //
+    // color: $osd_fg_color;
+    // text-shadow: 0 1px black;
+    // icon-shadow: 0 1px black;
+    // box-shadow: inset 0px 0px 0px 1px $selected_bg_color;
+  //   color: $selected_bg_color; // $_bg;
+  //   background-color: $c;
+  //   border-color: _border_color($c);
+  //   @if $modal == false { box-shadow: inset 0 -1px 0 0 _button_hilight_color($c); }
+  //   @else { box-shadow: inset 0 -1px $osd_borders_color;}
+  //   text-shadow: none; // 0 1px black;
+  //   icon-shadow: none; // 0 1px black;
   // }
 
   @else if $t==hover or $t==focus {
   //
   // active osd button
   //
-    // $_bg: if($c!=$default_bg_color, transparentize($c, 0.3),
-    //                         lighten($osd_bg_color,10%));
-    //
-    // color: white;
-    // border-color: $osd_borders_color;
-    // background-color: $_bg;
-    // box-shadow: inset 0 1px lighten($osd_bg_color,20%);
-    // text-shadow: 0 1px black;
-    // icon-shadow: 0 1px black;
+    $_bg: darken($c, 5%);
     color: $tc;
-    background-color: darken($c, 5%); // $_bg;
-    border-color: if($c!=$default_bg_color, _border_color($c), $osd_borders_color);
-    box-shadow: none; // inset 0 1px lighten($osd_bg_color,10%);
-    text-shadow: none; // 0 1px black;
-    icon-shadow: none; // 0 1px black;
+    background-color: $_bg;
+    border-color: _border_color($_bg);
+    @if $modal == false { box-shadow: inset 0 -1px 0 0 _button_hilight_color($c); }
+    @else { box-shadow: inset 0 -1px $osd_borders_color;}
+    text-shadow: none;
+    icon-shadow: none;
   }
   @else if $t==active {
   //
   // active osd button
   //
-    $_bg: if($c!=$bg_color, $c, $osd_borders_color);
-
-    // color: white;
-    // border-color: $osd_borders_color;
-    // background-color: darken($_bg,5%);
-    // This should be none, but it's creating some issues with borders, so to
-    // workaround it for now, use inset wich goes through a different code path.
-    // see https://bugzilla.gnome.org/show_bug.cgi?id=752934
-    // box-shadow: inset 0 0 black;
-    // text-shadow: none;
-    // icon-shadow: none;
+    $_bg: darken($c, 7%);
     color: $tc;
-    background-color: darken($c, 7%); // $_bg;
-    border-color: if($c!=$default_bg_color, _border_color($c), $osd_borders_color);
-    box-shadow: none; // inset 0 1px lighten($osd_bg_color,10%);
-    text-shadow: none; // 0 1px black;
-    icon-shadow: none; // 0 1px black;
+    background-color: $_bg;
+    border-color: _border_color($_bg);
+    @if $modal == false { box-shadow: inset 0 1px 3px -1px transparentize(black, 0.5); }
+    @else { box-shadow: inset 0 -1px $osd_borders_color;}
+    text-shadow: none;
+    icon-shadow: none;
   }
   @else if $t==insensitive {
   //
@@ -208,8 +196,8 @@
   //
     $_bg: transparentize(mix($insensitive_fg_color,$c,20%),0.3); // transparentize(mix($insensitive_fg_color,$osd_bg_color,20%),0.3);
 
-    color: $insensitive_fg_color;
-    border-color: $osd_borders_color;
+    color: if($c != $c, mix($tc, $c, 50%), $insensitive_fg_color);
+    border-color: _border_color($c);
     background-color: $_bg;
     box-shadow: none;
     text-shadow: none;
@@ -222,10 +210,6 @@
     border-color: transparent;
     background-color: transparent;
     background-image: none;
-
-    // @include _shadows(inset 0 1px transparentize(white,1),
-    //                   $_blank_edge);
-
     box-shadow: none;
     text-shadow: none;
     icon-shadow: none;
