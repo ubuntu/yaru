@@ -25,11 +25,3 @@ $purple: #74296F;
 $headerbar_bg_color: #303030;
 $headerbar_fg_color: $porcelain;
 //
-// $ubuntu_base_color: if($variant == 'light', #FAFAFA, #1C1B21);
-// $ubuntu_bg_color: if($variant == 'light', #fdfdfd, #292933);
-// $ubuntu_base_color: if($variant == 'light', #FAFAFA, #302E2E);
-// $ubuntu_bg_color: if($variant == 'light', #F7F7F7, #302E2E);
-$ubuntu_base_color: if($variant == 'light', #FAFAFA, #1C1B21);
-$ubuntu_bg_color: if($variant == 'light', #F7F7F7, #292933);
-$ubuntu_fg_color: if($variant == 'light', $slate, $porcelain);
-$ubuntu_text_color: transparentize($ubuntu_fg_color, .1);

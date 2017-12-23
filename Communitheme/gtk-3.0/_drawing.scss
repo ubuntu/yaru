@@ -211,7 +211,7 @@
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
-    // border-bottom-color: if($c != $button_bg_color, _border_color($c, true), $alt_borders_color);
+    @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
     @include _shadows(inset 0 -1px $_button_edge);
   }
 
@@ -224,7 +224,7 @@
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     border-color: _border_color($_bg);
-    // border-bottom-color: if($c != $button_bg_color, _border_color($c, true), $alt_borders_color);
+    @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
     @include _shadows(inset 0 -1px $_button_edge);
   }
 
@@ -260,6 +260,7 @@
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     border-color: _border_color($_bg);
+    @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
     @if $edge == none { box-shadow: none; }
     @else { @include _shadows(inset 0 2px 3px -1px $_pressed); }
   }
