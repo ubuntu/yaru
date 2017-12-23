@@ -57,13 +57,12 @@ stage {
 
 .modal-dialog-linked-button {
   border-right-width: 1px;
-  border-bottom-style: none;
   border-top: 1px solid;
-  @include button(normal, $modal: true);
-  &:insensitive { @include button(insensitive, $modal: true); }
-  &:active { @include button(hover, $modal: true); }
-  &:active { @include button(active, $modal: true); }
-  &:focus { @include button(focus, $modal: true); }
+  @include button(normal);
+  &:insensitive { @include button(insensitive); }
+  &:active { @include button(hover); }
+  &:active { @include button(active); }
+  &:focus { @include button(focus); }
   padding: 12px;
 
   &:first-child {
@@ -183,7 +182,7 @@ StScrollBar {
 .flashspot { background-color: white; }
 
 .modal-dialog {
-  border-radius: 9px;
+  border-radius: 6px;
   color: $osd_fg_color;
   background-color: $_bubble_bg_color;
   border: 1px solid $osd_borders_color;
@@ -564,7 +563,7 @@ StScrollBar {
   }
   .popup-menu-boxpointer,
   .candidate-popup-boxpointer {
-    -arrow-border-radius: 5px;
+    -arrow-border-radius: 6px;
     -arrow-background-color: transparentize($osd_bg_color, $popover-alpha-value);
     -arrow-border-width: 1px;
     -arrow-border-color: $osd_borders_color;
@@ -1477,7 +1476,7 @@ StScrollBar {
   // Collections
   .app-folder-popup { //expanded collection
     $_bg: $osd_fg_color;
-    -arrow-border-radius: 5px;
+    -arrow-border-radius: 6px;
     // -arrow-background-color: transparentize($osd_bg_color,0.7);
     -arrow-background-color: transparentize($_bg,.7);
     -arrow-border-width: 1px;
