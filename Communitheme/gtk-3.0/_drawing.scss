@@ -206,7 +206,7 @@
   //
   // normal button
   //
-    $_bg: if(lightness($c)>50%, $c, lighten($c, 3%));
+    $_bg: if(lightness($c)>50%, $c, lighten($c, 5%));
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
@@ -219,7 +219,7 @@
   //
   // hovered button
   //
-    $_bg: if(lightness($c)>50%, darken($c, 5%), lighten($c, 6%));
+    $_bg: if(lightness($c)>50%, darken($c, 5%), lighten($c, 8%));
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
@@ -254,7 +254,7 @@
   //
   // pushed button
   //
-    $_bg: if(lightness($c)>50%, darken($c, 10%), darken($c, 5%));
+    $_bg: if(lightness($c)>50%, darken($c, 10%), lighten($c, 3%));
     //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
@@ -269,7 +269,8 @@
   //
   // insensitive button
   //
-    $_bg: if($c != $button_bg_color, mix($c, $base_color, 85%), $insensitive_bg_color);
+    $_bg: if($c != $button_bg_color, mix($c, darken($base_color, if(lightness($c)>50%, 0%, 95%)), 85%),
+          $insensitive_bg_color);
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color); }
 
@@ -283,13 +284,12 @@
   //
   // insensitive pushed button
   //
-    $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 6%));
-    $_bc: if($c != $button_bg_color, _border_color($c), $insensitive_borders_color);
+    $_bg: darken(mix($c, darken($base_color, if(lightness($c)>50%, 0, 95%)), 85%), 8%);
 
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color); }
 
     background-color: $_bg;
-    border-color: $_bc;
+    border-color: if($c != $button_bg_color, _border_color($c), $insensitive_borders_color);
     @if $edge == none { @include _shadows(inset 0 2px 3px -1px lighten($_pressed, 40%)); }
     @else { box-shadow: none; }
   }
@@ -311,8 +311,7 @@
   //
   // backdrop pushed button
   //
-    $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 4%));
-    $_bc: if($variant == 'light', $_bg ,_border_color($c));
+    $_bg: darken(mix($c, darken($base_color, if(lightness($c)>50%, 0, 95%)), 85%), 8%);
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
 
@@ -326,8 +325,7 @@
   // backdrop insensitive button
   //
 
-    $_bg: if($c != $button_bg_color, mix($c, $base_color, 85%), $insensitive_bg_color);
-    $_bc: if($variant == 'light', $_bg,_border_color($c));
+    $_bg: if($c != $button_bg_color, mix($c, darken($base_color, if(lightness($c)>50%, 0, 95%)), 85%), $insensitive_bg_color);
 
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
 
@@ -341,8 +339,7 @@
   // backdrop insensitive pushed button
   //
 
-    $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 4%));
-    $_bc: if($variant == 'light', $_bg, _border_color($c));
+    $_bg: darken(mix($c, darken($base_color, if(lightness($c)>50%, 0, 95%)), 85%), 8%);
 
     label { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
 
