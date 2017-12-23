@@ -20,7 +20,7 @@ $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentiz
 $link_color: $blue; // if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
 $link_visited_color: if($variant == 'light', darken($link_color, 20%), lighten($link_color, 10%)); // if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 $top_hilight: $borders_edge;
-$dark_fill: darken(mix($borders_color, $bg_color, 50%), 10%); // mix($borders_color, $bg_color, 50%);
+$dark_fill: mix($borders_color, $bg_color, 50%);
 $menu_color: if($variant == 'light', $base_color, mix($bg_color, $base_color, 20%));
 $popover_bg_color: $bg_color;
 $popover_hover_color: lighten($bg_color, 5%);

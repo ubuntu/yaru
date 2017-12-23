@@ -39,3 +39,10 @@ list.tweak-categories separator {
 .terminal-notebook { }
 .terminal-screen { background: $terminal_bg_color; color: white; }
 }
+
+/***********
+ * GNOME Software *
+ ***********/
+buttonbox.horizontal.linked button.toggle.toolbar-primary-buttons-software {
+  @extend %underline_focus; // TODO:not applying
+}
