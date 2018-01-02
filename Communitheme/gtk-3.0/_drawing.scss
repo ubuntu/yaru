@@ -210,8 +210,10 @@
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     border-color: if($c != $button_bg_color, _border_color($c), $borders_color);
-    @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
-    @include _shadows(inset 0 -1px $_button_edge);
+    @if $edge == true {
+      @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
+      @include _shadows(inset 0 -1px $_button_edge);
+    }
   }
 
   @else if $t==hover {
@@ -223,8 +225,10 @@
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     border-color: _border_color($_bg);
-    @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
-    @include _shadows(inset 0 -1px $_button_edge);
+    @if $edge == true {
+      @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
+      @include _shadows(inset 0 -1px $_button_edge);
+    }
   }
 
   @if $t==normal-alt {
@@ -259,9 +263,10 @@
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     border-color: _border_color($_bg);
-    @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
-    @if $edge == none { box-shadow: none; }
-    @else { @include _shadows(inset 0 2px 3px -1px $_pressed); }
+    @if $edge == true {
+      @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
+      @include _shadows(inset 0 2px 3px -1px $_pressed);
+    }
   }
 
   @else if $t==insensitive {
@@ -275,8 +280,7 @@
 
     background-color: $_bg;
     border-color: if($c != $button_bg_color, _border_color($c), $insensitive_borders_color);
-    @if $edge == none { box-shadow: none; }
-    @else { @include _shadows(inset 0 -1px transparent); }
+    @if $edge == true { @include _shadows(inset 0 -1px transparent); }
   }
 
   @else if $t==insensitive-active {
@@ -289,8 +293,7 @@
 
     background-color: $_bg;
     border-color: if($c != $button_bg_color, _border_color($c), $insensitive_borders_color);
-    @if $edge == none { @include _shadows(inset 0 2px 3px -1px lighten($_pressed, 40%)); }
-    @else { box-shadow: none; }
+    @if $edge == true { @include _shadows(inset 0 2px 3px -1px lighten($_pressed, 40%)); }
   }
 
   @else if $t==backdrop {
