@@ -5,7 +5,7 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
 $panel-corner-radius: 0; // 6px;
 $panel-alpha-value: 0.1; // analogous to dash
-$popover-alpha-value: 0.05;
+$popover-alpha-value: 0.025;
 //
 
 /* Copyright 2009, 2015 Red Hat, Inc.
@@ -521,7 +521,7 @@ StScrollBar {
 
   .popup-menu-arrow { } //defined globally in the TOP BAR
   .popup-sub-menu {
-    background-color: transparentize(lighten($bg, 15%), ($popover-alpha-value * 15));
+    background-color: transparentize(lighten($bg, 15%), ($popover-alpha-value * 35));
     box-shadow: inset 0 -1px 0px $bc;
   }
 
@@ -717,7 +717,7 @@ StScrollBar {
   .ws-switcher-box {
     height: 50px;
     border: 1px solid transparentize($osd_fg_color,0.9);
-    background: transparent;
+    background: transparentize($osd_fg_color,0.9); // transparent;
     border-radius: 8px;
   }
 
@@ -788,7 +788,6 @@ StScrollBar {
     -natural-hpadding: 12px;
     -minimum-hpadding: 6px;
     font-weight: 450;
-    font-size: 95%;
     color: $_fg;
     text-shadow: none;
     transition-duration: 100ms;
@@ -1272,6 +1271,7 @@ StScrollBar {
     spacing: 25px;
     color: $osd_fg_color; // $selected_fg_color;
     background-color: $osd_bg_color; // $selected_bg_color;
+    border: 1px solid $osd_borders_color;
     border-radius: 8px;
     padding: 4px 12px;
   }
@@ -1364,6 +1364,7 @@ StScrollBar {
     padding: 4px 12px;
     color: $osd_fg_color;
     background-color: $osd_bg_color;
+    border: 1px solid $osd_borders_color;
     text-align: center;
     -x-offset: 8px;
   }
