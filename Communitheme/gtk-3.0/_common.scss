@@ -261,9 +261,8 @@ spinner {
 %entry,
 entry {
   %entry_basic, & {
-    min-height: 32px;
-    padding-left: 8px;
-    padding-right: 8px;
+    min-height: 24px;
+    padding: 4px 8px;
     border: 1px solid;
     border-radius: 3px;
     transition: all 200ms $ease-out-quad;
@@ -1456,7 +1455,7 @@ searchbar,
 %titlebar,
 headerbar {
   padding: 0 6px;
-  min-height: 46px;
+  // min-height: 46px;
   border-width: 0 0 1px;
   border-style: solid;
   border-color: _border_color($headerbar_bg_color);
@@ -1696,8 +1695,8 @@ headerbar {
   }
 
   &.default-decoration {
-    min-height: 28px;
-    padding: 4px;
+    min-height: 26px; // 28px;
+    padding: 4px 6px;
 
     button.titlebutton,  {
       // min-height: 26px;
@@ -1728,12 +1727,12 @@ headerbar {
   spinbutton,
   separator,
   button {
-    margin-top: 6px;
-    margin-bottom: 6px;
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
   switch {
-    margin-top: 9px;
-    margin-bottom: 9px;
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
 }
 
@@ -1988,11 +1987,11 @@ treeview.view {
 
   header {
     button {
-      $_column_header_color: mix($fg_color, $base_color, 50%);
-
+      // $_column_header_color: mix($fg_color, $base_color, 50%);
+      //
       @extend %column_header_button;
-
-      color: $_column_header_color;
+      //
+      // color: $_column_header_color;
       // background-color: $base_color;
       font-weight: bold;
       // text-shadow: none;
@@ -2001,15 +2000,15 @@ treeview.view {
       &:hover {
         @extend %column_header_button;
 
-        color: mix($_column_header_color, $fg_color, 50%);
-        box-shadow: none;
+        // color: mix($_column_header_color, $fg_color, 50%);
+        // box-shadow: none;
         transition: none; //I shouldn't need this
       }
 
       &:active {
         @extend %column_header_button;
-
-        color: $fg_color;
+        //
+        // color: $fg_color;
         transition: none; //I shouldn't need this
       }
     }
@@ -2019,12 +2018,12 @@ treeview.view {
   header.button.dnd { // for treeview-like derive widgets
     &:active, &:selected, &:hover, & {
       padding: 0 6px;
-      color: $base_color;
+      color: $selected_fg_color; // $base_color;
       background-image: none;
       background-color: $selected_bg_color;
       border-style: none;
       border-radius: 0;
-      box-shadow: inset 0 0 0 1px $base_color;
+      box-shadow: inset 0 0 0 1px $borders_color; // $base_color;
       // text-shadow: none;
       transition: none;
     }
@@ -2037,24 +2036,24 @@ treeview.view {
   padding: 0 6px;
   background-image: none;
   border-style: none solid solid none;
-  border-color: $bg_color;
+  // border-color: $bg_color;
   border-radius: 0;
   // text-shadow: none;
 
   &:disabled {
-    border-color: $bg_color;
+    // border-color: $bg_color;
     background-image: none;
   }
 
   &:backdrop {
-    color: mix($backdrop_fg_color, $backdrop_bg_color, 50%);
-    border-color: $backdrop_bg_color;
+    // color: mix($backdrop_fg_color, $backdrop_bg_color, 50%);
+    // border-color: $backdrop_bg_color;
     border-style: none solid solid none;
     background-image: none;
-    background-color: $backdrop_base_color;
+    // background-color: $backdrop_base_color;
 
     &:disabled {
-      border-color: $backdrop_bg_color;
+      // border-color: $backdrop_bg_color;
       background-image: none;
     }
   }
@@ -3774,7 +3773,7 @@ row {
       &.has-open-popup,
       &:hover { background-color: mix($fg_color, $selected_bg_color, 10%); }
 
-      &:backdrop { background-color: $selected_bg_color; }
+      // &:backdrop { background-color: $selected_bg_color; }
     }
   }
 
@@ -4524,18 +4523,99 @@ button.titlebutton {
   // @extend %button_basic.flat;
   // @include _button_text_shadow;
   border-radius: 100%;
+  border: none;
   min-width: 20px;
   min-height: 20px;
   margin: 0;
   padding: 0;
 
-  &:not(.close), &.close:backdrop {
-    @include restyle_button_states($edge: none, $retain_borders: false);
+  &:not(.close) {
+    $c: $headerbar_bg_color;
+    $tc: $headerbar_fg_color;
+    $edge: false;
+
+    &:hover {
+      @include button(hover, $c, $tc, $edge);
+    }
+
+    &:active, &:checked {
+      @include button(active, $c, $tc, $edge);
+    }
+
+    &:disabled {
+      @include button(insensitive, $c, $tc, $edge);
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    &:backdrop {
+      @include button(backdrop, $c, $tc, $edge);
+      border-color: transparent;
+      background-color: transparent;
+
+      &:active,
+      &:checked {
+        @include button(backdrop-active, $c, $tc, $edge);
+      }
+
+      &:disabled {
+        @include button(backdrop-insensitive, $c, $tc, $edge);
+        border-color: transparent;
+        background-color: transparent;
+
+        &:active,
+        &:checked {
+          @include button(backdrop-insensitive-active, $c, $tc, $edge);
+        }
+      }
+    }
   }
 
   &.close {
-    @include button(normal, $selected_bg_color, white, $edge: none);
-    @include restyle_button_states($selected_bg_color, white, $edge: none);
+    $c: $selected_bg_color;
+    $tc: $selected_fg_color;
+    $edge: false;
+
+    @include button(normal, $c, $tc, $edge);
+
+    &:hover {
+      @include button(hover, $c, $tc, $edge);
+    }
+
+    &:active, &:checked {
+      @include button(active, $c, $tc, $edge);
+    }
+
+    &:disabled {
+      @include button(insensitive, $c, $tc, $edge);
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    &:backdrop {
+      // don't use orange when in the backdrop
+      $c: $headerbar_bg_color;
+      $tc: $headerbar_fg_color;
+      @include button(backdrop, $c, $tc, $edge);
+      border-color: transparent;
+      background-color: transparent;
+
+      &:active,
+      &:checked {
+        @include button(backdrop-active, $c, $tc, $edge);
+      }
+
+      &:disabled {
+        @include button(backdrop-insensitive, $c, $tc, $edge);
+        border-color: transparent;
+        background-color: transparent;
+
+        &:active,
+        &:checked {
+          @include button(backdrop-insensitive-active, $c, $tc, $edge);
+        }
+      }
+    }
   }
 
   .selection-mode & {
@@ -4559,6 +4639,8 @@ headerbar.selection-mode button.titlebutton,
 
 %selected_items {
   background-color: $selected_bg_color;
+
+  &:backdrop { background-color: transparentize($fg_color, if($variant == 'light', .5, .7)); }
 
   @at-root %nobg_selected_items, & {
     color: $selected_fg_color;
