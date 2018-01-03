@@ -1459,22 +1459,13 @@ headerbar {
   min-height: 46px;
   border-width: 0 0 1px;
   border-style: solid;
-  // border-color: $alt_borders_color;
   border-color: _border_color($headerbar_bg_color);
   border-radius: 0;
-
-  // @include headerbar_fill;
   background-color: transparentize($headerbar_bg_color, $alpha-value);
   color: $headerbar_fg_color;
 
   &:backdrop {
-    $c: _backdrop_color($headerbar_bg_color);
-    // border-color: $backdrop_borders_color;
-    // background-color: $bg_color;
-    // background-image: none;
-    // box-shadow: inset 0 1px $top_hilight;
-    border-color: _border_color($c);
-    background-color: $c;
+    background-color: _backdrop_color($headerbar_bg_color);
     transition: $backdrop_transition;
   }
 
@@ -2261,7 +2252,7 @@ notebook {
       background-color: $backdrop_sidebar_bg_color; // $backdrop_dark_fill;
     }
 
-    tabs { margin: -1px; }
+    // tabs { margin: -1px; }
 
     &.top {
       border-bottom-style: solid;
@@ -2269,12 +2260,7 @@ notebook {
         padding-top: 4px;
         margin-bottom: -2px;
         > tab {
-          // &:hover { box-shadow: inset 0 -3px $borders_color; }
-          //
-          // &:backdrop { box-shadow: none; }
-          //
-          // &:checked { box-shadow: inset 0 -3px $selected_bg_color; }
-          border-radius: 0 6px 0 0;
+          border-radius: 5px 5px 0 0 ;
           &:checked { border-bottom-color: transparent; }
         }
       }
@@ -2286,12 +2272,7 @@ notebook {
         padding-bottom: 4px;
         margin-top: -2px;
         > tab {
-          // &:hover { box-shadow: inset 0 3px $borders_color; }
-          //
-          // &:backdrop { box-shadow: none; }
-          //
-          // &:checked { box-shadow: inset 0 3px $selected_bg_color; }
-          border-radius: 0 0 6px 0;
+          border-radius: 0 0 5px 5px;
           &:checked { border-top-color: transparent; }
         }
       }
@@ -2303,12 +2284,7 @@ notebook {
         padding-left: 4px;
         margin-right: -2px;
         > tab {
-          // &:hover { box-shadow: inset -3px 0 $borders_color; }
-          //
-          // &:backdrop { box-shadow: none; }
-          //
-          // &:checked { box-shadow: inset -3px 0 $selected_bg_color; }
-          border-radius: 0 0 0 6px;
+          border-radius: 6px 0 0 6px;
           &:checked { border-right-color: transparent; }
         }
       }
@@ -2320,12 +2296,7 @@ notebook {
         padding-right: 4px;
         margin-left: -2px;
         > tab {
-          // &:hover { box-shadow: inset 3px 0 $borders_color; }
-          //
-          // &:backdrop { box-shadow: none; }
-          //
-          // &:checked { box-shadow: inset 3px 0 $selected_bg_color; }
-          border-radius: 0 0 6px 0;
+          border-radius: 0 6px 6px 0;
           &:checked { border-left-color: transparent; }
         }
       }
@@ -2401,26 +2372,13 @@ notebook {
       min-height: 30px;
       min-width: 30px;
       padding: 3px 12px;
-
       outline-offset: -5px;
-
       color: $insensitive_fg_color;
-      // font-weight: bold;
-      // background-color: $insensitive_bg_color;
       border: 1px solid transparent;
-      background-color: $insensitive_bg_color;
-      border-color: $borders_color;
-      // border-width: 1px;         // for reorderable tabs
-      // border-color: transparent; //
 
       &:hover {
         background-color: mix($insensitive_bg_color, $base_color, 25%);
-        // color: mix($insensitive_fg_color, $fg_color, 50%);
-        //
-        // &.reorderable-page {
-        //   border-color: transparentize($borders_color, 0.7);
-        //   background-color: transparentize($bg_color, 0.8);
-        // }
+        border-color: mix($borders_color, $base_color, 60%);
       }
 
       &:backdrop {
@@ -2446,6 +2404,8 @@ notebook {
       }
 
       &:backdrop:checked {
+        background-color: $backdrop_base_color;
+        border-color: $backdrop_borders_color;
         color: $backdrop_fg_color;
 
         // &.reorderable-page {
@@ -2482,25 +2442,20 @@ notebook {
     &.top,
     &.bottom {
       tabs {
-        // padding-left: 4px;
+        padding-left: 4px;
         padding-right: 4px;
 
         &:not(:only-child) {
-          // margin-left: 3px;
+          margin-left: 3px;
           margin-right: 3px;
-
-          // &:first-child { margin-left: -1px; }
-          // &:last-child { margin-right: -1px; }
         }
 
         tab {
-          // margin-left: 4px;
-          // margin-right: 4px;
+          margin-left: 4px;
+          margin-right: 4px;
 
           // &.reorderable-page { border-style: none solid; }
-          border-left-style: none;
           &:last-child { margin-right: 4px; }
-          &:not(:first-child){ margin-left: -4px; border-left-style: solid; }
         }
       }
     }
@@ -2508,11 +2463,11 @@ notebook {
     &.left,
     &.right {
       tabs {
-        // padding-top: 4px;
+        padding-top: 4px;
         padding-bottom: 4px;
 
         &:not(:only-child) {
-          // margin-top: 3px;
+          margin-top: 3px;
           margin-bottom: 3px;
 
           // &:first-child { margin-top: -1px; }
@@ -2520,13 +2475,11 @@ notebook {
         }
 
         tab {
-          // margin-top: 4px;
-          // margin-bottom: 4px;
+          margin-top: 4px;
+          margin-bottom: 4px;
           //
           // &.reorderable-page { border-style: solid none; }
-          border-top-style: none;
           &:last-child { margin-bottom: 4px; }
-          &:not(:first-child){ margin-top: -4px; border-top-style: solid; }
         }
       }
     }
@@ -4576,7 +4529,7 @@ button.titlebutton {
   margin: 0;
   padding: 0;
 
-  &:not(.close) {
+  &:not(.close), &.close:backdrop {
     @include restyle_button_states($edge: none, $retain_borders: false);
   }
 

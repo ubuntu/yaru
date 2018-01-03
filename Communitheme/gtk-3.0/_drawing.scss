@@ -4,12 +4,7 @@
 
 @function _backdrop_color($c) {
 // returns backdrop shade
-@if variant == 'light' {
-  @return lighten($c, 2%);
-}
-@else {
-  @return darken($c, 2%);
-  }
+  @return lighten($c, 3%);
 }
 
 // @function _widget_edge($c:$borders_edge) {
@@ -214,6 +209,7 @@
       @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
       @include _shadows(inset 0 -1px $_button_edge);
     }
+    @else { box-shadow: none; }
   }
 
   @else if $t==hover {
@@ -229,6 +225,7 @@
       @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
       @include _shadows(inset 0 -1px $_button_edge);
     }
+    @else { box-shadow: none; }
   }
 
   @if $t==normal-alt {
@@ -267,6 +264,7 @@
       @if $c != $button_bg_color { border-bottom-color: _border_color($c, true); }
       @include _shadows(inset 0 2px 3px -1px $_pressed);
     }
+    @else { box-shadow: none; }
   }
 
   @else if $t==insensitive {
@@ -281,6 +279,7 @@
     background-color: $_bg;
     border-color: if($c != $button_bg_color, _border_color($c), $insensitive_borders_color);
     @if $edge == true { @include _shadows(inset 0 -1px transparent); }
+    @else { box-shadow: none; }
   }
 
   @else if $t==insensitive-active {
@@ -294,6 +293,7 @@
     background-color: $_bg;
     border-color: if($c != $button_bg_color, _border_color($c), $insensitive_borders_color);
     @if $edge == true { @include _shadows(inset 0 2px 3px -1px lighten($_pressed, 40%)); }
+    @else { box-shadow: none; }
   }
 
   @else if $t==backdrop {
@@ -608,21 +608,22 @@
       border-color: darken($c, 10%);
     }
 
-    &:backdrop { background-color: lighten($c, 1%); }
+    &:backdrop { background-color: _backdrop_color($c); }
 
     button {
-      @include button(normal, $c, $selected_fg_color, none);
-      &:hover { @include button(hover, $c, $selected_fg_color, none); }
+      $_bg: darken($c, 12%);
+      @include button(normal, $_bg, $selected_fg_color, none);
+      &:hover { @include button(hover, $_bg, $selected_fg_color, none); }
       &:active,
-      &:checked { @include button(active, $c, $selected_fg_color, none); }
-      &:disabled { @include button(insensitive,$c,$selected_fg_color,none); }
+      &:checked { @include button(active, $_bg, $selected_fg_color, none); }
+      &:disabled { @include button(insensitive,$_bg,$selected_fg_color,none); }
 
       &:backdrop {
-        @include button(backdrop, $c, $selected_fg_color, none);
+        @include button(backdrop, $_bg, $selected_fg_color, none);
         border-color: _border_color($c);
 
         &:disabled {
-          @include button(backdrop-insensitive, $c,
+          @include button(backdrop-insensitive, $_bg,
                           $selected_fg_color, none);
           border-color: _border_color($c);
         }
