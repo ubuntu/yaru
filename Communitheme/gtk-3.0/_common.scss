@@ -4606,16 +4606,21 @@ button.titlebutton {
   border-radius: 100%;
   min-width: 20px;
   min-height: 20px;
-  margin: 0;
-  padding: 0;
+  margin: 0 3px;
+  padding: 1px;
 
-  &, &:hover, &:active { border-width: 1px; }
-  &:not(.close) { @include restyle_button_states($_bg, $_fg) }
+  //&, &:hover, &:active { border-width: 1px; }
+  //&:not(.close) { @include restyle_button_states($_bg, $_fg) }
 
-  &.close {
-    border: none;
-    @include button(normal, $selected_bg_color, white);
-    @include restyle_button_states($selected_bg_color, white, $retain_borders: true);
+  &:hover:not(.close) {
+    @include button(normal, $headerbar_bg_color, white);
+    padding: 0;
+    border-width: 2px;
+    border-color: white;
+  }
+
+  &:hover.close {
+        @include button(normal, $selected_bg_color, white);
   }
 
   .selection-mode & {
