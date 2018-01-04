@@ -135,8 +135,8 @@ StScrollBar {
   -slider-height: 0.3em;
   -slider-background-color: $osd_borders_color; //background of the trough
   -slider-border-color: $osd_borders_color; //trough border color
-  -slider-active-background-color: $_bg; //active trough fill
-  -slider-active-border-color: $_bg; //active trough border
+  -slider-active-background-color: $indication_bg_color; //active trough fill
+  -slider-active-border-color: transparent; //active trough border
   -slider-border-width: 1px;
   -slider-handle-radius: 6px;
 }
@@ -991,8 +991,8 @@ StScrollBar {
       border-radius: 6px; // 1.4em;
       &:hover,&:focus { background-color: lighten($bg_color,5%); }
       &:active,&:selected {
-        color: lighten($selected_fg_color,5%);
-        background-color: $selected_bg_color;
+        color: lighten($selected_fg_color, 5%);
+        background-color: $indication_bg_color;
         border-color: transparent; //avoid jumparound due to today
       }
       &.calendar-day-heading {  //day of week heading
