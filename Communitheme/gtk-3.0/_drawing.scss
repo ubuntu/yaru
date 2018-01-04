@@ -3,8 +3,10 @@
 // generic drawing of more complex things
 
 @function _backdrop_color($c) {
-// returns backdrop shade
-  @return lighten($c, 3%);
+// desaturates the red, green, orange, etc. colors for use in the backdrop state
+// colors are darkened when using the dark theme so they aren't such a light grey
+  @if $variant != 'light' { $c: darken($c, 7.5%); }
+  @return desaturate($c, 75%);
 }
 
 // @function _widget_edge($c:$borders_edge) {
@@ -200,7 +202,7 @@
   //
   // normal button
   //
-    $_bg: if(lightness($c)>50%, $c, lighten($c, 5%));
+    $_bg: if(lightness($c)>40%, $c, lighten($c, 5%));
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
@@ -216,7 +218,7 @@
   //
   // hovered button
   //
-    $_bg: if(lightness($c)>50%, darken($c, 5%), lighten($c, 8%));
+    $_bg: if(lightness($c)>40%, darken($c, 5%), lighten($c, 8%));
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
@@ -254,7 +256,7 @@
   //
   // pushed button
   //
-    $_bg: if(lightness($c)>50%, darken($c, 10%), lighten($c, 3%));
+    $_bg: if(lightness($c)>40%, darken($c, 10%), lighten($c, 3%));
     //
     color: $tc;
     outline-color: transparentize($tc, 0.7);
@@ -271,7 +273,7 @@
   //
   // insensitive button
   //
-    $_bg: if($c != $button_bg_color, mix($c, darken($base_color, if(lightness($c)>50%, 0%, 95%)), 85%),
+    $_bg: if($c != $button_bg_color, mix($c, darken($base_color, if(lightness($c)>40%, 0%, 95%)), 85%),
           $insensitive_bg_color);
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color); }
@@ -286,7 +288,7 @@
   //
   // insensitive pushed button
   //
-    $_bg: darken(mix($c, darken($base_color, if(lightness($c)>50%, 0, 95%)), 85%), 8%);
+    $_bg: darken(mix($c, darken($base_color, if(lightness($c)>40%, 0, 95%)), 85%), 8%);
 
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color); }
 
@@ -300,12 +302,12 @@
   //
   // backdrop button
   //
-    $_bg: if($c != $button_bg_color, $c, $backdrop_bg_color);
+    $_bg: if($c != $button_bg_color, _backdrop_color($c), $backdrop_bg_color);
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
 
     background-color: $_bg;
-    border-color: if($c != $button_bg_color, _border_color($c), $backdrop_borders_color);
+    border-color: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
     box-shadow: none;
   }
 
@@ -313,12 +315,12 @@
   //
   // backdrop pushed button
   //
-    $_bg: darken(mix($c, darken($base_color, if(lightness($c)>50%, 0, 95%)), 85%), 8%);
+    $_bg: if($c != $button_bg_color, _backdrop_color($c), darken(mix($c, darken($base_color, if(lightness($c)>40%, 0, 95%)), 85%), 8%));
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
 
     background-color: $_bg;
-    border-color: if($c != $button_bg_color, _border_color($c), $backdrop_borders_color);
+    border-color: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
     box-shadow: none;
   }
 
@@ -327,12 +329,12 @@
   // backdrop insensitive button
   //
 
-    $_bg: if($c != $button_bg_color, mix($c, darken($base_color, if(lightness($c)>50%, 0, 95%)), 85%), $insensitive_bg_color);
+    $_bg: if($c != $button_bg_color, _backdrop_color(mix($c, darken($base_color, if(lightness($c)>40%, 0, 95%)), 85%)), $insensitive_bg_color);
 
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
 
     background-color: $_bg;
-    border-color: if($c != $button_bg_color, _border_color($c), $backdrop_borders_color);
+    border-color: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
     box-shadow: none;
   }
 
@@ -341,12 +343,12 @@
   // backdrop insensitive pushed button
   //
 
-    $_bg: darken(mix($c, darken($base_color, if(lightness($c)>50%, 0, 95%)), 85%), 8%);
+    $_bg: if($c != $button_bg_color, _backdrop_color($c), darken(mix($c, darken($base_color, if(lightness($c)>40%, 0, 95%)), 85%), 8%));
 
     label { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
 
     background-color: $_bg;
-    border-color: if($c != $button_bg_color, _border_color($c), $backdrop_borders_color);
+    border-color: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
     box-shadow: none;
   }
 
@@ -602,33 +604,28 @@
 //
 // styles infobar
 //
-    &:backdrop, & {
-      label, & { color: $selected_fg_color; }
-      background-color: $c;
-      border-color: darken($c, 10%);
+  background-color: $c;
+
+  selection { background-color: darken($c, 10%); }
+
+  &:backdrop, & {
+    label, & { color: $selected_fg_color; }
+    border-color: _border_color($c);
+  }
+
+  &:backdrop {
+    background-color: _backdrop_color($c);
+    border-color: _backdrop_color(_border_color($c));
+  }
+
+  button {
+    $_bg: darken($c, 10%);
+    $_fg: white;
+      @each $state, $t in ('', 'normal'), (':hover', 'hover'),
+                          (':active', 'active'), (':checked', 'active'),
+                          (':disabled', 'insensitive'), (':backdrop', 'backdrop'),
+                          (':backdrop:disabled', 'backdrop-insensitive'), (':backdrop:active', 'backdrop-active') {
+      &#{$state} { @include button($t, $_bg, $_fg); }
     }
-
-    &:backdrop { background-color: _backdrop_color($c); }
-
-    button {
-      $_bg: darken($c, 12%);
-      @include button(normal, $_bg, $selected_fg_color, none);
-      &:hover { @include button(hover, $_bg, $selected_fg_color, none); }
-      &:active,
-      &:checked { @include button(active, $_bg, $selected_fg_color, none); }
-      &:disabled { @include button(insensitive,$_bg,$selected_fg_color,none); }
-
-      &:backdrop {
-        @include button(backdrop, $_bg, $selected_fg_color, none);
-        border-color: _border_color($c);
-
-        &:disabled {
-          @include button(backdrop-insensitive, $_bg,
-                          $selected_fg_color, none);
-          border-color: _border_color($c);
-        }
-      }
-    }
-
-    selection { background-color: darken($c, 10%); }
+  }
 }
