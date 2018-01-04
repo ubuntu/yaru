@@ -1540,8 +1540,8 @@ headerbar {
       }
 
       &:hover {
-        @include button(hover, $headerbar_bg_color);
-        color: $headerbar_fg_color;
+        @include button(hover, $_bg, $_fg);
+        border-color: _border_color($_bg, true);
         -gtk-icon-effect: highlight;
       }
     }
