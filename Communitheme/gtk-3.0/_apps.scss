@@ -3,6 +3,7 @@
  ***********/
 list.tweak-categories separator {
   // hide sidebar separators
+  // make the sidebar look like a normal sidebar
   background: transparent;
 }
 
@@ -11,21 +12,30 @@ list.tweak-categories separator {
  ***********/
 .nautilus-window {
   // keep details box visible
+  // details box looks ugly when many items are selected and it floats above the orange
   paned box.floating-bar {
     background: $bg_color;
     border: 1px solid $borders_color;
   }
+
+  header.top {
+  // nautilus tabs has too thick borders
+  // makes nautilus tabs look much nicer
+    border: none
+  }
 }
 
 .nautilus-desktop-window {
-  // get rid of white line on the desktop if desktop icons are enabled
-.searchbar-container searchbar {
+  // get rid of white line on the desktop
+  // a 1px white line is shown at the top of the desktop if desktop icons are enabled
+  .searchbar-container searchbar {
     background: transparent;
     border-color: transparent;
   }
 
   .nautilus-desktop.view {
-    // white text on desktop instead of the variant dependant fg color
+    // use white text for desktop icons
+    // otherwise it uses the variant dependent grey or white text color
     color: $selected_fg_color;
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
   }
@@ -34,8 +44,108 @@ list.tweak-categories separator {
 /***********
  * Terminal *
  ***********/
-.terminal-window {
-  $terminal_bg_color: #300a24;
-.terminal-notebook { }
-.terminal-screen { background: $terminal_bg_color; color: white; }
+terminal-window {
+  // use unity 8 colors
+  // only colors, let everything else be inherited
+  .terminal-screen {
+    // inherits from .background
+    background-color: $terminal_bg_color;
+    color: $terminal_text_color;
+
+    &:backdrop {
+      color: _backdrop_color($terminal_text_color);
+      background-color: _backdrop_color($terminal_bg_color);
+    }
+  }
+
+  notebook {
+    // inherits from notebook header
+    > header {
+      border-color: $terminal_borders_color;
+      background-color: $terminal_base_color;
+
+      button {
+        color: $terminal_fg_color;
+        @include restyle_button_states($terminal_base_color, $terminal_fg_color);
+      }
+
+      &:backdrop {
+        border-color: _backdrop_color($terminal_borders_color);
+        background-color: _backdrop_color($terminal_base_color);
+      }
+
+      tab {
+        color: $terminal_text_color;
+
+        &:hover {
+          background-color: mix($insensitive_bg_color, $terminal_base_color, 15%);
+          border-color: mix($terminal_borders_color, $terminal_base_color, 30%);
+        }
+
+        &:backdrop {
+          color: _backdrop_color($terminal_text_color);
+        }
+
+        &:checked {
+          color: $terminal_fg_color;
+          background-color: $terminal_bg_color;
+          border-color: $terminal_borders_color;
+        }
+
+        &:backdrop:checked {
+          background-color: _backdrop_color($terminal_bg_color);
+          border-color: _backdrop_color($terminal_borders_color);
+          border-bottom-color: transparent;
+          color: _backdrop_color($terminal_fg_color);
+        }
+      }
+    }
+
+    scrollbar {
+      // inherits from scrollbar
+      $_scrollbar_bg: darken($terminal_bg_color, 5%);
+      $_scrollbar_bc: darken($terminal_borders_color, 5%);
+      background-color: $_scrollbar_bg;
+      border-color: $_scrollbar_bc;
+
+      &:backdrop {
+        background-color: _backdrop_color($_scrollbar_bg);
+        border-color: _backdrop_color($_scrollbar_bc);
+      }
+
+      slider {
+        $c: $terminal_text_color;
+        background-color: transparentize($c, 0.6);
+
+        &:hover {
+          background-color: transparentize($c, 0.4);
+        }
+
+        &:hover:active {
+          background-color: transparentize($c, 0.2);
+        }
+
+        &:backdrop {
+          background-color: transparentize($c, 0.8);
+        }
+
+        &:disabled {
+          background-color: transparent;
+        }
+      }
+
+      &.dragging,
+      &.hovering {
+        background-color: darken($_scrollbar_bg, 10%);
+      }
+    }
+  }
+}
+
+/***********
+ * GNOME Software *
+ ***********/
+buttonbox.horizontal.linked button.toggle.toolbar-primary-buttons-software {
+  // GNOME Software uses a stackswitcher-type button that isn't labeled as such
+  @extend %underline_focus; // TODO: not applying
 }

@@ -18,15 +18,18 @@ $green: #46B258;
 $blue: #30B3EA;
 $purple: #74296F;
 
+// Terminal colors
+$terminal_base_color: #213D45;
+$terminal_bg_color: #17333C;
+$terminal_fg_color: white; // #5D6C71;
+$terminal_text_color: #D0D7D9;
+$terminal_borders_color: #74888D;
+$terminal_selected_bg: #102A37;
+
 // Widget Colors
 // $headerbar_bg_color: #252525;
 // $headerbar_bg_color: #2B2B2B;
-$headerbar_bg_color: #383634; // #333230;
+// $headerbar_bg_color: #383634; // #333230;
+$headerbar_bg_color: #303030;
 $headerbar_fg_color: $porcelain;
 //
-// $ubuntu_base_color: if($variant == 'light', #FAFAFA, #1C1B21);
-// $ubuntu_bg_color: if($variant == 'light', #fdfdfd, #292933);
-$ubuntu_base_color: if($variant == 'light', #FAFAFA, #302E2E);
-$ubuntu_bg_color: if($variant == 'light', #F7F7F7, #302E2E);
-$ubuntu_fg_color: if($variant == 'light', $slate, $porcelain);
-$ubuntu_text_color: transparentize($ubuntu_fg_color, .1);

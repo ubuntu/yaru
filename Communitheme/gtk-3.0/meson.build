@@ -11,8 +11,10 @@ gtk3_scss_sources = [
 # Dependencies of the files that need to be compiled
 gtk3_scss_dependencies = [
   '_colors-public.scss',
+  '_ubuntu-colors.scss',
   '_colors.scss',
   '_common.scss',
+  '_apps.scss',
   '_drawing.scss',
 ]
 
