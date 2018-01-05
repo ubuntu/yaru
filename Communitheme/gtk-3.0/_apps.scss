@@ -149,5 +149,5 @@ terminal-window {
  ***********/
 buttonbox.horizontal.linked button.toggle.toolbar-primary-buttons-software {
   // GNOME Software uses a stackswitcher-type button that isn't labeled as such
-  @extend %underline_focus; // TODO: not applying
+  @extend %stackswitcher;
 }

@@ -519,7 +519,6 @@ button {
     min-width: 16px;
     padding: 4px 8px;
     border: 1px solid;
-    // box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.025);
     border-radius: 5px;
     transition: $button_transition;
 
@@ -1517,10 +1516,12 @@ headerbar {
       @extend %undecorated_button;
 
       color: $tc;
+      &:backdrop { color: $backdrop_fg_color; }
 
-      @each $state, $t in (':hover', 'hover'), (':active', 'active'),
-                          (':checked', 'active'), (':disabled', 'insensitive') {
-        &#{$state} { @include button($t, $c, $tc); }
+      @each $state, $t in (':hover', 'hover'),
+                          (':active, &:checked', 'active'), (':disabled', 'insensitive'),
+                          (':backdrop:active, &:backdrop:checked', 'backdrop-active') {
+        &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
       }
 
       @each $b_type, $b_color in (suggested-action, $success_color),
@@ -1529,16 +1530,18 @@ headerbar {
           // special buttons are not flat
           @each $state, $t in ('', 'normal'), (':hover', 'hover'),
                               (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
+                              (':backdrop:active, &:backdrop:checked', 'backdrop-active'),
                               (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-          &#{$state} { @include button($t, $b_color, $tc); } }
+          &#{$state} { @include button($t, $b_color, $tc, $bc: none, $edge: none); } }
         }
       }
     }
 
-    stackswitcher.horizontal.linked.stack-switcher button.text-button {
+    stackswitcher.horizontal.linked.stack-switcher button.text-button, %stackswitcher {
       // style the stackswitcher
       @extend %underline_focus;
       @extend %undecorated_button;
+      min-width: 100px; // include in the extend so stackswitcher-like buttons will inherit it
       border-radius: 0;
       margin: 0 4px;
     }
@@ -1548,7 +1551,7 @@ headerbar {
           // style the pathbar
           $c: $headerbar_bg_color;
           $tc: $headerbar_fg_color;
-          &, &:hover, &:active { @include button(normal, $c, $tc); }
+          &, &:hover, &:active { @include button(normal, $c, $tc, $edge: none); }
           @extend %underline_focus;
         }
       }
@@ -1559,8 +1562,9 @@ headerbar {
       $tc: $headerbar_fg_color;
       @each $state, $t in ('', 'normal'), (':hover', 'hover'),
                           (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
+                          (':backdrop:active, &:backdrop:checked', 'backdrop-active'),
                           (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-        &#{$state} { @include button($t, $c, $tc); }
+        &#{$state} { @include button($t, $c, $tc, $edge: none); }
       }
     }
   }
@@ -1825,6 +1829,8 @@ headerbar { // headerbar border rounding
  ************/
 %underline_focus {
   // indeterminate is there to lazily force the style
+  transition-property: box-shadow, color;
+
   &:not(:checked):not(:indeterminate) {
     color: $insensitive_fg_color;
     &:not(:backdrop):hover { color: $headerbar_fg_color; box-shadow: inset 0 -2px $insensitive_fg_color; }
@@ -4545,13 +4551,14 @@ button.titlebutton {
   margin: 0;
   padding: 0;
 
+  &:backdrop { color: $backdrop_fg_color; }
+
   &:not(.close) {
     $c: $headerbar_bg_color;
     $tc: $headerbar_fg_color;
-    $edge: false;
 
     @each $state, $t in (':hover', 'hover'), (':active', 'active'), (':disabled', 'insensitive') {
-      &#{$state} { @include button($t, $c, $tc, $edge); }
+      &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
     }
   }
 
@@ -4562,7 +4569,7 @@ button.titlebutton {
 
     @each $state, $t in ('', 'normal'), (':hover', 'hover'),
     (':active', 'active'), (':disabled', 'insensitive') {
-      &#{$state} { @include button($t, $c, $tc, $edge); }
+      &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
     }
 
     &:backdrop { background-color: transparent; }
