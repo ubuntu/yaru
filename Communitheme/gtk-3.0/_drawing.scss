@@ -238,7 +238,7 @@
     outline-color: transparentize($tc, 0.7);
     background-color: $c;
     border-color: if($c != $button_bg_color, _border_color($c), $alt_borders_color);
-    box-shadow: none;
+    box-shadow: inset 0 -1px 0 0 $borders_edge, inset 0 2px 0 0 $borders_edge;
   }
 
   @else if $t==hover-alt {
@@ -249,7 +249,7 @@
     outline-color: transparentize($tc, 0.7);
     background-color: $c;
     border-color: if($c != $button_bg_color, _border_color($c), $alt_borders_color);
-    box-shadow: none;
+    box-shadow: inset 0 -1px 0 0 $borders_edge, inset 0 2px 0 0 $borders_edge;
   }
 
   @else if $t==active {
