@@ -19,6 +19,7 @@ $link_color: $blue; // if($variant == 'light', darken($selected_bg_color,10%),
 $link_visited_color: if($variant == 'light', darken($link_color,20%),
                                      lighten($link_color,10%));
 $top_hilight: $borders_edge;
+$dark_fill: #C7C7C7;
 
 $warning_color: $yellow;
 $error_color: $red;

@@ -4,7 +4,8 @@
 $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
 $panel-corner-radius: 0; // 6px;
-$panel-alpha-value: 0.1; // analogous to dash
+$panel-alpha-value: 0.1;
+$dash-alpha-value: $panel-alpha-value;
 $popover-alpha-value: 0.025;
 //
 
@@ -133,8 +134,8 @@ StScrollBar {
   $_bg: $neutral_color; // $selected_bg_color;
   height: 1em;
   -slider-height: 0.3em;
-  -slider-background-color: $osd_borders_color; //background of the trough
-  -slider-border-color: $osd_borders_color; //trough border color
+  -slider-background-color: $dark_fill; // $osd_borders_color; //background of the trough
+  -slider-border-color: $dark_fill; // $osd_borders_color; //trough border color
   -slider-active-background-color: $_bg; //active trough fill
   -slider-active-border-color: $_bg; //active trough border
   -slider-border-width: 1px;
@@ -731,8 +732,8 @@ StScrollBar {
 
 /* Tiled window previews */
 .tile-preview {
-  background-color: transparentize($selected_bg_color,0.5);
-  border: 1px solid $selected_bg_color;
+  background-color: transparentize(white, .55); // transparentize($selected_bg_color,0.5);
+  border: 2px solid transparentize(white, .75);
 }
 
   .tile-preview-left.on-primary {

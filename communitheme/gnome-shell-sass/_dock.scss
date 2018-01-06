@@ -181,13 +181,13 @@
   }
 
   &.opaque {
-    background-color: transparentize($panel_bg_color, $panel-alpha-value) !important;
+    background-color: transparentize($panel_bg_color, $dash-alpha-value) !important;
     border-color: rgba(0, 0, 0, 0.4) !important;
     transition-duration: 300ms !important;
   }
 
   &.transparent {
-    background-color: transparentize($panel_bg_color, $panel-alpha-value) !important;
+    background-color: transparentize($panel_bg_color, $dash-alpha-value) !important;
     border-color: rgba(0, 0, 0, 0.1) !important;
     transition-duration: 500ms !important;
   }
