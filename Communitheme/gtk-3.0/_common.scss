@@ -1044,7 +1044,8 @@ modelbutton.flat,
 
   @extend %undecorated_button;
 
-  &:hover { background-color: $popover_hover_color; }
+  &:hover { background-color: $base_hover_color; }
+  &:active { background-color: $base_active_color; }
 
   &:selected { @extend %selected_items; }
 
@@ -2127,7 +2128,7 @@ menu,
 .menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
-  padding: 2px 0px;
+  // padding: 2px 0px;
   background-color: $menu_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
 
@@ -2136,14 +2137,15 @@ menu,
   &:backdrop { background-color: $backdrop_menu_color; }
 
   menuitem {
-    min-height: 16px;
-    min-width: 40px;
-    padding: 4px 6px;
+    transition: all 100ms $ease-out-quad;
+    min-height: 20px; // 16px;
+    min-width: 36px;
+    padding: 6px 4px; // 4px 6px;
     // text-shadow: none;
 
     &:hover {
-      color: $selected_fg_color;
-      background-color: $selected_bg_color;
+      // color: $selected_fg_color;
+      background-color: $base_hover_color;
     }
 
     &:disabled {
@@ -2159,17 +2161,19 @@ menu,
 
     // submenu indicators
     arrow {
-      min-height: 16px;
+      min-height: 14px;
       min-width: 16px;
 
       &:dir(ltr) {
-        -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+        -gtk-icon-source: -gtk-icontheme('go-next-symbolic'); // -gtk-icontheme('pan-end-symbolic');
         margin-left: 10px;
+        margin-right: 10px;
       }
 
       &:dir(rtl) {
-        -gtk-icon-source:-gtk-icontheme('pan-end-symbolic-rtl');
+        -gtk-icon-source: -gtk-icontheme('go-previous-symbolic'); // -gtk-icontheme('pan-end-symbolic-rtl');
         margin-right: 10px;
+        margin-left: 10px;
       }
     }
 
@@ -2191,13 +2195,13 @@ menu,
     &.top {
       margin-top: -6px;
       border-bottom: 1px solid mix($fg_color, $base_color, 10%);
-      -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+      -gtk-icon-source: -gtk-icontheme('go-next-symbolic'); // -gtk-icontheme('pan-end-symbolic');
     }
 
     &.bottom {
       margin-bottom: -6px;
       border-top: 1px solid mix($fg_color, $base_color, 10%);
-      -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+      -gtk-icon-source: -gtk-icontheme('go-previous-symbolic'); // -gtk-icontheme('pan-end-symbolic-rtl');
     }
 
     &:hover { background-color: mix($fg_color, $base_color, 10%); }
@@ -2230,9 +2234,9 @@ menuitem {
  ***************/
 
 popover.background {
-  padding: 2px;
+  // padding: 2px;
   border-radius: 5px;
-  background-color: $popover_bg_color;
+  background-color: $menu_color; // $popover_bg_color;
 
   .csd &, & { border: 1px solid $borders_color; }
 
@@ -2261,6 +2265,12 @@ popover.background {
     }
 
     &.osd { @extend %osd; }
+  }
+
+  modelbutton {
+    min-height: 24px; // 16px;
+    min-width: 40px;
+    padding: 4px 6px; // 4px 6px;
   }
 
   separator { margin: 3px; }
@@ -2766,7 +2776,7 @@ switch {
     transition: $button_transition;
 
     @include button(normal, white, $edge: none);
-    box-shadow: inset 0 0 0 1px $borders_color;
+    box-shadow: inset 0 0 0 1px if($variant == "light", $borders_color, _border_color($dark_fill));
     // border-color: darken($borders_color, 10%);
   }
 
@@ -3657,7 +3667,8 @@ levelbar {
     }
 
     &.empty {
-      $_bg: transparentize(black, .8);
+      // TODO: this looks kind of ugly
+      $_bg: transparentize(black, if($variant == "light", .8, .7));
       background-color: $_bg;
       // border-color: if($variant == 'light', transparentize($fg_color,0.8), transparentize($fg_color,0.9));
 
