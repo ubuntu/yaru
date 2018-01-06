@@ -1,49 +1,44 @@
-# Ubuntu GNOME Shell Communitheme
-ubuntu GNOME Shell community theme
+# Ubuntu Communitheme
 
-## How to test it?
+Communitheme is the new Ubuntu theme build by the Community.
 
-We have a set of packages creating a new "Ubuntu Communitheme session". Just install:
+## Install the daily build of Communitheme
 
-```sh
-sudo apt install ubuntu-communitheme-session
+ We're currently still developing the theme, but you can try it out for yourself. Be warned though, this is a pre-release alpha state. These packages are mainly intended for the Communitheme designers to get a sense of what actually works in Ubuntu. **Many icons are missing, some stuff is just a white squircle. You will find issues and stuff will break.**
+
+*Note: these instructions install the entire Communitheme session; this includes the Gnome Shell, GTK and icon theme.*
+
+```bash
+# First, make sure the old versions are removed
+sudo apt remove suru-icon-theme gtk-communitheme gnome-shell-communitheme ubuntu-communitheme-session
+
+# Add the PPA to your repository list
+sudo add-apt-repository ppa:communitheme/ppa
+# Download a list of all the software that's available from the repositories
+sudo apt update
+# Download and install the actual software
+sudo apt install suru-icon-theme gtk-communitheme gnome-shell-communitheme ubuntu-communitheme-session
 ```
 
-Restart your computer, the login screen will have this theme by default, and a new session will be selectable in GDM named "Ubuntu Communitheme". This will start the GNOME-Shell, GTK2, GTK3 themes and icon themes.
+And it's installed! Restart your computer, the login screen will use Communitheme by default. Select the "Ubuntu Communitheme" session from the login screen (click the gear) and login. This will start the GNOME-Shell, GTK2, GTK3 and icon themes.
 
-## How to build from source and install it?
+*You might need to manually specify the themes in "Gnome Tweaks" after logging in. Set the themes as specified in the image below.*
 
-We are using `meson` and `ninja` to build and install it. GNOME Shell only recognizes themes in its path by default, so you need to install it in `/usr/share/gnome-shell/theme` by default.
+![gnome-tweaks](./docs/gnome-tweaks.png "Select 'Communitheme' and 'Suru' in Gnome Tweaks.")
 
-```sh
-meson build --prefix=/usr
-cd build
-sudo ninja install
+## Upgrade the daily build of Communitheme
+
+These packages are built from the github repositories daily. Anything that's committed to the `master` branch of the github repository will be available in the repository in a day. These packages are automatically updated by the Ubuntu updater. You can manually update them using the following commands.
+
+```bash
+# Get a list of the latest software that's available in the repositories
+sudo apt update
+# Upgrade your packages to the latest version
+sudo apt upgrade
 ```
 
-Log now into the Ubuntu Communitheme session.
+## I want to contribute!
 
-You can do any modification in `<project_dir>/communitheme`. Now, after any modifications you want to test, being in the `build` directory:
+Great, we're looking forward to your PR!
 
-```sh
-sudo ninja install
-# <Alt-F2>, 'rt', <Enter>
-```
-
-Finally, if you want to change the GDM look and point to the same stylesheet:
-
-```sh
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/ubuntu-communitheme/gnome-shell.css 15
-```
-
-## Why do we import from package content and not from upstream git repository?
-
-We sync our version to be compatible with the GTK and GNOME Shell versions being in ubuntu repositories. This is why we sync from them (or rebase them as soon as we update a new version with changes in ubuntu).
-
-## What is removed from the initial data/theme/ directory?
-
-We remove on new version import:
-
-* upstream `gnome-shell*.css`: they are generated them with our modifications
-* upstream `meson.build`: we define our own
-* `data/theme/parse-sass.sh`: we handle building directly with meson.
+Read [CONTRIBUTING.md](./CONTRIBUTING.md) to figure out how to get started.

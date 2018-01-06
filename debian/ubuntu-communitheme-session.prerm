@@ -3,7 +3,7 @@
 set -e
 
 if [ "$1" = "remove" ]; then
-  update-alternatives --remove gdm3.css /usr/share/gnome-shell/theme/ubuntu-communitheme/gnome-shell.css
+  update-alternatives --remove gdm3.css /usr/share/gnome-shell/theme/communitheme/gnome-shell.css
 fi
 
 #DEBHELPER#

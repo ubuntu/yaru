@@ -58,7 +58,7 @@ data_sources = [
 ]
 
 # destination directory
-install_dir = join_paths(gnomeshell_theme_dir, 'ubuntu-communitheme')
+install_dir = join_paths(gnomeshell_theme_dir, 'communitheme')
 
 # generate .css files
 foreach f : theme_files

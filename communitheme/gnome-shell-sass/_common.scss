@@ -991,8 +991,8 @@ StScrollBar {
       border-radius: 6px; // 1.4em;
       &:hover,&:focus { background-color: lighten($bg_color,5%); }
       &:active,&:selected {
-        color: lighten($selected_fg_color,5%);
-        background-color: $selected_bg_color;
+        color: lighten($selected_fg_color, 5%);
+        background-color: $indication_bg_color;
         border-color: transparent; //avoid jumparound due to today
       }
       &.calendar-day-heading {  //day of week heading
