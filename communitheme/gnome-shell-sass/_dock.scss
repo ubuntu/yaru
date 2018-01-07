@@ -2,68 +2,126 @@
 
 #dashtodockContainer {
   &.shrink #dash, &.dashtodock #dash {
-    box-shadow: inset 0 4px 8px rgba(0,0,0,0.75);
-    border: 1px;
-    padding: 0px;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.75) !important;
+    border: 1px !important;
+    padding: 0px !important;
   }
+
   &.shrink.left #dash, &.dashtodock.left #dash {
-    border-left: 0px;
-    border-radius: 0px 9px 9px 0px;
+    border-left: 0px !important;
+    border-radius: 0px 9px 9px 0px !important;
   }
+
   &.shrink.right #dash, &.dashtodock.right #dash {
-    border-right: 0px;
-    border-radius: 9px 0px 0px 9px;
+    border-right: 0px !important;
+    border-radius: 9px 0px 0px 9px !important;
   }
+
   &.shrink.top #dash, &.dashtodock.top #dash {
-    border-top: 0px;
-    border-radius: 0px 0px 9px 9px;
+    border-top: 0px !important;
+    border-radius: 0px 0px 9px 9px !important;
   }
+
   &.shrink.bottom #dash, &.dashtodock.bottom #dash {
-    border-bottom: 0px;
-    border-radius: 9px 9px 0px 0px;
+    border-bottom: 0px !important;
+    border-radius: 9px 9px 0px 0px !important;
   }
+
   &.straight-corner #dash, &.shrink.straight-corner #dash {
-    border-radius: 0px;
+    border-radius: 0px !important;
   }
+
+  // .show-apps {
+  //   // Ubuntu Launcher as a whole square
+  //   $_bg: #e95420;
+  //
+  //   & {
+  //     // reset
+  //     &:hover,
+  //     &:focus,
+  //     &:checked {
+  //       .overview-icon {
+  //         background-color: transparent;
+  //         box-shadow: none;
+  //       }
+  //     }
+  //
+  //     & .show-apps-icon,
+  //     &:checked .show-apps-icon,
+  //     &:focus .show-apps-icon {
+  //       color: transparent;
+  //       background-color: transparent;
+  //       transition-duration: 100ms;
+  //     }
+  //   }
+  //
+  //   transition-duration: 200ms;
+  //   background-color: $_bg;
+  //   box-shadow: 1px 0 $_bg; // the box-shadow is there to overlap the dock's border BUT
+  //   // there's no border until the dash is opaque, so the launcher looks to be one pixel out of bounds
+  //   // how do we fix this?
+  //
+  //   &:focus, &:hover {
+  //     background-color: lighten($_bg, 2%);
+  //     box-shadow: 1px 0 lighten($_bg, 2%);
+  //   }
+  //
+  //   &:active, &:checked {
+  //     background-color: darken($_bg, 5%);
+  //     box-shadow: 1px 0 darken($_bg, 5%);
+  //   }
+  //
+  //   &,
+  //   &:focus, &:hover,
+  //   &:active, &:checked {
+  //     .overview-icon {
+  //       background-image: url("ubuntu-logo-icon.svg");
+  //       background-size: contain;
+  //     }
+  //   }
+  // }
 
   .show-apps {
-    // Ubuntu Launcher
-    $_bg: #e95420;
+    // Ubuntu Launcher as an orb
     & {
       // reset
-      &:hover,
-      &:focus,
-      &:checked {
-        .overview-icon { background-color: transparent; box-shadow: none; }
-      }
-
+      .overview-icon { border-radius: 0px !important; }
       & .show-apps-icon,
       &:checked .show-apps-icon,
       &:focus .show-apps-icon {
-        color: transparent;
-        background-color: transparent;
-        transition-duration: 100ms;
+        color: transparent !important;
+        background-color: transparent !important;
+        transition-duration: 100ms !important;
       }
     }
 
-    transition-duration: 200ms;
-    background-color: $_bg;
-    box-shadow: 1px 0 $_bg; // the box-shadow is there to overlap the dock's border BUT
-    // there's no border until the dash is opaque, so the launcher looks to be one pixel out of bounds
-    // how do we fix this?
-
-    &:focus, &:hover { background-color: lighten($_bg, 2%); box-shadow: 1px 0 lighten($_bg, 2%); }
-    &:active, &:checked { background-color: darken($_bg, 5%); box-shadow: 1px 0 darken($_bg, 5%); }
-
     &,
-    &:focus,
-    &:hover,
-    &:active,
-    &:checked {
-      .overview-icon {
-        background-image: url("ubuntu-logo-icon.svg");
-        background-size: contain;
+    &:focus, &:hover,
+    &:active, &:checked {
+      .overview-icon :first-child {
+        background-image: url("ubuntu-logo-icon.svg") !important;
+        background-size: 48px !important;
       }
+    }
+  }
+
+  .app-well-app {
+    &, & .overview-icon {
+      // border: none;
+      border-radius: 0px !important;
+    }
+
+    &:active .overview-icon,
+    &:checked .overview-icon {
+      // when clicking on an app or a folder is active
+
+    }
+
+    &:hover .overview-icon,
+    &:focus .overview-icon,
+    &:selected .overview-icon {
+      // when hovering over an app
+
     }
   }
 }
@@ -71,71 +129,83 @@
 /* Scrollview style */
 
 .bottom #dashtodockDashScrollview, .top #dashtodockDashScrollview {
-  -st-hfade-offset: 24px;
+  -st-hfade-offset: 24px !important;
 }
 
 .left #dashtodockDashScrollview, .right #dashtodockDashScrollview {
-  -st-vfade-offset: 24px;
+  -st-vfade-offset: 24px !important;
 }
 
 #dashtodockContainer {
   &.running-dots .dash-item-container > StButton, &.dashtodock .dash-item-container > StButton {
-    transition-duration: 250;
-    background-size: contain;
+    transition-duration: 250 !important;
+    background-size: contain !important;
   }
+
   &.shrink .dash-item-container > StButton, &.dashtodock .dash-item-container > StButton {
-    padding: 1px 2px;
+    padding: 0px !important; // 1px 2px;
   }
+
   &.extended {
     &.top #dash, &.right #dash, &.bottom #dash, &.left #dash {
-      border-radius: 0;
+      border-radius: 0 !important;
     }
+
     &.top #dash, &.bottom #dash {
-      border-left: 0px;
-      border-right: 0px;
+      border-left: 0px !important;
+      border-right: 0px !important;
     }
+
     &.right #dash, &.left #dash {
-      border-top: 0px;
-      border-bottom: 0px;
+      border-top: 0px !important;
+      border-bottom: 0px !important;
     }
   }
+
   &.running-dots .app-well-app.running > .overview-icon, &.dashtodock .app-well-app.running > .overview-icon {
-    background-image: none;
+    background-image: none !important;
   }
+
   &.running-dots .app-well-app.focused .overview-icon {
-    background-color: rgba(238, 238, 236, 0.1);
+    background-color: rgba(238, 238, 236, 0.1) !important;
   }
+
   &.dashtodock {
     .app-well-app.focused .overview-icon {
-      background-color: rgba(238, 238, 236, 0.1);
+      background-color: rgba(238, 238, 236, 0.1) !important;
     }
+
     #dash {
       background: #2e3436;
     }
   }
+
   &.opaque {
-    background-color: transparentize($panel_bg_color, $panel-alpha-value);
-    border-color: rgba(0, 0, 0, 0.4);
-    transition-duration: 300ms;
+    background-color: transparentize($panel_bg_color, $dash-alpha-value) !important;
+    border-color: rgba(0, 0, 0, 0.4) !important;
+    transition-duration: 300ms !important;
   }
+
   &.transparent {
-    background-color: transparentize($panel_bg_color, $panel-alpha-value);
-    border-color: rgba(0, 0, 0, 0.1);
-    transition-duration: 500ms;
+    background-color: transparentize($panel_bg_color, $dash-alpha-value) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    transition-duration: 500ms !important;
   }
+
   .number-overlay {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(0, 0, 0, 0.8);
-    text-align: center;
+    color: rgba(255, 255, 255, 1) !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    text-align: center !important;
   }
+
   .notification-badge {
-    color: rgba(255, 255, 255, 1);
-    background-color: #e95420;
-    padding: 0.2em 0.5em;
-    border-radius: 1em;
-    font-weight: bold;
-    text-align: center;
-    margin: 2px;
+    color: rgba(255, 255, 255, 1) !important;
+    background-color: #e95420 !important;
+    padding: 0.2em 0.5em !important;
+    border-radius: 1em !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    margin: 2px !important;
   }
 }
 
