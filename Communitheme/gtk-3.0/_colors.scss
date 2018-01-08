@@ -27,7 +27,7 @@ $scrollbar_slider_color: mix($scrollbar_bg_color, $fg_color, 40%);
 $scrollbar_slider_hover_color: $fg_color;
 $scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 10%));
 //
-$button_bg_color: darken($base_color, if($variant == "light", 12%, 5%));
+$button_bg_color: darken($base_color, if($variant == "light", 7%, 5%));
 //
 $warning_color: $yellow;
 $error_color: $red;
@@ -53,7 +53,7 @@ $drop_target_color: $green;
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
 $insensitive_headerbar_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
-$insensitive_borders_color: $borders_color;
+$insensitive_borders_color: transparentize($borders_color, 0.6);
 
 //colors for the backdrop state, derived from the main colors.
 $backdrop_base_color: if($variant == 'light', darken($base_color, 1%), lighten($base_color, 1%));
