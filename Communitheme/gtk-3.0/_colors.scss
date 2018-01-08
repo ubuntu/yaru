@@ -20,7 +20,7 @@ $top_hilight: $borders_edge;
 $dark_fill: $borders_color; // mix($borders_color, $bg_color, 50%);
 $menu_color: if($variant == 'light', $base_color, mix($bg_color, $base_color, 20%));
 $popover_bg_color: $bg_color;
-$popover_hover_color: lighten($bg_color, 5%);
+$popover_hover_color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 7%));
 //
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 90%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($scrollbar_bg_color, $fg_color, 40%);
