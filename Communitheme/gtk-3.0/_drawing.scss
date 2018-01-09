@@ -201,7 +201,7 @@
   //
     $_bg: if(lightness($c)<35%, lighten($c, 5%), $c);
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     @if($bc == true) { border-color: if($c != $button_bg_color, _border_color($c), $borders_color); }
     @else { border-color: $_bg; }
@@ -218,7 +218,7 @@
   //
     $_bg: if(lightness($c)<35%, lighten($c, 8%), darken($c, 5%));
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     @if($bc == true) { border-color: _border_color($_bg); }
     @else { border-color: $_bg; }
@@ -235,7 +235,7 @@
   // normal button alternative look
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $c;
     border-color: if($c != $button_bg_color, _border_color($c), $alt_borders_color);
     box-shadow: inset 0 -1px 0 0 $borders_edge, inset 0 2px 0 0 $borders_edge;
@@ -246,7 +246,7 @@
   // hovered button alternative look
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $c;
     border-color: if($c != $button_bg_color, _border_color($c), $alt_borders_color);
     box-shadow: inset 0 -1px 0 0 $borders_edge, inset 0 2px 0 0 $borders_edge;
@@ -259,7 +259,7 @@
     $_bg: if(lightness($c)<35%, darken($c, 5%), darken($c, 10%));
     //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     @if($bc == true) { border-color: _border_color($_bg); }
     @else { border-color: $_bg; }

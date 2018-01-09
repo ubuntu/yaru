@@ -32,11 +32,11 @@ $button_transition: all 200ms $ease-out-quad;
   // to the adwaita engine: using real CSS properties is faster,
   // and we don't use any outlines for now.
 
-  outline-color: gtkalpha(currentColor, 0.3);
+  outline-color: $blue; // gtkalpha(currentColor, 0.3);
   outline-style: dashed;
   outline-offset: -3px;
   outline-width: 1px;
-  -gtk-outline-radius: 2px;
+  -gtk-outline-radius: 0px;
 
   -gtk-secondary-caret-color: $selected_bg_color
 }
@@ -265,7 +265,7 @@ entry {
     min-height: 24px;
     padding: 4px 8px;
     border: 1px solid;
-    border-radius: 3px;
+    border-radius: 5px;
     transition: all 200ms $ease-out-quad;
 
     @include entry(normal);
@@ -520,6 +520,9 @@ button {
     padding: 4px 8px;
     border: 1px solid;
     border-radius: 5px;
+    outline-color: $blue;
+    outline-offset: -1px;
+    outline-radius: 5px;
     transition: $button_transition;
 
     @include button(normal);
@@ -557,6 +560,7 @@ button {
         @include button(backdrop);
 
         transition: $backdrop_transition;
+        outline-color: $blue;
         -gtk-icon-effect: none;
 
         &:active,
@@ -955,24 +959,29 @@ toolbar.inline-toolbar toolbutton:backdrop {
 %linked_middle {
   border-radius: 0;
   border-right-style: none;
+  -gtk-outline-radius: 0;
 }
 
 %linked {
   @extend %linked_middle;
 
   &:first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -gtk-outline-radius: 5px 0 0 5px ;
+
   }
 
   &:last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     border-right-style: solid;
+    -gtk-outline-radius: 0 5px 5px 0;
   }
 
   &:only-child {
-    border-radius: 3px;
+    border-radius: 5px;
+    -gtk-outline-radius: 5px;
     border-style: solid;
   }
 }
@@ -980,19 +989,22 @@ toolbar.inline-toolbar toolbutton:backdrop {
 %linked_vertical_middle {
   border-style: solid solid none solid;
   border-radius: 0;
+  -gtk-outline-radius: 0px;
 }
 
 %linked_vertical{
   @extend %linked_vertical_middle;
 
   &:first-child {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    -gtk-outline-radius: 5px 5px 0 0;
   }
 
   &:last-child {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -gtk-outline-radius: 0 0 5px 5px;
     border-style: solid;
   }
 
@@ -1002,7 +1014,8 @@ toolbar.inline-toolbar toolbutton:backdrop {
   }
 
   &:only-child {
-    border-radius: 3px;
+    border-radius: 5px;
+    -gtk-outline-radius: 5px;
     border-style: solid;
   }
 }
@@ -1027,7 +1040,7 @@ modelbutton.flat,
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 3px;
-  outline-offset: -2px;
+  outline-offset: 0; // -2px;
 
   @extend %undecorated_button;
 
@@ -1199,9 +1212,9 @@ spinbutton {
         &:dir(rtl) { border-style: none solid none none; }
       }
 
-      &:dir(ltr):last-child { border-radius: 0 3px 3px 0; }
+      &:dir(ltr):last-child { border-radius: 0 5px 5px 0; }
 
-      &:dir(rtl):first-child { border-radius: 3px 0 0 3px; }
+      &:dir(rtl):first-child { border-radius: 5px 0 0 5px; }
     }
   }
 
@@ -1247,9 +1260,9 @@ spinbutton {
         box-shadow: none;
       }
 
-      &:dir(ltr):last-child { border-radius: 0 3px 3px 0; }
+      &:dir(ltr):last-child { border-radius: 0 5px 5px 0; }
 
-      &:dir(rtl):first-child { border-radius: 3px 0 0 3px; }
+      &:dir(rtl):first-child { border-radius: 5px 0 0 5px; }
     }
   }
 
@@ -1288,12 +1301,12 @@ spinbutton {
     }
 
     %top_button {
-      border-radius: 3px 3px 0 0;
+      border-radius: 5px 5px 0 0;
       border-style: solid solid none solid;
     }
 
     %bottom_button {
-      border-radius: 0 0 3px 3px;
+      border-radius: 0 0 5px 5px;
       border-style: none solid solid solid;
     }
   }
@@ -2278,7 +2291,8 @@ notebook {
         padding-top: 4px;
         margin-bottom: -2px;
         > tab {
-          border-radius: 5px 5px 0 0 ;
+          border-radius: 5px 5px 0 0;
+          outline-radius: 5px 5px 0 0;
           &:checked { border-bottom-color: transparent; }
         }
       }
@@ -2291,6 +2305,7 @@ notebook {
         margin-top: -2px;
         > tab {
           border-radius: 0 0 5px 5px;
+          outline-radius: 0 0 5px 5px;
           &:checked { border-top-color: transparent; }
         }
       }
@@ -2302,7 +2317,8 @@ notebook {
         padding-left: 4px;
         margin-right: -2px;
         > tab {
-          border-radius: 6px 0 0 6px;
+          border-radius: 5px 0 0 5px;
+          outline-radius: 5px 0 0 5px;
           &:checked { border-right-color: transparent; }
         }
       }
@@ -2314,7 +2330,8 @@ notebook {
         padding-right: 4px;
         margin-left: -2px;
         > tab {
-          border-radius: 0 6px 6px 0;
+          border-radius: 0 5px 5px 0;
+          outline-radius: 0 5px 5px 0;
           &:checked { border-left-color: transparent; }
         }
       }
@@ -2390,7 +2407,7 @@ notebook {
       min-height: 30px;
       min-width: 30px;
       padding: 3px 12px;
-      outline-offset: -5px;
+      outline-offset: -1px; // -5px;
       color: $insensitive_fg_color;
       border: 1px solid transparent;
 
@@ -2699,7 +2716,7 @@ switch {
   $c: $success_color;
   font-weight: bold;
   font-size: smaller;
-  outline-offset: -4px;
+  outline-offset: 0; // -4px;
   box-shadow: inset 0 -1px 0 0 $borders_edge, inset 0 2px 0 0 $borders_edge;
   border-radius: 5px;
   color: transparent;
@@ -2742,6 +2759,9 @@ switch {
     min-width: 22px; // 32px; // 44px;
     min-height: 24px; // 20px; // 26px;
     // border: 1px solid;
+    outline-offset: -1px;
+    outline-radius: 5px;
+    outline-color: $blue;
     border-radius: 5px;
     transition: $button_transition;
 
@@ -3115,7 +3135,7 @@ scale {
   trough {
     @extend %scale_trough;
 
-    outline-offset: 2px;
+    outline-offset: 3px;
     -gtk-outline-radius: 5px;
   }
 
@@ -3524,30 +3544,31 @@ progressbar {
       // &:disabled { border-color: transparent; }
     }
   }
-
+// TODO: maybe we can experiment with &:not(.full)
+// so prgoress bars won't be rounded at the opposite end until they're full?
   progress {
     @extend %progressbar_highlight;
 
     border-radius: 1.5px;
 
     &.left {
-      border-top-left-radius: 2px;
-      border-bottom-left-radius: 2px;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
     }
 
     &.right {
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
     }
 
     &.top {
-      border-top-right-radius: 2px;
-      border-top-left-radius: 2px;
+      border-top-right-radius: 3px;
+      border-top-left-radius: 3px;
     }
 
     &.bottom {
-      border-bottom-right-radius: 2px;
-      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
     }
   }
 
@@ -3774,6 +3795,7 @@ list {
 }
 
 row {
+  outline-offset: 0;
   transition: all 150ms $ease-out-quad;
 
   &:hover { transition: none; }
@@ -3856,7 +3878,7 @@ calendar {
   &:selected {
     @extend %selected_items;
 
-    border-radius: 3px;
+    border-radius: 5px;
   }
 
   &.header {
@@ -4294,6 +4316,9 @@ colorswatch {
   &:drop(active), & { border-style: none; } // FIXME: implement a proper drop(active) state
 
   $_colorswatch_radius: 5px;
+  outline-offset: -2px;
+  -gtk-outline-radius: $_colorswatch_radius;
+
 
   // base color corners rounding
   // to avoid the artifacts caused by rounded corner anti-aliasing the base color
