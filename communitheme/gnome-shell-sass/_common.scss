@@ -32,7 +32,7 @@ $popover-alpha-value: 0.025;
 /* GLOBALS */
 $font-size: 11;
 $font-family: Ubuntu, Cantarell, Sans-Serif;
-$_bubble_bg_color: transparentize($osd_bg_color, $popover-alpha-value);
+$_dialog_bg_color: transparentize($osd_bg_color, $popover-alpha-value);
 
 stage {
   font-family: $font-family;
@@ -185,7 +185,7 @@ StScrollBar {
 .modal-dialog {
   border-radius: 6px;
   color: $osd_fg_color;
-  background-color: $_bubble_bg_color;
+  background-color: $_dialog_bg_color;
   border: 1px solid $osd_borders_color;
   .modal-dialog-content-box {
     padding: 24px;
@@ -724,7 +724,7 @@ StScrollBar {
 
 %osd-panel {
   color: $osd_fg_color;
-  background-color: $_bubble_bg_color;
+  background-color: $_dialog_bg_color;
   border: 1px solid $osd_borders_color;
   border-radius: 12px;
   padding: 12px;
@@ -1333,7 +1333,7 @@ StScrollBar {
     // TODO: style the ubuntu dock, not this
     font-size: 9pt;
     color: $osd_fg_color;
-    background-color: $_bubble_bg_color;
+    background-color: $_dialog_bg_color;
     padding: 4px 0;
     border: 1px solid $osd_borders_color;
     border-left: 0px;
@@ -1534,7 +1534,7 @@ StScrollBar {
 
 %overview-panel {
   color: $osd_fg_color;
-  background-color: $_bubble_bg_color;
+  background-color: $_dialog_bg_color;
   border: 1px solid $osd_borders_color;
 }
 
@@ -1573,11 +1573,11 @@ StScrollBar {
       // padding: 4px 4px 5px;
       min-height: 22px; // make just a little taller
       padding: 4px 32px;
-      background-color: darken($_bubble_bg_color,5%);
+      background-color: darken($_dialog_bg_color,5%);
       &:first-child { border-radius: 0 0 0 6px; }
       &:last-child { border-radius: 0 0 6px 0; }
-      &:hover, &:focus { background-color: darken($_bubble_bg_color,2%); }
-      &:active { background-color: darken($_bubble_bg_color, 5%); }
+      &:hover, &:focus { background-color: darken($_dialog_bg_color,2%); }
+      &:active { background-color: darken($_dialog_bg_color, 5%); }
     }
   }
   .summary-source-counter {
