@@ -2918,25 +2918,18 @@ radio {
 %check, %radio, check, radio {
   $c: $dark_fill;
   $tc: white;
-  &:checked:not(:indeterminate) {
-    $c: $success_color;
-    -gtk-icon-source: -gtk-icontheme('emblem-ok-symbolic'); // use the suru checkmark
 
-    @each $state, $t in ('', 'normal-alt'), (':hover', 'hover-alt'),
-                        (':active', 'active'), (':backdrop', 'backdrop'),
-                        (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-      &#{$state} { @include button($t, $c, $tc, $edge: none); }
-    }
-  }
-
-  &:indeterminate {
-    $c: $warning_color;
-    -gtk-icon-source: -gtk-icontheme('list-remove-symbolic'); // use the suru line
-
-    @each $state, $t in ('', 'normal-alt'), (':hover', 'hover-alt'), (':active', 'active'),
-                        (':backdrop', 'backdrop'), (':backdrop:disabled', 'backdrop-insensitive'),
-                        (':disabled', 'insensitive') {
-      &#{$state} { @include button($t, $c, $tc, $edge: none); }
+  @each $t, $c in (':checked:not(:indeterminate)', $success_color),
+                  (':indeterminate', $warning_color) {
+    &#{$t} {
+      -gtk-icon-source: -gtk-icontheme(if($t == ':checked:not(:indeterminate)',
+                                                'emblem-ok-symbolic',
+                                                'list-remove-symbolic')); // use the suru checkmark/line
+        @each $state, $t in ('', 'normal-alt'), (':hover, &:checked:hover', 'hover'),
+                            (':active, &:checked:active', 'active'), (':backdrop', 'backdrop'),
+                            (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
+        &#{$state} { @include button($t, $c, $tc, $edge: none); }
+      }
     }
   }
 }
@@ -2969,20 +2962,15 @@ check {
   }
 }
 
-menu menuitem {
-  check, radio {
-    border: 1px solid $borders_color;
-  }
-}
-
 treeview.view {
+  // make borders with box shadow so as to not add border width to size
   check, radio {
     box-shadow: inset 0 0 0 1px $borders_color;
   }
 }
 
 menu menuitem, treeview.view {
-  // treeview and menuitem checks and radios need borders to be visible
+  // make menuitem and treeview checks smaller
   check, radio {
     min-width: 14px;
     min-height: 14px;
@@ -2991,23 +2979,17 @@ menu menuitem, treeview.view {
 
 menu menuitem {
   radio, check {
-    &:hover { border-color: white; color: white; } // hovered menu items are basically selected items
+    $c: $success_color;
+    border: 1px solid $borders_color;
+    box-shadow: none;
     &:checked:not(:backdrop), &:indeterminate:not(:backdrop) { transition: none; }
-
-    &:checked:not(:backdrop) {
-      box-shadow: none;
-      &, &:disabled { border-color: $borders_color; background-color: transparent; }
-      color: $success_color;
-      &:disabled { color: $insensitive_fg_color; }
-      &:hover { color: white; border-color: white; background-color: transparent; }
-    }
-
-    &:indeterminate:not(:backdrop) {
-      box-shadow: none;
-      &, &:disabled { border-color: $borders_color; background-color: transparent; }
-      color: $warning_color;
-      &:disabled { color: $insensitive_fg_color; }
-      &:hover { color: white; border-color: white; background-color: transparent; }
+      @each $t, $c in (':checked:not(:backdrop)', $success_color),
+                      (':indeterminate:not(:backdrop)', $warning_color) {
+        &#{$t} {
+        &, &:hover, &:checked:hover { border-color: $c; color: $c; }
+        &, &:disabled, &:hover, &:checked:hover { background-color: transparent; box-shadow: none; }
+        &:disabled { border-color: $borders_color; color: inherit; }
+      }
     }
   }
 }
@@ -3031,7 +3013,7 @@ treeview.view radio {
 
 treeview.view radio, treeview.view check {
   // selected treeview elements
-  &, &:backdrop {
+  &, &:checked:hover, &:backdrop {
     &:selected { &:focus, & { border-color: white; color: white; background-color: transparent; box-shadow: inset 0 0 0 1px white; }}
   }
 }
