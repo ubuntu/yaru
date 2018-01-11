@@ -9,15 +9,12 @@ Communitheme is the new Ubuntu theme build by the Community.
 *Note: these instructions install the entire Communitheme session; this includes the Gnome Shell, GTK and icon theme.*
 
 ```bash
-# First, make sure the old versions are removed
-sudo apt remove suru-icon-theme gtk-communitheme gnome-shell-communitheme ubuntu-communitheme-session
-
 # Add the PPA to your repository list
 sudo add-apt-repository ppa:communitheme/ppa
 # Download a list of all the software that's available from the repositories
 sudo apt update
 # Download and install the actual software
-sudo apt install suru-icon-theme gtk-communitheme gnome-shell-communitheme ubuntu-communitheme-session
+sudo apt install ubuntu-communitheme-session
 ```
 
 And it's installed! Restart your computer, the login screen will use Communitheme by default. Select the "Ubuntu Communitheme" session from the login screen (click the gear) and login. This will start the GNOME-Shell, GTK2, GTK3 and icon themes.
