@@ -36,7 +36,7 @@
 
 @function entry_focus_shadow($fc:$selected_bg_color) { @return /*0 0 2px 2px rgba(0, 0, 0, 0.025),*/ inset 0 0 0 1px $fc; }
 
-@mixin entry($t, $fc:$selected_bg_color, $bg: $base_color, $tc: $text_color, $edge: none) {
+@mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $text_color, $edge: none) {
 //
 // Entries drawing function
 //
@@ -54,8 +54,8 @@
 
   @if $t==normal {
     color: if($tc != $text_color, transparentize($tc, .1), $text_color);
-    border-color: if($bg != $base_color, _border_color($bg), $borders_color);
-    background-color: $bg;
+    border-color: if($c != $base_color, _border_color($c), $borders_color);
+    background-color: $c;
     @include _shadows(entry_focus_shadow(transparentize($fc, 1)), $_entry_edge);
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
@@ -64,21 +64,21 @@
     border-color: entry_focus_border($fc);
   }
   @if $t==insensitive {
-    color: if($tc != $text_color, mix($tc, $bg, 50%), $insensitive_fg_color);
+    color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
     border-color: $borders_color;
-    background-color: if($bg != $base_color, mix($bg, $base_color, 85%), $insensitive_bg_color);
+    background-color: if($c != $base_color, mix($c, $base_color, 85%), $insensitive_bg_color);
     box-shadow: $_entry_edge;
   }
   @if $t==backdrop {
-    color: if($tc != $text_color, mix($tc, $bg, 80%), $backdrop_text_color);
-    border-color: if($bg != $base_color, _border_color($bg), $backdrop_borders_color);
-    background-color: if($bg != $base_color, lighten($bg, 1%), $backdrop_base_color);
+    color: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
+    border-color: if($c != $base_color, _border_color($c), $backdrop_borders_color);
+    background-color: if($c != $base_color, lighten($c, 1%), $backdrop_base_color);
     box-shadow: $_blank_edge;
   }
   @if $t==backdrop-insensitive {
-    color: if($bg != $base_color, mix($tc, $bg, 35%), $backdrop_insensitive_color);
-    border-color: if($bg != $base_color, _border_color($bg), $backdrop_borders_color);
-    background-color: if($bg != $base_color, darken($bg, 15%), $insensitive_bg_color);
+    color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
+    border-color: if($c != $base_color, _border_color($c), $backdrop_borders_color);
+    background-color: if($c != $base_color, darken($c, 15%), $insensitive_bg_color);
     box-shadow: $_blank_edge;
   }
   @if $t==osd {
@@ -123,11 +123,11 @@
 
 @function _border_color($c, $darker: false) {
   @if $darker == true {
-    @if lightness($c)<30% { @return darken($c, 20%); }
+    @if lightness($c)<40% { @return darken($c, 20%); }
     @else { @return darken($c, 10%); }
   }
   @else {
-    @if lightness($c)<30% { @return darken($c, 15%); }
+    @if lightness($c)<40% { @return darken($c, 15%); }
     @else { @return darken($c, 5%); }
   }
 }
@@ -201,7 +201,7 @@
   //
     $_bg: if(lightness($c)<35%, lighten($c, 5%), $c);
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     @if($bc == true) { border-color: if($c != $button_bg_color, _border_color($c), $borders_color); }
     @else { border-color: $_bg; }
@@ -218,7 +218,7 @@
   //
     $_bg: if(lightness($c)<35%, lighten($c, 8%), darken($c, 5%));
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     @if($bc == true) { border-color: _border_color($_bg); }
     @else { border-color: $_bg; }
@@ -235,7 +235,7 @@
   // normal button alternative look
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $c;
     border-color: if($c != $button_bg_color, _border_color($c), $alt_borders_color);
     box-shadow: inset 0 -1px 0 0 $borders_edge, inset 0 2px 0 0 $borders_edge;
@@ -246,7 +246,7 @@
   // hovered button alternative look
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $c;
     border-color: if($c != $button_bg_color, _border_color($c), $alt_borders_color);
     box-shadow: inset 0 -1px 0 0 $borders_edge, inset 0 2px 0 0 $borders_edge;
@@ -259,7 +259,7 @@
     $_bg: if(lightness($c)<35%, darken($c, 5%), darken($c, 10%));
     //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    // outline-color: transparentize($tc, 0.7);
     background-color: $_bg;
     @if($bc == true) { border-color: _border_color($_bg); }
     @else { border-color: $_bg; }
@@ -565,34 +565,4 @@
   background-position: $_bg_pos;
   border: none;
   box-shadow: none;
-}
-
-@mixin infobar($c) {
-//
-// styles infobar
-//
-  background-color: $c;
-
-  selection { background-color: darken($c, 10%); }
-
-  &:backdrop, & {
-    label, & { color: $selected_fg_color; }
-    border-color: _border_color($c);
-  }
-
-  &:backdrop {
-    background-color: _backdrop_color($c);
-    border-color: _backdrop_color(_border_color($c));
-  }
-
-  button {
-    $_bg: darken($c, 10%);
-    $_fg: white;
-      @each $state, $t in ('', 'normal'), (':hover', 'hover'),
-                          (':active', 'active'), (':checked', 'active'),
-                          (':disabled', 'insensitive'), (':backdrop', 'backdrop'),
-                          (':backdrop:disabled', 'backdrop-insensitive'), (':backdrop:active', 'backdrop-active') {
-      &#{$state} { @include button($t, $_bg, $_fg); }
-    }
-  }
 }

@@ -3,8 +3,8 @@
 
 @import 'ubuntu-colors';
 
-$base_color: if($variant == 'light', #FFFFFF, #1C1B21);
-$bg_color: if($variant == 'light', #FAFAFA, #292933);
+$base_color: if($variant == 'light', #FFFFFF, #292933);
+$bg_color: if($variant == 'light', #FAFAFA, #1C1B21);
 $fg_color: if($variant == 'light', $slate, $porcelain);
 $text_color: transparentize($fg_color, .1);
 //
@@ -17,7 +17,7 @@ $borders_edge: rgba(0, 0, 0, 0.09); // if($variant == 'light', transparentize(wh
 $link_color: $blue; // if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
 $link_visited_color: if($variant == 'light', darken($link_color, 20%), lighten($link_color, 10%)); // if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 $top_hilight: $borders_edge;
-$dark_fill: $borders_color; // mix($borders_color, $bg_color, 50%);
+$dark_fill: if($variant == "light", $borders_color, mix($fg_color, $bg_color, 50%));
 $menu_color: if($variant == 'light', $base_color, mix($bg_color, $base_color, 20%));
 $popover_bg_color: $bg_color;
 $popover_hover_color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 7%));
@@ -37,13 +37,14 @@ $neutral_color: $blue;
 //
 $osd_fg_color: $porcelain;
 $osd_text_color: transparentize($osd_fg_color, .1);
-$osd_bg_color: transparentize(#292933, 0.3);
+$osd_bg_color: transparentize(#1C1B21, 0.3);
 $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
 $osd_borders_color: transparentize(black, 0.3);
 //
 $sidebar_bg_color: darken(mix($bg_color, $base_color, 50%), 5%);
-$base_hover_color: transparentize($fg_color, 0.95);
+$base_hover_color: transparentize($fg_color, 0.85);
+$base_active_color: transparentize($fg_color, 0.80);
 //
 $tooltip_borders_color: transparentize(white, 0.9);
 $shadow_color: transparentize(black, 0.9);
