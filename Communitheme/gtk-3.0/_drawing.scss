@@ -64,9 +64,9 @@
     border-color: entry_focus_border($fc);
   }
   @if $t==insensitive {
-    color: if($tc != $text_color, mix($tc, $bg, 50%), $insensitive_fg_color);
+    color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
     border-color: $insensitive_borders_color; // $borders_color;
-    background-color: if($bg != $base_color, mix($bg, $base_color, 85%), $insensitive_bg_color);
+    background-color: if($c != $base_color, mix($c, $base_color, 85%), $insensitive_bg_color);
     box-shadow: $_entry_edge;
   }
   @if $t==backdrop {
