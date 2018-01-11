@@ -1530,13 +1530,18 @@ headerbar {
         &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
       }
 
-      &:disabled { border-color: transparent; background-color: transparent; }
+      &, &:backdrop {
+        &, &:disabled {
+          // headerbar buttons should be undecorated in backdrop and when disabled
+          background-color: transparent; border-color: transparent;
+        }
+      }
 
       @each $b_type, $b_color in (suggested-action, $success_color),
                                   (destructive-action, $destructive_color) {
         &.#{$b_type} {
           // special buttons are not flat
-          @each $state, $t in ('', 'normal'), (':hover', 'hover'),
+          @each $state, $t in ('', 'normal'), (':not(:backdrop):hover', 'hover'),
                               (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
                               (':backdrop:active, &:backdrop:checked', 'backdrop-active'),
                               (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
@@ -1557,9 +1562,8 @@ headerbar {
     .linked.path-bar button {
         &.image-button.text-button.toggle, &.text-button, &.toggle.image-button.toggle {
           // style the pathbar
-          $c: $headerbar_bg_color;
-          $tc: $headerbar_fg_color;
-          &, &:hover, &:active { @include button(normal, $c, $tc); }
+          &, &:hover, &:active { @include button(normal, $c, $tc, $edge: none); }
+          &:backdrop { @include button(backdrop, $c, $tc, $edge: none); }
           @extend %underline_focus;
         }
       }
@@ -1841,7 +1845,7 @@ headerbar { // headerbar border rounding
   &:checked:not(:indeterminate) {
       font-weight: bold;
       box-shadow: inset 0 -2px $selected_bg_color;
-      &:hover { box-shadow: inset 0 -2px mix($fg_color, $selected_bg_color, 10%) }
+      &:not(:backdrop):hover { box-shadow: inset 0 -2px mix($fg_color, $selected_bg_color, 10%) }
       &:backdrop { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color) }
   }
 }
@@ -4525,12 +4529,12 @@ button.titlebutton {
     $tc: $selected_fg_color;
     $edge: false;
 
-    @each $state, $t in ('', 'normal'), (':hover', 'hover'),
+    @each $state, $t in ('', 'normal'), (':hover, &:backdrop:hover', 'hover'),
     (':active', 'active'), (':disabled', 'insensitive') {
       &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
     }
 
-    &:backdrop { background-color: transparent; }
+    &:backdrop { background-color: transparent; color: $backdrop_fg_color; }
   }
 
   .selection-mode & {
