@@ -25,6 +25,8 @@ Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          gnome-shell-communitheme (= ${source:Version}),
+         gtk-communitheme,
+         suru-icon-theme,
 Description: session starting Ubuntu Community Theme
  This is the session enabling starting easily the theme
  that is shaped by the community on the Ubuntu hub.
