@@ -1552,9 +1552,10 @@ headerbar {
     stackswitcher.horizontal.linked.stack-switcher button.text-button {
       // style the stackswitcher
       @extend %stackswitcher_basic;
-        min-width: 100px;
-        margin-left: 4px;
-        margin-right: 4px;
+      &:checked { color: $headerbar_fg_color; }
+      min-width: 100px;
+      margin-left: 4px;
+      margin-right: 4px;
     }
 
     .linked.path-bar button {
