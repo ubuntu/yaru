@@ -1562,8 +1562,9 @@ headerbar {
     .linked.path-bar button {
         &.image-button.text-button.toggle, &.text-button, &.toggle.image-button.toggle {
           // style the pathbar
-          &, &:hover, &:active { @include button(normal, $c, $tc, $edge: none); }
-          &:backdrop { @include button(backdrop, $c, $tc, $edge: none); }
+          $c: $headerbar_bg_color;
+          $tc: $headerbar_fg_color;
+          &, &:hover, &:active { @include button(normal, $c, $tc); }
           @extend %underline_focus;
         }
       }
