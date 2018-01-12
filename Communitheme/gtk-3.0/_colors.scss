@@ -34,6 +34,7 @@ $error_color: $red;
 $success_color: $green;
 $destructive_color: darken($red, 10%);
 $neutral_color: $blue;
+$focus_color: transparentize($blue, 0.5);
 //
 $osd_fg_color: $porcelain;
 $osd_text_color: transparentize($osd_fg_color, .1);

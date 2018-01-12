@@ -32,7 +32,7 @@ $button_transition: all 200ms $ease-out-quad;
   // to the adwaita engine: using real CSS properties is faster,
   // and we don't use any outlines for now.
 
-  outline-color: $blue; // gtkalpha(currentColor, 0.3);
+  outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
   outline-style: dashed;
   outline-offset: -3px;
   outline-width: 1px;
@@ -511,7 +511,7 @@ button {
     padding: 4px 8px;
     border: 1px solid;
     border-radius: 5px;
-    outline-color: $blue;
+    outline-color: $focus_color;
     outline-offset: -1px;
     outline-radius: 5px;
     transition: $button_transition;
@@ -551,7 +551,7 @@ button {
         @include button(backdrop);
 
         transition: $backdrop_transition;
-        outline-color: $blue;
+        outline-color: $focus_color;
         -gtk-icon-effect: none;
 
         &:active,
@@ -1519,21 +1519,18 @@ headerbar {
     }
 
     button {
-      // make headerbar buttons flat
-      color: $tc;
-      @extend %undecorated_button;
-      &:backdrop { color: $backdrop_fg_color; }
-
-      @each $state, $t in (':not(:backdrop):hover', 'hover'),
-                          (':active, &:checked', 'active'), (':disabled', 'insensitive'),
-                          (':backdrop:active, &:backdrop:checked', 'backdrop-active') {
+      @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
+      (":active, &:checked", "active"), (":disabled", "insensitive"),
+      (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+      ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
         &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
       }
 
       &, &:backdrop {
         &, &:disabled {
-          // headerbar buttons should be undecorated in backdrop and when disabled
-          background-color: transparent; border-color: transparent;
+          // headerbar buttons should be undecorated when not being directly interacted with
+          @include button(undecorated);
         }
       }
 
@@ -1541,11 +1538,13 @@ headerbar {
                                   (destructive-action, $destructive_color) {
         &.#{$b_type} {
           // special buttons are not flat
-          @each $state, $t in ('', 'normal'), (':not(:backdrop):hover', 'hover'),
-                              (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
-                              (':backdrop:active, &:backdrop:checked', 'backdrop-active'),
-                              (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-          &#{$state} { @include button($t, $b_color, $tc, $bc: none, $edge: none); } }
+          @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
+          (":active, &:checked", "active"), (":disabled", "insensitive"),
+          (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+          ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+          (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+            &#{$state} { @include button($t, $b_color, $tc, $bc: none, $edge: none); }
+          }
         }
       }
     }
@@ -1571,11 +1570,12 @@ headerbar {
 
     .linked button {
       // linked buttons are not flat
-      @each $state, $t in ('', 'normal'), (':hover', 'hover'),
-                          (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
-                          (':backdrop:active, &:backdrop:checked', 'backdrop-active'),
-                          (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-        &#{$state} { @include button($t, $c, $tc); }
+      @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
+      (":active, &:checked", "active"), (":disabled", "insensitive"),
+      (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+      ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+        &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
       }
     }
   }
@@ -1586,118 +1586,56 @@ headerbar {
     }
 
   &.selection-mode {
-    $_hc: mix($top_hilight,$selected_bg_color, 50%); // hilight color
-
+    $c: $neutral_color;
     color: $selected_fg_color;
-    border-color: $selected_borders_color;
-    background-color: $selected_bg_color;
+    border-color: _border_color($c);
+    background-color: $c;
 
     &:backdrop {
-      background-color: $selected_bg_color;
-      background-image: none;
+      $c: _backdrop_color($c);
+      border-color: _border_color($c);
+      background-color: $c;
     }
 
     .subtitle:link { @extend *:link:selected;  }
 
     button {
-      @include button(normal, $selected_bg_color, $selected_fg_color);
-
-      &.flat { @include button(undecorated); }
-
-      &:hover { @include button(hover, $selected_bg_color, $selected_fg_color); }
-
-      &:active,
-      &:checked { @include button(active, $selected_bg_color, $selected_fg_color); }
-
-      &:backdrop {
-        &.flat, & {
-          @include button(backdrop, $selected_bg_color, $selected_fg_color);
-
-          -gtk-icon-effect: none;
-          border-color: $selected_borders_color;
-
-          &:active,
-          &:checked {
-            @include button(backdrop-active, $selected_bg_color, $selected_fg_color);
-
-            border-color: $selected_borders_color;
-          }
-
-          &:disabled {
-            @include button(backdrop-insensitive, $selected_bg_color, $selected_fg_color);
-
-            border-color: $selected_borders_color;
-
-            &:active, &:checked {
-              @include button(backdrop-insensitive-active, $selected_bg_color, $selected_fg_color);
-
-              border-color: $selected_borders_color;
-            }
-          }
+        @each $state, $t in ("", "normal"), (":hover", "hover"),
+        (":active, &:checked", "active"), (":disabled", "insensitive"),
+        (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+        ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+        (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+          $c: darken($neutral_color, 10%); // like the infobar
+          $tc: white;
+          &, &.selection-menu { &#{$state} { @include button($t, $c, $tc); } }
         }
-      }
 
-      &.flat { &:backdrop, &:disabled, &:backdrop:disabled { @include button(undecorated); }}
-
-      &:disabled {
-        @include button(insensitive, $selected_bg_color, $selected_fg_color);
-
-        &:active,
-        &:checked { @include button(insensitive-active, $selected_bg_color, $selected_fg_color); }
+      &.flat, &.selection-menu {
+        &, &:backdrop {
+          &, &:disabled { @include button(undecorated); }
+        }
       }
 
       &.suggested-action {
-        @include button(normal);
-
-        border-color: $selected_borders_color;
-
-        &:hover {
-          @include button(hover);
-
-          border-color: $selected_borders_color;
-        }
-
-        &:active {
-          @include button(active);
-
-          border-color: $selected_borders_color;
-        }
-
-        &:disabled {
-          @include button(insensitive);
-
-          border-color: $selected_borders_color;
-        }
-
-        &:backdrop {
-          @include button(backdrop);
-
-          border-color: $selected_borders_color;
-        }
-
-        &:backdrop:disabled {
-          @include button(backdrop-insensitive);
-
-          border-color: $selected_borders_color;
-        }
+        @each $state, $t in ("", "normal"), (":hover", "hover"),
+        (":active", "active"), (":disabled", "insensitive"),
+        (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+          $c: white;
+          $tc: $success_color;
+          &#{$state} { @include button($t, $c, $tc); } }
       }
-    }
 
-    .selection-menu {
-      &:backdrop, & {
-        border-color: transparentize($selected_bg_color, 1);
-        background-color: transparentize($selected_bg_color, 1);
-        background-image: none;
-        box-shadow: none;
-        padding-left: 10px;
-        padding-right: 10px;
+      &.selection-menu {
+        &:backdrop, & {
+          padding-left: 10px;
+          padding-right: 10px;
 
-        arrow { -GtkArrow-arrow-scaling: 1; }
+          arrow { -GtkArrow-arrow-scaling: 1; }
 
-        .arrow {
-          -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
-          color: transparentize($selected_fg_color,0.5);
-          // -gtk-icon-shadow: none;
+          .arrow {
+            -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+            // -gtk-icon-shadow: none;
+          }
         }
       }
     }
@@ -2733,7 +2671,7 @@ switch {
     // border: 1px solid;
     outline-offset: -1px;
     outline-radius: 5px;
-    outline-color: $blue;
+    outline-color: $focus_color;
     border-radius: 5px;
     transition: $button_transition;
 
@@ -2842,10 +2780,10 @@ radio {
   // border: 1px solid;
   -gtk-icon-source: none;
 
-  @each $state, $t in ('', 'normal'), (':hover', 'hover'),
-                      (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
-                      (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-    &#{$state} { @include button($t, $dark_fill, $edge: none); }
+    @each $state, $t in ("", "normal-alt"), (":hover", "hover"), (":active", "active"),
+    (":disabled", "insensitive"), (":disabled:active, &:disabled:checked", "insensitive-active"),
+    (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+    &#{$state} { @include button($t, $dark_fill, $edge: none); @if $state == "" { box-shadow: none; } }
   }
 
   &:backdrop { transition: $backdrop_transition; }
@@ -2886,10 +2824,11 @@ radio {
       -gtk-icon-source: -gtk-icontheme(if($t == ':checked:not(:indeterminate)',
                                                 'emblem-ok-symbolic',
                                                 'list-remove-symbolic')); // use the suru checkmark/line
-        @each $state, $t in ('', 'normal-alt'), (':hover, &:checked:hover', 'hover'),
-                            (':active, &:checked:active', 'active'), (':backdrop', 'backdrop'),
-                            (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-        &#{$state} { @include button($t, $c, $tc, $edge: none); }
+
+      @each $state, $t in ("", "normal-alt"), (":hover", "hover"), (":active", "active"),
+      (":disabled", "insensitive"), (":disabled:active, &:disabled:checked", "insensitive-active"),
+      (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+        &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
       }
     }
   }
@@ -2926,6 +2865,7 @@ check {
 treeview.view {
   // make borders with box shadow so as to not add border width to size
   check, radio {
+    background-color: $dark_fill;
     box-shadow: inset 0 0 0 1px $borders_color;
   }
 }
@@ -4182,17 +4122,17 @@ infobar {
       }
 
       button {
-        $_bg: darken($c, 10%);
-        $_fg: white;
-          @each $state, $t in ('', 'normal'), (':hover', 'hover'),
-                              (':active', 'active'), (':checked', 'active'),
-                              (':disabled', 'insensitive'), (':backdrop', 'backdrop'),
-                              (':backdrop:disabled', 'backdrop-insensitive'), (':backdrop:active', 'backdrop-active') {
-          &#{$state} { @include button($t, $_bg, $_fg); }
+        $c: darken($c, 10%);
+        $tc: white;
+          @each $state, $t in ("", "normal"), (":hover", "hover"),
+            (":active, &:checked", "active"), (":disabled", "insensitive"),
+            (":backdrop", "backdrop"), ("backdrop:active, &:backdrop:checked", 'backdrop-active'),
+            (":backdrop:disabled", 'backdrop-insensitive') {
+              &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
+          }
         }
       }
     }
-  }
   *:link { @extend %link_selected; }
 }
 
