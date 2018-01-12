@@ -1542,25 +1542,28 @@ headerbar {
       }
     }
 
-    stackswitcher.horizontal.linked.stack-switcher button.text-button, %stackswitcher {
-      // style the stackswitcher
+    %stackswitcher_basic {
       @extend %underline_focus;
       @extend %undecorated_button;
-      min-width: 100px; // include in the extend so stackswitcher-like buttons will inherit it
       border-radius: 0;
-      margin: 0 4px;
+      -gtk-outline-radius: 0;
+    }
+
+    stackswitcher.horizontal.linked.stack-switcher button.text-button {
+      // style the stackswitcher
+      @extend %stackswitcher_basic;
+        min-width: 100px;
+        margin-left: 4px;
+        margin-right: 4px;
     }
 
     .linked.path-bar button {
         &.image-button.text-button.toggle, &.text-button, &.toggle.image-button {
           // style the pathbar
-          $c: $headerbar_bg_color;
-          $tc: $headerbar_fg_color;
-          @extend %underline_focus;
-          @extend %undecorated_button;
-          border-radius: 0;
-          &:checked { color: $tc; }
-          &:not(:checked):hover { color: $insensitive_fg_color; }
+          @extend %stackswitcher_basic;
+          &:checked { color: $headerbar_fg_color; }
+          &:not(:first-child) { margin-left: 4px; }
+          &:not(:last-child) { margin-right: 4px; }
         }
       }
 
@@ -1576,6 +1579,8 @@ headerbar {
 
       // force linked buttons and entries to be separate
       // this needs a lot of testing
+      border-style: solid;
+      -gtk-outline-radius: 5px;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       border-bottom-left-radius: 5px;
@@ -1778,19 +1783,18 @@ headerbar { // headerbar border rounding
 %underline_focus {
   // indeterminate is there to lazily force the style
   transition-property: box-shadow, color;
-
-  &:not(:checked):not(:indeterminate) {
-    color: $insensitive_fg_color;
-    box-shadow: none;
-    &:not(:backdrop):hover { box-shadow: inset 0 -2px $insensitive_fg_color; }
-    &:backdrop { color: $backdrop_insensitive_color; }
+  &, &:not(:checked):not(:indeterminate) {
+  color: $insensitive_fg_color;
+  box-shadow: none;
+  &:hover { box-shadow: inset 0 -2px $insensitive_fg_color; }
+  &:backdrop { color: $backdrop_insensitive_color; }
   }
 
-  &:checked:not(:indeterminate) {
-      font-weight: bold;
-      box-shadow: inset 0 -2px $selected_bg_color;
-      &:not(:backdrop):hover { box-shadow: inset 0 -2px mix($fg_color, $selected_bg_color, 10%) }
-      &:backdrop { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color) }
+  &:checked, &:checked:not(:indeterminate) {
+    font-weight: bold;
+    box-shadow: inset 0 -2px $selected_bg_color;
+    &:not(:backdrop):hover { box-shadow: inset 0 -2px mix($fg_color, $selected_bg_color, 10%) }
+    &:backdrop { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color) }
   }
 }
 
