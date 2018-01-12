@@ -1480,7 +1480,7 @@ headerbar {
   .title {
     padding-left: 12px;
     padding-right: 12px;
-    font-weight: bold;
+    font-weight: 450; // same weight as shell panel button
   }
 
   .subtitle {
@@ -1500,13 +1500,6 @@ headerbar {
 
     entry, %dark_entry {
       image { color: $tc; }
-      &, &:backdrop {
-        &, &:disabled {
-          // darker border colors for better visibility
-          border-color: _border_color($c, $darker: true)
-        }
-      }
-
       @include entry(normal, $c: $c, $tc: $tc);
       &:disabled { @include entry(insensitive, $c: $tc, $tc: $c); }
 
@@ -1518,8 +1511,8 @@ headerbar {
       }
     }
 
-    button {
-      @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
+    button, .linked button {
+      @each $state, $t in ("", "normal"), (":hover", "hover"),
       (":active, &:checked", "active"), (":disabled", "insensitive"),
       (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
       ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
@@ -1549,34 +1542,51 @@ headerbar {
       }
     }
 
-    stackswitcher.horizontal.linked.stack-switcher button.text-button, %stackswitcher {
-      // style the stackswitcher
+    %stackswitcher_basic {
       @extend %underline_focus;
       @extend %undecorated_button;
-      min-width: 100px; // include in the extend so stackswitcher-like buttons will inherit it
       border-radius: 0;
-      margin: 0 4px;
+      -gtk-outline-radius: 0;
+    }
+
+    stackswitcher.horizontal.linked.stack-switcher button.text-button {
+      // style the stackswitcher
+      @extend %stackswitcher_basic;
+        min-width: 100px;
+        margin-left: 4px;
+        margin-right: 4px;
     }
 
     .linked.path-bar button {
-        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button.toggle {
+        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button {
           // style the pathbar
-          $c: $headerbar_bg_color;
-          $tc: $headerbar_fg_color;
-          &, &:hover, &:active { @include button(normal, $c, $tc); }
-          @extend %underline_focus;
+          @extend %stackswitcher_basic;
+          &:checked { color: $headerbar_fg_color; }
+          &:not(:first-child) { margin-left: 4px; }
+          &:not(:last-child) { margin-right: 4px; }
         }
       }
 
-    .linked button {
+    .linked button, .linked button.image-button, .horizontal.linked entry {
       // linked buttons are not flat
-      @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
-      (":active, &:checked", "active"), (":disabled", "insensitive"),
-      (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-      ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
-      (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-        &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
-      }
+      // @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
+      // (":active, &:checked", "active"), (":disabled", "insensitive"),
+      // (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+      // ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      // (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+      //   &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
+      // }
+
+      // force linked buttons and entries to be separate
+      // this needs a lot of testing
+      border-style: solid;
+      -gtk-outline-radius: 5px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      &:not(:only-child):not(:first-child) { margin-left: 2px; }
+      &:not(:only-child):not(:last-child) { margin-right: 2px; }
     }
   }
 
@@ -1773,19 +1783,18 @@ headerbar { // headerbar border rounding
 %underline_focus {
   // indeterminate is there to lazily force the style
   transition-property: box-shadow, color;
-
-  &:not(:checked):not(:indeterminate) {
-    color: $insensitive_fg_color;
-    box-shadow: none;
-    &:not(:backdrop):hover { box-shadow: inset 0 -2px $insensitive_fg_color; }
-    &:backdrop { color: $backdrop_insensitive_color; }
+  &, &:not(:checked):not(:indeterminate) {
+  color: $insensitive_fg_color;
+  box-shadow: none;
+  &:hover { box-shadow: inset 0 -2px $insensitive_fg_color; }
+  &:backdrop { color: $backdrop_insensitive_color; }
   }
 
-  &:checked:not(:indeterminate) {
-      font-weight: bold;
-      box-shadow: inset 0 -2px $selected_bg_color;
-      &:not(:backdrop):hover { box-shadow: inset 0 -2px mix($fg_color, $selected_bg_color, 10%) }
-      &:backdrop { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color) }
+  &:checked, &:checked:not(:indeterminate) {
+    font-weight: bold;
+    box-shadow: inset 0 -2px $selected_bg_color;
+    &:not(:backdrop):hover { box-shadow: inset 0 -2px mix($fg_color, $selected_bg_color, 10%) }
+    &:backdrop { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color) }
   }
 }
 
@@ -4452,12 +4461,10 @@ button.titlebutton {
     $tc: $selected_fg_color;
     $edge: false;
 
-    @each $state, $t in ('', 'normal'), (':hover, &:backdrop:hover', 'hover'),
-    (':active', 'active'), (':disabled', 'insensitive') {
+    @each $state, $t in ('', 'normal'), (':backdrop','backdrop'),
+    (':hover', 'hover'), (':active', 'active'), (':disabled', 'insensitive') {
       &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
     }
-
-    &:backdrop { background-color: transparent; color: $backdrop_fg_color; }
   }
 
   .selection-mode & {
