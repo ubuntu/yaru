@@ -1,0 +1,14 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+env:
+  - TRAVIS_DEBIAN_DISTRIBUTION=artful TRAVIS_DEBIAN_DERIVATIVE=ubuntu TRAVIS_DEBIAN_MIRROR=http://archive.ubuntu.com/ubuntu TRAVIS_DEBIAN_POCKETS="main restricted universe multiverse" TRAVIS_DEBIAN_INCREMENT_VERSION_NUMBER=true TRAVIS_DEBIAN_SECURITY_UPDATES=false
+
+script:
+  - wget -O- https://raw.githubusercontent.com/didrocks/travis.debian.net/gh-pages/script.sh | sh -
+
+if:
+  tag IS blank
