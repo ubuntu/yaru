@@ -344,48 +344,48 @@
   //
   // normal osd button
   //
-    $_bg: if($c != $button_bg_color, transparentize($c, 0.5), $osd_bg_color);
+    $_bg: if($c != $button_bg_color, transparentize($c, 0.5), $osd_button_bg_color);
 
     color: $osd_fg_color;
-    border-color: $osd_borders_color;
+    border-color: _border_color($_bg);
     background-color: $_bg;
     background-clip: padding-box;
-    box-shadow: inset 0 1px transparentize(white, 0.9);
-    text-shadow: 0 1px black;
-    -gtk-icon-shadow: 0 1px black;
-    outline-color: transparentize($osd_fg_color, 0.7);
+    box-shadow: inset 0 -1px 1px _button_hilight_color($_bg);
+    // text-shadow: 0 1px black;
+    // -gtk-icon-shadow: 0 1px black;
+    // outline-color: transparentize($osd_fg_color, 0.7);
   }
 
   @else if $t==osd-hover {
   //
   // active osd button
   //
-    $_bg: if($c != $button_bg_color, transparentize($c, 0.3), lighten($osd_bg_color, 12%));
+    $_bg: if($c != $button_bg_color, transparentize($c, 0.3), lighten($osd_button_bg_color, 12%));
 
     color: white;
-    border-color: $osd_borders_color;
+    border-color: _border_color($_bg);
     background-color: $_bg;
     background-clip: padding-box;
-    box-shadow: inset 0 1px transparentize(white, 0.9);
-    text-shadow: 0 1px black;
-    -gtk-icon-shadow: 0 1px black;
-    outline-color: transparentize($osd_fg_color, 0.7);
+    box-shadow: inset 0 -1px 1px _button_hilight_color($_bg);
+    // text-shadow: 0 1px black;
+    // -gtk-icon-shadow: 0 1px black;
+    // outline-color: transparentize($osd_fg_color, 0.7);
   }
 
   @else if $t==osd-active {
   //
   // active osd button
   //
-    $_bg: if($c != $button_bg_color, $c, $osd_borders_color);
+    $_bg: if($c != $button_bg_color, $c, $osd_button_bg_color);
 
     color: white;
-    border-color: $osd_borders_color;
+    border-color: _border_color($_bg);
     background-color: $_bg;
     background-clip: padding-box;
-    box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
-    outline-color: transparentize($osd_fg_color, 0.7);
+    box-shadow: inset 0 2px 3px -1px $_pressed;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
+    // outline-color: transparentize($osd_fg_color, 0.7);
   }
 
   @else if $t==osd-insensitive {
@@ -393,12 +393,12 @@
   // insensitive osd button
   //
     color: $osd_insensitive_fg_color;
-    border-color: $osd_borders_color;
     background-color: $osd_insensitive_bg_color;
+    border-color: _border_color($osd_insensitive_bg_color);
     background-clip: padding-box;
     box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
   }
 
   @else if $t==osd-backdrop {
@@ -408,12 +408,12 @@
     $_bg: if($c != $button_bg_color, transparentize($c, 0.5), $osd_bg_color);
 
     color: $osd_fg_color;
-    border-color: $osd_borders_color;
+    border-color: _border_color($_bg);
     background-color: $_bg;
     background-clip: padding-box;
     box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    // text-shadow: none;
+    // -gtk-icon-shadow: none;
   }
 
   @else if $t==undecorated {
