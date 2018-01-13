@@ -210,7 +210,7 @@
   //
   // hovered button
   //
-    $_bg: if(lightness($c)<35%, lighten($c, 8%), darken($c, 5%));
+    $_bg: if(lightness($c)<35%, lighten($c, 8%), darken($c, 7%));
     $_bc: if($bc == true, _border_color($_bg), $_bg);
   //
     color: $tc;
@@ -245,7 +245,7 @@
   //
   // pushed button
   //
-    $_bg: if(lightness($c)<35%, darken($c, 5%), darken($c, 10%));
+    $_bg: if(lightness($c)<35%, darken($c, 5%), darken($c, 12%));
     $_bc: if($bc == true, _border_color($_bg, $darker: true), $_bg);
   //
     color: $tc;

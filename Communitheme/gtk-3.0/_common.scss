@@ -528,9 +528,17 @@ button {
 
       &:hover {
         transition: $button_transition;
-        transition-duration: 500ms;
+        transition-duration: 250ms;
 
         &:active { transition: $button_transition; }
+      }
+
+      @each $state, $t in (":hover", "hover"),
+      (":active, &:checked", "active"), (":disabled", "insensitive"),
+      (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+      ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+        &#{$state} { @include button($t, $bc: none, $edge: none); }
       }
     }
 
@@ -1389,6 +1397,16 @@ toolbar {
   @extend %toolbar;
 
   padding: 4px 3px 3px 4px;
+
+  button {
+    @each $state, $t in (":hover", "hover"),
+    (":active, &:checked", "active"), (":disabled", "insensitive"),
+    (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+    ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+    (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+      &#{$state} { @include button($t, $bc: none, $edge: none); }
+    }
+  }
 
   // on OSD
   .osd & { background-color: transparent; }
