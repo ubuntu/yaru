@@ -218,6 +218,7 @@ assistant {
 .osd {
   color: $osd_fg_color;
   border: none;
+  box-shadow: inset 0 0 0 1px $osd_borders_color;
   background-color: $osd_bg_color;
   background-clip: padding-box;
 }
@@ -1396,14 +1397,19 @@ toolbar {
   // stand-alone OSD toolbars
   &.osd {
     padding: 13px;
-    border: none;
     border-radius: 5px;
+    border: none;
     background-color: $osd_bg_color;
 
     &.left,
     &.right,
     &.top,
     &.bottom { border-radius: 0; } // positional classes for `attached` osd toolbars
+
+    &.left { box-shadow: inset -1px 0 $osd_borders_color; }
+    &.right { box-shadow: inset 1px 0 $osd_borders_color; }
+    &.top { box-shadow: inset 0 -1px $osd_borders_color; }
+    &.bottom { box-shadow: inset 0 1px $osd_borders_color; }
   }
 
   // toolbar separators
@@ -2953,10 +2959,10 @@ treeview.view radio, treeview.view check {
 
   // OSD
   .osd & {
-    border-color: $osd_borders_color;
-    background-color: transparentize($osd_borders_color, 0.2);
-
-    &:disabled { background-color: $osd_insensitive_bg_color; }
+    // border-color: $osd_borders_color;
+    // background-color: transparentize($osd_borders_color, 0.2);
+    //
+    // &:disabled { background-color: $osd_insensitive_bg_color; }
   }
 }
 
@@ -2981,6 +2987,7 @@ treeview.view radio, treeview.view check {
 
   // OSD
   .osd & {
+    // should resemble regular
     // border-color: $osd_borders_color;
 
     // &:disabled { border-color: transparent; }
@@ -3060,14 +3067,14 @@ scale {
 
     // OSD
     .osd & {
-      background-color: mix($osd_fg_color, $osd_borders_color, 25%);
-
-      &:disabled {
-        &:backdrop, & {
-          border-color: transparent;
-          background-color: transparent;
-        }
-      }
+      // background-color: mix($osd_fg_color, $osd_borders_color, 25%);
+      //
+      // &:disabled {
+      //   &:backdrop, & {
+      //     border-color: transparent;
+      //     background-color: transparent;
+      //   }
+      // }
     }
   }
 
@@ -3075,8 +3082,9 @@ scale {
     $c: $neutral_color;
     @include button(normal, white, $edge: none);
 
-    border: 1px solid $borders_color;
+    border: 1px solid _border_color($dark_fill);
     border-radius: 6px;
+    background-clip: border-box;
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
@@ -3099,34 +3107,34 @@ scale {
 
     // OSD
     .osd & {
-      @include button(osd);
-      border-color: darken($osd_borders_color, 3%);
-      background-color: opacify($osd_bg_color, 1); // solid background needed here
-
-      &:hover {
-        @include button(osd-hover);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
-      }
-
-      &:active {
-        @include button(osd-active);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
-      }
-
-      &:disabled {
-        @include button(osd-insensitive);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
-      }
-
-      &:backdrop {
-        @include button(osd-backdrop);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
-
-        &:disabled {
-          @include button(osd-backdrop-insensitive);
-          background-color: opacify($osd_bg_color, 1); // solid background needed here
-        }
-      }
+      // @include button(osd);
+      // border-color: darken($osd_borders_color, 3%);
+      // background-color: opacify($osd_bg_color, 1); // solid background needed here
+      //
+      // &:hover {
+      //   @include button(osd-hover);
+      //   background-color: opacify($osd_bg_color, 1); // solid background needed here
+      // }
+      //
+      // &:active {
+      //   @include button(osd-active);
+      //   background-color: opacify($osd_bg_color, 1); // solid background needed here
+      // }
+      //
+      // &:disabled {
+      //   @include button(osd-insensitive);
+      //   background-color: opacify($osd_bg_color, 1); // solid background needed here
+      // }
+      //
+      // &:backdrop {
+      //   @include button(osd-backdrop);
+      //   background-color: opacify($osd_bg_color, 1); // solid background needed here
+      //
+      //   &:disabled {
+      //     @include button(osd-backdrop-insensitive);
+      //     background-color: opacify($osd_bg_color, 1); // solid background needed here
+      //   }
+      // }
     }
   }
 
@@ -3729,13 +3737,14 @@ row {
 
   padding: 10px;
   border-radius: 0 0 5px 5px;
-  background-color: $osd_bg_color;
-  background-image: linear-gradient(to bottom, transparentize(black, 0.8),
-                                               transparent 2px);
+  background-color: transparentize($jet, 0.1);
+  // background-image: linear-gradient(to bottom, transparentize(black, 0.8),
+  //                                             transparent 2px);
   background-clip: padding-box;
 
   &:backdrop {
-    background-image: none;
+    // background-image: none;
+    background-color: transparentize($backdrop_headerbar_bg_color, 0.1);
     transition: $backdrop_transition;
   }
 
@@ -4153,9 +4162,9 @@ tooltip {
   &.background {
     // background-color needs to be set this way otherwise it gets drawn twice
     // see https://bugzilla.gnome.org/show_bug.cgi?id=736155 for details.
-    background-color: transparentize($jet, 0.2);
+    background-color: transparentize($jet, 0.1);
     background-clip: padding-box;
-    border: 1px solid $tooltip_borders_color; // this suble border is meant to
+    border: 1px solid $osd_borders_color;     // this suble border is meant to
                                               // not make the tooltip melt with
                                               // very dark backgrounds
   }
@@ -4170,7 +4179,7 @@ tooltip {
   * { // Yeah this is ugly
     padding: 4px;
     background-color: transparent;
-    color: white;
+    color: $porcelain;
   }
 }
 
