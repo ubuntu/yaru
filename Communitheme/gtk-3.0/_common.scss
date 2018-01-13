@@ -4457,15 +4457,11 @@ button.titlebutton, .selection-mode button.titlebutton {
   margin: 0;
   min-width: 32px;
   min-height: 42px;
-  background-size: 22px;
+  background-size: 20px;
   background-position: center;
   background-repeat: no-repeat;
 
-  &:backdrop { color: $backdrop_fg_color; }
-
   &:not(.close) {
-    $c: $headerbar_bg_color;
-    $tc: $headerbar_fg_color;
     @each $state, $t in (':hover', '-hover'), (':active', '-active') {
       &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton#{$t}.png"), url("assets/titlebutton#{$t}@2.png")); }
     }
@@ -4473,10 +4469,11 @@ button.titlebutton, .selection-mode button.titlebutton {
 
   &.close {
     @each $state, $t in ('', ''), (':backdrop','-backdrop'),
-    (':hover', '-hover'), (':active', '-active') {
+    (':hover, &:backdrop:hover', '-hover'), (':active', '-active') {
       &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/titlebutton#{$t}@2.png")); }
     }
   }
+  &:backdrop:hover { color: $selected_fg_color; }
 }
 
 // catch all extend :)
