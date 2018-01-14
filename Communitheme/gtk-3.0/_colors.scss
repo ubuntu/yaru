@@ -6,7 +6,7 @@
 $base_color: if($variant == 'light', #FFFFFF, #292933);
 $bg_color: if($variant == 'light', #FAFAFA, #1C1B21);
 $fg_color: if($variant == 'light', $slate, $porcelain);
-$text_color: transparentize($fg_color, .1);
+$text_color: transparentize($fg_color, .15);
 //
 $selected_fg_color: #ffffff;
 $selected_bg_color: $orange;
@@ -56,6 +56,7 @@ $drop_target_color: $green;
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
 $insensitive_headerbar_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
+$insensitive_dark_fill: transparentize($dark_fill, 0.6);
 $insensitive_borders_color: transparentize($borders_color, 0.6);
 
 //colors for the backdrop state, derived from the main colors.
@@ -64,9 +65,10 @@ $backdrop_text_color: mix($text_color, $backdrop_base_color, 80%);
 $backdrop_bg_color: $bg_color;
 $backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 50%);
 $backdrop_insensitive_color: if($variant == 'light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 15%));
+$backdrop_insensitive_dark_fill: transparentize($insensitive_dark_fill, .3);
 $backdrop_selected_fg_color: if($variant == 'light', $backdrop_base_color, $backdrop_text_color);
 $backdrop_borders_color: mix($borders_color, $bg_color, 80%);
-$backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
+$backdrop_dark_fill: transparentize($dark_fill, 0.15);
 $backdrop_sidebar_bg_color: mix($backdrop_bg_color, $backdrop_base_color, 50%);
 
 $backdrop_scrollbar_bg_color: darken($backdrop_bg_color, 3%);
