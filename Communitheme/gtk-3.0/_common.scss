@@ -37,7 +37,6 @@ $button_transition: all 200ms $ease-out-quad;
   outline-offset: -3px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
-
   -gtk-secondary-caret-color: $selected_bg_color
 }
 
@@ -1566,32 +1565,6 @@ headerbar {
       }
     }
 
-    %stackswitcher_basic {
-      @extend %underline_focus;
-      @extend %undecorated_button;
-      border-radius: 0;
-      -gtk-outline-radius: 0;
-    }
-
-    stackswitcher.horizontal.linked.stack-switcher button.text-button {
-      // style the stackswitcher
-      @extend %stackswitcher_basic;
-      &:checked { color: $headerbar_fg_color; }
-      min-width: 100px;
-      margin-left: 4px;
-      margin-right: 4px;
-    }
-
-    .linked.path-bar button {
-        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button {
-          // style the pathbar
-          @extend %stackswitcher_basic;
-          &:checked { color: $headerbar_fg_color; }
-          &:not(:first-child) { margin-left: 4px; }
-          &:not(:last-child) { margin-right: 4px; }
-        }
-      }
-
     .linked button, .linked button.image-button, .horizontal.linked entry {
       // linked buttons are not flat
       // @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
@@ -1613,6 +1586,48 @@ headerbar {
       &:not(:only-child):not(:first-child) { margin-left: 2px; }
       &:not(:only-child):not(:last-child) { margin-right: 2px; }
     }
+
+    %stackswitcher_basic {
+      @extend %underline_focus;
+      @extend %undecorated_button;
+      border-radius: 0;
+      -gtk-outline-radius: 0;
+    }
+
+    stackswitcher.horizontal.linked.stack-switcher button.text-button {
+      // style the stackswitcher
+      @extend %stackswitcher_basic;
+      &:checked { color: $tc; }
+      min-width: 100px;
+      border: none;
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
+    .linked.path-bar button {
+        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button {
+          // style the pathbar
+          @extend %stackswitcher_basic;
+          &:checked { color: $tc; }
+          // &:not(:first-child) { margin-left: 4px; }
+          // &:not(:last-child) { margin-right: 4px; }
+        }
+
+        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button, &.slider-button {
+        $c: lighten($c, 8%);
+        background-color: $c;
+        margin-left: 0;
+        margin-right: 0;
+
+        &:backdrop { background-color: mix($backdrop_headerbar_bg_color, $c, 60%); }
+        }
+
+        &.slider-button {
+          border: none;
+          &:first-child { border-radius: 5px 0 0 5px; }
+          &:last-child { border-radius: 0 5px 5px 0; }
+        }
+      }
   }
 
     &:backdrop {
@@ -1635,14 +1650,14 @@ headerbar {
     .subtitle:link { @extend *:link:selected;  }
 
     button {
-        @each $state, $t in ("", "normal"), (":hover", "hover"),
+        @each $state, $t in (":hover", "hover"),
         (":active, &:checked", "active"), (":disabled", "insensitive"),
-        (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+        (":disabled:active, &:disabled:checked", "insensitive-active"),
         ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
         (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
           $c: darken($neutral_color, 10%); // like the infobar
           $tc: white;
-          &, &.selection-menu { &#{$state} { @include button($t, $c, $tc); } }
+          &, &.selection-menu { &#{$state} { @include button($t, $c, $tc, $bc: false, $edge: none); } }
         }
 
       &.flat, &.selection-menu {
@@ -1839,9 +1854,17 @@ headerbar { // headerbar border rounding
     label:first-child { padding-left: 8px; }
   }
 
-  &.text-button, &.toggle, &.toggle.image-button {
-    &, &:hover, &:active, &:checked { @include button(normal); }
+  &.text-button, &.toggle, &.toggle.image-button, &.slider-button {
+    $c: $button_bg_color;
+    &, &:hover, &:active, &:checked, &:disabled { background-color: $c; }
+    &:backdrop { background-color: mix($c, $base_color, 60%); }
+
+    &:checked { color: $fg_color; }
     @extend %underline_focus;
+    border-color: $borders_color;
+  }
+
+  &.text-button, &.toggle, &.toggle.image-button {
     border-left-style: none;
     border-right-style: none;
   }
@@ -1855,7 +1878,8 @@ headerbar { // headerbar border rounding
     padding-left: 0;
     padding-right: 0;
 
-    &:first-child { border-right-style: solid; }
+    &:first-child { border-right-style: none; }
+    &:last-child { border-left-style: none; }
   }
 }
 
@@ -2021,6 +2045,7 @@ treeview.view {
   padding: 0 6px;
   background-image: none;
   border-style: none solid solid none;
+  border-color: $borders_color; // don't darken the bottom border color
   border-radius: 0;
 
   &:backdrop {
@@ -2661,32 +2686,32 @@ switch {
   font-weight: bold;
   font-size: smaller;
   outline-offset: 0; // -4px;
-  box-shadow: inset 0 -1px 0 0 $borders_edge, inset 0 2px 0 0 $borders_edge;
+  box-shadow: inset 0 1px 0 0 _border_color($dark_fill), inset 0 1px 0 0 $borders_edge;
   border-radius: 5px;
   color: transparent;
   background-color: $dark_fill;
 
   &:checked {
     color: transparent;
-    border-color: _border_color($c);
+    box-shadow: inset 0 1px 0 0 _border_color($c), inset 0 1px 0 0 $borders_edge;
     background-color: $c;
   }
 
   &:disabled {
     color: transparent; // $insensitive_fg_color;
     box-shadow: inset 0 0 0 1px $insensitive_borders_color;
-    background-color: $insensitive_bg_color;
+    background-color: $insensitive_dark_fill;
   }
 
   &:backdrop {
     color: transparent; // $backdrop_fg_color;
     // border-color: $backdrop_borders_color;
-    background-color: $backdrop_borders_color;
-    box-shadow: inset 0 0 0 1px $backdrop_borders_color;
+    background-color: $backdrop_dark_fill;
+    box-shadow: inset 0 0 0 1px _border_color($backdrop_dark_fill);
     transition: $backdrop_transition;
 
     &:checked {
-      border-color: _backdrop_color($c);
+      box-shadow: inset 0 0 0 1px _backdrop_color($c);
       background-color: _backdrop_color($c);
     }
 
@@ -2694,43 +2719,45 @@ switch {
       color: transparent; // $backdrop_insensitive_color;
       // border-color: $backdrop_borders_color;
       box-shadow: inset 0 0 0 1px $backdrop_borders_color;
-      background-color: $insensitive_bg_color;
+      background-color: $backdrop_insensitive_dark_fill;
     }
   }
 
   slider {
-    // margin: -1px;
+    $c: $success_color;
     min-width: 22px;
     min-height: 24px;
-    // border: 1px solid;
     outline-offset: -1px;
     outline-radius: 5px;
     outline-color: $focus_color;
     border-radius: 5px;
+    background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
 
     @include button(normal, white, $edge: none);
-    box-shadow: inset 0 0 0 1px if($variant == "light", $borders_color, _border_color($dark_fill));
-    // border-color: darken($borders_color, 10%);
+    box-shadow: inset 0 1px 0 0 $borders_edge, inset 0 0 0 1px if($variant == "light", $borders_color, _border_color($dark_fill));
   }
 
   &:hover slider { /* ?? */ } // what should this look like?
 
-  // &:checked slider { border: 1px solid _border_color($c); }
+  &:checked slider { box-shadow: inset 0 0 0 1px _border_color($c); }
 
-  &:disabled slider { @include button(insensitive, white); box-shadow: inset 0 0 0 1px $insensitive_borders_color; }
+  &:disabled slider {
+    @include button(insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none);
+    box-shadow: inset 0 0 0 1px $insensitive_borders_color;
+  }
 
   &:backdrop {
     slider {
       transition: $backdrop_transition;
 
-      @include button(backdrop);
+      @include button(backdrop, white, $edge: none);
       box-shadow: inset 0 0 0 1px $backdrop_borders_color;
     }
 
     // &:checked slider { border-color: _backdrop_color($c); }
 
-    &:disabled slider { @include button(backdrop-insensitive); box-shadow: inset 0 0 0 1px $backdrop_borders_color; }
+    &:disabled slider { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none); box-shadow: inset 0 0 0 1px $backdrop_borders_color; }
   }
 
   // row:selected & { TODO: this should theortically look fine but it should still be tested
@@ -2814,7 +2841,7 @@ radio {
   // border: 1px solid;
   -gtk-icon-source: none;
 
-    @each $state, $t in ("", "normal-alt"), (":hover", "hover"), (":active", "active"),
+    @each $state, $t in ("", "normal-alt"), (":hover", "hover-alt"), (":active", "active"),
     (":disabled", "insensitive"), (":disabled:active, &:disabled:checked", "insensitive-active"),
     (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
     &#{$state} { @include button($t, $dark_fill, $edge: none); @if $state == "" { box-shadow: none; } }
@@ -2837,10 +2864,10 @@ radio {
     &:disabled { @include button(osd-insensitive); }
   }
 
-  menu menuitem & {
+  menu menuitem &, popover & {
     margin: 0; // this is a workaround for a menu check/radio size allocation issue
 
-    &, &:hover, &:disabled { //FIXME use button reset mixin
+    &, &:hover, &:disabled {
       background-color: transparent;
       box-shadow: none;
       color: inherit;
@@ -2859,10 +2886,10 @@ radio {
                                                 'emblem-ok-symbolic',
                                                 'list-remove-symbolic')); // use the suru checkmark/line
 
-      @each $state, $t in ("", "normal-alt"), (":hover", "hover"), (":active", "active"),
+      @each $state, $t in ("", "normal-alt"), (":hover", "hover-alt"), (":active", "active"),
       (":disabled", "insensitive"), (":disabled:active, &:disabled:checked", "insensitive-active"),
       (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
-        &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
+        &#{$state} { @include button($t, $c, $tc, $edge: none); }
       }
     }
   }
@@ -2912,17 +2939,17 @@ menu menuitem, treeview.view {
   }
 }
 
-menu menuitem {
+menu menuitem, popover {
   radio, check {
     $c: $success_color;
-    border: 1px solid $borders_color;
+    &, &:hover { border: 1px solid $borders_color; }
     box-shadow: none;
     &:checked:not(:backdrop), &:indeterminate:not(:backdrop) { transition: none; }
       @each $t, $c in (':checked:not(:backdrop)', $success_color),
                       (':indeterminate:not(:backdrop)', $warning_color) {
         &#{$t} {
         &, &:hover, &:checked:hover { border-color: $c; color: $c; }
-        &, &:disabled, &:hover, &:checked:hover { background-color: transparent; box-shadow: none; }
+        &, &:disabled, &:disabled:checked, &:hover, &:checked:hover { background-color: transparent; box-shadow: none; }
         &:disabled { border-color: $borders_color; color: inherit; }
       }
     }
@@ -2963,13 +2990,13 @@ treeview.view radio, treeview.view check {
   min-width: 4px;
   min-height: 4px;
 
-  &:disabled { background-color: $insensitive_bg_color; }
+  &:disabled { background-color: $insensitive_dark_fill; }
 
   &:backdrop {
     background-color: $backdrop_dark_fill;
     transition: $backdrop_transition;
 
-    &:disabled { background-color: $insensitive_bg_color; }
+    &:disabled { background-color: $backdrop_insensitive_dark_fill; }
   }
 
   // ...on selected list rows
@@ -3102,7 +3129,7 @@ scale {
 
     border: 1px solid _border_color($dark_fill);
     border-radius: 6px;
-    background-clip: border-box;
+    background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
@@ -3110,14 +3137,13 @@ scale {
 
     &:active { border-color: _border_color($c); }
 
-    &:disabled { @include button(insensitive); }
+    &:disabled { @include button(insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none); }
 
     &:backdrop {
       transition: $backdrop_transition;
-
-      @include button(backdrop);
-
-      &:disabled { @include button(backdrop-insensitive); }
+      @include button(backdrop, white, $edge: none);
+      &:disabled { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none); }
+      &, &:disabled { border: 1px solid _border_color($backdrop_dark_fill); }
     }
 
     // ...on selected list rows
@@ -3548,11 +3574,13 @@ levelbar {
   &:backdrop { transition: $backdrop_transition; }
 
   trough {
-    padding: 2px;
+    padding: 3px;
     border-radius: 3px;
-    @include entry(normal, $c: $dark_fill);
+    border: none;
+    @include entry(normal, $c: $base_color);
 
-    &:backdrop { @include entry(backdrop, $c: $dark_fill); }
+    &:backdrop { @include entry(backdrop, $c: $base_color); }
+    box-shadow: inset 0 0 0 1px $borders_color;
   }
 
   block {
@@ -3579,7 +3607,7 @@ levelbar {
 
     &.empty {
       // TODO: this looks kind of ugly
-      $_bg: transparentize(black, if($variant == "light", .8, .7));
+      $_bg: if($variant == "light", $dark_fill, transparentize($dark_fill, .7));
       background-color: $_bg;
 
       &:backdrop { background-color: transparent; }

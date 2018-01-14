@@ -23,16 +23,16 @@ list.tweak-categories separator {
   // makes nautilus tabs look much nicer
     border: none
   }
-}
 
-.nautilus-desktop-window {
-  // get rid of white line on the desktop
-  // a 1px white line is shown at the top of the desktop if desktop icons are enabled
   .searchbar-container searchbar {
+    // get rid of a 1px white line shown at the top of the window
+    // applies to the desktop too
     background: transparent;
     border-color: transparent;
   }
+}
 
+.nautilus-desktop-window {
   .nautilus-desktop.view {
     // use white text for desktop icons
     // otherwise it uses the variant dependent grey or white text color
@@ -161,4 +161,13 @@ buttonbox.horizontal.linked button.toggle.toolbar-primary-buttons-software {
   min-width: 80px;
   margin-left: 4px;
   margin-right: 4px;
+}
+
+/***********
+ * Gedit *
+ ***********/
+
+.gedit-bottom-panel-paned ~ statusbar {
+  // give gedit's bottom panel a border
+  border-top: 1px solid $borders_color;
 }
