@@ -3,10 +3,10 @@
 // generic drawing of more complex things
 
 @function _backdrop_color($c) {
-// desaturates the red, green, orange, etc. colors for use in the backdrop state
+// adjusts colors for use in the backdrop state
 // colors are darkened when using the dark theme so they aren't such a light grey
   @if $variant != 'light' { $c: darken($c, 7.5%); }
-  @return desaturate($c, 75%);
+  @return transparentize(desaturate($c, 75%), .4);
 }
 
 // @function _widget_edge($c:$borders_edge) {
@@ -247,7 +247,7 @@
   //
   // pushed button
   //
-    $_bg: if(lightness($c)<35%, darken($c, 5%), darken($c, 12%));
+    $_bg: if(lightness($c)<35%, darken($c, 8%), darken($c, 12%));
     $_bc: if($bc == true, _border_color($_bg, $darker: true), $_bg);
   //
     color: $tc;

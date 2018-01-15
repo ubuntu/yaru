@@ -163,6 +163,24 @@ gtk3_assets = [
   'assets/text-select-start-hover-dark.png',
   'assets/text-select-start-hover.png',
   'assets/text-select-start.png',
+  'assets/titlebutton-hover.png',
+  'assets/titlebutton-hover@2.png',
+  'assets/titlebutton-active.png',
+  'assets/titlebutton-active@2.png',
+  'assets/titlebutton-selection-mode-hover.png',
+  'assets/titlebutton-selection-mode-hover@2.png',
+  'assets/titlebutton-selection-mode-active.png',
+  'assets/titlebutton-selection-mode-active@2.png',
+  'assets/close-button.png',
+  'assets/close-button@2.png',
+  'assets/close-button-hover.png',
+  'assets/close-button-hover@2.png',
+  'assets/close-button-active.png',
+  'assets/close-button-active@2.png',
+  'assets/close-button-backdrop.png',
+  'assets/close-button-backdrop@2.png',
+  'assets/close-button-selection-mode.png',
+  'assets/close-button-selection-mode@2.png'
 ]
 
 # generate .css files

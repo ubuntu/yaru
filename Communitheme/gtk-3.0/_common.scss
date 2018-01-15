@@ -536,7 +536,7 @@ button {
       @each $state, $t in (":hover", "hover"),
       (":active, &:checked", "active"), (":disabled", "insensitive"),
       (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-      ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
       (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
         &#{$state} { @include button($t, $bc: none, $edge: none); }
       }
@@ -1399,13 +1399,15 @@ toolbar {
   padding: 4px 3px 3px 4px;
 
   button {
-    @each $state, $t in (":hover", "hover"),
+    @each $state, $t in ("", "normal"), (":hover", "hover"),
     (":active, &:checked", "active"), (":disabled", "insensitive"),
     (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-    ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+    (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
     (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
       &#{$state} { @include button($t, $bc: none, $edge: none); }
     }
+
+    &, &:backdrop { &, &:disabled { background-color: transparent; border-color: transparent; } }
   }
 
   // on OSD
@@ -1538,7 +1540,7 @@ headerbar {
       @each $state, $t in ("", "normal"), (":hover", "hover"),
       (":active, &:checked", "active"), (":disabled", "insensitive"),
       (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-      ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
       (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
         &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
       }
@@ -1554,10 +1556,10 @@ headerbar {
                                   (destructive-action, $destructive_color) {
         &.#{$b_type} {
           // special buttons are not flat
-          @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
+          @each $state, $t in ("", "normal"), (":hover", "hover"),
           (":active, &:checked", "active"), (":disabled", "insensitive"),
           (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-          ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+          (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
           (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
             &#{$state} { @include button($t, $b_color, $tc, $bc: none, $edge: none); }
           }
@@ -1570,7 +1572,7 @@ headerbar {
       // @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
       // (":active, &:checked", "active"), (":disabled", "insensitive"),
       // (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-      // ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      // (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
       // (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
       //   &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
       // }
@@ -1594,7 +1596,7 @@ headerbar {
       -gtk-outline-radius: 0;
     }
 
-    stackswitcher.horizontal.linked.stack-switcher button.text-button {
+    .horizontal.linked.stack-switcher button.text-button {
       // style the stackswitcher
       @extend %stackswitcher_basic;
       &:checked { color: $tc; }
@@ -1641,10 +1643,18 @@ headerbar {
     border-color: _border_color($c);
     background-color: $c;
 
+    ~ separator, separator {
+      background-image: image(_border_color($c));
+    }
+
     &:backdrop {
       $c: _backdrop_color($c);
       border-color: _border_color($c);
       background-color: $c;
+
+      ~ separator, separator {
+        background-image: image(_border_color($c));
+      }
     }
 
     .subtitle:link { @extend *:link:selected;  }
@@ -1653,7 +1663,7 @@ headerbar {
         @each $state, $t in (":hover", "hover"),
         (":active, &:checked", "active"), (":disabled", "insensitive"),
         (":disabled:active, &:disabled:checked", "insensitive-active"),
-        ("backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+        (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
         (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
           $c: darken($neutral_color, 10%); // like the infobar
           $tc: white;
@@ -1710,8 +1720,8 @@ headerbar {
     padding: 4px 6px;
 
     button.titlebutton,  {
-      min-width: 20px;
-      min-height: 20px;
+      min-width: 26px;
+      min-height: 26px;
       margin: 0;
       padding: 0;
     }
@@ -2698,14 +2708,13 @@ switch {
   }
 
   &:disabled {
-    color: transparent; // $insensitive_fg_color;
+    color: transparent;
     box-shadow: inset 0 0 0 1px $insensitive_borders_color;
     background-color: $insensitive_dark_fill;
   }
 
   &:backdrop {
-    color: transparent; // $backdrop_fg_color;
-    // border-color: $backdrop_borders_color;
+    color: transparent;
     background-color: $backdrop_dark_fill;
     box-shadow: inset 0 0 0 1px _border_color($backdrop_dark_fill);
     transition: $backdrop_transition;
@@ -2717,7 +2726,6 @@ switch {
 
     &:disabled {
       color: transparent; // $backdrop_insensitive_color;
-      // border-color: $backdrop_borders_color;
       box-shadow: inset 0 0 0 1px $backdrop_borders_color;
       background-color: $backdrop_insensitive_dark_fill;
     }
@@ -2725,27 +2733,24 @@ switch {
 
   slider {
     $c: $success_color;
-    min-width: 20px;
+    min-width: 22px;
     min-height: 22px;
+    margin: 2px;
     outline-offset: -1px;
     outline-radius: 5px;
     outline-color: $focus_color;
     border-radius: 5px;
     background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
-    margin: 2px;
 
     @include button(normal, white, $edge: none);
     box-shadow: none;
   }
 
-  &:hover slider { /* ?? */ } // what should this look like?
-
-  //&:checked slider { box-shadow: inset 0 0 0 1px _border_color($c); }
+  &:hover slider { /* ?? */ }
 
   &:disabled slider {
     @include button(insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none);
-    //box-shadow: inset 0 0 0 1px $insensitive_borders_color;
   }
 
   &:backdrop {
@@ -2753,12 +2758,9 @@ switch {
       transition: $backdrop_transition;
 
       @include button(backdrop, white, $edge: none);
-      //box-shadow: inset 0 0 0 1px $backdrop_borders_color;
     }
 
-    // &:checked slider { border-color: _backdrop_color($c); }
-
-    &:disabled slider { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none); /*box-shadow: inset 0 0 0 1px $backdrop_borders_color;*/ }
+    &:disabled slider { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none); }
   }
 
   // row:selected & { TODO: this should theortically look fine but it should still be tested
@@ -3749,14 +3751,14 @@ row {
   outline-offset: 0;
   transition: all 150ms $ease-out-quad;
 
-  &:hover { transition: none; }
+  // &:hover { transition: none; }
 
   &:backdrop { transition: $backdrop_transition; }
 
   &.activatable:not(:backdrop) {
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
 
-    &:hover { background-color: if(variant == light, transparentize($fg_color, 0.9), transparentize($fg_color, 0.95)); }
+    &:hover { background-color: $base_hover_color; }
 
     &:active { box-shadow: inset 0 2px 2px -2px transparentize(black, 0.8); }
 
@@ -4193,7 +4195,7 @@ infobar {
         $tc: white;
           @each $state, $t in ("", "normal"), (":hover", "hover"),
             (":active, &:checked", "active"), (":disabled", "insensitive"),
-            (":backdrop", "backdrop"), ("backdrop:active, &:backdrop:checked", 'backdrop-active'),
+            (":backdrop", "backdrop"), (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
             (":backdrop:disabled", 'backdrop-insensitive') {
               &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
           }
@@ -4493,48 +4495,49 @@ decoration {
 
 // Window Close button
 button.titlebutton {
-  // @extend %button_basic;
-  // @extend %button_basic.flat;
-  // @include _button_text_shadow;
+  &, .selection-mode & { &.close, &:not(.close) { &, &:hover, &:active, &:backdrop { background-color: transparent; } } } // reset
+
   border-radius: 100%;
   border: none;
-  min-width: 20px;
-  min-height: 20px;
-  margin: 0 5px;
-  padding: 0;
+  min-width: 26px;
+  min-height: 26px;
+  padding: 0px;
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
 
   &:backdrop { color: $backdrop_fg_color; }
 
   &:not(.close) {
-    $c: $headerbar_bg_color;
-    $tc: $headerbar_fg_color;
+    @each $state, $t in (":hover", "-hover"), (":active", "-active") {
+      &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton#{$t}.png"),
+                                                url("assets/titlebutton#{$t}@2.png")); }
+    }
 
-    @each $state, $t in (':hover', 'hover'), (':active', 'active'), (':disabled', 'insensitive') {
-      &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
+    .selection-mode & {
+      @each $state, $t in (":hover", "-hover"), (":active", "-active") {
+        &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton-selection-mode#{$t}.png"),
+                                                  url("assets/titlebutton-selection-mode#{$t}@2.png")); } }
     }
   }
 
   &.close {
-    $c: $selected_bg_color;
-    $tc: $selected_fg_color;
-    $edge: false;
+    @each $state, $t in ("", ""), (":hover", "-hover"), (":active", "-active"), (":backdrop", "-backdrop") {
+      &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"),
+                                                url("assets/close-button#{$t}@2.png")); }
+    }
 
-    @each $state, $t in ('', 'normal'), (':backdrop','backdrop'),
-    (':hover', 'hover'), (':active', 'active'), (':disabled', 'insensitive') {
-      &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
+    .selection-mode & {
+      background-image: -gtk-scaled(url("assets/close-button-selection-mode.png"),
+                                  url("assets/close-button-selection-mode@2.png"));
+
+      @each $state, $t in (":hover", "-hover"), (":active", "-active") {
+        &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton-selection-mode#{$t}.png"),
+                                                  url("assets/titlebutton-selection-mode#{$t}@2.png")); }
+      }
     }
   }
-
-  .selection-mode & {
-    @extend %button.flat.suggested-action;
-
-    @extend %nobg_selected_items;
-  }
-}
-
-headerbar.selection-mode button.titlebutton,
-.titlebar.selection-mode button.titlebutton {
-  // @include _button_text_shadow(white, $selected_bg_color);
 }
 
 
