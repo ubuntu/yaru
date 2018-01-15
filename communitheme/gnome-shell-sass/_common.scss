@@ -5,7 +5,7 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
 $panel-corner-radius: 0; // 6px;
 $panel-alpha-value: 0.1;
-$dash-alpha-value: $panel-alpha-value;
+$dash-alpha-value: 0.15;
 $popover-alpha-value: 0.025;
 //
 
@@ -165,8 +165,8 @@ StScrollBar {
 
   @each $v in us, intl {
     .toggle-switch-#{$v} {
-      background-image: url("resource:///org/gnome/shell/theme/toggle-off-#{$v}.svg");
-      &:checked { background-image: url("resource:///org/gnome/shell/theme/toggle-on-#{$v}.svg"); }
+      background-image: url("toggle-off-#{$v}.svg");
+      &:checked { background-image: url("toggle-on-#{$v}.svg"); }
     }
   }
 
@@ -565,7 +565,7 @@ StScrollBar {
   .popup-menu-boxpointer,
   .candidate-popup-boxpointer {
     -arrow-border-radius: 6px;
-    -arrow-background-color: transparentize($osd_bg_color, $popover-alpha-value);
+    -arrow-background-color: $_dialog_bg_color;
     -arrow-border-width: 1px;
     -arrow-border-color: $osd_borders_color;
     -arrow-base: 24px;
@@ -604,10 +604,11 @@ StScrollBar {
 
   .osd-monitor-label { font-size: 3em; }
   .level {
+    $c: $dark_fill;
     height: 0.6em;
     border-radius: 0.3em;
-    background-color: $osd_borders_color; // transparentize(darken($osd_bg_color,15%),0.5);
-    color: $osd_fg_color;
+    background-color: $c; // transparentize(darken($osd_bg_color,15%),0.5);
+    color: $c;
   }
   .level-bar {
     background-color: $neutral_color; // $osd_fg_color;
@@ -807,7 +808,7 @@ StScrollBar {
     }
 
     &:hover {
-      color: lighten($_fg, 10%);
+      color: $hover_fg_color;
       text-shadow: none; // 0px 1px 6px rgba(0, 0, 0, 1);
 
       .system-status-icon,
@@ -863,7 +864,7 @@ StScrollBar {
       text-shadow: none;
 
       &:hover {
-        color: lighten($_fg, 10%);
+        color: $hover_fg_color;
       }
     }
 
@@ -1362,7 +1363,7 @@ StScrollBar {
 
   .dash-label { //osd tooltip
     border-radius: 7px;
-    padding: 4px 12px;
+    padding: 6px 12px;
     color: $osd_fg_color;
     background-color: $osd_bg_color;
     border: 1px solid $osd_borders_color;
@@ -1798,11 +1799,13 @@ StScrollBar {
     &:active { @include button(active); }
     &:insensitive { @include button(insensitive); }
     &:default {
-      $_bg: $success_color;
-      @include button(normal,$c:$_bg);
-      &:hover,&:focus { @include button(hover,$c:$_bg); }
-      &:active { @include button(active,$c:$_bg); }
-      &:insensitive { @include button(insensitive, $c:$_bg); }
+      padding-bottom: 5px;
+      padding-top: 5px;
+      border: none;
+      @include button(normal, $c:transparentize($fg_color, 0.85));
+      &:hover,&:focus { @include button(hover, $c:transparentize($fg_color, 0.80)); }
+      &:active { @include button(active, $c:transparentize($fg_color, 0.90)); }
+      &:insensitive { @include button(insensitive, $c:transparentize($fg_color, 0.50)); }
     }
   }
 
@@ -1953,7 +1956,7 @@ StScrollBar {
 
 #lockDialogGroup {
   // background: #2e3436 url(resource:///org/gnome/shell/theme/noise-texture.png);
-  background: #2c001e url("lock-gradient.svg");
+  background: #2c001e url("lockscreen-gradient.svg");
   background-size: cover; // 40px;
   background-position: top left;
   background-repeat: no-repeat; // repeat;

@@ -93,13 +93,16 @@
         background-color: transparent !important;
         transition-duration: 100ms !important;
       }
+      background-color: $_dialog_bg_color;
     }
 
     &,
     &:focus, &:hover,
     &:active, &:checked {
-      .overview-icon :first-child {
+      .overview-icon {
         background-image: url("ubuntu-logo-icon.svg") !important;
+        background-position: center;
+        background-repeat: no-repeat;
         background-size: 48px !important;
       }
     }
