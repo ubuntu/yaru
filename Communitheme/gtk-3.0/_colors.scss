@@ -60,9 +60,9 @@ $insensitive_dark_fill: transparentize($dark_fill, 0.6);
 $insensitive_borders_color: transparentize($borders_color, 0.6);
 
 //colors for the backdrop state, derived from the main colors.
-$backdrop_base_color: if($variant == 'light', darken($base_color, 1%), lighten($base_color, 1%));
+$backdrop_base_color: if($variant == 'light', darken($base_color, 5%), lighten($base_color, 5%));
 $backdrop_text_color: mix($text_color, $backdrop_base_color, 80%);
-$backdrop_bg_color: $bg_color;
+$backdrop_bg_color: if($variant == 'light', darken($bg_color, 5%), lighten($bg_color, 5%));
 $backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 50%);
 $backdrop_insensitive_color: if($variant == 'light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 15%));
 $backdrop_insensitive_dark_fill: transparentize($insensitive_dark_fill, .3);
