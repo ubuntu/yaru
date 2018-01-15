@@ -3526,6 +3526,7 @@ progressbar {
   &.osd { // progressbar.osd used for epiphany page loading progress
     min-width: 3px;
     min-height: 3px;
+    box-shadow: none;
     background-color: transparent;
 
     trough {
