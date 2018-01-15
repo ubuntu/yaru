@@ -1980,7 +1980,7 @@ treeview.view {
 
   &.progressbar { // progress bar in treeviews
     @if $variant == light { color: $base_color; }
-    $c: $success_color;
+    $c: $neutral_color;
     border-radius: 3px;
     background-color: $c;
 
@@ -2822,7 +2822,6 @@ checkbutton.text-button, radiobutton.text-button {
 check,
 radio {
   margin: 0 4px;
-  padding: 2px;
 
   &:only-child { margin: 0; }
 
@@ -2839,9 +2838,9 @@ radio {
     }
   }
 
-  min-height: 16px;
-  min-width: 16px;
-  // border: 1px solid;
+  min-height: 14px;
+  min-width: 14px;
+  padding: 2px;
   -gtk-icon-source: none;
 
     @each $state, $t in ("", "normal-alt"), (":hover", "hover-alt"), (":active", "active"),
@@ -2881,14 +2880,13 @@ radio {
 %check, %radio, check, radio {
   $c: $dark_fill;
   $tc: white;
+  background-image: none;
+  background-position: center;
+  background-repeat: no-repeat;
 
   @each $t, $c in (':checked:not(:indeterminate)', $success_color),
                   (':indeterminate', $warning_color) {
     &#{$t} {
-      -gtk-icon-source: -gtk-icontheme(if($t == ':checked:not(:indeterminate)',
-                                                'emblem-ok-symbolic',
-                                                'list-remove-symbolic')); // use the suru checkmark/line
-
       @each $state, $t in ("", "normal-alt"), (":hover", "hover-alt"), (":active", "active"),
       (":disabled", "insensitive"), (":disabled:active, &:disabled:checked", "insensitive-active"),
       (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
@@ -2900,14 +2898,23 @@ radio {
 
 %check,
 check {
-  -gtk-icon-source: none;
   border-radius: 3px;
+
+  &:checked { -gtk-icon-source: -gtk-recolor(url("assets/check-symbolic.symbolic.png")); }
+
+  &:indeterminate { -gtk-icon-source: -gtk-recolor(url("assets/dash-symbolic.symbolic.png")); }
 }
 
 %radio,
 radio {
   border-radius: 100%;
+
+  &:checked { -gtk-icon-source: -gtk-recolor(url("assets/bullet-symbolic.symbolic.png")); }
+
+  &:indeterminate { -gtk-icon-source: -gtk-recolor(url("assets/dash-symbolic.symbolic.png")); }
 }
+
+
 
 // ANIMATION:
 // this is made with those pretty convoluted transitions, since checks and radios have to animate only on state changes,
@@ -3234,8 +3241,6 @@ scale {
   // *WARNING* scale with marks madness following
 
   // FIXME: OSD and selected list rows missing, I don't feel like adding the other 144 assets needed for those...
-  $suffix: if($variant == 'light', '', '-dark');
-
   @each $dir_class, $dir_infix in ('horizontal', 'horz'),
                                   ('vertical', 'vert') {
     @each $marks_infix, $marks_class in ('scale-has-marks-above', 'marks-before:not(.marks-after)'),
@@ -3253,10 +3258,10 @@ scale {
               // an asymmetric slider asset is used here, so the margins are uneven, the smaller
               // margin is set on the point side.
               margin: -10px;
-              $_scale_asset: 'assets/slider-#{$dir_infix}-#{$marks_infix}#{$state_infix}#{$suffix}';
+              $_scale_asset: 'assets/slider-#{$dir_infix}-#{$marks_infix}#{$state_infix}';
               border-style: none;
               border-radius: 0;
-
+              background-size: 14px;
               background-color: transparent;
               background-image: -gtk-scaled(url('#{$_scale_asset}.png'), url('#{$_scale_asset}@2.png'));
 
@@ -3470,7 +3475,7 @@ progressbar {
   &:backdrop trough { @extend %scale_trough:backdrop; } // looks like states are not passed to the trough component here
 
   %progressbar_highlight {
-    $c: $success_color;
+    $c: $neutral_color;
     border-radius: 3px;
     background-color: $c;
 
@@ -3606,7 +3611,7 @@ levelbar {
     }
 
     &.full {
-      @include block_highlight($success_color);
+      @include block_highlight($neutral_color);
     }
 
     &.empty {
