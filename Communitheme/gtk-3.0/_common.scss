@@ -2725,26 +2725,27 @@ switch {
 
   slider {
     $c: $success_color;
-    min-width: 22px;
-    min-height: 24px;
+    min-width: 20px;
+    min-height: 22px;
     outline-offset: -1px;
     outline-radius: 5px;
     outline-color: $focus_color;
     border-radius: 5px;
     background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
+    margin: 2px;
 
     @include button(normal, white, $edge: none);
-    box-shadow: inset 0 1px 0 0 $borders_edge, inset 0 0 0 1px if($variant == "light", $borders_color, _border_color($dark_fill));
+    box-shadow: none;
   }
 
   &:hover slider { /* ?? */ } // what should this look like?
 
-  &:checked slider { box-shadow: inset 0 0 0 1px _border_color($c); }
+  //&:checked slider { box-shadow: inset 0 0 0 1px _border_color($c); }
 
   &:disabled slider {
     @include button(insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none);
-    box-shadow: inset 0 0 0 1px $insensitive_borders_color;
+    //box-shadow: inset 0 0 0 1px $insensitive_borders_color;
   }
 
   &:backdrop {
@@ -2752,12 +2753,12 @@ switch {
       transition: $backdrop_transition;
 
       @include button(backdrop, white, $edge: none);
-      box-shadow: inset 0 0 0 1px $backdrop_borders_color;
+      //box-shadow: inset 0 0 0 1px $backdrop_borders_color;
     }
 
     // &:checked slider { border-color: _backdrop_color($c); }
 
-    &:disabled slider { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none); box-shadow: inset 0 0 0 1px $backdrop_borders_color; }
+    &:disabled slider { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 60%)), $edge: none); /*box-shadow: inset 0 0 0 1px $backdrop_borders_color;*/ }
   }
 
   // row:selected & { TODO: this should theortically look fine but it should still be tested
