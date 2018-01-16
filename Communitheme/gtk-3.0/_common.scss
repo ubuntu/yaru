@@ -964,6 +964,7 @@ toolbar.inline-toolbar toolbutton:backdrop {
   &:first-child {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    border-right-style: none;
     -gtk-outline-radius: 5px 0 0 5px ;
 
   }
