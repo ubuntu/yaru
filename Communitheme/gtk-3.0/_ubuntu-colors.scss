@@ -18,7 +18,6 @@ $green: #3EB34F;
 $blue: #19B6EE;
 $purple: #762572;
 
-
 // Terminal colors
 $terminal_base_color: #213D45;
 $terminal_bg_color: #17333C;
@@ -33,6 +32,9 @@ $terminal_selected_bg: #102A37;
 // $headerbar_bg_color: #383634; // #333230;
 $headerbar_bg_color: #303030;
 $headerbar_fg_color: $porcelain;
+$headerbar_insensitive_fg_color: transparentize(mix($headerbar_fg_color, $headerbar_bg_color, 50%), .25);
+$headerbar_backdrop_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 80%);
+$headerbar_backdrop_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 35%);
 $backdrop_headerbar_bg_color: lighten($headerbar_bg_color, 5%);
 $menubar_bg_color: lighten($headerbar_bg_color, 2.5%);
 $backdrop_menubar_bg_color: lighten($menubar_bg_color, 5%);
