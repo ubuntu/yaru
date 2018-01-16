@@ -149,11 +149,11 @@ StScrollBar {
   StBin {
     width: 24px;
     height: 22px;
-    background-image: url("resource:///org/gnome/shell/theme/checkbox-off.svg");
+    background-image: url("checkbox-off.svg");
   }
-  &:focus StBin { background-image: url("resource:///org/gnome/shell/theme/checkbox-off-focused.svg"); }
-  &:checked StBin { background-image: url("resource:///org/gnome/shell/theme/checkbox.svg"); }
-  &:focus:checked StBin { background-image: url("resource:///org/gnome/shell/theme/checkbox-focused.svg"); }
+  &:focus StBin { background-image: url("checkbox-off-focused.svg"); }
+  &:checked StBin { background-image: url("checkbox.svg"); }
+  &:focus:checked StBin { background-image: url("checkbox-focused.svg"); }
 }
 
 /* Switches */
@@ -161,6 +161,7 @@ StScrollBar {
   width: 65px;
   height: 22px;
   background-size: contain;
+  background-position: right center;
 }
 
   @each $v in us, intl {
@@ -992,8 +993,8 @@ StScrollBar {
       border-radius: 6px; // 1.4em;
       &:hover,&:focus { background-color: lighten($bg_color,5%); }
       &:active,&:selected {
-        background-color: $base_active_color;
-        color: $indication_bg_color;
+        background-color: $selected_bg_color;
+        color: white;
         border-color: transparent; //avoid jumparound due to today
       }
       &.calendar-day-heading {  //day of week heading
@@ -1174,7 +1175,7 @@ StScrollBar {
 .ripple-box {
   width: 52px;
   height: 52px;
-  background-image: url("resource:///org/gnome/shell/theme/corner-ripple-ltr.png");
+  background-image: url("corner-ripple-ltr.svg");
   background-size: contain;
 }
 
