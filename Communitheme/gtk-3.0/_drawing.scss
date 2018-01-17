@@ -34,7 +34,7 @@
   @else { @return if($fc==$selected_bg_color, $selected_borders_color, darken($fc, 35%)); }
 }
 
-@function entry_focus_shadow($fc:$selected_bg_color) { @return /*0 0 2px 2px rgba(0, 0, 0, 0.025),*/ inset 0 0 0 1px $fc; }
+@function entry_focus_shadow($fc:$selected_bg_color) { @return /*0 0 2px 2px rgba(0, 0, 0, 0.025),*/ 0 0 2px 2px transparentize($fc, .85); }
 
 @mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $text_color, $edge: none) {
 //
@@ -68,7 +68,7 @@
     $_bc: if($c == $headerbar_bg_color, $graphite, $c);
     color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
     border-color: $insensitive_borders_color; // $borders_color;
-    background-color: if($c != $base_color, mix($c, $base_color, 85%), $insensitive_bg_color);
+    background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
     box-shadow: $_entry_edge;
   }
   @if $t==backdrop {
@@ -260,10 +260,9 @@
   //
   // insensitive button
   //
-    $_bg: if($c != $button_bg_color, mix($c, darken(if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), if(lightness($c)<35%, 95%, 0%)), 85%),
-          $insensitive_bg_color);
+    $_bg: if($c != $button_bg_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
 
-    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color); }
+    label, & { color: transparentize(if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color), if($tc == $headerbar_fg_color, 0.25, 0)); }
     $_bc: if($bc == true, if($c == $button_bg_color, $insensitive_borders_color, _border_color($_bg)), $_bg);
   //
     background-color: $_bg;
@@ -275,7 +274,7 @@
   //
   // insensitive pushed button
   //
-    $_bg: darken(mix($c, darken(if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), if(lightness($c)<35%, 95%, 0%)), 85%), 8%);
+    $_bg: darken(mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), 8%);
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color); }
     $_bc: if($bc == true, _border_color($_bg, $darker: true), $_bg);
   //
@@ -288,8 +287,10 @@
   //
   // backdrop button
   //
-    $_bg: if($c != $button_bg_color, _backdrop_color($c), if($c == $headerbar_bg_color, $backdrop_headerbar_bg_color, $backdrop_bg_color));
-
+    $_bg: null;
+    @if $c == $headerbar_bg_color { $_bg: $backdrop_headerbar_bg_color; }
+    @else { $_bg: if($c == $button_bg_color, $backdrop_bg_color, _backdrop_color($c)); }
+  //
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
 
     background-color: $_bg;
@@ -302,8 +303,10 @@
   //
   // backdrop pushed button
   //
-    $_bg: if($c != $button_bg_color, _backdrop_color($c), darken(mix($c, darken(if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), if(lightness($c)<35%, 95%, 0%)), 85%), 8%));
-
+    $_bg: null;
+    @if $c == $headerbar_bg_color { $_bg: mix($c, $headerbar_bg_color, 85%); }
+    @else { $_bg: mix(if($c == $button_bg_color, $backdrop_bg_color, _backdrop_color($c)), $base_color, 85%); }
+  //
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
 
     background-color: $_bg;
@@ -316,11 +319,11 @@
   //
   // backdrop insensitive button
   //
-
-    $_bg: if($c != $button_bg_color, _backdrop_color(mix($c, darken(if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), if(lightness($c)<35%, 95%, 0%)), 85%)), $insensitive_bg_color);
-
+    $_bg: null;
+    @if $c == $headerbar_bg_color { $_bg: mix($c, $headerbar_bg_color, 60%); }
+    @else { $_bg: if($c == $button_bg_color, $insensitive_bg_color, mix(_backdrop_color($c), $base_color, 60%)); }
+  //
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
-
     background-color: $_bg;
     @if($bc == true) { border-color: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color); }
     @else { border-color: $_bg; }
@@ -331,11 +334,11 @@
   //
   // backdrop insensitive pushed button
   //
-
-    $_bg: if($c != $button_bg_color, _backdrop_color($c), darken(mix($c, darken(if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), if(lightness($c)<35%, 95%, 0%)), 85%), 8%));
-
+    $_bg: null;
+    @if $c == $headerbar_bg_color { $_bg: mix($c, $headerbar_bg_color, 85%); }
+    @else { $_bg: mix(if($c == $button_bg_color, $c, _backdrop_color($c)), $base_color, 85%); }
+  //
     label { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
-
     background-color: $_bg;
     @if($bc == true) { border-color: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color); }
     @else { border-color: $_bg; }

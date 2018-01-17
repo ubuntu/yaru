@@ -1526,7 +1526,7 @@ headerbar {
     entry, %dark_entry {
       image { color: $tc; }
       @include entry(normal, $c: $c, $tc: $tc);
-      &:disabled { @include entry(insensitive, $c: $tc, $tc: $c); }
+      &:disabled { @include entry(insensitive, $c: $c, $tc: $tc); }
 
       &:backdrop {
         @include entry(backdrop, $c: $c, $tc: $tc);
@@ -1594,40 +1594,43 @@ headerbar {
       @extend %undecorated_button;
       border-radius: 0;
       -gtk-outline-radius: 0;
+
+      &:not(:checked) {
+        box-shadow: none;
+        color: $insensitive_headerbar_fg_color;
+        box-shadow: inset 0 -2px $headerbar_insensitive_fg_color;
+        &:backdrop { color: $headerbar_backdrop_insensitive_color; box-shadow: inset 0 -2px $headerbar_backdrop_insensitive_color; }
+        &:not(:backdrop):hover { color: $selected_fg_color; }
+      }
+
+      &:checked { color: $selected_fg_color; }
     }
 
     .horizontal.linked.stack-switcher button.text-button {
       // style the stackswitcher
       @extend %stackswitcher_basic;
-      &:checked { color: $tc; }
       min-width: 100px;
       border: none;
-      margin-left: 4px;
-      margin-right: 4px;
+      // margin-left: 4px;
+      // margin-right: 4px;
+      margin-left: 0;
+      margin-right: 0;
     }
 
     .linked.path-bar button {
-        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button {
+        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button, &.slider-button {
           // style the pathbar
           @extend %stackswitcher_basic;
-          &:checked { color: $tc; }
-          // &:not(:first-child) { margin-left: 4px; }
-          // &:not(:last-child) { margin-right: 4px; }
         }
 
         &.image-button.text-button.toggle, &.text-button, &.toggle.image-button, &.slider-button {
-        $c: lighten($c, 8%);
-        background-color: $c;
         margin-left: 0;
         margin-right: 0;
-
-        &:backdrop { background-color: mix($backdrop_headerbar_bg_color, $c, 60%); }
         }
 
         &.slider-button {
+          margin: 5px 0;
           border: none;
-          &:first-child { border-radius: 5px 0 0 5px; }
-          &:last-child { border-radius: 0 5px 5px 0; }
         }
       }
   }
@@ -1832,19 +1835,13 @@ headerbar { // headerbar border rounding
  ************/
 %underline_focus {
   // indeterminate is there to lazily force the style
+  transition: 300ms ease;
   transition-property: box-shadow, color;
-  &, &:not(:checked):not(:indeterminate) {
-  color: $insensitive_fg_color;
-  box-shadow: none;
-  &:hover { box-shadow: inset 0 -2px $insensitive_fg_color; }
-  &:backdrop { color: $backdrop_insensitive_color; }
-  }
-
   &:checked, &:checked:not(:indeterminate) {
-    font-weight: bold;
+    font-weight: 450;
     box-shadow: inset 0 -2px $selected_bg_color;
-    &:not(:backdrop):hover { box-shadow: inset 0 -2px mix($fg_color, $selected_bg_color, 10%) }
     &:backdrop { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color) }
+    &:not(:backdrop):hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%) }
   }
 }
 
@@ -1865,12 +1862,20 @@ headerbar { // headerbar border rounding
   }
 
   &.text-button, &.toggle, &.toggle.image-button, &.slider-button {
-    $c: $button_bg_color;
-    &, &:hover, &:active, &:checked, &:disabled { background-color: $c; }
-    &:backdrop { background-color: mix($c, $base_color, 60%); }
+    @extend %underline_focus;
+    &, &:backdrop { &, &:hover, &:active, &:disabled { background-color: transparent; border-color: transparent; } }
+    border-radius: 0;
+    color: $insensitive_fg_color;
+    &:not(:backdrop) { box-shadow: inset 0 -2px $insensitive_fg_color; }
+    &:not(:backdrop):hover { color: $fg_color; }
+
+    &:backdrop {
+      color: $backdrop_insensitive_color;
+      box-shadow: inset 0 -2px $backdrop_insensitive_color;
+    }
 
     &:checked { color: $fg_color; }
-    @extend %underline_focus;
+
     border-color: $borders_color;
   }
 
@@ -1890,6 +1895,8 @@ headerbar { // headerbar border rounding
 
     &:first-child { border-right-style: none; }
     &:last-child { border-left-style: none; }
+
+    image { @extend .dim-label; }
   }
 }
 
@@ -2099,7 +2106,7 @@ menu,
 .menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
-  // padding: 2px 0px;
+  padding: 2px;
   background-color: $menu_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
 
@@ -2109,9 +2116,9 @@ menu,
 
   menuitem {
     transition: all 100ms $ease-out-quad;
-    min-height: 20px; // 16px;
+    min-height: 16px;
     min-width: 36px;
-    padding: 6px 4px; // 4px 6px;
+    padding: 5px 6px;
     // text-shadow: none;
 
     &:hover {
@@ -2132,17 +2139,17 @@ menu,
 
     // submenu indicators
     arrow {
-      min-height: 14px;
+      min-height: 16px;
       min-width: 16px;
 
       &:dir(ltr) {
-        -gtk-icon-source: -gtk-icontheme('go-next-symbolic'); // -gtk-icontheme('pan-end-symbolic');
+        -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
         margin-left: 10px;
         margin-right: 10px;
       }
 
       &:dir(rtl) {
-        -gtk-icon-source: -gtk-icontheme('go-previous-symbolic'); // -gtk-icontheme('pan-end-symbolic-rtl');
+        -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
         margin-right: 10px;
         margin-left: 10px;
       }
@@ -2166,13 +2173,13 @@ menu,
     &.top {
       margin-top: -6px;
       border-bottom: 1px solid mix($fg_color, $base_color, 10%);
-      -gtk-icon-source: -gtk-icontheme('go-next-symbolic'); // -gtk-icontheme('pan-end-symbolic');
+      -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
     }
 
     &.bottom {
       margin-bottom: -6px;
       border-top: 1px solid mix($fg_color, $base_color, 10%);
-      -gtk-icon-source: -gtk-icontheme('go-previous-symbolic'); // -gtk-icontheme('pan-end-symbolic-rtl');
+      -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
     }
 
     &:hover { background-color: mix($fg_color, $base_color, 10%); }
@@ -2192,9 +2199,6 @@ menuitem {
 
   check,
   radio {
-    min-height: 16px;
-    min-width: 16px;
-
     &:dir(ltr) { margin-right: 7px; }
     &:dir(rtl) { margin-left: 7px; }
   }
@@ -2205,7 +2209,7 @@ menuitem {
  ***************/
 
 popover.background {
-  // padding: 2px;
+  padding: 2px;
   border-radius: 5px;
   background-color: $menu_color; // $popover_bg_color;
 
@@ -2239,9 +2243,9 @@ popover.background {
   }
 
   modelbutton {
-    min-height: 24px; // 16px;
-    min-width: 40px;
-    padding: 4px 6px; // 4px 6px;
+    min-height: 16px;
+    min-width: 36px;
+    padding: 5px 6px;
   }
 
   separator { margin: 3px; }
@@ -2843,54 +2847,40 @@ radio {
   padding: 2px;
   -gtk-icon-source: none;
 
-    @each $state, $t in ("", "normal-alt"), (":hover", "hover-alt"), (":active", "active"),
-    (":disabled", "insensitive"), (":disabled:active, &:disabled:checked", "insensitive-active"),
-    (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
-    &#{$state} { @include button($t, $dark_fill, $edge: none); @if $state == "" { box-shadow: none; } }
-  }
-
   &:backdrop { transition: $backdrop_transition; }
 
-  @if $variant == 'light' {
-    // the borders of the light variant versions of checks and radios are too similar in luminosity to the selected background
-    // color, hence we need special casing.
-    row:selected & { border-color: $selected_borders_color; }
-  }
-
-  .osd & {
-    @include button(osd);
-
-    &:hover { @include button(osd); }
-    &:active { @include button(osd-active); }
-    &:backdrop { @include button(osd-backdrop); }
-    &:disabled { @include button(osd-insensitive); }
-  }
+  // .osd & {
+  //   @include button(osd);
+  //
+  //   &:hover { @include button(osd); }
+  //   &:active { @include button(osd-active); }
+  //   &:backdrop { @include button(osd-backdrop); }
+  //   &:disabled { @include button(osd-insensitive); }
+  // }
 
   menu menuitem &, popover & {
     margin: 0; // this is a workaround for a menu check/radio size allocation issue
-
-    &, &:hover, &:disabled {
-      background-color: transparent;
-      box-shadow: none;
-      color: inherit;
-    }
   }
 }
 
 %check, %radio, check, radio {
-  $c: $dark_fill;
-  $tc: white;
-  background-image: none;
-  background-position: center;
-  background-repeat: no-repeat;
+  & {
+    // for unchecked
+    @each $state, $t in ("", "normal-alt"), (":hover", "hover-alt"), (":active", "active"),
+      (":disabled", "insensitive"), (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+      &#{$state} { @include button($t, $dark_fill, $edge: none); }
+    }
+  }
 
-  @each $t, $c in (':checked:not(:indeterminate)', $success_color),
-                  (':indeterminate', $warning_color) {
-    &#{$t} {
-      @each $state, $t in ("", "normal-alt"), (":hover", "hover-alt"), (":active", "active"),
-      (":disabled", "insensitive"), (":disabled:active, &:disabled:checked", "insensitive-active"),
-      (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
-        &#{$state} { @include button($t, $c, $tc, $edge: none); }
+  & {
+    // for checked
+    @each $t, $c in (':checked:not(:indeterminate)', $success_color),
+                    (':indeterminate', $warning_color) {
+      &#{$t} {
+        @each $state, $t in ("", "normal-alt"), (":hover", "hover-alt"), (":active", "active"),
+        (":disabled", "insensitive"), (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+          &#{$state} { @include button($t, $c, $selected_fg_color, $edge: none); }
+        }
       }
     }
   }
@@ -2935,32 +2925,37 @@ check {
 
 treeview.view {
   // make borders with box shadow so as to not add border width to size
+  // too big checks and radios seem to be cropped
   check, radio {
     background-color: $dark_fill;
     box-shadow: inset 0 0 0 1px $borders_color;
   }
 }
 
-menu menuitem, treeview.view {
-  // make menuitem and treeview checks smaller
+menu menuitem, popover, treeview.view {
+  // make menuitem, popover and treeview checks and radios smaller
   check, radio {
-    min-width: 14px;
-    min-height: 14px;
+    padding: 1px;
   }
 }
 
 menu menuitem, popover {
+  // menu and popover checks and radios should be hollow
   radio, check {
-    $c: $success_color;
-    &, &:hover { border: 1px solid $borders_color; }
-    box-shadow: none;
-    &:checked:not(:backdrop), &:indeterminate:not(:backdrop) { transition: none; }
-      @each $t, $c in (':checked:not(:backdrop)', $success_color),
-                      (':indeterminate:not(:backdrop)', $warning_color) {
+    &, &:backdrop, &:hover, &:disabled, &:backdrop:disabled { background-color: transparent; box-shadow: none; }
+    &, &:hover { border: 1px solid if($variant == "light", $borders_color, $graphite); }
+    &:disabled { border-color: inherit; color: inherit; }
+    &:checked:not(:indeterminate), &:indeterminate {
+      transition: none;
+      &, &:backdrop, &:hover, &:disabled, &:backdrop:disabled { background-color: transparent; box-shadow: none; }
+      &:disabled { border-color: inherit; color: inherit; }
+    }
+    
+    @each $t, $c in (':checked:not(:indeterminate)', $success_color),
+                    (':indeterminate', $warning_color) {
         &#{$t} {
-        &, &:hover, &:checked:hover { border-color: $c; color: $c; }
-        &, &:disabled, &:disabled:checked, &:hover, &:checked:hover { background-color: transparent; box-shadow: none; }
-        &:disabled { border-color: $borders_color; color: inherit; }
+        &, &:hover { border-color: $c; color: $c; }
+        &:backdrop { color: _backdrop_color($c); }
       }
     }
   }
@@ -3756,14 +3751,13 @@ row {
   outline-offset: 0;
   transition: all 150ms $ease-out-quad;
 
-  // &:hover { transition: none; }
+  &:hover { background-color: $base_hover_color; }
+  &:active { background-color: $base_active_color; }
 
   &:backdrop { transition: $backdrop_transition; }
 
   &.activatable:not(:backdrop) {
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
-
-    &:hover { background-color: $base_hover_color; }
 
     &:active { box-shadow: inset 0 2px 2px -2px transparentize(black, 0.8); }
 
@@ -3885,7 +3879,7 @@ messagedialog { // Message Dialog styling
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
 
-    &:backdrop { background-color: $bg_color; }
+    &:backdrop { background-color: $backdrop_bg_color; }
   }
 
   &.csd { // rounded bottom border styling for csd version
