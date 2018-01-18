@@ -1567,7 +1567,7 @@ headerbar {
       }
     }
 
-    .linked button, .linked button.image-button, .horizontal.linked entry {
+    .horizontal.linked button, .horizontal.linked button.image-button, .horizontal.linked entry {
       // linked buttons are not flat
       // @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
       // (":active, &:checked", "active"), (":disabled", "insensitive"),
