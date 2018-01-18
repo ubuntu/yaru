@@ -1136,8 +1136,12 @@ button:visited {
 
   > label {
     @extend %link;
+  }
+
+  &:hover > label {
     text-decoration-line: underline;
   }
+
 }
 
 
@@ -2950,7 +2954,7 @@ menu menuitem, popover {
       &, &:backdrop, &:hover, &:disabled, &:backdrop:disabled { background-color: transparent; box-shadow: none; }
       &:disabled { border-color: inherit; color: inherit; }
     }
-    
+
     @each $t, $c in (':checked:not(:indeterminate)', $success_color),
                     (':indeterminate', $warning_color) {
         &#{$t} {
