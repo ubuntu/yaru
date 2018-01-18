@@ -2950,7 +2950,7 @@ menu menuitem, popover {
       &, &:backdrop, &:hover, &:disabled, &:backdrop:disabled { background-color: transparent; box-shadow: none; }
       &:disabled { border-color: inherit; color: inherit; }
     }
-    
+
     @each $t, $c in (':checked:not(:indeterminate)', $success_color),
                     (':indeterminate', $warning_color) {
         &#{$t} {
@@ -4496,35 +4496,30 @@ decoration {
 button.titlebutton {
   &, .selection-mode & { &.close, &:not(.close) { &, &:hover, &:active, &:backdrop { background-color: transparent; } } } // reset
 
-  border-radius: 100%;
+  border-radius: 5%;
   border: none;
   min-width: 26px;
   min-height: 26px;
-  padding: 0px;
+  padding: 5px;
+  margin: 0;
   background-size: 22px;
   background-repeat: no-repeat;
   background-position: center;
   color: white;
 
   &:backdrop { color: $backdrop_fg_color; }
-
-  &:not(.close) {
-    @each $state, $t in (":hover", "-hover"), (":active", "-active") {
-      &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton#{$t}.png"),
-                                                url("assets/titlebutton#{$t}@2.png")); }
-    }
-
-    .selection-mode & {
-      @each $state, $t in (":hover", "-hover"), (":active", "-active") {
-        &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton-selection-mode#{$t}.png"),
-                                                  url("assets/titlebutton-selection-mode#{$t}@2.png")); } }
-    }
+  &:not(.close):hover {
+      background: $base_hover_color;
   }
 
   &.close {
-    @each $state, $t in ("", ""), (":hover", "-hover"), (":active", "-active"), (":backdrop", "-backdrop") {
-      &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"),
-                                                url("assets/close-button#{$t}@2.png")); }
+    @each $state, $t in ("", ""), (":hover", ""), (":active", ""), (":backdrop", "-backdrop") {
+        &#{$state} {
+            background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png"));
+            @if $state == ":hover" {
+                background-color: $base_hover_color;
+            }
+        }
     }
 
     .selection-mode & {
