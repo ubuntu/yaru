@@ -1722,6 +1722,11 @@ headerbar {
     }
   }
 
+  &:not(:backdrop) .tiled-top &,
+  &:not(:backdrop) .maximized & {
+    box-shadow: inset 0 1px 0 0 $inkstone;
+  }
+
   &.default-decoration {
     min-height: 26px;
     padding: 4px 6px;
