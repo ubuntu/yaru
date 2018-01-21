@@ -4496,20 +4496,20 @@ decoration {
 button.titlebutton {
   &, .selection-mode & { &.close, &:not(.close) { &, &:hover, &:active, &:backdrop { background-color: transparent; } } } // reset
 
-  border-radius: 5%;
-  border: none;
-  min-width: 26px;
-  min-height: 26px;
-  padding: 5px;
-  margin: 0;
-  background-size: 22px;
-  background-repeat: no-repeat;
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  border-radius: 5px;
+  border: none;
   color: white;
+  min-height: 24px;
+  min-width: 24px;
+  padding: 5px;
 
   &:backdrop { color: $backdrop_fg_color; }
+
   &:not(.close):hover {
-      background: $base_hover_color;
+    background-color: lighten($headerbar_bg_color, 8%);
   }
 
   &.close {
@@ -4517,7 +4517,7 @@ button.titlebutton {
         &#{$state} {
             background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png"));
             @if $state == ":hover" {
-                background-color: $base_hover_color;
+                background-color: lighten($headerbar_bg_color, 8%);
             }
         }
     }
