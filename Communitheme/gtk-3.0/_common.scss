@@ -4518,9 +4518,6 @@ decoration {
 button.titlebutton {
   &, .selection-mode & { &.close, &:not(.close) { &, &:hover, &:active, &:backdrop { background-color: transparent; } } } // reset
 
-  $c: $headerbar_bg_color;
-  $tc: $headerbar_fg_color;
-
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -4531,7 +4528,8 @@ button.titlebutton {
   min-width: 24px;
   padding: 5px;
 
-  &:backdrop { color: $backdrop_fg_color; }
+  $c: $headerbar_bg_color;
+  $tc: $headerbar_fg_color;
 
   &.minimize, &.maximize, &.close {
       @each $state, $t in ("", "normal"), (":hover", "hover"),
@@ -4539,7 +4537,7 @@ button.titlebutton {
       (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
       (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
       (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-        &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
+        &#{$state} { @include button($t, $c, $tc, $flat: true); }
       }
 
       &, &:backdrop {
