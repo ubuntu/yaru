@@ -32,7 +32,7 @@ $error_color: $red;
 $success_color: $green;
 $destructive_color: darken($red, 10%);
 $neutral_color: $blue;
-$focus_color: transparentize($blue, 0.6);
+$focus_color: transparentize($selected_bg_color, 0.4);
 //
 $osd_fg_color: $porcelain;
 $osd_bg_color: transparentize($jet, 0.3);
