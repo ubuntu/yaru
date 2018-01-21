@@ -4496,6 +4496,9 @@ decoration {
 button.titlebutton {
   &, .selection-mode & { &.close, &:not(.close) { &, &:hover, &:active, &:backdrop { background-color: transparent; } } } // reset
 
+  $c: $headerbar_bg_color;
+  $tc: $headerbar_fg_color;
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -4508,28 +4511,28 @@ button.titlebutton {
 
   &:backdrop { color: $backdrop_fg_color; }
 
-  &:not(.close):hover {
-    background-color: lighten($headerbar_bg_color, 8%);
+  &.minimize, &.maximize, &.close {
+      @each $state, $t in ("", "normal"), (":hover", "hover"),
+      (":active, &:checked", "active"), (":disabled", "insensitive"),
+      (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+      (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+        &#{$state} { @include button($t, $c, $tc, $bc: none, $edge: none); }
+      }
+
+      &, &:backdrop {
+        &, &:disabled {
+          // headerbar buttons should be undecorated when not being directly interacted with
+          @include button(undecorated);
+        }
+      }
   }
 
   &.close {
     @each $state, $t in ("", ""), (":hover", ""), (":active", ""), (":backdrop", "-backdrop") {
         &#{$state} {
             background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png"));
-            @if $state == ":hover" {
-                background-color: lighten($headerbar_bg_color, 8%);
-            }
         }
-    }
-
-    .selection-mode & {
-      background-image: -gtk-scaled(url("assets/close-button-selection-mode.png"),
-                                  url("assets/close-button-selection-mode@2.png"));
-
-      @each $state, $t in (":hover", "-hover"), (":active", "-active") {
-        &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton-selection-mode#{$t}.png"),
-                                                  url("assets/titlebutton-selection-mode#{$t}@2.png")); }
-      }
     }
   }
 }
