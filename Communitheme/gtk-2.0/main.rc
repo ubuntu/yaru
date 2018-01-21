@@ -1501,7 +1501,6 @@ style "menubar" {
   bg[NORMAL]   = @menubar_bg
   bg[SELECTED] = @selected_fg_color
   fg[SELECTED] = @link_color
-
 }
 
 style "menubar_item" {
@@ -1509,8 +1508,8 @@ style "menubar_item" {
   xthickness = 3
   ythickness = 4
 
-  fg[NORMAL]   = @menubar_fg
-  fg[PRELIGHT] = @selected_bg_color
+  fg[NORMAL]   = @menubar_insensitive_fg
+  fg[PRELIGHT] = @menubar_fg
 
   engine "pixmap" {
     image {

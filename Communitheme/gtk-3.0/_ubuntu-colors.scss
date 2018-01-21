@@ -27,15 +27,15 @@ $terminal_borders_color: #74888D;
 $terminal_selected_bg: #102A37;
 
 // Widget Colors
-// $headerbar_bg_color: #252525;
-// $headerbar_bg_color: #2B2B2B;
-// $headerbar_bg_color: #383634; // #333230;
-$headerbar_bg_color: #303030;
+$headerbar_bg_color: #292929;
+$menubar_bg_color: lighten($headerbar_bg_color, 2.5%);
 $headerbar_fg_color: $porcelain;
-$headerbar_insensitive_fg_color: transparentize(mix($headerbar_fg_color, $headerbar_bg_color, 50%), .25);
-$headerbar_backdrop_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 80%);
+$headerbar_text_color: $silk;
+$headerbar_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
+//
 $headerbar_backdrop_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 35%);
 $backdrop_headerbar_bg_color: lighten($headerbar_bg_color, 5%);
-$menubar_bg_color: lighten($headerbar_bg_color, 2.5%);
+$headerbar_backdrop_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 80%);
+$headerbar_backdrop_text_color: mix($headerbar_text_color, $backdrop_headerbar_bg_color, 80%);
 $backdrop_menubar_bg_color: lighten($menubar_bg_color, 5%);
 //
