@@ -36,7 +36,7 @@ $button_transition: all 200ms $ease-out-quad;
   // and we don't use any outlines for now.
 
   outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
-  outline-style: dashed;
+  outline-style: solid;
   outline-offset: -3px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
