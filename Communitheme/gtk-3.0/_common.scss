@@ -4518,45 +4518,41 @@ decoration {
 button.titlebutton {
   &, .selection-mode & { &.close, &:not(.close) { &, &:hover, &:active, &:backdrop { background-color: transparent; } } } // reset
 
-  border-radius: 100%;
-  border: none;
-  min-width: 26px;
-  min-height: 26px;
-  padding: 0px;
-  background-size: 20px;
-  background-repeat: no-repeat;
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  border-radius: 5px;
+  border: none;
   color: white;
+  min-height: 24px;
+  min-width: 24px;
+  padding: 5px;
 
-  &:backdrop { color: $backdrop_fg_color; }
+  $c: $headerbar_bg_color;
+  $tc: $headerbar_fg_color;
 
-  &:not(.close) {
-    @each $state, $t in (":hover", "-hover"), (":active", "-active") {
-      &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton#{$t}.png"),
-                                                url("assets/titlebutton#{$t}@2.png")); }
-    }
+  &.minimize, &.maximize, &.close {
+      @each $state, $t in ("", "normal"), (":hover", "hover"),
+      (":active, &:checked", "active"), (":disabled", "insensitive"),
+      (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+      (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+      (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+        &#{$state} { @include button($t, $c, $tc, $flat: true); }
+      }
 
-    .selection-mode & {
-      @each $state, $t in (":hover", "-hover"), (":active", "-active") {
-        &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton-selection-mode#{$t}.png"),
-                                                  url("assets/titlebutton-selection-mode#{$t}@2.png")); } }
-    }
+      &, &:backdrop {
+        &, &:disabled {
+          // headerbar buttons should be undecorated when not being directly interacted with
+          @include button(undecorated);
+        }
+      }
   }
 
   &.close {
-    @each $state, $t in ("", ""), (":hover", "-hover"), (":active", "-active"), (":backdrop", "-backdrop") {
-      &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"),
-                                                url("assets/close-button#{$t}@2.png")); }
-    }
-
-    .selection-mode & {
-      background-image: -gtk-scaled(url("assets/close-button-selection-mode.png"),
-                                  url("assets/close-button-selection-mode@2.png"));
-
-      @each $state, $t in (":hover", "-hover"), (":active", "-active") {
-        &#{$state} { background-image: -gtk-scaled(url("assets/titlebutton-selection-mode#{$t}.png"),
-                                                  url("assets/titlebutton-selection-mode#{$t}@2.png")); }
-      }
+    @each $state, $t in ("", ""), (":hover", ""), (":active", ""), (":backdrop", "-backdrop") {
+        &#{$state} {
+            background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png"));
+        }
     }
   }
 }
