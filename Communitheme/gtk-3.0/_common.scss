@@ -1604,10 +1604,12 @@ headerbar {
       -gtk-outline-radius: 0;
 
       &:not(:checked) {
-        box-shadow: none;
+        box-shadow: inset 0 -2px black;
         color: $headerbar_insensitive_color;
-        box-shadow: inset 0 -2px $headerbar_insensitive_color;
-        &:backdrop { color: $headerbar_backdrop_insensitive_color; box-shadow: inset 0 -2px $headerbar_backdrop_insensitive_color; }
+        &:backdrop {
+          box-shadow: inset 0 -2px black;
+          color: $headerbar_backdrop_insensitive_color;
+        }
         &:not(:backdrop):hover { color: $selected_fg_color; }
       }
 
