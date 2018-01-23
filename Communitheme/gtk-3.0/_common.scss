@@ -1612,6 +1612,11 @@ headerbar {
         }
         &:not(:backdrop):hover { color: $selected_fg_color; }
       }
+      &:not(:disabled):first-child,
+      &:not(:disabled):last-child {
+          color: $silk;
+          &:hover { color: $white; }
+      }
 
       &:first-child, &:last-child,
       &:backdrop:first-child, &:backdrop:last-child {
