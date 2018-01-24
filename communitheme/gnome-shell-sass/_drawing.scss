@@ -46,7 +46,7 @@
   }
   @if $t==focus {
     color: $tc;
-    border-color: if($fc==$selected_bg_color, $selected_borders_color, darken($fc,35%));
+    border-color: $fc;
     box-shadow: none;
   }
   @if $t==hover { } // TODO: should we bother?
