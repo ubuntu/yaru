@@ -5,8 +5,9 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
 $panel-corner-radius: 0; // 6px;
 //
-$panel-alpha-value: 0.1;
-$dash-alpha-value: 0.15;
+$panel-alpha-value: 0.10;
+$dash-alpha-value: 0.20;
+$dash-opaque-alpha-value: 0.05;
 $popover-alpha-value: 0.025;
 //
 $small_radius: 4px;
@@ -1472,7 +1473,7 @@ StScrollBar {
   %icon_tile {
     // appeareance of apps
     color: $osd_fg_color;
-    border-radius: 4px;
+    border-radius: $small_radius;
     padding: 6px;
     border: 1px solid transparent;
     transition-duration: 100ms;
