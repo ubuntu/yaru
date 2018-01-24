@@ -88,6 +88,7 @@ stage {
 StEntry {
   border-radius: $small_radius;
   border-width: 1px;
+  min-height: 22px;
   padding: 4px;
   @include entry(normal);
   //&:hover { @include entry(hover);}
@@ -199,6 +200,8 @@ StScrollBar {
   .run-dialog-entry {
     width: 20em;
     margin-bottom: 6px;
+
+    &:focus { border-color: $selected_bg_color; }
   }
   .run-dialog-error-box {
     padding-top: 16px;
@@ -1287,14 +1290,15 @@ StScrollBar {
   //search entry
   .search-entry {
     width: 320px;
-    padding: 7px 9px;
     border-radius: $small_radius;
     border-color: $osd_borders_color;
     color: $osd_fg_color;
     background-color: $osd_bg_color;
+
+    &, &:focus { padding: 7px 9px; }
+
     &:focus {
-      padding: 6px 8px;
-      border-width: 2px;
+      border-width: 1px;
       border-color: $selected_bg_color;
     }
 
