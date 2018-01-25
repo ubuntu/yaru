@@ -185,7 +185,6 @@
     // Show apps icon
     & {
       // reset
-      .overview-icon { border-radius: 0px !important; }
       & .show-apps-icon,
       &:checked .show-apps-icon,
       &:focus .show-apps-icon {
@@ -193,7 +192,6 @@
         background-color: transparent !important;
         transition-duration: 100ms !important;
       }
-      background-color: $_dialog_bg_color !important;
     }
 
     &,
