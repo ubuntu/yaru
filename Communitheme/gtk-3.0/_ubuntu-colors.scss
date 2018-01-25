@@ -33,9 +33,8 @@ $headerbar_fg_color: $porcelain;
 $headerbar_text_color: $silk;
 $headerbar_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
 //
-$headerbar_backdrop_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 35%);
 $backdrop_headerbar_bg_color: lighten($headerbar_bg_color, 5%);
-$headerbar_backdrop_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 80%);
-$headerbar_backdrop_text_color: mix($headerbar_text_color, $backdrop_headerbar_bg_color, 80%);
+$backdrop_headerbar_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 70%);
+$backdrop_headerbar_text_color: mix($headerbar_text_color, $backdrop_headerbar_bg_color, 70%);
+$backdrop_headerbar_insensitive_color: mix($headerbar_fg_color, $backdrop_headerbar_bg_color, 70%);
 $backdrop_menubar_bg_color: lighten($menubar_bg_color, 5%);
-//
