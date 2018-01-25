@@ -1,10 +1,6 @@
-# The Communitheme Sound Theme
-
 ![Sounds](/banner.jpg)
 
-This sound theme combines sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) themes.
-
-With an emphasis on making sound a usability feature instead of an annoyance. We're clipping out things like 'button-pressed' and 'service-logout', and working towards shorter and less intrusive, more refined audio set.
+This sound theme combines sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) themes with an emphasis on making sound a usability feature instead of an annoyance. We're clipping out things like 'button-pressed' and 'service-logout', and working towards shorter and less intrusive, more refined audio set.
  The system notifications are played on a wooden percussion instrument to give the theme an african feeling. To make the theme feel light and responsive, the sounds are very short and there's no reverb or delay added.
 The desktop-login sound is based on Jouni Helminen's awesome work for Ubuntu Touch.
 
