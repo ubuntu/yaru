@@ -1618,11 +1618,6 @@ headerbar {
           &:hover { color: $white; }
       }
 
-      &:first-child, &:last-child,
-      &:backdrop:first-child, &:backdrop:last-child {
-        box-shadow: none;
-      }
-
       &:checked { color: $selected_fg_color; }
     }
 
@@ -1651,6 +1646,10 @@ headerbar {
         &.slider-button {
           margin: 5px 0;
           border: none;
+          &:first-child, &:last-child,
+          &:backdrop:first-child, &:backdrop:last-child {
+            box-shadow: none;
+          }
         }
       }
   }
