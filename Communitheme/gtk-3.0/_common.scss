@@ -516,7 +516,7 @@ animation: shrink 1s linear infinite;
     border-radius: $small_radius;
     outline-color: $focus_color;
     outline-offset: -1px;
-    outline-radius: $small_radius;
+    -gtk-outline-radius: $small_radius;
     transition: $button_transition;
 
     @include button(normal);
@@ -2771,7 +2771,7 @@ switch {
     min-height: 22px;
     margin: 2px;
     outline-offset: -1px;
-    outline-radius: $small_radius;
+    -gtk-outline-radius: $small_radius;
     outline-color: $focus_color;
     border-radius: $small_radius;
     background-clip: if($variant == "light", border-box, padding-box);
