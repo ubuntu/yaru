@@ -1738,12 +1738,10 @@ headerbar {
   .tiled-left &,
   .maximized &,
   .fullscreen & {
-    // background-color: $headerbar_bg_color; // opaque headerbar when maximized
+    
     &:backdrop, & {
       border-radius: 0;
     }
-
-    &:not(:backdrop) { box-shadow: inset 0 1px 0 0 $inkstone; }
   }
 
   &.default-decoration {
