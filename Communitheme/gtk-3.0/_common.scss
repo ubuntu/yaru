@@ -245,6 +245,8 @@ spinner {
 
     &:disabled { opacity: 0.5; }
   }
+
+  &:backdrop { color: _backdrop_color($blue); }
 }
 
 
@@ -260,6 +262,7 @@ entry {
     border: 1px solid;
     border-radius: $small_radius;
     transition: all 200ms $ease-out-quad;
+    caret-color: currentColor;
 
     @include entry(normal);
 
@@ -355,7 +358,7 @@ entry {
   .linked:not(.vertical) > & { @extend %linked; }
   .linked:not(.vertical) > &:focus + &,
   .linked:not(.vertical) > &:focus + button,
-  .linked:not(.vertical) > &:focus + combobox > box > button.combo { border-left-color: entry_focus_border(); }
+  .linked:not(.vertical) > &:focus + combobox > box > button.combo { border-left-color: $selected_bg_color; }
 
   .linked:not(.vertical) > &:drop(active) + &,
   .linked:not(.vertical) > &:drop(active) + button,
@@ -381,7 +384,7 @@ entry {
     // color back the top border of a linked focused entry following another entry.
     // :not(:only-child) is a specificity bump hack.
     + %entry:focus:not(:only-child),
-    + entry:focus:not(:only-child) { border-top-color: entry_focus_border(); }
+    + entry:focus:not(:only-child) { border-top-color: $selected_bg_color; }
 
     + %entry:drop(active):not(:only-child),
     + entry:drop(active):not(:only-child) { border-top-color: $drop_target_color; }
@@ -392,7 +395,7 @@ entry {
       + %entry,
       + entry,
       + button,
-      + combobox > box > button.combo { border-top-color: entry_focus_border(); }
+      + combobox > box > button.combo { border-top-color: $selected_bg_color; }
     }
 
     &:drop(active):not(:only-child) {
@@ -857,16 +860,19 @@ animation: shrink 1s linear infinite;
     // FIXME: take care of colored circular button.
     // $_border_bg: linear-gradient(to top, $alt-borders-color 25%, $borders-color 50%);
 
+    &:not(.flat):not(:checked):not(:active):not(:disabled):not(:backdrop),
+    &:hover:not(:checked):not(:active):not(:disabled):not(:backdrop),
+    &:checked, &:active {
+      border-color: $borders_color;
+      box-shadow: none;
+    }
+
     &:not(.flat):not(:checked):not(:active):not(:disabled):not(:backdrop) {
-      @include button(normal, $flat:true);
+      @include button(normal);
     }
 
     &:hover:not(:checked):not(:active):not(:disabled):not(:backdrop) {
-      @include button(hover, $flat:true);
-    }
-
-    &:checked, &:active {
-      box-shadow: none;
+      @include button(hover);
     }
 
     background-origin: padding-box, border-box;
@@ -1523,7 +1529,7 @@ headerbar {
     @extend .dim-label;
   }
 
-  ~ separator, separator { background-image: image(_border_color($graphite)); }
+  ~ separator, separator { background-image: image($inkstone); }
 
   & {
     // style headerbar buttons and entries using the appropriate headerbar colors
@@ -1608,7 +1614,7 @@ headerbar {
         color: $headerbar_insensitive_color;
         &:backdrop {
           box-shadow: inset 0 -2px transparentize(black, 0.7);
-          color: $headerbar_backdrop_insensitive_color;
+          color: $backdrop_headerbar_insensitive_color;
         }
         &:not(:backdrop):hover { color: $selected_fg_color; }
       }
@@ -1732,15 +1738,10 @@ headerbar {
   .tiled-left &,
   .maximized &,
   .fullscreen & {
-    // background-color: $headerbar_bg_color; // opaque headerbar when maximized
+    
     &:backdrop, & {
       border-radius: 0;
     }
-  }
-
-  &:not(:backdrop) .tiled-top &,
-  &:not(:backdrop) .maximized & {
-    box-shadow: inset 0 1px 0 0 $inkstone;
   }
 
   &.default-decoration {
@@ -2110,7 +2111,7 @@ menubar,
   color: $headerbar_text_color;
   padding: 0px;
 
-  &:backdrop { background-color: $backdrop_menubar_bg_color; color: $headerbar_backdrop_text_color; }
+  &:backdrop { background-color: $backdrop_menubar_bg_color; color: $backdrop_headerbar_text_color; }
 
   > menuitem {
     transition: 100ms ease;
@@ -2137,11 +2138,12 @@ menu,
   // padding: 2px;
   box-shadow: 0 2px 5px transparentize(black, 0.75);
   background-color: $menu_color;
+  color: $text_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
 
   .csd & { border: none; }  // axes borders in a composited env
 
-  &:backdrop { background-color: $backdrop_menu_color; }
+  &:backdrop { background-color: $backdrop_menu_color;  color: $backdrop_text_color; }
 
   menuitem {
     transition: all 100ms $ease-out-quad;
@@ -2239,6 +2241,7 @@ menuitem {
 
 popover.background {
   padding: 2px;
+  color: $text_color;
   border-radius: $medium_radius;
   background-color: $menu_color; // $popover_bg_color;
 
@@ -2248,6 +2251,7 @@ popover.background {
 
   &:backdrop {
     background-color: $backdrop_bg_color;
+    color: $backdrop_text_color;
     box-shadow: none;
   }
 
@@ -2303,6 +2307,8 @@ notebook {
       > tabs {
         padding-top: 4px;
         margin-bottom: -2px;
+        box-shadow: inset 0 -1px $borders_color;
+
         > tab {
           border-radius: 4px 4px 0 0;
           -gtk-outline-radius: 4px 4px 0 0;
@@ -2316,6 +2322,8 @@ notebook {
       > tabs {
         padding-bottom: 4px;
         margin-top: -2px;
+        box-shadow: inset 0 1px $borders_color;
+
         > tab {
           border-radius: 0 0 4px 4px;
           -gtk-outline-radius: 0 0 4px 4px;
@@ -2329,6 +2337,8 @@ notebook {
       > tabs {
         padding-left: 4px;
         margin-right: -2px;
+        box-shadow: inset -1px 0 $borders_color;
+
         > tab {
           border-radius: 4px 0 0 4px;
           -gtk-outline-radius: 4px 0 0 4px;
@@ -2342,6 +2352,8 @@ notebook {
       > tabs {
         padding-right: 4px;
         margin-left: -2px;
+        box-shadow: inset 1px 0 $borders_color;
+
         > tab {
           border-radius: 0 4px 4px 0;
           -gtk-outline-radius: 0 4px 4px 0;
@@ -2730,14 +2742,14 @@ switch {
   font-weight: bold;
   font-size: smaller;
   outline-offset: 0; // -4px;
-  box-shadow: inset 0 1px 0 0 _border_color($dark_fill), inset 0 2px 0 0 $borders_edge;
+  box-shadow: inset 0 1px 0 0 _border_color($dark_fill), inset 0 1px 0 0 $borders_edge;
   border-radius: 5px;
   color: transparent;
   background-color: $dark_fill;
 
   &:checked {
     color: transparent;
-    box-shadow: inset 0 1px 0 0 _border_color($c), inset 0 2px 0 0 $borders_edge;
+    box-shadow: inset 0 1px 0 0 _border_color($c), inset 0 1px 0 0 $borders_edge;
     background-color: $c;
   }
 
@@ -2754,7 +2766,7 @@ switch {
     transition: $backdrop_transition;
 
     &:checked {
-      box-shadow: inset 0 0 0 1px _backdrop_color($c);
+      box-shadow: none;
       background-color: _backdrop_color($c);
     }
 
@@ -3159,7 +3171,7 @@ scale {
 
   slider {
     $c: $neutral_color;
-    @include button(normal, white, $flat:true);
+    @include button(normal, white);
 
     border: 1px solid _border_color($dark_fill);
     border-radius: 6px;
@@ -3171,13 +3183,13 @@ scale {
 
     &:active { border-color: _border_color($c); }
 
-    &:disabled { @include button(insensitive, if($variant == "light", white, darken(white, 20%)), $flat:true); }
+    &:disabled { @include button(insensitive, if($variant == "light", white, darken(white, 20%))); }
 
     &:backdrop {
       transition: $backdrop_transition;
-      @include button(backdrop, white, $flat:true);
-      &:disabled { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 20%)), $flat:true); }
-      &, &:disabled { border: 1px solid _border_color($backdrop_dark_fill); }
+      @include button(backdrop, white);
+      &:disabled { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 20%))); }
+      &, &:disabled { border: 1px solid $backdrop_dark_fill; }
     }
 
     // ...on selected list rows
@@ -4529,43 +4541,32 @@ decoration {
 
 // Window Close button
 button.titlebutton {
-  &, .selection-mode & { &.close, &:not(.close) { &, &:hover, &:active, &:backdrop { background-color: transparent; } } } // reset
-
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 20px;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  min-height: 24px;
-  min-width: 24px;
-  padding: 5px;
-
   $c: $headerbar_bg_color;
   $tc: $headerbar_fg_color;
+  transition: $button_transition;
+  border-radius: 5px;
+  min-height: 24px;
+  min-width: 24px;
+  padding-left: 4px;
+  padding-right: 4px;
 
-  &.minimize, &.maximize, &.close {
-      @each $state, $t in ("", "normal"), (":hover", "hover"),
-      (":active, &:checked", "active"), (":disabled", "insensitive"),
-      (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-      (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
-      (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-        &#{$state} { @include button($t, $c, $tc, $flat: true); }
-      }
+  @each $state, $t in ("", "normal"), (":hover, &:backdrop:hover", "hover"),
+  (":active", "active"), (":backdrop", "backdrop"), (":backdrop:active", 'backdrop-active') {
+    &#{$state} { @include button($t, $c, $tc, $flat: true); }
+  }
 
-      &, &:backdrop {
-        &, &:disabled {
-          // headerbar buttons should be undecorated when not being directly interacted with
-          @include button(undecorated);
-        }
-      }
+  &, &:backdrop {
+    // headerbar buttons should be undecorated when not being directly interacted with
+    @include button(undecorated);
   }
 
   &.close {
-    @each $state, $t in ("", ""), (":hover", ""), (":active", ""), (":backdrop", "-backdrop") {
-        &#{$state} {
-            background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png"));
-        }
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+
+    @each $state, $t in ("", ""), (":hover", "-hover"), (":active", "-active"), (":backdrop", "-backdrop") {
+      &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png")); }
     }
   }
 }
