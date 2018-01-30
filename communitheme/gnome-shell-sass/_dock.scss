@@ -1,91 +1,190 @@
-/* Shrink the dash by reducing padding and border radius */
+/* Default Ubuntu Dock styling, append !important to any changed rules */
 
 #dashtodockContainer {
-  &.shrink #dash, &.dashtodock #dash {
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.75) !important;
+  // Shrink the dash by reducing padding and border radius
+  &.shrink #dash,
+  &.dashtodock #dash {
+    border: 1px;
+    padding: 0px;
+  }
+
+  &.shrink.left #dash,
+  &.dashtodock.left #dash {
+    border-left: 0px;
+    border-radius: 0px 9px 9px 0px;
+  }
+
+  &.shrink.right #dash,
+  &.dashtodock.right #dash {
+    border-right: 0px;
+    border-radius: 9px 0px 0px 9px;
+  }
+
+  &.shrink.top #dash,
+  &.dashtodock.top #dash {
+    border-top: 0px;
+    border-radius: 0px 0px 9px 9px;
+  }
+
+  &.shrink.bottom #dash,
+  &.dashtodock.bottom #dash {
+    border-bottom: 0px;
+    border-radius: 9px 9px 0px 0px;
+  }
+
+  &.straight-corner #dash,
+  &.shrink.straight-corner #dash {
+    border-radius: 0px;
+  }
+}
+
+.bottom #dashtodockDashScrollview,
+.top #dashtodockDashScrollview {
+  // Scrollview style -vertical
+  -st-hfade-offset: 24px;
+}
+
+.left #dashtodockDashScrollview,
+.right #dashtodockDashScrollview {
+  // Scrollview style -horizontal
+  -st-vfade-offset: 24px;
+}
+
+#dashtodockContainer {
+  &.running-dots .dash-item-container > StButton,
+  &.dashtodock .dash-item-container > StButton {
+    transition-duration: 250;
+    background-size: contain;
+  }
+
+  &.shrink .dash-item-container > StButton,
+  &.dashtodock .dash-item-container > StButton {
+    padding: 2px 4px !important; // 1px 2px;
+  }
+
+  &.extended {
+    // Dash height extended to the whole available vertical space */
+    &.top #dash, &.right #dash,
+    &.bottom #dash, &.left #dash {
+      border-radius: 0;
+    }
+
+    &.top #dash, &.bottom #dash {
+      border-left: 0px;
+      border-right: 0px;
+    }
+
+    &.right #dash, &.left #dash {
+      border-top: 0px;
+      border-bottom: 0px;
+    }
+  }
+
+  &.running-dots .app-well-app.running > .overview-icon,
+  &.dashtodock .app-well-app.running > .overview-icon {
+    /* Running and focused application style */
+    background-image: none;
+  }
+
+  &.running-dots .app-well-app.focused .overview-icon {
+    background-color: rgba(238, 238, 236, 0.1);
+  }
+
+  &.dashtodock {
+    .app-well-app.focused .overview-icon {
+      background-color: rgba(238, 238, 236, 0.1);
+    }
+
+    #dash {
+      background: #2e3436;
+    }
+  }
+
+  &.opaque {
+    /* Only alpha value is used */
+    background-color: rgba(0, 0, 0, (1 - $dash-opaque-alpha-value));
+    border-color: rgba(0, 0, 0, 0.4);
+    transition-duration: 300ms;
+  }
+
+  &.transparent {
+    /* Only alpha value is used */
+    background-color: rgba(0, 0, 0, (1 - $dash-alpha-value));
+    border-color: rgba(0, 0, 0, 0.1);
+    transition-duration: 500ms;
+  }
+
+  .number-overlay {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+  }
+
+  .notification-badge {
+    color: rgba(255, 255, 255, 1);
+    background-color: #e95420;
+    padding: 0.2em 0.5em;
+    border-radius: 1em;
+    font-weight: bold;
+    text-align: center;
+    margin: 2px;
+  }
+}
+
+#dashtodockPreviewSeparator.popup-separator-menu-item-horizontal {
+  width: 1px;
+  height: auto;
+  border-right-width: 1px;
+  margin: 32px 0px;
+}
+
+/* Communitheme Dock styling */
+
+#dashtodockContainer {
+  // without border: none, there is a 1px gap between windows and the dock
+  &.shrink #dash,
+  &.dashtodock #dash {
+    box-shadow: inset 0 4px 3px rgba(0, 0, 0, 0.5) !important;
     border: none !important;
-    padding: 0px !important;
   }
 
-  &.shrink.left #dash, &.dashtodock.left #dash {
-    border-left: 0px !important;
-    border-radius: 0px 9px 9px 0px !important;
+  &.shrink.left #dash,
+  &.dashtodock.left #dash {
+    border: none !important;
   }
 
-  &.shrink.right #dash, &.dashtodock.right #dash {
-    border-right: 0px !important;
-    border-radius: 9px 0px 0px 9px !important;
+  &.shrink.right #dash,
+  &.dashtodock.right #dash {
+    border: none !important;
   }
 
-  &.shrink.top #dash, &.dashtodock.top #dash {
-    border-top: 0px !important;
-    border-radius: 0px 0px 9px 9px !important;
+  &.shrink.top #dash,
+  &.dashtodock.top #dash {
+    border: none !important;
   }
 
-  &.shrink.bottom #dash, &.dashtodock.bottom #dash {
-    border-bottom: 0px !important;
-    border-radius: 9px 9px 0px 0px !important;
+  &.shrink.bottom #dash,
+  &.dashtodock.bottom #dash {
+    border: none !important;
   }
 
-  &.straight-corner #dash, &.shrink.straight-corner #dash {
-    border-radius: 0px !important;
+  &.straight-corner #dash,
+  &.shrink.straight-corner #dash {
+    border: none !important;
   }
 
-  // .show-apps {
-  //   // Ubuntu Launcher as a whole square
-  //   $_bg: #e95420;
-  //
-  //   & {
-  //     // reset
-  //     &:hover,
-  //     &:focus,
-  //     &:checked {
-  //       .overview-icon {
-  //         background-color: transparent;
-  //         box-shadow: none;
-  //       }
-  //     }
-  //
-  //     & .show-apps-icon,
-  //     &:checked .show-apps-icon,
-  //     &:focus .show-apps-icon {
-  //       color: transparent;
-  //       background-color: transparent;
-  //       transition-duration: 100ms;
-  //     }
-  //   }
-  //
-  //   transition-duration: 200ms;
-  //   background-color: $_bg;
-  //   box-shadow: 1px 0 $_bg; // the box-shadow is there to overlap the dock's border BUT
-  //   // there's no border until the dash is opaque, so the launcher looks to be one pixel out of bounds
-  //   // how do we fix this?
-  //
-  //   &:focus, &:hover {
-  //     background-color: lighten($_bg, 2%);
-  //     box-shadow: 1px 0 lighten($_bg, 2%);
-  //   }
-  //
-  //   &:active, &:checked {
-  //     background-color: darken($_bg, 5%);
-  //     box-shadow: 1px 0 darken($_bg, 5%);
-  //   }
-  //
-  //   &,
-  //   &:focus, &:hover,
-  //   &:active, &:checked {
-  //     .overview-icon {
-  //       background-image: url("ubuntu-logo-icon.svg");
-  //       background-size: contain;
-  //     }
-  //   }
-  // }
+  &.shrink.left #dash,
+  &.dashtodock.left #dash,
+  &.shrink.right #dash,
+  &.dashtodock.right #dash {
+    // don't let the first icon be too close to the shadow + panel
+    padding-top: 2px;
+  }
 
   .show-apps {
-    // Ubuntu Launcher as an orb
+    // Show apps icon
     & {
       // reset
-      .overview-icon { border-radius: 0px !important; }
       & .show-apps-icon,
       &:checked .show-apps-icon,
       &:focus .show-apps-icon {
@@ -93,7 +192,6 @@
         background-color: transparent !important;
         transition-duration: 100ms !important;
       }
-      background-color: $_dialog_bg_color;
     }
 
     &,
@@ -109,120 +207,24 @@
   }
 
   .app-well-app {
+    // regular app icons
     &, & .overview-icon {
-      // border: none;
-      border-radius: 0px !important;
+      // normal
     }
 
     &:active .overview-icon,
     &:checked .overview-icon {
-      // when clicking on an app or a folder is active
+      // when clicking on an app
+    }
 
+    &.focused .overview-icon {
+      // when an app is focused
     }
 
     &:hover .overview-icon,
     &:focus .overview-icon,
     &:selected .overview-icon {
       // when hovering over an app
-
     }
   }
-}
-
-/* Scrollview style */
-
-.bottom #dashtodockDashScrollview, .top #dashtodockDashScrollview {
-  -st-hfade-offset: 24px !important;
-}
-
-.left #dashtodockDashScrollview, .right #dashtodockDashScrollview {
-  -st-vfade-offset: 24px !important;
-}
-
-#dashtodockContainer {
-  &.running-dots .dash-item-container > StButton, &.dashtodock .dash-item-container > StButton {
-    transition-duration: 250 !important;
-    background-size: contain !important;
-  }
-
-  &.shrink .dash-item-container > StButton, &.dashtodock .dash-item-container > StButton {
-    padding: 0px !important; // 1px 2px;
-  }
-
-  &.extended {
-    &.top #dash, &.right #dash, &.bottom #dash, &.left #dash {
-      border-radius: 0 !important;
-    }
-
-    &.top #dash, &.bottom #dash {
-      border-left: 0px !important;
-      border-right: 0px !important;
-    }
-
-    &.right #dash, &.left #dash {
-      border-top: 0px !important;
-      border-bottom: 0px !important;
-    }
-  }
-
-  &.running-dots .app-well-app.running > .overview-icon, &.dashtodock .app-well-app.running > .overview-icon {
-    background-image: none !important;
-  }
-
-  &.running-dots .app-well-app.focused .overview-icon {
-    background-color: rgba(238, 238, 236, 0.1) !important;
-  }
-
-  &.dashtodock {
-    .app-well-app.focused .overview-icon {
-      background-color: rgba(238, 238, 236, 0.1) !important;
-    }
-
-    #dash {
-      background: #2e3436;
-    }
-  }
-
-  &.opaque {
-    background-color: transparentize($panel_bg_color, $dash-alpha-value) !important;
-    border-color: rgba(0, 0, 0, 0.4) !important;
-    transition-duration: 300ms !important;
-  }
-
-  &.transparent {
-    background-color: transparentize($panel_bg_color, $dash-alpha-value) !important;
-    border-color: rgba(0, 0, 0, 0.1) !important;
-    transition-duration: 500ms !important;
-  }
-
-  .number-overlay {
-    color: rgba(255, 255, 255, 1) !important;
-    background-color: rgba(0, 0, 0, 0.8) !important;
-    text-align: center !important;
-  }
-
-  .notification-badge {
-    color: rgba(255, 255, 255, 1) !important;
-    background-color: #e95420 !important;
-    padding: 0.2em 0.5em !important;
-    border-radius: 1em !important;
-    font-weight: bold !important;
-    text-align: center !important;
-    margin: 2px !important;
-  }
-}
-
-/* Dash height extended to the whole available vertical space */
-
-/* Running and focused application style */
-
-/* Only alpha value is used */
-
-/* Only alpha value is used */
-
-#dashtodockPreviewSeparator.popup-separator-menu-item-horizontal {
-  width: 1px;
-  height: auto;
-  border-right-width: 1px;
-  margin: 32px 0px;
 }
