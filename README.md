@@ -4,7 +4,7 @@ This sound theme is an accompaniment for the [Ubuntu Communitheme](https://githu
 
  
 The system notifications are played on a wooden percussion instrument to give the theme an african feeling. To make the theme feel light and responsive, the sounds are very short and there's no reverb or delay added.
-The desktop-login sound is based on Jouni Helminen's awesome work for Ubuntu Touch.
+The desktop-login sound is based on [Jouni Helminen's awesome work for Ubuntu Touch](https://youtu.be/XnyopqW3Af8?t=2m48s).
 
 ---
 
