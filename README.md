@@ -4,7 +4,7 @@ This sound theme is an accompaniment for the [Ubuntu Communitheme](https://githu
 
  
 The system notifications are played on a wooden percussion instrument to give the theme an african feeling. To make the theme feel light and responsive, the sounds are very short and there's no reverb or delay added.
-The desktop-login sound is based on Jouni Helminen's awesome work for Ubuntu Touch.
+The desktop-login sound is based on [Jouni Helminen's awesome work for Ubuntu Touch](https://youtu.be/XnyopqW3Af8?t=2m48s).
 
 ---
 
@@ -41,6 +41,17 @@ Type in a terminal `gnome-session-properties`. It'll give you the list of starti
 
 ---
 
+### Testing from the desktop
+
+A quick and easy way to test if the sounds are installed correctly, is by triggering them from the desktop. Here's a few places that will trigger a notification:
+
+- Open a texteditor (like Gedit or even the terminal) and press backspace or delete
+- Open two tabs in Firefox and close the window
+- Adding / removing a USB drive
+- Clicking the volumeslider in the system menu in the top right corner
+
+---
+
 This project is licensed under CC-BY-SA 3.0.
 
-The meson script and the build instruction are taken from the [Suru icon theme](https://github.com/snwh/suru-icon-theme)
+The meson script, the build instruction and the banner icon are taken from the [Suru icon theme](https://github.com/snwh/suru-icon-theme)
