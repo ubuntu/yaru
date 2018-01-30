@@ -1737,7 +1737,7 @@ headerbar {
   .tiled-left &,
   .maximized &,
   .fullscreen & {
-    
+
     &:backdrop, & {
       border-radius: 0;
     }
@@ -3091,7 +3091,7 @@ treeview.view radio, treeview.view check {
 scale {
   // sizing
   $_marks_lenght: 6px;
-  $_marks_distance: 6px;
+  $_marks_distance: 4px;
 
   min-height: 10px;
   min-width: 10px;
@@ -3311,12 +3311,12 @@ scale {
                 min-width: 22px;
 
                 @if $marks_infix == 'scale-has-marks-above' {
-                  margin-top: -14px;
+                  margin-top: -12px;
 
                   $_scale_slider_bg_pos: top;
                 }
 
-                @else { margin-bottom: -14px; }
+                @else { margin-bottom: -12px; }
               }
 
               @else {
@@ -3324,13 +3324,13 @@ scale {
                 min-width: 26px;
 
                 @if $marks_infix == 'scale-has-marks-above' {
-                  margin-left: -14px;
+                  margin-left: -12px;
 
                   $_scale_slider_bg_pos: left bottom;
                 }
 
                 @else {
-                  margin-right: -14px;
+                  margin-right: -12px;
 
                   $_scale_slider_bg_pos: right bottom;
                 }
