@@ -2797,7 +2797,7 @@ switch {
   &:hover slider { /* ?? */ }
 
   &:disabled slider {
-    @include button(insensitive, if($variant == "light", white, darken(white, 20%)), $flat:true);
+    @include button(insensitive, if($variant == "light", transparentize(white, 0.2), darken(white, 20%)), $flat:true);
   }
 
   &:backdrop {
