@@ -3123,7 +3123,7 @@ scale {
     }
 
     // to make the trough grow in fine-tune mode
-    slider { margin: -6px; }
+    slider { margin: -7px; }
 
     fill,
     highlight,
@@ -3343,7 +3343,7 @@ scale {
 
           &.fine-tune slider {
             // bigger negative margins to make the trough grow here as well
-            margin: -7px;
+            margin: -9px;
 
             @if $dir_class == 'horizontal' {
               @if $marks_infix == 'scale-has-marks-above' { margin-top: -11px; }
