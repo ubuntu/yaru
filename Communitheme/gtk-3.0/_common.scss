@@ -2281,7 +2281,7 @@ popover.background {
 
   separator { margin: 3px; }
 
-  list separator { margin: -1px 0px; }
+  list separator { margin: 0px; }
 }
 
 /*************
@@ -3781,14 +3781,13 @@ list {
   color: $text_color;
   background-color: $base_color; // $sidebar_bg_color;
   border-color: $borders_color;
-  padding-top: -3px;
 
   &:backdrop {
     background-color: $backdrop_base_color; // $backdrop_sidebar_bg_color;
     border-color: $backdrop_borders_color;
   }
 
-  row { padding: -1px 2px 2px 2px; }
+  row { padding: 2px; }
 }
 
 row {
@@ -3818,8 +3817,6 @@ row {
   }
 
   &:selected { @extend %selected_items; }
-
-  row { padding: -1px 2px 2px 2px; }
 }
 
 
@@ -4050,13 +4047,14 @@ row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sid
 
 placessidebar {
   > viewport.frame { border-style: none; }
+
   > viewport > list { margin-top: -3px; }
 
   row {
     // Needs overriding of the GtkListBoxRow padding
-    margin-top: -2px;
+    margin: -1px 0;
     min-height: 36px;
-    padding: 1px 0px;
+    padding: 0px;
 
     // Using margins/padding directly in the SidebarRow
     // will make the animation of the new bookmark row jump
