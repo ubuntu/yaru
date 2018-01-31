@@ -479,7 +479,8 @@ StScrollBar {
   .audio-selection-device {
     border: 1px solid $osd_borders_color; // $osd_borders_color;
     border-radius: 12px;
-    &:active,&:hover,&:focus { background-color: $selected_bg_color; }
+    &:hover,&:focus { background-color: $base_hover_color; }
+    &:active { background-color: $base_active_color; }
   }
 
   .audio-selection-device-box {
@@ -1232,7 +1233,7 @@ StScrollBar {
 
   .nm-dialog-airplane-text { color: $fg_color; }
   .nm-dialog-header-icon { icon-size: 32px; }
-  .nm-dialog-scroll-view { border: 1px solid $borders_color; } // 2px solid $borders_color; }
+  .nm-dialog-scroll-view { border: 1px solid $osd_borders_color; } // 2px solid $borders_color; }
   .nm-dialog-header { font-weight: bold; }
 
   .nm-dialog-item {
@@ -1243,7 +1244,7 @@ StScrollBar {
   }
 
   .nm-dialog-item:selected {
-    background-color: $selected_bg_color;
+    background-color: $base_hover_color;
     color: $selected_fg_color;
   }
 
