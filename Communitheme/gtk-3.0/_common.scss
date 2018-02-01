@@ -2302,12 +2302,13 @@ notebook {
       background-color: $backdrop_sidebar_bg_color; // $backdrop_dark_fill;
     }
 
+    tabs { margin: -1px; }
+
     &.top {
       border-bottom-style: solid;
       > tabs {
         padding-top: 4px;
         margin-bottom: -2px;
-        box-shadow: inset 0 -1px $borders_color;
 
         > tab {
           border-radius: 4px 4px 0 0;
@@ -2322,7 +2323,6 @@ notebook {
       > tabs {
         padding-bottom: 4px;
         margin-top: -2px;
-        box-shadow: inset 0 1px $borders_color;
 
         > tab {
           border-radius: 0 0 4px 4px;
@@ -2337,7 +2337,6 @@ notebook {
       > tabs {
         padding-left: 4px;
         margin-right: -2px;
-        box-shadow: inset -1px 0 $borders_color;
 
         > tab {
           border-radius: 4px 0 0 4px;
@@ -2352,7 +2351,6 @@ notebook {
       > tabs {
         padding-right: 4px;
         margin-left: -2px;
-        box-shadow: inset 1px 0 $borders_color;
 
         > tab {
           border-radius: 0 4px 4px 0;
@@ -2429,9 +2427,9 @@ notebook {
     }
 
     tab {
-      min-height: 30px;
-      min-width: 30px;
-      padding: 3px 12px;
+      min-height: 24px;
+      min-width: 24px;
+      padding: 4px 12px;
       outline-offset: -1px; // -5px;
       color: $insensitive_fg_color;
       border: 1px solid transparent;
@@ -2481,19 +2479,19 @@ notebook {
         &, &:backdrop { color: gtkalpha(currentColor, 0.3); }
 
         padding: 0;
-        margin-top: 4px;
-        margin-bottom: 4px;
+        margin-top: 1px;
+        margin-bottom: 1px;
         // FIXME: generalize .small-button?
         min-width: 20px;
         min-height: 20px;
 
         &:last-child {
           margin-left: 4px;
-          margin-right: -4px;
+          margin-right: -8px;
         }
 
         &:first-child {
-          margin-left: -4px;
+          margin-left: -8px;
           margin-right: 4px;
         }
       }
@@ -2502,20 +2500,22 @@ notebook {
     &.top,
     &.bottom {
       tabs {
-        padding-left: 4px;
-        padding-right: 4px;
+        padding-left: 2px;
+        padding-right: 2px;
 
         &:not(:only-child) {
-          margin-left: 3px;
-          margin-right: 3px;
+          // margin-left: 3px;
+          // margin-right: 3px;
+
+          // &:first-child { margin-left: -1px; }
+          // &:last-child { margin-right: -1px; }
         }
 
         tab {
-          margin-left: 4px;
-          margin-right: 4px;
+          margin-left: 2px;
+          margin-right: 2px;
 
           // &.reorderable-page { border-style: none solid; }
-          &:last-child { margin-right: 4px; }
         }
       }
     }
@@ -2523,29 +2523,28 @@ notebook {
     &.left,
     &.right {
       tabs {
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding-top: 2px;
+        padding-bottom: 2px;
 
         &:not(:only-child) {
-          margin-top: 3px;
-          margin-bottom: 3px;
+          // margin-top: 3px;
+          // margin-bottom: 3px;
 
           // &:first-child { margin-top: -1px; }
           // &:last-child { margin-bottom: -1px; }
         }
 
         tab {
-          margin-top: 4px;
-          margin-bottom: 4px;
+          margin-top: 2px;
+          margin-bottom: 2px;
           //
           // &.reorderable-page { border-style: solid none; }
-          &:last-child { margin-bottom: 4px; }
         }
       }
     }
 
-    &.top tab { padding-bottom: 4px; }
-    &.bottom tab { padding-top: 4px; }
+    &.top tab { padding-top: 3px; }
+    &.bottom tab { padding-bottom: 3px; }
   }
 
   > stack:not(:only-child) { // the :not(:only-child) is for "hidden" notebooks

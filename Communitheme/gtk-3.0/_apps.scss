@@ -18,12 +18,6 @@ list.tweak-categories separator {
     border: 1px solid $borders_color;
   }
 
-  header.top {
-  // nautilus tabs has too thick borders
-  // makes nautilus tabs look much nicer
-    border: none
-  }
-
   .searchbar-container searchbar {
     // get rid of a 1px white line shown at the top of the window
     // applies to the desktop too
