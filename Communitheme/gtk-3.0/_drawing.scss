@@ -210,12 +210,12 @@
   @else if $t==hover {
   // hovered button
   //
-    $_bg: if(lightness($c)<35%, lighten($c, 7.5%), darken($c, 5%));
+    $_bg: if(lightness($c)<35%, lighten($c, 10%), darken($c, 5%));
   //
     color: $tc;
     background-color: $_bg;
     -gtk-icon-effect: highlight;
-    border-color: if($flat==true, $_bg, _border_color($_bg));
+    border-color: if($flat==true, $_pressed, _border_color($_bg));
 
     @if $flat == false {
       border-bottom-color: darken($_bg, 30%);
@@ -226,11 +226,11 @@
   @else if $t==active {
     // pushed button
     //
-    $_bg: if(lightness($c)<35%, darken($c, 5%), darken($c, 10%));
+    $_bg: if(lightness($c)<35%, lighten($c, 10%), darken($c, 10%));
     //
     color: $tc;
     background-color: $_bg;
-    border-color: if($flat==true, $_bg, _border_color($_bg, $darker: true));
+    border-color: if($flat==true, $_pressed, _border_color($_bg, $darker: true));
 
     @if $flat == false {
       border-color: darken($_bg, 15%);
