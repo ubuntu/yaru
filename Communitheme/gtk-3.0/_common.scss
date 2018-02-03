@@ -1612,7 +1612,7 @@ headerbar {
         &:backdrop { color: $backdrop_headerbar_insensitive_color; }
       }
 
-      &:hover {  box-shadow: inset 0 -2px $headerbar_insensitive_color; }
+      &:hover {  box-shadow: inset 0 -1px $headerbar_insensitive_color; }
       &:checked:not(:indeterminate) { color: $selected_fg_color; &:backdrop { color: $backdrop_headerbar_fg_color; }}
     }
 
@@ -1642,13 +1642,20 @@ headerbar {
           @extend %underline_focus_headerbar;
         }
 
-        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button, &.slider-button {
+        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button {
           // lighten($c, 5%) spits out the same bg-color as include button(normal, $headerbar_bg_color)
           // not using include button, since we don't need all the other styling
-          $c: lighten($c, 5%);
+          $c: lighten($c, 10%);
+          background-color: $c;
           border: none;
-          &, &:disabled { background-color: $c; }
+          &:disabled { background-color: darken($c, 5%); }
           &:backdrop { background-color: mix($c, $headerbar_bg_color, 50%); }
+        }
+
+        &.slider-button {
+            background-color: lighten($headerbar_bg_color, 5%);
+            border: none;
+            &:backdrop { background-color: mix($c, $headerbar_bg_color, 50%); }
         }
       }
     }
@@ -1859,21 +1866,26 @@ headerbar { // headerbar border rounding
 
   &:not(:checked) {
     color: $insensitive_fg_color;
-    &:hover { color: $insensitive_fg_color; box-shadow: inset 0 -2px $insensitive_fg_color; }
+    &:hover { color: $insensitive_fg_color; box-shadow: inset 0 -1px $insensitive_fg_color; }
     &:backdrop { color: $backdrop_insensitive_color; }
   }
 
-  &:active { box-shadow: inset 0 -2px $selected_bg_color; }
+  &:active { box-shadow: inset 0 -1px $selected_bg_color; }
 
   &:checked, &:checked:not(:indeterminate) {
     color: $fg_color;
-    box-shadow: inset 0 -2px $selected_bg_color;
-    &:backdrop:not(:indeterminate) { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color) }
-    &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%) }
+    box-shadow: inset 0 -1px $selected_bg_color;
+    &:backdrop:not(:indeterminate) { box-shadow: inset 0 -1px _backdrop_color($selected_bg_color) }
+    &:hover { box-shadow: inset 0 -1px mix($selected_fg_color, $selected_bg_color, 10%) }
   }
 }
 
 .path-bar button {
+  // keep a margin between inner buttons only
+  &.text-button:not(:nth-child(2)) {
+    margin-left: 1px;
+  }
+
   &.text-button, &.image-button, & {
     padding-left: 4px;
     padding-right: 4px;
@@ -1912,12 +1924,23 @@ headerbar { // headerbar border rounding
   }
 
   &.slider-button {
+    border-image: none;
     padding-left: 0;
     padding-right: 0;
 
     &:hover, &:active, &:disabled { background-color: $button_bg_color; }
-    &:first-child { border-right-style: none; }
-    &:last-child { border-left-style: none; }
+    &:first-child {
+      &, &:focus {
+        border-radius: $large_radius 0 0 $large_radius;
+        border: solid 1px $selected_bg_color;
+      }
+    }
+    &:last-child {
+      &, &:focus {
+        border-radius: 0 $large_radius $large_radius 0;
+        border: solid 1px $selected_bg_color;
+      }
+    }
 
     &:hover { color: $selected_bg_color; }
     &:disabled image {
