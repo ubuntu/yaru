@@ -2782,48 +2782,28 @@ switch {
 
   slider {
     $c: $success_color;
-    min-width: 22px;
-    min-height: 22px;
-    margin: 2px;
-    outline-offset: -1px;
     -gtk-outline-radius: $small_radius;
-    outline-color: $focus_color;
-    border-radius: $small_radius;
     background-clip: if($variant == "light", border-box, padding-box);
+    background-color: white;
+    border-radius: $small_radius;
+    margin: 2px;
+    min-height: 22px;
+    min-width: 22px;
+    outline-color: $focus_color;
+    outline-offset: -1px;
     transition: $button_transition;
-
-    @include button(normal, white, $flat:true);
   }
 
-  &:hover slider { /* ?? */ }
-
   &:disabled slider {
-    @include button(insensitive, if($variant == "light", white, darken(white, 20%)), $flat:true);
+    background-color: transparentize(white, 0.2);
   }
 
   &:backdrop {
     slider {
       transition: $backdrop_transition;
-
-      @include button(backdrop, white, $flat:true);
+      background-color: transparentize(white, 0.4);
     }
-
-    &:disabled slider { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 20%)), $flat:true); }
   }
-
-  // row:selected & { TODO: this should theortically look fine but it should still be tested
-    // @if $variant == 'light' {
-      // box-shadow: none;
-      // border-color: _border_color($c);
-
-      // &:backdrop { border-color: _backdrop_color($c); }
-
-      // slider:dir(rtl) { border-left-color: $borders_color; }
-      // slider:dir(ltr) { border-right-color: $borders_color; }
-
-      // slider { &:checked, & { border-color: _border_color($c); } }
-    // }
-  // }
 }
 
 
