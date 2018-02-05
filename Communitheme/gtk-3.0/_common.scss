@@ -511,7 +511,7 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 %button,
 button {
   @at-root %button_basic, & {
-animation: shrink 1s linear infinite;
+    animation: shrink 1s linear infinite;
     min-height: 24px;
     min-width: 16px;
     padding: 4px 8px;
@@ -1548,7 +1548,7 @@ headerbar {
       }
     }
 
-    button, .linked button {
+    button, .linked button, .horizontal.linked button {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
                           (":active, &:checked", "active"),
@@ -1559,13 +1559,6 @@ headerbar {
                           (":backdrop:disabled", 'backdrop-insensitive'),
                           (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
                             &#{$state} { @include button($t, $c, $tc, $flat:true); }
-      }
-
-      &, &:backdrop {
-        &, &:disabled {
-          // headerbar buttons should be undecorated when not being directly interacted with
-          @include button(undecorated);
-        }
       }
 
       @each $b_type, $b_color in (suggested-action, $success_color),
@@ -1584,7 +1577,6 @@ headerbar {
     }
 
     .horizontal.linked button, .horizontal.linked button.image-button, .horizontal.linked entry {
-      // linked buttons are not flat
       // @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
       // (":active, &:checked", "active"), (":disabled", "insensitive"),
       // (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
@@ -4577,7 +4569,8 @@ button.titlebutton {
   padding-left: 4px;
   padding-right: 4px;
 
-  @each $state, $t in (":hover", "hover"),
+  @each $state, $t in ("", "normal"),
+                      (":hover", "hover"),
                       (":active", "active"),
                       (":backdrop", "backdrop"),
                       (":backdrop:active", 'backdrop-active') {
