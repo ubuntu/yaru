@@ -1549,12 +1549,16 @@ headerbar {
     }
 
     button, .linked button {
-      @each $state, $t in ("", "normal"), (":hover", "hover"),
-      (":active, &:checked", "active"), (":disabled", "insensitive"),
-      (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-      (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
-      (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-        &#{$state} { @include button($t, $c, $tc, $flat:true); }
+      @each $state, $t in ("", "normal"),
+                          (":hover", "hover"),
+                          (":active, &:checked", "active"),
+                          (":disabled", "insensitive"),
+                          (":disabled:active, &:disabled:checked", "insensitive-active"),
+                          (":backdrop", "backdrop"),
+                          (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                          (":backdrop:disabled", 'backdrop-insensitive'),
+                          (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+                            &#{$state} { @include button($t, $c, $tc, $flat:true); }
       }
 
       &, &:backdrop {
@@ -4573,9 +4577,12 @@ button.titlebutton {
   padding-left: 4px;
   padding-right: 4px;
 
-  @each $state, $t in ("", "normal"), (":hover, &:backdrop:hover", "hover"),
-  (":active", "active"), (":backdrop", "backdrop"), (":backdrop:active", 'backdrop-active') {
-    &#{$state} { @include button($t, $c, $tc, $flat: true); }
+  @each $state, $t in ("", "normal"),
+                      (":hover", "hover"),
+                      (":active", "active"),
+                      (":backdrop", "backdrop"),
+                      (":backdrop:active", 'backdrop-active') {
+                        &#{$state} { @include button($t, $c, $tc, $flat: true); }
   }
 
   &, &:backdrop {
