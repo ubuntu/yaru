@@ -232,6 +232,8 @@
     background-color: $_bg;
     border-color: if($flat==true, $_pressed, _border_color($_bg, $darker: true));
 
+    label { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $tc); }
+
     @if $flat == false {
       border-color: darken($_bg, 15%);
       box-shadow: inset 0 2px 3px -1px $_pressed;
@@ -293,7 +295,7 @@
     @if $c==$headerbar_bg_color { $_bg: $backdrop_headerbar_bg_color; }
     @else { $_bg: if($c==$button_bg_color, $backdrop_bg_color, _backdrop_color($c)); }
   //
-    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
+    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_fg_color); }
   //
     box-shadow: none;
     background-color: $_bg;
