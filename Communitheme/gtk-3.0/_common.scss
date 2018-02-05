@@ -4577,17 +4577,11 @@ button.titlebutton {
   padding-left: 4px;
   padding-right: 4px;
 
-  @each $state, $t in ("", "normal"),
-                      (":hover", "hover"),
+  @each $state, $t in (":hover", "hover"),
                       (":active", "active"),
                       (":backdrop", "backdrop"),
                       (":backdrop:active", 'backdrop-active') {
                         &#{$state} { @include button($t, $c, $tc, $flat: true); }
-  }
-
-  &, &:backdrop {
-    // headerbar buttons should be undecorated when not being directly interacted with
-    @include button(undecorated);
   }
 
   &.close {
@@ -4595,8 +4589,9 @@ button.titlebutton {
     background-repeat: no-repeat;
     background-size: 20px;
 
-    @each $state, $t in ("", ""), (":backdrop", "-backdrop") {
-      &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png")); }
+    @each $state, $t in ("", ""),
+                        (":backdrop", "-backdrop") {
+                          &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png")); }
     }
   }
 }
