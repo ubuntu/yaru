@@ -1738,7 +1738,7 @@ headerbar {
   .maximized &,
   .fullscreen & {
     box-shadow: inset 0 1px $inkstone;
-    
+
     &:backdrop, & {
       border-radius: 0;
     }
@@ -1929,18 +1929,8 @@ headerbar { // headerbar border rounding
     padding-right: 0;
 
     &:hover, &:active, &:disabled { background-color: $button_bg_color; }
-    &:first-child {
-      &, &:focus {
-        border-radius: $large_radius 0 0 $large_radius;
-        border: solid 1px $selected_bg_color;
-      }
-    }
-    &:last-child {
-      &, &:focus {
-        border-radius: 0 $large_radius $large_radius 0;
-        border: solid 1px $selected_bg_color;
-      }
-    }
+    &:first-child { border-radius: $medium_radius 0 0 $medium_radius; }
+    &:last-child { border-radius: 0 $medium_radius $medium_radius 0; }
 
     &:hover { color: $selected_bg_color; }
     &:disabled image {
