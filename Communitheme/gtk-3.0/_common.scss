@@ -1606,6 +1606,8 @@ headerbar {
       // underline_focus using the appropriate headerbar colors
       // this is used for the stackswitcher and pathbar as there are pathbars NOT in the headerbar
       @extend %underline_focus_effect;
+      background-color: lighten($headerbar_bg_color, 10%);
+
       &:not(:checked) {
         color: $headerbar_insensitive_color;
         &:hover { color: $headerbar_fg_color; }
@@ -1626,13 +1628,14 @@ headerbar {
       -gtk-outline-radius: 0;
     }
 
-    .horizontal.linked.stack-switcher button.text-button {
+    .horizontal.linked.stack-switcher button.text-button,
+    buttonbox.horizontal.linked button {
       // style the stackswitcher
       @extend %basic_underline_styling;
       border: none;
       min-width: 100px;
-      margin-left: 4px;
-      margin-right: 4px;
+      margin-left: 2px;
+      margin-right: 2px;
     }
 
     .linked.path-bar button {
