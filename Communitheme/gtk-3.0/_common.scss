@@ -37,7 +37,7 @@ $button_transition: all 200ms $ease-out-quad;
 
   outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
   outline-style: solid;
-  outline-offset: -3px;
+  outline-offset: 0; //-3px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
   -gtk-secondary-caret-color: $selected_bg_color
@@ -778,7 +778,7 @@ button {
     // child, a label needs just lateral padding while an icon needs vertical
     // padding added too.
 
-    outline-offset: -3px; // needs to be set or it gets overriden by GtkRadioButton outline-offset
+    //outline-offset: -3px; // needs to be set or it gets overriden by GtkRadioButton outline-offset
 
     > label {
       padding-left: 6px;  // label padding
