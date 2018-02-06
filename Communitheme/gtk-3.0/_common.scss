@@ -1535,6 +1535,13 @@ headerbar {
     $c: $headerbar_bg_color;
     $tc: $headerbar_fg_color;
 
+    switch:backdrop {
+      background-color: $headerbar_bg_color;
+      & slider {
+        background-color: $backdrop_insensitive_color;
+      }
+    }
+
     entry, %dark_entry {
       image { color: $tc; }
       @include entry(normal, $c: $c, $tc: $tc);
