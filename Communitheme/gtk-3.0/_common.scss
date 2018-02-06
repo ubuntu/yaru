@@ -1880,8 +1880,12 @@ headerbar { // headerbar border rounding
 
 .path-bar button {
   // keep a margin between inner buttons only
-  &.text-button:not(:nth-child(2)) {
+  &.text-button {
     margin-left: 1px;
+  }
+
+  &.slider-button:first-child {
+    margin-right: -1px;
   }
 
   &.text-button, &.image-button, & {
