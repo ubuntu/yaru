@@ -8,7 +8,7 @@ $alpha-value: 0.00;
 $small_radius: 4px;
 $medium_radius: 6px;
 $large_radius: 12px;
-$backdrop_transition: 200ms ease-out;
+$backdrop_transition: all 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
 
 * {
@@ -520,7 +520,6 @@ button {
     outline-color: $focus_color;
     outline-offset: -1px;
     -gtk-outline-radius: $small_radius;
-    transition: $button_transition;
 
     @include button(normal);
 
@@ -4562,7 +4561,6 @@ decoration {
 button.titlebutton {
   $c: $headerbar_bg_color;
   $tc: $headerbar_fg_color;
-  transition: $button_transition;
   border-radius: 5px;
   min-height: 24px;
   min-width: 24px;
