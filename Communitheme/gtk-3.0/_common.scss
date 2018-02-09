@@ -3910,48 +3910,72 @@ calendar {
  * Dialogs *
  ***********/
 messagedialog { // Message Dialog styling
+  $_bg: transparentize(darken($jet, 10%), 0.1);
   .titlebar {
-    min-height: 20px;
+    background-color: $_bg;
     background-image: none;
-    background-color: $bg_color;
-    border-style: none;
-    border-top-left-radius: $large_radius;
-    border-top-right-radius: $large_radius;
+    border-bottom: none;
+    border-left: 1px solid $inkstone;
+    border-right: 1px solid $inkstone;
+    border-top: 1px solid $inkstone;
+    border-top-left-radius: $medium_radius;
+    border-top-right-radius: $medium_radius;
+    color: $headerbar_fg_color;
+    min-height: 20px;
 
-    &:backdrop { background-color: $backdrop_bg_color; }
+    &:backdrop { background-color: $backdrop_headerbar_bg_color; }
   }
 
   &.csd { // rounded bottom border styling for csd version
     &.background {
-      // bigger radius for better antialiasing
-      border-bottom-left-radius: ($large_radius + 2px);
-      border-bottom-right-radius: ($large_radius + 2px);
+      background-color: $_bg;
+      // Bottom radius slightly bigger for better antialiasing with button border
+      border-bottom-left-radius: $medium_radius + 1;
+      border-bottom-right-radius: $medium_radius + 1;
+      border-bottom: 1px solid $inkstone;
+      border-left: 1px solid $inkstone;
+      border-right: 1px solid $inkstone;
+      border-top: none;
+      color: $headerbar_fg_color;
+
+      &:backdrop { background-color: $backdrop_headerbar_bg_color; }
     }
 
     .dialog-action-area button {
-      padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
-      border-radius: 0;
-      border-top-style: solid;
-      border-left-style: solid;
-      border-right-style: none;
-      border-bottom-style: none;
+      background-color: $inkstone;
+      border-top: 1px solid black;
+      border-right: 1px solid black;
+      border-left: none;
+      border-bottom: 1px solid $inkstone;
 
-      &:not(:last-child) {
-        // linked buttons will have more defined border colors
-        border-right-color: $borders_color;
-        &:disabled { border-right-color: $insensitive_borders_color;}
-      }
+      border-radius: 0; // defined in first/last-child
+      color: $headerbar_fg_color;
+      padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
 
       &:first-child {
-        border-left-style: none;
-        border-bottom-left-radius: $large_radius;
-        -gtk-outline-bottom-left-radius: $large_radius;
+        border-left: 1px solid $inkstone;
+        border-bottom-left-radius: $medium_radius;
+        -gtk-outline-bottom-left-radius: $medium_radius;
       }
-
       &:last-child {
-        border-bottom-right-radius: $large_radius;
-        -gtk-outline-bottom-right-radius: $large_radius;
+        border-right: 1px solid $inkstone;
+        border-bottom-right-radius: $medium_radius;
+        -gtk-outline-bottom-right-radius: $medium_radius;
       }
+      &:active {
+        background-color: darken($inkstone, 30%);
+        color: white;
+      }
+      &:focus { border-color: $selected_bg_color; }
+      &:hover {
+          background-color: darken($inkstone, 10%);
+          color: white;
+      }
+      &:backdrop {
+        background-color: $backdrop_headerbar_bg_color;
+        border-color: $backdrop_headerbar_bg_color;
+      }
+      &:disabled { border-color: $insensitive_borders_color; }
     }
   }
 }
