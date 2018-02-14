@@ -2619,6 +2619,7 @@ scrollbar {
     background-clip: padding-box;
     background-color: $scrollbar_slider_color;
     transition: 150ms linear;
+    transition-property: min-height, min-width, border-color, background-color;
 
     &:hover { background-color: $scrollbar_slider_hover_color; }
 
@@ -2631,41 +2632,42 @@ scrollbar {
 
   &.fine-tune {
     slider {
-      min-width: 3px;
-      min-height: 3px;
+      min-width: 4px;
+      min-height: 4px;
+      transition: none; // to prevent jumping the size
     }
 
-    &.horizontal slider { border-width: 5px 4px; }
-    &.vertical slider { border-width: 4px 5px; }
+    &.horizontal slider { margin: 0 -1px; }
+    &.vertical slider { margin: -1px 0; }
   }
 
   &.overlay-indicator {
     &:not(.dragging):not(.hovering) {
       border-color: transparent;
-      opacity: 0.8;
+      // opacity: 0.8;
       background-color: transparent;
 
       slider {
-        margin: 0;
+        margin: 2px;
         min-width: 3px;
         min-height: 3px;
-        background-color: $fg_color;
-        border: 1px solid if($variant == 'light', white, black);
+        // background-color: $fg_color;
+        border: 1px solid if($variant == 'light', transparentize(white, 0.8), transparentize(black, 0.8));
       }
 
       button {
         min-width: 5px;
         min-height: 5px;
-        background-color: $fg_color;
+        background-color: $scrollbar_slider_color;
         background-clip: padding-box;
         border-radius: 100%;
-        border: 1px solid if($variant == 'light', white, black);
+        border: 1px solid if($variant == 'light', transparentize(white, 0.8), transparentize(black, 0.8));
         -gtk-icon-source: none;
       }
 
       &.horizontal {
         slider {
-          margin: 0 2px;
+          // margin: 0 2px;
           min-width: $_slider_min_length;
         }
 
@@ -2677,7 +2679,7 @@ scrollbar {
 
       &.vertical {
         slider {
-          margin: 2px 0;
+          // margin: 2px 0;
           min-height: $_slider_min_length;
         }
 
@@ -2689,7 +2691,11 @@ scrollbar {
     }
 
     &.dragging,
-    &.hovering { opacity: 0.8; }
+    &.hovering {
+      background-color: transparentize($scrollbar_bg_color, 0.2);
+
+      &:backdrop { background-color: transparentize($backdrop_scrollbar_bg_color, 0.2); }
+    }
   }
 
   &.horizontal slider { min-width: $_slider_min_length; }
