@@ -37,7 +37,7 @@
 // @function entry_focus_shadow($fc:$selected_bg_color) { @return /*0 0 2px 2px rgba(0, 0, 0, 0.025),*/ 0 0 2px 2px transparentize($fc, .85); }
 @function entry_focus_shadow($fc:$selected_bg_color) { @return none; }
 
-@mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $text_color, $edge: none) {
+@mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $fg_color, $edge: none) {
 //
 // Entries drawing function
 //
@@ -55,7 +55,7 @@
 
   @if $t==normal {
     $_bc: if($c == $headerbar_bg_color, $graphite, $c);
-    color: if($tc != $text_color, transparentize($tc, .1), $text_color);
+    color: if($tc != $fg_color, transparentize($tc, .1), $fg_color);
     border-color: if($c != $base_color, _border_color($_bc), $borders_color);
     background-color: $c;
     @include _shadows(entry_focus_shadow(transparentize($fc, 1)), $_entry_edge);
@@ -67,14 +67,14 @@
   }
   @if $t==insensitive {
     $_bc: if($c == $headerbar_bg_color, $graphite, $c);
-    color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
+    color: if($tc != $fg_color, mix($tc, $c, 50%), $insensitive_fg_color);
     border-color: $insensitive_borders_color; // $borders_color;
     background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
     box-shadow: $_entry_edge;
   }
   @if $t==backdrop {
     $_bc: if($c == $headerbar_bg_color, $graphite, $c);
-    color: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
+    color: if($tc != $fg_color, mix($tc, $c, 80%), $backdrop_text_color);
     border-color: if($c != $base_color, _border_color($c), $backdrop_borders_color);
     background-color: if($c != $base_color, lighten($c, 1%), $backdrop_base_color);
     box-shadow: $_blank_edge;
