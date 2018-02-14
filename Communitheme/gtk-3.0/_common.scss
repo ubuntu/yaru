@@ -1051,7 +1051,8 @@ modelbutton.flat,
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 3px;
-  outline-offset: 0; // -2px;
+  -gtk-outline-radius: 3px;
+  outline-offset: -2px;
 
   @extend %undecorated_button;
 
@@ -2855,6 +2856,7 @@ switch {
 checkbutton.text-button, radiobutton.text-button {
   // this is for a nice focus on check and radios text
   padding: 2px 0;
+  -gtk-outline-radius: $small_radius;
   outline-offset: 0;
 
   label:not(:only-child) {
