@@ -339,7 +339,7 @@
     @if $c == $headerbar_bg_color {
       $_bg: transparent;
       background-image: none;
-      text-shadonw: none;
+      text-shadow: none;
       -gtk-icon-shadow: none;
     }
     @else { $_bg: if($c == $button_bg_color, $insensitive_bg_color, mix(_backdrop_color($c), $base_color, 60%)); }
