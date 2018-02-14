@@ -1790,8 +1790,8 @@ headerbar {
     margin-bottom: 4px;
   }
   switch, separator {
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 6px;
+    margin-bottom: 6px;
   }
 }
 
@@ -4551,11 +4551,10 @@ decoration {
 button.titlebutton {
   $c: $headerbar_bg_color;
   $tc: $headerbar_fg_color;
-  border-radius: 5px;
+  border-radius: $small_radius;
   min-height: 24px;
   min-width: 24px;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 3px;
 
   @each $state, $t in ("", "normal"),
                       (":hover", "hover"),
