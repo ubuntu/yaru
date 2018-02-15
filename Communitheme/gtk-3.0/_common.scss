@@ -258,7 +258,7 @@ spinner {
 entry {
   %entry_basic, & {
     min-height: 24px;
-    padding: 4px 8px;
+    padding: 3px 8px;
     border: 1px solid;
     border-radius: $small_radius;
     transition: all 200ms $ease-out-quad;
@@ -411,6 +411,12 @@ entry {
     border-top-color: $borders_color;
     border-left-color: $borders_color;
     border-right-color: $borders_color;
+
+    & {
+      // buttons next to entry fields need less padding so as to not appear to wide
+      padding-left: 7px;
+      padding-right: 7px
+    }
   }
 }
 
@@ -514,7 +520,7 @@ button {
     animation: shrink 1s linear infinite;
     min-height: 24px;
     min-width: 16px;
-    padding: 4px 8px;
+    padding: 3px 8px;
     border: 1px solid;
     border-radius: $small_radius;
     outline-color: $focus_color;
@@ -590,8 +596,8 @@ button {
 
     &.image-button {
       min-width: 24px;
-      padding-left: 4px;
-      padding-right: 4px;
+      padding-left: 3px;
+      padding-right: 3px;
     }
 
     &.text-button {
@@ -1785,8 +1791,8 @@ headerbar {
     margin-bottom: 4px;
   }
   switch, separator {
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 6px;
+    margin-bottom: 6px;
   }
 }
 
@@ -2892,7 +2898,7 @@ radio {
 
   min-height: 14px;
   min-width: 14px;
-  padding: 2px;
+  padding: 1px;
   -gtk-icon-source: none;
 
   &:backdrop { transition: $backdrop_transition; }
@@ -4552,11 +4558,10 @@ decoration {
 button.titlebutton {
   $c: $headerbar_bg_color;
   $tc: $headerbar_fg_color;
-  border-radius: 5px;
+  border-radius: $small_radius;
   min-height: 24px;
   min-width: 24px;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 3px;
 
   @each $state, $t in ("", "normal"),
                       (":hover", "hover"),
