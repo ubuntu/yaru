@@ -829,7 +829,7 @@ button {
   &.font,
   &.file { separator { background-color: transparent; }}
 
-  &.font { > box > box > label { font-weight: bold; }}
+  &.font { > box > box > label { font-weight: 500; }}
 
   // inline-toolbar buttons
   .inline-toolbar &, .inline-toolbar &:backdrop {
@@ -1522,6 +1522,7 @@ headerbar {
   }
 
   .title {
+    font-weight: 500;
     padding-left: 12px;
     padding-right: 12px;
   }
@@ -2082,7 +2083,7 @@ treeview.view {
   header {
     button {
       @extend %column_header_button;
-      font-weight: bold;
+      font-weight: 500;
       box-shadow: none;
 
       &:hover {
@@ -2479,7 +2480,7 @@ notebook {
 
       &:checked {
         color: $fg_color;
-        font-weight: bold;
+        font-weight: 500;
         background-color: $base_color;
         border-color: $borders_color;
         // &.reorderable-page {
@@ -2783,7 +2784,7 @@ switch {
   box-shadow: none;
   color: transparent;
   font-size: smaller;
-  font-weight: bold;
+  font-weight: 500;
   outline-offset: 0;
 
   &:checked {
