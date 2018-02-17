@@ -867,7 +867,7 @@ StScrollBar {
     // box-shadow: inset 0 -1px _border_color($panel_bg_color);
     /* transition from transparent to solid */
     box-shadow: none;
-    transition-duration: 1000ms;
+    transition-duration: 500ms;
 
     .panel-corner {
       -panel-corner-background-color: black;
