@@ -2085,6 +2085,7 @@ treeview.view {
       @extend %column_header_button;
       font-weight: 500;
       box-shadow: none;
+      -gtk-outline-radius: 0;
 
       &:hover {
         @extend %column_header_button;
