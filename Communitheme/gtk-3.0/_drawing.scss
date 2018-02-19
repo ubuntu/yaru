@@ -216,7 +216,7 @@
     color: $tc;
     background-color: $_bg;
     -gtk-icon-effect: highlight;
-    border-color: if($flat==true, $_pressed, _border_color($_bg));
+    border-color: if($flat==true, if($c == $headerbar_bg_color, $_pressed, $_bg), _border_color($_bg));
 
     @if $flat == false {
       border-bottom-color: darken($_bg, 30%);
@@ -234,7 +234,7 @@
     //
     color: $tc;
     background-color: $_bg;
-    border-color: if($flat==true, $_pressed, _border_color($_bg, $darker: true));
+    border-color: if($flat==true, if($c == $headerbar_bg_color, $_pressed, $_bg), _border_color($_bg, $darker: true));
 
     label { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $tc); }
 
