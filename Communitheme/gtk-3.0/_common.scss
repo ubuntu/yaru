@@ -37,7 +37,7 @@ $button_transition: all 200ms $ease-out-quad;
 
   outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
   outline-style: solid;
-  outline-offset: 0; //-3px;
+  outline-offset: -3px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
   -gtk-secondary-caret-color: $selected_bg_color
