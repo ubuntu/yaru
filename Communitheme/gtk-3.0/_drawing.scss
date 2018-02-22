@@ -342,7 +342,9 @@
       text-shadow: none;
       -gtk-icon-shadow: none;
     }
-    @else { $_bg: if($c == $button_bg_color, $insensitive_bg_color, mix(_backdrop_color($c), $base_color, 60%)); }
+    @else {
+        $_bg: if($c == $button_bg_color, $insensitive_bg_color, mix(_backdrop_color($c), $base_color, 60%));
+    }
   //
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
   //
