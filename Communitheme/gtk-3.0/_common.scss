@@ -3947,47 +3947,25 @@ calendar {
  ***********/
 messagedialog { // Message Dialog styling
   .titlebar {
-    min-height: 20px;
+    background-color: $headerbar_bg_color;
     background-image: none;
-    background-color: $bg_color;
     border-style: none;
-    border-top-left-radius: $large_radius;
-    border-top-right-radius: $large_radius;
+    border-top-left-radius: $small_radius;
+    border-top-right-radius: $small_radius;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+    min-height: 32px;
 
-    &:backdrop { background-color: $backdrop_bg_color; }
+    &:backdrop {
+      background-color: $backdrop_headerbar_bg_color;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
   }
 
-  &.csd { // rounded bottom border styling for csd version
-    &.background {
-      // bigger radius for better antialiasing
-      border-bottom-left-radius: ($large_radius + 2px);
-      border-bottom-right-radius: ($large_radius + 2px);
-    }
-
+  &.csd {
+    .dialog-vbox { margin-top: 14px; }
     .dialog-action-area button {
-      padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
-      border-radius: 0;
-      border-top-style: solid;
-      border-left-style: solid;
-      border-right-style: none;
-      border-bottom-style: none;
-
-      &:not(:last-child) {
-        // linked buttons will have more defined border colors
-        border-right-color: $borders_color;
-        &:disabled { border-right-color: $insensitive_borders_color;}
-      }
-
-      &:first-child {
-        border-left-style: none;
-        border-bottom-left-radius: $large_radius;
-        -gtk-outline-bottom-left-radius: $large_radius;
-      }
-
-      &:last-child {
-        border-bottom-right-radius: $large_radius;
-        -gtk-outline-bottom-right-radius: $large_radius;
-      }
+      @extend %button;
+      margin: 3px 5px;
     }
   }
 }
