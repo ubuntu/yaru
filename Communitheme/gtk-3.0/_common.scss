@@ -1617,10 +1617,6 @@ headerbar {
       // this is used for the stackswitcher and pathbar as there are pathbars NOT in the headerbar
       @extend %underline_focus_effect;
 
-      // gets rid of the radius
-      border-radius: 0;
-      -gtk-outline-radius: 0;
-
       // lighten($c, 5%) spits out the same bg-color as include button(normal, $headerbar_bg_color)
       // not using include button, since we don't need all the other styling
       $c: lighten($c, 5%);
@@ -1637,7 +1633,7 @@ headerbar {
         color: $selected_fg_color;
         box-shadow: inset 0 -2px $selected_bg_color;
 
-        &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%) }
+        &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%); }
       }
 
       &:backdrop {
@@ -1654,7 +1650,7 @@ headerbar {
     .horizontal.linked.stack-switcher,
     buttonbox.horizontal.linked {
       // round the stackswitcher corners by using border
-      border-width: 0 6px;
+      border-width: 0 8px;
       border-style: solid;
       border-color: $c;
       border-radius: $small_radius;
@@ -1666,6 +1662,11 @@ headerbar {
     buttonbox.horizontal.linked button {
       // style the stackswitcher
       @extend %underline_focus_headerbar;
+
+      // gets rid of the radius
+      border-radius: 0;
+      -gtk-outline-radius: 0;
+
       margin: 0;
       min-width: 100px;
       border: none;
@@ -1906,7 +1907,7 @@ headerbar { // headerbar border rounding
     color: $fg_color;
     box-shadow: inset 0 -2px $selected_bg_color;
 
-    &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%) }
+    &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%); }
   }
 
   &:backdrop {
@@ -1942,9 +1943,6 @@ headerbar { // headerbar border rounding
     padding-left: 0;
     padding-right: 0;
     box-shadow: none;
-
-    &:first-child { border-radius: $small_radius 0 0 $small_radius; }
-    &:last-child { border-radius: 0 $small_radius $small_radius 0; }
 
     &:hover { color: $selected_bg_color; }
     &:disabled image {
