@@ -1591,16 +1591,18 @@ headerbar {
     }
 
     .horizontal.linked button, .horizontal.linked button.image-button, .horizontal.linked entry {
-      // @each $state, $t in ("", "normal"), (":hover:not(:backdrop)", "hover"),
-      // (":active, &:checked", "active"), (":disabled", "insensitive"),
-      // (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-      // (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
-      // (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-      //   &#{$state} { @include button($t, $c, $tc, $bc: none, $flat:true); }
-      // }
-
       // force linked buttons and entries to be separate
       // this needs a lot of testing
+      &:focus {
+        & + entry { border-left-color: _border_color($graphite); }
+        & + button { border-left-color: transparent; }
+
+        & + entry,
+        & + button {
+          &:disabled { border-left-color: $insensitive_borders_color; }
+          &:backdrop { border-left-color: _border_color($headerbar_bg_color); }
+        }
+      }
       border-width: 1px;
       border-style: solid;
       -gtk-outline-radius: $small_radius;
