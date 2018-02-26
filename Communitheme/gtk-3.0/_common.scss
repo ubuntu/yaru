@@ -2996,14 +2996,14 @@ check {
   }
 }
 
-treeview.view {
-  // make borders with box shadow so as to not add border width to size
-  // too big checks and radios seem to be cropped
-  check, radio {
-    background-color: $dark_fill;
-    box-shadow: inset 0 0 0 1px $borders_color;
-  }
-}
+//treeview.view {
+//  // make borders with box shadow so as to not add border width to size
+//  // too big checks and radios seem to be cropped
+//  check, radio {
+//    //background-color: $dark_fill;
+//    //box-shadow: inset 0 0 0 1px $borders_color;
+//  }
+//}
 
 menu menuitem, popover, treeview.view {
   // make menuitem, popover and treeview checks and radios smaller
@@ -3034,30 +3034,33 @@ menu menuitem, popover {
   }
 }
 
-treeview.view check,
-treeview.view radio {
-  &:selected {
-    &:focus, & {
-      color: $fg_color;
+treeview.view {
+  radio, check {
+    &, &:checked:hover, &:backdrop {
+      &:selected {
+        &:focus, & {
+          border-color: white;
+          color: white;
+          background-color: transparent;
+        }
+      }
+      &:disabled {
+        color: $insensitive_fg_color;
+
+        &:backdrop { color: $backdrop_insensitive_color; }
+      }
     }
 
-    &:disabled {
-      color: $insensitive_fg_color;
-
-      &:backdrop { color: $backdrop_insensitive_color; }
-    }
-  }
-
-  &:backdrop { &:selected, & { color: $backdrop_fg_color; }}
-}
-
-treeview.view radio, treeview.view check {
-  // selected treeview elements
-  &, &:checked:hover, &:backdrop {
-    &:selected { &:focus, & { border-color: white; color: white; background-color: transparent; box-shadow: inset 0 0 0 1px white; }}
+    &:backdrop { &:selected, & { color: $backdrop_fg_color; }}
   }
 }
 
+// Somehow radio button loses its radius value when
+// in below status.
+// The only fix seems to re-set it here.
+treeview.view radio:checked:selected {
+  border-radius: 100%;
+}
 
 /************
  * GtkScale *
