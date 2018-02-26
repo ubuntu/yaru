@@ -3070,8 +3070,6 @@ treeview.view radio:checked:selected {
 %scale_trough {
   border-radius: 3px;
   background-color: $dark_fill;
-  min-width: 3px;
-  min-height: 3px;
 
   &:disabled { background-color: $insensitive_dark_fill; }
 
@@ -3127,8 +3125,8 @@ scale {
   $_marks_lenght: 6px;
   $_marks_distance: 6px;
 
-  min-height: 10px;
-  min-width: 10px;
+  min-height: 8px;
+  min-width: 8px;
   padding: 12px;
 
   // those are inside the trough node, I need them to show their own border over the trough one, so negative margin
@@ -3143,22 +3141,30 @@ scale {
     margin: -9px;
   }
 
+  &.horizontal slider { margin-top: -8px; }
+
+  &.vertical slider { margin-left: -8px; }
+
   // click-and-hold the slider to activate
   &.fine-tune {
     &.horizontal {
-      padding-top: 9px;
-      padding-bottom: 9px;
+      padding-top: 8px;
+      padding-bottom: 8px;
       min-height: 16px;
     }
 
     &.vertical {
-      padding-left: 9px;
-      padding-right: 9px;
+      padding-left: 8px;
+      padding-right: 8px;
       min-width: 16px;
     }
 
     // to make the trough grow in fine-tune mode
-    slider { margin: -7px; }
+    slider { margin: -8px; }
+
+    &.horizontal slider { margin-top: -7px; }
+
+    &.vertical slider { margin-left: -7px; }
 
     fill,
     highlight,
@@ -3288,7 +3294,7 @@ scale {
                                                      (bottom, right, left) {
       &.#{$marks_class} {
         margin-#{$marks_margin}: $_marks_distance;
-        margin-#{$marks_pos}: -($_marks_distance + $_marks_lenght - 3px);
+        margin-#{$marks_pos}: -($_marks_distance + $_marks_lenght - 1px);
       }
     }
   }
@@ -3299,7 +3305,7 @@ scale {
       min-width: 1px;
     }
 
-    &.fine-tune indicator { min-height: ($_marks_lenght - 3px); }
+    &.fine-tune indicator { min-height: ($_marks_lenght - 1px); }
   }
 
   &.vertical {
@@ -3308,7 +3314,7 @@ scale {
       min-width: $_marks_lenght;
     }
 
-    &.fine-tune indicator { min-width: ($_marks_lenght - 3px); }
+    &.fine-tune indicator { min-width: ($_marks_lenght - 1px); }
   }
 
   // *WARNING* scale with marks madness following
@@ -3330,24 +3336,25 @@ scale {
             &#{$state} {
               // an asymmetric slider asset is used here, so the margins are uneven, the smaller
               // margin is set on the point side.
-              margin: -10px;
+              margin: -9px;
               $_scale_asset: 'assets/slider-#{$dir_infix}-#{$marks_infix}#{$state_infix}';
               border-style: none;
               border-radius: 0;
-              background-size: 14px;
+
               background-color: transparent;
               background-image: -gtk-scaled(url('#{$_scale_asset}.png'), url('#{$_scale_asset}@2.png'));
 
-              $_scale_slider_bg_pos: bottom;
+              $_scale_slider_bg_pos: center calc(100% - 2px);
 
               @if $dir_class == 'horizontal' {
                 min-height: 26px;
                 min-width: 22px;
+                background-size: 14px 22px;
 
                 @if $marks_infix == 'scale-has-marks-above' {
                   margin-top: -14px;
 
-                  $_scale_slider_bg_pos: top;
+                  $_scale_slider_bg_pos: center 2px;
                 }
 
                 @else { margin-bottom: -14px; }
@@ -3356,17 +3363,18 @@ scale {
               @else {
                 min-height: 22px;
                 min-width: 26px;
+                background-size: 22px 14px;
 
                 @if $marks_infix == 'scale-has-marks-above' {
                   margin-left: -14px;
 
-                  $_scale_slider_bg_pos: left bottom;
+                  $_scale_slider_bg_pos: calc(100% - 2px) center;
                 }
 
                 @else {
                   margin-right: -14px;
 
-                  $_scale_slider_bg_pos: right bottom;
+                  $_scale_slider_bg_pos: 2px center;
                 }
               }
 
@@ -3378,18 +3386,18 @@ scale {
 
           &.fine-tune slider {
             // bigger negative margins to make the trough grow here as well
-            margin: -9px;
+            margin: -8px;
 
             @if $dir_class == 'horizontal' {
-              @if $marks_infix == 'scale-has-marks-above' { margin-top: -11px; }
+              @if $marks_infix == 'scale-has-marks-above' { margin-top: -13px; }
 
-              @else { margin-bottom: -11px; }
+              @else { margin-bottom: -13px; }
             }
 
             @else {
-              @if $marks_infix == 'scale-has-marks-above' { margin-left: -11px; }
+              @if $marks_infix == 'scale-has-marks-above' { margin-left: -13px; }
 
-              @else { margin-right: -11px; }
+              @else { margin-right: -13px; }
             }
           }
         }
@@ -3402,16 +3410,16 @@ scale {
     min-width: 0;
 
     trough {
-      background-image: image($borders_color);
-      background-repeat: no-repeat;
+      // background-image: image($borders_color);
+      // background-repeat: no-repeat;
     }
 
     &.horizontal {
-      padding: 0 0 15px 0;
+      padding: 0 0 12px 0;
 
       trough {
-        padding-bottom: 4px;
-        background-position: 0 -3px;
+        padding-bottom: 3px;
+        // background-position: 0 -3px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
       }
@@ -3419,8 +3427,8 @@ scale {
       slider {
         &:dir(ltr), &:dir(rtl) { // specificity bumb
           &:hover, &:backdrop, &:disabled, &:backdrop:disabled, & {
-            margin-bottom: -15px;
-            margin-top: 6px;
+            margin-bottom: -12px;
+            margin-top: 5px;
           }
         }
       }
@@ -3428,37 +3436,37 @@ scale {
 
     &.vertical {
       &:dir(ltr) {
-        padding: 0 0 0 15px;
+        padding: 0 0 0 12px;
 
         trough {
-          padding-left: 4px;
-          background-position: 3px 0;
+          padding-left: 3px;
+          // background-position: 3px 0;
           border-bottom-right-radius: 0;
           border-top-right-radius: 0;
         }
 
         slider {
           &:hover, &:backdrop, &:disabled, &:backdrop:disabled, & {
-            margin-left: -15px;
-            margin-right: 6px;
+            margin-left: -12px;
+            margin-right: 5px;
           }
         }
       }
 
       &:dir(rtl) {
-        padding: 0 15px 0 0;
+        padding: 0 12px 0 0;
 
         trough {
-          padding-right: 4px;
-          background-position: -3px 0;
+          padding-right: 3px;
+          // background-position: -3px 0;
           border-bottom-left-radius: 0;
           border-top-left-radius: 0;
         }
 
         slider {
           &:hover, &:backdrop, &:disabled, &:backdrop:disabled, & {
-            margin-right: -15px;
-            margin-left: 6px;
+            margin-right: -12px;
+            margin-left: 5px;
           }
         }
       }
@@ -3467,46 +3475,46 @@ scale {
     &.fine-tune {
       &.horizontal {
         &:dir(ltr), &:dir(rtl) { // specificity bump
-          padding: 0 0 12px 0;
+          padding: 0 0 10px 0;
 
           trough {
-            padding-bottom: 7px;
-            background-position: 0 -6px;
+            padding-bottom: 5px;
+            // background-position: 0 -6px;
           }
 
           slider {
-            margin-bottom: -15px;
-            margin-top: 6px;
+            margin-bottom: -12px;
+            margin-top: 5px;
           }
         }
       }
 
       &.vertical {
         &:dir(ltr) {
-          padding: 0 0 0 12px;
+          padding: 0 0 0 10px;
 
           trough {
-            padding-left: 7px;
-            background-position: 6px 0;
+            padding-left: 5px;
+            // background-position: 6px 0;
           }
 
           slider {
-            margin-left: -15px;
-            margin-right: 6px;
+            margin-left: -12px;
+            margin-right: 5px;
           }
         }
 
         &:dir(rtl) {
-          padding: 0 12px 0 0;
+          padding: 0 10px 0 0;
 
           trough {
-            padding-right: 7px;
-            background-position: -6px 0;
+            padding-right: 5px;
+            // background-position: -6px 0;
           }
 
           slider {
-            margin-right: -15px;
-            margin-left: 6px;
+            margin-right: -12px;
+            margin-left: 5px;
           }
         }
       }
