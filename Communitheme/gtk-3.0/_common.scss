@@ -2573,10 +2573,6 @@ notebook {
 
     &:backdrop { background-color: $backdrop_base_color; }
   }
-
-  > stack grid:not(.nautilus-list-view) {
-        padding-top: 15px;
-  }
 }
 
 

@@ -32,6 +32,10 @@ list.tweak-categories separator {
                                                 // completely transparent tints the icon black
     background-image: image($selected_bg_color); // label background becomes this
   }
+
+  notebook > stack grid:not(.nautilus-list-view) {
+    padding-top: 15px;
+  }
 }
 
 .nautilus-desktop-window {
