@@ -1509,15 +1509,16 @@ searchbar,
 headerbar {
   padding: 0 6px;
   // min-height: 46px;
-  border-width: 0 0 1px;
+  border-width: 1px;
   border-style: solid;
-  border-color: _border_color($headerbar_bg_color);
+  border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
   border-radius: 0;
   background-color: transparentize($headerbar_bg_color, $alpha-value);
   color: $headerbar_fg_color;
 
   &:backdrop {
     background-color: $backdrop_headerbar_bg_color;
+    border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.9);
     transition: $backdrop_transition;
   }
 
@@ -4508,8 +4509,7 @@ decoration {
   $_wm_border: transparentize(black, 0.77);
   $_wm_border_backdrop: transparentize(black, 0.82);
 
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
-              0 0 0 1px $_wm_border; //doing borders with box-shadow
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
 
   // FIXME rationalize shadows
 
