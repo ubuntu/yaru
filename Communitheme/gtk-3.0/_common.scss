@@ -1518,7 +1518,7 @@ headerbar {
 
   &:backdrop {
     background-color: $backdrop_headerbar_bg_color;
-    border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.9);
+    border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.7);
     transition: $backdrop_transition;
   }
 
@@ -4507,7 +4507,6 @@ decoration {
   // this needs to be transparent
   // see bug #722563
   $_wm_border: transparentize(black, 0.77);
-  $_wm_border_backdrop: transparentize(black, 0.82);
 
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
 
@@ -4522,8 +4521,7 @@ decoration {
     // The biggest shadow should be in the same order then in the active state
     // or the jumping will happen during the transition.
     box-shadow: 0 3px 9px 1px transparent,
-                0 2px 6px 2px transparentize(black, 0.8),
-                0 0 0 1px $_wm_border_backdrop;
+                0 2px 6px 2px transparentize(black, 0.8);
     transition: $backdrop_transition;
   }
 
