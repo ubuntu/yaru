@@ -1618,67 +1618,76 @@ headerbar {
       // underline_focus using the appropriate headerbar colors
       // this is used for the stackswitcher and pathbar as there are pathbars NOT in the headerbar
       @extend %underline_focus_effect;
-      background-color: lighten($headerbar_bg_color, 5%);
 
-      &:not(:checked) {
-        &, label { color: $headerbar_text_color; }
-        &:hover { &, label { color: $headerbar_fg_color; } }
-        &:backdrop { &, label { color: $backdrop_headerbar_insensitive_color; } }
+      // lighten($c, 5%) spits out the same bg-color as include button(normal, $headerbar_bg_color)
+      // not using include button, since we don't need all the other styling
+      $c: lighten($c, 5%);
+      background-color: $c;
+      color: $headerbar_text_color;
+
+      // &:hover { color: $headerbar_fg_color; }
+
+      &:hover { box-shadow: inset 0 -2px transparentize($headerbar_text_color, 0.5); }
+
+      &:active { box-shadow: inset 0 -2px $headerbar_text_color; }
+
+      &:checked {
+        color: $selected_fg_color;
+        box-shadow: inset 0 -2px $selected_bg_color;
+
+        &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%); }
       }
 
-      &:hover { box-shadow: inset 0 -2px $headerbar_text_color; }
-      &:checked:not(:indeterminate) {
-        &, label { color: $selected_fg_color; }
-        &:backdrop { &, label { color: $backdrop_headerbar_fg_color; }}}
+      &:backdrop {
+        background-color: mix($c, $headerbar_bg_color, 50%);
+        color: $backdrop_headerbar_insensitive_color;
+
+        &:checked {
+          color: $backdrop_headerbar_fg_color;
+          box-shadow: inset 0 -2px _backdrop_color($selected_bg_color);
+        }
+      }
     }
 
-    %basic_underline_styling {
-      // makes the widget flat
-      // uses the underline effect
-      // gets rid of the radius
-      @extend %underline_focus_headerbar;
-      @extend %undecorated_button;
-      border-radius: 0;
-      -gtk-outline-radius: 0;
+    .horizontal.linked.stack-switcher,
+    buttonbox.horizontal.linked {
+      // round the stackswitcher corners by using border
+      border-width: 0 8px;
+      border-style: solid;
+      border-color: $c;
+      border-radius: $small_radius;
+
+      &:backdrop { border-color: mix($c, $headerbar_bg_color, 50%); }
     }
 
     .horizontal.linked.stack-switcher button.text-button,
     buttonbox.horizontal.linked button {
       // style the stackswitcher
-      @extend %basic_underline_styling;
-      background-color: transparent;
+      @extend %underline_focus_headerbar;
+
+      // gets rid of the radius
+      border-radius: 0;
+      -gtk-outline-radius: 0;
+
+      margin: 0;
       min-width: 100px;
       border: none;
     }
 
     .linked.path-bar button {
-        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button {
-          // style the headerbar pathbar
-          @extend %basic_underline_styling;
-          @extend %underline_focus_headerbar;
-        }
+      // style the headerbar pathbar
+      @extend %underline_focus_headerbar;
 
-        &.image-button.text-button.toggle, &.text-button, &.toggle.image-button {
-          // lighten($c, 5%) spits out the same bg-color as include button(normal, $headerbar_bg_color)
-          // not using include button, since we don't need all the other styling
-          $c: lighten($c, 5%);
-          background-color: $c;
-          &:disabled { background-color: darken($c, 5%); }
-          &:backdrop { background-color: mix($c, $headerbar_bg_color, 50%); }
-        }
-
-        &.slider-button {
-            background-color: $c;
-            border: none; // specificity bump
-            &:backdrop { background-color: mix($c, $headerbar_bg_color, 50%); }
-        }
+      &.slider-button {
+        box-shadow: none;
       }
     }
+  }
 
-    &:backdrop {
-      background-color: opacify($backdrop_headerbar_bg_color, 1);
-      transition: $backdrop_transition;
-    }
+  &:backdrop {
+    background-color: opacify($backdrop_headerbar_bg_color, 1);
+    transition: $backdrop_transition;
+  }
 
   &.selection-mode {
     $c: $neutral_color;
@@ -1878,24 +1887,40 @@ headerbar { // headerbar border rounding
   // indeterminate is there to lazily force the style
   transition: 300ms ease;
   transition-property: box-shadow, color;
+  border-color: transparent;
 
-  &:not(:checked) {
-    color: $insensitive_fg_color;
-    &:hover { color: $insensitive_fg_color; box-shadow: inset 0 -2px $insensitive_fg_color; }
-    &:backdrop { color: $backdrop_insensitive_color; }
-  }
-
-  &:active { box-shadow: inset 0 -2px $selected_bg_color; }
-
-  &:checked, &:checked:not(:indeterminate) {
-    color: $fg_color;
-    box-shadow: inset 0 -2px $selected_bg_color;
-    &:backdrop:not(:indeterminate) { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color) }
-    &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%) }
-  }
+  &, &:backdrop { box-shadow: inset 0 -2px transparent; }
 }
 
 .path-bar button {
+  @extend %underline_focus_effect;
+  background-color: $button_bg_color;
+  color: $insensitive_fg_color;
+  border-left-style: none;
+  border-right-style: none;
+
+  // &:hover { color: $insensitive_fg_color; }
+
+  &:hover { box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5); }
+
+  &:active { box-shadow: inset 0 -2px $insensitive_fg_color; }
+
+  &:checked {
+    color: $fg_color;
+    box-shadow: inset 0 -2px $selected_bg_color;
+
+    &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%); }
+  }
+
+  &:backdrop {
+    background-color: $button_bg_color;
+    color: $backdrop_insensitive_color;
+    border-color: transparent;
+    box-shadow: inset 0 -2px transparent;
+
+    &:checked { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color); }
+  }
+
   &.text-button, &.image-button, & {
     padding-left: 4px;
     padding-right: 4px;
@@ -1911,23 +1936,6 @@ headerbar { // headerbar border rounding
     label:first-child { padding-left: 8px; }
   }
 
-  &.text-button, &.toggle, &.toggle.image-button {
-    @extend %underline_focus_effect;
-    background-color: $button_bg_color;
-  }
-
-  &.text-button, &.toggle, &.toggle.image-button, &.slider-button {
-    &, &:disabled {
-      border-color: $borders_color;
-      &:backdrop { border-color: $backdrop_borders_color; }
-    }
-  }
-
-  &.text-button, &.toggle, &.toggle.image-button {
-    border-left-style: none;
-    border-right-style: none;
-  }
-
   image {
     padding-left: 4px;
     padding-right: 4px;
@@ -1936,15 +1944,12 @@ headerbar { // headerbar border rounding
   &.slider-button {
     padding-left: 0;
     padding-right: 0;
-
-    &:hover, &:active, &:disabled { background-color: $button_bg_color; }
-    &:first-child { border-radius: $small_radius 0 0 $small_radius; }
-    &:last-child { border-radius: 0 $small_radius $small_radius 0; }
+    box-shadow: none;
 
     &:hover { color: $selected_bg_color; }
     &:disabled image {
       // make disabled arrows less prominent
-      @extend .dim-label;
+      opacity: 0.3;
     }
   }
 }
