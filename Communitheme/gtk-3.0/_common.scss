@@ -1691,7 +1691,7 @@ headerbar {
   }
 
   &.selection-mode {
-    $c: $neutral_color;
+    $c: $success_color;
     color: $selected_fg_color;
     border-color: _border_color($c);
     background-color: $c;
@@ -1713,12 +1713,12 @@ headerbar {
     .subtitle:link { @extend *:link:selected;  }
 
     button {
-        @each $state, $t in (":hover", "hover"),
+        @each $state, $t in ("", "normal"), (":hover", "hover"),
         (":active, &:checked", "active"), (":disabled", "insensitive"),
         (":disabled:active, &:disabled:checked", "insensitive-active"),
-        (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
-        (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-          $c: darken($neutral_color, 10%); // like the infobar
+        (":backdrop", "backdrop"), (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+        (":backdrop:disabled", 'backdrop-insensitive'), (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+          $c: darken($success_color, 10%); // like the infobar
           $tc: white;
           &, &.selection-menu { &#{$state} { @include button($t, $c, $tc, $flat:true); } }
         }
@@ -4550,7 +4550,6 @@ decoration {
   }
 
   messagedialog.csd & {
-    border-radius: $large_radius;
     box-shadow: 0 1px 2px transparentize(black, 0.8);
   }
 
