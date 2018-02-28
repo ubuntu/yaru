@@ -1509,15 +1509,16 @@ searchbar,
 headerbar {
   padding: 0 6px;
   // min-height: 46px;
-  border-width: 0 0 1px;
+  border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
   border-style: solid;
-  border-color: _border_color($headerbar_bg_color);
+  border-width: 1px;
   border-radius: 0;
   background-color: transparentize($headerbar_bg_color, $alpha-value);
   color: $headerbar_fg_color;
 
   &:backdrop {
     background-color: $backdrop_headerbar_bg_color;
+    border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.7);
     transition: $backdrop_transition;
   }
 
@@ -3963,15 +3964,15 @@ messagedialog { // Message Dialog styling
   .titlebar {
     background-color: $headerbar_bg_color;
     background-image: none;
-    border-style: none;
+    border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
+    border-style: solid;
+    border-width: 1px;
     border-top-left-radius: $small_radius;
     border-top-right-radius: $small_radius;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
     min-height: 32px;
 
     &:backdrop {
       background-color: $backdrop_headerbar_bg_color;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -4506,10 +4507,8 @@ decoration {
   // this needs to be transparent
   // see bug #722563
   $_wm_border: transparentize(black, 0.77);
-  $_wm_border_backdrop: transparentize(black, 0.82);
 
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
-              0 0 0 1px $_wm_border; //doing borders with box-shadow
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
 
   // FIXME rationalize shadows
 
@@ -4522,8 +4521,7 @@ decoration {
     // The biggest shadow should be in the same order then in the active state
     // or the jumping will happen during the transition.
     box-shadow: 0 3px 9px 1px transparent,
-                0 2px 6px 2px transparentize(black, 0.8),
-                0 0 0 1px $_wm_border_backdrop;
+                0 2px 6px 2px transparentize(black, 0.8);
     transition: $backdrop_transition;
   }
 
@@ -4552,8 +4550,7 @@ decoration {
   }
 
   messagedialog.csd & {
-    box-shadow: 0 1px 2px transparentize(black, 0.8),
-                0 0 0 1px transparentize($_wm_border, 0.1);
+    box-shadow: 0 1px 2px transparentize(black, 0.8);
   }
 
   .solid-csd & {
