@@ -122,6 +122,11 @@ terminal-window {
       }
 
       slider {
+        // avoids scrollbar protruding from the terminal window on wayland session
+        // workaround for https://bugs.launchpad.net/ubuntu/+source/gnome-terminal/+bug/1720651
+        margin: 0;
+        border-width: 3px;
+
         $c: $terminal_text_color;
         background-color: transparentize($c, 0.6);
 
