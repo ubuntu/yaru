@@ -115,14 +115,6 @@ Putting button `{ background-color: red; }` will make all buttons have a red bac
 
 We sync our version to be compatible with the GTK and GNOME Shell versions being in ubuntu repositories. This is why we sync from them (or rebase them as soon as we update a new version with changes in ubuntu).
 
-## Shell: What is removed from the initial data/theme/ directory?
-
-We remove on new version import:
-
-- upstream `gnome-shell*.css`: they are generated them with our modifications
-- upstream `meson.build`: we define our own
-- `data/theme/parse-sass.sh`: we handle building directly with meson.
-
 ## GTK: What is removed from the initial directory?
 
 We remove on new version import:
