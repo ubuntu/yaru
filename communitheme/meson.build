@@ -9,7 +9,8 @@ theme_sources = files([
   'gnome-shell-sass/_common.scss',
   'gnome-shell-sass/_dock.scss',
   'gnome-shell-sass/_drawing.scss',
-  'gnome-shell-sass/_high-contrast-colors.scss'
+  'gnome-shell-sass/_high-contrast-colors.scss',
+  'gnome-shell-sass/_ubuntu-colors.scss',
 ])
 
 styles = [
