@@ -34,7 +34,3 @@ To uninstall Suru, simply run: `sudo ninja -C builddir uninstall` or, if you ins
 
     gsettings reset org.gnome.desktop.interface icon-theme
 
-## Donate
-
-You can [donate](https://snwh.org/donate) to support the development of Suru or become a patron on [Patreon](http://patreon.com/snwh/). It goes without saying that your support is much appreciated. &#x1F60A;
-
