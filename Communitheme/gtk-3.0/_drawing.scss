@@ -307,6 +307,7 @@
   //
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_fg_color); }
   //
+    -gtk-icon-effect: dim;
     box-shadow: none;
     background-color: $_bg;
     border-color: if($flat==true, $_bg, $_bc);
