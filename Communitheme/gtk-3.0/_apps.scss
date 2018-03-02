@@ -177,3 +177,13 @@ buttonbox.horizontal.linked button.toggle.toolbar-primary-buttons-software {
   // give gedit's bottom panel a border
   border-top: 1px solid $borders_color;
 }
+
+/***********
+ * GNOME Disks *
+ ***********/
+
+headerbar button image ~ window decoration ~ menu separator {
+  // gnome disks headerbar menu seems to inherit the headerbar separator bg color
+  // no unique class names or id used here so this rule is as specific as it can be
+  background: $borders_color;
+}
