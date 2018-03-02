@@ -1563,7 +1563,7 @@ headerbar {
       }
     }
 
-    button, .linked button, .horizontal.linked button {
+    button, button.popup, .linked button, .horizontal.linked button {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
                           (":active, &:checked", "active"),
