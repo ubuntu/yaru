@@ -2463,7 +2463,7 @@ notebook {
       color: $insensitive_fg_color;
       border: 1px solid transparent;
 
-      &:hover {
+      &:hover:not(:active):not(:backdrop) {
         background-color: mix($insensitive_bg_color, $base_color, 25%);
         border-color: mix($borders_color, $base_color, 60%);
       }
