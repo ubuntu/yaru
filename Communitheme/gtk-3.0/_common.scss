@@ -3979,7 +3979,24 @@ messagedialog { // Message Dialog styling
     .dialog-vbox { margin-top: 14px; }
     .dialog-action-area button {
       @extend %button;
-      margin: 3px 5px;
+      margin: 0 5px 5px;
+
+      &:not(:last-child) {
+        border-right-style: none;
+        margin-right: 0px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0px;
+        -gtk-outline-top-right-radius: 0px;
+        -gtk-outline-bottom-right-radius: 0px;
+      }
+
+      &:not(:first-child) {
+        margin-left: 0px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        -gtk-outline-top-left-radius: 0px;
+        -gtk-outline-bottom-left-radius: 0px;
+        border-left-color: $borders_color }
     }
   }
 }
