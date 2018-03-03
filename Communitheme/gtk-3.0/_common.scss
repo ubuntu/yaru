@@ -3236,9 +3236,8 @@ scale {
 
     &:backdrop {
       transition: $backdrop_transition;
-      @include button(backdrop, white);
-      &:disabled { @include button(backdrop-insensitive, if($variant == "light", white, darken(white, 20%))); }
-      &, &:disabled { border: 1px solid $backdrop_dark_fill; }
+      background-color: mix($white, $backdrop_bg_color, 70%);
+      &:disabled { background-color: mix($white, $backdrop_insensitive_color, 70%); border-color: $backdrop_insensitive_color; }
     }
 
     // ...on selected list rows
