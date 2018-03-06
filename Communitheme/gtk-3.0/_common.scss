@@ -1969,7 +1969,7 @@ treeview.view {
    }
 
   border-left-color: mix($fg_color, $base_color, 50%); // this is actually the tree lines color,
-  border-top-color: $bg_color;                         // while this is the grid lines color, better then nothing
+  border-top-color: transparentize(black, 0.9);        // while this is the grid lines color, better then nothing
 
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
@@ -1982,7 +1982,7 @@ treeview.view {
 
     &:backdrop, & {
       border-left-color: mix($selected_fg_color, $selected_bg_color, 50%);
-      border-top-color: transparentize($fg_color, 0.9); // doesn't work unfortunatelly
+      border-top-color: transparentize(black, 0.9); // doesn't work unfortunatelly
     }
   }
 
@@ -2006,7 +2006,7 @@ treeview.view {
 
   &:backdrop {
     border-left-color: mix($backdrop_fg_color, $backdrop_bg_color, 50%);
-    border-top: $backdrop_bg_color;
+    border-top: transparentize(black, 0.9);
   }
   &:drop(active) {
     border-style: solid none;
