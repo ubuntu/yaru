@@ -518,7 +518,7 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 button {
   @at-root %button_basic, & {
     animation: shrink 1s linear infinite;
-    min-height: 24px;
+    min-height: 22px;
     min-width: 16px;
     padding: 3px 8px;
     border: 1px solid;
