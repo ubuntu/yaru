@@ -169,6 +169,25 @@ buttonbox.horizontal.linked button.toggle.toolbar-primary-buttons-software {
   // margin-right: 4px;
 }
 
+.review-row {
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  box-shadow: 0 1px 2.5px transparentize(black, 0.75);
+  // border-radius: $medium_radius;
+  outline-offset: -1px;
+  // -gtk-outline-radius: $medium_radius;
+
+  &,
+  &:not(:selected):not(:backdrop):hover,
+  &:not(:selected):not(:backdrop):active { background-color: $base_color; }
+
+  &:backdrop { background-color: $backdrop_base_color; }
+
+  &:last-child { margin-bottom: 0; }
+
+  > grid { margin-top: -24px; }
+}
+
 /***********
  * Gedit *
  ***********/
