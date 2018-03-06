@@ -70,11 +70,11 @@ terminal-window {
       border-color: $terminal_borders_color;
       background-color: $terminal_base_color;
 
-      button {
+      button.flat {
         color: $terminal_fg_color;
           @each $state, $t in   (':hover', 'hover'), (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
                                 (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-          &#{$state} { @include button($t, $terminal_bg_color, white); } }
+          &#{$state} { @include button($t, lighten($terminal_base_color, 3%), white, $flat:true); } }
       }
 
       &:backdrop {
@@ -85,9 +85,15 @@ terminal-window {
       tab {
         color: $terminal_text_color;
 
-        &:hover {
-          background-color: mix($insensitive_bg_color, $terminal_base_color, 15%);
-          border-color: mix($terminal_borders_color, $terminal_base_color, 30%);
+        &:hover:not(:active):not(:backdrop) {
+          background-color: transparent;
+          border-color: $terminal_borders_color;
+        }
+
+        &:hover:checked:not(:backdrop) {
+          background-color: $terminal_bg_color;
+          border-color: $terminal_borders_color;
+          border-bottom-color: transparent;
         }
 
         &:backdrop {
