@@ -518,7 +518,7 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 button {
   @at-root %button_basic, & {
     animation: shrink 1s linear infinite;
-    min-height: 24px;
+    min-height: 22px;
     min-width: 16px;
     padding: 3px 8px;
     border: 1px solid;
@@ -1201,7 +1201,7 @@ spinbutton {
 
       &:hover {
         color: $fg_color;
-        background-color: $base_hover_color;
+        box-shadow: 0 0 1px 1px transparentize(black, 0.7);
       }
 
       &:disabled {

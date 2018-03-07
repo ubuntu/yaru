@@ -57,7 +57,7 @@
     $_bc: if($c == $headerbar_bg_color, $graphite, $c);
     color: if($tc != $fg_color, transparentize($tc, .1), $fg_color);
     border-color: if($c != $base_color, _border_color($_bc), $borders_color);
-    background-color: $c;
+    background-color: $_bc;
     @include _shadows(entry_focus_shadow(transparentize($fc, 1)), $_entry_edge);
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
@@ -66,25 +66,26 @@
     border-color: entry_focus_border($fc);
   }
   @if $t==insensitive {
-    $_bc: if($c == $headerbar_bg_color, $graphite, $c);
-    color: if($tc != $fg_color, mix($tc, $c, 50%), $insensitive_fg_color);
-    border-color: $insensitive_borders_color; // $borders_color;
     background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
+    border-color: $insensitive_borders_color; // $borders_color;
     box-shadow: $_entry_edge;
+    color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
   }
   @if $t==backdrop {
-    $_bc: if($c == $headerbar_bg_color, $graphite, $c);
-    color: if($tc != $fg_color, mix($tc, $c, 80%), $backdrop_text_color);
+    background-color: if($c == $headerbar_bg_color, $graphite, transparent);
     border-color: if($c != $base_color, _border_color($c), $backdrop_borders_color);
-    background-color: if($c != $base_color, lighten($c, 1%), $backdrop_base_color);
     box-shadow: $_blank_edge;
+    color: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
+
+    label, & { color:  $backdrop_fg_color; }
   }
   @if $t==backdrop-insensitive {
-    $_bc: if($c == $headerbar_bg_color, $graphite, $c);
-    color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
+    background-color: if($c == $headerbar_bg_color, $graphite, transparent);
     border-color: if($c != $base_color, _border_color($c), $backdrop_borders_color);
-    background-color: if($c != $base_color, darken($c, 15%), $insensitive_bg_color);
     box-shadow: $_blank_edge;
+    color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
+
+    label, & { color:  $backdrop_fg_color; }
   }
   @if $t==osd {
     color: $osd_text_color;
@@ -133,7 +134,7 @@
   }
   @else {
     @if lightness($c)<40% { @return darken($c, 15%); }
-    @else { @return darken($c, 5%); }
+    @else { @return darken($c, 13%); }
   }
 }
 
@@ -193,15 +194,13 @@
   $_pressed: if(lightness($c)<15%, transparentize(black, 0.3), transparentize(black, 0.6));
 
   @if $t==normal {
-  // normal button
-  //
-    color: $tc;
+    // normal button
     background-color: $c;
     border-color: if($flat==true, $c, _border_color($c));
+    color: $tc;
 
     @if $flat == false {
       border-bottom-color: darken($c, 30%);
-      box-shadow: inset 0 -1px 1px _button_hilight_color($c);
     }
     @else {
       box-shadow: none;
@@ -209,20 +208,19 @@
   }
 
   @else if $t==hover {
-  // hovered button
-  //
-    $_bg: if(lightness($c)<35%, lighten($c, 10%), darken($c, 5%));
-  //
-    color: $tc;
-    background-color: $_bg;
+    // hovered button
+    $_bg: if(lightness($c)<35%, lighten($c, 10%), $c);
     -gtk-icon-effect: highlight;
-    border-color: if($flat==true, if($c == $headerbar_bg_color, $_pressed, $_bg), _border_color($_bg));
+    background-color: $_bg;
+    color: $tc;
 
     @if $flat == false {
-      border-bottom-color: darken($_bg, 30%);
-      box-shadow: inset 0 -1px 1px _button_hilight_color($_bg);
+      border-color: darken($_bg, 40%);
+      box-shadow: 0px 1px 1px transparentize(black, 0.8);
+      transition: all 0.3s ease-out;
     }
     @else {
+      border-color: if($c == $headerbar_bg_color, $_pressed, $_bg);
       box-shadow: none;
     }
   }
@@ -243,8 +241,8 @@
   }
 
   @if $t==normal-alt {
-  // normal button alternative look
-  //
+    // normal button alternative look
+    //
     color: $tc;
     background-color: $c;
     border-color: _border_color($c);
@@ -265,12 +263,16 @@
   @else if $t==insensitive {
   // insensitive button
   //
-    $_bg: if($c != $button_bg_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
+    $_bg: if($c != $button_bg_color,
+                mix($c, if($c == $headerbar_bg_color,
+                            $headerbar_bg_color, $base_color),
+                            85%),
+                $insensitive_bg_color);
   //
     label, & { color: transparentize(if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color), if($tc == $headerbar_fg_color, 0.25, 0)); }
   //
     background-color: $_bg;
-    border-color: if($flat==true, $_bg, _border_color($_bg));
+    border-color: if($flat==true, $_bg, $borders_edge);
 
     @if $flat==false {
       box-shadow: inset 0 -1px transparent;
@@ -280,7 +282,7 @@
     }
   }
 
-  @else if $t==insensitive {
+  @else if $t==insensitive-active {
   // insensitive pushed button
   //
     $_bg: darken(mix($c, if($c==$headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), 8%);
@@ -297,7 +299,6 @@
   }
 
   @else if $t==backdrop {
-  //
   // backdrop button
   //
     $_bg: null;
@@ -342,7 +343,7 @@
       -gtk-icon-shadow: none;
     }
     @else {
-        $_bg: if($c == $button_bg_color, $insensitive_bg_color, mix(_backdrop_color($c), $base_color, 60%));
+        $_bg: if($c==$button_bg_color, $backdrop_bg_color, _backdrop_color($c));
     }
   //
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
@@ -358,7 +359,7 @@
     $_bg: null;
     $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
     @if $c == $headerbar_bg_color { $_bg: mix($c, $headerbar_bg_color, 85%); }
-    @else { $_bg: mix(if($c == $button_bg_color, $c, _backdrop_color($c)), $base_color, 85%); }
+    @else { $_bg: if($c==$button_bg_color, $backdrop_bg_color, _backdrop_color($c)); }
   //
     label { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
     box-shadow: none;
