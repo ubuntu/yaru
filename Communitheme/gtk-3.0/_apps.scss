@@ -33,6 +33,13 @@ list.tweak-categories separator {
     background-image: image($selected_bg_color); // label background becomes this
   }
 
+  .nautilus-list-view .view {
+    border-bottom: 1px solid transparentize(black, 0.9);
+
+    // Hide superfluous treeview drop target indication
+    &.dnd { border-style: none; }
+  }
+
   notebook > stack grid:not(.nautilus-list-view) {
     padding-top: 15px;
   }
