@@ -1536,7 +1536,15 @@ headerbar {
     @extend .dim-label;
   }
 
-  ~ separator, separator { background-image: image($inkstone); }
+  ~ separator, separator {
+    background-image: image(mix($inkstone, $headerbar_bg_color, 50%));
+    &:backdrop {
+      background-image: image(mix($inkstone, $headerbar_bg_color, 20%));
+    }
+  }
+
+  &:first-child { border-right-width: 0; }
+  &:last-child { border-left-width: 0; }
 
   & {
     // style headerbar buttons and entries using the appropriate headerbar colors
