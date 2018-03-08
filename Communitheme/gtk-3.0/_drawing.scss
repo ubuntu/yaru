@@ -204,7 +204,7 @@
       box-shadow: none;
     }
     @else {
-      border-color: darken(_border_color($c), 10%);
+      border-color: if($c==$success_color, $c, darken(_border_color($c), 10%));
       border-bottom-color: darken($c, 30%);
     }
   }
