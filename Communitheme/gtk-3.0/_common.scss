@@ -1201,7 +1201,12 @@ spinbutton {
 
       &:hover {
         color: $fg_color;
-        box-shadow: 0 0 1px 1px transparentize(black, 0.7);
+        @if $variant==light {
+          box-shadow: 0 0 1px 1px transparentize(black, 0.7);
+        }
+        @else {
+          background-color: $base_hover_color;
+        }
       }
 
       &:disabled {
@@ -3755,6 +3760,9 @@ actionbar > revealer >  box {
 }
 
 scrolledwindow {
+  viewport list {
+    background-color: $sidebar_bg_color;
+  }
   viewport.frame { // avoid double borders when viewport inside scrolled window
     border-style: none;
   }

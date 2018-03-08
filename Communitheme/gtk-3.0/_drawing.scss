@@ -199,11 +199,13 @@
     border-color: if($flat==true, $c, _border_color($c));
     color: $tc;
 
-    @if $flat == false {
-      border-bottom-color: darken($c, 30%);
+    @if $flat {
+      border-color: $c;
+      box-shadow: none;
     }
     @else {
-      box-shadow: none;
+      border-color: if($c==$success_color, $c, darken(_border_color($c), 10%));
+      border-bottom-color: darken($c, 30%);
     }
   }
 
