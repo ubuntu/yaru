@@ -257,7 +257,7 @@ spinner {
 %entry,
 entry {
   %entry_basic, & {
-    min-height: 24px;
+    min-height: 22px;
     padding: 3px 8px;
     border: 1px solid;
     border-radius: $small_radius;
@@ -596,8 +596,8 @@ button {
 
     &.image-button {
       min-width: 24px;
-      padding-left: 3px;
-      padding-right: 3px;
+      padding-left: 2px;
+      padding-right: 2px;
     }
 
     &.text-button {
