@@ -3768,7 +3768,8 @@ actionbar > revealer >  box {
 }
 
 scrolledwindow {
-  viewport list {
+  viewport > list,
+  viewport > stack list {
     background-color: $sidebar_bg_color;
   }
   viewport.frame { // avoid double borders when viewport inside scrolled window
