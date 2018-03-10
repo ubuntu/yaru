@@ -3995,7 +3995,7 @@ messagedialog { // Message Dialog styling
     .dialog-vbox { margin-top: 14px; }
     .dialog-action-area button {
       @extend %button;
-      margin: 3px 5px;
+      margin: 0 5px 5px;
     }
   }
 }
@@ -4551,7 +4551,7 @@ decoration {
   .popup & { box-shadow: none; }
 
   // server-side decorations as used by mutter
-  .ssd & { box-shadow: none; } //just doing borders, wm draws actual shadows
+  .ssd & { box-shadow: none; }
 
   .csd.popup & {
     border-radius: 0;
