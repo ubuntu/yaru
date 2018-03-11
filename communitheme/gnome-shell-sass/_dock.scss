@@ -197,11 +197,11 @@
     &,
     &:focus, &:hover,
     &:active, &:checked {
-      .overview-icon {
+      .show-apps-icon {
         background-image: url("ubuntu-logo-icon.svg") !important;
         background-position: center;
         background-repeat: no-repeat;
-        background-size: 48px !important;
+        background-size: contain !important;
       }
     }
   }
