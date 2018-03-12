@@ -171,17 +171,6 @@ terminal-window {
 /***********
  * GNOME Software *
  ***********/
-buttonbox.horizontal.linked button.toggle.toolbar-primary-buttons-software {
-  // GNOME Software uses a stackswitcher-type button that isn't labeled as such
-  @extend %underline_focus_headerbar;
-  min-width: 80px;
-  margin-left: 0;
-  margin-right: 0;
-  border: none;
-  // margin-left: 4px;
-  // margin-right: 4px;
-}
-
 .review-row {
   margin-bottom: 10px;
   padding: 6px 12px;

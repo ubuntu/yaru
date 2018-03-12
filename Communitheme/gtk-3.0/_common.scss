@@ -1563,7 +1563,7 @@ headerbar {
       }
     }
 
-    button, button.popup, .linked button, .horizontal.linked button {
+    button, button.flat {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
                           (":active, &:checked", "active"),
@@ -1591,7 +1591,7 @@ headerbar {
       }
     }
 
-    .horizontal.linked button, .horizontal.linked button.image-button, .horizontal.linked entry {
+    .linked:not(.path-bar):not(.stack-switcher):not(buttonbox) button, .linked:not(.vertical) entry {
       // force linked buttons and entries to be separate
       // this needs a lot of testing
       &:focus {
@@ -1606,13 +1606,10 @@ headerbar {
       }
       border-width: 1px;
       border-style: solid;
+      border-radius: $small_radius;
       -gtk-outline-radius: $small_radius;
-      border-top-left-radius: $small_radius;
-      border-top-right-radius: $small_radius;
-      border-bottom-left-radius: $small_radius;
-      border-bottom-right-radius: $small_radius;
-      &:not(:only-child):not(:first-child) { margin-left: 2px; }
-      &:not(:only-child):not(:last-child) { margin-right: 2px; }
+
+      &:not(:last-child) { margin-right: 4px; }
     }
 
     %underline_focus_headerbar {
@@ -1650,8 +1647,8 @@ headerbar {
       }
     }
 
-    .horizontal.linked.stack-switcher,
-    buttonbox.horizontal.linked {
+    .stack-switcher.linked,
+    buttonbox.linked {
       // round the stackswitcher corners by using border
       border-width: 0 8px;
       border-style: solid;
@@ -1659,35 +1656,30 @@ headerbar {
       border-radius: $small_radius;
 
       &:backdrop { border-color: mix($c, $headerbar_bg_color, 50%); }
+
+      button {
+        // style the stackswitcher buttons
+        @extend %underline_focus_headerbar;
+
+        &:dir(rtl), &:dir(ltr) { // specificity bump
+          // gets rid of the radius
+          border-radius: 0;
+          -gtk-outline-radius: 0;
+        }
+
+        margin: 0;
+        border: none;
+      }
     }
 
-    .horizontal.linked.stack-switcher button.text-button,
-    buttonbox.horizontal.linked button {
-      // style the stackswitcher
-      @extend %underline_focus_headerbar;
-
-      // gets rid of the radius
-      border-radius: 0;
-      -gtk-outline-radius: 0;
-
-      margin: 0;
-      min-width: 100px;
-      border: none;
-    }
-
-    .linked.path-bar button {
-      // style the headerbar pathbar
+    .path-bar.linked button {
+      // style the pathbar buttons
       @extend %underline_focus_headerbar;
 
       &.slider-button {
         box-shadow: none;
       }
     }
-  }
-
-  &:backdrop {
-    background-color: opacify($backdrop_headerbar_bg_color, 1);
-    transition: $backdrop_transition;
   }
 
   &.selection-mode {
@@ -1773,7 +1765,7 @@ headerbar {
     min-height: 26px;
     padding: 4px 6px;
 
-    button.titlebutton,  {
+    button.titlebutton {
       min-width: 26px;
       min-height: 26px;
       margin: 0;
