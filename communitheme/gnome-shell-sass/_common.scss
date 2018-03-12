@@ -749,7 +749,7 @@ StScrollBar {
 }
 
   .tile-preview-left.on-primary {
-    border-radius: $panel-corner-radius $panel-corner-radius 0 0;
+    border-radius: $panel-corner-radius 0 0 0;
   }
 
   .tile-preview-right.on-primary {
@@ -876,7 +876,7 @@ StScrollBar {
       color: $_fg;
       text-shadow: none;
 
-      &:hover {
+      &:hover, &:active, &:overview, &:focus, &:checked {
         color: $hover_fg_color;
       }
     }
@@ -951,6 +951,7 @@ StScrollBar {
 
     .datemenu-today-button .date-label {
       font-size: 1.5em;
+      font-weight: 300;
     }
 
     .world-clocks-header,
@@ -1162,6 +1163,12 @@ StScrollBar {
   .aggregate-menu {
     min-width: 21em;
     .popup-menu-icon { padding: 0 4px; }
+    .popup-sub-menu .popup-menu-item :first-child {
+      &:ltr { /* 12px spacing + 2*4px padding */
+              padding-left: 20px; margin-left: 1.09em; }
+      &:rtl { /* 12px spacing + 2*4px padding */
+              padding-right: 20px; margin-right: 1.09em; }
+    }
   }
 
   .system-menu-action {
@@ -1546,6 +1553,12 @@ StScrollBar {
     border-radius: 9px 0 0 9px;
     //border-width: 1px 0 1px 1px; //fixme: can't have non unoform borders :(
     &:rtl { border-radius: 0 9px 9px 0;}
+
+    .placeholder {
+      background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
+      background-size: contain;
+      height: 24px;
+    }
   }
   .workspace-thumbnail-indicator {
     border: 4px solid $selected_bg_color;
@@ -1699,27 +1712,31 @@ StScrollBar {
 
 //Keyboard
 /* On-screen Keyboard */
+.word-suggestions {
+    font-size: 14pt;
+    spacing: 12px;
+    min-height: 20pt;
+}
 
 #keyboard {
     background-color: transparentize($osd_bg_color, 0.3);
 }
 
-  .keyboard-layout {
-    spacing: 10px;
-    padding: 10px;
+  .key-container {
+    padding: 4px;
+    spacing: 4px;
   }
 
   .keyboard-row { spacing: 15px; }
 
   .keyboard-key {
-    @include button(normal);
+    background-color: #393f3f;
     min-height: 2em;
     min-width: 2em;
-    font-size: 14pt;
-    font-weight: bold;
-    border-radius: $small_radius;
-    border: 1px solid $borders-color;
-    color: white;
+    font-size: 16pt;
+    border-radius: 3px;
+    border: 1px solid #464d4d;
+    color: #e5e5e5;
     &:focus { @include button(focus); }
     &:hover,&:checked { @include button(hover); }
     &:active { @include button(active);}
@@ -1728,11 +1745,35 @@ StScrollBar {
       color: $osd_fg_color;
       border-color: $osd_borders_color;
     }
+    &.default-key {
+      border-color: #2d3232;
+      background-color: #1d2020;
+      background-size: 20px;
+    }
+    &.enter-key {
+      border-color: #005684;
+      background-color: #006098;
+      background-image: url("resource:///org/gnome/shell/theme/key-enter.svg");
+    }
+    &.shift-key-lowercase {
+      background-image: url("resource:///org/gnome/shell/theme/key-shift.svg");
+    }
+    &.shift-key-uppercase {
+      background-image: url("resource:///org/gnome/shell/theme/key-shift-uppercase.svg");
+    }
+    &.shift-key-uppercase:latched {
+      background-image: url("resource:///org/gnome/shell/theme/key-shift-latched-uppercase.svg");
+    }
+    &.hide-key {
+      background-image: url("resource:///org/gnome/shell/theme/key-hide.svg");
+    }
+    &.layout-key {
+      background-image: url("resource:///org/gnome/shell/theme/key-layout.svg");
+    }
   }
 
   .keyboard-subkeys { //long press on a key popup
     color: white;
-    padding: 5px;
     -arrow-border-radius: 10px;
     -arrow-background-color: transparentize($osd_bg_color, 0.3);
     -arrow-border-width: 2px;
@@ -1930,7 +1971,10 @@ StScrollBar {
   text-shadow: 0px 2px 2px rgba(0,0,0,0.4);
 }
 
-.screen-shield-clock-date { font-size: 28pt; }
+.screen-shield-clock-date { 
+  font-size: 28pt;
+  font-weight: normal;
+}
 
 .screen-shield-notifications-container {
   spacing: 6px;
