@@ -1513,7 +1513,7 @@ searchbar,
 %titlebar,
 headerbar {
   padding: 0 6px;
-  // min-height: 46px;
+  min-height: 40px;
   border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
   border-style: solid;
   border-width: 1px;
