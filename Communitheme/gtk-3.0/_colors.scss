@@ -54,7 +54,7 @@ $drop_target_color: $green;
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_dark_fill: mix($bg_color, $dark_fill);
-$insensitive_borders_color: transparentize($borders_color, 0.6);
+$insensitive_borders_color: transparentize($borders_color, 1.0);
 
 //colors for the backdrop state, derived from the main colors.
 $backdrop_base_color: if($variant == 'light', darken($base_color, 5%), lighten($base_color, 5%));
