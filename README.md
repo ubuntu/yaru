@@ -1,6 +1,6 @@
 # Ubuntu Communitheme
 
-Communitheme is the new Ubuntu theme build by the Community.
+Communitheme is the new Ubuntu theme built by the Community.
 
 ## Install the daily build of Communitheme
 
