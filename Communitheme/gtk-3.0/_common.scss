@@ -1613,7 +1613,7 @@ headerbar {
 
         & + entry,
         & + button {
-          &:disabled { border-left-color: $insensitive_borders_color; }
+          &:disabled { border-left-color: none; }
           &:backdrop { border-left-color: _border_color($headerbar_bg_color); }
         }
       }
