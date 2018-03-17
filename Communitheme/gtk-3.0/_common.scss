@@ -1564,7 +1564,6 @@ headerbar {
     }
 
     entry, %dark_entry {
-      image { color: $tc; }
       @include entry(normal, $c: $c, $tc: $tc);
       &:disabled { @include entry(insensitive, $c: $c, $tc: $tc); }
 
@@ -1573,6 +1572,10 @@ headerbar {
         transition: $backdrop_transition;
 
         &:disabled { @include entry(backdrop-insensitive, $c: $c, $tc: $tc); }
+      }
+      image {
+        color: $tc;
+        &:hover { color: $backdrop_headerbar_text_color; }
       }
     }
 
