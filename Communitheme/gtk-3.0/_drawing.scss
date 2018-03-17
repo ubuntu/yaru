@@ -197,6 +197,7 @@
     // normal button
     background-color: $c;
     border-color: if($flat==true, $c, _border_color($c));
+    box-shadow: 0px 2px 2px -2px transparentize(black, 0.7);
     color: $tc;
 
     @if $flat {
@@ -211,15 +212,17 @@
 
   @else if $t==hover {
     // hovered button
-    $_bg: if(lightness($c)<35%, lighten($c, 10%), $c);
     -gtk-icon-effect: highlight;
+
+    $_bg: if(lightness($c)<35%, lighten($c, 10%), $c);
     background-color: $_bg;
     color: $tc;
 
     @if $flat == false {
       border-color: darken($_bg, 40%);
-      box-shadow: 0px 1px 1px transparentize(black, 0.8);
-      transition: all 0.3s ease-out;
+      box-shadow: 0px 2px 2px -2px transparentize(black, 0.5);
+      //box-shadow: 0px 1px 1px transparentize(black, 0.8);
+      //transition: all 0.3s ease-out;
     }
     @else {
       border-color: if($c == $headerbar_bg_color, $_pressed, $_bg);
