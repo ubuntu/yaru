@@ -2796,9 +2796,8 @@ switch {
     border: 1px solid $borders_edge;
   }
 
-  &:backdrop {
-    background-color: transparent;
-    border: 1px solid $borders_edge;
+  &:backdrop:not(:disabled) {
+    background-color: _backdrop_color(transparentize($c, 0.3));
     color: transparent;
     transition: $backdrop_transition;
   }
@@ -2826,7 +2825,6 @@ switch {
   &:backdrop {
     slider {
       background-color: $backdrop_bg_color;
-      border: 1px solid $borders_edge;
       transition: $backdrop_transition;
     }
 
