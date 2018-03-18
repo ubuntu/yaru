@@ -67,7 +67,7 @@
   }
   @if $t==insensitive {
     background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
-    border-color: $hb_button_bg_hover; // $borders_color;
+    border-color: if($c == $headerbar_bg_color, $hb_pathbar_bg, $borders_color);
     box-shadow: $_entry_edge;
     color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
   }
