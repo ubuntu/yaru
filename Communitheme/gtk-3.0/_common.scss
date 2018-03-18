@@ -188,7 +188,7 @@ label {
   }
 
   &:backdrop {
-    color: $backdrop_fg_color;
+    color: $backdrop_text_color;
 
     selection { @extend %selected_items:backdrop; }
   }
@@ -1525,6 +1525,7 @@ headerbar {
     background-color: $backdrop_headerbar_bg_color;
     border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.7);
     transition: $backdrop_transition;
+    & label { color: $backdrop_fg_color; }
   }
 
   .title {
@@ -2148,7 +2149,10 @@ menubar,
   color: $headerbar_text_color;
   padding: 0px;
 
-  &:backdrop { background-color: $backdrop_menubar_bg_color; color: $backdrop_headerbar_text_color; }
+  &:backdrop {
+    background-color: $backdrop_menubar_bg_color; color: $backdrop_headerbar_text_color;
+    & label { color: $backdrop_fg_color; }
+  }
 
   > menuitem {
     transition: 100ms ease;
