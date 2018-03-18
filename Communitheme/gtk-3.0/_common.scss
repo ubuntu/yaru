@@ -3757,11 +3757,11 @@ frame > border,
   margin: 0;
   padding: 0;
   border-radius: 0;
-  border: 1px solid $borders_color;
+  border: 1px solid $borders_edge;
 
   &.flat { border-style: none; }
 
-  &:backdrop { border-color: $backdrop_borders_color; }
+  &:backdrop { border-color: $borders_edge; }
 }
 
 actionbar > revealer >  box {
