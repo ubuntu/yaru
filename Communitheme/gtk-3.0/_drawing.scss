@@ -221,8 +221,7 @@
     @if $flat == false {
       border-color: darken($_bg, 40%);
       box-shadow: 0px 2px 2px -2px transparentize(black, 0.5);
-      //box-shadow: 0px 1px 1px transparentize(black, 0.8);
-      //transition: all 0.3s ease-out;
+      transition: all 0.3s ease;
     }
     @else {
       border-color: if($c == $headerbar_bg_color, $_pressed, $_bg);
