@@ -54,9 +54,9 @@
   $_entry_edge: if($edge == none, none, _widget_edge($edge));
 
   @if $t==normal {
-    $_bc: if($c == $headerbar_bg_color, $graphite, $c);
+    $_bc: if($c == $headerbar_bg_color, $hb_pathbar_bg, $c);
     color: if($tc != $fg_color, transparentize($tc, .1), $fg_color);
-    border-color: if($c != $base_color, _border_color($_bc), $borders_color);
+    border-color: if($c != $base_color, transparent, $borders_color);
     background-color: $_bc;
     @include _shadows(entry_focus_shadow(transparentize($fc, 1)), $_entry_edge);
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
@@ -67,21 +67,21 @@
   }
   @if $t==insensitive {
     background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
-    border-color: $insensitive_borders_color; // $borders_color;
+    border-color: $hb_button_bg_hover; // $borders_color;
     box-shadow: $_entry_edge;
     color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
   }
   @if $t==backdrop {
-    background-color: if($c == $headerbar_bg_color, $graphite, transparent);
-    border-color: if($c != $base_color, _border_color($c), $backdrop_borders_color);
+    background-color: if($c == $headerbar_bg_color, $hb_pathbar_bg_backdrop, transparent);
+    border-color: if($c != $base_color, $hb_pathbar_border_backdrop, $backdrop_borders_color);
     box-shadow: $_blank_edge;
     color: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
 
     label, & { color:  $backdrop_fg_color; }
   }
   @if $t==backdrop-insensitive {
-    background-color: if($c == $headerbar_bg_color, $graphite, transparent);
-    border-color: if($c != $base_color, _border_color($c), $backdrop_borders_color);
+    background-color: transparent; //if($c == $headerbar_bg_color, $graphite, transparent);
+    border-color: if($c != $base_color, $hb_pathbar_bg_backdrop, $backdrop_borders_color);
     box-shadow: $_blank_edge;
     color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
 
