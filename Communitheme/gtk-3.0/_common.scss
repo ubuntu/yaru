@@ -2799,10 +2799,17 @@ switch {
     border: 1px solid $borders_edge;
   }
 
-  &:backdrop:not(:disabled) {
-    background-color: _backdrop_color(transparentize($c, 0.3));
+  &:backdrop {
+    background-color: _backdrop_color(transparentize($dark_fill, 0.3));
     color: transparent;
     transition: $backdrop_transition;
+
+    &:checked {
+      background-color: _backdrop_color(transparentize($c, 0.3));
+    }
+    &:disabled {
+      background-color: transparent;
+    }
   }
 
   slider {
