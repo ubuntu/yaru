@@ -325,7 +325,7 @@
     border-color: if($flat==true, $_bg, $_bc);
     box-shadow: none;
 
-    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_fg_color); }
+    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_text_color); }
   }
 
   @else if $t==backdrop-active {
