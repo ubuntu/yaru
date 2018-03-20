@@ -9,7 +9,7 @@
     $c: darken($c, 7.5%);
   }
   //@return transparentize(desaturate($c, 75%), .4);
-  @return desaturate($c, 15%);
+  @return desaturate($c, 20%);
 }
 
 // @function _widget_edge($c:$borders_edge) {
