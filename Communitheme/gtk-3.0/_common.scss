@@ -168,7 +168,7 @@ label {
 
     color: $fg_color;
 
-    &:backdrop { color: $backdrop_fg_color; }
+    &:backdrop { color: $backdrop_text_color; }
   }
 
   row:selected &,
@@ -188,7 +188,7 @@ label {
   }
 
   &:backdrop {
-    color: $backdrop_fg_color;
+    color: $backdrop_text_color;
 
     selection { @extend %selected_items:backdrop; }
   }
@@ -1528,6 +1528,7 @@ headerbar {
     background-color: $backdrop_headerbar_bg_color;
     border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.7);
     transition: $backdrop_transition;
+    & label { color: $backdrop_fg_color; }
   }
 
   .title {
@@ -2151,7 +2152,10 @@ menubar,
   color: $headerbar_text_color;
   padding: 0px;
 
-  &:backdrop { background-color: $backdrop_menubar_bg_color; color: $backdrop_headerbar_text_color; }
+  &:backdrop {
+    background-color: $backdrop_menubar_bg_color; color: $backdrop_headerbar_text_color;
+    & label { color: $backdrop_fg_color; }
+  }
 
   > menuitem {
     transition: 100ms ease;
@@ -2803,10 +2807,16 @@ switch {
   }
 
   &:backdrop {
-    background-color: transparent;
-    border: 1px solid $borders_edge;
+    background-color: _backdrop_color(transparentize($dark_fill, 0.3));
     color: transparent;
     transition: $backdrop_transition;
+
+    &:checked {
+      background-color: _backdrop_color($c);
+    }
+    &:disabled {
+      background-color: transparent;
+    }
   }
 
   slider {
@@ -2832,7 +2842,6 @@ switch {
   &:backdrop {
     slider {
       background-color: $backdrop_bg_color;
-      border: 1px solid $borders_edge;
       transition: $backdrop_transition;
     }
 
@@ -2957,19 +2966,13 @@ radio {
       &#{$t} {
           @each $state, $t in ("", "normal"),
                               (":hover", "hover"),
-                              (":active", "active") {
-                                  &#{$state} {
-                                      @include button($t, $c, white, $flat:true);
-                                      border: 1px solid $c;
-                                      color: white;
-                                  }
-                              }
-          @each $state, $t in (":disabled", "insensitive"),
+                              (":active", "active"),
+                              (":disabled", "insensitive"),
                               (":backdrop", "backdrop"),
                               (":backdrop:disabled", 'backdrop-insensitive') {
                                   &#{$state} {
-                                      @include button($t, transparentize($c, 0.3), white, $flat:true);
-                                      border: 1px solid transparentize($borders_color, 0.6);
+                                      @include button($t, $c, white, $flat:true);
+                                      border: 1px solid $c;
                                       color: white;
                                   }
                               }
@@ -3751,11 +3754,11 @@ frame > border,
   margin: 0;
   padding: 0;
   border-radius: 0;
-  border: 1px solid $borders_color;
+  border: 1px solid $borders_edge;
 
   &.flat { border-style: none; }
 
-  &:backdrop { border-color: $backdrop_borders_color; }
+  &:backdrop { border-color: $borders_edge; }
 }
 
 actionbar > revealer >  box {
