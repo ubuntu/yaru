@@ -2812,7 +2812,7 @@ switch {
     transition: $backdrop_transition;
 
     &:checked {
-      background-color: _backdrop_color(transparentize($c, 0.3));
+      background-color: _backdrop_color($c);
     }
     &:disabled {
       background-color: transparent;
@@ -2966,19 +2966,13 @@ radio {
       &#{$t} {
           @each $state, $t in ("", "normal"),
                               (":hover", "hover"),
-                              (":active", "active") {
-                                  &#{$state} {
-                                      @include button($t, $c, white, $flat:true);
-                                      border: 1px solid $c;
-                                      color: white;
-                                  }
-                              }
-          @each $state, $t in (":disabled", "insensitive"),
+                              (":active", "active"),
+                              (":disabled", "insensitive"),
                               (":backdrop", "backdrop"),
                               (":backdrop:disabled", 'backdrop-insensitive') {
                                   &#{$state} {
-                                      @include button($t, transparentize($c, 0.3), white, $flat:true);
-                                      border: 1px solid transparentize($borders_color, 0.6);
+                                      @include button($t, $c, white, $flat:true);
+                                      border: 1px solid $c;
                                       color: white;
                                   }
                               }
