@@ -75,7 +75,7 @@
     color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
   }
   @if $t==backdrop {
-    background-color: if($c == $headerbar_bg_color, $hb_pathbar_bg_backdrop, transparent);
+    background-color: if($c == $headerbar_bg_color, $hb_pathbar_bg_backdrop, _backdrop_color($c));
     border-color: if($c != $base_color, $hb_pathbar_border_backdrop, $backdrop_borders_color);
     box-shadow: $_blank_edge;
     color: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
