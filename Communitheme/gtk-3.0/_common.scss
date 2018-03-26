@@ -1620,7 +1620,7 @@ headerbar {
 
         & + entry,
         & + button {
-          &:disabled { border-left-color: none; }
+          &:disabled { border-left-color: transparent; }
           &:backdrop { border-left-color: _border_color($headerbar_bg_color); }
         }
       }
