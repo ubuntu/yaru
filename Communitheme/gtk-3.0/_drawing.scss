@@ -227,7 +227,7 @@
     // hovered button
     -gtk-icon-effect: highlight;
     @if $flat == true { $c: darken($c, 5%); }
-    $_bg: if(lightness($c)<35%, lighten($c, 10%), darken($c, 5%));
+    $_bg: if(lightness($c)<35%, lighten($c, 20%), darken($c, 5%));
     background-color: $_bg;
     color: $tc;
 
