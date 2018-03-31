@@ -1527,9 +1527,11 @@ headerbar {
   &:backdrop {
     background-color: $backdrop_headerbar_bg_color;
     border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.7);
+    color: $backdrop_fg_color;
     transition: $backdrop_transition;
-    & label { color: $backdrop_fg_color; }
   }
+
+  label:backdrop { color: inherit; } // make sure to inherit the backdrop label color
 
   .title {
     font-weight: 500;
