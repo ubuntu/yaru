@@ -231,12 +231,11 @@
     background-color: $_bg;
     color: $tc;
 
-    @if $flat {
-      border-color: $_bg;
-      box-shadow: none;
-    }
-
-    @else {
+    @if $flat == false {
+      border-color: darken($_bg, 40%);
+      box-shadow: 0px 2px 2px -2px transparentize(black, 0.4), inset 0 0 0 0.095 black;
+      transition: all 0.2s ease-out;
+    } @else {
       border-color: darken($_bg, 25%);
       border-bottom-color: darken($_bg, 50%);
       box-shadow: $shadow;
