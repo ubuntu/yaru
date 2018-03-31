@@ -2175,15 +2175,17 @@ menubar,
   }
 }
 
+.background.popup { background-color: transparent; }
+
 menu,
 .menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
   // padding: 2px;
-  box-shadow: 0 2px 5px transparentize(black, 0.75);
   background-color: $menu_color;
   color: $text_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
+  border-radius: $small_radius;
 
   .csd & { border: none; }  // axes borders in a composited env
 
@@ -2210,6 +2212,16 @@ menu,
     &:backdrop:hover {
       color: $backdrop_fg_color;
       background-color: transparent;
+    }
+
+    &:first-child {
+      border-top-right-radius: $small_radius;
+      border-top-left-radius: $small_radius;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: $small_radius;
+      border-bottom-left-radius: $small_radius;
     }
 
     // submenu indicators
@@ -2242,18 +2254,22 @@ menu,
     min-height: 16px;
     min-width: 16px;
     padding: 4px;
-    background-color: $menu_color;
+    // background-color: $menu_color;
     border-radius: 0;
 
     &.top {
-      margin-top: -6px;
+      // margin-top: -6px;
       border-bottom: 1px solid mix($fg_color, $base_color, 10%);
+      border-top-right-radius: $small_radius;
+      border-top-left-radius: $small_radius;
       -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
     }
 
     &.bottom {
-      margin-bottom: -6px;
+      // margin-bottom: -6px;
       border-top: 1px solid mix($fg_color, $base_color, 10%);
+      border-bottom-right-radius: $small_radius;
+      border-bottom-left-radius: $small_radius;
       -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
     }
 
@@ -4556,7 +4572,7 @@ decoration {
   .ssd & { box-shadow: none; }
 
   .csd.popup & {
-    border-radius: 0;
+    border-radius: $small_radius;
     box-shadow: 0 1px 2px transparentize(black, 0.8),
                 0 0 0 1px transparentize($_wm_border, 0.1);
   }
