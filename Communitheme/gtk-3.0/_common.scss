@@ -2262,7 +2262,7 @@ menu,
       border-bottom: 1px solid mix($fg_color, $base_color, 10%);
       border-top-right-radius: $small_radius;
       border-top-left-radius: $small_radius;
-      -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+      -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
     }
 
     &.bottom {
@@ -2270,7 +2270,7 @@ menu,
       border-top: 1px solid mix($fg_color, $base_color, 10%);
       border-bottom-right-radius: $small_radius;
       border-bottom-left-radius: $small_radius;
-      -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
+      -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
     }
 
     &:hover { background-color: mix($fg_color, $base_color, 10%); }
