@@ -1596,33 +1596,71 @@ StScrollBar {
   .notification-banner {
     font-size: 11pt;
     width: 34em;
+    min-height: 64px;
     margin: 5px;
-    border-radius: $medium_radius;
-    color: $osd_fg_color;
-    background-color: $osd_bg_color;
-    border: 1px solid $osd_borders_color;
-    //box-shadow: 0 1px 4px black;
-    box-shadow: none;
-    &:hover, &:focus { background-color: opacify(mix($osd_bg_color, $base_hover_color), 1); }
-
-    .notification-icon { padding: 5px; }
-    .notification-content { padding: 5px; spacing: 5px; }
-    .secondary-icon { icon-size: 1.09em; }
-    .notification-actions {
-      background-color: $osd_borders_color; // $borders_color;
-      padding-top: 1px;
-      spacing: 1px;
-    }
-    .notification-button {
-      // padding: 4px 4px 5px;
-      min-height: 22px; // make just a little taller
-      padding: 4px 32px;
-      background-color: darken($_dialog_bg_color,5%);
-      &:first-child { border-radius: 0 0 0 6px; }
-      &:last-child { border-radius: 0 0 6px 0; }
-      &:hover, &:focus { background-color: darken($_dialog_bg_color,2%); }
-      &:active { background-color: darken($_dialog_bg_color, 5%); }
-    }
+    border-radius: $medium-radius;
+    color: $inkstone;
+    background-color: white;
+    border: none;
+    //box-shadow: 0 3px 3px rgba(0, 0, 0, 0.24), 0 3px 3px rgba(0, 0, 0, 0.345);
+    box-shadow: 0 2px 5px transparentize(black, 0.75);
+    color: $inkstone;
+    &, &:active { .message-title { color: $inkstone; } }
+    &, &:active { .message-content { color: $slate; } }
+  }
+  
+  .notification-banner:hover {
+    background-color: white;
+  }
+  
+  .notification-banner:focus {
+    background-color: white;
+  }
+  
+  .notification-banner .notification-icon {
+    padding: 5px;
+  }
+  
+  .notification-banner .notification-content {
+    padding: 5px;
+    spacing: 5px;
+  }
+  
+  .notification-banner .secondary-icon {
+    icon-size: 1.14286em;
+  }
+  
+  .notification-banner .notification-actions {
+    background-color: transparent;
+    padding-top: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    spacing: 1px;
+  }
+  
+  .notification-banner .notification-button {
+    min-height: 35px;
+    padding: 0 16px;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.54);
+    font-weight: 500;
+  }
+  
+  .notification-banner .notification-button:first-child {
+    border-radius: 0 0 0 2px;
+  }
+  
+  .notification-banner .notification-button:last-child {
+    border-radius: 0 0 2px 0;
+  }
+  
+  .notification-banner .notification-button:hover, .notification-banner .notification-buttonfocus {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.87);
+  }
+  
+  .notification-banner .notification-button:active {
+    background-color: rgba(0, 0, 0, 0.26);
+    color: rgba(0, 0, 0, 0.87);
   }
   .summary-source-counter {
     font-size: 10pt;
