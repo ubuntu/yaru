@@ -1602,8 +1602,7 @@ StScrollBar {
     color: $inkstone;
     background-color: white;
     border: none;
-    //box-shadow: 0 3px 3px rgba(0, 0, 0, 0.24), 0 3px 3px rgba(0, 0, 0, 0.345);
-    box-shadow: 0 2px 5px transparentize(black, 0.75);
+    box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
     color: $inkstone;
     &, &:active { .message-title { color: $inkstone; } }
     &, &:active { .message-content { color: $slate; } }
