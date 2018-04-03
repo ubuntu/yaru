@@ -113,6 +113,7 @@ $button_transition: all 200ms $ease-out-quad;
 
       border-radius: 3px;
     }
+    
   }
 }
 
@@ -121,7 +122,8 @@ textview {
   text {
     @extend %view;
 
-    selection { &:focus, & { @extend %selected_items; }}
+    selection { background-color: $text_selection;
+      /*&:focus, & { @extend %selected_items; }*/}
   }
 }
 
