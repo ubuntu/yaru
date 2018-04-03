@@ -2165,6 +2165,10 @@ menubar,
     min-height: 16px;
     padding: 4px 8px;
 
+    menu {
+      border-radius: 0 0 $small_radius $small_radius;
+    }
+
     &:hover { //Seems like it :hover even with keyboard focus
       box-shadow: inset 0 -3px $selected_bg_color;
       color: $headerbar_fg_color;
