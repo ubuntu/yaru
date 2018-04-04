@@ -1,6 +1,6 @@
 name: communitheme
 version: '0.1'
-summary: Next ubuntu theme shapred by the community
+summary: Next ubuntu theme shaped by the community
 description: |
   This is the theme that is shaped by the community on the Ubuntu hub,
   which will turn into the default ubuntu theme.
@@ -22,12 +22,14 @@ parts:
   gnome-shell:
     source: https://github.com/ubuntu/gnome-shell-communitheme.git
     plugin: meson
+    build-packages: ["sassc"]
     meson-parameters: ["--prefix=/"]
     stage:
       - share/gnome-shell
   gtk:
     source: https://github.com/ubuntu/gtk-communitheme.git
     plugin: meson
+    build-packages: ["sassc"]
     meson-parameters: ["--prefix=/"]
   suru:
     source: https://github.com/ubuntu/suru-icon-theme.git
