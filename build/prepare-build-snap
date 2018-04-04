@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+THEME_HELPER_REPO_URL=https://raw.githubusercontent.com/ubuntu/communitheme-snap-helpers/master/
+
+# download snapcraft.yaml from template
+mkdir -p snap/
+curl -o snap/snapcraft.yaml "$THEME_HELPER_REPO_URL/snap/snapcraft.yaml"
+
+# use local source for current repo
+sed -i "s#    source: .*$TRAVIS_REPO_SLUG\.git#    source: \.#" snap/snapcraft.yaml
+
+# select correct channel
+channel="edge"
+if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+    channel="$channel/${TRAVIS_REPO_SLUG//\//_}_$TRAVIS_PULL_REQUEST"
+fi
+
+# build and release it
+# Note: we need bionic meson version and sassc. As only those additions alongside git will be installed
+# change directly sources.list
+docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c \
+        "sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pwd) && snapcraft && snapcraft push *.snap --release=$channel"
+
+# write on PR install instructions for the snap branch
+[ "$TRAVIS_PULL_REQUEST" == "false" ] && exit 0
+curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
+        -d "{\"body\": \"A test snap is available using: `snap install communitheme --channel=$channel`.\nUpdates will track that PR then.\n\nThink about tracking back edge or stable snap with `snap install communitheme --edge` or `snap install communitheme --stable` once all tested!\"}" \
+        "https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
