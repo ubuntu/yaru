@@ -3790,6 +3790,7 @@ scrolledwindow {
   viewport > list,
   viewport > stack list {
     background-color: $sidebar_bg_color;
+    &:backdrop { background-color: $backdrop_sidebar_bg_color; }
   }
   viewport.frame { // avoid double borders when viewport inside scrolled window
     border-style: none;
@@ -3848,6 +3849,12 @@ scrolledwindow {
       transition: $backdrop_transition;
     }
   }
+}
+
+// Avoid Gnome-Control-Center's language list to use sidebar colors
+frame > scrolledwindow > viewport > list {
+    background-color: white;
+    &:backdrop { background-color: $backdrop_bg_color; }
 }
 
 //vbox and hbox separators
