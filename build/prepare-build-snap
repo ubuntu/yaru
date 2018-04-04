@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-THEME_HELPER_REPO_URL=https://raw.githubusercontent.com/ubuntu/communitheme-snap-helpers/master/
-
 # download snapcraft.yaml from template
 mkdir -p snap/
 curl -o snap/snapcraft.yaml "$THEME_HELPER_REPO_URL/snap/snapcraft.yaml"
