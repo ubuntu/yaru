@@ -4,16 +4,16 @@
 $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
 $panel-corner-radius: 0; // 6px;
-//
-$panel-alpha-value: 0.1;
+
+$panel-alpha-value: 0.8;
 $dash-alpha-value: 0.7;
 $dash-opaque-alpha-value: 0.0;
 $popover-alpha-value: 0.015;
-//
+
 $small_radius: 4px;
 $medium_radius: 6px;
 $large_radius: 12px;
-//
+
 
 /* Copyright 2009, 2015 Red Hat, Inc.
  *
@@ -765,7 +765,6 @@ StScrollBar {
 #panel {
   $_fg: $panel_fg_color;
   background-color: transparentize($panel_bg_color, $panel-alpha-value);
-  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.5);
   /* transition from solid to transparent */
   transition-duration: 500ms;
   font-weight: 450;
@@ -834,7 +833,7 @@ StScrollBar {
       // Trick due to St limitations. It needs a background to draw
       // a box-shadow
       background-color: rgba(0, 0, 0, 0.01);
-      box-shadow: inset 0px -3px $selected_bg_color;
+      box-shadow: inset 0px -2px $selected_bg_color;
       color: lighten($_fg,10%);
 
       & > .system-status-icon { icon-shadow: none; /*black 0 2px 2px;*/ }
@@ -1375,7 +1374,6 @@ StScrollBar {
       width: 24px;
       height: 24px;
     }
-
   }
 
   .dash-item-container > StWidget {

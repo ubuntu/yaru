@@ -104,7 +104,7 @@
     /* Only alpha value is used */
     background-color: rgba(0, 0, 0, (1 - $dash-opaque-alpha-value));
     border-color: rgba(0, 0, 0, 0.4);
-    transition-duration: 300ms;
+    transition-duration: 500ms;
   }
 
   &.transparent {
