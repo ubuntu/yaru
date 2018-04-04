@@ -364,9 +364,6 @@ entry {
   .linked:not(.vertical) > &:drop(active) + button,
   .linked:not(.vertical) > &:drop(active) + combobox > box > button.combo { border-left-color: $drop_target_color; }
 
-  // Remove box-shadow from button linked to entries
-  .linked:not(.vertical) > & + button:not(:hover):not(:checked) { box-shadow: none; }
-
   // Vertically linked entries
   // FIXME: take care of "colored" entries
   .linked.vertical > & {
