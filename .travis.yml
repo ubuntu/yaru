@@ -3,4 +3,8 @@ language: bash
 services:
   - docker
 script:
-  - sleep 120
+  # the key is specific to current built repo
+  - openssl aes-256-cbc -K $encrypted_074bcb9b4f29_key -iv $encrypted_074bcb9b4f29_iv -in .snapcraft/travis_snapcraft.cfg -out .snapcraft/snapcraft.cfg -d
+  # fetch standard build script which will change the local source to ., build and release the snap
+  - curl -o /tmp/build-snap "$THEME_HELPER_REPO_URL/build/prepare-build-snap" && chmod +x /tmp/build-snap
+  - /tmp/build-snap
