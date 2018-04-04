@@ -1,0 +1,6 @@
+sudo: required
+language: bash
+services:
+  - docker
+script:
+  - sleep 120
