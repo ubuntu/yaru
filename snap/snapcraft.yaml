@@ -1,0 +1,48 @@
+name: communitheme
+version: '0.1'
+summary: Next ubuntu theme shapred by the community
+description: |
+  This is the theme that is shaped by the community on the Ubuntu hub,
+  which will turn into the default ubuntu theme.
+  You can install that snap on ubuntu 18.04 LTS, reboot, and new session option
+  "Ubuntu with Communitheme" will appear in the login screen.
+  More information is available at
+  https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
+grade: stable
+confinement: strict
+
+parts:
+  session:
+    source: https://github.com/ubuntu/communitheme-snap-helpers.git
+    plugin: dump
+    stage:
+      - -build/
+      - -README.md
+      - -travis.yml
+  gnome-shell:
+    source: https://github.com/ubuntu/gnome-shell-communitheme.git
+    plugin: meson
+    meson-parameters: ["--prefix=/"]
+    stage:
+      - share/gnome-shell
+  gtk:
+    source: https://github.com/ubuntu/gtk-communitheme.git
+    plugin: meson
+    meson-parameters: ["--prefix=/"]
+  suru:
+    source: https://github.com/ubuntu/suru-icon-theme.git
+    plugin: meson
+    meson-parameters: ["--prefix=/"]
+  cursor:
+    source: https://github.com/madsrh/yet-another-DMZ-cursor-theme.git
+    plugin: dump
+    organize:
+      Communitheme_12: share/icons/communitheme
+    stage:
+      - share/icons/
+  sound:
+    source: https://github.com/madsrh/WoodenBeaver.git
+    plugin: meson
+    meson-parameters: ["--prefix=/"]
+    organize:
+      share/sounds/WoodenBeaver: share/sounds/communitheme
