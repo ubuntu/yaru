@@ -8,12 +8,6 @@ curl -o snap/snapcraft.yaml "$THEME_HELPER_REPO_URL/snap/snapcraft.yaml"
 # use local source for current repo
 sed -i "s#    source: .*$TRAVIS_REPO_SLUG\.git#    source: \.#" snap/snapcraft.yaml
 
-# select correct channel
-channel="edge"
-if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-    channel="$channel/${TRAVIS_REPO_SLUG//\//_}_$TRAVIS_PULL_REQUEST"
-fi
-
 # build and release it
 
 # Note: we need bionic meson version and sassc. As only those additions alongside git will be installed
@@ -22,9 +16,11 @@ cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pw
 
 # Only release as a snap from main repo (ubuntu slug), enabling other forks to test build the snap.
 REPO="${TRAVIS_REPO_SLUG%%/*}"
+channel="edge"
 if [ "$REPO" == "ubuntu" ]; then
         # if it's a PR event from
         if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+                channel="$channel/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
                 cmd="$cmd && snapcraft push *.snap --release=$channel"
                 echo "PR to main ubuntu repo: will release to $channel"
         # only push build to master are released, the rest will be as PR via dedicated channel
