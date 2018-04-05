@@ -42,15 +42,13 @@ parts:
     plugin: meson
     meson-parameters: ["--prefix=/"]
   cursor:
-    source: https://github.com/madsrh/yet-another-DMZ-cursor-theme.git
+    source: https://github.com/ubuntu/cursor-communitheme.git
     plugin: dump
     organize:
       Communitheme_12: share/icons/communitheme
     stage:
       - share/icons/
   sound:
-    source: https://github.com/madsrh/WoodenBeaver.git
+    source: https://github.com/ubuntu/communitheme-sounds.git
     plugin: meson
     meson-parameters: ["--prefix=/"]
-    organize:
-      share/sounds/WoodenBeaver: share/sounds/communitheme
