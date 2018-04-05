@@ -19,7 +19,3 @@ Install Communitheme in order to get this icon theme. [How to install Communithe
 ## Copying or Reusing
 
 This project is licenced under the terms of the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt), so you are free to copy and reuse accordingly.
-
-## Donate
-
-You can [donate](https://snwh.org/donate) to support the development of Suru or become a patron on [Patreon](http://patreon.com/snwh/). It goes without saying that your support is much appreciated. &#x1F60A;
