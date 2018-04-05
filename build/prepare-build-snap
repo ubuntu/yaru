@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eu
 
 # download snapcraft.yaml from template
 mkdir -p snap/
