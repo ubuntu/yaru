@@ -24,7 +24,6 @@ if [ "$REPO" == "ubuntu" ]; then
                 echo "PR to main ubuntu repo: will release to $channel"
         # only push build to master are released, the rest will be as PR via dedicated channel
         elif [ "$TRAVIS_BRANCH" == "master" ]; then
-                cmd="$cmd && snapcraft push *.snap --release=$channel"
                 channel="edge"
                 echo "Push to master ubuntu repo: will release to $channel"
         fi
