@@ -16,17 +16,21 @@ cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pw
 
 # Only release as a snap from main repo (ubuntu slug), enabling other forks to test build the snap.
 REPO="${TRAVIS_REPO_SLUG%%/*}"
-channel="edge"
+channel=""
 if [ "$REPO" == "ubuntu" ]; then
         # if it's a PR event from
         if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-                channel="$channel/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
-                cmd="$cmd && snapcraft push *.snap --release=$channel"
+                channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
                 echo "PR to main ubuntu repo: will release to $channel"
         # only push build to master are released, the rest will be as PR via dedicated channel
         elif [ "$TRAVIS_BRANCH" == "master" ]; then
                 cmd="$cmd && snapcraft push *.snap --release=$channel"
+                channel="edge"
                 echo "Push to master ubuntu repo: will release to $channel"
+        fi
+
+        if [ ! -z "$channel" ]; then
+                cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
         fi
 fi
 
