@@ -38,5 +38,5 @@ docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
 # write on PR install instructions for the snap branch
 [ "$TRAVIS_PULL_REQUEST" == "false" ] && exit 0
 curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
-        -d "{\"body\": \"A new test snap version is available using: \`snap install communitheme --channel=$channel\`.\nFurther available updates will track that pull request then.\n\nSwitch back to stable or edge snap with \`snap refresh communitheme --stable\` or \`snap refresh communitheme --edge\` once you are done with it!\"}" \
+        -d "{\"body\": \"A new test snap version is available using: \`snap refresh communitheme --channel=$channel\`.\nFurther available updates will track that pull request then.\n\nSwitch back to stable or edge snap with \`snap refresh communitheme --stable\` or \`snap refresh communitheme --edge\` once you are done with it!\n\nReplace \`refresh\` with \`install\` if you haven't installed the snap yet.\"}" \
         "https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
