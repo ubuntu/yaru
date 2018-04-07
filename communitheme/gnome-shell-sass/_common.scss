@@ -56,20 +56,21 @@ stage {
   min-height: 22px; // make just a little taller
   padding: 4px 32px;
   @include button(normal);
-  &:hover { @include button(hover); }
-  &:focus { @include button(focus); }
-  &:insensitive { @include button(insensitive); }
   &:active { @include button(active); }
+  &:focus { @include button(focus); }
+  &:hover { @include button(hover); }
+  &:insensitive { @include button(insensitive); }
 }
 
 .modal-dialog-linked-button {
   border-right-width: 1px;
   border-top: 1px solid;
   @include button(normal);
-  &:insensitive { @include button(insensitive); }
-  &:active { @include button(hover); }
   &:active { @include button(active); }
   &:focus { @include button(focus); }
+  &:hover { @include button(hover); }
+  &:focus:hover { @include button(focus-hover); }
+  &:insensitive { @include button(insensitive); }
   padding: 12px;
 
   &:first-child {
