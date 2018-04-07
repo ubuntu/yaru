@@ -49,7 +49,6 @@
     border-color: $fc;
     box-shadow: none;
   }
-  @if $t==hover { } // TODO: should we bother?
   @if $t==insensitive {
     $_bg: transparentize(mix($insensitive_fg_color,$c,20%),0.3); // transparentize(mix($insensitive_fg_color,$osd_bg_color,20%),0.3);
     color: $insensitive_fg_color;
