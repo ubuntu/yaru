@@ -2202,11 +2202,16 @@ menu,
     min-height: 16px;
     min-width: 36px;
     padding: 5px 6px;
+    border-radius: 0;
     // text-shadow: none;
 
     &:hover {
       // color: $selected_fg_color;
       background-color: $base_hover_color;
+      &:first-child {
+          // first-child is the one at the bottom of the menu.
+          border-radius: 0 0 $small_radius $small_radius;
+      }
     }
 
     &:disabled {
