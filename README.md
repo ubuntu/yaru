@@ -5,8 +5,11 @@ Snap build status: [![Build Status](https://travis-ci.org/ubuntu/communitheme-sn
 
 ## Testing communitheme snap
 
-You can install the **communitheme** snap and try it on Ubuntu 18.04 LTS by simply running: `snap install communitheme`.
-After rebooting, a new "communitheme" entry will be available in the login screen, select it.
+We're currently still developing the theme, but you can try it out for yourself. Be warned though, this is a pre-release alpha state. These packages are mainly intended for the Communitheme designers to get a sense of what actually works in Ubuntu. **Many icons are missing, some stuff is just a white squircle. You will find issues and stuff will break.**
+
+You can install the **communitheme** snap and try it on Ubuntu 18.04 LTS by simply running: `snap install communitheme` or from the Ubuntu Software application.
+
+Restart your computer, the login screen will use Communitheme by default. Select the "Ubuntu with communitheme snap" session from the login screen (click the gear) and login.
 
 You should enter your normal user session with the GNOME Shell, application and icon themes applied, as well as a new set
 of sound notifications and cursor.
