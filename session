@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+# script_file=`readlink -f "$0"`
+# `dirname "$script_file"`/share/
+# we don't really on readlink -f "$0", as we always want to
+# point to current/ to get latest update applied immediately.
+XDG_DATA_DIRS=$XDG_DATA_DIRS:/snap/communitheme/current/share/
+gnome-session --session=ubuntu
