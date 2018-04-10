@@ -1,14 +1,11 @@
 sudo: required
-language: generic
-
+language: bash
 services:
   - docker
 
-env:
-  - TRAVIS_DEBIAN_DISTRIBUTION=bionic TRAVIS_DEBIAN_BACKPORTS="bionic-security bionic-updates" TRAVIS_DEBIAN_INCREMENT_VERSION_NUMBER=true
+# fetch standard build script which will change the local source to ., build and release the snap
+before_script:
+  - curl -o /tmp/build-snap "$THEME_HELPER_REPO_URL/build/prepare-build-snap" && chmod +x /tmp/build-snap
 
 script:
-  - wget -O- https://raw.githubusercontent.com/lamby/travis.debian.net/gh-pages/script.sh | sh -
-
-if:
-  tag IS blank
+  - /tmp/build-snap
