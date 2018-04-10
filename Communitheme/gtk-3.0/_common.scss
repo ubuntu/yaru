@@ -4636,11 +4636,12 @@ button.titlebutton {
   min-width: 24px;
   padding: 3px;
 
-  @each $state, $t in ("", "normal"),
+  @each $state, $t in //("", "normal"),
                       (":hover", "hover"),
-                      (":active", "active"),
-                      (":backdrop", "backdrop"),
-                      (":backdrop:active", 'backdrop-active') {
+                      //(":active", "active"),
+                      //(":backdrop", "backdrop"),
+                      //(":backdrop:active", 'backdrop-active') 
+                      {
                         &#{$state} { @include button($t, $c, $tc, $flat: true); }
   }
 
