@@ -4650,8 +4650,10 @@ button.titlebutton {
     background-repeat: no-repeat;
     background-size: 20px;
 
-    @each $state, $t in /*("", "")*/(":hover", "hover")/*,
-                        (":backdrop", "-backdrop")*/ {
+    @each $state, $t in /*("", "")*/
+                        (":hover", "-hover"),
+                        (":active", ""),
+                        (":backdrop:hover", "-backdrop") {
                           &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png")); }
     }
   }
