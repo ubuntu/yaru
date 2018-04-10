@@ -4638,7 +4638,7 @@ button.titlebutton {
 
   @each $state, $t in //("", "normal"),
                       (":hover", "hover"),
-                      //(":active", "active"),
+                      (":active", "active"),
                       //(":backdrop", "backdrop"),
                       //(":backdrop:active", 'backdrop-active') 
                       {
