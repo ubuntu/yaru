@@ -10,7 +10,11 @@ The desktop-login sound is based on [Jouni Helminen's awesome work for Ubuntu To
 
 ## How to test it
 
-### Installation instruction
+This is a very early pre-release version of the theme. This package is intended for the Communitheme designers to get a sense of what actually works in Ubuntu. Many icons are missing, some stuff is just a white squircle. You will find issues and **stuff will break**. We'll make a public statement when this theme is ready for a wider audience.
+
+Install Communitheme in order to get this sound Theme. [How to install Communitheme](https://github.com/ubuntu/communitheme-snap-helpers/blob/master/README.md).
+
+### Manual Installation instruction
 
 You can install communitheme-sounds from source using the Meson build system.
 
