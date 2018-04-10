@@ -1,0 +1,11 @@
+sudo: required
+language: bash
+services:
+  - docker
+
+# fetch standard build script which will change the local source to ., build and release the snap
+before_script:
+  - curl -o /tmp/build-snap "$THEME_HELPER_REPO_URL/build/prepare-build-snap" && chmod +x /tmp/build-snap
+
+script:
+  - /tmp/build-snap
