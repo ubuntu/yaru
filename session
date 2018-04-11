@@ -6,4 +6,6 @@ set -e
 # we don't really on readlink -f "$0", as we always want to
 # point to current/ to get latest update applied immediately.
 XDG_DATA_DIRS=$XDG_DATA_DIRS:/snap/communitheme/current/share/
+GTK2_RC_FILES=$GTK2_RC_FILES:/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc
+export GTK2_RC_FILES
 gnome-session --session=ubuntu
