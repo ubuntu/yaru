@@ -1718,7 +1718,7 @@ StScrollBar {
     .hotplug-resident-mount {
       spacing: 8px;
       border-radius: 4px;
-      &:hover { background-color: transparentize($bg_color,0.7); }
+      &:hover { background-color: /*transparentize($bg_color,0.7)*/white }
     }
 
     .hotplug-resident-mount-label {
