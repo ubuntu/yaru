@@ -866,6 +866,45 @@ button {
   .linked.vertical > &:checked,
   .linked.vertical > &:backdrop { @extend %linked_vertical; }
 
+  @each $s, $p in (':not(.vertical)', 'left'),
+                  ('.vertical', 'top') {
+    .linked#{$s} > & {
+      $c: $button_bg_color;
+
+      $_bg: if(lightness($c)<35%, lighten($c, 20%), darken($c, 5%));
+      &:hover:not(:only-child) {
+        + %entry,
+        + entry,
+        + button,
+        + combobox > box > button.combo { border-#{$p}-color: darken($_bg, 25%); }
+      }
+
+      $_bg: if(lightness($c)<35%, lighten($c, 10%), darken($c, 5%));
+      &:active:not(:only-child),
+      &:checked:not(:only-child) {
+        + %entry,
+        + entry,
+        + button,
+        + combobox > box > button.combo { border-#{$p}-color: darken($_bg, 30%); }
+      }
+
+      $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
+      &:checked:backdrop:not(:only-child) {
+        + %entry,
+        + entry,
+        + button,
+        + combobox > box > button.combo { border-#{$p}-color: $_bc; }
+      }
+
+      &:drop(active):not(:only-child) {
+        + %entry,
+        + entry,
+        + button,
+        + combobox > box > button.combo { border-#{$p}-color: $drop_target_color; }
+      }
+    }
+  }
+
   &.circular { // The Bloody Circul Button
     border-radius: 9999px;
     -gtk-outline-radius: 9999px;
@@ -1019,12 +1058,6 @@ toolbar.inline-toolbar toolbutton:backdrop {
 
 %linked_vertical{
   @extend %linked_vertical_middle;
-
-  &:not(:first-child) {
-    // linked buttons will have more defined border colors
-    border-top-color: $borders_color;
-    &:disabled { border-top-color: $insensitive_borders_color;}
-  }
 
   &:first-child {
     border-top-left-radius: $small_radius;
@@ -1627,14 +1660,15 @@ headerbar {
     .linked:not(.path-bar):not(.stack-switcher):not(buttonbox) button, .linked:not(.vertical) entry {
       // force linked buttons and entries to be separate
       // this needs a lot of testing
+      &:hover,
       &:focus {
-        & + entry { border-left-color: _border_color($graphite); }
+        & + entry { border-left-color: transparent; }
         & + button { border-left-color: transparent; }
 
         & + entry,
         & + button {
           &:disabled { border-left-color: transparent; }
-          &:backdrop { border-left-color: _border_color($headerbar_bg_color); }
+          &:backdrop { border-left-color: transparent; }
         }
       }
       border-width: 1px;
