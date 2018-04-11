@@ -4636,11 +4636,8 @@ button.titlebutton {
   min-width: 24px;
   padding: 3px;
 
-  @each $state, $t in ("", "normal"),
-                      (":hover", "hover"),
-                      (":active", "active"),
-                      (":backdrop", "backdrop"),
-                      (":backdrop:active", 'backdrop-active') {
+  @each $state, $t in (":hover", "hover"),
+                      (":active", "active") {
                         &#{$state} { @include button($t, $c, $tc, $flat: true); }
   }
 
@@ -4649,9 +4646,10 @@ button.titlebutton {
     background-repeat: no-repeat;
     background-size: 20px;
 
-    @each $state, $t in ("", ""),
-                        (":backdrop", "-backdrop") {
-                          &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}.png"), url("assets/close-button#{$t}@2.png")); }
+    @each $state, $t in (":hover", "-hover"),
+                        (":active", ""),
+                        (":backdrop:hover", "-backdrop") {
+                          &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}@2.png"), url("assets/close-button#{$t}@2.png")); }
     }
   }
 }
