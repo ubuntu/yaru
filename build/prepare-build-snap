@@ -35,8 +35,30 @@ fi
 
 docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
 
+# stop if this was just a test build without any snap pushed
+[ -z "$channel" ] && exit 0
+
+# build now gtk-common-themes
+# FIXME: we won't need this once snapd can accept and auto-install theme snaps.
+mkdir -p ../gtk-common-themes/snap
+cd ../gtk-common-themes
+
+# get top part of original snapcraft.yaml and complete with unsquash the snap
+gct_snapcraftyaml=`mktemp`
+curl -o $gct_snapcraftyaml "https://raw.githubusercontent.com/snapcrafters/gtk-common-themes/master/snap/snapcraft.yaml"
+sed -e '/parts:/,$d' $gct_snapcraftyaml > snap/snapcraft.yaml
+
+curl -o $gct_snapcraftyaml "$THEME_HELPER_REPO_URL/build/gtk-common-themes-parts.yaml"
+sed -e "s,CHANNEL,$channel,g" $gct_snapcraftyaml >> snap/snapcraft.yaml
+rm $gct_snapcraftyaml
+
+# build and push gtk-common-themes snap
+cmd="cd $(pwd) && snapcraft"
+cmd="$cmd && echo \"$SNAP_COMMON_THEMES_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
+docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
+
 # write on PR install instructions for the snap branch
 [ "$TRAVIS_PULL_REQUEST" == "false" ] && exit 0
 curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
-        -d "{\"body\": \"A new test snap version is available using: \`snap refresh communitheme --channel=$channel\`.\nFurther available updates will track that pull request then.\n\nSwitch back to stable or edge snap with \`snap refresh communitheme --stable\` or \`snap refresh communitheme --edge\` once you are done with it!\n\nReplace \`refresh\` with \`install\` if you haven't installed the snap yet.\"}" \
+        -d "{\"body\": \"A new test snap version is available using: \`snap refresh communitheme --channel=$channel\`.\nFurther available updates will track that pull request then.\n\nSwitch back to stable or edge snap with \`snap refresh communitheme --stable\` or \`snap refresh communitheme --edge\` once you are done with it!\nYou may want to download as well \`gtk-common-themes\` snap from \`$channel\` channel to test your snaps with those changes.\n\nReplace \`refresh\` with \`install\` if you haven't installed the snap yet.\"}" \
         "https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"

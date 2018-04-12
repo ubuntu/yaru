@@ -25,5 +25,7 @@ By default, you track manually tested and curated releases of communitheme snap.
 and published to the snap store when any project related to communitheme has changed (being GNOME Shell theme, or icon or…).
 
 For switching to it, you can switch to the **edge** channel, by running: `snap refresh communitheme --edge`.
+If you want to follow the **edge** content for snap applications, you will need as well to switch `gtk-common-theme` snap
+to the same channel: `snap refresh gtk-common-themes --edge`.
 
 If you haven't install the snap yet but want to directly track the edge channel, you can run `snap install communitheme --edge`.
