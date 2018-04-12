@@ -4634,22 +4634,19 @@ button.titlebutton {
   border-radius: $small_radius;
   min-height: 24px;
   min-width: 24px;
-  padding: 3px;
-
-  @each $state, $t in (":hover", "hover"),
-                      (":active", "active") {
-                        &#{$state} { @include button($t, $c, $tc, $flat: true); }
-  }
+  padding: 2px;
 
   &.close {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 20px;
+    $button_size: 24px + 2px * 2;
+    $circle_size: 20px / $button_size / 2;
 
-    @each $state, $t in (":hover", "-hover"),
-                        (":active", ""),
-                        (":backdrop:hover", "-backdrop") {
-                          &#{$state} { background-image: -gtk-scaled(url("assets/close-button#{$t}@2.png"), url("assets/close-button#{$t}@2.png")); }
+    &:hover:not(:backdrop),
+    &:active:not(:backdrop) {
+      background-image: -gtk-gradient(radial,
+                                      center center, 0,
+                                      center center, $circle_size,
+                                      to($selected_bg_color),
+                                      to(transparent));
     }
   }
 }
