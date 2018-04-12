@@ -4,7 +4,7 @@
 @import 'ubuntu-colors';
 
 $base_color: if($variant == 'light', #FFFFFF, #292933);
-$bg_color: if($variant == 'light', #FDFDFD, #1C1B21);
+$bg_color: if($variant == 'light', #F7F7F7, #1C1B21);
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 $text_color: if($variant == 'light', #2D2D2D, $silk);
 //
@@ -25,7 +25,7 @@ $scrollbar_slider_color: transparentize($fg_color, 0.4);
 $scrollbar_slider_hover_color: $fg_color;
 $scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 10%));
 //
-$button_bg_color: if($variant == 'light', darken($bg_color, 2%), lighten($bg_color, 7%));
+$button_bg_color: if($variant == 'light', white, lighten($bg_color, 7%));
 //
 $warning_color: $yellow;
 $error_color: $red;
