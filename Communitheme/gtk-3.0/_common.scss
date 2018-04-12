@@ -115,7 +115,7 @@ $button_transition: all 200ms $ease-out-quad;
       color: $text_color;
       border-radius: 3px;
     }
-    
+
   }
 }
 
@@ -304,8 +304,8 @@ entry {
 
     &:backdrop:disabled { @include entry(backdrop-insensitive); }
 
-    selection { 
-      @extend %selected_items; 
+    selection {
+      @extend %selected_items;
       //Trying blue for the text selection
       color: $text_color;
       background-color: $text_selection;
@@ -3096,22 +3096,13 @@ menu menuitem, popover {
 
 treeview.view {
   radio, check {
-    &, &:checked:hover, &:backdrop {
-      &:selected {
-        &:focus, & {
-          border-color: white;
-          color: white;
-          background-color: transparent;
-        }
-      }
-      &:disabled {
-        color: $insensitive_fg_color;
-
-        &:backdrop { color: $backdrop_insensitive_color; }
+    @each $t, $c in (':checked:not(:indeterminate)', $success_color),
+                    (':indeterminate', $success_color) {
+        &#{$t} {
+        &, &:hover { background-color: $c}
+        &:backdrop { background-color: _backdrop_color($c); }
       }
     }
-
-    &:backdrop { &:selected, & { color: $backdrop_fg_color; }}
   }
 }
 
