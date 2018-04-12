@@ -3925,22 +3925,32 @@ row {
  *********************/
 .app-notification,
 .app-notification.frame {
-  @extend %osd;
+  // @extend %osd;
 
   padding: 10px;
-  border-radius: 0 0 5px 5px;
-  background-color: transparentize($jet, 0.1);
+  // border-radius: 0 0 5px 5px;
+  // background-color: transparentize($inkstone, 0.025);
   // background-image: linear-gradient(to bottom, transparentize(black, 0.8),
   //                                             transparent 2px);
-  background-clip: padding-box;
+  // background-clip: padding-box;
+
+  margin: 6px;
+  color: $text_color;
+  border-radius: $medium_radius;
+  background-color: $menu_color; // $popover_bg_color;
+  border: 1px solid $borders_color;
+  box-shadow: 0 2px 2px transparentize(black, 0.75);
 
   &:backdrop {
     // background-image: none;
-    background-color: transparentize($backdrop_headerbar_bg_color, 0.1);
+    // background-color: transparentize($backdrop_headerbar_bg_color, 0.1);
+    background-color: $backdrop_bg_color;
+    color: $backdrop_text_color;
+    box-shadow: none;
     transition: $backdrop_transition;
   }
 
-  button { @extend %osd_button; }
+  // button { @extend %osd_button; }
 
   border { border: none; }
 }
