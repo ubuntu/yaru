@@ -1599,13 +1599,12 @@ StScrollBar {
     min-height: 64px;
     margin: 5px;
     border-radius: $medium-radius;
-    color: $inkstone;
+    color: $jet;
     background-color: white;
     border: none;
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
-    color: $inkstone;
-    &, &:active { .message-title { color: $inkstone; } }
-    &, &:active { .message-content { color: $slate; } }
+    &, &:active { .message-title { color: $jet; } }
+    &, &:active { .message-content { color: $inkstone; background-color: transparent; } }
   }
   
   .notification-banner:hover {
@@ -1640,8 +1639,8 @@ StScrollBar {
     min-height: 35px;
     padding: 0 16px;
     background-color: transparent;
-    color: rgba(0, 0, 0, 0.54);
-    font-weight: 500;
+    color: $inkstone;
+    font-weight: 500;    
   }
   
   .notification-banner .notification-button:first-child {
@@ -1649,7 +1648,7 @@ StScrollBar {
   }
   
   .notification-banner .notification-button:last-child {
-    border-radius: 0 0 2px 0;
+    border-radius: 0 0 2px 0;    
   }
   
   .notification-banner .notification-button:hover, .notification-banner .notification-buttonfocus {
@@ -1698,14 +1697,21 @@ StScrollBar {
     &:rtl { padding-left: 0; padding-right: 4px; }
   }
 
-  //hotplug
-  .hotplug-transient-box {
-    spacing: 6px;
-    padding: 2px 72px 2px 12px;
-  }
+    //hotplug
+    .hotplug-transient-box {
+      padding: 2px 72px 2px 12px;
+      spacing: 6px;    
+    }
     .hotplug-notification-item {
       padding: 2px 10px;
       &:focus { padding: 1px 71px 1px 11px; }
+      color: $inkstone;
+      
+      @include button(undecorated);
+      border-radius: 0 0 $small_radius $small_radius;
+      &:focus { padding: 1px 71px 1px 11px; }
+      &:hover { background-color: $silk;}
+      &:active { background-color: transparent; }
     }
 
     .hotplug-notification-item-icon {
@@ -1713,12 +1719,12 @@ StScrollBar {
       padding: 2px 5px;
     }
 
-    .hotplug-resident-box { spacing: 8px; }
+    .hotplug-resident-box { spacing: 8px;}
 
     .hotplug-resident-mount {
       spacing: 8px;
       border-radius: 4px;
-      &:hover { background-color: /*transparentize($bg_color,0.7)*/white }
+      &:hover { background-color: transparent; }
     }
 
     .hotplug-resident-mount-label {
@@ -1738,7 +1744,7 @@ StScrollBar {
     .hotplug-resident-eject-button {
       padding: 7px;
       border-radius: 5px;
-      color: pink;
+      color: $inkstone;
     }
 
 /* Eeeky things */
