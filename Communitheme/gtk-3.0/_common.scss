@@ -9,7 +9,7 @@ $small_radius: 4px;
 $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
-$button_transition: all 200ms $ease-out-quad;
+$button_transition: all 150ms $ease-out-quad;
 
 * {
   padding: 0;
@@ -263,11 +263,11 @@ spinner {
 %entry,
 entry {
   %entry_basic, & {
-    min-height: 22px;
-    padding: 3px 8px;
+    min-height: 24px;
+    padding: 2px 6px;
     border: 1px solid;
     border-radius: $small_radius;
-    transition: all 200ms $ease-out-quad;
+    transition: $button_transition;
     caret-color: currentColor;
 
     @include entry(normal);
@@ -375,9 +375,6 @@ entry {
   .linked:not(.vertical) > &:drop(active) + button,
   .linked:not(.vertical) > &:drop(active) + combobox > box > button.combo { border-left-color: $drop_target_color; }
 
-  // Remove box-shadow from button linked to entries
-  .linked:not(.vertical) > & + button:not(:hover):not(:checked) { box-shadow: none; }
-
   // Vertically linked entries
   // FIXME: take care of "colored" entries
   .linked.vertical > & {
@@ -417,19 +414,6 @@ entry {
       + entry,
       + button,
       + combobox > box > button.combo { border-top-color: $drop_target_color; }
-    }
-  }
-
-  ~ button {
-    // buttons next to entry fields will have more defined border colors
-    border-top-color: $borders_color;
-    border-left-color: $borders_color;
-    border-right-color: $borders_color;
-
-    & {
-      // buttons next to entry fields need less padding so as to not appear to wide
-      padding-left: 6px;
-      padding-right: 6px
     }
   }
 }
@@ -532,14 +516,15 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 button {
   @at-root %button_basic, & {
     animation: shrink 1s linear infinite;
-    min-height: 22px;
+    min-height: 24px;
     min-width: 16px;
-    padding: 3px 8px;
+    padding: 2px 6px;
     border: 1px solid;
     border-radius: $small_radius;
     outline-color: $focus_color;
     outline-offset: -3px;
     -gtk-outline-radius: $small_radius;
+    transition: $button_transition;
 
     @include button(normal);
 
@@ -576,7 +561,7 @@ button {
     &:checked {
       @include button(active);
 
-      transition-duration: 50ms;
+      transition-duration: 100ms;
     }
 
     &:backdrop {
@@ -820,8 +805,8 @@ button {
     &.image-button {
       // we want image buttons to have a 1:1 aspect ratio, so compensation
       // of the padding added to the GtkImage is needed
-      padding-left: 2px;
-      padding-right: 2px;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     &.needs-attention {
@@ -1207,7 +1192,7 @@ spinbutton {
       color: mix($fg_color, $base_color, 90%);
       border-style: none none none solid;
       background-color: transparent;
-      border-color: transparentize($borders_color, 0.7);
+      border-color: $borders_edge;
       border-radius: 0;
       box-shadow: none;
 
@@ -3783,11 +3768,11 @@ frame > border,
   margin: 0;
   padding: 0;
   border-radius: 0;
-  border: 1px solid $borders_edge;
+  border: 1px solid $borders_color;
 
   &.flat { border-style: none; }
 
-  &:backdrop { border-color: $borders_edge; }
+  &:backdrop { border-color: $backdrop_borders_color; }
 }
 
 actionbar > revealer >  box {
