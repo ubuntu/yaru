@@ -947,9 +947,6 @@ StScrollBar {
       color: $caption_fg_color;
     }
 
-    .datemenu-today-button .day-label {
-    }
-
     .datemenu-today-button .date-label {
       font-size: 1.5em;
       font-weight: 300;
@@ -1000,6 +997,7 @@ StScrollBar {
 
     .calendar-day-base {
       font-size: 80%;
+      font-weight: 500;
       text-align: center;
       width: 2.4em; height: 2.4em;
       padding: 0.1em;
@@ -1045,12 +1043,12 @@ StScrollBar {
       }
       .calendar-week-number {
         font-size: 70%;
-        font-weight: bold;
+        font-weight: 700;
         width: 2.3em; height: 1.8em;
         border-radius: 2px;
         padding: 0.5em 0 0;
         margin: 6px;
-        background-color: transparentize($fg_color,0.7);
+        background-color: transparentize($fg_color,0.6);
         color: $bg_color;
       }
 
