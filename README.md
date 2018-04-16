@@ -3,11 +3,7 @@ Suru Icon Theme
 
 This project is a revitalization of the Suru icon set that was designed for Ubuntu Touch. The principles and styles created for Suru now serve as the basis for a new FreeDesktop icon theme.
 
-## Contributor Notes
-
- - Pull requests regarding branded, third-party application icons (for example, Google Chrome) will be rejected. Infringing upon third-party brands is a no-no in this set.
- - Development is focused on targeting the GNOME desktop, changes regarding other desktop environments (such as MATE or KDE) are not currently a priority.
- - See the README in the [icon sources folder](/src) for more about how to contribute or modify icons
+Contributions are welcome and if you would like to contribute to this project, please read the [accompanying documentation](/CONTRIBUTING.md) regarding contributions.
 
 ## Copying or Reusing
 
