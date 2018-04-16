@@ -15,9 +15,11 @@ sed -i "s#    source: .*$TRAVIS_REPO_SLUG\.git#    source: \.#" snap/snapcraft.y
 cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pwd) && snapcraft"
 
 # Only release as a snap from main repo (ubuntu slug), enabling other forks to test build the snap.
+# Notes that the tokens are only available when the source repo is under ubuntu/ project.
 REPO="${TRAVIS_REPO_SLUG%%/*}"
+SOURCE_REPO="${TRAVIS_PULL_REQUEST_SLUG%%/*}"
 channel=""
-if [ "$REPO" == "ubuntu" ]; then
+if [ "$REPO" == "ubuntu" ] && [ "$SOURCE_REPO" == "ubuntu" ] ; then
         # if it's a PR event from
         if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
                 channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
@@ -31,6 +33,8 @@ if [ "$REPO" == "ubuntu" ]; then
         if [ ! -z "$channel" ]; then
                 cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
         fi
+elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+        echo "This PR doesn't originate from an ubuntu/ repo for an ubuntu/ destination repo. We can't upload automatically a snap on your beyond thus."
 fi
 
 docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
