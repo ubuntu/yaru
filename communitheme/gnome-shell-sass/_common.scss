@@ -1306,15 +1306,13 @@ StScrollBar {
     border-color: $osd_borders_color;
     color: $osd_fg_color;
     background-color: $osd_bg_color;
-
-    &, &:focus { padding: 7px 9px; }
+    padding: 6px 4px;
 
     &:focus {
-      border-width: 1px;
       border-color: $selected_bg_color;
     }
 
-    .search-entry-icon { icon-size: 1em; padding: 0 4px; color: transparentize($fg_color,.3); }
+    .search-entry-icon { icon-size: 1em; padding: 0 6px; color: transparentize($fg_color,.3); }
 
     &:hover, &:focus {
       .search-entry-icon { color: $fg_color; }
