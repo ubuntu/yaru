@@ -1591,73 +1591,65 @@ StScrollBar {
   .url-highlighter { link-color: $link_color; /*lighten($selected_bg_color,10%);*/ }
 
   // Banners
-  .notification-banner {
-    font-size: 11pt;
-    width: 34em;
-    min-height: 64px;
-    margin: 5px;
-    border-radius: $medium-radius;
-    color: $jet;
-    background-color: white;
-    border: none;
-    box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
-    &, &:active { .message-title { color: $jet; } }
-    &, &:active { .message-content { color: $inkstone; background-color: transparent; } }
-  }
+ .notification-banner {
+  font-size: 11pt;
+  width: 34em;
+  min-height: 64px;
+  margin: 6px;
+  border-radius: $medium-radius;
+  border: none;
+  box-shadow: 0 2px 2px transparentize(black, 0.75);
+  color: $jet;
   
-  .notification-banner:hover {
-    background-color: white;
+  &, &:hover, &:focus, &:active {
+    & { background-color: white; }
+    .message-title { color: $jet; }
+    .message-content { color: $inkstone; }
   }
-  
-  .notification-banner:focus {
-    background-color: white;
-  }
-  
-  .notification-banner .notification-icon {
+
+  .notification-icon {
     padding: 5px;
   }
-  
-  .notification-banner .notification-content {
+
+  .notification-content {
     padding: 5px;
     spacing: 5px;
   }
   
-  .notification-banner .secondary-icon {
+  .secondary-icon {
     icon-size: 1.14286em;
   }
-  
-  .notification-banner .notification-actions {
+
+  .notification-actions {
     background-color: transparent;
     padding-top: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.12);
     spacing: 1px;
   }
-  
-  .notification-banner .notification-button {
+
+  .notification-button {
     min-height: 35px;
     padding: 0 16px;
     background-color: transparent;
     color: $inkstone;
-    font-weight: 500;    
+    font-weight: 500;
+
+    &:first-child { border-radius: 0 0 0 2px; }
+
+    &:last-child { border-radius: 0 0 2px 0; }
+
+    &:hover &:focus {
+      background-color: rgba(0, 0, 0, 0.12);
+      color: rgba(0, 0, 0, 0.87);
+    }
+
+    &:active {
+      background-color: rgba(0, 0, 0, 0.26);
+      color: rgba(0, 0, 0, 0.87);
+    }
   }
-  
-  .notification-banner .notification-button:first-child {
-    border-radius: 0 0 0 2px;
-  }
-  
-  .notification-banner .notification-button:last-child {
-    border-radius: 0 0 2px 0;    
-  }
-  
-  .notification-banner .notification-button:hover, .notification-banner .notification-buttonfocus {
-    background-color: rgba(0, 0, 0, 0.12);
-    color: rgba(0, 0, 0, 0.87);
-  }
-  
-  .notification-banner .notification-button:active {
-    background-color: rgba(0, 0, 0, 0.26);
-    color: rgba(0, 0, 0, 0.87);
-  }
+}
+
   .summary-source-counter {
     font-size: 10pt;
     font-weight: bold;
