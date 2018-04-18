@@ -666,12 +666,10 @@ StScrollBar {
     border: 2px solid darken($borders_color,10%);
   }
 
-   .switcher-list .item-box:selected {
-     background-color: $base_hover_color;
-     border: 2px solid $selected_bg_color;
-     border-radius: $small_radius;
-     color: $selected_fg_color;
-   }
+  .switcher-list .item-box:selected {
+    background-color: $selected_bg_color;
+    color: $selected_fg_color;
+  }
 
   .switcher-list .thumbnail-box {
     padding: 2px;
@@ -949,9 +947,6 @@ StScrollBar {
       color: $caption_fg_color;
     }
 
-    .datemenu-today-button .day-label {
-    }
-
     .datemenu-today-button .date-label {
       font-size: 1.5em;
       font-weight: 300;
@@ -1002,6 +997,7 @@ StScrollBar {
 
     .calendar-day-base {
       font-size: 80%;
+      font-weight: 500;
       text-align: center;
       width: 2.4em; height: 2.4em;
       padding: 0.1em;
@@ -1047,12 +1043,12 @@ StScrollBar {
       }
       .calendar-week-number {
         font-size: 70%;
-        font-weight: bold;
+        font-weight: 700;
         width: 2.3em; height: 1.8em;
         border-radius: 2px;
         padding: 0.5em 0 0;
         margin: 6px;
-        background-color: transparentize($fg_color,0.7);
+        background-color: transparentize($fg_color,0.6);
         color: $bg_color;
       }
 
@@ -1081,7 +1077,7 @@ StScrollBar {
         .message {
           background-color: $osd_bg_color;
           border: 1px solid $osd_borders_color;
-          &:hover,&:focus { background-color: opacify(mix($osd_bg_color, $base_hover_color), 1); }
+          &:hover, &:focus { background-color: opacify(mix($osd_bg_color, $base_hover_color), 1); }
           &:active { background-color: $base_active_color; }
           &:active { .message-title, .message-content { color: $active_fg_color; } }
           border-radius: $small_radius; // 3px;
@@ -1308,13 +1304,15 @@ StScrollBar {
     border-color: $osd_borders_color;
     color: $osd_fg_color;
     background-color: $osd_bg_color;
-    padding: 6px 4px;
+
+    &, &:focus { padding: 7px 9px; }
 
     &:focus {
+      border-width: 1px;
       border-color: $selected_bg_color;
     }
 
-    .search-entry-icon { icon-size: 1em; padding: 0 6px; color: transparentize($fg_color,.3); }
+    .search-entry-icon { icon-size: 1em; padding: 0 4px; color: transparentize($fg_color,.3); }
 
     &:hover, &:focus {
       .search-entry-icon { color: $fg_color; }
@@ -1550,9 +1548,9 @@ StScrollBar {
     visible-width: 32px; //amount visible before hover
     spacing: 11px;
     padding: 8px;
-    border-radius: $medium_radius 0 0 $medium_radius;
+    border-radius: 9px 0 0 9px;
     //border-width: 1px 0 1px 1px; //fixme: can't have non unoform borders :(
-    &:rtl { border-radius: 0 $medium_radius $medium_radius 0;}
+    &:rtl { border-radius: 0 9px 9px 0;}
 
     .placeholder {
       background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
@@ -1561,9 +1559,9 @@ StScrollBar {
     }
   }
   .workspace-thumbnail-indicator {
-    border: 0px solid $selected_bg_color;
-    border-left-width: 2px;
-    padding: 4px;
+    border: 4px solid $selected_bg_color;
+    border-radius: $medium_radius;
+    padding: 1px;
   }
 
   //Some hacks I don't even
@@ -1597,70 +1595,61 @@ StScrollBar {
     font-size: 11pt;
     width: 34em;
     min-height: 64px;
-    margin: 5px;
+    margin: 6px;
     border-radius: $medium-radius;
-    color: $inkstone;
-    background-color: white;
     border: none;
-    box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
-    color: $inkstone;
-    &, &:active { .message-title { color: $inkstone; } }
-    &, &:active { .message-content { color: $slate; } }
+    box-shadow: 0 2px 2px transparentize(black, 0.75);
+    color: $jet;
+
+    &, &:hover, &:focus, &:active {
+      & { background-color: white; }
+      .message-title { color: $jet; }
+      .message-content { color: $inkstone; }
+    }
+
+    .notification-icon {
+      padding: 5px;
+    }
+
+    .notification-content {
+      padding: 5px;
+      spacing: 5px;
+    }
+
+    .secondary-icon {
+      icon-size: 1.14286em;
+    }
+
+    .notification-actions {
+      background-color: transparent;
+      padding-top: 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      spacing: 1px;
+    }
+
+    .notification-button {
+      min-height: 35px;
+      padding: 0 16px;
+      background-color: transparent;
+      color: $inkstone;
+      font-weight: 500;
+
+      &:first-child { border-radius: 0 0 0 2px; }
+
+      &:last-child { border-radius: 0 0 2px 0; }
+
+      &:hover &:focus {
+        background-color: rgba(0, 0, 0, 0.12);
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      &:active {
+        background-color: rgba(0, 0, 0, 0.26);
+        color: rgba(0, 0, 0, 0.87);
+      }
+    }
   }
 
-  .notification-banner:hover {
-    background-color: white;
-  }
-
-  .notification-banner:focus {
-    background-color: white;
-  }
-
-  .notification-banner .notification-icon {
-    padding: 5px;
-  }
-
-  .notification-banner .notification-content {
-    padding: 5px;
-    spacing: 5px;
-  }
-
-  .notification-banner .secondary-icon {
-    icon-size: 1.14286em;
-  }
-
-  .notification-banner .notification-actions {
-    background-color: transparent;
-    padding-top: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
-    spacing: 1px;
-  }
-
-  .notification-banner .notification-button {
-    min-height: 35px;
-    padding: 0 16px;
-    background-color: transparent;
-    color: rgba(0, 0, 0, 0.54);
-    font-weight: 500;
-  }
-
-  .notification-banner .notification-button:first-child {
-    border-radius: 0 0 0 2px;
-  }
-
-  .notification-banner .notification-button:last-child {
-    border-radius: 0 0 2px 0;
-  }
-
-  .notification-banner .notification-button:hover, .notification-banner .notification-buttonfocus {
-    background-color: rgba(0, 0, 0, 0.12);
-    color: rgba(0, 0, 0, 0.87);
-  }
-
-  .notification-banner .notification-button:active {
-    background-color: rgba(0, 0, 0, 0.26);
-    color: rgba(0, 0, 0, 0.87);
-  }
   .summary-source-counter {
     font-size: 10pt;
     font-weight: bold;
@@ -1698,14 +1687,20 @@ StScrollBar {
     &:rtl { padding-left: 0; padding-right: 4px; }
   }
 
-  //hotplug
-  .hotplug-transient-box {
-    spacing: 6px;
-    padding: 2px 72px 2px 12px;
-  }
+    //hotplug
+    .hotplug-transient-box {
+      padding: 2px 72px 2px 12px;
+      spacing: 6px;
+    }
     .hotplug-notification-item {
       padding: 2px 10px;
+      color: $inkstone;
+
+      @include button(undecorated);
+      border-radius: 0 0 $small_radius $small_radius;
       &:focus { padding: 1px 71px 1px 11px; }
+      &:hover { background-color: $silk;}
+      &:active { background-color: transparent; }
     }
 
     .hotplug-notification-item-icon {
@@ -1713,12 +1708,12 @@ StScrollBar {
       padding: 2px 5px;
     }
 
-    .hotplug-resident-box { spacing: 8px; }
+    .hotplug-resident-box { spacing: 8px;}
 
     .hotplug-resident-mount {
       spacing: 8px;
       border-radius: 4px;
-      &:hover { background-color: transparentize($bg_color,0.7); }
+      &:hover { background-color: transparent; }
     }
 
     .hotplug-resident-mount-label {
@@ -1738,7 +1733,7 @@ StScrollBar {
     .hotplug-resident-eject-button {
       padding: 7px;
       border-radius: 5px;
-      color: pink;
+      color: $inkstone;
     }
 
 /* Eeeky things */
