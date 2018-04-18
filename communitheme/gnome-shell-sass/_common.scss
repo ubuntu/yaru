@@ -666,10 +666,12 @@ StScrollBar {
     border: 2px solid darken($borders_color,10%);
   }
 
-  .switcher-list .item-box:selected {
-    background-color: $selected_bg_color;
-    color: $selected_fg_color;
-  }
+   .switcher-list .item-box:selected {
+     background-color: $base_hover_color;
+     border: 2px solid $selected_bg_color;
+     border-radius: $small_radius;
+     color: $selected_fg_color;
+   }
 
   .switcher-list .thumbnail-box {
     padding: 2px;
@@ -1548,9 +1550,9 @@ StScrollBar {
     visible-width: 32px; //amount visible before hover
     spacing: 11px;
     padding: 8px;
-    border-radius: 9px 0 0 9px;
+    border-radius: $medium_radius 0 0 $medium_radius;
     //border-width: 1px 0 1px 1px; //fixme: can't have non unoform borders :(
-    &:rtl { border-radius: 0 9px 9px 0;}
+    &:rtl { border-radius: 0 $medium_radius $medium_radius 0;}
 
     .placeholder {
       background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
@@ -1559,9 +1561,9 @@ StScrollBar {
     }
   }
   .workspace-thumbnail-indicator {
-    border: 4px solid $selected_bg_color;
-    border-radius: $medium_radius;
-    padding: 1px;
+    border: 0px solid $selected_bg_color;
+    border-left-width: 2px;
+    padding: 4px;
   }
 
   //Some hacks I don't even
@@ -1575,7 +1577,7 @@ StScrollBar {
 %overview-panel {
   color: $osd_fg_color;
   background-color: transparentize($panel_bg_color,0.5);
-  //transparentize($osd_fg_color,0.9) 
+  //transparentize($osd_fg_color,0.9)
   //border: 1px solid $osd_borders_color;
   border: none;
 }
@@ -1605,35 +1607,35 @@ StScrollBar {
     &, &:active { .message-title { color: $inkstone; } }
     &, &:active { .message-content { color: $slate; } }
   }
-  
+
   .notification-banner:hover {
     background-color: white;
   }
-  
+
   .notification-banner:focus {
     background-color: white;
   }
-  
+
   .notification-banner .notification-icon {
     padding: 5px;
   }
-  
+
   .notification-banner .notification-content {
     padding: 5px;
     spacing: 5px;
   }
-  
+
   .notification-banner .secondary-icon {
     icon-size: 1.14286em;
   }
-  
+
   .notification-banner .notification-actions {
     background-color: transparent;
     padding-top: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.12);
     spacing: 1px;
   }
-  
+
   .notification-banner .notification-button {
     min-height: 35px;
     padding: 0 16px;
@@ -1641,20 +1643,20 @@ StScrollBar {
     color: rgba(0, 0, 0, 0.54);
     font-weight: 500;
   }
-  
+
   .notification-banner .notification-button:first-child {
     border-radius: 0 0 0 2px;
   }
-  
+
   .notification-banner .notification-button:last-child {
     border-radius: 0 0 2px 0;
   }
-  
+
   .notification-banner .notification-button:hover, .notification-banner .notification-buttonfocus {
     background-color: rgba(0, 0, 0, 0.12);
     color: rgba(0, 0, 0, 0.87);
   }
-  
+
   .notification-banner .notification-button:active {
     background-color: rgba(0, 0, 0, 0.26);
     color: rgba(0, 0, 0, 0.87);
@@ -2009,7 +2011,7 @@ StScrollBar {
   text-shadow: 0px 2px 2px rgba(0,0,0,0.4);
 }
 
-.screen-shield-clock-date { 
+.screen-shield-clock-date {
   font-size: 28pt;
   font-weight: normal;
 }
