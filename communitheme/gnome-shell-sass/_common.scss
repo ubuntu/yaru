@@ -1694,7 +1694,6 @@ StScrollBar {
     }
     .hotplug-notification-item {
       padding: 2px 10px;
-      &:focus { padding: 1px 71px 1px 11px; }
       color: $inkstone;
       
       @include button(undecorated);
