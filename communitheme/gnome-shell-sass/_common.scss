@@ -1600,7 +1600,7 @@ StScrollBar {
     margin: 6px;
     border-radius: $medium-radius;
     border: none;
-    box-shadow: 0 2px 2px transparentize(black, 0.75);
+    box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
     color: $jet;
 
     &, &:hover, &:focus, &:active {
