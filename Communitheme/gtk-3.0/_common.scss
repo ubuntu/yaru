@@ -2202,12 +2202,9 @@ menu,
     // text-shadow: none;
 
     &:hover {
-      // color: $selected_fg_color;
       background-color: $base_hover_color;
-      &:first-child {
-          // first-child is the one at the bottom of the menu.
-          border-radius: 0 0 $small_radius $small_radius;
-      }
+      &:first-child { border-radius: $small_radius $small_radius 0 0; }
+      &:last-child { border-radius: 0 0 $small_radius $small_radius; }
     }
 
     &:disabled {
