@@ -19,7 +19,7 @@ cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pw
 REPO="${TRAVIS_REPO_SLUG%%/*}"
 SOURCE_REPO="${TRAVIS_PULL_REQUEST_SLUG%%/*}"
 channel=""
-if [ "$REPO" == "ubuntu" ] && [ "$SOURCE_REPO" == "ubuntu" ] ; then
+if [ "$REPO" == "ubuntu" ] && ([ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$SOURCE_REPO" == "ubuntu" ]) ; then
         # if it's a PR event from
         if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
                 channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
