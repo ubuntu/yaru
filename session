@@ -5,7 +5,19 @@ set -e
 # `dirname "$script_file"`/share/
 # we don't really on readlink -f "$0", as we always want to
 # point to current/ to get latest update applied immediately.
-XDG_DATA_DIRS=$XDG_DATA_DIRS:/snap/communitheme/current/share/
-GTK2_RC_FILES=$GTK2_RC_FILES:/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc
+
+# on Wayland, this is the first process setting this env variable
+if [ -z "$XDG_DATA_DIRS" ]; then
+    XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
+fi
+if [ -n "${XDG_DATA_DIRS##*/snap/communitheme/current/share/*}" ]; then
+    XDG_DATA_DIRS=/snap/communitheme/current/share/:"$XDG_DATA_DIRS"
+    export XDG_DATA_DIRS
+fi
+
+if [ -n "${GTK2_RC_FILES##*/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc*}" ]; then
+    GTK2_RC_FILES=$GTK2_RC_FILES:/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc
+fi
 export GTK2_RC_FILES
+
 gnome-session --session=ubuntu
