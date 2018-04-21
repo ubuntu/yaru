@@ -524,7 +524,6 @@ button {
     outline-color: $focus_color;
     outline-offset: -3px;
     -gtk-outline-radius: $small_radius;
-    transition: $button_transition;
 
     @include button(normal);
 
