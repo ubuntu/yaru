@@ -84,7 +84,7 @@
   }
   @if $t==backdrop-insensitive {
     background-color: transparent; //if($c == $headerbar_bg_color, $graphite, transparent);
-    border-color: if($c != $base_color, $hb_pathbar_bg_backdrop, $backdrop_borders_color);
+    border-color: if($c == $headerbar_bg_color, $hb_pathbar_bg, $borders_edge);
     box-shadow: $_blank_edge;
     color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
 
