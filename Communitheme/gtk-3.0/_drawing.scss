@@ -80,7 +80,7 @@
     box-shadow: $_blank_edge;
     color: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
 
-    label, & { color:  $backdrop_text_color; }
+    label, & { color: $backdrop_text_color; }
   }
   @if $t==backdrop-insensitive {
     background-color: transparent; //if($c == $headerbar_bg_color, $graphite, transparent);
