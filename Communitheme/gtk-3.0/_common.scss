@@ -3901,10 +3901,10 @@ row {
 
   &:selected {
     // use orange strip for selected sidebar item
-    background-color: $base_active_color;
+    // background-color: $white;
     color: $fg_color;
     box-shadow: inset 3px 0 $selected_bg_color;
-    font-weight: 500;
+    font-weight: bold;
 
     &:backdrop { box-shadow: inset 3px 0 _backdrop_color($selected_bg_color); }
 
