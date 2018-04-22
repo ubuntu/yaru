@@ -109,10 +109,8 @@ $button_transition: all 150ms $ease-out-quad;
 
   &:selected {
     &:focus, & {
-      @extend %selected_items;
-      //Trying blue for the text selection
-      background-color: $text_selection;
-      color: $text_color;
+      // @extend %selected_items;
+      @extend %selected_text; //Trying blue for the text selection
       border-radius: 3px;
     }
 
@@ -123,10 +121,8 @@ $button_transition: all 150ms $ease-out-quad;
 textview {
   text {
     @extend %view;
-    selection {&:focus, & { background-color: $text_selection; }}
-    //selection { background-color: $text_selection;
-      /*&:focus, & { @extend %selected_items; }}*/
-
+    selection { &:focus, & { @extend %selected_text; }}
+    //selection { /*&:focus, & { @extend %selected_items; }}*/
   }
 }
 
@@ -180,9 +176,7 @@ label {
   &:selected { @extend %nobg_selected_items; }
 
   selection {
-    //Trying blue for the text selection
-    background-color: $text_selection;//$selected_bg_color;
-    color: $text_color;//$selected_fg_color;
+    @extend %selected_text; //Trying blue for the text selection
   }
 
   &:disabled {
@@ -305,10 +299,8 @@ entry {
     &:backdrop:disabled { @include entry(backdrop-insensitive); }
 
     selection {
-      @extend %selected_items;
-      //Trying blue for the text selection
-      color: $text_color;
-      background-color: $text_selection;
+      // @extend %selected_items;
+      @extend %selected_text; //Trying blue for the text selection
     }
 
     // entry error and warning style
@@ -3081,7 +3073,7 @@ treeview.view {
     @each $t, $c in (':checked:not(:indeterminate)', $success_color),
                     (':indeterminate', $success_color) {
         &#{$t} {
-        &, &:hover { background-color: $c}
+        &, &:hover { background-color: $c; color: white }
         &:backdrop { background-color: _backdrop_color($c); }
       }
     }
@@ -4671,6 +4663,13 @@ button.titlebutton {
       &:disabled { color: mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
     }
   }
+}
+
+%selected_text {
+  background-color: $text_selection;
+  color: $text_color;
+
+  &:backdrop { background-color: _backdrop_color($text_selection); color: $backdrop_text_color; }
 }
 
 .monospace { font-family: monospace; }
