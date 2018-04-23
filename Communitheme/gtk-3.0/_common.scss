@@ -36,7 +36,7 @@ $button_transition: all 150ms $ease-out-quad;
   // and we don't use any outlines for now.
 
   outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
-  outline-style: solid;
+  outline-style: dashed;
   outline-offset: -3px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
@@ -549,6 +549,10 @@ button {
       (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
         &#{$state} { @include button($t, $flat:true); }
       }
+    }
+
+    &.default {
+        border-color: $ash;
     }
 
     &:hover {
