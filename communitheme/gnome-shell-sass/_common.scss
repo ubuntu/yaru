@@ -5,15 +5,17 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
 $panel-corner-radius: 0; // 6px;
 
-$panel-alpha-value: 0.7;
-$dash-alpha-value: 0.7;
-$dash-opaque-alpha-value: 0.0;
+$panel-alpha-value: 0.6;
+$panel_opaque_value: 0.4;
+
+$dash-alpha-value: 0.6;
+$dash-opaque-alpha-value: 0.4;
+
 $popover-alpha-value: 0.015;
 
 $small_radius: 4px;
 $medium_radius: 6px;
 $large_radius: 12px;
-
 
 /* Copyright 2009, 2015 Red Hat, Inc.
  *
@@ -767,8 +769,9 @@ StScrollBar {
 /* TOP BAR */
 
 #panel {
-  $_fg: $panel_fg_color;
+  $_fg: darken($panel_fg_color, 5%);
   background-color: transparentize($panel_bg_color, $panel-alpha-value);
+
   /* transition from solid to transparent */
   transition-duration: 500ms;
   font-weight: 450;
@@ -805,8 +808,8 @@ StScrollBar {
     -natural-hpadding: 12px;
     -minimum-hpadding: 6px;
     font-weight: 450;
-    color: darken($_fg, 5%);
-    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+    color: $_fg;
+    text-shadow: none;
     transition-duration: 100ms;
 
     .app-menu-icon {
@@ -819,18 +822,16 @@ StScrollBar {
     .system-status-icon,
     .app-menu-icon > StIcon,
     .popup-menu-arrow {
-      icon-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+      icon-shadow: none;
     }
 
     &:hover {
       color: $hover_fg_color;
-      text-shadow: 0px 1px 4px rgba(0, 0, 0, 1);
+      text-shadow: none;
 
       .system-status-icon,
       .app-menu-icon > StIcon,
-      .popup-menu-arrow {
-        icon-shadow: 0px 1px 4px rgba(0, 0, 0, 1);
-      }
+      .popup-menu-arrow { icon-shadow: none; }
     }
 
     &:active, &:overview, &:focus, &:checked {
@@ -840,7 +841,7 @@ StScrollBar {
       box-shadow: inset 0px -2px $selected_bg_color;
       color: lighten($_fg,10%);
 
-      & > .system-status-icon { icon-shadow: none; /*black 0 2px 2px;*/ }
+      & > .system-status-icon { icon-shadow: none; }
     }
 
     .system-status-icon { icon-size: 1.09em; padding: 0 5px; }
@@ -865,8 +866,8 @@ StScrollBar {
   .screencast-indicator { color: $warning_color; }
 
   &.solid {
-    background-color: $panel_bg_color;
-    // box-shadow: inset 0 -1px _border_color($panel_bg_color);
+    background-color: transparentize($panel_bg_color, $panel_opaque_value);;
+
     /* transition from transparent to solid */
     box-shadow: none;
     transition-duration: 500ms;
@@ -886,9 +887,7 @@ StScrollBar {
 
     .system-status-icon,
     .app-menu-icon > StIcon,
-    .popup-menu-arrow {
-      icon-shadow: none;
-    }
+    .popup-menu-arrow { icon-shadow: none; }
   }
 }
 

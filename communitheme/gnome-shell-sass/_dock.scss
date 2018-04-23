@@ -151,6 +151,7 @@
   &.shrink.left #dash,
   &.dashtodock.left #dash {
     border: none !important;
+    border-top: 1px solid #2B2929 !important;
   }
 
   &.shrink.right #dash,
@@ -178,6 +179,7 @@
   &.shrink.right #dash,
   &.dashtodock.right #dash {
     // don't let the first icon be too close to the shadow + panel
+    background: #2B2929;
     padding-top: 2px;
   }
 
