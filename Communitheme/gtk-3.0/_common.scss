@@ -1208,7 +1208,7 @@ spinbutton {
       }
 
       &:disabled {
-        color: transparentize($insensitive_fg_color, 0.7);
+        color: transparentize($insensitive_fg_color, 0.4);
         background-color: transparent;
       }
 
@@ -1225,7 +1225,7 @@ spinbutton {
       }
 
       &:backdrop:disabled {
-        color: transparentize($backdrop_insensitive_color,0.7);
+        color: transparentize($insensitive_fg_color, 0.5);
         background-color: transparent;
         border-style: none none none solid; // It is needed or it gets overridden
 
