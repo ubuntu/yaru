@@ -913,7 +913,7 @@ StScrollBar {
     .datemenu-displays-box { spacing: 1em; }
 
     .datemenu-calendar-column {
-      border: 0 solid lighten($bg_color,5%);
+      border: 0 solid lighten($bg_color,15%);
       &:ltr { border-left-width: 1px; }
       &:rtl { border-right-width: 1px; }
     }
