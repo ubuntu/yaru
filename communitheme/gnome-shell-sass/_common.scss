@@ -1062,7 +1062,8 @@ StScrollBar {
       }
 
         .message-list-clear-button.button {
-          @include button(normal);
+          @include button(undecorated);
+          border-color: lighten($bg_color,15%);
           &:hover,&:focus { @include button(hover); }
           &:active { @include button(active); }
           &:insensitive { @include button(insensitive); }
