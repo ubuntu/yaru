@@ -1011,6 +1011,7 @@ StScrollBar {
         background-color: transparent;
         border-radius: $small_radius;
         border: 2px solid $selected_bg_color;
+        margin: 0;
       }
 
       &.calendar-day-heading {  //day of week heading
@@ -1020,7 +1021,7 @@ StScrollBar {
       }
     }
       .calendar-day { //border collapse hack - see calendar.js
-        border-width: 0;
+        border-width: 2px;
       }
       .calendar-day-top { border-top-width: 1px; }
       .calendar-day-left { border-left-width: 1px; }
