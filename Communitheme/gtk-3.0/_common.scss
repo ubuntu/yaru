@@ -711,7 +711,7 @@ button {
   }
 
   // Suggested and Destructive Action buttons
-  @each $b_type, $b_color in (suggested-action, /*$selected_bg_color*/ $success_color),
+  @each $b_type, $b_color in (suggested-action, $success_color),
                              (destructive-action, $destructive_color) {
     &.#{$b_type} {
       @include button(normal, $b_color, white);
@@ -1204,7 +1204,7 @@ spinbutton {
       }
 
       &:disabled {
-        color: transparentize($insensitive_fg_color, 0.7);
+        color: transparentize($insensitive_fg_color, 0.4);
         background-color: transparent;
       }
 
@@ -1221,7 +1221,7 @@ spinbutton {
       }
 
       &:backdrop:disabled {
-        color: transparentize($backdrop_insensitive_color,0.7);
+        color: transparentize($insensitive_fg_color, 0.5);
         background-color: transparent;
         border-style: none none none solid; // It is needed or it gets overridden
 
@@ -2965,7 +2965,7 @@ radio {
                         (":backdrop:disabled", 'backdrop-insensitive') {
                           &#{$state} {
                             @include button($t, white, $flat:true);
-                            border: 1px solid transparentize($borders_color, 0.6);
+                            border: 1px solid transparentize($borders_color, 0.2);
                           }
     }
 
@@ -2979,18 +2979,24 @@ radio {
     @each $t, $c in (':checked:not(:indeterminate)', $success_color),
                     (':indeterminate', $success_color) {
       &#{$t} {
-          @each $state, $t in ("", "normal"),
-                              (":hover", "hover"),
-                              (":active", "active"),
-                              (":disabled", "insensitive"),
-                              (":backdrop", "backdrop"),
-                              (":backdrop:disabled", 'backdrop-insensitive') {
-                                  &#{$state} {
-                                      @include button($t, $c, white, $flat:true);
-                                      border: 1px solid $c;
-                                      color: white;
-                                  }
-                              }
+          @each $state, $t in ("", "normal"), (":hover", "hover"),
+              (":active", "active"), (":disabled", "insensitive") {
+                  &#{$state} {
+                      @include button($t, $c, white, $flat:true);
+                      border: 1px solid $c;
+                      color: white;
+                  }
+              }
+      }
+
+      &#{$t} {
+          @each $state, $t in (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+                  &#{$state} {
+                      @include button($t, _backdrop_color($c), white, $flat:true);
+                      border: 1px solid _backdrop_color($c);
+                      color: white;
+                  }
+              }
       }
     }
   }
