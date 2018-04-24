@@ -6,10 +6,10 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 $panel-corner-radius: 0; // 6px;
 
 $panel-alpha-value: 0.6;
-$panel_opaque_value: 0.4;
+$panel_opaque_value: 0.2;
 
 $dash-alpha-value: 0.6;
-$dash-opaque-alpha-value: 0.4;
+$dash-opaque-alpha-value: 0.2;
 
 $popover-alpha-value: 0.015;
 
@@ -809,7 +809,7 @@ StScrollBar {
     -minimum-hpadding: 6px;
     font-weight: 450;
     color: $_fg;
-    text-shadow: none;
+    text-shadow: -1px 0 rgba(0, 0, 0, 0.6), 1px 0 rgba(0, 0, 0, 0.6), 0 -1px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.6);
     transition-duration: 100ms;
 
     .app-menu-icon {
@@ -822,16 +822,18 @@ StScrollBar {
     .system-status-icon,
     .app-menu-icon > StIcon,
     .popup-menu-arrow {
-      icon-shadow: none;
+      icon-shadow: -1px 0 rgba(0, 0, 0, 0.6), 1px 0 rgba(0, 0, 0, 0.6), 0 -1px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.6);
     }
 
     &:hover {
       color: $hover_fg_color;
-      text-shadow: none;
+      text-shadow: -1px 0 rgba(0, 0, 0, 0.6), 1px 0 rgba(0, 0, 0, 0.6), 0 -1px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.6);
 
       .system-status-icon,
       .app-menu-icon > StIcon,
-      .popup-menu-arrow { icon-shadow: none; }
+      .popup-menu-arrow {
+        icon-shadow: -1px 0 rgba(0, 0, 0, 0.6), 1px 0 rgba(0, 0, 0, 0.6), 0 -1px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.6);
+      }
     }
 
     &:active, &:overview, &:focus, &:checked {
@@ -841,7 +843,9 @@ StScrollBar {
       box-shadow: inset 0px -2px $selected_bg_color;
       color: lighten($_fg,10%);
 
-      & > .system-status-icon { icon-shadow: none; }
+      & > .system-status-icon {
+        icon-shadow: -1px 0 rgba(0, 0, 0, 0.6), 1px 0 rgba(0, 0, 0, 0.6), 0 -1px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.6);
+      }
     }
 
     .system-status-icon { icon-size: 1.09em; padding: 0 5px; }
@@ -878,7 +882,7 @@ StScrollBar {
 
     .panel-button {
       color: $_fg;
-      text-shadow: none;
+      text-shadow: -1px 0 black, 1px 0 black, 0 -1px black, 0 1px black;
 
       &:hover, &:active, &:overview, &:focus, &:checked {
         color: $hover_fg_color;
@@ -887,7 +891,9 @@ StScrollBar {
 
     .system-status-icon,
     .app-menu-icon > StIcon,
-    .popup-menu-arrow { icon-shadow: none; }
+    .popup-menu-arrow {
+      icon-shadow: -1px 0 rgba(0, 0, 0, 0.6), 1px 0 rgba(0, 0, 0, 0.6), 0 -1px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.6);
+    }
   }
 }
 
