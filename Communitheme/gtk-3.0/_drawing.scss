@@ -275,7 +275,14 @@
 
   @else if $t==insensitive {
     // insensitive button
-    $_bg: if($c == $button_bg_color, $bg_color, $c);
+    $_bg: null;
+    @if $c == $button_bg_color {
+        $_bg: $bg_color;
+    } @else if $c == $headerbar_bg_color {
+        $_bg: $c;
+    } @else {
+        $_bg: darken($c, 20%);
+    }
 
     background-color: $_bg;
 
@@ -361,17 +368,18 @@
   @else if $t==backdrop-insensitive {
     // backdrop insensitive button
 
-    $_bg: null;
     $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
 
-    @if $c == $headerbar_bg_color {
-      $_bg: transparent;
-      background-image: none;
-      text-shadow: none;
-      -gtk-icon-shadow: none;
-    }
-    @else {
-        $_bg: if($c==$button_bg_color, $backdrop_bg_color, _backdrop_color($c));
+    $_bg: null;
+    @if $c == $button_bg_color {
+        $_bg: $backdrop_bg_color;
+    } @else if $c == $headerbar_bg_color {
+        $_bg: transparent;
+        background-image: none;
+        text-shadow: none;
+        -gtk-icon-shadow: none;
+    } @else {
+        $_bg: darken($c, 20%);
     }
 
     background-color: $_bg;
