@@ -15,8 +15,11 @@ if [ -n "${XDG_DATA_DIRS##*/snap/communitheme/current/share/*}" ]; then
     export XDG_DATA_DIRS
 fi
 
-if [ -n "${GTK2_RC_FILES##*/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc*}" ]; then
-    GTK2_RC_FILES=$GTK2_RC_FILES:/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc
+gtk2_communitheme="/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc"
+if [ -z "$GTK2_RC_FILES" ]; then
+    GTK2_RC_FILES=$gtk2_communitheme
+elif [ -n "${GTK2_RC_FILES##*$gtk2_communitheme*}" ]; then
+    GTK2_RC_FILES=$gtk2_communitheme:$GTK2_RC_FILES
 fi
 export GTK2_RC_FILES
 
