@@ -3910,6 +3910,7 @@ row {
 
     &:backdrop { box-shadow: inset 3px 0 _backdrop_color($selected_bg_color); }
 
+    image, image.sidebar-icon { opacity: 1; }
 
     label {
       transition: padding 100ms linear;
@@ -4190,7 +4191,6 @@ placessidebar {
 
     // in the sidebar case it makes no sense to click the selected row
     &:selected:active { box-shadow: none; }
-    &:selected image.sidebar-icon { opacity: 1; }
 
     &.sidebar-placeholder-row {
       padding: 0 8px;
