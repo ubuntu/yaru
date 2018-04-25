@@ -3249,7 +3249,7 @@ scale {
     @include button(normal, white);
 
     border: 1px solid _border_color($dark_fill);
-    border-radius: 6px;
+    border-radius: 10px;
     background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
     transition-property: background, border, box-shadow;
