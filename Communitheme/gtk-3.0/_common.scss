@@ -109,8 +109,8 @@ $button_transition: all 150ms $ease-out-quad;
 
   &:selected {
     &:focus, & {
-      // @extend %selected_items;
-      @extend %selected_text; //Trying blue for the text selection
+      @extend %selected_items;
+      // @extend %selected_text; //Trying blue for the text selection
       border-radius: 3px;
     }
 
@@ -4657,28 +4657,39 @@ button.titlebutton {
 // catch all extend :)
 
 %selected_items {
-  background-color: $selected_bg_color;
+  $c: $selected_bg_color;
+  $tc: $selected_fg_color;
+  background-color: $c;
 
-  &:backdrop { background-color: _backdrop_color($selected_bg_color); }
+  &:backdrop { background-color: _backdrop_color($c); }
 
   @at-root %nobg_selected_items, & {
-    color: $selected_fg_color;
+    color: $tc;
 
-    &:disabled { color: mix($selected_fg_color, $selected_bg_color, 50%); }
+    &:disabled { color: mix($tc, $c, 50%); }
 
     &:backdrop {
       color: $backdrop_selected_fg_color;
 
-      &:disabled { color: mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
+      &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
     }
   }
 }
 
 %selected_text {
-  background-color: $text_selection;
-  color: $text_color;
+  $c: $text_selection;
+  $tc: $text_color;
+  background-color: $c;
+  color: $tc;
 
-  &:backdrop { background-color: _backdrop_color($text_selection); color: $backdrop_text_color; }
+  &:disabled { color: mix($tc, $c, 50%); }
+
+  &:backdrop {
+    background-color: _backdrop_color($c);
+    color: $backdrop_text_color;
+
+    &:disabled { color: mix($backdrop_text_color, $c, 30%); }
+  }
 }
 
 .monospace { font-family: monospace; }
