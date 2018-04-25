@@ -4128,7 +4128,7 @@ stacksidebar {
 /****************
  * File chooser *
  ****************/
-$_placesidebar_icons_opacity: 0.7;
+$_placesidebar_icons_opacity: 0.6;
 
 row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sidebar icons
                                                                   // see bug #786613 for details
@@ -4190,6 +4190,7 @@ placessidebar {
 
     // in the sidebar case it makes no sense to click the selected row
     &:selected:active { box-shadow: none; }
+    &:selected image.sidebar-icon { opacity: 1; }
 
     &.sidebar-placeholder-row {
       padding: 0 8px;
