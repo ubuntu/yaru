@@ -1,16 +1,36 @@
-# generated .css files from .scss
-theme_files = [
-    'gnome-shell',
-    'gnome-shell-high-contrast',
-]
-# theme sources .scss files
-theme_sources = [
+# destination directory
+install_dir = join_paths(gnomeshell_theme_dir, 'communitheme')
+
+# generate .css files
+theme_sources = files([
+  'gnome-shell-high-contrast.scss',
+  'gnome-shell.scss',
   'gnome-shell-sass/_colors.scss',
   'gnome-shell-sass/_common.scss',
   'gnome-shell-sass/_dock.scss',
   'gnome-shell-sass/_drawing.scss',
   'gnome-shell-sass/_high-contrast-colors.scss',
+  'gnome-shell-sass/_ubuntu-colors.scss',
+])
+
+styles = [
+  'gnome-shell-high-contrast',
+  'gnome-shell'
 ]
+
+theme_deps = []
+
+foreach style: styles
+  theme_deps += custom_target('style-' + style,
+                              input: '@0@.scss'.format(style),
+                              output: '@0@.css'.format(style),
+                              command: [
+                                sassc, '-a', '@INPUT@', '@OUTPUT@'
+                              ],
+                              install: true,
+                              install_dir: install_dir,
+                              depend_files: theme_sources)
+endforeach
 
 # static files to copy
 data_sources = [
@@ -56,26 +76,6 @@ data_sources = [
   'ws-switch-arrow-down.svg',
   'ws-switch-arrow-up.svg',
 ]
-
-# destination directory
-install_dir = join_paths(gnomeshell_theme_dir, 'communitheme')
-
-# generate .css files
-foreach f : theme_files
-    theme_sources += [f + '.scss']
-endforeach
-theme_sources = files(theme_sources)
-foreach f : theme_files
-    custom_target('generate_' + f,
-        input: f + '.scss',
-        output: f + '.css',
-        depend_files: theme_sources,
-        command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
-        build_by_default: true,
-        install: true,
-        install_dir: install_dir,
-    )
-endforeach
 
 # install static data files
 install_data(data_sources, install_dir: install_dir)

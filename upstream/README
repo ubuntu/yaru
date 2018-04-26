@@ -1,12 +1,9 @@
 Summary
 -------
 
-* Do not edit the CSS directly, edit the source SCSS files and process them with SASS (running
-  `make` should do that when you have the required software installed, as described below;
-  run `./parse-sass.sh` manually if it doesn't)
-* Most SASS preprocessors should produce similar results, however the build system
-  integration and 'parse-sass.sh' script use sassc. You should be able to install
-  it with `pkcon install sassc` or your distribution's package manager.
+* Do not edit the CSS directly, edit the source SCSS files and the CSS files will be generated
+  automatically when building with meson + ninja and left inside the build directory to be
+  incorporated into the gresource XML (you'll need to have sassc installed).
 
 How to tweak the theme
 ----------------------
@@ -31,4 +28,4 @@ _common.scss        - actual definitions of style for each widget. This is where
                       your changes.
                       
 You can read about SASS at http://sass-lang.com/documentation/. Once you make your changes to the
-_common.scss file, you can either run make or the ./parse-sass.sh script.
+_common.scss file, you can run ninja to generate the final CSS files.
