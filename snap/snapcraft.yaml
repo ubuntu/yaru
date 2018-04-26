@@ -16,10 +16,7 @@ parts:
   session-script:
     source: https://github.com/ubuntu/communitheme-snap-helpers.git
     plugin: dump
-    stage:
-      - -build/
-      - -README.md
-      - -travis.yml
+    stage: [session]
   gnome-shell:
     source: https://github.com/ubuntu/gnome-shell-communitheme.git
     plugin: meson
