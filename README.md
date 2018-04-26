@@ -16,8 +16,11 @@ of sound notifications and cursor.
 
 Any new update of communitheme will come directly to you on a regular basis thanks to the snap without having to run any command!
 
-If this is not the case, it can be due to your settings not being the default. You can reset them by running
-`communitheme.reset` in a terminal.
+If this is not the case, it can be due to your settings not being the default. You can reset them by installing the **communitheme-set-default** snap, via: `snap install communitheme-set-default --classic`.
+
+Then, just run `sudo communitheme-set-default` in a terminal to reset the session. It will as well set it as default in the login screen at next reboot.
+
+If you want to reset default login screen theme, you can run `sudo communitheme-set-default remove`.
 
 ### Tracking latest of latest
 

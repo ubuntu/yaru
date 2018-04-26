@@ -11,16 +11,10 @@ description: |
 grade: stable
 confinement: strict
 
-apps:
-  reset:
-    command: reset
-    plugs: ["gsettings"]
-
 parts:
   session-script:
     source: https://github.com/ubuntu/communitheme-snap-helpers.git
     plugin: dump
-    stage-packages: ["dconf-cli"]
     stage:
       - -build/
       - -README.md
