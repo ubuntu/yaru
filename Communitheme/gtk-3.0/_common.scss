@@ -2371,7 +2371,7 @@ notebook {
 
         > tab {
           border-radius: 4px 4px 0 0;
-          -gtk-outline-radius: 4px 4px 0 0;
+          // -gtk-outline-radius: 4px 4px 0 0;
           &:checked { border-bottom-color: transparent; }
         }
       }
@@ -2385,7 +2385,7 @@ notebook {
 
         > tab {
           border-radius: 0 0 4px 4px;
-          -gtk-outline-radius: 0 0 4px 4px;
+          // -gtk-outline-radius: 0 0 4px 4px;
           &:checked { border-top-color: transparent; }
         }
       }
@@ -2399,7 +2399,7 @@ notebook {
 
         > tab {
           border-radius: 4px 0 0 4px;
-          -gtk-outline-radius: 4px 0 0 4px;
+          // -gtk-outline-radius: 4px 0 0 4px;
           &:checked { border-right-color: transparent; }
         }
       }
@@ -2413,7 +2413,7 @@ notebook {
 
         > tab {
           border-radius: 0 4px 4px 0;
-          -gtk-outline-radius: 0 4px 4px 0;
+          // -gtk-outline-radius: 0 4px 4px 0;
           &:checked { border-left-color: transparent; }
         }
       }
@@ -2489,7 +2489,9 @@ notebook {
       min-height: 24px;
       min-width: 24px;
       padding: 4px 12px;
-      outline-offset: -1px; // -5px;
+      outline-offset: -5px; // -5px;
+      outline-style: solid;
+      -gtk-outline-radius: $small_radius;
       color: $text_color;
       border: 1px solid transparent;
 
