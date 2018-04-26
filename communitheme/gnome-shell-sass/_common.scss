@@ -1608,11 +1608,15 @@ StScrollBar {
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
     color: $jet;
 
-    &, &:hover, &:focus, &:active {
+    &, &:focus, &:active {
       & { background-color: white; }
       .message-title { color: $jet; }
       .message-content { color: $inkstone; }
     }
+    &:hover {
+      background: transparentize(white,0.15);
+    }
+
 
     .notification-icon {
       padding: 5px;
@@ -1641,9 +1645,16 @@ StScrollBar {
       color: $inkstone;
       font-weight: 500;
 
-      &:first-child { border-radius: 0 0 0 2px; }
+      &:first-child {
+        border-radius: 0 0 0 2px;
 
-      &:last-child { border-radius: 0 0 2px 0; }
+
+      }
+
+      &:last-child {
+        border-radius: 0 0 2px 0;
+
+      }
 
       &:hover &:focus {
         background-color: rgba(0, 0, 0, 0.12);
@@ -1653,8 +1664,13 @@ StScrollBar {
       &:active {
         background-color: rgba(0, 0, 0, 0.26);
         color: rgba(0, 0, 0, 0.87);
+        border-radius: 0 0 $medium_radius $medium-radius;
       }
     }
+  }
+  .notification-banner .notification-button:active {
+    background-color: rgba(0, 0, 0, 0.26);
+    color: rgba(0, 0, 0, 0.87);
   }
 
   .summary-source-counter {
