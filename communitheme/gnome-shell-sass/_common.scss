@@ -1716,10 +1716,10 @@ StScrollBar {
     color: $inkstone;
 
     @include button(undecorated);
-    border-radius: 0 0 $small_radius $small_radius;
+    border-radius: 0 0 $medium_radius $medium_radius;
     &:focus { padding: 1px 71px 1px 11px; }
     &:hover { background-color: $silk;}
-    &:active { background-color: transparent; }
+    &:active { background-color: rgba(0, 0, 0, 0.26); border: none;}
   }
 
   .hotplug-notification-item-icon {
