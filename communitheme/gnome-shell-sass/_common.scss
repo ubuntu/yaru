@@ -6,10 +6,10 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 $panel-corner-radius: 0; // 6px;
 
 $panel-alpha-value: 0.6;
-$panel_opaque_value: 0.15;
+$panel_opaque_value: 0.13;
 
 $dash-alpha-value: 0.6;
-$dash-opaque-alpha-value: 0.15;
+$dash-opaque-alpha-value: 0.13;
 
 $popover-alpha-value: 0.015;
 
@@ -771,6 +771,7 @@ StScrollBar {
 #panel {
   $_fg: darken($panel_fg_color, 5%);
   background-color: transparentize($panel_bg_color, $panel-alpha-value);
+  box-shadow: inset 0 -1px 2px -1px rgba(0, 0, 0, 0.5);
 
   /* transition from solid to transparent */
   transition-duration: 500ms;
@@ -870,7 +871,8 @@ StScrollBar {
   .screencast-indicator { color: $warning_color; }
 
   &.solid {
-    background-color: transparentize($panel_bg_color, $panel_opaque_value);;
+    background-color: transparentize($panel_bg_color, $panel_opaque_value);
+    box-shadow: inset 0 -1px 2px -1px rgba(0, 0, 0, 0.7) !important;
 
     /* transition from transparent to solid */
     box-shadow: none;
