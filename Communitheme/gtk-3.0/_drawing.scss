@@ -57,15 +57,15 @@
   $_entry_edge: if($edge == none, none, _widget_edge($edge));
 
   @if $t==normal {
-    $_bc: if($c == $headerbar_bg_color, $hb_pathbar_bg, $c);
+    $_bc: if($c == $headerbar_bg_color, lighten($hb_pathbar_bg, 5%), $c);
     color: if($tc != $fg_color, transparentize($tc, .1), $fg_color);
     border-color: if($c != $base_color, transparent, $borders_color);
     background-color: $_bc;
-    @include _shadows(/*entry_focus_shadow(transparentize($fc, 1)),*/ $_entry_edge);
+    @include _shadows($_entry_edge);
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
   @if $t==focus {
-    @include _shadows(/*entry_focus_shadow($fc),*/ $_entry_edge);
+    @include _shadows($_entry_edge);
     border-color: entry_focus_border($fc);
   }
   @if $t==insensitive {
