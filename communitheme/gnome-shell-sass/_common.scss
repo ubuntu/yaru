@@ -1606,7 +1606,6 @@ StScrollBar {
     border-radius: $medium-radius;
     border: none;
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
-    color: $jet;
 
     &, &:focus, &:active {
       & { background-color: white; }
@@ -1614,7 +1613,7 @@ StScrollBar {
       .message-content { color: $inkstone; }
     }
     &:hover {
-      background: transparentize(white,0.15);
+      background: transparentize(white,0.10);
     }
 
 
@@ -1632,7 +1631,6 @@ StScrollBar {
     }
 
     .notification-actions {
-      background-color: transparent;
       padding-top: 0;
       border-top: 1px solid rgba(0, 0, 0, 0.12);
       spacing: 1px;
@@ -1646,13 +1644,11 @@ StScrollBar {
       font-weight: 500;
 
       &:first-child {
-        border-radius: 0 0 0 2px;
-
-
+        border-radius: 0 0 0 $medium-radius;
       }
 
       &:last-child {
-        border-radius: 0 0 2px 0;
+        border-radius: 0 0 $medium-radius 0;
 
       }
 
@@ -1711,53 +1707,53 @@ StScrollBar {
   }
 
     //hotplug
-    .hotplug-transient-box {
+  .hotplug-transient-box {
       padding: 2px 72px 2px 12px;
       spacing: 6px;
-    }
-    .hotplug-notification-item {
-      padding: 2px 10px;
-      color: $inkstone;
+  }
+  .hotplug-notification-item {
+    padding: 2px 10px;
+    color: $inkstone;
 
-      @include button(undecorated);
-      border-radius: 0 0 $small_radius $small_radius;
-      &:focus { padding: 1px 71px 1px 11px; }
-      &:hover { background-color: $silk;}
-      &:active { background-color: transparent; }
-    }
+    @include button(undecorated);
+    border-radius: 0 0 $small_radius $small_radius;
+    &:focus { padding: 1px 71px 1px 11px; }
+    &:hover { background-color: $silk;}
+    &:active { background-color: transparent; }
+  }
 
-    .hotplug-notification-item-icon {
-      icon-size: 24px;
-      padding: 2px 5px;
-    }
+  .hotplug-notification-item-icon {
+    icon-size: 24px;
+    padding: 2px 5px;
+  }
 
-    .hotplug-resident-box { spacing: 8px;}
+  .hotplug-resident-box { spacing: 8px;}
 
-    .hotplug-resident-mount {
-      spacing: 8px;
-      border-radius: 4px;
-      &:hover { background-color: transparent; }
-    }
+  .hotplug-resident-mount {
+    spacing: 8px;
+    border-radius: 4px;
+    &:hover { background-color: transparent; }
+  }
 
-    .hotplug-resident-mount-label {
-      color: inherit;
-      padding-left: 6px;
-    }
+  .hotplug-resident-mount-label {
+    color: inherit;
+    padding-left: 6px;
+  }
 
-    .hotplug-resident-mount-icon {
-      icon-size: 24px;
-      padding-left: 6px;
-    }
+  .hotplug-resident-mount-icon {
+    icon-size: 24px;
+    padding-left: 6px;
+  }
 
-    .hotplug-resident-eject-icon {
-      icon-size: 16px;
-    }
+  .hotplug-resident-eject-icon {
+    icon-size: 16px;
+  }
 
-    .hotplug-resident-eject-button {
-      padding: 7px;
-      border-radius: 5px;
-      color: $inkstone;
-    }
+  .hotplug-resident-eject-button {
+    padding: 7px;
+    border-radius: 5px;
+    color: $inkstone;
+  }
 
 /* Eeeky things */
 
