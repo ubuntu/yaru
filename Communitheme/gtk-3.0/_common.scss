@@ -4,7 +4,6 @@
 
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
-$alpha-value: 0.00;
 $small_radius: 4px;
 $medium_radius: 6px;
 $large_radius: 12px;
@@ -1516,7 +1515,7 @@ headerbar {
   border-style: solid;
   border-width: 1px 1px 0 1px;
   border-radius: 0;
-  background-color: transparentize($headerbar_bg_color, $alpha-value);
+  background-color: $headerbar_bg_color;
   color: $headerbar_fg_color;
 
   &:backdrop {
@@ -1638,8 +1637,6 @@ headerbar {
       $c: lighten($c, 5%);
       background-color: $c;
       color: $headerbar_text_color;
-
-      // &:hover { color: $headerbar_fg_color; }
 
       &:hover { box-shadow: inset 0 -2px transparentize($headerbar_text_color, 0.5); }
 
@@ -3935,7 +3932,20 @@ filechooser {
     &:backdrop { border-top-color: $backdrop_borders_color; }
   }
 
-  #pathbarbox { border-bottom: 1px solid $bg_color; }
+  #pathbarbox {
+    $_bg: $sidebar_bg_color;
+
+    background: $_bg;
+    border-bottom: 1px solid $borders_color;
+
+    .path-bar.linked button {
+      background: darken($_bg, 5%);
+      &, & label { color: $text_color }
+
+      &:backdrop label { color: $backdrop_text_color; }
+      &:checked label { font-weight: 500; }
+    }
+  }
 }
 
 filechooserbutton:drop(active) {
