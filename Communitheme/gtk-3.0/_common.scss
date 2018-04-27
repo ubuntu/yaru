@@ -1767,7 +1767,7 @@ headerbar {
   .tiled-left &,
   .maximized &,
   .fullscreen & {
-    box-shadow: inset 0 1px $inkstone;
+    box-shadow: inset 0 1px $inkstone, inset 1px 0 $inkstone;
 
     &:backdrop, & {
       border-radius: 0;
