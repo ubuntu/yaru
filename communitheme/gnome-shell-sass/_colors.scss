@@ -52,5 +52,5 @@ $dark_fg_color: $inkstone;
 $dark_subtext_color: #2d2d2d;
 $light_borders_color: darken($light_bg_color, 18%);
 $light_button_bg_color: darken($light_bg_color, 3%);
-$light_base_hover_color: transparentize($light_fg_color, 0.85);
-$light_base_active_color: transparentize($light_fg_color, 0.80);
+$light_base_hover_color: transparentize($dark_fg_color, 0.85);
+$light_base_active_color: transparentize($dark_fg_color, 0.80);
