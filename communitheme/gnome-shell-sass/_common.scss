@@ -1631,18 +1631,32 @@ StScrollBar {
   }
 
   .notification-button {
+    @include button(normal);
+    &:active { @include button(active); background-color: rgba(0, 0, 0, 0.26);}
+    //&:focus { @include button(focus); background-color: rgba(0, 0, 0, 0.26);}
+    &:hover { @include button(hover); background-color: rgba(0, 0, 0, 0.10);}
+    //&:focus:hover { @include button(focus-hover); background-color: rgba(0, 0, 0, 0.26);}
+    //&:insensitive { @include button(insensitive); }
+
+    &:first-child {
+      border-radius: 0px 0px 0px $medium_radius; border: none;
+    }
+    &:last-child {
+      border-right-width: 0px;
+      border-radius: 0px 0px $medium_radius 0px; border: none;
+    }
+    &:first-child:last-child {
+      border-right-width: 0px;
+      border-radius: 0px 0px $medium_radius $medium_radius;border: none;
+    }
     min-height: 35px;
     padding: 0 16px;
     background-color: transparent;
     color: $inkstone;
     font-weight: 500;
-    &:active { background-color: rgba(0, 0, 0, 0.26); }
-    
+    &:selected { border: none;}
+    border: none;
   }
-  .notification-button {
-    &:first-child { &, &:active { border-radius: 0 0 0 $medium-radius; } }
-    &:last-child { &, &:active { border-radius: 0 0 $medium-radius 0; } }
-}
 
   .summary-source-counter {
     font-size: 10pt;
