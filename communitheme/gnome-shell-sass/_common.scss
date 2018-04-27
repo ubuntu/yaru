@@ -1633,10 +1633,7 @@ StScrollBar {
   .notification-button {
     @include button(normal);
     &:active { @include button(active); background-color: rgba(0, 0, 0, 0.26);}
-    //&:focus { @include button(focus); background-color: rgba(0, 0, 0, 0.26);}
     &:hover { @include button(hover); background-color: rgba(0, 0, 0, 0.10);}
-    //&:focus:hover { @include button(focus-hover); background-color: rgba(0, 0, 0, 0.26);}
-    //&:insensitive { @include button(insensitive); }
 
     &:first-child {
       border-radius: 0px 0px 0px $medium_radius; border: none;
