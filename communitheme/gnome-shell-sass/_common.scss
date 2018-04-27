@@ -1611,55 +1611,53 @@ StScrollBar {
     border-radius: $medium-radius;
     border: none;
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
-    color: $jet;
 
-    &, &:hover, &:focus, &:active {
-      & { background-color: white; }
+    &, &:focus, &:active {
+      & { background-color: transparentize(white,0.10); }
       .message-title { color: $jet; }
       .message-content { color: $inkstone; }
     }
+    &:hover { background: white; }
+  }
 
-    .notification-icon {
-      padding: 5px;
+  .notification-icon { padding: 5px; -gtk-icon-shadow: none;}
+
+  .notification-content {
+    padding: 5px;
+    spacing: 5px;
+  }
+
+  .secondary-icon { icon-size: 1.14286em; }
+
+  .notification-actions {
+    padding-top: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    spacing: 0px;
+  }
+
+  .notification-button {
+    @include button(normal);
+    &:active { @include button(active); background-color: rgba(0, 0, 0, 0.26);}
+    &:hover { @include button(hover); background-color: rgba(0, 0, 0, 0.10);}
+
+    &:first-child {
+      border-radius: 0px 0px 0px $medium_radius; border: none;
     }
-
-    .notification-content {
-      padding: 5px;
-      spacing: 5px;
+    &:last-child {
+      border-right-width: 0px;
+      border-radius: 0px 0px $medium_radius 0px; border: none;
     }
-
-    .secondary-icon {
-      icon-size: 1.14286em;
+    &:first-child:last-child {
+      border-right-width: 0px;
+      border-radius: 0px 0px $medium_radius $medium_radius;border: none;
     }
-
-    .notification-actions {
-      background-color: transparent;
-      padding-top: 0;
-      border-top: 1px solid rgba(0, 0, 0, 0.12);
-      spacing: 1px;
-    }
-
-    .notification-button {
-      min-height: 35px;
-      padding: 0 16px;
-      background-color: transparent;
-      color: $inkstone;
-      font-weight: 500;
-
-      &:first-child { border-radius: 0 0 0 2px; }
-
-      &:last-child { border-radius: 0 0 2px 0; }
-
-      &:hover &:focus {
-        background-color: rgba(0, 0, 0, 0.12);
-        color: rgba(0, 0, 0, 0.87);
-      }
-
-      &:active {
-        background-color: rgba(0, 0, 0, 0.26);
-        color: rgba(0, 0, 0, 0.87);
-      }
-    }
+    min-height: 35px;
+    padding: 0 16px;
+    background-color: transparent;
+    color: $inkstone;
+    font-weight: 500;
+    &:selected { border: none;}
+    border: none;
   }
 
   .summary-source-counter {
@@ -1700,53 +1698,53 @@ StScrollBar {
   }
 
     //hotplug
-    .hotplug-transient-box {
+  .hotplug-transient-box {
       padding: 2px 72px 2px 12px;
       spacing: 6px;
-    }
-    .hotplug-notification-item {
-      padding: 2px 10px;
-      color: $inkstone;
+  }
+  .hotplug-notification-item {
+    padding: 2px 10px;
+    color: $inkstone;
 
-      @include button(undecorated);
-      border-radius: 0 0 $small_radius $small_radius;
-      &:focus { padding: 1px 71px 1px 11px; }
-      &:hover { background-color: $silk;}
-      &:active { background-color: transparent; }
-    }
+    @include button(undecorated);
+    border-radius: 0 0 $medium_radius $medium_radius;
+    &:focus { padding: 1px 71px 1px 11px; }
+    &:hover { background-color: $silk;}
+    &:active { background-color: rgba(0, 0, 0, 0.26); border: none;}
+  }
 
-    .hotplug-notification-item-icon {
-      icon-size: 24px;
-      padding: 2px 5px;
-    }
+  .hotplug-notification-item-icon {
+    icon-size: 24px;
+    padding: 2px 5px;
+  }
 
-    .hotplug-resident-box { spacing: 8px;}
+  .hotplug-resident-box { spacing: 8px;}
 
-    .hotplug-resident-mount {
-      spacing: 8px;
-      border-radius: 4px;
-      &:hover { background-color: transparent; }
-    }
+  .hotplug-resident-mount {
+    spacing: 8px;
+    border-radius: 4px;
+    &:hover { background-color: transparent; }
+  }
 
-    .hotplug-resident-mount-label {
-      color: inherit;
-      padding-left: 6px;
-    }
+  .hotplug-resident-mount-label {
+    color: inherit;
+    padding-left: 6px;
+  }
 
-    .hotplug-resident-mount-icon {
-      icon-size: 24px;
-      padding-left: 6px;
-    }
+  .hotplug-resident-mount-icon {
+    icon-size: 24px;
+    padding-left: 6px;
+  }
 
-    .hotplug-resident-eject-icon {
-      icon-size: 16px;
-    }
+  .hotplug-resident-eject-icon {
+    icon-size: 16px;
+  }
 
-    .hotplug-resident-eject-button {
-      padding: 7px;
-      border-radius: 5px;
-      color: $inkstone;
-    }
+  .hotplug-resident-eject-button {
+    padding: 7px;
+    border-radius: 5px;
+    color: $inkstone;
+  }
 
 /* Eeeky things */
 
