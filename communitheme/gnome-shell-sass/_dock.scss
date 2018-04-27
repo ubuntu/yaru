@@ -87,7 +87,7 @@
   }
 
   &.running-dots .app-well-app.focused .overview-icon {
-    background-color: rgba(238, 238, 236, 0.1);
+    background-color: rgba(238, 238, 236, 0.2);
   }
 
   &.dashtodock {
@@ -141,11 +141,11 @@
 /* Communitheme Dock styling */
 
 #dashtodockContainer {
-  // without border: none, there is a 1px gap between windows and the dock
+  // without "border: none", there is a 1px gap between windows and the dock
   &.shrink #dash,
   &.dashtodock #dash {
-    //box-shadow: inset 0 1px $inkstone !important;
     border: none !important;
+    box-shadow: inset 0 1px 2px -1px rgba(0, 0, 0, 0.4) !important;
   }
 
   &.shrink.left #dash,
@@ -178,6 +178,7 @@
   &.shrink.right #dash,
   &.dashtodock.right #dash {
     // don't let the first icon be too close to the shadow + panel
+    background: #2B2929;
     padding-top: 2px;
   }
 
