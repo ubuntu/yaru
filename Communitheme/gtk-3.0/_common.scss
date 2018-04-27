@@ -4637,7 +4637,14 @@ button.titlebutton {
   $c: $headerbar_bg_color;
   $tc: $headerbar_fg_color;
 
-  &, &:hover, &:active, &:backdrop:not(:indeterminate) { @extend %undecorated_button; }
+  &, &:hover,
+  &:active, &:backdrop {
+    headerbar & {
+      // spec bump otherwise :backdrop  will still have a bg
+      @extend %undecorated_button;
+    }
+  }
+
   border-radius: $small_radius;
   min-height: 24px;
   min-width: 24px;
