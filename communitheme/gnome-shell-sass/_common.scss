@@ -1615,7 +1615,7 @@ StScrollBar {
     &:hover { background: white; }
   }
 
-  .notification-icon { padding: 5px; }
+  .notification-icon { padding: 5px; -gtk-icon-shadow: none;}
 
   .notification-content {
     padding: 5px;
@@ -1627,8 +1627,7 @@ StScrollBar {
   .notification-actions {
     padding-top: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.12);
-    spacing: 1px;
-    &:active { background-color: rgba(0, 0, 0, 0.26);}
+    spacing: 0px;
   }
 
   .notification-button {
@@ -1637,10 +1636,13 @@ StScrollBar {
     background-color: transparent;
     color: $inkstone;
     font-weight: 500;
-    &:active { background-color: rgba(0, 0, 0, 0.26); border-radius: 0 0 $medium-radius $medium-radius;}
-    //&:first-child:active{ border-radius: 0 0 0 $medium-radius; }
-    //&:last-child:active{ border-radius: 0 0 $medium-radius 0 ;}
+    &:active { background-color: rgba(0, 0, 0, 0.26); }
+    
   }
+  .notification-button {
+    &:first-child { &, &:active { border-radius: 0 0 0 $medium-radius; } }
+    &:last-child { &, &:active { border-radius: 0 0 $medium-radius 0; } }
+}
 
   .summary-source-counter {
     font-size: 10pt;
