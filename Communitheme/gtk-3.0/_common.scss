@@ -4637,9 +4637,8 @@ button.titlebutton {
   $c: $headerbar_bg_color;
   $tc: $headerbar_fg_color;
 
-  &, &:hover,
-  &:active, &:backdrop {
-    headerbar & {
+  &, &:hover, &:active {
+    headerbar &, .titlebar &, & {
       // spec bump otherwise :backdrop  will still have a bg
       @extend %undecorated_button;
     }
