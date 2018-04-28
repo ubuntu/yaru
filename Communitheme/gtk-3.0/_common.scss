@@ -3865,9 +3865,11 @@ row {
     // background-color: $white;
     color: $fg_color;
     box-shadow: inset 3px 0 $selected_bg_color;
+    background-color: transparentize($base_hover_color, 0.05);
     font-weight: bold;
 
     &:backdrop { box-shadow: inset 3px 0 _backdrop_color($selected_bg_color); }
+    &:hover { background-color: $base_hover_color; }
 
     image, image.sidebar-icon { opacity: 1; }
 
