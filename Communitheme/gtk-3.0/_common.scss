@@ -2949,52 +2949,34 @@ radio {
 %check, %radio, check, radio {
   & {
     // for unchecked
-    @each $state, $t in ("", "normal"),
-                        (":hover", "hover"),
-                        (":active", "active") {
-                          &#{$state} {
-                            @include button($t, white, $flat:true);
-                            border: 1px solid $borders_color;
-                        }
+    @each $state, $t in ("", "normal"), (":hover", "hover"), (":active", "active") {
+      &#{$state} {
+        @include check($t, white);
+        border: 1px solid $borders_color;
+      }
     }
 
-    @each $state, $t in (":disabled", "insensitive"),
-                        (":backdrop", "backdrop"),
-                        (":backdrop:disabled", 'backdrop-insensitive') {
-                          &#{$state} {
-                            @include button($t, white, $flat:true);
-                            border: 1px solid transparentize($borders_color, 0.2);
-                          }
+    @each $state, $t in (":disabled", "insensitive"), (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+      &#{$state} {
+        @include check($t, white);
+        border: 1px solid transparentize($borders_color, 0.2);
+      }
     }
 
     &:backdrop:disabled {
-        background: transparent;
+      background: transparent;
     }
   }
 
   & {
     // for checked
-    @each $t, $c in (':checked:not(:indeterminate)', $success_color),
-                    (':indeterminate', $success_color) {
+    @each $t, $c in (':checked:not(:indeterminate)', $success_color),(':indeterminate', $success_color) {
       &#{$t} {
-          @each $state, $t in ("", "normal"), (":hover", "hover"),
-              (":active", "active"), (":disabled", "insensitive") {
-                  &#{$state} {
-                      @include button($t, $c, white, $flat:true);
-                      border: 1px solid $c;
-                      color: white;
-                  }
-              }
-      }
-
-      &#{$t} {
-          @each $state, $t in (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
-                  &#{$state} {
-                      @include button($t, _backdrop_color($c), white, $flat:true);
-                      border: 1px solid _backdrop_color($c);
-                      color: white;
-                  }
-              }
+        @each $state, $t in ("", "normal"), (":hover", "hover"), (":disabled", "insensitive"), (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+          &#{$state} {
+            @include check($t, $c, white);
+          }
+        }
       }
     }
   }
@@ -3017,7 +2999,6 @@ radio {
 
   &:indeterminate { -gtk-icon-source: -gtk-recolor(url("assets/dash-symbolic.symbolic.png")); }
 }
-
 
 
 // ANIMATION:
