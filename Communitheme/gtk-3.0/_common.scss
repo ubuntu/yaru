@@ -4270,9 +4270,9 @@ paned {
  **************/
 
 infobar {
-  @each $t, $c in ("", $purple),
-                  (".info", $purple),
-                  (".question", $purple),
+  @each $t, $c in ("", $blue),
+                  (".info", $blue),
+                  (".question", $blue),
                   (".warning", $warning_color),
                   ('.error', $error_color) {
     &#{$t} {
@@ -4291,13 +4291,14 @@ infobar {
       }
 
       button {
-        $c: darken($c, 10%);
+        $c: $c;
         $tc: white;
           @each $state, $t in ("", "normal"), (":hover", "hover"),
             (":active, &:checked", "active"), (":disabled", "insensitive"),
             (":backdrop", "backdrop"), (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
             (":backdrop:disabled", 'backdrop-insensitive') {
-              &#{$state} { @include button($t, $c, $tc, $flat:true); }
+              @if $t == "normal" { $c: darken($c, 5%); }
+              &#{$state} { @include button($t, $c, $tc); }
           }
         }
       }
