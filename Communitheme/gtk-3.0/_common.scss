@@ -1782,6 +1782,8 @@ headerbar {
       inset -1px 0 $inkstone;;
     }
 
+    &.selection-mode { border: none; }
+
     &:backdrop, & {
       border-radius: 0;
     }
