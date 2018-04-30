@@ -3858,24 +3858,7 @@ row {
     }
   }
 
-  // &:selected { @extend %selected_items; }
-
-  &:selected {
-    // use orange strip for selected sidebar item
-    // background-color: $white;
-    color: $fg_color;
-    box-shadow: inset 3px 0 $selected_bg_color;
-    font-weight: bold;
-
-    &:backdrop { box-shadow: inset 3px 0 _backdrop_color($selected_bg_color); }
-
-    image, image.sidebar-icon { opacity: 1; }
-
-    label {
-      transition: padding 100ms linear;
-      padding-left: 3px;
-    }
-  }
+  &:selected { @extend %selected_items; }
 }
 
 
@@ -4629,7 +4612,7 @@ button.titlebutton {
     &:disabled { color: mix($tc, $c, 50%); }
 
     &:backdrop {
-      color: $backdrop_selected_fg_color;
+      &, label { color: $backdrop_selected_fg_color; }
 
       &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
     }
