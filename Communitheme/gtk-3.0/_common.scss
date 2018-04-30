@@ -4621,7 +4621,7 @@ button.titlebutton {
 
 %selected_text {
   $c: $text_selection;
-  $tc: $text_color;
+  $tc: $selected_fg_color;
   background-color: $c;
   color: $tc;
 
@@ -4629,9 +4629,9 @@ button.titlebutton {
 
   &:backdrop {
     background-color: _backdrop_color($c);
-    color: $backdrop_text_color;
+    color: $backdrop_selected_fg_color;
 
-    &:disabled { color: mix($backdrop_text_color, $c, 30%); }
+    &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
 }
 
