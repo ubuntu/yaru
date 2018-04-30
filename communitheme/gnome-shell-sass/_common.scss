@@ -1066,14 +1066,14 @@ StScrollBar {
         width: 31.5em;
       }
 
-        .message-list-clear-button.button {
-          @include button(undecorated);
-          border-color: lighten($bg_color,10%);
-          &:hover,&:focus { @include button(hover); }
-          &:active { @include button(active); }
-          &:insensitive { @include button(insensitive); }
-          margin: 1.5em 1.5em 0;
-        }
+      .message-list-clear-button.button {
+        @include button(undecorated);
+        border-color: lighten($bg_color,10%);
+        &:hover,&:focus { @include button(hover); }
+        &:active { @include button(undecorated-active); color: darken($fg_color,25%);}
+        &:insensitive { @include button(insensitive); }
+        margin: 1.5em 1.5em 0;
+      }
 
         .message-list-sections {
           spacing: 1em;
@@ -1479,14 +1479,15 @@ StScrollBar {
       border-image: none;
       background-image: none;
     }
-
   }
 
   .app-well-app-running-dot { //running apps indicator
-    width: 10px; height: 3px;
+    width: 6px; height: 6px;
+    box-shadow: 1px 1px 5px 0px transparentize(black, 0.5);
+    border-radius: 3px;
     background-color: $selected_bg_color;
-    margin-bottom: 2px;
-  }
+    margin-bottom: 1px;
+}
 
   %icon_tile {
     // appeareance of apps
