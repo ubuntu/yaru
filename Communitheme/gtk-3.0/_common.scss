@@ -1546,7 +1546,7 @@ headerbar {
   }
 
   &:first-child { border-right-width: 0; }
-  &:last-child { border-left-width: 0; }
+  &:dir(rtl):last-child { border-left-width: 0; }
 
   & {
     // style headerbar buttons and entries using the appropriate headerbar colors
