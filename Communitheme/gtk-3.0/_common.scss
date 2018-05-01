@@ -2354,15 +2354,14 @@ popover.background {
  *************/
 notebook {
   > header {
-    // TODO: what radius should tabs have?
     padding: 1px;
     border-color: $borders_color;
     border-width: 1px;
-    background-color: $sidebar_bg_color; // $dark_fill;
+    background-color: $sidebar_bg_color;
 
     &:backdrop {
       border-color: $backdrop_borders_color;
-      background-color: $backdrop_sidebar_bg_color; // $backdrop_dark_fill;
+      background-color: $backdrop_sidebar_bg_color;
     }
 
     tabs { margin: -1px; }
@@ -2375,7 +2374,6 @@ notebook {
 
         > tab {
           border-radius: 4px 4px 0 0;
-          // -gtk-outline-radius: 4px 4px 0 0;
           &:checked { border-bottom-color: transparent; }
         }
       }
@@ -2389,7 +2387,6 @@ notebook {
 
         > tab {
           border-radius: 0 0 4px 4px;
-          // -gtk-outline-radius: 0 0 4px 4px;
           &:checked { border-top-color: transparent; }
         }
       }
@@ -2403,7 +2400,6 @@ notebook {
 
         > tab {
           border-radius: 4px 0 0 4px;
-          // -gtk-outline-radius: 4px 0 0 4px;
           &:checked { border-right-color: transparent; }
         }
       }
@@ -2417,7 +2413,6 @@ notebook {
 
         > tab {
           border-radius: 0 4px 4px 0;
-          // -gtk-outline-radius: 0 4px 4px 0;
           &:checked { border-left-color: transparent; }
         }
       }
@@ -2493,8 +2488,8 @@ notebook {
       min-height: 24px;
       min-width: 24px;
       padding: 4px 12px;
-      outline-offset: -5px; // -5px;
-      outline-style: solid;
+      outline-offset: -5px;
+      outline-style: dashed;
       -gtk-outline-radius: $small_radius;
       color: $text_color;
       border: 1px solid transparent;
@@ -2504,37 +2499,19 @@ notebook {
         border-color: mix($borders_color, $base_color, 60%);
       }
 
-      &:backdrop {
-        color: mix($backdrop_fg_color, $backdrop_bg_color, 60%);
-
-        // &.reorderable-page {
-        //   border-color: transparent;
-        //   background-color: transparent;
-        // }
-      }
+      &:backdrop { color: mix($backdrop_fg_color, $backdrop_bg_color, 60%); }
 
       &:checked {
         color: $fg_color;
         font-weight: 500;
         background-color: $base_color;
         border-color: $borders_color;
-        // &.reorderable-page {
-        //   border-color: transparentize($borders_color, 0.5);
-        //   background-color: transparentize($bg_color, 0.5);
-        //
-        //   &:hover { background-color: transparentize($bg_color, 0.3); }
-        // }
       }
 
       &:backdrop:checked {
         background-color: $backdrop_base_color;
         border-color: $backdrop_borders_color;
         color: $backdrop_fg_color;
-
-        // &.reorderable-page {
-        //   border-color: $backdrop_borders_color;
-        //   background-color: $backdrop_bg_color;
-        // }
       }
 
       // colors the button like the label, overridden otherwise
@@ -2568,19 +2545,9 @@ notebook {
         padding-left: 2px;
         padding-right: 2px;
 
-        &:not(:only-child) {
-          // margin-left: 3px;
-          // margin-right: 3px;
-
-          // &:first-child { margin-left: -1px; }
-          // &:last-child { margin-right: -1px; }
-        }
-
         tab {
           margin-left: 2px;
           margin-right: 2px;
-
-          // &.reorderable-page { border-style: none solid; }
         }
       }
     }
@@ -2591,19 +2558,9 @@ notebook {
         padding-top: 2px;
         padding-bottom: 2px;
 
-        &:not(:only-child) {
-          // margin-top: 3px;
-          // margin-bottom: 3px;
-
-          // &:first-child { margin-top: -1px; }
-          // &:last-child { margin-bottom: -1px; }
-        }
-
         tab {
           margin-top: 2px;
           margin-bottom: 2px;
-          //
-          // &.reorderable-page { border-style: solid none; }
         }
       }
     }
@@ -3905,24 +3862,7 @@ row {
     }
   }
 
-  // &:selected { @extend %selected_items; }
-
-  &:selected {
-    // use orange strip for selected sidebar item
-    // background-color: $white;
-    color: $fg_color;
-    box-shadow: inset 3px 0 $selected_bg_color;
-    font-weight: bold;
-
-    &:backdrop { box-shadow: inset 3px 0 _backdrop_color($selected_bg_color); }
-
-    image, image.sidebar-icon { opacity: 1; }
-
-    label {
-      transition: padding 100ms linear;
-      padding-left: 3px;
-    }
-  }
+  &:selected { @extend %selected_items; }
 }
 
 
@@ -4676,7 +4616,7 @@ button.titlebutton {
     &:disabled { color: mix($tc, $c, 50%); }
 
     &:backdrop {
-      color: $backdrop_selected_fg_color;
+      &, label { color: $backdrop_selected_fg_color; }
 
       &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
     }
@@ -4685,7 +4625,7 @@ button.titlebutton {
 
 %selected_text {
   $c: $text_selection;
-  $tc: $text_color;
+  $tc: $selected_fg_color;
   background-color: $c;
   color: $tc;
 
@@ -4693,9 +4633,9 @@ button.titlebutton {
 
   &:backdrop {
     background-color: _backdrop_color($c);
-    color: $backdrop_text_color;
+    color: $backdrop_selected_fg_color;
 
-    &:disabled { color: mix($backdrop_text_color, $c, 30%); }
+    &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
 }
 
