@@ -533,7 +533,7 @@
     background-color: transparentize($c, 0.4);
     border-color: $insensitive_borders_color;
     box-shadow: 0 1px transparent;
-    label { color: transparentize(white, 0.6); }
+    color: transparentize(white, 0.6);
   }
 
   @if $t == backdrop {
@@ -541,8 +541,7 @@
     background-color: _backdrop_color($c);
     border-color: _backdrop_color($c);
     box-shadow: none;
-
-    label, & { color: mix($tc, $c, 60%); }
+    color: mix($tc, $c, 60%);
   }
 
   @if $t==backdrop-insensitive {
@@ -550,8 +549,7 @@
     background-color: transparentize(_backdrop_color($c), 0.4);
     border-color: $insensitive_borders_color;
     box-shadow: none;
-
-    label, & { color: mix($tc, $c, 60%); }
+    color: mix($tc, $c, 60%);
   }
 }
 
