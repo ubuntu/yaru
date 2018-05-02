@@ -73,7 +73,7 @@ terminal-window {
     color: $terminal_text_color;
 
     &:backdrop {
-      color: _backdrop_color($terminal_text_color);
+      color: $terminal_text_backdrop_color;
       background-color: _backdrop_color($terminal_bg_color);
     }
   }
@@ -118,7 +118,7 @@ terminal-window {
         }
 
         &:backdrop {
-          color: _backdrop_color($terminal_text_color);
+          &, label { color: $terminal_text_backdrop_color; }
         }
 
         &:checked {
