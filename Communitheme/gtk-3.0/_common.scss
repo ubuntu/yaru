@@ -4640,7 +4640,9 @@ button.titlebutton {
   &, &:hover, &:active {
     headerbar &, .titlebar &, & {
       // spec bump otherwise :backdrop  will still have a bg
-      @extend %undecorated_button;
+      &, &:backdrop {
+        @extend %undecorated_button;
+      }
     }
   }
 
