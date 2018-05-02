@@ -1546,7 +1546,7 @@ headerbar {
   }
 
   &:first-child { border-right-width: 0; }
-  &:last-child { border-left-width: 0; }
+  &:dir(rtl):last-child { border-left-width: 0; }
 
   & {
     // style headerbar buttons and entries using the appropriate headerbar colors
@@ -1723,10 +1723,22 @@ headerbar {
         (":disabled:active, &:disabled:checked", "insensitive-active"),
         (":backdrop", "backdrop"), (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
         (":backdrop:disabled", 'backdrop-insensitive'), (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-          $c: darken($success_color, 10%); // like the infobar
+          $c: $success_color; //darken($success_color, 10%); // like the infobar
           $tc: white;
-          &, &.selection-menu { &#{$state} { @include button($t, $c, $tc, $flat:true); } }
+          &, &.selection-menu {
+            &#{$state} {
+              @include button($t, $c, $tc, $flat:true);
+            }
+          }
         }
+
+      &:active, &:checked {
+        $c: darken($success_color, 10%);
+        background-color: $c;
+        box-shadow: inset 0 1px 1px 0px darken($c, 3%);
+        border-color: darken($c, 7%);
+        border-top-color: darken($c, 17%);
+      }
 
       &.flat, &.selection-menu {
         &, &:backdrop {
@@ -1768,6 +1780,8 @@ headerbar {
   .maximized &,
   .fullscreen & {
     box-shadow: inset 0 1px $inkstone, inset 1px 0 $inkstone;
+
+    &.selection-mode { border: none; }
 
     &:backdrop, & {
       border-radius: 0;
