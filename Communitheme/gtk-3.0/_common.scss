@@ -4575,23 +4575,25 @@ decoration {
 button.titlebutton {
   $c: $headerbar_bg_color;
   $tc: $headerbar_fg_color;
+
+  &, &:hover, &:active {
+    headerbar &, .titlebar &, & {
+      // spec bump otherwise :backdrop  will still have a bg
+      &, &:backdrop {
+        @extend %undecorated_button;
+      }
+    }
+  }
+
   border-radius: $small_radius;
   min-height: 24px;
   min-width: 24px;
   padding: 2px;
 
-  &.close {
-    $button_size: 24px + 2px * 2;
-    $circle_size: 20px / $button_size / 2;
+  &:not(.close) { @include draw_circle($c) ; }
 
-    &:hover:not(:backdrop),
-    &:active:not(:backdrop) {
-      background-image: -gtk-gradient(radial,
-                                      center center, 0,
-                                      center center, $circle_size,
-                                      to($selected_bg_color),
-                                      to(transparent));
-    }
+  &.close {
+    @include draw_circle($selected_bg_color, $close:true);
   }
 }
 
