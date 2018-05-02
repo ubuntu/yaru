@@ -282,8 +282,11 @@
         $_bg: $bg_color;
     } @else if $c == $headerbar_bg_color {
         $_bg: $c;
-    } @else {
-        $_bg: darken($c, 20%);
+    } @else if $c == $red, $green, $yellow, $blue, $purple {
+        $_bg: transparentize($c, .1);
+    }
+      @else {
+        $_bg: darken($c, 20%); 
     }
 
     background-color: $_bg;
@@ -292,7 +295,7 @@
       border-color: $_bg;
       box-shadow: none;
     } @else {
-      border-color: $insensitive_borders_color;
+      border-color: if($c!=$button_bg_color, $c, $insensitive_borders_color);
       box-shadow: 0 1px transparent;
     }
 
