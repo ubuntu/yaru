@@ -178,6 +178,7 @@ label {
   selection {
     @extend %selected_text; //Trying blue for the text selection
   }
+  counter-label{background-color: $purple;}
 
   &:disabled {
     color: $insensitive_fg_color;
@@ -818,6 +819,9 @@ button {
       }
     }
   }
+
+
+
 
   // hide separators
   &.font,
@@ -4756,4 +4760,13 @@ button.emoji-section {
   :hover {
     background: $selected_bg_color;
   }
+}
+//The count of updates in the stackswitcher
+.counter-label {
+  margin-top: 2px;
+  margin-bottom: 4px;
+  border-width: 0px;
+  padding-left: 2px;
+  padding-right: 2px;
+  box-shadow: inset 0 0 10px 10px $success_color;
 }
