@@ -220,13 +220,6 @@ StScrollBar {
     color: $dark_subtext_color; // $subheader_fg_color; // darken($osd_fg_color,10%);
     padding-bottom: .4em;
   }
-
-  StEntry {
-    @include entry(normal, $tc: $slate, $c: $porcelain);
-    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.5));}
-    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);}
-  }
-
 }
 
   .mount-dialog-subject,
@@ -407,12 +400,12 @@ StScrollBar {
 
 .prompt-dialog {
   //this is the width of the entire modal popup
+  @extend %dialog_window;
   width: 34em;
-  border: 1px solid $osd_borders_color;
 
   .message-dialog-main-layout { spacing: 24px; padding: 10px; }
   .message-dialog-content { spacing: 16px; }
-  .message-dialog-title { color: $subheader_fg_color; }
+  .message-dialog-title { color: $dark_subtext_color; }
 }
 
   .prompt-dialog-description:rtl {
@@ -470,6 +463,7 @@ StScrollBar {
 /* Audio selection dialog */
 .audio-device-selection-dialog {
   // TODO: where is this?
+  @extend %dialog_window;
   spacing: 30px;
 }
 
@@ -488,10 +482,11 @@ StScrollBar {
   }
 
   .audio-selection-device {
-    border: 1px solid $osd_borders_color; // $osd_borders_color;
+    @extend %dialog_window;
+    // border: 1px solid $osd_borders_color; // $osd_borders_color;
     border-radius: 12px;
-    &:hover,&:focus { background-color: $base_hover_color; }
-    &:active { background-color: $base_active_color; }
+    &:hover,&:focus { background-color: $light_base_hover_color; }
+    &:active { background-color: $light_base_active_color; }
   }
 
   .audio-selection-device-box {
@@ -505,22 +500,26 @@ StScrollBar {
 
 /* Access Dialog */
 .access-dialog {
+  @extend %dialog_window;
   spacing: 30px;
 }
 
 /* Geolocation Dialog */
 .geolocation-dialog {
+  @extend %dialog_window;
   spacing: 30px;
 }
 
 /* Extension Dialog */
 .extension-dialog {
+  @extend %dialog_window;
   .message-dialog-main-layout { spacing: 24px; padding: 10px; }
-  .message-dialog-title { color: $subheader_fg_color; }
+  .message-dialog-title { color: $dark_fg_color; }
 }
 
 /* Inhibit-Shortcuts Dialog */
 .inhibit-shortcuts-dialog {
+  @extend %dialog_window;
   spacing: 30px;
 }
 
@@ -762,6 +761,14 @@ StScrollBar {
   background-color: $dialog_bg_color;
   border: 1px solid $light_borders_color;
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
+
+  StEntry {
+    $_bg: $light_base_color;
+    $_fg: $inkstone;
+    @include entry(normal, $tc: $_fg, $c: $_bg);
+    &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
+    &:insensitive { @include entry(insensitive, $tc: $_fg, $c: $_bg);}
+  }
 }
 
 /* Tiled window previews */
@@ -1253,6 +1260,7 @@ StScrollBar {
 /* NETWORK DIALOGS */
 
 .nm-dialog {
+  @extend %dialog_window;
   max-height: 34em;
   min-height: 31em;
   min-width: 32em;

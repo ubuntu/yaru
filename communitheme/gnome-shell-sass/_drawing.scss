@@ -41,7 +41,7 @@
   @if $t==normal {
     color: $tc;
     background-color: $c;
-    border-color: if($c != $base_color, _border_color($c), $borders_color);
+    border-color: if($c != $base_color, if($c == $light_base_color, $light_borders_color, border_color($c)), $borders_color);
     box-shadow: none;
   }
   @if $t==focus {
