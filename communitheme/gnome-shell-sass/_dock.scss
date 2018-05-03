@@ -122,9 +122,11 @@
 
   .notification-badge {
     color: rgba(255, 255, 255, 1);
-    background-color: #e95420;
+    background-color: $green;
     padding: 0.2em 0.5em;
     border-radius: 1em;
+    border: 1px solid darken($green,10%);
+    box-shadow: 1px 1px 5px 0px transparentize(black, 0.5);
     font-weight: bold;
     text-align: center;
     margin: 2px;
