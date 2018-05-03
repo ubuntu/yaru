@@ -40,7 +40,7 @@ $large_radius: 12px;
 /* GLOBALS */
 $font-size: 11;
 $font-family: Ubuntu, Cantarell, Sans-Serif;
-$_dialog_bg_color: transparentize($osd_bg_color, $popover-alpha-value);
+$_popover_bg_color: transparentize($osd_bg_color, $popover-alpha-value);
 
 stage {
   font-family: $font-family;
@@ -66,14 +66,16 @@ stage {
 
 .modal-dialog-linked-button {
   border-right-width: 1px;
-  border-top: 1px solid;
-  @include button(normal);
-  &:active { @include button(active); }
-  &:focus { @include button(focus); }
-  &:hover { @include button(hover); }
-  &:focus:hover { @include button(focus-hover); }
-  &:insensitive { @include button(insensitive); }
+  $c: $light_button_bg_color;
+  $tc: $dark_fg_color;
+  @include button(normal, $c, $tc);
+  &:active { @include button(active, $c, $tc); }
+  &:focus { @include button(focus, $c, $tc); }
+  &:hover { @include button(hover, $c, $tc); }
+  &:focus:hover { @include button(focus-hover, $c, $tc); }
+  &:insensitive { @include button(insensitive, $c, $tc); }
   padding: 12px;
+  border-top: 1px solid $light_borders_color;
 
   &:first-child {
     border-radius: 0px 0px 0px $medium_radius;
@@ -196,9 +198,8 @@ StScrollBar {
 
 .modal-dialog {
   border-radius: $medium_radius;
-  color: $osd_fg_color;
-  background-color: $_dialog_bg_color;
-  border: 1px solid $osd_borders_color;
+  @extend %dialog_window;
+
   .modal-dialog-content-box {
     padding: 24px;
   }
@@ -216,8 +217,14 @@ StScrollBar {
   .run-dialog-label {
     @include fontsize($font-size + 1.1);
     font-weight: normal; // bold;
-    color: $subheader_fg_color; // darken($osd_fg_color,10%);
+    color: $dark_subtext_color; // $subheader_fg_color; // darken($osd_fg_color,10%);
     padding-bottom: .4em;
+  }
+
+  StEntry {
+    @include entry(normal, $tc: $slate, $c: $porcelain);
+    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.5));}
+    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);}
   }
 
 }
@@ -301,7 +308,7 @@ StScrollBar {
   }
 
   .end-session-dialog-shutdown-icon {
-    color: $fg_color; // $fg_color;
+    color: $dark_fg_color; // $fg_color;
     width: 48px;
     height: 48px;
   }
@@ -580,7 +587,7 @@ StScrollBar {
   .popup-menu-boxpointer,
   .candidate-popup-boxpointer {
     -arrow-border-radius: $medium_radius;
-    -arrow-background-color: $_dialog_bg_color;
+    -arrow-background-color: $_popover_bg_color;
     -arrow-border-width: 1px;
     -arrow-border-color: $osd_borders_color;
     -arrow-base: 24px;
@@ -616,6 +623,7 @@ StScrollBar {
   margin: 32px;
   min-width: 64px;
   min-height: 64px;
+  @extend %dialog_window;
 
   .osd-monitor-label { font-size: 3em; }
   .level {
@@ -742,10 +750,18 @@ StScrollBar {
 
 %osd-panel {
   color: $osd_fg_color;
-  background-color: $_dialog_bg_color;
+  background-color: $_popover_bg_color;
   border: 1px solid $osd_borders_color;
   border-radius: $large_radius;
   padding: 12px;
+}
+
+%dialog_window {
+  $dialog_bg_color: transparentize($light_bg_color, $popover-alpha-value);
+  color: $dark_fg_color;
+  background-color: $dialog_bg_color;
+  border: 1px solid $light_borders_color;
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
 }
 
 /* Tiled window previews */
@@ -1254,26 +1270,26 @@ StScrollBar {
     text-align: center;
   }
 
-  .nm-dialog-airplane-text { color: $fg_color; }
+  .nm-dialog-airplane-text { color: $dark_fg_color; } //$fg_color; }
   .nm-dialog-header-icon { icon-size: 32px; }
-  .nm-dialog-scroll-view { border: 1px solid $osd_borders_color; } // 2px solid $borders_color; }
+  .nm-dialog-scroll-view { border: 1px solid $light_borders_color; } //$osd_borders_color; } // 2px solid $borders_color; }
   .nm-dialog-header { font-weight: bold; }
 
   .nm-dialog-item {
     font-size: 110%;
-    border-bottom: 1px solid $borders_color; // $borders_color;
+    border-bottom: 1px solid $light_borders_color; // $borders_color;
     padding: 12px;
     spacing: 20px;
   }
 
   .nm-dialog-item:selected {
-    background-color: $base_hover_color;
-    color: $selected_fg_color;
+    background-color: $light_base_hover_color;
+    color: $dark_fg_color; // $selected_fg_color;
   }
 
   .nm-dialog-icons { spacing: .5em; }
   .nm-dialog-icon { icon-size: 16px; }
-  .no-networks-label { color: #999999; }
+  .no-networks-label { color: $dark_subtext_color; /*#999999;*/ }
   .no-networks-box { spacing: 12px; }
 
 /* OVERVIEW */

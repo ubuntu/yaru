@@ -130,7 +130,7 @@
   // normal button
     background-color: $c;
     border-color: _border_color($c);
-    box-shadow: inset 0 -1px 0 0 $_hilight_color;
+    // box-shadow: inset 0 -1px 0 0 $_hilight_color;
     color: $tc;
     icon-shadow: none;
     text-shadow: none;
@@ -149,7 +149,7 @@
   @else if $t==focus-hover {
   // active osd button
     background-color: lighten($c, 10%);
-    box-shadow: inset 0px 0px 0px 1px $selected_bg_color;
+    // box-shadow: inset 0px 0px 0px 1px $selected_bg_color;
   }
   @else if $t==active {
   // active osd button
