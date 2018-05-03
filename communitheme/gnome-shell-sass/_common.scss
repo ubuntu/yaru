@@ -658,9 +658,16 @@ StScrollBar {
 }
 
 .osd-window,
-.resize-popup,
-.switcher-list {
+.resize-popup {
   @extend %osd-panel;
+}
+
+.switcher-list {
+  // borders and padding taking from %osd-panel
+  @extend %dialog_window;
+  border: 1px solid $light_borders_color;
+  border-radius: $large_radius;
+  padding: 12px;
 }
 
   .switcher-list-item-container { spacing: 8px;  }
@@ -668,18 +675,18 @@ StScrollBar {
   .switcher-list .item-box {
     padding: 8px;
     border-radius: $small_radius;
-    color: darken($selected_fg_color,25%);
+    color: $dark_subtext_color;
   }
 
   .switcher-list .item-box:outlined {
     padding: 6px;
-    border: 2px solid darken($borders_color,10%);
+    border: 1px solid $light_borders_color;
   }
 
   .switcher-list .item-box:selected {
-    background-color: $base_hover_color;
+    background-color: $light_base_hover_color;
     border-radius: $small_radius;
-    color: $selected_fg_color;
+    color: $dark_fg_color;
   }
 
   .switcher-list .thumbnail-box {
@@ -693,14 +700,14 @@ StScrollBar {
 
   .switcher-list .separator {
     width: 1px;
-    background: $borders_color;
+    background: $light_borders_color;
   }
 
   .switcher-arrow {
     border-color: rgba(0,0,0,0);
-    color: transparentize($fg_color,0.2);
+    color: transparentize($dark_fg_color,0.2);
     &:highlighted {
-      color: $fg_color;
+      color: $dark_fg_color;
     }
   }
 
