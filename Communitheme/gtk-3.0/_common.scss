@@ -1557,11 +1557,10 @@ headerbar {
     $c: $headerbar_bg_color;
     $tc: $headerbar_fg_color;
 
-    switch:backdrop {
-      background-color: $headerbar_bg_color;
-      & slider {
-        background-color: $backdrop_insensitive_color;
-      }
+    switch {
+      margin-top: 10px;
+      margin-bottom: 9px;
+      @include switch(lighten($headerbar_bg_color, 18%));
     }
 
     entry, %dark_entry {
@@ -2780,68 +2779,7 @@ treeview ~ scrollbar.vertical {
  * Switch *
  **********/
 switch {
-  $c: $success_color;
-  background-color: $dark_fill;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  box-shadow: none;
-  color: transparent;
-  font-size: smaller;
-  font-weight: 500;
-  outline-offset: 0;
-
-  &:checked {
-    background-color: $c;
-  }
-
-  &:disabled {
-    background-color: transparent; //$insensitive_dark_fill;
-    border: 1px solid $borders_edge;
-  }
-
-  &:backdrop {
-    background-color: _backdrop_color(transparentize($dark_fill, 0.3));
-    color: transparent;
-    transition: $backdrop_transition;
-
-    &:checked {
-      background-color: _backdrop_color($c);
-    }
-    &:disabled {
-      background-color: transparent;
-    }
-  }
-
-  slider {
-    $c: $success_color;
-    background-color: white;
-    background-clip: if($variant == "light", border-box, padding-box);
-    border-radius: $small_radius;
-    border: 1px solid transparent;
-    margin: 1px;
-    min-height: 21px;
-    min-width: 21px;
-    outline-color: $focus_color;
-    outline-offset: -1px;
-    transition: $button_transition;
-    -gtk-outline-radius: $small_radius;
-  }
-
-  &:disabled slider {
-    background-color: transparent;
-    border: 1px solid $borders_edge;
-  }
-
-  &:backdrop {
-    slider {
-      background-color: $backdrop_bg_color;
-      transition: $backdrop_transition;
-    }
-
-    &:disabled slider {
-      background-color: transparent;
-    }
-  }
+  @include switch($dark_fill, $success_color);
 }
 
 
