@@ -70,11 +70,11 @@ terminal-window {
   .terminal-screen {
     // inherits from .background
     background-color: $terminal_bg_color;
-    color: $terminal_text_color;
+    color: $terminal_fg_color;
 
     &:backdrop {
-      color: _backdrop_color($terminal_text_color);
       background-color: _backdrop_color($terminal_bg_color);
+      color: $backdrop_selected_fg_color;
     }
   }
 
@@ -99,7 +99,7 @@ terminal-window {
       }
 
       tab {
-        color: $terminal_text_color;
+        color: $terminal_fg_color;
 
         &:hover:not(:active):not(:backdrop):not(:checked) {
           background-color: lighten($terminal_base_color, 3%);
@@ -118,7 +118,7 @@ terminal-window {
         }
 
         &:backdrop {
-          color: _backdrop_color($terminal_text_color);
+          &, label { color: $backdrop_selected_fg_color; }
         }
 
         &:checked {
@@ -154,7 +154,7 @@ terminal-window {
         margin: 0;
         border-width: 3px;
 
-        $c: $terminal_text_color;
+        $c: $terminal_fg_color;
         background-color: transparentize($c, 0.6);
 
         &:hover {
