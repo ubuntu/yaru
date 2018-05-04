@@ -48,6 +48,7 @@ $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: $borders_color;
 // light colors imported from gtk theme
 $light_bg_color: #FAFAFA;
+$light_base_color: #FFF;
 $dark_fg_color: $inkstone;
 $dark_subtext_color: #2d2d2d;
 $light_borders_color: darken($light_bg_color, 18%);
