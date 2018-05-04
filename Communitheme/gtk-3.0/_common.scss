@@ -1554,47 +1554,9 @@ headerbar {
     $tc: $headerbar_fg_color;
 
     switch {
-      $_bg: lighten($headerbar_bg_color, 18%);
-      background-color: $_bg;
-      border: 1px solid darken($headerbar_bg_color, 3%);
-      border-top-color: darken($headerbar_bg_color, 20%);
-      box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.15);
-
-      &:hover {
-        -gtk-icon-effect: highlight;
-        background-color: lighten($_bg, 5%);
-      }
-
-      &:checked {
-        background-color: $success_color;
-        border-color: darken($success_color, 5%);
-        border-top-color: darken($success_color, 20%);
-        box-shadow: inset 0 1px 1px 0 transparentize($success_color, 0.2);
-        &:hover {
-          -gtk-icon-effect: highlight;
-          background-color: lighten($success_color, 5%);
-        }
-      }
-
-      & slider {
-        background-color: $headerbar_fg_color;
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);
-      }
-
-      &:backdrop {
-        background-color: $headerbar_bg_color;
-        transition: $backdrop_transition;
-
-        &:checked {
-          background-color: _backdrop_color($success_color);
-          border-top-color: darken($success_color, 10%);
-          box-shadow: none;
-        }
-
-        & slider {
-          background-color: $backdrop_insensitive_color;
-        }
-      }
+      margin-top: 10px;
+      margin-bottom: 9px;
+      @include switch(lighten($headerbar_bg_color, 18%));
     }
 
     entry, %dark_entry {
@@ -2812,101 +2774,7 @@ treeview ~ scrollbar.vertical {
  * Switch *
  **********/
 switch {
-  $c: $success_color;
-  background-color: $dark_fill;
-  border-radius: 6px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: darken($dark_fill, 5%);
-  border-top-color: darken($dark_fill, 20%);
-  box-shadow: inset 0 1px 1px 0 transparentize($dark_fill, 0.2);
-  color: transparent;
-  font-size: 0;
-  font-weight: 500;
-  outline-offset: 0;
-
-  &:hover {
-    -gtk-icon-effect: highlight;
-    background-color: lighten($dark_fill, 5%);
-  }
-
-  &:checked {
-    background-color: $c;
-    border-color: darken($c, 5%);
-    border-top-color: darken($c, 20%);
-    box-shadow: inset 0 1px 1px 0 transparentize($c, 0.2);
-    &:hover {
-      -gtk-icon-effect: highlight;
-      background-color: lighten($c, 5%);
-    }
-  }
-
-  &:disabled {
-    background-color: transparent; //$insensitive_dark_fill;
-    border: 1px solid $borders_edge;
-    box-shadow: inset 0 1px 1px 0 transparentize($dark_fill, 0.3);
-  }
-
-  &:backdrop {
-    background-color: _backdrop_color(transparentize($dark_fill, 0.3));
-    border-top-color: darken($dark_fill, 10%);
-    color: transparent;
-    transition: $backdrop_transition;
-
-    &:checked {
-      background-color: _backdrop_color($c);
-      border-top-color: darken($c, 10%);
-      box-shadow: none;
-    }
-
-    &:disabled {
-      background-color: transparent;
-      border: 1px solid $borders_edge;
-      box-shadow: none;
-    }
-  }
-
-  slider {
-    $c: $success_color;
-    background-color: white;
-    background-clip: if($variant == "light", border-box, padding-box);
-
-    border-radius: $small_radius;
-    border: 1px solid transparent;
-    box-shadow: 0 1px 1px darken($dark_fill, 7%);
-
-    margin: 2px;
-
-    min-height: 16px;
-    min-width: 16px;
-
-    outline-color: $focus_color;
-    outline-offset: -1px;
-
-    transition: $button_transition;
-    -gtk-outline-radius: $small_radius;
-  }
-
-  &:checked slider {
-    box-shadow: 0 1px 1px darken($c, 7%);
-  }
-
-  &:disabled slider {
-    background-color: transparent;
-    border: 1px solid $borders_edge;
-    box-shadow: 0 1px 1px 0 darken($dark_fill, 0.3);
-  }
-
-  &:backdrop {
-    slider {
-      background-color: $backdrop_bg_color;
-      transition: $backdrop_transition;
-    }
-
-    &:disabled slider {
-      background-color: transparent;
-    }
-  }
+  @include switch($dark_fill, $success_color);
 }
 
 
