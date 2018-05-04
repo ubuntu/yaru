@@ -686,9 +686,10 @@ StScrollBar {
   }
 
   .switcher-list .item-box:selected {
-    background-color: rgba(0, 0, 0, 0.26);
+    background-color: rgba(0, 0, 0, 0.36);
     border-radius: $small_radius;
     color: white;
+    font-weight: 500;
   }
 
   .switcher-list .thumbnail-box {
