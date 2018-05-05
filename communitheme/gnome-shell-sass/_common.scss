@@ -1140,7 +1140,7 @@ StScrollBar {
           }
 
           .message-icon-bin > StIcon {
-            color: darken($inactive_element_color,10%);
+            color: $inactive_element_color;
             icon-size: 1.09em;
             -st-icon-style: symbolic;
           }
@@ -1659,7 +1659,9 @@ StScrollBar {
       .message-content { color: $inkstone; }
     }
     &:hover { background: white; }
-
+    .message-icon-bin > StIcon {
+     color: $inkstone;
+    }
   }
 
   .notification-icon { padding: 5px; background-color: black;}
