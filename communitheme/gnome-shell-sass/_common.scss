@@ -74,8 +74,8 @@ stage {
   &:hover { @include button(hover, $c, $tc);}
   &:focus:hover { @include button(focus-hover, $c, $tc); }
   &:insensitive { @include button(insensitive, $c, $tc); }
-  &:hover, &:focus:hover {background-color: rgba(0, 0, 0, 0.10);}
-  &:active, &:focus:active {background-color: rgba(0, 0, 0, 0.26);}
+  &:hover, &:focus:hover {background-color: $light_base_hover_color;}
+  &:active, &:focus:active {background-color: $light_base_active_color;}
   padding: 12px;
   border-top: 1px solid $light_borders_color;
 
@@ -487,8 +487,8 @@ StScrollBar {
     //@extend %dialog_window;
     //border: 1px solid darken(white, 20%);
     border-radius: 12px;
-    &:hover, &:focus:hover {background-color: rgba(0, 0, 0, 0.10);}
-    &:active, &:focus:active {background-color: rgba(0, 0, 0, 0.26);}
+    &:hover, &:focus:hover {background-color: $light_base_hover_color;}
+    &:active, &:focus:active {background-color: $light_base_active_color;}
   }
 
   .audio-selection-device-box {
@@ -686,7 +686,7 @@ StScrollBar {
   }
 
   .switcher-list .item-box:selected {
-    background-color: rgba(0, 0, 0, 0.36);
+    background-color: $light_base_select_color;
     border-radius: $small_radius;
     color: white;
     font-weight: 500;
@@ -742,7 +742,7 @@ StScrollBar {
 
   .ws-switcher-active-up, .ws-switcher-active-down {
     height: 50px;
-    background-color: rgba(0, 0, 0, 0.36);
+    background-color: $light_base_select_color;
 ;
     color: $selected_fg_color;
     //background-image: url("resource:///org/gnome/shell/theme/ws-switch-arrow-up.png");
