@@ -727,7 +727,9 @@ StScrollBar {
 .workspace-switcher-group { padding: 12px; }
 
   .workspace-switcher-container {
-    @extend %osd-panel;
+    @extend %dialog_window;
+    padding: 5px;
+    border-radius: $medium_radius;
   }
 
   .workspace-switcher {
@@ -740,7 +742,8 @@ StScrollBar {
 
   .ws-switcher-active-up, .ws-switcher-active-down {
     height: 50px;
-    background-color: $selected_bg_color;
+    background-color: rgba(0, 0, 0, 0.36);
+;
     color: $selected_fg_color;
     //background-image: url("resource:///org/gnome/shell/theme/ws-switch-arrow-up.png");
     background-size: 32px;
@@ -748,7 +751,7 @@ StScrollBar {
   }
 
   .ws-switcher-active-up { background-image: url("ws-switch-arrow-up.svg"); }
-  .ws-switcher-active-down { background-image: url("ws-switch-arrow-down.svg"); }
+  .ws-switcher-active-down {background-image: url("ws-switch-arrow-down.svg"); }
 
   .ws-switcher-box {
     height: 50px;
