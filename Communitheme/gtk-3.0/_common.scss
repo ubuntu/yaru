@@ -4530,8 +4530,10 @@ button.titlebutton {
   padding: 2px;
 
   &:not(.close) {
-    @include draw_circle($c) ;
-    &:backdrop:hover{@include draw_circle(darken($headerbar_fg_color,50%), $close:true)}
+    &:hover {
+      @include draw_circle($c) ;
+      &:backdrop:hover{@include draw_circle(darken($headerbar_fg_color,50%), $close:true)}
+    }
   }
 
   &.close {
