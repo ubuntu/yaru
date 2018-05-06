@@ -1675,7 +1675,7 @@ StScrollBar {
 
   .notification-actions {
     padding-top: 0;
-    border-top: 1px solid $light_borders_color;
+    border-top: 1px solid lighten($light_borders_color,10%);
     spacing: 0px;
   }
 
