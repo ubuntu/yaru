@@ -74,8 +74,8 @@ stage {
   &:hover { @include button(hover, $c, $tc);}
   &:focus:hover { @include button(focus-hover, $c, $tc); }
   &:insensitive { @include button(insensitive, $c, $tc); }
-  &:hover, &:focus:hover {background-color: rgba(0, 0, 0, 0.10);}
-  &:active, &:focus:active {background-color: rgba(0, 0, 0, 0.26);}
+  &:hover, &:focus:hover {background-color: $light_base_hover_color;}
+  &:active, &:focus:active {background-color: $light_base_active_color;}
   padding: 12px;
   border-top: 1px solid $light_borders_color;
 
@@ -336,7 +336,7 @@ StScrollBar {
   }
 
   .end-session-dialog-app-list-item-description {
-    color: $caption_fg_color; // darken($fg_color,5%);
+    color: $dark_fg_color; // darken($fg_color,5%);
     font-size: 10pt;
   }
 
@@ -487,8 +487,8 @@ StScrollBar {
     //@extend %dialog_window;
     //border: 1px solid darken(white, 20%);
     border-radius: 12px;
-    &:hover, &:focus:hover {background-color: rgba(0, 0, 0, 0.10);}
-    &:active, &:focus:active {background-color: rgba(0, 0, 0, 0.26);}
+    &:hover, &:focus:hover {background-color: $light_base_hover_color;}
+    &:active, &:focus:active {background-color: $light_base_active_color;}
   }
 
   .audio-selection-device-box {
@@ -628,7 +628,7 @@ StScrollBar {
 
   .osd-monitor-label { font-size: 3em; }
   .level {
-    $c: $dark_fill;
+    $c: darken($dark_fill,15%);
     height: 0.3em;
     border-radius: 0.3em;
     background-color: $c;
@@ -686,9 +686,9 @@ StScrollBar {
   }
 
   .switcher-list .item-box:selected {
-    background-color: rgba(0, 0, 0, 0.26);
+    background-color: $light_base_active_color;
     border-radius: $small_radius;
-    color: white;
+    color: $dark_fg_color;
   }
 
   .switcher-list .thumbnail-box {
@@ -726,7 +726,9 @@ StScrollBar {
 .workspace-switcher-group { padding: 12px; }
 
   .workspace-switcher-container {
-    @extend %osd-panel;
+    @extend %dialog_window;
+    padding: 5px;
+    border-radius: $medium_radius;
   }
 
   .workspace-switcher {
@@ -739,7 +741,8 @@ StScrollBar {
 
   .ws-switcher-active-up, .ws-switcher-active-down {
     height: 50px;
-    background-color: $selected_bg_color;
+    background-color: transparentize($dark_fg_color, 0.60);
+;
     color: $selected_fg_color;
     //background-image: url("resource:///org/gnome/shell/theme/ws-switch-arrow-up.png");
     background-size: 32px;
@@ -747,7 +750,7 @@ StScrollBar {
   }
 
   .ws-switcher-active-up { background-image: url("ws-switch-arrow-up.svg"); }
-  .ws-switcher-active-down { background-image: url("ws-switch-arrow-down.svg"); }
+  .ws-switcher-active-down {background-image: url("ws-switch-arrow-down.svg"); }
 
   .ws-switcher-box {
     height: 50px;
@@ -1136,7 +1139,7 @@ StScrollBar {
           }
 
           .message-icon-bin > StIcon {
-            color: darken($inactive_element_color,10%);
+            color: $inactive_element_color;
             icon-size: 1.09em;
             -st-icon-style: symbolic;
           }
@@ -1652,10 +1655,13 @@ StScrollBar {
     &, &:focus, &:active {
       & { background-color: transparentize(white,0.10); }
       .message-title { color: $jet; }
-      .message-content { color: $inkstone; }
+      .message-content { color: $inkstone;
+       }
     }
     &:hover { background: white; }
-
+    .message-icon-bin > StIcon {
+     color: $inkstone;
+    }
   }
 
   .notification-icon { padding: 5px; background-color: black;}
