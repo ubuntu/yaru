@@ -4538,7 +4538,7 @@ button.titlebutton {
 
   &.close {
     @include draw_circle($selected_bg_color, $close:true);
-    &:backdrop{@include draw_circle(darken($headerbar_fg_color,60%), $close:true)}
+    &:backdrop{@include draw_circle(transparent, $close:true)}
     &:backdrop:hover{@include draw_circle(darken($headerbar_fg_color,50%), $close:true)}
   }
 }
