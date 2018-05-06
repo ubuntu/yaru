@@ -1513,6 +1513,7 @@ headerbar {
   padding: 0 6px;
   min-height: 40px;
   border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
+  border-top-color: $inkstone;
   border-style: solid;
   border-width: 1px 1px 0 1px;
   border-radius: 0;
@@ -1782,6 +1783,7 @@ headerbar {
   .tiled-left &,
   .maximized &,
   .fullscreen & {
+    border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
     &.selection-mode { border: none; }
 
     &:backdrop, & {
