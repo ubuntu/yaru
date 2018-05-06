@@ -2652,7 +2652,7 @@ scrollbar {
 
   &.overlay-indicator {
     &:not(.dragging):not(.hovering) {
-      border-color: transparent;
+      border-style: none;
       // opacity: 0.8;
       background-color: transparent;
 
@@ -2660,7 +2660,7 @@ scrollbar {
         margin: 2px;
         min-width: 3px;
         min-height: 3px;
-        // background-color: $fg_color;
+        background-color: $fg_color;
         border: 1px solid if($variant == 'light', transparentize(white, 0.8), transparentize(black, 0.8));
       }
 
@@ -2701,7 +2701,8 @@ scrollbar {
 
     &.dragging,
     &.hovering {
-      background-color: transparentize($scrollbar_bg_color, 0.2);
+      border-style: none;
+      background-color: transparent;
 
       &:backdrop { background-color: transparentize($backdrop_scrollbar_bg_color, 0.2); }
     }
