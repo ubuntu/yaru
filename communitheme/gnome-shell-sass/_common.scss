@@ -336,7 +336,7 @@ StScrollBar {
   }
 
   .end-session-dialog-app-list-item-description {
-    color: $caption_fg_color; // darken($fg_color,5%);
+    color: $dark_fg_color; // darken($fg_color,5%);
     font-size: 10pt;
   }
 
@@ -686,10 +686,9 @@ StScrollBar {
   }
 
   .switcher-list .item-box:selected {
-    background-color: $light_base_hover_color;
-    border-radius: $small_radius $small_radius 0 0;
+    background-color: $light_base_active_color;
+    border-radius: $small_radius;
     color: $dark_fg_color;
-    box-shadow: inset 0 -4px (color) $selected_bg_color;
   }
 
   .switcher-list .thumbnail-box {
