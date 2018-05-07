@@ -58,7 +58,7 @@ list.tweak-categories separator {
     border-radius: 0 0 $small_radius $small_radius;
   }
 
-  separator { background-image: image(rgba(0, 0, 0, 0.04)); }
+  separator, separator:backdrop { background-image: image(rgba(0, 0, 0, 0.04)); }
 }
 
 .nautilus-desktop-window {
