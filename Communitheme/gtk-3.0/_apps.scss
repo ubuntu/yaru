@@ -13,6 +13,8 @@ list.tweak-categories separator {
 .nautilus-window {
   // keep details box visible
   // details box looks ugly when many items are selected and it floats above the orange
+
+  background-color: $bg_color;
   paned box.floating-bar {
     background: $bg_color;
     border: 1px solid $borders_color;
@@ -21,9 +23,13 @@ list.tweak-categories separator {
   .searchbar-container searchbar {
     // get rid of a 1px white line shown at the top of the window
     // applies to the desktop too
-    background: transparent;
+    background: $bg_color;
     border-color: transparent;
   }
+
+  scrolledwindow,
+  scrolledwindow treeview,
+  scrolledwindow treeview header button { background-color: $bg_color; }
 
   scrolledwindow widget.view:selected {
     // reduces orangeness of selected folder icons
@@ -40,15 +46,8 @@ list.tweak-categories separator {
     &.dnd { border-style: none; }
   }
 
-  notebook > stack grid:not(.nautilus-list-view) {
-    padding-top: 2px;
-  }
-
-  notebook > stack grid:not(.nautilus-list-view) > scrolledwindow {
-    padding-top: 15px;
-  }
-
   notebook > header > tabs > tab {
+    &:checked { background-color: $bg_color; }
     margin-right: 9px;
   }
 
