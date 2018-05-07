@@ -1,26 +1,32 @@
-# communitheme-snap-helpers
-Various build and run helper for communitheme snap
+# Communitheme Snap Helpers
+
+Various build and run helper for communitheme snap.
 
 Snap build status: [![Build Status](https://travis-ci.org/ubuntu/communitheme-snap-helpers.svg?branch=master)](https://travis-ci.org/ubuntu/communitheme-snap-helpers)
 
-## Testing communitheme snap
+## Testing communitheme snap on Ubuntu 18.04 (bionic beaver)
 
 We're currently still developing the theme, but you can try it out for yourself. Be warned though, this is a pre-release alpha state. These packages are mainly intended for the Communitheme designers to get a sense of what actually works in Ubuntu. **Many icons are missing, some stuff is just a white squircle. You will find issues and stuff will break.**
 
-You can install the **communitheme** snap and try it on Ubuntu 18.04 LTS by simply running: `snap install communitheme` or from the Ubuntu Software application.
+*Note that these steps only work on Ubuntu 18.04 (bionic beaver).*
 
-Restart your computer, the login screen will use Communitheme by default. Select the "Ubuntu with communitheme snap" session from the login screen (click the gear) and login.
+Follow these steps in order to install and enable communitheme.
 
-You should enter your normal user session with the GNOME Shell, application and icon themes applied, as well as a new set
-of sound notifications and cursor.
+1. Install the communitheme snap on 18.04 by installing `communitheme` in the Ubuntu Software Application or running `snap install communitheme`.
+2. Restart your computer. The login screen will now use Communitheme by default. Click on your user, click on the gear icon ans select the "Ubuntu with communitheme snap" session from the login screen, and login.
+3. Now everything is using the communitheme including applications, icons, sound notifications and cursor. Any new update of communitheme will come directly to you on a regular basis thanks to the snap without having to run any command!
 
-Any new update of communitheme will come directly to you on a regular basis thanks to the snap without having to run any command!
-
+<!--  TODO: uncomment this when communitheme-set-default is in the store.
 If this is not the case, it can be due to your settings not being the default. You can reset them by installing the **communitheme-set-default** snap, via: `snap install communitheme-set-default --classic`.
 
 Then, just run `sudo communitheme-set-default` in a terminal to reset the session. It will as well set it as default in the login screen at next reboot.
 
 If you want to reset default login screen theme, you can run `sudo communitheme-set-default remove`.
+-->
+
+The following video guides you through these steps.
+
+[![Video guide](https://img.youtube.com/vi/azlreXxAigY/0.jpg)](https://www.youtube.com/watch?v=azlreXxAigY)
 
 ### Tracking latest of latest
 
