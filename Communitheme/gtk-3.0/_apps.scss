@@ -41,9 +41,16 @@ list.tweak-categories separator {
   }
 
   notebook > stack grid:not(.nautilus-list-view) {
+    padding-top: 2px;
+  }
+
+  notebook > stack grid:not(.nautilus-list-view) > scrolledwindow {
     padding-top: 15px;
   }
 
+  notebook > header > tabs > tab {
+    margin-right: 9px;
+  }
 
   menu menuitem:first-child:hover {
     // context menu in nautilus has its last-child labeled as its first child lol
