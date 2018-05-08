@@ -88,7 +88,7 @@
     background-color: $_bg;
     border-color: if($c != $base_color, $hb_pathbar_border_backdrop, $backdrop_borders_color);
     box-shadow: $_blank_edge;
-    color: $_tc
+    color: $_tc;
 
     label, & { color:  $backdrop_text_color; }
   }
