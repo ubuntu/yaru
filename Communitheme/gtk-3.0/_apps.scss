@@ -57,6 +57,8 @@ list.tweak-categories separator {
     // using :hover for specificity bump
     border-radius: 0 0 $small_radius $small_radius;
   }
+
+  separator, separator:backdrop { background-image: image(rgba(0, 0, 0, 0.05)); }
 }
 
 .nautilus-desktop-window {
