@@ -1934,8 +1934,8 @@ StScrollBar {
 
   StEntry {
     @include entry(normal, $tc: $slate, $c: $porcelain);
-    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.5));}
-    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);}
+    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.1));}
+    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);color: lighten($insensitive_fg_color,40%);}
   }
 
   .modal-dialog-button-box { spacing: 3px; }
