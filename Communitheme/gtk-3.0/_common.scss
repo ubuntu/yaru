@@ -1583,7 +1583,7 @@ headerbar {
       border-color: $hb_button_bg_hover;
     }
 
-    button, button.flat {
+    button, button.flat, button.titlebutton.appmenu {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
                           (":active, &:checked", "active"),
@@ -4550,7 +4550,7 @@ button.titlebutton {
   min-width: 24px;
   padding: 2px;
 
-  &:not(.close) {
+  &:not(.close):not(.appmenu){
     &:hover {
       @include draw_circle($c) ;
       &:backdrop:hover{@include draw_circle(darken($headerbar_fg_color,50%), $close:true)}
