@@ -1583,7 +1583,7 @@ headerbar {
       border-color: $hb_button_bg_hover;
     }
 
-    button, button.flat {
+    button, button.flat, button.titlebutton.appmenu {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
                           (":active, &:checked", "active"),
@@ -4556,19 +4556,6 @@ button.titlebutton {
       &:backdrop:hover{@include draw_circle(darken($headerbar_fg_color,50%), $close:true)}
     }
   }
-  &.appmenu{
-    @each $state, $t in ("", "normal"),
-                        (":hover", "hover"),
-                        (":active, &:checked", "active"),
-                        (":disabled", "insensitive"),
-                        (":disabled:active, &:disabled:checked", "insensitive-active"),
-                        (":backdrop", "backdrop"),
-                        (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
-                        (":backdrop:disabled", 'backdrop-insensitive'),
-                        (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-                          &#{$state} { @include button($t, $c, $tc, $flat:true); }
-                        }
-    }
 
   &.close {
     @include draw_circle($selected_bg_color, $close:true);
