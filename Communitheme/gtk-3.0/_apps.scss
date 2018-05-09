@@ -40,14 +40,6 @@ list.tweak-categories separator {
     &.dnd { border-style: none; }
   }
 
-  notebook > stack grid:not(.nautilus-list-view) {
-    padding-top: 2px;
-  }
-
-  notebook > stack grid:not(.nautilus-list-view) > scrolledwindow {
-    padding-top: 15px;
-  }
-
   notebook > header > tabs > tab {
     margin-right: 9px;
   }
