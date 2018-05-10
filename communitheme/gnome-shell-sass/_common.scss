@@ -546,7 +546,7 @@ StScrollBar {
 
   .popup-menu-arrow { } //defined globally in the TOP BAR
   .popup-sub-menu {
-    background-color: transparentize(lighten($bg, 15%), ($popover-alpha-value * 35));
+    background-color: transparentize(darken($base_active_color,70%), ($popover-alpha-value));
     box-shadow: inset 0 -1px 0px $bc;
   }
 
@@ -558,7 +558,7 @@ StScrollBar {
     &:ltr { padding: .4em 1.75em .4em 0em; }
     &:rtl { padding: .4em 0em .4em 1.75em; }
     &:checked {
-      background-color: darken($bg, 2%);
+      background-color: darken($base_active_color,50%);
       box-shadow: inset 0 -1px 0px $bc;
       border-top-color: $bc;
       font-weight: bold;
@@ -601,7 +601,7 @@ StScrollBar {
     height: 1px; //not really the whole box
     margin: 6px 64px;
     background-color: transparent;
-    border-color: $osd_borders_color;
+    border-color: $osd_separator_color;
     border-bottom-width: 1px;
     border-bottom-style: solid;
   }
@@ -953,7 +953,7 @@ StScrollBar {
     .datemenu-displays-box { spacing: 1em; }
 
     .datemenu-calendar-column {
-      border: 0 solid lighten($bg_color,7%);
+      border: 0 solid $osd_separator_color;
       &:ltr { border-left-width: 1px; }
       &:rtl { border-right-width: 1px; }
     }
