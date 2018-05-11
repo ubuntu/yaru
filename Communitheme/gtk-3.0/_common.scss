@@ -4513,9 +4513,10 @@ decoration {
   // server-side decorations as used by mutter
   .ssd & { box-shadow: none; }
 
+  //These shadows are applied to the context-menu!
   .csd.popup & {
     border-radius: $small_radius;
-    box-shadow: 0 1px 2px transparentize(black, 0.8),
+    box-shadow: 0 2px 5px transparentize(black, 0.75),
                 0 0 0 1px transparentize($_wm_border, 0.1);
   }
 
