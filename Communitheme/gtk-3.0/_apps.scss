@@ -79,56 +79,63 @@ terminal-window {
     }
   }
 
+  notebook > header.top > tabs > tab {
+    &:checked {
+      color: $terminal_fg_color;
+      border-bottom: 2px solid darken($orange, 10%);
+    }
+  }
+
   notebook {
     // inherits from notebook header
     > header {
       border-color: $terminal_borders_color;
-      background-color: $terminal_base_color;
+      background-color: $headerbar_bg_color;
 
       button.flat {
         color: $terminal_fg_color;
-          @each $state, $t in   (':hover', 'hover'), (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
-                                (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-          &#{$state} { @include button($t, lighten($terminal_base_color, 3%), white, $flat:false); } }
+        @each $state, $t in   (':hover', 'hover'), (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
+        (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
+        &#{$state} { @include button($t, darken($headerbar_bg_color, 5%), white, $flat:false); } }
 
-          &, &:backdrop { &, &:disabled { background-color: transparent; border-color: transparent; } }
+        &, &:backdrop { &, &:disabled { background-color: transparent; border-color: transparent; } }
       }
 
       &:backdrop {
         border-color: _backdrop_color($terminal_borders_color);
-        background-color: _backdrop_color($terminal_base_color);
+        background-color: _backdrop_color($backdrop_headerbar_bg_color);
       }
 
       tab {
-        color: $terminal_fg_color;
+        color: $ash;
 
         &:hover:not(:active):not(:backdrop):not(:checked) {
-          background-color: lighten($terminal_base_color, 3%);
+          background-color: $headerbar_bg_color; //lighten($headerbar_bg_color, 3%);
           border-color: $terminal_borders_color;
         }
 
         &:hover:not(:active):not(:backdrop) {
-          background-color: $terminal_base_color;
+          background-color: $headerbar_bg_color;
           border-color: $terminal_borders_color;
         }
 
         &:hover:checked:not(:backdrop) {
-          background-color: $terminal_bg_color;
+          background-color: $hb_button_bg_hover;
           border-color: $terminal_borders_color;
-          border-bottom-color: transparent;
+          border-bottom: 2px solid $orange;
         }
 
         &:backdrop {
-          &, label { color: $backdrop_selected_fg_color; }
+          &, label { color: $ash; }
         }
 
         &:checked {
           color: $terminal_fg_color;
-          background-color: $terminal_bg_color;
+          background-color: lighten($headerbar_bg_color, 5%);
           border-color: $terminal_borders_color;
 
           &:backdrop {
-            background-color: _backdrop_color($terminal_bg_color);
+            background-color: $backdrop_headerbar_bg_color;
             border-color: _backdrop_color($terminal_borders_color);
             border-bottom-color: transparent;
             color: _backdrop_color($terminal_fg_color);
