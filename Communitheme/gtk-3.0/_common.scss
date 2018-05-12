@@ -1205,13 +1205,7 @@ spinbutton {
       &:dir(rtl) { border-style: none solid none none; }
 
       &:hover {
-        color: $fg_color;
-        @if $variant==light {
-          box-shadow: 0 0 1px 1px transparentize(black, 0.7);
-        }
-        @else {
-          background-color: $base_hover_color;
-        }
+        background-color: darken(white, 5%);
       }
 
       &:disabled {
