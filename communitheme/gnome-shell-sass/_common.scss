@@ -624,7 +624,7 @@ StScrollBar {
   margin: 32px;
   min-width: 64px;
   min-height: 64px;
-  @extend %dialog_window;
+  @extend %osd-panel;
 
   .osd-monitor-label { font-size: 3em; }
   .level {
@@ -666,8 +666,8 @@ StScrollBar {
 
 .switcher-list {
   // borders and padding taking from %osd-panel
-  @extend %dialog_window;
-  border: 1px solid $light_borders_color;
+  @extend %osd-panel;
+  //border: 1px solid $light_borders_color;
   border-radius: $large_radius;
   padding: 12px;
 }
@@ -677,18 +677,21 @@ StScrollBar {
   .switcher-list .item-box {
     padding: 8px;
     border-radius: $small_radius;
-    color: $dark_subtext_color;
+    //color: $dark_subtext_color;
+    color: $fg_color;
   }
 
   .switcher-list .item-box:outlined {
     padding: 6px;
-    border: 1px solid $light_borders_color;
+    //border: 1px solid $light_borders_color;
   }
 
   .switcher-list .item-box:selected {
-    background-color: $light_base_active_color;
+    //background-color: $light_base_active_color;
+    background-color: $base_active_color;
     border-radius: $small_radius;
-    color: $dark_fg_color;
+    //color: $dark_fg_color;
+    color: $fg_color;
   }
 
   .switcher-list .thumbnail-box {
@@ -726,7 +729,7 @@ StScrollBar {
 .workspace-switcher-group { padding: 12px; }
 
   .workspace-switcher-container {
-    @extend %dialog_window;
+    @extend %osd-panel;
     padding: 5px;
     border-radius: $medium_radius;
   }
@@ -741,8 +744,8 @@ StScrollBar {
 
   .ws-switcher-active-up, .ws-switcher-active-down {
     height: 50px;
-    background-color: transparentize($dark_fg_color, 0.60);
-;
+    //background-color: transparentize($dark_fg_color, 0.60);
+    background-color: transparentize($fg_color, 0.60);
     color: $selected_fg_color;
     //background-image: url("resource:///org/gnome/shell/theme/ws-switch-arrow-up.png");
     background-size: 32px;
@@ -776,7 +779,7 @@ StScrollBar {
 
   StEntry {
     $_bg: $light_base_color;
-    $_fg: $inkstone;
+    $_fg: $dark_fg_color;
     @include entry(normal, $tc: $_fg, $c: $_bg);
     &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
     &:insensitive { @include entry(insensitive, $tc: $_fg, $c: $_bg);}
@@ -1654,13 +1657,13 @@ StScrollBar {
 
     &, &:focus, &:active {
       & { background-color: transparentize($light_base_color,0.10); }
-      .message-title { color: $jet; }
-      .message-content { color: $inkstone;
+      .message-title { color: darken($dark_fg_color, 10%); }
+      .message-content { color: $dark_fg_color;
        }
     }
     &:hover { background: $light_base_color; }
     .message-icon-bin > StIcon {
-     color: $inkstone;
+     color: $dark_fg_color;
     }
   }
 
@@ -1698,7 +1701,7 @@ StScrollBar {
     min-height: 35px;
     padding: 0 16px;
     background-color: transparent;
-    color: $inkstone;
+    color: $dark_fg_color;
     font-weight: 500;
     &:selected { border: none;}
     border: none;
@@ -1748,13 +1751,13 @@ StScrollBar {
   }
   .hotplug-notification-item {
     padding: 2px 10px;
-    color: $inkstone;
+    color: $dark_fg_color;
 
     @include button(undecorated);
     border-radius: 0 0 $medium_radius $medium_radius;
     &:focus { padding: 1px 71px 1px 11px; }
-    &:hover { background-color: $silk;}
-    &:active { background-color: rgba(0, 0, 0, 0.26); border: none;}
+    &:hover { background-color: $light_base_hover_color;}
+    &:active { background-color: $light_base_active_color; border: none;}
   }
 
   .hotplug-notification-item-icon {
@@ -1787,7 +1790,7 @@ StScrollBar {
   .hotplug-resident-eject-button {
     padding: 7px;
     border-radius: 5px;
-    color: $inkstone;
+    color: $dark_fg_color;
   }
 
 /* Eeeky things */
@@ -1931,8 +1934,8 @@ StScrollBar {
 
   StEntry {
     @include entry(normal, $tc: $slate, $c: $porcelain);
-    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.5));}
-    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);}
+    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.1));}
+    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);color: lighten($insensitive_fg_color,40%);}
   }
 
   .modal-dialog-button-box { spacing: 3px; }
@@ -1946,13 +1949,14 @@ StScrollBar {
       padding-bottom: 5px;
       padding-top: 5px;
       border: none;
-      @include button(normal, $c:transparentize($fg_color, 0.85));
-      &:hover,&:focus { @include button(hover, $c:transparentize($fg_color, 0.80)); }
-      &:active { @include button(active, $c:transparentize($fg_color, 0.90)); }
-      &:insensitive { @include button(insensitive, $c:transparentize($fg_color, 0.50)); }
+      @include button(normal, $c:$success_color);
+      &:hover { @include button(hover, $c:transparentize($success_color, 0.20)); }
+      &:hover:active { @include button(hover-active, $c:transparentize($success_color, 0.20)); }
+      &:focus { @include button(focus, $c:transparentize($success_color, 0.30)); color: $fg_color; }
+      &:active { @include button(active, $c:transparentize($success_color, 0.30)); color: $fg_color; }
+      &:insensitive { @include button(insensitive, $c:transparentize($success_color, 0.40)); color: $fg_color;}
     }
   }
-
 }
 
   .login-dialog-logo-bin { padding: 24px 0px; }
