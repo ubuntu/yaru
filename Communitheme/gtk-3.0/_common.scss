@@ -2820,8 +2820,8 @@ switch {
   .content-view .tile check#{$s}:not(list) {
     -gtk-icon-source: -gtk-scaled(url("assets/checkbox#{$as}.png"), url("assets/checkbox#{$as}@2.png"));
     background-color: transparent;
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 30px;
+    min-height: 30px;
     background-image: none;
     transition: none;
     box-shadow: none;
@@ -4563,15 +4563,11 @@ button.titlebutton {
   &:not(.close):not(.appmenu){
     &:hover {
       @include draw_circle($c) ;
-      &:backdrop:hover{@include draw_circle(darken($headerbar_fg_color,50%), $close:true)}
     }
   }
 
   &.close {
     @include draw_circle($selected_bg_color, $close:true);
-    &:backdrop{@include draw_circle(transparent, $close:true)}
-    &:backdrop:hover{@include draw_circle(darken($headerbar_fg_color,50%), $close:true)}
-    &:backdrop:active{@include draw_circle(darken($headerbar_fg_color,40%), $close:true)}
   }
 }
 
