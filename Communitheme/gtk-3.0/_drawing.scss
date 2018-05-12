@@ -769,11 +769,14 @@ $circle_size: 20px / $button_size / 2;
 @if $close == true {
   &:backdrop {
     color: $headerbar_fg_color;
-    background-image: -gtk-gradient(radial,
+    &:backdrop:hover {
+      $_bg: lighten($headerbar_bg_color, 25%);
+      background-image: -gtk-gradient(radial,
                                     center center, 0,
                                     center center, $circle_size,
-                                    to($c),
+                                    to($_bg),
                                     to(transparent));
+    }
     }
   }
 }
