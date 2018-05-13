@@ -2208,7 +2208,7 @@ menu,
 .menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
-  // padding: 2px;
+  padding: 3px 0;
   background-color: transparent;//$menu_color;
   color: $text_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
@@ -2228,8 +2228,6 @@ menu,
 
     &:hover {
       background-color: $base_hover_color;
-      &:first-child { border-radius: $small_radius $small_radius 0 0; }
-      &:last-child { border-radius: 0 0 $small_radius $small_radius; }
     }
 
     &:disabled {
@@ -2241,16 +2239,6 @@ menu,
     &:backdrop:hover {
       color: $backdrop_fg_color;
       background-color: transparent;
-    }
-
-    &:first-child {
-      border-top-right-radius: $small_radius;
-      border-top-left-radius: $small_radius;
-    }
-
-    &:last-child {
-      border-bottom-right-radius: $small_radius;
-      border-bottom-left-radius: $small_radius;
     }
 
     // submenu indicators
