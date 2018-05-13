@@ -2181,7 +2181,8 @@ menubar,
   padding: 0px;
 
   &:backdrop {
-    background-color: $backdrop_menubar_bg_color; color: $backdrop_headerbar_text_color;
+    background-color: $backdrop_headerbar_bg_color;
+    color: $backdrop_headerbar_text_color;
     & label { color: $backdrop_fg_color; }
   }
 
