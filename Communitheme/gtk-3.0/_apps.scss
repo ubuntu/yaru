@@ -95,11 +95,24 @@ terminal-window {
 
       button.flat {
         color: $terminal_fg_color;
-        @each $state, $t in   (':hover', 'hover'), (':active, &:checked', 'active'), (':backdrop', 'backdrop'),
-        (':backdrop:disabled', 'backdrop-insensitive'), (':disabled', 'insensitive') {
-        &#{$state} { @include button($t, darken($headerbar_bg_color, 5%), white, $flat:false); } }
+        @each $state, $t in (':hover', 'hover'),
+                            (':active, &:checked', 'active'),
+                            (':backdrop', 'backdrop'),
+                            (':backdrop:disabled', 'backdrop-insensitive'),
+                            (':disabled', 'insensitive') {
+            &#{$state} {
+              @include button($t, $headerbar_bg_color, $headerbar_bg_color, $flat:true);
+              color: white;
+            }
+        }
 
-        &, &:backdrop { &, &:disabled { background-color: transparent; border-color: transparent; } }
+        &:backdrop { color: $backdrop_headerbar_fg_color; }
+        &, &:backdrop {
+          &, &:disabled {
+            background-color: transparent;
+            border-color: transparent;
+          }
+        }
       }
 
       &:backdrop {
