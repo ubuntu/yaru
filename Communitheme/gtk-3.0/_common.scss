@@ -4505,9 +4505,6 @@ decoration {
     box-shadow: 0 2px 5px transparentize(black, 0.75),
                 0 0 0 1px transparentize($_wm_border, 0.1);
   }
-  .background.csd.popup & {
-    border-radius: 0 0 $small_radius $small_radius;
-  }
 
   tooltip.csd & {
     border-radius: 5px;
