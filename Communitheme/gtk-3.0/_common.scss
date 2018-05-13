@@ -2208,7 +2208,7 @@ menu,
 .menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
-  padding: 3px 0;
+  padding: 4px 0;
   background-color: transparent;//$menu_color;
   color: $text_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
@@ -4498,12 +4498,15 @@ decoration {
   // server-side decorations as used by mutter
   .ssd & { box-shadow: none; }
 
-  //These shadows are applied to the context-menu!
+  //These shadows and border-radius are applied to the context-menu 's
   .csd.popup & {
     border-radius: $small_radius;
     background-color: $menu_color;
     box-shadow: 0 2px 5px transparentize(black, 0.75),
                 0 0 0 1px transparentize($_wm_border, 0.1);
+  }
+  .background.csd.popup & {
+    border-radius: 0 0 $small_radius $small_radius;
   }
 
   tooltip.csd & {
