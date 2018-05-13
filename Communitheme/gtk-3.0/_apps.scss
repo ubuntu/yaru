@@ -82,6 +82,7 @@ terminal-window {
   notebook > header.top > tabs > tab {
     &:checked {
       color: $terminal_fg_color;
+      border-color: $inkstone;
       border-bottom: 2px solid darken($orange, 10%);
     }
   }
@@ -89,7 +90,7 @@ terminal-window {
   notebook {
     // inherits from notebook header
     > header {
-      border-color: $terminal_borders_color;
+      border-color: $inkstone;
       background-color: $headerbar_bg_color;
 
       button.flat {
@@ -107,21 +108,24 @@ terminal-window {
       }
 
       tab {
+        $_border_color: transparentize(_border_color($menubar_bg_color), 0.8);
+
         color: $ash;
 
         &:hover:not(:active):not(:backdrop):not(:checked) {
-          background-color: $headerbar_bg_color; //lighten($headerbar_bg_color, 3%);
-          border-color: $terminal_borders_color;
+          background-color: $headerbar_bg_color;
+          border-color: $_border_color;
+          border-bottom-color: $inkstone;
         }
 
         &:hover:not(:active):not(:backdrop) {
           background-color: $headerbar_bg_color;
-          border-color: $terminal_borders_color;
+          border-color: $_border_color;
         }
 
         &:hover:checked:not(:backdrop) {
-          background-color: $hb_button_bg_hover;
-          border-color: $terminal_borders_color;
+          background-color: lighten($headerbar_bg_color, 6%);
+          border-color: $inkstone;
           border-bottom: 2px solid $orange;
         }
 
@@ -131,12 +135,12 @@ terminal-window {
 
         &:checked {
           color: $terminal_fg_color;
-          background-color: lighten($headerbar_bg_color, 5%);
-          border-color: $terminal_borders_color;
+          background-color: lighten($headerbar_bg_color, 4%);
+          border-color: $_border_color;
 
           &:backdrop {
             background-color: $backdrop_headerbar_bg_color;
-            border-color: _backdrop_color($terminal_borders_color);
+            border-color: _backdrop_color($_border_color);
             border-bottom-color: transparent;
             color: _backdrop_color($terminal_fg_color);
           }
@@ -146,7 +150,7 @@ terminal-window {
 
     scrollbar {
       // inherits from scrollbar
-      $_scrollbar_bg: darken($terminal_bg_color, 5%);
+      $_scrollbar_bg: darken($headerbar_bg_color, 5%);
       $_scrollbar_bc: darken($terminal_borders_color, 5%);
       background-color: $_scrollbar_bg;
       border-color: $_scrollbar_bc;
