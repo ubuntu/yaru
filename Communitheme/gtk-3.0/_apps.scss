@@ -13,6 +13,8 @@ list.tweak-categories separator {
 .nautilus-window {
   // keep details box visible
   // details box looks ugly when many items are selected and it floats above the orange
+  *scrolledwindow:backdrop { opacity: 0.95; }
+   // Makes icons less bright in backdrop
   paned box.floating-bar {
     background: $bg_color;
     border: 1px solid $borders_color;
@@ -62,8 +64,6 @@ list.tweak-categories separator {
   }
 }
 
-// Makes icons less bright in backdrop
-*scrolledwindow:backdrop { opacity: 0.95; }
 
 /***********
  * Terminal *
