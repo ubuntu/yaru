@@ -2817,8 +2817,8 @@ switch {
   .content-view .tile check#{$s}:not(list) {
     -gtk-icon-source: -gtk-scaled(url("assets/checkbox#{$as}.png"), url("assets/checkbox#{$as}@2.png"));
     background-color: transparent;
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 30px;
+    min-height: 30px;
     background-image: none;
     transition: none;
     box-shadow: none;
