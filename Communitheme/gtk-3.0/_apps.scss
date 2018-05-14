@@ -44,12 +44,6 @@ list.tweak-categories separator {
     margin-right: 9px;
   }
 
-  menu menuitem:first-child:hover {
-    // context menu in nautilus has its last-child labeled as its first child lol
-    // using :hover for specificity bump
-    border-radius: 0 0 $small_radius $small_radius;
-  }
-
   separator, separator:backdrop { background-image: image(rgba(0, 0, 0, 0.05)); }
 }
 

@@ -2208,11 +2208,11 @@ menu,
 .menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
-  // padding: 2px;
-  background-color: $menu_color;
+  padding: 4px 0;
+  background-color: transparent;//$menu_color;
   color: $text_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
-  border-radius: $small_radius;
+  border-radius: 0px;//$small_radius;
 
   .csd & { border: none; }  // axes borders in a composited env
 
@@ -2228,8 +2228,6 @@ menu,
 
     &:hover {
       background-color: $base_hover_color;
-      &:first-child { border-radius: $small_radius $small_radius 0 0; }
-      &:last-child { border-radius: 0 0 $small_radius $small_radius; }
     }
 
     &:disabled {
@@ -2241,16 +2239,6 @@ menu,
     &:backdrop:hover {
       color: $backdrop_fg_color;
       background-color: transparent;
-    }
-
-    &:first-child {
-      border-top-right-radius: $small_radius;
-      border-top-left-radius: $small_radius;
-    }
-
-    &:last-child {
-      border-bottom-right-radius: $small_radius;
-      border-bottom-left-radius: $small_radius;
     }
 
     // submenu indicators
@@ -4510,9 +4498,10 @@ decoration {
   // server-side decorations as used by mutter
   .ssd & { box-shadow: none; }
 
-  //These shadows are applied to the context-menu!
+  //These shadows and border-radius are applied to the context-menu 's
   .csd.popup & {
     border-radius: $small_radius;
+    background-color: $menu_color;
     box-shadow: 0 2px 5px transparentize(black, 0.75),
                 0 0 0 1px transparentize($_wm_border, 0.1);
   }
