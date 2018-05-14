@@ -6,7 +6,7 @@
 $base_color: if($variant == 'light', #FFFFFF, $inkstone);
 $bg_color: if($variant == 'light', #FAFAFA, $inkstone);
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
-$text_color: if($variant == 'light', #2D2D2D, $silk);
+$text_color: if($variant == 'light', #2D2D2D, $porcelain);
 //
 $selected_fg_color: #ffffff;
 $selected_bg_color: $orange;
