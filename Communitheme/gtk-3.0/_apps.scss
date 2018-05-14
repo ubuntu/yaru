@@ -62,6 +62,9 @@ list.tweak-categories separator {
   }
 }
 
+// Makes icons less bright in backdrop
+*scrolledwindow:backdrop { opacity: 0.95; }
+
 /***********
  * Terminal *
  ***********/
