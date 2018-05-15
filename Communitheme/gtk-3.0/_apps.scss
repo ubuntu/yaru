@@ -265,3 +265,20 @@ headerbar button image ~ window decoration ~ menu separator {
   // no unique class names or id used here so this rule is as specific as it can be
   background: $borders_color;
 }
+
+/***********
+ * GNOME ToDo *
+ ***********/
+
+taskrow.activatable.new-task-row button.popup.toggle {
+  border-radius: 0px;
+  border: none;
+  border-left: 1px solid $borders-color;
+  padding-left: 10px; padding-right: 10px;
+
+}
+
+viewport.view, listbox.transparent {
+  background-color: $sidebar_bg_color;
+  &:backdrop { background-color: $backdrop_sidebar_bg_color;}
+}
