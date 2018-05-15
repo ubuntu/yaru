@@ -2004,6 +2004,7 @@ treeview.view {
 
   border-left-color: mix($fg_color, $base_color, 50%); // this is actually the tree lines color,
   border-top-color: transparentize(black, 0.9);        // while this is the grid lines color, better then nothing
+  background-color: $base_color;
 
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
@@ -2041,6 +2042,7 @@ treeview.view {
   &:backdrop {
     border-left-color: mix($backdrop_fg_color, $backdrop_bg_color, 50%);
     border-top: transparentize(black, 0.9);
+    background-color: $backdrop_bg_color;
   }
   &:drop(active) {
     border-style: solid none;
@@ -2154,9 +2156,12 @@ treeview.view {
   border-style: none solid solid none;
   border-color: $borders_color; // don't darken the bottom border color
   border-radius: 0;
+  background-color: $sidebar_bg_color;
 
   &:backdrop {
     border-style: none solid solid none;
+    border-color: $backdrop_borders_color;
+    background-color: $backdrop_sidebar_bg_color;
   }
 
   &:last-child { &:backdrop, & { border-right-style: none; }}
@@ -3959,9 +3964,11 @@ filechooser {
 
     background: $_bg;
     border-bottom: 1px solid $borders_color;
+    &:backdrop{background:  $backdrop_sidebar_bg_color;}
 
     .path-bar.linked button {
       background: darken($_bg, 5%);
+      &:backdrop { background: $_bg}
       &, & label { color: $text_color }
 
       &:backdrop label { color: $backdrop_text_color; }
