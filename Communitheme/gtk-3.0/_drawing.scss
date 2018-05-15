@@ -78,8 +78,8 @@
     $_bg: null;
     $_tc: null;
     @if $c == $headerbar_bg_color {
-        $_bg: lighten($hb_pathbar_bg_backdrop, 5%);
-        $_tc: $silk;
+        $_bg: $hb_button_bg_hover;
+        $_tc: $backdrop_headerbar_text_color;
     } @else {
         $_bg: _backdrop_color($c);
         $_tc: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
@@ -90,7 +90,7 @@
     box-shadow: $_blank_edge;
     color: $_tc;
 
-    label, & { color:  $backdrop_text_color; }
+    label, & { color: $_tc; }
   }
   @if $t==backdrop-insensitive {
     background-color: transparent; //if($c == $headerbar_bg_color, $graphite, transparent);
