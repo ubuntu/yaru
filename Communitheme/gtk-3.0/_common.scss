@@ -1690,6 +1690,11 @@ headerbar {
 
         margin: 0;
         border: none;
+
+        &:insensitive:checked{
+          background-color: $hb_pathbar_bg;
+          &:backdrop{ background-color: $hb_pathbar_bg_backdrop;}
+        }
       }
     }
 
