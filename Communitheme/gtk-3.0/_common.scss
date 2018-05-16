@@ -4455,7 +4455,7 @@ colorchooser .popover.osd { border-radius: 5px; }
 
   &:hover { -gtk-icon-effect: highlight; }
 
-  &:backdrop { background-color: darken($bg_color,7%); }
+  &:backdrop { background-color: $bg_color,7%; }
 
   rubberband, .rubberband { @extend rubberband; }
 }
