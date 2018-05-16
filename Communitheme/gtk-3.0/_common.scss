@@ -4451,11 +4451,11 @@ colorchooser .popover.osd { border-radius: 5px; }
  ********/
 //content view (grid/list)
 .content-view {
-  background-color: darken($bg_color,7%);
+  background-color: $bg_color;
 
   &:hover { -gtk-icon-effect: highlight; }
 
-  &:backdrop { background-color: $bg_color,7%; }
+  &:backdrop { background-color: $backdrop_bg_color; }
 
   rubberband, .rubberband { @extend rubberband; }
 }
