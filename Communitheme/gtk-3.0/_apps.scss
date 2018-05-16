@@ -13,7 +13,7 @@ list.tweak-categories separator {
 .nautilus-window {
   // keep details box visible
   // details box looks ugly when many items are selected and it floats above the orange
-  *scrolledwindow:backdrop { opacity: 0.85; }
+  *scrolledwindow:backdrop { opacity: 0.9; }
    // Makes icons less bright in backdrop
   paned box.floating-bar {
     background: $bg_color;
