@@ -1793,7 +1793,8 @@ headerbar {
   .tiled-left &,
   .maximized &,
   .fullscreen & {
-    border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
+    border-color: $inkstone; //transparentize(_border_color($headerbar_bg_color), 0.7);
+
     &.selection-mode { border: none; }
 
     &:backdrop, & {
@@ -2161,6 +2162,19 @@ treeview.view {
 /*********
  * Menus *
  *********/
+menubar {
+  tiled &,
+  .tiled-top &,
+  .tiled-right &,
+  .tiled-bottom &,
+  .tiled-left &,
+  .maximized &,
+  .fullscreen & {
+    border-left-color: $inkstone;
+    border-right-color: $inkstone;
+  }
+}
+
 menubar,
 .menubar {
   -GtkWidget-window-dragging: true;
