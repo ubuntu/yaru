@@ -255,7 +255,6 @@
   }
 
   @else if $t==active {
-    // pushed buttonge
     @if $c == $headerbar_bg_color { $_border: darken($c, 3%); }
     @if $flat == true { $c: darken($c, 5%); }
     $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
@@ -265,6 +264,14 @@
     border-color: $_border;
     border-top-color: darken($_border, 20%);
     color: $tc;
+  }
+
+  @else if $t==active-hover {
+    @if $c == $headerbar_bg_color { $_border: darken($c, 3%); }
+    @if $flat == true { $c: darken($c, 5%); }
+    $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
+
+    background-color: transparentize($_bg, 0.4);
   }
 
   @else if $t==insensitive {
