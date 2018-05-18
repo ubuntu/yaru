@@ -1551,9 +1551,8 @@ headerbar {
     }
   }
 
-  &:first-child { border-right-width: 0; }
-  &:dir(rtl):last-child { border-left-width: 0; }
-  &:dir(ltr):last-child { border-left-width: 0; }
+  &:not(:only-child):first-child { border-right-width: 0; }
+  &:not(:only-child):not(:first-child) { border-left-width: 0; };
 
   & {
     // style headerbar buttons and entries using the appropriate headerbar colors
@@ -2890,23 +2889,12 @@ radio {
 
 %check, %radio, check, radio {
   & {
+    border: 1px solid;
     // for unchecked
-    @each $state, $t in ("", "normal"), (":hover", "hover"), (":active", "active") {
+    @each $state, $t in ("", "normal"), (":hover", "hover"), (":active", "active"), (":disabled", "insensitive"), (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
       &#{$state} {
         @include check($t, white);
-        border: 1px solid $borders_color;
       }
-    }
-
-    @each $state, $t in (":disabled", "insensitive"), (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
-      &#{$state} {
-        @include check($t, white);
-        border: 1px solid transparentize($borders_color, 0.2);
-      }
-    }
-
-    &:backdrop:disabled {
-      background: transparent;
     }
   }
 

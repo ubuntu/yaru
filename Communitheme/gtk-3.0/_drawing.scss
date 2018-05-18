@@ -481,7 +481,7 @@
   }
 }
 
-@mixin check($t, $c:$button_bg_color, $tc:white) {
+@mixin check($t, $c:white, $tc:white) {
   // Check/Radio drawing function
   //
   // $t:    check/radio type,
@@ -491,10 +491,12 @@
   // possible $t values:
   // normal, hover, active, insensitive, backdrop, backdrop-insensitive
 
+  $_border: if($c == white, $borders_color, $c);
+
   @if $t==normal  {
     background-color: $c;
-    border-color: $c;
-    box-shadow: 0 1px transparentize(black, 0.9);
+    border-color: $_border;
+    box-shadow: 0 1px transparentize(black, 0.95);
     color: $tc;
   }
 
@@ -504,31 +506,33 @@
   }
 
   @if $t==active {
-    box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.20),
-                0 1px transparentize($c, 0.9);
+    box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.1);
   }
 
   @if $t==insensitive {
-    background-color: transparentize($c, 0.4);
-    border-color: $insensitive_borders_color;
-    box-shadow: 0 1px transparent;
-    color: transparentize(white, 0.6);
+    $_bg: mix($c, $base_color, 50%);
+    background-color: $_bg;
+    border-color: if($c==white, $insensitive_borders_color, $_bg);
+    box-shadow: none;
+    color: transparentize($tc, 0.4);
   }
 
   @if $t == backdrop {
+    $_bg: mix($c, $base_color, 85%);
     -gtk-icon-effect: dim;
-    background-color: _backdrop_color($c);
-    border-color: _backdrop_color($c);
+    background-color: _backdrop_color($_bg);
+    border-color: if($c==white, $insensitive_borders_color, _backdrop_color($_bg));
     box-shadow: none;
-    color: mix($tc, $c, 60%);
+    color: transparentize($tc, 0.5);
   }
 
   @if $t==backdrop-insensitive {
+    $_bg: mix(_backdrop_color($c), $base_color, 60%);
     -gtk-icon-effect: dim;
-    background-color: transparentize(_backdrop_color($c), 0.4);
-    border-color: $insensitive_borders_color;
+    background-color: $_bg;
+    border-color: if($c==white, $insensitive_borders_color, $_bg);
     box-shadow: none;
-    color: mix($tc, $c, 60%);
+    color: transparentize($tc, 0.6);
   }
 }
 
