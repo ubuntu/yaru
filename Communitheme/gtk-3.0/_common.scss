@@ -4134,6 +4134,12 @@ placessidebar {
 }
 
 placesview {
+
+  > stack > frame > scrolledwindow > viewport > list {
+    background-color: $bg_color;
+    &:backdrop { background-color: $backdrop_bg_color; }
+  }
+
   .server-list-button > image {
     transition: 200ms $ease-out-quad;
     -gtk-icon-transform: rotate(0turn);
@@ -4144,13 +4150,15 @@ placesview {
     -gtk-icon-transform: rotate(-0.5turn);
   }
 
-  row.activatable:hover { background-color: transparent; }
+  row.activatable:hover { background-color: transparent; }im
 
   // this selects the "connect to server" label
   > actionbar > revealer > box > label {
     padding-left: 8px;
     padding-right: 8px;
   }
+
+
 }
 
 
