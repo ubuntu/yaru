@@ -1563,7 +1563,7 @@ headerbar {
     switch {
       margin-top: 10px;
       margin-bottom: 9px;
-      @include switch(lighten($headerbar_bg_color, 18%));
+      @include switch(lighten($headerbar_bg_color, 25%));
     }
 
     entry, %dark_entry {
