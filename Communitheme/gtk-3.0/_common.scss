@@ -1547,7 +1547,7 @@ headerbar {
 
   ~ separator, separator {
     &, &.titlebutton {
-      &.horizontal, &.vertical { 
+      &.horizontal, &.vertical {
         & { background-image: image(mix($inkstone, $headerbar_bg_color, 50%)); }
         &:backdrop { background-image: image(mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%)); }
       }
@@ -1564,8 +1564,6 @@ headerbar {
     $tc: $headerbar_fg_color;
 
     switch {
-      margin-top: 10px;
-      margin-bottom: 9px;
       @include switch(lighten($headerbar_bg_color, 25%));
     }
 
@@ -1842,8 +1840,8 @@ headerbar {
     margin-bottom: 4px;
   }
   switch, separator {
-    margin-top: 6px;
-    margin-bottom: 6px;
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
 }
 
@@ -3746,19 +3744,19 @@ scrolledwindow {
 
 // Avoid Gnome-Control-Center's language list to use sidebar colors
 frame > scrolledwindow > viewport > list {
-    background-color: /*white*/ $bg_color; 
+    background-color: /*white*/ $bg_color;
     &:backdrop { background-color: $backdrop_bg_color; }
 
 }
 
 //vbox and hbox separators
 separator {
-  background: transparentize(/*black*/$borders_color, 0.9); 
+  background: transparentize(/*black*/$borders_color, 0.9);
   min-width: 1px;
   min-height: 1px;
 }
 
-// box > separator.vertical { 
+// box > separator.vertical {
   // target separators between sidebars and views -> this may need to be a thing
   // background: $borders_color;
 // }
@@ -3779,8 +3777,8 @@ list {
 
   row { padding: 2px; }
 
-  separator { 
-    // separator within sidebar 
+  separator {
+    // separator within sidebar
     background-color: transparentize($borders_color, 0.5);
   }
 }
@@ -4058,8 +4056,8 @@ placessidebar {
 
   > viewport > list { margin-top: -3px; }
 
-  separator { 
-    // separator within sidebar 
+  separator {
+    // separator within sidebar
     background-color: transparentize($borders_color, 0.5);
   }
 
