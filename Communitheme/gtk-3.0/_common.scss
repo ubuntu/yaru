@@ -162,6 +162,7 @@ flowbox {
 
 label {
   caret-color: currentColor; // this shouldn't be needed.
+  outline-offset: 1px;
 
   &.separator {
     @extend .dim-label;
@@ -1780,8 +1781,6 @@ headerbar {
         }
       }
     }
-
-
   }
 
   // squared corners when the window is maximized, tiled, or fullscreen
