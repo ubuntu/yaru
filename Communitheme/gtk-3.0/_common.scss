@@ -1546,11 +1546,14 @@ headerbar {
   }
 
   ~ separator, separator {
-    background-image: image(mix($inkstone, $headerbar_bg_color, 50%));
-    &:backdrop {
-      background-image: image(mix($inkstone, $headerbar_bg_color, 20%));
+    &, &.titlebutton {
+      &.horizontal, &.vertical { 
+        & { background-image: image(mix($inkstone, $headerbar_bg_color, 50%)); }
+        &:backdrop { background-image: image(mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%)); }
+      }
     }
   }
+
 
   &:not(:only-child):first-child { border-right-width: 0; }
   &:not(:only-child):not(:first-child) { border-left-width: 0; };
@@ -2001,7 +2004,7 @@ treeview.view {
    }
 
   border-left-color: mix($fg_color, $base_color, 50%); // this is actually the tree lines color,
-  border-top-color: transparentize(black, 0.9);        // while this is the grid lines color, better then nothing
+  border-top-color: transparentize($borders_color, 0.8);        // while this is the grid lines color, better then nothing
   background-color: $base_color;
 
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
@@ -2015,7 +2018,7 @@ treeview.view {
 
     &:backdrop, & {
       border-left-color: mix($selected_fg_color, $selected_bg_color, 50%);
-      border-top-color: transparentize(black, 0.9); // doesn't work unfortunatelly
+      border-top-color: transparentize($borders_color, 0.8); // doesn't work unfortunatelly
     }
   }
 
@@ -2039,7 +2042,7 @@ treeview.view {
 
   &:backdrop {
     border-left-color: mix($backdrop_fg_color, $backdrop_bg_color, 50%);
-    border-top: transparentize(black, 0.9);
+    border-top-color: transparentize($borders_color, 0.8);
     background-color: $backdrop_bg_color;
   }
   &:drop(active) {
@@ -2118,16 +2121,6 @@ treeview.view {
       font-weight: 500;
       box-shadow: none;
       -gtk-outline-radius: 0;
-
-      &:hover {
-        @extend %column_header_button;
-        transition: none;
-      }
-
-      &:active {
-        @extend %column_header_button;
-        transition: none;
-      }
     }
   }
 
@@ -2154,12 +2147,10 @@ treeview.view {
   border-style: none solid solid none;
   border-color: $borders_color; // don't darken the bottom border color
   border-radius: 0;
-  background-color: $bg_color;
 
   &:backdrop {
     border-style: none solid solid none;
     border-color: $backdrop_borders_color;
-    background-color: $backdrop_bg_color;
   }
 
   &:last-child { &:backdrop, & { border-right-style: none; }}
@@ -3755,16 +3746,22 @@ scrolledwindow {
 
 // Avoid Gnome-Control-Center's language list to use sidebar colors
 frame > scrolledwindow > viewport > list {
-    background-color: white;
+    background-color: /*white*/ $bg_color; 
     &:backdrop { background-color: $backdrop_bg_color; }
+
 }
 
 //vbox and hbox separators
 separator {
-  background: transparentize(black, 0.9);
+  background: transparentize(/*black*/$borders_color, 0.9); 
   min-width: 1px;
   min-height: 1px;
 }
+
+// box > separator.vertical { 
+  // target separators between sidebars and views -> this may need to be a thing
+  // background: $borders_color;
+// }
 
 
 /*********
@@ -3781,6 +3778,11 @@ list {
   }
 
   row { padding: 2px; }
+
+  separator { 
+    // separator within sidebar 
+    background-color: transparentize($borders_color, 0.5);
+  }
 }
 
 row {
@@ -3879,9 +3881,9 @@ calendar {
   }
 
   &.header {
-    border-bottom-color: transparentize(black, 0.9);
+    border-bottom-color: $borders_color;
 
-    &:backdrop { border-bottom-color: transparentize(black, 0.9); }
+    &:backdrop { border-bottom-color: $borders_color; }
   }
 
   &.button {
@@ -3967,7 +3969,8 @@ filechooser {
 
   & actionbar { background-color: $sidebar_bg_color; }
   & placessidebar ~ box box > stack ~ box  {
-    background-color: #efeded;
+    // what is this for?
+    background-color: #efeded; // fixed color won't work with dark theme
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-width: 0 1px;
     padding: 10px;
@@ -4054,6 +4057,11 @@ placessidebar {
   > viewport.frame { border-style: none; }
 
   > viewport > list { margin-top: -3px; }
+
+  separator { 
+    // separator within sidebar 
+    background-color: transparentize($borders_color, 0.5);
+  }
 
   row {
     // Needs overriding of the GtkListBoxRow padding
@@ -4583,7 +4591,6 @@ button.titlebutton {
     @include draw_circle($selected_bg_color, $close:true);
   }
 }
-
 
 // catch all extend :)
 

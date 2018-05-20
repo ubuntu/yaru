@@ -13,7 +13,7 @@ list.tweak-categories separator {
 .nautilus-window {
   // keep details box visible
   // details box looks ugly when many items are selected and it floats above the orange
-  *scrolledwindow:backdrop { opacity: 0.9; }
+  *scrolledwindow:backdrop { opacity: 0.9; } // what is this for?
    // Makes icons less bright in backdrop
   paned box.floating-bar {
     background: $bg_color;
@@ -36,7 +36,7 @@ list.tweak-categories separator {
   }
 
   .nautilus-list-view .view {
-    border-bottom: 1px solid transparentize(black, 0.9);
+    border-bottom: 1px solid transparentize($borders_color, 0.8);
 
     // Hide superfluous treeview drop target indication
     &.dnd { border-style: none; }
@@ -52,8 +52,14 @@ list.tweak-categories separator {
     border-radius: 0 0 $small_radius $small_radius;
   }
 
-  separator, separator:backdrop { background-image: image(rgba(0, 0, 0, 0.05)); }
+  paned > separator{
+    // separator between sidebar and main window view
+    &, &:backdrop {
+      background-image: image($borders_color);
+    }
+  }
 }
+
 
 .nautilus-desktop-window {
   .nautilus-desktop.view {
