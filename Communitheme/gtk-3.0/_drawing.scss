@@ -547,7 +547,6 @@
 
   color: transparent;
   font-size: 0;
-  //font-weight: 500;
   outline-offset: 0;
 
   &:hover {
@@ -568,15 +567,15 @@
   }
 
   &:disabled {
-    background-color: transparent;;
+    background-color: if($bg==$dark_fill, transparent, $ash);
     border: 1px solid $borders_edge;
     box-shadow: none;
   }
 
   &:backdrop {
-    background-color: _backdrop_color(transparentize($bg, 0.3));
+    background-color: if($bg==$dark_fill, _backdrop_color(transparentize($bg, 0.3)), _backdrop_color($bg));
+    border: 1px solid if($bg==$dark_fill, $borders_edge, transparent);
     border-top-color: darken($bg, 10%);
-    color: transparent;
     transition: $backdrop_transition;
 
     &:checked {
@@ -586,8 +585,9 @@
     }
 
     &:disabled {
-      background-color: transparent;
-      border: 1px solid if($bg==$dark_fill, $borders_edge, darken($bg, 10%));
+      background-color: if($bg==$dark_fill, transparent, _backdrop_color($ash));
+      //background-color: if($bg==$dark_fill, transparent, $ash);
+      border: 1px solid if($bg==$dark_fill, $borders_edge, transparent);
       box-shadow: none;
     }
   }
@@ -612,14 +612,19 @@
   }
 
   &:disabled slider {
-    background-color: transparent;
-    border: 1px solid $borders_edge;
+    background-color: if($bg==$dark_fill, transparent, $ash);
+    border: 1px solid if($bg==$dark_fill, $borders_edge, $slate);;
     box-shadow: none;
   }
 
   &:backdrop slider {
-    background-color: if($bg==$dark_fill, $backdrop_bg_color, $backdrop_insensitive_color);
     transition: $backdrop_transition;
+    background-color: if($bg==$dark_fill, $backdrop_bg_color, $headerbar_fg_color);
+  }
+
+  &:backdrop:disabled slider {
+    transition: $backdrop_transition;
+    background-color: if($bg==$dark_fill, transparent, _backdrop_color($ash));
   }
 }
 
