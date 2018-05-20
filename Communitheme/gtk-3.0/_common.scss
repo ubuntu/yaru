@@ -1690,6 +1690,11 @@ headerbar {
 
         margin: 0;
         border: none;
+
+        &:insensitive:checked{
+          background-color: $hb_pathbar_bg;
+          &:backdrop{ background-color: $hb_pathbar_bg_backdrop;}
+        }
       }
     }
 
@@ -1997,6 +2002,7 @@ treeview.view {
 
   border-left-color: mix($fg_color, $base_color, 50%); // this is actually the tree lines color,
   border-top-color: transparentize(black, 0.9);        // while this is the grid lines color, better then nothing
+  background-color: $base_color;
 
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
@@ -2034,6 +2040,7 @@ treeview.view {
   &:backdrop {
     border-left-color: mix($backdrop_fg_color, $backdrop_bg_color, 50%);
     border-top: transparentize(black, 0.9);
+    background-color: $backdrop_bg_color;
   }
   &:drop(active) {
     border-style: solid none;
@@ -2147,9 +2154,12 @@ treeview.view {
   border-style: none solid solid none;
   border-color: $borders_color; // don't darken the bottom border color
   border-radius: 0;
+  background-color: $bg_color;
 
   &:backdrop {
     border-style: none solid solid none;
+    border-color: $backdrop_borders_color;
+    background-color: $backdrop_bg_color;
   }
 
   &:last-child { &:backdrop, & { border-right-style: none; }}
@@ -3941,9 +3951,11 @@ filechooser {
 
     background: $_bg;
     border-bottom: 1px solid $borders_color;
+    &:backdrop{background:  $backdrop_sidebar_bg_color;}
 
     .path-bar.linked button {
       background: darken($_bg, 5%);
+      &:backdrop { background: $_bg}
       &, & label { color: $text_color }
 
       &:backdrop label { color: $backdrop_text_color; }
@@ -4023,7 +4035,7 @@ stacksidebar {
 /****************
  * File chooser *
  ****************/
-$_placesidebar_icons_opacity: 0.6;
+$_placesidebar_icons_opacity: 0.8;
 
 row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sidebar icons
                                                                   // see bug #786613 for details
@@ -4109,6 +4121,12 @@ placessidebar {
 }
 
 placesview {
+
+  > stack > frame > scrolledwindow > viewport > list {
+    background-color: $bg_color;
+    &:backdrop { background-color: $backdrop_bg_color; }
+  }
+
   .server-list-button > image {
     transition: 200ms $ease-out-quad;
     -gtk-icon-transform: rotate(0turn);
@@ -4119,13 +4137,15 @@ placesview {
     -gtk-icon-transform: rotate(-0.5turn);
   }
 
-  row.activatable:hover { background-color: transparent; }
+  row.activatable:hover { background-color: transparent; }im
 
   // this selects the "connect to server" label
   > actionbar > revealer > box > label {
     padding-left: 8px;
     padding-right: 8px;
   }
+
+
 }
 
 
@@ -4426,11 +4446,11 @@ colorchooser .popover.osd { border-radius: 5px; }
  ********/
 //content view (grid/list)
 .content-view {
-  background-color: darken($bg_color,7%);
+  background-color: $bg_color;
 
   &:hover { -gtk-icon-effect: highlight; }
 
-  &:backdrop { background-color: darken($bg_color,7%); }
+  &:backdrop { background-color: $backdrop_bg_color; }
 
   rubberband, .rubberband { @extend rubberband; }
 }
