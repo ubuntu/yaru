@@ -3930,6 +3930,8 @@ messagedialog { // Message Dialog styling
 }
 
 filechooser {
+  background-color: white;
+
   .dialog-action-box {
     border-top: 1px solid $borders_color;
 
@@ -3950,13 +3952,20 @@ filechooser {
       &:checked label { font-weight: 500; }
     }
   }
+
+  & actionbar { background-color: $sidebar_bg_color; }
+  & placessidebar ~ box box > stack ~ box  {
+    background-color: #efeded;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-width: 0 1px;
+    padding: 10px;
+  }
 }
 
 filechooserbutton:drop(active) {
   box-shadow: none;
   border-color: transparent;
 }
-
 
 /***********
  * Sidebar *
