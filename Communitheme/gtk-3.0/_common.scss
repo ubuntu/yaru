@@ -162,6 +162,7 @@ flowbox {
 
 label {
   caret-color: currentColor; // this shouldn't be needed.
+  outline-offset: 1px;
 
   &.separator {
     @extend .dim-label;
@@ -1562,7 +1563,7 @@ headerbar {
     switch {
       margin-top: 10px;
       margin-bottom: 9px;
-      @include switch(lighten($headerbar_bg_color, 18%));
+      @include switch(lighten($headerbar_bg_color, 25%));
     }
 
     entry, %dark_entry {
@@ -1785,8 +1786,6 @@ headerbar {
         }
       }
     }
-
-
   }
 
   // squared corners when the window is maximized, tiled, or fullscreen
