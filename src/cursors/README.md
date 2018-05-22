@@ -8,9 +8,9 @@
 
 For simplified development, has various scripts to render and build the cursor set are provided
 
- - [`render-cursors.py`](./render-cursors.py) will render the cursor PNG assets into [bitmaps](./bitmaps) at the appropriate sizes; ran by passing the source filename to it: `./render-cursors.py source-cursors.svg`
- - [`x11-make.sh`](./x11-make.sh) builds the cursor assets into a Xcursor set
- - [`w32-make.sh`](./w32-make.sh) builds the cursor assets into a Windows cursor set
+ - [*render-cursors.py*](./render-cursors.py) will render the cursor PNG assets into [bitmaps](./bitmaps) at the appropriate sizes; ran by passing the source filename to it: `./render-cursors.py source-cursors.svg`
+ - [*x11-make.sh*](./x11-make.sh) builds the cursor assets into a Xcursor set
+ - [*w32-make.sh*](./w32-make.sh) builds the cursor assets into a Windows cursor set
 
 ## Cursor SVG source
 
