@@ -25,7 +25,7 @@ import argparse
 
 INKSCAPE = '/usr/bin/inkscape'
 OPTIPNG = '/usr/bin/optipng'
-MAINDIR = '../Suru'
+MAINDIR = '../../Suru'
 # SRC = 'fullcolor'
 SOURCES = ('fullcolor/apps', 'fullcolor/categories', 'fullcolor/devices', 'fullcolor/mimetypes', 'fullcolor/places')
 

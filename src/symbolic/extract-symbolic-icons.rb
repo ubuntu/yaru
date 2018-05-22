@@ -24,7 +24,7 @@ include REXML
 
 INKSCAPE = '/usr/bin/inkscape'
 SRC = "./source-symbolic.svg"
-PREFIX = "../Suru/scalable"
+PREFIX = "../../Suru/scalable"
 
 # install with `sudo npm install -g svgo`
 SVGO = '/usr/local/bin/svgo' 
