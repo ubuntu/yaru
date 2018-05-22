@@ -4263,13 +4263,13 @@ infobar {
       }
 
       button {
-        $c: darken($c, 10%);
+        $c: $c;
         $tc: white;
           @each $state, $t in ("", "normal"), (":hover", "hover"),
             (":active, &:checked", "active"), (":disabled", "insensitive"),
             (":backdrop", "backdrop"), (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
             (":backdrop:disabled", 'backdrop-insensitive') {
-              &#{$state} { @include button($t, $c, $tc, $flat:true); }
+              &#{$state} { @include button($t, $c, $tc); }
           }
         }
       }
