@@ -12,6 +12,10 @@ The sources for all the different icons are kept organized in this `src` folder 
  - sources for all full color icons.
  - divided into subfolders that organize the icons sources by `context`
 
+**[cursors](./cursors)**
+ - sources for the cursor theme.
+ - for more info read the [cursor readme](./cursors/README.md).
+
 **[source-symbolic.svg](./source-symbolic.svg)**
  - the source plate for all of the symbolic icons
  - layers on the source plate correspond to an icons `context` and the icons are sorted accordingly

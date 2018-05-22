@@ -1,5 +1,5 @@
-Suru Icon Theme
-================
+Suru Icons & Cursors
+====================
 
 This project is a revitalization of the Suru icon set that was designed for Ubuntu Touch. The principles and styles created for Suru now serve as the basis for a new FreeDesktop icon theme.
 
@@ -15,20 +15,31 @@ The Suru icon assets (any and all `.png` icons) are licenced under the terms of 
 
 You can install Suru from source using the Meson build system.
 
-```shell
-meson builddir --prefix=/usr
-sudo ninja -C builddir install
+```bash
+# build
+meson "build" --prefix=/usr
+# install
+sudo ninja -C "build" install
 ```
 
 By default it installs to `/usr/` but you can specify a different directory with a prefix like: `/usr/local` or `$HOME/.local`.
 
-After which you should be able to pick Suru as your icon theme or set it with:
+After which you should be able to pick Suru as your icon or cursor theme in GNOME Tweak tool, or you can set either from a terminal with:
 
-    gsettings set org.gnome.desktop.interface icon-theme Suru
+```bash
+# set the icon theme
+gsettings set org.gnome.desktop.interface icon-theme Suru
+# cursor theme
+gsettings set org.gnome.desktop.interface cursor-theme Suru
+```
 
 ### Uninstalling Suru
 
-To uninstall Suru, simply run: `sudo ninja -C builddir uninstall` or, if you installed it without superuser priveleges: `ninja -C builddir uninstall` and you can reset your icon theme to the default:
+To uninstall Suru, simply run: `sudo ninja -C "build" uninstall` or, if you installed it without superuser priveleges: `ninja -C "build" uninstall` and you can reset your icon and cursor theme to the default:
 
-    gsettings reset org.gnome.desktop.interface icon-theme
-
+```bash
+# reset icon theme to default
+gsettings reset org.gnome.desktop.interface icon-theme
+# reset cursor theme to default
+gsettings reset org.gnome.desktop.interface cursor-theme
+```
