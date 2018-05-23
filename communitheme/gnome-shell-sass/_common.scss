@@ -1335,7 +1335,7 @@ StScrollBar {
   }
 
   .window-clone-border {
-    $_bg: transparentize(white,0.4);
+    $_bg: transparentize(white,0.5);
     border: 5px solid $_bg;
     border-radius: $medium_radius;
     // For window decorations with round corners we can't match
