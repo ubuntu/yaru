@@ -9,9 +9,9 @@ $caption_fg_color: darken($fg_color, 20%);
 $text_color: darken($fg_color, 30%);
 $inactive_element_color: darken($fg_color, 40%);
 //
-$panel_bg_color: $jet;//#2B2929;
+$panel_bg_color: lighten($jet, 4%);
 $panel_fg_color: $porcelain;
-$dash_bg_color: $jet;//#3B3939;
+$dash_bg_color: $panel_bg_color;
 $menu_color: #252525;
 //
 $selected_fg_color: #ffffff;
@@ -34,7 +34,7 @@ $neutral_color: $blue;
 $indication_bg_color: #19B6EE;
 //
 $osd_fg_color: $fg_color;
-$osd_bg_color: $jet;//#2B2929;
+$osd_bg_color: $panel_bg_color;
 $button_bg_color: $osd_bg_color;
 $osd_borders_color: transparentize($porcelain, 0.90);
 $osd_separator_color: lighten($osd_bg_color,4%);
