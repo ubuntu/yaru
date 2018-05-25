@@ -36,8 +36,7 @@ $indication_bg_color: #19B6EE;
 $osd_fg_color: $fg_color;
 $osd_bg_color: $panel_bg_color;
 $button_bg_color: $osd_bg_color;
-$osd_borders_color: transparentize($porcelain, 0.90);
-$osd_separator_color: lighten($osd_bg_color,4%);
+$osd_borders_color: transparentize($fg_color, 0.90);
 //
 $base_hover_color: transparentize($fg_color, 0.85);
 $base_active_color: transparentize($fg_color, 0.80);

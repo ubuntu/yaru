@@ -11,7 +11,7 @@ $panel_opaque_value: 0.0;
 $dash-alpha-value: 0.6;
 $dash-opaque-alpha-value: $panel_opaque_value;
 
-$popover-alpha-value: 0.025;
+$popover-alpha-value: 0.035;
 
 $small_radius: 4px;
 $medium_radius: 6px;
@@ -601,7 +601,7 @@ StScrollBar {
     height: 1px; //not really the whole box
     margin: 6px 64px;
     background-color: transparent;
-    border-color: $osd_separator_color;
+    border-color: $osd_borders_color;
     border-bottom-width: 1px;
     border-bottom-style: solid;
   }
@@ -956,7 +956,7 @@ StScrollBar {
     .datemenu-displays-box { spacing: 1em; }
 
     .datemenu-calendar-column {
-      border: 0 solid $osd_separator_color;
+      border: 0 solid $osd_borders_color;
       &:ltr { border-left-width: 1px; }
       &:rtl { border-right-width: 1px; }
     }
