@@ -2145,6 +2145,9 @@ treeview.view {
   padding: 0 6px;
   background-image: none;
   border-style: none solid solid none;
+  &:not(:hover), &:not(:active) { background-image: image($bg_color); }
+  &:backdrop { background-image: image($backdrop_bg_color); }
+  &:hover, &:active { background-image: none; }
   border-color: $borders_color; // don't darken the bottom border color
   border-radius: 0;
 
@@ -2792,6 +2795,7 @@ treeview ~ scrollbar.vertical {
  * Switch *
  **********/
 switch {
+  transition: $button_transition;
   @include switch($dark_fill, $success_color);
 }
 
