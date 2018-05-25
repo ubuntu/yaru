@@ -331,9 +331,9 @@ headerbar button image ~ window decoration ~ menu separator {
   }
 }
 
-/***********
+/*************
 * GNOME ToDo *
-***********/
+**************/
 
 .org-gnome-Todo {
   taskrow.activatable.new-task-row button.popup.toggle {
@@ -348,5 +348,25 @@ headerbar button image ~ window decoration ~ menu separator {
   viewport.view, listbox.transparent {
    background-color: $sidebar_bg_color;
    &:backdrop { background-color: $backdrop_sidebar_bg_color;}
+  }
+}
+
+/*********************
+ * Chrome / Chromium *
+ *********************/
+window.maximized.background.chromium {
+  button.titlebutton {
+    padding: 0;
+
+    &, &:hover, &:active {
+      headerbar &, .titlebar &, & {
+        // spec bump otherwise :backdrop  will still have a bg
+        &, &:backdrop { @extend %undecorated_button; }
+      }
+    }
+    &:not(.close):not(.appmenu){
+      &:hover { @include draw_circle($headerbar_bg_color, $size:20px) ; }
+    }
+    &.close { @include draw_circle($selected_bg_color, $close:true, $size:20px); }
   }
 }

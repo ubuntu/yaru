@@ -761,8 +761,8 @@
   box-shadow: none;
 }
 
-@mixin draw_circle($c, $close:false) {
-$button_size: 24px + 2px * 2;
+@mixin draw_circle($c, $close:false, $size:24px) {
+$button_size: $size + 2px * 2;
 $circle_size: 20px / $button_size / 2;
 
   background-image: -gtk-gradient(radial,
