@@ -22,12 +22,13 @@ require "rexml/document"
 require "fileutils"
 include REXML
 
+# INKSCAPE = 'flatpak run org.inkscape.Inkscape'
 INKSCAPE = '/usr/bin/inkscape'
 SRC = "./source-symbolic.svg"
 PREFIX = "../../Suru/scalable"
 
 # install with `sudo npm install -g svgo`
-SVGO = '/usr/local/bin/svgo' 
+SVGO = '/usr/local/bin/svgo'
 
 def chopSVG(icon)
 	FileUtils.mkdir_p(icon[:dir]) unless File.exists?(icon[:dir])
@@ -84,10 +85,14 @@ if (ARGV[0].nil?) #render all SVGs
 			#puts "DEBUG #{icon.attributes.get_attribute('id')}"
 			dir = "#{PREFIX}/#{context_name}"
 			icon_name = icon.attributes.get_attribute("inkscape:label").value
-			chopSVG({ :name => icon_name,
-					:id => icon.attributes.get_attribute("id"),
-					:dir => dir,
-					:file => get_output_filename(dir, icon_name)})
+			if icon_name.end_with?("-alt")
+				puts " >> skipping icon '" + icon_name + "'"
+			else
+				chopSVG({ :name => icon_name,
+						:id => icon.attributes.get_attribute("id"),
+						:dir => dir,
+						:file => get_output_filename(dir, icon_name)})
+			end
 		end
 	end
 	puts "\nrendered all SVGs"
