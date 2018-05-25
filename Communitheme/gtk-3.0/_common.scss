@@ -568,6 +568,8 @@ button {
       transition-duration: 100ms;
     }
 
+    &:hover:checked { @include button(active-hover); }
+
     &:backdrop {
       &.flat, & {
         @include button(backdrop);
