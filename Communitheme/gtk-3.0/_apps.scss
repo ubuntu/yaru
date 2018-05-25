@@ -354,19 +354,15 @@ headerbar button image ~ window decoration ~ menu separator {
 /*********************
  * Chrome / Chromium *
  *********************/
-window.maximized.background.chromium {
+window.background.chromium {
   button.titlebutton {
     padding: 0;
 
-    &, &:hover, &:active {
-      headerbar &, .titlebar &, & {
-        // spec bump otherwise :backdrop  will still have a bg
-        &, &:backdrop { @extend %undecorated_button; }
-      }
-    }
-    &:not(.close):not(.appmenu){
+    &:not(.appmenu){
       &:hover { @include draw_circle($headerbar_bg_color, $size:20px) ; }
     }
-    &.close { @include draw_circle($selected_bg_color, $close:true, $size:20px); }
+    &.close:not(:backdrop) {
+      @include draw_circle($selected_bg_color, $close:true, $size:20px);
+    }
   }
 }
