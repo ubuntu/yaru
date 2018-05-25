@@ -54,12 +54,13 @@
 //
 
   $_blank_edge: if($edge == none, none, 0 1px transparentize($edge, 1));
-  $_entry_edge: if($edge == none, none, _widget_edge($edge));
+  $_entry_edge: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
 
   @if $t==normal {
     $_bc: if($c == $headerbar_bg_color, lighten($hb_pathbar_bg, 5%), $c);
     color: if($tc != $fg_color, transparentize($tc, .1), $fg_color);
     border-color: if($c != $base_color, transparent, $borders_color);
+    border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
     background-color: $_bc;
     @include _shadows($_entry_edge);
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
@@ -71,7 +72,7 @@
   @if $t==insensitive {
     background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
     border-color: if($c == $headerbar_bg_color, $hb_pathbar_bg, $borders_edge);
-    box-shadow: $_entry_edge;
+    box-shadow: none;
     color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
   }
   @if $t==backdrop {
@@ -87,7 +88,7 @@
 
     background-color: $_bg;
     border-color: if($c != $base_color, $hb_pathbar_border_backdrop, $backdrop_borders_color);
-    box-shadow: $_blank_edge;
+    box-shadow: none;
     color: $_tc;
 
     label, & { color: $_tc; }
@@ -95,7 +96,7 @@
   @if $t==backdrop-insensitive {
     background-color: transparent; //if($c == $headerbar_bg_color, $graphite, transparent);
     border-color: if($c != $base_color, $hb_pathbar_bg_backdrop, transparentize($backdrop_borders_color, 0.5));
-    box-shadow: $_blank_edge;
+    box-shadow: none;
     color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
 
     label, & { color:  $backdrop_fg_color; }
