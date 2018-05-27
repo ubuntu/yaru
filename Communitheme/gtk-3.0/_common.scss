@@ -2326,6 +2326,10 @@ menuitem {
   }
 }
 
+window.background:not(.csd) { // firefox menu
+  .menu { border: none; }
+}
+
 /***************
  * Popovers   *
  ***************/
