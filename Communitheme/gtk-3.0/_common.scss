@@ -199,6 +199,18 @@ label {
   opacity: 0.55;
 }
 
+//Used as update count in GNOME software
+.counter-label {
+  margin-top: 2px;
+  margin-bottom: 4px;
+  border-width: 0px;
+  padding-left: 2px;
+  padding-right: 2px;
+  box-shadow: inset 0 0 10px 10px $success_color;
+}
+//Used as error count in GNOME logs
+.compressed-entries-label { box-shadow: inset 0 0 10px 10px darken($bg_color,40%); }
+
 assistant {
   .sidebar {
     background-color: $sidebar_bg_color; // $base_color;
@@ -4764,13 +4776,4 @@ button.emoji-section {
   :hover {
     background: $selected_bg_color;
   }
-}
-//The count of updates in the stackswitcher
-.counter-label {
-  margin-top: 2px;
-  margin-bottom: 4px;
-  border-width: 0px;
-  padding-left: 2px;
-  padding-right: 2px;
-  box-shadow: inset 0 0 10px 10px $success_color;
 }
