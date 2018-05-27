@@ -4088,7 +4088,7 @@ placessidebar {
     &:backdrop {
       color: $backdrop_text_color;
 
-      // &:selected { color: $backdrop_selected_fg_color; }
+       &:selected { background-color: transparentize($selected_bg_color,0.2); }
 
       &:disabled { color: $backdrop_insensitive_color; }
     }
@@ -4261,7 +4261,7 @@ infobar {
       selection { background-color: darken($c, 10%); }
 
       &:backdrop, & {
-        color: $selected_fg_color; 
+        color: $selected_fg_color;
         border-color: _border_color($c);
       }
 
