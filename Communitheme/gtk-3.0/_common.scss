@@ -2188,8 +2188,14 @@ menubar,
     min-height: 16px;
     padding: 4px 8px;
 
-    menu {
+    menu, .menu, .context-menu {
       border-radius: 0 0 $small_radius $small_radius;
+      menuitem {
+        &:hover {
+          &:first-child { border-radius: 0; }
+          &:last-child { border-radius: 0; }
+        }
+      }
     }
 
     &:hover { //Seems like it :hover even with keyboard focus
@@ -2218,6 +2224,13 @@ menu,
 
   .csd & { border: none; }  // axes borders in a composited env
 
+  separator,
+  .csd & separator {
+    min-height: 0;
+    border: none;
+    background-color: transparent;
+  }
+
   &:backdrop { background-color: $backdrop_menu_color;  color: $backdrop_text_color; }
 
   menuitem {
@@ -2225,7 +2238,7 @@ menu,
     min-height: 16px;
     min-width: 36px;
     padding: 5px 6px;
-    border-radius: 0;
+    // border-radius: 0;
     // text-shadow: none;
 
     &:hover {
@@ -2327,7 +2340,7 @@ menuitem {
 }
 
 window.background:not(.csd) { // firefox menu
-  .menu { border: none; }
+  menu, .menu { border: none; }
 }
 
 /***************

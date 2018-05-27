@@ -60,7 +60,6 @@ list.tweak-categories separator {
   }
 }
 
-
 .nautilus-desktop-window {
   .nautilus-desktop.view {
     // use white text for desktop icons
@@ -263,6 +262,13 @@ terminal-window {
     background-color: $backdrop_bg_color;
     border-color: $backdrop_borders_color;
   }
+}
+
+.gedit-search-entry-occurrences-tag {
+  color: transparentize($fg_color, 0.6);
+  border: none;
+  margin: 2px;
+  padding: 2px;
 }
 
 /***********
