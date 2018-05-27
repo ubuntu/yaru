@@ -4088,7 +4088,7 @@ placessidebar {
     &:backdrop {
       color: $backdrop_text_color;
 
-       &:selected { background-color: transparentize($selected_bg_color,0.2); }
+       &:selected { background-color: transparentize($selected_bg_color,0.1); }
 
       &:disabled { color: $backdrop_insensitive_color; }
     }
