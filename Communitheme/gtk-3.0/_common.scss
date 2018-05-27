@@ -4261,7 +4261,7 @@ infobar {
       selection { background-color: darken($c, 10%); }
 
       &:backdrop, & {
-        label, & { color: $selected_fg_color; }
+        color: $selected_fg_color; 
         border-color: _border_color($c);
       }
 
@@ -4269,19 +4269,8 @@ infobar {
         background-color: _backdrop_color($c);
         border-color: _backdrop_color(_border_color($c));
       }
-
-      button {
-        $c: $c;
-        $tc: white;
-          @each $state, $t in ("", "normal"), (":hover", "hover"),
-            (":active, &:checked", "active"), (":disabled", "insensitive"),
-            (":backdrop", "backdrop"), (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
-            (":backdrop:disabled", 'backdrop-insensitive') {
-              &#{$state} { @include button($t, $c, $tc); }
-          }
-        }
-      }
     }
+  }
   *:link { @extend %link_selected; }
 }
 
