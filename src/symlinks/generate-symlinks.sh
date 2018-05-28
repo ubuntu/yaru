@@ -17,8 +17,11 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, see <https://www.gnu.org/licenses/gpl-3.0.txt>
 
-THEMEDIR=$(dirname '$0')"../../Suru"
-DATADIR=$(dirname '$0')"./data"
+
+DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+THEME="Suru"
+
+# echo $DIR
 
 # Icon sizes and contexts
 CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "status")
@@ -33,15 +36,15 @@ do
 	# Sizes Loop
 	for SIZE in "${SIZES[@]}"
 	do
-		LIST="$DATADIR/fullcolor/$CONTEXT.list"
+		LIST="$DIR/fullcolor/$CONTEXT.list"
 		# Check if directory exists
-		if [ -d "$THEMEDIR/$SIZE/$CONTEXT" ]; then
-			cd $THEMEDIR/$SIZE/$CONTEXT
+		if [ -d "$DIR/../../$THEME/$SIZE/$CONTEXT" ]; then
+			cd $DIR/../../$THEME/$SIZE/$CONTEXT
 			while read line;
 			do
 				ln -sf $line
 			done < $LIST
-			cd $THEMEDIR
+			cd $DIR/../../$THEME
 		else
 			echo "  -- skipping "$SIZE"/"$CONTEXT
 		fi
@@ -56,17 +59,17 @@ echo "Generating links for symbolic icons..."
 for CONTEXT in "${CONTEXTS[@]}"
 do
 	echo " -- "$CONTEXT
-	LIST="$DATADIR/symbolic/$CONTEXT.list"
+	LIST="$DIR/symbolic/$CONTEXT.list"
 	# Check if directory exists
-	if [ -d "$THEMEDIR/symbolic/$CONTEXT" ]; then
-		cd $THEMEDIR/symbolic/$CONTEXT
+	if [ -d "$DIR/../../$THEME/scalable/$CONTEXT" ]; then
+		cd $DIR/../../$THEME/scalable/$CONTEXT
 		while read line;
 		do
 			ln -sf $line
 		done < $LIST
-		cd $THEMEDIR
+		cd $DIR/../../$THEME
 	else
-		echo "  -- skipping symbolic/"$CONTEXT
+		echo "  -- skipping scalable/"$CONTEXT
 	fi
 done
 echo "Done."
@@ -74,6 +77,6 @@ echo "Done."
 # Clear symlink errors
 if command -v symlinks 2>&1 >/dev/null; then
 	echo "Deleting broken links..."
-	symlinks -cdr $THEMEDIR/
+	symlinks -cdr $DIR/../../$THEME
 	echo "Done."
 fi
