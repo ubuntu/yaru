@@ -80,3 +80,7 @@ $hb_pathbar_bg: lighten($headerbar_bg_color, 5%);
 $hb_pathbar_bg_backdrop: mix(lighten($headerbar_bg_color, 5%), $headerbar_bg_color, 50%);
 $hb_pathbar_border_backdrop: darken($hb_pathbar_bg_backdrop, 2%);
 $hb_button_bg_hover: lighten($headerbar_bg_color, 10%);
+
+//box-shadows
+$window_decoration_shadow: 0 3px 9px 1px transparentize(black, 0.5);
+$popover_shadow: 0 2px 5px transparentize(black, 0.75);
