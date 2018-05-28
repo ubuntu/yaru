@@ -3840,7 +3840,8 @@ row {
   border-radius: $medium_radius;
   background-color: $menu_color;
   border: 1px solid $borders_color;
-  box-shadow: $window_decoration_shadow;
+  box-shadow: $popover_shadow;
+
   &:backdrop {
     // background-image: none;
     // background-color: transparentize($backdrop_headerbar_bg_color, 0.1);
