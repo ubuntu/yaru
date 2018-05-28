@@ -3840,8 +3840,7 @@ row {
   border-radius: $medium_radius;
   background-color: $menu_color;
   border: 1px solid $borders_color;
-  box-shadow: $popover_shadow;
-
+  box-shadow: $window_decoration_shadow;
   &:backdrop {
     // background-image: none;
     // background-color: transparentize($backdrop_headerbar_bg_color, 0.1);
@@ -4261,7 +4260,7 @@ infobar {
       selection { background-color: darken($c, 10%); }
 
       &:backdrop, & {
-        color: $selected_fg_color; 
+        color: $selected_fg_color;
         border-color: _border_color($c);
       }
 
