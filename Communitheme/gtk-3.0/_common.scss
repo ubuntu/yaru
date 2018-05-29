@@ -2899,22 +2899,30 @@ radio {
 
 %check, %radio, check, radio {
   & {
-    border: 1px solid;
     // for unchecked
-    @each $state, $t in ("", "normal"), (":hover", "hover"), (":active", "active"), (":disabled", "insensitive"), (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+    border: 1px solid;
+    $_c: if($light, white, $bg_color);
+
+    @each $state, $t in ("", "normal"), (":hover", "hover"),
+                        (":active", "active"), (":disabled", "insensitive"),
+                        (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
       &#{$state} {
-        @include check($t, white);
+        @include check($t, $_c);
       }
     }
   }
 
   & {
     // for checked
-    @each $t, $c in (':checked:not(:indeterminate)', $success_color),(':indeterminate', $success_color) {
+    @each $t in (':checked:not(:indeterminate)'), (':indeterminate') {
       &#{$t} {
-        @each $state, $t in ("", "normal"), (":hover", "hover"), (":disabled", "insensitive"), (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+        @each $state, $t in ("", "normal"),
+                            (":hover", "hover"),
+                            (":disabled", "insensitive"),
+                            (":backdrop", "backdrop"),
+                            (":backdrop:disabled", 'backdrop-insensitive') {
           &#{$state} {
-            @include check($t, $c, white);
+            @include check($t, $success_color);
           }
         }
       }
@@ -4273,7 +4281,7 @@ infobar {
       selection { background-color: darken($c, 10%); }
 
       &:backdrop, & {
-        color: $selected_fg_color; 
+        color: $selected_fg_color;
         border-color: _border_color($c);
       }
 

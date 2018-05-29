@@ -506,46 +506,50 @@
   // possible $t values:
   // normal, hover, active, insensitive, backdrop, backdrop-insensitive
 
-  $_border: if($c == white, $borders_color, $c);
+  $_checked: if($c==$success_color, true, false);
+  $_border_color: if($_checked, $c, if($light, $borders_color, white));
+  $_dim_border_color: transparentize($_border_color, if($light, 0.3, 0.7));
+  $_dim_background: if($light, $dark_fill, $slate);
 
   @if $t==normal  {
     background-color: $c;
-    border-color: $_border;
+    border-color: $_border_color;
     box-shadow: 0 1px transparentize(black, 0.95);
     color: $tc;
   }
 
   @if $t==hover {
     -gtk-icon-effect: highlight;
-    background-color: if($c == $success_color, lighten($c, 5%), darken($c, 5%));
+    background-color: if($c!=white, lighten($c, 7%), darken($c, 5%));
   }
 
   @if $t==active {
-    box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 1px 0px if($light, rgba(0, 0, 0, 0.2), black);
   }
 
   @if $t==insensitive {
-    $_bg: if($c!=white, $dark_fill, mix($c, $base_color, 50%));
+    $_bg: if($_checked, $_dim_background , mix($c, $base_color, 50%));
     background-color: $_bg;
-    border-color: if($c==white, $insensitive_borders_color, $_bg);
+    border-color: if($_checked, $_bg, $_dim_border_color);
     box-shadow: none;
-    color: transparentize($tc, 0.4);
+    color: transparentize($tc, 0.3);
   }
 
-  @if $t == backdrop {
-    $_bg: mix($c, $base_color, 85%);
+  @if $t==backdrop {
     -gtk-icon-effect: dim;
-    background-color: _backdrop_color($_bg);
-    border-color: if($c==white, $insensitive_borders_color, _backdrop_color($_bg));
-    box-shadow: none;
-    color: transparentize($tc, 0.5);
+
+    background-color: if($_checked, _backdrop_color($c), $bg_color);
+    border-color: $_dim_border_color;
+    box-shadow: 0 1px transparentize(black, 0.95);
+    color: $tc;
   }
 
   @if $t==backdrop-insensitive {
-    $_bg: _backdrop_color($dark_fill);
     -gtk-icon-effect: dim;
+
+    $_bg: if($_checked, $_dim_background, $bg_color);
     background-color: $_bg;
-    border-color: if($c==white, $insensitive_borders_color, $_bg);
+    border-color: if($_checked, $_bg, $_dim_border_color);
     box-shadow: none;
     color: transparentize($tc, 0.6);
   }
