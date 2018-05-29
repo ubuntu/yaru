@@ -525,7 +525,7 @@
   }
 
   @if $t==insensitive {
-    $_bg: mix($c, $base_color, 50%);
+    $_bg: if($c!=white, $dark_fill, mix($c, $base_color, 50%));
     background-color: $_bg;
     border-color: if($c==white, $insensitive_borders_color, $_bg);
     box-shadow: none;
@@ -542,7 +542,7 @@
   }
 
   @if $t==backdrop-insensitive {
-    $_bg: mix(_backdrop_color($c), $base_color, 60%);
+    $_bg: _backdrop_color($dark_fill);
     -gtk-icon-effect: dim;
     background-color: $_bg;
     border-color: if($c==white, $insensitive_borders_color, $_bg);
