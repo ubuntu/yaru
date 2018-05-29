@@ -110,7 +110,10 @@ $button_transition: all 150ms $ease-out-quad;
     &:focus, & {
       @extend %selected_items;
       // @extend %selected_text; //Trying blue for the text selection
-      border-radius: 3px;
+
+      /* border-radius change here caused issue 473: selected radio becomes squared
+       * keeping the code since it is not clear if removing it can cause any side effect
+       * border-radius: 3px; */
     }
 
   }
@@ -3014,13 +3017,6 @@ treeview.view {
       }
     }
   }
-}
-
-// Somehow radio button loses its radius value when
-// in below status.
-// The only fix seems to re-set it here.
-treeview.view radio:checked:selected {
-  border-radius: 100%;
 }
 
 /************
