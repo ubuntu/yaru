@@ -2354,7 +2354,7 @@ popover.background {
 
   .csd &, & { border: 1px solid $borders_color; }
 
-  box-shadow: 0 2px 5px transparentize(black, 0.75);
+  box-shadow: $popover_shadow;
 
   &:backdrop {
     background-color: $backdrop_bg_color;
@@ -3852,7 +3852,7 @@ row {
   border-radius: $medium_radius;
   background-color: $menu_color;
   border: 1px solid $borders_color;
-  box-shadow: 0 2px 5px transparentize(black, 0.75);
+  box-shadow: $popover_shadow;
 
   &:backdrop {
     // background-image: none;
@@ -4273,7 +4273,7 @@ infobar {
       selection { background-color: darken($c, 10%); }
 
       &:backdrop, & {
-        color: $selected_fg_color; 
+        color: $selected_fg_color;
         border-color: _border_color($c);
       }
 
@@ -4513,7 +4513,7 @@ decoration {
   // see bug #722563
   $_wm_border: transparentize(black, 0.77);
 
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
+  box-shadow: $window_decoration_shadow;
 
   // FIXME rationalize shadows
 
@@ -4546,7 +4546,7 @@ decoration {
   //These shadows are applied to the context-menu!
   .csd.popup & {
     border-radius: $small_radius;
-    box-shadow: 0 2px 5px transparentize(black, 0.75),
+    box-shadow: $popover_shadow,
                 0 0 0 1px transparentize($_wm_border, 0.1);
   }
 
