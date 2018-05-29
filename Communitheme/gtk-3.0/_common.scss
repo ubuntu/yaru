@@ -2986,7 +2986,7 @@ menu menuitem, popover {
   // menu and popover checks and radios should be hollow
   radio, check {
     &, &:backdrop, &:hover, &:disabled, &:backdrop:disabled { background-color: transparent; box-shadow: none; }
-    &, &:hover { border: 1px solid if($variant == "light", $borders_color, $graphite); }
+    &, &:hover { border: 1px solid if($variant == "light", $ash, $porcelain); }
     &:disabled { border-color: $insensitive_borders_color; color: inherit; }
     &:checked:not(:indeterminate), &:indeterminate {
       transition: none;
@@ -2997,8 +2997,8 @@ menu menuitem, popover {
     @each $t, $c in (':checked:not(:indeterminate)', $success_color),
                     (':indeterminate', $success_color) {
         &#{$t} {
-        &, &:hover { border-color: $c; color: $c; }
-        &:backdrop { color: _backdrop_color($c); }
+          &, &:hover { border-color: $c; color: $c; }
+          &:backdrop { color: _backdrop_color($c); }
       }
     }
   }
