@@ -1439,7 +1439,7 @@ toolbar {
 
   padding: 4px 3px 3px 4px;
 
-  button {
+  button.flat {
     @each $state, $t in ("", "normal"), (":hover", "hover"),
     (":active, &:checked", "active"), (":disabled", "insensitive"),
     (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
