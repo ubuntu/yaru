@@ -546,7 +546,7 @@ StScrollBar {
 
   .popup-menu-arrow { } //defined globally in the TOP BAR
   .popup-sub-menu {
-    background-color: transparentize(darken($base_active_color,63%), ($popover-alpha-value));
+    background-color: transparentize(darken($base_active_color,55%), $popover-alpha-value);
     box-shadow: inset 0 -1px 0px $bc;
   }
 
