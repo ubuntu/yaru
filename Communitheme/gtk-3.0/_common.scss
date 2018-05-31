@@ -1223,7 +1223,7 @@ spinbutton {
       &:dir(rtl) { border-style: none solid none none; }
 
       &:hover {
-        background-color: darken(white, 5%);
+        background-color: if($variant=="light", darken($bg_color, 5%), lighten($bg_color, 25%));
       }
 
       &:disabled {
