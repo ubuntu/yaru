@@ -1128,7 +1128,7 @@ StScrollBar {
         }
 
         .message {
-          background-color: $osd_bg_color;
+          background-color: transparentize($osd_bg_color, 0.7);
           border: 1px solid $osd_borders_color;
           &:hover, &:focus { background-color: opacify(mix($osd_bg_color, $base_hover_color), 1); }
           &:active { background-color: $base_active_color; }
