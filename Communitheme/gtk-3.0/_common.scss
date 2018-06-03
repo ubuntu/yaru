@@ -2203,8 +2203,14 @@ menubar,
     min-height: 16px;
     padding: 4px 8px;
 
-    menu {
+    menu, .menu, .context-menu {
       border-radius: 0 0 $small_radius $small_radius;
+      menuitem {
+        &:hover {
+          &:first-child { border-radius: 0; }
+          &:last-child { border-radius: 0; }
+        }
+      }
     }
 
     &:hover { //Seems like it :hover even with keyboard focus
@@ -2221,9 +2227,18 @@ menubar,
 
 .background.popup { background-color: transparent; }
 
-menu,
-.menu,
 .context-menu {
+  menuitem {
+    border-radius: 0;
+    &:hover {
+      &:first-child { border-radius: 0 0 $small_radius $small_radius; }
+      &:last-child { border-radius: $small_radius $small_radius 0 0; }
+    }
+  }
+}
+
+menu,
+.menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
   // padding: 2px;
   background-color: $menu_color;
@@ -2232,6 +2247,13 @@ menu,
   border-radius: $small_radius;
 
   .csd & { border: none; }  // axes borders in a composited env
+
+  separator,
+  .csd & separator {
+    min-height: 0;
+    border: none;
+    background-color: transparent;
+  }
 
   &:backdrop { background-color: $backdrop_menu_color;  color: $backdrop_text_color; }
 
@@ -2258,16 +2280,6 @@ menu,
     &:backdrop:hover {
       color: $backdrop_fg_color;
       background-color: transparent;
-    }
-
-    &:first-child {
-      border-top-right-radius: $small_radius;
-      border-top-left-radius: $small_radius;
-    }
-
-    &:last-child {
-      border-bottom-right-radius: $small_radius;
-      border-bottom-left-radius: $small_radius;
     }
 
     // submenu indicators
@@ -2341,8 +2353,8 @@ menuitem {
   }
 }
 
-window.background:not(.csd) { // firefox menu
-  .menu { border: none; }
+window.background:not(.csd) {
+  .menu { border: none; } // firefox menu
 }
 
 /***************
