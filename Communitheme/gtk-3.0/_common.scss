@@ -2243,10 +2243,7 @@ menu,
     border-radius: $small_radius;
     // text-shadow: none;
 
-    &:hover {
-      background-color: $base_hover_color;
-
-    }
+    &:hover { background-color: $base_hover_color; }
 
     &:disabled {
       color: $insensitive_fg_color;
@@ -2264,17 +2261,9 @@ menu,
       min-height: 16px;
       min-width: 16px;
 
-      &:dir(ltr) {
-        -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
-        margin-left: 0px;
-        margin-right: 0px;
-      }
+      &:dir(ltr) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic'); }
 
-      &:dir(rtl) {
-        -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
-        margin-right: 0px;
-        margin-left: 0px;
-      }
+      &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
     }
 
     // avoids labels color being overridden, see
