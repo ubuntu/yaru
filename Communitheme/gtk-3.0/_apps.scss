@@ -359,4 +359,5 @@ window.background.chromium {
       @include draw_circle($selected_bg_color, $close:true, $size:20px);
     }
   }
+  menuitem { border-radius: 0; }
 }
