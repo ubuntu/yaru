@@ -252,7 +252,7 @@ assistant {
 spinner {
   background: none;
   opacity: 0; // non spinning spinner makes no sense
-  color: $blue;
+  color: $orange; //$blue;
   -gtk-icon-source: -gtk-icontheme('process-working-symbolic');
 
   &:checked {
@@ -3147,9 +3147,10 @@ scale {
 
   slider {
     $c: $neutral_color;
+    $_bc: _border_color($dark_fill);
     @include button(normal, white);
 
-    border: 1px solid _border_color($dark_fill);
+    border: 1px solid $_bc;
     border-radius: 10px;
     background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
@@ -3159,7 +3160,10 @@ scale {
 
     &:active { border-color: _border_color($c); }
 
-    &:disabled { @include button(insensitive, if($variant == "light", white, darken(white, 20%))); }
+    &:disabled {
+      @include button(insensitive, if($variant == "light", white, darken(white, 20%)));
+      border-color: lighten($_bc, 10%);
+    }
 
     &:backdrop {
       transition: $backdrop_transition;
