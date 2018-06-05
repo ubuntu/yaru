@@ -4618,8 +4618,8 @@ button.titlebutton {
   &:disabled { color: mix($tc, $c, 50%); }
 
   &:backdrop {
-    background-color: if($variant==light,lighten($c,5%),darken($c,5%));
-    color: $slate;//$backdrop_selected_fg_color;
+    background-color: $backdrop_selected_bg_color;
+    color: $backdrop_text_color;
 
     &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
