@@ -252,7 +252,7 @@ assistant {
 spinner {
   background: none;
   opacity: 0; // non spinning spinner makes no sense
-  color: $orange; //$blue;
+  color: $blue;
   -gtk-icon-source: -gtk-icontheme('process-working-symbolic');
 
   &:checked {
