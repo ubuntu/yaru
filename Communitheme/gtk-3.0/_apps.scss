@@ -47,12 +47,6 @@ list.tweak-categories separator {
     margin-right: 9px;
   }
 
-  menu menuitem:first-child:hover {
-    // context menu in nautilus has its last-child labeled as its first child lol
-    // using :hover for specificity bump
-    border-radius: 0 0 $small_radius $small_radius;
-  }
-
   paned > separator{
     // separator between sidebar and main window view
     &, &:backdrop {
@@ -366,4 +360,5 @@ window.background.chromium {
       @include draw_circle($selected_bg_color, $close:true, $size:20px);
     }
   }
+  menuitem { border-radius: 0; }
 }

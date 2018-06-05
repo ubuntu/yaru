@@ -252,7 +252,7 @@ assistant {
 spinner {
   background: none;
   opacity: 0; // non spinning spinner makes no sense
-  color: $blue;
+  color: $orange; //$blue;
   -gtk-icon-source: -gtk-icontheme('process-working-symbolic');
 
   &:checked {
@@ -1709,7 +1709,7 @@ headerbar {
         margin: 0;
         border: none;
 
-        &:insensitive:checked{
+        &:disabled:checked{
           background-color: $hb_pathbar_bg;
           &:backdrop{ background-color: $hb_pathbar_bg_backdrop;}
         }
@@ -2225,7 +2225,7 @@ menu,
 .menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
-  // padding: 2px;
+  padding: 4px;
   background-color: $menu_color;
   color: $text_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
@@ -2240,14 +2240,10 @@ menu,
     min-height: 16px;
     min-width: 36px;
     padding: 5px 6px;
-    border-radius: 0;
+    border-radius: $small_radius;
     // text-shadow: none;
 
-    &:hover {
-      background-color: $base_hover_color;
-      &:first-child { border-radius: $small_radius $small_radius 0 0; }
-      &:last-child { border-radius: 0 0 $small_radius $small_radius; }
-    }
+    &:hover { background-color: $base_hover_color; }
 
     &:disabled {
       color: $insensitive_fg_color;
@@ -2260,32 +2256,14 @@ menu,
       background-color: transparent;
     }
 
-    &:first-child {
-      border-top-right-radius: $small_radius;
-      border-top-left-radius: $small_radius;
-    }
-
-    &:last-child {
-      border-bottom-right-radius: $small_radius;
-      border-bottom-left-radius: $small_radius;
-    }
-
     // submenu indicators
     arrow {
       min-height: 16px;
       min-width: 16px;
 
-      &:dir(ltr) {
-        -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
-        margin-left: 10px;
-        margin-right: 10px;
-      }
+      &:dir(ltr) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic'); }
 
-      &:dir(rtl) {
-        -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
-        margin-right: 10px;
-        margin-left: 10px;
-      }
+      &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
     }
 
     // avoids labels color being overridden, see
@@ -3169,9 +3147,10 @@ scale {
 
   slider {
     $c: $neutral_color;
+    $_bc: _border_color($dark_fill);
     @include button(normal, white);
 
-    border: 1px solid _border_color($dark_fill);
+    border: 1px solid $_bc;
     border-radius: 10px;
     background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
@@ -3181,7 +3160,10 @@ scale {
 
     &:active { border-color: _border_color($c); }
 
-    &:disabled { @include button(insensitive, if($variant == "light", white, darken(white, 20%))); }
+    &:disabled {
+      @include button(insensitive, if($variant == "light", white, darken(white, 20%)));
+      border-color: lighten($_bc, 10%);
+    }
 
     &:backdrop {
       transition: $backdrop_transition;
