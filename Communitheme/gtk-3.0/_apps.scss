@@ -34,6 +34,7 @@ list.tweak-categories separator {
                                                 // completely transparent tints the icon black
     background-image: image($selected_bg_color); // label background becomes this
     &:backdrop {background-image: image($backdrop_selected_bg_color);}
+    border-radius: $small_radius;
   }
 
   .nautilus-list-view .view {
