@@ -363,3 +363,8 @@ window.background.chromium {
   }
   menuitem { border-radius: 0; }
 }
+
+/*********************
+ * Geary *
+ *********************/
+.geary-conversation-frame scrolledwindow:backdrop * { color: $backdrop_text_color;}
