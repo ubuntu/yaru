@@ -8,7 +8,7 @@ $small_radius: 4px;
 $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
-$button_transition: all 150ms $ease-out-quad;
+$button_transition: all 0.4s ease-out;
 
 * {
   padding: 0;
@@ -553,7 +553,6 @@ button {
 
       &:hover {
         transition: $button_transition;
-        transition-duration: 250ms;
 
         &:active { transition: $button_transition; }
       }
@@ -574,6 +573,7 @@ button {
     &:hover {
       @include button(hover);
       -gtk-icon-effect: highlight;
+      transition: $button_transition;
     }
 
     &:active,
