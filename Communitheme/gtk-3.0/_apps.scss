@@ -361,3 +361,9 @@ window.background.chromium {
   }
   menuitem { border-radius: 0; }
 }
+
+/*********************
+ * GNOME Photos *
+ *********************/
+//removes the black background for picture tiles 
+.documents-scrolledwin.frame.frame widget flowboxchild.tile { background-color: transparent; }
