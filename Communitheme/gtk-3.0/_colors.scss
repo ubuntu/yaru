@@ -34,7 +34,7 @@ $success_color: $green;
 $destructive_color: darken($red, 10%);
 $neutral_color: $blue;
 $focus_color: transparentize($selected_bg_color, 0.4);
-$text_selection: #C4E4F0; // #FA794B;
+$text_selection: rgba(#c83703, 0.24);
 //
 $osd_fg_color: $porcelain;
 $osd_bg_color: transparentize($jet, 0.3);
