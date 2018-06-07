@@ -2075,9 +2075,9 @@ treeview.view {
 
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
-    color: mix($text_color, $base_color, 70%);
+    color: $text_color;
 
-    &:hover { color: $text_color; }
+    &:hover { color: lighten($text_color, 25%); }
 
     &:selected {
       color: mix($selected_fg_color, $selected_bg_color, 70%);
