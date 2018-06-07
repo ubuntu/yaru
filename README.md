@@ -11,7 +11,7 @@ The Suru icon assets (any and all `.png` files) are licenced under the terms of 
 
 ## Installing & Using
 
-You can install Suru from source using the Meson build system.
+You can build and install Suru from source using Meson.
 
 ```bash
 # build
