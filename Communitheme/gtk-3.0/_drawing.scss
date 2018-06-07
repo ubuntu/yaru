@@ -589,6 +589,10 @@
     background-color: if($bg==$dark_fill, transparent, $ash);
     border: 1px solid $borders_edge;
     box-shadow: none;
+
+    &:checked {
+      background-color: transparentize($dark_fill, 0.7);
+    }
   }
 
   &:backdrop {
