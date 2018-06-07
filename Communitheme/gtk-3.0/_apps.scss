@@ -262,6 +262,7 @@ terminal-window {
 .gedit-search-entry-occurrences-tag {
     color: transparentize($fg_color, 0.65);
     border: none; // Removed ugly tag border
+    box-shadow: none; // Removed button inset shadow
     margin: 2px;
     padding: 2px;
 }

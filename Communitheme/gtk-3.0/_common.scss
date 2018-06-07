@@ -2205,6 +2205,9 @@ menubar,
 
     menu {
       border-radius: 0 0 $small_radius $small_radius;
+      menu {
+        border-radius: $small_radius;
+      }
     }
 
     &:hover { //Seems like it :hover even with keyboard focus
