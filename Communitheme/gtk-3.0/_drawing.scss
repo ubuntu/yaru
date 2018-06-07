@@ -303,10 +303,15 @@
       $_label_alpha: if($tc == $headerbar_fg_color, 0.25, 0);
       $_label_color: none;
 
-      @if $tc == $fg_color {
+      @if $c == $success_color {
+        $_label_color: $porcelain;
+        $_label_alpha: 0.45;
+      } @else if $tc == $fg_color {
         $_label_color: $insensitive_fg_color;
+        $_label_alpha: 0;
       } @else {
         $_label_color: mix($tc, $_bg, 50%);
+        $_label_alpha: 0.25;
       }
 
       color: transparentize($_label_color, $_label_alpha);
