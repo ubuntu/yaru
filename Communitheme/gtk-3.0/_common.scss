@@ -2205,6 +2205,9 @@ menubar,
 
     menu {
       border-radius: 0 0 $small_radius $small_radius;
+      menu {
+        border-radius: $small_radius;
+      }
     }
 
     &:hover { //Seems like it :hover even with keyboard focus
@@ -2290,7 +2293,7 @@ menu,
     }
 
     &.bottom {
-      // margin-bottom: -6px;
+      margin-bottom: -8px;
       border-top: 1px solid mix($fg_color, $base_color, 10%);
       border-bottom-right-radius: $small_radius;
       border-bottom-left-radius: $small_radius;
@@ -2319,8 +2322,10 @@ menuitem {
   }
 }
 
-window.background:not(.csd) { // firefox menu
-  .menu { border: none; }
+window.background:not(.csd) {
+  // Firefox menu
+  > menu, .menu { border: none; } // Removed ugly menu borders
+  > menu > menuitem { border-radius: 0; } // Removed rounded menu corners
 }
 
 /***************
