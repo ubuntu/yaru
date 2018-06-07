@@ -8,7 +8,7 @@ $small_radius: 4px;
 $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
-$button_transition: all 150ms $ease-out-quad;
+$button_transition: all 0.4s ease-out;
 
 * {
   padding: 0;
@@ -553,7 +553,6 @@ button {
 
       &:hover {
         transition: $button_transition;
-        transition-duration: 250ms;
 
         &:active { transition: $button_transition; }
       }
@@ -574,6 +573,7 @@ button {
     &:hover {
       @include button(hover);
       -gtk-icon-effect: highlight;
+      transition: $button_transition;
     }
 
     &:active,
@@ -1439,7 +1439,7 @@ toolbar {
 
   padding: 4px 3px 3px 4px;
 
-  button {
+  button.flat {
     @each $state, $t in ("", "normal"), (":hover", "hover"),
     (":active, &:checked", "active"), (":disabled", "insensitive"),
     (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
@@ -2075,9 +2075,9 @@ treeview.view {
 
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
-    color: mix($text_color, $base_color, 70%);
+    color: $text_color;
 
-    &:hover { color: $text_color; }
+    &:hover { color: lighten($text_color, 25%); }
 
     &:selected {
       color: mix($selected_fg_color, $selected_bg_color, 70%);
@@ -2205,6 +2205,9 @@ menubar,
 
     menu {
       border-radius: 0 0 $small_radius $small_radius;
+      menu {
+        border-radius: $small_radius;
+      }
     }
 
     &:hover { //Seems like it :hover even with keyboard focus
@@ -2290,7 +2293,7 @@ menu,
     }
 
     &.bottom {
-      // margin-bottom: -6px;
+      margin-bottom: -8px;
       border-top: 1px solid mix($fg_color, $base_color, 10%);
       border-bottom-right-radius: $small_radius;
       border-bottom-left-radius: $small_radius;
@@ -2319,8 +2322,10 @@ menuitem {
   }
 }
 
-window.background:not(.csd) { // firefox menu
-  .menu { border: none; }
+window.background:not(.csd) {
+  // Firefox menu
+  > menu, .menu { border: none; } // Removed ugly menu borders
+  > menu > menuitem { border-radius: 0; } // Removed rounded menu corners
 }
 
 /***************
