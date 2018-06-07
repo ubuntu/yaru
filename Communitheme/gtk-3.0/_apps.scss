@@ -33,6 +33,8 @@ list.tweak-categories separator {
                                                 // near transparent white results in no tint
                                                 // completely transparent tints the icon black
     background-image: image($selected_bg_color); // label background becomes this
+    &:backdrop {background-image: image($backdrop_selected_bg_color);}
+    border-radius: $small_radius;
   }
 
   .nautilus-list-view .view {
@@ -395,6 +397,11 @@ window.background.chromium {
   }
   menuitem { border-radius: 0; }
 }
+
+/*********************
+ * Geary *
+ *********************/
+.geary-conversation-frame scrolledwindow:backdrop * { color: $backdrop_text_color;}
 
 /*********************
  * GNOME Photos *

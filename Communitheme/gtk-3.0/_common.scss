@@ -252,7 +252,7 @@ assistant {
 spinner {
   background: none;
   opacity: 0; // non spinning spinner makes no sense
-  color: $blue;
+  color: $orange; //$blue;
   -gtk-icon-source: -gtk-icontheme('process-working-symbolic');
 
   &:checked {
@@ -1681,7 +1681,7 @@ headerbar {
 
         &:checked {
           color: $backdrop_headerbar_fg_color;
-          box-shadow: inset 0 -2px _backdrop_color($selected_bg_color);
+          box-shadow: inset 0 -2px $backdrop_selected_bg_color;
         }
       }
     }
@@ -1969,7 +1969,7 @@ headerbar { // headerbar border rounding
     border-color: transparent;
     box-shadow: inset 0 -2px transparent;
 
-    &:checked { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color); }
+    &:checked { box-shadow: inset 0 -2px $backdrop_selected_bg_color; }
   }
 
   &.text-button, &.image-button, & {
@@ -4599,7 +4599,7 @@ button.titlebutton {
   $tc: $selected_fg_color;
   background-color: $c;
 
-  &:backdrop { background-color: _backdrop_color($c); }
+  &:backdrop { background-color: $backdrop_selected_bg_color;}
 
   @at-root %nobg_selected_items, & {
     color: $tc;
@@ -4607,7 +4607,7 @@ button.titlebutton {
     &:disabled { color: mix($tc, $c, 50%); }
 
     &:backdrop {
-      &, label { color: $backdrop_selected_fg_color; }
+      &, label { color: $backdrop_text_color; }
 
       &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
     }
@@ -4623,8 +4623,8 @@ button.titlebutton {
   &:disabled { color: mix($tc, $c, 50%); }
 
   &:backdrop {
-    background-color: if($variant==light,lighten($c,5%),darken($c,5%));
-    color: $slate;//$backdrop_selected_fg_color;
+    background-color: $backdrop_selected_bg_color;
+    color: $backdrop_text_color;
 
     &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
