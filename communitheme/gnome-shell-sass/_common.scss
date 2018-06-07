@@ -682,7 +682,7 @@ StScrollBar {
   }
 
   .switcher-list .item-box:outlined {
-    padding: 6px;
+    padding: 8px;
     //border: 1px solid $light_borders_color;
   }
 
@@ -712,7 +712,7 @@ StScrollBar {
     border-color: rgba(0,0,0,0);
     color: transparentize($dark_fg_color,0.2);
     &:highlighted {
-      color: $dark_fg_color;
+      color: $fg_color;
     }
   }
 
