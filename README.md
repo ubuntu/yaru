@@ -7,7 +7,7 @@ This project is a revitalization of the Suru icon set that was designed for Ubun
 
 This project is licenced under the terms of either the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt) or [Creative Commons Attribution-ShareAlike 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/).
 
-The Suru icon assets (any and all `.png` icons) are licenced under the terms of the CC-by-SA (which is encoded in the PNG metadata), all SVG icons, icon source materials, scripts and other bits are free software licenced under the GNU GPL; you can copy, redistribute and/or modify aspects of this work under the terms of each license accordingly.
+The Suru icon assets (any and all `.png` files) are licenced under the terms of the CC-by-SA (which is encoded in the PNG metadata), all SVG icons, icon source materials, scripts and other bits are free software licenced under the GNU GPL; you can copy, redistribute and/or modify aspects of this work under the terms of each license accordingly.
 
 ## Installing & Using
 
