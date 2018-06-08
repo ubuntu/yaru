@@ -2718,7 +2718,7 @@ scrollbar {
     &.dragging,
     &.hovering {
       border-style: none;
-      background-color: $scrollbar_bg_color;
+      background-color: transparent; //$scrollbar_bg_color;
       border-radius: $small_radius;
 
       &:backdrop { background-color: transparentize($backdrop_scrollbar_bg_color, 0.2); }
@@ -3755,25 +3755,12 @@ scrolledwindow {
   }
 }
 
-// Avoid Gnome-Control-Center's language list to use sidebar colors
-frame > scrolledwindow > viewport > list {
-    background-color: /*white*/ $bg_color;
-    &:backdrop { background-color: $backdrop_bg_color; }
-
-}
-
 //vbox and hbox separators
 separator {
-  background: transparentize(/*black*/$borders_color, 0.9);
+  background: transparentize($borders_color, 0.85);
   min-width: 1px;
   min-height: 1px;
 }
-
-// box > separator.vertical {
-  // target separators between sidebars and views -> this may need to be a thing
-  // background: $borders_color;
-// }
-
 
 /*********
  * Lists *
@@ -4065,7 +4052,12 @@ row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sid
                                                                   // on this oddity
 
 placessidebar {
-  > viewport.frame { border-style: none; }
+  > viewport.frame {
+    background-color: $bg_color;
+    border-style: none;
+
+    &:backdrop { background-color: $backdrop_bg_color; };
+  }
 
   > viewport > list { margin-top: -3px; }
 

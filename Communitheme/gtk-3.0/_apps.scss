@@ -13,8 +13,13 @@ list.tweak-categories separator {
 .nautilus-window {
   // keep details box visible
   // details box looks ugly when many items are selected and it floats above the orange
+  background-image: none;
+  background-color: white;
+  &:backdrop { background-color: _backdrop_color(white); }
+
   *scrolledwindow:backdrop { opacity: 0.9; } // what is this for?
-   // Makes icons less bright in backdrop
+
+  // Makes icons less bright in backdrop
   paned box.floating-bar {
     background: $bg_color;
     border: 1px solid $borders_color;
@@ -25,6 +30,16 @@ list.tweak-categories separator {
     // applies to the desktop too
     background: transparent;
     border-color: transparent;
+  }
+
+  treeview.view,
+  treeview.view header button {
+    background-color: white;
+    background-image: none;
+    border-color: transparentize($borders_color, 0.6);
+    border-left: 1px;
+
+    &:backdrop {background-color: _backdrop_color(white);}
   }
 
   scrolledwindow widget.view:selected {
@@ -42,14 +57,32 @@ list.tweak-categories separator {
     &.dnd { border-style: none; }
   }
 
-  notebook > header > tabs > tab {
-    margin-right: 9px;
+  notebook > header > tabs {
+    background: $porcelain;
+    &:backdrop { background-color: $backdrop_bg_color; }
+
+
+    & > tab {
+      border-bottom: 1px solid transparentize($borders_color, 0.6);
+      margin: 0px;
+
+      &:checked {
+        border-color: transparentize($borders_color, 0.6);
+        border-bottom: none;
+
+        &:backdrop { background-color: _backdrop_color(white); }
+      }
+
+      &:not(:checked) {
+        & label { color: transparentize($text_color, 0.5); }
+      }
+    }
   }
 
-  paned > separator{
+  paned > separator {
     // separator between sidebar and main window view
     &, &:backdrop {
-      background-image: image($borders_color);
+      background-image: image(rgba(0, 0, 0, 0.06));
     }
   }
 }
@@ -57,10 +90,8 @@ list.tweak-categories separator {
 
 .nautilus-desktop-window {
   .nautilus-desktop.view {
-    // use white text for desktop icons
-    // otherwise it uses the variant dependent grey or white text color
     color: $selected_fg_color;
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -399,5 +430,5 @@ window.background.chromium {
 /*********************
  * GNOME Photos *
  *********************/
-//removes the black background for picture tiles 
+//removes the black background for picture tiles
 .documents-scrolledwin.frame.frame widget flowboxchild.tile { background-color: transparent; }
