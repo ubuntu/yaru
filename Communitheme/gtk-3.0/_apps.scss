@@ -32,7 +32,6 @@ list.tweak-categories separator {
     border-color: transparent;
   }
 
-  treeview.view,
   treeview.view header button {
     background-color: white;
     background-image: none;
@@ -40,9 +39,6 @@ list.tweak-categories separator {
     border-left: 1px;
 
     &:backdrop {background-color: _backdrop_color(white);}
-  }
-
-  treeview.view header button {
     &:hover {background-color: $bg_color;}
   }
 
