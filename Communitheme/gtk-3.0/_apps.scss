@@ -62,11 +62,11 @@ list.tweak-categories separator {
     &:backdrop { background-color: $backdrop_bg_color; }
 
     & > tab {
-      border-bottom: 1px solid transparentize($borders_color, 0.6);
+      border-bottom: 1px solid transparentize($borders_color, 0.5);
       margin: 0px;
 
       &:checked {
-        border-color: transparentize($borders_color, 0.6);
+        border-color: transparentize($borders_color, 0.5);
         border-bottom: none;
 
         &:backdrop { background-color: #EEEFF0; }  // It should be _backdrop_color(white); but that does not work.
