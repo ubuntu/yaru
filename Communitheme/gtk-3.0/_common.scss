@@ -4060,7 +4060,7 @@ placessidebar {
     background-color: $bg_color;
     border-style: none;
 
-    &:backdrop { background-color: darken($backdrop_bg_color, 5%); };
+    &:backdrop { background-color: $backdrop_bg_color; };
   }
 
   > viewport > list { margin-top: -3px; }

@@ -38,8 +38,8 @@ list.tweak-categories separator {
     border-color: transparentize($borders_color, 0.6);
     border-left: 1px;
 
-    &:backdrop {background-color: _backdrop_color(white);}
     &:hover {background-color: $bg_color;}
+    &:backdrop { background-color: #EEEFF0; } // It should be _backdrop_color(white); but that does not work.
   }
 
   scrolledwindow widget.view:selected {
@@ -60,8 +60,6 @@ list.tweak-categories separator {
   notebook > header > tabs {
     background: $porcelain;
     &:backdrop { background-color: $backdrop_bg_color; }
-    border: 1px solid transparentize($borders_color, 0.6);
-
 
     & > tab {
       border-bottom: 1px solid transparentize($borders_color, 0.6);
@@ -71,7 +69,7 @@ list.tweak-categories separator {
         border-color: transparentize($borders_color, 0.6);
         border-bottom: none;
 
-        &:backdrop { background-color: _backdrop_color(white); }
+        &:backdrop { background-color: #EEEFF0; }  // It should be _backdrop_color(white); but that does not work.
       }
 
       &:not(:checked) {
