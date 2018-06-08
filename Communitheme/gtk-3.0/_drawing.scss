@@ -6,10 +6,11 @@
   // adjusts colors for use in the backdrop state
   // colors are darkened when using the dark theme so they aren't such a light grey
   @if $variant != 'light' {
-    $c: darken($c, 7.5%);
+    @return lighten($c, 5%);
   }
-  //@return transparentize(desaturate($c, 75%), .4);
-  @return darken($c, 3%);
+  @else {
+    @return lighten($c, 5%);
+  }
 }
 
 // @function _widget_edge($c:$borders_edge) {
