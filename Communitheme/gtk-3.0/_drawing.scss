@@ -268,11 +268,17 @@
   }
 
   @else if $t==active-hover {
-    @if $c == $headerbar_bg_color { $_border: darken($c, 3%); }
-    @if $flat == true { $c: darken($c, 5%); }
-    $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
+    $_bg: none;
 
-    background-color: transparentize($_bg, 0.4);
+    @if $c == $headerbar_bg_color {
+      $_bg: lighten($c, 20%);
+    } @else {
+      @if $flat == true { $c: darken($c, 5%); }
+      $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
+      $_bg: transparentize($_bg, 0.4);
+    }
+
+    background-color: $_bg;
   }
 
   @else if $t==insensitive {

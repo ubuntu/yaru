@@ -1608,6 +1608,7 @@ headerbar {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
                           (":active, &:checked", "active"),
+                          (":hover:checked", "active-hover"),
                           (":disabled", "insensitive"),
                           (":disabled:active, &:disabled:checked", "insensitive-active"),
                           (":backdrop", "backdrop"),
