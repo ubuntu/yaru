@@ -42,6 +42,10 @@ list.tweak-categories separator {
     &:backdrop {background-color: _backdrop_color(white);}
   }
 
+  treeview.view header button {
+    &:hover {background-color: $bg_color;}
+  }
+
   scrolledwindow widget.view:selected {
     // reduces orangeness of selected folder icons
     background-color: rgba(255, 255, 255, 0.1); // folder icon is tinted based on this
@@ -60,6 +64,7 @@ list.tweak-categories separator {
   notebook > header > tabs {
     background: $porcelain;
     &:backdrop { background-color: $backdrop_bg_color; }
+    border: 1px solid transparentize($borders_color, 0.6);
 
 
     & > tab {
