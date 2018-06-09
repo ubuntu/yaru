@@ -45,7 +45,6 @@ $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_col
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
 //
 $sidebar_bg_color: if($variant == 'light', white, lighten($bg_color, 5%));
-//$sidebar_bg_color: adjust-color($sidebar_bg_color, $red: 2); // add +2 on red channel to make the color warmer like headerbar
 $base_hover_color: transparentize($fg_color, 0.85);
 $base_active_color: transparentize($fg_color, 0.80);
 //
