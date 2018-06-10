@@ -234,6 +234,13 @@ terminal-window {
   > grid { margin-top: -24px; }
 }
 
+.list-box-app-row {
+  border-radius: 0px;
+  border-left: 1px solid $borders_color;
+  border-right: 1px solid $borders_color;
+  margin: -1px 0;
+}
+
 /***********
  * Gedit *
  ***********/
