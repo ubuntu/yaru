@@ -315,8 +315,8 @@ entry {
     &:backdrop:disabled { @include entry(backdrop-insensitive); }
 
     selection {
-      // @extend %selected_items;
-      @extend %selected_text; //Trying blue for the text selection
+       @extend %selected_items;
+      //@extend %selected_text; //Trying blue for the text selection
     }
 
     // entry error and warning style
