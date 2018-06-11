@@ -370,8 +370,11 @@
 
     @if $c==$headerbar_bg_color {
       $_bg: mix($c, $headerbar_bg_color, 85%);
-    } @else {
+    } @else if $c!=$headerbar_bg_color and $variant=='light'{
       $_bg: darken($c, 12%);
+    }
+    @else if $c!=$headerbar_bg_color and $variant=='dark'{
+      $_bg: darken($c, 1%);
     }
 
     //box-shadow: none;
