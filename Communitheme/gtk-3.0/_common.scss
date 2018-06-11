@@ -3922,7 +3922,7 @@ filechooser {
 
     background: $_bg;
     border-bottom: 1px solid $borders_color;
-    &:backdrop{background: darken($backdrop_bg_color, 5%);}
+    &:backdrop{background: if($variant==light,darken($backdrop_bg_color, 5%), $backdrop_bg_color);}
 
     .path-bar.linked button {
       background: if($variant==light, darken($_bg, 10%), darken($_bg, 5%));
