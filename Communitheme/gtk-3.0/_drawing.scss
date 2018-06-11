@@ -238,7 +238,7 @@
     @if $flat == true { $c: darken($c, 10%); }
     $_bg: if(lightness($c)<35%, lighten($c, 25%), lighten($c, 5%));
     background-color: $_bg;
-    @if $variant=='dark' and $c != darken($headerbar_bg_color, 10%) { background-color: $base_hover_color;}
+    @if $variant=='dark' and $c != darken($headerbar_bg_color, 10%) { background-color: lighten($c,1%); }
     color: $tc;
 
     @if $flat {
@@ -257,6 +257,7 @@
     $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
 
     background-color: $_bg;
+    @if $variant=='dark' and $c != darken($headerbar_bg_color,5%) { background-color: darken($button_bg_color,6.5%); }
     box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
     border-color: $_border;
     border-top-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 20%, 12%));
@@ -275,6 +276,7 @@
     }
 
     background-color: $_bg;
+    @if $variant=='dark' and $c != $headerbar_bg_color { background-color: darken($button_bg_color,7%); }
   }
 
   @else if $t==insensitive {
