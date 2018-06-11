@@ -315,8 +315,7 @@ entry {
     &:backdrop:disabled { @include entry(backdrop-insensitive); }
 
     selection {
-      // @extend %selected_items;
-      @extend %selected_text; //Trying blue for the text selection
+      @extend %selected_items;
     }
 
     // entry error and warning style
@@ -4586,7 +4585,7 @@ button.titlebutton {
 
 %selected_text {
   $c: $text_selection;
-  $tc: if($variant==light,$text_color,#2D2D2D);
+  $tc: $text_color;
   background-color: $c;
   color: $tc;
 
