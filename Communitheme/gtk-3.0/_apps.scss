@@ -412,8 +412,8 @@ headerbar button image ~ window decoration ~ menu separator {
   }
 
   viewport.view, listbox.transparent {
-   background-color: darken($base_color,10%);
-   &:backdrop { background-color: darken($backdrop_base_color,10%)}
+   background-color: darken($base_color,5%);
+   &:backdrop { background-color: $backdrop_base_color}
   }
 }
 
