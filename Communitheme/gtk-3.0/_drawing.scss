@@ -238,6 +238,7 @@
     @if $flat == true { $c: darken($c, 10%); }
     $_bg: if(lightness($c)<35%, lighten($c, 25%), lighten($c, 5%));
     background-color: $_bg;
+    @if $variant=='dark' and $c != darken($headerbar_bg_color, 10%) { background-color: $base_hover_color;}
     color: $tc;
 
     @if $flat {
