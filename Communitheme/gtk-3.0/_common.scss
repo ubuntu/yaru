@@ -2160,9 +2160,9 @@ treeview.view {
   padding: 0 6px;
   background-image: none;
   border-style: none solid solid none;
-  &:not(:hover), &:not(:active) { background-image: image($bg_color); }
+  &:not(:hover), &:not(:active) { background-image: if($variant==light, image(white), image($bg_color)); }
   &:backdrop { background-image: image($backdrop_bg_color); }
-  &:hover, &:active { background-image: none; }
+  &:hover, &:active { background-image: image($bg_color); }
   border-color: $borders_color; // don't darken the bottom border color
   border-radius: 0;
 
@@ -2718,7 +2718,7 @@ scrollbar {
     &.dragging,
     &.hovering {
       border-style: none;
-      background-color: $scrollbar_bg_color;
+      background-color: transparent; //$scrollbar_bg_color;
       border-radius: $small_radius;
 
       &:backdrop { background-color: transparentize($backdrop_scrollbar_bg_color, 0.2); }
@@ -3724,25 +3724,12 @@ scrolledwindow {
   }
 }
 
-// Avoid Gnome-Control-Center's language list to use sidebar colors
-frame > scrolledwindow > viewport > list {
-    background-color: /*white*/ $bg_color;
-    &:backdrop { background-color: $backdrop_bg_color; }
-
-}
-
 //vbox and hbox separators
 separator {
-  background: transparentize(/*black*/$borders_color, 0.9);
+  background: transparentize($borders_color, 0.85);
   min-width: 1px;
   min-height: 1px;
 }
-
-// box > separator.vertical {
-  // target separators between sidebars and views -> this may need to be a thing
-  // background: $borders_color;
-// }
-
 
 /*********
  * Lists *
@@ -3922,7 +3909,7 @@ messagedialog { // Message Dialog styling
 }
 
 filechooser {
-  background-color: white;
+  background-color: if($variant==light, white, $bg_color);
 
   .dialog-action-box {
     border-top: 1px solid $borders_color;
@@ -3931,26 +3918,30 @@ filechooser {
   }
 
   #pathbarbox {
-    $_bg: $sidebar_bg_color;
+    $_bg: $bg_color;
 
     background: $_bg;
     border-bottom: 1px solid $borders_color;
-    &:backdrop{background:  $backdrop_sidebar_bg_color;}
+    &:backdrop{background: darken($backdrop_bg_color, 5%);}
 
     .path-bar.linked button {
-      background: darken($_bg, 5%);
+      background: if($variant==light, darken($_bg, 10%), darken($_bg, 5%));
       &:backdrop { background: $_bg}
       &, & label { color: $text_color }
 
       &:backdrop label { color: $backdrop_text_color; }
       &:checked label { font-weight: 500; }
+      &:backdrop{background: darken($backdrop_bg_color, 5%);}
     }
   }
 
-  & actionbar { background-color: $sidebar_bg_color; }
+  & actionbar {
+    background-color: $bg_color;
+    &:backdrop{background: darken($backdrop_bg_color, 5%);}
+  }
+  // picture preview pane
   & placessidebar ~ box box > stack ~ box  {
-    // what is this for?
-    background-color: #efeded; // fixed color won't work with dark theme
+    background-color: $bg_color; // fixed color won't work with dark theme
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-width: 0 1px;
     padding: 10px;
@@ -4034,7 +4025,12 @@ row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sid
                                                                   // on this oddity
 
 placessidebar {
-  > viewport.frame { border-style: none; }
+  > viewport.frame {
+    background-color: $bg_color;
+    border-style: none;
+
+    &:backdrop { background-color: $backdrop_bg_color; };
+  }
 
   > viewport > list { margin-top: -3px; }
 

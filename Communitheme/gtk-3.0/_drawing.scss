@@ -227,12 +227,8 @@
     @if $flat {
       border-color: $c;
       box-shadow: none;
-    }
-
-    @else {
+    } @else {
       border-color: $_border;
-      border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 20%, 12%));
-      box-shadow: 0 1px transparentize(black, 0.9);
     }
   }
 
@@ -247,11 +243,9 @@
     @if $flat {
       border-color: $_bg;
       box-shadow: none;
-    }
-
-    @else {
+    } @else {
       border-color: $_border;
-      border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 20%, 12%));
+      border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
       box-shadow: 0 1px transparentize(black, 0.9);
     }
   }
