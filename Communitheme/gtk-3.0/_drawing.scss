@@ -420,8 +420,12 @@
     $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
     @if $c == $headerbar_bg_color {
       $_bg: mix($c, $headerbar_bg_color, 85%);
-    } @else {
+    }
+    @else if $c!=$headerbar_bg_color and $variant=='light'{
       $_bg: darken($c, 15%);
+    }
+    @else if $c!=$headerbar_bg_color and $variant=='dark'{
+      $_bg: darken($c, 5%);
     }
 
     //box-shadow: none;
