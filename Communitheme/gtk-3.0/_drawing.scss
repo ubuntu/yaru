@@ -212,6 +212,9 @@
   // backdrop, backdrop-active, backdrop-insensitive, backdrop-insensitive-active,
   // osd, osd-hover, osd-active, osd-insensitive, osd-backdrop, undecorated
 
+  $_c_flat_headerbar: darken($headerbar_bg_color, 10%);
+  $_c_flat_headerbar_active: darken($headerbar_bg_color, 5%);
+
   $_pressed: if(lightness($c)<15%, transparentize(black, 0.4), transparentize(black, 0.8));
   $shadow: null;
   @if $variant == "dark" or $c != $button_bg_color { $shadow: 0px 2px 2px -1px $borders_edge, inset 0 -1px _button_hilight_color($c); }
@@ -235,10 +238,10 @@
   @else if $t==hover {
     // hovered button
     -gtk-icon-effect: highlight;
-    @if $flat == true { $c: darken($c, 10%); }
+    @if $flat == true { $c: $_c_flat_headerbar; }
     $_bg: if(lightness($c)<35%, lighten($c, 25%), lighten($c, 5%));
     background-color: $_bg;
-    @if $variant=='dark' and $c != darken($headerbar_bg_color, 10%) { background-color: lighten($c,1%); }
+    @if $variant=='dark' and $c != $_c_flat_headerbar { background-color: lighten($c,1%); }
     color: $tc;
 
     @if $flat {
@@ -253,11 +256,11 @@
 
   @else if $t==active {
     @if $c == $headerbar_bg_color { $_border: darken($c, 3%); }
-    @if $flat == true { $c: darken($c, 5%); }
+    @if $flat == true { $c: $_c_flat_headerbar_active; }
     $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
 
     background-color: $_bg;
-    @if $variant=='dark' and $c != darken($headerbar_bg_color,5%) { background-color: darken($button_bg_color,6.5%); }
+    @if $variant=='dark' and $c != $_c_flat_headerbar_active { background-color: darken($button_bg_color,6.5%); }
     box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
     border-color: $_border;
     border-top-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 20%, 12%));
