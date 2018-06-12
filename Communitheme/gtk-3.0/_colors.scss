@@ -14,9 +14,9 @@ $selected_bg_color: $orange;
 $borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 7%));
 $link_color: $blue;
 $link_visited_color: if($variant == 'light', darken($link_color, 20%), lighten($link_color, 10%));
-$borders_edge: rgba(0, 0, 0, 0.1);
+$borders_edge: if($variant == 'light',rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
 $top_hilight: $borders_edge;
-$dark_fill: #CDCDCD;
+$dark_fill: if($variant == 'light',#CDCDCD, $ash);
 $menu_color: if($variant == 'light', $base_color, mix($bg_color, $base_color, 20%));
 $popover_bg_color: $bg_color;
 $popover_hover_color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 7%));
@@ -26,7 +26,7 @@ $scrollbar_slider_color: transparentize($fg_color, 0.4);
 $scrollbar_slider_hover_color: $fg_color;
 $scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 10%));
 //
-$button_bg_color: if($variant == 'light', lighten($bg_color, 3%), lighten($bg_color, 5%));
+$button_bg_color: if($variant == 'light', lighten($bg_color, 3%), lighten($bg_color, 6%));
 //
 $warning_color: $yellow;
 $error_color: $red;
