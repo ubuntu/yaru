@@ -4467,7 +4467,7 @@ decoration {
 
   // this needs to be transparent
   // see bug #722563
-  $_wm_border: transparentize(black, 0.77);
+  $_wm_border: if($variant == 'light',transparentize(black, 0.77), darken($bg_color, 7%));
 
   box-shadow: $window_decoration_shadow;
 
