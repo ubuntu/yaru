@@ -313,7 +313,7 @@
         $_bg: $bg_color;
     } @else if $c == $headerbar_bg_color {
         $_bg: $c;
-    } @else if $c == $red, $green, $yellow, $blue, $purple {
+    } @else if $c == $red or $green or $yellow or $blue or $purple {
         $_bg: transparentize($c, .1);
     }
       @else {
@@ -427,7 +427,7 @@
         text-shadow: none;
         -gtk-icon-shadow: none;
     }
-    @else if $c == $red, $green, $yellow, $blue, $purple {
+    @else if $c == $red or $green or $yellow or $blue or $purple {
         $_bg: transparentize($c, .1);
     }
     @else {
