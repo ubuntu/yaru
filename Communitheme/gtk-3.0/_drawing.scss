@@ -401,7 +401,7 @@
       $_bg: darken($c, 12%);
     }
     @else if $c!=$headerbar_bg_color and $variant=='dark'{
-      $_bg: darken($c, 1%);
+      $_bg: darken($c, 7%);
     }
 
     //box-shadow: none;
