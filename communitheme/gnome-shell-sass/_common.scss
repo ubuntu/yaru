@@ -1656,7 +1656,7 @@ StScrollBar {
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
 
     &, &:focus, &:active {
-      & { background-color: transparentize($light_base_color,0.10); }
+      & { background-color: $light_base_color }
       .message-title { color: darken($dark_fg_color, 10%); }
       .message-content { color: $dark_fg_color;
        }
