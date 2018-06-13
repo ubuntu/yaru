@@ -377,7 +377,7 @@
     @if $c == $headerbar_bg_color {
       $_bg: $backdrop_headerbar_bg_color;
     } @else {
-      $_bg: _backdrop_color($c); //if($c==$button_bg_color, $backdrop_bg_color, _backdrop_color($c));
+      $_bg: _backdrop_color($c);
     }
 
     -gtk-icon-effect: dim;
@@ -403,10 +403,17 @@
       $_bg: darken($c, 7%);
     }
 
+    $_border_top_color: null;
+    @if $c==$headerbar_bg_color { $_border_top_color: darken($_border,10%);}
+    @else if $c==$button_bg_color {
+      @if $variant=='light' { $_border_top_color: darken($_border,10%);}
+      @else { $_border_top_color: darken($_border,2%);}
+    }
+
     //box-shadow: none;
     background-color: $_bg;
     border-color: if($flat==true, $_bg, $_bc);
-    border-top-color: if($flat==true, $_bg, darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 10%, 6%)));
+    border-top-color: $_border_top_color;//if($flat==true, $_bg, darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 10%, 6%)));
     box-shadow: none;
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
@@ -457,7 +464,13 @@
     //box-shadow: none;
     background-color: $_bg;
     border-color: if($flat==true, $_bg, $_bc);
-    border-top-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 9%));
+    $_border_top_color: null;
+    @if $c==$headerbar_bg_color { $_border_top_color: darken($_border,15%);}
+    @else if $c==$button_bg_color {
+      @if $variant=='light' { $_border_top_color: darken($_border,15%);}
+      @else { $_border_top_color: darken($_border,1%);}
+    }
+    border-top-color: $_border_top_color;
 
     label { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), transparentize($backdrop_text_color, 0.5)); }
   }
