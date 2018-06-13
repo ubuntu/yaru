@@ -4,12 +4,11 @@
 
 @function _backdrop_color($c) {
   // adjusts colors for use in the backdrop state
-  // colors are lightened for both light and dark, the level may be changed later
-  @if $variant != 'light' {
+  @if $variant == 'light' {
     @return lighten($c, 5%);
   }
   @else {
-    @return lighten($c, 5%);
+    @return darken($c, 2%);
   }
 }
 
