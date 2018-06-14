@@ -267,7 +267,7 @@
     $_border_top_color: null;
 
     @if $c==$headerbar_bg_color {
-      $_bg: lighten($c, 13%);
+      $_bg: lighten($c, 10%);
       $_border: darken($c, 3%);
       $_border_top_color: darken($_border, 20%);
     }
