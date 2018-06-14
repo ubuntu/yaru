@@ -8,7 +8,12 @@
     @return lighten($c, 5%);
   }
   @else {
-    @return darken($c, 2%);
+    @if $c!=$orange {
+      @return darken($c, 2%);
+    }
+    @else {
+      @return lighten($c, 5%);
+    }
   }
 }
 
