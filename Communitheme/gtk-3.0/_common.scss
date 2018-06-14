@@ -2887,7 +2887,7 @@ radio {
   & {
     // for unchecked
     border: 1px solid;
-    $_c: if($light, white, $bg_color);
+    $_c: if($light, white, transparent);
 
     @each $state, $t in ("", "normal"), (":hover", "hover"),
                         (":active", "active"), (":disabled", "insensitive"),
