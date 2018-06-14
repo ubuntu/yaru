@@ -130,7 +130,7 @@ textview {
 
 textview border { background-color: mix($bg_color, $base_color, 50%); }
 
-iconview { @extend .view; }
+iconview { @extend .view; &:selected { border-radius: $small_radius; } }
 
 .rubberband,
 rubberband {
