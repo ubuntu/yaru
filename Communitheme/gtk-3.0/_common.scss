@@ -2887,7 +2887,7 @@ radio {
   & {
     // for unchecked
     border: 1px solid;
-    $_c: if($light, white, $bg_color);
+    $_c: if($light, white, transparent);
 
     @each $state, $t in ("", "normal"), (":hover", "hover"),
                         (":active", "active"), (":disabled", "insensitive"),
@@ -3922,7 +3922,7 @@ filechooser {
 
     background: $_bg;
     border-bottom: 1px solid $borders_color;
-    &:backdrop{background: darken($backdrop_bg_color, 5%);}
+    &:backdrop{background: if($variant==light,darken($backdrop_bg_color, 5%), $backdrop_bg_color);}
 
     .path-bar.linked button {
       background: if($variant==light, darken($_bg, 10%), darken($_bg, 5%));
@@ -4467,7 +4467,7 @@ decoration {
 
   // this needs to be transparent
   // see bug #722563
-  $_wm_border: transparentize(black, 0.77);
+  $_wm_border: if($variant == 'light',transparentize(black, 0.77),transparentize(black, 0.5));
 
   box-shadow: $window_decoration_shadow;
 

@@ -403,17 +403,17 @@ headerbar button image ~ window decoration ~ menu separator {
 
 .org-gnome-Todo {
   taskrow.activatable.new-task-row button.popup.toggle {
-   border-radius: 0px;
+   border-radius: 0px $small_radius $small_radius 0px ;
    border: none;
    border-left: 1px solid $borders-color;
    padding-left: 10px; padding-right: 10px;
-   -gtk-outline-radius: 0;
+   -gtk-outline-radius: 0px $small_radius $small_radius 0px;
 
   }
 
   viewport.view, listbox.transparent {
-   background-color: $sidebar_bg_color;
-   &:backdrop { background-color: $backdrop_sidebar_bg_color;}
+   background-color: darken($base_color,5%);
+   &:backdrop { background-color: $backdrop_base_color}
   }
 }
 

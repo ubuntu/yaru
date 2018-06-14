@@ -4,12 +4,16 @@
 
 @function _backdrop_color($c) {
   // adjusts colors for use in the backdrop state
-  // colors are lightened for both light and dark, the level may be changed later
-  @if $variant != 'light' {
+  @if $variant == 'light' {
     @return lighten($c, 5%);
   }
   @else {
-    @return lighten($c, 5%);
+    @if $c!=$orange {
+      @return darken($c, 2%);
+    }
+    @else {
+      @return lighten($c, 5%);
+    }
   }
 }
 
@@ -235,8 +239,16 @@
   @else if $t==hover {
     // hovered button
     -gtk-icon-effect: highlight;
-    @if $flat == true { $c: darken($c, 10%); }
-    $_bg: if(lightness($c)<35%, lighten($c, 25%), lighten($c, 5%));
+
+    $_bg: null;
+
+    @if $c==$headerbar_bg_color { $_bg: lighten($c, 15%); }
+    @else if $c==$success_color or $destructive_color or $neutral_color or $purple { $_bg: lighten($c, 5%); }
+    @else if $c==$button_bg_color {
+      @if $variant=='light' { $_bg: lighten($c, 25%); }
+      @else { $_bg: lighten($c, 1%); }
+    }
+
     background-color: $_bg;
     color: $tc;
 
@@ -251,15 +263,36 @@
   }
 
   @else if $t==active {
-    @if $c == $headerbar_bg_color { $_border: darken($c, 3%); }
-    @if $flat == true { $c: darken($c, 5%); }
-    $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
+    $_bg: null;
+    $_border_top_color: null;
 
-    background-color: $_bg;
+    @if $c==$headerbar_bg_color {
+      $_bg: lighten($c, 10%);
+      $_border: darken($c, 3%);
+      $_border_top_color: darken($_border, 20%);
+    }
+    @else if $c==$button_bg_color{
+      @if $variant=='light' {
+        $_bg: darken($c, 7%);
+        $_border: $borders_color;
+        $_border_top_color: darken($_border, 25%);
+      }
+      @else {
+        $_bg: darken($button_bg_color,10%);
+        $_border: $borders_color;
+        $_border_top_color: darken($_border, 8%);
+      }
+    }
+    @else if $c==$success_color or $destructive_color or $neutral_color or $purple {
+      $_bg: darken($c, 10%);
+      $_border: darken($c, 15%);
+      $_border_top_color: darken($_border, 5%);
+    }
+
     box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
     border-color: $_border;
-    border-top-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 20%, 12%));
-    color: $tc;
+    border-top-color: $_border_top_color;
+    background-color: $_bg;
   }
 
   @else if $t==active-hover {
@@ -274,6 +307,7 @@
     }
 
     background-color: $_bg;
+    @if $variant=='dark' and $c != $headerbar_bg_color { background-color: darken($button_bg_color,7%); }
   }
 
   @else if $t==insensitive {
@@ -283,7 +317,7 @@
         $_bg: $bg_color;
     } @else if $c == $headerbar_bg_color {
         $_bg: $c;
-    } @else if $c == $red, $green, $yellow, $blue, $purple {
+    } @else if $c == $red or $green or $yellow or $blue or $purple {
         $_bg: transparentize($c, .1);
     }
       @else {
@@ -332,8 +366,8 @@
       border-color: $_bg;
       box-shadow: none;
     } @else {
-      border-color: _border_color($_bg, $darker: true);
-      border-top-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 9%));
+      border-color: $insensitive_borders_color;
+      border-top-color: darken($insensitive_borders_color, 10%);
       box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
     }
 
@@ -348,7 +382,7 @@
     @if $c == $headerbar_bg_color {
       $_bg: $backdrop_headerbar_bg_color;
     } @else {
-      $_bg: _backdrop_color($c); //if($c==$button_bg_color, $backdrop_bg_color, _backdrop_color($c));
+      $_bg: _backdrop_color($c);
     }
 
     -gtk-icon-effect: dim;
@@ -367,14 +401,24 @@
 
     @if $c==$headerbar_bg_color {
       $_bg: mix($c, $headerbar_bg_color, 85%);
-    } @else {
+    } @else if $c!=$headerbar_bg_color and $variant=='light'{
       $_bg: darken($c, 12%);
+    }
+    @else if $c!=$headerbar_bg_color and $variant=='dark'{
+      $_bg: darken($c, 7%);
+    }
+
+    $_border_top_color: null;
+    @if $c==$headerbar_bg_color { $_border_top_color: darken($_border,10%);}
+    @else if $c==$button_bg_color {
+      @if $variant=='light' { $_border_top_color: darken($_border,10%);}
+      @else { $_border_top_color: darken($_border,2%);}
     }
 
     //box-shadow: none;
     background-color: $_bg;
     border-color: if($flat==true, $_bg, $_bc);
-    border-top-color: if($flat==true, $_bg, darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 10%, 6%)));
+    border-top-color: $_border_top_color;//if($flat==true, $_bg, darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 10%, 6%)));
     box-shadow: none;
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
@@ -394,7 +438,7 @@
         text-shadow: none;
         -gtk-icon-shadow: none;
     }
-    @else if $c == $red, $green, $yellow, $blue, $purple {
+    @else if $c == $red or $green or $yellow or $blue or $purple {
         $_bg: transparentize($c, .1);
     }
     @else {
@@ -414,14 +458,24 @@
     $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
     @if $c == $headerbar_bg_color {
       $_bg: mix($c, $headerbar_bg_color, 85%);
-    } @else {
+    }
+    @else if $c!=$headerbar_bg_color and $variant=='light'{
       $_bg: darken($c, 15%);
+    }
+    @else if $c!=$headerbar_bg_color and $variant=='dark'{
+      $_bg: darken($c, 5%);
     }
 
     //box-shadow: none;
     background-color: $_bg;
     border-color: if($flat==true, $_bg, $_bc);
-    border-top-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 9%));
+    $_border_top_color: null;
+    @if $c==$headerbar_bg_color { $_border_top_color: darken($_border,15%);}
+    @else if $c==$button_bg_color {
+      @if $variant=='light' { $_border_top_color: darken($_border,15%);}
+      @else { $_border_top_color: darken($_border,1%);}
+    }
+    border-top-color: $_border_top_color;
 
     label { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), transparentize($backdrop_text_color, 0.5)); }
   }
