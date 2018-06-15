@@ -7,12 +7,12 @@
   @if $variant == 'light' {
     @return lighten($c, 5%);
   }
-  @else {
-    @if $c!=$orange {
-      @return darken($c, 2%);
+  @else if $variant == 'dark'{
+    @if $c==$orange or $c==$hb_pathbar_bg {
+      @return lighten($c, 5%);
     }
     @else {
-      @return lighten($c, 5%);
+      @return darken($c, 2%);
     }
   }
 }
