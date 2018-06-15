@@ -4581,7 +4581,7 @@ button.titlebutton {
 
 %selected_text {
   $c: $text_selection;
-  $tc: if($variant=='light',$text_color,#2D2D2D);
+  $tc: if($variant=='light',$text_color,darken(#2D2D2D,5%));
   background-color: $c;
   color: $tc;
 
