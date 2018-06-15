@@ -233,6 +233,7 @@
       box-shadow: none;
     } @else {
       border-color: $_border;
+      box-shadow: 0 1px transparentize(black, 0.9);
     }
   }
 
@@ -258,7 +259,7 @@
     } @else {
       border-color: $_border;
       border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
-      box-shadow: 0 1px transparentize(black, 0.9);
+      box-shadow: 0 1px transparentize(black, 0.85);
     }
   }
 
