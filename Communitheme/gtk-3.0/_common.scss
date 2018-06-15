@@ -1658,9 +1658,9 @@ headerbar {
       // this is used for the stackswitcher and pathbar as there are pathbars NOT in the headerbar
       @extend %underline_focus_effect;
 
-      // lighten($c, 5%) spits out the same bg-color as include button(normal, $headerbar_bg_color)
+      // rather use $hb_pathbar_bg instead if lighten($c,5%) since the variable exists
       // not using include button, since we don't need all the other styling
-      $c: lighten($c, 5%);
+      $c: $hb_pathbar_bg;
       background-color: $c;
       color: $headerbar_text_color;
 
