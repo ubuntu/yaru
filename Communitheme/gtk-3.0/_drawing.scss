@@ -17,12 +17,6 @@
   }
 }
 
-// @function _widget_edge($c:$borders_edge) {
-// // outer highlight "used" on most widgets
-//   @if $c == none { @return none; }
-//   @else { @return 0 1px $c; }
-// }
-
 @mixin _shadows($list...) {
 //
 // Helper mixin to stack up to box-shadows;
