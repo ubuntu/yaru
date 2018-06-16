@@ -59,7 +59,7 @@ list.tweak-categories separator {
   }
 
   notebook > header > tabs {
-    background: $porcelain;
+    background: if($variant==light,$porcelain,$base_color);
     &:backdrop { background-color: $backdrop_bg_color; }
 
     & > tab {
@@ -70,7 +70,7 @@ list.tweak-categories separator {
         border-color: transparentize($borders_color, 0.5);
         border-bottom: none;
 
-        &:backdrop { background-color: #EEEFF0; }  // It should be _backdrop_color(white); but that does not work.
+        &:backdrop { background-color: if($variant==light,#EEEFF0,$backdrop_base_color); }  // It should be _backdrop_color(white); but that does not work.
       }
 
       &:not(:checked) {
