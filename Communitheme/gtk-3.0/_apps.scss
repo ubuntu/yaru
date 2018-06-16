@@ -33,7 +33,7 @@ list.tweak-categories separator {
   }
 
   treeview.view header button {
-    background-color: white;
+    background-color: if($variant==light,white,$base_color);
     background-image: none;
     border-color: transparentize($borders_color, 0.6);
     border-left: 1px;
