@@ -4549,6 +4549,9 @@ button.titlebutton {
     &:hover {
       @include draw_circle($c) ;
     }
+    &:active {
+      @include draw_circle($c);
+    }
   }
 
   &.close {
