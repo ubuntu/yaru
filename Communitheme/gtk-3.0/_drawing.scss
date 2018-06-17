@@ -686,6 +686,14 @@
     border-top-color: darken($bg, 10%);
     transition: $backdrop_transition;
 
+    &:hover {
+      background-color: $bg;
+
+      &:checked {
+        background-color: $alt;
+      }
+    }
+
     &:checked {
       background-color: _backdrop_color($alt);
       border-top-color: darken($alt, 10%);
