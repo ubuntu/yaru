@@ -2901,9 +2901,13 @@ radio {
     border: 1px solid;
     $_c: if($light, white, transparent);
 
-    @each $state, $t in ("", "normal"), (":hover", "hover"),
-                        (":active", "active"), (":disabled", "insensitive"),
-                        (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
+    @each $state, $t in ("", "normal"),
+                        (":hover", "hover"),
+                        (":hover:backdrop", "backdrop-hover"),
+                        (":active", "active"),
+                        (":disabled", "insensitive"),
+                        (":backdrop", "backdrop"),
+                        (":backdrop:disabled", 'backdrop-insensitive') {
       &#{$state} {
         @include check($t, $_c);
       }
@@ -2916,6 +2920,7 @@ radio {
       &#{$t} {
         @each $state, $t in ("", "normal"),
                             (":hover", "hover"),
+                            (":hover:backdrop", "backdrop-hover"),
                             (":disabled", "insensitive"),
                             (":backdrop", "backdrop"),
                             (":backdrop:disabled", 'backdrop-insensitive') {

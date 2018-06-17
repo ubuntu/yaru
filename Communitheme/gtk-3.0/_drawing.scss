@@ -624,6 +624,11 @@
     color: $tc;
   }
 
+  @if $t==backdrop-hover {
+    -gtk-icon-effect: highlight;
+    background-color: if($c!=white, lighten($c, 9%), darken($c, 7%));
+  }
+
   @if $t==backdrop-insensitive {
     -gtk-icon-effect: dim;
 
