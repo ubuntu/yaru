@@ -556,7 +556,7 @@ button {
         &:active { transition: $button_transition; }
       }
 
-      @each $state, $t in (":hover", "hover"),
+      @each $state, $t in (":hover", "hover"), (":hover:backdrop", "backdrop-hover"),
       (":active, &:checked", "active"), (":disabled", "insensitive"),
       (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
       (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
@@ -573,6 +573,8 @@ button {
       @include button(hover);
       -gtk-icon-effect: highlight;
       transition: $button_transition;
+
+      &:backdrop { @include button(backdrop-hover); }
     }
 
     &:active,
@@ -1439,7 +1441,7 @@ toolbar {
   padding: 4px 3px 3px 4px;
 
   button.flat {
-    @each $state, $t in ("", "normal"), (":hover", "hover"),
+    @each $state, $t in ("", "normal"), (":hover", "hover"), (":hover:backdrop", "backdrop-hover"),
     (":active, &:checked", "active"), (":disabled", "insensitive"),
     (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
     (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
@@ -1606,6 +1608,7 @@ headerbar {
     button, button.flat, button.titlebutton.appmenu {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
+                          (":hover:backdrop", "backdrop-hover"),
                           (":active, &:checked", "active"),
                           (":hover:checked", "active-hover"),
                           (":disabled", "insensitive"),
@@ -1621,12 +1624,17 @@ headerbar {
                                   (destructive-action, $destructive_color) {
         &.#{$b_type} {
           // special buttons show their color when not interacted with
-          @each $state, $t in ("", "normal"), (":hover", "hover"),
-          (":active, &:checked", "active"), (":disabled", "insensitive"),
-          (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-          (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
-          (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-            &#{$state} { @include button($t, $b_color, $tc, $flat:true); }
+          @each $state, $t in ("", "normal"),
+                              (":hover", "hover"),
+                              (":hover:backdrop", "backdrop-hover"),
+                              (":active, &:checked", "active"),
+                              (":disabled", "insensitive"),
+                              (":disabled:active, &:disabled:checked", "insensitive-active"),
+                              (":backdrop", "backdrop"),
+                              (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                              (":backdrop:disabled", 'backdrop-insensitive'),
+                              (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+            &#{$state} { @include button($t, $b_color, white, $flat:true); }
           }
         }
       }
@@ -1748,12 +1756,17 @@ headerbar {
     .subtitle:link { @extend *:link:selected;  }
 
     button {
-        @each $state, $t in ("", "normal"), (":hover", "hover"),
-        (":active, &:checked", "active"), (":disabled", "insensitive"),
-        (":disabled:active, &:disabled:checked", "insensitive-active"),
-        (":backdrop", "backdrop"), (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
-        (":backdrop:disabled", 'backdrop-insensitive'), (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-          $c: $success_color; //darken($success_color, 10%); // like the infobar
+        @each $state, $t in ("", "normal"),
+                            (":hover", "hover"),
+                            (":hover:backdrop", "backdrop-hover"),
+                            (":active, &:checked", "active"),
+                            (":disabled", "insensitive"),
+                            (":disabled:active, &:disabled:checked", "insensitive-active"),
+                            (":backdrop", "backdrop"),
+                            (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                            (":backdrop:disabled", 'backdrop-insensitive'),
+                            (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+          $c: $success_color;
           $tc: white;
           &, &.selection-menu {
             &#{$state} {
@@ -1781,7 +1794,7 @@ headerbar {
       }
 
       &.suggested-action {
-        @each $state, $t in ("", "normal"), (":hover", "hover"),
+        @each $state, $t in ("", "normal"), (":hover", "hover"), (":hover:backdrop", "backdrop-hover"),
         (":active", "active"), (":disabled", "insensitive"),
         (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
           $c: white;

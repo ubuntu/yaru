@@ -27,6 +27,7 @@ $scrollbar_slider_hover_color: $fg_color;
 $scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 10%));
 //
 $button_bg_color: if($variant == 'light', lighten($bg_color, 3%), lighten($bg_color, 6%));
+$button_backdrop_bg_color: transparentize($button_bg_color, 0.3);
 //
 $warning_color: $yellow;
 $error_color: $red;

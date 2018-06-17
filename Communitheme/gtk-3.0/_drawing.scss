@@ -376,6 +376,8 @@
     $_bg: null;
     @if $c == $headerbar_bg_color {
       $_bg: $backdrop_headerbar_bg_color;
+    } @else if $c == $button_bg_color {
+      $_bg: $button_backdrop_bg_color;
     } @else {
       $_bg: _backdrop_color($c);
     }
@@ -387,7 +389,30 @@
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_text_color); }
   }
+  @else if $t==backdrop-hover {
 
+    $_bg: null;
+    @if $c==$headerbar_bg_color { $_bg: lighten($backdrop_headerbar_bg_color, 15%); }
+    @else if $c==$success_color or $destructive_color or $neutral_color or $purple {
+      $_c: _backdrop_color($c);
+      $_bg: lighten($_c, 5%);
+    } @else if $c==$button_bg_color {
+      $_bg: if($light, lighten($button_backdrop_bg_color, 25%), lighten($button_backdrop_bg_color, 1%) );
+    }
+
+    background-color: $_bg;
+    color: $tc;
+
+    @if $flat {
+      border-color: $_bg;
+      box-shadow: none;
+    } @else {
+      border-color: $_border;
+      border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
+      box-shadow: 0 1px transparentize(black, 0.85);
+    }
+
+  }
   @else if $t==backdrop-active {
     // backdrop pushed button
 
