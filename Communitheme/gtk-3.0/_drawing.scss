@@ -708,7 +708,17 @@
 
   &:backdrop slider {
     transition: $backdrop_transition;
-    background-color: if($bg==$dark_fill, $backdrop_bg_color, $headerbar_fg_color);
+    @if $bg==$dark_fill {
+      @if $variant=='light' {
+        background-color: $backdrop_bg_color;
+      }
+      @else {
+        background-color: lighten($backdrop_fg_color,20%);
+      }
+    }
+    @else {
+      background-color: $headerbar_fg_color;
+    }
   }
 
   &:backdrop:disabled slider {
