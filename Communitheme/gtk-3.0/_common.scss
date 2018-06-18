@@ -4556,6 +4556,12 @@ button.titlebutton {
 
   &.close {
     @include draw_circle($selected_bg_color, $close:true);
+    &:hover {
+      @include draw_circle($selected_bg_color, $close:true);
+    }
+    &:active {
+      @include draw_circle($selected_bg_color, $close:true);
+    }
   }
 }
 
