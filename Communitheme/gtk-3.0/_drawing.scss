@@ -308,7 +308,7 @@
     }
 
     background-color: $_bg;
-    @if $variant=='dark' and $c != $headerbar_bg_color { background-color: darken($button_bg_color,7%); }
+    @if $variant=='dark' and $c != $headerbar_bg_color { background-color: darken($button_bg_color,9%); }
   }
 
   @else if $t==insensitive {
