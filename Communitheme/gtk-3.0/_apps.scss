@@ -439,3 +439,24 @@ window.background.chromium {
  *********************/
 //removes the black background for picture tiles
 .documents-scrolledwin.frame.frame widget flowboxchild.tile { background-color: transparent; }
+
+/*********************
+ * Firefox *
+ *********************/
+#MozillaGtkWidget.background  {
+  > widget {
+    > scrolledwindow > textview {
+      text {
+        &:selected { @extend %selected_text; border-color: $selected_bg_color;}
+      }
+    }
+  }
+
+  headerbar.titlebar {
+    //Remove the round corners until firefox fixed the white border bleed at the top edges
+    border-radius: 0;
+  }
+
+  > menu, .menu { border: none; } // Removed ugly menu borders
+  > menu > menuitem { border-radius: 0; } // Removed rounded menu corners
+}

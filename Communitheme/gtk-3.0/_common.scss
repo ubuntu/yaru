@@ -2321,11 +2321,7 @@ menuitem {
   }
 }
 
-window.background:not(.csd) {
-  // Firefox menu
-  > menu, .menu { border: none; } // Removed ugly menu borders
-  > menu > menuitem { border-radius: 0; } // Removed rounded menu corners
-}
+
 
 /***************
  * Popovers   *
