@@ -65,7 +65,12 @@
     $_bc: if($c == $headerbar_bg_color, lighten($hb_pathbar_bg, 5%), $c);
     color: if($tc != $fg_color, transparentize($tc, .1), $fg_color);
     border-color: if($c != $base_color, transparent, $borders_color);
-    border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+    @if $variant == 'light' {
+      border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+    }
+    else {
+      border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+    }
     background-color: $_bc;
     @include _shadows($_entry_edge);
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
