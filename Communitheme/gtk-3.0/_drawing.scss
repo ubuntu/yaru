@@ -662,9 +662,20 @@
   }
 
   &:backdrop {
-    background-color: if($bg==$dark_fill, _backdrop_color(transparentize($bg, 0.3)), _backdrop_color($bg));
+    @if $bg!=$dark_fill {
+      background-color: _backdrop_color(transparentize($bg, 0.3));
+    }
+    @else {
+      @if $variant='light' {
+        background-color: _backdrop_color($bg);
+      }
+      @else {
+        background-color: lighten($bg,2%);
+      }
+    }
+
     border: 1px solid if($bg==$dark_fill, $borders_edge, transparent);
-    border-top-color: darken($bg, 10%);
+    border-top-color: if($variant=='light',darken($bg, 10%),darken($bg, 5%));
     transition: $backdrop_transition;
 
     &:checked {
