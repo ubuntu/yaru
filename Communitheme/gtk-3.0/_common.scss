@@ -3129,7 +3129,9 @@ scale {
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
-    &:hover { border-color: mix($c, $borders_color); } // TODO: what should the focused slider look like?
+    &:hover {
+      background-color: darken(white, 5%);
+    }
 
     &:active { border-color: _border_color($c); }
 
