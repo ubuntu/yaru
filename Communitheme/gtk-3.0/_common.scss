@@ -1181,6 +1181,11 @@ button:visited {
     text-decoration-line: underline;
   }
 
+  &:backdrop:hover {
+      background-color: transparent;
+      border-color: transparent;
+  }
+
 }
 
 
