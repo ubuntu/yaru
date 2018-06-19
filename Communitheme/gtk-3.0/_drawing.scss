@@ -4,14 +4,13 @@
 
 @function _backdrop_color($c) {
   // adjusts colors for use in the backdrop state
-  @if $variant == 'light' {
-    @return lighten($c, 5%);
+  @if $light {
+    @return if($c!=white, lighten($c, 5%), transparentize(white, 0.3));
   }
-  @else if $variant == 'dark'{
+  @else {
     @if $c==$orange or $c==$hb_pathbar_bg {
       @return lighten($c, 5%);
-    }
-    @else {
+    } @else {
       @return darken($c, 2%);
     }
   }

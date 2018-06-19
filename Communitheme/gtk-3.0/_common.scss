@@ -1229,7 +1229,11 @@ spinbutton {
       &:dir(rtl) { border-style: none solid none none; }
 
       &:hover {
-        background-color: if($variant=="light", darken($bg_color, 5%), lighten($bg_color, 25%));
+        background-color: if($light, darken($bg_color, 3%), lighten($bg_color, 15%));
+
+        &:backdrop {
+            background-color: lighten($backdrop_bg_color, 8%);
+        }
       }
 
       &:disabled {
@@ -1247,14 +1251,14 @@ spinbutton {
         background-color: transparent;
         border-color: transparentize($backdrop_borders_color, 0.7);
         transition: $backdrop_transition;
-      }
 
-      &:backdrop:disabled {
-        color: transparentize($insensitive_fg_color, 0.5);
-        background-color: transparent;
-        border-style: none none none solid; // It is needed or it gets overridden
+        &:disabled {
+            color: transparentize($insensitive_fg_color, 0.5);
+            background-color: transparent;
+            border-style: none none none solid; // It is needed or it gets overridden
 
-        &:dir(rtl) { border-style: none solid none none; }
+            &:dir(rtl) { border-style: none solid none none; }
+        }
       }
 
       &:dir(ltr):last-child { border-radius: 0 $small_radius $small_radius 0; }
