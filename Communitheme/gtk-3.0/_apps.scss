@@ -15,7 +15,7 @@ list.tweak-categories separator {
   // details box looks ugly when many items are selected and it floats above the orange
   background-image: none;
   background-color: if($variant==light,white,$base_color);
-  &:backdrop { background-color: if($variant==light,_backdrop_color(white),$backdrop_base_color); }
+  &:backdrop { background-color: $backdrop_base_color }
 
   *scrolledwindow:backdrop { opacity: 0.9; } // what is this for?
 
