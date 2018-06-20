@@ -206,7 +206,7 @@
   //
   // possible $t values:
   // normal, hover, active, insensitive, insensitive-active,
-  // backdrop, backdrop-active, backdrop-insensitive, backdrop-insensitive-active,
+  // backdrop, backdrop-hover, backdrop-active, backdrop-insensitive, backdrop-insensitive-active,
   // osd, osd-hover, osd-active, osd-insensitive, osd-backdrop, undecorated
 
   $_pressed: if(lightness($c)<15%, transparentize(black, 0.4), transparentize(black, 0.8));
@@ -388,10 +388,10 @@
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_text_color); }
   }
-  @else if $t==backdrop-hover {
 
+  @else if $t==backdrop-hover {
     $_bg: null;
-    @if $c==$headerbar_bg_color { $_bg: lighten($backdrop_headerbar_bg_color, 15%); }
+    @if $c==$headerbar_bg_color { $_bg: lighten($backdrop_headerbar_bg_color, 5%); }
     @else if $c==$success_color or $destructive_color or $neutral_color or $purple {
       $_c: _backdrop_color($c);
       $_bg: lighten($_c, 5%);
@@ -410,7 +410,6 @@
       border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
       box-shadow: 0 1px transparentize(black, 0.85);
     }
-
   }
   @else if $t==backdrop-active {
     // backdrop pushed button
