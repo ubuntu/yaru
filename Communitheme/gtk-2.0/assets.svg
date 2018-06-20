@@ -15,10 +15,50 @@
    height="480px"
    id="svg3032"
    version="1.1"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="assets.svg">
   <defs
      id="defs3034">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5579">
+      <stop
+         style="stop-color:#c2c8ce;stop-opacity:1"
+         offset="0"
+         id="stop5571" />
+      <stop
+         id="stop5573"
+         offset="0.9285714"
+         style="stop-color:#c2c8ce;stop-opacity:1" />
+      <stop
+         style="stop-color:#cccccc;stop-opacity:1"
+         offset="0.96428573"
+         id="stop5575" />
+      <stop
+         style="stop-color:#cccccc;stop-opacity:1"
+         offset="1"
+         id="stop5577" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5505">
+      <stop
+         style="stop-color:#cfcfcf;stop-opacity:1"
+         offset="0"
+         id="stop5497" />
+      <stop
+         id="stop5499"
+         offset="0.9285714"
+         style="stop-color:#c2c8ce;stop-opacity:1" />
+      <stop
+         style="stop-color:#7b8896;stop-opacity:1"
+         offset="0.96428573"
+         id="stop5501" />
+      <stop
+         style="stop-color:#7b8896;stop-opacity:1"
+         offset="1"
+         id="stop5503" />
+    </linearGradient>
     <inkscape:path-effect
        effect="bspline"
        id="path-effect1863"
@@ -185,7 +225,7 @@
        id="Button_Insensitive_BG"
        osb:paint="solid">
       <stop
-         style="stop-color:#fcfcfc;stop-opacity:1;"
+         style="stop-color:#e7fcfc;stop-opacity:1;"
          offset="0"
          id="stop2955" />
     </linearGradient>
@@ -193,7 +233,7 @@
        id="Button_Active_BG"
        osb:paint="solid">
       <stop
-         style="stop-color:#cfcfcf;stop-opacity:1;"
+         style="stop-color:#eaecee;stop-opacity:1;"
          offset="0"
          id="stop2949" />
     </linearGradient>
@@ -201,15 +241,14 @@
        id="Button_Hover_BG"
        osb:paint="solid">
       <stop
-         style="stop-color:#dbdbdb;stop-opacity:1;"
+         style="stop-color:#ffffff;stop-opacity:1;"
          offset="0"
          id="stop2943" />
     </linearGradient>
     <linearGradient
-       id="Button_BG"
-       osb:paint="solid">
+       id="Button_BG">
       <stop
-         style="stop-color:#ededed;stop-opacity:1;"
+         style="stop-color:#fefefe;stop-opacity:1;"
          offset="0"
          id="stop2937" />
     </linearGradient>
@@ -262,44 +301,24 @@
          id="stop2901" />
     </linearGradient>
     <linearGradient
-       id="Button_Hover-3"
+       id="Button_Active-2-8"
        inkscape:collect="always">
       <stop
          id="stop2368"
          offset="0"
          style="stop-color:#cfcfcf;stop-opacity:1" />
       <stop
-         style="stop-color:#cfcfcf;stop-opacity:1"
+         style="stop-color:#c2c8ce;stop-opacity:1"
          offset="0.9285714"
          id="stop2370" />
       <stop
          id="stop2372"
          offset="0.96428573"
-         style="stop-color:#8f8f8f;stop-opacity:1" />
+         style="stop-color:#98a2ac;stop-opacity:1" />
       <stop
          id="stop2374"
          offset="1"
-         style="stop-color:#8f8f8f;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient
-       id="Button-9"
-       inkscape:collect="always">
-      <stop
-         id="stop2358"
-         offset="0"
-         style="stop-color:#e0e0e0;stop-opacity:1" />
-      <stop
-         style="stop-color:#e0e0e0;stop-opacity:1"
-         offset="0.9285714"
-         id="stop2360" />
-      <stop
-         id="stop2362"
-         offset="0.96428573"
-         style="stop-color:#a1a1a1;stop-opacity:1" />
-      <stop
-         id="stop2364"
-         offset="1"
-         style="stop-color:#a1a1a1;stop-opacity:1" />
+         style="stop-color:#98a2ac;stop-opacity:1" />
     </linearGradient>
     <linearGradient
        id="linearGradient6819">
@@ -450,16 +469,7 @@
        y2="82.123726" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#Button-9"
-       id="linearGradient4922"
-       x1="5"
-       y1="1"
-       x2="5"
-       y2="31"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Button_Hover-3"
+       xlink:href="#Button_Active-2-8"
        id="linearGradient4883"
        x1="15"
        y1="1"
@@ -595,83 +605,11 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#Button_Active"
-       id="linearGradient2905"
-       x1="31"
-       y1="16"
-       x2="39"
-       y2="16"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Button_Insensitive"
-       id="linearGradient2911"
-       x1="21"
-       y1="16"
-       x2="29"
-       y2="16"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Entry"
-       id="linearGradient2917"
-       x1="1"
-       y1="96"
-       x2="9"
-       y2="96"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Entry_Insensitive"
-       id="linearGradient2923"
-       x1="21"
-       y1="16"
-       x2="29"
-       y2="16"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Button_Active"
        id="linearGradient2929"
        x1="57"
        y1="141"
        x2="64"
        y2="141"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Button_BG"
-       id="linearGradient2941"
-       x1="1"
-       y1="16"
-       x2="9"
-       y2="16"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Button_Hover_BG"
-       id="linearGradient2947"
-       x1="11.5"
-       y1="16"
-       x2="18.5"
-       y2="16"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Button_Active_BG"
-       id="linearGradient2953"
-       x1="30.8"
-       y1="16.000001"
-       x2="39.200001"
-       y2="16.000001"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Button_Insensitive_BG"
-       id="linearGradient2959"
-       x1="21"
-       y1="16"
-       x2="29"
-       y2="16"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
@@ -980,16 +918,6 @@
          id="rect5143-9"
          style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.10196078" />
     </clipPath>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#Button_BG"
-       id="linearGradient1712"
-       gradientUnits="userSpaceOnUse"
-       x1="1"
-       y1="16"
-       x2="9"
-       y2="16"
-       gradientTransform="translate(0,-0.15500694)" />
     <inkscape:path-effect
        effect="bspline"
        id="path-effect1722-0"
@@ -1211,6 +1139,52 @@
        apply_no_weight="true"
        apply_with_weight="true"
        only_selected="false" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5505"
+       id="linearGradient5476"
+       gradientUnits="userSpaceOnUse"
+       x1="15"
+       y1="1"
+       x2="15"
+       y2="31" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5579"
+       id="linearGradient5558"
+       gradientUnits="userSpaceOnUse"
+       x1="15"
+       y1="1"
+       x2="15"
+       y2="31" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5611">
+      <rect
+         style="opacity:0.93599997;fill:#ffffff;fill-opacity:1;stroke:#c2c8ce;stroke-width:0.65298295;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect5613"
+         width="7.3470173"
+         height="2.347017"
+         x="27.138988"
+         y="48.889015"
+         rx="0"
+         ry="0"
+         transform="scale(-1)" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5611-2">
+      <rect
+         style="opacity:0.93599997;fill:#ffffff;fill-opacity:1;stroke:#c2c8ce;stroke-width:0.65298295;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect5613-2"
+         width="7.3470173"
+         height="2.347017"
+         x="27.138988"
+         y="48.889015"
+         rx="0"
+         ry="0"
+         transform="scale(-1)" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1219,9 +1193,9 @@
      borderopacity="1"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6568546"
-     inkscape:cx="15.686337"
-     inkscape:cy="439.11828"
+     inkscape:zoom="2.0000001"
+     inkscape:cx="32.891606"
+     inkscape:cy="471.21113"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
@@ -1258,7 +1232,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1299,7 +1273,7 @@
        y="5"
        sodipodi:insensitive="true" />
     <g
-       id="entry"
+       id="g5560"
        inkscape:label="#g6880"
        transform="translate(3,-36)">
       <rect
@@ -1322,17 +1296,7 @@
          style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;marker:none;enable-background:accumulate" />
       <g
          transform="translate(7,6)"
-         id="g4377">
-        <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;stroke:url(#linearGradient2917);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate;fill-opacity:1"
-           id="use4309"
-           width="7"
-           height="29"
-           x="1.5"
-           y="81.5"
-           rx="3"
-           ry="3" />
-      </g>
+         id="g4377" />
     </g>
     <g
        inkscape:label="#Buttons/button-insensitive"
@@ -1359,7 +1323,7 @@
       <g
          id="g3187">
         <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#fcfcfc;fill-opacity:1;stroke:url(#linearGradient2923);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#f9fafa;fill-opacity:1;stroke:#e1e1e1;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
            id="use3191"
            width="7"
            height="29"
@@ -2230,7 +2194,7 @@
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="cssssc" />
         <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:url(#linearGradient2941);stroke:url(#linearGradient4922);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate;fill-opacity:1"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#fefefe;stroke:#c2c8ce;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate;fill-opacity:1"
            id="rect5365"
            width="7"
            height="29"
@@ -2256,7 +2220,7 @@
       <g
          id="g5371">
         <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:url(#linearGradient2947);fill-opacity:1;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
            id="rect5373"
            width="7"
            height="29"
@@ -2279,14 +2243,6 @@
        inkscape:label="#g5347"
        id="button-insensitive"
        transform="translate(-12,3)">
-      <use
-         height="480"
-         width="640"
-         transform="translate(67,7)"
-         id="use5381"
-         xlink:href="#rect5362"
-         y="0"
-         x="0" />
       <rect
          style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"
          id="rect5383"
@@ -2301,7 +2257,7 @@
          transform="translate(47,7)"
          style="fill:#fcfcfc;fill-opacity:1;stroke:#d1d1d1;stroke-opacity:1">
         <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#fcfcfc;fill-opacity:1;stroke:#d1d1d1;stroke-width:1;marker:none;enable-background:accumulate;stroke-opacity:1"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#c2c8ce;fill-opacity:1;stroke:#c2c8ce;stroke-width:1;marker:none;enable-background:accumulate;stroke-opacity:1;opacity:0.6"
            id="rect5387"
            width="7"
            height="29"
@@ -2310,58 +2266,11 @@
            rx="3"
            ry="3" />
         <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:url(#linearGradient2959);stroke:url(#linearGradient2911);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate;fill-opacity:1"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#f5f6f7;stroke:#d6dadf;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate;fill-opacity:1"
            id="use5389"
            width="7"
            height="29"
            x="21.5"
-           y="1.5"
-           rx="3"
-           ry="3" />
-      </g>
-    </g>
-    <g
-       inkscape:label="#g5336"
-       id="button-active"
-       transform="translate(-7,3)"
-       style="">
-      <use
-         x="0"
-         y="0"
-         xlink:href="#rect5362"
-         id="use5393"
-         transform="translate(47,7)"
-         width="640"
-         height="480"
-         style="" />
-      <rect
-         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate;"
-         id="rect5395"
-         width="10"
-         height="32"
-         x="47"
-         y="7"
-         rx="0"
-         ry="0" />
-      <g
-         id="g5397"
-         transform="translate(17,7)"
-         style="">
-        <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:url(#linearGradient2953);fill-opacity:1;stroke:none;stroke-width:1;marker:none;enable-background:accumulate;"
-           id="rect5399"
-           width="7"
-           height="29"
-           x="31.5"
-           y="1.5"
-           rx="3"
-           ry="3" />
-        <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;stroke:url(#linearGradient2905);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate;"
-           id="use5401"
-           width="7"
-           height="29"
-           x="31.5"
            y="1.5"
            rx="3"
            ry="3" />
@@ -2907,6 +2816,17 @@
            id="use6911"
            style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;stroke:#E55730;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate" />
       </g>
+      <rect
+         transform="matrix(-0.75089175,0,0,-0.49602961,31.863151,27.652654)"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#f3f3f3;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
+         id="use5377-1-3-8"
+         width="7"
+         height="29"
+         x="-34.312496"
+         y="-78.062523"
+         rx="3"
+         ry="3"
+         clip-path="url(#clipPath5611-2)" />
     </g>
     <g
        id="g6947"
@@ -5561,7 +5481,7 @@
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="cssssc" />
         <rect
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:url(#linearGradient1712);fill-opacity:1;stroke:#c7c7c7;stroke-width:0.79342163;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;stroke:#c2c8ce;stroke-width:0.79342163;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
            id="rect5365-7"
            width="7"
            height="29"
@@ -5851,5 +5771,86 @@
          inkscape:path-effect="#path-effect1863-6-1-7"
          inkscape:original-d="m 162.6145,495 c 3.59138,-10e-4 7.18173,-10e-4 10.771,0" />
     </g>
+    <g
+       transform="rotate(180,30,21)"
+       inkscape:label="#Buttons/button-prelight"
+       id="button-active">
+      <rect
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"
+         id="rect5369-5"
+         width="10"
+         height="32"
+         x="10"
+         y="0"
+         rx="0"
+         ry="0" />
+      <g
+         id="g5371-6">
+        <rect
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+           id="rect5373-2"
+           width="7"
+           height="29"
+           x="11.5"
+           y="1.5"
+           rx="3"
+           ry="3" />
+        <rect
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;stroke:url(#linearGradient5476);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
+           id="use5377-9"
+           width="7"
+           height="29"
+           x="11.5"
+           y="1.5"
+           rx="3"
+           ry="3" />
+      </g>
+    </g>
+    <g
+       transform="rotate(-180,15,41)"
+       inkscape:label="#Buttons/button-prelight"
+       id="entry">
+      <rect
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"
+         id="rect5369-0"
+         width="10"
+         height="32"
+         x="10"
+         y="0"
+         rx="0"
+         ry="0" />
+      <g
+         id="g5371-62">
+        <rect
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+           id="rect5373-6"
+           width="7"
+           height="29"
+           x="11.5"
+           y="1.5"
+           rx="3"
+           ry="3" />
+        <rect
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;stroke:url(#linearGradient5558);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
+           id="use5377-1"
+           width="7"
+           height="29"
+           x="11.5"
+           y="1.5"
+           rx="3"
+           ry="3" />
+      </g>
+    </g>
+    <rect
+       transform="matrix(-0.75089175,0,0,-0.49602961,-8.1485681,27.652654)"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#f3f3f3;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker:none;enable-background:accumulate"
+       id="use5377-1-3"
+       width="7"
+       height="29"
+       x="-34.312496"
+       y="-78.062523"
+       rx="3"
+       ry="3"
+       clip-path="url(#clipPath5611)" />
   </g>
 </svg>
