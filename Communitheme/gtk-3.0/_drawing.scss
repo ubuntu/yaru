@@ -399,10 +399,10 @@
       $_bg: if($light, lighten($button_backdrop_bg_color, 25%), lighten($button_backdrop_bg_color, 1%) );
     }
 
-    background-color: $_bg;
     color: $tc;
 
     @if $flat {
+      background-color: $_bg;
       border-color: $_bg;
       box-shadow: none;
     } @else {
