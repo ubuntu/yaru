@@ -391,7 +391,7 @@
 
   @else if $t==backdrop-hover {
     $_bg: null;
-    @if $c==$headerbar_bg_color { $_bg: lighten($backdrop_headerbar_bg_color, 5%); }
+    @if $c==$headerbar_bg_color { $_bg: lighten($backdrop_headerbar_bg_color, 6%); }
     @else if $c==$success_color or $destructive_color or $neutral_color or $purple {
       $_c: _backdrop_color($c);
       $_bg: lighten($_c, 5%);
@@ -885,44 +885,44 @@
 }
 
 @mixin draw_circle($c, $close:false, $size:24px) {
-$button_size: $size + 2px * 2;
-$circle_size: 20px / $button_size / 2;
+    $button_size: $size + 2px * 2;
+    $circle_size: 20px / $button_size / 2;
 
-  background-image: -gtk-gradient(radial,
-                                  center center, 0,
-                                  center center, $circle_size,
-                                  to($c),
-                                  to(transparent));
-
-  &:hover {
-    $_bg: if(lightness($c)<35%, lighten($c, 25%), lighten($c, 5%));
-    background-image: -gtk-gradient(radial,
-                                  center center, 0,
-                                  center center, $circle_size,
-                                  to($_bg),
-                                  to(transparent));
-  }
-
-  &:active {
-    $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
     background-image: -gtk-gradient(radial,
                                     center center, 0,
                                     center center, $circle_size,
-                                    to($_bg),
+                                    to($c),
                                     to(transparent));
-}
 
-@if $close == true {
-  &:backdrop {
-    color: $backdrop_headerbar_fg_color;
-    &:backdrop:hover {
-      $_bg: lighten($headerbar_bg_color, 25%);
-      background-image: -gtk-gradient(radial,
-                                    center center, 0,
-                                    center center, $circle_size,
-                                    to($_bg),
-                                    to(transparent));
+    &:hover {
+        $_bg: if(lightness($c)<35%, lighten($c, 25%), lighten($c, 5%));
+        background-image: -gtk-gradient(radial,
+                                        center center, 0,
+                                        center center, $circle_size,
+                                        to($_bg),
+                                        to(transparent));
+        &:backdrop {
+            $_bg: lighten($backdrop_headerbar_bg_color, 8%);
+            background-image: -gtk-gradient(radial,
+                                        center center, 0,
+                                        center center, $circle_size,
+                                        to($_bg),
+                                        to(transparent));
+        }
     }
+
+    &:active {
+        $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
+        background-image: -gtk-gradient(radial,
+                                        center center, 0,
+                                        center center, $circle_size,
+                                        to($_bg),
+                                        to(transparent));
     }
-  }
+
+    @if $close == true {
+        &:backdrop {
+            color: $backdrop_headerbar_fg_color;
+        }
+    }
 }

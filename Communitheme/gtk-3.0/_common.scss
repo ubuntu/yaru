@@ -4577,7 +4577,7 @@ button.titlebutton {
 
   &:not(.close):not(.appmenu){
     &:hover {
-      @include draw_circle($c) ;
+      @include draw_circle($c);
     }
     &:active {
       @include draw_circle($c);
