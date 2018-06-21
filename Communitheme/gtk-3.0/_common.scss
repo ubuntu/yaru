@@ -2554,7 +2554,12 @@ notebook {
         border-color: mix($borders_color, $base_color, 60%);
       }
 
-      &:backdrop { color: mix($backdrop_fg_color, $backdrop_bg_color, 60%); }
+      &:backdrop {
+        color: mix($backdrop_fg_color, $backdrop_bg_color, 60%);
+        &:hover {
+          border-color: mix($borders_color, $backdrop_bg_color, 65%);
+        }
+      }
 
       &:checked {
         color: $fg_color;
