@@ -431,6 +431,7 @@ treeview, row {
     outline-offset: -2px;
     -gtk-outline-radius: $small_radius;
  }
+ &:backdrop:hover { background-color: lighten($base_hover_color, 20%); }
 }
 
 treeview entry {
@@ -3511,7 +3512,7 @@ progressbar {
       }
     }
 
-    // ...on selected list rows
+    // ...on selected nist rows
     row:selected & { &:disabled, & { border-color: $c; }} // TODO: what program uses this so it can be tested out?
 
     // OSD
