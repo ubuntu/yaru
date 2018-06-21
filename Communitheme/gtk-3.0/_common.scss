@@ -315,7 +315,7 @@ entry {
     &:backdrop:disabled { @include entry(backdrop-insensitive); }
 
     selection {
-      @extend %selected_items;
+      @extend %selected_text;
     }
 
     // entry error and warning style
@@ -3160,7 +3160,9 @@ scale {
     transition: $button_transition;
     transition-property: background, border, box-shadow;
 
-    &:hover { border-color: mix($c, $borders_color); } // TODO: what should the focused slider look like?
+    &:hover {
+      background-color: darken(white, 5%);
+    }
 
     &:active { border-color: _border_color($c); }
 
@@ -4587,6 +4589,12 @@ button.titlebutton {
 
   &.close {
     @include draw_circle($selected_bg_color, $close:true);
+    &:hover {
+      @include draw_circle($selected_bg_color, $close:true);
+    }
+    &:active {
+      @include draw_circle($selected_bg_color, $close:true);
+    }
   }
 }
 
@@ -4614,7 +4622,7 @@ button.titlebutton {
 
 %selected_text {
   $c: $text_selection;
-  $tc: $text_color;
+  $tc: if($variant=='light',$text_color,darken(#2D2D2D,10%));
   background-color: $c;
   color: $tc;
 
