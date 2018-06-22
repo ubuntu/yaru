@@ -39,7 +39,7 @@ list.tweak-categories separator {
     border-left: 1px;
 
     &:hover {background-color: $bg_color;}
-    &:backdrop { background-color: #EEEFF0; } // It should be _backdrop_color(white); but that does not work.
+    &:backdrop { background-color: if($variant==light,#EEEFF0,$backdrop_base_color);} // It should be _backdrop_color(white); but that does not work.
   }
 
   scrolledwindow widget.view:selected {
