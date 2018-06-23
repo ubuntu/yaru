@@ -4,24 +4,17 @@
 
 @function _backdrop_color($c) {
   // adjusts colors for use in the backdrop state
-  @if $variant == 'light' {
-    @return lighten($c, 5%);
+  @if $light {
+    @return if($c!=white, lighten($c, 5%), transparentize(white, 0.3));
   }
-  @else if $variant == 'dark'{
+  @else {
     @if $c==$orange or $c==$hb_pathbar_bg {
       @return lighten($c, 5%);
-    }
-    @else {
+    } @else {
       @return darken($c, 2%);
     }
   }
 }
-
-// @function _widget_edge($c:$borders_edge) {
-// // outer highlight "used" on most widgets
-//   @if $c == none { @return none; }
-//   @else { @return 0 1px $c; }
-// }
 
 @mixin _shadows($list...) {
 //
@@ -218,7 +211,7 @@
   //
   // possible $t values:
   // normal, hover, active, insensitive, insensitive-active,
-  // backdrop, backdrop-active, backdrop-insensitive, backdrop-insensitive-active,
+  // backdrop, backdrop-hover, backdrop-active, backdrop-insensitive, backdrop-insensitive-active,
   // osd, osd-hover, osd-active, osd-insensitive, osd-backdrop, undecorated
 
   $_pressed: if(lightness($c)<15%, transparentize(black, 0.4), transparentize(black, 0.8));
@@ -387,6 +380,8 @@
     $_bg: null;
     @if $c == $headerbar_bg_color {
       $_bg: $backdrop_headerbar_bg_color;
+    } @else if $c == $button_bg_color {
+      $_bg: $button_backdrop_bg_color;
     } @else {
       $_bg: _backdrop_color($c);
     }
@@ -399,6 +394,28 @@
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_text_color); }
   }
 
+  @else if $t==backdrop-hover {
+    $_bg: null;
+    @if $c==$headerbar_bg_color { $_bg: lighten($backdrop_headerbar_bg_color, 6%); }
+    @else if $c==$success_color or $destructive_color or $neutral_color or $purple {
+      $_c: _backdrop_color($c);
+      $_bg: lighten($_c, 5%);
+    } @else if $c==$button_bg_color {
+      $_bg: if($light, lighten($button_backdrop_bg_color, 25%), lighten($button_backdrop_bg_color, 1%) );
+    }
+
+    color: $tc;
+
+    @if $flat {
+      background-color: $_bg;
+      border-color: $_bg;
+      box-shadow: none;
+    } @else {
+      border-color: $_border;
+      border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
+      box-shadow: 0 1px transparentize(black, 0.85);
+    }
+  }
   @else if $t==backdrop-active {
     // backdrop pushed button
 
@@ -610,6 +627,11 @@
     color: $tc;
   }
 
+  @if $t==backdrop-hover {
+    -gtk-icon-effect: highlight;
+    background-color: if($c!=white, lighten($c, 9%), darken($c, 7%));
+  }
+
   @if $t==backdrop-insensitive {
     -gtk-icon-effect: dim;
 
@@ -677,6 +699,14 @@
     border: 1px solid if($bg==$dark_fill, $borders_edge, transparent);
     border-top-color: if($variant=='light',darken($bg, 10%),darken($bg, 5%));
     transition: $backdrop_transition;
+
+    &:hover {
+      background-color: $bg;
+
+      &:checked {
+        background-color: $alt;
+      }
+    }
 
     &:checked {
       background-color: _backdrop_color($alt);
@@ -881,44 +911,44 @@
 }
 
 @mixin draw_circle($c, $close:false, $size:24px) {
-$button_size: $size + 2px * 2;
-$circle_size: 20px / $button_size / 2;
+    $button_size: $size + 2px * 2;
+    $circle_size: 20px / $button_size / 2;
 
-  background-image: -gtk-gradient(radial,
-                                  center center, 0,
-                                  center center, $circle_size,
-                                  to($c),
-                                  to(transparent));
-
-  &:hover {
-    $_bg: if(lightness($c)<35%, lighten($c, 25%), lighten($c, 5%));
-    background-image: -gtk-gradient(radial,
-                                  center center, 0,
-                                  center center, $circle_size,
-                                  to($_bg),
-                                  to(transparent));
-  }
-
-  &:active {
-    $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
     background-image: -gtk-gradient(radial,
                                     center center, 0,
                                     center center, $circle_size,
-                                    to($_bg),
+                                    to($c),
                                     to(transparent));
-}
 
-@if $close == true {
-  &:backdrop {
-    color: $backdrop_headerbar_fg_color;
-      &:hover {
-        $_bg: lighten($headerbar_bg_color, 25%);
+    &:hover {
+        $_bg: if(lightness($c)<35%, lighten($c, 25%), lighten($c, 5%));
         background-image: -gtk-gradient(radial,
-                                      center center, 0,
-                                      center center, $circle_size,
-                                      to($_bg),
-                                      to(transparent));
-      }
+                                        center center, 0,
+                                        center center, $circle_size,
+                                        to($_bg),
+                                        to(transparent));
+        &:backdrop {
+            $_bg: lighten($backdrop_headerbar_bg_color, 8%);
+            background-image: -gtk-gradient(radial,
+                                        center center, 0,
+                                        center center, $circle_size,
+                                        to($_bg),
+                                        to(transparent));
+        }
     }
-  }
+
+    &:active {
+        $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
+        background-image: -gtk-gradient(radial,
+                                        center center, 0,
+                                        center center, $circle_size,
+                                        to($_bg),
+                                        to(transparent));
+    }
+
+    @if $close == true {
+        &:backdrop {
+            color: $backdrop_headerbar_fg_color;
+        }
+    }
 }
