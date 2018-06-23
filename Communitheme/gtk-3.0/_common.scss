@@ -4754,3 +4754,12 @@ button.emoji-section {
     border-radius: 6px;
   }
 }
+
+.regular-button{
+  @include button(normal);
+  &:hover{@include button(hover)};
+  &:active{@include button(active);}
+  &:disabled{@include button(insensitive)}
+}
+
+
