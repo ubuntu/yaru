@@ -400,14 +400,56 @@ style "default" {
       detail = "spinbutton"
     }
 
-    # Disable arrows for qt in scrollbars
+    # QGtkStyle (used for Qt apps) *always* assumes scrollbars have
+    # arrows, so configure these here. Gtk2 apps will atually ignore
+    # this.
+
     image {
-      function = ARROW
-      detail   = "vscrollbar"
+      function        = ARROW
+      overlay_file    = "assets/scrollbar-arrow-up.png"
+      detail          = "vscrollbar"
+      overlay_border  = { 0, 0, 0, 0 }
+      overlay_stretch = FALSE
+      arrow_direction = UP
     }
+ 
     image {
-      function = ARROW
-      detail   = "hscrollbar"
+      function        = ARROW
+      overlay_file    = "assets/scrollbar-arrow-down.png"
+      detail          = "vscrollbar"
+      overlay_border  = { 0, 0, 0, 0 }
+      overlay_stretch = FALSE
+      arrow_direction = DOWN
+    }
+
+    image {
+      function        = ARROW
+      overlay_file    = "assets/scrollbar-arrow-left.png"
+      detail          = "hscrollbar"
+      overlay_border  = { 0, 0, 0, 0 }
+      overlay_stretch = FALSE
+      arrow_direction = LEFT
+    }
+
+    image {
+      function        = ARROW
+      overlay_file    = "assets/scrollbar-arrow-right.png"
+      detail          = "hscrollbar"
+      overlay_border  = { 0, 0, 0, 0 }
+      overlay_stretch = FALSE
+      arrow_direction = RIGHT
+    }
+
+    image {
+      function    = BOX
+      detail      = "hscrollbar"
+      orientation = HORIZONTAL
+    }
+
+    image {
+      function    = BOX
+      detail      = "vscrollbar"
+      orientation = VERTICAL
     }
 
     # Menu arrows
