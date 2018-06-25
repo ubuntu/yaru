@@ -1609,6 +1609,11 @@ headerbar {
         color: $tc;
         &:hover { color: $backdrop_headerbar_text_color; }
       }
+
+      selection {
+        background-color: lighten($blue,10%);
+        color: $text_color,darken(#2D2D2D,5%);
+      }
     }
 
     .text-button:not(.suggested-action):not(:hover) {
@@ -4623,7 +4628,7 @@ button.titlebutton {
 
 %selected_text {
   $c: $text_selection;
-  $tc: if($variant=='light',$text_color,darken(#2D2D2D,10%));
+  $tc: if($variant=='light',$text_color,darken(#2D2D2D,5%));
   background-color: $c;
   color: $tc;
 
@@ -4793,5 +4798,3 @@ button.emoji-section {
   &:active{@include button(active);}
   &:disabled{@include button(insensitive)}
 }
-
-
