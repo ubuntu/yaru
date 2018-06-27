@@ -275,7 +275,7 @@ terminal-window {
 .star{
   @if $variant=='dark'{
     border-radius: $small_radius;
-    box-shadow: inset 0 0 10px 10px transparentize(white, 0.1);
+    box-shadow: inset 0 0 10px 10px #fdfdfd;
   }
 }
 //Background color can not be set, so use a inset-box-shadow
