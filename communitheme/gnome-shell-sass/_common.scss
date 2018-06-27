@@ -1668,6 +1668,17 @@ StScrollBar {
     .message-icon-bin > StIcon {
      color: $dark_fg_color;
     }
+
+    StEntry {
+      $_bg: $light_base_color;
+      $_fg: $dark_fg_color;
+      @include entry(normal, $tc: $_fg, $c: $_bg);
+      &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
+      &:insensitive {
+        @include entry(insensitive, $tc: $_fg, $c: $_bg);
+        border-color: $silk;
+      }
+    }
   }
 
   .notification-icon { padding: 5px;}
