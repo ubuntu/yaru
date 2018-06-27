@@ -778,14 +778,7 @@ StScrollBar {
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
 
   StEntry {
-    $_bg: $light_base_color;
-    $_fg: $dark_fg_color;
-    @include entry(normal, $tc: $_fg, $c: $_bg);
-    &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
-    &:insensitive {
-      @include entry(insensitive, $tc: $_fg, $c: $_bg);
-      border-color: $silk;
-    }
+    @extend %light_entry;
   }
 }
 
@@ -1644,6 +1637,17 @@ StScrollBar {
   color: $fg_color;
 }
 
+%light_entry {
+    $_bg: $light_base_color;
+    $_fg: $dark_fg_color;
+    @include entry(normal, $tc: $_fg, $c: $_bg);
+    &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
+    &:insensitive {
+      @include entry(insensitive, $tc: $_fg, $c: $_bg);
+      border-color: $silk;
+  }
+}
+
 /* NOTIFICATIONS & MESSAGE TRAY */
 
   .url-highlighter { link-color: $link_color; /*lighten($selected_bg_color,10%);*/ }
@@ -1670,14 +1674,7 @@ StScrollBar {
     }
 
     StEntry {
-      $_bg: $light_base_color;
-      $_fg: $dark_fg_color;
-      @include entry(normal, $tc: $_fg, $c: $_bg);
-      &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
-      &:insensitive {
-        @include entry(insensitive, $tc: $_fg, $c: $_bg);
-        border-color: $silk;
-      }
+      @extend %light_entry
     }
   }
 
