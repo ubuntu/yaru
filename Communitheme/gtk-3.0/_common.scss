@@ -154,13 +154,13 @@ flowbox {
 
 .content-view .tile {
   margin: 2px;
-  background-color: if($variant=='light', transparent, black);
+  background-color: if($variant=='light', transparent, transparent);
   border-radius: 0;
   padding: 0;
 
-  &:backdrop { background-color: if($variant=='light', transparent, darken($backdrop_base_color,5%)); }
-  &:active, &:selected { background-color: if($variant=='light', transparent, $selected_bg_color); }
-  &:disabled { background-color: if($variant=='light', transparent, $insensitive_bg_color); }
+  &:backdrop { background-color: if($variant=='light', transparent, transparent); }
+  &:active, &:selected { background-color: if($variant=='light', transparent, transparent); }
+  &:disabled { background-color: if($variant=='light', transparent, transparent); }
 }
 
 label {
