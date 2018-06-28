@@ -1638,7 +1638,7 @@ StScrollBar {
 }
 
 %light_entry {
-  selection-background-color: lighten($blue,35%);
+  selection-background-color: $text_selection;
   selected-color: $dark_fg_color;
     $_bg: $light_base_color;
     $_fg: $dark_fg_color;
@@ -1946,9 +1946,11 @@ StScrollBar {
   background-color: transparent;
 
   StEntry {
-    @include entry(normal, $tc: $slate, $c: $porcelain);
-    &:focus { @include entry(focus, $tc: $slate, $c: $porcelain, $fc:transparentize($fg_color,0.1));}
-    &:insensitive { @include entry(insensitive, $tc: $slate, $c: $porcelain);color: lighten($insensitive_fg_color,40%);}
+    @extend %light_entry;
+    &:focus { border-color: transparentize($fg_color,0.1); }
+    &:insensitive {
+      @include entry(insensitive, $tc: $slate, $c: $porcelain);
+      color: lighten($insensitive_fg_color,40%);}
   }
 
   .modal-dialog-button-box { spacing: 3px; }
