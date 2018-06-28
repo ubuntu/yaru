@@ -1638,6 +1638,8 @@ StScrollBar {
 }
 
 %light_entry {
+  selection-background-color: lighten($blue,35%);
+  selected-color: $dark_fg_color;
     $_bg: $light_base_color;
     $_fg: $dark_fg_color;
     @include entry(normal, $tc: $_fg, $c: $_bg);
