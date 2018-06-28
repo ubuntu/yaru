@@ -4506,10 +4506,10 @@ decoration {
   // this needs to be transparent
   // see bug #722563
   $_wm_border: if($variant == 'light',transparentize(black, 0.77),transparentize(black, 0.5));
-  @if $variant='dark' {
-    border-left: 1px solid $_wm_border;
-    border-right: 1px solid $_wm_border;
-    border-bottom: 1px solid $_wm_border;
+  @if $variant=='dark' {
+      border-left: 1px solid transparentize($_wm_border, 0.1);
+      border-right: 1px solid transparentize($_wm_border, 0.1);
+      border-bottom: 1px solid transparentize($_wm_border, 0.1);
   }
   @else {
     border: none;
@@ -4548,14 +4548,14 @@ decoration {
   //These shadows are applied to the context-menu!
   .csd.popup & {
     border-radius: $small_radius;
-    @if $variant='light' {
+    @if $variant=='light' {
       box-shadow: $popover_shadow,
                   0 0 0 1px transparentize($_wm_border, 0.1);
     }
-    else {
+    @else {
       box-shadow: $popover_shadow;
+      border-top: 1px solid transparentize($_wm_border, 0.1);
     }
-
   }
 
   tooltip.csd & {
