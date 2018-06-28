@@ -4506,6 +4506,11 @@ decoration {
   // this needs to be transparent
   // see bug #722563
   $_wm_border: if($variant == 'light',transparentize(black, 0.77),transparentize(black, 0.5));
+  @if $variant='dark' {    
+    border-left: 1px solid $_wm_border;
+    border-right: 1px solid $_wm_border;
+    border-bottom: 1px solid $_wm_border;
+  }
 
   box-shadow: $window_decoration_shadow;
 
