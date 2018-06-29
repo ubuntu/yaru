@@ -1,7 +1,7 @@
 project('suru-icon-theme',
-    version: '0.1',
+    version: '1.0',
     meson_version: '>= 0.40',
-    license: 'GPL-3.0',
+    license: 'CC-by-SA',
     default_options: ['prefix=/usr']
 )
 
