@@ -1109,7 +1109,7 @@ StScrollBar {
         border-color: lighten($bg_color,10%);
         &:hover,&:focus { @include button(hover); }
         &:active { @include button(undecorated-active); color: darken($fg_color,25%);}
-        &:insensitive { @include button(insensitive); }
+        &:insensitive { @include button(undecorated); border-color: transparentize(darken($fg_color,40%),0.8);}
         margin: 1.5em 1.5em 0;
       }
 
