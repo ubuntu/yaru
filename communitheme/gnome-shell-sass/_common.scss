@@ -689,6 +689,7 @@ StScrollBar {
   .switcher-list .item-box:selected {
     //background-color: $light_base_active_color;
     background-color: $base_active_color;
+    border: 1px solid $osd_borders_color;
     border-radius: $small_radius;
     //color: $dark_fg_color;
     color: $fg_color;
@@ -1329,7 +1330,7 @@ StScrollBar {
   }
 
   .window-clone-border {
-    $_bg: transparentize(white,0.75);
+    $_bg: transparentize(white,0.5);
     border: 5px solid $_bg;
     border-radius: $medium_radius;
     // For window decorations with round corners we can't match
