@@ -242,9 +242,9 @@
     $_bg: null;
 
     @if $c==$headerbar_bg_color { $_bg: lighten($c, 15%); }
-    @else if $c==$success_color or $destructive_color or $neutral_color or $purple { $_bg: lighten($c, 5%); }
+    @else if $c==$success_color or $c==$destructive_color or $c==$neutral_color or $c==$purple { $_bg: lighten($c, 5%); }
     @else if $c==$button_bg_color {
-      @if $variant=='light' { $_bg: lighten($c, 25%); }
+      @if $variant=='light' { $_bg: $c; $tc: scale-color($tc, $lightness:15%); }
       @else { $_bg: lighten($c, 1%); }
     }
 
