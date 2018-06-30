@@ -17,12 +17,16 @@ list.tweak-categories separator {
   background-color: if($variant==light,white,$base_color);
   &:backdrop { background-color: $backdrop_base_color }
 
-  *scrolledwindow:backdrop { opacity: 0.9; } // what is this for?
-
   // Makes icons less bright in backdrop
+  *scrolledwindow:backdrop { opacity: 0.9; }
+
   paned box.floating-bar {
     background: $bg_color;
+    border-radius: $small_radius;
     border: 1px solid $borders_color;
+    box-shadow: $popover_shadow;
+    margin-bottom: 5px;
+    margin-right: 5px;
   }
 
   .searchbar-container searchbar {
