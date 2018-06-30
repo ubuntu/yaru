@@ -1451,12 +1451,17 @@ toolbar {
   padding: 4px 3px 3px 4px;
 
   button.flat {
-    @each $state, $t in ("", "normal"), (":hover", "hover"), (":hover:backdrop", "backdrop-hover"),
-    (":active, &:checked", "active"), (":disabled", "insensitive"),
-    (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-    (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
-    (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-      &#{$state} { @include button($t, $flat:true); }
+    @each $state, $t, $is_flat in ("", "normal", true),
+                                  (":hover", "hover", false),
+                                  (":hover:backdrop", "backdrop-hover", false),
+                                  (":active, &:checked", "active", true),
+                                  (":disabled", "insensitive", true),
+                                  (":disabled:active, &:disabled:checked", "insensitive-active", true),
+                                  (":backdrop", "backdrop", true),
+                                  (":backdrop:active, &:backdrop:checked", 'backdrop-active', true),
+                                  (":backdrop:disabled", 'backdrop-insensitive', true),
+                                  (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active', true) {
+      &#{$state} { @include button($t, $c:$menu_color, $flat:$is_flat); }
     }
 
     &, &:backdrop { &, &:disabled { background-color: transparent; border-color: transparent; } }
