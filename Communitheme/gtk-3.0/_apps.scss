@@ -21,9 +21,25 @@ list.tweak-categories separator {
   *scrolledwindow:backdrop { opacity: 0.9; }
 
   paned box.floating-bar {
-    background: transparentize(darken($bg_color,20%),0.4);
-    border-radius: $small_radius 0 0 0;
+    @if $variant=='light' {
+      background: transparentize(darken($sidebar_bg_color,0%),0.1);
+    }
+    @else {
+      background: transparentize($jet,0.1);
+    }
     border: none;
+    border-radius: $small_radius 0 0 0;
+
+    &:backdrop{
+      @if $variant=='light' {
+        background: transparentize($backdrop_bg_color,0.1);
+      }
+      @else {
+        background: transparentize(lighten($jet,10%),0.1);
+      }
+      color: $backdrop_text_color;
+    }
+
   }
 
   .searchbar-container searchbar {
