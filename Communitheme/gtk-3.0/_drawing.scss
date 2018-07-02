@@ -244,7 +244,7 @@
     @if $c==$headerbar_bg_color { $_bg: lighten($c, 15%); }
     @else if $c==$success_color or $c==$destructive_color or $c==$neutral_color or $c==$purple { $_bg: lighten($c, 5%); }
     @else if $c==$button_bg_color {
-      @if $variant=='light' { $_bg: $c; $tc: scale-color($tc, $lightness:15%); }
+      @if $variant=='light' { $_bg: lighten($c, 25%); }
       @else { $_bg: lighten($c, 1%); }
     }
 
@@ -282,7 +282,7 @@
         $_border_top_color: darken($_border, 8%);
       }
     }
-    @else if $c==$success_color or $destructive_color or $neutral_color or $purple {
+    @else if $c==$success_color or $c==$destructive_color or $c==$neutral_color or $c==$purple {
       $_bg: darken($c, 10%);
       $_border: darken($c, 15%);
       $_border_top_color: darken($_border, 5%);
@@ -397,7 +397,7 @@
   @else if $t==backdrop-hover {
     $_bg: null;
     @if $c==$headerbar_bg_color { $_bg: lighten($backdrop_headerbar_bg_color, 6%); }
-    @else if $c==$success_color or $destructive_color or $neutral_color or $purple {
+    @else if $c==$success_color or $c==$destructive_color or $c==$neutral_color or $c==$purple {
       $_c: _backdrop_color($c);
       $_bg: lighten($_c, 5%);
     } @else if $c==$button_bg_color {
