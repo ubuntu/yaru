@@ -23,19 +23,16 @@ list.tweak-categories separator {
   paned box.floating-bar {
     background: transparentize($jet,0.1);
     color: $porcelain;
-    border: 1px solid transparentize($borders_color,0.7);
-    border-bottom: none;
-    border-right: none;
+    border: none;
     border-radius: $small_radius 0 0 0;
 
-    &:backdrop{
+    &:backdrop {
       @if $variant=='light' {
-        background: transparentize($backdrop_bg_color,0.1);
+        background: transparentize(darken($backdrop_bg_color,10%),0.1);
       }
       @else {
         background: transparentize(lighten($jet,10%),0.1);
       }
-      border: 1px solid transparentize($borders_color,0.7);
     }
   }
 
