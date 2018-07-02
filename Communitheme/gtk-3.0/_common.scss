@@ -1617,7 +1617,7 @@ headerbar {
 
       selection {
         background-color: #48b7de;
-        color: $text_color,darken(#2D2D2D,5%);
+        color: if($variant=='light', $text_color, darken(#2D2D2D,5%));
       }
     }
 
