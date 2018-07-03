@@ -4,8 +4,11 @@ set -eu
 # download snapcraft.yaml from template
 mkdir -p snap/
 
-# Do not download snapcraft.yaml if this is the theme helper repo.
-if [[ "$THEME_HELPER_REPO_URL" != *"/$TRAVIS_REPO_SLUG/"* ]]; then
+# Download snapcraft.yaml if this is not the theme helper repo.
+if [[ "$THEME_HELPER_REPO_URL" == *"/$TRAVIS_REPO_SLUG/"* ]]; then
+        echo "using local snapcraft.yaml"
+else
+        echo "downloading snapcraft.yaml from $THEME_HELPER_REPO_URL"
         curl -o snap/snapcraft.yaml "$THEME_HELPER_REPO_URL/snap/snapcraft.yaml"
 fi
 
