@@ -33,13 +33,13 @@ parts:
     source: https://github.com/ubuntu/suru-icon-theme.git
     plugin: meson
     meson-parameters: ["--prefix=/"]
-  cursor:
-    source: https://github.com/ubuntu/cursor-communitheme.git
-    plugin: dump
-    organize:
-      Communitheme_13: share/icons/communitheme
-    stage:
-      - share/icons/
+    override-build: |
+      # First run normal build stage (the build stage of the meson plugin)
+      snapcraftctl build
+      # Copy and rename to `communitheme`.
+      cp -r "$SNAPCRAFT_PART_INSTALL/share/icons/Suru" "$SNAPCRAFT_PART_INSTALL/share/icons/communitheme"
+      sed -i 's/Suru/communitheme/' "$SNAPCRAFT_PART_INSTALL/share/icons/communitheme/cursor.theme"
+      sed -i 's/Suru/communitheme/' "$SNAPCRAFT_PART_INSTALL/share/icons/communitheme/index.theme"
   sound:
     source: https://github.com/ubuntu/communitheme-sounds.git
     plugin: meson
