@@ -146,14 +146,17 @@ StScrollBar {
 /* Slider */
 
 .slider {
+  $_bg: $indication_bg_color;
+  $_inactive_bg: lighten($inactive_indication_bg_color,5%);
   height: 1em;
-  -slider-height: 0.1em;
-  -slider-background-color: $inactive_indication_bg_color; //background of the trough
-  -slider-border-color: $inactive_indication_bg_color; //trough border color
-  -slider-active-background-color: $indication_bg_color; //active trough fill
-  -slider-active-border-color: $indication_bg_color; //active trough border
-  -slider-border-width: 1px;
+  -slider-height: 0.2em; //increase the height because of the border removal
+  -slider-background-color:  $_inactive_bg;//background of the trough
+  //-slider-border-color: $_inactive_bg; //trough border color but border is 0px
+  -slider-active-background-color: $_bg; //active trough fill
+  -slider-active-border-color: $_bg; //active trough border
+  -slider-border-width: 0px; //remove the border for a more flat trough
   -slider-handle-radius: 8px;
+  color: $fg_color; //Color of the knob/slider-handle
 }
 
 /* Check Boxes */
