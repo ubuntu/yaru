@@ -629,7 +629,7 @@ StScrollBar {
 
   .osd-monitor-label { font-size: 3em; }
   .level {
-    $c: darken($indication_bg_color, 35%);
+    $c: darken($indication_bg_color, 30%);
     height: 0.3em;
     border-radius: 0.3em;
     background-color: $c;
