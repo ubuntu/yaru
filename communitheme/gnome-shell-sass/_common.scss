@@ -146,14 +146,12 @@ StScrollBar {
 /* Slider */
 
 .slider {
-  $_bg: $indication_bg_color;
-  $_inactive_bg: darken($indication_bg_color, 30%);
   height: 1em;
   -slider-height: 0.1em;
-  -slider-background-color: $_inactive_bg; //background of the trough
-  -slider-border-color: $_inactive_bg; //trough border color
-  -slider-active-background-color: $_bg; //active trough fill
-  -slider-active-border-color: $_bg; //active trough border
+  -slider-background-color: $inactive_indication_bg_color; //background of the trough
+  -slider-border-color: $inactive_indication_bg_color; //trough border color
+  -slider-active-background-color: $indication_bg_color; //active trough fill
+  -slider-active-border-color: $indication_bg_color; //active trough border
   -slider-border-width: 1px;
   -slider-handle-radius: 8px;
 }
@@ -629,7 +627,7 @@ StScrollBar {
 
   .osd-monitor-label { font-size: 3em; }
   .level {
-    $c: darken($indication_bg_color, 30%);
+    $c: $inactive_indication_bg_color;
     height: 0.3em;
     border-radius: 0.3em;
     background-color: $c;
