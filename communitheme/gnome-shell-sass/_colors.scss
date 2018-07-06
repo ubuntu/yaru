@@ -57,3 +57,6 @@ $light_borders_color: darken($light_bg_color, 18%);
 $light_button_bg_color: darken($light_bg_color, 3%);
 $light_base_hover_color: transparentize($dark_fg_color, 0.85);
 $light_base_active_color: transparentize($dark_fg_color, 0.80);
+//
+$dark_caption_fg_color: transparentize($dark_fg_color, 0.15);
+$dark_inactive_element_color: mix($dark_fg_color, $light_bg_color, 50%);
