@@ -18,6 +18,7 @@ list.tweak-categories separator {
   &:backdrop { background-color: $backdrop_base_color }
 
   // Makes icons less bright in backdrop
+  @at-root %dim_icons_in_backdrop,
   *scrolledwindow:backdrop { opacity: 0.9; }
 
   paned box.floating-bar {
@@ -53,6 +54,7 @@ list.tweak-categories separator {
     &:backdrop { background-color: if($variant==light,#EEEFF0,$backdrop_base_color);} // It should be _backdrop_color(white); but that does not work.
   }
 
+  @at-root %remove_folder_icon_tint,
   scrolledwindow widget.view:selected {
     // reduces orangeness of selected folder icons
     background-color: rgba(255, 255, 255, 0.1); // folder icon is tinted based on this
@@ -374,6 +376,21 @@ headerbar button image ~ window decoration ~ menu separator {
   //&:selected { background: $selected_bg_color; }
 //}
 
+.nemo-properties-dialog {
+  .dialog-action-box .dialog-action-area { 
+    // add margin to preferences buttons
+    margin: 2px 6px 4px; 
+  }
+
+  toolbar stackswitcher.linked button { 
+    margin-right: 0; 
+    &:backdrop { 
+      color: $backdrop_fg_color;
+      background-color: $backdrop_bg_color; 
+    }
+  }
+}
+
 .nemo-window {
   .sidebar  {
     scrolledwindow.frame.nemo-places-sidebar {
@@ -387,6 +404,13 @@ headerbar button image ~ window decoration ~ menu separator {
       &:backdrop { background-image: image($backdrop_sidebar_bg_color); }
       &.view:selected { background: $selected_bg_color; }
     }
+  }
+
+  .view {
+    // imports nautilus tweaks
+    // dim icons in backdrop and have only labels be colored when selected
+    &:selected { @extend %remove_folder_icon_tint; }
+    &:backdrop { @extend %dim_icons_in_backdrop; }
   }
 
   toolbar.horizontal.primary-toolbar {
