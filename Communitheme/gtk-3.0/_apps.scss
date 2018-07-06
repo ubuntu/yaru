@@ -139,10 +139,12 @@ terminal-window {
       background-color: $headerbar_bg_color;
 
       button.flat {
+        &, &:backdrop {
         color: $terminal_fg_color;
         @each $state, $t in (':hover', 'hover'),
                             (':active, &:checked', 'active'),
                             (':backdrop', 'backdrop'),
+                            (':backdrop-hover', 'backdrop-hover'),
                             (':backdrop:disabled', 'backdrop-insensitive'),
                             (':disabled', 'insensitive') {
             &#{$state} {
@@ -159,6 +161,7 @@ terminal-window {
           }
         }
       }
+    }
 
       &:backdrop {
         border-color: _backdrop_color($terminal_borders_color);
@@ -170,10 +173,12 @@ terminal-window {
 
         color: $ash;
 
+        &:hover:backdrop {
+          border-color: lighten($headerbar_bg_color, 4%);
+        }
+
         &:hover:not(:active):not(:backdrop):not(:checked) {
-          background-color: $headerbar_bg_color;
           background-color: lighten($headerbar_bg_color, 4%);
-          border-color: $_border_color;
           border-color: $inkstone;
         }
 
