@@ -1464,6 +1464,7 @@ toolbar {
       &#{$state} { @include button($t, $c:$menu_color, $flat:$is_flat); }
     }
 
+    &:hover { border-color: $borders_color; }
     &, &:backdrop { &, &:disabled { background-color: transparent; border-color: transparent; } }
   }
 
