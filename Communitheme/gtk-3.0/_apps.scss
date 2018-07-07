@@ -119,7 +119,7 @@ terminal-window {
     color: $terminal_fg_color;
 
     &:backdrop {
-      background-color: _backdrop_color($terminal_bg_color);
+      background-color: lighten($terminal_bg_color, 2%);
       color: $backdrop_selected_fg_color;
     }
   }
