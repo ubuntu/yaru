@@ -140,31 +140,31 @@ terminal-window {
 
       button.flat {
         &, &:backdrop {
-        color: $terminal_fg_color;
-        @each $state, $t in (':hover', 'hover'),
-                            (':active, &:checked', 'active'),
-                            (':backdrop', 'backdrop'),
-                            (':backdrop-hover', 'backdrop-hover'),
-                            (':backdrop:disabled', 'backdrop-insensitive'),
-                            (':disabled', 'insensitive') {
+          color: $terminal_fg_color;
+          @each $state, $t in (':hover', 'hover'),
+          (':active, &:checked', 'active'),
+          (':backdrop', 'backdrop'),
+          (':backdrop-hover', 'backdrop-hover'),
+          (':backdrop:disabled', 'backdrop-insensitive'),
+          (':disabled', 'insensitive') {
             &#{$state} {
               @include button($t, $headerbar_bg_color, $headerbar_bg_color, $flat:true);
               color: white;
             }
-        }
+          }
 
-        &:backdrop { color: $backdrop_headerbar_fg_color; }
-        &, &:backdrop {
-          &, &:disabled {
-            background-color: transparent;
-            border-color: transparent;
+          &:backdrop { color: $backdrop_headerbar_fg_color; }
+          &, &:backdrop {
+            &, &:disabled {
+              background-color: transparent;
+              border-color: transparent;
+            }
           }
         }
       }
-    }
 
       &:backdrop {
-        border-color: _backdrop_color($terminal_borders_color);
+        border-color: $inkstone;
         background-color: _backdrop_color($backdrop_headerbar_bg_color);
       }
 
