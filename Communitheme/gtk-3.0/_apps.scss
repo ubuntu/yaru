@@ -153,8 +153,8 @@ terminal-window {
             }
           }
 
-          &:backdrop { color: $backdrop_headerbar_fg_color; }
           &, &:backdrop {
+            color: $backdrop_headerbar_fg_color;
             &, &:disabled {
               background-color: transparent;
               border-color: transparent;
