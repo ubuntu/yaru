@@ -678,7 +678,7 @@ StScrollBar {
     padding: 8px;
     border-radius: $small_radius;
     //color: $dark_subtext_color;
-    color: $fg_color;
+    color: darken($fg_color,30%);
   }
 
   .switcher-list .item-box:outlined {
