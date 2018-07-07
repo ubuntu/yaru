@@ -144,7 +144,8 @@ terminal-window {
           @each $state, $t in (':hover', 'hover'),
           (':active, &:checked', 'active'),
           (':backdrop', 'backdrop'),
-          (':backdrop-hover', 'backdrop-hover'),
+          (':backdrop:hover', 'backdrop-hover'),
+          (':backdrop:checked:hover', 'backdrop-active'),
           (':backdrop:disabled', 'backdrop-insensitive'),
           (':disabled', 'insensitive') {
             &#{$state} {
@@ -160,6 +161,7 @@ terminal-window {
               border-color: transparent;
             }
           }
+          &:backdrop:hover { border-color: $inkstone; }
         }
       }
 
