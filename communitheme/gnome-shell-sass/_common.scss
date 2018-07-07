@@ -768,6 +768,7 @@ StScrollBar {
   border: 1px solid $osd_borders_color;
   border-radius: $large_radius;
   padding: 12px;
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
 }
 
 %dialog_window {
