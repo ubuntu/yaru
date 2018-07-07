@@ -147,7 +147,7 @@ StScrollBar {
 
 .slider {
   $_bg: $indication_bg_color;
-  $_inactive_bg: lighten($inactive_indication_bg_color,0%);
+  $_inactive_bg: $inactive_indication_bg_color;
   height: 1em;
   -slider-height: 0.2em; //increase the height because of the border removal
   -slider-background-color:  $_inactive_bg;//background of the trough

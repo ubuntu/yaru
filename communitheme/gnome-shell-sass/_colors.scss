@@ -34,7 +34,7 @@ $success_color: $green;
 $destructive_color: darken($red, 10%);
 $neutral_color: $blue;
 $indication_bg_color: $blue;
-$inactive_indication_bg_color: $ash;
+$inactive_indication_bg_color: darken($ash,5%);
 //
 $osd_fg_color: $fg_color;
 $osd_bg_color: $panel_bg_color;
