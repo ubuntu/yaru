@@ -398,11 +398,15 @@ headerbar button image ~ window decoration ~ menu separator {
       border: none;
     }
 
-    treeview {
+    viewport.frame box.vertical treeview.view.places-treeview {
       // use sidebar bg color
       background-image: image($sidebar_bg_color);
+      border-radius: 0; // get rid of weird radius on selected rows
       &:backdrop { background-image: image($backdrop_sidebar_bg_color); }
-      &.view:selected { background: $selected_bg_color; }
+      &:selected { background: $selected_bg_color; }
+      &:not(:selected) {
+        &:not(:backdrop):hover { background-image: image($base_hover_color); }
+      }
     }
   }
 
