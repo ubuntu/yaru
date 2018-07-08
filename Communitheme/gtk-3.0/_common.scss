@@ -3854,6 +3854,10 @@ row {
   }
 
   // button { @extend %osd_button; }
+  button.flat:hover {
+      @include button(hover, $menu_color);
+      border-color: $borders_color;
+  }
 
   border { border: none; }
 }
