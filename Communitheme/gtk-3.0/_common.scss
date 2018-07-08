@@ -4558,7 +4558,7 @@ decoration {
   }
 
   messagedialog.csd & {
-    box-shadow: 0 1px 2px transparentize(black, 0.8);
+    box-shadow: $window_decoration_shadow transparentize(black, 0.5);
   }
 
   .solid-csd & {
