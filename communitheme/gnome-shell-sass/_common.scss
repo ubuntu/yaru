@@ -146,15 +146,17 @@ StScrollBar {
 /* Slider */
 
 .slider {
-  $_bg: $indication_bg_color; // $selected_bg_color;
+  $_bg: $indication_bg_color;
+  $_inactive_bg: $inactive_indication_bg_color;
   height: 1em;
-  -slider-height: 0.1em;
-  -slider-background-color: $dark_fill; // $osd_borders_color; //background of the trough
-  -slider-border-color: $dark_fill; // $osd_borders_color; //trough border color
+  -slider-height: 0.2em; //increase the height because of the border removal
+  -slider-background-color:  $_inactive_bg;//background of the trough
+  //-slider-border-color: $_inactive_bg; //trough border color but border is 0px
   -slider-active-background-color: $_bg; //active trough fill
   -slider-active-border-color: $_bg; //active trough border
-  -slider-border-width: 1px;
+  -slider-border-width: 0px; //remove the border for a more flat trough
   -slider-handle-radius: 8px;
+  color: $fg_color; //Color of the knob/slider-handle
 }
 
 /* Check Boxes */
@@ -628,14 +630,14 @@ StScrollBar {
 
   .osd-monitor-label { font-size: 3em; }
   .level {
-    $c: darken($dark_fill,15%);
+    $c: $inactive_indication_bg_color;
     height: 0.3em;
     border-radius: 0.3em;
     background-color: $c;
     color: $c;
   }
   .level-bar {
-    background-color: $indication_bg_color; // $osd_fg_color;
+    background-color: $indication_bg_color;
     border-radius: 0.3em;
   }
 }
