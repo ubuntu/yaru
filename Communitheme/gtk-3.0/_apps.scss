@@ -89,6 +89,12 @@ list.tweak-categories separator {
       &:not(:checked) {
         & label { color: transparentize($text_color, 0.5); }
       }
+
+      > box{ padding: 0 8px };
+      & > box:drop(active):focus,
+      & > box:drop(active) {
+        border-radius: $small_radius;
+      }
     }
   }
 
@@ -98,6 +104,8 @@ list.tweak-categories separator {
       background-image: image(rgba(0, 0, 0, 0.06));
     }
   }
+
+
 }
 
 
@@ -384,16 +392,16 @@ headerbar button image ~ window decoration ~ menu separator {
 //}
 
 .nemo-properties-dialog {
-  .dialog-action-box .dialog-action-area { 
+  .dialog-action-box .dialog-action-area {
     // add margin to preferences buttons
-    margin: 2px 6px 4px; 
+    margin: 2px 6px 4px;
   }
 
-  toolbar stackswitcher.linked button { 
-    margin-right: 0; 
-    &:backdrop { 
+  toolbar stackswitcher.linked button {
+    margin-right: 0;
+    &:backdrop {
       color: $backdrop_fg_color;
-      background-color: $backdrop_bg_color; 
+      background-color: $backdrop_bg_color;
     }
   }
 }
