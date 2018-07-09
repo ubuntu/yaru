@@ -2122,6 +2122,15 @@ StScrollBar {
 
 #panel.lock-screen { background-color: transparent; }
 
+#panelActivities {
+    background-image: url("activities.svg");
+    background-size: contain;
+    background-position: center;
+    text-align: right;
+    width: 105px;
+    height: 20px;
+}
+
 .screen-shield-background { //just the shadow, really
   background: black;
   box-shadow: 0px 2px 4px transparentize(black,0.6);

@@ -75,6 +75,7 @@ data_sources = [
   'ubuntu-logo-icon.svg',
   'ws-switch-arrow-down.svg',
   'ws-switch-arrow-up.svg',
+  'activities.svg'
 ]
 
 # install static data files
