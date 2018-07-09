@@ -565,9 +565,6 @@ StScrollBar {
       background-color: transparent;
       border-top-color: transparent;
       font-weight: bold;
-      &:hover {
-        box-shadow: none;
-      }
     }
     &.selected { background-color: $base_hover_color; color: $fg_color; }
     &:active {
