@@ -1454,9 +1454,9 @@ toolbar {
     @each $state, $t, $is_flat in ("", "normal", true),
                                   (":hover", "hover", false),
                                   (":hover:backdrop", "backdrop-hover", false),
-                                  (":active, &:checked", "active", true),
+                                  (":active, &:checked", "active", false),
                                   (":disabled", "insensitive", true),
-                                  (":disabled:active, &:disabled:checked", "insensitive-active", true),
+                                  (":disabled:active, &:disabled:checked", "insensitive-active", false),
                                   (":backdrop", "backdrop", true),
                                   (":backdrop:active, &:backdrop:checked", 'backdrop-active', true),
                                   (":backdrop:disabled", 'backdrop-insensitive', true),
@@ -1464,7 +1464,7 @@ toolbar {
       &#{$state} { @include button($t, $c:$menu_color, $flat:$is_flat); }
     }
 
-    &:hover { border-color: $borders_color; }
+    &:hover, &:checked { border-color: $borders_color; }
     &, &:backdrop { &, &:disabled { background-color: transparent; border-color: transparent; } }
   }
 
