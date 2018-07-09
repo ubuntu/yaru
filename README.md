@@ -1,3 +1,7 @@
+# IMPORTANT UPDATE: PLEASE REPORT SHELL ISSUES ON THE GTK REPOSITORY THE CODE WILL MOVE SOON, TOO
+
+--> https://github.com/ubuntu/gtk-communitheme
+
 # Ubuntu Communitheme
 
 Communitheme is the new Ubuntu theme built by the Community.
