@@ -185,12 +185,27 @@
   }
 
   .show-apps {
-    .overview-icon {
-      border-radius: $small_radius;
+    // Show apps icon
+    & {
+      // reset
+      & .show-apps-icon,
+      &:checked .show-apps-icon,
+      &:focus .show-apps-icon {
+        color: transparent !important;
+        background-color: transparent !important;
+        transition-duration: 100ms !important;
+      }
     }
 
+    &,
+    &:focus, &:hover,
     &:active, &:checked {
-      .overview-icon { background-color: $base_active_color; box-shadow: none; }
+      .show-apps-icon {
+        background-image: url("ubuntu-appgrid-icon.svg") !important;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain !important;
+      }
     }
   }
 
