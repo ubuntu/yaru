@@ -1946,12 +1946,12 @@ StScrollBar {
   background-color: transparent;
 
   > StBoxLayout {
-  // this is the main window that the widgets are drawn on
-  background-color: transparentize($light_bg_color, $popover-alpha-value);
-  border: 1px solid $light_borders_color;
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
-  border-radius: $large_radius;
-  padding: 12px 40px 24px 40px;  
+    // this is the main window that the widgets are drawn on
+    background-color: transparentize($light_bg_color, $popover-alpha-value);
+    border: 1px solid $light_borders_color;
+    box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
+    border-radius: $medium_radius;
+    padding: 12px 40px 24px 40px;
   }
 
   StEntry {
@@ -2005,13 +2005,17 @@ StScrollBar {
     color: $dark_inactive_element_color;
     padding-top: 1em;
   }
-  
+
   .login-dialog-user-list-view { -st-vfade-offset: 1em; }
   .login-dialog-user-list {
     spacing: 12px;
     padding: .2em;
     width: 23em;
-    &:expanded .login-dialog-user-list-item:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
+    &:expanded .login-dialog-user-list-item:selected {
+      //colors with transparency don't seem to be possible so emulate $base_hover_color
+      background-color: lighten($ash,20%);
+      color: $selected_fg_color;
+    }
     &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
   }
   .login-dialog-user-list-item {
