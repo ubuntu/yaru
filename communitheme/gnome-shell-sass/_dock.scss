@@ -185,28 +185,12 @@
   }
 
   .show-apps {
-    // Show apps icon
-    & {
-      // reset
-      & .show-apps-icon,
-      &:checked .show-apps-icon,
-      &:focus .show-apps-icon {
-        color: transparent !important;
-        background-color: transparent !important;
-        transition-duration: 100ms !important;
-      }
-    }
-
-    &,
-    &:focus, &:hover,
-    &:active, &:checked {
-      .show-apps-icon {
-        background-image: url("ubuntu-appgrid-icon.svg") !important;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain !important;
-      }
-    }
+     &:active, &:checked {
+       .overview-icon {
+         background-color: $base_active_color;
+         box-shadow: none;
+       }
+     }
   }
 
   .app-well-app {
