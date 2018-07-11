@@ -1579,9 +1579,14 @@ headerbar {
     @extend .dim-label;
   }
 
+  & > separator {
+      background-image: image(mix($inkstone, $headerbar_bg_color, 50%));
+      &:backdrop { background-image: image(mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%)); }
+  }
+
   ~ separator, separator {
     &, &.titlebutton {
-      &, &.horizontal, &.vertical {
+     &.horizontal, &.vertical {
         & { background-image: image(mix($inkstone, $headerbar_bg_color, 50%)); }
         &:backdrop { background-image: image(mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%)); }
       }
