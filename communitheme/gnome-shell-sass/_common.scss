@@ -136,7 +136,6 @@ StScrollBar {
   StButton#vhandle, StButton#hhandle {
     border-radius: 8px;
     background-color: mix($fg_color, $bg_color, 60%);
-    //border: 3px solid transparent; //would be nice to margin or at least to transparent
     margin: 3px;
     &:hover { background-color: mix($fg_color, $bg_color, 80%); }
     &:active { background-color: $selected_bg_color; }
@@ -151,7 +150,6 @@ StScrollBar {
   height: 1em;
   -slider-height: 0.2em; //increase the height because of the border removal
   -slider-background-color:  $_inactive_bg;//background of the trough
-  //-slider-border-color: $_inactive_bg; //trough border color but border is 0px
   -slider-active-background-color: $_bg; //active trough fill
   -slider-active-border-color: $_bg; //active trough border
   -slider-border-width: 0px; //remove the border for a more flat trough
@@ -220,8 +218,8 @@ StScrollBar {
   .run-dialog-button-box { padding-top: 1em; }
   .run-dialog-label {
     @include fontsize($font-size + 1.1);
-    font-weight: normal; // bold;
-    color: $dark_subtext_color; // $subheader_fg_color; // darken($osd_fg_color,10%);
+    font-weight: normal;
+    color: $dark_subtext_color;
     padding-bottom: .4em;
   }
 }
@@ -260,14 +258,6 @@ StScrollBar {
 .end-session-dialog {
   spacing: 42px;
   border: 1px solid $osd_borders_color;
-
-  // .modal-dialog-linked-button:last-child {
-  //   // Power off button
-  //   @include button(normal, $destructive_color);
-  //   &:focus { @include button(hover, $destructive_color)}
-  //   &:hover { @include button(hover, $destructive_color); }
-  //   &:active { @include button(active, $destructive_color);}
-  // }
 }
 
   .end-session-dialog-list {
@@ -297,7 +287,6 @@ StScrollBar {
   }
 
   .end-session-dialog-logout-icon {
-    //border: 2px solid #8b8b8b;
     border-radius: $small_radius;
     width: 48px;
     height: 48px;
@@ -305,7 +294,7 @@ StScrollBar {
   }
 
   .end-session-dialog-shutdown-icon {
-    color: $dark_fg_color; // $fg_color;
+    color: $dark_fg_color;
     width: 48px;
     height: 48px;
   }
@@ -338,7 +327,7 @@ StScrollBar {
   }
 
   .end-session-dialog-app-list-item-description {
-    color: $dark_fg_color; // darken($fg_color,5%);
+    color: $dark_fg_color;
     font-size: 10pt;
   }
 
@@ -385,7 +374,7 @@ StScrollBar {
 
   .mount-dialog-app-list-item {
     color: $caption_fg_color;
-    &:hover { color: $fg_color /*$fg_color*/; }
+    &:hover { color: $fg_color; }
     &:ltr { padding-right: 1em; }
     &:rtl { padding-left: 1em; }
   }
@@ -486,8 +475,6 @@ StScrollBar {
   }
 
   .audio-selection-device {
-    //@extend %dialog_window;
-    //border: 1px solid darken(white, 20%);
     border-radius: 12px;
     &:hover, &:focus:hover {background-color: $light_base_hover_color;}
     &:active, &:focus:active {background-color: $light_base_active_color;}
@@ -580,7 +567,6 @@ StScrollBar {
 
     &:insensitive { color: transparentize($fg_color,0.5); }
   }
-  //.popup-status-menu-item { font-weight: normal;  color: pink; } //dunno what that is
   &.panel-menu {
     -boxpointer-gap: 4px;
     margin-bottom: 1.75em;
@@ -604,7 +590,6 @@ StScrollBar {
   }
 
   .popup-separator-menu-item {
-    //-margin-horizontal: 24px;
     height: 1px; //not really the whole box
     margin: 6px 64px;
     background-color: transparent;
@@ -674,7 +659,6 @@ StScrollBar {
 .switcher-list {
   // borders and padding taking from %osd-panel
   @extend %osd-panel;
-  //border: 1px solid $light_borders_color;
   border-radius: $large_radius;
   padding: 12px;
 }
@@ -684,20 +668,16 @@ StScrollBar {
   .switcher-list .item-box {
     padding: 8px;
     border-radius: $small_radius;
-    //color: $dark_subtext_color;
     color: darken($fg_color,30%);
   }
 
   .switcher-list .item-box:outlined {
     padding: 8px;
-    //border: 1px solid $light_borders_color;
   }
 
   .switcher-list .item-box:selected {
-    //background-color: $light_base_active_color;
     background-color: $base_active_color;
     border-radius: $medium_radius;
-    //color: $dark_fg_color;
     color: $fg_color;
   }
 
@@ -751,10 +731,8 @@ StScrollBar {
 
   .ws-switcher-active-up, .ws-switcher-active-down {
     height: 50px;
-    //background-color: transparentize($dark_fg_color, 0.60);
     background-color: transparentize($fg_color, 0.60);
     color: $selected_fg_color;
-    //background-image: url("resource:///org/gnome/shell/theme/ws-switch-arrow-up.png");
     background-size: 32px;
     border-radius: $medium_radius;
   }
@@ -765,7 +743,7 @@ StScrollBar {
   .ws-switcher-box {
     height: 50px;
     border: 1px solid transparentize($osd_fg_color,0.9);
-    background: transparentize($osd_fg_color,0.9); // transparent;
+    background: transparentize($osd_fg_color,0.9);
     border-radius: $medium_radius;
   }
 
@@ -792,7 +770,7 @@ StScrollBar {
 
 /* Tiled window previews */
 .tile-preview {
-  background-color: transparentize(white, .55); // transparentize($selected_bg_color,0.5);
+  background-color: transparentize(white, .55);
   border: 2px solid transparentize(white, .75);
 }
 
@@ -1008,7 +986,7 @@ StScrollBar {
     .weather-header,
     .events-section-title {
       color: $fg_color;
-      font-weight: 450; // normal; // bold;
+      font-weight: 450;
       font-size: 110%;
     }
 
@@ -1022,7 +1000,7 @@ StScrollBar {
 
     .calendar-month-label {
       color: $subheader_fg_color;
-      font-weight: 450; // normal; // bold;
+      font-weight: 450;
       font-size: 110%;
       padding: 8px 0;
       &:focus {}
@@ -1054,7 +1032,7 @@ StScrollBar {
       width: 2.4em; height: 2.4em;
       padding: 0.1em;
       margin: 2px;
-      border-radius: $small_radius; // 1.4em;
+      border-radius: $small_radius;
       &:hover,&:focus { background-color: lighten($bg_color,5%); }
       &:selected {
         color: white;
@@ -1085,7 +1063,6 @@ StScrollBar {
       .calendar-today {
         font-weight: bold;
         background-color: lighten($bg_color,13%);
-        //&:hover{background: $base_hover_color;}
       }
       .calendar-day-with-events {
         color: lighten($fg_color,10%);
@@ -1136,7 +1113,7 @@ StScrollBar {
           &:hover, &:focus { background-color: opacify(mix($osd_bg_color, $base_hover_color), 1); }
           &:active { background-color: $base_active_color; }
           &:active { .message-title, .message-content { color: $active_fg_color; } }
-          border-radius: $small_radius; // 3px;
+          border-radius: $small_radius;
         }
 
           .message-icon-bin {
@@ -1229,18 +1206,18 @@ StScrollBar {
   .system-menu-action {
     color: $fg_color;
     transition-duration: 200ms;
-    border-radius: $small_radius; // 32px; /* wish we could do 50% */
+    border-radius: $small_radius; /* wish we could do 50% */
     padding: 13px;
-    border: none; // 1px solid transparent; //  $osd_borders_color; // lighten($borders_color,5%);
+    border: none;
 
     &:hover, &:focus {
       color: $fg_color;
       background-color: $base_hover_color;
-      border: none; // 1px solid $osd_borders_color;
-      padding: 13px; // 14px;
+      border: none;
+      padding: 13px;
     }
 
-    &:active { color: $active_fg_color; border: none; /* 1px solid $osd_borders_color; */ background-color: $base_active_color; }
+    &:active { color: $active_fg_color; border: none; background-color: $base_active_color; }
 
     & > StIcon { icon-size: 16px; }
   }
@@ -1296,32 +1273,32 @@ StScrollBar {
     text-align: center;
   }
 
-  .nm-dialog-airplane-text { color: $dark_fg_color; } //$fg_color; }
+  .nm-dialog-airplane-text { color: $dark_fg_color; }
   .nm-dialog-header-icon { icon-size: 32px; }
-  .nm-dialog-scroll-view { border: 1px solid $light_borders_color; } //$osd_borders_color; } // 2px solid $borders_color; }
+  .nm-dialog-scroll-view { border: 1px solid $light_borders_color; }
   .nm-dialog-header { font-weight: bold; }
 
   .nm-dialog-item {
     font-size: 110%;
-    border-bottom: 1px solid $light_borders_color; // $borders_color;
+    border-bottom: 1px solid $light_borders_color;
     padding: 12px;
     spacing: 20px;
   }
 
   .nm-dialog-item:selected {
     background-color: $light_base_hover_color;
-    color: $dark_fg_color; // $selected_fg_color;
+    color: $dark_fg_color;
   }
 
   .nm-dialog-icons { spacing: .5em; }
   .nm-dialog-icon { icon-size: 16px; }
-  .no-networks-label { color: $dark_subtext_color; /*#999999;*/ }
+  .no-networks-label { color: $dark_subtext_color; }
   .no-networks-box { spacing: 12px; }
 
 /* OVERVIEW */
 
 #overview {
-  spacing: 24px; //
+  spacing: 24px;
 }
 
 .overview-controls {
@@ -1347,8 +1324,8 @@ StScrollBar {
   }
   .window-caption {
     spacing: 25px;
-    color: $osd_fg_color; // $selected_fg_color;
-    background-color: $osd_bg_color; // $selected_bg_color;
+    color: $osd_fg_color;
+    background-color: $osd_bg_color;
     border: 1px solid $osd_borders_color;
     border-radius: $medium_radius;
     padding: 4px 12px;
@@ -1455,7 +1432,6 @@ StScrollBar {
 
     .overview-icon { icon-size: 96px; }
   }
-  //.app-display { spacing: 20px; }
 
   .system-action-icon {
     background-color: black;
@@ -1513,7 +1489,7 @@ StScrollBar {
     &:checked .overview-icon {
       // when clicking on an app or a folder is active
       $_bg: darken($osd_fg_color, 10%);
-      background-color: transparentize($_bg,.7) !important; // transparentize($osd_bg_color,.6);
+      background-color: transparentize($_bg,.7) !important;
       box-shadow: inset 0 1px 2px $osd_borders_color;
     }
     &:hover .overview-icon,
@@ -1521,7 +1497,7 @@ StScrollBar {
     &:selected .overview-icon {
       // when hovering over an app
       $_bg: $osd_fg_color;
-      background-color: transparentize($_bg,.7); // transparentize($osd_bg_color,.6);
+      background-color: transparentize($_bg,.7);
       transition-duration: 0ms;
       border-image: none;
       background-image: none;
@@ -1548,7 +1524,7 @@ StScrollBar {
 
   .app-well-app.app-folder > .overview-icon {
     // app folder
-    $_bg: darken($osd_fg_color, 25%); // $osd_bg_color;
+    $_bg: darken($osd_fg_color, 25%);
     background-color: transparentize($_bg,.5);
     box-shadow: inset 0 0 0 1px transparentize($_bg,.6);
   }
@@ -1563,7 +1539,6 @@ StScrollBar {
   .app-folder-popup { //expanded collection
     $_bg: $osd_fg_color;
     -arrow-border-radius: $medium_radius;
-    // -arrow-background-color: transparentize($osd_bg_color,0.7);
     -arrow-background-color: transparentize($_bg,.7);
     -arrow-border-width: 1px;
     -arrow-border-color: transparentize($_bg,.5);
@@ -1607,7 +1582,6 @@ StScrollBar {
     spacing: 11px;
     padding: 8px;
     border-radius: $medium_radius 0 0 $medium_radius;
-    //border-width: 1px 0 1px 1px; //fixme: can't have non unoform borders :(
     &:rtl { border-radius: 0 $medium_radius $medium_radius 0;}
 
 
@@ -1659,7 +1633,7 @@ StScrollBar {
 
 /* NOTIFICATIONS & MESSAGE TRAY */
 
-  .url-highlighter { link-color: $link_color; /*lighten($selected_bg_color,10%);*/ }
+  .url-highlighter { link-color: $link_color; }
 
   // Banners
   .notification-banner {
@@ -1737,7 +1711,7 @@ StScrollBar {
     color: $selected_fg_color;
     border: 2px solid $osd_fg_color;
     box-shadow: 0 2px 2px rgba(0,0,0,0.5);
-    border-radius: 0.9em; // should be 0.8 but whatever; wish I could do 50%;
+    border-radius: 0.9em;
   }
 
   .secondary-icon { icon-size: 1.09em; }
@@ -2154,11 +2128,10 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  // background: #2e3436 url(resource:///org/gnome/shell/theme/noise-texture.png);
-  background: #2c001e /*url("lockscreen-gradient.svg")*/;
-  background-size: cover; // 40px;
+  background: #2c001e;
+  background-size: cover;
   background-position: top right;
-  background-repeat: no-repeat; // repeat;
+  background-repeat: no-repeat;
 }
 
 #screenShieldNotifications {
