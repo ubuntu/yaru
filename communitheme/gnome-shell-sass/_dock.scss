@@ -182,31 +182,16 @@
     // don't let the first icon be too close to the shadow + panel
     background: $dash_bg_color;
     padding-top: 2px;
+    padding-bottom: 2px;
   }
 
   .show-apps {
-    // Show apps icon
-    & {
-      // reset
-      & .show-apps-icon,
-      &:checked .show-apps-icon,
-      &:focus .show-apps-icon {
-        color: transparent !important;
-        background-color: transparent !important;
-        transition-duration: 100ms !important;
-      }
-    }
-
-    &,
-    &:focus, &:hover,
-    &:active, &:checked {
-      .show-apps-icon {
-        background-image: url("ubuntu-logo-icon.svg") !important;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain !important;
-      }
-    }
+     &:active, &:checked {
+       .overview-icon {
+         background-color: $base_active_color;
+         box-shadow: none;
+       }
+     }
   }
 
   .app-well-app {
