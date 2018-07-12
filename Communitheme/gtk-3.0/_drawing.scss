@@ -1,9 +1,10 @@
 // Drawing mixins
-
 // generic drawing of more complex things
 
 @function _backdrop_color($c) {
+  //
   // adjusts colors for use in the backdrop state
+  //
   @if $light {
     @return if($c!=white, lighten($c, 5%), transparentize(white, 0.3));
   }
@@ -29,14 +30,15 @@
   box-shadow: $shadows;
 }
 
-// entries
+/***********
+ * Entries *
+ ***********/
 @function entry_focus_border($fc:$selected_bg_color) {
   @if $variant == 'light' { @return $fc; }
   @else { @return if($fc==$selected_bg_color, _border_color($selected_bg_color), darken($fc, 35%)); }
 }
 
 @function entry_focus_shadow($fc:$selected_bg_color) { @return 0 0 2px 2px transparentize($fc, .8); }
-// @function entry_focus_shadow($fc:$selected_bg_color) { @return none; }
 
 @mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $fg_color, $edge: none) {
 //
@@ -97,7 +99,7 @@
     label, & { color: $_tc; }
   }
   @if $t==backdrop-insensitive {
-    background-color: transparent; //if($c == $headerbar_bg_color, $graphite, transparent);
+    background-color: transparent;
     border-color: if($c != $base_color, $hb_pathbar_bg_backdrop, transparentize($backdrop_borders_color, 0.5));
     box-shadow: none;
     color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
@@ -110,17 +112,12 @@
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
     box-shadow: none;
-    // text-shadow: 0 1px black;
-    // -gtk-icon-shadow: 0 1px black;
   }
   @if $t==osd-focus {
     color: $osd_text_color;
     border-color: $selected_bg_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
-    // box-shadow: entry_focus_shadow($fc);
-    // text-shadow: 0 1px black;
-    // -gtk-icon-shadow: 0 1px black;
   }
   @if $t==osd-insensitive {
     color: $osd_insensitive_fg_color;
@@ -128,8 +125,6 @@
     background-color: $osd_insensitive_bg_color;
     background-clip: padding-box;
     box-shadow: none;
-    // text-shadow: none;
-    // -gtk-icon-shadow: none;
   }
   @if $t==osd-backdrop {
     color: $osd_text_color;
@@ -137,12 +132,12 @@
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
     box-shadow: none;
-    // text-shadow: none;
-    // -gtk-icon-shadow: none;
   }
 }
 
-// buttons
+/***********
+ * Buttons *
+ ***********/
 
 @function _border_color($c, $darker: false) {
   @if $darker == true {
@@ -438,10 +433,9 @@
       @else { $_border_top_color: darken($_border,2%);}
     }
 
-    //box-shadow: none;
     background-color: $_bg;
     border-color: if($flat==true, $_bg, $_bc);
-    border-top-color: $_border_top_color;//if($flat==true, $_bg, darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 10%, 6%)));
+    border-top-color: $_border_top_color;
     box-shadow: none;
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
@@ -489,7 +483,6 @@
       $_bg: darken($c, 5%);
     }
 
-    //box-shadow: none;
     background-color: $_bg;
     border-color: if($flat==true, $_bg, $_bc);
     $_border_top_color: null;
@@ -579,6 +572,10 @@
   }
 }
 
+/***************************
+ * Check and Radio buttons *
+ ***************************/
+
 @mixin check($t, $c:white, $tc:white) {
   // Check/Radio drawing function
   //
@@ -643,6 +640,9 @@
   }
 }
 
+/************
+ * Switches *
+ ************/
 @mixin switch($bg:$dark_fill, $alt:$success_color) {
   background-color: $bg;
   border-radius: 5px;
@@ -716,7 +716,6 @@
 
     &:disabled {
       background-color: if($bg==$dark_fill, transparent, _backdrop_color($ash));
-      //background-color: if($bg==$dark_fill, transparent, $ash);
       border: 1px solid if($bg==$dark_fill, $borders_edge, transparent);
       box-shadow: none;
     }
@@ -768,6 +767,9 @@
   }
 }
 
+/**************************
+ * Overshoot & Undershoot *
+ **************************/
 @mixin overshoot($p, $t:normal, $c:$fg_color) {
 //
 // overshoot
@@ -874,10 +876,6 @@
     $_bg_pos: $p center;
   }
 
-  // background-image: linear-gradient(to $_gradient_dir, // this is the dashed line
-  //                                   $_undershoot_color_light 50%,
-  //                                   $_undershoot_color_dark 50%);
-
   padding-#{$p}: 1px;
   background-size: $_dash_bg_size;
   background-repeat: $_gradient_repeat;
@@ -885,7 +883,7 @@
   background-position: $_bg_pos;
   border: none;
 
-  //We don't like the dashed line so we go for a light shadow
+  // Replace dashed line with light shadow
   $us_shadow_color: $silk;
   $us_shadow_alpha: 0.8;
   @if $variant=='dark' {
