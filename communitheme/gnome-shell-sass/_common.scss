@@ -1931,10 +1931,11 @@ StScrollBar {
 
 .framed-user-icon {
   background-size: contain;
-  border: 2px solid $osd_fg_color;
-  color: $osd_fg_color;
+  border: 2px solid $light_borders_color;
+  color: $dark_fg_color;
   border-radius: $small_radius;
   &:hover {
+    // TODO
     border-color: lighten($osd_fg_color,30%);
     color: lighten($osd_fg_color,30%);
   }
@@ -1952,21 +1953,33 @@ StScrollBar {
   border: none;
   background-color: transparent;
 
+  > StBoxLayout {
+    // this is the main window that the widgets are drawn on
+    background-color: transparentize($light_bg_color, $popover-alpha-value);
+    border: 1px solid $light_borders_color;
+    box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
+    border-radius: $medium_radius;
+    padding: 12px 40px 24px 40px;
+  }
+
   StEntry {
     @extend %light_entry;
-    &:focus { border-color: transparentize($fg_color,0.1); }
-    &:insensitive {
-      @include entry(insensitive, $tc: $slate, $c: $porcelain);
-      color: lighten($insensitive_fg_color,40%);}
   }
 
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
-    @include button(normal);
-    &:hover,&:focus { @include button(hover); }
-    &:active { @include button(active); }
-    &:insensitive { @include button(insensitive); }
+    $c: $light_button_bg_color;
+    $tc: $dark_fg_color;
+    @include button(normal, $c, $tc);
+    &:active { @include button(active, $c, $tc);}
+    &:focus { @include button(focus, $c, $tc);}
+    &:hover { @include button(hover, $c, $tc);}
+    &:focus:hover { @include button(focus-hover, $c, $tc); }
+    &:insensitive { @include button(insensitive, $c, $tc); }
+    &:hover, &:focus:hover {background-color: $light_base_hover_color;}
+    &:active, &:focus:active {background-color: $light_base_active_color;}
+
     &:default {
       padding-bottom: 5px;
       padding-top: 5px;
@@ -1982,7 +1995,7 @@ StScrollBar {
 }
 
   .login-dialog-logo-bin { padding: 24px 0px; }
-  .login-dialog-banner { color: $caption_fg_color; }
+  .login-dialog-banner { color: $dark_caption_fg_color; }
   .login-dialog-button-box { spacing: 5px; }
   .login-dialog-message-warning { color: $warning_color; }
   .login-dialog-message-hint { padding-top: 0; padding-bottom: 20px; }
@@ -1991,13 +2004,13 @@ StScrollBar {
     padding-left: 2px;
     .login-dialog-not-listed-button:focus &,
     .login-dialog-not-listed-button:hover & {
-      color: $osd_fg_color;
+      color: $dark_fg_color;
     }
   }
   .login-dialog-not-listed-label {
     font-size: 90%;
     font-weight: bold;
-    color: $inactive_element_color;
+    color: $dark_inactive_element_color;
     padding-top: 1em;
   }
 
@@ -2006,7 +2019,11 @@ StScrollBar {
     spacing: 12px;
     padding: .2em;
     width: 23em;
-    &:expanded .login-dialog-user-list-item:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
+    &:expanded .login-dialog-user-list-item:selected {
+      //colors with transparency don't seem to be possible so emulate $base_hover_color
+      background-color: lighten($ash,20%);
+      color: $selected_fg_color;
+    }
     &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
   }
   .login-dialog-user-list-item {
@@ -2018,14 +2035,14 @@ StScrollBar {
     .login-dialog-timed-login-indicator {
       height: 2px;
       margin: 2px 0 0 0;
-      background-color: $osd_fg_color;
+      background-color: $dark_fg_color;
     }
-    &:focus .login-dialog-timed-login-indicator { background-color: $selected_fg_color; }
+    &:focus .login-dialog-timed-login-indicator { background-color: $dark_fg_color; }
   }
 
   .login-dialog-username,
   .user-widget-label {
-    color: $osd_fg_color;
+    color: $dark_fg_color;
     font-size: 120%;
     font-weight: bold;
     text-align: left;
@@ -2044,7 +2061,7 @@ StScrollBar {
   }
 
   .login-dialog-prompt-label {
-      color: $caption_fg_color;
+      color: $dark_caption_fg_color;
       font-size: 110%;
       padding-top: 1em;
   }
@@ -2054,9 +2071,9 @@ StScrollBar {
   }
 
   .login-dialog-session-list-button {
-      color: $inactive_element_color;
-      &:hover,&:focus { color: $osd_fg_color; }
-      &:active { color: darken($osd_fg_color, 50%); }
+      color: $dark_inactive_element_color;
+      &:hover,&:focus { color: $dark_fg_color; }
+      &:active { color: darken($dark_fg_color, 50%); }
   }
 
 //SCREEN SHIELD
@@ -2129,7 +2146,7 @@ StScrollBar {
 
 #lockDialogGroup {
   // background: #2e3436 url(resource:///org/gnome/shell/theme/noise-texture.png);
-  background: #2c001e url("lockscreen-gradient.svg");
+  background: #2c001e /*url("lockscreen-gradient.svg")*/;
   background-size: cover; // 40px;
   background-position: top right;
   background-repeat: no-repeat; // repeat;
