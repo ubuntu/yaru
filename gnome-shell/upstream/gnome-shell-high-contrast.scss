@@ -1,0 +1,14 @@
+@import "gnome-shell-sass/_high-contrast-colors"; //use gtk colors
+@import "gnome-shell-sass/_drawing";
+@import "gnome-shell-sass/_common";
+
+//force symbolic icons
+stage {
+  -st-icon-style: symbolic;
+}
+
+.toggle-switch { width: 48px; }
+.toggle-switch-us, .toggle-switch-intl {
+  background-image: url("resource:///org/gnome/shell/theme/toggle-off-hc.svg");
+  &:checked { background-image: url("resource:///org/gnome/shell/theme/toggle-on-hc.svg"); }
+}
