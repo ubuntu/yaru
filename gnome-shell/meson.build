@@ -4,4 +4,3 @@ gnomeshell_theme_dir = join_paths(gnomeshell_dir, 'theme')
 sassc = find_program('sassc')
 
 subdir(meson.project_name())
-#subdir('session')
