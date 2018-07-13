@@ -1,0 +1,28 @@
+parts:
+  communitheme:
+    plugin: nil
+    build-packages: [snapd]
+    # note: at this date (13/04/18), build-snaps gives a segfault in docker image
+    build: |
+      set -eu
+      snap download communitheme --channel=CHANNEL
+      unsquashfs communitheme*.snap
+    install: |
+      set -eu
+      cp -a squashfs-root/share $SNAPCRAFT_PART_INSTALL/
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/gnome-shell/
+  # everything else but communitheme
+  gtk-common-themes-others:
+    plugin: nil
+    build-packages: [snapd]
+    build: |
+      set -eu
+      snap download gtk-common-themes --edge
+      unsquashfs gtk-common-themes*.snap
+    install: |
+      set -eu
+      [ -d squashfs-root/ ] || exit 1
+      cp -a squashfs-root/* $SNAPCRAFT_PART_INSTALL/
+      # remove everything related to communitheme
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/*/*ommunitheme
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/icons/Suru

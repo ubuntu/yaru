@@ -2,6 +2,8 @@
 build/
 builddir/
 /obj-*/
+Communitheme/gtk-3\.0/gtk\.css
+communitheme/gnome-shell\.css
 
 # Packaging generated content
 debian/*debhelper*
@@ -13,5 +15,9 @@ debian/tmp/
 debian/ubuntu-communitheme-session/
 debian/suru-icon-theme/
 
-Communitheme/gtk-3\.0/gtk\.css
-communitheme/gnome-shell\.css
+# snapcraft build artefacts
+parts/
+stage/
+prime/
+snap/.snapcraft/state
+*.snap

@@ -1,0 +1,75 @@
+#!/bin/bash
+set -eu
+
+# download snapcraft.yaml from template
+mkdir -p snap/
+
+# Download snapcraft.yaml if this is not the theme helper repo.
+if [[ "$THEME_HELPER_REPO_URL" == *"/$TRAVIS_REPO_SLUG/"* ]]; then
+        echo "using local snapcraft.yaml"
+else
+        echo "downloading snapcraft.yaml from $THEME_HELPER_REPO_URL"
+        curl -o snap/snapcraft.yaml "$THEME_HELPER_REPO_URL/snap/snapcraft.yaml"
+fi
+
+# use local source for current repo
+sed -i "s#    source: .*$TRAVIS_REPO_SLUG\.git#    source: \.#" snap/snapcraft.yaml
+
+# build and release it
+
+# Note: we need bionic meson version and sassc. As only those additions alongside git will be installed
+# change directly sources.list
+cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pwd) && snapcraft"
+
+# Only release as a snap from main repo (ubuntu slug), enabling other forks to test build the snap.
+# Notes that the tokens are only available when the source repo is under ubuntu/ project.
+REPO="${TRAVIS_REPO_SLUG%%/*}"
+SOURCE_REPO="${TRAVIS_PULL_REQUEST_SLUG%%/*}"
+channel=""
+if [ "$REPO" == "ubuntu" ] && ([ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$SOURCE_REPO" == "ubuntu" ]) ; then
+        # if it's a PR event from
+        if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+                channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
+                echo "PR to main ubuntu repo: will release to $channel"
+        # only push build to master are released, the rest will be as PR via dedicated channel
+        elif [ "$TRAVIS_BRANCH" == "master" ]; then
+                channel="edge"
+                echo "Push to master ubuntu repo: will release to $channel"
+        fi
+
+        if [ ! -z "$channel" ]; then
+                cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
+        fi
+elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+        echo "This PR doesn't originate from an ubuntu/ repo for an ubuntu/ destination repo. We can't upload automatically a snap on your beyond thus."
+fi
+
+docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
+
+# stop if this was just a test build without any snap pushed
+[ -z "$channel" ] && exit 0
+
+# build now gtk-common-themes
+# FIXME: we won't need this once snapd can accept and auto-install theme snaps.
+mkdir -p ../gtk-common-themes/snap
+cd ../gtk-common-themes
+
+# get top part of original snapcraft.yaml and complete with unsquash the snap
+gct_snapcraftyaml=`mktemp`
+curl -o $gct_snapcraftyaml "https://raw.githubusercontent.com/snapcrafters/gtk-common-themes/master/snap/snapcraft.yaml"
+sed -e '/parts:/,$d' $gct_snapcraftyaml > snap/snapcraft.yaml
+
+curl -o $gct_snapcraftyaml "$THEME_HELPER_REPO_URL/build/gtk-common-themes-parts.yaml"
+sed -e "s,CHANNEL,$channel,g" $gct_snapcraftyaml >> snap/snapcraft.yaml
+rm $gct_snapcraftyaml
+
+# build and push gtk-common-themes snap
+cmd="cd $(pwd) && snapcraft"
+cmd="$cmd && echo \"$SNAP_COMMON_THEMES_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
+docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
+
+# write on PR install instructions for the snap branch
+[ "$TRAVIS_PULL_REQUEST" == "false" ] && exit 0
+curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
+        -d "{\"body\": \"A new test snap version is available using: \`snap refresh communitheme --channel=$channel\`.\nFurther available updates will track that pull request then.\n\nSwitch back to stable or edge snap with \`snap refresh communitheme --stable\` or \`snap refresh communitheme --edge\` once you are done with it!\nYou may want to download as well \`gtk-common-themes\` snap from \`$channel\` channel to test your snaps with those changes.\n\nReplace \`refresh\` with \`install\` if you haven't installed the snap yet.\"}" \
+        "https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
