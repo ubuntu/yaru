@@ -1,4 +1,4 @@
-gtk2_dir = join_paths(communitheme_dir, 'gtk-2.0')
+gtk2_dir = join_paths(theme_dir, 'gtk-2.0')
 
 # static theme files to copy
 gtk2_theme_data_sources = [

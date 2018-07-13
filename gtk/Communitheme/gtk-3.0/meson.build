@@ -1,4 +1,4 @@
-gtk3_dir = join_paths(communitheme_dir, 'gtk-3.0')
+gtk3_dir = join_paths(theme_dir, 'gtk-3.0')
 
 # theme sources .scss files
 
@@ -124,7 +124,7 @@ gtk3_assets = [
 ]
 
 # generate .css files
-# and install to themes/communitheme/gtk-3.0
+# and install to themes/THEMENAME/gtk-3.0
 gtk3_scss_dependencies = files(gtk3_scss_dependencies)
 foreach f : gtk3_scss_sources
     custom_target('generate_' + f,
@@ -138,5 +138,5 @@ foreach f : gtk3_scss_sources
     )
 endforeach
 
-# Install asset files to themes/communitheme/gtk-3.0/assets
+# Install asset files to themes/THEMENAME/gtk-3.0/assets
 install_data(gtk3_assets, install_dir: gtk3_asset_dir)

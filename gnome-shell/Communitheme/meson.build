@@ -1,5 +1,5 @@
 # destination directory
-install_dir = join_paths(gnomeshell_theme_dir, 'communitheme')
+install_dir = join_paths(gnomeshell_theme_dir, meson.project_name())
 
 # generate .css files
 theme_sources = files([

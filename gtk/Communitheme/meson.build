@@ -1,13 +1,15 @@
-communitheme_dir = join_paths(gtk_theme_dir, 'Communitheme')
+theme_dir = join_paths(gtk_theme_dir, meson.project_name())
 
-# static asset files to copy
-index_sources = [
-  'index.theme',
-]
-
-# Install index file
-install_data(index_sources, install_dir: communitheme_dir)
-
+generate_theme = find_program('meson/generate_theme.py')
+custom_target('gtk-index.theme',
+              input: 'index.theme.in',
+              output: 'index.theme',
+              command: [
+                generate_theme, '@INPUT@', '@OUTPUT@', meson.project_name()
+              ],
+              build_by_default: true,
+              install: true,
+              install_dir: theme_dir)
 
 subdir('gtk-2.0')
 subdir('gtk-3.0')

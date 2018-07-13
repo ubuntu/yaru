@@ -1,12 +1,6 @@
-project('suru-icon-theme',
-    version: '1.0',
-    meson_version: '>= 0.40',
-    license: 'CC-by-SA',
-    default_options: ['prefix=/usr']
-)
-
 install_subdir('Suru',
-    install_dir: join_paths(get_option('prefix'), 'share/icons')
+    install_dir: join_paths(get_option('prefix'), 'share/icons', meson.project_name()),
+    strip_directory: true,
 )
 
-meson.add_install_script('meson/post_install.py')
+meson.add_install_script('meson/post_install.py', meson.project_name())
