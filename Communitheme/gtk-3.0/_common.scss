@@ -110,8 +110,6 @@ $popover_shadow: 0 2px 5px transparentize(black, 0.75);
   &:selected {
     &:focus, & {
       @extend %selected_items;
-      // @extend %selected_text; //Trying blue for the text selection
-
       /* border-radius change here caused issue 473: selected radio becomes squared
        * keeping the code since it is not clear if removing it can cause any side effect
        * border-radius: 3px; */
@@ -125,7 +123,6 @@ textview {
   text {
     @extend %view;
     selection { &:focus, & { @extend %selected_text; }}
-    //selection { /*&:focus, & { @extend %selected_items; }}*/
   }
 }
 
@@ -176,11 +173,10 @@ label {
     &:backdrop { color: $backdrop_text_color; }
   }
 
-  //row:selected &,
   &:selected { @extend %nobg_selected_items; }
 
   selection {
-    @extend %selected_text; //Trying blue for the text selection
+    @extend %selected_text;
   }
   counter-label{background-color: $purple;}
 
@@ -217,11 +213,11 @@ label {
 
 assistant {
   .sidebar {
-    background-color: $sidebar_bg_color; // $base_color;
+    background-color: $sidebar_bg_color;
     border-top: 1px solid $borders_color;
 
     &:backdrop {
-      background-color: $backdrop_sidebar_bg_color; // $backdrop_base_color;
+      background-color: $backdrop_sidebar_bg_color;
       border-color: $backdrop_borders_color;
     }
   }
@@ -806,8 +802,6 @@ button {
     // child, a label needs just lateral padding while an icon needs vertical
     // padding added too.
 
-    //outline-offset: -3px; // needs to be set or it gets overriden by GtkRadioButton outline-offset
-
     > label {
       padding-left: 6px;  // label padding
       padding-right: 6px; //
@@ -889,7 +883,6 @@ button {
     // so on relevant states we an additional background-image with a gradient clipped on the border-box,
     // so setting a transparent border would reveal it.
     // FIXME: take care of colored circular button.
-    // $_border_bg: linear-gradient(to top, $alt-borders-color 25%, $borders-color 50%);
 
     &:not(.flat):not(:checked):not(:active):not(:disabled):not(:backdrop),
     &:hover:not(:checked):not(:active):not(:disabled):not(:backdrop),
@@ -1841,7 +1834,6 @@ headerbar {
 
           .arrow {
             -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
-            // -gtk-icon-shadow: none;
           }
         }
       }
@@ -1893,7 +1885,6 @@ headerbar {
   // add vertical margins to common widget on the headerbar to avoid them spanning the whole height
   entry,
   spinbutton,
-  // separator,
   button {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -2061,7 +2052,7 @@ treeview.view {
    }
 
   border-left-color: mix($fg_color, $base_color, 50%); // this is actually the tree lines color,
-  border-top-color: transparentize($borders_color, 0.8);        // while this is the grid lines color, better then nothing
+  border-top-color: transparentize($borders_color, 0.8); // while this is the grid lines color, better then nothing
   background-color: $base_color;
 
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
@@ -2159,7 +2150,7 @@ treeview.view {
   }
 
   &.trough { // progress bar trough in treeviews
-    background-color: $dark_fill; // transparentize($fg_color,0.9);
+    background-color: $dark_fill;
     border-radius: 3px;
 
     &:selected {
@@ -2185,12 +2176,12 @@ treeview.view {
   header.button.dnd { // for treeview-like derive widgets
     &:active, &:selected, &:hover, & {
       padding: 0 6px;
-      color: $selected_fg_color; // $base_color;
+      color: $selected_fg_color;
       background-image: none;
       background-color: $selected_bg_color;
       border-style: none;
       border-radius: 0;
-      box-shadow: inset 0 0 0 1px $borders_color; // $base_color;
+      box-shadow: inset 0 0 0 1px $borders_color;
       transition: none;
     }
   }
@@ -2286,7 +2277,6 @@ menu,
     min-width: 36px;
     padding: 5px 6px;
     border-radius: 0;
-    // text-shadow: none;
 
     &:hover { background-color: $base_hover_color; }
 
@@ -2323,11 +2313,9 @@ menu,
     min-height: 16px;
     min-width: 16px;
     padding: 4px;
-    // background-color: $menu_color;
     border-radius: 0;
 
     &.top {
-      // margin-top: -6px;
       border-bottom: 1px solid mix($fg_color, $base_color, 10%);
       border-top-right-radius: $small_radius;
       border-top-left-radius: $small_radius;
@@ -2374,7 +2362,7 @@ popover.background {
   padding: 2px;
   color: $text_color;
   border-radius: $medium_radius;
-  background-color: $menu_color; // $popover_bg_color;
+  background-color: $menu_color;
 
   .csd &, & { border: 1px solid $borders_color; }
 
@@ -2712,14 +2700,12 @@ scrollbar {
   &.overlay-indicator {
     &:not(.dragging):not(.hovering) {
       border-style: none;
-      // opacity: 0.8;
       background-color: transparent;
 
       slider {
         margin: 2px;
         min-width: 3px;
         min-height: 3px;
-        //background-color: $fg_color;
         border: 1px solid if($variant == 'light', transparentize(white, 0.8), transparentize(black, 0.8));
       }
 
@@ -2735,7 +2721,6 @@ scrollbar {
 
       &.horizontal {
         slider {
-          // margin: 0 2px;
           min-width: $_slider_min_length;
         }
 
@@ -2747,7 +2732,6 @@ scrollbar {
 
       &.vertical {
         slider {
-          // margin: 2px 0;
           min-height: $_slider_min_length;
         }
 
@@ -2761,7 +2745,7 @@ scrollbar {
     &.dragging,
     &.hovering {
       border-style: none;
-      background-color: transparent; //$scrollbar_bg_color;
+      background-color: transparent;
       border-radius: $small_radius;
 
       &:backdrop { background-color: transparentize($backdrop_scrollbar_bg_color, 0.2); }
@@ -2912,15 +2896,6 @@ radio {
 
   &:backdrop { transition: $backdrop_transition; }
 
-  // .osd & {
-  //   @include button(osd);
-  //
-  //   &:hover { @include button(osd); }
-  //   &:active { @include button(osd-active); }
-  //   &:backdrop { @include button(osd-backdrop); }
-  //   &:disabled { @include button(osd-insensitive); }
-  // }
-
   menu menuitem &, popover & {
     margin: 0; // this is a workaround for a menu check/radio size allocation issue
   }
@@ -3039,12 +3014,7 @@ treeview.view {
   row:selected & { &:disabled, & { border-color: $neutral_color; }} // TODO: what program uses this so it can be tested out?
 
   // OSD
-  .osd & {
-    // border-color: $osd_borders_color;
-    // background-color: transparentize($osd_borders_color, 0.2);
-    //
-    // &:disabled { background-color: $osd_insensitive_bg_color; }
-  }
+  .osd & { }
 }
 
 %scale_highlight {
@@ -3067,12 +3037,7 @@ treeview.view {
   row:selected & { &:disabled, & { border-color: $c; }}
 
   // OSD
-  .osd & {
-    // should resemble regular
-    // border-color: $osd_borders_color;
-
-    // &:disabled { border-color: transparent; }
-  }
+  .osd & { }
 }
 
 scale {
@@ -3084,12 +3049,7 @@ scale {
   min-width: 8px;
   padding: 12px;
 
-  // those are inside the trough node, I need them to show their own border over the trough one, so negative margin
-  // fill,
-  // highlight { margin: -1px; }
-
   // the slider is inside the trough, so to have make it bigger there's a negative margin
-
   slider {
     min-height: 18px;
     min-width: 18px;
@@ -3155,16 +3115,7 @@ scale {
     }
 
     // OSD
-    .osd & {
-      // background-color: mix($osd_fg_color, $osd_borders_color, 25%);
-      //
-      // &:disabled {
-      //   &:backdrop, & {
-      //     border-color: transparent;
-      //     background-color: transparent;
-      //   }
-      // }
-    }
+    .osd & { }
   }
 
   slider {
@@ -3199,36 +3150,7 @@ scale {
     row:selected & { &:disabled, & { border-color: $c; } }
 
     // OSD
-    .osd & {
-      // @include button(osd);
-      // border-color: darken($osd_borders_color, 3%);
-      // background-color: opacify($osd_bg_color, 1); // solid background needed here
-      //
-      // &:hover {
-      //   @include button(osd-hover);
-      //   background-color: opacify($osd_bg_color, 1); // solid background needed here
-      // }
-      //
-      // &:active {
-      //   @include button(osd-active);
-      //   background-color: opacify($osd_bg_color, 1); // solid background needed here
-      // }
-      //
-      // &:disabled {
-      //   @include button(osd-insensitive);
-      //   background-color: opacify($osd_bg_color, 1); // solid background needed here
-      // }
-      //
-      // &:backdrop {
-      //   @include button(osd-backdrop);
-      //   background-color: opacify($osd_bg_color, 1); // solid background needed here
-      //
-      //   &:disabled {
-      //     @include button(osd-backdrop-insensitive);
-      //     background-color: opacify($osd_bg_color, 1); // solid background needed here
-      //   }
-      // }
-    }
+    .osd & { }
   }
 
   value { color: gtkalpha(currentColor, 0.55); }
@@ -3369,17 +3291,13 @@ scale {
     min-height: 0;
     min-width: 0;
 
-    trough {
-      // background-image: image($borders_color);
-      // background-repeat: no-repeat;
-    }
+    trough { }
 
     &.horizontal {
       padding: 0 0 12px 0;
 
       trough {
         padding-bottom: 3px;
-        // background-position: 0 -3px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
       }
@@ -3400,7 +3318,6 @@ scale {
 
         trough {
           padding-left: 3px;
-          // background-position: 3px 0;
           border-bottom-right-radius: 0;
           border-top-right-radius: 0;
         }
@@ -3418,7 +3335,6 @@ scale {
 
         trough {
           padding-right: 3px;
-          // background-position: -3px 0;
           border-bottom-left-radius: 0;
           border-top-left-radius: 0;
         }
@@ -3439,7 +3355,6 @@ scale {
 
           trough {
             padding-bottom: 5px;
-            // background-position: 0 -6px;
           }
 
           slider {
@@ -3455,7 +3370,6 @@ scale {
 
           trough {
             padding-left: 5px;
-            // background-position: 6px 0;
           }
 
           slider {
@@ -3469,7 +3383,6 @@ scale {
 
           trough {
             padding-right: 5px;
-            // background-position: -6px 0;
           }
 
           slider {
@@ -3497,10 +3410,6 @@ progressbar {
     trough,
     progress { min-width: 3px; }
   }
-
-  // &.horizontal progress { margin: 0 -1px; } // the progress node is positioned after the trough border
-  // &.vertical progress { margin: -1px 0; }   // this moves it over it.
-
 
   // FIXME: insensitive state missing and some other state should be set probably
   font-size: smaller;
@@ -3536,11 +3445,7 @@ progressbar {
     row:selected & { &:disabled, & { border-color: $c; }} // TODO: what program uses this so it can be tested out?
 
     // OSD
-    .osd & {
-      // border-color: $osd_borders_color;
-
-      // &:disabled { border-color: transparent; }
-    }
+    .osd & { }
   }
 // TODO: maybe we can experiment with &:not(.full)
 // so prgoress bars won't be rounded at the opposite end until they're full?
@@ -3835,15 +3740,7 @@ row {
  *********************/
 .app-notification,
 .app-notification.frame {
-  // @extend %osd;
-
   padding: 10px;
-  // border-radius: 0 0 5px 5px;
-  // background-color: transparentize($inkstone, 0.025);
-  // background-image: linear-gradient(to bottom, transparentize(black, 0.8),
-  //                                             transparent 2px);
-  // background-clip: padding-box;
-
   margin: 12px;
   color: $text_color;
   border-radius: $medium_radius;
@@ -3852,15 +3749,12 @@ row {
   box-shadow: $popover_shadow;
 
   &:backdrop {
-    // background-image: none;
-    // background-color: transparentize($backdrop_headerbar_bg_color, 0.1);
     background-color: $backdrop_bg_color;
     color: $backdrop_text_color;
     box-shadow: none;
     transition: $backdrop_transition;
   }
 
-  // button { @extend %osd_button; }
   button.flat:hover {
       @include button(hover, $menu_color);
       border-color: $borders_color;
@@ -4103,14 +3997,10 @@ placessidebar {
     // will make the animation of the new bookmark row jump
     > revealer { padding: 0 14px; }
 
-    // &:selected { color: $selected_fg_color; }
-
     &:disabled { color: $insensitive_fg_color; }
 
     &:backdrop {
       color: $backdrop_text_color;
-
-      // &:selected { color: $backdrop_selected_fg_color; }
 
       &:disabled { color: $backdrop_insensitive_color; }
     }
@@ -4577,9 +4467,9 @@ decoration {
     background-color: $borders_color;
     border: solid 1px $borders_color;
     border-radius: 0;
-    box-shadow: inset 0 0 0 3px $headerbar_bg_color; //, inset 0 1px $top_hilight;
+    box-shadow: inset 0 0 0 3px $headerbar_bg_color;
 
-    &:backdrop { box-shadow: inset 0 0 0 3px $backdrop_headerbar_bg_color; /*, inset 0 1px $top_hilight;*/ }
+    &:backdrop { box-shadow: inset 0 0 0 3px $backdrop_headerbar_bg_color; }
   }
 }
 
@@ -4654,7 +4544,7 @@ button.titlebutton {
 
   &:backdrop {
     background-color: if($variant==light,lighten($c,5%),darken($c,5%));
-    color: $slate;//$backdrop_selected_fg_color;
+    color: $slate;
 
     &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
@@ -4761,8 +4651,6 @@ popover.emoji-picker {
       border-color: $selected_bg_color;
     }
   }
-
-  // scrolledwindow { border-bottom: 1px solid $borders_color; }
 }
 
 button.emoji-section {
@@ -4788,7 +4676,6 @@ button.emoji-section {
 
   &:checked {
     box-shadow: inset 0 2px $selected_bg_color;
-//    background-color: transparent;
   }
 
   label {
