@@ -7,3 +7,4 @@ project('Communitheme',
 subdir('icons')
 subdir('gnome-shell')
 subdir('gtk')
+subdir('sounds')
