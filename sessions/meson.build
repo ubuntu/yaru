@@ -33,3 +33,5 @@ custom_target('gsettings-override',
               build_by_default: true,
               install: true,
               install_dir: gsettings_override_dir)
+
+meson.add_install_script('meson/compile-schemas')
