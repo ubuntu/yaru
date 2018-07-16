@@ -20,6 +20,7 @@ styles = [
 
 theme_deps = []
 
+sassc = find_program('sassc')
 foreach style: styles
   theme_deps += custom_target('style-' + style,
                               input: '@0@.scss'.format(style),

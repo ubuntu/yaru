@@ -28,13 +28,15 @@ If you want to change the GDM look and point to the same stylesheet. You only ne
 update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/local/share/gnome-shell/theme/Communitheme/gnome-shell.css 15
 ```
 
+If you reboot, select the Communitheme session in GDM and you should be all right.
+
+### More granular changes
+
 Now everything should be in place. Select the GTK and sound theme via:
 ```bash
 gsettings set org.gnome.desktop.interface gtk-theme Communitheme
 gsettings set org.gnome.desktop.sound theme-name communitheme
 ```
-
-To select the GNOME Shell theme, you should try using the snap session after installing the snap in 18.04.
 
 The GTK2 and GTK3 files go into `/usr/local/share/themes/Communitheme`. The shell files go into `/usr/local/share/gnome-shell/theme/Communitheme`. You can edit the `gtk.css` and `gnome-shell.css` files in those folders directly for testing, or you can edit the SCSS files inside the folder you cloned from GitHub.
 

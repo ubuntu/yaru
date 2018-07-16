@@ -1,0 +1,15 @@
+##########################################
+# THEMENAME specific session for testers #
+##########################################
+
+[org.gnome.desktop.interface:THEMENAME]
+cursor-theme = "THEMENAME"
+icon-theme = "THEMENAME"
+gtk-theme = "THEMENAME"
+
+[org.gnome.desktop.sound:THEMENAME]
+theme-name = "THEMENAME"
+input-feedback-sounds = true
+
+[org.gnome.mutter:THEMENAME]
+center-new-windows = true
