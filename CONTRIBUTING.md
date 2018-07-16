@@ -4,6 +4,7 @@ Communitheme consists of one project with 3 distinct parts.
 
 - `gnome-shell` directory is the theme for GNOME Shell. This themes stuff like the calendar widget, the Ubuntu dock, the top panel, the login screen and more. It derives from upstream GNOME Shell theme.
 - `gtk` contains the themes GTK+2 and GTK+3. This specifies how applications like Files, Terminal, Ubuntu Software look. It derives from upstream Adwaita GTK+2 and GTK+3 themes.
+- `sound` contains all sound themes related information. Derives from 
 - `suru-icon-theme` contains all the icons, derives from the [Suru icon](https://snwh.org/suru) theme.
 
 ## Build and install themes from source
@@ -27,9 +28,10 @@ If you want to change the GDM look and point to the same stylesheet. You only ne
 update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/local/share/gnome-shell/theme/Communitheme/gnome-shell.css 15
 ```
 
-Now everything should be in place. Select the GTK theme via:
+Now everything should be in place. Select the GTK and sound theme via:
 ```bash
 gsettings set org.gnome.desktop.interface gtk-theme Communitheme
+gsettings set org.gnome.desktop.sound theme-name communitheme
 ```
 
 To select the GNOME Shell theme, you should try using the snap session after installing the snap in 18.04.
@@ -50,6 +52,28 @@ gsettings set org.gnome.desktop.interface gtk-theme Communitheme
 gsettings set org.gnome.desktop.interface icon-theme Humanity
 gsettings set org.gnome.desktop.interface icon-theme Communitheme
 ```
+
+### Testing desktop-login sound
+
+Type in a terminal `gnome-session-properties`. It'll give you the list of starting applications. Click on "add", and type the following informations in the dialog shown :
+
+- **Name:** `GNOME Login Sound`
+
+- **Command:** `/usr/bin/canberra-gtk-play --id="desktop-login" --description="GNOME Login"`
+
+- **Comment:** `Plays a sound whenever you log in`
+
+---
+
+### Testing from the desktop
+
+A quick and easy way to test if the sounds are installed correctly, is by triggering them from the desktop. Here's a few places that will trigger a notification:
+
+- Open a texteditor (like Gedit or even the terminal) and press backspace or delete
+- Open two tabs in Firefox and close the window
+- Adding / removing a USB drive
+- Clicking the volumeslider in the system menu in the top right corner
+
 
 ## Quick testing in the GTK Inspector
 

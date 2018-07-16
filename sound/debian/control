@@ -1,0 +1,21 @@
+Source: communitheme-sounds
+Section: misc
+Priority: optional
+Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
+Build-Depends: debhelper (>= 10.3),
+               meson,
+               sassc,
+Standards-Version: 4.1.1
+Homepage: https://github.com/ubuntu/communitheme-sounds
+
+Package: communitheme-sounds
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+Description: Sound theme for Ubuntu Community Theme
+ This is the theme that is shaped by the community on the Ubuntu hub.
+ .
+ This package contains the sound theme
+ .
+ More information if you want to follow the development on
+ https://community.ubuntu.com/c/desktop/theme-refresh.
