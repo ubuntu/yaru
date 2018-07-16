@@ -1,6 +1,6 @@
 theme_dir = join_paths(get_option('prefix'), 'share', 'sounds', meson.project_name())
 
-generate_theme = find_program('meson/generate_theme.py')
+generate_theme = find_program('../meson-helpers/replace_theme_name.py')
 custom_target('sound-index.theme',
               input: 'src/index.theme.in',
               output: 'index.theme',
