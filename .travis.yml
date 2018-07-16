@@ -4,4 +4,4 @@ services:
   - docker
 
 script:
-  - build/prepare-build-snap
+  - build-helpers/prepare-build-snap
