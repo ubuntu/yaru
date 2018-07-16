@@ -4,6 +4,6 @@ project('Communitheme',
         license : ['GPL3', 'CC BY-SA 4.0'],
         default_options: ['prefix=/usr'])
 
-subdir('icon-theme')
-subdir('gtk')
+subdir('icons')
 subdir('gnome-shell')
+subdir('gtk')
