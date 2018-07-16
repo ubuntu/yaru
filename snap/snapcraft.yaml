@@ -21,8 +21,8 @@ parts:
     override-build: |
       # First run normal build stage (the build stage of the meson plugin)
       snapcraftctl build
-      # Copy session file
-      cp ../../../snap/session $SNAPCRAFT_PART_INSTALL/
+      # Link session file
+      ln -s snap/session $SNAPCRAFT_PART_INSTALL/session
       # backward compability naming with symlinks and names
       mv $SNAPCRAFT_PART_INSTALL/share/icons/Communitheme $SNAPCRAFT_PART_INSTALL/share/icons/communitheme
       sed -i 's/Communitheme/communitheme/' $SNAPCRAFT_PART_INSTALL/share/icons/communitheme/*.theme
