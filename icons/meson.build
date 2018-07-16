@@ -6,7 +6,7 @@ install_subdir('Suru',
     exclude_files: ['index.theme', 'cursor.theme'],
 )
 
-replace_name = find_program('../build-helpers/replace_name.py')
+replace_name = find_program('../build-helpers/replace-name')
 themes_f = [
   'cursor.theme',
   'index.theme',

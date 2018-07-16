@@ -1,6 +1,6 @@
 gnomeshell_mode_dir = join_paths(get_option('datadir'), 'gnome-shell', 'modes')
 
-replace_name = find_program('../build-helpers/replace_name.py')
+replace_name = find_program('../build-helpers/replace-name')
 custom_target('shell-mode',
               input: 'mode.json.in',
               output: meson.project_name()+'.json',
@@ -21,7 +21,7 @@ custom_target('desktop-xsession',
               build_by_default: true,
               install: true,
               install_dir: xsession_dir)
-meson.add_install_script('meson/copy_to_wayland_session', meson.project_name())
+meson.add_install_script('meson/copy-to-wayland-session', meson.project_name())
 
 gsettings_override_dir = join_paths(get_option('datadir'), 'glib-2.0', 'schemas')
 custom_target('gsettings-override',

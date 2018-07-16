@@ -1,6 +1,6 @@
 theme_dir = join_paths(get_option('datadir'), 'themes', meson.project_name())
 
-replace_name = find_program('../build-helpers/replace_name.py')
+replace_name = find_program('../build-helpers/replace-name')
 custom_target('gtk-index.theme',
               input: 'src/index.theme.in',
               output: 'index.theme',
