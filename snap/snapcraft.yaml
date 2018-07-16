@@ -13,34 +13,19 @@ grade: stable
 confinement: strict
 
 parts:
-  session-script:
-    source: https://github.com/ubuntu/communitheme-snap-helpers.git
-    plugin: dump
-    stage: [session]
-  gnome-shell:
-    source: https://github.com/ubuntu/gnome-shell-communitheme.git
+  theme:
+    source: .
     plugin: meson
     build-packages: ["sassc"]
-    meson-parameters: ["--prefix=/"]
-    stage:
-      - share/gnome-shell
-  gtk:
-    source: https://github.com/ubuntu/gtk-communitheme.git
-    plugin: meson
-    build-packages: ["sassc"]
-    meson-parameters: ["--prefix=/"]
-  suru:
-    source: https://github.com/ubuntu/suru-icon-theme.git
-    plugin: meson
     meson-parameters: ["--prefix=/"]
     override-build: |
       # First run normal build stage (the build stage of the meson plugin)
       snapcraftctl build
-      # Copy and rename to `communitheme`.
-      cp -r "$SNAPCRAFT_PART_INSTALL/share/icons/Suru" "$SNAPCRAFT_PART_INSTALL/share/icons/communitheme"
-      sed -i 's/Suru/communitheme/' "$SNAPCRAFT_PART_INSTALL/share/icons/communitheme/cursor.theme"
-      sed -i 's/Suru/communitheme/' "$SNAPCRAFT_PART_INSTALL/share/icons/communitheme/index.theme"
-  sound:
-    source: https://github.com/ubuntu/communitheme-sounds.git
-    plugin: meson
-    meson-parameters: ["--prefix=/"]
+      # Copy session file
+      cp ../../../snap/session $SNAPCRAFT_PART_INSTALL/
+      # backward compability naming with symlinks and names
+      mv $SNAPCRAFT_PART_INSTALL/share/icons/Communitheme $SNAPCRAFT_PART_INSTALL/share/icons/communitheme
+      sed -i 's/Communitheme/communitheme/' $SNAPCRAFT_PART_INSTALL/share/icons/communitheme/*.theme
+      mv $SNAPCRAFT_PART_INSTALL/share/sounds/Communitheme $SNAPCRAFT_PART_INSTALL/share/sounds/communitheme
+      sed -i 's/Communitheme/communitheme/' $SNAPCRAFT_PART_INSTALL/share/sounds/communitheme/*.theme
+      mv $SNAPCRAFT_PART_INSTALL/share/gnome-shell/modes/Communitheme.json $SNAPCRAFT_PART_INSTALL/share/gnome-shell/modes/ubuntu-communitheme.json
