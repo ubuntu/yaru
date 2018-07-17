@@ -27,7 +27,9 @@ parts:
       ln -s snap/session $SNAPCRAFT_PART_INSTALL/session
       # backward compability naming with symlinks and names
       mv $SNAPCRAFT_PART_INSTALL/share/icons/Communitheme $SNAPCRAFT_PART_INSTALL/share/icons/communitheme
-      sed -i 's/Communitheme/communitheme/' $SNAPCRAFT_PART_INSTALL/share/icons/communitheme/*.theme
+      sed -i 's/Communitheme/communitheme/' $SNAPCRAFT_PART_INSTALL/share/icons/communitheme/cursor.theme
+      ln -s communitheme $SNAPCRAFT_PART_INSTALL/share/icons/Suru
+      sed -i 's/Communitheme/Suru/' $SNAPCRAFT_PART_INSTALL/share/icons/Suru/index.theme
       mv $SNAPCRAFT_PART_INSTALL/share/sounds/Communitheme $SNAPCRAFT_PART_INSTALL/share/sounds/communitheme
       sed -i 's/Communitheme/communitheme/' $SNAPCRAFT_PART_INSTALL/share/sounds/communitheme/*.theme
       mv $SNAPCRAFT_PART_INSTALL/share/gnome-shell/modes/Communitheme.json $SNAPCRAFT_PART_INSTALL/share/gnome-shell/modes/ubuntu-communitheme.json
