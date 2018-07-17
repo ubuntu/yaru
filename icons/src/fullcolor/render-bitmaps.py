@@ -23,7 +23,9 @@ import xml.sax
 import subprocess
 import argparse
 
-INKSCAPE = '/usr/bin/inkscape'
+
+INKSCAPE = ['/usr/bin/flatpak','run','org.inkscape.Inkscape','--shell']
+# INKSCAPE = ['/usr/bin/inkscape','--shell']
 OPTIPNG = '/usr/bin/optipng'
 MAINDIR = '../../Suru'
 # SRC = 'fullcolor'
@@ -57,7 +59,7 @@ def main(args, SRC):
             output = output[1:]
 
     def start_inkscape():
-        process = subprocess.Popen([INKSCAPE, '--shell'], bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        process = subprocess.Popen(INKSCAPE, bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         wait_for_prompt(process)
         return process
 
