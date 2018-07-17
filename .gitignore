@@ -6,12 +6,11 @@ build/
 debian/*debhelper*
 debian/files
 debian/*.substvars
-debian/gtk-communitheme/
-debian/gnome-shell-communitheme/
 debian/tmp/
-debian/ubuntu-communitheme-session/
-debian/communitheme-sounds/
-debian/suru-icon-theme/
+debian/gnome-shell-theme-communitheme/
+debian/gtk-theme-communitheme/
+debian/icon-theme-communitheme/
+debian/sound-theme-communitheme/
 
 # snapcraft build artefacts
 parts/
