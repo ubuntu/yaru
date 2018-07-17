@@ -59,7 +59,7 @@
 
   &.shrink .dash-item-container > StButton,
   &.dashtodock .dash-item-container > StButton {
-    padding: 2px 4px !important; // 1px 2px;
+    padding: 2px 4px !important;
   }
 
   &.extended {
@@ -186,12 +186,27 @@
   }
 
   .show-apps {
-     &:active, &:checked {
-       .overview-icon {
-         background-color: $base_active_color;
-         box-shadow: none;
-       }
-     }
+    // Show apps icon
+    & {
+      // reset
+      & .show-apps-icon,
+      &:checked .show-apps-icon,
+      &:focus .show-apps-icon {
+        color: transparent !important;
+        background-color: transparent !important;
+        transition-duration: 0ms !important;
+      }
+    }
+
+    &,
+    &:hover, &:active, &:checked {
+      .show-apps-icon {
+        background-image: url("ubuntu-appgrid-icon.svg") !important;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain !important;
+      }
+    }
   }
 
   .app-well-app {
