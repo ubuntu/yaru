@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE = 1
+
+%:
+	dh $@ --buildsystem=meson
+
+override_dh_install:
+	dh_install
+	rm -r debian/tmp/usr/share/glib-2.0
+	rm -r debian/tmp/usr/share/xsessions
+	rm -r debian/tmp/usr/share/wayland-sessions
+
+override_dh_missing:
+	dh_missing --fail-missing

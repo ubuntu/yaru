@@ -1,8 +1,0 @@
-#!/usr/bin/make -f
-#export DH_VERBOSE = 1
-
-%:
-	dh $@ --buildsystem=meson -- --fail-missing
-
-override_dh_installgsettings:
-	dh_installgsettings --priority=15

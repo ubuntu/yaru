@@ -4,7 +4,7 @@ set -e
 
 if [ "$1" = configure ]; then
   update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css \
-    gdm3.css /usr/share/gnome-shell/theme/communitheme/gnome-shell.css 15
+    gdm3.css /usr/share/gnome-shell/theme/Communitheme/gnome-shell.css 10
 fi
 
 #DEBHELPER#
