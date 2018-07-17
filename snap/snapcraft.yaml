@@ -19,6 +19,8 @@ parts:
     build-packages: ["sassc"]
     meson-parameters: ["--prefix=/"]
     override-build: |
+      # Rename the theme name to previous name for backward compatibility
+      sed -i 's/Communitheme/Communitheme/' meson.build
       # First run normal build stage (the build stage of the meson plugin)
       snapcraftctl build
       # Link session file
