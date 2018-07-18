@@ -11,8 +11,6 @@ More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-t
 
 ![widgetfactorylight](https://i.imgur.com/h1nKYKi.png)
 
-![Screenshot02]()
-
 It contains:
  * a GNOME Shell theme
  * a GTK2 and GTK3 theme
