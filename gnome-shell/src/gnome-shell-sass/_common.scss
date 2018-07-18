@@ -1,0 +1,2228 @@
+//This is the RIGHT PLACE to edit the stylesheet
+
+//let's start by telling people not to edit the generated CSS:
+$cakeisalie: "This stylesheet is generated, DO NOT EDIT";
+/* #{$cakeisalie} */
+$panel-corner-radius: 0; // 6px;
+
+$panel-alpha-value: 0.6;
+$panel_opaque_value: 0.0;
+
+$dash-alpha-value: 0.6;
+$dash-opaque-alpha-value: $panel_opaque_value;
+
+$popover-alpha-value: 0.025;
+
+$small_radius: 4px;
+$medium_radius: 6px;
+$large_radius: 12px;
+
+/* Copyright 2009, 2015 Red Hat, Inc.
+ *
+ * Portions adapted from Mx's data/style/default.css
+ *   Copyright 2009 Intel Corporation
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms and conditions of the GNU Lesser General Public License,
+ * version 2.1, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+
+/* GLOBALS */
+$font-size: 11;
+$font-family: Ubuntu, Cantarell, Sans-Serif;
+$_popover_bg_color: transparentize($osd_bg_color, $popover-alpha-value);
+
+stage {
+  font-family: $font-family;
+  @include fontsize($font-size);
+  color: $fg_color;
+}
+
+/* WIDGETS */
+
+/* Buttons */
+.button {
+  border-radius: $small_radius;
+  border-width: 1px;
+  border-bottom-style: none;
+  min-height: 22px; // make just a little taller
+  padding: 4px 32px;
+  @include button(normal);
+  &:active { @include button(active); }
+  &:focus { @include button(focus); }
+  &:hover { @include button(hover); }
+  &:insensitive { @include button(insensitive); }
+}
+
+.modal-dialog-linked-button {
+  border-right-width: 1px;
+  $c: $light_button_bg_color;
+  $tc: $dark_fg_color;
+  @include button(normal, $c, $tc);
+  &:active { @include button(active, $c, $tc);}
+  &:focus { @include button(focus, $c, $tc);}
+  &:hover { @include button(hover, $c, $tc);}
+  &:focus:hover { @include button(focus-hover, $c, $tc); }
+  &:insensitive { @include button(insensitive, $c, $tc); }
+  &:hover, &:focus:hover {background-color: $light_base_hover_color;}
+  &:active, &:focus:active {background-color: $light_base_active_color;}
+  padding: 12px;
+  border-top: 1px solid $light_borders_color;
+
+  &:first-child {
+    border-radius: 0px 0px 0px $medium_radius;
+  }
+  &:last-child {
+    border-right-width: 0px;
+    border-radius: 0px 0px $medium_radius 0px;
+  }
+  &:first-child:last-child {
+    border-right-width: 0px;
+    border-radius: 0px 0px $medium_radius $medium_radius;
+  }
+}
+
+/* Entries */
+StEntry {
+  border-radius: $small_radius;
+  border-width: 1px;
+  min-height: 22px;
+  padding: 4px;
+
+  @include entry(normal);
+  &:focus { @include entry(focus);}
+  &:insensitive { @include entry(insensitive);}
+
+  selection-background-color: $selected_bg_color;
+  selected-color: $selected_fg_color;
+  StIcon.capslock-warning {
+    icon-size: 16px;
+    warning-color: $warning_color;
+    padding: 0 4px;
+  }
+}
+
+
+/* Scrollbars */
+
+StScrollView {
+  &.vfade { -st-vfade-offset: 68px; }
+  &.hfade { -st-hfade-offset: 68px; }
+}
+
+StScrollBar {
+  padding: 0;
+
+  StScrollView & {
+    min-width: 14px;
+    min-height: 14px;
+  }
+
+  StBin#trough {
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  StButton#vhandle, StButton#hhandle {
+    border-radius: 8px;
+    background-color: mix($fg_color, $bg_color, 60%);
+    margin: 3px;
+    &:hover { background-color: mix($fg_color, $bg_color, 80%); }
+    &:active { background-color: $selected_bg_color; }
+  }
+}
+
+/* Slider */
+
+.slider {
+  $_bg: $indication_bg_color;
+  $_inactive_bg: $inactive_indication_bg_color;
+  height: 1em;
+  -slider-height: 0.2em; //increase the height because of the border removal
+  -slider-background-color:  $_inactive_bg;//background of the trough
+  -slider-active-background-color: $_bg; //active trough fill
+  -slider-active-border-color: $_bg; //active trough border
+  -slider-border-width: 0px; //remove the border for a more flat trough
+  -slider-handle-radius: 8px;
+  color: $fg_color; //Color of the knob/slider-handle
+}
+
+/* Check Boxes */
+
+.check-box {
+  StBoxLayout { spacing: .8em; }
+  StBin {
+    width: 24px;
+    height: 22px;
+    background-image: url("checkbox-off.svg");
+  }
+  &:focus StBin { background-image: url("checkbox-off-focused.svg"); }
+  &:checked StBin { background-image: url("checkbox.svg"); }
+  &:focus:checked StBin { background-image: url("checkbox-focused.svg"); }
+}
+
+/* Switches */
+.toggle-switch {
+  width: 65px;
+  height: 22px;
+  background-size: contain;
+  background-position: right center;
+}
+
+  @each $v in us, intl {
+    .toggle-switch-#{$v} {
+      background-image: url("toggle-off-#{$v}.svg");
+      &:checked { background-image: url("toggle-on-#{$v}.svg"); }
+    }
+  }
+
+/* links */
+.shell-link {
+  color: $link_color;
+  &:hover { color: lighten($link_color,10%); }
+}
+
+/* Modal Dialogs */
+
+.headline { font-size: 110%; }
+.lightbox { background-color: black; }
+.flashspot { background-color: white; }
+
+.modal-dialog {
+  border-radius: $medium_radius;
+  @extend %dialog_window;
+
+  .modal-dialog-content-box {
+    padding: 24px;
+  }
+  .run-dialog-entry {
+    width: 20em;
+    margin-bottom: 6px;
+
+    &:focus { border-color: $selected_bg_color; }
+  }
+  .run-dialog-error-box {
+    padding-top: 16px;
+    spacing: 6px;
+  }
+  .run-dialog-button-box { padding-top: 1em; }
+  .run-dialog-label {
+    @include fontsize($font-size + 1.1);
+    font-weight: normal;
+    color: $dark_subtext_color;
+    padding-bottom: .4em;
+  }
+}
+
+  .mount-dialog-subject,
+  .end-session-dialog-subject { //this should be a generic header class
+    @include fontsize($font-size * 1.3);
+  }
+
+/* Message Dialog */
+  .message-dialog-main-layout {
+    padding: 12px 20px 0;
+    spacing: 12px;
+  }
+
+  .message-dialog-content {
+    max-width: 28em;
+    spacing: 20px;
+  }
+
+  .message-dialog-icon {
+    min-width: 48px;
+    icon-size: 48px;
+  }
+
+  .message-dialog-title {
+    font-weight: bold;
+  }
+
+  .message-dialog-subtitle {
+    color: $dark_subtext_color;
+    font-weight: normal;
+  }
+
+/* End Session Dialog */
+.end-session-dialog {
+  spacing: 42px;
+  border: 1px solid $osd_borders_color;
+}
+
+  .end-session-dialog-list {
+      padding-top: 20px;
+  }
+
+  .end-session-dialog-layout {
+    padding-left: 17px;
+    &:rtl { padding-right: 17px; }
+  }
+
+  .end-session-dialog-description {
+    width: 28em;
+    padding-bottom: 10px;
+    &:rtl {
+      text-align: right;
+    }
+  }
+
+  .end-session-dialog-warning {
+    width: 28em;
+    color: $warning_color;
+    padding-top: 6px;
+    &:rtl {
+      text-align: right;
+    }
+  }
+
+  .end-session-dialog-logout-icon {
+    border-radius: $small_radius;
+    width: 48px;
+    height: 48px;
+    background-size: contain;
+  }
+
+  .end-session-dialog-shutdown-icon {
+    color: $dark_fg_color;
+    width: 48px;
+    height: 48px;
+  }
+
+  .end-session-dialog-inhibitor-layout {
+    spacing: 16px;
+    max-height: 200px;
+    padding-right: 65px;
+    padding-left: 65px;
+  }
+
+  .end-session-dialog-session-list,
+  .end-session-dialog-app-list {
+    spacing: 1em;
+  }
+
+  .end-session-dialog-list-header {
+    font-weight: bold;
+    &:rtl { text-align: right; }
+  }
+
+  .end-session-dialog-app-list-item,
+  .end-session-dialog-session-list-item {
+    spacing: 1em;
+  }
+
+  .end-session-dialog-app-list-item-name,
+  .end-session-dialog-session-list-item-name {
+    font-weight: bold;
+  }
+
+  .end-session-dialog-app-list-item-description {
+    color: $dark_fg_color;
+    font-size: 10pt;
+  }
+
+/* ShellMountOperation Dialogs */
+.shell-mount-operation-icon { icon-size: 48px; }
+
+  .mount-dialog {
+    spacing: 24px;
+
+    .message-dialog-title {
+      padding-top: 10px;
+      padding-left: 17px;
+      padding-bottom: 6px;
+      max-width: 34em;
+    }
+
+    .message-dialog-title:rtl {
+      padding-left: 0px;
+      padding-right: 17px;
+    }
+
+    .message-dialog-body {
+      padding-left: 17px;
+      width: 28em;
+    }
+
+    .message-dialog-body:rtl {
+      padding-left: 0px;
+      padding-right: 17px;
+    }
+  }
+
+  .mount-dialog-app-list {
+    max-height: 200px;
+    padding-top: 24px;
+    padding-left: 49px;
+    padding-right: 32px;
+  }
+
+  .mount-dialog-app-list:rtl {
+    padding-right: 49px;
+    padding-left: 32px;
+  }
+
+  .mount-dialog-app-list-item {
+    color: $caption_fg_color;
+    &:hover { color: $fg_color; }
+    &:ltr { padding-right: 1em; }
+    &:rtl { padding-left: 1em; }
+  }
+
+  .mount-dialog-app-list-item-icon {
+    &:ltr { padding-right: 17px; }
+    &:rtl { padding-left: 17px; }
+  }
+
+  .mount-dialog-app-list-item-name {
+    font-size: 10pt;
+  }
+
+
+/* Password or Authentication Dialog */
+
+.prompt-dialog {
+  //this is the width of the entire modal popup
+  @extend %dialog_window;
+  width: 34em;
+
+  .message-dialog-main-layout { spacing: 24px; padding: 10px; }
+  .message-dialog-content { spacing: 16px; }
+  .message-dialog-title { color: $dark_subtext_color; }
+}
+
+  .prompt-dialog-description:rtl {
+    text-align: right;
+  }
+
+  .prompt-dialog-password-box {
+    spacing: 1em;
+    padding-bottom: 1em;
+  }
+
+  .prompt-dialog-error-label {
+    font-size: 10pt;
+    color: $error_color;
+    padding-bottom: 8px;
+  }
+
+  .prompt-dialog-info-label {
+    font-size: 10pt;
+    padding-bottom: 8px;
+  }
+
+  .hidden {
+    color: rgba(0,0,0,0);
+  }
+
+  .prompt-dialog-null-label {
+    font-size: 10pt;
+    padding-bottom: 8px;
+  }
+
+
+/* Polkit Dialog */
+
+.polkit-dialog-user-layout {
+  padding-left: 10px;
+  spacing: 10px;
+  &:rtl {
+    padding-left: 0px;
+    padding-right: 10px;
+  }
+}
+
+  .polkit-dialog-user-root-label {
+    color: $warning_color;
+  }
+
+  .polkit-dialog-user-icon {
+    border-radius: $small_radius;
+    background-size: contain;
+    width: 48px;
+    height: 48px;
+  }
+
+/* Audio selection dialog */
+.audio-device-selection-dialog {
+  // TODO: where is this?
+  @extend %dialog_window;
+  spacing: 30px;
+}
+
+  .audio-selection-content {
+    spacing: 20px;
+    padding: 24px;
+  }
+
+  .audio-selection-title {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .audio-selection-box {
+    spacing: 20px;
+  }
+
+  .audio-selection-device {
+    border-radius: 12px;
+    &:hover, &:focus:hover {background-color: $light_base_hover_color;}
+    &:active, &:focus:active {background-color: $light_base_active_color;}
+  }
+
+  .audio-selection-device-box {
+    padding: 20px;
+    spacing: 20px;
+  }
+
+  .audio-selection-device-icon {
+    icon-size: 64px;
+  }
+
+/* Access Dialog */
+.access-dialog {
+  @extend %dialog_window;
+  spacing: 30px;
+}
+
+/* Geolocation Dialog */
+.geolocation-dialog {
+  @extend %dialog_window;
+  spacing: 30px;
+}
+
+/* Extension Dialog */
+.extension-dialog {
+  @extend %dialog_window;
+  .message-dialog-main-layout { spacing: 24px; padding: 10px; }
+  .message-dialog-title { color: $dark_fg_color; }
+}
+
+/* Inhibit-Shortcuts Dialog */
+.inhibit-shortcuts-dialog {
+  @extend %dialog_window;
+  spacing: 30px;
+}
+
+/* Network Agent Dialog */
+
+.network-dialog-secret-table {
+  spacing-rows: 15px;
+  spacing-columns: 1em;
+}
+
+.keyring-dialog-control-table {
+  spacing-rows: 15px;
+  spacing-columns: 1em;
+}
+
+/* Popovers/Menus */
+
+.popup-menu {
+  min-width: 15em;
+  $bc: $osd_borders_color;
+  $bg: $osd_bg_color;
+
+  .popup-menu-arrow { } //defined globally in the TOP BAR
+  .popup-sub-menu {
+    background-color: transparentize(darken($base_active_color,55%), $popover-alpha-value);
+    box-shadow: inset 0 -1px 0px $bc;
+  }
+
+  .popup-menu-content { padding: 1em 0em; }
+  .popup-menu-item {
+    spacing: 12px;
+    border-top: 1px solid transparent; // to avoid popping
+
+    &:ltr { padding: .4em 1.75em .4em 0em; }
+    &:rtl { padding: .4em 0em .4em 1.75em; }
+    &:checked {
+      //less transparency than $osd_borders_color to match the bottom color of the submenu
+      box-shadow: inset 0 -1px 0px transparentize($fg_color, 0.855);
+      background-color: transparent;
+      border-top-color: transparent;
+      font-weight: bold;
+    }
+    &.selected { background-color: $base_hover_color; color: $fg_color; }
+    &:active {
+      background-color: $base_active_color;
+      color: $active_fg_color;
+      box-shadow: none;
+    }
+    &:insensitive { color: transparentize($fg_color,.5); }
+  }
+
+  .popup-inactive-menu-item { //all icons and other graphical elements
+    color: $fg_color;
+
+    &:insensitive { color: transparentize($fg_color,0.5); }
+  }
+  &.panel-menu {
+    -boxpointer-gap: 4px;
+    margin-bottom: 1.75em;
+  }
+}
+
+  .popup-menu-ornament {
+    text-align: right;
+    width: 1.2em;
+  }
+
+  .popup-menu-boxpointer,
+  .candidate-popup-boxpointer {
+    -arrow-border-radius: $medium_radius;
+    -arrow-background-color: $_popover_bg_color;
+    -arrow-border-width: 1px;
+    -arrow-border-color: $osd_borders_color;
+    -arrow-base: 24px;
+    -arrow-rise: 11px;
+    -arrow-box-shadow: 0 1px 3px black; //dreaming. bug #689995
+  }
+
+  .popup-separator-menu-item {
+    height: 1px; //not really the whole box
+    margin: 6px 64px;
+    background-color: transparent;
+    border-color: $osd_borders_color;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+
+
+// Background menu
+.background-menu { -boxpointer-gap: 4px; -arrow-rise: 0px; }
+
+/* fallback menu
+- odd thing for styling App menu when apparently not running under shell. Light Adwaita styled
+  app menu inside the main app window itself rather than the top bar
+*/
+
+
+/* OSD */
+.osd-window {
+  text-align: center;
+  font-weight: bold;
+  spacing: 1em;
+  margin: 32px;
+  min-width: 64px;
+  min-height: 64px;
+  @extend %osd-panel;
+
+  .osd-monitor-label { font-size: 3em; }
+  .level {
+    $c: $inactive_indication_bg_color;
+    height: 0.3em;
+    border-radius: 0.3em;
+    background-color: $c;
+    color: $c;
+  }
+  .level-bar {
+    background-color: $indication_bg_color;
+    border-radius: 0.3em;
+  }
+}
+
+/* Pad OSD */
+.pad-osd-window {
+    padding: 32px;
+    background-color: transparentize(black, 0.2);
+
+  .pad-osd-title-box { spacing: 12px; }
+  .pad-osd-title-menu-box { spacing: 6px; }
+}
+
+.combo-box-label {
+    width: 15em;
+}
+
+/* App Switcher */
+.switcher-popup {
+  padding: 8px;
+  spacing: 16px;
+}
+
+.osd-window,
+.resize-popup {
+  @extend %osd-panel;
+}
+
+.switcher-list {
+  // borders and padding taking from %osd-panel
+  @extend %osd-panel;
+  border-radius: $large_radius;
+  padding: 12px;
+}
+
+  .switcher-list-item-container { spacing: 8px;  }
+
+  .switcher-list .item-box {
+    padding: 8px;
+    border-radius: $small_radius;
+    color: darken($fg_color,30%);
+  }
+
+  .switcher-list .item-box:outlined {
+    padding: 8px;
+  }
+
+  .switcher-list .item-box:selected {
+    background-color: $base_active_color;
+    border-radius: $medium_radius;
+    color: $fg_color;
+  }
+
+  .switcher-list .thumbnail-box {
+    padding: 2px;
+    spacing: 4px;
+  }
+
+  .switcher-list .thumbnail {
+    width:  256px;
+  }
+
+  .switcher-list .separator {
+    width: 1px;
+    background: $light_borders_color;
+  }
+
+  .switcher-arrow {
+    border-color: rgba(0,0,0,0);
+    color: transparentize($dark_fg_color,0.2);
+    &:highlighted {
+      color: $fg_color;
+    }
+  }
+
+  .input-source-switcher-symbol {
+    font-size: 34pt;
+    width: 96px;
+    height: 96px;
+  }
+
+/* Window Cycler */
+.cycler-highlight { border: 5px solid $selected_bg_color; }
+
+/* Workspace Switcher */
+.workspace-switcher-group { padding: 12px; }
+
+  .workspace-switcher-container {
+    @extend %osd-panel;
+    padding: 5px;
+    border-radius: $medium_radius;
+  }
+
+  .workspace-switcher {
+    background: transparent;
+    border: 0px;
+    border-radius: 0px;
+    padding: 0px;
+    spacing: 8px;
+  }
+
+  .ws-switcher-active-up, .ws-switcher-active-down {
+    height: 50px;
+    background-color: transparentize($fg_color, 0.60);
+    color: $selected_fg_color;
+    background-size: 32px;
+    border-radius: $medium_radius;
+  }
+
+  .ws-switcher-active-up { background-image: url("ws-switch-arrow-up.svg"); }
+  .ws-switcher-active-down {background-image: url("ws-switch-arrow-down.svg"); }
+
+  .ws-switcher-box {
+    height: 50px;
+    border: 1px solid transparentize($osd_fg_color,0.9);
+    background: transparentize($osd_fg_color,0.9);
+    border-radius: $medium_radius;
+  }
+
+%osd-panel {
+  color: $osd_fg_color;
+  background-color: $_popover_bg_color;
+  border: 1px solid $osd_borders_color;
+  border-radius: $large_radius;
+  padding: 12px;
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
+}
+
+%dialog_window {
+  $dialog_bg_color: transparentize($light_bg_color, $popover-alpha-value);
+  color: $dark_fg_color;
+  background-color: $dialog_bg_color;
+  border: 1px solid $light_borders_color;
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
+
+  StEntry {
+    @extend %light_entry;
+  }
+}
+
+/* Tiled window previews */
+.tile-preview {
+  background-color: transparentize(white, .55);
+  border: 2px solid transparentize(white, .75);
+}
+
+  .tile-preview-left.on-primary {
+    border-radius: $panel-corner-radius 0 0 0;
+  }
+
+  .tile-preview-right.on-primary {
+    border-radius: 0 $panel-corner-radius 0 0;
+  }
+
+  .tile-preview-left.tile-preview-right.on-primary {
+    border-radius: $panel-corner-radius $panel-corner-radius 0 0;
+  }
+
+/* TOP BAR */
+
+#panel {
+  $_fg: darken($panel_fg_color, 5%);
+  background-color: transparentize($panel_bg_color, $panel-alpha-value);
+
+  /* transition from solid to transparent */
+  transition-duration: 500ms;
+  font-weight: 450;
+  height: 1.86em;
+
+  &.unlock-screen,
+  &.login-screen,
+  &.lock-screen {
+    background-color: transparent;
+  }
+
+  #panelLeft, #panelCenter { // spacing between activities<>app menu and such
+    spacing: 4px;
+  }
+
+  .panel-corner {
+    -panel-corner-radius: $panel-corner-radius;
+    -panel-corner-background-color: rgba(0, 0, 0, 0.35);
+    -panel-corner-border-width: 2px;
+    -panel-corner-border-color: transparent;
+
+    &:active, &:overview, &:focus {
+      -panel-corner-border-color: lighten($selected_bg_color,5%);
+    }
+
+    &.lock-screen, &.login-screen, &.unlock-screen {
+      -panel-corner-radius: 0;
+      -panel-corner-background-color: transparent;
+      -panel-corner-border-color: transparent;
+    }
+  }
+
+  .panel-button {
+    -natural-hpadding: 12px;
+    -minimum-hpadding: 6px;
+    font-weight: 450;
+    color: $_fg;
+    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+    transition-duration: 100ms;
+
+    .app-menu-icon {
+      margin-left: 4px;
+      margin-right: 4px;
+      //dimensions of the icon are hardcoded
+    }
+
+    .system-status-icon,
+    .app-menu-icon > StIcon,
+    .popup-menu-arrow {
+      icon-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    &:hover {
+      color: $hover_fg_color;
+      text-shadow: 0px 1px 4px rgba(0, 0, 0, 1);
+
+      .system-status-icon,
+      .app-menu-icon > StIcon,
+      .popup-menu-arrow {
+        icon-shadow: 0px 1px 4px rgba(0, 0, 0, 1);
+      }
+    }
+
+    &:active, &:overview, &:focus, &:checked {
+      // Trick due to St limitations. It needs a background to draw
+      // a box-shadow
+      background-color: rgba(0, 0, 0, 0.01);
+      box-shadow: inset 0px -2px $selected_bg_color;
+      color: lighten($_fg,10%);
+
+      & > .system-status-icon {
+        icon-shadow: 0px 1px 4px rgba(0, 0, 0, 1);
+      }
+    }
+
+    .system-status-icon { icon-size: 1.09em; padding: 0 5px; }
+    .unlock-screen &,
+    .login-screen &,
+    .lock-screen & {
+      color: lighten($_fg, 10%);
+      &:focus, &:hover, &:active { color: lighten($_fg, 10%); }
+    }
+  }
+
+  .panel-status-indicators-box,
+  .panel-status-menu-box {
+    spacing: 2px;
+  }
+
+  // spacing between power icon and (optional) percentage label
+  .power-status.panel-status-indicators-box {
+    spacing: 0;
+  }
+
+  .screencast-indicator { color: $warning_color; }
+
+  &.solid {
+    background-color: transparentize($panel_bg_color, $panel_opaque_value);
+
+    /* transition from transparent to solid */
+    box-shadow: none;
+    transition-duration: 500ms;
+
+    .panel-corner {
+      -panel-corner-background-color: black;
+    }
+
+    .panel-button {
+      color: $_fg;
+      text-shadow: none;
+
+      &:hover, &:active, &:overview, &:focus, &:checked {
+        color: $hover_fg_color;
+      }
+    }
+
+    .system-status-icon,
+    .app-menu-icon > StIcon,
+    .popup-menu-arrow {
+      icon-shadow: none;
+    }
+  }
+}
+
+  // calendar popover
+  #calendarArea {
+    padding: 0.75em 1.0em;
+  }
+
+  .calendar {
+    margin-bottom: 1em;
+  }
+
+    .calendar,
+    .datemenu-today-button,
+    .datemenu-displays-box,
+    .message-list-sections {
+      margin: 0 1.5em;
+    }
+
+    .datemenu-calendar-column { spacing: 0.5em; }
+    .datemenu-displays-section { padding-bottom: 3em; }
+    .datemenu-displays-box { spacing: 1em; }
+
+    .datemenu-calendar-column {
+      border: 0 solid $osd_borders_color;
+      &:ltr { border-left-width: 1px; }
+      &:rtl { border-right-width: 1px; }
+    }
+
+    .datemenu-today-button,
+    .world-clocks-button,
+    .weather-button,
+    .events-section-title {
+      border-radius: $small_radius;
+      padding: .4em;
+    }
+
+    .message-list-section-list:ltr {
+      padding-left: .4em;
+    }
+
+    .message-list-section-list:rtl {
+      padding-right: .4em;
+    }
+
+    .datemenu-today-button,
+    .world-clocks-button,
+    .weather-button,
+    .events-section-title {
+      &:hover,&:focus { background-color: $base_hover_color; }
+      &:active {
+        color: $active_fg_color;
+        background-color: $base_active_color;
+      }
+    }
+
+    .world-clocks-button {
+      font-size: 10pt;
+    }
+
+    .weather-button {
+      color: $caption_fg_color;
+    }
+
+    .datemenu-today-button .date-label {
+      font-size: 1.5em;
+      font-weight: 300;
+    }
+
+    .world-clocks-header,
+    .weather-header,
+    .events-section-title {
+      color: $fg_color;
+      font-weight: 450;
+      font-size: 110%;
+    }
+
+    .world-clocks-grid {
+      spacing-rows: 0.4em;
+    }
+
+    .weather-box {
+      spacing: 0.4em;
+    }
+
+    .calendar-month-label {
+      color: $subheader_fg_color;
+      font-weight: 450;
+      font-size: 110%;
+      padding: 8px 0;
+      &:focus {}
+    }
+
+    .pager-button {
+      transition-duration: 100ms;
+      color: $fg_color;
+      background-color: transparent;
+      width: 32px;
+      border-radius: $small_radius;
+      &:hover, &:focus { background-color: $base_hover_color; }
+      &:active { background-color: $base_active_color; }
+    }
+
+      .calendar-change-month-back { //arrow back
+        background-image: url("calendar-arrow-left.svg");
+        &:rtl { background-image: url("calendar-arrow-right.svg"); }
+      }
+      .calendar-change-month-forward { //arrow foreward
+        background-image: url("calendar-arrow-right.svg");
+        &:rtl { background-image: url("calendar-arrow-left.svg"); }
+      }
+
+    .calendar-day-base {
+      font-size: 80%;
+      font-weight: 500;
+      text-align: center;
+      width: 2.4em; height: 2.4em;
+      padding: 0.1em;
+      margin: 2px;
+      border-radius: $small_radius;
+      &:hover,&:focus { background-color: lighten($bg_color,5%); }
+      &:selected {
+        color: white;
+        background-color: transparent;
+        border-radius: $small_radius;
+        border: 2px solid $selected_bg_color;
+        margin: 0;
+        &:hover {background-color: $base_hover_color;}
+      }
+
+      &.calendar-day-heading {  //day of week heading
+        color: $inactive_element_color;
+        margin-top: 1em;
+        font-size: 70%;
+      }
+    }
+      .calendar-day { //border collapse hack - see calendar.js
+        border-width: 2px;
+      }
+      .calendar-day-top { border-top-width: 1px; }
+      .calendar-day-left { border-left-width: 1px; }
+      .calendar-work-day {
+
+      }
+      .calendar-nonwork-day {
+        color: $insensitive_fg_color;
+      }
+      .calendar-today {
+        font-weight: bold;
+        background-color: lighten($bg_color,13%);
+      }
+      .calendar-day-with-events {
+        color: lighten($fg_color,10%);
+        font-weight: bold;
+        background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
+      }
+      .calendar-other-month-day {
+        color: transparentize($fg_color,0.85);
+        opacity: 0.5;
+      }
+      .calendar-week-number {
+        font-size: 70%;
+        font-weight: 700;
+        width: 2.3em; height: 1.8em;
+        border-radius: 2px;
+        padding: 0.5em 0 0;
+        margin: 6px;
+        background-color: transparentize($fg_color,0.6);
+        color: $bg_color;
+      }
+
+      /* Message list */
+      .message-list {
+        width: 31.5em;
+      }
+
+      .message-list-clear-button.button {
+        @include button(undecorated);
+        border-color: lighten($bg_color,10%);
+        &:hover,&:focus { @include button(hover); }
+        &:active { @include button(undecorated-active); color: darken($fg_color,25%);}
+        &:insensitive { @include button(undecorated); border-color: transparentize(darken($fg_color,40%),0.8);}
+        margin: 1.5em 1.5em 0;
+      }
+
+        .message-list-sections {
+          spacing: 1em;
+        }
+
+        .message-list-section,
+        .message-list-section-list {
+          spacing: 0.4em;
+        }
+
+        .message {
+          background-color: transparentize($osd_bg_color, 0.7);
+          border: 1px solid $osd_borders_color;
+          &:hover, &:focus { background-color: opacify(mix($osd_bg_color, $base_hover_color), 1); }
+          &:active { background-color: $base_active_color; }
+          &:active { .message-title, .message-content { color: $active_fg_color; } }
+          border-radius: $small_radius;
+        }
+
+          .message-icon-bin {
+            padding: 0.68em 0.2em 0.68em 0.68em;
+            &:rtl { padding: 0.68em 0.68em 0.68em 0.2em; }
+          }
+
+          .message-icon-bin > StIcon {
+            color: $inactive_element_color;
+            icon-size: 1.09em;
+            -st-icon-style: symbolic;
+          }
+
+          .message-secondary-bin {
+            padding: 0 0.82em;;
+          }
+
+          .message-secondary-bin > .event-time {
+            color: $inactive_element_color;
+            font-size: 0.7em;
+            /* HACK: the label should be baseline-aligned with a 1em label,
+                     fake this with some bottom padding */
+            padding-bottom: 0.13em;
+          }
+
+          .message-secondary-bin > StIcon {
+            icon-size: 1.09em;
+          }
+
+          .message-title {
+            color: $subheader_fg_color;
+          }
+
+          .message-content {
+            color: $caption_fg_color;
+            padding: 10px;
+          }
+
+          .message-media-control {
+            padding: 12px;
+            color: $caption_fg_color;
+
+            &:last-child:ltr { padding-right: 18px; }
+            &:last-child:rtl { padding-left: 18px; }
+            &:hover { color: $fg_color; }
+            &:insensitive { color: $inactive_element_color; }
+          }
+
+          .media-message-cover-icon {
+            icon-size: 48px !important;
+            &.fallback {
+              color: lighten($bg_color,10%);
+              background-color: $bg_color;
+              border: 2px solid $bg_color;
+              border-radius: 2px;
+              icon-size: 16px;
+              padding: 8px; }
+          }
+
+
+  // a little unstructured mess:
+
+  .system-switch-user-submenu-icon.user-icon {
+    icon-size: 20px;
+    padding: 0 2px;
+  }
+  .system-switch-user-submenu-icon.default-icon {
+    icon-size: 16px;
+    padding: 0 4px;
+  }
+
+  #appMenu {
+    spinner-image: url("resource:///org/gnome/shell/theme/process-working.svg");
+    spacing: 4px;
+
+    .label-shadow { color: transparent; }
+  }
+
+  .aggregate-menu {
+    min-width: 21em;
+    .popup-menu-icon { padding: 0 4px; }
+    .popup-sub-menu .popup-menu-item :first-child {
+      &:ltr { /* 12px spacing + 2*4px padding */
+              padding-left: 20px; margin-left: 1.09em; }
+      &:rtl { /* 12px spacing + 2*4px padding */
+              padding-right: 20px; margin-right: 1.09em; }
+    }
+  }
+
+  .system-menu-action {
+    color: $fg_color;
+    transition-duration: 200ms;
+    border-radius: $small_radius; /* wish we could do 50% */
+    padding: 13px;
+    border: none;
+
+    &:hover, &:focus {
+      color: $fg_color;
+      background-color: $base_hover_color;
+      border: none;
+      padding: 13px;
+    }
+
+    &:active { color: $active_fg_color; border: none; background-color: $base_active_color; }
+
+    & > StIcon { icon-size: 16px; }
+  }
+
+//Activities Ripples
+.ripple-box {
+  width: 52px;
+  height: 52px;
+  background-image: url("corner-ripple-ltr.svg");
+  background-size: contain;
+}
+
+.ripple-box:rtl {
+  background-image: url("resource:///org/gnome/shell/theme/corner-ripple-rtl.png");
+}
+
+// not really top bar only
+.popup-menu-arrow { width: 16px; height: 16px; }
+.popup-menu-icon { icon-size: 1.09em; }
+
+//close buttons
+
+.window-close {
+  transition-duration: 100ms;
+  background-image: url("close-window.svg");
+  background-size: 32px;
+  height: 32px;
+  width: 32px;
+  -shell-close-overlap: 13px;
+
+  &:hover { background-image: url("close-window-hover.svg"); }
+  &:active { background-image: url("close-window-active.svg"); }
+}
+
+/* NETWORK DIALOGS */
+
+.nm-dialog {
+  @extend %dialog_window;
+  max-height: 34em;
+  min-height: 31em;
+  min-width: 32em;
+}
+
+  .nm-dialog-content {
+    spacing: 20px;
+    padding: 24px;
+  }
+  .nm-dialog-header-hbox { spacing: 10px; }
+  .nm-dialog-airplane-box { spacing: 12px; }
+
+  .nm-dialog-airplane-headline {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .nm-dialog-airplane-text { color: $dark_fg_color; }
+  .nm-dialog-header-icon { icon-size: 32px; }
+  .nm-dialog-scroll-view { border: 1px solid $light_borders_color; }
+  .nm-dialog-header { font-weight: bold; }
+
+  .nm-dialog-item {
+    font-size: 110%;
+    border-bottom: 1px solid $light_borders_color;
+    padding: 12px;
+    spacing: 20px;
+  }
+
+  .nm-dialog-item:selected {
+    background-color: $light_base_hover_color;
+    color: $dark_fg_color;
+  }
+
+  .nm-dialog-icons { spacing: .5em; }
+  .nm-dialog-icon { icon-size: 16px; }
+  .no-networks-label { color: $dark_subtext_color; }
+  .no-networks-box { spacing: 12px; }
+
+/* OVERVIEW */
+
+#overview {
+  spacing: 24px;
+}
+
+.overview-controls {
+  padding-bottom: 32px;
+}
+
+  .window-picker { //container around window thumbnails
+    -horizontal-spacing: 16px;
+    -vertical-spacing: 16px;
+    padding: 0 16px 16px;
+
+    &.external-monitor { padding: 16px; }
+  }
+
+  .window-clone-border {
+    $_bg: transparentize(white,0.65);
+    border: 5px solid $_bg;
+    border-radius: $medium_radius;
+    // For window decorations with round corners we can't match
+    // the exact shape when the window is scaled. So apply a shadow
+    // to fix that case
+    box-shadow: inset 0 0 0 1px $_bg;
+  }
+  .window-caption {
+    spacing: 25px;
+    color: $osd_fg_color;
+    background-color: $osd_bg_color;
+    border: 1px solid $osd_borders_color;
+    border-radius: $medium_radius;
+    padding: 4px 12px;
+  }
+
+  //search entry
+  .search-entry {
+    width: 320px;
+    border-radius: $small_radius;
+    border-color: $osd_borders_color;
+    color: $osd_fg_color;
+    background-color: transparentize($panel_bg_color, $panel-alpha-value);
+
+    &, &:focus { padding: 7px 9px; }
+
+    &:focus {
+      border-width: 1px;
+      border-color: $selected_bg_color;
+    }
+
+    .search-entry-icon { icon-size: 1em; padding: 0 4px; color: transparentize($fg_color,.3); }
+
+    &:hover, &:focus {
+      .search-entry-icon { color: $fg_color; }
+    }
+  }
+
+  //search results
+
+  #searchResultsBin {
+    max-width: 1000px;
+  }
+
+  #searchResultsContent {
+    padding-left: 20px;
+    padding-right: 20px;
+    spacing: 16px;
+  }
+
+  .search-section { spacing: 16px; } // This should be equal to #searchResultsContent spacing
+  .search-section-content { spacing: 32px; } // This is the space between the provider icon and the results container
+  .search-statustext { // "no results"
+    @extend %status_text;
+  }
+  .list-search-results { spacing: 3px; }
+
+  .search-section-separator { height: 2px; background-color: rgba(255, 255, 255, 0.2); }
+
+  .list-search-result-content { spacing: 30px; }
+  .list-search-result-title { color: $fg_color; spacing: 12px; }
+  .list-search-result-description { color: $caption_fg_color; }
+  .list-search-provider-details { width: 150px; color: $subheader_fg_color; margin-top: 0.24em; }
+  .list-search-provider-content { spacing: 20px; }
+  .search-provider-icon { padding: 15px; }
+
+
+  /* DASHBOARD */
+
+  #dash {
+    // TODO: style the ubuntu dock, not this
+    font-size: 9pt;
+    color: $osd_fg_color;
+    background-color: $dash_bg_color;
+    padding: 4px 0;
+    border: 1px solid _border_color($dash_bg_color);
+    border-left: 0px;
+    border-radius: 0px 9px 9px 0px;
+
+    &:rtl {
+      border-radius: 9px 0 0 9px;
+    }
+
+    .placeholder {
+      background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
+      background-size: contain;
+      height: 24px;
+    }
+
+    .empty-dash-drop-target {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .dash-item-container > StWidget {
+    padding: 4px 8px;
+  }
+
+  .dash-label { //osd tooltip
+    border-radius: $medium_radius;
+    padding: 6px 12px;
+    color: $osd_fg_color;
+    background-color: $osd_bg_color;
+    border: 1px solid $osd_borders_color;
+    text-align: center;
+    -x-offset: 8px;
+  }
+
+  /* App Vault/Grid */
+  .icon-grid {
+    spacing: 30px;
+    -shell-grid-horizontal-item-size: 136px;
+    -shell-grid-vertical-item-size: 136px;
+
+    .overview-icon { icon-size: 96px; }
+  }
+
+  .system-action-icon {
+    background-color: black;
+    color: white;
+    border-radius: 99px;
+    icon-size: 48px;
+  }
+
+  .app-view-controls { //favorties | all toggle container
+    padding-bottom: 32px;
+  }
+  .app-view-control { //favorties | all toggle button
+    // make it look like the gtk3 stackswitcher
+    padding: 4px 32px;
+    margin: 0 4px;
+    &, &:hover, &:checked { @include button(undecorated); } // reset
+
+    color: $insensitive_fg_color;
+    &:hover { box-shadow: inset 0 -2px $insensitive_fg_color; color: $fg_color }
+
+    &:checked {
+      color: $fg_color;
+      font-weight: bold;
+      box-shadow: inset 0 -2px $selected_bg_color;
+    }
+
+    &:first-child {
+      border-right-width: 0;
+      border-radius: 0;
+    }
+
+    &:last-child {
+     border-radius: 0;
+    }
+  }
+
+  //Icon tile
+  .search-provider-icon,
+  .list-search-result {
+    @extend %icon_tile;
+    &:active, &:checked { background-color: transparentize(darken($osd_bg_color,10%),.1); }
+    &:focus, &:selected, &:hover {
+      background-color: transparentize($osd_fg_color,.9);
+      transition-duration: 200ms;
+    }
+  }
+  .app-well-app,
+  .app-well-app.app-folder,
+  .show-apps,
+  .grid-search-result {
+    & .overview-icon {
+      @extend %icon_tile;
+    }
+    &:active .overview-icon,
+    &:checked .overview-icon {
+      // when clicking on an app or a folder is active
+      $_bg: darken($osd_fg_color, 10%);
+      background-color: transparentize($_bg,.7) !important;
+      box-shadow: inset 0 1px 2px $osd_borders_color;
+    }
+    &:hover .overview-icon,
+    &:focus .overview-icon,
+    &:selected .overview-icon {
+      // when hovering over an app
+      $_bg: $osd_fg_color;
+      background-color: transparentize($_bg,.7);
+      transition-duration: 0ms;
+      border-image: none;
+      background-image: none;
+    }
+  }
+
+  .app-well-app-running-dot { //running apps indicator
+    width: 6px; height: 6px;
+    box-shadow: 1px 1px 5px 0px transparentize(black, 0.5);
+    border-radius: 3px;
+    background-color: $selected_bg_color;
+    margin-bottom: 1px;
+}
+
+  %icon_tile {
+    // appeareance of apps
+    color: $osd_fg_color;
+    border-radius: $small_radius;
+    padding: 6px;
+    border: 1px solid transparent;
+    transition-duration: 100ms;
+    text-align: center;
+  }
+
+  .app-well-app.app-folder > .overview-icon {
+    // app folder
+    $_bg: darken($osd_fg_color, 25%);
+    background-color: transparentize($_bg,.5);
+    box-shadow: inset 0 0 0 1px transparentize($_bg,.6);
+  }
+
+  .show-apps:checked .show-apps-icon,
+  .show-apps:focus .show-apps-icon {
+    color: white;
+    transition-duration: 100ms;
+  }
+
+  // Collections
+  .app-folder-popup { //expanded collection
+    $_bg: $osd_fg_color;
+    -arrow-border-radius: $medium_radius;
+    -arrow-background-color: transparentize($_bg,.7);
+    -arrow-border-width: 1px;
+    -arrow-border-color: transparentize($_bg,.5);
+    -arrow-base: 24px;
+    -arrow-rise: 11px;
+  }
+  .app-folder-popup-bin { padding: 5px; }
+  .app-folder-icon {
+    padding: 5px;
+    spacing-rows: 5px;
+    spacing-columns: 5px;
+  }
+
+  .page-indicator {
+    padding: 15px 20px;
+
+    .page-indicator-icon {
+      width: 18px;
+      height: 18px;
+      background-image: url(resource:///org/gnome/shell/theme/page-indicator-inactive.svg);
+    }
+
+    &:hover .page-indicator-icon { background-image: url(resource:///org/gnome/shell/theme/page-indicator-hover.svg); }
+    &:active .page-indicator-icon { background-image: url(resource:///org/gnome/shell/theme/page-indicator-active.svg); }
+    &:checked .page-indicator-icon,
+    &:checked:active { background-image: url(resource:///org/gnome/shell/theme/page-indicator-checked.svg); }
+  }
+
+  .no-frequent-applications-label { @extend %status_text; }
+
+  .app-well-app > .overview-icon.overview-icon-with-label,
+  .grid-search-result .overview-icon.overview-icon-with-label {
+    padding: 10px 8px 5px 8px;
+    spacing: 4px;
+  }
+
+  // Workspace pager
+  .workspace-thumbnails { //container ala dash
+    @extend %overview-panel;
+    visible-width: 32px; //amount visible before hover
+    spacing: 11px;
+    padding: 8px;
+    border-radius: $medium_radius 0 0 $medium_radius;
+    &:rtl { border-radius: 0 $medium_radius $medium_radius 0;}
+
+
+    .placeholder {
+      background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
+      background-size: contain;
+      height: 24px;
+    }
+
+  }
+  .workspace-thumbnail-indicator {
+    border: 0px solid $selected_bg_color;
+    border-left-width: 2px;
+    padding: 4px;
+  }
+
+  //Some hacks I don't even
+  .search-display > StBoxLayout,
+  .all-apps,
+  .frequent-apps > StBoxLayout {
+    // horizontal padding to make sure scrollbars or dash don't overlap content
+    padding: 0px 88px 10px 88px;
+  }
+
+%overview-panel {
+  color: $osd_fg_color;
+  background-color: transparentize($panel_bg_color, $panel-alpha-value);
+  border: none;
+}
+
+%status_text {
+  font-size: 2em;
+  font-weight: bold;
+  color: $fg_color;
+}
+
+%light_entry {
+  selection-background-color: $text_selection;
+  selected-color: $dark_fg_color;
+    $_bg: $light_base_color;
+    $_fg: $dark_fg_color;
+    @include entry(normal, $tc: $_fg, $c: $_bg);
+    &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
+    &:insensitive {
+      @include entry(insensitive, $tc: $_fg, $c: $_bg);
+      border-color: $silk;
+  }
+}
+
+/* NOTIFICATIONS & MESSAGE TRAY */
+
+  .url-highlighter { link-color: $link_color; }
+
+  // Banners
+  .notification-banner {
+    font-size: 11pt;
+    width: 34em;
+    min-height: 64px;
+    margin: 6px;
+    border-radius: $medium-radius;
+    border: none;
+    box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
+
+    &, &:focus, &:active {
+      & { background-color: $light_base_color }
+      .message-title { color: darken($dark_fg_color, 10%); }
+      .message-content { color: $dark_fg_color;
+       }
+    }
+    &:hover { background: $light_base_color; }
+    .message-icon-bin > StIcon {
+     color: $dark_fg_color;
+    }
+
+    StEntry {
+      @extend %light_entry
+    }
+  }
+
+  .notification-icon { padding: 5px;}
+
+  .notification-content {
+    padding: 5px;
+    spacing: 5px;
+  }
+
+  .secondary-icon { icon-size: 1.14286em; }
+
+  .notification-actions {
+    padding-top: 0;
+    border-top: 1px solid lighten($light_borders_color,10%);
+    spacing: 0px;
+  }
+
+  .notification-button {
+    @include button(normal);
+    &:active { @include button(active); background-color: $light_base_active_color;}
+    &:hover { @include button(hover); background-color: $light_base_hover_color;}
+
+    &:first-child {
+      border-radius: 0px 0px 0px $medium_radius; border: none;
+    }
+    &:last-child {
+      border-right-width: 0px;
+      border-radius: 0px 0px $medium_radius 0px; border: none;
+    }
+    &:first-child:last-child {
+      border-right-width: 0px;
+      border-radius: 0px 0px $medium_radius $medium_radius;border: none;
+    }
+    min-height: 35px;
+    padding: 0 16px;
+    background-color: transparent;
+    color: $dark_fg_color;
+    font-weight: 500;
+    &:selected { border: none;}
+    border: none;
+  }
+
+  .summary-source-counter {
+    font-size: 10pt;
+    font-weight: bold;
+    height: 1.6em; width: 1.6em;
+    -shell-counter-overlap-x: 3px;
+    -shell-counter-overlap-y: 3px;
+    background-color: $selected_bg_color;
+    color: $selected_fg_color;
+    border: 2px solid $osd_fg_color;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.5);
+    border-radius: 0.9em;
+  }
+
+  .secondary-icon { icon-size: 1.09em; }
+
+  //chat bubbles
+  .chat-body { spacing: 5px; }
+  .chat-response { margin: 5px; }
+  .chat-log-message { color: $caption_fg_color; }
+  .chat-new-group { padding-top: 1em; }
+  .chat-received {
+    padding-left: 4px;
+    &:rtl { padding-left: 0px; padding-right: 4px; }
+  }
+  .chat-sent {
+    padding-left: 18pt;
+    color: $caption_fg_color;
+    &:rtl { padding-left: 0; padding-right: 18pt; }
+  }
+  .chat-meta-message {
+    padding-left: 4px;
+    font-size: 9pt;
+    font-weight: bold;
+    color: $text_color;
+    &:rtl { padding-left: 0; padding-right: 4px; }
+  }
+
+    //hotplug
+  .hotplug-transient-box {
+      padding: 2px 72px 2px 12px;
+      spacing: 6px;
+  }
+  .hotplug-notification-item {
+    padding: 2px 10px;
+    color: $dark_fg_color;
+
+    @include button(undecorated);
+    border-radius: 0 0 $medium_radius $medium_radius;
+    &:focus { padding: 1px 71px 1px 11px; }
+    &:hover { background-color: $light_base_hover_color;}
+    &:active { background-color: $light_base_active_color; border: none;}
+  }
+
+  .hotplug-notification-item-icon {
+    icon-size: 24px;
+    padding: 2px 5px;
+  }
+
+  .hotplug-resident-box { spacing: 8px;}
+
+  .hotplug-resident-mount {
+    spacing: 8px;
+    border-radius: 4px;
+    &:hover { background-color: transparent; }
+  }
+
+  .hotplug-resident-mount-label {
+    color: inherit;
+    padding-left: 6px;
+  }
+
+  .hotplug-resident-mount-icon {
+    icon-size: 24px;
+    padding-left: 6px;
+  }
+
+  .hotplug-resident-eject-icon {
+    icon-size: 16px;
+  }
+
+  .hotplug-resident-eject-button {
+    padding: 7px;
+    border-radius: 5px;
+    color: $dark_fg_color;
+  }
+
+/* Eeeky things */
+
+//magnifier
+
+.magnifier-zoom-region {
+  border: 2px solid $selected_bg_color;
+  &.full-screen { border-width: 0; }
+}
+
+//Keyboard
+/* On-screen Keyboard */
+.word-suggestions {
+    font-size: 14pt;
+    spacing: 12px;
+    min-height: 20pt;
+}
+
+#keyboard {
+    background-color: transparentize($osd_bg_color, 0.3);
+}
+
+  .key-container {
+    padding: 4px;
+    spacing: 4px;
+  }
+
+  .keyboard-row { spacing: 15px; }
+
+  .keyboard-key {
+    background-color: #393f3f;
+    min-height: 2em;
+    min-width: 2em;
+    font-size: 16pt;
+    border-radius: 3px;
+    border: 1px solid #464d4d;
+    color: #e5e5e5;
+    &:focus { @include button(focus); }
+    &:hover,&:checked { @include button(hover); }
+    &:active { @include button(active);}
+    &:grayed { //FIXME
+      background-color: $osd_bg_color;
+      color: $osd_fg_color;
+      border-color: $osd_borders_color;
+    }
+    &.default-key {
+      border-color: #2d3232;
+      background-color: #1d2020;
+      background-size: 20px;
+    }
+    &.enter-key {
+      border-color: #005684;
+      background-color: #006098;
+      background-image: url("resource:///org/gnome/shell/theme/key-enter.svg");
+    }
+    &.shift-key-lowercase {
+      background-image: url("resource:///org/gnome/shell/theme/key-shift.svg");
+    }
+    &.shift-key-uppercase {
+      background-image: url("resource:///org/gnome/shell/theme/key-shift-uppercase.svg");
+    }
+    &.shift-key-uppercase:latched {
+      background-image: url("resource:///org/gnome/shell/theme/key-shift-latched-uppercase.svg");
+    }
+    &.hide-key {
+      background-image: url("resource:///org/gnome/shell/theme/key-hide.svg");
+    }
+    &.layout-key {
+      background-image: url("resource:///org/gnome/shell/theme/key-layout.svg");
+    }
+  }
+
+  .keyboard-subkeys { //long press on a key popup
+    color: white;
+    -arrow-border-radius: 10px;
+    -arrow-background-color: transparentize($osd_bg_color, 0.3);
+    -arrow-border-width: 2px;
+    -arrow-border-color: $osd_borders_color;
+    -arrow-base: 20px;
+    -arrow-rise: 10px;
+    -boxpointer-gap: 5px;
+  }
+
+// IBus Candidate Popup
+
+.candidate-popup-content {
+  padding: 0.5em;
+  spacing: 0.3em;
+}
+
+  .candidate-index {
+    padding: 0 0.5em 0 0;
+    color: $caption_fg_color;
+  }
+
+  .candidate-box {
+    padding: 0.3em 0.5em 0.3em 0.5em;
+    border-radius: 4px;
+    &:selected,&:hover { background-color: $selected_bg_color; color: $selected_fg_color; }
+  }
+
+  .candidate-page-button-box {
+    height: 2em;
+    .vertical & { padding-top: 0.5em; }
+    .horizontal & { padding-left: 0.5em; }
+  }
+
+  .candidate-page-button {
+    padding: 4px;
+  }
+
+  .candidate-page-button-previous { border-radius: 4px 0px 0px 4px; border-right-width: 0; }
+  .candidate-page-button-next { border-radius: 0px 4px 4px 0px;  }
+  .candidate-page-button-icon { icon-size: 1em; }
+
+/* Auth Dialogs & Screen Shield */
+
+.framed-user-icon {
+  background-size: contain;
+  border: 2px solid $light_borders_color;
+  color: $dark_fg_color;
+  border-radius: $small_radius;
+  &:hover {
+    // TODO
+    border-color: lighten($osd_fg_color,30%);
+    color: lighten($osd_fg_color,30%);
+  }
+}
+
+// LOGIN DIALOG
+
+.login-dialog-banner-view {
+  padding-top: 24px;
+  max-width: 23em;
+}
+
+.login-dialog {
+  //reset
+  border: none;
+  background-color: transparent;
+
+  > StBoxLayout {
+    // this is the main window that the widgets are drawn on
+    background-color: transparentize($light_bg_color, $popover-alpha-value);
+    border: 1px solid $light_borders_color;
+    box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
+    border-radius: $medium_radius;
+    padding: 12px 40px 24px 40px;
+  }
+
+  StEntry {
+    @extend %light_entry;
+  }
+
+  .modal-dialog-button-box { spacing: 3px; }
+  .modal-dialog-button {
+    padding: 4px 18px;
+    $c: $light_button_bg_color;
+    $tc: $dark_fg_color;
+    @include button(normal, $c, $tc);
+    &:active { @include button(active, $c, $tc);}
+    &:focus { @include button(focus, $c, $tc);}
+    &:hover { @include button(hover, $c, $tc);}
+    &:focus:hover { @include button(focus-hover, $c, $tc); }
+    &:insensitive { @include button(insensitive, $c, $tc); }
+    &:hover, &:focus:hover {background-color: $light_base_hover_color;}
+    &:active, &:focus:active {background-color: $light_base_active_color;}
+
+    &:default {
+      padding-bottom: 5px;
+      padding-top: 5px;
+      border: none;
+      @include button(normal, $c:$success_color);
+      &:hover { @include button(hover, $c:transparentize($success_color, 0.20)); }
+      &:hover:active { @include button(hover-active, $c:transparentize($success_color, 0.20)); }
+      &:focus { @include button(focus, $c:transparentize($success_color, 0.30)); color: $fg_color; }
+      &:active { @include button(active, $c:transparentize($success_color, 0.30)); color: $fg_color; }
+      &:insensitive { @include button(insensitive, $c:transparentize($success_color, 0.40)); color: $fg_color;}
+    }
+  }
+}
+
+  .login-dialog-logo-bin { padding: 24px 0px; }
+  .login-dialog-banner { color: $dark_caption_fg_color; }
+  .login-dialog-button-box { spacing: 5px; }
+  .login-dialog-message-warning { color: $warning_color; }
+  .login-dialog-message-hint { padding-top: 0; padding-bottom: 20px; }
+  .login-dialog-user-selection-box { padding: 100px 0px; }
+  .login-dialog-not-listed-label {
+    padding-left: 2px;
+    .login-dialog-not-listed-button:focus &,
+    .login-dialog-not-listed-button:hover & {
+      color: $dark_fg_color;
+    }
+  }
+  .login-dialog-not-listed-label {
+    font-size: 90%;
+    font-weight: bold;
+    color: $dark_inactive_element_color;
+    padding-top: 1em;
+  }
+
+  .login-dialog-user-list-view { -st-vfade-offset: 1em; }
+  .login-dialog-user-list {
+    spacing: 12px;
+    padding: .2em;
+    width: 23em;
+    &:expanded .login-dialog-user-list-item:selected {
+      //colors with transparency don't seem to be possible so emulate $base_hover_color
+      background-color: lighten($ash,20%);
+      color: $selected_fg_color;
+    }
+    &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
+  }
+  .login-dialog-user-list-item {
+    border-radius: 5px;
+    padding: .2em;
+    color: $text_color;
+    &:ltr { padding-right: 1em; }
+    &:rtl { padding-left: 1em; }
+    .login-dialog-timed-login-indicator {
+      height: 2px;
+      margin: 2px 0 0 0;
+      background-color: $dark_fg_color;
+    }
+    &:focus .login-dialog-timed-login-indicator { background-color: $dark_fg_color; }
+  }
+
+  .login-dialog-username,
+  .user-widget-label {
+    color: $dark_fg_color;
+    font-size: 120%;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 15px;
+  }
+    .user-widget-label {
+      &:ltr { padding-left: 18px; }
+      &:rtl { padding-right: 18px; }
+    }
+
+  .login-dialog-prompt-layout {
+      padding-top: 24px;
+      padding-bottom: 12px;
+      spacing: 8px;
+      width: 23em;
+  }
+
+  .login-dialog-prompt-label {
+      color: $dark_caption_fg_color;
+      font-size: 110%;
+      padding-top: 1em;
+  }
+
+  .login-dialog-session-list-button StIcon {
+      icon-size: 1.25em;
+  }
+
+  .login-dialog-session-list-button {
+      color: $dark_inactive_element_color;
+      &:hover,&:focus { color: $dark_fg_color; }
+      &:active { color: darken($dark_fg_color, 50%); }
+  }
+
+//SCREEN SHIELD
+
+.screen-shield-arrows {
+    padding-bottom: 3em;
+}
+
+.screen-shield-arrows Gjs_Arrow {
+    color: white;
+    width: 80px;
+    height: 48px;
+    -arrow-thickness: 12px;
+    -arrow-shadow: 0 1px 1px rgba(0,0,0,0.4);
+}
+
+.screen-shield-clock {
+  color: white;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.6);
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 1.5em;
+}
+
+.screen-shield-clock-time {
+  font-size: 72pt;
+  text-shadow: 0px 2px 2px rgba(0,0,0,0.4);
+}
+
+.screen-shield-clock-date {
+  font-size: 28pt;
+  font-weight: normal;
+}
+
+.screen-shield-notifications-container {
+  spacing: 6px;
+  width: 30em;
+  background-color: transparent;
+  max-height: 500px;
+  .summary-notification-stack-scrollview {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .notification,
+  .screen-shield-notification-source {
+    padding: 12px 6px;
+    border: 1px solid $osd_borders_color;
+    background-color: transparentize($osd_bg_color, $panel-alpha-value);
+    color: $osd_fg_color;
+    border-radius: 5px;
+  }
+  .notification { margin-right: 15px; } //compensate for space allocated to the scrollbar
+}
+
+
+.screen-shield-notification-label {
+  font-weight: bold;
+  padding: 0px 0px 0px 12px;
+}
+
+.screen-shield-notification-count-text { padding: 0px 0px 0px 12px; }
+
+#panel.lock-screen { background-color: transparent; }
+
+// This is the "Activities" button
+#panelActivities.panel-button { }
+
+.screen-shield-background { //just the shadow, really
+  background: black;
+  box-shadow: 0px 2px 4px transparentize(black,0.6);
+}
+
+#lockDialogGroup {
+  background: #2c001e;
+  background-size: cover;
+  background-position: top right;
+  background-repeat: no-repeat;
+}
+
+#screenShieldNotifications {
+  StButton#vhandle, StButton#hhandle {
+    background-color: transparentize($bg_color,0.7);
+    &:hover, &:focus { background-color: transparentize($bg_color,0.5); }
+    &:active { background-color: transparentize($selected_bg_color,0.5); }
+  }
+}
+
+
+// Looking Glass
+#LookingGlassDialog {
+  background-color: rgba(0,0,0,0.80);
+  spacing: 4px;
+  padding: 4px;
+  border: 2px solid grey;
+  border-radius: $small_radius;
+  & > #Toolbar {
+    border: 1px solid grey;
+    border-radius: 4px;
+  }
+  .labels { spacing: 4px; }
+  .notebook-tab {
+    -natural-hpadding: 12px;
+    -minimum-hpadding: 6px;
+    font-weight: bold;
+    color: #ccc;
+    transition-duration: 100ms;
+    padding-left: .3em;
+    padding-right: .3em;
+    &:hover {
+      color: white;
+      text-shadow: black 0px 2px 2px;
+    }
+    &:selected {
+      border-bottom-width: 2px;
+      border-color: lighten($selected_bg_color,5%);
+      color: white;
+      text-shadow: black 0px 2px 2px;
+    }
+  }
+  StBoxLayout#EvalBox { padding: 4px; spacing: 4px; }
+  StBoxLayout#ResultsArea { spacing: 4px; }
+}
+
+  .lg-dialog {
+    StEntry {
+      selection-background-color: #bbbbbb;
+      selected-color: #333333;
+    }
+    .shell-link {
+      color: #999999;
+      &:hover { color: #dddddd; }
+     }
+  }
+
+  .lg-completions-text {
+      font-size: .9em;
+      font-style: italic;
+  }
+
+  .lg-obj-inspector-title {
+      spacing: 4px;
+  }
+
+  .lg-obj-inspector-button {
+      border: 1px solid gray;
+      padding: 4px;
+      border-radius: $small_radius;
+      &:hover { border: 1px solid #ffffff; }
+  }
+
+  #lookingGlassExtensions { padding: 4px; }
+
+  .lg-extensions-list {
+      padding: 4px;
+      spacing: 6px;
+  }
+
+  .lg-extension {
+      border: 1px solid #6f6f6f;
+      border-radius: 4px;
+      padding: 4px;
+  }
+
+  .lg-extension-name {
+      font-weight: bold;
+  }
+
+  .lg-extension-meta {
+      spacing: 6px;
+  }
+
+  #LookingGlassPropertyInspector {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid grey;
+    border-radius: $small_radius;
+    padding: 6px;
+  }

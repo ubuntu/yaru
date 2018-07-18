@@ -1,13 +1,20 @@
-# Meson build directories (local and package)
-/build/
+# Meson suggested build directories (local and package)
+build/
 /obj-*/
 
 # Packaging generated content
 debian/*debhelper*
 debian/files
 debian/*.substvars
-debian/gtk-communitheme/
 debian/tmp/
-debian/ubuntu-communitheme-session/
+debian/gnome-shell-theme-communitheme/
+debian/gtk-theme-communitheme/
+debian/icon-theme-communitheme/
+debian/sound-theme-communitheme/
 
-Communitheme/gtk-3\.0/gtk\.css
+# snapcraft build artefacts
+parts/
+stage/
+prime/
+snap/.snapcraft/state
+*.snap

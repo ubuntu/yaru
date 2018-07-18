@@ -1,0 +1,37 @@
+name: communitheme
+version: '0.1'
+architectures: [all]
+summary: Next ubuntu theme shaped by the community
+description: |
+  This is the theme that is shaped by the community on the Ubuntu hub,
+  which will turn into the default ubuntu theme.
+  You can install that snap on ubuntu 18.04 LTS, reboot, and new session option
+  "Ubuntu with Communitheme" will appear in the login screen.
+  More information is available at
+  https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
+grade: stable
+confinement: strict
+
+parts:
+  theme:
+    source: .
+    plugin: meson
+    build-packages: ["sassc"]
+    meson-parameters: ["--prefix=/"]
+    override-build: |
+      # Rename the theme name to previous name for backward compatibility
+      sed -i 's/Communitheme/Communitheme/' meson.build
+      # First run normal build stage (the build stage of the meson plugin)
+      snapcraftctl build
+      # Link session file
+      ln -s snap/session $SNAPCRAFT_PART_INSTALL/session
+      # backward compability naming with symlinks and names
+      mv $SNAPCRAFT_PART_INSTALL/share/icons/Communitheme $SNAPCRAFT_PART_INSTALL/share/icons/communitheme
+      sed -i 's/Communitheme/communitheme/' $SNAPCRAFT_PART_INSTALL/share/icons/communitheme/cursor.theme
+      ln -s communitheme $SNAPCRAFT_PART_INSTALL/share/icons/Suru
+      sed -i 's/Communitheme/Suru/' $SNAPCRAFT_PART_INSTALL/share/icons/Suru/index.theme
+      mv $SNAPCRAFT_PART_INSTALL/share/sounds/Communitheme $SNAPCRAFT_PART_INSTALL/share/sounds/communitheme
+      sed -i 's/Communitheme/communitheme/' $SNAPCRAFT_PART_INSTALL/share/sounds/communitheme/*.theme
+      mv $SNAPCRAFT_PART_INSTALL/share/gnome-shell/modes/Communitheme.json $SNAPCRAFT_PART_INSTALL/share/gnome-shell/modes/ubuntu-communitheme.json
+      # remove unused artefacts in the snap (sessions and schemas)
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/*sessions $SNAPCRAFT_PART_INSTALL/share/glib-2.0
