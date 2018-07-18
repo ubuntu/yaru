@@ -1,4 +1,4 @@
-Source: communitheme
+Source: yaru-theme
 Section: misc
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
@@ -6,13 +6,13 @@ Build-Depends: debhelper (>= 10.3),
                meson,
                sassc,
 Standards-Version: 4.1.1
-Homepage: https://github.com/ubuntu/gnome-shell-communitheme
+Homepage: https://github.com/ubuntu/yaru
 
-Package: gnome-shell-theme-communitheme
+Package: yaru-theme-gnome-shell
 Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-Description: GNOME Shell Ubuntu Community Theme
+Description: Yaru GNOME Shell theme from Ubuntu Community
  This is the theme that is shaped by the community on the Ubuntu hub.
  .
  This package contains the GNOME Shell theme part
@@ -20,14 +20,14 @@ Description: GNOME Shell Ubuntu Community Theme
  More information if you want to follow the development on
  https://community.ubuntu.com/c/desktop/theme-refresh.
 
-Package: gtk-theme-communitheme
+Package: yaru-theme-gtk
 Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          gnome-themes-extra,
          gtk2-engines-pixbuf,
          gtk2-engines-murrine,
-Description: GTK Ubuntu Community Theme
+Description: Yaru GTK theme from Ubuntu Community
  This is the theme that is shaped by the community on the Ubuntu hub.
  .
  This package contains the GTK+ 2 and 3 theme parts
@@ -35,11 +35,11 @@ Description: GTK Ubuntu Community Theme
  More information if you want to follow the development on
  https://community.ubuntu.com/c/desktop/theme-refresh.
 
-Package: icon-theme-communitheme
+Package: yaru-theme-icon
 Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-Description: Icon theme for Ubuntu Community Theme
+Description: Yaru icon theme from Ubuntu Community
  This is the theme that is shaped by the community on the Ubuntu hub.
  .
  This package contains the icon theme
@@ -47,11 +47,11 @@ Description: Icon theme for Ubuntu Community Theme
  More information if you want to follow the development on
  https://community.ubuntu.com/c/desktop/theme-refresh.
 
-Package: sound-theme-communitheme
+Package: yaru-theme-sound
 Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-Description: Sound theme for Ubuntu Community Theme
+Description: Yaru sound theme from Ubuntu Community
  This is the theme that is shaped by the community on the Ubuntu hub.
  .
  This package contains the sound theme
