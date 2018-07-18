@@ -40,14 +40,10 @@ docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
 mkdir -p ../gtk-common-themes/snap
 cd ../gtk-common-themes
 
-# get top part of original snapcraft.yaml and complete with unsquash the snap
-gct_snapcraftyaml=`mktemp`
-curl -o $gct_snapcraftyaml "https://raw.githubusercontent.com/snapcrafters/gtk-common-themes/master/snap/snapcraft.yaml"
-sed -e '/parts:/,$d' $gct_snapcraftyaml > snap/snapcraft.yaml
-
-curl -o $gct_snapcraftyaml "$THEME_HELPER_REPO_URL/build/gtk-common-themes-parts.yaml"
-sed -e "s,CHANNEL,$channel,g" $gct_snapcraftyaml >> snap/snapcraft.yaml
-rm $gct_snapcraftyaml
+# get top part of original snapcraft.yaml and complete with new content
+curl -o snap/snapcraft.yaml "https://raw.githubusercontent.com/snapcrafters/gtk-common-themes/master/snap/snapcraft.yaml"
+sed -i '/parts:/,$d' snap/snapcraft.yaml
+sed -e "s,CHANNEL,$channel,g" "$TRAVIS_BUILD_DIR/build-helpers/gtk-common-themes-parts.yaml" >> snap/snapcraft.yaml
 
 # build and push gtk-common-themes snap
 cmd="cd $(pwd) && snapcraft"
