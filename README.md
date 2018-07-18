@@ -7,6 +7,8 @@ This is the theme that is shaped by the community on the Ubuntu hub, which will 
 
 More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
 
+![Files](https://i.imgur.com/W5pFnlL.png)
+
 ![Dash](https://i.imgur.com/Td2GLe5.png)
 
 ![widgetfactorylight](https://i.imgur.com/ZG7GIYM.png)
