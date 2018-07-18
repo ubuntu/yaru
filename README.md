@@ -7,15 +7,19 @@ This is the theme that is shaped by the community on the Ubuntu hub, which will 
 
 More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
 
-![Dash1](https://i.imgur.com/hC98wNU.png)
+Detailed screenshots and reasoning behind the design can be found inside the Design Wiki: https://github.com/ubuntu/communitheme/wiki
 
-![widgetfactorylight](https://i.imgur.com/h1nKYKi.png)
+![Files](https://i.imgur.com/W5pFnlL.png)
+
+![Dash](https://i.imgur.com/Td2GLe5.png)
+
+![widgetfactorylight](https://i.imgur.com/ZG7GIYM.png)
 
 It contains:
  * a GNOME Shell theme
  * a GTK2 and GTK3 theme
- * an icon theme, derived from the [Suru icon](https://snwh.org/suru) theme.
- * a sound theme, vombining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes with an emphasis on making sound a usability feature instead of an annoyance.
+ * an icon & cursor theme, derived from the [Suru icon](https://snwh.org/suru) theme.
+ * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes with an emphasis on making sound a usability feature instead of an annoyance.
 
 ## Communitheme on Ubuntu 18.10
 
