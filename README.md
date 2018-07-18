@@ -7,9 +7,9 @@ This is the theme that is shaped by the community on the Ubuntu hub, which will 
 
 More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
 
-![Dash1](https://i.imgur.com/hC98wNU.png)
+![Dash](https://i.imgur.com/Td2GLe5.png)
 
-![widgetfactorylight](https://i.imgur.com/h1nKYKi.png)
+![widgetfactorylight](https://i.imgur.com/ZG7GIYM.png)
 
 It contains:
  * a GNOME Shell theme
