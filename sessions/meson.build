@@ -1,9 +1,10 @@
 gnomeshell_mode_dir = join_paths(get_option('datadir'), 'gnome-shell', 'modes')
 
+# NOTE: GNOME Shell only accept lowercase mode names.
 replace_name = find_program('../build-helpers/replace-name')
 custom_target('shell-mode',
               input: 'mode.json.in',
-              output: meson.project_name()+'.json',
+              output: meson.project_name().to_lower()+'.json',
               command: [
                 replace_name, '@INPUT@', '@OUTPUT@', 'THEMENAME', meson.project_name()
               ],
