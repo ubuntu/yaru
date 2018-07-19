@@ -16,7 +16,7 @@ This installation method is to try out the theme while developing it. If you're 
 git clone https://github.com/ubuntu/communitheme.git
 cd communitheme
 # Initialize build system (only required once per repo)
-meson build --prefix=/usr/local
+meson build
 cd build
 # Build and install
 sudo ninja install
