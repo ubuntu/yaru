@@ -202,7 +202,7 @@
     &:hover, &:active, &:checked {
       .show-apps-icon {
         background-image: url("ubuntu-appgrid-icon.svg") !important;
-        background-position: center;
+        /* background-position: center; non-number values seems not supported see #653 */
         background-repeat: no-repeat;
         background-size: contain !important;
       }

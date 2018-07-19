@@ -150,6 +150,7 @@ StScrollBar {
   height: 1em;
   -slider-height: 0.2em; //increase the height because of the border removal
   -slider-background-color:  $_inactive_bg;//background of the trough
+  -slider-border-color: $borders_color; //trough border color
   -slider-active-background-color: $_bg; //active trough fill
   -slider-active-border-color: $_bg; //active trough border
   -slider-border-width: 0px; //remove the border for a more flat trough
