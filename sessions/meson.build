@@ -11,7 +11,6 @@ custom_target('shell-mode',
               install: true,
               install_dir: gnomeshell_mode_dir)
 
-xsession_dir = join_paths(get_option('datadir'), 'xsessions')
 custom_target('desktop-xsession',
               input: 'THEMENAME.desktop.in',
               output: meson.project_name()+'.desktop',
@@ -20,8 +19,16 @@ custom_target('desktop-xsession',
               ],
               build_by_default: true,
               install: true,
-              install_dir: xsession_dir)
-meson.add_install_script('meson/copy-to-wayland-session', meson.project_name())
+              install_dir: join_paths(get_option('datadir'), 'xsessions'))
+custom_target('desktop-waylandsession',
+              input: 'THEMENAME-wayland.desktop.in',
+              output: meson.project_name()+'-wayland.desktop',
+              command: [
+                replace_name, '@INPUT@', '@OUTPUT@', 'THEMENAME', meson.project_name()
+              ],
+              build_by_default: true,
+              install: true,
+              install_dir: join_paths(get_option('datadir'), 'wayland-sessions'))
 
 gsettings_override_dir = join_paths(get_option('datadir'), 'glib-2.0', 'schemas')
 custom_target('gsettings-override',

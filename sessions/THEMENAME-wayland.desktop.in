@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=THEMENAME session on wayland
+Comment=This session logs you with THEMENAME on wayland
+Exec=env GNOME_SHELL_SESSION_MODE=THEMENAME gnome-session
+TryExec=gnome-session
+Type=Application
+DesktopNames=THEMENAME:ubuntu:GNOME
+X-Ubuntu-Gettext-Domain=gnome-session-3.0

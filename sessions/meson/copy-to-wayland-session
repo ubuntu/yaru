@@ -1,4 +1,0 @@
-#!/bin/sh
-
-mkdir -p "${MESON_INSTALL_DESTDIR_PREFIX}/share/wayland-sessions"
-cp -a "${MESON_INSTALL_DESTDIR_PREFIX}/share/xsessions/$1.desktop" "${MESON_INSTALL_DESTDIR_PREFIX}/share/wayland-sessions/$1.desktop"
