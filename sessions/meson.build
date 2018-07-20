@@ -42,4 +42,5 @@ custom_target('gsettings-override',
               install: true,
               install_dir: gsettings_override_dir)
 
+meson.add_install_script('meson/install-dock-override', meson.project_name().to_lower())
 meson.add_install_script('meson/compile-schemas')

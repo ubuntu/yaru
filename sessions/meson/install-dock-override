@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+
+DOCK_DIR="${MESON_INSTALL_DESTDIR_PREFIX}/share/gnome-shell/extensions/ubuntu-dock@ubuntu.com"
+
+mkdir -p "${DOCK_DIR}"
+touch "${DOCK_DIR}/$1.css"
