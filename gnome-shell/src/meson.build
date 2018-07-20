@@ -78,6 +78,7 @@ data_sources = [
   'ws-switch-arrow-up.svg',
   'activities.svg',
   'ubuntu-appgrid-icon.svg',
+  'appgrid.svg',
 ]
 
 # install static data files
