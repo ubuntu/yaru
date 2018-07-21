@@ -34,6 +34,15 @@ gtk-color-scheme = "tooltip_fg_color:#ffffff\ntooltip_bg_color:#343434"
 # Set GTK settings
 gtk-auto-mnemonics              = 1
 gtk-primary-button-warps-slider = 1
+gtk-icon-sizes="gtk-menu=16,16:
+gtk-button=16,16:
+gtk-small-toolbar=16,16:
+gtk-large-toolbar=16,16:
+gtk-dnd=16,16:
+gtk-dialog=16,16"
+gtk-toolbar-style = GTK_TOOLBAR_ICONS
+gtk-menu-images = 0
+gtk-menu-popup-delay = 0
 
 # And hand over the control to the theme files
 include "main.rc"
