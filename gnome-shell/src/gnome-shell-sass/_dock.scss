@@ -186,26 +186,11 @@
   }
 
   .show-apps {
-    // Show apps icon
-    & {
-      // reset
-      & .show-apps-icon,
-      &:checked .show-apps-icon,
-      &:focus .show-apps-icon {
-        color: transparent !important;
-        background-color: transparent !important;
-        transition-duration: 0ms !important;
-      }
+    .overview-icon {
+      border-radius: $small_radius;
     }
-
-    &,
-    &:hover, &:active, &:checked {
-      .show-apps-icon {
-        background-image: url("ubuntu-appgrid-icon.svg") !important;
-        /* background-position: center; non-number values seems not supported see #653 */
-        background-repeat: no-repeat;
-        background-size: contain !important;
-      }
+    &:active, &:checked {
+      background-color: $base_active_color; box-shadow: none;
     }
   }
 
