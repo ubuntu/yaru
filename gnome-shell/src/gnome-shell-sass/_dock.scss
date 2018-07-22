@@ -190,7 +190,9 @@
       border-radius: $small_radius;
     }
     &:active, &:checked {
-      background-color: $base_active_color; box-shadow: none;
+      .overview-icon {
+        background-color: $base_active_color; box-shadow: none;
+      }
     }
   }
 
