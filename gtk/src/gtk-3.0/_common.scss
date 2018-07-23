@@ -2412,11 +2412,11 @@ notebook {
     padding: 1px;
     border-color: $borders_color;
     border-width: 1px;
-    background-color: $sidebar_bg_color;
+    background: if($variant==light, $porcelain, $base_color);
 
     &:backdrop {
       border-color: $backdrop_borders_color;
-      background-color: $backdrop_sidebar_bg_color;
+      background-color: $backdrop_bg_color;
     }
 
     tabs { margin: -1px; }
@@ -3767,6 +3767,10 @@ row {
  * Expanders *
  *************/
 expander {
+  notebook {
+    border: 1px solid $borders_color;
+  }
+
   arrow {
     min-width: 16px;
     min-height: 16px;
