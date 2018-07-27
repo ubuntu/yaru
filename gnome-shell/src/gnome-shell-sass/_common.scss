@@ -1906,7 +1906,7 @@ StScrollBar {
 
 .framed-user-icon {
   background-size: contain;
-  border: 2px solid $light_borders_color;
+  border: 1px solid $light_borders_color;
   color: $dark_fg_color;
   border-radius: $small_radius;
   &:hover {
@@ -1944,7 +1944,7 @@ StScrollBar {
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
-    $c: $light_button_bg_color;
+    $c: darken($light_bg_color,10%);
     $tc: $dark_fg_color;
     @include button(normal, $c, $tc);
     &:active { @include button(active, $c, $tc);}
@@ -2019,7 +2019,7 @@ StScrollBar {
   .user-widget-label {
     color: $dark_fg_color;
     font-size: 120%;
-    font-weight: bold;
+    font-weight: normal;
     text-align: left;
     padding-left: 15px;
   }
@@ -2123,7 +2123,7 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  background: #2c001e;
+  background: $light_bg_color;//#2c001e;
   background-size: cover;
   background-position: top right;
   background-repeat: no-repeat;
