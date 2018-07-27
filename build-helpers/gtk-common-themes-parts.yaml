@@ -25,3 +25,4 @@ parts:
       cp -a squashfs-root/* $SNAPCRAFT_PART_INSTALL/
       # remove everything related to communitheme
       rm -rf $SNAPCRAFT_PART_INSTALL/share/*/*ommunitheme
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/icons/Suru
