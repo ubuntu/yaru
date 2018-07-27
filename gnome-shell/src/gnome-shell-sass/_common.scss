@@ -1984,8 +1984,8 @@ StScrollBar {
   }
   .login-dialog-not-listed-label {
     font-size: 90%;
-    font-weight: bold;
-    color: $dark_inactive_element_color;
+    font-weight: normal;
+    color: lighten($dark_fg_color,10%);
     padding-top: 1em;
   }
 
@@ -2123,7 +2123,7 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  background: $light_bg_color;//#2c001e;
+  background: #2c001e;
   background-size: cover;
   background-position: top right;
   background-repeat: no-repeat;
