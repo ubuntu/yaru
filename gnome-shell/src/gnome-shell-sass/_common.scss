@@ -1930,11 +1930,9 @@ StScrollBar {
 
   > StBoxLayout {
     // this is the main window that the widgets are drawn on
-    background-color: transparentize($light_bg_color, $popover-alpha-value);
-    border: 1px solid $light_borders_color;
-    box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // to match with the notification banner but maybe no?
-    border-radius: $medium_radius;
-    padding: 12px 40px 24px 40px;
+
+//    border-radius: $medium_radius;
+//    padding: 12px 40px 24px 40px;
   }
 
   StEntry {
@@ -1979,13 +1977,13 @@ StScrollBar {
     padding-left: 2px;
     .login-dialog-not-listed-button:focus &,
     .login-dialog-not-listed-button:hover & {
-      color: $dark_fg_color;
+      color: $fg_color;
     }
   }
   .login-dialog-not-listed-label {
     font-size: 90%;
     font-weight: normal;
-    color: lighten($dark_fg_color,10%);
+    color: $fg_color;
     padding-top: 1em;
   }
 
@@ -2010,14 +2008,14 @@ StScrollBar {
     .login-dialog-timed-login-indicator {
       height: 2px;
       margin: 2px 0 0 0;
-      background-color: $dark_fg_color;
+      background-color: $fg_color;
     }
-    &:focus .login-dialog-timed-login-indicator { background-color: $dark_fg_color; }
+    &:focus .login-dialog-timed-login-indicator { background-color: $fg_color; }
   }
 
   .login-dialog-username,
   .user-widget-label {
-    color: $dark_fg_color;
+    color: $fg_color;
     font-size: 120%;
     font-weight: normal;
     text-align: left;
@@ -2036,7 +2034,7 @@ StScrollBar {
   }
 
   .login-dialog-prompt-label {
-      color: $dark_caption_fg_color;
+      color: $caption_fg_color;
       font-size: 110%;
       padding-top: 1em;
   }
@@ -2046,9 +2044,9 @@ StScrollBar {
   }
 
   .login-dialog-session-list-button {
-      color: $dark_inactive_element_color;
-      &:hover,&:focus { color: $dark_fg_color; }
-      &:active { color: darken($dark_fg_color, 50%); }
+      color: $inactive_element_color;
+      &:hover,&:focus { color: $fg_color; }
+      &:active { color: darken($fg_color, 50%); }
   }
 
 //SCREEN SHIELD
@@ -2123,10 +2121,17 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  background: #2c001e;
-  background-size: cover;
-  background-position: top right;
-  background-repeat: no-repeat;
+
+  // background: #2c001e;
+  // background-size: cover;
+  // background-position: top right;
+  // background-repeat: no-repeat;
+
+  background:none;
+    background-color:none;
+    background-gradient-direction: vertical;
+    background-gradient-start: $purple;
+    background-gradient-end: #2c001e;
 }
 
 #screenShieldNotifications {
