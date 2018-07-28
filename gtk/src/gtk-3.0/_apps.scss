@@ -526,3 +526,14 @@ window.background.chromium {
   > menu, .menu { border: none; } // Removed ugly menu borders
   > menu > menuitem { border-radius: 0; } // Removed rounded menu corners
 }
+
+normal-button {
+  @include button(normal);
+
+  &:hover {
+    @include button(hover);
+  }
+  &:active { @include button(active)}
+
+  &:disabled {@include button(insensitive);}
+}
