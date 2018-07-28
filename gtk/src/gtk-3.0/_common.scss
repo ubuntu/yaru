@@ -1559,12 +1559,14 @@ headerbar {
   label:backdrop { color: inherit; } // make sure to inherit the backdrop label color
 
   .title {
+    color: $headerbar_text_color;
     font-weight: 500;
     padding-left: 12px;
     padding-right: 12px;
   }
 
   .subtitle {
+    color: $headerbar_text_color;
     font-size: smaller;
     padding-left: 12px;
     padding-right: 12px;
@@ -1633,7 +1635,7 @@ headerbar {
                           (":backdrop:disabled", 'backdrop-insensitive'),
                           (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
                             @if $t == "normal" {
-                              &#{$state} { @include button($t, $c, $headerbar_text_color, $flat:true); }  
+                              &#{$state} { @include button($t, $c, $headerbar_fg_color, $flat:true); }  
                             }
                             
                             @else {
@@ -4455,7 +4457,6 @@ button.titlebutton {
   }
 
   &.close {
-    color: white;
     @include draw_circle($selected_bg_color, $close:true);
     &:hover {
       @include draw_circle($selected_bg_color, $close:true);
