@@ -178,9 +178,14 @@ StScrollBar {
   height: 22px;
   background-size: contain;
   background-position: right center;
-  background-image: url("toggle-off.svg");
-  &:checked { background-image: url("toggle-on.svg"); }
 }
+
+  @each $v in us, intl {
+    .toggle-switch-#{$v} {
+      background-image: url("toggle-off-#{$v}.svg");
+      &:checked { background-image: url("toggle-on-#{$v}.svg"); }
+    }
+  }
 
 /* links */
 .shell-link {
