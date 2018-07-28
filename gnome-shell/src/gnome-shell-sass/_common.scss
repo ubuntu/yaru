@@ -1945,13 +1945,13 @@ StScrollBar {
     $c: darken($light_bg_color,10%);
     $tc: $dark_fg_color;
     @include button(normal, $c, $tc);
-    &:active { @include button(active, $c, $tc);}
+    &:active { @include button(undecorated, $c, $tc);}
     &:focus { @include button(focus, $c, $tc);}
     &:hover { @include button(hover, $c, $tc);}
     &:focus:hover { @include button(focus-hover, $c, $tc); }
     &:insensitive { @include button(insensitive, $c, $tc); }
-    &:hover, &:focus:hover {background-color: $light_base_hover_color;}
-    &:active, &:focus:active {background-color: $light_base_active_color;}
+    &:hover, &:focus:hover { background-color: $silk; }
+    &:active, &:focus:active { background-color: darken($silk,5%); }
 
     &:default {
       padding-bottom: 5px;
@@ -1993,9 +1993,9 @@ StScrollBar {
     padding: .2em;
     width: 23em;
     &:expanded .login-dialog-user-list-item:selected {
-      //colors with transparency don't seem to be possible so emulate $base_hover_color
-      background-color: lighten($ash,20%);
+      background-color: transparent;//$selected_bg_color;
       color: $selected_fg_color;
+      border: 1px solid $selected_bg_color;
     }
     &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
   }
@@ -2121,17 +2121,11 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-
-  // background: #2c001e;
-  // background-size: cover;
-  // background-position: top right;
-  // background-repeat: no-repeat;
-
-  background:none;
-    background-color:none;
-    background-gradient-direction: vertical;
-    background-gradient-start: $purple;
-    background-gradient-end: #2c001e;
+  background: none;
+  background-color: none;
+  background-gradient-direction: horizontal;
+  background-gradient-start: #2c001e;
+  background-gradient-end: $purple;
 }
 
 #screenShieldNotifications {
