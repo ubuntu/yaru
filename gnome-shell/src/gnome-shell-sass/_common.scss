@@ -1993,9 +1993,8 @@ StScrollBar {
     padding: .2em;
     width: 23em;
     &:expanded .login-dialog-user-list-item:selected {
-      background-color: transparent;//$selected_bg_color;
+      background-color: $selected_bg_color;
       color: $selected_fg_color;
-      border: 1px solid $selected_bg_color;
     }
     &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
   }
