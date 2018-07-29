@@ -1628,7 +1628,6 @@ StScrollBar {
     &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
     &:insensitive {
       @include entry(insensitive, $tc: $_fg, $c: $_bg);
-      border-color: $silk;
   }
 }
 
@@ -1945,13 +1944,13 @@ StScrollBar {
     $c: darken($light_bg_color,10%);
     $tc: $dark_fg_color;
     @include button(normal, $c, $tc);
-    &:active { @include button(undecorated, $c, $tc);}
-    &:focus { @include button(focus, $c, $tc);}
-    &:hover { @include button(hover, $c, $tc);}
+    &:active { @include button(undecorated-active, $c, $tc);}
+    &:focus { @include button(focus, $c, $tc); border-color: $c;}
+    &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
     &:insensitive { @include button(insensitive, $c, $tc); }
-    &:hover, &:focus:hover { background-color: $silk; }
-    &:active, &:focus:active { background-color: darken($silk,5%); }
+    &:hover, &:focus:hover { @include button(focus, $c, $tc); }
+    &:active, &:focus:active { @include button(undecorated-active, $ash); }
 
     &:default {
       padding-bottom: 5px;
@@ -2123,8 +2122,8 @@ StScrollBar {
   background: none;
   background-color: none;
   background-gradient-direction: vertical;
-  background-gradient-start: $purple;
-  background-gradient-end: #2c001e;
+  background-gradient-start: #6D2169;
+  background-gradient-end: #370026;
 }
 
 #screenShieldNotifications {
