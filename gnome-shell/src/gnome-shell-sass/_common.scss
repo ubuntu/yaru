@@ -1906,7 +1906,7 @@ StScrollBar {
 .framed-user-icon {
   background-size: contain;
   border: 1px solid $light_borders_color;
-  color: $dark_fg_color;
+  color: $fg_color;
   border-radius: $small_radius;
   &:hover {
     // TODO
@@ -1927,13 +1927,6 @@ StScrollBar {
   border: none;
   background-color: transparent;
 
-  > StBoxLayout {
-    // this is the main window that the widgets are drawn on
-
-//    border-radius: $medium_radius;
-//    padding: 12px 40px 24px 40px;
-  }
-
   StEntry {
     @extend %light_entry;
   }
@@ -1948,7 +1941,7 @@ StScrollBar {
     &:focus { @include button(focus, $c, $tc); border-color: $c;}
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
-    &:insensitive { @include button(insensitive, $c, $tc); }
+    &:insensitive { @include button(insensitive, $c, $tc); border-color: $c;}
     &:hover, &:focus:hover { @include button(focus, $c, $tc); }
     &:active, &:focus:active { @include button(undecorated-active, $ash); }
 
