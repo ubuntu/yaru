@@ -2122,9 +2122,9 @@ StScrollBar {
 #lockDialogGroup {
   background: none;
   background-color: none;
-  background-gradient-direction: horizontal;
-  background-gradient-start: #2c001e;
-  background-gradient-end: $purple;
+  background-gradient-direction: vertical;
+  background-gradient-start: $purple;
+  background-gradient-end: #2c001e;
 }
 
 #screenShieldNotifications {
