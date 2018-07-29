@@ -183,7 +183,7 @@ StScrollBar {
   @each $v in us, intl {
     .toggle-switch-#{$v} {
       background-image: url("toggle-off-#{$v}.svg");
-      &:checked { background-image: url("toggle-on-#{$v}.svg"); }
+      &:checked { background-image: url("toggle-on.svg"); }
     }
   }
 
