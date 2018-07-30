@@ -537,3 +537,17 @@ normal-button {
 
   &:disabled {@include button(insensitive);}
 }
+
+/***********
+ * Ubiquity *
+ ***********/
+
+ #progress_mode, #title_eventbox { background-color: $purple; }
+ #dot_grid { 
+  .empty { background-color: transparentize(white, 0.6); }
+  .full progress { background-color: white; }
+}
+
+#page_title { color: white; }
+
+#live_installer.background.titlebar { background-color: $purple; }
