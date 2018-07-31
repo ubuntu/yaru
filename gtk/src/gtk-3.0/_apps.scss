@@ -469,11 +469,11 @@ headerbar button image ~ window decoration ~ menu separator {
 
 .org-gnome-Todo {
   taskrow.activatable.new-task-row button.popup.toggle {
-   border-radius: 0px $small_radius $small_radius 0px ;
+   border-radius: 0px;
    border: none;
    border-left: 1px solid $borders-color;
    padding-left: 10px; padding-right: 10px;
-   -gtk-outline-radius: 0px $small_radius $small_radius 0px;
+   -gtk-outline-radius: 0px;
 
   }
 
