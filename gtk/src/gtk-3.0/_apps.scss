@@ -550,4 +550,5 @@ normal-button {
 
 #page_title { color: white; }
 
-#live_installer.background.titlebar { background-color: $purple; }
+#warning_dialog.background { border: 1px solid darken($borders_color,20%); }
+#dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
