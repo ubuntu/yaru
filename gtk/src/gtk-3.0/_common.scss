@@ -3230,7 +3230,7 @@ scale {
               @if $dir_class == 'horizontal' {
                 min-height: 26px;
                 min-width: 22px;
-                background-size: 14px 22px;
+                background-size: 16px 24px;
 
                 @if $marks_infix == 'scale-has-marks-above' {
                   margin-top: -14px;
@@ -3244,7 +3244,7 @@ scale {
               @else {
                 min-height: 22px;
                 min-width: 26px;
-                background-size: 22px 14px;
+                background-size: 24px 16px;
 
                 @if $marks_infix == 'scale-has-marks-above' {
                   margin-left: -14px;
