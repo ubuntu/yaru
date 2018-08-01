@@ -1727,6 +1727,9 @@ headerbar {
         &:checked {
             box-shadow: inset 0 1px rgba(0 , 0, 0, 0.6);
         }
+        &:backdrop {
+            &, &:checked { border-color: lighten($inkstone, 3%); }
+        }
     }
 
     .stack-switcher.linked {
