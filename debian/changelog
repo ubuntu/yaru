@@ -1,10 +1,16 @@
-yaru-theme (18.10.1) UNRELEASED; urgency=medium
+yaru-theme (18.10.1) cosmic; urgency=medium
 
+  [ Didier Roche ]
   * debian/yaru-theme-gnome-shell.postinst:
     - bump priority for Yaru gdm css to 15, higher than current ubuntu
-      unthemed default.
+      unthemed default. (LP: #1783571)
 
- -- Didier Roche <didrocks@ubuntu.com>  Wed, 25 Jul 2018 16:33:42 +0200
+  [ Marco Trevisan (Treviño) ]
+  * Theme updated to support gnome-shell 3.29.90
+  * debian/gbp.conf:
+    - add build-package configuration
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 01 Aug 2018 16:32:46 +0200
 
 yaru-theme (18.10) cosmic; urgency=medium
 
