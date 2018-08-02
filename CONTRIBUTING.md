@@ -25,7 +25,7 @@ sudo ninja install
 If you want to change the GDM look and point to the same stylesheet. You only need to do this once.
 
 ```sh
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/local/share/gnome-shell/theme/Yaru/gnome-shell.css 15
+update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/Yaru/gnome-shell.css 15
 ```
 
 If you reboot, select the Yaru session in GDM and you should be all right.
