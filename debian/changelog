@@ -1,8 +1,14 @@
 yaru-theme (18.10.2) UNRELEASED; urgency=medium
 
+  [ Marco Trevisan (Treviño) ]
   * debian/control:
     - add Vcs parameters
     - point homepage to https://community.ubuntu.com/c/desktop/theme-refresh
+
+  [ Didier Roche ]
+  * debian/gbp.conf:
+    - only keep necessary configuration, skip the rest which isn't needed in
+      gbp buildpackage / gbp buildpackage --git-tag-only
 
  -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 01 Aug 2018 17:35:14 +0200
 
