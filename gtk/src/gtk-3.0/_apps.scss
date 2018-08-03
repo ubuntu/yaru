@@ -105,6 +105,11 @@ list.tweak-categories separator {
     }
   }
 
+  .nautilus-canvas-item.dim-label,
+  .nautilus-list-dim-label {
+      color: if($variant==light, lighten($text_color,25%), darken($text_color,25%));
+      &:selected { color: $silk }
+  }
 
 }
 
