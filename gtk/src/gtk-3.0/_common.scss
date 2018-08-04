@@ -1715,6 +1715,26 @@ headerbar {
       }
     }
 
+    :not(.linked) button.text-button:not(.suggested-action):not(.destructive-action):not(:indeterminate) {
+        // non-special text buttons are not flat
+        $c: $headerbar_bg_color;
+        @each $state, $t in ("", "normal"),
+                            (":hover", "hover"),
+                            (":hover:backdrop", "backdrop-hover"),
+                            (":active, &:checked", "active"),
+                            (":hover:checked", "active-hover"),
+                            (":disabled", "insensitive"),
+                            (":disabled:active, &:disabled:checked", "insensitive-active"),
+                            (":backdrop", "backdrop"),
+                            (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                            (":backdrop:disabled", 'backdrop-insensitive'),
+                            (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+                              &#{$state} { @include button($t, $c, $tc); }
+        }
+        &:not(:hover) { background-color: $hb_pathbar_bg; }
+        &:backdrop { background-color: $hb_pathbar_bg_backdrop; border-color: $hb_pathbar_border_backdrop; }
+      }
+
     .stack-switcher.linked,
     buttonbox.linked {
       // round the stackswitcher corners by using border
