@@ -1715,9 +1715,14 @@ headerbar {
       }
     }
 
-    buttonbox button,
-    buttonbox button.text-button ~ button {
-        &, &.backdrop { border: 1px solid $inkstone; }
+    buttonbox.linked button,
+    buttonbox.linked button.text-button ~ button {
+        border-style: solid;
+        border-color: $inkstone;
+
+        &:not(:only-child) { border-width: 1px 0; }
+        &:first-child { border-width: 1px 0 1px 1px; }
+        &:last-child { border-width: 1px 1px 1px 0; }
     }
 
     .stack-switcher.linked {
