@@ -1715,10 +1715,9 @@ headerbar {
       }
     }
 
-    buttonbox  {
-      #recent-button, #save-as-button {
-        border: 1px solid $inkstone;
-      }
+    buttonbox button,
+    buttonbox button.text-button ~ button {
+        &, &.backdrop { border: 1px solid $inkstone; }
     }
 
     .stack-switcher.linked {
