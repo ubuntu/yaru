@@ -1715,8 +1715,13 @@ headerbar {
       }
     }
 
-    .stack-switcher.linked,
-    buttonbox.linked {
+    buttonbox  {
+      #recent-button, #save-as-button {
+        border: 1px solid $inkstone;
+      }
+    }
+
+    .stack-switcher.linked {
       // round the stackswitcher corners by using border
       border-width: 0 8px;
       border-style: solid;
