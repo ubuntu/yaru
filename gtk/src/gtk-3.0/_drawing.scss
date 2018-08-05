@@ -222,7 +222,7 @@
     color: $tc;
 
     @if $flat {
-      border-color: $c;
+      border-color: if($c==$headerbar_bg_color, $inkstone, $c);
       box-shadow: none;
     } @else {
       border-color: $_border;
@@ -321,7 +321,7 @@
     background-color: $_bg;
 
     @if $flat {
-      border-color: $_bg;
+      border-color: if($_bg==$headerbar_bg_color, $inkstone, $_bg);
       box-shadow: none;
     } @else {
       border-color: if($c!=$button_bg_color, $c, $insensitive_borders_color);
