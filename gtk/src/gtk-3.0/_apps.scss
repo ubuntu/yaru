@@ -542,11 +542,20 @@ normal-button {
  * Ubiquity *
  ***********/
 
- #progress_mode, #title_eventbox { background-color: $purple; }
- #dot_grid { 
-  .empty { background-color: transparentize(white, 0.6); }
-  .full progress { background-color: white; }
+#title_eventbox {
+   background-image: linear-gradient(0.25turn, $orange, $purple);
+   border-left: 1px solid $orange;
+   border-right: 1px solid $purple;
+ }
+#progress_mode {
+ background-color: #FAFAFA;
+ margin-bottom: -4000px;
 }
+#dot_grid {
+.empty { background-color: transparentize(white, 0.6); }
+.full progress { background-color: white; }
+}
+#progress_mode { max-height: 0px;}
 
 #page_title { color: white; }
 
