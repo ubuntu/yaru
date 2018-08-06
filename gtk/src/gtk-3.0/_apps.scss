@@ -541,23 +541,18 @@ normal-button {
 /***********
  * Ubiquity *
  ***********/
-
-#title_eventbox {
-   background-image: linear-gradient(0.25turn, $orange, $purple);
-   border-left: 1px solid $orange;
-   border-right: 1px solid $purple;
+$installer_gradient_start: darken($purple,15%);
+$installer_gradient_end: $purple;
+$purple_gradient: linear-gradient(0.25turn, $installer_gradient_start, $installer_gradient_end);
+#progress_mode, #title_eventbox {
+   background-image: $purple_gradient;
+   border-left: 1px solid $installer_gradient_start;
+   border-right: 1px solid $installer_gradient_end;
  }
-#progress_mode {
- background-color: #FAFAFA;
- margin-bottom: -4000px;
-}
 #dot_grid {
 .empty { background-color: transparentize(white, 0.6); }
 .full progress { background-color: white; }
 }
-#progress_mode { max-height: 0px;}
-
 #page_title { color: white; }
-
 #warning_dialog.background { border: 1px solid darken($borders_color,20%); }
 #dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
