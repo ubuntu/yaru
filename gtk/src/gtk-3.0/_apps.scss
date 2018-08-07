@@ -541,18 +541,27 @@ normal-button {
 /***********
  * Ubiquity *
  ***********/
-$installer_gradient_start: darken($purple,15%);
-$installer_gradient_end: $purple;
-$purple_gradient: linear-gradient(0.25turn, $installer_gradient_start, $installer_gradient_end);
-#progress_mode, #title_eventbox {
-   background-image: $purple_gradient;
-   border-left: 1px solid $installer_gradient_start;
-   border-right: 1px solid $installer_gradient_end;
- }
-#dot_grid {
-.empty { background-color: transparentize(white, 0.6); }
-.full progress { background-color: white; }
+
+#live_installer {
+  #title_eventbox {
+    border-left-color: $bg_color;
+    border-right-color: $bg_color;
+    background-color: $bg_color;
+    box-shadow: none;
+    &:backdrop {
+     background-color: $backdrop_bg_color;
+     border-left-color: $backdrop_bg_color;
+     border-right-color: $backdrop_bg_color;
+    }
+   }
+   #progress_mode {
+     background-color: $headerbar_bg_color;
+     &:backdrop { background-color: $backdrop_headerbar_bg_color; }
+   }
+  #dot_grid {
+    .empty { background-color: transparentize($blue, 0.6); }
+  }
+  #page_title { color: $purple; }
+  #warning_dialog.background { border: 1px solid $borders_color; }
+  #dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
 }
-#page_title { color: white; }
-#warning_dialog.background { border: 1px solid darken($borders_color,20%); }
-#dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
