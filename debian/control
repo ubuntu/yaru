@@ -3,10 +3,12 @@ Section: misc
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: debhelper (>= 10.3),
-               meson,
-               sassc,
-Standards-Version: 4.1.1
-Homepage: https://github.com/ubuntu/yaru
+Build-Depends-Indep: meson,
+                     sassc,
+Standards-Version: 4.1.5
+Homepage: https://community.ubuntu.com/c/desktop/theme-refresh
+Vcs-Browser: https://github.com/ubuntu/yaru
+Vcs-Git: https://github.com/ubuntu/yaru.git
 
 Package: yaru-theme-gnome-shell
 Architecture: all
