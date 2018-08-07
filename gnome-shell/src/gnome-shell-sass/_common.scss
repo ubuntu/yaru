@@ -58,10 +58,11 @@ stage {
   min-height: 22px; // make just a little taller
   padding: 4px 32px;
   @include button(normal);
-  &:active { @include button(active); }
   &:focus { @include button(focus); }
   &:hover { @include button(hover); }
   &:insensitive { @include button(insensitive); }
+  &:active { @include button(active); }
+
 }
 
 .modal-dialog-linked-button {
@@ -102,7 +103,6 @@ StEntry {
   @include entry(normal);
   &:focus { @include entry(focus);}
   &:insensitive { @include entry(insensitive);}
-
   selection-background-color: $selected_bg_color;
   selected-color: $selected_fg_color;
   StIcon.capslock-warning {
@@ -136,6 +136,7 @@ StScrollBar {
   StButton#vhandle, StButton#hhandle {
     border-radius: 8px;
     background-color: mix($fg_color, $bg_color, 60%);
+    //border: 3px solid transparent; //would be nice to margin or at least to transparent
     margin: 3px;
     &:hover { background-color: mix($fg_color, $bg_color, 80%); }
     &:active { background-color: $selected_bg_color; }
@@ -148,14 +149,26 @@ StScrollBar {
   $_bg: $indication_bg_color;
   $_inactive_bg: $inactive_indication_bg_color;
   height: 1em;
+  -barlevel-height: 0.2em; //increase the height because of the border removal
+  -barlevel-background-color: $_inactive_bg; //background of the trough
+  -barlevel-border-color: $borders_color; //trough border color
+  -barlevel-active-background-color: $_bg; //active trough fill
+  -barlevel-active-border-color: $_bg; //active trough border
+  -barlevel-overdrive-color: $destructive_color;
+  -barlevel-overdrive-border-color: darken($destructive_color,10%);
+  -barlevel-overdrive-separator-width: 0.2em;
+  -barlevel-border-width: 0px; //remove the border for a more flat trough
+  -slider-handle-radius: 8px;
+  color: $fg_color; //Color of the knob/slider-handle
+
+  /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   -slider-height: 0.2em; //increase the height because of the border removal
   -slider-background-color:  $_inactive_bg;//background of the trough
   -slider-border-color: $borders_color; //trough border color
   -slider-active-background-color: $_bg; //active trough fill
   -slider-active-border-color: $_bg; //active trough border
   -slider-border-width: 0px; //remove the border for a more flat trough
-  -slider-handle-radius: 8px;
-  color: $fg_color; //Color of the knob/slider-handle
+  /* END: VERSION SPECIFIC CODE (< 3.29.90) */
 }
 
 /* Check Boxes */
@@ -177,7 +190,6 @@ StScrollBar {
   width: 65px;
   height: 22px;
   background-size: contain;
-  background-position: right center;
 }
 
   @each $v in us, intl {
@@ -223,6 +235,7 @@ StScrollBar {
     color: $dark_subtext_color;
     padding-bottom: .4em;
   }
+
 }
 
   .mount-dialog-subject,
@@ -568,17 +581,19 @@ StScrollBar {
 
     &:insensitive { color: transparentize($fg_color,0.5); }
   }
+  //.popup-status-menu-item { font-weight: normal;  color: pink; } //dunno what that is
   &.panel-menu {
     -boxpointer-gap: 4px;
     margin-bottom: 1.75em;
   }
 }
 
+
+
   .popup-menu-ornament {
     text-align: right;
     width: 1.2em;
   }
-
   .popup-menu-boxpointer,
   .candidate-popup-boxpointer {
     -arrow-border-radius: $medium_radius;
@@ -591,6 +606,7 @@ StScrollBar {
   }
 
   .popup-separator-menu-item {
+    //-margin-horizontal: 24px;
     height: 1px; //not really the whole box
     margin: 6px 64px;
     background-color: transparent;
@@ -624,13 +640,26 @@ StScrollBar {
     $c: $inactive_indication_bg_color;
     height: 0.3em;
     border-radius: 0.3em;
-    background-color: $c;
-    color: $c;
+    -barlevel-height: 0.3em;
+    -barlevel-background-color: $c;
+    -barlevel-active-background-color: $indication_bg_color;
+    -barlevel-overdrive-color: $destructive_color;
+    -barlevel-overdrive-separator-width: 0.2em;
+
+    /* START: VERSION SPECIFIC CODE (< 3.29.90) */
+    /* However, if we enable them, we break the theming for new versions,
+       so, it's probably better not to show a background at all than breaking
+       upstream version.  */
+    // background-color: $c;
+    // color: $c;
+    /* END: VERSION SPECIFIC CODE (< 3.29.90) */
   }
+  /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   .level-bar {
     background-color: $indication_bg_color;
     border-radius: 0.3em;
   }
+  /* END: VERSION SPECIFIC CODE (< 3.29.90) */
 }
 
 /* Pad OSD */
@@ -797,6 +826,7 @@ StScrollBar {
   transition-duration: 500ms;
   font-weight: 450;
   height: 1.86em;
+  font-feature-settings: "tnum";
 
   &.unlock-screen,
   &.login-screen,
@@ -834,6 +864,7 @@ StScrollBar {
     transition-duration: 100ms;
 
     .app-menu-icon {
+      -st-icon-style: symbolic;
       margin-left: 4px;
       margin-right: 4px;
       //dimensions of the icon are hardcoded
@@ -889,9 +920,10 @@ StScrollBar {
 
   .screencast-indicator { color: $warning_color; }
 
+  .remote-access-indicator { color: $warning_color; }
+
   &.solid {
     background-color: transparentize($panel_bg_color, $panel_opaque_value);
-
     /* transition from transparent to solid */
     box-shadow: none;
     transition-duration: 500ms;
@@ -1034,6 +1066,7 @@ StScrollBar {
       padding: 0.1em;
       margin: 2px;
       border-radius: $small_radius;
+      font-feature-settings: "tnum";
       &:hover,&:focus { background-color: lighten($bg_color,5%); }
       &:selected {
         color: white;
@@ -1043,7 +1076,6 @@ StScrollBar {
         margin: 0;
         &:hover {background-color: $base_hover_color;}
       }
-
       &.calendar-day-heading {  //day of week heading
         color: $inactive_element_color;
         margin-top: 1em;
@@ -1196,7 +1228,7 @@ StScrollBar {
   .aggregate-menu {
     min-width: 21em;
     .popup-menu-icon { padding: 0 4px; }
-    .popup-sub-menu .popup-menu-item :first-child {
+    .popup-sub-menu .popup-menu-item > :first-child {
       &:ltr { /* 12px spacing + 2*4px padding */
               padding-left: 20px; margin-left: 1.09em; }
       &:rtl { /* 12px spacing + 2*4px padding */
@@ -1205,6 +1237,7 @@ StScrollBar {
   }
 
   .system-menu-action {
+    -st-icon-style: symbolic;
     color: $fg_color;
     transition-duration: 200ms;
     border-radius: $small_radius; /* wish we could do 50% */
@@ -1299,7 +1332,7 @@ StScrollBar {
 /* OVERVIEW */
 
 #overview {
-  spacing: 24px;
+  spacing: 24px; //
 }
 
 .overview-controls {
@@ -1409,6 +1442,7 @@ StScrollBar {
       width: 24px;
       height: 24px;
     }
+
   }
 
   .dash-item-container > StWidget {
@@ -1433,6 +1467,7 @@ StScrollBar {
 
     .overview-icon { icon-size: 96px; }
   }
+  //.app-display { spacing: 20px; }
 
   .system-action-icon {
     background-color: black;
@@ -1463,7 +1498,6 @@ StScrollBar {
       border-right-width: 0;
       border-radius: 0;
     }
-
     &:last-child {
      border-radius: 0;
     }
@@ -1503,6 +1537,7 @@ StScrollBar {
       border-image: none;
       background-image: none;
     }
+
   }
 
   .app-well-app-running-dot { //running apps indicator
@@ -1511,7 +1546,7 @@ StScrollBar {
     border-radius: 3px;
     background-color: $selected_bg_color;
     margin-bottom: 1px;
-}
+  }
 
   %icon_tile {
     // appeareance of apps
@@ -1535,6 +1570,7 @@ StScrollBar {
     color: white;
     transition-duration: 100ms;
   }
+
 
   // Collections
   .app-folder-popup { //expanded collection
@@ -1738,54 +1774,54 @@ StScrollBar {
     &:rtl { padding-left: 0; padding-right: 4px; }
   }
 
-    //hotplug
+  //hotplug
   .hotplug-transient-box {
-      padding: 2px 72px 2px 12px;
-      spacing: 6px;
+    spacing: 6px;
+    padding: 2px 72px 2px 12px;
   }
-  .hotplug-notification-item {
-    padding: 2px 10px;
-    color: $dark_fg_color;
+    .hotplug-notification-item {
+      padding: 2px 10px;
+      color: $dark_fg_color;
 
-    @include button(undecorated);
-    border-radius: 0 0 $medium_radius $medium_radius;
-    &:focus { padding: 1px 71px 1px 11px; }
-    &:hover { background-color: $light_base_hover_color;}
-    &:active { background-color: $light_base_active_color; border: none;}
-  }
+      @include button(undecorated);
+      border-radius: 0 0 $medium_radius $medium_radius;
+      &:focus { padding: 1px 71px 1px 11px; }
+      &:hover { background-color: $light_base_hover_color;}
+      &:active { background-color: $light_base_active_color; border: none;}
+    }
 
-  .hotplug-notification-item-icon {
-    icon-size: 24px;
-    padding: 2px 5px;
-  }
+    .hotplug-notification-item-icon {
+      icon-size: 24px;
+      padding: 2px 5px;
+    }
 
-  .hotplug-resident-box { spacing: 8px;}
+    .hotplug-resident-box { spacing: 8px; }
 
-  .hotplug-resident-mount {
-    spacing: 8px;
-    border-radius: 4px;
-    &:hover { background-color: transparent; }
-  }
+    .hotplug-resident-mount {
+      spacing: 8px;
+      border-radius: 4px;
+      &:hover { background-color: transparent; }
+    }
 
-  .hotplug-resident-mount-label {
-    color: inherit;
-    padding-left: 6px;
-  }
+    .hotplug-resident-mount-label {
+      color: inherit;
+      padding-left: 6px;
+    }
 
-  .hotplug-resident-mount-icon {
-    icon-size: 24px;
-    padding-left: 6px;
-  }
+    .hotplug-resident-mount-icon {
+      icon-size: 24px;
+      padding-left: 6px;
+    }
 
-  .hotplug-resident-eject-icon {
-    icon-size: 16px;
-  }
+    .hotplug-resident-eject-icon {
+      icon-size: 16px;
+    }
 
-  .hotplug-resident-eject-button {
-    padding: 7px;
-    border-radius: 5px;
-    color: $dark_fg_color;
-  }
+    .hotplug-resident-eject-button {
+      padding: 7px;
+      border-radius: 5px;
+      color: $dark_fg_color;
+    }
 
 /* Eeeky things */
 
@@ -1812,8 +1848,6 @@ StScrollBar {
     padding: 4px;
     spacing: 4px;
   }
-
-  .keyboard-row { spacing: 15px; }
 
   .keyboard-key {
     background-color: #393f3f;
@@ -1957,6 +1991,7 @@ StScrollBar {
       &:insensitive { @include button(insensitive, $c:transparentize($success_color, 0.40)); color: $fg_color;}
     }
   }
+
 }
 
   .login-dialog-logo-bin { padding: 24px 0px; }
@@ -1982,7 +2017,6 @@ StScrollBar {
   .login-dialog-user-list-view { -st-vfade-offset: 1em; }
   .login-dialog-user-list {
     spacing: 12px;
-    padding: .2em;
     width: 23em;
     &:expanded .login-dialog-user-list-item:selected {
       background-color: $selected_bg_color;
@@ -1992,13 +2026,13 @@ StScrollBar {
   }
   .login-dialog-user-list-item {
     border-radius: 5px;
-    padding: .2em;
+    padding: 6px;
     color: $text_color;
-    &:ltr { padding-right: 1em; }
-    &:rtl { padding-left: 1em; }
+    &:ltr .user-widget { padding-right: 1em; }
+    &:rtl .user-widget { padding-left: 1em; }
     .login-dialog-timed-login-indicator {
       height: 2px;
-      margin: 2px 0 0 0;
+      margin-top: 6px;
       background-color: $fg_color;
     }
     &:focus .login-dialog-timed-login-indicator { background-color: $fg_color; }
@@ -2065,9 +2099,10 @@ StScrollBar {
 .screen-shield-clock-time {
   font-size: 72pt;
   text-shadow: 0px 2px 2px rgba(0,0,0,0.4);
+  font-feature-settings: "tnum";
 }
 
-.screen-shield-clock-date {
+.screen-shield-clock-date { 
   font-size: 28pt;
   font-weight: normal;
 }
