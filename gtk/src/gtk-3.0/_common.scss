@@ -534,6 +534,7 @@ button {
     border: 1px solid;
     border-radius: $small_radius;
     outline-color: $selected_bg_color;
+    outline-style: solid;
     outline-offset: -1px;
     -gtk-outline-radius: $small_radius;
 
