@@ -533,8 +533,8 @@ button {
     padding: 2px 6px;
     border: 1px solid;
     border-radius: $small_radius;
-    outline-color: $selected_bg_color;
-    outline-style: solid;
+    outline-color: $focus_color;
+    outline-style: dashed;
     outline-offset: -1px;
     -gtk-outline-radius: $small_radius;
 
