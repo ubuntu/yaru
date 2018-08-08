@@ -565,7 +565,7 @@ button {
     &.default {
       $_default_color: $selected_bg_color;
         color: $_default_color;
-        &:hover { color: darken($_default_color, 15%); }
+        &:hover { color: darken($_default_color, 10%); }
     }
 
     &:hover {
