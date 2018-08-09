@@ -1664,6 +1664,7 @@ StScrollBar {
     &:focus { @include entry(focus, $tc: $_fg, $c: $_bg);}
     &:insensitive {
       @include entry(insensitive, $tc: $_fg, $c: $_bg);
+      border-color: transparentize($ash, 0.5);
   }
 }
 
@@ -1975,7 +1976,7 @@ StScrollBar {
     &:focus { @include button(focus, $c, $tc); border-color: $c;}
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
-    &:insensitive { @include button(insensitive, $c, $tc); border-color: $c;}
+    &:insensitive { @include button(insensitive, $c, $tc); background-color: $c;}
     &:hover, &:focus:hover { @include button(focus, $c, $tc); }
     &:active, &:focus:active { @include button(undecorated-active, $ash); }
 
@@ -2102,7 +2103,7 @@ StScrollBar {
   font-feature-settings: "tnum";
 }
 
-.screen-shield-clock-date { 
+.screen-shield-clock-date {
   font-size: 28pt;
   font-weight: normal;
 }
