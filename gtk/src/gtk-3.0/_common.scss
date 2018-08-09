@@ -565,10 +565,10 @@ button {
 
     &.default {
       $_default_color: $selected_bg_color;
+      color: $_default_color;
+      &:hover {
         color: $_default_color;
-        &:hover {
-          color: $_default_color;
-        }
+      }
     }
 
     &:hover {
