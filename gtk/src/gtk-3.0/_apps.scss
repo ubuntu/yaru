@@ -548,25 +548,14 @@ normal-button {
  ***********/
 
 #live_installer {
-  #title_eventbox {
-    border-left-color: $bg_color;
-    border-right-color: $bg_color;
-    background-color: $bg_color;
-    box-shadow: none;
-    &:backdrop {
-     background-color: $backdrop_bg_color;
-     border-left-color: $backdrop_bg_color;
-     border-right-color: $backdrop_bg_color;
-    }
-   }
-   #progress_mode {
+   #progress_mode, #title_eventbox {
      background-color: $headerbar_bg_color;
      &:backdrop { background-color: $backdrop_headerbar_bg_color; }
    }
   #dot_grid {
     .empty { background-color: transparentize($blue, 0.6); }
   }
-  #page_title { color: $purple; }
+  #page_title { color: $headerbar_fg_color; }
 }
 #warning_dialog.background { border: 1px solid $borders_color; }
 #dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
