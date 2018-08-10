@@ -4213,6 +4213,8 @@ infobar {
       }
     }
   }
+  > revealer > box > box label:backdrop { color: $button_backdrop_bg_color; }
+  button:not(:insensitive):backdrop { background-color: darken($button_bg_color, 5%); }
   *:link { @extend %link_selected; }
 }
 
