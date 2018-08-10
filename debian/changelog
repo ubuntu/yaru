@@ -1,10 +1,33 @@
-yaru-theme (18.10.1) UNRELEASED; urgency=medium
+yaru-theme (18.10.2) UNRELEASED; urgency=medium
 
+  [ Marco Trevisan (Treviño) ]
+  * debian/control:
+    - add Vcs parameters
+    - point homepage to https://community.ubuntu.com/c/desktop/theme-refresh
+
+  [ Didier Roche ]
+  * debian/gbp.conf:
+    - only keep necessary configuration, skip the rest which isn't needed in
+      gbp buildpackage / gbp buildpackage --git-tag-only
+  * debian/control:
+    - move some build-deps to b-d-i as requested on the MIR
+    - bump Standards-Version to latest
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 01 Aug 2018 17:35:14 +0200
+
+yaru-theme (18.10.1) cosmic; urgency=medium
+
+  [ Didier Roche ]
   * debian/yaru-theme-gnome-shell.postinst:
     - bump priority for Yaru gdm css to 15, higher than current ubuntu
-      unthemed default.
+      unthemed default. (LP: #1783571)
 
- -- Didier Roche <didrocks@ubuntu.com>  Wed, 25 Jul 2018 16:33:42 +0200
+  [ Marco Trevisan (Treviño) ]
+  * Theme updated to support gnome-shell 3.29.90
+  * debian/gbp.conf:
+    - add build-package configuration
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 01 Aug 2018 16:32:46 +0200
 
 yaru-theme (18.10) cosmic; urgency=medium
 

@@ -105,6 +105,11 @@ list.tweak-categories separator {
     }
   }
 
+  .nautilus-canvas-item.dim-label,
+  .nautilus-list-dim-label {
+      color: if($variant==light, lighten($text_color,30%), darken($text_color,25%));
+      &:selected { color: $silk }
+  }
 
 }
 
@@ -469,11 +474,11 @@ headerbar button image ~ window decoration ~ menu separator {
 
 .org-gnome-Todo {
   taskrow.activatable.new-task-row button.popup.toggle {
-   border-radius: 0px $small_radius $small_radius 0px ;
+   border-radius: 0px;
    border: none;
    border-left: 1px solid $borders-color;
    padding-left: 10px; padding-right: 10px;
-   -gtk-outline-radius: 0px $small_radius $small_radius 0px;
+   -gtk-outline-radius: 0px;
 
   }
 
@@ -537,3 +542,20 @@ normal-button {
 
   &:disabled {@include button(insensitive);}
 }
+
+/***********
+ * Ubiquity *
+ ***********/
+
+#live_installer {
+   #progress_mode, #title_eventbox {
+     background-color: $headerbar_bg_color;
+     &:backdrop { background-color: $backdrop_headerbar_bg_color; }
+   }
+  #dot_grid {
+    .empty { background-color: transparentize($blue, 0.6); }
+  }
+  #page_title { color: $headerbar_fg_color; }
+}
+#warning_dialog.background { border: 1px solid $borders_color; }
+#dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
