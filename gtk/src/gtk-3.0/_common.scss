@@ -28,7 +28,7 @@
 
   outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
   outline-style: dashed;
-  outline-offset: 0px;
+  outline-offset: -3px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
   -gtk-secondary-caret-color: $selected_bg_color
@@ -534,7 +534,6 @@ button {
     border: 1px solid;
     border-radius: $small_radius;
     outline-color: $focus_color;
-    outline-style: dashed;
     outline-offset: -3px;
     -gtk-outline-radius: $small_radius;
 
@@ -564,11 +563,7 @@ button {
     }
 
     &.default {
-      $_default_color: $selected_bg_color;
-        color: $_default_color;
-        &:hover {
-          color: $_default_color;
-        }
+        border-color: $ash;
     }
 
     &:hover {
@@ -1660,12 +1655,6 @@ headerbar {
                               (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
             &#{$state} { @include button($t, $b_color, white, $flat:true); }
           }
-        }
-      }
-
-      &.default {
-        &, &:hover {
-          color: $headerbar_text_color;
         }
       }
     }
