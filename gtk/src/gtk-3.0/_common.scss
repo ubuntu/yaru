@@ -565,10 +565,9 @@ button {
 
     &.default {
       $_default_color: $selected_bg_color;
+      &, &:hover {
         color: $_default_color;
-        &:hover {
-          color: $_default_color;
-        }
+      }
     }
 
     &:hover {
@@ -1665,7 +1664,7 @@ headerbar {
 
       &.default {
         &, &:hover {
-          color: $headerbar_text_color;
+          color: $headerbar_fg_color;
         }
       }
     }
