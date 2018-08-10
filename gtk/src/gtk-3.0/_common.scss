@@ -1555,7 +1555,7 @@ headerbar {
   color: $headerbar_fg_color;
   @if $variant=='dark' {
     &:backdrop {
-      border-bottom: 1px solid $backdrop_borders_color;
+      box-shadow: inset 0 -1px 0 0 transparentize($backdrop_borders_color,0.2);
     }
   }
 
