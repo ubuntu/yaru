@@ -39,9 +39,17 @@ list.tweak-categories separator {
     }
 
     button, button image {
-      &, &:hover, &:active {
+      & {
         color: $_c;
-        background-color: $_bg;
+        background-color: transparent;
+      }
+      &:hover {
+        color: $destructive_color;
+        background-color: transparent;
+      }
+      &:active  {
+        color: transparentize($destructive_color, 0.3);
+        background-color: transparent;
       }
     }
   }
