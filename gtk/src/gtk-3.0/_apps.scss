@@ -22,8 +22,10 @@ list.tweak-categories separator {
   *scrolledwindow:backdrop { opacity: 0.9; }
 
   paned box.floating-bar {
-    background: transparentize($jet,0.1);
-    color: $porcelain;
+    $_bg: transparentize($jet,0.1);
+    $_c: $headerbar_fg_color;
+    background: $_bg;
+    color: $_c;
     border: none;
     border-radius: $small_radius 0 0 0;
 
@@ -33,6 +35,21 @@ list.tweak-categories separator {
       }
       @else {
         background: transparentize(lighten($jet,10%),0.1);
+      }
+    }
+
+    button, button image {
+      & {
+        color: $_c;
+        background-color: transparent;
+      }
+      &:hover {
+        color: $destructive_color;
+        background-color: transparent;
+      }
+      &:active  {
+        color: transparentize($destructive_color, 0.3);
+        background-color: transparent;
       }
     }
   }
