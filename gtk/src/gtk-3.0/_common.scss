@@ -1552,6 +1552,11 @@ headerbar {
   border-radius: 0;
   background-color: $headerbar_bg_color;
   color: $headerbar_fg_color;
+  @if $variant=='dark' {
+    &:backdrop {
+      box-shadow: inset 0 -1px 0 0 transparentize($backdrop_borders_color,0.2);
+    }
+  }
 
   &:backdrop {
     background-color: $backdrop_headerbar_bg_color;
