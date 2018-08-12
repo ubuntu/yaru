@@ -31,7 +31,7 @@ list.tweak-categories separator {
       // style both normal and hover at the same time is necessary
       // otherwise gtk will take the style from somewhere else...
       &, &:hover {
-        background-color: darken($slate, 2%);
+        background-color: transparent;
         border-color: darken($inkstone, 4%);
         color: $bg_color;
         margin: 2px;
