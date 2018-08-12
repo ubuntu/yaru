@@ -273,7 +273,6 @@ entry {
     padding: 2px 6px;
     border: 1px solid;
     border-radius: $small_radius;
-    transition: $button_transition;
     caret-color: currentColor;
 
     @include entry(normal);
@@ -298,7 +297,10 @@ entry {
       }
     }
 
-    &:focus { @include entry(focus); }
+    &:focus {
+      @include entry(focus);
+      transition: $button_transition;
+    }
 
     &:disabled { @include entry(insensitive); }
 
@@ -372,7 +374,7 @@ entry {
   .linked:not(.vertical) > & { @extend %linked; }
   .linked:not(.vertical) > &:focus + &,
   .linked:not(.vertical) > &:focus + button,
-  .linked:not(.vertical) > &:focus + combobox > box > button.combo { border-left-color: $selected_bg_color; }
+  .linked:not(.vertical) > &:focus + combobox > box > button.combo { transition: $button_transition; border-left-color: $selected_bg_color; }
 
   .linked:not(.vertical) > &:drop(active) + &,
   .linked:not(.vertical) > &:drop(active) + button,
