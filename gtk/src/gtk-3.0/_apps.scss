@@ -27,6 +27,22 @@ list.tweak-categories separator {
     border: none;
     border-radius: $small_radius 0 0 0;
 
+    button.circular.flat.image-button {
+      // style both normal and hover at the same time is necessary
+      // otherwise gtk will take the style from somewhere else...
+      &, &:hover {
+        background-color: darken($slate, 2%);
+        border-color: darken($inkstone, 4%);
+        color: $bg_color;
+        margin: 2px;
+      }
+
+      // ...and here style just the difference from normal
+      &:hover {
+        color: $destructive_color;
+      }
+    }
+
     &:backdrop {
       @if $variant=='light' {
         background: transparentize(darken($backdrop_bg_color,10%),0.1);
