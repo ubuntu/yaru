@@ -802,6 +802,13 @@ button {
     }
   }
 
+  &.destructive-action image {
+    icon-shadow: 0 0 2px darken($destructive_color, 25%);
+    &:backdrop {
+      icon-shadow: 0 0 2px darken($destructive_color, 10%);
+    }
+  }
+
   .stack-switcher > & {
     // to position the needs attention dot, padding is added to the button
     // child, a label needs just lateral padding while an icon needs vertical
