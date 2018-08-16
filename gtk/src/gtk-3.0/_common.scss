@@ -1577,12 +1577,14 @@ headerbar {
   label:backdrop { color: inherit; } // make sure to inherit the backdrop label color
 
   .title {
+    color: $headerbar_text_color;
     font-weight: 500;
     padding-left: 12px;
     padding-right: 12px;
   }
 
   .subtitle {
+    color: $headerbar_text_color;
     font-size: smaller;
     padding-left: 12px;
     padding-right: 12px;
@@ -1638,10 +1640,6 @@ headerbar {
       }
     }
 
-    .text-button:not(.suggested-action):not(:hover) {
-      border-color: $hb_button_bg_hover;
-    }
-
     button, button.flat, button.titlebutton.appmenu {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
@@ -1654,7 +1652,13 @@ headerbar {
                           (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
                           (":backdrop:disabled", 'backdrop-insensitive'),
                           (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-                            &#{$state} { @include button($t, $c, $tc, $flat:true); }
+                            @if $t == "normal" {
+                              &#{$state} { @include button($t, $c, $headerbar_fg_color, $flat:true); }  
+                            }
+                            
+                            @else {
+                              &#{$state} { @include button($t, $c, $tc, $flat:true); }
+                            }
       }
 
       @each $b_type, $b_color in (suggested-action, $success_color),
