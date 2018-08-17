@@ -1,6 +1,7 @@
-yaru-theme (18.10.2) UNRELEASED; urgency=medium
+yaru-theme (18.10.2) cosmic; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
+  * New upstream release r17
   * debian/control:
     - add Vcs parameters
     - point homepage to https://community.ubuntu.com/c/desktop/theme-refresh
@@ -13,7 +14,84 @@ yaru-theme (18.10.2) UNRELEASED; urgency=medium
     - move some build-deps to b-d-i as requested on the MIR
     - bump Standards-Version to latest
 
- -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 01 Aug 2018 17:35:14 +0200
+  [ feichtmeier ]
+  * Shrink icon sizes
+
+  [ Eaglers ]
+  * Recolour Universal Access toggles to dark
+  * Recolour disabled Universal Access toggles to #6c6767
+
+  [ feichtmeier ]
+  * Style ubiquity
+  * Add a border and padding for the Quit-dialog
+  * Remove the global buttonbox stackswitcher imitation
+
+  [ Carlo Lobrano ]
+  * buttonbox as standard button
+  * Fixed toggle button size change on hover
+  * Improved pressed effect on button inside buttonbox
+  * Fixed buttonbox border color in backdrop
+  * Adjusted indentation
+  * Fixed backdrop checked button background
+
+  [ Feichtmeier ]
+  * Update gtkrc
+
+  [ Carlo Lobrano ]
+  * Fix update-alternative commands (#684)
+
+  [ feichtmeier ]
+  * Make secondary nautilus icon labels less colorful
+  * Lighten the nautilus dim-label even further
+  * Gradient top panel, remove the bottom panel with -4000px margin-bottom
+  * Purple gradient for top and bottom section
+  * White header, purple heading, black bottom, blue progressdots
+  * Move the dialogue code out of the window code to be applied.
+  * Default button and outline style
+  * Add dark orange hover for default buttons
+  * 10% darker orange is enough
+  * Use a box-shadow on hover for the default button and no color change
+  * Style headerbar default buttons with headerbar text color
+
+  [ Carlo Lobrano ]
+  * Testing solid selection ring
+
+  [ feichtmeier ]
+  * Focus color, -1px offset, dashed
+  * -3px offset
+  * Dashed outline for buttons
+  * Back to dark header and footer, transparent progress dots, backdrop fix
+  * Light entry and button fix
+  * Use headerbar_fg_color for .default btns in headerbar
+
+  [ Carlo Lobrano ]
+  * Fixed indentation
+  * optimized selector
+
+  [ Eaglers ]
+  * Fix Universal Access toggles
+
+  [ feichtmeier ]
+  * Dark theme border improvements
+  * Emulate the border with an inset box shadow
+  * Infobar backdrop improvements
+
+  [ Carlo Lobrano ]
+  * Replaced :insensitive pseudoclass with :disabled
+  * Style circular button in Nautilus
+  * Fixed speed of combobox selection ring transition
+  * Update ISSUE_TEMPLATE.md
+  * Made circular stop button background transparent
+  * Improved visibility of destructive-action button icon
+
+  [ feichtmeier ]
+  * Remove the headerbar border for geary new messages.
+  * Remove the uneven margin because of the recent buttonbox changes
+
+  [ Carlo Lobrano ]
+  * Remove opacity parameter from label in emoji-section
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 17 Aug 2018 18:00:13 +0200
 
 yaru-theme (18.10.1) cosmic; urgency=medium
 
