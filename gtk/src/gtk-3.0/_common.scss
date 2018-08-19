@@ -428,6 +428,8 @@ treeview, row {
     outline-color: transparentize(white, 0.2);
     outline-offset: -2px;
     -gtk-outline-radius: $small_radius;
+
+    radio, check { border-color: white; }
  }
  &:backdrop:hover { background-color: lighten($base_hover_color, 20%); }
 }
