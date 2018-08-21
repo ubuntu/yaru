@@ -9,7 +9,7 @@
     @return if($c!=white, lighten($c, 5%), transparentize(white, 0.3));
   }
   @else {
-    @if $c==$orange or $c==$hb_pathbar_bg {
+    @if $c==$selected_bg_color or $c==$hb_pathbar_bg {
       @return lighten($c, 5%);
     } @else {
       @return darken($c, 2%);
