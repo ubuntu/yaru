@@ -540,12 +540,18 @@ window.background.chromium {
   }
 
   headerbar.titlebar {
-    //Remove the round corners until firefox fixed the white border bleed at the top edges
+    // Remove the round corners until firefox fixed the white border bleed at the top edges
     border-radius: 0;
   }
 
-  > menu, .menu { border: none; } // Removed ugly menu borders
+  > menu, .menu { border: none; } // Removed menu borders
   > menu > menuitem { border-radius: 0; } // Removed rounded menu corners
+
+  // Adapt scrollbars a bit more to the GTK Scrollbar styling
+  scrollbar {
+    background-color: transparent;
+    border-color: transparent;
+  }
 }
 
 normal-button {
