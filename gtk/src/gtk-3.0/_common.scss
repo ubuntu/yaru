@@ -803,9 +803,15 @@ button {
   }
 
   &.destructive-action image {
-    icon-shadow: 0 0 2px darken($destructive_color, 25%);
+    -gtk-icon-shadow: 1px  0px 1px darken($destructive_color, 25%),
+                      0px  1px 1px darken($destructive_color, 25%),
+                      0px -1px 1px darken($destructive_color, 25%),
+                     -1px  0px 1px darken($destructive_color, 25%);
     &:backdrop {
-      icon-shadow: 0 0 2px darken($destructive_color, 10%);
+      -gtk-icon-shadow: 1px  0px 1px darken($destructive_color, 10%),
+                        0px  1px 1px darken($destructive_color, 10%),
+                        0px -1px 1px darken($destructive_color, 10%),
+                       -1px  0px 1px darken($destructive_color, 10%);
     }
   }
 
