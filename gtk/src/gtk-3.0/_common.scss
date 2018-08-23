@@ -2172,39 +2172,36 @@ treeview.view {
   }
 
   &.progressbar { // progress bar in treeviews
-    @if $variant == light { color: $base_color; }
-    $c: $neutral_color;
-    border-radius: 3px;
-    background-color: $c;
+    background-color: $neutral_color;
+    border-radius: $small_radius 0 0 $small_radius;
+    border: 1px solid $neutral_color;
+    color: $text_color;
 
     &:selected {
       &:focus, & {
-        border-radius: 3px;
-        color: $c;
-        background-color: $base_color;
-
-        &:backdrop {
-            color: $c;
-            background-color: $backdrop_base_color;
-          }
-        }
+        background-color: $neutral_color;
+        border-color: $selected_bg_color;
+        border-style: solid none;
+        border-width: 1px 0;
+        border-radius: $small_radius 0 0 $small_radius;
       }
+    }
 
     &:backdrop {
-      @if $variant == 'light' { color: $backdrop_base_color; }
+      color: $backdrop_text_color;
     }
   }
 
   &.trough { // progress bar trough in treeviews
     background-color: $dark_fill;
-    border-radius: 3px;
+    border-radius: $small_radius;
+    border: 1px solid $dark_fill;
 
     &:selected {
       &:focus, & {
-        background-color: if($variant == 'light',
-                             transparentize($selected_fg_color, 0.7),
-                             darken($success_color, 5%));
-        border-radius: 3px;
+        background-color: lighten($selected_bg_color, 15%);
+        border-radius: $small_radius;
+        border: 1px solid $selected_bg_color;
       }
     }
   }
