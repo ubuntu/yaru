@@ -107,6 +107,11 @@ $popover_shadow: 0 2px 5px transparentize(black, 0.75);
   }
 
   &:selected {
+    /* below 'border-color' actually targets check/radio
+     * border in a selected (orange) row. I could not find
+     * a less generic way to target such widgets inside a .view */
+    border-color: $base_color;
+
     &:focus, & {
       @extend %selected_items;
       /* border-radius change here caused issue 473: selected radio becomes squared
@@ -428,8 +433,9 @@ treeview, row {
     outline-color: transparentize(white, 0.2);
     outline-offset: -2px;
     -gtk-outline-radius: $small_radius;
- }
- &:backdrop:hover { background-color: lighten($base_hover_color, 20%); }
+  }
+
+  &:backdrop:hover { background-color: lighten($base_hover_color, 20%); }
 }
 
 treeview entry {
@@ -3770,7 +3776,7 @@ row {
     &:active { box-shadow: inset 0 2px 2px -2px transparentize(black, 0.8); }
 
     &:not(:backdrop):selected {
-      &:active { box-shadow: inset 3px 0 $selected_bg_color, inset 0 2px 3px -1px transparentize(black, 0.5); }
+      &:active { box-shadow: inset 2px 0 $selected_bg_color, inset 0 2px 3px -1px transparentize(black, 0.5); }
 
       &.has-open-popup { background-color: mix($fg_color, $selected_bg_color, 10%); }
 
