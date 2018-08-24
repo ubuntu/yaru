@@ -6,7 +6,7 @@ If you're filing an issue for a missing icon, look for **Icon Request** section 
 
 Thanks a lot!
 
-
+------ ISSUE TEMPLATE starts HERE ------
 ## Expected Behavior
 
 (What you were trying to do)
@@ -32,6 +32,9 @@ I you installed from the sources, go the Yaru folder and copy the output of the 
 
     `$ git describe`
 
+Software that presents the issue:
+- Name:
+- Version:
 
 
 ## Icon Request
