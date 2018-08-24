@@ -2111,14 +2111,15 @@ treeview.view {
 
   &:selected {
     &:focus, & {
-      border-radius: 0;
-
       @extend %selected_items;
+      border-radius: 0;
     }
 
     &:backdrop, & {
+      color: $selected_fg_color;
+      /* TODO: What the following lines actually do? */
       border-left-color: mix($selected_fg_color, $selected_bg_color, 50%);
-      border-top-color: transparentize($borders_color, 0.8); // doesn't work unfortunatelly
+      border-top-color: transparentize($borders_color, 0.8); // doesn't work unfortunately
     }
   }
 
