@@ -1633,7 +1633,8 @@ headerbar {
       }
 
       selection {
-        @extend %selected_text;
+        color: $headerbar_fg_color;
+        background-color: darken($text_selection, 45%);
       }
     }
 
