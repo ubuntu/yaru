@@ -1632,9 +1632,18 @@ headerbar {
         &:hover { color: $backdrop_headerbar_text_color; }
       }
 
+      // Sadly, we need a dedicated styling here because
+      // the $variant is independant from the headerbar bg
       selection {
-        color: $headerbar_fg_color;
-        background-color: darken($text_selection, 45%);
+        $_bg: darken($text_selection, 45%);
+        $_c: $headerbar_fg_color;
+        background-color: $_bg;
+        color: $_c;
+
+        &:backdrop {
+          background-color: darken($_bg, 5%);
+          color: darken($_c,5%);
+        }
       }
     }
 
