@@ -2460,14 +2460,15 @@ popover.background {
  *************/
 notebook {
   > header {
-    padding: 1px;
-    border-color: $borders_color;
+    $_borders_color: if($light, $borders_color, darken($slate, 8%));
+    background: if($light, $porcelain, lighten($headerbar_bg_color, 6%));
+    border-color: $_borders_color;
     border-width: 1px;
-    background: if($variant==light, $porcelain, $base_color);
+    padding: 1px;
 
     &:backdrop {
+      background-color: if($light, $backdrop_bg_color, $backdrop_headerbar_bg_color);
       border-color: $backdrop_borders_color;
-      background-color: $backdrop_bg_color;
     }
 
     tabs { margin: -1px; }
@@ -2480,7 +2481,7 @@ notebook {
 
         > tab {
           border-radius: 4px 4px 0 0;
-          &:checked { border-bottom-color: transparent; }
+          &:checked { border-bottom-style: none; }
         }
       }
     }
@@ -2493,7 +2494,7 @@ notebook {
 
         > tab {
           border-radius: 0 0 4px 4px;
-          &:checked { border-top-color: transparent; }
+          &:checked { border-top-style: none; }
         }
       }
     }
@@ -2597,12 +2598,17 @@ notebook {
       outline-offset: -5px;
       outline-style: dashed;
       -gtk-outline-radius: $small_radius;
-      color: $text_color;
+      color: if($light, $text_color, $silk);
       border: 1px solid transparent;
 
       &:hover:not(:active):not(:backdrop):not(:checked) {
-        background-color: mix($insensitive_bg_color, $base_color, 25%);
-        border-color: mix($borders_color, $base_color, 60%);
+        @if $light {
+          background-color: mix($insensitive_bg_color, $base_color, 25%);
+          border-color: mix($_borders_color, $base_color, 60%);
+        } @else {
+          background-color: $base_color;
+          border-color: $_borders_color;
+        }
       }
 
       &:backdrop {
@@ -2616,7 +2622,7 @@ notebook {
         color: $fg_color;
         font-weight: 500;
         background-color: $base_color;
-        border-color: $borders_color;
+        border-color: $_borders_color;
       }
 
       &:backdrop:checked {
@@ -2627,7 +2633,10 @@ notebook {
 
       // colors the button like the label, overridden otherwise
       button.flat {
-        &:hover { color: currentColor; }
+        &:hover {
+          color: currentColor;
+          border-color: if($light, $base_color, $slate);
+        }
 
         &, &:backdrop { color: gtkalpha(currentColor, 0.3); }
 

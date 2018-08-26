@@ -14,7 +14,7 @@ list.tweak-categories separator {
   // keep details box visible
   // details box looks ugly when many items are selected and it floats above the orange
   background-image: none;
-  background-color: if($variant==light,white,$base_color);
+  background-color: if($light, white, $base_color);
   &:backdrop { background-color: $backdrop_base_color }
 
   // Makes icons less bright in backdrop
@@ -61,13 +61,13 @@ list.tweak-categories separator {
   }
 
   treeview.view header button {
-    background-color: if($variant==light,white,$base_color);
+    background-color: if($light, $base_color, $base_color);
     background-image: none;
     border-color: transparentize($borders_color, 0.6);
     border-left: 1px;
 
     &:hover {background-color: $bg_color;}
-    &:backdrop { background-color: if($variant==light,#EEEFF0,$backdrop_base_color);} // It should be _backdrop_color(white); but that does not work.
+    &:backdrop { background-color: if($light, #EEEFF0, $backdrop_base_color);} // It should be _backdrop_color(white); but that does not work.
   }
 
   @at-root %remove_folder_icon_tint,
@@ -158,7 +158,7 @@ terminal-window {
     &:checked {
       color: $terminal_fg_color;
       border-color: $inkstone;
-      border-bottom: 2px solid darken($orange, 10%);
+      border-bottom: 2px solid darken($selected_bg_color, 10%);
     }
   }
 
@@ -180,7 +180,7 @@ terminal-window {
           (':disabled', 'insensitive') {
             &#{$state} {
               @include button($t, $headerbar_bg_color, $headerbar_bg_color, $flat:true);
-              color: white;
+              color: $base_color;
             }
           }
 
