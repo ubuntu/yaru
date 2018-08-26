@@ -195,7 +195,7 @@ label {
   &:backdrop {
     color: $backdrop_text_color;
 
-    selection { @extend %selected_items:backdrop; }
+    selection { @extend %selected_text:backdrop; }
   }
 }
 
@@ -1644,9 +1644,18 @@ headerbar {
         &:hover { color: $backdrop_headerbar_text_color; }
       }
 
+      // Sadly, we need a dedicated styling here because
+      // the $variant is independant from the headerbar bg
       selection {
-        background-color: #48b7de;
-        color: if($variant=='light', $text_color, darken(#2D2D2D,5%));
+        $_bg: darken($neutral_color, 10%);
+        $_c: $headerbar_fg_color;
+        background-color: $_bg;
+        color: $_c;
+
+        &:backdrop {
+          background-color: _backdrop_color($_bg);
+          color: _backdrop_color($_c);
+        }
       }
     }
 
@@ -4549,15 +4558,15 @@ button.titlebutton {
 
 %selected_text {
   $c: $text_selection;
-  $tc: if($variant=='light',$text_color,darken(#2D2D2D,5%));
+  $tc: $text_color;
   background-color: $c;
   color: $tc;
 
   &:disabled { color: mix($tc, $c, 50%); }
 
   &:backdrop {
-    background-color: if($variant==light,lighten($c,5%),darken($c,5%));
-    color: $slate;
+    background-color: _backdrop_color($c);
+    color: $backdrop_text_color;
 
     &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
