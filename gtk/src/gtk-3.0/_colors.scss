@@ -11,10 +11,10 @@ $text_color: if($variant == 'light', #2D2D2D, $porcelain);
 //
 $selected_fg_color: white;
 $selected_bg_color: $orange;
-$borders_color: if($variant == 'light', darken($bg_color, 18%), darken($slate, 8%));
+$borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 4%));
 $link_color: $blue;
 $link_visited_color: if($variant == 'light', darken($link_color, 20%), lighten($link_color, 10%));
-$borders_edge: if($variant == 'light',rgba(0, 0, 0, 0.1), transparent($borders_color, 0.6));
+$borders_edge: if($variant == 'light',rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
 $top_hilight: $borders_edge;
 $dark_fill: if($variant == 'light',#CDCDCD, $ash);
 $menu_color: if($variant == 'light', $base_color, darken($base_color,5%));
