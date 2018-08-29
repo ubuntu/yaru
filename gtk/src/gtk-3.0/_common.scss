@@ -3063,7 +3063,7 @@ treeview.view {
   &:disabled { background-color: $insensitive_dark_fill; }
 
   &:backdrop {
-    background-color: $backdrop_dark_fill;
+    background-color: _backdrop_color($dark_fill);
     transition: $backdrop_transition;
 
     &:disabled { background-color: $backdrop_insensitive_dark_fill; }
@@ -3620,11 +3620,7 @@ levelbar {
     }
 
     &.empty {
-      // TODO: this looks kind of ugly
-      $_bg: if($variant == "light", $dark_fill, transparentize($dark_fill, .7));
-      background-color: $_bg;
-
-      &:backdrop { background-color: transparent; }
+      @include block_highlight($dark_fill);
     }
   }
 }
