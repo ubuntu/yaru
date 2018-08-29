@@ -297,6 +297,7 @@
 
     @if $c == $headerbar_bg_color {
       $_bg: lighten($c, 20%);
+      border-color: $_bg;
     } @else {
       @if $flat == true { $c: darken($c, 5%); }
       $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
