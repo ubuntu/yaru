@@ -259,11 +259,11 @@
   @else if $t==active {
     $_bg: null;
     $_border_top_color: null;
+    $_box_shadow: none;
 
     @if $c==$headerbar_bg_color {
       $_bg: lighten($c, 10%);
-      $_border: darken($c, 3%);
-      $_border_top_color: darken($_border, 20%);
+      $_border: $_bg;
     }
     @else if $c==$button_bg_color{
       @if $variant=='light' {
@@ -276,6 +276,7 @@
         $_border: $borders_color;
         $_border_top_color: darken($_border, 8%);
       }
+      $_box_shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.05);
     }
     @else if $c==$success_color or $c==$destructive_color or $c==$neutral_color or $c==$purple {
       $_bg: darken($c, 10%);
@@ -283,7 +284,7 @@
       $_border_top_color: darken($_border, 5%);
     }
 
-    box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
+    box-shadow: $_box_shadow;
     border-color: $_border;
     border-top-color: $_border_top_color;
     background-color: $_bg;
@@ -294,6 +295,8 @@
 
     @if $c == $headerbar_bg_color {
       $_bg: lighten($c, 20%);
+      border-color: $_bg;
+      box-shadow: none;
     } @else {
       @if $flat == true { $c: darken($c, 5%); }
       $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
