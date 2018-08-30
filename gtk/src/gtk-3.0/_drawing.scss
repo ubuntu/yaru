@@ -430,7 +430,7 @@
     }
 
     $_border_top_color: null;
-    @if $c==$headerbar_bg_color { $_border_top_color: darken($_border,10%);}
+    @if $c==$headerbar_bg_color { $_border_top_color: $_bg;}
     @else if $c==$button_bg_color {
       @if $variant=='light' { $_border_top_color: darken($_border,10%);}
       @else { $_border_top_color: darken($_border,2%);}
