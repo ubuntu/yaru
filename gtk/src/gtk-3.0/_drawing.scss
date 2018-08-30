@@ -251,7 +251,19 @@
       box-shadow: none;
     } @else {
       border-color: $_border;
-      border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
+      $_amount: 12%;
+      @if $c==$headerbar_bg_color {
+        $_amount: 15%;
+      }
+      @else if $c==$button_bg_color {
+        @if $variant=='light' {
+          $_amount: 15%;
+        }
+        @else {
+          $_amount: 4%;
+        }
+      }
+      border-bottom-color: darken($_border, $_amount);
       box-shadow: 0 1px transparentize(black, 0.85);
     }
   }
