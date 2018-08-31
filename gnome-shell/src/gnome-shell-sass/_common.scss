@@ -65,12 +65,12 @@ stage {
 
 }
 
-.modal-dialog-linked-button {
+.modal-dialog-linked-button, %light_button {
   border-right-width: 1px;
-  $c: $light_button_bg_color;
+  $c: $light_bg_color;
   $tc: $dark_fg_color;
   @include button(normal, $c, $tc);
-  &:active { @include button(active, $c, $tc);}
+  &:active { @include button(undecorated-active, $c, $tc);}
   &:focus { @include button(focus, $c, $tc);}
   &:hover { @include button(hover, $c, $tc);}
   &:focus:hover { @include button(focus-hover, $c, $tc); }
@@ -1708,27 +1708,12 @@ StScrollBar {
   }
 
   .notification-button {
-    @include button(normal);
-    &:active { @include button(active); background-color: $light_base_active_color;}
-    &:hover { @include button(hover); background-color: $light_base_hover_color;}
-
-    &:first-child {
-      border-radius: 0px 0px 0px $medium_radius; border: none;
-    }
-    &:last-child {
-      border-right-width: 0px;
-      border-radius: 0px 0px $medium_radius 0px; border: none;
-    }
-    &:first-child:last-child {
-      border-right-width: 0px;
-      border-radius: 0px 0px $medium_radius $medium_radius;border: none;
-    }
+    @extend %light_button;
+    background-color: transparent;
+    &:focus { box-shadow: none; }
     min-height: 35px;
     padding: 0 16px;
-    background-color: transparent;
-    color: $dark_fg_color;
     font-weight: 500;
-    &:selected { border: none;}
     border: none;
   }
 
@@ -1775,14 +1760,10 @@ StScrollBar {
     padding: 2px 72px 2px 12px;
   }
     .hotplug-notification-item {
+      @extend %light_button;
+      border: none; box-shadow: none;
       padding: 2px 10px;
-      color: $dark_fg_color;
-
-      @include button(undecorated);
-      border-radius: 0 0 $medium_radius $medium_radius;
-      &:focus { padding: 1px 71px 1px 11px; }
-      &:hover { background-color: $light_base_hover_color;}
-      &:active { background-color: $light_base_active_color; border: none;}
+      &:active { border: none; box-shadow: none; }
     }
 
     .hotplug-notification-item-icon {
