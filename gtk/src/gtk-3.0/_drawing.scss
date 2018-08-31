@@ -282,6 +282,12 @@
       $_bg: darken($c, 10%);
       $_border: darken($c, 15%);
       $_border_top_color: darken($_border, 5%);
+      @if $flat {
+        $_bg: darken($c, 10%);
+        $_border: $_bg;
+        $_border_top_color: $_bg;
+        $_box_shadow: none;
+      }
     }
 
     box-shadow: $_box_shadow;
