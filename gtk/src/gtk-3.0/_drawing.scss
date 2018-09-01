@@ -611,7 +611,7 @@
   }
 
   @if $t==insensitive {
-    $_bg: if($_checked, $_dim_background , mix($c, $base_color, 50%));
+    $_bg: if($_checked, $_dim_background , transparent);
     background-color: $_bg;
     border-color: if($_checked, $_bg, $_dim_border_color);
     box-shadow: none;
@@ -635,7 +635,7 @@
   @if $t==backdrop-insensitive {
     -gtk-icon-effect: dim;
 
-    $_bg: if($_checked, $_dim_background, $bg_color);
+    $_bg: if($_checked, $_dim_background, transparent);
     background-color: $_bg;
     border-color: if($_checked, $_bg, $_dim_border_color);
     box-shadow: none;
