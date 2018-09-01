@@ -603,7 +603,7 @@
 
   @if $t==hover {
     -gtk-icon-effect: highlight;
-    background-color: if($c!=white, lighten($c, 7%), darken($c, 5%));
+    background-color: if($c==white, darken($c, 5%), lighten($c, 5%));
   }
 
   @if $t==active {
