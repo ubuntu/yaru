@@ -9,7 +9,7 @@
     @return if($c!=white, lighten($c, 5%), transparentize(white, 0.3));
   }
   @else {
-    @if $c==$orange or $c==$hb_pathbar_bg {
+    @if $c==$selected_bg_color or $c==$hb_pathbar_bg {
       @return lighten($c, 5%);
     } @else {
       @return darken($c, 2%);
@@ -75,8 +75,8 @@
     border-color: entry_focus_border($fc);
   }
   @if $t==insensitive {
-    background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), $insensitive_bg_color);
-    border-color: if($c == $headerbar_bg_color, $hb_pathbar_bg, $borders_edge);
+    background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), transparent);
+    border-color: if($c == $headerbar_bg_color, $hb_pathbar_bg, $insensitive_borders_color);
     box-shadow: none;
     color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
   }
@@ -100,7 +100,7 @@
   }
   @if $t==backdrop-insensitive {
     background-color: transparent;
-    border-color: if($c != $base_color, $hb_pathbar_bg_backdrop, transparentize($backdrop_borders_color, 0.5));
+    border-color: if($c != $base_color, $hb_pathbar_bg_backdrop, transparentize($backdrop_borders_color, 0.3));
     box-shadow: none;
     color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
 
@@ -259,11 +259,11 @@
   @else if $t==active {
     $_bg: null;
     $_border_top_color: null;
+    $_box_shadow: none;
 
     @if $c==$headerbar_bg_color {
       $_bg: lighten($c, 10%);
-      $_border: darken($c, 3%);
-      $_border_top_color: darken($_border, 20%);
+      $_border: $_bg;
     }
     @else if $c==$button_bg_color{
       @if $variant=='light' {
@@ -276,14 +276,21 @@
         $_border: $borders_color;
         $_border_top_color: darken($_border, 8%);
       }
+      $_box_shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.05);
     }
     @else if $c==$success_color or $c==$destructive_color or $c==$neutral_color or $c==$purple {
       $_bg: darken($c, 10%);
       $_border: darken($c, 15%);
       $_border_top_color: darken($_border, 5%);
+      @if $flat {
+        $_bg: darken($c, 10%);
+        $_border: $_bg;
+        $_border_top_color: $_bg;
+        $_box_shadow: none;
+      }
     }
 
-    box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
+    box-shadow: $_box_shadow;
     border-color: $_border;
     border-top-color: $_border_top_color;
     background-color: $_bg;
@@ -294,6 +301,8 @@
 
     @if $c == $headerbar_bg_color {
       $_bg: lighten($c, 20%);
+      border-color: $_bg;
+      box-shadow: none;
     } @else {
       @if $flat == true { $c: darken($c, 5%); }
       $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
@@ -427,7 +436,7 @@
     }
 
     $_border_top_color: null;
-    @if $c==$headerbar_bg_color { $_border_top_color: darken($_border,10%);}
+    @if $c==$headerbar_bg_color { $_border_top_color: $_bg;}
     @else if $c==$button_bg_color {
       @if $variant=='light' { $_border_top_color: darken($_border,10%);}
       @else { $_border_top_color: darken($_border,2%);}
@@ -444,8 +453,7 @@
   @else if $t==backdrop-insensitive {
     // backdrop insensitive button
 
-    $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
-
+    $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), transparentize($backdrop_borders_color, 0.3));
     $_bg: null;
     @if $c == $button_bg_color {
         $_bg: $backdrop_bg_color;
@@ -600,7 +608,7 @@
 
   @if $t==hover {
     -gtk-icon-effect: highlight;
-    background-color: if($c!=white, lighten($c, 7%), darken($c, 5%));
+    background-color: if($c==white, darken($c, 5%), lighten($c, 5%));
   }
 
   @if $t==active {
@@ -608,7 +616,7 @@
   }
 
   @if $t==insensitive {
-    $_bg: if($_checked, $_dim_background , mix($c, $base_color, 50%));
+    $_bg: if($_checked, $_dim_background , transparent);
     background-color: $_bg;
     border-color: if($_checked, $_bg, $_dim_border_color);
     box-shadow: none;
@@ -632,7 +640,7 @@
   @if $t==backdrop-insensitive {
     -gtk-icon-effect: dim;
 
-    $_bg: if($_checked, $_dim_background, $bg_color);
+    $_bg: if($_checked, $_dim_background, transparent);
     background-color: $_bg;
     border-color: if($_checked, $_bg, $_dim_border_color);
     box-shadow: none;

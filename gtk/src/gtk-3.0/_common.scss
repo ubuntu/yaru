@@ -195,7 +195,7 @@ label {
   &:backdrop {
     color: $backdrop_text_color;
 
-    selection { @extend %selected_items:backdrop; }
+    selection { @extend %selected_text:backdrop; }
   }
 }
 
@@ -1241,7 +1241,7 @@ spinbutton {
       color: mix($fg_color, $base_color, 90%);
       border-style: none none none solid;
       background-color: transparent;
-      border-color: $borders_edge;
+      border-color: $borders_color;
       border-radius: 0;
       box-shadow: none;
 
@@ -1258,6 +1258,7 @@ spinbutton {
       &:disabled {
         color: transparentize($insensitive_fg_color, 0.4);
         background-color: transparent;
+        border-color: $insensitive_borders_color;
       }
 
       &:active {
@@ -1268,13 +1269,14 @@ spinbutton {
       &:backdrop {
         color: mix($backdrop_fg_color, $backdrop_base_color, 90%);
         background-color: transparent;
-        border-color: transparentize($backdrop_borders_color, 0.7);
+        border-color: $backdrop_borders_color;
         transition: $backdrop_transition;
 
         &:disabled {
             color: transparentize($insensitive_fg_color, 0.5);
             background-color: transparent;
             border-style: none none none solid; // It is needed or it gets overridden
+            border-color: transparentize($backdrop_borders_color, 0.3);
 
             &:dir(rtl) { border-style: none solid none none; }
         }
@@ -1352,6 +1354,12 @@ spinbutton {
       min-width: 32px;
       padding: 0;
       border-radius: 0;
+
+      &:backdrop {
+        border-color: $backdrop_borders_color;
+        &:disabled { border-color: transparentize($backdrop_borders_color, 0.3); }
+      }
+      &:disabled { border-color: $insensitive_borders_color; }
     }
 
     button {
@@ -1644,9 +1652,18 @@ headerbar {
         &:hover { color: $backdrop_headerbar_text_color; }
       }
 
+      // Sadly, we need a dedicated styling here because
+      // the $variant is independant from the headerbar bg
       selection {
-        background-color: #48b7de;
-        color: if($variant=='light', $text_color, darken(#2D2D2D,5%));
+        $_bg: darken($neutral_color, 10%);
+        $_c: $headerbar_fg_color;
+        background-color: $_bg;
+        color: $_c;
+
+        &:backdrop {
+          background-color: _backdrop_color($_bg);
+          color: _backdrop_color($_c);
+        }
       }
     }
 
@@ -1759,10 +1776,6 @@ headerbar {
       &:not(:only-child) { border-width: 1px 0; }
       &:first-child { border-width: 1px 0 1px 1px; }
       &:last-child { border-width: 1px 1px 1px 0; }
-
-      &:checked {
-          box-shadow: inset 0 1px rgba(0 , 0, 0, 0.6);
-      }
 
       &:backdrop {
         &, &:checked { border-color: lighten($inkstone, 3%); }
@@ -2964,7 +2977,7 @@ radio {
   & {
     // for unchecked
     border: 1px solid;
-    $_c: if($light, white, transparent);
+    $_c: if($light, white, lighten($bg_color, 3%));
 
     @each $state, $t in ("", "normal"),
                         (":hover", "hover"),
@@ -3063,7 +3076,7 @@ treeview.view {
   &:disabled { background-color: $insensitive_dark_fill; }
 
   &:backdrop {
-    background-color: $backdrop_dark_fill;
+    background-color: _backdrop_color($dark_fill);
     transition: $backdrop_transition;
 
     &:disabled { background-color: $backdrop_insensitive_dark_fill; }
@@ -3620,11 +3633,7 @@ levelbar {
     }
 
     &.empty {
-      // TODO: this looks kind of ugly
-      $_bg: if($variant == "light", $dark_fill, transparentize($dark_fill, .7));
-      background-color: $_bg;
-
-      &:backdrop { background-color: transparent; }
+      @include block_highlight($dark_fill);
     }
   }
 }
@@ -4558,15 +4567,15 @@ button.titlebutton {
 
 %selected_text {
   $c: $text_selection;
-  $tc: if($variant=='light',$text_color,darken(#2D2D2D,5%));
+  $tc: $text_color;
   background-color: $c;
   color: $tc;
 
   &:disabled { color: mix($tc, $c, 50%); }
 
   &:backdrop {
-    background-color: if($variant==light,lighten($c,5%),darken($c,5%));
-    color: $slate;
+    background-color: _backdrop_color($c);
+    color: $backdrop_text_color;
 
     &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
