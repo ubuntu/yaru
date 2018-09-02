@@ -2960,7 +2960,7 @@ radio {
   & {
     // for unchecked
     border: 1px solid;
-    $_c: if($light, white, transparent);
+    $_c: if($light, white, lighten($bg_color, 3%));
 
     @each $state, $t in ("", "normal"),
                         (":hover", "hover"),
