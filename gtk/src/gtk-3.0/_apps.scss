@@ -22,7 +22,7 @@ list.tweak-categories separator {
   *scrolledwindow:backdrop { opacity: 0.9; }
 
   paned box.floating-bar {
-    background: transparentize($jet,0.1);
+    background: transparentize($jet, 0.1);
     color: $porcelain;
     border: none;
     border-radius: $small_radius 0 0 0;
@@ -46,10 +46,10 @@ list.tweak-categories separator {
 
     &:backdrop {
       @if $variant=='light' {
-        background: transparentize(darken($backdrop_bg_color,10%),0.1);
+        background: transparentize(darken($backdrop_bg_color, 10%), 0.1);
       }
       @else {
-        background: transparentize(lighten($jet,10%),0.1);
+        background: transparentize(lighten($jet, 10%), 0.1);
       }
     }
   }
@@ -100,7 +100,7 @@ list.tweak-categories separator {
         border-color: if($light, transparentize($borders_color, 0.5), darken($slate, 8%));
         border-bottom: none;
 
-        &:backdrop { background-color: if($variant==light,#EEEFF0,$backdrop_base_color); }  // It should be _backdrop_color(white); but that does not work.
+        &:backdrop { background-color: if($variant==light, #EEEFF0, $backdrop_base_color); }  // It should be _backdrop_color(white); but that does not work.
       }
 
       &:not(:checked) {
