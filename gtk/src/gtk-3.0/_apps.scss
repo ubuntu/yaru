@@ -118,7 +118,7 @@ list.tweak-categories separator {
   paned > separator {
     // separator between sidebar and main window view
     &, &:backdrop {
-      background-image: image(if($light, image(rgba(0, 0, 0, 0.06)), darken($slate, 8%)));
+      background-image: image(image(rgba(0, 0, 0, 0.06)));
     }
   }
 
