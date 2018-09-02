@@ -109,8 +109,9 @@ $popover_shadow: 0 2px 5px transparentize(black, 0.75);
   &:selected {
     /* below 'border-color' actually targets check/radio
      * border in a selected (orange) row. I could not find
-     * a less generic way to target such widgets inside a .view */
-    border-color: $base_color;
+     * a less generic way to target such widgets inside a .view.
+     * NOTE: white is the right color for both light and dark variant. */
+    border-color: white;
 
     &:focus, & {
       @extend %selected_items;
