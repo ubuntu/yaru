@@ -89,7 +89,7 @@ list.tweak-categories separator {
   }
 
   notebook > header > tabs {
-    background: if($variant==light, $porcelain, lighten($headerbar_bg_color, 6%));
+    background: if($variant==light, $porcelain, $headerbar_bg_color);
     &:backdrop { background-color: $backdrop_bg_color; }
 
     & > tab {

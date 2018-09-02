@@ -2461,7 +2461,7 @@ popover.background {
 notebook {
   > header {
     $_borders_color: if($light, $borders_color, darken($slate, 8%));
-    background: if($light, $porcelain, lighten($headerbar_bg_color, 6%));
+    background: if($light, $porcelain, $headerbar_bg_color);
     border-color: $_borders_color;
     border-width: 1px;
     padding: 1px;
