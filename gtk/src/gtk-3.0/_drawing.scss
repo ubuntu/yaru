@@ -87,7 +87,7 @@
         $_bg: $hb_button_bg_hover;
         $_tc: $backdrop_headerbar_text_color;
     } @else {
-        $_bg: if($variant=='light',_backdrop_color($c),darken($c,1%));
+        $_bg: if($variant=='light', _backdrop_color($c), $c);
         $_tc: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
     }
 
