@@ -21,3 +21,7 @@ The Suru icon set is not a "universal" set and **will not attempt to supply icon
 It is key that this project to not infringe on the brands of other projects as it is intended to be eventually used at the vendor-level.  So pull requests to add icons or symbolic links that would overwrite the branding of third-party apps **will be rejected.**
 
 That said, if you are a third-party developer would like to be cohesive with this icon set by providing a Suru-styled icon in their app, don't hesistate to reach out for assistance, if need be.
+
+## Adding Icons
+
+New [fullcolor icons](src/fullcolor) (those for applications, etc.) must be created from a template found in the source files or simply be based off of a pre-existing source file. See the [fullcolor README](src/fullcolor/README.md) for more details and new [symbolic icons](src/scalable) icons must be added to the source plate SVG found in the source files. See the [symbolic README](src/scalable/README.md) for more details.
