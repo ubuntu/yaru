@@ -2648,7 +2648,8 @@ notebook {
       button.flat {
         &:hover {
           color: currentColor;
-          border-color: if($light, $base_color, $slate);
+          background-color: $base_color;
+          border-color: $base_color;
         }
 
         &, &:backdrop { color: gtkalpha(currentColor, 0.3); }
