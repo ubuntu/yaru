@@ -2420,7 +2420,7 @@ popover.background {
   border-radius: $medium_radius;
   background-color: $menu_color;
 
-  .csd &, & { border: 1px solid $borders_color; }
+  .csd &, & { border: 1px solid if($variant=='light', $borders_color, transparentize(black, 0.5)); }
 
   box-shadow: $popover_shadow;
 
