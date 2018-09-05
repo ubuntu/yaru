@@ -5,3 +5,6 @@ services:
 
 script:
   - build-helpers/prepare-build-snap
+
+after_failure:
+  - cat /tmp/tmp*/trace.txt
