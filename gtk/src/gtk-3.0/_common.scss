@@ -1865,15 +1865,7 @@ headerbar {
         }
 
       &.text-button:not(:hover) {
-        border-color: $success_color;
-      }
-
-      &:active, &:checked {
-        $c: darken($success_color, 10%);
-        background-color: $c;
-        box-shadow: inset 0 1px 1px 0px darken($c, 3%);
-        border-color: darken($c, 7%);
-        border-top-color: darken($c, 17%);
+        border-color: transparentize(white, 0.7);
       }
 
       &.flat, &.selection-menu {
