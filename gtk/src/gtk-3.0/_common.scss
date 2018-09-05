@@ -3743,7 +3743,7 @@ scrolledwindow {
 
 //vbox and hbox separators
 separator {
-  background: transparentize($borders_color, 0.85);
+  background: transparentize($borders_color, 0.7);
   min-width: 1px;
   min-height: 1px;
 }
@@ -3952,7 +3952,7 @@ filechooser {
       &, & label { color: $text_color; }
       &:checked label { font-weight: 500; }
       &:backdrop {
-        background: transparent; 
+        background: transparent;
         label { color: $backdrop_text_color; }
       }
     }

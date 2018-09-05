@@ -30,7 +30,7 @@ elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
         echo "This PR doesn't originate from an ubuntu/ repo for an ubuntu/ destination repo. We can't upload automatically a snap on your beyond thus."
 fi
 
-docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
+docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
 # stop if this was just a test build without any snap pushed
 [ -z "$channel" ] && exit 0
@@ -48,7 +48,7 @@ sed -e "s,CHANNEL,$channel,g" "$TRAVIS_BUILD_DIR/build-helpers/gtk-common-themes
 # build and push gtk-common-themes snap
 cmd="cd $(pwd) && snapcraft"
 cmd="$cmd && echo \"$SNAP_COMMON_THEMES_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
-docker run -v $(pwd):$(pwd) -t snapcore/snapcraft sh -c "$cmd"
+docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
 # write on PR install instructions for the snap branch
 [ "$TRAVIS_PULL_REQUEST" == "false" ] && exit 0

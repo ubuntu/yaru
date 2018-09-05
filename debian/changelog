@@ -1,3 +1,77 @@
+yaru-theme (18.10.3) cosmic; urgency=medium
+
+  [ Carlo Lobrano ]
+  * Made message dialog all white
+  * Renamed icon-shadow to -gtk-icon-shadow
+  * White border for check/radio in selected treeview rows
+  * improved visibility of icon over destructive button
+  * Fixed check/radio border color in selected row
+  * Avoid changing progressbar bg color when selected in treeview
+  * Let selected labels keep bright color in backdrop
+  * Update ISSUE_TEMPLATE.md
+  * Made notebook tabs more similar to gnome-terminal's ones
+  * Testing bright borders on dark variant
+  * Revert "Testing bright borders on dark variant"
+  * apps/nautilus dark: made unchecked tab darker
+  * common/levelbar: Fixed backdrop colors
+  * apps/nautilus dark: brighter tabs borders
+  * apps/nautilus dark: brighter sidebar separator
+  * apps/nautilus: fixed sassc compiler error
+  * common/check-radio: add hover effect to uncheck
+  * drawing/check-radio: transparent background for insensitive unchecked
+  * drawing/entry dark: made backdrop/insensitive borders equal as button ones
+  * common/spinbutton: fix backdrop/insensitive border colors
+  * apps/nautilus: minor format fixes
+  * notebook: made unchecked tabs the same color as headerbar
+  * apps/nautilus dark: remove bright sidebar
+  * view/check-radio: white border for selected in dark variant
+  * drawing/entries dark: fixed backdrop entry backdround color
+  * common/notebook: reviewd tabs' button hover
+  * travis: added after_failure target
+
+  [ feichtmeier ]
+  * Selected text improvements
+  * Replace $orange with $selected_bg_color in _apps.scss
+  * Make firefox/thunderbird scrollbars background and border transparent
+  * Lighten default button text color for the dark variant by 10%
+  * Adapt headerbar entries to the darktheme.
+  * Backdrop headerbar entry styling, adapted to the dark variant
+  * Use neutral_color to have the same blue in both dark and light
+  * Make dialogue, notificatio and hotplug buttons flat.
+  * Make active and active-hover buttons flat for headerbar
+  * Adapt buttonbox.linked button
+  * Adapt backdrop
+  * Fix hotplug notification
+  * Change base_hover and base_active transparentized color
+  * Make pathbarbox linked buttons have a transparent bg in backdrop
+  * Adapt selection-mode buttons in headerbar to the new headerbar styling
+  * Adapt flat suggested action buttons
+  * Use transparentized selcted fg color instead of silk
+
+  [ Sam Hewitt ]
+  * added welcome app icons based on the CoF
+  * welcome-app -> ubuntu-welcome-app
+  * added proper Rhythmbox icon
+  * removed executable permissions from most files
+  * added overamplified symbolic; changed file permissions
+
+  [ Jeremy Bicha ]
+  * gnome-shell: Don't use symbolic app icons in the top bar (LP: #1787401)
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell: make toggle class naming dynamic
+  * gnome-shell: reduce diff with upstream code
+
+  [ Didier Roche ]
+  * New upstream release r20
+  * Use stable docker image
+  * Reset suru icon themes
+  * Rebootstrap suru icon theme files from upstream
+  * Add back suru icon build system changes
+  * Remove after_failure stenza as it's outside the container
+
+ -- Didier Roche <didrocks@ubuntu.com>  Wed, 05 Sep 2018 17:28:14 +0200
+
 yaru-theme (18.10.2) cosmic; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
