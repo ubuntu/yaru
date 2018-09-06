@@ -4473,7 +4473,7 @@ decoration {
   .csd.popup & {
     border-radius: $small_radius;
     box-shadow: $popover_shadow,
-                0 0 0 1px transparentize($_wm_border, 0.1);
+                0 0 0 1px transparentize($borders_color, 0.2);
   }
 
   tooltip.csd & {
