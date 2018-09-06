@@ -4244,50 +4244,57 @@ infobar {
                   ('.error', $error_color) {
     &#{$t} {
       background-color: $c;
+      color: white;
       border-bottom: none;
       selection { background-color: darken($c, 10%); }
-      $_active_amount: 20%;
+      $_active_amount: 8%;
       $_hover_amount: 5%;
-      $_bg: $button_bg_color;
+      $_bg: if($variant=='light', $button_bg_color, lighten($button_bg_color, $_hover_amount));
       $_c: $fg_color;
       $_active_bg: darken($_bg, $_active_amount);
       $_hover_bg: if($variant=='light', darken($_bg, $_hover_amount), lighten($_bg, $_hover_amount));
+      $_insensitive_bg: mix($c, $_bg, 20%);
 
-      button.flat {
+      button.close {
         &, &:backdrop {
           color: white;
-          background-color: transparent;
           border-color: transparent;
           box-shadow: none;
-          &:active {
-            color: transparentize(white, 0.3);
-            background-color: darken($c, $_active_amount);
-          }
-          &:hover {
-            background-color: darken($c, $_hover_amount);
-          }
+        }
+        &:hover {
+          background-color: darken($c, $_hover_amount);
+        }
+        &:active {
+          color: transparentize(white, 0.3);
+          background-color: darken($c, $_active_amount);
         }
       }
 
-      button.text-button:not(.flat) {
+      button:not(.close) {
         border-color: $_bg;
         box-shadow: none;
+        background-color: $_bg;
+        color: $_c;
+        &:hover {
+          background-color: $_hover_bg;
+          border-color: $_hover_bg;
+        }
         &:disabled {
-          background-color: $insensitive_bg_color;
-          border-color: $insensitive_bg_color;
+          background-color: $_insensitive_bg;
+          border-color: $_insensitive_bg;
         }
         &:active {
           border-color: $_active_bg;
           background-color: $_active_bg;
           color: lighten($_c, $_active_amount);
         }
-        &:hover {
-          background-color: $_hover_bg;
-          border-color: $_hover_bg;
-        }
         &:backdrop {
           background-color: _backdrop_color($_bg);
           border-color: _backdrop_color($_bg);
+          &:disabled {
+            background-color: $_insensitive_bg;
+            border-color: $_insensitive_bg;
+          }
           &:hover {
             background-color: $_hover_bg;
             border-color: $_hover_bg;
@@ -4299,12 +4306,9 @@ infobar {
         }
       }
 
-      &:backdrop, & {
-        color: $selected_fg_color;
-      }
-
       &:backdrop {
         background-color: _backdrop_color($c);
+        color: $selected_fg_color;
       }
     }
   }
