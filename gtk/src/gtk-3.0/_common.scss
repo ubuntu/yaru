@@ -573,10 +573,7 @@ button {
     }
 
     &.default {
-      $_default_color: if($variant=='light',$selected_bg_color,lighten($selected_bg_color,10%));
-      &, &:hover {
-        color: $_default_color;
-      }
+        font-weight: bold;
     }
 
     &:hover {
