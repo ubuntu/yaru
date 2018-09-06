@@ -4247,6 +4247,9 @@ infobar {
       color: white;
       border-bottom: none;
       selection { background-color: darken($c, 10%); }
+
+      // The following extensive local styling of buttons in infobars
+      // should be replaced by smarter functions in drawing after 18.10 UI-Freeze
       $_active_amount: 8%;
       $_hover_amount: 5%;
       $_bg: if($variant=='light', $button_bg_color, lighten($button_bg_color, $_hover_amount));
