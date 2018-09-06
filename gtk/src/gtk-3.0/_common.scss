@@ -4308,7 +4308,7 @@ infobar {
       }
     }
   }
-  > revealer > box > box label:backdrop { color: $button_backdrop_bg_color; }
+  > revealer > box > box label:backdrop { color: transparentize(white, 0.3); }
   *:link { @extend %link_selected; }
 }
 
