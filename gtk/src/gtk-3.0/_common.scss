@@ -4247,6 +4247,25 @@ infobar {
       border-bottom: 1px solid;
       selection { background-color: darken($c, 10%); }
 
+      button, button.flat {
+        @each $state, $t in ("", "normal"),
+                            (":hover", "hover"),
+                            (":hover:backdrop", "backdrop-hover"),
+                            (":active, &:checked", "active"),
+                            (":hover:checked", "active-hover"),
+                            (":disabled", "insensitive"),
+                            (":disabled:active, &:disabled:checked", "insensitive-active"),
+                            (":backdrop", "backdrop"),
+                            (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                            (":backdrop:disabled", 'backdrop-insensitive'),
+                            (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+                              &#{$state} { @include button($t, $c, white, $flat:true); font-weight: bold; }
+        }
+      }
+      button, button.flat {
+        &:active { color: transparentize(white, 0.3); }
+      }
+
       &:backdrop, & {
         color: $selected_fg_color;
         border-color: _border_color($c);
@@ -4259,7 +4278,6 @@ infobar {
     }
   }
   > revealer > box > box label:backdrop { color: $button_backdrop_bg_color; }
-  button:not(:disabled):backdrop { background-color: darken($button_bg_color, 5%); }
   *:link { @extend %link_selected; }
 }
 

@@ -237,7 +237,7 @@
     $_bg: null;
 
     @if $c==$headerbar_bg_color { $_bg: lighten($c, 15%); }
-    @else if $c==$success_color or $c==$destructive_color or $c==$neutral_color or $c==$purple { $_bg: lighten($c, 5%); }
+    @else if $c==$success_color or $c==$destructive_color or $c==$warning_color or $c==$neutral_color or $c==$purple { $_bg: lighten($c, 5%); }
     @else if $c==$button_bg_color {
       @if $variant=='light' { $_bg: lighten($c, 25%); }
       @else { $_bg: lighten($c, 1%); }
@@ -278,7 +278,7 @@
       }
       $_box_shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.05);
     }
-    @else if $c==$success_color or $c==$destructive_color or $c==$neutral_color or $c==$purple {
+    @else if $c==$success_color or $c==$destructive_color or $c==$warning_color or $c==$neutral_color or $c==$purple {
       $_bg: darken($c, 10%);
       $_border: darken($c, 15%);
       $_border_top_color: darken($_border, 5%);
