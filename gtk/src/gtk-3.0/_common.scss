@@ -4244,36 +4244,67 @@ infobar {
                   ('.error', $error_color) {
     &#{$t} {
       background-color: $c;
-      border-bottom: 1px solid;
+      border-bottom: none;
       selection { background-color: darken($c, 10%); }
+      $_active_amount: 20%;
+      $_hover_amount: 5%;
+      $_bg: $button_bg_color;
+      $_c: $fg_color;
+      $_active_bg: darken($_bg, $_active_amount);
+      $_hover_bg: if($variant=='light', darken($_bg, $_hover_amount), lighten($_bg, $_hover_amount));
 
-      button, button.flat {
-        @each $state, $t in ("", "normal"),
-                            (":hover", "hover"),
-                            (":hover:backdrop", "backdrop-hover"),
-                            (":active, &:checked", "active"),
-                            (":hover:checked", "active-hover"),
-                            (":disabled", "insensitive"),
-                            (":disabled:active, &:disabled:checked", "insensitive-active"),
-                            (":backdrop", "backdrop"),
-                            (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
-                            (":backdrop:disabled", 'backdrop-insensitive'),
-                            (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-                              &#{$state} { @include button($t, $c, white, $flat:true); font-weight: bold; }
+      button.flat {
+        &, &:backdrop {
+          color: white;
+          background-color: transparent;
+          border-color: transparent;
+          box-shadow: none;
+          &:active {
+            color: transparentize(white, 0.3);
+            background-color: darken($c, $_active_amount);
+          }
+          &:hover {
+            background-color: darken($c, $_hover_amount);
+          }
         }
       }
-      button, button.flat {
-        &:active { color: transparentize(white, 0.3); }
+
+      button.text-button:not(.flat) {
+        border-color: $_bg;
+        box-shadow: none;
+        &:disabled {
+          background-color: $insensitive_bg_color;
+          border-color: $insensitive_bg_color;
+        }
+        &:active {
+          border-color: $_active_bg;
+          background-color: $_active_bg;
+          color: lighten($_c, $_active_amount);
+        }
+        &:hover {
+          background-color: $_hover_bg;
+          border-color: $_hover_bg;
+        }
+        &:backdrop {
+          background-color: _backdrop_color($_bg);
+          border-color: _backdrop_color($_bg);
+          &:hover {
+            background-color: $_hover_bg;
+            border-color: $_hover_bg;
+          }
+          &:active {
+            background-color: $_active_bg;
+            border-color: $_active_bg;
+          }
+        }
       }
 
       &:backdrop, & {
         color: $selected_fg_color;
-        border-color: _border_color($c);
       }
 
       &:backdrop {
         background-color: _backdrop_color($c);
-        border-color: _backdrop_color(_border_color($c));
       }
     }
   }
