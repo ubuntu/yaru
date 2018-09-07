@@ -4241,22 +4241,80 @@ infobar {
                   ('.error', $error_color) {
     &#{$t} {
       background-color: $c;
-      border-bottom: 1px solid;
+      color: white;
+      border-bottom: none;
       selection { background-color: darken($c, 10%); }
 
-      &:backdrop, & {
-        color: $selected_fg_color;
-        border-color: _border_color($c);
+      // The following extensive local styling of buttons in infobars
+      // should be replaced by smarter functions in drawing after 18.10 UI-Freeze
+      $_active_amount: if($variant=='light', 10%, 8%);
+      $_hover_amount: 5%;
+      $_bg: if($variant=='light', $button_bg_color, lighten($button_bg_color, $_hover_amount));
+      $_c: $fg_color;
+      $_active_bg: darken($_bg, $_active_amount);
+      $_hover_bg: if($variant=='light', darken($_bg, $_hover_amount), lighten($_bg, $_hover_amount));
+      $_insensitive_bg: mix($c, $_bg, 20%);
+
+      button.close {
+        &, &:backdrop {
+          color: white;
+          border-color: transparent;
+          box-shadow: none;
+        }
+        &:hover {
+          background-color: darken($c, $_hover_amount);
+        }
+        &:active {
+          color: transparentize(white, 0.3);
+          background-color: darken($c, $_active_amount);
+        }
+      }
+
+      button:not(.close) {
+        border-color: $_bg;
+        box-shadow: none;
+        background-color: $_bg;
+        color: $_c;
+        &:hover {
+          background-color: $_hover_bg;
+          border-color: $_hover_bg;
+        }
+        &:active {
+          border-color: $_active_bg;
+          background-color: $_active_bg;
+          color: lighten($_c, $_active_amount);
+        }
+        &:disabled {
+          background-color: $_insensitive_bg;
+          border-color: $_insensitive_bg;
+          label { color: $insensitive_fg_color; }
+        }
+        &:backdrop {
+          background-color: _backdrop_color($_bg);
+          border-color: _backdrop_color($_bg);
+          &:disabled {
+            background-color: $_insensitive_bg;
+            border-color: $_insensitive_bg;
+            label { color: _backdrop_color($insensitive_fg_color); }
+          }
+          &:hover {
+            background-color: $_hover_bg;
+            border-color: $_hover_bg;
+          }
+          &:active {
+            background-color: $_active_bg;
+            border-color: $_active_bg;
+          }
+        }
       }
 
       &:backdrop {
         background-color: _backdrop_color($c);
-        border-color: _backdrop_color(_border_color($c));
+        color: $selected_fg_color;
       }
     }
   }
-  > revealer > box > box label:backdrop { color: $button_backdrop_bg_color; }
-  button:not(:disabled):backdrop { background-color: darken($button_bg_color, 5%); }
+  > revealer > box > box label:backdrop { color: transparentize(white, 0.3); }
   *:link { @extend %link_selected; }
 }
 
