@@ -572,8 +572,8 @@ button {
       }
     }
 
-    &.default {
-        font-weight: 500;
+    &.default:not(.suggested-action) {
+        color: if($variant=='light', black, white);
     }
 
     &:hover {
