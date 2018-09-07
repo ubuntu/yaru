@@ -4282,14 +4282,15 @@ infobar {
           background-color: $_hover_bg;
           border-color: $_hover_bg;
         }
-        &:disabled {
-          background-color: $_insensitive_bg;
-          border-color: $_insensitive_bg;
-        }
         &:active {
           border-color: $_active_bg;
           background-color: $_active_bg;
           color: lighten($_c, $_active_amount);
+        }
+        &:disabled {
+          background-color: $_insensitive_bg;
+          border-color: $_insensitive_bg;
+          label { color: $insensitive_fg_color; }
         }
         &:backdrop {
           background-color: _backdrop_color($_bg);
@@ -4297,6 +4298,7 @@ infobar {
           &:disabled {
             background-color: $_insensitive_bg;
             border-color: $_insensitive_bg;
+            label { color: _backdrop_color($insensitive_fg_color); }
           }
           &:hover {
             background-color: $_hover_bg;
