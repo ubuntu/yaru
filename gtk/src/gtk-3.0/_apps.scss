@@ -89,7 +89,7 @@ list.tweak-categories separator {
   }
 
   notebook > header > tabs {
-    background: if($variant==light, $porcelain, $headerbar_bg_color);
+    background: if($variant==light, $porcelain, $bg_color);
     &:backdrop { background-color: $backdrop_bg_color; }
 
     & > tab {
@@ -118,7 +118,8 @@ list.tweak-categories separator {
   paned > separator {
     // separator between sidebar and main window view
     &, &:backdrop {
-      background-image: image(image(rgba(0, 0, 0, 0.06)));
+      $_alpha: if($variant=='light', 0.06, 0.2);
+      background-image: image(image(rgba(0, 0, 0, $_alpha)));
     }
   }
 
@@ -336,12 +337,15 @@ terminal-window {
 /*********
  * Gedit *
  *********/
+.gedit-bottom-panel-paned notebook > header {
+    background: if($variant==light, $porcelain, $bg_color);
+}
 
 .gedit-bottom-panel-paned ~ statusbar {
   // give gedit's bottom panel a border
   border-top: 1px solid $borders_color;
 
-    &:backdrop { border-color: $backdrop_borders_color; }
+  &:backdrop { border-color: $backdrop_borders_color; }
 }
 
 .gedit-search-slider {
@@ -369,6 +373,7 @@ terminal-window {
 
 .gedit-document-panel { // 'documents' pane
 
+    background-color: $bg_color;
     row.activatable { padding: 6px; }
 
     row button { // 'close' button

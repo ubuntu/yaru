@@ -3952,7 +3952,7 @@ filechooser {
       &, & label { color: $text_color; }
       &:checked label { font-weight: 500; }
       &:backdrop {
-        background: transparent; 
+        background: transparent;
         label { color: $backdrop_text_color; }
       }
     }
