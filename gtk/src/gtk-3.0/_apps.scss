@@ -492,23 +492,6 @@ headerbar button image ~ window decoration ~ menu separator {
   }
 }
 
-/*********************
- * Chrome / Chromium *
- *********************/
-window.background.chromium {
-  button.titlebutton {
-    padding: 0;
-
-    &:not(.appmenu){
-      &:hover { @include draw_circle($headerbar_bg_color, $size:16px) ; }
-    }
-    &.close:not(:backdrop) {
-      @include draw_circle($selected_bg_color, $close:true, $size:16px);
-    }
-  }
-  menuitem { border-radius: 0; }
-}
-
 /****************
  * GNOME Photos *
  ****************/
