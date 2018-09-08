@@ -232,12 +232,12 @@ terminal-window {
       // inherits from scrollbar
       $_scrollbar_bg: darken($headerbar_bg_color, 5%);
       $_scrollbar_bc: darken($terminal_borders_color, 5%);
-      background-color: $_scrollbar_bg;
-      border-color: $_scrollbar_bc;
+      background-color: transparent;
+      border-color: transparent;
 
       &:backdrop {
-        background-color: _backdrop_color($_scrollbar_bg);
-        border-color: _backdrop_color($_scrollbar_bc);
+        background-color: transparent;
+        border-color: transparent
       }
 
       slider {
@@ -268,7 +268,7 @@ terminal-window {
 
       &.dragging,
       &.hovering {
-        background-color: darken($_scrollbar_bg, 10%);
+        background-color: transparent;
       }
     }
   }
