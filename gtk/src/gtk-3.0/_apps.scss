@@ -90,35 +90,17 @@ list.tweak-categories separator {
 
   notebook > header > tabs {
     background: if($variant==light, $porcelain, $bg_color);
-    &:backdrop { background-color: $backdrop_bg_color; }
 
     & > tab {
-      border-bottom: 1px solid if($light, transparentize($borders_color, 0.5), darken($slate, 8%));
+      border-bottom-color:if($light, transparentize($borders_color, 0.2), darken($slate, 8%));
       margin: 0px;
-
-      &:checked {
-        border-color: if($light, transparentize($borders_color, 0.5), darken($slate, 8%));
-        border-bottom: none;
-
-        &:backdrop { background-color: if($variant==light, #EEEFF0, $backdrop_base_color); }  // It should be _backdrop_color(white); but that does not work.
-      }
-
-      &:not(:checked) {
-        & label { color: transparentize($text_color, 0.5); }
-      }
-
-      > box{ padding: 0 8px };
-      & > box:drop(active):focus,
-      & > box:drop(active) {
-        border-radius: $small_radius;
-      }
     }
   }
 
   paned > separator {
     // separator between sidebar and main window view
     &, &:backdrop {
-      $_alpha: if($variant=='light', 0.06, 0.2);
+      $_alpha: if($variant=='light', 0.08, 0.16);
       background-image: image(image(rgba(0, 0, 0, $_alpha)));
     }
   }
