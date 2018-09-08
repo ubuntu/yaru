@@ -1665,8 +1665,13 @@ headerbar {
       }
     }
 
-    .text-button:not(.suggested-action):not(:hover) {
-      border-color: $hb_button_bg_hover;
+    .text-button:not(.suggested-action) {
+      &:not(:hover) { border-color: $hb_button_bg_hover; }
+      &.default {
+        &, &:active, &:hover, &:focus {
+          color: white;
+        }
+      }
     }
 
     button, button.flat, button.titlebutton.appmenu {
@@ -1700,12 +1705,6 @@ headerbar {
                               (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
             &#{$state} { @include button($t, $b_color, white, $flat:true); }
           }
-        }
-      }
-
-      &.default {
-        &, &:hover {
-          color: $headerbar_fg_color;
         }
       }
     }
