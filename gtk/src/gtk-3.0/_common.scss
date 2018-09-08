@@ -2463,7 +2463,7 @@ popover.background {
  *************/
 notebook {
   > header {
-    $_borders_color: if($light, $borders_color, darken($slate, 8%));
+    $_borders_color: if($light, transparentize($borders_color, 0.2), darken($slate, 8%));
     background: if($light, $porcelain, $headerbar_bg_color);
     border-color: $_borders_color;
     border-width: 1px;
@@ -2601,7 +2601,7 @@ notebook {
       outline-offset: -5px;
       outline-style: dashed;
       -gtk-outline-radius: $small_radius;
-      color: if($light, $text_color, $silk);
+      color: transparentize($text_color, 0.3);
       border: 1px solid transparent;
 
       &:hover:not(:active):not(:backdrop):not(:checked) {
