@@ -572,7 +572,7 @@ button {
       }
     }
 
-    &.default:not(.suggested-action) {
+    &.default:not(.suggested-action):not(.destructive-action) {
         color: if($variant=='light', black, white);
     }
 
