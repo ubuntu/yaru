@@ -62,7 +62,6 @@ stage {
   &:hover { @include button(hover); }
   &:insensitive { @include button(insensitive); }
   &:active { @include button(active); }
-
 }
 
 .modal-dialog-linked-button, %light_button {

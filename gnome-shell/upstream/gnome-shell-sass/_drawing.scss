@@ -150,8 +150,8 @@
   //
   // focused button
   //
-    $_bg: if($c!=$osd_bg_color, transparentize($c, 0.5),
-                          $osd_bg_color);
+    $_bg: if($c!=$osd_bg_color, transparentize($c, 0.3),
+                          lighten($osd_bg_color,3%));
 
     color: $osd_fg_color;
     text-shadow: 0 1px black;
@@ -164,7 +164,7 @@
   // active osd button
   //
     $_bg: if($c!=$osd_bg_color, transparentize($c, 0.3),
-                            lighten($osd_bg_color,10%));
+                            lighten($osd_bg_color,3%));
 
     color: white;
     border-color: $osd_borders_color;
@@ -182,7 +182,7 @@
 
     color: white;
     border-color: $osd_borders_color;
-    background-color: darken($_bg,5%);
+    background-color: $selected_bg_color;
     // This should be none, but it's creating some issues with borders, so to
     // workaround it for now, use inset wich goes through a different code path.
     // see https://bugzilla.gnome.org/show_bug.cgi?id=752934
