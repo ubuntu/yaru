@@ -232,12 +232,12 @@ terminal-window {
       // inherits from scrollbar
       $_scrollbar_bg: darken($headerbar_bg_color, 5%);
       $_scrollbar_bc: darken($terminal_borders_color, 5%);
-      background-color: $_scrollbar_bg;
-      border-color: $_scrollbar_bc;
+      background-color: transparent;
+      border-color: transparent;
 
       &:backdrop {
-        background-color: _backdrop_color($_scrollbar_bg);
-        border-color: _backdrop_color($_scrollbar_bc);
+        background-color: transparent;
+        border-color: transparent
       }
 
       slider {
@@ -268,7 +268,7 @@ terminal-window {
 
       &.dragging,
       &.hovering {
-        background-color: darken($_scrollbar_bg, 10%);
+        background-color: transparent;
       }
     }
   }
@@ -490,23 +490,6 @@ headerbar button image ~ window decoration ~ menu separator {
    background-color: darken($base_color,5%);
    &:backdrop { background-color: $backdrop_base_color}
   }
-}
-
-/*********************
- * Chrome / Chromium *
- *********************/
-window.background.chromium {
-  button.titlebutton {
-    padding: 0;
-
-    &:not(.appmenu){
-      &:hover { @include draw_circle($headerbar_bg_color, $size:16px) ; }
-    }
-    &.close:not(:backdrop) {
-      @include draw_circle($selected_bg_color, $close:true, $size:16px);
-    }
-  }
-  menuitem { border-radius: 0; }
 }
 
 /****************
