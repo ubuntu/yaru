@@ -4753,9 +4753,18 @@ button.emoji-section {
     background-color: $base_hover_color;
   }
 
-  &:active, &:checked {
+  &:active {
     box-shadow: inset 0 2px $selected_bg_color;
     background-color: $base_active_color;
+  }
+
+  &:checked {
+    box-shadow: inset 0 2px $selected_bg_color;
+    background-color: transparent;
+    &:hover {
+      box-shadow: inset 0 2px $selected_bg_color;
+      background-color: $base_hover_color;
+    }
   }
 
   label {
