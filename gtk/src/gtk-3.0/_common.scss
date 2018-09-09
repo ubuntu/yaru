@@ -4761,6 +4761,9 @@ button.emoji-section {
   label {
     padding: 0;
   }
+
+  &:first-child { border-bottom-left-radius: $small_radius; }
+  &:last-child { border-bottom-right-radius: $small_radius; }
 }
 
 .emoji {
