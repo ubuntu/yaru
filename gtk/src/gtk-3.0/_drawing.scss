@@ -600,7 +600,7 @@
   $_dim_background: if($light, $dark_fill, $slate);
 
   @if $t==normal  {
-    background-color: $c;
+    background-color: if($_checked, $c, if($variant=='light', $c, transparent));
     border-color: $_border_color;
     box-shadow: 0 1px transparentize(black, 0.95);
     color: $tc;
