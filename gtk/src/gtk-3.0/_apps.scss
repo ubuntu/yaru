@@ -113,8 +113,11 @@ list.tweak-categories separator {
 
   .nautilus-canvas-item {
     -gtk-outline-radius: $small_radius;
+    outline-offset: -2px;
+    &:selected {
+      outline-color: white;
+    }
   }
-
 }
 
 .nautilus-desktop-window {
