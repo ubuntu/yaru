@@ -38,6 +38,8 @@ list.tweak-categories separator {
         margin: 2px;
       }
 
+      &:backdrop { border-color: transparent; }
+
       // ...and here style just the difference from normal
       &:hover {
         color: $destructive_color;
