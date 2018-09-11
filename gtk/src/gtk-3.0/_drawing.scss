@@ -660,6 +660,13 @@
   border-top-color: darken($bg, 20%);
   box-shadow: inset 0 1px 1px 0 if($bg==$dark_fill, transparentize($bg, 0.2), rgba(0, 0, 0, 0.15));
 
+  $_insensitive_border_color: null;
+  @if $bg == $dark_fill {
+    $_insensitive_border_color: if($variant=='light', $borders_edge, lighten($inkstone, 5%));
+  } @else {
+    $_insensitive_border_color: $borders_edge;
+  }
+
   color: transparent;
   font-size: 0;
   outline-offset: 0;
@@ -683,7 +690,7 @@
 
   &:disabled {
     background-color: if($bg==$dark_fill, transparent, $ash);
-    border: 1px solid $borders_edge;
+    border: 1px solid $_insensitive_border_color;
     box-shadow: none;
 
     &:checked {
@@ -700,12 +707,12 @@
         background-color: _backdrop_color($bg);
       }
       @else {
-        background-color: lighten($bg,2%);
+        background-color: lighten($bg, 2%);
       }
     }
 
-    border: 1px solid if($bg==$dark_fill, $borders_edge, transparent);
-    border-top-color: if($variant=='light',darken($bg, 10%),darken($bg, 5%));
+    border: 1px solid if($bg==$dark_fill, if($variant=='light', $borders_edge, $bg), transparent);
+    border-top-color: darken($bg, if($variant=='light', 10%, 5%));
     transition: $backdrop_transition;
 
     &:hover {
@@ -724,7 +731,7 @@
 
     &:disabled {
       background-color: if($bg==$dark_fill, transparent, _backdrop_color($ash));
-      border: 1px solid if($bg==$dark_fill, $borders_edge, transparent);
+      border: 1px solid if($bg==$dark_fill, $_insensitive_border_color, transparent);
       box-shadow: none;
     }
   }
@@ -750,7 +757,7 @@
 
   &:disabled slider {
     background-color: if($bg==$dark_fill, transparent, $ash);
-    border: 1px solid if($bg==$dark_fill, $borders_edge, $slate);;
+    border: 1px solid if($bg==$dark_fill, $_insensitive_border_color, $slate);;
     box-shadow: none;
   }
 
@@ -759,12 +766,10 @@
     @if $bg==$dark_fill {
       @if $variant=='light' {
         background-color: $backdrop_bg_color;
-      }
-      @else {
+      } @else {
         background-color: lighten($backdrop_fg_color,20%);
       }
-    }
-    @else {
+    } @else {
       background-color: $headerbar_fg_color;
     }
   }
