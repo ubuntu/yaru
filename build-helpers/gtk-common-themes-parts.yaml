@@ -16,6 +16,12 @@ parts:
     plugin: meson
     meson-parameters: [--prefix=/]
     build-packages: [sassc]
+    override-build: |
+      snapcraftctl build
+      # remove unused artefacts in the snap (sessions and schemas)
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/*sessions $SNAPCRAFT_PART_INSTALL/share/glib-2.0
+      # don't support dark variant until it's ready
+      rm -r $SNAPCRAFT_PART_INSTALL/share/themes/*-dark
   # everything else but communitheme and yaru
   gtk-common-themes-others:
     plugin: nil
