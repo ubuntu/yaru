@@ -1,8 +1,7 @@
 sassc = find_program('sassc')
 
 gtk3_dir = join_paths(theme_dir, 'gtk-3.0')
-
-# theme sources .scss files
+gtk3_asset_dir = join_paths(gtk3_dir, 'assets')
 
 # Dependencies of the files that need to be compiled
 gtk3_scss_dependencies = [
@@ -13,8 +12,6 @@ gtk3_scss_dependencies = [
   '_apps.scss',
   '_drawing.scss',
 ]
-
-gtk3_asset_dir = join_paths(gtk3_dir, 'assets')
 
 gtk3_assets = [
   'assets/bullet-symbolic.svg',
