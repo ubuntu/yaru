@@ -1,17 +1,12 @@
 theme_dir = join_paths(get_option('datadir'), 'themes', meson.project_name())
 
-replace_name = find_program('../../../build-helpers/replace-name')
-custom_target('gtk-index.theme',
-              input: '../index.theme.in',
-              output: 'index.theme',
-              command: [
-                replace_name, '@INPUT@', '@OUTPUT@', 'THEMENAME', meson.project_name()
-              ],
-              build_by_default: true,
-              install: true,
-              install_dir: theme_dir)
-
-sassc = find_program('sassc')
+conf_data = configuration_data()
+conf_data.set('ThemeName', meson.project_name())
+conf_data.set('VariantThemeName', meson.project_name())
+configure_file(input : '../index.theme.in',
+               output : 'index.theme',
+               configuration : conf_data,
+               install_dir: theme_dir)
 
 subdir('gtk-2.0')
 subdir('gtk-3.0')
