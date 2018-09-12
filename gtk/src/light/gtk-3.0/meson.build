@@ -3,6 +3,13 @@ sassc = find_program('sassc')
 gtk3_dir = join_paths(theme_dir, 'gtk-3.0')
 gtk3_asset_dir = join_paths(gtk3_dir, 'assets')
 
+# theme sources .scss files
+gtk3_scss_sources = [
+  'gtk-dark',   # applications requesting dark theme when using the light one.
+  'gtk',
+]
+
+
 # Dependencies of the files that need to be compiled
 gtk3_scss_dependencies = [
   '_colors-public.scss',
@@ -118,15 +125,17 @@ gtk3_assets = [
 
 # generate .css files
 # and install to themes/THEMENAME/gtk-3.0
-custom_target('gtk3_light',
-    input: 'gtk.scss',
-    output: 'gtk.css',
-    depend_files: files(gtk3_scss_dependencies),
-    command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
-    build_by_default: true,
-    install: true,
-    install_dir: gtk3_dir,
-)
+foreach f : gtk3_scss_sources
+  custom_target('generate_' + f,
+      input: f + '.scss',
+      output: f + '.css',
+      depend_files: files(gtk3_scss_dependencies),
+      command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
+      build_by_default: true,
+      install: true,
+      install_dir: gtk3_dir,
+  )
+endforeach
 
 # Install asset files to themes/THEMENAME/gtk-3.0/assets
 install_data(gtk3_assets, install_dir: gtk3_asset_dir)
