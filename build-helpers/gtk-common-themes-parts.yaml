@@ -37,4 +37,4 @@ parts:
       # remove everything related to communitheme and yaru
       rm -rf $SNAPCRAFT_PART_INSTALL/share/*/*ommunitheme
       rm -rf $SNAPCRAFT_PART_INSTALL/share/icons/Suru
-      rm -rf $SNAPCRAFT_PART_INSTALL/share/*/Yaru
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/*/Yaru*
