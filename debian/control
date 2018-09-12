@@ -3,7 +3,7 @@ Section: misc
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: debhelper (>= 10.3),
-Build-Depends-Indep: meson,
+Build-Depends-Indep: meson (>= 0.42),
                      sassc,
 Standards-Version: 4.1.5
 Homepage: https://community.ubuntu.com/c/desktop/theme-refresh

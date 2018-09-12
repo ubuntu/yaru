@@ -36,3 +36,5 @@ parts:
       mv $SNAPCRAFT_PART_INSTALL/share/gnome-shell/modes/communitheme.json $SNAPCRAFT_PART_INSTALL/share/gnome-shell/modes/ubuntu-communitheme.json
       # remove unused artefacts in the snap (sessions and schemas)
       rm -rf $SNAPCRAFT_PART_INSTALL/share/*sessions $SNAPCRAFT_PART_INSTALL/share/glib-2.0
+      # don't support dark variant until it's ready
+      rm -r $SNAPCRAFT_PART_INSTALL/share/themes/*-dark
