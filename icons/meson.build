@@ -6,24 +6,17 @@ install_subdir('Suru',
     exclude_files: ['index.theme', 'cursor.theme'],
 )
 
-replace_name = find_program('../build-helpers/replace-name')
 themes_f = [
   'cursor.theme',
   'index.theme',
 ]
-
-theme_deps = []
-
+conf_data = configuration_data()
+conf_data.set('ThemeName', meson.project_name())
 foreach theme: themes_f
-  theme_deps += custom_target(theme,
-                              input: 'Suru/@0@'.format(theme),
-                              output: '@0@'.format(theme),
-                              command: [
-                                replace_name, '@INPUT@', '@OUTPUT@', 'Suru', meson.project_name()
-                              ],
-                              build_by_default: true,
-                              install: true,
-                              install_dir: theme_dir)
+  configure_file(input : 'Suru/@0@'.format(theme),
+                 output : '@0@'.format(theme),
+                 configuration : conf_data,
+                 install_dir: theme_dir)
 endforeach
 
 meson.add_install_script('meson/post_install.py', meson.project_name())
