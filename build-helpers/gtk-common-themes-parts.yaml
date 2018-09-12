@@ -11,7 +11,18 @@ parts:
       set -eu
       cp -a squashfs-root/share $SNAPCRAFT_PART_INSTALL/
       rm -rf $SNAPCRAFT_PART_INSTALL/share/gnome-shell/
-  # everything else but communitheme
+  yaru:
+    source: .
+    plugin: meson
+    meson-parameters: [--prefix=/]
+    build-packages: [sassc]
+    override-build: |
+      snapcraftctl build
+      # remove unused artefacts in the snap (sessions and schemas)
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/*sessions $SNAPCRAFT_PART_INSTALL/share/glib-2.0
+      # don't support dark variant until it's ready
+      rm -r $SNAPCRAFT_PART_INSTALL/share/themes/*-dark
+  # everything else but communitheme and yaru
   gtk-common-themes-others:
     plugin: nil
     build-packages: [snapd]
@@ -23,6 +34,7 @@ parts:
       set -eu
       [ -d squashfs-root/ ] || exit 1
       cp -a squashfs-root/* $SNAPCRAFT_PART_INSTALL/
-      # remove everything related to communitheme
+      # remove everything related to communitheme and yaru
       rm -rf $SNAPCRAFT_PART_INSTALL/share/*/*ommunitheme
       rm -rf $SNAPCRAFT_PART_INSTALL/share/icons/Suru
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/*/Yaru*
