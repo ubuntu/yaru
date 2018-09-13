@@ -1665,6 +1665,7 @@ headerbar {
       }
     }
 
+    // default button and its labels needs dedicated styling in the headerbar
     .text-button:not(.suggested-action) {
       &:not(:hover) { border-color: $hb_button_bg_hover; }
       &.default {
@@ -1673,6 +1674,7 @@ headerbar {
         }
       }
     }
+    button.default { label { color: white; } }
 
     button, button.flat, button.titlebutton.appmenu {
       @each $state, $t in ("", "normal"),
