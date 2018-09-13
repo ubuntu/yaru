@@ -46,7 +46,7 @@ sed -i '/parts:/,$d' snap/snapcraft.yaml
 sed -e "s,CHANNEL,$channel,g" "$TRAVIS_BUILD_DIR/build-helpers/gtk-common-themes-parts.yaml" >> snap/snapcraft.yaml
 
 # build and push gtk-common-themes snap
-cmd="cd $(pwd) && snapcraft"
+cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pwd) && snapcraft"
 cmd="$cmd && echo \"$SNAP_COMMON_THEMES_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
 docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
