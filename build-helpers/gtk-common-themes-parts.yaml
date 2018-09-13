@@ -12,7 +12,8 @@ parts:
       cp -a squashfs-root/share $SNAPCRAFT_PART_INSTALL/
       rm -rf $SNAPCRAFT_PART_INSTALL/share/gnome-shell/
   yaru:
-    source: .
+    source: https://github.com/REPO.git
+    source-branch: BRANCH
     plugin: meson
     meson-parameters: [--prefix=/]
     build-packages: [sassc]
