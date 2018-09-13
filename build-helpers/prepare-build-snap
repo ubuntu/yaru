@@ -47,6 +47,9 @@ curl -o snap/snapcraft.yaml "https://raw.githubusercontent.com/snapcrafters/gtk-
 sed -i '/parts:/,$d' snap/snapcraft.yaml
 sed -e "s,CHANNEL,$channel,g" -e "s,REPO,$TRAVIS_REPO_SLUG," -e "s,BRANCH,$YARU_BRANCH," "$TRAVIS_BUILD_DIR/build-helpers/gtk-common-themes-parts.yaml" >> snap/snapcraft.yaml
 
+echo "####################################"
+cat snap/snapcraft.yaml
+
 # build and push gtk-common-themes snap
 cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pwd) && snapcraft"
 cmd="$cmd && echo \"$SNAP_COMMON_THEMES_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
