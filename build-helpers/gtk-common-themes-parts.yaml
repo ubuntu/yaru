@@ -3,20 +3,22 @@ parts:
     plugin: nil
     build-packages: [snapd]
     # note: at this date (13/04/18), build-snaps gives a segfault in docker image
-    build: |
+    override-pull: |
       set -eu
       snap download communitheme --channel=CHANNEL
       unsquashfs communitheme*.snap
-    install: |
+    override-build: |
       set -eu
       cp -a squashfs-root/share $SNAPCRAFT_PART_INSTALL/
       rm -rf $SNAPCRAFT_PART_INSTALL/share/gnome-shell/
   yaru:
-    source: .
+    source: https://github.com/REPO.git
+    source-branch: BRANCH
     plugin: meson
     meson-parameters: [--prefix=/]
     build-packages: [sassc]
     override-build: |
+      set -eu
       snapcraftctl build
       # remove unused artefacts in the snap (sessions and schemas)
       rm -rf $SNAPCRAFT_PART_INSTALL/share/*sessions $SNAPCRAFT_PART_INSTALL/share/glib-2.0
@@ -26,11 +28,11 @@ parts:
   gtk-common-themes-others:
     plugin: nil
     build-packages: [snapd]
-    build: |
+    override-pull: |
       set -eu
       snap download gtk-common-themes --edge
       unsquashfs gtk-common-themes*.snap
-    install: |
+    override-build: |
       set -eu
       [ -d squashfs-root/ ] || exit 1
       cp -a squashfs-root/* $SNAPCRAFT_PART_INSTALL/

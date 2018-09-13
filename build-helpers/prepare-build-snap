@@ -11,11 +11,13 @@ cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pw
 # Notes that the tokens are only available when the source repo is under ubuntu/ project.
 REPO="${TRAVIS_REPO_SLUG%%/*}"
 SOURCE_REPO="${TRAVIS_PULL_REQUEST_SLUG%%/*}"
+YARU_BRANCH="$TRAVIS_BRANCH"
 channel=""
 if [ "$REPO" == "ubuntu" ] && ([ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$SOURCE_REPO" == "ubuntu" ]) ; then
         # if it's a PR event from
         if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
                 channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
+                YARU_BRANCH="$TRAVIS_PULL_REQUEST_BRANCH"
                 echo "PR to main ubuntu repo: will release to $channel"
         # only push build to master are released, the rest will be as PR via dedicated channel
         elif [ "$TRAVIS_BRANCH" == "master" ]; then
@@ -43,10 +45,13 @@ cd ../gtk-common-themes
 # get top part of original snapcraft.yaml and complete with new content
 curl -o snap/snapcraft.yaml "https://raw.githubusercontent.com/snapcrafters/gtk-common-themes/master/snap/snapcraft.yaml"
 sed -i '/parts:/,$d' snap/snapcraft.yaml
-sed -e "s,CHANNEL,$channel,g" "$TRAVIS_BUILD_DIR/build-helpers/gtk-common-themes-parts.yaml" >> snap/snapcraft.yaml
+sed -e "s,CHANNEL,$channel,g" -e "s,REPO,$TRAVIS_REPO_SLUG," -e "s,BRANCH,$YARU_BRANCH," "$TRAVIS_BUILD_DIR/build-helpers/gtk-common-themes-parts.yaml" >> snap/snapcraft.yaml
+
+echo "####################################"
+cat snap/snapcraft.yaml
 
 # build and push gtk-common-themes snap
-cmd="cd $(pwd) && snapcraft"
+cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pwd) && snapcraft"
 cmd="$cmd && echo \"$SNAP_COMMON_THEMES_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
 docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
