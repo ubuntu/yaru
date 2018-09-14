@@ -90,6 +90,10 @@ list.tweak-categories separator {
     &.dnd { border-style: none; }
   }
 
+  notebook > header {
+    background: if($variant==light, $porcelain, $bg_color);
+  }
+
   paned > separator {
     // separator between sidebar and main window view
     &, &:backdrop {
