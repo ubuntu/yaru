@@ -90,13 +90,8 @@ list.tweak-categories separator {
     &.dnd { border-style: none; }
   }
 
-  notebook > header > tabs {
+  notebook > header {
     background: if($variant==light, $porcelain, $bg_color);
-
-    & > tab {
-      border-bottom-color:if($light, transparentize($borders_color, 0.2), darken($slate, 8%));
-      margin: 0px;
-    }
   }
 
   paned > separator {
