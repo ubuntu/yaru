@@ -60,14 +60,20 @@
     $_bc: if($c == $headerbar_bg_color, lighten($hb_pathbar_bg, 5%), $c);
     color: if($tc != $fg_color, transparentize($tc, .1), $fg_color);
     border-color: if($c != $base_color, transparent, $borders_color);
-    @if $variant == 'light' {
-      border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+    @if $c!=$headerbar_bg_color {
+      @if $variant == 'light' {
+        border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+      }
+      else {
+        border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+      }
+      @include _shadows($_entry_edge);
     }
-    else {
-      border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+    @else {
+      border-top-color: $_bc;
+      box-shadow: none;
     }
     background-color: $_bc;
-    @include _shadows($_entry_edge);
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
   @if $t==focus {
@@ -83,16 +89,18 @@
   @if $t==backdrop {
     $_bg: null;
     $_tc: null;
+    $_border_c: null;
     @if $c == $headerbar_bg_color {
         $_bg: $hb_button_bg_hover;
         $_tc: $backdrop_headerbar_text_color;
+        $_border_c: $_bg;
     } @else {
         $_bg: if($variant=='light', _backdrop_color($c), $c);
         $_tc: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
+        $_border_c: $backdrop_borders_color
     }
-
     background-color: $_bg;
-    border-color: if($c != $base_color, $hb_pathbar_border_backdrop, $backdrop_borders_color);
+    border-color: $_border_c;
     box-shadow: none;
     color: $_tc;
 
@@ -100,7 +108,7 @@
   }
   @if $t==backdrop-insensitive {
     background-color: transparent;
-    border-color: if($c != $base_color, $hb_pathbar_bg_backdrop, transparentize($backdrop_borders_color, 0.3));
+    border-color: if($c != $base_color, transparent, transparentize($backdrop_borders_color, 0.3));
     box-shadow: none;
     color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
 
