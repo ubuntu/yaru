@@ -9,5 +9,5 @@ configure_file(input : '../index.theme.in',
                install_dir: theme_dir)
 
 # No gtk-2.0 dark theme yet
-#subdir('gtk-2.0')
+subdir('gtk-2.0')
 subdir('gtk-3.0')
