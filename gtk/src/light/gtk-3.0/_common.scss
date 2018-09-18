@@ -90,6 +90,8 @@ $popover_shadow: 0 2px 5px transparentize(black, 0.75);
   }
 }
 
+widget:selected { color: $selected_fg_color; }
+
 .view,
 %view {
   color: $text_color;
