@@ -1539,6 +1539,7 @@ toolbar {
   border-width: 0 1px 1px;
   border-radius: 0  0 5px 5px;
 }
+.inline-toolbar.horizontal.sidebar-toolbar:backdrop { background-color: transparent; }
 
 searchbar,
 .location-bar {
