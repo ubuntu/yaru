@@ -33,7 +33,7 @@ list.tweak-categories separator {
       // otherwise gtk will take the style from somewhere else...
       &, &:hover {
         background-color: transparent;
-        border-color: darken($inkstone, 4%);
+        border-color: transparent;
         color: $bg_color;
         margin: 2px;
       }
