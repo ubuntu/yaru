@@ -591,13 +591,19 @@ StScrollBar {
   }
   .popup-menu-boxpointer,
   .candidate-popup-boxpointer {
-    -arrow-border-radius: $medium_radius;
-    -arrow-background-color: $_popover_bg_color;
-    -arrow-border-width: 1px;
-    -arrow-border-color: $osd_borders_color;
-    -arrow-base: 24px;
-    -arrow-rise: 11px;
+    -arrow-border-radius: 0;
+    -arrow-background-color: transparent;
+    -arrow-border-width: 0;
+    -arrow-border-color: transparent;
+    -arrow-base: 0;
+    -arrow-rise: 0;
     -arrow-box-shadow: 0 1px 3px black; //dreaming. bug #689995
+    margin: 2px 5px 2px;
+    background-color: $osd_bg_color;
+    border-radius: $medium_radius;
+    box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
+    border: 1px sold $osd_borders_color;
+
   }
 
   .popup-separator-menu-item {
@@ -2067,7 +2073,7 @@ StScrollBar {
   font-feature-settings: "tnum";
 }
 
-.screen-shield-clock-date { 
+.screen-shield-clock-date {
   font-size: 28pt;
   font-weight: normal;
 }
