@@ -19,7 +19,7 @@ $selected_bg_color: $orange;
 $selected_borders_color: if($variant=='light', darken($selected_bg_color, 5%),
                                                darken($selected_bg_color, 15%));
 $text_selection: lighten($blue,35%);
-                                               
+
 $borders_color: if($variant =='light', darken($bg_color,30%), darken($bg_color,12%));
 $borders_edge: if($variant =='light', white, transparentize($fg_color, 0.9));
 $link_color: $blue;
@@ -39,7 +39,7 @@ $inactive_indication_bg_color: darken($ash,5%);
 $osd_fg_color: $fg_color;
 $osd_bg_color: $panel_bg_color;
 $button_bg_color: $osd_bg_color;
-$osd_borders_color: transparentize($fg_color, 0.91);
+$osd_borders_color: transparentize(white, 0.87);
 //
 $base_hover_color: transparentize(white, 0.8);
 $base_active_color: transparentize(white, 0.75);
