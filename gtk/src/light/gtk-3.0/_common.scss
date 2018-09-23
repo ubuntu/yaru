@@ -2630,12 +2630,14 @@ notebook {
         font-weight: 500;
         background-color: $base_color;
         border-color: $_borders_color;
+        & label {padding-bottom: 1px};
       }
 
       &:backdrop:checked {
         background-color: $backdrop_base_color;
         border-color: $backdrop_borders_color;
         color: $backdrop_fg_color;
+        & label {padding-bottom: 1px};
       }
 
       // colors the button like the label, overridden otherwise
