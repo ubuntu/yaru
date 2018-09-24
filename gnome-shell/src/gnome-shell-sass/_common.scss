@@ -605,7 +605,7 @@ StScrollBar {
     height: 1px; //not really the whole box
     margin: 6px 64px;
     background-color: transparent;
-    border-color: $osd_borders_color;
+    border-color: transparentize($fg_color, 0.91);
     border-bottom-width: 1px;
     border-bottom-style: solid;
   }
@@ -964,7 +964,7 @@ StScrollBar {
     .datemenu-displays-box { spacing: 1em; }
 
     .datemenu-calendar-column {
-      border: 0 solid $osd_borders_color;
+      border: 0 solid transparentize($fg_color, 0.91);
       &:ltr { border-left-width: 1px; }
       &:rtl { border-right-width: 1px; }
     }
