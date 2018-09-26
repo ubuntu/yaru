@@ -1875,7 +1875,7 @@ headerbar {
         }
       }
 
-      &.suggested-action {
+      &.suggested-action, %flat_suggested_action {
         @each $state, $t in ("", "normal"), (":hover", "hover"), (":hover:backdrop", "backdrop-hover"),
         (":active", "active"), (":disabled", "insensitive"),
         (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
@@ -2478,6 +2478,35 @@ popover.background {
 }
 
 popover.background, menu, .menu, .context-menu  {
+  row {
+    color: $menu_fg_color;
+    &:backdrop {
+      color: $backdrop_headerbar_fg_color;
+    }
+  }
+
+  check, radio {
+    &, &:backdrop, &:hover {
+     background-color: transparent;
+    }    
+  }
+
+  entry, textview.view text {
+    background-color: lighten($menu_color, 2%);
+    border-color: $menu_border_color;
+    color: $menu_fg_color;
+    &:backdrop {
+      background-color: $backdrop_headerbar_bg_color; 
+      color: $backdrop_headerbar_fg_color
+    }
+  }
+  label {
+    color: $menu_fg_color;
+    &:backdrop {
+      color: $backdrop_headerbar_fg_color
+    }
+  }
+
   button:not(.suggested-action):not(.destructive-action) {
     &, &label {
       color: $menu_fg_color;
@@ -2498,27 +2527,10 @@ popover.background, menu, .menu, .context-menu  {
       &:backdrop { color: $backdrop_headerbar_insensitive_color; }
     }
   }
-
-  row {
-    color: $menu_fg_color;
-    &:backdrop {
-      color: $backdrop_headerbar_fg_color;
-    }
-  }
-
-  check, radio {
-    &, &:backdrop, &:hover {
-     background-color: transparent;
+  button {
+    .suggested-action {
+      @extend %flat_suggested_action;
     }    
-  }
-
-  entry {
-    background-color: lighten($menu_color, 2%);
-    border-color: $menu_border_color;
-    color: $menu_fg_color;
-    &:backdrop {
-      background-color: transparent; 
-    }
   }
 
   undershoot {
