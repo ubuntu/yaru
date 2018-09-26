@@ -839,6 +839,12 @@
 
     @if $t==backdrop { $_small_gradient_color: $backdrop_borders_color; }
   }
+  @else {
+    $_small_gradient_color: $inkstone;
+    $_big_gradient_color: $fg_color;
+
+    @if $t==backdrop { $_small_gradient_color: $backdrop_borders_color; }
+  }
 
   $_small_gradient: -gtk-gradient(radial,
                                   $_position, 0,
@@ -870,7 +876,7 @@
   box-shadow: none;              //
 }
 
-@mixin undershoot($p) {
+@mixin undershoot($p, $menu: 'false') {
 //
 // undershoot
 //
@@ -907,7 +913,7 @@
   // Replace dashed line with light shadow
   $us_shadow_color: $silk;
   $us_shadow_alpha: 0.8;
-  @if $variant=='dark' {
+  @if ($variant=='dark') or ($menu=='true') {
     $us_shadow_color: $jet;
   }
 
