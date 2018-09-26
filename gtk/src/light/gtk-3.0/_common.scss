@@ -2431,8 +2431,8 @@ popover.background {
   box-shadow: $popover_shadow;
 
   &:backdrop {
-    background-color: $backdrop_bg_color;
-    color: $backdrop_text_color;
+    background-color: $backdrop_headerbar_bg_color;
+    color: $backdrop_headerbar_fg_color;
     box-shadow: none;
   }
 
@@ -2462,6 +2462,10 @@ popover.background {
     padding: 5px 6px;
 
     &:hover { background-color: $menu_hover_color; }
+
+    label:backdrop {
+      color: $backdrop_headerbar_fg_color;
+    }
   }
 
   list separator, separator { 
@@ -2475,10 +2479,12 @@ popover.background {
 
 popover.background, menu, .menu, .context-menu  {
   button:not(.suggested-action):not(.destructive-action) {
-    label {
+    &, &label {
       color: $menu_fg_color;
+      &:backdrop {
+        color: $backdrop_headerbar_fg_color;
+      }
     }
-    color: $menu_fg_color;
     background-color: transparent;
     border-color: $inkstone;
     &:hover {
@@ -2489,15 +2495,19 @@ popover.background, menu, .menu, .context-menu  {
     }
     &:disabled {
       color: $insensitive_fg_color;
+      &:backdrop { color: $backdrop_headerbar_insensitive_color; }
     }
   }
 
   row {
     color: $menu_fg_color;
+    &:backdrop {
+      color: $backdrop_headerbar_fg_color;
+    }
   }
 
   check, radio {
-    &, &:hover {
+    &, &:backdrop, &:hover {
      background-color: transparent;
     }    
   }
@@ -2506,6 +2516,9 @@ popover.background, menu, .menu, .context-menu  {
     background-color: lighten($menu_color, 2%);
     border-color: $menu_border_color;
     color: $menu_fg_color;
+    &:backdrop {
+      background-color: transparent; 
+    }
   }
 
   undershoot {
@@ -4809,7 +4822,7 @@ popover.emoji-picker {
   padding: 0;
 
   entry {
-    border-bottom: 1px solid $borders_color;
+    border-bottom: 1px solid $menu_border_color;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     box-shadow: none;
@@ -4825,6 +4838,14 @@ popover.emoji-picker {
   box scrolledwindow {
     background-color: lighten($menu_color, 4%);
     color: $menu_fg_color; 
+    &:backdrop {
+      background-color: $backdrop_headerbar_bg_color;
+      label { color: $backdrop_headerbar_fg_color; }
+    }
+  }
+
+  scrollbar {
+    &:backdrop:hover { background-color: transparent; }
   }
 }
 

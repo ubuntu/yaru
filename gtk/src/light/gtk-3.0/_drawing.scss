@@ -839,8 +839,8 @@
 
     @if $t==backdrop { $_small_gradient_color: $backdrop_borders_color; }
   }
-  @else {
-    $_small_gradient_color: $inkstone;
+  @else if $c==$menu_color {
+    $_small_gradient_color: $jet;
     $_big_gradient_color: $fg_color;
 
     @if $t==backdrop { $_small_gradient_color: $backdrop_borders_color; }

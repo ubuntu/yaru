@@ -18,7 +18,7 @@ $borders_edge: if($variant == 'light', rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
 $top_hilight: $borders_edge;
 $dark_fill: if($variant == 'light',#CDCDCD, $ash);
 
-$menu_color: transparentize(lighten($jet, 2%), 0.025);
+$menu_color: transparentize(lighten($jet, 2%), if($variant=='light', 0.025, 0.002));
 $menu_fg_color: $porcelain;
 $menu_border_color: transparentize(white, 0.9);
 $menu_hover_color: transparentize($porcelain, 0.85);
