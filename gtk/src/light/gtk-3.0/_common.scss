@@ -1679,7 +1679,7 @@ headerbar {
     }
     button.default { label { color: white; } }
 
-    button, button.flat, button.titlebutton.appmenu {
+    button, button.flat, button.titlebutton.appmenu, %headerbarbutton {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
                           (":hover:backdrop", "backdrop-hover"),
@@ -2320,8 +2320,8 @@ menu,
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
   padding: 8px 0;
   background-color: $menu_color;
-  color: $text_color;
-  border: 1px solid $borders_color; // adds borders in a non composited env
+  color: $menu_fg_color;
+  border: 1px solid $menu_border_color; // adds borders in a non composited env
   border-radius: $small_radius;
 
   .csd & { border: none; }  // axes borders in a composited env
@@ -2335,7 +2335,7 @@ menu,
     padding: 5px 6px;
     border-radius: 0;
 
-    &:hover { background-color: $base_hover_color; }
+    &:hover { background-color: $menu_hover_color; }
 
     &:disabled {
       color: $insensitive_fg_color;
@@ -2397,6 +2397,10 @@ menu,
       border-color: transparent ;
     }
   }
+
+  separator {
+    border-color: $menu_border_color;
+  }
 }
 
 menuitem {
@@ -2417,11 +2421,11 @@ menuitem {
 
 popover.background {
   padding: 2px;
-  color: $text_color;
+  color: $menu_fg_color;
   border-radius: $medium_radius;
   background-color: $menu_color;
 
-  .csd &, & { border: 1px solid $borders_color; }
+  .csd &, & { border: 1px solid $menu_border_color; }
 
   box-shadow: $popover_shadow;
 
@@ -2457,9 +2461,13 @@ popover.background {
     padding: 5px 6px;
   }
 
-  separator { margin: 3px; }
+  separator { margin: 3px; border-color: $menu_border_color; }
 
   list separator { margin: 0px; }
+
+  button {
+    @extend %headerbarbutton;
+  }
 }
 
 /*************
@@ -4534,7 +4542,7 @@ decoration {
   .csd.popup & {
     border-radius: $small_radius;
     box-shadow: $popover_shadow,
-                0 0 0 1px transparentize($borders_color, 0.2);
+                0 0 0 1px $menu_border_color;
   }
 
   tooltip.csd & {
