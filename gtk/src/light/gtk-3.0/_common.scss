@@ -41,7 +41,7 @@ $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
-$popover_shadow: 0 2px 5px transparentize(black, 0.75);
+$popover_shadow: if($variant=='dark', 0 2px 5px transparentize(black, 0.75), 0 2px 5px transparentize(black, 0.5));
 
 /***************
  * Base States *
@@ -2400,6 +2400,7 @@ menu,
 
   separator {
     border-color: $menu_border_color;
+    background-color: $menu_border_color;
   }
 }
 
@@ -2459,14 +2460,52 @@ popover.background {
     min-height: 16px;
     min-width: 36px;
     padding: 5px 6px;
+
+    &:hover { background-color: $menu_hover_color; }
   }
 
-  separator { margin: 3px; border-color: $menu_border_color; }
+  list separator, separator { 
+    margin: 3px; 
+    border-color: $menu_border_color;
+    background-color: $menu_border_color;
+  }
 
   list separator { margin: 0px; }
+}
 
-  button {
-    @extend %headerbarbutton;
+popover.background,
+menu,
+.menu,
+.context-menu  {
+  button:not(.suggested-action):not(.destructive-action) {
+    label {
+      color: $menu_fg_color;
+    }
+    color: $menu_fg_color;
+    background-color: transparent;
+    box-shadow: none;
+    border-color: $inkstone;
+    &:hover {
+      background-color: $menu_hover_color;
+    }
+    &:active {
+      background-color: $menu_active_color;
+    }
+    &:disabled {
+      color: $insensitive_fg_color;
+    }
+  }
+
+  check, radio {
+    &, &:hover {
+     background-color: transparent;
+    }    
+  }
+
+  entry {
+    background-color: lighten($menu_color, 2%);
+    border-color: $menu_border_color;
+    color: $menu_fg_color;
   }
 }
 
@@ -3817,7 +3856,7 @@ row {
   margin: 12px;
   color: $text_color;
   border-radius: $medium_radius;
-  background-color: $menu_color;
+  background-color: if($variant=='light', white, lighten($inkstone, 5%));
   border: 1px solid $borders_color;
   box-shadow: $popover_shadow;
 
