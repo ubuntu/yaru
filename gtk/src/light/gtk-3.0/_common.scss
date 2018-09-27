@@ -3978,10 +3978,28 @@ row {
     box-shadow: none;
     transition: $backdrop_transition;
   }
-
   button.flat:hover {
       @include button(hover, $menu_color);
       border-color: $borders_color;
+  }
+  button, button.flat {
+    @if $variant=='dark' {
+      background-color: transparent;
+      &, &:hover, &:active {
+        box-shadow: none;
+        border-color: $inkstone;
+      }
+      
+      &:hover {
+        background-color: $menu_hover_color;
+      }
+      &:active {
+        background-color: $menu_active_color;
+      }
+      &:backdrop {
+        
+      }
+    }
   }
 
   border { border: none; }
