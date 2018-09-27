@@ -41,7 +41,7 @@ $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
-$popover_shadow: if($variant=='dark', 0 2px 5px transparentize(black, 0.75), 0 2px 5px transparentize(black, 0.5));
+$popover_shadow: 0 2px 5px transparentize(black, 0.5);
 
 /***************
  * Base States *
@@ -3970,7 +3970,7 @@ row {
   border-radius: $medium_radius;
   background-color: if($variant=='light', white, $menu_color);
   border: 1px solid $borders_color;
-  box-shadow: $popover_shadow;
+  box-shadow: 0 2px 5px transparentize(black, 0.75);
 
   &:backdrop {
     background-color: $backdrop_bg_color;
