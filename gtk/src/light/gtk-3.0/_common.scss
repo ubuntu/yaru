@@ -2373,21 +2373,23 @@ menu,
     border-radius: 0;
 
     &.top {
-      border-bottom: 1px solid mix($fg_color, $base_color, 10%);
+      border-bottom: 1px solid $menu_border_color;
       border-top-right-radius: $small_radius;
       border-top-left-radius: $small_radius;
       -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+      background-color: $menu_color;
     }
 
     &.bottom {
       margin-bottom: -8px;
-      border-top: 1px solid mix($fg_color, $base_color, 10%);
+      border-top: 1px solid $menu_border_color;
       border-bottom-right-radius: $small_radius;
       border-bottom-left-radius: $small_radius;
       -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+      background-color: $menu_color;
     }
 
-    &:hover { background-color: mix($fg_color, $base_color, 10%); }
+    &:hover { background-color: $menu_active_color; }
 
     &:backdrop { background-color: $backdrop_menu_color; }
 
