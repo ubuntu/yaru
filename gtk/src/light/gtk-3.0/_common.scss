@@ -1845,7 +1845,7 @@ headerbar {
 
     .subtitle:link { @extend *:link:selected;  }
 
-    button {
+    button, %flat_success_btn {
         @each $state, $t in ("", "normal"),
                             (":hover", "hover"),
                             (":hover:backdrop", "backdrop-hover"),
@@ -1875,7 +1875,7 @@ headerbar {
         }
       }
 
-      &.suggested-action, %flat_suggested_action {
+      &.suggested-action {
         @each $state, $t in ("", "normal"), (":hover", "hover"), (":hover:backdrop", "backdrop-hover"),
         (":active", "active"), (":disabled", "insensitive"),
         (":backdrop", "backdrop"), (":backdrop:disabled", 'backdrop-insensitive') {
@@ -2478,6 +2478,10 @@ popover.background {
 }
 
 popover.background, menu, .menu, .context-menu  {
+  box {
+    border-color: $menu_border_color;
+  }
+
   row {
     color: $menu_fg_color;
     &:backdrop {
@@ -2508,12 +2512,17 @@ popover.background, menu, .menu, .context-menu  {
   }
 
   button:not(.suggested-action):not(.destructive-action) {
-    &, &label {
-      color: $menu_fg_color;
-      &:backdrop {
-        color: $backdrop_headerbar_fg_color;
+    
+    color: $menu_fg_color;
+    label { color: $menu_fg_color; }
+    &:backdrop {
+      color: $backdrop_headerbar_fg_color;
+      border-color: lighten($inkstone, 4%);
+      &:hover {
+        box-shadow: none;
       }
     }
+    
     background-color: transparent;
     border-color: $inkstone;
     &:hover {
@@ -2527,11 +2536,18 @@ popover.background, menu, .menu, .context-menu  {
       &:backdrop { color: $backdrop_headerbar_insensitive_color; }
     }
   }
-  button {
-    .suggested-action {
-      @extend %flat_suggested_action;
-    }    
+  
+  .suggested-action {
+    @extend %headerbarbutton;
+    &:disabled {
+      background-color: transparent;
+      border-color: $menu_border_color;
+      &:backdrop {        
+          &, &label { color: lighten($inkstone, 4%); }        
+      }
+    }
   }
+  
 
   undershoot {
     &.top { @include undershoot(top, 'true'); }
