@@ -533,6 +533,13 @@ headerbar button image ~ window decoration ~ menu separator {
   }
 }
 
+/*********************	
+ * Chrome / Chromium *	
+ *********************/	
+ window.background.chromium {	
+  menu { border: 1px solid $inkstone; }
+ }
+
 normal-button {
   @include button(normal);
 
