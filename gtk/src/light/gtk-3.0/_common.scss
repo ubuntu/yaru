@@ -2478,12 +2478,28 @@ popover.background {
 }
 
 popover.background, menu, .menu, .context-menu  {
-  box {
+  scrolledwindow { 
     border-color: $menu_border_color;
+    &:backdrop {
+      border-color: $menu_backdrop_border_color;
+    }
   }
 
-  row {
+  list {    
+    background-color: lighten($menu_color, 2%);    
+    &:backdrop {
+      background-color: transparent;
+    }
+  }
+
+  row, row.activatable {
     color: $menu_fg_color;
+    &:hover {
+      background-color: $menu_hover_color;
+    }
+    &:active {
+      background-color: $menu_active_color;
+    }
     &:backdrop {
       color: $backdrop_headerbar_fg_color;
     }
@@ -2504,6 +2520,21 @@ popover.background, menu, .menu, .context-menu  {
       color: $backdrop_headerbar_fg_color
     }
   }
+  
+  entry, text {
+    selection {
+      &:focus, & { 
+        background-color: darken($neutral_color, 10%);
+        color: $menu_fg_color;
+      }
+
+      &:backdrop {
+        background-color: darken($neutral_color, 5%);
+        color: $silk;
+      }
+    }
+  } 
+
   label {
     color: $menu_fg_color;
     &:backdrop {
@@ -2517,7 +2548,7 @@ popover.background, menu, .menu, .context-menu  {
     label { color: $menu_fg_color; }
     &:backdrop {
       color: $backdrop_headerbar_fg_color;
-      border-color: lighten($inkstone, 4%);
+      border-color: $menu_backdrop_border_color;
       &:hover {
         box-shadow: none;
       }
@@ -2538,16 +2569,19 @@ popover.background, menu, .menu, .context-menu  {
   }
   
   .suggested-action {
-    @extend %headerbarbutton;
+    border-color: $success_color;
+    box-shadow: none;
     &:disabled {
       background-color: transparent;
       border-color: $menu_border_color;
       &:backdrop {        
-          &, &label { color: lighten($inkstone, 4%); }        
+          &, &label { color: $menu_backdrop_border_color; }        
       }
     }
-  }
-  
+    &:backdrop {
+      &, &label { color: transparentize($color: white, $amount: 0.5); }
+    }
+  }  
 
   undershoot {
     &.top { @include undershoot(top, 'true'); }
