@@ -2527,9 +2527,6 @@ popover.background, menu, .menu, .context-menu  {
      background-color: transparent;
      border-color: $menu_fg_color;
     }
-    &:checked {
-      background-color: pink;
-    }
     &:disabled {
       &, &:active, &:checked, &:indeterminate, &:indeterminate:checked {        
           background-color: $menu_border_color;
@@ -2545,7 +2542,7 @@ popover.background, menu, .menu, .context-menu  {
   }
 
   entry, textview.view text {
-    background-color: lighten($menu_color, 2%);
+    background-color: lighten($jet, 6%);
     border-color: $menu_border_color;
     color: $menu_fg_color;
     &:backdrop {
