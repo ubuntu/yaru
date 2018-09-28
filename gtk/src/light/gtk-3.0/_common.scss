@@ -2480,6 +2480,13 @@ popover.background {
 }
 
 popover.background, menu, .menu, .context-menu  {
+  border { 
+    border-color: $menu_border_color;
+    &:backdrop {
+      border-color: $menu_backdrop_border_color;
+    }
+  }
+
   scrolledwindow { 
     border-color: $menu_border_color;
     &:backdrop {
@@ -2566,7 +2573,11 @@ popover.background, menu, .menu, .context-menu  {
         color: $silk;
       }
     }
-  } 
+  }
+
+  entry border {
+    color: $menu_border_color;
+  }
 
   label {
     color: $menu_fg_color;
