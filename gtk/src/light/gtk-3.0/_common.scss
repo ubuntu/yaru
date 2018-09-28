@@ -2521,11 +2521,27 @@ popover.background, menu, .menu, .context-menu  {
       color: $backdrop_headerbar_fg_color;
     }
   }
-
+  
   check, radio {
     &, &:backdrop, &:hover {
      background-color: transparent;
-    }    
+     border-color: $menu_fg_color;
+    }
+    &:checked {
+      background-color: pink;
+    }
+    &:disabled {
+      &, &:active, &:checked, &:indeterminate, &:indeterminate:checked {        
+          background-color: $menu_border_color;
+          border-color: $ash;
+      }
+      &:dir(ltr), &:dir(rtl) {
+        &:checked {
+          background-color: $menu_border_color;
+          border-color: $ash;
+        } 
+      }
+    }
   }
 
   entry, textview.view text {
