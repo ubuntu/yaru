@@ -2583,8 +2583,9 @@ popover.background, menu, .menu, .context-menu  {
     caret-color: white;
   }
 
-  entry border {
-    color: $menu_border_color;
+  entry {
+    border { color: $menu_border_color; }
+    image { color: $menu_fg_color; }
   }
 
   label {
