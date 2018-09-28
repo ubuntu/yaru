@@ -2677,6 +2677,8 @@ popover.background, menu, .menu, .context-menu  {
   }
 }
 
+button .popup menu separator { background-color: $menu_border_color; }
+
 /*************
  * Notebooks *
  *************/
