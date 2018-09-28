@@ -21,8 +21,8 @@ $dark_fill: if($variant == 'light',#CDCDCD, $ash);
 $menu_color: transparentize(lighten($jet, 2%), if($variant=='light', 0.025, 0.002));
 $menu_fg_color: $porcelain;
 $menu_border_color: transparentize(white, 0.9);
-$menu_hover_color: transparentize($porcelain, 0.85);
-$menu_active_color: transparentize($porcelain, 0.8);
+$menu_hover_color: transparentize(white, 0.85);
+$menu_active_color: transparentize(white, 0.8);
 $menu_backdrop_border_color: lighten($inkstone, 4%);
 
 $popover_bg_color: $bg_color;

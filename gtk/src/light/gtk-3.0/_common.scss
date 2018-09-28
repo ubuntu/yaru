@@ -41,7 +41,7 @@ $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
-$popover_shadow: 0 2px 5px transparentize(black, 0.5);
+$popover_shadow: 0 3px 5px 1px transparentize(black, 0.5);
 
 /***************
  * Base States *
@@ -2510,11 +2510,14 @@ popover.background, menu, .menu, .context-menu  {
     }
     &:hover {
       background-color: $menu_hover_color;
+      border-color: transparent;
     }
     &:active {
       background-color: $menu_active_color;
+      border-color: transparent;
     }
   }
+  treeview { border-color: darken($inkstone, 2%); }
   calendar {
     border-color: $menu_border_color;
     &.header {
@@ -2559,8 +2562,8 @@ popover.background, menu, .menu, .context-menu  {
   }
 
   entry, textview.view text {
-    background-color: lighten($jet, 6%);
-    border-color: $menu_border_color;
+    background-color: lighten($jet, 4%);
+    border-color: lighten($inkstone,2%);
     color: $menu_fg_color;
     &:backdrop {
       background-color: $backdrop_headerbar_bg_color; 
@@ -2608,7 +2611,7 @@ popover.background, menu, .menu, .context-menu  {
     }
     
     background-color: transparent;
-    border-color: $inkstone;
+    border-color: lighten($inkstone,2%);
     &:hover {
       background-color: $menu_hover_color;
     }
