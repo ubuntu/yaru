@@ -2593,7 +2593,7 @@ popover.background, menu, .menu, .context-menu  {
       background-color: $menu_active_color;
     }
     &:disabled {
-      color: $insensitive_fg_color;
+      color: lighten($inkstone,4%);
       &:backdrop { color: $backdrop_headerbar_insensitive_color; }
     }
   }
