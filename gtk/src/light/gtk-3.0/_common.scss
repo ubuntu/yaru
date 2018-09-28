@@ -2494,6 +2494,21 @@ popover.background, menu, .menu, .context-menu  {
     }
   }
 
+  treeview {
+    background-color: transparent;
+    color: $menu_fg_color;
+    &:backdrop{
+      background-color: $backdrop_menu_color;
+      color: $backdrop_menu_fg_color;
+    }
+    &:hover {
+      background-color: $menu_hover_color;
+    }
+    &:active {
+      background-color: $menu_active_color;
+    }
+  }
+
   row, row.activatable {
     color: $menu_fg_color;
     &:hover {

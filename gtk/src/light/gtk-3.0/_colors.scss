@@ -82,6 +82,7 @@ $backdrop_scrollbar_bg_color: darken($backdrop_bg_color, 3%);
 $backdrop_scrollbar_slider_color: transparentize($backdrop_fg_color, 0.4);
 
 $backdrop_menu_color: $backdrop_headerbar_bg_color;
+$backdrop_menu_fg_color: $backdrop_headerbar_fg_color;
 
 // Headerbar widgets colors
 $hb_pathbar_bg: lighten($headerbar_bg_color, 5%);
