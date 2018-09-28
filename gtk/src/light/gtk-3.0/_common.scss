@@ -2494,7 +2494,7 @@ popover.background, menu, .menu, .context-menu  {
     }
   }
 
-  treeview {
+  treeview, calendar {
     background-color: transparent;
     color: $menu_fg_color;
     &:backdrop{
@@ -2507,6 +2507,9 @@ popover.background, menu, .menu, .context-menu  {
     &:active {
       background-color: $menu_active_color;
     }
+  }
+  calendar {
+    border-color: $menu_border_color;
   }
 
   row, row.activatable {
