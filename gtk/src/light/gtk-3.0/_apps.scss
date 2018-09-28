@@ -523,8 +523,8 @@ headerbar button image ~ window decoration ~ menu separator {
     border-radius: 0;
   }
 
-  > menu, .menu { border: none; } // Removed menu borders
-  > menu > menuitem { border-radius: 0; } // Removed rounded menu corners
+  // Remove rounded menus because the border bleeds in firefox
+  menu, .menu,.context-menu { border-radius: 0; }
 
   // Adapt scrollbars a bit more to the GTK Scrollbar styling
   scrollbar {
