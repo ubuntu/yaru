@@ -2517,6 +2517,13 @@ popover.background, menu, .menu, .context-menu  {
   }
   calendar {
     border-color: $menu_border_color;
+    &.header {
+      border-bottom-color: $menu_border_color;
+    }
+    &:hover {
+      background-color: transparent;
+      color: $menu_hover_color;
+    }
   }
 
   row, row.activatable {
@@ -2573,6 +2580,7 @@ popover.background, menu, .menu, .context-menu  {
         color: $silk;
       }
     }
+    caret-color: white;
   }
 
   entry border {
