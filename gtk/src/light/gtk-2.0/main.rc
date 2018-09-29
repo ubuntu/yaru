@@ -412,7 +412,7 @@ style "default" {
       overlay_stretch = FALSE
       arrow_direction = UP
     }
- 
+
     image {
       function        = ARROW
       overlay_file    = "assets/scrollbar-arrow-down.png"
@@ -1585,8 +1585,9 @@ style "menu_item" {
   # Chromium uses this setting
   bg[SELECTED]   = @menu_hover_color
 
-  fg[PRELIGHT]   = @fg_color
-  fg[SELECTED]    = @fg_color
+  fg[NORMAL]   = @menubar_fg
+  fg[PRELIGHT]   = @menubar_fg
+  fg[SELECTED]    = @menubar_fg
   text[NORMAL]   = @fg_color
   text[PRELIGHT] = @fg_color
   text[ACTIVE]      = @fg_color
