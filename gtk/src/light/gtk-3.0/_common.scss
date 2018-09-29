@@ -2470,8 +2470,8 @@ popover.background {
     }
   }
 
-  list separator, separator { 
-    margin: 3px; 
+  list separator, separator {
+    margin: 3px;
     border-color: $menu_border_color;
     background-color: $menu_border_color;
   }
@@ -2480,22 +2480,22 @@ popover.background {
 }
 
 popover.background, menu, .menu, .context-menu  {
-  border { 
+  border {
     border-color: $menu_border_color;
     &:backdrop {
       border-color: $menu_backdrop_border_color;
     }
   }
 
-  scrolledwindow { 
+  scrolledwindow {
     border-color: $menu_border_color;
     &:backdrop {
       border-color: $menu_backdrop_border_color;
     }
   }
 
-  list {    
-    background-color: lighten($menu_color, 2%);    
+  list {
+    background-color: lighten($menu_color, 2%);
     &:backdrop {
       background-color: transparent;
     }
@@ -2541,14 +2541,14 @@ popover.background, menu, .menu, .context-menu  {
       color: $backdrop_headerbar_fg_color;
     }
   }
-  
+
   check, radio {
     &, &:backdrop, &:hover {
      background-color: transparent;
      border-color: $menu_fg_color;
     }
     &:disabled {
-      &, &:active, &:checked, &:indeterminate, &:indeterminate:checked {        
+      &, &:active, &:checked, &:indeterminate, &:indeterminate:checked {
           background-color: $menu_border_color;
           border-color: $ash;
       }
@@ -2556,7 +2556,7 @@ popover.background, menu, .menu, .context-menu  {
         &:checked {
           background-color: $menu_border_color;
           border-color: $ash;
-        } 
+        }
       }
     }
   }
@@ -2566,14 +2566,14 @@ popover.background, menu, .menu, .context-menu  {
     border-color: lighten($inkstone,2%);
     color: $menu_fg_color;
     &:backdrop {
-      background-color: $backdrop_headerbar_bg_color; 
+      background-color: $backdrop_headerbar_bg_color;
       color: $backdrop_headerbar_fg_color
     }
   }
-  
+
   entry, text {
     selection {
-      &:focus, & { 
+      &:focus, & {
         background-color: darken($neutral_color, 10%);
         color: $menu_fg_color;
       }
@@ -2599,7 +2599,7 @@ popover.background, menu, .menu, .context-menu  {
   }
 
   button:not(.suggested-action):not(.destructive-action) {
-    
+
     color: $menu_fg_color;
     label { color: $menu_fg_color; }
     &:backdrop {
@@ -2609,7 +2609,7 @@ popover.background, menu, .menu, .context-menu  {
         box-shadow: none;
       }
     }
-    
+
     background-color: transparent;
     border-color: lighten($inkstone,2%);
     &:hover {
@@ -2623,21 +2623,21 @@ popover.background, menu, .menu, .context-menu  {
       &:backdrop { color: $backdrop_headerbar_insensitive_color; }
     }
   }
-  
+
   .suggested-action {
     border-color: $success_color;
     box-shadow: none;
     &:disabled {
       background-color: transparent;
       border-color: $menu_border_color;
-      &:backdrop {        
-          &, &label { color: $menu_backdrop_border_color; }        
+      &:backdrop {
+          &, &label { color: $menu_backdrop_border_color; }
       }
     }
     &:backdrop {
       &, &label { color: transparentize($color: white, $amount: 0.5); }
     }
-  }  
+  }
 
   undershoot {
     &.top { @include undershoot(top, 'true'); }
@@ -4047,7 +4047,7 @@ row {
         box-shadow: none;
         border-color: $inkstone;
       }
-      
+
       &:hover {
         background-color: $menu_hover_color;
       }
@@ -4055,7 +4055,7 @@ row {
         background-color: $menu_active_color;
       }
       &:backdrop {
-        
+
       }
     }
   }
@@ -4975,7 +4975,7 @@ popover.emoji-picker {
 
   box scrolledwindow {
     background-color: lighten($menu_color, 4%);
-    color: $menu_fg_color; 
+    color: $menu_fg_color;
     &:backdrop {
       background-color: $backdrop_headerbar_bg_color;
       label { color: $backdrop_headerbar_fg_color; }
@@ -4994,7 +4994,7 @@ button.emoji-section {
   margin: 0;
   padding: 2px 5px;
   min-width: 32px;
-  min-height: 28px;  
+  min-height: 28px;
 
   outline-offset: -5px;
 
