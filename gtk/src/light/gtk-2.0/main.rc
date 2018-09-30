@@ -1585,12 +1585,13 @@ style "menu_item" {
   # Chromium uses this setting
   bg[SELECTED]   = @menu_hover_color
 
-  fg[PRELIGHT]   = @fg_color
-  fg[SELECTED]    = @fg_color
+  fg[NORMAL]     = @menubar_insensitive_fg
+  fg[PRELIGHT]   = @menubar_fg
+  fg[SELECTED]   = @menubar_fg
   text[NORMAL]   = @fg_color
   text[PRELIGHT] = @fg_color
-  text[ACTIVE]      = @fg_color
-  text[SELECTED]    = @fg_color
+  text[ACTIVE]   = @fg_color
+  text[SELECTED] = @fg_color
 
   # Some widgets use text, we need to handle that
   # Don't know what this comment is about but maybe we've nulled it

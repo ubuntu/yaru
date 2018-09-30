@@ -41,7 +41,7 @@ $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
-$popover_shadow: 0 2px 5px transparentize(black, 0.75);
+$popover_shadow: 0 3px 5px 1px transparentize(black, 0.5);
 
 /***************
  * Base States *
@@ -1679,7 +1679,7 @@ headerbar {
     }
     button.default { label { color: white; } }
 
-    button, button.flat, button.titlebutton.appmenu {
+    button, button.flat, button.titlebutton.appmenu, %headerbarbutton {
       @each $state, $t in ("", "normal"),
                           (":hover", "hover"),
                           (":hover:backdrop", "backdrop-hover"),
@@ -1845,7 +1845,7 @@ headerbar {
 
     .subtitle:link { @extend *:link:selected;  }
 
-    button {
+    button, %flat_success_btn {
         @each $state, $t in ("", "normal"),
                             (":hover", "hover"),
                             (":hover:backdrop", "backdrop-hover"),
@@ -2314,14 +2314,15 @@ menubar,
 
 .background.popup { background-color: transparent; }
 
+// Custom styling for black menus
 menu,
 .menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
   padding: 8px 0;
   background-color: $menu_color;
-  color: $text_color;
-  border: 1px solid $borders_color; // adds borders in a non composited env
+  color: $menu_fg_color;
+  border: 1px solid $menu_border_color; // adds borders in a non composited env
   border-radius: $small_radius;
 
   .csd & { border: none; }  // axes borders in a composited env
@@ -2335,7 +2336,7 @@ menu,
     padding: 5px 6px;
     border-radius: 0;
 
-    &:hover { background-color: $base_hover_color; }
+    &:hover { background-color: $menu_hover_color; }
 
     &:disabled {
       color: $insensitive_fg_color;
@@ -2373,21 +2374,23 @@ menu,
     border-radius: 0;
 
     &.top {
-      border-bottom: 1px solid mix($fg_color, $base_color, 10%);
+      border-bottom: 1px solid $menu_border_color;
       border-top-right-radius: $small_radius;
       border-top-left-radius: $small_radius;
       -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+      background-color: $menu_color;
     }
 
     &.bottom {
       margin-bottom: -8px;
-      border-top: 1px solid mix($fg_color, $base_color, 10%);
+      border-top: 1px solid $menu_border_color;
       border-bottom-right-radius: $small_radius;
       border-bottom-left-radius: $small_radius;
       -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+      background-color: $menu_color;
     }
 
-    &:hover { background-color: mix($fg_color, $base_color, 10%); }
+    &:hover { background-color: $menu_active_color; }
 
     &:backdrop { background-color: $backdrop_menu_color; }
 
@@ -2396,6 +2399,11 @@ menu,
       background-color: transparent;
       border-color: transparent ;
     }
+  }
+
+  separator {
+    border-color: $menu_border_color;
+    background-color: $menu_border_color;
   }
 }
 
@@ -2415,19 +2423,20 @@ menuitem {
  * Popovers   *
  ***************/
 
+// Custom styling for black popups
 popover.background {
   padding: 2px;
-  color: $text_color;
+  color: $menu_fg_color;
   border-radius: $medium_radius;
   background-color: $menu_color;
 
-  .csd &, & { border: 1px solid $borders_color; }
+  .csd &, & { border: 1px solid $menu_border_color; }
 
   box-shadow: $popover_shadow;
 
   &:backdrop {
-    background-color: $backdrop_bg_color;
-    color: $backdrop_text_color;
+    background-color: $backdrop_headerbar_bg_color;
+    color: $backdrop_headerbar_fg_color;
     box-shadow: none;
   }
 
@@ -2455,11 +2464,222 @@ popover.background {
     min-height: 16px;
     min-width: 36px;
     padding: 5px 6px;
+
+    &:hover { background-color: $menu_hover_color; }
+
+    label:backdrop {
+      color: $backdrop_headerbar_fg_color;
+    }
   }
 
-  separator { margin: 3px; }
+  list separator, separator {
+    margin: 3px;
+    border-color: $menu_border_color;
+    background-color: $menu_border_color;
+  }
 
   list separator { margin: 0px; }
+
+  border {
+    border-color: $menu_border_color;
+    &:backdrop {
+      border-color: $menu_backdrop_border_color;
+    }
+  }
+
+  scrolledwindow {
+    border-color: $menu_border_color;
+    &:backdrop {
+      border-color: $menu_backdrop_border_color;
+    }
+  }
+
+  list {
+    background-color: lighten($menu_color, 2%);
+    &:backdrop {
+      background-color: transparent;
+    }
+  }
+
+  treeview, calendar {
+    background-color: transparent;
+    color: $menu_fg_color;
+    &:backdrop{
+      background-color: $backdrop_menu_color;
+      color: $backdrop_menu_fg_color;
+    }
+    &:hover {
+      background-color: $menu_hover_color;
+      border-color: transparent;
+    }
+    &:active {
+      background-color: $menu_active_color;
+      border-color: transparent;
+    }
+  }
+  treeview { border-color: darken($inkstone, 2%); }
+  calendar {
+    border-color: $menu_border_color;
+    &.header {
+      border-bottom-color: $menu_border_color;
+    }
+    &:hover {
+      background-color: transparent;
+      color: $menu_hover_color;
+    }
+  }
+
+  list row, row, row.activatable {
+    color: $menu_fg_color;
+    &:hover {
+      background-color: $menu_hover_color;
+    }
+    &:active {
+      background-color: $menu_active_color;
+    }
+    &:backdrop {
+      color: $backdrop_headerbar_fg_color;
+    }
+    label { color: $menu_fg_color; }
+  }
+
+  entry, textview.view text {
+    background-color: lighten($jet, 4%);
+    border-color: lighten($inkstone,2%);
+    color: $menu_fg_color;
+    &:backdrop {
+      background-color: $backdrop_headerbar_bg_color;
+      color: $backdrop_headerbar_fg_color
+    }
+  }
+
+  entry, text {
+    selection {
+      &:focus, & {
+        background-color: darken($neutral_color, 10%);
+        color: $menu_fg_color;
+      }
+
+      &:backdrop {
+        background-color: darken($neutral_color, 5%);
+        color: $silk;
+      }
+    }
+    caret-color: white;
+  }
+
+  entry {
+    border { color: $menu_border_color; }
+    image { color: $menu_fg_color; }
+  }
+
+  label, image, button image, box image  {
+    color: $menu_fg_color;
+    &:backdrop {
+      color: $backdrop_headerbar_fg_color
+    }
+  }
+
+  button:not(.suggested-action):not(.destructive-action) {
+
+    color: $menu_fg_color;
+    label { color: $menu_fg_color; }
+    &:backdrop {
+      color: $backdrop_headerbar_fg_color;
+      border-color: $menu_backdrop_border_color;
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    background-color: transparent;
+    border-color: lighten($inkstone,2%);
+    &:hover {
+      background-color: $menu_hover_color;
+    }
+    &:active {
+      background-color: $menu_active_color;
+    }
+    &:disabled {
+      color: lighten($inkstone,4%);
+      &:backdrop { color: $backdrop_headerbar_insensitive_color; }
+    }
+  }
+
+  .suggested-action {
+    border-color: $success_color;
+    box-shadow: none;
+    &:disabled {
+      background-color: transparent;
+      border-color: $menu_border_color;
+      &:backdrop {
+          &, &label { color: $menu_backdrop_border_color; }
+      }
+    }
+    &:backdrop {
+      &, &label { color: transparentize($color: white, $amount: 0.5); }
+    }
+  }
+
+  undershoot {
+    &.top { @include undershoot(top, 'true'); }
+
+    &.bottom { @include undershoot(bottom, 'true'); }
+
+    &.left { @include undershoot(left, 'true'); }
+
+    &.right { @include undershoot(right, 'true'); }
+  }
+
+  overshoot {
+    $_c: $menu_color;
+    &.top {
+      @include overshoot(top, normal, $_c);
+
+      &:backdrop { @include overshoot(top, backdrop, $_c); }
+    }
+
+    &.bottom {
+      @include overshoot(bottom, normal, $_c);
+
+      &:backdrop { @include overshoot(bottom, backdrop, $_c); }
+    }
+
+    &.left {
+      @include overshoot(left, normal, $_c);
+
+      &:backdrop { @include overshoot(left, backdrop, $_c); }
+    }
+
+    &.right {
+      @include overshoot(right, normal, $_c);
+
+      &:backdrop { @include overshoot(right, backdrop, $_c); }
+    }
+  }
+}
+
+// Custom styling for black menus and popups
+button .popup menu separator { background-color: $menu_border_color; }
+popover.background, menu, .menu, .context-menu {
+  check, radio {
+    &, &:backdrop, &:hover {
+     background-color: transparent;
+     border-color: $menu_fg_color;
+    }
+    &:disabled {
+      &, &:active, &:checked, &:indeterminate, &:indeterminate:checked {
+          background-color: $menu_border_color;
+          border-color: $ash;
+      }
+      &:dir(ltr), &:dir(rtl) {
+        &:checked {
+          background-color: $menu_border_color;
+          border-color: $ash;
+        }
+      }
+    }
+  }
 }
 
 /*************
@@ -3809,9 +4029,9 @@ row {
   margin: 12px;
   color: $text_color;
   border-radius: $medium_radius;
-  background-color: $menu_color;
+  background-color: if($variant=='light', white, $menu_color);
   border: 1px solid $borders_color;
-  box-shadow: $popover_shadow;
+  box-shadow: 0 2px 5px transparentize(black, 0.75);
 
   &:backdrop {
     background-color: $backdrop_bg_color;
@@ -3819,10 +4039,28 @@ row {
     box-shadow: none;
     transition: $backdrop_transition;
   }
-
   button.flat:hover {
       @include button(hover, $menu_color);
       border-color: $borders_color;
+  }
+  button, button.flat {
+    @if $variant=='dark' {
+      background-color: transparent;
+      &, &:hover, &:active {
+        box-shadow: none;
+        border-color: $inkstone;
+      }
+
+      &:hover {
+        background-color: $menu_hover_color;
+      }
+      &:active {
+        background-color: $menu_active_color;
+      }
+      &:backdrop {
+
+      }
+    }
   }
 
   border { border: none; }
@@ -4534,7 +4772,7 @@ decoration {
   .csd.popup & {
     border-radius: $small_radius;
     box-shadow: $popover_shadow,
-                0 0 0 1px transparentize($borders_color, 0.2);
+                0 0 0 1px $menu_border_color;
   }
 
   tooltip.csd & {
@@ -4725,7 +4963,7 @@ popover.emoji-picker {
   padding: 0;
 
   entry {
-    border-bottom: 1px solid $borders_color;
+    border-bottom: 1px solid $menu_border_color;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     box-shadow: none;
@@ -4737,39 +4975,48 @@ popover.emoji-picker {
       border-color: $selected_bg_color;
     }
   }
+
+  box scrolledwindow {
+    background-color: lighten($menu_color, 4%);
+    color: $menu_fg_color;
+    &:backdrop {
+      background-color: $backdrop_headerbar_bg_color;
+      label { color: $backdrop_headerbar_fg_color; }
+    }
+  }
+
+  scrollbar {
+    &:backdrop:hover { background-color: transparent; }
+  }
 }
 
 button.emoji-section {
   border-style: none;
   border-radius: 0;
-
+  background-color: transparent;
   margin: 0;
   padding: 2px 5px;
   min-width: 32px;
   min-height: 28px;
 
-  /* reset props inherited from the button style */
-  background: none;
-  box-shadow: inset 0 1px $borders_color;
-
   outline-offset: -5px;
 
   &:hover {
-    box-shadow: inset 0 2px $borders_color;
-    background-color: $base_hover_color;
+    box-shadow: none;
+    background-color: $menu_hover_color;
   }
 
   &:active {
     box-shadow: inset 0 2px $selected_bg_color;
-    background-color: $base_active_color;
+    background-color: $menu_active_color;
   }
 
   &:checked {
     box-shadow: inset 0 2px $selected_bg_color;
-    background-color: transparent;
+    background-color: $selected_bg_color;
     &:hover {
       box-shadow: inset 0 2px $selected_bg_color;
-      background-color: $base_hover_color;
+      background-color: $menu_hover_color;
     }
   }
 
