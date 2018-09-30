@@ -41,7 +41,7 @@ $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
-$popover_shadow: 0 2px 5px transparentize(black, 0.5);
+$popover_shadow: 0 3px 5px 1px transparentize(black, 0.5);
 
 /***************
  * Base States *
@@ -2314,6 +2314,7 @@ menubar,
 
 .background.popup { background-color: transparent; }
 
+// Custom styling for black menus
 menu,
 .menu,
 .context-menu {
@@ -2422,6 +2423,7 @@ menuitem {
  * Popovers   *
  ***************/
 
+// Custom styling for black popups
 popover.background {
   padding: 2px;
   color: $menu_fg_color;
@@ -2477,9 +2479,7 @@ popover.background {
   }
 
   list separator { margin: 0px; }
-}
 
-popover.background, menu, .menu, .context-menu  {
   border {
     border-color: $menu_border_color;
     &:backdrop {
@@ -2529,7 +2529,7 @@ popover.background, menu, .menu, .context-menu  {
     }
   }
 
-  row, row.activatable {
+  list row, row, row.activatable {
     color: $menu_fg_color;
     &:hover {
       background-color: $menu_hover_color;
@@ -2540,25 +2540,7 @@ popover.background, menu, .menu, .context-menu  {
     &:backdrop {
       color: $backdrop_headerbar_fg_color;
     }
-  }
-
-  check, radio {
-    &, &:backdrop, &:hover {
-     background-color: transparent;
-     border-color: $menu_fg_color;
-    }
-    &:disabled {
-      &, &:active, &:checked, &:indeterminate, &:indeterminate:checked {
-          background-color: $menu_border_color;
-          border-color: $ash;
-      }
-      &:dir(ltr), &:dir(rtl) {
-        &:checked {
-          background-color: $menu_border_color;
-          border-color: $ash;
-        }
-      }
-    }
+    label { color: $menu_fg_color; }
   }
 
   entry, textview.view text {
@@ -2591,7 +2573,7 @@ popover.background, menu, .menu, .context-menu  {
     image { color: $menu_fg_color; }
   }
 
-  label, image {
+  label, image, button image, box image  {
     color: $menu_fg_color;
     &:backdrop {
       color: $backdrop_headerbar_fg_color
@@ -2677,7 +2659,28 @@ popover.background, menu, .menu, .context-menu  {
   }
 }
 
+// Custom styling for black menus and popups
 button .popup menu separator { background-color: $menu_border_color; }
+popover.background, menu, .menu, .context-menu {
+  check, radio {
+    &, &:backdrop, &:hover {
+     background-color: transparent;
+     border-color: $menu_fg_color;
+    }
+    &:disabled {
+      &, &:active, &:checked, &:indeterminate, &:indeterminate:checked {
+          background-color: $menu_border_color;
+          border-color: $ash;
+      }
+      &:dir(ltr), &:dir(rtl) {
+        &:checked {
+          background-color: $menu_border_color;
+          border-color: $ash;
+        }
+      }
+    }
+  }
+}
 
 /*************
  * Notebooks *
