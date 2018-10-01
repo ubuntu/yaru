@@ -1,3 +1,47 @@
+yaru-theme (18.10.5) UNRELEASED; urgency=medium
+
+  [ Jeremy Bicha ]
+  * debian/gbp.conf: Enable multimaint-merge
+
+  [ feichtmeier ]
+  * Style labels inside default buttons inside headerbar
+  * Adapt headerbar entries to the buttons in headerbar
+  * Selected widgets should have the a light text color.
+  * Make .inline-toolbar.horizontal.sidebar-toolbar transparent in backdrop
+  * Add a margin to usb-creator's dialog Correct geary headerbar
+  * Make separators visible again in popups and calendar
+
+  [ Didier Roche ]
+  * Build gtk-common-themes using bionic docker image
+  * Ensure we pick correct Yaru version when building g-c-t
+  * Clean snapcraft.yaml sync for g-t-c
+  * Add some debug to ensure we pick the correct branch
+  * Remove debug in build script.
+
+  [ Carlo Lobrano ]
+  * apps/nautilus: removed custom notebook code
+  * apps/nautilus: added minimal custom code for dark variant
+  * apps/nautilus: fixed circular button backdrop transition
+  * apps/nautilus: fixed circular button bright border in normal state
+  * apps/nautilus: fixed circular button border in hover state
+  * shell/colors: made osd_borders_color brighter
+  * common/notebook: align active notebook tab labels
+  * light gtk2 assets: Fixing entry bleeding background
+  * drawing/switch: fixed backdrop insensitive switch (LP: #1794942)
+  * light gtk2: fixed radio/check buttons
+  * light gtk2 main.rc: fixed reference to insensitive check/radio assets
+  * gtk2 assets + main.rc: made scrollbars more similar to GTK3 ones
+  * gtk2 menu asset: fixed wrong file name
+
+  [ Ken VanDine ]
+  * Updated url to pull gtk-common-themes from gitlab.gnome.org
+
+  [ James Henstridge ]
+  * build: require Meson >= 0.45 for strip_directory support, fixing #835
+  * debian/control: update meson requirement here too
+
+ -- Didier Roche <didrocks@ubuntu.com>  Mon, 01 Oct 2018 14:09:30 +0200
+
 yaru-theme (18.10.4) cosmic; urgency=medium
 
   [ feichtmeier ]
