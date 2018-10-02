@@ -364,11 +364,6 @@
     } @else {
       border-color: if($c!=$button_bg_color, $c, $insensitive_borders_color);
       box-shadow: 0 1px transparent;
-      @if $menu==true {
-        border-color: $menu_button_border_color;
-        box-shadow: none;
-        color: $menu_disabled_fg_color;
-      }
     }
 
     label, & {
@@ -387,6 +382,13 @@
       }
 
       color: transparentize($_label_color, $_label_alpha);
+    }
+
+    @if $menu==true {
+      background-color: if($c==$menu_color, transparent, transparentize($c,0.2));
+      border-color: if($c==$menu_color, $menu_button_border_color, transparentize($c,0.2));
+      box-shadow: none;
+      label, & { color: if($c==$menu_color, $menu_disabled_fg_color, transparentize(white, 0.5)); }
     }
   }
 
