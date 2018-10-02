@@ -40,7 +40,7 @@
 
 @function entry_focus_shadow($fc:$selected_bg_color) { @return 0 0 2px 2px transparentize($fc, .8); }
 
-@mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $fg_color, $edge: none) {
+@mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $fg_color, $edge: none, $menu: false) {
 //
 // Entries drawing function
 //
@@ -75,6 +75,11 @@
     }
     background-color: $_bc;
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
+    @if $menu==true {
+      box-shadow: none;
+      &, image { color: $menu_fg_color; }
+      border-color: $menu_button_border_color;
+    }
   }
   @if $t==focus {
     @include _shadows($_entry_edge);

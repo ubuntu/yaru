@@ -2503,7 +2503,7 @@ popover.background {
     background-color: transparent;
     color: $menu_fg_color;
     &:backdrop{
-      background-color: $backdrop_menu_color;
+      background-color: transparent;
       color: $backdrop_menu_fg_color;
     }
     &:hover {
@@ -2536,12 +2536,13 @@ popover.background {
     }
     &:backdrop {
       color: $backdrop_headerbar_fg_color;
+      background: transparent;
     }
     label { color: $menu_fg_color; }
   }
 
-  entry, textview.view text {
-    background-color: $menu_button_color;
+  textview.view text {
+    background-color: $menu_color;
     border-color: $menu_button_border_color;
     color: $menu_fg_color;
     &:backdrop {
@@ -2565,21 +2566,11 @@ popover.background {
     caret-color: white;
   }
 
-  entry {
-    border { color: $menu_border_color; }
-    image { color: $menu_fg_color; }
-  }
+  label:backdrop { color: $backdrop_menu_fg_color; }
 
-  // label, image, button image, box image  {
-  //   color: $menu_fg_color;
-  //   &:backdrop {
-  //     color: $backdrop_headerbar_fg_color
-  //   }
-  //   &:disabled {
-  //     & { color: $menu_disabled_fg_color; }
-  //     &:backdrop { color: $backdrop_headerbar_insensitive_color; }
-  //   }
-  // }
+  entry {
+    @include entry(normal, $c: $menu_button_color, $tc: $menu_fg_color, $menu:true);
+  }
 
   button {
     @each $state, $t in ("", "normal"),
