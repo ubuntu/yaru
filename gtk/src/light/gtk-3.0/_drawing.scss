@@ -204,7 +204,7 @@
   }
 }
 
-@mixin button($t, $c:$button_bg_color, $tc:$fg_color, $flat:false) {
+@mixin button($t, $c:$button_bg_color, $tc:$fg_color, $flat:false, $menu:false) {
   // Button drawing function
   //
   // $t:    button type,
@@ -235,6 +235,10 @@
     } @else {
       border-color: $_border;
       box-shadow: 0 1px transparentize(black, 0.9);
+    }
+  @if $menu==true {
+      border-color: $menu_button_border_color;
+      box-shadow: none;
     }
   }
 
@@ -625,7 +629,7 @@
 
   @if $t==insensitive {
     $_bg: if($_checked, $_dim_background , transparent);
-    @if $menu=true {
+    @if $menu==true {
       $_bg: $menu_border_color;
     }
     background-color: $_bg;
@@ -639,7 +643,7 @@
 
     background-color: if($_checked, _backdrop_color($c), $bg_color);
     border-color: $_dim_border_color;
-    @if $menu=true {
+    @if $menu==true {
       background-color: transparent;
       border-color: $backdrop_menu_border_color;
     }
@@ -650,7 +654,7 @@
   @if $t==backdrop-hover {
     -gtk-icon-effect: highlight;
     background-color: if($c!=white, lighten($c, 9%), darken($c, 7%));
-    @if $menu=true {
+    @if $menu==true {
       background-color: $backdrop_menu_border_color;
     }
   }

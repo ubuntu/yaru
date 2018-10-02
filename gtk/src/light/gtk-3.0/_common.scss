@@ -2422,7 +2422,7 @@ menuitem {
  * Popovers   *
  ***************/
 
-// Custom styling for black popups
+// Custom styling for black popovers
 popover.background {
   padding: 2px;
   color: $menu_fg_color;
@@ -2434,8 +2434,8 @@ popover.background {
   box-shadow: $popover_shadow;
 
   &:backdrop {
-    background-color: $backdrop_headerbar_bg_color;
-    color: $backdrop_headerbar_fg_color;
+    background-color: $backdrop_menu_color;
+    color: $backdrop_menu_fg_color;
     box-shadow: none;
   }
 
@@ -2467,7 +2467,7 @@ popover.background {
     &:hover { background-color: $menu_hover_color; }
 
     label:backdrop {
-      color: $backdrop_headerbar_fg_color;
+      color: $backdrop_menu_fg_color;
     }
   }
 
@@ -2581,43 +2581,38 @@ popover.background {
     }
   }
 
-  button:not(.suggested-action):not(.destructive-action) {
-    color: $menu_fg_color;
-    label { color: $menu_fg_color; }
-    &:backdrop {
-      color: $backdrop_headerbar_fg_color;
-      border-color: $backdrop_menu_border_color;
-      &:hover {
-        box-shadow: none;
-      }
+  button {
+    @each $state, $t in ("", "normal"),
+                        (":hover", "hover"),
+                        (":hover:backdrop", "backdrop-hover"),
+                        (":active, &:checked", "active"),
+                        (":hover:checked", "active-hover"),
+                        (":disabled", "insensitive"),
+                        (":disabled:active, &:disabled:checked", "insensitive-active"),
+                        (":backdrop", "backdrop"),
+                        (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                        (":backdrop:disabled", 'backdrop-insensitive'),
+                        (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+                          &#{$state} { @include button($t, $menu_color, $menu_fg_color, $flat:false, $menu:true); }
     }
 
-    background-color: $menu_button_color;
-    border-color: $menu_button_border_color;
-    &:hover {
-      background-color: $menu_hover_color;
-    }
-    &:active {
-      background-color: $menu_active_color;
-    }
-    &:disabled {
-      &, label { color: $menu_disabled_fg_color; }
-      &:backdrop { color: $backdrop_headerbar_insensitive_color; }
-    }
-  }
-
-  .suggested-action {
-    border-color: $success_color;
-    box-shadow: none;
-    &:disabled {
-      background-color: transparent;
-      border-color: $menu_border_color;
-      &:backdrop {
-          &, &label { color: $backdrop_menu_border_color; }
+    @each $b_type, $b_color in (suggested-action, $success_color),
+                                (destructive-action, $destructive_color) {
+      &.#{$b_type} {
+        // special buttons show their color when not interacted with
+        @each $state, $t in ("", "normal"),
+                            (":hover", "hover"),
+                            (":hover:backdrop", "backdrop-hover"),
+                            (":active, &:checked", "active"),
+                            (":disabled", "insensitive"),
+                            (":disabled:active, &:disabled:checked", "insensitive-active"),
+                            (":backdrop", "backdrop"),
+                            (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                            (":backdrop:disabled", 'backdrop-insensitive'),
+                            (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+          &#{$state} { @include button($t, $b_color, white, $flat:true, $menu:true) }
+        }
       }
-    }
-    &:backdrop {
-      &, &label { color: transparentize($color: white, $amount: 0.5); }
     }
   }
 
@@ -2676,7 +2671,7 @@ popover.background, menu, .menu, .context-menu {
                           (":backdrop", "backdrop"),
                           (":backdrop:disabled", 'backdrop-insensitive') {
         &#{$state} {
-          @include check($t, $_c);
+          @include check($t, $_c, $menu:true);
         }
       }
     }
@@ -2692,7 +2687,7 @@ popover.background, menu, .menu, .context-menu {
                               (":backdrop", "backdrop"),
                               (":backdrop:disabled", 'backdrop-insensitive') {
             &#{$state} {
-              @include check($t, $success_color);
+              @include check($t, $success_color, $menu:true);
             }
           }
         }
