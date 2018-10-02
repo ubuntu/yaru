@@ -2570,16 +2570,16 @@ popover.background {
     image { color: $menu_fg_color; }
   }
 
-  label, image, button image, box image  {
-    color: $menu_fg_color;
-    &:backdrop {
-      color: $backdrop_headerbar_fg_color
-    }
-    &:disabled {
-      & { color: $menu_disabled_fg_color; }
-      &:backdrop { color: $backdrop_headerbar_insensitive_color; }
-    }
-  }
+  // label, image, button image, box image  {
+  //   color: $menu_fg_color;
+  //   &:backdrop {
+  //     color: $backdrop_headerbar_fg_color
+  //   }
+  //   &:disabled {
+  //     & { color: $menu_disabled_fg_color; }
+  //     &:backdrop { color: $backdrop_headerbar_insensitive_color; }
+  //   }
+  // }
 
   button {
     @each $state, $t in ("", "normal"),
@@ -2617,38 +2617,28 @@ popover.background {
   }
 
   undershoot {
-    &.top { @include undershoot(top, 'true'); }
-
-    &.bottom { @include undershoot(bottom, 'true'); }
-
-    &.left { @include undershoot(left, 'true'); }
-
-    &.right { @include undershoot(right, 'true'); }
+    &.top { @include undershoot(top, $menu: true); }
+    &.bottom { @include undershoot(bottom, $menu: true); }
+    &.left { @include undershoot(left, $menu: true); }
+    &.right { @include undershoot(right, $menu: true); }
   }
 
   overshoot {
     $_c: $menu_color;
     &.top {
       @include overshoot(top, normal, $_c);
-
       &:backdrop { @include overshoot(top, backdrop, $_c); }
     }
-
     &.bottom {
       @include overshoot(bottom, normal, $_c);
-
       &:backdrop { @include overshoot(bottom, backdrop, $_c); }
     }
-
     &.left {
       @include overshoot(left, normal, $_c);
-
       &:backdrop { @include overshoot(left, backdrop, $_c); }
     }
-
     &.right {
       @include overshoot(right, normal, $_c);
-
       &:backdrop { @include overshoot(right, backdrop, $_c); }
     }
   }
