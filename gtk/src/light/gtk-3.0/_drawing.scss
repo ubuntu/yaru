@@ -639,6 +639,10 @@
 
     background-color: if($_checked, _backdrop_color($c), $bg_color);
     border-color: $_dim_border_color;
+    @if $menu=true {
+      background-color: transparent;
+      border-color: $backdrop_menu_border_color;
+    }
     box-shadow: 0 1px transparentize(black, 0.95);
     color: $tc;
   }
@@ -646,6 +650,9 @@
   @if $t==backdrop-hover {
     -gtk-icon-effect: highlight;
     background-color: if($c!=white, lighten($c, 9%), darken($c, 7%));
+    @if $menu=true {
+      background-color: $backdrop_menu_border_color;
+    }
   }
 
   @if $t==backdrop-insensitive {
