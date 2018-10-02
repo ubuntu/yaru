@@ -236,7 +236,7 @@
       border-color: $_border;
       box-shadow: 0 1px transparentize(black, 0.9);
     }
-  @if $menu==true {
+    @if $menu==true {
       border-color: $menu_button_border_color;
       box-shadow: none;
     }
@@ -265,6 +265,11 @@
       border-color: $_border;
       border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
       box-shadow: 0 1px transparentize(black, 0.85);
+    }
+    @if $menu==true {
+      border-color: $menu_button_border_color;
+      box-shadow: none;
+      background-color: $menu_hover_color;
     }
   }
 
