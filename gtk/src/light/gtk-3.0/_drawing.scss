@@ -237,7 +237,7 @@
       box-shadow: 0 1px transparentize(black, 0.9);
     }
     @if $menu==true {
-      border-color: $menu_button_border_color;
+      border-color: if($c==$menu_color, $menu_button_border_color, $c);
       box-shadow: none;
     }
   }
@@ -267,9 +267,9 @@
       box-shadow: 0 1px transparentize(black, 0.85);
     }
     @if $menu==true {
+      background-color: $menu_hover_color;
       border-color: $menu_button_border_color;
       box-shadow: none;
-      background-color: $menu_hover_color;
     }
   }
 
@@ -306,6 +306,12 @@
         $_box_shadow: none;
       }
     }
+    @if $menu==true {
+      $_bg: $menu_active_color;
+      $_border: $menu_button_border_color;
+      $_box_shadow: none;
+      $_border_top_color: $_border;
+    }
 
     box-shadow: $_box_shadow;
     border-color: $_border;
@@ -328,6 +334,12 @@
 
     background-color: $_bg;
     @if $variant=='dark' and $c != $headerbar_bg_color { background-color: darken($button_bg_color,9%); }
+
+    @if $menu==true {
+      background-color: $menu_hover_color;
+      border-color: $menu_button_border_color;
+      box-shadow: none;
+    }
   }
 
   @else if $t==insensitive {
@@ -361,7 +373,7 @@
 
     label, & {
       $_label_alpha: if($tc == $headerbar_fg_color, 0.25, 0);
-      $_label_color: none;
+      $_label_color: if($menu == true, $menu_disabled_fg_color, none);
 
       @if $c == $success_color {
         $_label_color: $porcelain;
@@ -418,6 +430,12 @@
     box-shadow: none;
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_text_color); }
+
+    @if $menu==true {
+      background-color: transparent;
+      border-color: $backdrop_menu_border_color;
+      label, & { color: $backdrop_menu_fg_color; }
+    }
   }
 
   @else if $t==backdrop-hover {
@@ -440,6 +458,13 @@
       border-color: $_border;
       border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
       box-shadow: 0 1px transparentize(black, 0.85);
+    }
+
+    @if $menu==true {
+      background-color: $backdrop_menu_border_color;
+      border-color: $backdrop_menu_border_color;
+      label, & { color: $backdrop_menu_fg_color; }
+      box-shadow: none;
     }
   }
   @else if $t==backdrop-active {
@@ -470,6 +495,13 @@
     box-shadow: none;
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
+
+    @if $menu==true {
+      background-color: lighten($backdrop_menu_border_color,3%);
+      border-color: lighten($backdrop_menu_border_color,3%);
+      label, & { color: $backdrop_menu_fg_color; }
+      box-shadow: none;
+    }
   }
 
   @else if $t==backdrop-insensitive {
@@ -497,6 +529,13 @@
     box-shadow: none;
 
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), transparentize($backdrop_text_color, 0.3)); }
+
+    @if $menu==true {
+      background-color: transparent;
+      border-color: $backdrop_menu_border_color;
+      label, & { color: orange; }
+      box-shadow: none;
+    }
   }
 
   @else if $t==backdrop-insensitive-active {
