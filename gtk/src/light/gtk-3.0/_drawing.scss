@@ -592,7 +592,7 @@
  * Check and Radio buttons *
  ***************************/
 
-@mixin check($t, $c:white, $tc:white) {
+@mixin check($t, $c:white, $tc:white, $menu: false) {
   // Check/Radio drawing function
   //
   // $t:    check/radio type,
@@ -625,6 +625,9 @@
 
   @if $t==insensitive {
     $_bg: if($_checked, $_dim_background , transparent);
+    @if $menu=true {
+      $_bg: $menu_border_color;
+    }
     background-color: $_bg;
     border-color: if($_checked, $_bg, $_dim_border_color);
     box-shadow: none;

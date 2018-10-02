@@ -41,7 +41,6 @@ $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
-$popover_shadow: 0 3px 5px 1px transparentize(black, 0.5);
 
 /***************
  * Base States *
@@ -2474,7 +2473,6 @@ popover.background {
 
   list separator, separator {
     margin: 3px;
-    border-color: $menu_border_color;
     background-color: $menu_border_color;
   }
 
@@ -2483,14 +2481,14 @@ popover.background {
   border {
     border-color: $menu_border_color;
     &:backdrop {
-      border-color: $menu_backdrop_border_color;
+      border-color: $backdrop_menu_border_color;
     }
   }
 
   scrolledwindow {
     border-color: $menu_border_color;
     &:backdrop {
-      border-color: $menu_backdrop_border_color;
+      border-color: $backdrop_menu_border_color;
     }
   }
 
@@ -2517,7 +2515,6 @@ popover.background {
       border-color: transparent;
     }
   }
-  treeview { border-color: darken($inkstone, 2%); }
   calendar {
     border-color: $menu_border_color;
     &.header {
@@ -2544,8 +2541,8 @@ popover.background {
   }
 
   entry, textview.view text {
-    background-color: lighten($jet, 4%);
-    border-color: lighten($inkstone,2%);
+    background-color: $menu_button_color;
+    border-color: $menu_button_border_color;
     color: $menu_fg_color;
     &:backdrop {
       background-color: $backdrop_headerbar_bg_color;
@@ -2578,22 +2575,25 @@ popover.background {
     &:backdrop {
       color: $backdrop_headerbar_fg_color
     }
+    &:disabled {
+      & { color: $menu_disabled_fg_color; }
+      &:backdrop { color: $backdrop_headerbar_insensitive_color; }
+    }
   }
 
   button:not(.suggested-action):not(.destructive-action) {
-
     color: $menu_fg_color;
     label { color: $menu_fg_color; }
     &:backdrop {
       color: $backdrop_headerbar_fg_color;
-      border-color: $menu_backdrop_border_color;
+      border-color: $backdrop_menu_border_color;
       &:hover {
         box-shadow: none;
       }
     }
 
-    background-color: transparent;
-    border-color: lighten($inkstone,2%);
+    background-color: $menu_button_color;
+    border-color: $menu_button_border_color;
     &:hover {
       background-color: $menu_hover_color;
     }
@@ -2601,7 +2601,7 @@ popover.background {
       background-color: $menu_active_color;
     }
     &:disabled {
-      color: lighten($inkstone,4%);
+      &, label { color: $menu_disabled_fg_color; }
       &:backdrop { color: $backdrop_headerbar_insensitive_color; }
     }
   }
@@ -2613,7 +2613,7 @@ popover.background {
       background-color: transparent;
       border-color: $menu_border_color;
       &:backdrop {
-          &, &label { color: $menu_backdrop_border_color; }
+          &, &label { color: $backdrop_menu_border_color; }
       }
     }
     &:backdrop {
@@ -2663,19 +2663,38 @@ popover.background {
 button .popup menu separator { background-color: $menu_border_color; }
 popover.background, menu, .menu, .context-menu {
   check, radio {
-    &, &:backdrop, &:hover {
-     background-color: transparent;
-     border-color: $menu_fg_color;
-    }
-    &:disabled {
-      &, &:active, &:checked, &:indeterminate, &:indeterminate:checked {
-          background-color: $menu_border_color;
-          border-color: $ash;
+    & {
+      // for unchecked
+      border: 1px solid;
+      $_c: $menu_button_color;
+  
+      @each $state, $t in ("", "normal"),
+                          (":hover", "hover"),
+                          (":hover:backdrop", "backdrop-hover"),
+                          (":active", "active"),
+                          (":disabled", "insensitive"),
+                          (":backdrop", "backdrop"),
+                          (":backdrop:disabled", 'backdrop-insensitive') {
+        &#{$state} {
+          @include check($t, $_c);
+        }
       }
-      &:dir(ltr), &:dir(rtl) {
-        &:checked {
-          background-color: $menu_border_color;
-          border-color: $ash;
+    }
+  
+    & {
+      // for checked
+      @each $t in (':checked:not(:indeterminate)'), (':indeterminate') {
+        &#{$t} {
+          @each $state, $t in ("", "normal"),
+                              (":hover", "hover"),
+                              (":hover:backdrop", "backdrop-hover"),
+                              (":disabled", "insensitive"),
+                              (":backdrop", "backdrop"),
+                              (":backdrop:disabled", 'backdrop-insensitive') {
+            &#{$state} {
+              @include check($t, $success_color);
+            }
+          }
         }
       }
     }
