@@ -2593,7 +2593,7 @@ popover.background {
                         (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
                         (":backdrop:disabled", 'backdrop-insensitive'),
                         (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-                          &#{$state} { @include button($t, $menu_color, $menu_fg_color, $flat:false, $menu:true); }
+                          &#{$state} { @include button($t, $menu_button_color, $menu_fg_color, $flat:false, $menu:true); }
     }
 
     @each $b_type, $b_color in (suggested-action, $success_color),

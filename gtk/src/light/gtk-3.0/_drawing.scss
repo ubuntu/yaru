@@ -385,8 +385,9 @@
     }
 
     @if $menu==true {
-      background-color: if($c==$menu_color, transparent, transparentize($c,0.2));
-      border-color: if($c==$menu_color, $menu_button_border_color, transparentize($c,0.2));
+      $_menu_btn_color: if($c==$menu_color, transparent, transparentize($c,0.2));
+      background-color: $_menu_btn_color;
+      border-color: if($c==$menu_color, $menu_button_border_color, $_menu_btn_color);
       box-shadow: none;
       label, & { color: if($c==$menu_color, $menu_disabled_fg_color, transparentize(white, 0.5)); }
     }
@@ -411,6 +412,14 @@
     }
 
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color); }
+
+    @if $menu==true {
+      $_menu_btn_color: if($c==$menu_color, transparentize($menu_active_color, 0.3), transparentize($c, 0.3));
+      background-color: $_menu_btn_color;
+      border-color: $_menu_btn_color;
+      box-shadow: none;
+      label, & { color: if($c==$menu_color, $menu_disabled_fg_color, transparentize(white, 0.5)); }
+    }
   }
 
   @else if $t == backdrop {
@@ -437,6 +446,14 @@
       background-color: transparent;
       border-color: $backdrop_menu_border_color;
       label, & { color: $backdrop_menu_fg_color; }
+    }
+
+    @if $menu==true {
+      $_menu_btn_color: if($c==$menu_color, transparent, transparentize($c, 0.1));
+      background-color: $_menu_btn_color;
+      border-color: if($c==$menu_color, $backdrop_menu_border_color, $_menu_btn_color);
+      box-shadow: none;
+      label, & { color: if($c==$menu_color, $backdrop_menu_fg_color, transparentize(white, 0.3)); }
     }
   }
 
@@ -533,10 +550,10 @@
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), transparentize($backdrop_text_color, 0.3)); }
 
     @if $menu==true {
-      background-color: transparent;
-      border-color: $backdrop_menu_border_color;
-      label, & { color: orange; }
-      box-shadow: none;
+      $_menu_btn_color: if($c==$menu_button_color, transparent, darken($c, 5%));
+      background-color: $_menu_btn_color;
+      border-color: if($c==$menu_button_color, $backdrop_menu_border_color, $_menu_btn_color);
+      label, & { color: if($c==$menu_button_color, $backdrop_menu_disabled_fg_color, transparentize(white, 0.3)); }
     }
   }
 
