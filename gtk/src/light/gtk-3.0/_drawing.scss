@@ -347,6 +347,11 @@
     } @else {
       border-color: if($c!=$button_bg_color, $c, $insensitive_borders_color);
       box-shadow: 0 1px transparent;
+      @if $menu==true {
+        border-color: $menu_button_border_color;
+        box-shadow: none;
+        color: $menu_disabled_fg_color;
+      }
     }
 
     label, & {
