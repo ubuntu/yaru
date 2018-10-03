@@ -2465,24 +2465,14 @@ popover.background {
     padding: 5px 6px;
 
     &:hover { background-color: $menu_hover_color; }
-
-    label:backdrop {
-      color: $backdrop_menu_fg_color;
-    }
+    &:backdrop:hover { background-color: $backdrop_menu_border_color; }
   }
 
-  list separator, separator {
-    margin: 3px;
-    background-color: $menu_border_color;
-  }
-
+  separator {margin: 3px; }  
   list separator { margin: 0px; }
-
-  border {
-    border-color: $menu_border_color;
-    &:backdrop {
-      border-color: $backdrop_menu_border_color;
-    }
+  list separator, separator, border { 
+    background-color: $menu_border_color;
+    &:backdrop { background-color: $backdrop_menu_border_color; }
   }
 
   scrolledwindow {
@@ -2566,8 +2556,6 @@ popover.background {
     caret-color: white;
   }
 
-  label:backdrop { color: $backdrop_menu_fg_color; }
-
   entry {
     @include entry(normal, $c: $menu_button_color, $tc: $menu_fg_color, $menu:true);
   }
@@ -2605,6 +2593,14 @@ popover.background {
         }
       }
     }
+  }
+
+  modelbutton label, label {
+    & { 
+      color: $menu_fg_color;
+      &:disabled { color: $menu_disabled_fg_color; } 
+    }    
+    &:backdrop { &:disabled { color: $backdrop_menu_disabled_fg_color; } }
   }
 
   undershoot {
@@ -2675,6 +2671,7 @@ popover.background, menu, .menu, .context-menu {
       }
     }
   }
+  radiobutton radio { margin-right: 5px; }
 }
 
 /*************
