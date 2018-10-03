@@ -2439,13 +2439,6 @@ popover.background {
     box-shadow: none;
   }
 
-  > list,
-  > .view,
-  > toolbar {
-    border-style: none;
-    background-color: transparent;
-  }
-
   .csd &, & {
     &.touch-selection,
     &.magnifier {
@@ -2482,18 +2475,16 @@ popover.background {
     }
   }
 
-  list {
-    background-color: lighten($menu_color, 2%);
+  list, toolbar, treeview, calendar {
+    background-color: transparent;
     &:backdrop {
       background-color: transparent;
     }
   }
 
   treeview, calendar {
-    background-color: transparent;
     color: $menu_fg_color;
     &:backdrop{
-      background-color: transparent;
       color: $backdrop_menu_fg_color;
     }
     &:hover {
@@ -2547,7 +2538,6 @@ popover.background {
         background-color: darken($neutral_color, 10%);
         color: $menu_fg_color;
       }
-
       &:backdrop {
         background-color: darken($neutral_color, 5%);
         color: $silk;
@@ -2558,6 +2548,7 @@ popover.background {
 
   entry {
     @include entry(normal, $c: $menu_button_color, $tc: $menu_fg_color, $menu:true);
+    &:focus { @include entry(focus, $c: $menu_button_color, $tc: $menu_fg_color, $menu:true) }
   }
 
   button {
