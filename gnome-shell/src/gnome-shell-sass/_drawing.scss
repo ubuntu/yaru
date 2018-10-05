@@ -138,7 +138,7 @@
 
   @if $t==focus {
   // focused button
-    box-shadow: inset 0px 0px 0px 1px $selected_bg_color;
+    box-shadow: inset 0px 0px 0px 1px if($c!=$success_color, $selected_bg_color, white);
   }
 
   @else if $t==hover {
@@ -166,6 +166,13 @@
     box-shadow: none;
     text-shadow: none;
     icon-shadow: none;
+
+    @if $c==$success_color {
+      $_bg: darken($c, 20%);
+      background-color: $_bg;
+      border-color: $_bg;
+      color: transparentize(white, 0.5)
+    }
   }
   @else if $t==undecorated {
   // reset
