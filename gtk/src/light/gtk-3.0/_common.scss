@@ -2338,7 +2338,7 @@ menu,
     &:hover { background-color: $menu_hover_color; }
 
     &:disabled {
-      color: $insensitive_fg_color;
+      color: $menu_disabled_fg_color;
       &:backdrop { color: $backdrop_insensitive_color; }
     }
 
@@ -2398,11 +2398,6 @@ menu,
       background-color: transparent;
       border-color: transparent ;
     }
-  }
-
-  separator {
-    border-color: $menu_border_color;
-    background-color: $menu_border_color;
   }
 }
 
@@ -2464,7 +2459,6 @@ popover.background {
   separator {margin: 3px; }  
   list separator { margin: 0px; }
   list separator, separator, border { 
-    background-color: $menu_border_color;
     &:backdrop { background-color: $backdrop_menu_border_color; }
   }
 
@@ -2663,6 +2657,10 @@ popover.background, menu, .menu, .context-menu {
     }
   }
   radiobutton radio { margin-right: 5px; }
+
+  separator {
+    background-color: darken($menu_border_color, 6%);
+  }
 }
 
 /*************
