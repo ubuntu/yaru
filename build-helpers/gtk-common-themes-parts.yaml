@@ -20,8 +20,8 @@ parts:
     override-build: |
       set -eu
       snapcraftctl build
-      # remove unused artefacts in the snap (sessions and schemas)
-      rm -rf $SNAPCRAFT_PART_INSTALL/share/*sessions $SNAPCRAFT_PART_INSTALL/share/glib-2.0
+      # remove unused artefacts in the gtk-common-themes snap (shell, sessions and schemas)
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/gnome-shell $SNAPCRAFT_PART_INSTALL/share/*sessions $SNAPCRAFT_PART_INSTALL/share/glib-2.0
       # don't support dark variant until it's ready
       rm -r $SNAPCRAFT_PART_INSTALL/share/themes/*-dark
   # everything else but communitheme and yaru
