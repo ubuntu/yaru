@@ -805,6 +805,7 @@ button {
 
         &:backdrop { @include button(osd-backdrop, $b_color); }
       }
+      &:focus { outline-color: white; }
     }
   }
 
