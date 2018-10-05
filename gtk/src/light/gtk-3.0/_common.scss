@@ -2404,6 +2404,7 @@ menu,
 
 menuitem {
   accelerator { color: gtkalpha(currentColor,0.55); }
+  &:disabled { accelerator { color: $menu_disabled_fg_color; } }
 
   check,
   radio {
