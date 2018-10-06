@@ -29,7 +29,7 @@ You will receive there at regular intervals stable updates of the theme.
 
 ## Testing Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
 
-> Note that for backward compability, we kept the name "communitheme" for bionic beaver. It's still up to date with latest of development of Yaru, only the name differs.
+> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. It's still up to date with latest of development of Yaru, only the name differs.
 
 We're currently still developing the theme, but you can try it out for yourself. Be warned though, this is a pre-release alpha state and not (yet) officially supported. These packages are mainly intended for the Yaru designers to get a sense of what actually works in Ubuntu.
 
