@@ -2462,7 +2462,7 @@ popover.background {
 
   list separator { margin: 0px; }
 
-  radiobutton radio { 
+  radiobutton radio, checkbutton check { 
     &:dir(ltr) { margin-right: 3px; }
     &:dir(rtl) { margin-left: 3px; }
   }
