@@ -309,7 +309,7 @@ terminal-window {
   border-color: $borders_color;
   border-style: none solid solid solid;
   border-width: 0 1px 1px 1px;
-  margin-top: -1px 0 0 0;
+  margin: -1px 0 0 0;
 
   & ~ separator {
     background-color: $bg_color;
