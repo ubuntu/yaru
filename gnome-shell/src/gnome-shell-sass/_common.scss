@@ -1938,13 +1938,13 @@ StScrollBar {
     padding: 4px 18px;
     $c: darken($light_bg_color, 10%);
     $tc: $dark_fg_color;
-    @include button(normal, $c, $tc); box-shadow: none;
+    @include button(normal, $c, $tc); box-shadow: none; 
     &:active { @include button(active, $c, $tc); box-shadow: inset 0px 0px 0px 1px $selected_bg_color; }
     &:focus { @include button(focus, $c, $tc); }
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
-    &:insensitive {
-      border-color: darken($c, 20%);
+    &:insensitive { 
+      border-color: darken($c, 20%); 
       background-color: darken($c, 20%);
       box-shadow: none;
       color: lighten($tc, 5%);
@@ -1953,7 +1953,7 @@ StScrollBar {
     &:default {
       padding-bottom: 5px;
       padding-top: 5px;
-      @include button(normal, $c:$success_color); box-shadow: none;
+      @include button(normal, $c:$success_color); box-shadow: none; 
       &:hover { @include button(hover, $c:$success_color); }
       &:focus { @include button(focus, $c:$success_color); }
       &:active { @include button(active, $c:$success_color); box-shadow: inset 0px 0px 0px 1px white; }
