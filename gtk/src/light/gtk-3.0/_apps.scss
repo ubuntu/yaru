@@ -318,6 +318,11 @@ terminal-window {
   }
 }
 
+// Avoid double border when list in included in a box (e.g. Updates view)
+widget > box > list row.list-box-app-row {
+    border: none;
+}
+
 // Star color can not be set, so this gives the stars a background in the dark theme
 .star{
   @if $variant=='dark'{
