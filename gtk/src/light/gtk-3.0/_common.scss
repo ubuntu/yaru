@@ -382,7 +382,7 @@ entry {
   .linked:not(.vertical) > & { @extend %linked; }
   .linked:not(.vertical) > &:focus + &,
   .linked:not(.vertical) > &:focus + button,
-  .linked:not(.vertical) > &:focus + combobox > box > button.combo { transition: $button_transition; border-left-color: $selected_bg_color; }
+  .linked:not(.vertical) > &:focus + combobox > box > button.combo { transition: $button_transition; border-left-color: $selected_bg_color; border-left-style: dashed; }
 
   .linked:not(.vertical) > &:drop(active) + &,
   .linked:not(.vertical) > &:drop(active) + button,
