@@ -1,6 +1,6 @@
 sassc = find_program('sassc')
 
-gtk3_dir = join_paths(theme_dir, 'gtk-3.0')
+gtk3_dir = join_paths(theme_dir, 'gtk-3.20')
 gtk3_asset_dir = join_paths(gtk3_dir, 'assets')
 
 # theme sources .scss files
