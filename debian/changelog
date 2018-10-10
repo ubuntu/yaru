@@ -1,3 +1,29 @@
+yaru-theme (18.10.6) UNRELEASED; urgency=medium
+
+  [ feichtmeier ]
+  * Symlink system-monitor-app -> gnome-system-monitor
+  * White outline color for green and red buttons
+  * White outline color for green button + improvements
+
+  [ Didier Roche ]
+  * Remove Shell artefacts from gtk-common-themes
+
+  [ Tiago Rodrigo Lampert ]
+  * Fix typo
+
+  [ Carlo Lobrano ]
+  * apps/software-center: added app-listbox-header background color
+  * apps/software-center: added missing bottom border to list box app row
+  * shell/popup-menu-item: fixed black border in submenu hover
+  * shell/dock: Fixed dock transparency
+  * apps/gnome-software: avoid double border when list is included in a box
+  * Fixing target from previous commit
+  * Reduced diff against master
+  * Reduced diff reverting trailing spaces
+  * apps/software-center: fixed theme parsing error
+
+ -- Didier Roche <didrocks@ubuntu.com>  Wed, 10 Oct 2018 10:05:57 +0200
+
 yaru-theme (18.10.5) cosmic; urgency=medium
 
   [ Jeremy Bicha ]
