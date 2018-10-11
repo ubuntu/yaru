@@ -67,6 +67,11 @@ list.tweak-categories separator {
     border-color: transparent;
   }
 
+  treeview:drop(active):focus {
+    // drop target green bottom border was missing
+    border-bottom: 1px solid $drop_target_color;
+  }
+
   treeview.view header button {
     background-color: if($light, $base_color, $base_color);
     background-image: none;
@@ -588,3 +593,13 @@ normal-button {
  ***********/
 
  #dialog-action_area3 { margin: 5px; }
+
+ /***********
+ * Evolution *
+ ***********/
+
+ assistant.background scrolledwindow .vertical checkbutton { 
+   // checkbox is clipped but this is undetectable till it gets keyboard focus
+   // so we're pushing it to the right to have the focus ring be displayed properly
+   margin-left: 1px 
+  }
