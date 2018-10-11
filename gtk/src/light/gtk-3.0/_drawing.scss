@@ -79,6 +79,7 @@
   @if $t==focus {
     @include _shadows($_entry_edge);
     border-color: entry_focus_border($fc);
+    border-style: dashed;
   }
   @if $t==insensitive {
     background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), transparent);
