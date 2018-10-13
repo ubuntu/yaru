@@ -396,6 +396,8 @@
   }
 
   @else if $t==backdrop-hover {
+    // hover on backdrop button
+
     $_base: null;
     $_perc: null;
 
@@ -414,7 +416,7 @@
 
     color: $tc;
 
-    border-color: if($flat, $_bg, $_boder);
+    border-color: if($flat, $_bg, $_border);
     box-shadow: if($flat, none, 0 1px transparentize(black, 0.85));
 
     @if $flat {
@@ -428,26 +430,20 @@
     // backdrop pushed button
 
     $_bg: null;
-    $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
-
-    @if $c==$headerbar_bg_color {
-      $_bg: lighten($backdrop_headerbar_bg_color, 5%);
-    } @else if $c!=$headerbar_bg_color and $variant=='light'{
-      $_bg: darken($c, 12%);
-    }
-    @else if $c!=$headerbar_bg_color and $variant=='dark'{
-      $_bg: darken($c, 7%);
-    }
-
     $_border_top_color: null;
-    @if $c==$headerbar_bg_color { $_border_top_color: $_bg;}
-    @else if $c==$button_bg_color {
-      @if $variant=='light' { $_border_top_color: darken($_border,10%);}
-      @else { $_border_top_color: darken($_border,2%);}
+
+    @if $_headerbar {
+      $_bg: lighten($backdrop_headerbar_bg_color, 5%);
+      $_border_top_color: $_bg;
+    } @else {
+      $_bg: darken($c, if($variant == 'light', 12%, 7%));
+      $_border_top_color: darken($_border, if($variant == 'light', 10%, 2%));
     }
+
+    $_bc: if($c == $button_bg_color, $backdrop_borders_color, _backdrop_color(_border_color($c)));
 
     background-color: $_bg;
-    border-color: if($flat==true, $_bg, $_bc);
+    border-color: if($flat, $_bg, $_bc);
     border-top-color: $_border_top_color;
     box-shadow: none;
 
