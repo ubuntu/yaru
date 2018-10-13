@@ -304,20 +304,25 @@
   }
 
   @else if $t==active-hover {
+    // hover on pressed button
+
     $_bg: none;
 
-    @if $c == $headerbar_bg_color {
+    @if $_headerbar {
       $_bg: lighten($c, 20%);
       border-color: $_bg;
       box-shadow: none;
     } @else {
       @if $flat == true { $c: darken($c, 5%); }
-      $_bg: if(lightness($c)<35%, lighten($c, 18%), darken($c, 7%));
-      $_bg: transparentize($_bg, 0.4);
+      @if $variant == 'dark' {
+        $_bg: darken($button_bg_color, 9%);
+      } @else {
+        $_base: if(lightness($c) < 35%, lighten($c, 18%), darken($c, 7%));
+        $_bg: transparentize($_base, 0.4);
+      }
     }
 
     background-color: $_bg;
-    @if $variant=='dark' and $c != $headerbar_bg_color { background-color: darken($button_bg_color,9%); }
   }
 
   @else if $t==insensitive {
