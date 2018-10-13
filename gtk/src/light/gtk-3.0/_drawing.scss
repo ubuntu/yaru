@@ -327,26 +327,19 @@
 
   @else if $t==insensitive {
     // insensitive button
+
     $_bg: null;
-    @if $c == $button_bg_color {
-        $_bg: $bg_color;
-    } @else if $c == $headerbar_bg_color {
-        $_bg: $c;
-    } @else if $c == $red or $green or $yellow or $blue or $purple {
-        $_bg: transparentize($c, .1);
-    }
-      @else {
-        $_bg: darken($c, 20%);
-    }
+    @if $_headerbar { $_bg: $c; }
+    @else if $c == $button_bg_color { $_bg: $bg_color; }
+    @else { $_bg: transparentize($c, 0.1); }
 
     background-color: $_bg;
+    border-color: if($c != $button_bg_color, $c, $insensitive_borders_color);
+    box-shadow: 0 1px transparent;
 
     @if $flat {
       border-color: $_bg;
       box-shadow: none;
-    } @else {
-      border-color: if($c!=$button_bg_color, $c, $insensitive_borders_color);
-      box-shadow: 0 1px transparent;
     }
 
     label, & {
