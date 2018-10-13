@@ -473,29 +473,24 @@
 
   @else if $t==backdrop-insensitive-active {
     // backdrop insensitive pushed button
+
     $_bg: null;
-    $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
-    @if $c == $headerbar_bg_color {
+    $_perc: null;
+    @if $_headerbar {
       $_bg: mix($c, $headerbar_bg_color, 85%);
-    }
-    @else if $c!=$headerbar_bg_color and $variant=='light'{
-      $_bg: darken($c, 15%);
-    }
-    @else if $c!=$headerbar_bg_color and $variant=='dark'{
-      $_bg: darken($c, 5%);
+      $_perc: 15%;
+    } @else {
+      $_bg: darken($c, if($variant == 'light', 15%, 5%));
+      $_perc: if($variant == 'light', 15%, 1%);
     }
 
     background-color: $_bg;
-    border-color: if($flat==true, $_bg, $_bc);
-    $_border_top_color: null;
-    @if $c==$headerbar_bg_color { $_border_top_color: darken($_border,15%);}
-    @else if $c==$button_bg_color {
-      @if $variant=='light' { $_border_top_color: darken($_border,15%);}
-      @else { $_border_top_color: darken($_border,1%);}
-    }
-    border-top-color: $_border_top_color;
 
-    label { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), transparentize($backdrop_text_color, 0.5)); }
+    $_bc: if($c == $button_bg_color, $backdrop_borders_color, _backdrop_color(_border_color($c)));
+    border-color: if($flat, $_bg, $_bc);
+    border-top-color: darken($_border, $_perc);
+
+    label { color: if($c == $button_bg_color, transparentize($backdrop_text_color, 0.5), mix($tc, $_bg, 35%)); }
   }
 
   @else if $t==osd {
