@@ -253,14 +253,12 @@
     background-color: $_bg;
     color: $tc;
 
-    @if $flat {
-      border-color: $_bg;
-      box-shadow: none;
-    } @else {
-      border-color: $_border;
+    border-color: if($flat, $_bg, $_border);
+    box-shadow: if($flat, none,  0 1px transparentize(black, 0.85));
+
+    @if $flat == false {
       $_perc: if(is_special_color($c) == false, 15%, 12%);
       border-bottom-color: darken($_border, $_perc);
-      box-shadow: 0 1px transparentize(black, 0.85);
     }
   }
 
