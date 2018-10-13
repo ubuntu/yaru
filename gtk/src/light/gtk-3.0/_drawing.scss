@@ -232,15 +232,9 @@
   @if $t==normal {
     // normal button
     background-color: $c;
+    border-color: if($flat, $c, $_border);
+    box-shadow: if($flat, none, 0 1px transparentize(black, 0.9));
     color: $tc;
-
-    @if $flat {
-      border-color: $c;
-      box-shadow: none;
-    } @else {
-      border-color: $_border;
-      box-shadow: 0 1px transparentize(black, 0.9);
-    }
   }
 
   @else if $t==hover {
