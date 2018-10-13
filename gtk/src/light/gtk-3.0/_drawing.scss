@@ -204,6 +204,14 @@
   }
 }
 
+@function is_special_color($c) {
+  @return $c==$success_color os
+          $c==$destructive_color or
+          $c==$warning_color or
+          $c==$neutral_color or
+          $c==$purple
+}
+
 @mixin button($t, $c:$button_bg_color, $tc:$fg_color, $flat:false) {
   // Button drawing function
   //
@@ -243,13 +251,13 @@
     -gtk-icon-effect: highlight;
 
     $_bg: null;
+    $_perc: null;
 
-    @if $c==$headerbar_bg_color { $_bg: lighten($c, 15%); }
-    @else if $c==$success_color or $c==$destructive_color or $c==$warning_color or $c==$neutral_color or $c==$purple { $_bg: lighten($c, 5%); }
-    @else if $c==$button_bg_color {
-      @if $variant=='light' { $_bg: lighten($c, 25%); }
-      @else { $_bg: lighten($c, 1%); }
-    }
+    @if $c==$headerbar_bg_color   { $_perc: 15%;  }
+    @else if is_special_color($c) { $_perc: 5%;  }
+    @else { $_perc: if($variant=='light', 25%, 1%); }
+
+    $_bg: lighten($c, $_perc);
 
     background-color: $_bg;
     color: $tc;
@@ -259,7 +267,8 @@
       box-shadow: none;
     } @else {
       border-color: $_border;
-      border-bottom-color: darken($_border, if($c == $headerbar_bg_color or $c == $button_bg_color, 15%, 12%));
+      $_perc: if(is_special_color($c) == false, 15%, 12%);
+      border-bottom-color: darken($_border, $_perc);
       box-shadow: 0 1px transparentize(black, 0.85);
     }
   }
