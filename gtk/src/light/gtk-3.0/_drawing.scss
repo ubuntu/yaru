@@ -453,28 +453,22 @@
   @else if $t==backdrop-insensitive {
     // backdrop insensitive button
 
-    $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), transparentize($backdrop_borders_color, 0.3));
     $_bg: null;
-    @if $c == $button_bg_color {
-        $_bg: $backdrop_bg_color;
-    } @else if $c == $headerbar_bg_color {
+    @if $_headerbar {
         $_bg: transparent;
+        -gtk-icon-shadow: none;
         background-image: none;
         text-shadow: none;
-        -gtk-icon-shadow: none;
-    }
-    @else if $c == $red or $green or $yellow or $blue or $purple {
-        $_bg: transparentize($c, .1);
-    }
-    @else {
-        $_bg: darken($c, 20%);
-    }
+    } @else if $c == $button_bg_color { $_bg: $backdrop_bg_color;
+    } @else if is_special_color($c)   { $_bg: transparentize($c, 0.1);
+    } @else                           { $_bg: darken($c, 20%); }
 
     background-color: $_bg;
-    border-color: if($flat==true, $_bg, $_bc);
+    $_bc: if($c == $button_bg_color, transparentize($backdrop_borders_color, 0.3), _backdrop_color(_border_color($c)));
+    border-color: if($flat, $_bg, $_bc);
     box-shadow: none;
 
-    label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 35%), transparentize($backdrop_text_color, 0.3)); }
+    label, & { color: if($c == $button_bg_color, transparentize($backdrop_text_color, 0.3), mix($tc, $_bg, 35%)); }
   }
 
   @else if $t==backdrop-insensitive-active {
