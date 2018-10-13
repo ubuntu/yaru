@@ -257,7 +257,7 @@
     box-shadow: if($flat, none,  0 1px transparentize(black, 0.85));
 
     @if $flat == false {
-      $_perc: if(is_special_color($c) == false, 15%, 12%);
+      $_perc: if(is_special_color($c), 12%, 15%);
       border-bottom-color: darken($_border, $_perc);
     }
   }
@@ -272,7 +272,7 @@
     @if $_headerbar {
       $_bg: lighten($c, 10%);
       $_border: $_bg;
-    } @else if $c==$button_bg_color {
+    } @else if $c == $button_bg_color {
       $_bg: darken($c, if($variant=='light', 7%, 10%));
       $_border: $borders_color;
       $_border_top_color: darken($_border, if($variant=='light', 25%, 8%));
@@ -326,12 +326,13 @@
     @else                           { $_bg: transparentize($c, 0.1); }
 
     background-color: $_bg;
-    border-color: if($c != $button_bg_color, $c, $insensitive_borders_color);
-    box-shadow: 0 1px transparent;
 
     @if $flat {
       border-color: $_bg;
       box-shadow: none;
+    } @else {
+      border-color: if($c == $button_bg_color, $insensitive_borders_color, $c);
+      box-shadow: 0 1px transparent;
     }
 
     label, & {
@@ -389,7 +390,6 @@
 
     $_bc: if($c == $button_bg_color, $backdrop_borders_color, _backdrop_color(_border_color($c)));
     border-color: if($flat, $_bg, $_bc);
-
     box-shadow: none;
 
     label, & { color: if($tc == $fg_color, $backdrop_text_color, mix($tc, $_bg, 60%)); }
@@ -402,7 +402,7 @@
     @if $_headerbar {
       $_base: $backdrop_headerbar_bg_color;
       $_perc: 6%;
-    } @else if $c==$button_bg_color {
+    } @else if $c == $button_bg_color {
       $_base: $button_backdrop_bg_color;
       $_perc: if($variant == 'light', 25%, 1%)
     } @else {
@@ -414,14 +414,13 @@
 
     color: $tc;
 
+    border-color: if($flat, $_bg, $_boder);
+    box-shadow: if($flat, none, 0 1px transparentize(black, 0.85));
+
     @if $flat {
       background-color: $_bg;
-      border-color: $_bg;
-      box-shadow: none;
     } @else {
-      border-color: $_border;
-      border-bottom-color: darken($_border, if(is_special_color($c) == false, 15%, 12%));
-      box-shadow: 0 1px transparentize(black, 0.85);
+      border-bottom-color: darken($_border, if(is_special_color($c), 12%, 15%));
     }
   }
 
