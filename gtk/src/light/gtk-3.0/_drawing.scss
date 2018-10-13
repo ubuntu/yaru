@@ -363,8 +363,9 @@
 
   @else if $t==insensitive-active {
     // insensitive pushed button
+
     $_from: $c;
-    $_to: if($c==$headerbar_bg_color, $headerbar_bg_color, $base_color);
+    $_to: if($_headerbar, $headerbar_bg_color, $base_color);
     $_mix: mix($_from, $_to, 85%);
 
     $_bg: darken($_mix, 8%);
