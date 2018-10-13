@@ -226,10 +226,6 @@
   // osd, osd-hover, osd-active, osd-insensitive, osd-backdrop, undecorated
 
   $_pressed: if(lightness($c)<15%, transparentize(black, 0.4), transparentize(black, 0.8));
-  $shadow: null;
-  @if $variant == "dark" or $c != $button_bg_color { $shadow: 0px 2px 2px -1px $borders_edge, inset 0 -1px _button_hilight_color($c); }
-  @else { $shadow: 0px 2px 2px -1px $borders_edge; }
-
   $_border: if($c == $button_bg_color, $borders_color, darken($c, 10%));
 
   @if $t==normal {
