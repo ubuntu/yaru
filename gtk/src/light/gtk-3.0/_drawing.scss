@@ -385,23 +385,22 @@
 
   @else if $t == backdrop {
     // backdrop button
-    $_bc: if($c != $button_bg_color, _backdrop_color(_border_color($c)), $backdrop_borders_color);
-
-    $_bg: null;
-    @if $c == $headerbar_bg_color {
-      $_bg: $backdrop_headerbar_bg_color;
-    } @else if $c == $button_bg_color {
-      $_bg: $button_backdrop_bg_color;
-    } @else {
-      $_bg: _backdrop_color($c);
-    }
 
     -gtk-icon-effect: dim;
+
+    $_bg: null;
+    @if $_headerbar                 { $_bg: $backdrop_headerbar_bg_color; }
+    @else if $c == $button_bg_color { $_bg: $button_backdrop_bg_color; }
+    @else                           { $_bg: _backdrop_color($c); }
+
     background-color: $_bg;
-    border-color: if($flat==true, $_bg, $_bc);
+
+    $_bc: if($c == $button_bg_color, $backdrop_borders_color, _backdrop_color(_border_color($c)));
+    border-color: if($flat, $_bg, $_bc);
+
     box-shadow: none;
 
-    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_text_color); }
+    label, & { color: if($tc == $fg_color, $backdrop_text_color, mix($tc, $_bg, 60%)); }
   }
 
   @else if $t==backdrop-hover {
