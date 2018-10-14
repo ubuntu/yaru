@@ -55,7 +55,6 @@
 // normal, focus, insensitive, backdrop, backdrop-insensitive, osd, osd-focus, osd-backdrop;
 //
 
-  $_blank_edge: if($edge == none, none, 0 1px transparentize($edge, 1));
   $_entry_edge: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
 
   @if $t==normal {
