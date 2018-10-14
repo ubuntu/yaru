@@ -108,10 +108,12 @@
     label, & { color: $_tc; }
   }
   @if $t==backdrop-insensitive {
+    // backdrop-insensitive entry
+
     background-color: transparent;
-    border-color: if($c != $base_color, transparent, transparentize($backdrop_borders_color, 0.3));
+    border-color: if($c == $base_color, transparentize($backdrop_borders_color, 0.3), transparent);
     box-shadow: none;
-    color: if($c != $base_color, mix($tc, $c, 35%), $backdrop_insensitive_color);
+    color: if($c == $base_color, $backdrop_insensitive_color, mix($tc, $c, 35%));
 
     label, & { color:  $backdrop_fg_color; }
   }
