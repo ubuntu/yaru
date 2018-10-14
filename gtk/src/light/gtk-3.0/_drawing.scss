@@ -79,10 +79,11 @@
     border-color: entry_focus_border($fc);
   }
   @if $t==insensitive {
-    background-color: if($c != $base_color, mix($c, if($c == $headerbar_bg_color, $headerbar_bg_color, $base_color), 85%), transparent);
-    border-color: if($c == $headerbar_bg_color, $hb_pathbar_bg, $insensitive_borders_color);
+    // insensitive entry
+    background-color: if($c == $base_color, transparent, mix($c, if($_headerbar, $headerbar_bg_color, $base_color), 85%));
+    border-color: if($_headerbar, $hb_pathbar_bg, $insensitive_borders_color);
     box-shadow: none;
-    color: if($tc != $text_color, mix($tc, $c, 50%), $insensitive_fg_color);
+    color: if($tc == $text_color, $insensitive_fg_color, mix($tc, $c, 50%));
   }
   @if $t==backdrop {
     $_bg: null;
