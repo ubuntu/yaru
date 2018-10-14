@@ -584,13 +584,13 @@
   // possible $t values:
   // normal, hover, active, insensitive, backdrop, backdrop-insensitive
 
-  $_checked: if($c==$success_color, true, false);
-  $_border_color: if($_checked, $c, if($light, $borders_color, white));
-  $_dim_border_color: transparentize($_border_color, if($light, 0.3, 0.7));
-  $_dim_background: if($light, $dark_fill, $slate);
+  $_checked: $c == $success_color;
+  $_border_color: if($_checked, $c, if($variant == 'light', $borders_color, white));
+  $_dim_border_color: transparentize($_border_color, if($variant == 'light', 0.3, 0.7));
+  $_dim_background: if($variant == 'light', $dark_fill, $slate);
 
   @if $t==normal  {
-    background-color: if($_checked, $c, if($variant=='light', $c, transparent));
+    background-color: if($_checked, $c, if($variant == 'light', $c, transparent));
     border-color: $_border_color;
     box-shadow: 0 1px transparentize(black, 0.95);
     color: $tc;
@@ -598,11 +598,11 @@
 
   @if $t==hover {
     -gtk-icon-effect: highlight;
-    background-color: if($c==white, darken($c, 5%), lighten($c, 5%));
+    background-color: if($c == white, darken($c, 5%), lighten($c, 5%));
   }
 
   @if $t==active {
-    box-shadow: inset 0 1px 1px 0px if($light, rgba(0, 0, 0, 0.2), black);
+    box-shadow: inset 0 1px 1px 0px if($variant == 'light', rgba(0, 0, 0, 0.2), black);
   }
 
   @if $t==insensitive {
@@ -624,7 +624,7 @@
 
   @if $t==backdrop-hover {
     -gtk-icon-effect: highlight;
-    background-color: if($c!=white, lighten($c, 9%), darken($c, 7%));
+    background-color: if($c != white, lighten($c, 9%), darken($c, 7%));
   }
 
   @if $t==backdrop-insensitive {
