@@ -55,29 +55,26 @@
 // normal, focus, insensitive, backdrop, backdrop-insensitive, osd, osd-focus, osd-backdrop;
 //
 
+  $_headerbar: $c == $headerbar_bg_color;
   $_entry_edge: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
 
   @if $t==normal {
-    $_bc: if($c == $headerbar_bg_color, lighten($hb_pathbar_bg, 5%), $c);
-    color: if($tc != $fg_color, transparentize($tc, .1), $fg_color);
-    border-color: if($c != $base_color, transparent, $borders_color);
-    @if $c!=$headerbar_bg_color {
-      @if $variant == 'light' {
-        border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
-      }
-      else {
-        border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
-      }
-      @include _shadows($_entry_edge);
-    }
-    @else {
+
+    $_bc: if($_headerbar, lighten($hb_pathbar_bg, 5%), $c);
+    background-color: $_bc;
+    color: if($tc == $fg_color, $tc, transparentize($tc, 0.1));
+
+    border-color: if($c == $base_color, $borders_color, transparent);
+    @if $_headerbar {
       border-top-color: $_bc;
       box-shadow: none;
+    } @else {
+      border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+      @include _shadows($_entry_edge);
     }
-    background-color: $_bc;
-    // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
   @if $t==focus {
+    // selected entry
     @include _shadows($_entry_edge);
     border-color: entry_focus_border($fc);
   }
