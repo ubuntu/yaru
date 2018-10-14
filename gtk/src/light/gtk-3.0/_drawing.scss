@@ -86,16 +86,18 @@
     color: if($tc == $text_color, $insensitive_fg_color, mix($tc, $c, 50%));
   }
   @if $t==backdrop {
+    // backdrop entry
+
     $_bg: null;
     $_tc: null;
     $_border_c: null;
-    @if $c == $headerbar_bg_color {
+    @if $_headerbar {
         $_bg: $hb_button_bg_hover;
         $_tc: $backdrop_headerbar_text_color;
         $_border_c: $_bg;
     } @else {
-        $_bg: if($variant=='light', _backdrop_color($c), $c);
-        $_tc: if($tc != $text_color, mix($tc, $c, 80%), $backdrop_text_color);
+        $_bg: if($variant == 'light', _backdrop_color($c), $c);
+        $_tc: if($tc == $text_color, $backdrop_text_color, mix($tc, $c, 80%));
         $_border_c: $backdrop_borders_color
     }
     background-color: $_bg;
