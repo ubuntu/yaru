@@ -689,28 +689,23 @@
   }
 
   &:backdrop {
-    @if $bg!=$dark_fill {
+    $_border_color: null;
+    @if $bg == $dark_fill {
+      background-color: if($variant == 'light', _backdrop_color($bg), lighten($bg, 2%));
+      $_border_color: if($variant == 'light', $borders_edge, $bg);
+    } @else {
       background-color: _backdrop_color(transparentize($bg, 0.3));
-    }
-    @else {
-      @if $variant='light' {
-        background-color: _backdrop_color($bg);
-      }
-      @else {
-        background-color: lighten($bg, 2%);
-      }
+      $_border_color: transparent;
     }
 
-    border: 1px solid if($bg==$dark_fill, if($variant=='light', $borders_edge, $bg), transparent);
-    border-top-color: darken($bg, if($variant=='light', 10%, 5%));
+    border: 1px solid $_border_color;
+    border-top-color: darken($bg, if($variant == 'light', 10%, 5%));
     transition: $backdrop_transition;
 
     &:hover {
       background-color: $bg;
 
-      &:checked {
-        background-color: $alt;
-      }
+      &:checked { background-color: $alt; }
     }
 
     &:checked {
@@ -719,24 +714,24 @@
       box-shadow: none;
 
       &:disabled {
-        $_bg: transparentize($dark_fill, if($variant=='light', 0.7, 0.9));
-        background-color: if($bg==$dark_fill, $_bg, _backdrop_color($ash));;
+        $_bg: transparentize($dark_fill, if($variant == 'light', 0.7, 0.9));
+        background-color: if($bg == $dark_fill, $_bg, _backdrop_color($ash));;
       }
     }
 
     &:disabled {
-      background-color: if($bg==$dark_fill, transparent, _backdrop_color($ash));
-      border: 1px solid if($bg==$dark_fill, $_insensitive_border_color, transparent);
+      background-color: if($bg == $dark_fill, transparent, _backdrop_color($ash));
+      border: 1px solid if($bg == $dark_fill, $_insensitive_border_color, transparent);
       box-shadow: none;
     }
   }
 
   slider {
-    background-color: if($bg==$dark_fill, white, $headerbar_fg_color);
+    background-color: if($bg == $dark_fill, white, $headerbar_fg_color);
     background-clip: if($variant == "light", border-box, padding-box);
     border-radius: $small_radius;
     border: 1px solid transparent;
-    box-shadow: 0 1px 1px if($bg==$dark_fill, darken($bg, 7%), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 1px 1px if($bg == $dark_fill, darken($bg, 7%), rgba(0, 0, 0, 0.15));
     margin: 2px;
     min-height: 16px;
     min-width: 16px;
@@ -751,26 +746,22 @@
   }
 
   &:disabled slider {
-    background-color: if($bg==$dark_fill, transparent, $ash);
-    border: 1px solid if($bg==$dark_fill, $_insensitive_border_color, $slate);;
+    background-color: if($bg == $dark_fill, transparent, $ash);
+    border: 1px solid if($bg == $dark_fill, $_insensitive_border_color, $slate);;
     box-shadow: none;
   }
 
   &:backdrop slider {
     transition: $backdrop_transition;
-    @if $bg==$dark_fill {
-      @if $variant=='light' {
-        background-color: $backdrop_bg_color;
-      } @else {
-        background-color: lighten($backdrop_fg_color, 20%);
-      }
+    @if $bg == $dark_fill {
+      background-color: if($variant == 'light', $backdrop_bg_color, lighten($backdrop_fg_color, 20%));
     } @else {
       background-color: $headerbar_fg_color;
     }
   }
 
   &:backdrop:disabled slider {
-    background-color: if($bg==$dark_fill, transparent, _backdrop_color($ash));
+    background-color: if($bg == $dark_fill, transparent, _backdrop_color($ash));
     transition: $backdrop_transition;
   }
 }
