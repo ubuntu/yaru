@@ -118,6 +118,7 @@
     label, & { color:  $backdrop_fg_color; }
   }
   @if $t==osd {
+    // osd entry
     color: $osd_text_color;
     border-color: $osd_borders_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
@@ -125,12 +126,14 @@
     box-shadow: none;
   }
   @if $t==osd-focus {
+    // osd-focus entry
     color: $osd_text_color;
     border-color: $selected_bg_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
   }
   @if $t==osd-insensitive {
+    // osd-insensitive entry
     color: $osd_insensitive_fg_color;
     border-color: $osd_borders_color;
     background-color: $osd_insensitive_bg_color;
@@ -138,6 +141,7 @@
     box-shadow: none;
   }
   @if $t==osd-backdrop {
+    // osd-backdrop entry
     color: $osd_text_color;
     border-color: $osd_borders_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
