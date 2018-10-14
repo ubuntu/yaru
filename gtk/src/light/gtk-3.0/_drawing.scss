@@ -448,12 +448,6 @@
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 60%), $backdrop_text_color); }
 
     @if $menu==true {
-      background-color: transparent;
-      border-color: $backdrop_menu_border_color;
-      label, & { color: $backdrop_menu_fg_color; }
-    }
-
-    @if $menu==true {
       $_btn_color: if($c==$menu_button_color, transparent, transparentize($c, 0.1));
       background-color: $_btn_color;
       border-color: if($c==$menu_button_color, $backdrop_menu_border_color, $_btn_color);
