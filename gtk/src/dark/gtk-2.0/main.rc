@@ -2519,6 +2519,14 @@ style "tooltip" {
 
 }
 
+style "text" = "default" {
+  engine "murrine" { textstyle = 0 }
+}
+
+style "menu_text" = "menu_item" {
+  engine "murrine" { textstyle = 0 }
+}
+
 style "disable_separator" {
 
   xthickness = 0
@@ -2613,3 +2621,10 @@ widget_class "*<GtkComboBox>*<GtkCellView>"                        style "combob
 
 # GTK tooltips
 widget "gtk-tooltip*"                                              style "tooltip"
+
+# Fixes ugly text shadows for insensitive text
+widget_class "*<GtkLabel>"                                          style "text"
+widget_class "*<GtkMenu>*<GtkLabel>"                                style "menu_text"
+widget_class "*<GtkComboBox>*<GtkCellLayout>"                       style "text"
+widget_class "*<GtkNotebook>*<GtkLabel>"                            style "text"
+widget_class "*<GtkNotebook>*<GtkCellLayout>"                       style "text"
