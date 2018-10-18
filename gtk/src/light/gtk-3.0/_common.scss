@@ -4792,3 +4792,50 @@ button.emoji-section {
   &:active{@include button(active);}
   &:disabled{@include button(insensitive)}
 }
+
+.regular-entry {
+  @include entry(normal);
+  &:focus { @include entry(focus); }
+    &:disabled { @include entry(insensitive); }
+}
+
+
+.regular-button {
+  background-color: #454545;
+  color: #F7F7F7;
+  border-color: #2b2b2b;
+  box-shadow: 0 1px rgba(0, 0, 0, 0.1); }
+  .regular-button:hover {
+    -gtk-icon-effect: highlight;
+    background-color: #474747;
+    color: #F7F7F7;
+    border-color: #2b2b2b;
+    border-bottom-color: #050505;
+    box-shadow: 0 1px rgba(0, 0, 0, 0.15); }
+  .regular-button:active {
+    box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.05);
+    border-color: #2b2b2b;
+    border-top-color: #171717;
+    background-color: #2b2b2b; }
+  .regular-button:disabled {
+    background-color: #353535;
+    border-color: rgba(43, 43, 43, 0.7);
+    box-shadow: 0 1px transparent; }
+    .regular-button:disabled label, .regular-button:disabled {
+      color: #969696; }
+
+.regular-entry {
+  color: #F7F7F7;
+  border-color: #2b2b2b;
+  box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.05);
+  background-color: #3D3D3D; }
+  .regular-entry else {
+    border-top-color: #0a0a0a; }
+  .regular-entry:focus {
+    box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.05);
+    border-color: #b53c12; }
+  .regular-entry:disabled {
+    background-color: transparent;
+    border-color: rgba(43, 43, 43, 0.7);
+    box-shadow: none;
+    color: #969696; }
