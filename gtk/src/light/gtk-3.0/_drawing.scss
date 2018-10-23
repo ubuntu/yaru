@@ -240,6 +240,7 @@
   @if $t==normal {
     // normal button
     background-color: $c;
+    background-image: none;
     color: $tc;
 
     @if $flat {
@@ -265,6 +266,7 @@
     }
 
     background-color: $_bg;
+    background-image: none;
     color: $tc;
 
     @if $flat {
@@ -315,6 +317,7 @@
     border-color: $_border;
     border-top-color: $_border_top_color;
     background-color: $_bg;
+    background-image: none;
   }
 
   @else if $t==active-hover {
@@ -331,6 +334,7 @@
     }
 
     background-color: $_bg;
+    background-image: none;
     @if $variant=='dark' and $c != $headerbar_bg_color { background-color: darken($button_bg_color,9%); }
   }
 
@@ -349,6 +353,7 @@
     }
 
     background-color: $_bg;
+    background-image: none;
 
     @if $flat {
       border-color: $_bg;
@@ -385,6 +390,7 @@
 
     $_bg: darken($_mix, 8%);
     background-color: $_bg;
+    background-image: none;
 
     @if $flat {
       border-color: $_bg;
@@ -413,6 +419,7 @@
 
     -gtk-icon-effect: dim;
     background-color: $_bg;
+    background-image: none;
     border-color: if($flat==true, $_bg, $_bc);
     box-shadow: none;
 
@@ -433,6 +440,7 @@
 
     @if $flat {
       background-color: $_bg;
+      background-image: none;
       border-color: $_bg;
       box-shadow: none;
     } @else {
@@ -464,6 +472,7 @@
     }
 
     background-color: $_bg;
+    background-image: none;
     border-color: if($flat==true, $_bg, $_bc);
     border-top-color: $_border_top_color;
     box-shadow: none;
@@ -492,6 +501,7 @@
     }
 
     background-color: $_bg;
+    background-image: none;
     border-color: if($flat==true, $_bg, $_bc);
     box-shadow: none;
 
@@ -513,6 +523,7 @@
     }
 
     background-color: $_bg;
+    background-image: none;
     border-color: if($flat==true, $_bg, $_bc);
     $_border_top_color: null;
     @if $c==$headerbar_bg_color { $_border_top_color: darken($_border,15%);}
@@ -534,6 +545,7 @@
     color: $osd_fg_color;
     border-color: _border_color($_bg);
     background-color: $_bg;
+    background-image: none;
     background-clip: padding-box;
     box-shadow: inset 0 -1px 1px _button_hilight_color($_bg);
   }
@@ -547,6 +559,7 @@
     color: white;
     border-color: _border_color($_bg);
     background-color: $_bg;
+    background-image: none;
     background-clip: padding-box;
     box-shadow: inset 0 -1px 1px _button_hilight_color($_bg);
   }
@@ -560,6 +573,7 @@
     color: white;
     border-color: _border_color($_bg);
     background-color: $_bg;
+    background-image: none;
     background-clip: padding-box;
     box-shadow: inset 0 2px 3px -1px $_pressed;
   }
@@ -570,6 +584,7 @@
   //
     color: $osd_insensitive_fg_color;
     background-color: $osd_insensitive_bg_color;
+    background-image: none;
     border-color: _border_color($osd_insensitive_bg_color);
     background-clip: padding-box;
     box-shadow: none;
@@ -584,6 +599,7 @@
     color: $osd_fg_color;
     border-color: _border_color($_bg);
     background-color: $_bg;
+    background-image: none;
     background-clip: padding-box;
     box-shadow: none;
   }
