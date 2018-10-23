@@ -5,18 +5,18 @@ gtk3_asset_dir = join_paths(gtk3_dir, 'assets')
 
 # Dependencies of the files that need to be compiled
 gtk3_scss_dependencies = [
-  '../../light/gtk-3.0/_colors-public.scss',
-  '../../light/gtk-3.0/_ubuntu-colors.scss',
-  '../../light/gtk-3.0/_colors.scss',
-  '../../light/gtk-3.0/_common.scss',
-  '../../light/gtk-3.0/_apps.scss',
-  '../../light/gtk-3.0/_drawing.scss',
+  '../../light/gtk-3.20/_colors-public.scss',
+  '../../light/gtk-3.20/_ubuntu-colors.scss',
+  '../../light/gtk-3.20/_colors.scss',
+  '../../light/gtk-3.20/_common.scss',
+  '../../light/gtk-3.20/_apps.scss',
+  '../../light/gtk-3.20/_drawing.scss',
 ]
 
 # generate .css files
 # and install to themes/THEMENAME-dark/gtk-3.0
 custom_target('gtk3_dark',
-    input: '../../light/gtk-3.0/gtk-dark.scss',
+    input: '../../light/gtk-3.20/gtk-dark.scss',
     output: 'gtk.css',
     depend_files: files(gtk3_scss_dependencies),
     command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],

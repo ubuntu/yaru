@@ -4,6 +4,12 @@
 
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
+$small_radius: 4px;
+$medium_radius: 6px;
+$large_radius: 12px;
+$backdrop_transition: all 200ms ease-out;
+$button_transition: all 0.4s ease-out;
+$popover_shadow: 0 2px 5px transparentize(black, 0.75);
 
 * {
   padding: 0;
@@ -133,7 +139,7 @@ $asset_suffix: if($variant=='dark', '-dark', '');
   &:selected,
   &:selected:focus,
   &:selected:hover {
-    @extend %selected_items;
+    @extend %selected_text;
   }
   &:insensitive {
     color: $insensitive_fg_color;
@@ -246,7 +252,7 @@ GtkTextView { // This will get overridden by .view, needed by gedit line numbers
 
   &:selected,
   &:selected:focus {
-    @extend %selected_items;
+    @extend %selected_text;
   }
 
   &.progressbar {
@@ -362,13 +368,17 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
 
 .button {
-
-  $_button_transition: all 200ms $ease-out-quad;
-
+  animation: shrink 1s linear infinite;
+  min-height: 24px;
+  min-width: 16px;
+  padding: 2px 6px;
   border: 1px solid;
-  border-radius: 3px;
-  padding: 5px 8px 6px;
-  transition: $_button_transition;
+  border-radius: $small_radius;
+  outline-color: $focus_color;
+  outline-style: dashed;
+  outline-offset: -3px;
+  -gtk-outline-radius: $small_radius;
+
   @include button(normal);
   &.flat {
     @include button(undecorated);
@@ -378,9 +388,15 @@ $_dot_color: if($variant=='light', $selected_bg_color,
     // in this case the duration is increased.
     transition: none;
     &:hover {
-      transition: $_button_transition;
-      transition-duration: 500ms;
-      &:active { transition: $_button_transition; }
+      transition: $button_transition;
+      &:active { transition: $button_transition; }
+    }
+    @each $state, $t in (":hover", "hover"), (":hover:backdrop", "backdrop-hover"),
+    (":active, &:checked", "active"), (":disabled", "insensitive"),
+    (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
+    (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
+    (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+      &#{$state} { @include button($t, $flat:true); }
     }
   }
   &:hover {
@@ -901,22 +917,22 @@ GtkColorButton.button {
       padding-bottom: 8px; //
       &:first-child {
         @extend %top_button;
-        @include button(normal, $edge:none);
+        @include button(normal, $flat:true);
         &:active {
           @extend %top_button;
-          @include button(active, $edge:none);
+          @include button(active, $flat:true);
         }
         &:hover {
           @extend %top_button;
-          @include button(hover, $edge:none);
+          @include button(hover, $flat:true);
         }
         &:insensitive {
           @extend %top_button;
-          @include button(insensitive, $edge:none);
+          @include button(insensitive, $flat:true);
         }
         &:backdrop {
           @extend %top_button;
-          @include button(backdrop, $edge:none);
+          @include button(backdrop, $flat:true);
         }
       }
       &:last-child {
@@ -1105,24 +1121,30 @@ GtkComboBox {
 
 .titlebar,
 .header-bar {
-  padding: 6px;
-  border-width: 0 0 1px;
+  padding: 0 6px;
+  min-height: 40px;
+  border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
+  border-top-color: $inkstone;
   border-style: solid;
-  border-color: $borders_color;
+  border-width: 1px 1px 0 1px;
   border-radius: 7px 7px 0 0;
-  background-color: transparent;
-
-  @include headerbar_fill;
+  background-color: $headerbar_bg_color;
+  color: $headerbar_fg_color;
+  @if $variant=='dark' {
+    &:backdrop {
+      box-shadow: inset 0 -1px 0 0 transparentize($backdrop_borders_color,0.2);
+    }
+  }
 
   &:backdrop {
-    border-color: $backdrop_borders_color;
-    background-color: $bg_color;
-    background-image: none;
-    box-shadow: inset 0 1px $top_hilight;
+    background-color: $backdrop_headerbar_bg_color;
+    border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.7);
+    color: $backdrop_fg_color;
+    transition: $backdrop_transition;
   }
 
   .title {
-    font-weight: bold;
+    font-weight: 500;
     padding-left: 12px;
     padding-right: 12px;
   }
@@ -1138,17 +1160,10 @@ GtkComboBox {
   & > GtkBox > .separator.vertical {
     -GtkWidget-wide-separators: true;
     -GtkWidget-separator-width: 1px;
-    border-width: 0 1px;
-    border-image: linear-gradient(to bottom,
-                                  transparentize($borders_color,1),
-                                  $borders_color 30%,
-                                  $borders_color 70%,
-                                  transparentize($borders_color,1) 100%)
-                  0 1 / 0 1px stretch; //FIXME use a proper color
+    background-image: image(mix($inkstone, $headerbar_bg_color, 50%));
 
     &:backdrop {
-      border-image: linear-gradient(to bottom, transparentize($backdrop_borders_color, 0.5))
-                    0 1 / 1px 1px;  //FIXME use a proper color
+      background-image: image(mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%));
     }
   }
 
@@ -1214,35 +1229,35 @@ GtkComboBox {
       &:insensitive {
         @include button(insensitive, $selected_bg_color, $selected_fg_color, $_hc);
 
-        &:active, &:checked { @include button(insensitive-active, $selected_bg_color, $selected_fg_color, $_hc); }
+        &:active, &:checked { @include button(insensitive-active, $selected_bg_color, $selected_fg_color, $flat:true); }
       }
 
       &.suggested-action {
-        @include button(normal, $edge:$_hc);
+        @include button(normal, $flat:true);
         border-color: $selected_borders_color;
 
         &:hover {
-          @include button(hover, $edge:$_hc);
+          @include button(hover, $flat:true);
           border-color: $selected_borders_color;
         }
 
         &:active {
-          @include button(active, $edge:$_hc);
+          @include button(active, $flat:true);
           border-color: $selected_borders_color;
         }
 
         &:insensitive {
-          @include button(insensitive, $edge:$_hc);
+          @include button(insensitive, $flat:true);
           border-color: $selected_borders_color;
         }
 
         &:backdrop {
-          @include button(backdrop, $edge:$_hc);
+          @include button(backdrop, $flat:true);
           border-color: $selected_borders_color;
         }
 
         &:backdrop:insensitive {
-          @include button(backdrop-insensitive, $edge:$_hc);
+          @include button(backdrop-insensitive, $flat:true);
           border-color: $selected_borders_color;
         }
       }
@@ -1275,11 +1290,214 @@ GtkComboBox {
     padding: 4px;
     .button { padding: 5px; }
   }
+
+  & {
+    // style headerbar buttons and entries using the appropriate headerbar colors
+    $c: $headerbar_bg_color;
+    $tc: $headerbar_fg_color;
+
+    .switch {
+      @include switch(lighten($headerbar_bg_color, 25%));
+    }
+
+    .entry, %dark_entry {
+      @include entry(normal, $c: $c, $tc: $tc);
+      &:disabled { @include entry(insensitive, $c: $c, $tc: $tc); }
+
+      &:backdrop {
+        @include entry(backdrop, $c: $c, $tc: $tc);
+        transition: $backdrop_transition;
+
+        &:disabled { @include entry(backdrop-insensitive, $c: $c, $tc: $tc); }
+      }
+      .image {
+        color: $tc;
+        &:hover { color: $backdrop_headerbar_text_color; }
+      }
+
+      // Sadly, we need a dedicated styling here because
+      // the $variant is independant from the headerbar bg
+      selection {
+        $_bg: darken($neutral_color, 10%);
+        $_c: $headerbar_fg_color;
+        background-color: $_bg;
+        color: $_c;
+
+        &:backdrop {
+          background-color: _backdrop_color($_bg);
+          color: _backdrop_color($_c);
+        }
+      }
+    }
+
+    // default button and its labels needs dedicated styling in the headerbar
+    .text-button:not(.suggested-action) {
+      &:not(:hover) { border-color: $hb_button_bg_hover; }
+      &.default {
+        &, &:active, &:hover, &:focus {
+          color: white;
+        }
+      }
+    }
+    .button.default { label { color: white; } }
+
+    .button, .button.flat, .button.titlebutton.appmenu {
+      @each $state, $t in ("", "normal"),
+                          (":hover", "hover"),
+                          (":hover:backdrop", "backdrop-hover"),
+                          (":active, &:checked", "active"),
+                          (":hover:checked", "active-hover"),
+                          (":disabled", "insensitive"),
+                          (":disabled:active, &:disabled:checked", "insensitive-active"),
+                          (":backdrop", "backdrop"),
+                          (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                          (":backdrop:disabled", 'backdrop-insensitive'),
+                          (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+                            &#{$state} { @include button($t, $c, $tc, $flat:true); }
+      }
+
+      @each $b_type, $b_color in (suggested-action, $success_color),
+                                  (destructive-action, $destructive_color) {
+        &.#{$b_type} {
+          // special buttons show their color when not interacted with
+          @each $state, $t in ("", "normal"),
+                              (":hover", "hover"),
+                              (":hover:backdrop", "backdrop-hover"),
+                              (":active, &:checked", "active"),
+                              (":disabled", "insensitive"),
+                              (":disabled:active, &:disabled:checked", "insensitive-active"),
+                              (":backdrop", "backdrop"),
+                              (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                              (":backdrop:disabled", 'backdrop-insensitive'),
+                              (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+            &#{$state} { @include button($t, $b_color, white, $flat:true); }
+          }
+        }
+      }
+    }
+
+    .linked:not(.path-bar):not(.stack-switcher):not(buttonbox) .button, .linked:not(.vertical) entry {
+      // force linked buttons and entries to be separate
+      // this needs a lot of testing
+      &:focus {
+        & + entry { border-left-color: _border_color($graphite); }
+        & + button { border-left-color: transparent; }
+
+        & + entry,
+        & + button {
+          &:disabled { border-left-color: transparent; }
+          &:backdrop { border-left-color: _border_color($headerbar_bg_color); }
+        }
+      }
+      border-width: 1px;
+      border-style: solid;
+      border-radius: $small_radius;
+      -gtk-outline-radius: $small_radius;
+
+      &:not(:last-child) { margin-right: 4px; }
+    }
+
+    %underline_focus_headerbar {
+      // underline_focus using the appropriate headerbar colors
+      // this is used for the stackswitcher and pathbar as there are pathbars NOT in the headerbar
+      @extend %underline_focus_effect;
+
+      // not using include button, since we don't need all the other styling
+      $c: $hb_pathbar_bg;
+      background-color: $c;
+      color: $headerbar_text_color;
+
+      &:hover {
+        box-shadow: inset 0 -2px transparentize($headerbar_text_color, 0.5);
+        &:backdrop { box-shadow: inset 0 -2px transparentize($headerbar_text_color, 0.7); }
+      }
+
+      &:active { box-shadow: inset 0 -2px $headerbar_text_color; }
+
+      &:checked {
+        color: $selected_fg_color;
+        box-shadow: inset 0 -2px $selected_bg_color;
+
+        &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%); }
+      }
+
+      &:backdrop {
+        background-color: _backdrop_color($c);
+        color: $backdrop_headerbar_insensitive_color;
+
+        &:checked {
+          color: $backdrop_headerbar_fg_color;
+          box-shadow: inset 0 -2px _backdrop_color($selected_bg_color);
+        }
+      }
+    }
+
+    buttonbox.linked .button,
+    buttonbox.linked .button.text-button ~ .button {
+      border-style: solid;
+      border-color: $inkstone;
+
+      &:not(:only-child) { border-width: 1px 0; }
+      &:first-child { border-width: 1px 0 1px 1px; }
+      &:last-child { border-width: 1px 1px 1px 0; }
+
+      &:backdrop {
+        &, &:checked { border-color: lighten($inkstone, 3%); }
+      }
+    }
+
+    .stack-switcher.linked {
+      // round the stackswitcher corners by using border
+      border-width: 0 8px;
+      border-style: solid;
+      border-color: $c;
+      border-radius: $small_radius;
+
+      &:backdrop { border-color: _backdrop_color($c); }
+
+      button {
+        // style the stackswitcher buttons
+        @extend %underline_focus_headerbar;
+
+        &:dir(rtl), &:dir(ltr) { // specificity bump
+          // gets rid of the radius
+          border-radius: 0;
+          -gtk-outline-radius: 0;
+        }
+
+        margin: 0;
+        border: none;
+
+        &:disabled:checked{
+          background-color: $hb_pathbar_bg;
+          &:backdrop{ background-color: $hb_pathbar_bg_backdrop;}
+        }
+      }
+    }
+
+    .path-bar.linked .button {
+      // style the pathbar buttons
+      @extend %underline_focus_headerbar;
+
+      &.slider-button {
+        box-shadow: none;
+      }
+    }
+  }
 }
 
 /************
  * Pathbars *
  ************/
+
+%underline_focus_effect {
+  // indeterminate is there to lazily force the style
+  transition: 300ms ease;
+  transition-property: box-shadow, color;
+  border-color: transparent;
+
+  &, &:backdrop { box-shadow: inset 0 -2px transparent; }
+}
 
 .path-bar .button {
   padding: 5px 6px 6px;
@@ -1808,12 +2026,12 @@ column-header.button.dnd { // for treeview-like derive widgets
       color: transparentize($fg_color,0.7);
       &:hover {
         color:  $fg_color;
-        @include button(hover, $edge:none);
+        @include button(hover, $flat:true);
         background-image: none;
         box-shadow: none;
       }
       &:active {
-        @include button(active, $edge:none);
+        @include button(active, $flat:true);
       }
       &:backdrop {
         color: transparentize($backdrop_fg_color,0.7);
@@ -2063,7 +2281,7 @@ GtkSwitch {
                   inset 0 -1px mix($bg_color, $borders_color, 50%);
     }
     &:active { border: 1px solid $selected_borders_color; }
-    &:insensitive { @include button(insensitive, $edge:none); }
+    &:insensitive { @include button(insensitive, $flat:true); }
     &:backdrop {
       @include button(backdrop);
       box-shadow: none;
@@ -2605,32 +2823,32 @@ GtkScrolledWindow {
 .list-row:selected {
   @extend %selected_items;
   .button {
-    @include button(normal, $edge:none);
+    @include button(normal, $flat:true);
     @if $variant == 'light' { border-color: $selected_borders_color; }
     &.flat {
-      @include button(undecorated, $edge:none);
+      @include button(undecorated, $flat:true);
       color: $selected_fg_color;
     }
     &:hover {
-      @include button(hover, $edge:none);
+      @include button(hover, $flat:true);
       @if $variant == 'light' { border-color: $selected_borders_color; }
     }
     &:active, &:checked {
-      @include button(active, $edge:none);
+      @include button(active, $flat:true);
       @if $variant == 'light' { border-color: $selected_borders_color; }
     }
     &:backdrop, &.flat:backdrop {
-      @include button(backdrop, $edge:none);
+      @include button(backdrop, $flat:true);
       @if $variant == 'light' { border-color: $selected_borders_color; }
       &:active, &:checked {
-        @include button(backdrop-active, $edge:none);
+        @include button(backdrop-active, $flat:true);
         @if $variant == 'light' { border-color: $selected_borders_color; }
       }
       &:insensitive {
-        @include button(backdrop-insensitive, $edge:none);
+        @include button(backdrop-insensitive, $flat:true);
         @if $variant == 'light' { border-color: $selected_borders_color; }
         &:active, &:checked {
-          @include button(backdrop-insensitive-active, $edge:none);
+          @include button(backdrop-insensitive-active, $flat:true);
           @if $variant == 'light' { border-color: $selected_borders_color; }
         }
       }
@@ -2640,9 +2858,9 @@ GtkScrolledWindow {
       color: if($variant=='light', $backdrop_base_color, $backdrop_fg_color);
     }
     &:insensitive {
-      @include button(insensitive, $edge:none);
+      @include button(insensitive, $flat:true);
       @if $variant == 'light' { border-color: $selected_borders_color; }
-      &:active, &:checked { @include button(insensitive-active, $edge:none); }
+      &:active, &:checked { @include button(insensitive-active, $flat:true); }
     }
     //FIXME: make placeholder with buttons w/o edge to be extended around
     //       istead of repeating everytime this stuff.
@@ -2785,51 +3003,51 @@ GtkCalendar {
     .dialog-action-area .button {
       padding: 12px;
       border-radius: 0;
-      @include button(normal, $edge:none);
+      @include button(normal, $flat:true);
       @extend %middle_button;
       &:hover {
-        @include button(hover, $edge:none);
+        @include button(hover, $flat:true);
         @extend %middle_button;
       }
       &:active {
-        @include button(active, $edge:none);
+        @include button(active, $flat:true);
         @extend %middle_button;
       }
       &:insensitive {
-        @include button(insensitive, $edge:none);
+        @include button(insensitive, $flat:true);
         @extend %middle_button;
       }
       &:backdrop {
-        @include button(backdrop, $edge:none);
+        @include button(backdrop, $flat:true);
         @extend %middle_button;
       }
       &:backdrop:insensitive {
-        @include button(backdrop-insensitive, $edge:none);
+        @include button(backdrop-insensitive, $flat:true);
         @extend %middle_button;
       }
       @each $b_type, $b_color in (suggested-action, $selected_bg_color),
                                  (destructive-action, $destructive_color) {
         &.#{$b_type} {
-          @include button(normal, $b_color, white, $edge:none);
+          @include button(normal, $b_color, white, $flat:true);
           @extend %middle_button;
           &:hover {
-            @include button(hover, $b_color, white, $edge:none);
+            @include button(hover, $b_color, white, $flat:true);
             @extend %middle_button;
           }
           &:active {
-            @include button(active, $b_color, white, $edge:none);
+            @include button(active, $b_color, white, $flat:true);
             @extend %middle_button;
           }
           &:backdrop {
-            @include button(backdrop, $b_color, white, $edge:none);
+            @include button(backdrop, $b_color, white, $flat:true);
             @extend %middle_button;
             &:insensitive {
-              @include button(backdrop-insensitive, $edge:none);
+              @include button(backdrop-insensitive, $flat:true);
               @extend %middle_button;
             }
           }
           &:insensitive {
-            @include button(insensitive, $edge:none);
+            @include button(insensitive, $flat:true);
             @extend %middle_button;
           }
         }
@@ -3275,8 +3493,8 @@ GtkVolumeButton.button {
   $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
   $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.82), transparentize($borders_color, 0.1));
 
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
-              0 0 0 1px $_wm_border; //doing borders with box-shadow
+  $window_decoration_shadow: 0 3px 9px 1px;
+  box-shadow: $window_decoration_shadow transparentize(black, 0.5);
 
   // FIXME rationalize window-frame shadows
 
@@ -3284,8 +3502,13 @@ GtkVolumeButton.button {
   margin: 10px;
 
   &:backdrop {
-    box-shadow: 0 2px 6px 2px transparentize(black, 0.8),
-                0 0 0 1px $_wm_border_backdrop;
+    // the transparent shadow here is to enforce that the shadow extents don't
+    // change when we go to backdrop, to prevent jumping windows.
+    // The biggest shadow should be in the same order then in the active state
+    // or the jumping will happen during the transition.
+    box-shadow: $window_decoration_shadow transparent,
+                0 2px 6px 2px transparentize(black, 0.8);
+    transition: $backdrop_transition;
   }
   &.tiled {
     border-radius: 0;
@@ -3325,11 +3548,48 @@ GtkVolumeButton.button {
 // Window Close button
 .header-bar .button.titlebutton,
 .titlebar .button.titlebutton {
+/*
   @extend .button;
   @extend .button.flat;
   @extend .image-button;
   @include _button_text_shadow;
   &:backdrop { icon-shadow: none; }
+*/
+  $c: $headerbar_bg_color;
+  $tc: $headerbar_fg_color;
+
+  &, &:hover, &:active {
+    headerbar &, .titlebar &, & {
+      // spec bump otherwise :backdrop  will still have a bg
+      &, &:backdrop {
+        @extend %undecorated_button;
+      }
+    }
+  }
+
+  border-radius: $small_radius;
+  min-height: 24px;
+  min-width: 24px;
+  padding: 2px;
+
+  &:not(.close):not(.appmenu){
+    &:hover {
+      @include draw_circle($c);
+    }
+    &:active {
+      @include draw_circle($c);
+    }
+  }
+
+  &.close {
+    @include draw_circle($selected_bg_color, $close:true);
+    &:hover {
+      @include draw_circle($selected_bg_color, $close:true);
+    }
+    &:active {
+      @include draw_circle($selected_bg_color, $close:true);
+    }
+  }
 }
 
 .header-bar.selection-mode .button.titlebutton,
@@ -3353,6 +3613,22 @@ GtkVolumeButton.button {
     &:insensitive {
       color: mix($backdrop_selected_fg_color, $selected_bg_color, 30%);
     }
+  }
+}
+
+%selected_text {
+  $c: $text_selection;
+  $tc: $text_color;
+  background-color: $c;
+  color: $tc;
+
+  &:disabled { color: mix($tc, $c, 50%); }
+
+  &:backdrop {
+    background-color: _backdrop_color($c);
+    color: $backdrop_text_color;
+
+    &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
 }
 
