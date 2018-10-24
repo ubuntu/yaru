@@ -369,8 +369,8 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
 .button {
   animation: shrink 1s linear infinite;
-  min-height: 24px;
-  min-width: 16px;
+  //min-height: 24px;
+  //min-width: 16px;
   padding: 2px 6px;
   border: 1px solid;
   border-radius: $small_radius;
@@ -392,10 +392,10 @@ $_dot_color: if($variant=='light', $selected_bg_color,
       &:active { transition: $button_transition; }
     }
     @each $state, $t in (":hover", "hover"), (":hover:backdrop", "backdrop-hover"),
-    (":active, &:checked", "active"), (":disabled", "insensitive"),
-    (":disabled:active, &:disabled:checked", "insensitive-active"), (":backdrop", "backdrop"),
-    (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:disabled", 'backdrop-insensitive'),
-    (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+    (":active, &:checked", "active"), (":insensitive", "insensitive"),
+    (":insensitive:active, &:insensitive:checked", "insensitive-active"), (":backdrop", "backdrop"),
+    (":backdrop:active, &:backdrop:checked", 'backdrop-active'), (":backdrop:insensitive", 'backdrop-insensitive'),
+    (":backdrop:insensitive:active, &:backdrop:insensitive:checked", 'backdrop-insensitive-active') {
       &#{$state} { @include button($t, $flat:true); }
     }
   }
@@ -760,7 +760,7 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
 %undecorated_button {
   &, &:backdrop {
-    &, &:disabled {
+    &, &:insensitive {
       background-color: transparent;
       background-image: none;
       border-color: transparent;
@@ -1125,7 +1125,7 @@ GtkComboBox {
 .titlebar,
 .header-bar {
   padding: 0 6px;
-  min-height: 40px;
+  //min-height: 40px;
   border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
   border-top-color: $inkstone;
   border-style: solid;
@@ -1165,10 +1165,12 @@ GtkComboBox {
   & > GtkBox > .separator.vertical {
     -GtkWidget-wide-separators: true;
     -GtkWidget-separator-width: 1px;
-    background-image: image(mix($inkstone, $headerbar_bg_color, 50%));
+    background-color: mix($inkstone, $headerbar_bg_color, 50%);
+    background-image: none;
 
     &:backdrop {
-      background-image: image(mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%));
+      background-color: mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%);
+      background-image: none;
     }
   }
 
@@ -1307,13 +1309,13 @@ GtkComboBox {
 
     .entry, %dark_entry {
       @include entry(normal, $c: $c, $tc: $tc);
-      &:disabled { @include entry(insensitive, $c: $c, $tc: $tc); }
+      &:insensitive { @include entry(insensitive, $c: $c, $tc: $tc); }
 
       &:backdrop {
         @include entry(backdrop, $c: $c, $tc: $tc);
         transition: $backdrop_transition;
 
-        &:disabled { @include entry(backdrop-insensitive, $c: $c, $tc: $tc); }
+        &:insensitive { @include entry(backdrop-insensitive, $c: $c, $tc: $tc); }
       }
       .image {
         color: $tc;
@@ -1352,12 +1354,12 @@ GtkComboBox {
                           (":hover:backdrop", "backdrop-hover"),
                           (":active, &:checked", "active"),
                           (":hover:checked", "active-hover"),
-                          (":disabled", "insensitive"),
-                          (":disabled:active, &:disabled:checked", "insensitive-active"),
+                          (":insensitive", "insensitive"),
+                          (":insensitive:active, &:insensitive:checked", "insensitive-active"),
                           (":backdrop", "backdrop"),
                           (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
-                          (":backdrop:disabled", 'backdrop-insensitive'),
-                          (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+                          (":backdrop:insensitive", 'backdrop-insensitive'),
+                          (":backdrop:insensitive:active, &:backdrop:insensitive:checked", 'backdrop-insensitive-active') {
                             &#{$state} { @include button($t, $c, $tc, $flat:true); }
       }
 
@@ -1369,12 +1371,12 @@ GtkComboBox {
                               (":hover", "hover"),
                               (":hover:backdrop", "backdrop-hover"),
                               (":active, &:checked", "active"),
-                              (":disabled", "insensitive"),
-                              (":disabled:active, &:disabled:checked", "insensitive-active"),
+                              (":insensitive", "insensitive"),
+                              (":insensitive:active, &:insensitive:checked", "insensitive-active"),
                               (":backdrop", "backdrop"),
                               (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
-                              (":backdrop:disabled", 'backdrop-insensitive'),
-                              (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+                              (":backdrop:insensitive", 'backdrop-insensitive'),
+                              (":backdrop:insensitive:active, &:backdrop:insensitive:checked", 'backdrop-insensitive-active') {
             &#{$state} { @include button($t, $b_color, white, $flat:true); }
           }
         }
@@ -1390,14 +1392,14 @@ GtkComboBox {
 
         & + entry,
         & + button {
-          &:disabled { border-left-color: transparent; }
+          &:insensitive { border-left-color: transparent; }
           &:backdrop { border-left-color: _border_color($headerbar_bg_color); }
         }
       }
       border-width: 1px;
       border-style: solid;
       border-radius: $small_radius;
-      -gtk-outline-radius: $small_radius;
+      outline-radius: $small_radius;
 
       &:not(:last-child) { margin-right: 4px; }
     }
@@ -1467,13 +1469,13 @@ GtkComboBox {
         &:dir(rtl), &:dir(ltr) { // specificity bump
           // gets rid of the radius
           border-radius: 0;
-          -gtk-outline-radius: 0;
+          outline-radius: 0;
         }
 
         margin: 0;
         border: none;
 
-        &:disabled:checked{
+        &:insensitive:checked{
           background-color: $hb_pathbar_bg;
           &:backdrop{ background-color: $hb_pathbar_bg_backdrop;}
         }
@@ -3573,8 +3575,8 @@ GtkVolumeButton.button {
   }
 
   border-radius: $small_radius;
-  min-height: 24px;
-  min-width: 24px;
+  //min-height: 24px;
+  //min-width: 24px;
   padding: 2px;
 
   &:not(.close):not(.appmenu){
@@ -3627,13 +3629,13 @@ GtkVolumeButton.button {
   background-color: $c;
   color: $tc;
 
-  &:disabled { color: mix($tc, $c, 50%); }
+  &:insensitive { color: mix($tc, $c, 50%); }
 
   &:backdrop {
     background-color: _backdrop_color($c);
     color: $backdrop_text_color;
 
-    &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
+    &:insensitive { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
 }
 
