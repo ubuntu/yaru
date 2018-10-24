@@ -491,7 +491,7 @@
         $_bg: transparent;
         background-image: none;
         text-shadow: none;
-        -gtk-icon-shadow: none;
+        icon-shadow: none;
     }
     @else if $c == $red or $green or $yellow or $blue or $purple {
         $_bg: transparentize($c, .1);
@@ -613,7 +613,7 @@
     background-image: none;
     box-shadow: none;
     text-shadow: none;
-    -gtk-icon-shadow: none;
+    icon-shadow: none;
   }
 }
 
@@ -790,7 +790,7 @@
     outline-color: $focus_color;
     outline-offset: -2px;
     transition: $button_transition;
-    -gtk-outline-radius: $small_radius;
+    outline-radius: $small_radius;
   }
 
   &:checked slider {
