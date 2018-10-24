@@ -1133,6 +1133,7 @@ GtkComboBox {
   border-radius: 7px 7px 0 0;
   background-color: $headerbar_bg_color;
   background-image: none;
+  box-shadow: none;
   color: $headerbar_fg_color;
   @if $variant=='dark' {
     &:backdrop {
