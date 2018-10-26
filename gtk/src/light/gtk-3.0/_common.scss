@@ -1821,8 +1821,12 @@ column-header.button.dnd { // for treeview-like derive widgets
   // Through me you go a pass among lost souls.
   // ...
   // Abandon all hope — Ye Who Enter Here
-  padding: 0;
+  $_borders_color: if($light, transparentize($borders_color, 0.2), darken($slate, 8%));
+  //background-color: if($light, $porcelain, $headerbar_bg_color);
   background-color: $base_color;
+  border-color: $_borders_color;
+  border-width: 1px;
+  padding: 1px;
   -GtkNotebook-initial-gap: 10;
   -GtkNotebook-arrow-spacing: 5;
   -GtkNotebook-tab-curvature: 0;
@@ -1832,6 +1836,7 @@ column-header.button.dnd { // for treeview-like derive widgets
   -GtkWidget-focus-line-width: 0;
   transition: all 200ms $ease-out-quad;
   &:backdrop {
+    //background-color: if($light, $backdrop_bg_color, $backdrop_headerbar_bg_color);
     background-color: $backdrop_base_color;
   }
   &.frame {
@@ -1846,7 +1851,8 @@ column-header.button.dnd { // for treeview-like derive widgets
   &.header {
     // FIXME: double borders in some case, can't fix it w/o a class tho
     // FIXME: doesn't work on dark var
-    background-color: mix($bg_color, $borders_color, 70%);
+    //background-color: mix($bg_color, $borders_color, 70%);
+    background-color: if($light, $porcelain, $headerbar_bg_color);
 
     // this is the shading of the header behind the tabs
     &.frame {
@@ -1858,30 +1864,30 @@ column-header.button.dnd { // for treeview-like derive widgets
       &:backdrop { border-color: $backdrop_borders_color; }
     }
 
-    $_header_shade: inset 0 2px 3px -1px transparentize(black, 0.85);
     &.top {
-      box-shadow: $_header_shade,
-                  inset 0 -1px $borders_color; // border
-      &:backdrop { box-shadow: inset 0 -1px $backdrop_borders_color; }
+      padding-top: 4px;
+      margin-bottom: -2px;
     }
     &.bottom {
-      box-shadow: $_header_shade,
-                  inset 0 1px $borders_color;
-      &:backdrop { box-shadow: inset 0 1px $backdrop_borders_color; }
-    }
-    &.right {
-      box-shadow: $_header_shade,
-                  inset 1px 0 $borders_color;
-      &:backdrop { box-shadow: inset 1px 0 $backdrop_borders_color; }
+      padding-bottom: 4px;
+      margin-top: -2px;
     }
     &.left {
-      box-shadow: $_header_shade,
-                  inset -1px 0 $borders_color;
-      &:backdrop { box-shadow: inset -1px 0 $backdrop_borders_color; }
+      padding-left: 4px;
+      margin-right: -2px;
+    }
+    &.right {
+      padding-right: 4px;
+      margin-left: -2px;
+    }
+
+    // Reset Adwaita box shadow and background
+    &.top, &.bottom, &.right, &.left {
+      box-shadow: none;
+      &:backdrop { box-shadow: none; }
     }
     &:backdrop {
-      // same color as backdrop pushed button
-      background-color: $backdrop_dark_fill;
+      background-color: if($light, $backdrop_bg_color, $backdrop_headerbar_bg_color);
       box-shadow: none;
     }
   }
@@ -1891,7 +1897,12 @@ column-header.button.dnd { // for treeview-like derive widgets
     border-color: transparent;
     background-color: transparent;
 
-    outline-offset: 0;
+    padding: 4px 12px;
+    outline-offset: -5px;
+    outline-style: dashed;
+    outline-radius: $small_radius;
+    color: transparentize($text_color, 0.3);
+    border: 1px solid transparent;
 
     $tab_indicator_size: 3px;
     //vertical tab sizing
@@ -1905,7 +1916,6 @@ column-header.button.dnd { // for treeview-like derive widgets
     //notebook content frame...
     &.top, &.bottom { padding: $vt_vpadding $vt_hpadding; }
     &.left, &.right { padding: $ht_vpadding $ht_hpadding; }
-
 
     /* works for testnotebookdnd, but there's a superfluous border
        in gedit or web, commented out for now, needs gtk fixes
@@ -1950,31 +1960,56 @@ column-header.button.dnd { // for treeview-like derive widgets
     }
     &.top {
       //padding-bottom: ($vt_vpadding -$tab_indicator_size);
-      border-bottom-width: $tab_indicator_size;
+      border-radius: 4px 4px 0 0;
+      &:active { border-bottom-style: none; }
     }
     &.bottom {
       //padding-top: ($vt_vpadding -$tab_indicator_size);
       border-top-width: $tab_indicator_size;
+      border-radius: 0 0 4px 4px;
+      &:active { border-top-style: none; }
     }
     &.left {
       //padding-right: ($ht_hpadding -$tab_indicator_size);
       border-right-width: $tab_indicator_size;
+      border-radius: 4px 0 0 4px;
+      &:active { border-right-style: none; }
     }
     &.right {
       //padding-left: ($ht_hpadding -$tab_indicator_size);
       border-left-width: $tab_indicator_size;
+      border-radius: 0 4px 4px 0;
+      &:active { border-left-style: none; }
     }
 
     //here's the interesting stuff
-    &:hover, &.prelight-page {
-      border-color: $borders_color;
-    }
-    &:active, &.active-page, &:backdrop:active {
-      border-color: $selected_bg_color;
+    &:hover:not(:active):not(:backdrop), &.prelight-page {
+      @if $light {
+        background-color: mix($insensitive_bg_color, $base_color, 25%);
+        border-color: mix($_borders_color, $base_color, 60%);
+      } @else {
+        background-color: $base_color;
+        border-color: $_borders_color;
+      }
     }
     &:backdrop {
       background-color: transparent;
       border-color: transparent;
+      color: mix($backdrop_fg_color, $backdrop_bg_color, 60%);
+      &:hover {
+        border-color: mix($borders_color, $backdrop_bg_color, 65%);
+      }
+    }
+    &:active, &.active-page, &:backdrop:active {
+      color: $fg_color;
+      font-weight: 500;
+      background-color: $base_color;
+      border-color: $_borders_color;
+    }
+    &:backdrop:active {
+      background-color: $backdrop_base_color;
+      border-color: $backdrop_borders_color;
+      color: $backdrop_fg_color;
     }
     @each $_tab, $_border in (top, bottom),
                              (bottom, top),
@@ -2006,10 +2041,14 @@ column-header.button.dnd { // for treeview-like derive widgets
     }
     .label { //tab text
       padding: 0 2px; // needed for a nicer focus ring
-      font-weight: bold;
+      font-weight: inherit;
       color: $insensitive_fg_color;
       &:backdrop, &.prelight-page:backdrop {
         color: mix($backdrop_fg_color, $backdrop_insensitive_color, 50%);
+      }
+      &.active-page {
+        font-weight: 500;
+        padding-bottom: 1px;
       }
     }
     .prelight-page .label, .label.prelight-page {
@@ -3595,6 +3634,11 @@ GtkVolumeButton.button {
     }
     &:active {
       @include draw_circle($selected_bg_color, $close:true);
+    }
+    &:backdrop {
+      // This doesn't seem to be inherited from %undecorated_button
+      // like in GTK 3.20
+      background-image: none;
     }
   }
 }
