@@ -90,6 +90,8 @@ $popover_shadow: 0 2px 5px transparentize(black, 0.75);
   }
 }
 
+widget:selected { color: $selected_fg_color; }
+
 .view,
 %view {
   color: $text_color;
@@ -803,6 +805,7 @@ button {
 
         &:backdrop { @include button(osd-backdrop, $b_color); }
       }
+      &:focus { outline-color: white; }
     }
   }
 
@@ -1539,6 +1542,7 @@ toolbar {
   border-width: 0 1px 1px;
   border-radius: 0  0 5px 5px;
 }
+.inline-toolbar.horizontal.sidebar-toolbar:backdrop { background-color: transparent; }
 
 searchbar,
 .location-bar {
@@ -2457,6 +2461,11 @@ popover.background {
   separator { margin: 3px; }
 
   list separator { margin: 0px; }
+
+  radiobutton radio, checkbutton check { 
+    &:dir(ltr) { margin-right: 3px; }
+    &:dir(rtl) { margin-left: 3px; }
+  }
 }
 
 /*************
@@ -2627,12 +2636,14 @@ notebook {
         font-weight: 500;
         background-color: $base_color;
         border-color: $_borders_color;
+        & label {padding-bottom: 1px};
       }
 
       &:backdrop:checked {
         background-color: $backdrop_base_color;
         border-color: $backdrop_borders_color;
         color: $backdrop_fg_color;
+        & label {padding-bottom: 1px};
       }
 
       // colors the button like the label, overridden otherwise

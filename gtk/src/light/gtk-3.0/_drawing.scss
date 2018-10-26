@@ -702,7 +702,7 @@
     box-shadow: none;
 
     &:checked {
-      background-color: transparentize($dark_fill, 0.7);
+      background-color: transparentize($dark_fill, if($variant=='light', 0.6, 0.9));
     }
   }
 
@@ -735,6 +735,11 @@
       background-color: _backdrop_color($alt);
       border-top-color: darken($alt, 10%);
       box-shadow: none;
+
+      &:disabled {
+        $_bg: transparentize($dark_fill, if($variant=='light', 0.7, 0.9));
+        background-color: if($bg==$dark_fill, $_bg, _backdrop_color($ash));;
+      }
     }
 
     &:disabled {
@@ -775,7 +780,7 @@
       @if $variant=='light' {
         background-color: $backdrop_bg_color;
       } @else {
-        background-color: lighten($backdrop_fg_color,20%);
+        background-color: lighten($backdrop_fg_color, 20%);
       }
     } @else {
       background-color: $headerbar_fg_color;
@@ -783,8 +788,8 @@
   }
 
   &:backdrop:disabled slider {
-    transition: $backdrop_transition;
     background-color: if($bg==$dark_fill, transparent, _backdrop_color($ash));
+    transition: $backdrop_transition;
   }
 }
 

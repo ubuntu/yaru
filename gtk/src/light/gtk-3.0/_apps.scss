@@ -33,12 +33,16 @@ list.tweak-categories separator {
       // otherwise gtk will take the style from somewhere else...
       &, &:hover {
         background-color: transparent;
-        border-color: darken($inkstone, 4%);
+        border-color: transparent;
+        box-shadow: none;
         color: $bg_color;
         margin: 2px;
       }
 
-      &:backdrop { border-color: transparent; }
+      &:backdrop {
+        transition: none;
+        border-color: transparent;
+      }
 
       // ...and here style just the difference from normal
       &:hover {
@@ -61,6 +65,11 @@ list.tweak-categories separator {
     // applies to the desktop too
     background: transparent;
     border-color: transparent;
+  }
+
+  treeview:drop(active):focus {
+    // drop target green bottom border was missing
+    border-bottom: 1px solid $drop_target_color;
   }
 
   treeview.view header button {
@@ -298,11 +307,25 @@ terminal-window {
   > grid { margin-top: -24px; }
 }
 
+.app-listbox-header { background: $dark_fill; }
+
 .list-box-app-row {
-  border-radius: 0px;
-  border-left: 1px solid $borders_color;
-  border-right: 1px solid $borders_color;
-  margin: -1px 0;
+  border-radius: 0;
+  border-color: $borders_color;
+  border-style: none solid solid solid;
+  border-width: 0 1px 1px 1px;
+  margin: -1px 0 0 0;
+
+  & ~ separator {
+    background-color: $bg_color;
+    border: none;
+    min-height: 0px;
+  }
+}
+
+// Avoid double border when list in included in a box (e.g. Updates view)
+box > list row.list-box-app-row {
+    border: none;
 }
 
 // Star color can not be set, so this gives the stars a background in the dark theme
@@ -312,10 +335,12 @@ terminal-window {
     box-shadow: inset 0 0 10px 10px #fdfdfd;
   }
 }
+
 // Background color can not be set, so use a inset-box-shadow
 .application-details-infobar {
   box-shadow: inset 0 0 100px 100px $base_color;
 }
+
 .category_page_header_filter_box  {
     box-shadow: inset 0 0 100px 100px $base_color;
 }
@@ -561,4 +586,20 @@ normal-button {
  * Geary *
  ***********/
 
-.geary-expanded.geary-last headerbar { border: none; }
+.geary-expanded headerbar { border: none; }
+
+/***********
+ * usb-creator-gtk *
+ ***********/
+
+ #dialog-action_area3 { margin: 5px; }
+
+ /***********
+ * Evolution *
+ ***********/
+
+ assistant.background scrolledwindow .vertical checkbutton { 
+   // checkbox is clipped but this is undetectable till it gets keyboard focus
+   // so we're pushing it to the right to have the focus ring be displayed properly
+   margin-left: 1px 
+  }

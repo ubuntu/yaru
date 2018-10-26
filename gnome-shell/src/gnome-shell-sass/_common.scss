@@ -8,7 +8,7 @@ $panel-corner-radius: 0; // 6px;
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
 
-$dash-alpha-value: 0.6;
+$dash-alpha-value: 0.8;
 $dash-opaque-alpha-value: $panel_opaque_value;
 
 $popover-alpha-value: 0.025;
@@ -562,7 +562,7 @@ StScrollBar {
       border-top-color: transparent;
       font-weight: bold;
     }
-    &.selected { background-color: $base_hover_color; color: $fg_color; }
+    &.selected { background-color: $base_hover_color; color: $fg_color; border-top-color: $light_base_hover_color; }
     &:active {
       background-color: $base_active_color;
       color: $active_fg_color;
@@ -605,7 +605,7 @@ StScrollBar {
     height: 1px; //not really the whole box
     margin: 6px 64px;
     background-color: transparent;
-    border-color: $osd_borders_color;
+    border-color: transparentize($fg_color, 0.91);
     border-bottom-width: 1px;
     border-bottom-style: solid;
   }
@@ -964,7 +964,7 @@ StScrollBar {
     .datemenu-displays-box { spacing: 1em; }
 
     .datemenu-calendar-column {
-      border: 0 solid $osd_borders_color;
+      border: 0 solid transparentize($fg_color, 0.91);
       &:ltr { border-left-width: 1px; }
       &:rtl { border-right-width: 1px; }
     }
@@ -1936,30 +1936,31 @@ StScrollBar {
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
-    $c: darken($light_bg_color,10%);
+    $c: darken($light_bg_color, 10%);
     $tc: $dark_fg_color;
-    @include button(normal, $c, $tc);
-    &:active { @include button(undecorated-active, $c, $tc);}
-    &:focus { @include button(focus, $c, $tc); border-color: $c;}
+    @include button(normal, $c, $tc); box-shadow: none; 
+    &:active { @include button(active, $c, $tc); box-shadow: inset 0px 0px 0px 1px $selected_bg_color; }
+    &:focus { @include button(focus, $c, $tc); }
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
-    &:insensitive { @include button(insensitive, $c, $tc); background-color: $c;}
-    &:hover, &:focus:hover { @include button(focus, $c, $tc); }
-    &:active, &:focus:active { @include button(undecorated-active, $ash); }
+    &:insensitive { 
+      border-color: darken($c, 20%); 
+      background-color: darken($c, 20%);
+      box-shadow: none;
+      color: lighten($tc, 5%);
+    }
 
     &:default {
       padding-bottom: 5px;
       padding-top: 5px;
-      border: none;
-      @include button(normal, $c:$success_color);
-      &:hover { @include button(hover, $c:transparentize($success_color, 0.20)); }
-      &:hover:active { @include button(hover-active, $c:transparentize($success_color, 0.20)); }
-      &:focus { @include button(focus, $c:transparentize($success_color, 0.30)); color: $fg_color; }
-      &:active { @include button(active, $c:transparentize($success_color, 0.30)); color: $fg_color; }
-      &:insensitive { @include button(insensitive, $c:transparentize($success_color, 0.40)); color: $fg_color;}
+      @include button(normal, $c:$success_color); box-shadow: none; 
+      &:hover { @include button(hover, $c:$success_color); }
+      &:focus { @include button(focus, $c:$success_color); }
+      &:active { @include button(active, $c:$success_color); box-shadow: inset 0px 0px 0px 1px white; }
+      &:focus:hover { @include button(focus-hover, $c:$success_color ); }
+      &:insensitive { @include button(insensitive, $c:$success_color); }
     }
   }
-
 }
 
   .login-dialog-logo-bin { padding: 24px 0px; }
@@ -2067,7 +2068,7 @@ StScrollBar {
   font-feature-settings: "tnum";
 }
 
-.screen-shield-clock-date { 
+.screen-shield-clock-date {
   font-size: 28pt;
   font-weight: normal;
 }
