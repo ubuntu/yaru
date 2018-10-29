@@ -3,7 +3,9 @@
 }
 
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$asset_suffix: if($variant=='dark', '-dark', '');
+// Until we have dark assets, just use the light ones
+//$asset_suffix: if($variant=='dark', '-dark', '');
+$asset_suffix: '';
 $small_radius: 4px;
 $medium_radius: 6px;
 $large_radius: 12px;
@@ -2422,22 +2424,25 @@ GtkSwitch {
       // we need special casing.
       .view.#{$w}#{$s}:selected,
       .list-row:selected .#{$w}#{$s} {
-        -gtk-icon-source: -gtk-scaled(url("assets/selected-#{$a}#{$as}#{$asset_suffix}.png"),
-                                      url("assets/selected-#{$a}#{$as}#{$asset_suffix}@2.png"));
+        -gtk-icon-source: -gtk-scaled(url("assets/#{$a}#{$as}#{$asset_suffix}.png"),
+                                      url("assets/#{$a}#{$as}#{$asset_suffix}@2.png"));
       }
     }
   }
 
   //menu
   .menu .menuitem.#{$w} {
-    -gtk-icon-source: -gtk-icontheme('#{$a}-symbolic');
+    -gtk-icon-source: -gtk-scaled(url("assets/#{$a}-unchecked#{$asset_suffix}.png"),
+                                  url("assets/#{$a}-unchecked#{$asset_suffix}@2.png"));
     color: mix($fg_color, $bg_color, 60%);
     icon-shadow: none;
     &:active, &:checked {
-      -gtk-icon-source: -gtk-icontheme('#{$a}-checked-symbolic');
+      -gtk-icon-source: -gtk-scaled(url("assets/#{$a}-checked#{$asset_suffix}.png"),
+                                    url("assets/#{$a}-checked#{$asset_suffix}@2.png"));
     }
     &:inconsistent {
-      -gtk-icon-source: -gtk-icontheme('#{$a}-mixed-symbolic');
+      -gtk-icon-source: -gtk-scaled(url("assets/#{$a}-mixed#{$asset_suffix}.png"),
+                                    url("assets/#{$a}-mixed#{$asset_suffix}@2.png"));
     }
     &:hover { color: $selected_fg_color; }
     &:insensitive { color: mix($insensitive_fg_color, $bg_color, 50%); }
