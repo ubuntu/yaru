@@ -213,6 +213,7 @@ GtkTextView { // This will get overridden by .view, needed by gedit line numbers
   background-image: none;
   background-color: blue;
   opacity: 0; // non spinning spinner makes no sense
+  color: $blue;
   -gtk-icon-source: -gtk-icontheme('process-working-symbolic');
   &:active {
     opacity: 1;
@@ -221,6 +222,8 @@ GtkTextView { // This will get overridden by .view, needed by gedit line numbers
       opacity: 0.5;
     }
   }
+
+  &:backdrop { color: _backdrop_color($blue); }
 }
 
 /****************
