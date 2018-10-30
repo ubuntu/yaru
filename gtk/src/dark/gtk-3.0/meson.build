@@ -26,4 +26,4 @@ custom_target('gtk3_dark',
 )
 
 # assets are just a symlink to the light themes as they are not modified
-meson.add_install_script('sh', '-c', 'ln -sf ../../'+meson.project_name()+'/gtk-3.0/assets $MESON_INSTALL_DESTDIR_PREFIX/'+gtk3_asset_dir)
+meson.add_install_script('sh', '-c', 'ln -sf ../../'+meson.project_name()+'/gtk-3.20/assets $MESON_INSTALL_DESTDIR_PREFIX/'+gtk3_asset_dir)
