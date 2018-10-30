@@ -3075,6 +3075,7 @@ treeview.view {
 %scale_trough {
   border-radius: 3px;
   background-color: $dark_fill;
+  min-height: 2px;
 
   &:disabled { background-color: $insensitive_dark_fill; }
 
