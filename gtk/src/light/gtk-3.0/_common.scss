@@ -2724,14 +2724,7 @@ GtkProgressBar {
     -GtkProgressBar-min-horizontal-bar-height: 3;
   }
   &.trough {  // background
-    border: 1px solid $borders_color;
-    border-radius: 3px;
-    background-color: mix($borders_color, $bg_color, 35%);
-    &:backdrop{
-      border-color: $backdrop_borders_color;
-      background-color: $backdrop_dark_fill;
-      box-shadow: 0 1px transparentize(white,1);
-    }
+    @extend %scale_trough;
     &.osd {
       border-style: none;
       background-color: transparent;
@@ -2740,11 +2733,35 @@ GtkProgressBar {
   }
 }
 
+%progressbar_highlight {
+  $c: $neutral_color;
+  border: none;
+  border-radius: 3px;
+  background-color: $c;
+  background-image: none;
+
+  &:insensitive {
+    background-color: $insensitive_dark_fill;
+  }
+
+  &:backdrop {
+    background-color: _backdrop_color($c);
+
+    &:insensitive {
+      background-color: $backdrop_insensitive_dark_fill;
+    }
+  }
+
+  // ...on selected nist rows
+  row:selected & { &:insensitive, & { border-color: $c; }} // TODO: what program uses this so it can be tested out?
+
+  // OSD
+  .osd & { }
+}
+
 // moving bit
 .progressbar {
-  @include progressbar_fill;
-  border: 1px solid $selected_borders_color;
-  border-radius: 1.5px;
+  @extend %progressbar_highlight;
   box-shadow: none; //needed for clipping
   &.left {
     border-top-left-radius: 3px;
@@ -2758,7 +2775,6 @@ GtkProgressBar {
     box-shadow: none;
   }
   &.vertical {
-    @include progressbar_fill(vertical);
     &.bottom {
       border-bottom-left-radius: 3px;
       border-bottom-right-radius: 3px;
@@ -2768,13 +2784,6 @@ GtkProgressBar {
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
     }
-  }
-  &:backdrop {
-    border-color: if($variant=='light', $selected_bg_color,
-                                        $selected_borders_color);
-    background-image: none;
-    background-color: $selected_bg_color;
-    box-shadow: none;
   }
   &.osd {
     background-image: none;
@@ -2809,35 +2818,32 @@ GtkProgressBar {
   &.fill-block {
     // FIXME: it would be nice to set make fill blocks bigger, but we'd need
     // :nth-child working on discrete indicators
-    border: 1px solid if($variant=='light', darken($selected_bg_color,10%),
-                                            darken($selected_bg_color,5%));
-    background-color: $selected_bg_color;
-    box-shadow: 0 1px transparentize(black, 0.9);
-    border-radius: 1px;
-    &:backdrop {
-      border-color: $selected_bg_color;
+    border-radius: 3px;
+
+    @mixin block_highlight($c) {
+      background-color: $c;
+      border: none;
       box-shadow: none;
+      &:backdrop {
+        background-color: _backdrop_color($c);
+        border: none;
+        box-shadow: none;
+      }
     }
+    @include block_highlight($neutral_color)
+
     &.indicator-discrete {
       &.horizontal { margin: 0 1px; }
       &.vertical { margin: 1px 0; }
     }
     &.level-high {
-      border-color: darken($success_color,10%);
-      background-color: $success_color;
-      &:backdrop { border-color: $success_color; }
+      @include block_highlight($neutral_color);
     }
     &.level-low {
-      border-color: darken($warning_color,10%);
-      background-color: $warning_color;
-      &:backdrop { border-color: $warning_color; };
+      @include block_highlight($warning_color);
     }
     &.empty-fill-block {
-      background-color: transparent;
-      border-color: if($variant=='light', transparentize($fg_color,0.8),
-                       transparentize($fg_color,0.9));
-      box-shadow: none;
-      &:backdrop { border-color: transparentize($backdrop_fg_color,0.85); }
+      @include block_highlight($dark_fill);
     }
   }
 }
