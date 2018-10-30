@@ -124,7 +124,7 @@ gtk3_assets = [
 ]
 
 # generate .css files
-# and install to themes/THEMENAME/gtk-3.0
+# and install to themes/THEMENAME/gtk-3.20
 foreach f : gtk3_scss_sources
   custom_target('generate_' + f,
       input: f + '.scss',
@@ -137,5 +137,5 @@ foreach f : gtk3_scss_sources
   )
 endforeach
 
-# Install asset files to themes/THEMENAME/gtk-3.0/assets
+# Install asset files to themes/THEMENAME/gtk-3.20/assets
 install_data(gtk3_assets, install_dir: gtk3_asset_dir)
