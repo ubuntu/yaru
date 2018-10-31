@@ -261,10 +261,10 @@ GtkTextView { // This will get overridden by .view, needed by gedit line numbers
   }
 
   &.progressbar {
-    margin: 1px;
+    margin: 2px -6px;
     border-radius: 0;
     border-width: 0 0 2px;
-    border-color: $selected_bg_color;
+    border-color: $neutral_color;
     border-style: solid;
     background-image: none;
     background-color: transparent;
@@ -2618,6 +2618,9 @@ GtkCheckButton.text-button, GtkRadioButton.text-button {
  *****************/
 
 GtkProgressBar {
+  -GtkProgressBar-min-horizontal-bar-height: 3;
+  -GtkProgressBar-min-vertical-bar-width: 3;
+
   padding: 0;
   font-size: smaller;
   color: transparentize($fg_color, 0.6);
