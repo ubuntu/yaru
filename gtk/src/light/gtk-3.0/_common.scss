@@ -820,10 +820,10 @@ GtkColorButton.button {
     *:selected & { color: mix($selected_fg_color, $selected_bg_color, 80%); }
   }
   &:backdrop, &:backdrop:hover, &:backdrop:hover:selected {
-    color: $selected_bg_color;
+    color: _backdrop_color($link_color);
   }
   &:selected, *:selected & {
-    color: mix($selected_fg_color, $selected_bg_color, 80%);
+    color: mix($selected_fg_color, $link_color, 80%);
   }
 }
 
