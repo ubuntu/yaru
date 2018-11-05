@@ -2742,7 +2742,7 @@ GtkProgressBar {
         box-shadow: none;
       }
     }
-    @include block_highlight($neutral_color)
+    @include block_highlight($neutral_color);
 
     &.indicator-discrete {
       &.horizontal { margin: 0 1px; }
@@ -3246,31 +3246,6 @@ GtkPaned.wide { // this is for the paned with wide separator
  **************/
 GtkInfoBar {
   border-style: none;
-}
-
-infobar {
-  $_generic_bg: $bg_color;
-  @each $t, $c in ("", $_generic_bg),
-                  (".info", $_generic_bg),
-                  (".question", $_generic_bg),
-                  (".warning", $warning_color),
-                  ('.error', $error_color) {
-    &#{$t} {
-      background-color: $c;
-      color: white;
-      border-bottom: 1px solid $borders_color;
-      selection { @extend %selected_text; } 
-    }
-  }
-  button.close { color: white; &:backdrop { color: transparentize(white, 0.3); } }
-  > revealer > box > box label:backdrop { color: transparentize(white, 0.3); }
-  &:not(.warning):not(.error) { 
-    > revealer > box > box label { 
-      color: $text_color; 
-      &:backdrop { color: $backdrop_text_color; }
-    }
-  }
-  *:link { @extend %link_selected; }
 }
 
 /************
