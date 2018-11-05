@@ -4266,6 +4266,9 @@ paned {
       color: $text_color; 
       &:backdrop { color: $backdrop_text_color; }
     }
+    &:backdrop {
+      background-color: $backdrop_bg_color;
+    }
   }
   *:link { @extend %link_selected; }
 }
