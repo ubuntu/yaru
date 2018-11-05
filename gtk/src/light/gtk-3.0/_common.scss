@@ -3248,38 +3248,29 @@ GtkInfoBar {
   border-style: none;
 }
 
-.info,
-.question,
-.warning,
-.error {
-  background-color: $selected_bg_color;
-  color: $selected_fg_color;
-  text-shadow: 0 1px darken($selected_bg_color, 10%);
-  border-color: darken($selected_bg_color, 10%);
-  .button {
-    // FIXME: extend selection mode buttons
-    @include button(normal, $selected_bg_color, $selected_fg_color, none);
-    &:hover {
-      @include button(hover, $selected_bg_color, $selected_fg_color, none); }
-    &:active {
-      @include button(active, $selected_bg_color, $selected_fg_color, none); }
-    &:insensitive {
-      @include button(insensitive,$selected_bg_color,$selected_fg_color,none); }
-    &:backdrop {
-      @include button(backdrop, $selected_bg_color, $selected_fg_color, none);
-      border-color: _border_color($selected_bg_color);
-      &:insensitive {
-        @include button(backdrop-insensitive, $selected_bg_color,
-                        $selected_fg_color, none);
-        border-color: _border_color($selected_bg_color);
-      }
+infobar {
+  $_generic_bg: $bg_color;
+  @each $t, $c in ("", $_generic_bg),
+                  (".info", $_generic_bg),
+                  (".question", $_generic_bg),
+                  (".warning", $warning_color),
+                  ('.error', $error_color) {
+    &#{$t} {
+      background-color: $c;
+      color: white;
+      border-bottom: 1px solid $borders_color;
+      selection { @extend %selected_text; } 
     }
   }
-  .label:selected,
-  .label:selected:focus,
-  .label:selected:hover {
-    background-color: darken($selected_bg_color, 10%);
+  button.close { color: white; &:backdrop { color: transparentize(white, 0.3); } }
+  > revealer > box > box label:backdrop { color: transparentize(white, 0.3); }
+  &:not(.warning):not(.error) { 
+    > revealer > box > box label { 
+      color: $text_color; 
+      &:backdrop { color: $backdrop_text_color; }
+    }
   }
+  *:link { @extend %link_selected; }
 }
 
 /************
