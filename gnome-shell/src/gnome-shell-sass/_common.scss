@@ -8,7 +8,7 @@ $panel-corner-radius: 0; // 6px;
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
 
-$dash-alpha-value: 0.6;
+$dash-alpha-value: 0.8;
 $dash-opaque-alpha-value: $panel_opaque_value;
 
 $popover-alpha-value: 0.025;
@@ -562,7 +562,7 @@ StScrollBar {
       border-top-color: transparent;
       font-weight: bold;
     }
-    &.selected { background-color: $base_hover_color; color: $fg_color; }
+    &.selected { background-color: $base_hover_color; color: $fg_color; border-top-color: $light_base_hover_color; }
     &:active {
       background-color: $base_active_color;
       color: $active_fg_color;
