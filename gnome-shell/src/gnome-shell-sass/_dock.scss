@@ -101,15 +101,13 @@
   }
 
   &.opaque {
-    /* Only alpha value is used */
-    background-color: rgba(0, 0, 0, (1 - $dash-opaque-alpha-value));
+    background-color: transparentize($dash_bg_color, $dash-opaque-alpha-value);
     border-color: rgba(0, 0, 0, 0.4);
     transition-duration: 500ms;
   }
 
   &.transparent {
-    /* Only alpha value is used */
-    background-color: rgba(0, 0, 0, (1 - $dash-alpha-value));
+    background-color: transparentize($dash_bg_color, $dash-alpha-value);
     border-color: rgba(0, 0, 0, 0.1);
     transition-duration: 500ms;
   }

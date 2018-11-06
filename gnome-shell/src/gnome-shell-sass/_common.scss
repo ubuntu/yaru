@@ -8,7 +8,7 @@ $panel-corner-radius: 0; // 6px;
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
 
-$dash-alpha-value: 0.8;
+$dash-alpha-value: 0.6;
 $dash-opaque-alpha-value: $panel_opaque_value;
 
 $popover-alpha-value: 0.025;
@@ -255,7 +255,8 @@ StScrollBar {
   }
 
   .message-dialog-title {
-    font-weight: bold;
+    font-size: 135%;
+    font-weight: normal;
   }
 
   .message-dialog-subtitle {
@@ -782,7 +783,7 @@ StScrollBar {
 }
 
 %dialog_window {
-  $dialog_bg_color: transparentize($light_bg_color, $popover-alpha-value);
+  $dialog_bg_color: transparentize($light_base_color, $popover-alpha-value);
   color: $dark_fg_color;
   background-color: $dialog_bg_color;
   border: 1px solid $light_borders_color;
