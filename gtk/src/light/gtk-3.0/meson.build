@@ -1,7 +1,7 @@
+gnome = import('gnome')
 sassc = find_program('sassc')
 
 gtk3_dir = join_paths(theme_dir, 'gtk-3.0')
-gtk3_asset_dir = join_paths(gtk3_dir, 'assets')
 
 # theme sources .scss files
 gtk3_scss_sources = [
@@ -172,17 +172,45 @@ gtk3_assets = [
 
 # generate .css files
 # and install to themes/THEMENAME/gtk-3.0
+generated_css = []
 foreach f : gtk3_scss_sources
-  custom_target('generate_' + f + '_3_0',
+  generated_css += custom_target('light-gtk-3.0-' + f + '-generated.css',
       input: f + '.scss',
-      output: f + '.css',
+      output: f + '-generated.css',
       depend_files: files(gtk3_scss_dependencies),
       command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
-      build_by_default: true,
-      install: true,
-      install_dir: gtk3_dir,
   )
 endforeach
 
-# Install asset files to themes/THEMENAME/gtk-3.0/assets
-install_data(gtk3_assets, install_dir: gtk3_asset_dir)
+# Bundle CSS and assets into gtk.gresource
+asset_xml = []
+foreach f : gtk3_assets
+  asset_xml += '<file>@0@</file>'.format(f)
+endforeach
+conf_data = configuration_data()
+conf_data.set('ASSETS', '\n'.join(asset_xml))
+gresource_xml = configure_file(
+  input: 'gtk.gresource.xml.in',
+  output: 'gtk.gresource.xml',
+  configuration: conf_data)
+
+# compile_resources() can not generate two resource bundles with the
+# same basename in the project, so we use a custom target to install
+# the bundle with the correct name.
+#  https://github.com/mesonbuild/meson/issues/4477
+
+gresource = gnome.compile_resources('gtk30', gresource_xml,
+  gresource_bundle: true,
+  dependencies: generated_css,
+)
+
+custom_target('light-gtk-3.0-gtk.gresource',
+  input: gresource,
+  output: 'gtk.gresource',
+  command: ['cp', '@INPUT@', '@OUTPUT@'],
+  install: true,
+  install_dir: gtk3_dir,
+)
+
+# Install stub CSS files
+install_data(['gtk.css', 'gtk-dark.css'], install_dir: gtk3_dir)
