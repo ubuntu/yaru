@@ -2462,7 +2462,7 @@ popover.background {
 
   list separator { margin: 0px; }
 
-  radiobutton radio, checkbutton check { 
+  radiobutton radio, checkbutton check {
     &:dir(ltr) { margin-right: 3px; }
     &:dir(rtl) { margin-left: 3px; }
   }
@@ -3198,7 +3198,7 @@ scale {
     $_bc: _border_color($dark_fill);
     @include button(normal, white);
 
-    border: 1px solid $_bc;
+    border: 1px solid if($variant=='light', $_bc, transparent);
     border-radius: 10px;
     background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
@@ -3212,7 +3212,7 @@ scale {
 
     &:disabled {
       @include button(insensitive, if($variant == "light", white, darken(white, 20%)));
-      border-color: lighten($_bc, 10%);
+      border-color: if($variant=='light', lighten($_bc, 10%), transparent);
     }
 
     &:backdrop {
@@ -4256,14 +4256,14 @@ paned {
       background-color: $c;
       color: white;
       border-bottom: 1px solid $borders_color;
-      selection { @extend %selected_text; } 
+      selection { @extend %selected_text; }
     }
   }
   button.close { color: white; &:backdrop { color: transparentize(white, 0.3); } }
   > revealer > box > box label:backdrop { color: transparentize(white, 0.3); }
-  &:not(.warning):not(.error) { 
-    > revealer > box > box label { 
-      color: $text_color; 
+  &:not(.warning):not(.error) {
+    > revealer > box > box label {
+      color: $text_color;
       &:backdrop { color: $backdrop_text_color; }
     }
     &:backdrop {
