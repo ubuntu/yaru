@@ -2462,7 +2462,7 @@ popover.background {
 
   list separator { margin: 0px; }
 
-  radiobutton radio, checkbutton check { 
+  radiobutton radio, checkbutton check {
     &:dir(ltr) { margin-right: 3px; }
     &:dir(rtl) { margin-left: 3px; }
   }
@@ -3075,6 +3075,7 @@ treeview.view {
 %scale_trough {
   border-radius: 3px;
   background-color: $dark_fill;
+  min-height: 2px;
 
   &:disabled { background-color: $insensitive_dark_fill; }
 
@@ -4256,14 +4257,14 @@ paned {
       background-color: $c;
       color: white;
       border-bottom: 1px solid $borders_color;
-      selection { @extend %selected_text; } 
+      selection { @extend %selected_text; }
     }
   }
   button.close { color: white; &:backdrop { color: transparentize(white, 0.3); } }
   > revealer > box > box label:backdrop { color: transparentize(white, 0.3); }
-  &:not(.warning):not(.error) { 
-    > revealer > box > box label { 
-      color: $text_color; 
+  &:not(.warning):not(.error) {
+    > revealer > box > box label {
+      color: $text_color;
       &:backdrop { color: $backdrop_text_color; }
     }
     &:backdrop {
