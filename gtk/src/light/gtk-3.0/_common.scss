@@ -3193,7 +3193,7 @@ scale {
     $_bc: _border_color($dark_fill);
     @include button(normal, white);
 
-    border: 1px solid if($variant=="light", $_bc, transparent);
+    border: 1px solid $_bc;
     border-radius: 10px;
     background-clip: if($variant == "light", border-box, padding-box);
     transition: $button_transition;
@@ -3207,7 +3207,7 @@ scale {
 
     &:disabled {
       @include button(insensitive, if($variant == "light", white, darken(white, 20%)));
-      border-color: if($variant=="light", lighten($_bc, 10%), transparent);
+      border-color: lighten($_bc, 10%);
     }
 
     &:backdrop {
