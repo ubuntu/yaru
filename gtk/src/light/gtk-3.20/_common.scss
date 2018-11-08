@@ -1771,7 +1771,7 @@ headerbar {
       }
     }
 
-    buttonbox.linked button,
+    .path-bar button, .path-bar.linked button, .stack-switcher.linked button, buttonbox.linked button,
     buttonbox.linked button.text-button ~ button {
       border-style: solid;
       border-color: $inkstone;
@@ -1785,43 +1785,43 @@ headerbar {
       }
     }
 
-    .stack-switcher.linked {
-      // round the stackswitcher corners by using border
-      border-width: 0 8px;
-      border-style: solid;
-      border-color: $c;
-      border-radius: $small_radius;
+    // .stack-switcher.linked {
+    //   // round the stackswitcher corners by using border
+    //   border-width: 0 8px;
+    //   border-style: solid;
+    //   border-color: $c;
+    //   border-radius: $small_radius;
 
-      &:backdrop { border-color: _backdrop_color($c); }
+    //   &:backdrop { border-color: _backdrop_color($c); }
 
-      button {
-        // style the stackswitcher buttons
-        @extend %underline_focus_headerbar;
+    //   button {
+    //     // style the stackswitcher buttons
+    //     //@extend %underline_focus_headerbar;
 
-        &:dir(rtl), &:dir(ltr) { // specificity bump
-          // gets rid of the radius
-          border-radius: 0;
-          -gtk-outline-radius: 0;
-        }
+    //     &:dir(rtl), &:dir(ltr) { // specificity bump
+    //       // gets rid of the radius
+    //       border-radius: 0;
+    //       -gtk-outline-radius: 0;
+    //     }
 
-        margin: 0;
-        border: none;
+    //     margin: 0;
+    //     border: none;
 
-        &:disabled:checked{
-          background-color: $hb_pathbar_bg;
-          &:backdrop{ background-color: $hb_pathbar_bg_backdrop;}
-        }
-      }
-    }
+    //     &:disabled:checked{
+    //       background-color: $hb_pathbar_bg;
+    //       &:backdrop{ background-color: $hb_pathbar_bg_backdrop;}
+    //     }
+    //   }
+    // }
 
-    .path-bar.linked button {
-      // style the pathbar buttons
-      @extend %underline_focus_headerbar;
+    // .path-bar.linked button {
+    //   // style the pathbar buttons
+    //   //@extend %underline_focus_headerbar;
 
-      &.slider-button {
-        box-shadow: none;
-      }
-    }
+    //   &.slider-button {
+    //     box-shadow: none;
+    //   }
+    // }
   }
 
   &.selection-mode {
@@ -2039,64 +2039,64 @@ headerbar { // headerbar border rounding
   &, &:backdrop { box-shadow: inset 0 -2px transparent; }
 }
 
-.path-bar button {
-  @extend %underline_focus_effect;
-  background-color: $button_bg_color;
-  color: $insensitive_fg_color;
-  border-style: none;
+// .path-bar button {
+//   @extend %underline_focus_effect;
+//   background-color: $button_bg_color;
+//   color: $insensitive_fg_color;
+//   border-style: none;
 
-  &:hover { box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5); }
+//   &:hover { box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5); }
 
-  &:active { box-shadow: inset 0 -2px $insensitive_fg_color; }
+//   &:active { box-shadow: inset 0 -2px $insensitive_fg_color; }
 
-  &:checked {
-    color: $fg_color;
-    box-shadow: inset 0 -2px $selected_bg_color;
+//   &:checked {
+//     color: $fg_color;
+//     box-shadow: inset 0 -2px $selected_bg_color;
 
-    &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%); }
-  }
+//     &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%); }
+//   }
 
-  &:backdrop {
-    background-color: $button_bg_color;
-    color: $backdrop_insensitive_color;
-    border-color: transparent;
-    box-shadow: inset 0 -2px transparent;
+//   &:backdrop {
+//     background-color: $button_bg_color;
+//     color: $backdrop_insensitive_color;
+//     border-color: transparent;
+//     box-shadow: inset 0 -2px transparent;
 
-    &:checked { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color); }
-  }
+//     &:checked { box-shadow: inset 0 -2px _backdrop_color($selected_bg_color); }
+//   }
 
-  &.text-button, &.image-button, & {
-    padding-left: 4px;
-    padding-right: 4px;
-  }
+//   &.text-button, &.image-button, & {
+//     padding-left: 4px;
+//     padding-right: 4px;
+//   }
 
-  &.text-button.image-button label {
-    padding-left: 0;
-    padding-right: 0;
-  }
+//   &.text-button.image-button label {
+//     padding-left: 0;
+//     padding-right: 0;
+//   }
 
-  &.text-button.image-button, & {
-    label:last-child { padding-right: 8px; }
-    label:first-child { padding-left: 8px; }
-  }
+//   &.text-button.image-button, & {
+//     label:last-child { padding-right: 8px; }
+//     label:first-child { padding-left: 8px; }
+//   }
 
-  image {
-    padding-left: 4px;
-    padding-right: 4px;
-  }
+//   image {
+//     padding-left: 4px;
+//     padding-right: 4px;
+//   }
 
-  &.slider-button {
-    padding-left: 0;
-    padding-right: 0;
-    box-shadow: none;
+//   &.slider-button {
+//     padding-left: 0;
+//     padding-right: 0;
+//     box-shadow: none;
 
-    &:hover { color: $selected_bg_color; }
-    &:disabled image {
-      // make disabled arrows less prominent
-      opacity: 0.3;
-    }
-  }
-}
+//     &:hover { color: $selected_bg_color; }
+//     &:disabled image {
+//       // make disabled arrows less prominent
+//       opacity: 0.3;
+//     }
+//   }
+//}
 
 /**************
  * Tree Views *
