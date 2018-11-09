@@ -1844,12 +1844,15 @@ StScrollBar {
     &.default-key {
       border-color: $osd_borders_color;
       background-color: darken($dark_fg_color, 5%);
-      background-size: 20px;
+      background-size: 24px;
     }
     &.enter-key {
-      border-color: _border_color(#00A2E4);
-      background-color: #00A2E4;
+      $_blue: $green;
+      @include button(normal, $_blue);
+      // border-color: _border_color(#00A2E4);
+      // background-color: #00A2E4;
       background-image: url("key-enter.svg");
+      &:active { @include button(active, darken($_blue, 5%)); }
     }
     &.shift-key-lowercase {
       background-image: url("key-shift.svg");
