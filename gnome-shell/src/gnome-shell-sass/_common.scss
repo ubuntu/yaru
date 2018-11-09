@@ -1847,12 +1847,11 @@ StScrollBar {
       background-size: 24px;
     }
     &.enter-key {
-      $_blue: $green;
-      @include button(normal, $_blue);
+      @include button(normal, $success_color);
       // border-color: _border_color(#00A2E4);
       // background-color: #00A2E4;
       background-image: url("key-enter.svg");
-      &:active { @include button(active, darken($_blue, 5%)); }
+      &:active { @include button(active, darken($success_color, 5%)); }
     }
     &.shift-key-lowercase {
       background-image: url("key-shift.svg");
