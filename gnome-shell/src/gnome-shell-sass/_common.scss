@@ -1849,22 +1849,22 @@ StScrollBar {
     &.enter-key {
       border-color: _border_color(#00A2E4);
       background-color: #00A2E4;
-      background-image: url("resource:///org/gnome/shell/theme/key-enter.svg");
+      background-image: url("key-enter.svg");
     }
     &.shift-key-lowercase {
-      background-image: url("resource:///org/gnome/shell/theme/key-shift.svg");
+      background-image: url("key-shift.svg");
     }
     &.shift-key-uppercase {
-      background-image: url("resource:///org/gnome/shell/theme/key-shift-uppercase.svg");
+      background-image: url("key-shift-uppercase.svg");
     }
     &.shift-key-uppercase:latched {
-      background-image: url("resource:///org/gnome/shell/theme/key-shift-latched-uppercase.svg");
+      background-image: url("key-shift-latched-uppercase.svg");
     }
     &.hide-key {
-      background-image: url("resource:///org/gnome/shell/theme/key-hide.svg");
+      background-image: url("key-hide.svg");
     }
     &.layout-key {
-      background-image: url("resource:///org/gnome/shell/theme/key-layout.svg");
+      background-image: url("key-layout.svg");
     }
   }
 
