@@ -12,6 +12,8 @@ Yaru consists of one project with 3 distinct parts.
 This installation method is to try out the theme while developing it. If you're not a developer, follow the instructions in the [README.md](./README.md).
 
 ```bash
+# Install build dependencies
+sudo apt install git meson sassc
 # Download the repository from github
 git clone https://github.com/ubuntu/yaru.git
 cd yaru
@@ -25,7 +27,7 @@ sudo ninja install
 If you want to change the GDM look and point to the same stylesheet. You only need to do this once.
 
 ```sh
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/Yaru/gnome-shell.css 15
+sudo update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/Yaru/gnome-shell.css 15
 ```
 
 If you reboot, select the Yaru session in GDM and you should be all right.
