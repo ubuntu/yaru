@@ -76,6 +76,12 @@ data_sources = [
   'ws-switch-arrow-up.svg',
   'activities.svg',
   'ubuntu-appgrid-icon.svg',
+  'key-enter.svg',
+  'key-hide.svg',
+  'key-layout.svg',
+  'key-shift.svg',
+  'key-shift-latched-uppercase.svg',
+  'key-shift-uppercase.svg'
 ]
 
 # install static data files
