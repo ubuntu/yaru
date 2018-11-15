@@ -44,6 +44,8 @@ cd ../gtk-common-themes
 
 # get top part of original snapcraft.yaml and complete with new content
 curl -o snap/snapcraft.yaml "https://gitlab.gnome.org/Community/Ubuntu/gtk-common-themes/raw/master/snap/snapcraft.yaml"
+# remove version-script target
+sed -i '/version-script:/,+1 d' snap/snapcraft.yaml
 sed -i '/parts:/,$d' snap/snapcraft.yaml
 sed -e "s,CHANNEL,$channel,g" -e "s,REPO,$TRAVIS_REPO_SLUG," -e "s,BRANCH,$YARU_BRANCH," "$TRAVIS_BUILD_DIR/build-helpers/gtk-common-themes-parts.yaml" >> snap/snapcraft.yaml
 
