@@ -101,15 +101,13 @@
   }
 
   &.opaque {
-    /* Only alpha value is used */
-    background-color: rgba(0, 0, 0, (1 - $dash-opaque-alpha-value));
+    background-color: transparentize($dash_bg_color, $dash-opaque-alpha-value);
     border-color: rgba(0, 0, 0, 0.4);
     transition-duration: 500ms;
   }
 
   &.transparent {
-    /* Only alpha value is used */
-    background-color: rgba(0, 0, 0, (1 - $dash-alpha-value));
+    background-color: transparentize($dash_bg_color, $dash-alpha-value);
     border-color: rgba(0, 0, 0, 0.1);
     transition-duration: 500ms;
   }
@@ -122,10 +120,10 @@
 
   .notification-badge {
     color: rgba(255, 255, 255, 1);
-    background-color: $red;
+    background-color: $green;
     padding: 0.2em 0.5em;
     border-radius: 1em;
-    border: 1px solid darken($red,10%);
+    border: 1px solid darken($green,10%);
     box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
     font-weight: bold;
     text-align: center;

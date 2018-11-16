@@ -11,6 +11,7 @@ $text_color: if($variant == 'light', #2D2D2D, $porcelain);
 //
 $selected_fg_color: white;
 $selected_bg_color: $orange;
+$selected_borders_color: if($variant== 'light', darken($selected_bg_color, 30%), darken($selected_bg_color, 20%));
 $borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 4%));
 $link_color: $blue;
 $link_visited_color: if($variant == 'light', darken($link_color, 20%), lighten($link_color, 10%));
