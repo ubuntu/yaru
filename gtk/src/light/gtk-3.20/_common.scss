@@ -27,7 +27,7 @@
   // and we don't use any outlines for now.
 
   outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
-  outline-style: dashed;
+  outline-style: solid;
   outline-offset: 0px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
@@ -545,8 +545,8 @@ button {
     border: 1px solid;
     border-radius: $small_radius;
     outline-color: $focus_color;
-    outline-style: dashed;
-    outline-offset: -3px;
+    outline-style: solid;
+    outline-offset: -1px;
     -gtk-outline-radius: $small_radius;
 
     @include button(normal);
@@ -2608,8 +2608,8 @@ notebook {
       min-height: 24px;
       min-width: 24px;
       padding: 4px 12px;
-      outline-offset: -5px;
-      outline-style: dashed;
+      outline-offset: -1px;
+      outline-style: solid;
       -gtk-outline-radius: $small_radius;
       color: transparentize($text_color, 0.3);
       border: 1px solid transparent;
