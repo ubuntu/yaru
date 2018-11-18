@@ -16,7 +16,7 @@ parts:
     source-branch: BRANCH
     plugin: meson
     meson-parameters: [--prefix=/]
-    build-packages: [sassc]
+    build-packages: ["sassc", "libglib2.0-dev"]
     override-build: |
       set -eu
       snapcraftctl build
