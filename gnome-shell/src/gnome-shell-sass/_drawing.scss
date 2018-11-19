@@ -138,7 +138,7 @@
 
   @if $t==focus {
   // focused button
-    box-shadow: inset 0px 0px 0px 1px if($c!=$success_color, $focus_color, white);
+    box-shadow: inset 0px 0px 0px 1px $focus_color;
   }
 
   @else if $t==hover {
