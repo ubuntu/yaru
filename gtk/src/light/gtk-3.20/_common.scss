@@ -382,7 +382,7 @@ entry {
   .linked:not(.vertical) > & { @extend %linked; }
   .linked:not(.vertical) > &:focus + &,
   .linked:not(.vertical) > &:focus + button,
-  .linked:not(.vertical) > &:focus + combobox > box > button.combo { transition: $button_transition; border-left-color: $selected_bg_color; }
+  .linked:not(.vertical) > &:focus + combobox > box > button.combo { transition: $button_transition; border-left-color: $focus_color; }
 
   .linked:not(.vertical) > &:drop(active) + &,
   .linked:not(.vertical) > &:drop(active) + button,
@@ -408,7 +408,7 @@ entry {
     // color back the top border of a linked focused entry following another entry.
     // :not(:only-child) is a specificity bump hack.
     + %entry:focus:not(:only-child),
-    + entry:focus:not(:only-child) { border-top-color: $selected_bg_color; }
+    + entry:focus:not(:only-child) { border-top-color: $focus_color; }
 
     + %entry:drop(active):not(:only-child),
     + entry:drop(active):not(:only-child) { border-top-color: $drop_target_color; }
@@ -419,7 +419,7 @@ entry {
       + %entry,
       + entry,
       + button,
-      + combobox > box > button.combo { border-top-color: $selected_bg_color; }
+      + combobox > box > button.combo { border-top-color: $focus_color; }
     }
 
     &:drop(active):not(:only-child) {
@@ -454,7 +454,7 @@ treeview entry {
     background-image: none;
     background-color: $base_color;
 
-    &:focus { border-color: $selected_bg_color; }
+    &:focus { border-color: $focus_color; }
   }
 }
 
