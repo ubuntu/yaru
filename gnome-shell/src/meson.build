@@ -53,6 +53,7 @@ data_sources = [
   'filter-selected-ltr.svg',
   'filter-selected-rtl.svg',
   'logged-in-indicator.svg',
+  'login-background.svg',
   'lockscreen-gradient.svg',
   'message-indicator-symbolic.svg',
   'no-events.svg',
