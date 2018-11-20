@@ -2123,11 +2123,11 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  background: none;
-  background-color: none;
-  background-gradient-direction: vertical;
-  background-gradient-start: #6D2169;
-  background-gradient-end: #370026;
+  background-image: url(login-background.svg);
+  background-color: #762572;
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 #screenShieldNotifications {
