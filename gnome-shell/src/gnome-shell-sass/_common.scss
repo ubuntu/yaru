@@ -2123,9 +2123,7 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  background-image: url(login-background.svg);
-  background-position: top right;
-  background-repeat: no-repeat;
+  background: url(login-background.svg) top right no-repeat, #762572
   background-size: contain;
 }
 
