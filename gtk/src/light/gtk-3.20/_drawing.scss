@@ -69,7 +69,7 @@
       border-top-color: $_bc;
       box-shadow: none;
     } @else {
-      border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+      border-top-color: darken($_bc, if($c != $base_color, 12%, if($variant==light, 20%, 10%)));
       @include _shadows($_entry_edge);
     }
   }
