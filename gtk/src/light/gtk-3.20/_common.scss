@@ -1815,8 +1815,8 @@ headerbar {
     }
 
     .path-bar.linked button {
-      // style the pathbar buttons
-      @extend %underline_focus_headerbar;
+      background-color: transparent;
+      border-radius: 0;
 
       &.slider-button {
         box-shadow: none;
