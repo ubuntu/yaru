@@ -22,8 +22,8 @@ require "rexml/document"
 require "fileutils"
 include REXML
 
-INKSCAPE = 'flatpak run org.inkscape.Inkscape'
-# INKSCAPE = '/usr/bin/inkscape'
+# INKSCAPE = 'flatpak run org.inkscape.Inkscape'
+INKSCAPE = '/usr/bin/inkscape'
 SRC = "./source-symbolic.svg"
 PREFIX = "../../Suru/scalable"
 
