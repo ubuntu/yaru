@@ -28,7 +28,7 @@
 
   outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
   outline-style: dashed;
-  outline-offset: 0px;
+  outline-offset: -3px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
   -gtk-secondary-caret-color: $selected_bg_color
@@ -382,7 +382,7 @@ entry {
   .linked:not(.vertical) > & { @extend %linked; }
   .linked:not(.vertical) > &:focus + &,
   .linked:not(.vertical) > &:focus + button,
-  .linked:not(.vertical) > &:focus + combobox > box > button.combo { transition: $button_transition; border-left-color: $selected_bg_color; }
+  .linked:not(.vertical) > &:focus + combobox > box > button.combo { transition: $button_transition; border-left-color: $focus_color; }
 
   .linked:not(.vertical) > &:drop(active) + &,
   .linked:not(.vertical) > &:drop(active) + button,
@@ -408,7 +408,7 @@ entry {
     // color back the top border of a linked focused entry following another entry.
     // :not(:only-child) is a specificity bump hack.
     + %entry:focus:not(:only-child),
-    + entry:focus:not(:only-child) { border-top-color: $selected_bg_color; }
+    + entry:focus:not(:only-child) { border-top-color: $focus_color; }
 
     + %entry:drop(active):not(:only-child),
     + entry:drop(active):not(:only-child) { border-top-color: $drop_target_color; }
@@ -419,7 +419,7 @@ entry {
       + %entry,
       + entry,
       + button,
-      + combobox > box > button.combo { border-top-color: $selected_bg_color; }
+      + combobox > box > button.combo { border-top-color: $focus_color; }
     }
 
     &:drop(active):not(:only-child) {
@@ -454,7 +454,7 @@ treeview entry {
     background-image: none;
     background-color: $base_color;
 
-    &:focus { border-color: $selected_bg_color; }
+    &:focus { border-color: $focus_color; }
   }
 }
 
@@ -2608,7 +2608,7 @@ notebook {
       min-height: 24px;
       min-width: 24px;
       padding: 4px 12px;
-      outline-offset: -5px;
+      outline-offset: -3px;
       outline-style: dashed;
       -gtk-outline-radius: $small_radius;
       color: transparentize($text_color, 0.3);
@@ -3780,7 +3780,7 @@ list {
 }
 
 row {
-  outline-offset: 0;
+  outline-offset: -3px;
   transition: all 150ms $ease-out-quad;
 
   &:not(:selected) {
