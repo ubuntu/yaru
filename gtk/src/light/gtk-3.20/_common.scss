@@ -27,8 +27,8 @@
   // and we don't use any outlines for now.
 
   outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
-  outline-style: solid;
-  outline-offset: 0px;
+  outline-style: dashed;
+  outline-offset: -3px;
   outline-width: 1px;
   -gtk-outline-radius: 0px;
   -gtk-secondary-caret-color: $selected_bg_color
@@ -545,8 +545,8 @@ button {
     border: 1px solid;
     border-radius: $small_radius;
     outline-color: $focus_color;
-    outline-style: solid;
-    outline-offset: -1px;
+    outline-style: dashed;
+    outline-offset: -3px;
     -gtk-outline-radius: $small_radius;
 
     @include button(normal);
@@ -805,6 +805,7 @@ button {
 
         &:backdrop { @include button(osd-backdrop, $b_color); }
       }
+      &:focus { outline-color: white; }
     }
   }
 
@@ -2607,8 +2608,8 @@ notebook {
       min-height: 24px;
       min-width: 24px;
       padding: 4px 12px;
-      outline-offset: -1px;
-      outline-style: solid;
+      outline-offset: -3px;
+      outline-style: dashed;
       -gtk-outline-radius: $small_radius;
       color: transparentize($text_color, 0.3);
       border: 1px solid transparent;
@@ -3779,7 +3780,7 @@ list {
 }
 
 row {
-  outline-offset: 0;
+  outline-offset: -3px;
   transition: all 150ms $ease-out-quad;
 
   &:not(:selected) {

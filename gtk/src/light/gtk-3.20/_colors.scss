@@ -34,7 +34,7 @@ $error_color: $red;
 $success_color: $green;
 $destructive_color: darken($red, 10%);
 $neutral_color: $blue;
-$focus_color: $blue;
+$focus_color: $orange;
 $text_selection: if($variant == 'light',lighten($neutral_color,35%),darken($neutral_color, 10%));
 //
 $osd_fg_color: $porcelain;

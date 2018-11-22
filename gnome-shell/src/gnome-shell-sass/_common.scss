@@ -1949,7 +1949,7 @@ StScrollBar {
     $c: darken($light_bg_color, 10%);
     $tc: $dark_fg_color;
     @include button(normal, $c, $tc); box-shadow: none; 
-    &:active { @include button(active, $c, $tc); border-color: $focus_color; }
+    &:active { @include button(active, $c, $tc); }
     &:focus { box-shadow: none; border-color: $focus_color;  }
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
@@ -1966,7 +1966,7 @@ StScrollBar {
       @include button(normal, $c:$success_color); box-shadow: none; 
       &:hover { @include button(hover, $c:$success_color); }
       &:focus { @include button(focus, $c:$success_color); }
-      &:active { @include button(active, $c:$success_color); box-shadow: inset 0px 0px 0px 1px $focus_color; }
+      &:active { @include button(active, $c:$success_color); }
       &:focus:hover { @include button(focus-hover, $c:$success_color ); }
       &:insensitive { @include button(insensitive, $c:$success_color); }
     }
