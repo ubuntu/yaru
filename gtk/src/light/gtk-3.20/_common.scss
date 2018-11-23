@@ -497,6 +497,7 @@ treeview entry {
   &.button {
     background-color: transparent;
     color: transparentize($_entry_tag_color, 0.3);
+    &.close { border: none; box-shadow: none; background-color: transparent; }
   }
 
   :not(:backdrop) &.button {
@@ -509,6 +510,7 @@ treeview entry {
       color: transparentize($_entry_tag_color, 0.3);
     }
   }
+  &, * {border: none; box-shadow: none; margin: 4px; }
 }
 
 /***********
