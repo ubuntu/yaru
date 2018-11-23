@@ -476,6 +476,7 @@ treeview entry {
   border-color: transparent;
   background-color: $slate;
   color: darken($silk, 3%);
+  &.button:hover { color: white; }
 }
 
 /***********
