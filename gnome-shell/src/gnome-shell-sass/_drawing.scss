@@ -25,7 +25,7 @@
 
 // entries
 
-@mixin entry($t, $tc: $fg_color, $c: $base_color, $fc:$selected_bg_color) {
+@mixin entry($t, $tc: $fg_color, $c: $base_color, $fc:$focus_color) {
 //
 // Entries drawing function
 //
@@ -138,7 +138,7 @@
 
   @if $t==focus {
   // focused button
-    box-shadow: inset 0px 0px 0px 1px if($c!=$success_color, $selected_bg_color, white);
+    box-shadow: inset 0px 0px 0px 1px if($c!=$success_color, $focus_color, white);
   }
 
   @else if $t==hover {
@@ -153,7 +153,7 @@
   }
   @else if $t==active {
   // active osd button
-    box-shadow: inset 0 1px 3px -1px transparentize(black, 0.5);
+    box-shadow: none;
   }
   @else if $t==insensitive {
   // insensitive osd button
