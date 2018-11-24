@@ -1754,8 +1754,7 @@ headerbar {
     }
 
     .stack-switcher.linked {
-      // round the stackswitcher corners by using border
-      border-width: 0 8px;
+      border-width: 1px;
       border-style: solid;
       border-color: $c;
       border-radius: $small_radius;
@@ -1763,15 +1762,6 @@ headerbar {
       &:backdrop { border-color: _backdrop_color($c); }
 
       button {
-        // style the stackswitcher buttons
-        @extend %underline_focus_headerbar;
-
-        &:dir(rtl), &:dir(ltr) { // specificity bump
-          // gets rid of the radius
-          border-radius: 0;
-          -gtk-outline-radius: 0;
-        }
-
         margin: 0;
         border: none;
 
@@ -1783,7 +1773,6 @@ headerbar {
     }
 
     .path-bar.linked button {
-      // style the pathbar buttons
       @extend %underline_focus_headerbar;
 
       &.slider-button {
