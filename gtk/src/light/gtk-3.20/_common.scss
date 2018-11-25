@@ -1739,6 +1739,7 @@ headerbar {
       }
     }
 
+    .stack-switcher.linked button,
     buttonbox.linked button,
     buttonbox.linked button.text-button ~ button {
       border-style: solid;
@@ -1753,25 +1754,6 @@ headerbar {
       }
     }
 
-    .stack-switcher.linked {
-      border-width: 1px;
-      border-style: solid;
-      border-color: $c;
-      border-radius: $small_radius;
-
-      &:backdrop { border-color: _backdrop_color($c); }
-
-      button {
-        margin: 0;
-        border: none;
-
-        &:disabled:checked{
-          background-color: $hb_pathbar_bg;
-          &:backdrop{ background-color: $hb_pathbar_bg_backdrop;}
-        }
-      }
-    }
-
     .path-bar.linked button {
       background-color: transparent;
       border-radius: 0;
@@ -1779,7 +1761,7 @@ headerbar {
         color: $headerbar_fg_color; 
         font-weight: normal;
       }
-      
+
       &.slider-button {
         box-shadow: none;
       }
