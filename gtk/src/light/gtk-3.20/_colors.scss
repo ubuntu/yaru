@@ -80,22 +80,20 @@ $hb_pathbar_border_backdrop: darken($hb_pathbar_bg_backdrop, 2%);
 $hb_button_bg_hover: lighten($headerbar_bg_color, 10%);
 
 // Menu and popover colors
-$menu_color: $base_color;
-$backdrop_menu_color: $backdrop_base_color;
-@if $variant=='dark' {
-    $menu_color: transparentize(lighten($jet, 2%), if($variant=='light', 0.025, 0.025));
-    $menu_fg_color: $porcelain;
-    $menu_border_color: transparentize(white, 0.87);
-    $menu_hover_color: transparentize(white, 0.85);
-    $menu_active_color: transparentize(white, 0.8);
-    $menu_button_color: transparent;
-    $menu_button_border_color: lighten($inkstone,2%);
-    $menu_disabled_fg_color: lighten($inkstone, 4%);
-    $popover_shadow: 0 2px 5px transparentize(black, 0.7);
+$menu_color: transparentize(lighten($jet, 2%), if($variant=='light', 0.025, 0.025));
+$menu_color: if($variant=='light', $base_color, $menu_color);
+$menu_fg_color: $porcelain;
+$menu_border_color: transparentize(white, 0.87);
+$menu_hover_color: transparentize(white, 0.85);
+$menu_active_color: transparentize(white, 0.8);
+$menu_button_color: transparent;
+$menu_button_border_color: lighten($inkstone,2%);
+$menu_disabled_fg_color: lighten($inkstone, 4%);
+$popover_shadow: 0 2px 5px transparentize(black, 0.7);
 
-    $backdrop_menu_color: $backdrop_headerbar_bg_color;
-    $backdrop_menu_fg_color: $backdrop_headerbar_fg_color;
-    $backdrop_menu_border_color: lighten($inkstone, 5%);
-    $backdrop_menu_color: $backdrop_headerbar_bg_color;
-    $backdrop_menu_disabled_fg_color: lighten($inkstone,7%);
-}
+$backdrop_menu_color: if($variant=='light', $backdrop_base_color, $backdrop_headerbar_bg_color);
+$backdrop_menu_fg_color: $backdrop_headerbar_fg_color;
+$backdrop_menu_border_color: lighten($inkstone, 5%);
+$backdrop_menu_color: $backdrop_headerbar_bg_color;
+$backdrop_menu_disabled_fg_color: lighten($inkstone,7%);
+

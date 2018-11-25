@@ -4708,3 +4708,357 @@ button.emoji-section {
   &:active{@include button(active);}
   &:disabled{@include button(insensitive)}
 }
+
+@if $variant == 'dark' {
+  // Custom styling for black menus
+menu,
+.menu,
+.context-menu {
+  margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
+  padding: 8px 0;
+  background-color: $menu_color;
+  color: $menu_fg_color;
+  border: 1px solid $menu_border_color; // adds borders in a non composited env
+  border-radius: $small_radius;
+
+  .csd & { border: none; }  // axes borders in a composited env
+
+  &:backdrop { background-color: $backdrop_menu_color;  color: $backdrop_text_color; }
+
+  menuitem {
+    transition: all 100ms $ease-out-quad;
+    min-height: 16px;
+    min-width: 36px;
+    padding: 5px 6px;
+    border-radius: 0;
+
+    &:hover { background-color: $menu_hover_color; }
+
+    &:disabled {
+      color: $menu_disabled_fg_color;
+      &:backdrop { color: $backdrop_insensitive_color; }
+    }
+
+    &:backdrop,
+    &:backdrop:hover {
+      color: $backdrop_fg_color;
+      background-color: transparent;
+    }
+
+    // submenu indicators
+    arrow {
+      min-height: 16px;
+      min-width: 16px;
+
+      &:dir(ltr) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic'); }
+
+      &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
+    }
+
+    // avoids labels color being overridden, see
+    // https://bugzilla.gnome.org/show_bug.cgi?id=767058
+    label { &:dir(rtl), &:dir(ltr) { color: inherit; }}
+  }
+
+  // overflow arrows
+  > arrow {
+    @include button(undecorated);
+
+    min-height: 16px;
+    min-width: 16px;
+    padding: 4px;
+    border-radius: 0;
+
+    &.top {
+      border-bottom: 1px solid $menu_border_color;
+      border-top-right-radius: $small_radius;
+      border-top-left-radius: $small_radius;
+      -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+      background-color: $menu_color;
+    }
+
+    &.bottom {
+      margin-bottom: -8px;
+      border-top: 1px solid $menu_border_color;
+      border-bottom-right-radius: $small_radius;
+      border-bottom-left-radius: $small_radius;
+      -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+      background-color: $menu_color;
+    }
+
+    &:hover { background-color: $menu_active_color; }
+
+    &:backdrop { background-color: $backdrop_menu_color; }
+
+    &:disabled {
+      color: transparent;
+      background-color: transparent;
+      border-color: transparent ;
+    }
+  }
+}
+
+menuitem {
+  accelerator { color: gtkalpha(currentColor,0.55); }
+  &:disabled { accelerator { color: $menu_disabled_fg_color; } }
+
+  check,
+  radio {
+    &:dir(ltr) { margin-right: 7px; }
+    &:dir(rtl) { margin-left: 7px; }
+  }
+}
+
+
+
+/***************
+ * Popovers   *
+ ***************/
+
+// Custom styling for black popovers
+popover.background {
+  padding: 2px;
+  color: $menu_fg_color;
+  border-radius: $medium_radius;
+  background-color: $menu_color;
+
+  .csd &, & { border: 1px solid $menu_border_color; }
+
+  box-shadow: $popover_shadow;
+
+  &:backdrop {
+    background-color: $backdrop_menu_color;
+    color: $backdrop_menu_fg_color;
+    box-shadow: none;
+  }
+
+  .csd &, & {
+    &.touch-selection,
+    &.magnifier {
+      @extend %osd;
+
+      border: 1px solid transparentize(white, 0.9);
+
+      button { @extend %osd_button };
+    }
+
+    &.osd { @extend %osd; }
+  }
+
+  modelbutton {
+    min-height: 16px;
+    min-width: 36px;
+    padding: 5px 6px;
+
+    &:hover { background-color: $menu_hover_color; }
+    &:backdrop:hover { background-color: $backdrop_menu_border_color; }
+  }
+
+  separator {margin: 3px; }  
+  list separator { margin: 0px; }
+  list separator, separator, border { 
+    &:backdrop { background-color: $backdrop_menu_border_color; }
+  }
+
+  scrolledwindow {
+    border-color: $menu_border_color;
+    &:backdrop {
+      border-color: $backdrop_menu_border_color;
+    }
+  }
+
+  list, toolbar, treeview, calendar {
+    background-color: transparent;
+    &:backdrop {
+      background-color: transparent;
+    }
+  }
+
+  treeview, calendar {
+    color: $menu_fg_color;
+    &:backdrop{
+      color: $backdrop_menu_fg_color;
+    }
+    &:hover {
+      background-color: $menu_hover_color;
+      border-color: transparent;
+    }
+    &:active {
+      background-color: $menu_active_color;
+      border-color: transparent;
+    }
+  }
+  calendar {
+    border-color: $menu_border_color;
+    &.header {
+      border-bottom-color: $menu_border_color;
+    }
+    &:hover {
+      background-color: transparent;
+      color: $menu_hover_color;
+    }
+  }
+
+  list row, row, row.activatable {
+    color: $menu_fg_color;
+    &:hover {
+      background-color: $menu_hover_color;
+    }
+    &:active {
+      background-color: $menu_active_color;
+    }
+    &:backdrop {
+      color: $backdrop_headerbar_fg_color;
+      background: transparent;
+    }
+    label { color: $menu_fg_color; }
+  }
+
+  textview.view text {
+    background-color: $menu_color;
+    border-color: $menu_button_border_color;
+    color: $menu_fg_color;
+    &:backdrop {
+      background-color: $backdrop_headerbar_bg_color;
+      color: $backdrop_headerbar_fg_color
+    }
+  }
+
+  entry, text {
+    selection {
+      &:focus, & {
+        background-color: darken($neutral_color, 10%);
+        color: $menu_fg_color;
+      }
+      &:backdrop {
+        background-color: darken($neutral_color, 5%);
+        color: $silk;
+      }
+    }
+    caret-color: white;
+  }
+
+  entry {
+    @include entry(normal, $c: $menu_button_color, $tc: $menu_fg_color, $menu:true);
+    &:focus { @include entry(focus, $c: $menu_button_color, $tc: $menu_fg_color, $menu:true) }
+  }
+
+  button {
+    @each $state, $t in ("", "normal"),
+                        (":hover", "hover"),
+                        (":hover:backdrop", "backdrop-hover"),
+                        (":active, &:checked", "active"),
+                        (":hover:checked", "active-hover"),
+                        (":disabled", "insensitive"),
+                        (":disabled:active, &:disabled:checked", "insensitive-active"),
+                        (":backdrop", "backdrop"),
+                        (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                        (":backdrop:disabled", 'backdrop-insensitive'),
+                        (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+                          &#{$state} { @include button($t, $menu_button_color, $menu_fg_color, $flat:false, $menu:true); }
+    }
+
+    @each $b_type, $b_color in (suggested-action, $success_color),
+                                (destructive-action, $destructive_color) {
+      &.#{$b_type} {
+        // special buttons show their color when not interacted with
+        @each $state, $t in ("", "normal"),
+                            (":hover", "hover"),
+                            (":hover:backdrop", "backdrop-hover"),
+                            (":active, &:checked", "active"),
+                            (":disabled", "insensitive"),
+                            (":disabled:active, &:disabled:checked", "insensitive-active"),
+                            (":backdrop", "backdrop"),
+                            (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
+                            (":backdrop:disabled", 'backdrop-insensitive'),
+                            (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
+          &#{$state} { @include button($t, $b_color, white, $flat:true, $menu:true) }
+        }
+      }
+    }
+    background-color: pink;
+  }
+
+  modelbutton label, label {
+    & { 
+      color: $menu_fg_color;
+      &:disabled { color: $menu_disabled_fg_color; } 
+    }    
+    &:backdrop { &:disabled { color: $backdrop_menu_disabled_fg_color; } }
+  }
+
+  undershoot {
+    &.top { @include undershoot(top, $menu: true); }
+    &.bottom { @include undershoot(bottom, $menu: true); }
+    &.left { @include undershoot(left, $menu: true); }
+    &.right { @include undershoot(right, $menu: true); }
+  }
+
+  overshoot {
+    $_c: $menu_color;
+    &.top {
+      @include overshoot(top, normal, $_c);
+      &:backdrop { @include overshoot(top, backdrop, $_c); }
+    }
+    &.bottom {
+      @include overshoot(bottom, normal, $_c);
+      &:backdrop { @include overshoot(bottom, backdrop, $_c); }
+    }
+    &.left {
+      @include overshoot(left, normal, $_c);
+      &:backdrop { @include overshoot(left, backdrop, $_c); }
+    }
+    &.right {
+      @include overshoot(right, normal, $_c);
+      &:backdrop { @include overshoot(right, backdrop, $_c); }
+    }
+  }
+}
+
+// Custom styling for black menus and popups
+button .popup menu separator { background-color: $menu_border_color; }
+popover.background, menu, .menu, .context-menu {
+  check, radio {
+    & {
+      // for unchecked
+      border: 1px solid;
+      $_c: $menu_button_color;
+  
+      @each $state, $t in ("", "normal"),
+                          (":hover", "hover"),
+                          (":hover:backdrop", "backdrop-hover"),
+                          (":active", "active"),
+                          (":disabled", "insensitive"),
+                          (":backdrop", "backdrop"),
+                          (":backdrop:disabled", 'backdrop-insensitive') {
+        &#{$state} {
+          @include check($t, $_c, $menu:true);
+        }
+      }
+    }
+  
+    & {
+      // for checked
+      @each $t in (':checked:not(:indeterminate)'), (':indeterminate') {
+        &#{$t} {
+          @each $state, $t in ("", "normal"),
+                              (":hover", "hover"),
+                              (":hover:backdrop", "backdrop-hover"),
+                              (":disabled", "insensitive"),
+                              (":backdrop", "backdrop"),
+                              (":backdrop:disabled", 'backdrop-insensitive') {
+            &#{$state} {
+              @include check($t, $success_color, $menu:true);
+            }
+          }
+        }
+      }
+    }
+  }
+  radiobutton radio { margin-right: 5px; }
+
+  separator {
+    background-color: darken($menu_border_color, 6%);
+  }
+}
+}
