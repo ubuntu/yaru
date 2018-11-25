@@ -4445,7 +4445,7 @@ decoration {
   .csd.popup & {
     border-radius: $small_radius;
     box-shadow: $popover_shadow,
-                0 0 0 1px transparentize($borders_color, 0.2);
+                0 0 0 1px $menu_border_color;
   }
 
   tooltip.csd & {
@@ -4823,6 +4823,7 @@ popover.background {
   background-color: $menu_color;
 
   .csd &, & { border: 1px solid $menu_border_color; }
+  border-color: $menu_border_color;
 
   box-shadow: $popover_shadow;
 
