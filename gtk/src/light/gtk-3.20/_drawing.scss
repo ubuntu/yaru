@@ -40,7 +40,7 @@
 
 @function entry_focus_shadow($fc:$focus_color) { @return 0 0 2px 2px transparentize($fc, .8); }
 
-@mixin entry($t, $fc:$focus_color, $c: $base_color, $tc: $fg_color, $edge: none) {
+@mixin entry($t, $fc:$focus_color, $c: $base_color, $tc: $fg_color, $edge: none, $menu: false) {
 //
 // Entries drawing function
 //
@@ -71,6 +71,11 @@
     } @else {
       border-top-color: darken($_bc, if($c != $base_color, 12%, if($variant==light, 20%, 10%)));
       @include _shadows($_entry_edge);
+    }
+    @if $menu==true {
+      box-shadow: none;
+      &, image { color: $menu_fg_color; }
+      border-color: $menu_button_border_color;
     }
   }
   @if $t==focus {
@@ -219,7 +224,7 @@
           $c==$purple
 }
 
-@mixin button($t, $c:$button_bg_color, $tc:$fg_color, $flat:false) {
+@mixin button($t, $c:$button_bg_color, $tc:$fg_color, $flat:false, $menu:false) {
   // Button drawing function
   //
   // $t:    button type,
@@ -242,6 +247,11 @@
     border-color: if($flat, $c, $_border);
     box-shadow: if($flat, none, 0 1px transparentize(black, 0.9));
     color: $tc;
+
+    @if $menu==true {
+      border-color: if($c==$menu_button_color, $menu_button_border_color, $c);
+      box-shadow: none;
+    }
   }
 
   @else if $t==hover {
@@ -266,6 +276,11 @@
     @if $flat == false {
       $_perc: if(is_special_color($c), 12%, 15%);
       border-bottom-color: darken($_border, $_perc);
+    }
+    @if $menu==true {
+      background-color: $menu_hover_color;
+      border-color: $menu_button_border_color;
+      box-shadow: none;
     }
   }
 
@@ -295,6 +310,12 @@
         $_border_top_color: $_bg;
       }
     }
+    @if $menu==true {
+      $_bg: $menu_active_color;
+      $_border: $menu_button_border_color;
+      $_box_shadow: none;
+      $_border_top_color: $_border;
+    }
 
     background-color: $_bg;
     border-color: $_border;
@@ -322,6 +343,12 @@
     }
 
     background-color: $_bg;
+
+    @if $menu==true {
+      background-color: $menu_hover_color;
+      border-color: $menu_button_border_color;
+      box-shadow: none;
+    }
   }
 
   @else if $t==insensitive {
@@ -359,6 +386,13 @@
 
       color: transparentize($_label_color, $_label_alpha);
     }
+    @if $menu==true {
+      $_btn_color: if($c==$menu_button_color, transparent, transparentize($c,0.2));
+      background-color: $_btn_color;
+      border-color: if($c==$menu_button_color, $menu_button_border_color, $_btn_color);
+      box-shadow: none;
+      label, & { color: if($c==$menu_button_color, $menu_disabled_fg_color, transparentize(white, 0.5)); }
+    }
   }
 
   @else if $t==insensitive-active {
@@ -381,6 +415,14 @@
     }
 
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color); }
+
+    @if $menu==true {
+      $_btn_color: if($c==$menu_color, transparentize($menu_active_color, 0.3), transparentize($c, 0.3));
+      background-color: $_btn_color;
+      border-color: $_btn_color;
+      box-shadow: none;
+      label, & { color: if($c==$menu_color, $menu_disabled_fg_color, transparentize(white, 0.5)); }
+    }
   }
 
   @else if $t == backdrop {
@@ -400,6 +442,14 @@
     box-shadow: none;
 
     label, & { color: if($tc == $fg_color, $backdrop_text_color, mix($tc, $_bg, 60%)); }
+
+    @if $menu==true {
+      $_btn_color: if($c==$menu_button_color, transparent, transparentize($c, 0.1));
+      background-color: $_btn_color;
+      border-color: if($c==$menu_button_color, $backdrop_menu_border_color, $_btn_color);
+      box-shadow: none;
+      label, & { color: if($c==$menu_button_color, $backdrop_menu_fg_color, transparentize(white, 0.3)); }
+    }
   }
 
   @else if $t==backdrop-hover {
@@ -431,6 +481,13 @@
     } @else {
       border-bottom-color: darken($_border, if(is_special_color($c), 12%, 15%));
     }
+
+    @if $menu==true {
+      background-color: $backdrop_menu_border_color;
+      border-color: $backdrop_menu_border_color;
+      label, & { color: $backdrop_menu_fg_color; }
+      box-shadow: none;
+    }
   }
 
   @else if $t==backdrop-active {
@@ -455,6 +512,13 @@
     box-shadow: none;
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
+
+    @if $menu==true {
+      background-color: lighten($backdrop_menu_border_color,3%);
+      border-color: lighten($backdrop_menu_border_color,3%);
+      label, & { color: $backdrop_menu_fg_color; }
+      box-shadow: none;
+    }
   }
 
   @else if $t==backdrop-insensitive {
@@ -476,6 +540,13 @@
     box-shadow: none;
 
     label, & { color: if($c == $button_bg_color, transparentize($backdrop_text_color, 0.3), mix($tc, $_bg, 35%)); }
+
+    @if $menu==true {
+      $_btn_color: if($c==$menu_button_color, transparent, darken($c, 5%));
+      background-color: $_btn_color;
+      border-color: if($c==$menu_button_color, $backdrop_menu_border_color, $_btn_color);
+      label, & { color: if($c==$menu_button_color, $backdrop_menu_disabled_fg_color, transparentize(white, 0.3)); }
+    }
   }
 
   @else if $t==backdrop-insensitive-active {
@@ -574,7 +645,7 @@
  * Check and Radio buttons *
  ***************************/
 
-@mixin check($t, $c:white, $tc:white) {
+@mixin check($t, $c:white, $tc:white, $menu: false) {
   // Check/Radio drawing function
   //
   // $t:    check/radio type,
@@ -607,6 +678,9 @@
 
   @if $t==insensitive {
     $_bg: if($_checked, $_dim_background , transparent);
+    @if $menu==true {
+      $_bg: $menu_border_color;
+    }
     background-color: $_bg;
     border-color: if($_checked, $_bg, $_dim_border_color);
     box-shadow: none;
@@ -620,11 +694,18 @@
     border-color: $_dim_border_color;
     box-shadow: 0 1px transparentize(black, 0.95);
     color: $tc;
+    @if $menu==true {
+      background-color: transparent;
+      border-color: $backdrop_menu_border_color;
+    }
   }
 
   @if $t==backdrop-hover {
     -gtk-icon-effect: highlight;
     background-color: if($c != white, lighten($c, 9%), darken($c, 7%));
+    @if $menu==true {
+      background-color: $backdrop_menu_border_color;
+    }
   }
 
   @if $t==backdrop-insensitive {
@@ -817,6 +898,12 @@
 
     @if $t==backdrop { $_small_gradient_color: $backdrop_borders_color; }
   }
+  @else if $c==$menu_color {
+    $_small_gradient_color: $jet;
+    $_big_gradient_color: $fg_color;
+
+    @if $t==backdrop { $_small_gradient_color: $backdrop_borders_color; }
+  }
 
   $_small_gradient: -gtk-gradient(radial,
                                   $_position, 0,
@@ -848,7 +935,7 @@
   box-shadow: none;              //
 }
 
-@mixin undershoot($p) {
+@mixin undershoot($p, $menu: false) {
 //
 // undershoot
 //
@@ -885,7 +972,7 @@
   // Replace dashed line with light shadow
   $us_shadow_color: $silk;
   $us_shadow_alpha: 0.8;
-  @if $variant=='dark' {
+  @if ($variant=='dark') or ($menu==true) {
     $us_shadow_color: $jet;
   }
 
