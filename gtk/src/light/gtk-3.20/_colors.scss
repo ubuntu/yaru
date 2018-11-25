@@ -94,6 +94,4 @@ $popover_shadow: 0 2px 5px transparentize(black, 0.7);
 $backdrop_menu_color: if($variant=='light', $backdrop_base_color, $backdrop_headerbar_bg_color);
 $backdrop_menu_fg_color: $backdrop_headerbar_fg_color;
 $backdrop_menu_border_color: lighten($inkstone, 5%);
-$backdrop_menu_color: $backdrop_headerbar_bg_color;
 $backdrop_menu_disabled_fg_color: lighten($inkstone,7%);
-
