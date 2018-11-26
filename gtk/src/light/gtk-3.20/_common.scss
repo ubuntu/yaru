@@ -4804,8 +4804,7 @@ button.emoji-section {
       border-radius: $medium_radius;
       background-color: $menu_color;
   
-      .csd &, & { border: 1px solid $menu_border_color; }
-      border-color: $menu_border_color;
+      .csd &, & { border-color: transparentize($color: white, $amount: 0.8) }
   
       box-shadow: $popover_shadow;
   
@@ -4820,7 +4819,7 @@ button.emoji-section {
         &.magnifier {
           @extend %osd;
   
-          border: 1px solid transparentize(white, 0.9);
+          border-color: transparentize($color: white, $amount: 0.8);
   
           button { @extend %osd_button };
         }
