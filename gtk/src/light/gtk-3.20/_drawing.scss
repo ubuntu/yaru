@@ -279,6 +279,8 @@
     @if $_headerbar {
       $_bg: lighten($c, 10%);
       $_border: $_bg;
+      $_border_top_color: $_bg;
+      $_box_shadow: none;
     } @else if $c == $button_bg_color {
       $_bg: darken($c, if($variant=='light', 7%, 10%));
       $_border: $borders_color;
