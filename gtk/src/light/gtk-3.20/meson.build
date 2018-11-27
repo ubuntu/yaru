@@ -16,9 +16,9 @@ gtk3_scss_dependencies = [
   '_ubuntu-colors.scss',
   '_colors.scss',
   '_common.scss',
+  '_menus.scss',
   '_apps.scss',
   '_drawing.scss',
-  '_menus.scss',
 ]
 
 gtk3_assets = [
