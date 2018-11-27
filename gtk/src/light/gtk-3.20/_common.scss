@@ -5008,8 +5008,9 @@ button.emoji-section {
     *********************/
     .app-notification,
     .app-notification.frame {
-      background-color: $menu_color; 
-      button.flat:hover { @include button(hover, $menu_color); }
+      background-color: $menu_color;
+      border-color: $menu_border_color; 
+      button.flat:hover { @include button(hover, $menu_color, $menu:true); }
       button, button.flat {
           background-color: transparent;
           &, &:hover, &:active {
@@ -5020,7 +5021,7 @@ button.emoji-section {
           &:active { background-color: $menu_active_color; }
       }
     }
-  
+
     /*********
     * Jet Emoji Picker*
     ********/
