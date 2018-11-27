@@ -4709,13 +4709,12 @@ button.emoji-section {
   &:disabled{@include button(insensitive)}
 }
 
+@if $variant == 'dark' {
+    /***************
+    * Jet Menus   *
+    ***************/
 
-/***************
- * Jet Menus   *
- ***************/
-
- // Custom styling for black menus
- @if $variant == 'dark' {
+    // Custom styling for black menus 
     menu,
     .menu,
     .context-menu {
@@ -4748,9 +4747,6 @@ button.emoji-section {
   
           &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
         }
-  
-        // avoids labels color being overridden, see
-        // https://bugzilla.gnome.org/show_bug.cgi?id=767058
         label { &:dir(rtl), &:dir(ltr) { color: inherit; }}
       }
   
@@ -4788,11 +4784,8 @@ button.emoji-section {
   
     menuitem {
       accelerator { color: gtkalpha(currentColor,0.55); }
-      &:disabled { accelerator { color: $menu_disabled_fg_color; } }
-  
-    }
-  
-  
+      &:disabled { accelerator { color: $menu_disabled_fg_color; } }  
+    }    
   
     /***************
     * Jet Popovers   *
@@ -4801,10 +4794,9 @@ button.emoji-section {
     // Custom styling for black popovers
     popover.background {
       color: $menu_fg_color;
-      border-radius: $medium_radius;
       background-color: $menu_color;
   
-      .csd &, & { border-color: transparentize($color: white, $amount: 0.8) }
+      .csd &, & { border-color: transparentize($color: white, $amount: 0.8); }
   
       box-shadow: $popover_shadow;
   
@@ -4816,15 +4808,7 @@ button.emoji-section {
   
       .csd &, & {
         &.touch-selection,
-        &.magnifier {
-          @extend %osd;
-  
-          border-color: transparentize($color: white, $amount: 0.8);
-  
-          button { @extend %osd_button };
-        }
-  
-        &.osd { @extend %osd; }
+        &.magnifier { border-color: transparentize($color: white, $amount: 0.8); }
       }
   
       modelbutton {  
@@ -4838,23 +4822,14 @@ button.emoji-section {
   
       scrolledwindow {
         border-color: $menu_border_color;
-        &:backdrop {
-          border-color: $backdrop_menu_border_color;
-        }
+        &:backdrop { border-color: $backdrop_menu_border_color; }
       }
   
-      list, toolbar, treeview, calendar {
-        background-color: transparent;
-        &:backdrop {
-          background-color: transparent;
-        }
-      }
+      list, toolbar, treeview, calendar { &, &:backdrop { background-color: transparent; } }
   
       treeview, calendar {
         color: $menu_fg_color;
-        &:backdrop{
-          color: $backdrop_menu_fg_color;
-        }
+        &:backdrop { color: $backdrop_menu_fg_color; }
         &:hover {
           background-color: $menu_hover_color;
           border-color: transparent;
@@ -4866,9 +4841,7 @@ button.emoji-section {
       }
       calendar {
         border-color: $menu_border_color;
-        &.header {
-          border-bottom-color: $menu_border_color;
-        }
+        &.header { border-bottom-color: $menu_border_color; }
         &:hover {
           background-color: transparent;
           color: $menu_hover_color;
@@ -4877,12 +4850,8 @@ button.emoji-section {
   
       list row, row, row.activatable {
         color: $menu_fg_color;
-        &:hover {
-          background-color: $menu_hover_color;
-        }
-        &:active {
-          background-color: $menu_active_color;
-        }
+        &:hover { background-color: $menu_hover_color; }
+        &:active { background-color: $menu_active_color; }
         &:backdrop {
           color: $backdrop_headerbar_fg_color;
           background: transparent;
@@ -4952,7 +4921,6 @@ button.emoji-section {
             }
           }
         }
-        background-color: pink;
       }
   
       modelbutton label, label {
@@ -5032,9 +5000,7 @@ button.emoji-section {
         }
       }
   
-      separator {
-        background-color: darken($menu_border_color, 6%);
-      }
+      separator { background-color: darken($menu_border_color, 6%); }
     }
   
     /*********************
@@ -5043,27 +5009,15 @@ button.emoji-section {
     .app-notification,
     .app-notification.frame {
       background-color: $menu_color; 
-      button.flat:hover {
-          @include button(hover, $menu_color);
-      }
+      button.flat:hover { @include button(hover, $menu_color); }
       button, button.flat {
-        @if $variant=='dark' {
           background-color: transparent;
           &, &:hover, &:active {
             box-shadow: none;
-            border-color: $inkstone;
-          }
-  
-          &:hover {
-            background-color: $menu_hover_color;
-          }
-          &:active {
-            background-color: $menu_active_color;
-          }
-          &:backdrop {
-  
-          }
-        }
+            border-color: $menu_button_border_color;
+          }  
+          &:hover { background-color: $menu_hover_color; }
+          &:active { background-color: $menu_active_color; }
       }
     }
   
@@ -5074,7 +5028,7 @@ button.emoji-section {
     popover.emoji-picker {  
       entry {
         border-bottom: 1px solid $menu_border_color;
-        box-shadow: none;x
+        box-shadow: none;
   
         &:focus {
           box-shadow: inset 0 -1px $selected_bg_color;
@@ -5091,9 +5045,7 @@ button.emoji-section {
         }
       }
   
-      scrollbar {
-        &:backdrop:hover { background-color: transparent; }
-      }
+      scrollbar { &:backdrop:hover { background-color: transparent; } }
     }
   
     button.emoji-section {
