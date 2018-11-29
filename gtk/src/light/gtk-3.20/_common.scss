@@ -2283,7 +2283,7 @@ menu,
   padding: 8px 0;
   background-color: $menu_color;
   color: $text_color;
-  border: 1px solid $menu_border_color; // adds borders in a non composited env
+  border: 1px solid $borders_color; // adds borders in a non composited env
   border-radius: $small_radius;
 
   .csd & { border: none; }  // axes borders in a composited env
@@ -2381,7 +2381,7 @@ popover.background {
   padding: 2px;
   color: $text_color;
   border-radius: $medium_radius;
-  background-color: if($variant=='light', $base_color, $menu_color);
+  background-color: $menu_color;
 
   .csd &, & { border: 1px solid $borders_color; }
 
@@ -3777,7 +3777,7 @@ row {
   margin: 12px;
   color: $text_color;
   border-radius: $medium_radius;
-  background-color: $bg_color;
+  background-color: $menu_color;
   border: 1px solid $borders_color;
   box-shadow: $popover_shadow;
 
@@ -3788,9 +3788,9 @@ row {
     transition: $backdrop_transition;
   }
 
-  button.flat {
-    &:hover { @include button(hover, $button_bg_color); }
-    &:active { @include button(active, $button_bg_color); }
+  button.flat:hover {
+      @include button(hover, $menu_color);
+      border-color: $borders_color;
   }
 
   border { border: none; }
@@ -4445,7 +4445,7 @@ decoration {
   .csd.popup & {
     border-radius: $small_radius;
     box-shadow: $popover_shadow,
-                0 0 0 1px $menu_border_color;
+                0 0 0 1px if($variant=='light',transparentize($borders_color, 0.2),$menu_border_color);
   }
 
   tooltip.csd & {

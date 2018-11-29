@@ -558,7 +558,7 @@ headerbar button image ~ window decoration ~ menu separator {
  * Chrome / Chromium *	
  *********************/	
  window.background.chromium {	
-   @if $variant=='dark' or $variant=='light' {
+   @if $variant=='dark' {
     menu { border: 1px solid lighten($inkstone,1%); }
    }
  }
