@@ -1,4 +1,4 @@
-@if $variant == 'dark' {
+@if $variant == 'dark' or $variant == 'light' {
   /***************
    * Jet Menus   *
    ***************/
@@ -75,6 +75,9 @@
     accelerator { color: gtkalpha(currentColor,0.55); }
     &:disabled { accelerator { color: $menu_disabled_fg_color; } }
   }
+}
+
+@if $variant == 'dark' {
 
   /***************
    * Jet Popovers   *
@@ -247,9 +250,11 @@
       }
     }
   }
+}
 
+@if $variant == 'dark' or $variant == 'light' {
   // Custom styling for black menus and popups
-  button .popup menu separator { background-color: $menu_border_color; }
+  
   popover.background, menu, .menu, .context-menu {
     check, radio {
       & {
@@ -287,14 +292,23 @@
           }
         }
       }
-    }
-
-    separator { background-color: darken($menu_border_color, 6%); }
+    }    
   }
+}
+
+  @if $variant == 'dark' {
+
+  /*********************
+   * Jet Separators *
+   *********************/
+
+  button .popup menu separator { background-color: $menu_border_color; }
+  menu, .menu, .context-menu separator { background-color: darken($menu_border_color, 6%); }
 
   /*********************
    * Jet App Notifications *
    *********************/
+   
   .app-notification,
   .app-notification.frame {
     background-color: $menu_color;

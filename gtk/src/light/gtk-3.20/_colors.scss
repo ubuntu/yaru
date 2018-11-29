@@ -81,7 +81,7 @@ $hb_button_bg_hover: lighten($headerbar_bg_color, 10%);
 
 // Menu and popover colors
 $menu_color: transparentize(lighten($jet, 2%), if($variant=='light', 0.025, 0.025));
-$menu_color: if($variant=='light', $base_color, $menu_color);
+//$menu_color: if($variant=='light', $base_color, $menu_color);
 $menu_fg_color: $porcelain;
 $menu_border_color: transparentize(white, 0.87);
 $menu_hover_color: transparentize(white, 0.85);
