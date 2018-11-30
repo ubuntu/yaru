@@ -1806,6 +1806,7 @@ headerbar {
           &, &.selection-menu {
             &#{$state} {
               @include button($t, $c, $tc, $flat:true);
+              outline-color: white;
             }
           }
         }
@@ -3727,6 +3728,7 @@ row {
   transition: all 150ms $ease-out-quad;
 
   &:not(:selected) {
+    outline-color: $focus_color;
     &:not(:backdrop):hover { background-color: $base_hover_color; }
     &:not(:backdrop):active { background-color: $base_active_color; }
   }
