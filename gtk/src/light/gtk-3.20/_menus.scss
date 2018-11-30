@@ -249,7 +249,7 @@
   }
 
   // Custom styling for black menus and popups
-  button .popup menu separator { background-color: $menu_border_color; }
+  button .popup menu separator { background-color: $inkstone; }
   popover.background, menu, .menu, .context-menu {
     check, radio {
       & {

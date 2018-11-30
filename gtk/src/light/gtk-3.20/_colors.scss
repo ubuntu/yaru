@@ -84,8 +84,8 @@ $menu_color: transparentize(lighten($jet, 2%), if($variant=='light', 0.025, 0.02
 $menu_color: if($variant=='light', $base_color, $menu_color);
 $menu_fg_color: $porcelain;
 $menu_border_color: transparentize(white, 0.87);
-$menu_hover_color: transparentize(white, 0.85);
-$menu_active_color: transparentize(white, 0.8);
+$menu_hover_color: transparentize(white, 0.83);
+$menu_active_color: transparentize(white, 0.77);
 $menu_button_color: transparent;
 $menu_button_border_color: lighten($inkstone,2%);
 $menu_disabled_fg_color: lighten($inkstone, 4%);
