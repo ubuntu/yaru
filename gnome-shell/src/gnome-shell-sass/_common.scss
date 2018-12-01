@@ -102,7 +102,7 @@ StEntry {
   //&:hover { @include entry(hover);}
   &:focus { @include entry(focus);}
   &:insensitive { @include entry(insensitive);}
-  selection-background-color: $focus_color;
+  selection-background-color: darken($blue,10%);
   selected-color: $selected_fg_color;
   StIcon.capslock-warning {
     icon-size: 16px;
@@ -1658,8 +1658,8 @@ StScrollBar {
 }
 
 %light_entry {
-  selection-background-color: $focus_color;
-  selected-color: $fg_color;
+  selection-background-color: $text_selection;
+  selected-color: $dark_fg_color;
     $_bg: $light_base_color;
     $_fg: $dark_fg_color;
     @include entry(normal, $tc: $_fg, $c: $_bg);
@@ -2123,11 +2123,7 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  background: none;
-  background-color: none;
-  background-gradient-direction: vertical;
-  background-gradient-start: #6D2169;
-  background-gradient-end: #370026;
+  background-color: #2C001E;
 }
 
 #screenShieldNotifications {
