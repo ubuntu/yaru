@@ -4566,7 +4566,7 @@ cursor-handle {
       -gtk-icon-source: none;
       background-repeat: no-repeat;
       background-size: 16px 24px;
-      background-position: top 2px;
+      background-position: center -2px;
       background-image: -gtk-scaled(url('#{$_url}.png'),
                                     url('#{$_url}@2.png'));
     }
