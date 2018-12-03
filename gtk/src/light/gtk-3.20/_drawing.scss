@@ -253,7 +253,7 @@
 
     @if $_headerbar               { $_perc: 15%;  }
     @else if is_special_color($c) { $_perc: 5%;  }
-    @else                         { $_perc: if($variant=='light', 25%, 1%); }
+    @else                         { $_perc: if($variant=='light', 25%, 2%); }
 
     $_bg: lighten($c, $_perc);
 
@@ -264,7 +264,7 @@
     box-shadow: if($flat, none,  0 1px transparentize(black, 0.85));
 
     @if $flat == false {
-      $_perc: if(is_special_color($c), 12%, 15%);
+      $_perc: if(is_special_color($c), 12%, if($variant=='light', 15%, 6%));
       border-bottom-color: darken($_border, $_perc);
     }
   }
@@ -284,7 +284,7 @@
     } @else if $c == $button_bg_color {
       $_bg: darken($c, if($variant=='light', 7%, 10%));
       $_border: $borders_color;
-      $_border_top_color: darken($_border, if($variant=='light', 25%, 8%));
+      $_border_top_color: $_border;
       $_box_shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.05);
     } @else {
       $_bg: darken($c, 10%);
