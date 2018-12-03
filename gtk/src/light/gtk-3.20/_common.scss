@@ -42,7 +42,7 @@ $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
 $popover_shadow: 0 2px 5px transparentize(black, 0.75);
-$menu_border: if($variant=='light', transparentize($borders_color, 0.2) , lighten($inkstone,1%));
+$menu_border: if($variant=='light', transparentize($borders_color, 0.2) , transparentize(white, 0.88));
 
 /***************
  * Base States *
@@ -2382,7 +2382,7 @@ popover.background {
   border-radius: $medium_radius;
   background-color: $menu_color;
 
-  .csd &, & { border: 1px solid $menu_border; }
+  .csd &, & { border: 1px solid if($variant=='light', $menu_border, transparentize(white, 0.8)); }
 
   box-shadow: $popover_shadow;
 
