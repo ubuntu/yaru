@@ -1063,6 +1063,20 @@ toolbar.inline-toolbar toolbutton:backdrop {
   }
 }
 
+%jet_popover_button {
+  background-color: transparent;
+  &.suggested-action:not(:disabled):not(:active):not(:hover) { background-color: $success_color; border-color: $success_color; }
+  &.destructive-action:not(:disabled):not(:active):not(:hover) { background-color: $destructive_color; border-color: $destructive_color; }
+  &, &:hover, &:active, &:checked { box-shadow: none; }
+  &:hover, &:checked:hover { background-color: lighten($inkstone, 2%); border-color: lighten($inkstone, 2%); }
+  &:checked { background-color: $inkstone; border-color: $inkstone; }
+  &:active, &:checked:active { background-color: lighten($inkstone, 5%) }
+  &:backdrop {
+    check, radio { background-color: transparent; }
+    &:hover { background-color: lighten($backdrop_menu_color, 2%); } 
+  }
+}
+
 /* menu buttons */
 modelbutton.flat,
 .menuitem.button.flat {
@@ -2419,19 +2433,7 @@ popover.background {
     scrollbar slider { background-color: $scrollbar_slider_color; }    
     entry selection { background-color: $text_selection; color: $fg_color; }    
     entry, button { border-color: darken($inkstone,1%); &:backdrop { border-color: transparent; } }
-    button, button.circular, button.flat, button.text-button, modelbutton {
-      background-color: transparent;
-      &.suggested-action:not(:disabled):not(:active):not(:hover) { background-color: $success_color; border-color: $success_color; }
-      &.destructive-action:not(:disabled):not(:active):not(:hover) { background-color: $destructive_color; border-color: $destructive_color; }
-      &, &:hover, &:active, &:checked { box-shadow: none; }
-      &:hover, &:checked:hover { background-color: lighten($inkstone, 2%); border-color: lighten($inkstone, 2%); }
-      &:checked { background-color: $inkstone; border-color: $inkstone; }
-      &:active, &:checked:active { background-color: lighten($inkstone, 5%) }
-      &:backdrop {
-        check, radio { background-color: transparent; }
-        &:hover { background-color: lighten($backdrop_menu_color, 2%); } 
-      }
-    }
+    button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
   }
 }
 
@@ -3785,7 +3787,7 @@ row {
   color: $text_color;
   border-radius: $medium_radius;
   background-color: $menu_color;
-  border: 1px solid $borders_color;
+  border: 1px solid $popover_border;
   box-shadow: $popover_shadow;
 
   &:backdrop {
@@ -3795,9 +3797,9 @@ row {
     transition: $backdrop_transition;
   }
 
-  button.flat:hover {
-      @include button(hover, $menu_color);
-      border-color: $borders_color;
+  @if $variant=='dark' { 
+    box button, button.flat, button.text-button { @extend %jet_popover_button; } 
+    button.flat { border-color: transparent; } 
   }
 
   border { border: none; }
