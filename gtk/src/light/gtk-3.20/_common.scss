@@ -4563,7 +4563,11 @@ cursor-handle {
 
     &.insertion-cursor#{$s}:dir(ltr), &.insertion-cursor#{$s}:dir(rtl) {
       $_url: 'assets/slider-horz-scale-has-marks-above#{$as}#{$asset_suffix}';
-      -gtk-icon-source: -gtk-scaled(url('#{$_url}.png'),
+      -gtk-icon-source: none;
+      background-repeat: no-repeat;
+      background-size: 16px 24px;
+      background-position: center -2px;
+      background-image: -gtk-scaled(url('#{$_url}.png'),
                                     url('#{$_url}@2.png'));
     }
   }
