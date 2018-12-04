@@ -105,15 +105,16 @@ list.tweak-categories separator {
 
   paned > separator {
     // separator between sidebar and main window view
-    &, &:backdrop {
-      $_alpha: if($variant=='light', 0.08, 0.16);
-      background-image: image(image(rgba(0, 0, 0, $_alpha)));
-    }
+    $_alpha: if($variant=='light', 0.08, 0.16);
+    $_separator_color: rgba(0, 0, 0, $_alpha);
+
+    background-image: image($_separator_color);
+    &:backdrop { background-image: image(transparentize($borders_color, 0.7)); }
   }
 
   .nautilus-canvas-item.dim-label,
   .nautilus-list-dim-label {
-      color: if($variant==light, lighten($text_color,30%), darken($text_color,25%));
+      color: if($variant==light, lighten($text_color, 30%), darken($text_color, 25%));
       &:selected { color: transparentize($selected_fg_color, 0.3); }
   }
 
@@ -592,8 +593,8 @@ normal-button {
  * Evolution *
  ***********/
 
- assistant.background scrolledwindow .vertical checkbutton { 
+ assistant.background scrolledwindow .vertical checkbutton {
    // checkbox is clipped but this is undetectable till it gets keyboard focus
    // so we're pushing it to the right to have the focus ring be displayed properly
-   margin-left: 1px 
+   margin-left: 1px
 }
