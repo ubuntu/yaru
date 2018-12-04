@@ -531,20 +531,14 @@ headerbar button image ~ window decoration ~ menu separator {
  * Firefox *
  ***********/
 #MozillaGtkWidget.background  {
-  > widget {
-    > scrolledwindow > textview {
-      text {
-        &:selected { @extend %selected_text; border-color: $selected_bg_color;}
-      }
-    }
-  }
-
   headerbar.titlebar {
-    // Remove the round corners until firefox fixed the white border bleed at the top edges
+    // Removes the round corners until firefox fixed the white border bleed at the top edges
+    // REMOVE THIS when firefox 65 is in the ubuntu repos on the end of Januar 2019
     border-radius: 0;
   }
 
-  // Remove rounded menus because the border bleeds in firefox
+  // Removes rounded menus because the border bleeds in firefox
+  // REMOVE THIS when firefox supports rounded menus
   menu, .menu,.context-menu { border-radius: 0; }
 
   // Adapt scrollbars a bit more to the GTK Scrollbar styling
@@ -611,4 +605,4 @@ normal-button {
    // checkbox is clipped but this is undetectable till it gets keyboard focus
    // so we're pushing it to the right to have the focus ring be displayed properly
    margin-left: 1px 
-  }
+}
