@@ -15,12 +15,21 @@ if [ -n "${XDG_DATA_DIRS##*/snap/communitheme/current/share/*}" ]; then
     export XDG_DATA_DIRS
 fi
 
-gtk2_communitheme="/snap/communitheme/current/share/themes/Communitheme-dark/gtk-2.0/gtkrc"
+gtk2_communitheme_light="/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc"
+gtk2_communitheme_dark="/snap/communitheme/current/share/themes/Communitheme-dark/gtk-2.0/gtkrc"
+
 if [ -z "$GTK2_RC_FILES" ]; then
-    GTK2_RC_FILES=$gtk2_communitheme
-elif [ -n "${GTK2_RC_FILES##*$gtk2_communitheme*}" ]; then
-    GTK2_RC_FILES=$gtk2_communitheme:$GTK2_RC_FILES
+    GTK2_RC_FILES=$gtk2_communitheme_light:$gtk2_communitheme_dark
 fi
+
+if [ -n "${GTK2_RC_FILES##*$gtk2_communitheme_dark*}" ]; then
+    GTK2_RC_FILES=$gtk2_communitheme_dark:$GTK2_RC_FILES
+fi
+
+if [ -n "${GTK2_RC_FILES##*$gtk2_communitheme_light*}" ]; then
+    GTK2_RC_FILES=$gtk2_communitheme_light:$GTK2_RC_FILES
+fi
+
 export GTK2_RC_FILES
 
 gnome-session --session=ubuntu
