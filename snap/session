@@ -17,9 +17,9 @@ fi
 
 current=$(gsettings get org.gnome.desktop.interface gtk-theme)
 
-if [ $current == 'Communitheme' ]; then
+if [ $current == "'Communitheme'" ]; then
   gtk2_communitheme="/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc"
-elif [ $current == 'Communitheme-dark' ]; then
+elif [ $current == "'Communitheme-dark'" ]; then
   gtk2_communitheme="/snap/communitheme/current/share/themes/Communitheme-dark/gtk-2.0/gtkrc"
 fi
 
@@ -32,4 +32,5 @@ if [ -n $gtk2_communitheme ]; then
   export GTK2_RC_FILES
 fi
 
-gnome-session --session=ubuntu
+#gnome-session --session=ubuntu
+echo $GTK2_RC_FILES
