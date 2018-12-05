@@ -32,5 +32,4 @@ if [ -n $gtk2_communitheme ]; then
   export GTK2_RC_FILES
 fi
 
-#gnome-session --session=ubuntu
-echo $GTK2_RC_FILES
+gnome-session --session=ubuntu
