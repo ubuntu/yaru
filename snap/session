@@ -15,8 +15,15 @@ if [ -n "${XDG_DATA_DIRS##*/snap/communitheme/current/share/*}" ]; then
     export XDG_DATA_DIRS
 fi
 
-gtk2_communitheme="/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc"
-if [ -z "$GTK2_RC_FILES" ]; then
+current=$(gsettings get org.gnome.desktop.interface gtk-theme)
+
+if [ $current == 'Communitheme' ]; then
+  gtk2_communitheme="/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc"
+elif [ $current == 'Communitheme-dark' ]; then
+  gtk2_communitheme="/snap/communitheme/current/share/themes/Communitheme-dark/gtk-2.0/gtkrc"
+fi
+
+if [ -n $gtk2_communitheme ] && [ -z "$GTK2_RC_FILES" ]; then
     GTK2_RC_FILES=$gtk2_communitheme
 elif [ -n "${GTK2_RC_FILES##*$gtk2_communitheme*}" ]; then
     GTK2_RC_FILES=$gtk2_communitheme:$GTK2_RC_FILES
