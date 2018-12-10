@@ -333,6 +333,8 @@ entry {
 
         &:focus { @include entry(focus, $e_color); }
 
+        &:not(:focus) { border-color: $borders_color; }
+        &:backdrop { border-color: $backdrop_borders_color; }
         selection { background-color: $e_color; }
       }
     }
