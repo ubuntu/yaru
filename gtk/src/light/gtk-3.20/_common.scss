@@ -42,6 +42,7 @@ $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
 $popover_shadow: 0 2px 5px transparentize(black, 0.75);
+$menu_border: if($variant=='light', transparentize($borders_color, 0.2) , transparentize(white, 0.88));
 
 /***************
  * Base States *
@@ -1061,6 +1062,20 @@ toolbar.inline-toolbar toolbutton:backdrop {
       text-shadow: none;
       -gtk-icon-shadow: none;
     }
+  }
+}
+
+%jet_popover_button {
+  background-color: transparent;
+  &.suggested-action:not(:disabled):not(:active):not(:hover) { background-color: $success_color; border-color: $success_color; }
+  &.destructive-action:not(:disabled):not(:active):not(:hover) { background-color: $destructive_color; border-color: $destructive_color; }
+  &, &:hover, &:active, &:checked { box-shadow: none; }
+  &:hover, &:checked:hover { background-color: lighten($inkstone, 2%); border-color: lighten($inkstone, 2%); }
+  &:checked { background-color: $inkstone; border-color: $inkstone; }
+  &:active, &:checked:active { background-color: lighten($inkstone, 5%) }
+  &:backdrop {
+    check, radio { background-color: transparent; }
+    &:hover { background-color: lighten($backdrop_menu_color, 2%); } 
   }
 }
 
@@ -2273,7 +2288,7 @@ menu,
   padding: 8px 0;
   background-color: $menu_color;
   color: $text_color;
-  border: 1px solid $borders_color; // adds borders in a non composited env
+  border: 1px solid if($variant=='light', $borders_color, $menu_border);
   border-radius: $small_radius;
 
   .csd & { border: none; }  // axes borders in a composited env
@@ -2349,6 +2364,7 @@ menu,
       border-color: transparent ;
     }
   }
+  @if $variant=='dark' { separator { background-color: darken($menu_border, 12%); } }
 }
 
 menuitem {
@@ -2373,7 +2389,7 @@ popover.background {
   border-radius: $medium_radius;
   background-color: $menu_color;
 
-  .csd &, & { border: 1px solid $borders_color; }
+  .csd &, & { border: 1px solid if($variant=='light', $menu_border, transparentize(white, 0.8)); }
 
   box-shadow: $popover_shadow;
 
@@ -2416,6 +2432,15 @@ popover.background {
   radiobutton radio, checkbutton check {
     &:dir(ltr) { margin-right: 3px; }
     &:dir(rtl) { margin-left: 3px; }
+  }
+
+  @if $variant=='dark' {
+    separator { background-color: darken($menu_border,12%); &:backdrop { background-color: transparent; } }
+    * { background-color: transparent; }
+    scrollbar slider { background-color: $scrollbar_slider_color; }    
+    entry selection { background-color: $text_selection; color: $fg_color; }    
+    entry, button { border-color: darken($inkstone,1%); &:backdrop { border-color: transparent; } }
+    button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
   }
 }
 
@@ -3769,7 +3794,7 @@ row {
   color: $text_color;
   border-radius: $medium_radius;
   background-color: $menu_color;
-  border: 1px solid $borders_color;
+  border: 1px solid $menu_border;
   box-shadow: $popover_shadow;
 
   &:backdrop {
@@ -3779,9 +3804,9 @@ row {
     transition: $backdrop_transition;
   }
 
-  button.flat:hover {
-      @include button(hover, $menu_color);
-      border-color: $borders_color;
+  @if $variant=='dark' { 
+    box button, button.flat, button.text-button { @extend %jet_popover_button; } 
+    button.flat { border-color: transparent; } 
   }
 
   border { border: none; }
@@ -4436,7 +4461,7 @@ decoration {
   .csd.popup & {
     border-radius: $small_radius;
     box-shadow: $popover_shadow,
-                0 0 0 1px transparentize($borders_color, 0.2);
+                0 0 0 1px $menu_border;
   }
 
   tooltip.csd & {
