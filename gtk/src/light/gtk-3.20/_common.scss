@@ -1722,41 +1722,6 @@ headerbar {
       &:not(:last-child) { margin-right: 4px; }
     }
 
-    %underline_focus_headerbar {
-      // underline_focus using the appropriate headerbar colors
-      // this is used for the stackswitcher and pathbar as there are pathbars NOT in the headerbar
-      @extend %underline_focus_effect;
-
-      // not using include button, since we don't need all the other styling
-      $c: $hb_pathbar_bg;
-      background-color: $c;
-      color: $headerbar_text_color;
-
-      &:hover {
-        box-shadow: inset 0 -2px transparentize($headerbar_text_color, 0.5);
-        &:backdrop { box-shadow: inset 0 -2px transparentize($headerbar_text_color, 0.7); }
-      }
-
-      &:active { box-shadow: inset 0 -2px $headerbar_text_color; }
-
-      &:checked {
-        color: $selected_fg_color;
-        box-shadow: inset 0 -2px $selected_bg_color;
-
-        &:hover { box-shadow: inset 0 -2px mix($selected_fg_color, $selected_bg_color, 10%); }
-      }
-
-      &:backdrop {
-        background-color: _backdrop_color($c);
-        color: $backdrop_headerbar_insensitive_color;
-
-        &:checked {
-          color: $backdrop_headerbar_fg_color;
-          box-shadow: inset 0 -2px _backdrop_color($selected_bg_color);
-        }
-      }
-    }
-
     .stack-switcher.linked button,
     buttonbox.linked button,
     buttonbox.linked button.text-button ~ button {
