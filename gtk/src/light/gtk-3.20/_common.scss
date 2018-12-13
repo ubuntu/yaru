@@ -2289,7 +2289,8 @@ menu,
   &:backdrop { background-color: $backdrop_menu_color;  color: $backdrop_text_color; }
 
   menuitem {
-    transition: all 100ms $ease-out-quad;
+    // a transition here causes no visible bg change for some popovers
+    // transition: all 100ms $ease-out-quad; 
     min-height: 16px;
     min-width: 36px;
     padding: 5px 6px;
