@@ -430,6 +430,7 @@
     $_bg: null;
 
     @if $_headerbar { $_bg: lighten($backdrop_headerbar_bg_color, 5%); } 
+    @else if $c==$menu_color { $_bg: if($variant=='light', darken($c, 12%), $headerbar_bg_color); }
     @else { $_bg: darken($c, if($variant == 'light', 12%, 7%)); }
 
     $_bc: if($c == $button_bg_color, if($variant=='light', $backdrop_borders_color, darken($backdrop_borders_color, 2%)),_backdrop_color(_border_color($c)));
