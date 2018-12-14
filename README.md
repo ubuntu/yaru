@@ -2,8 +2,8 @@
 
 Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch=master)](https://travis-ci.org/ubuntu/yaru)
 
-Yaru theme, which is going to be the default theme for ubuntu, entirely backed by the community.
-This is the theme that is shaped by the community on the Ubuntu hub, which will turn into the default ubuntu theme.
+Yaru theme is the default theme for Ubuntu, entirely backed by the community.
+This is the theme that is shaped by the community on the Ubuntu hub, turned into the default theme starting from Ubuntu 18.10 Cosmic Cuttlefish.
 
 More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
 
