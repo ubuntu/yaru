@@ -35,7 +35,7 @@ fi
 docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
 # stop if this was just a test build without any snap pushed
-[ -z "$channel" ] && exit 0
+[ -z "$channel" ] && echo "test build, no snap pushed, exiting" && exit 0
 
 # build now gtk-common-themes
 # FIXME: we won't need this once snapd can accept and auto-install theme snaps.
