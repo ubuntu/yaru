@@ -21,6 +21,8 @@ if [ $current = "'Communitheme'" ]; then
   GTK2_RC_FILES="/snap/communitheme/current/share/themes/Communitheme/gtk-2.0/gtkrc"
 elif [ $current = "'Communitheme-dark'" ]; then
   GTK2_RC_FILES="/snap/communitheme/current/share/themes/Communitheme-dark/gtk-2.0/gtkrc"
+else
+  GTK2_RC_FILES=""
 fi
 
 export GTK2_RC_FILES
