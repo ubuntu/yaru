@@ -102,7 +102,7 @@ StEntry {
   //&:hover { @include entry(hover);}
   &:focus { @include entry(focus);}
   &:insensitive { @include entry(insensitive);}
-  selection-background-color: $selected_bg_color;
+  selection-background-color: darken($blue,10%);
   selected-color: $selected_fg_color;
   StIcon.capslock-warning {
     icon-size: 16px;
@@ -217,7 +217,7 @@ StScrollBar {
     padding: 24px;
   }
   .run-dialog-entry { width: 20em; margin-bottom: 6px;
-    &:focus { border-color: $selected_bg_color; }
+    &:focus { border-color: $focus_color; }
   }
   .run-dialog-error-box {
     padding-top: 16px;
@@ -1379,7 +1379,7 @@ StScrollBar {
 
     &:focus {
       border-width: 1px;
-      border-color: $selected_bg_color;
+      border-color: $focus_color;
     }
 
     .search-entry-icon { icon-size: 1em; padding: 0 4px; color: transparentize($fg_color,.3); }
@@ -1949,8 +1949,8 @@ StScrollBar {
     $c: darken($light_bg_color, 10%);
     $tc: $dark_fg_color;
     @include button(normal, $c, $tc); box-shadow: none; 
-    &:active { @include button(active, $c, $tc); box-shadow: inset 0px 0px 0px 1px $selected_bg_color; }
-    &:focus { @include button(focus, $c, $tc); }
+    &:active { @include button(active, $c, $tc); }
+    &:focus { box-shadow: none; border-color: $focus_color;  }
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
     &:insensitive { 
@@ -1966,7 +1966,7 @@ StScrollBar {
       @include button(normal, $c:$success_color); box-shadow: none; 
       &:hover { @include button(hover, $c:$success_color); }
       &:focus { @include button(focus, $c:$success_color); }
-      &:active { @include button(active, $c:$success_color); box-shadow: inset 0px 0px 0px 1px white; }
+      &:active { @include button(active, $c:$success_color); }
       &:focus:hover { @include button(focus-hover, $c:$success_color ); }
       &:insensitive { @include button(insensitive, $c:$success_color); }
     }
@@ -2123,11 +2123,7 @@ StScrollBar {
 }
 
 #lockDialogGroup {
-  background: none;
-  background-color: none;
-  background-gradient-direction: vertical;
-  background-gradient-start: #6D2169;
-  background-gradient-end: #370026;
+  background-color: #2C001E;
 }
 
 #screenShieldNotifications {

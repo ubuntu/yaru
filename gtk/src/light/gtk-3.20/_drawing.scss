@@ -33,14 +33,13 @@
 /***********
  * Entries *
  ***********/
-@function entry_focus_border($fc:$selected_bg_color) {
-  @if $variant == 'light' { @return $fc; }
-  @else { @return if($fc==$selected_bg_color, _border_color($selected_bg_color), darken($fc, 35%)); }
+@function entry_focus_border($fc:$focus_color) {
+  @return $fc;
 }
 
-@function entry_focus_shadow($fc:$selected_bg_color) { @return 0 0 2px 2px transparentize($fc, .8); }
+@function entry_focus_shadow($fc:$focus_color) { @return 0 0 2px 2px transparentize($fc, .8); }
 
-@mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $fg_color, $edge: none) {
+@mixin entry($t, $fc:$focus_color, $c: $base_color, $tc: $fg_color, $edge: none) {
 //
 // Entries drawing function
 //
@@ -69,14 +68,14 @@
       border-top-color: $_bc;
       box-shadow: none;
     } @else {
-      border-top-color: darken($_bc, if($c != $base_color, 12%, 20%));
+      border-top-color: darken($_bc, if($c != $base_color, 12%, if($variant==light, 20%, 10%)));
       @include _shadows($_entry_edge);
     }
   }
   @if $t==focus {
     // selected entry
     @include _shadows($_entry_edge);
-    border-color: entry_focus_border($fc);
+    border-color: $fc;
   }
   @if $t==insensitive {
     // insensitive entry
@@ -128,7 +127,7 @@
   @if $t==osd-focus {
     // osd-focus entry
     color: $osd_text_color;
-    border-color: $selected_bg_color;
+    border-color: $focus_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
   }
@@ -253,7 +252,7 @@
 
     @if $_headerbar               { $_perc: 15%;  }
     @else if is_special_color($c) { $_perc: 5%;  }
-    @else                         { $_perc: if($variant=='light', 25%, 1%); }
+    @else                         { $_perc: if($variant=='light', 25%, 2%); }
 
     $_bg: lighten($c, $_perc);
 
@@ -264,7 +263,7 @@
     box-shadow: if($flat, none,  0 1px transparentize(black, 0.85));
 
     @if $flat == false {
-      $_perc: if(is_special_color($c), 12%, 15%);
+      $_perc: if(is_special_color($c), 12%, if($variant=='light', 15%, 6%));
       border-bottom-color: darken($_border, $_perc);
     }
   }
@@ -273,22 +272,16 @@
     // pressed button
 
     $_bg: null;
-    $_box_shadow: null;
-    $_border_top_color: null;
 
     @if $_headerbar {
       $_bg: lighten($c, 10%);
       $_border: $_bg;
     } @else if $c == $button_bg_color {
       $_bg: darken($c, if($variant=='light', 7%, 10%));
-      $_border: $borders_color;
-      $_border_top_color: darken($_border, if($variant=='light', 25%, 8%));
-      $_box_shadow: inset 0 1px 1px 0px rgba(0, 0, 0, 0.05);
+      $_border: if($variant=='light', $borders_color, darken($borders_color, 2%));
     } @else {
       $_bg: darken($c, 10%);
       $_border: darken($c, 15%);
-      $_border_top_color: darken($_border, 5%);
-      $_box_shadow: none;
 
       @if $flat {
         $_border: $_bg;
@@ -298,8 +291,7 @@
 
     background-color: $_bg;
     border-color: $_border;
-    border-top-color: $_border_top_color;
-    box-shadow: $_box_shadow;
+    box-shadow: none;
   }
 
   @else if $t==active-hover {
@@ -371,14 +363,8 @@
     $_bg: darken($_mix, 8%);
     background-color: $_bg;
 
-    @if $flat {
-      border-color: $_bg;
-      box-shadow: none;
-    } @else {
-      border-color: $insensitive_borders_color;
-      border-top-color: darken($insensitive_borders_color, 10%);
-      box-shadow: inset 0 1px 1px 0px rgba(0, 0, 0, if($c==$headerbar_bg_color, .15, 0.05));
-    }
+    @if $flat { border-color: $_bg; } 
+    @else { border-color: $insensitive_borders_color; }
 
     label, & { color: if($c != $button_bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color); }
   }
@@ -429,7 +415,7 @@
     @if $flat {
       background-color: $_bg;
     } @else {
-      border-bottom-color: darken($_border, if(is_special_color($c), 12%, 15%));
+      border-bottom-color: darken($_border, if(is_special_color($c), 12%, if($variant=='light', 15%, 6%)));
     }
   }
 
@@ -437,21 +423,14 @@
     // backdrop pushed button
 
     $_bg: null;
-    $_border_top_color: null;
 
-    @if $_headerbar {
-      $_bg: lighten($backdrop_headerbar_bg_color, 5%);
-      $_border_top_color: $_bg;
-    } @else {
-      $_bg: darken($c, if($variant == 'light', 12%, 7%));
-      $_border_top_color: darken($_border, if($variant == 'light', 10%, 2%));
-    }
+    @if $_headerbar { $_bg: lighten($backdrop_headerbar_bg_color, 5%); } 
+    @else { $_bg: darken($c, if($variant == 'light', 12%, 7%)); }
 
-    $_bc: if($c == $button_bg_color, $backdrop_borders_color, _backdrop_color(_border_color($c)));
+    $_bc: if($c == $button_bg_color, if($variant=='light', $backdrop_borders_color, darken($backdrop_borders_color, 2%)),_backdrop_color(_border_color($c)));
 
     background-color: $_bg;
     border-color: if($flat, $_bg, $_bc);
-    border-top-color: $_border_top_color;
     box-shadow: none;
 
     label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
@@ -495,14 +474,11 @@
 
     $_bc: if($c == $button_bg_color, $backdrop_borders_color, _backdrop_color(_border_color($c)));
     border-color: if($flat, $_bg, $_bc);
-    border-top-color: darken($_border, $_perc);
 
     label { color: if($c == $button_bg_color, transparentize($backdrop_text_color, 0.5), mix($tc, $_bg, 35%)); }
   }
 
   @else if $t==osd {
-    // normal osd button
-
     $_bg: if($c == $button_bg_color, $osd_button_bg_color, transparentize($c, 0.5));
 
     color: $osd_fg_color;
@@ -513,9 +489,7 @@
   }
 
   @else if $t==osd-hover {
-    // active osd button
-
-    $_bg: if($c == $button_bg_color, lighten($osd_button_bg_color, 12%), transparentize($c, 0.3));
+    $_bg: if($c == $button_bg_color, lighten($button_bg_color, 10%), transparentize($c, 0.3));
 
     color: white;
     border-color: _border_color($_bg);
@@ -525,9 +499,7 @@
   }
 
   @else if $t==osd-active {
-    // active osd button
-
-    $_bg: if($c != $button_bg_color, $c, $osd_button_bg_color);
+    $_bg: $c;
 
     color: white;
     border-color: _border_color($_bg);
@@ -537,8 +509,6 @@
   }
 
   @else if $t==osd-insensitive {
-    // insensitive osd button
-
     color: $osd_insensitive_fg_color;
     background-color: $osd_insensitive_bg_color;
     border-color: _border_color($osd_insensitive_bg_color);
@@ -547,9 +517,7 @@
   }
 
   @else if $t==osd-backdrop {
-    // backdrop osd button
-
-    $_bg: if($c != $button_bg_color, transparentize($c, 0.5), $osd_bg_color);
+    $_bg: if($c == $button_bg_color, $osd_bg_color, transparentize($c, 0.5));
 
     color: $osd_fg_color;
     border-color: _border_color($_bg);

@@ -17,7 +17,7 @@ parts:
   theme:
     source: .
     plugin: meson
-    build-packages: ["sassc"]
+    build-packages: ["sassc", "libglib2.0-dev"]
     meson-parameters: ["--prefix=/"]
     override-build: |
       # Rename the theme name to previous name for backward compatibility

@@ -105,15 +105,16 @@ list.tweak-categories separator {
 
   paned > separator {
     // separator between sidebar and main window view
-    &, &:backdrop {
-      $_alpha: if($variant=='light', 0.08, 0.16);
-      background-image: image(image(rgba(0, 0, 0, $_alpha)));
-    }
+    $_alpha: if($variant=='light', 0.08, 0.16);
+    $_separator_color: rgba(0, 0, 0, $_alpha);
+
+    background-image: image($_separator_color);
+    &:backdrop { background-image: image(transparentize($borders_color, 0.7)); }
   }
 
   .nautilus-canvas-item.dim-label,
   .nautilus-list-dim-label {
-      color: if($variant==light, lighten($text_color,30%), darken($text_color,25%));
+      color: if($variant==light, lighten($text_color, 30%), darken($text_color, 25%));
       &:selected { color: transparentize($selected_fg_color, 0.3); }
   }
 
@@ -531,26 +532,23 @@ headerbar button image ~ window decoration ~ menu separator {
  * Firefox *
  ***********/
 #MozillaGtkWidget.background  {
-  > widget {
-    > scrolledwindow > textview {
-      text {
-        &:selected { @extend %selected_text; border-color: $selected_bg_color;}
-      }
-    }
-  }
-
-  headerbar.titlebar {
-    // Remove the round corners until firefox fixed the white border bleed at the top edges
-    border-radius: 0;
-  }
-
-  > menu, .menu { border: none; } // Removed menu borders
-  > menu > menuitem { border-radius: 0; } // Removed rounded menu corners
+  // Removes rounded menus because the border bleeds in firefox
+  // REMOVE THIS when firefox supports rounded menus
+  menu, .menu,.context-menu { border-radius: 0; }
 
   // Adapt scrollbars a bit more to the GTK Scrollbar styling
   scrollbar {
     background-color: transparent;
     border-color: transparent;
+  }
+}
+
+/*********************	
+ * Chrome / Chromium *	
+ *********************/	
+ window.background.chromium {	
+  @if $variant=='dark' {
+   menu { border: 1px solid lighten($inkstone,1%); }
   }
 }
 
@@ -598,8 +596,8 @@ normal-button {
  * Evolution *
  ***********/
 
- assistant.background scrolledwindow .vertical checkbutton { 
+ assistant.background scrolledwindow .vertical checkbutton {
    // checkbox is clipped but this is undetectable till it gets keyboard focus
    // so we're pushing it to the right to have the focus ring be displayed properly
-   margin-left: 1px 
-  }
+   margin-left: 1px
+}
