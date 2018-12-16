@@ -282,8 +282,8 @@
       $_bg: darken($c, if($variant=='light', 7%, 10%));
       $_border: if($variant=='light', $borders_color, darken($borders_color, 2%));
     } @else if $c == $menu_color {
-      $_bg: if($variant=='light', darken($c, 10%), $headerbar_bg_color);
-      $_border: if($variant=='light', darken($c, 15%), $_bg);
+      $_bg: if($variant=='light', darken($c, 10%), lighten($c, 3%));
+      $_border: if($variant=='light', darken($c, 15%), darken($_bg, 30%));
     } @else {
       $_bg: darken($c, 10%);
       $_border: darken($c, 15%);
