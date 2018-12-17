@@ -2435,6 +2435,7 @@ popover.background {
     entry selection { background-color: $text_selection; color: $fg_color; }    
     entry, button { border-color: darken($inkstone,1%); &:backdrop { border-color: transparent; } }
     button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
+    switch { @include switch($dark_fill, $success_color); }
   }
 }
 
