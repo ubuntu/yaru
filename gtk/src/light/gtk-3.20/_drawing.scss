@@ -252,6 +252,7 @@
 
     @if $_headerbar               { $_perc: 15%;  }
     @else if is_special_color($c) { $_perc: 5%;  }
+    @else if $c==$menu_color      { $_perc: if($variant=='light', 25%, 20%); }
     @else                         { $_perc: if($variant=='light', 25%, 2%); }
 
     $_bg: lighten($c, $_perc);
@@ -279,6 +280,9 @@
     } @else if $c == $button_bg_color {
       $_bg: darken($c, if($variant=='light', 7%, 10%));
       $_border: if($variant=='light', $borders_color, darken($borders_color, 2%));
+    } @else if $c == $menu_color {
+      $_bg: if($variant=='light', darken($c, 10%), lighten($c, 3%));
+      $_border: if($variant=='light', darken($c, 15%), darken($_bg, 30%));
     } @else {
       $_bg: darken($c, 10%);
       $_border: darken($c, 15%);
@@ -409,7 +413,7 @@
 
     color: $tc;
 
-    border-color: if($flat, $_bg, $_border);
+    border-color: if($flat, $_bg, $borders_color);
     box-shadow: if($flat, none, 0 1px transparentize(black, 0.85));
 
     @if $flat {
@@ -425,6 +429,7 @@
     $_bg: null;
 
     @if $_headerbar { $_bg: lighten($backdrop_headerbar_bg_color, 5%); } 
+    @else if $c==$menu_color { $_bg: if($variant=='light', darken($c, 12%), $headerbar_bg_color); }
     @else { $_bg: darken($c, if($variant == 'light', 12%, 7%)); }
 
     $_bc: if($c == $button_bg_color, if($variant=='light', $backdrop_borders_color, darken($backdrop_borders_color, 2%)),_backdrop_color(_border_color($c)));

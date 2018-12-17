@@ -1492,8 +1492,8 @@ toolbar {
 
   button.flat {
     @each $state, $t, $is_flat in ("", "normal", true),
-                                  (":hover", "hover", false),
-                                  (":hover:backdrop", "backdrop-hover", false),
+                                  (":hover, &:hover:checked", "hover", false),
+                                  (":hover:backdrop, &:hover:backdrop:checked", "backdrop-hover", false),
                                   (":active, &:checked", "active", false),
                                   (":disabled", "insensitive", true),
                                   (":disabled:active, &:disabled:checked", "insensitive-active", false),
