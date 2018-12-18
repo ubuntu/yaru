@@ -1699,7 +1699,7 @@ StScrollBar {
       @extend %light_entry
     }
 
-    .notification-icon { padding: 5px; }
+    .notification-icon { padding: 5px; -st-icon-style: symbolic; }
     .notification-content { padding: 5px; spacing: 5px; }
     .secondary-icon { icon-size: 1.14286em; }
     .notification-actions {
