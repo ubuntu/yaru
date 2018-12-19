@@ -1692,14 +1692,15 @@ StScrollBar {
     }
     &:hover { background: $light_base_color; }
     .message-icon-bin > StIcon {
-     color: $dark_fg_color;
+      color: $dark_fg_color;
+      -st-icon-style: symbolic;
     }
 
     StEntry {
       @extend %light_entry
     }
 
-    .notification-icon { padding: 5px; -st-icon-style: symbolic; }
+    .notification-icon { padding: 5px; }
     .notification-content { padding: 5px; spacing: 5px; }
     .secondary-icon { icon-size: 1.14286em; }
     .notification-actions {
