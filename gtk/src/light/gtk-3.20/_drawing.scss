@@ -563,7 +563,8 @@
   $_dim_background: if($variant == 'light', $dark_fill, $slate);
 
   @if $t==normal  {
-    background-color: $c; //if($_checked, $c, if($variant == 'light', $c, transparent));
+    background-clip: if($_checked, border-box, padding-box);
+    background-color: $c;
     border-color: $_border_color;
     box-shadow: 0 1px transparentize(black, 0.95);
     color: $tc;
