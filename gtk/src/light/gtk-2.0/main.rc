@@ -2338,7 +2338,7 @@ style "treeview_header_button" {
 
   engine "pixmap" {
     image {
-      function = BOX
+      function = SHADOW
       state    = NORMAL
       file     = "assets/treeview-header-button.png"
       border   = {4, 4, 4, 4}
