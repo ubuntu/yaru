@@ -2427,7 +2427,7 @@ popover.background {
 
   @if $variant=='dark' {
     separator { background-color: darken($menu_border,12%); &:backdrop { background-color: transparent; } }
-    *:not(fill):not(highlight):not(trough):not(slider) { background-color: transparent; }
+    *:not(fill):not(highlight):not(trough):not(slider):not(switch) { background-color: transparent; }
     scrollbar slider { background-color: $scrollbar_slider_color; }
     entry selection { background-color: $text_selection; color: $fg_color; }
     entry, button { border-color: darken($inkstone,1%); &:backdrop { border-color: transparent; } }
