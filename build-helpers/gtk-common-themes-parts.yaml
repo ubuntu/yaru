@@ -37,6 +37,6 @@ parts:
       [ -d squashfs-root/ ] || exit 1
       cp -a squashfs-root/* $SNAPCRAFT_PART_INSTALL/
       # remove everything related to communitheme and yaru
-      rm -rf $SNAPCRAFT_PART_INSTALL/share/*/*ommunitheme
+      rm -rf $SNAPCRAFT_PART_INSTALL/share/*/*ommunitheme*
       rm -rf $SNAPCRAFT_PART_INSTALL/share/icons/Suru
       rm -rf $SNAPCRAFT_PART_INSTALL/share/*/Yaru*
