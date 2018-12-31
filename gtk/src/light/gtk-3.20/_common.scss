@@ -26,7 +26,7 @@
   // to the adwaita engine: using real CSS properties is faster,
   // and we don't use any outlines for now.
 
-  outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
+  outline-color: gtkalpha(currentColor, 0.3);
   outline-style: dashed;
   outline-offset: -3px;
   outline-width: 1px;
@@ -543,7 +543,6 @@ button {
     padding: 2px 6px;
     border: 1px solid;
     border-radius: $small_radius;
-    outline-color: $focus_color;
     outline-style: dashed;
     outline-offset: -3px;
     -gtk-outline-radius: $small_radius;
@@ -599,7 +598,7 @@ button {
         @include button(backdrop);
 
         transition: $backdrop_transition;
-        outline-color: $focus_color;
+        outline-color: gtkalpha(currentColor, 0.3);
         -gtk-icon-effect: none;
 
         &:active,
@@ -3757,7 +3756,6 @@ row {
   transition: all 150ms $ease-out-quad;
 
   &:not(:selected) {
-    outline-color: $focus_color;
     &:not(:backdrop):hover { background-color: $base_hover_color; }
     &:not(:backdrop):active { background-color: $base_active_color; }
   }
