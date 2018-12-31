@@ -2427,9 +2427,9 @@ popover.background {
 
   @if $variant=='dark' {
     separator { background-color: darken($menu_border,12%); &:backdrop { background-color: transparent; } }
-    * { background-color: transparent; }
-    scrollbar slider { background-color: $scrollbar_slider_color; }    
-    entry selection { background-color: $text_selection; color: $fg_color; }    
+    *:not(fill):not(highlight):not(trough):not(slider):not(switch) { background-color: transparent; }
+    scrollbar slider { background-color: $scrollbar_slider_color; }
+    entry selection { background-color: $text_selection; color: $fg_color; }
     entry, button { border-color: darken($inkstone,1%); &:backdrop { border-color: transparent; } }
     button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
     switch { @include switch($dark_fill, $success_color); }
