@@ -102,7 +102,7 @@ StEntry {
   //&:hover { @include entry(hover);}
   &:focus { @include entry(focus);}
   &:insensitive { @include entry(insensitive);}
-  selection-background-color: darken($blue,10%);
+  selection-background-color: $selected_bg_color;
   selected-color: $selected_fg_color;
   StIcon.capslock-warning {
     icon-size: 16px;
@@ -1658,8 +1658,6 @@ StScrollBar {
 }
 
 %light_entry {
-  selection-background-color: $text_selection;
-  selected-color: $dark_fg_color;
     $_bg: $light_base_color;
     $_fg: $dark_fg_color;
     @include entry(normal, $tc: $_fg, $c: $_bg);
