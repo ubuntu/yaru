@@ -45,9 +45,9 @@ style "default" {
   GtkEntry::state-hint = 1
   GtkEntry::inner-border = {7, 7, 4, 5}
 
-  GtkPaned::handle-size = 9
-  GtkHPaned::handle-size = 9
-  GtkVPaned::handle-size = 9
+  GtkPaned::handle-size = 8
+  GtkHPaned::handle-size = 8
+  GtkVPaned::handle-size = 8
 
   GtkScrollbar::trough-border = 0
   GtkRange::trough-border     = 0
@@ -2338,7 +2338,7 @@ style "treeview_header_button" {
 
   engine "pixmap" {
     image {
-      function = BOX
+      function = SHADOW
       state    = NORMAL
       file     = "assets/treeview-header-button.png"
       border   = {4, 4, 4, 4}
