@@ -217,7 +217,7 @@ StScrollBar {
     padding: 24px;
   }
   .run-dialog-entry { width: 20em; margin-bottom: 6px;
-    &:focus { border-color: $focus_color; }
+    &:focus { border-color: $selected_bg_color; }
   }
   .run-dialog-error-box {
     padding-top: 16px;
@@ -1379,7 +1379,7 @@ StScrollBar {
 
     &:focus {
       border-width: 1px;
-      border-color: $focus_color;
+      border-color: $selected_bg_color;
     }
 
     .search-entry-icon { icon-size: 1em; padding: 0 4px; color: transparentize($fg_color,.3); }
@@ -1948,7 +1948,7 @@ StScrollBar {
     $tc: $dark_fg_color;
     @include button(normal, $c, $tc); box-shadow: none; 
     &:active { @include button(active, $c, $tc); }
-    &:focus { box-shadow: none; border-color: $focus_color;  }
+    &:focus { box-shadow: none; border-color: $selected_bg_color;  }
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
     &:insensitive { 

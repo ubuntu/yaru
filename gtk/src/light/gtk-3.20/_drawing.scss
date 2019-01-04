@@ -33,13 +33,13 @@
 /***********
  * Entries *
  ***********/
-@function entry_focus_border($fc:$focus_color) {
+@function entry_focus_border($fc:$selected_bg_color) {
   @return $fc;
 }
 
-@function entry_focus_shadow($fc:$focus_color) { @return 0 0 2px 2px transparentize($fc, .8); }
+@function entry_focus_shadow($fc:$selected_bg_color) { @return 0 0 2px 2px transparentize($fc, .8); }
 
-@mixin entry($t, $fc:$focus_color, $c: $base_color, $tc: $fg_color, $edge: none) {
+@mixin entry($t, $fc:$selected_bg_color, $c: $base_color, $tc: $fg_color, $edge: none) {
 //
 // Entries drawing function
 //
@@ -127,7 +127,7 @@
   @if $t==osd-focus {
     // osd-focus entry
     color: $osd_text_color;
-    border-color: $focus_color;
+    border-color: $selected_bg_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
   }

@@ -485,7 +485,7 @@ treeview entry {
     background-image: none;
     background-color: $base_color;
 
-    &:focus { border-color: $focus_color; }
+    &:focus { border-color: $selected_bg_color; }
   }
 }
 
