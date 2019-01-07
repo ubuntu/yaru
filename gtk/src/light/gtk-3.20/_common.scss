@@ -1747,7 +1747,7 @@ headerbar {
       }
     }
 
-    .path-bar.linked button {
+    .path-bar.linked button, .path-bar button {
       background-color: transparent;
       border-radius: 0;
       &:checked, &checked:active { 
@@ -3915,7 +3915,7 @@ filechooser {
     border-bottom: 1px solid $borders_color;
     &:backdrop { background: if($variant==light, darken($backdrop_bg_color, 5%), $backdrop_bg_color);}
 
-    .path-bar.linked button {
+    .path-bar.linked button, .path-bar button  {
       background: if($variant==light, darken($_bg, 10%), darken($_bg, 5%));
       &, & label { color: $text_color; }
       &:checked label { font-weight: 500; }
