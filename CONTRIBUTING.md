@@ -4,7 +4,7 @@ Yaru consists of one project with 3 distinct parts.
 
 - `gnome-shell` directory is the theme for GNOME Shell. This themes stuff like the calendar widget, the Ubuntu dock, the top panel, the login screen and more. It derives from upstream GNOME Shell theme.
 - `gtk` contains the themes GTK+2 and GTK+3. This specifies how applications like Files, Terminal, Ubuntu Software look. It derives from upstream Adwaita GTK+2 and GTK+3 themes.
-- `sound` contains all sound themes related information. Derives from 
+- `sound` contains all sound themes related information, combining both [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix).
 - `suru-icon-theme` contains all the icons, derives from the [Suru icon](https://snwh.org/suru) theme.
 
 ## Build and install themes from source
