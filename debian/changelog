@@ -1,3 +1,250 @@
+yaru-theme (18.10.8) UNRELEASED; urgency=medium
+
+  [ Carlo Lobrano ]
+  * dark gtk-2.0
+    - gtkrc: added dark colors
+    - fixed line
+    - fixed render-assets.sh permission
+    - assets: added button normal state
+    - assets: added button-hover
+    - assets: added button-insensitive
+    - assets: added button-active
+    - added entry widgets
+    - assets: fixed tabs and treeview headerbar
+    - external-assets: added checkbox unchecked
+    - external-assets: added radio unchecked
+    - assets: added pan (normal and insensitive)
+    - assets: added treeview-pan
+    - assets: added spin arrows
+    - assets: added spin button
+    - assets: added scale slider hover and active
+    - assets: added frame-notebook
+    - assets: fixed missin recoloring of spin buttons
+    - assets: fixed button insensitive border
+    - assets: fixed frame border
+    - assets: added transparent scrollbars
+    - assets: added handle horz + vert
+    - assets: added notebook-entries
+    - assets: added menu-radio and menu-checkbox
+    - main.rc: using menu-radio assets for radio checked
+    - assets: fixed frame-inline
+    - assets: fixed entry bleeding background
+    - assets: fixed menu-pan colors
+  * common/scale circular slider: made border transparent in dark variant
+  * shell common+dock: Fix dock opaque color and revert badge color
+  * shell/common: fixed auth dialog title style
+  * shell/common: Made dialog background brighter
+  * common/scale circular slider: made border transparent in dark variant
+  * Moved code-refactoring changes from 3.0 to 3.20 folder
+  * Fixed menu background and hover colors
+  * Added missing dependency in yaru part yaml
+  * Unify stackswitcher and buttonbox style
+  * Reuse all buttonbox code for stackswitcher
+  * Fixed missing hb button definition
+  * Use background property to set insertion-cursor icon
+  * Fixed insertion-cursor alignment
+  * re-enable -dark theme in snap
+  * testing snap session pointer to communitheme-dark
+  * Set both default and -dark Communitheme path to GTK2_RC_FILES env
+  * Update gtk-common-themes to release the -dark version as well
+  * Revert snap/session changes
+  * Fixed Nautilus dark backdrop separator color
+  * Attempt to set gtk2 them path according to current theme set
+  * Fixed set of GTK2_RC_FILES only when theme is Communitheme*
+  * Fix typo
+  * Remove test code
+  * Fixed comparison test
+  * Always set only one path to GTK2_RC_FILE
+  * treeview expander invert hover colors
+  * Fix linked entry+button combobox in error and warning state
+  * Do not darken error/warning border color in dark variant
+  * Remove unused underline_focus_headerbar
+  * Fix menu button hover
+  * Update README.md
+  * Add active button state for menu button
+  * Add toolbar button missing states
+  * Fix osd button active and active:hover states
+  * Unset GTK2_RC_FILES if current theme is not Communitheme*
+  * Make active button darker
+  * Change menu color to be the same as in gtk3
+  * Add proper svg image scaling and fix svg opacity
+  * Minor format adjustments
+  * Remove headerbar and menubar side borders
+  * Add solid bg to check and radio
+  * Fix glitches in non-straight lines
+  * Fix gtk2 treeview header double lines
+  * gtk2: Reduced GtkPaned handle size to remove the double line between panes
+  * Remove dark communitheme from gtk-common-themes-other snap target
+  * Fix transparent scale in jet popover
+  * Add switch to jet popover wildcard black list
+  * Renamed x-trash icon into application-x-trash
+  * Revert "Remake shutdown icon"
+
+  [ ubuntujaggers ]
+  * provide a gnome-mines icon
+  * provide a gnome-mines icon
+  * provide a gnome-aisleriot icon
+  * provide a corrected gnome-aisleriot icon
+  * provide a gnome-mahjongg icon
+  * provide a gnome-mahjongg icon
+  * setting baseplate layer of gnome-mines, gnome-aisleriot and gnome-mahjongg to be invisible rather than transparent
+  * providing corrected version of gnome-mahjongg icon with crisper edges on smaller sizes
+  * providing transmission icon
+  * providing transmission icon with better vertical alignment
+  * providing ubiquity icon
+  * providing improved transmission icon
+  * providing transmission icon with more improvements
+  * providing usb-creator-gtk icon
+  * providing usb-creator-gtk icon with restored shadow on small sizes
+  * providing usb-creator-gtk icon with correction in baseplate layer
+  * providing usb-creator-gtk icon with no progress bar
+  * providing better transmission icon
+  * providing better gnome-mahjongg icon with blue background
+  * providing revised usb-creator-grk icon
+  * providing aptdaemon-download icon
+  * providing more suru icons for ubiquity, gnome-mahjongg and usb-creator-gtk
+  * providing improved icon for gnome-aisleriot
+  * providing improved icon for aptdaemon-download
+  * providing icon for aptdaemon-download with clearer arrow
+  * providing better icons for gnome-mines and transmission
+  * removing transmission.svg pending further discussion
+  * adding the icon for shotwell
+  * adding the new full colour icon for user-desktop
+  * amending the source file of all the scalable monochrome icons to take the launcher buttons off the desktop icon so it matches the full colour user-desktop icon
+  * adding icons for libreoffice apps
+  * fixing baseplate on libreoffice-main
+  * fixing baseplate on libreoffice-main attempt no. 2
+  * seeing if git add -A adds new libreoffice-base icon
+  * adding the remaining LibreOffice icons after running the python script: writer, impress, draw, base, main
+  * adding svg for white firefox icon and all the pngs
+  * adding svg for dark blue firefox icon and all the pngs
+  * adding svg for network-server icon and all the pngs
+  * renaming the network glyph in source-symbolic to see if that works
+  * renaming the network glyph in source-symbolic to correct error in previous commit
+  * adding svg for thunderbird and all the pngs
+  * adding folders.svg with the new folder-remote icons plus all the pngs, and also a corrected version of source-symbolic.svg with the ethernet glyph renamed folder-remote.
+  * adding folders.svg with the new folder-remote concept plus pngs.  also committing a version of the source-symbolic svg which has the redundant ethernet port glyph removed.
+  * adding x-trash.svg plus pngs of different sizes.
+  * adding printer.svg plus pngs of different sizes.
+
+  [ Sam Hewitt ]
+  * new language icon; updated software properties icon
+  * added USB drive icon
+  * added usb-creator-gtk icon
+
+  [ feichtmeier ]
+  * Export jaggers svgs to pngs
+  * Use lighten($slate,5%) for neutral infobars
+  * bg_color for not important infobars & remove custom code
+  * Export @ubuntujaggers new shotwell icon
+  * Fix infobar branch merge
+  * Fix backdrop bg color for generic infobars (question/info)
+  * Style buttons in light dialogues
+  * Provide an insync-folder icon
+  * $blue as $focus_color
+  * Fix GDM focus ring
+  * Adapt suggested action buttons to blue, solid focus
+  * Use focus color for entries, comboxboxes
+  * Darken entries border-top color less for the dark theme
+  * Use less code
+  * Fix inkscape to not use flatpak
+  * Use a new user-desktop and user-desktop-sybolic icon by @ubuntujaggers
+  * Fully opague focus ring, dashed + -3px offset for gtk
+  * Remove the background and the bradius to avoid streched underline
+  * Normal font weight + header_fg_color for the checked button
+  * Style tag labels
+  * No orange underline for checked pathbar buttons
+  * Adapt backdrop
+  * Style entry tag with no border, slat bg and darker silk color
+  * Style the close button to become white on hover
+  * Don't change text color on hover
+  * Fix backdrop and checked:active
+  * Fix outline regressions introduced by PR #971
+  * Use the same purple bg color for GDM as Grub uses in Ubuntu
+  * Fixing entries to have a blue/dark blue selection for light/dark entries
+  * Provide an updated symlink list
+  * Symlink: aptdaemon-download.png -> update-notifier.png
+  * Jet menus and popovers
+  * Style jet app notifications for the dark theme
+  * Button hover and active refinements
+  * Remover border-top-color border-color difference for all button types and ...
+  * Rename popover_border to menu_color and lighten popover's border
+  * Remove the top box-shadow for active buttons
+  * Remove box-shadow from insenstive-active buttons
+  * Darken border-color by 2% for active and backdrop-active dark btns
+  * Firefox theming
+  * Removes margin for toolbar toolitem box .linked.horizontal button
+  * Add backdrop hover underline for not checked pathbar buttons
+  * Remove red/yellow border of error/warning entries when ...
+  * Fix wrong settings icon in gnome shell 3.30+ status menu popup
+  * Removes firefox headerbar bleed fix because ....
+  * Make focus border for entries always the same color in dark and light
+  * Reduce the darkness of dark var undershoots + refactoring
+  * Bring back normal switches for dark popovers
+  * Use gtkalpha(currentColor, 0.3) for all outlines except ...
+  * Adapt sliders, increase offset by additional -1 because the new color
+  * Don't remove not selected rows outline
+  * Make selected text orange again in gtk and shell themes
+  * Replace focus_color with selected_bg_color in shell and gtk themes
+  * Fix .path-bar button styling
+
+  [ godlyranchdressing ]
+  * Update spinbuttons
+  * Better looking disabled text
+  * Update insensitive slider
+  * Style the Shell's virtual keyboard to match the rest of the theme
+  * Update meson file
+  * Update icons
+  * Use green bg for enter key
+  * Remove menuitem transition from context menus and popovers
+
+  [ Feichtmeier ]
+  * Make the badge border temporarly dark red,
+  * Make notification badge background red, too
+  * Update _drawing.scss
+
+  [ James Henstridge ]
+  * gtk: move existing theme to gtk-3.20 to make way for gtk-3.18 compatible theme.
+  * Import Gtk 3.18 Adwaita theme.
+  * gtk/src/light/gtk-3.0: port drawing code over from GTK 3.20 theme.
+  * gtk/src/light/gtk-3.0: set some properties to ensure we don't inherit from Adwaita CSS unexpectedly.
+  * gtk/src/light/gtk-3.0: override headerbar box-shadow inherited from Adwaita
+  * gtk/src/light/gtk-3.0: remove some "-gtk-" prefixes on properties
+  * gtk/src/light/gtk-3.0: more changes driven by GTK warnings
+  * gtk/src/light/gtk-3.0: attempt to fix up notebook tabs
+  * gtk/src/light/gtk-3.0: apply menu styling
+  * gtk/src/light/gtk-3.0: update asset sheet with Yaru assets
+  * gtk/src/light/gtk-3.0: use light assets on dark theme.
+  * gtk/src/light/gtk-3.0: use padding on titlebuttons to simulate min-width/height
+  * gtk/src/light/gtk-3.0: make scales match GTK 3.20 theme
+  * gtk/src/light/gtk-3.0: update progress bars and level bars
+  * gtk/src/light/gtk-3.0: make spinner blue
+  * gtk/src/light/gtk-3.0: fix headerbar stack switcher underline, and scale slider width
+  * gtk/src/light/gtk-3.20: Fix up some comments in meson build configuration
+  * gtk/src/light/gtk-3.0: port switches to Yaru look
+  * gtk/src/light/gtk-3.0: tweak hyperlink colours
+  * gtk/src/light/gtk-3.0: remove unused assets
+  * gtk/src/dark/gtk-3.0: support both versions of dark GTK 3 theme
+  * gtk/src/light/gtk-3.0: get rid of some unwanted text/icon shadows
+  * gtk/src/light/gtk-3.0: change text handle sizes to match assets.
+  * gtk/src/light/gtk-3.0: progressbar tweaks
+  * gtk: bundle CSS and assets into a gtk.gresource file
+  * build: we need libglib2.0-dev for glib-compile-resources
+
+  [ Eaglers ]
+  * Add Packages icon
+  * Add Podcasts icon
+  * Add object-select icon
+  * Add icon for USB hard disk
+  * Increase the pictogram of drive-harddisk-usb icon
+  * Remake shutdown icon
+  * Improve GNOME Help icon
+
+  [ madsrh ]
+  * Amplified sounds
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 08 Jan 2019 14:06:16 +0100
+
 yaru-theme (18.10.7) cosmic; urgency=medium
 
   [ feichtmeier ]
