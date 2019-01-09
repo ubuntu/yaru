@@ -1,4 +1,4 @@
-yaru-theme (18.10.8) UNRELEASED; urgency=medium
+yaru-theme (19.04) disco; urgency=medium
 
   [ Carlo Lobrano ]
   * dark gtk-2.0
@@ -19,7 +19,7 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
     - assets: added spin button
     - assets: added scale slider hover and active
     - assets: added frame-notebook
-    - assets: fixed missin recoloring of spin buttons
+    - assets: fixed missing recoloring of spin buttons
     - assets: fixed button insensitive border
     - assets: fixed frame border
     - assets: added transparent scrollbars
@@ -73,7 +73,8 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
   * Add solid bg to check and radio
   * Fix glitches in non-straight lines
   * Fix gtk2 treeview header double lines
-  * gtk2: Reduced GtkPaned handle size to remove the double line between panes
+  * gtk2: Reduced GtkPaned handle size to remove the double line
+    between panes
   * Remove dark communitheme from gtk-common-themes-other snap target
   * Fix transparent scale in jet popover
   * Add switch to jet popover wildcard black list
@@ -87,8 +88,10 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
   * provide a corrected gnome-aisleriot icon
   * provide a gnome-mahjongg icon
   * provide a gnome-mahjongg icon
-  * setting baseplate layer of gnome-mines, gnome-aisleriot and gnome-mahjongg to be invisible rather than transparent
-  * providing corrected version of gnome-mahjongg icon with crisper edges on smaller sizes
+  * setting baseplate layer of gnome-mines, gnome-aisleriot and
+    gnome-mahjongg to be invisible rather than transparent
+  * providing corrected version of gnome-mahjongg icon with crisper
+    edges on smaller sizes
   * providing transmission icon
   * providing transmission icon with better vertical alignment
   * providing ubiquity icon
@@ -100,9 +103,10 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
   * providing usb-creator-gtk icon with no progress bar
   * providing better transmission icon
   * providing better gnome-mahjongg icon with blue background
-  * providing revised usb-creator-grk icon
+  * providing revised usb-creator-gtk icon
   * providing aptdaemon-download icon
-  * providing more suru icons for ubiquity, gnome-mahjongg and usb-creator-gtk
+  * providing more suru icons for ubiquity, gnome-mahjongg and
+    usb-creator-gtk
   * providing improved icon for gnome-aisleriot
   * providing improved icon for aptdaemon-download
   * providing icon for aptdaemon-download with clearer arrow
@@ -110,20 +114,28 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
   * removing transmission.svg pending further discussion
   * adding the icon for shotwell
   * adding the new full colour icon for user-desktop
-  * amending the source file of all the scalable monochrome icons to take the launcher buttons off the desktop icon so it matches the full colour user-desktop icon
+  * amending the source file of all the scalable monochrome icons to
+    take the launcher buttons off the desktop icon so it matches the
+    full colour user-desktop icon
   * adding icons for libreoffice apps
   * fixing baseplate on libreoffice-main
   * fixing baseplate on libreoffice-main attempt no. 2
   * seeing if git add -A adds new libreoffice-base icon
-  * adding the remaining LibreOffice icons after running the python script: writer, impress, draw, base, main
+  * adding the remaining LibreOffice icons after running the python
+    script: writer, impress, draw, base, main
   * adding svg for white firefox icon and all the pngs
   * adding svg for dark blue firefox icon and all the pngs
   * adding svg for network-server icon and all the pngs
   * renaming the network glyph in source-symbolic to see if that works
-  * renaming the network glyph in source-symbolic to correct error in previous commit
+  * renaming the network glyph in source-symbolic to correct error
+    in previous commit
   * adding svg for thunderbird and all the pngs
-  * adding folders.svg with the new folder-remote icons plus all the pngs, and also a corrected version of source-symbolic.svg with the ethernet glyph renamed folder-remote.
-  * adding folders.svg with the new folder-remote concept plus pngs.  also committing a version of the source-symbolic svg which has the redundant ethernet port glyph removed.
+  * adding folders.svg with the new folder-remote icons plus all the
+    pngs, and also a corrected version of source-symbolic.svg with the
+    ethernet glyph renamed folder-remote.
+  * adding folders.svg with the new folder-remote concept plus pngs.
+    Also committing a version of the source-symbolic svg which has the
+    redundant ethernet port glyph removed.
   * adding x-trash.svg plus pngs of different sizes.
   * adding printer.svg plus pngs of different sizes.
 
@@ -149,8 +161,8 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
   * Use less code
   * Fix inkscape to not use flatpak
   * Use a new user-desktop and user-desktop-sybolic icon by @ubuntujaggers
-  * Fully opague focus ring, dashed + -3px offset for gtk
-  * Remove the background and the bradius to avoid streched underline
+  * Fully opaque focus ring, dashed + -3px offset for gtk
+  * Remove the background and the radius to avoid stretched underline
   * Normal font weight + header_fg_color for the checked button
   * Style tag labels
   * No orange underline for checked pathbar buttons
@@ -167,10 +179,10 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
   * Jet menus and popovers
   * Style jet app notifications for the dark theme
   * Button hover and active refinements
-  * Remover border-top-color border-color difference for all button types and ...
+  * Remover border-top-color border-color difference for all button types
   * Rename popover_border to menu_color and lighten popover's border
   * Remove the top box-shadow for active buttons
-  * Remove box-shadow from insenstive-active buttons
+  * Remove box-shadow from insensitive-active buttons
   * Darken border-color by 2% for active and backdrop-active dark btns
   * Firefox theming
   * Removes margin for toolbar toolitem box .linked.horizontal button
@@ -199,27 +211,32 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
   * Remove menuitem transition from context menus and popovers
 
   [ Feichtmeier ]
-  * Make the badge border temporarly dark red,
+  * Make the badge border temporarily dark red,
   * Make notification badge background red, too
   * Update _drawing.scss
 
   [ James Henstridge ]
-  * gtk: move existing theme to gtk-3.20 to make way for gtk-3.18 compatible theme.
+  * gtk: move existing theme to gtk-3.20 to make way for gtk-3.18
+    compatible theme.
   * Import Gtk 3.18 Adwaita theme.
   * gtk/src/light/gtk-3.0: port drawing code over from GTK 3.20 theme.
-  * gtk/src/light/gtk-3.0: set some properties to ensure we don't inherit from Adwaita CSS unexpectedly.
-  * gtk/src/light/gtk-3.0: override headerbar box-shadow inherited from Adwaita
+  * gtk/src/light/gtk-3.0: set some properties to ensure we don't
+    inherit from Adwaita CSS unexpectedly.
+  * gtk/src/light/gtk-3.0: override headerbar box-shadow inherited from
+  Adwaita
   * gtk/src/light/gtk-3.0: remove some "-gtk-" prefixes on properties
   * gtk/src/light/gtk-3.0: more changes driven by GTK warnings
   * gtk/src/light/gtk-3.0: attempt to fix up notebook tabs
   * gtk/src/light/gtk-3.0: apply menu styling
   * gtk/src/light/gtk-3.0: update asset sheet with Yaru assets
   * gtk/src/light/gtk-3.0: use light assets on dark theme.
-  * gtk/src/light/gtk-3.0: use padding on titlebuttons to simulate min-width/height
+  * gtk/src/light/gtk-3.0: use padding on titlebuttons to simulate
+    min-width/height
   * gtk/src/light/gtk-3.0: make scales match GTK 3.20 theme
   * gtk/src/light/gtk-3.0: update progress bars and level bars
   * gtk/src/light/gtk-3.0: make spinner blue
-  * gtk/src/light/gtk-3.0: fix headerbar stack switcher underline, and scale slider width
+  * gtk/src/light/gtk-3.0: fix headerbar stack switcher underline, and
+    scale slider width
   * gtk/src/light/gtk-3.20: Fix up some comments in meson build configuration
   * gtk/src/light/gtk-3.0: port switches to Yaru look
   * gtk/src/light/gtk-3.0: tweak hyperlink colours
@@ -243,7 +260,7 @@ yaru-theme (18.10.8) UNRELEASED; urgency=medium
   [ madsrh ]
   * Amplified sounds
 
- -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 08 Jan 2019 14:06:16 +0100
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 09 Jan 2019 13:23:16 +0100
 
 yaru-theme (18.10.7) cosmic; urgency=medium
 
