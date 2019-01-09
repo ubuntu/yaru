@@ -18,8 +18,6 @@ $selected_fg_color: #ffffff;
 $selected_bg_color: $orange;
 $selected_borders_color: if($variant=='light', darken($selected_bg_color, 5%),
                                                darken($selected_bg_color, 15%));
-$text_selection: lighten($blue,35%);
-$focus_color: $orange;
 
 $borders_color: if($variant =='light', darken($bg_color,30%), darken($bg_color,12%));
 $borders_edge: if($variant =='light', white, transparentize($fg_color, 0.9));

@@ -26,7 +26,7 @@
   // to the adwaita engine: using real CSS properties is faster,
   // and we don't use any outlines for now.
 
-  outline-color: $focus_color; // gtkalpha(currentColor, 0.3);
+  outline-color: gtkalpha(currentColor, 0.3);
   outline-style: dashed;
   outline-offset: -3px;
   outline-width: 1px;
@@ -130,7 +130,7 @@ widget:selected { color: $selected_fg_color; }
 textview {
   text {
     @extend %view;
-    selection { &:focus, & { @extend %selected_text; }}
+    selection { &:focus, & { @extend %selected_items; }}
   }
 }
 
@@ -184,7 +184,7 @@ label {
   &:selected { @extend %nobg_selected_items; }
 
   selection {
-    @extend %selected_text;
+    @extend %selected_items;
   }
   counter-label{background-color: $purple;}
 
@@ -199,7 +199,7 @@ label {
   &:backdrop {
     color: $backdrop_text_color;
 
-    selection { @extend %selected_text:backdrop; }
+    selection { @extend %selected_items:backdrop; }
   }
 }
 
@@ -322,7 +322,7 @@ entry {
     &:backdrop:disabled { @include entry(backdrop-insensitive); }
 
     selection {
-      @extend %selected_text;
+      @extend %selected_items;
     }
 
     // entry error and warning style
@@ -485,7 +485,7 @@ treeview entry {
     background-image: none;
     background-color: $base_color;
 
-    &:focus { border-color: $focus_color; }
+    &:focus { border-color: $selected_bg_color; }
   }
 }
 
@@ -543,7 +543,6 @@ button {
     padding: 2px 6px;
     border: 1px solid;
     border-radius: $small_radius;
-    outline-color: $focus_color;
     outline-style: dashed;
     outline-offset: -3px;
     -gtk-outline-radius: $small_radius;
@@ -599,7 +598,7 @@ button {
         @include button(backdrop);
 
         transition: $backdrop_transition;
-        outline-color: $focus_color;
+        outline-color: gtkalpha(currentColor, 0.3);
         -gtk-icon-effect: none;
 
         &:active,
@@ -1664,20 +1663,6 @@ headerbar {
         color: $tc;
         &:hover { color: $backdrop_headerbar_text_color; }
       }
-
-      // Sadly, we need a dedicated styling here because
-      // the $variant is independant from the headerbar bg
-      selection {
-        $_bg: darken($neutral_color, 10%);
-        $_c: $headerbar_fg_color;
-        background-color: $_bg;
-        color: $_c;
-
-        &:backdrop {
-          background-color: _backdrop_color($_bg);
-          color: _backdrop_color($_c);
-        }
-      }
     }
 
     // default button and its labels needs dedicated styling in the headerbar
@@ -1759,19 +1744,6 @@ headerbar {
 
       &:backdrop {
         &, &:checked { border-color: lighten($inkstone, 3%); }
-      }
-    }
-
-    .path-bar.linked button {
-      background-color: transparent;
-      border-radius: 0;
-      &:checked, &checked:active { 
-        color: $headerbar_fg_color; 
-        font-weight: normal;
-      }
-
-      &.slider-button {
-        box-shadow: none;
       }
     }
   }
@@ -1992,31 +1964,37 @@ headerbar { // headerbar border rounding
   &, &:backdrop { box-shadow: inset 0 -2px transparent; }
 }
 
-.path-bar button {
+.path-bar button:dir(ltr), .path-bar button:dir(rtl) {
   @extend %underline_focus_effect;
-  background-color: $button_bg_color;
+  background-color: transparent;
   color: $insensitive_fg_color;
   border-style: none;
+  border-radius: 0;
+  box-shadow: none;
 
   &:hover { 
-    box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5); 
+    box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5);
+    background-color: transparent;
     color: $insensitive_fg_color; 
   }
   
   &:active { box-shadow: inset 0 -2px $insensitive_fg_color; }
 
   &:checked, &:checked:active {
-    color: $fg_color;
+    color: $headerbar_fg_color;
+    background-color: transparent;
     &:hover { box-shadow: inset 0 -2px $insensitive_fg_color; }
+    &:hover, &:backdrop { background-color: transparent; }
   }
 
   &:backdrop {
-    background-color: $button_bg_color;
+    background-color: transparent;
     color: $backdrop_insensitive_color;
     border-color: transparent;
     box-shadow: inset 0 -2px transparent;
     &:hover { 
       box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5); 
+      background-color: transparent;
       color: $backdrop_insensitive_color;
     }
   }
@@ -2429,7 +2407,6 @@ popover.background {
     separator { background-color: darken($menu_border,12%); &:backdrop { background-color: transparent; } }
     *:not(fill):not(highlight):not(trough):not(slider):not(switch) { background-color: transparent; }
     scrollbar slider { background-color: $scrollbar_slider_color; }
-    entry selection { background-color: $text_selection; color: $fg_color; }
     entry, button { border-color: darken($inkstone,1%); &:backdrop { border-color: transparent; } }
     button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
     switch { @include switch($dark_fill, $success_color); }
@@ -3757,7 +3734,7 @@ row {
   transition: all 150ms $ease-out-quad;
 
   &:not(:selected) {
-    outline-color: $focus_color;
+    outline-color: gtkalpha(currentColor, 0.3);
     &:not(:backdrop):hover { background-color: $base_hover_color; }
     &:not(:backdrop):active { background-color: $base_active_color; }
   }
@@ -4231,7 +4208,7 @@ paned {
       background-color: $c;
       color: white;
       border-bottom: 1px solid $borders_color;
-      selection { @extend %selected_text; }
+      selection { @extend %selected_items; }
     }
   }
   button.close { color: white; &:backdrop { color: transparentize(white, 0.3); } }
@@ -4541,22 +4518,6 @@ button.titlebutton {
 
       &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
     }
-  }
-}
-
-%selected_text {
-  $c: $text_selection;
-  $tc: $text_color;
-  background-color: $c;
-  color: $tc;
-
-  &:disabled { color: mix($tc, $c, 50%); }
-
-  &:backdrop {
-    background-color: _backdrop_color($c);
-    color: $backdrop_text_color;
-
-    &:disabled { color: mix($backdrop_selected_fg_color, $c, 30%); }
   }
 }
 
