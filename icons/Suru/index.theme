@@ -69,13 +69,13 @@ Type=Fixed
 
 [48x48/apps]
 Context=Applications
-Size=48
+Size=256
 Type=Fixed
 
 [256x256/apps]
 Context=Applications
 Size=256
-MinSize=64
+MinSize=48
 MaxSize=256
 Type=Scalable
 
@@ -436,14 +436,14 @@ Type=Fixed
 [48x48@2x/apps]
 Context=Applications
 Scale=2
-Size=48
+Size=256
 Type=Fixed
 
 [256x256@2x/apps]
 Context=Apps
 Scale=2
 Size=256
-MinSize=64
+MinSize=48
 MaxSize=256
 Type=Scalable
 
