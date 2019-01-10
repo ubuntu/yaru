@@ -138,6 +138,18 @@ yaru-theme (19.04) disco; urgency=medium
     redundant ethernet port glyph removed.
   * adding x-trash.svg plus pngs of different sizes.
   * adding printer.svg plus pngs of different sizes.
+  * updating source-symbolic.svg to include less ambiguous 'select all'
+    icon under actions
+  * updating source-symbolic.svg to include less ambiguous 'select all'
+    icon under actions
+  * updating source-symbolic.svg to include symbols for Suru apps and a
+    new select-all action icon
+  * updating source-symbolic.svg to fix some errors
+  * updating source-symbolic.svg to fix the nameless icon that caused the
+    script to fail
+  * this is a new version of source-symbolic.svg with all the new app symbols
+    and also the Adwaita-style select-all, plus all the individual svgs and
+    symlinks that the scripts produce
 
   [ Sam Hewitt ]
   * new language icon; updated software properties icon
@@ -199,6 +211,7 @@ yaru-theme (19.04) disco; urgency=medium
   * Make selected text orange again in gtk and shell themes
   * Replace focus_color with selected_bg_color in shell and gtk themes
   * Fix .path-bar button styling
+  * Bring back symbolic icons for the app menu and the notitications/message
 
   [ godlyranchdressing ]
   * Update spinbuttons
@@ -260,7 +273,7 @@ yaru-theme (19.04) disco; urgency=medium
   [ madsrh ]
   * Amplified sounds
 
- -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 09 Jan 2019 13:23:16 +0100
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Thu, 10 Jan 2019 11:26:55 +0100
 
 yaru-theme (18.10.7) cosmic; urgency=medium
 
