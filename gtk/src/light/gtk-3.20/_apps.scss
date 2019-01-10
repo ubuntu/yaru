@@ -540,6 +540,10 @@ headerbar button image ~ window decoration ~ menu separator {
   scrollbar {
     background-color: transparent;
     border-color: transparent;
+
+    trough {
+      background-color: transparentize($bg_color, 0.8);
+    }
   }
 }
 

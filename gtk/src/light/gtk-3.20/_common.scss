@@ -2679,10 +2679,6 @@ scrollbar {
   &.left { border-right: 1px solid $borders_color; }
   &.right { border-left: 1px solid $borders_color; }
 
-  trough {
-    background-color: transparentize($bg_color, 0.8);
-  }
-
   &:backdrop {
     background-color: $backdrop_scrollbar_bg_color;
     border-color: $backdrop_borders_color;
