@@ -9,11 +9,11 @@ More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-t
 
 Detailed screenshots and reasoning behind the design can be found inside the Design Wiki: https://github.com/ubuntu/yaru/wiki
 
-![Files](https://i.imgur.com/W5pFnlL.png)
+![Files](https://i.imgur.com/XA00uS9.jpg)
 
-![Dash](https://i.imgur.com/Td2GLe5.png)
+![Dash](https://i.imgur.com/TUFvhlk.png)
 
-![widgetfactorylight](https://i.imgur.com/ZG7GIYM.png)
+![widgetfactorylight](https://i.imgur.com/Iau8WZo.png)
 
 It contains:
  * a GNOME Shell theme
