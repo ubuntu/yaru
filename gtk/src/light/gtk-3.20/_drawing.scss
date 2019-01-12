@@ -484,7 +484,7 @@
   }
 
   @else if $t==osd {
-    $_bg: if($c == $button_bg_color, $osd_button_bg_color, transparentize($c, 0.5));
+    $_bg: $osd_button_bg_color;
 
     color: $osd_fg_color;
     border-color: _border_color($_bg);
@@ -494,7 +494,7 @@
   }
 
   @else if $t==osd-hover {
-    $_bg: if($c == $button_bg_color, lighten($button_bg_color, 10%), transparentize($c, 0.3));
+    $_bg: lighten($osd_button_bg_color, 10%);
 
     color: white;
     border-color: _border_color($_bg);
@@ -504,7 +504,7 @@
   }
 
   @else if $t==osd-active {
-    $_bg: $c;
+    $_bg: lighten($osd_button_bg_color, 15%);
 
     color: white;
     border-color: _border_color($_bg);
