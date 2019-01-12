@@ -540,6 +540,18 @@ headerbar button image ~ window decoration ~ menu separator {
   scrollbar {
     background-color: transparent;
     border-color: transparent;
+
+    slider  {
+      background-color: darken($scrollbar_slider_color, 10%);
+      &:hover { background-color: darken($scrollbar_slider_hover_color, 10%); }
+      &:hover:active { background-color: $scrollbar_slider_active_color; }
+      &:backdrop { background-color: $backdrop_scrollbar_slider_color; }
+      &:disabled { background-color: transparent; }
+    }
+
+    trough {
+      background-color: transparentize($bg_color, 0.8);
+    }
   }
 }
 
