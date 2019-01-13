@@ -4211,17 +4211,6 @@ paned {
       selection { @extend %selected_items; }
     }
   }
-  button.close { color: white; &:backdrop { color: transparentize(white, 0.3); } }
-  > revealer > box > box label:backdrop { color: transparentize(white, 0.3); }
-  &:not(.warning):not(.error) {
-    > revealer > box > box label {
-      color: $text_color;
-      &:backdrop { color: $backdrop_text_color; }
-    }
-    &:backdrop {
-      background-color: $backdrop_bg_color;
-    }
-  }
   *:link { @extend %link_selected; }
 }
 
