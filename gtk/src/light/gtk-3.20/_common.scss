@@ -4206,7 +4206,7 @@ paned {
                   ('.error', $error_color) {
     &#{$t} {
       background-color: $c;
-      color: white;
+      color: $text_color;
       border-bottom: 1px solid $borders_color;
       selection { @extend %selected_items; }
     }
