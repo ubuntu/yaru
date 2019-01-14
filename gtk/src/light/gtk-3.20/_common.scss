@@ -4211,7 +4211,6 @@ paned {
       selection { @extend %selected_items; }
     }
   }
-  &:not(.warning):not(.error):backdrop { background-color: $backdrop_bg_color; }
   *:link { @extend %link_selected; }
 }
 
