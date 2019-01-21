@@ -41,8 +41,10 @@ $medium_radius: 6px;
 $large_radius: 12px;
 $backdrop_transition: all 200ms ease-out;
 $button_transition: all 0.4s ease-out;
-$popover_shadow: 0 2px 5px transparentize(black, 0.75);
-$menu_border: if($variant=='light', transparentize($borders_color, 0.2) , transparentize(white, 0.88));
+$menu_shadow: 0 1px 2px transparentize(black, 0.8);
+$popover_shadow: 0 2px 5px transparentize(black, 0.8);
+$window_border: if($variant == 'light', transparentize(black, 0.96), transparentize(black, 0.8));
+$menu_border: if($variant=='light', transparentize(black, 0.8), transparentize(white, 0.88));
 
 /***************
  * Base States *
@@ -2256,7 +2258,7 @@ menu,
   padding: 8px 0;
   background-color: $menu_color;
   color: $text_color;
-  border: 1px solid if($variant=='light', $borders_color, $menu_border);
+  border: 1px solid $menu_border;
   border-radius: $small_radius;
 
   .csd & { border: none; }  // axes borders in a composited env
@@ -2333,7 +2335,7 @@ menu,
       border-color: transparent ;
     }
   }
-  @if $variant=='dark' { separator { background-color: darken($menu_border, 12%); } }
+  separator { background-color: if($variant=='light', darken($menu_color,9%), lighten($menu_color,6%)); }
 }
 
 menuitem {
@@ -2358,7 +2360,7 @@ popover.background {
   border-radius: $medium_radius;
   background-color: $menu_color;
 
-  .csd &, & { border: 1px solid if($variant=='light', $menu_border, transparentize(white, 0.8)); }
+  .csd &, & { border: 1px solid if($variant=='light', transparentize(black,0.75), transparentize(white, 0.8)); }
 
   box-shadow: $popover_shadow;
 
@@ -2404,8 +2406,8 @@ popover.background {
   }
 
   @if $variant=='dark' {
-    separator { background-color: darken($menu_border,12%); &:backdrop { background-color: transparent; } }
     *:not(fill):not(highlight):not(trough):not(slider):not(switch):not(selection) { background-color: transparent; }
+    separator { background-color: $inkstone; &:backdrop { background-color: transparent; } }
     scrollbar slider { background-color: $scrollbar_slider_color; }
     entry:not(:focus), button { border-color: darken($inkstone,1%); &:backdrop { border-color: transparent; } }
     button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
@@ -3703,7 +3705,7 @@ scrolledwindow {
 
 //vbox and hbox separators
 separator {
-  background: transparentize($borders_color, 0.7);
+  background: if($variant=='light', transparentize($borders_color, 0.7), $inkstone);
   min-width: 1px;
   min-height: 1px;
 }
@@ -4385,12 +4387,9 @@ decoration {
   // lamefun trick to get rounded borders regardless of CSD use
   border-width: 0px;
 
-  // this needs to be transparent
-  // see bug #722563
-  $_wm_border: if($variant == 'light',transparentize(black, 0.77),transparentize(black, 0.5));
-
   $window_decoration_shadow: 0 3px 9px 1px;
-  box-shadow: $window_decoration_shadow transparentize(black, 0.5);
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
+              0 0 0 1px $window_border; //doing borders with box-shadow
 
   // FIXME rationalize shadows
 
@@ -4418,19 +4417,13 @@ decoration {
   .popup & { box-shadow: none; }
 
   // server-side decorations as used by mutter
-  .ssd & { box-shadow: none; }
+  .ssd & { box-shadow: 0 0 0 1px $window_border; } //just doing borders, wm draws actual shadows
 
   //These shadows are applied to the context-menu!
   .csd.popup & {
     border-radius: $small_radius;    
-    @if $variant=='light' {
-      box-shadow: 0 1px 2px transparentize(black, 0.8),
-                  0 0 0 1px transparentize($_wm_border, 0.1);
-    }
-    @else {
-          box-shadow: $popover_shadow,
-                      0 0 0 1px $menu_border;
-    }
+    box-shadow: $menu_shadow,
+                0 0 0 1px $menu_border;
   }
 
   tooltip.csd & {
