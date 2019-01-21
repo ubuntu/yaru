@@ -2335,7 +2335,7 @@ menu,
       border-color: transparent ;
     }
   }
-  separator { background-color: if($variant=='light', darken($menu_color,9%), lighten($menu_color,6%)); }
+  @if $variant=='dark' { separator { background-color: lighten($menu_color, 6%); } }
 }
 
 menuitem {
@@ -2360,7 +2360,10 @@ popover.background {
   border-radius: $medium_radius;
   background-color: $menu_color;
 
-  .csd &, & { border: 1px solid if($variant=='light', transparentize(black,0.75), transparentize(white, 0.8)); }
+  .csd &, & {
+    border: 1px solid if($variant=='light', transparentize(black,0.75), transparentize(white, 0.8));
+    &:backdrop { @if $variant=='light' { border-color: $backdrop_borders_color; } }
+  }
 
   box-shadow: $popover_shadow;
 
@@ -2407,9 +2410,9 @@ popover.background {
 
   @if $variant=='dark' {
     *:not(fill):not(highlight):not(trough):not(slider):not(switch):not(selection) { background-color: transparent; }
-    separator { background-color: $inkstone; &:backdrop { background-color: transparent; } }
+    separator { background-image: image(darken($menu_border,13%)); }
     scrollbar slider { background-color: $scrollbar_slider_color; }
-    entry:not(:focus), button { border-color: darken($inkstone,1%); &:backdrop { border-color: transparent; } }
+    entry:not(:focus), button { border-color: darken($inkstone,1%); &:backdrop { border-color: lighten($inkstone,5%); } }
     button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
     switch { @include switch($dark_fill, $success_color); }
   }
@@ -3705,7 +3708,7 @@ scrolledwindow {
 
 //vbox and hbox separators
 separator {
-  background: if($variant=='light', transparentize($borders_color, 0.7), $inkstone);
+  background: transparentize($borders_color, 0.7);
   min-width: 1px;
   min-height: 1px;
 }
