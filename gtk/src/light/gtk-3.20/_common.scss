@@ -4421,7 +4421,7 @@ decoration {
 
   // server-side decorations as used by mutter
   //just doing borders, wm draws actual shadows
-  .ssd & { box-shadow: 0 0 0 1px $window_border; &:backdrop { box-shadow: none; }}
+  .ssd & { box-shadow: 0 0 0 1px $window_border; }
   //These shadows are applied to the context-menu!
   .csd.popup & {
     border-radius: $small_radius;    
