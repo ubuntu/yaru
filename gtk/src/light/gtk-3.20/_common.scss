@@ -3908,7 +3908,6 @@ filechooser {
 
   #pathbarbox {
     $_bg: $bg_color;
-
     background: $_bg;
     border-bottom: 1px solid $borders_color;
     &:backdrop { background: if($variant==light, darken($backdrop_bg_color, 5%), $backdrop_bg_color);}
@@ -3921,6 +3920,10 @@ filechooser {
         background: transparent;
         label { color: $backdrop_text_color; }
       }
+    }
+    .slider-button { 
+      &:first-child { border-radius: $small_radius 0 0 $small_radius; }
+      &:last-child { border-radius: 0 $small_radius $small_radius  0; }
     }
   }
 
