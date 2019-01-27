@@ -1649,7 +1649,7 @@ headerbar {
 
     switch {
       @include switch(lighten($headerbar_bg_color, 25%));
-      &, &:hover, &:checked, &:checked:hover { border-top-color: transparent; box-shadow: none; }    
+      &, &:backdrop { &, &:hover, &:checked, &:checked:hover { border-top-color: transparent; box-shadow: none; } }
     }
 
     entry, %dark_entry {
