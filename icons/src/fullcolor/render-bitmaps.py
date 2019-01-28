@@ -150,8 +150,8 @@ def main(args, SRC):
                 print (self.context, self.icon_name)
                 for rect in self.rects:
                     for dpi_factor in DPIS:
-                        width = rect['width']
-                        height = rect['height']
+                        width = int(float(rect['width']))
+                        height = int(float(rect['height']))
                         id = rect['id']
                         dpi = 96 * dpi_factor
 
