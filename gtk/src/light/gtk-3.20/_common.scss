@@ -1708,7 +1708,7 @@ headerbar {
                               (":backdrop:active, &:backdrop:checked", 'backdrop-active'),
                               (":backdrop:disabled", 'backdrop-insensitive'),
                               (":backdrop:disabled:active, &:backdrop:disabled:checked", 'backdrop-insensitive-active') {
-            &#{$state} { @include button($t, $b_color, white, $flat:true); }
+            &#{$state} { @include button($t, $b_color, white, $flat:true); &:not(:active) { border-color: $b_color; } }
           }
         }
       }
