@@ -20,10 +20,10 @@
 
 DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 THEME="Suru"
+needle=$1 # Symlink only the files that matches the needle
 
 # echo $DIR
-
-# Icon sizes and contexts
+# Icon sizes and contextthe s
 CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "status")
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
 
@@ -42,7 +42,9 @@ do
 			cd $DIR/../../$THEME/$SIZE/$CONTEXT
 			while read line;
 			do
-				ln -sf $line
+				if [[ $line == *"$needle"* ]]; then
+					ln -sf $line
+				fi
 			done < $LIST
 			cd $DIR/../../$THEME
 		else
@@ -65,7 +67,9 @@ do
 		cd $DIR/../../$THEME/scalable/$CONTEXT
 		while read line;
 		do
-			ln -sf $line
+			if [[ $line == *"$needle"* ]]; then
+					ln -sf $line
+				fi
 		done < $LIST
 		cd $DIR/../../$THEME
 	else
