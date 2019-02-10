@@ -1977,7 +1977,7 @@ headerbar { // headerbar border rounding
         &, &:hover { color: $headerbar_fg_color; }
       }
       border-style: none;
-      &, &:not(:first-child):not(:last-child) { border-radius: 0; }
+      &, &:not(:first-child):not(:last-child), &:first-child, &:last-child { border-radius: 0; }
       box-shadow: none;
 
       &:hover { 
@@ -2006,6 +2006,7 @@ headerbar { // headerbar border rounding
           color: $backdrop_insensitive_color;
         }
       }
+    }
   }
 
   &.text-button, &.image-button, & {
@@ -2039,7 +2040,6 @@ headerbar { // headerbar border rounding
       opacity: 0.3;
     }
   }
-}
 }
 
 /**************
