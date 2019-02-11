@@ -12,8 +12,8 @@ Yaru consists of one project with 3 distinct parts.
 This installation method is to try out the theme while developing it. If you're not a developer, follow the instructions in the [README.md](./README.md).
 
 ```bash
-# Needed before install
-sudo apt install libgtk-3-dev git meson sassc
+# Needed to build, test and contribute to the gtk, shell and icon themes
+sudo apt install libgtk-3-dev git meson sassc inkscape optipng
 # Download the repository from github
 git clone https://github.com/ubuntu/yaru.git
 cd yaru
