@@ -412,8 +412,8 @@
     $_bg: lighten($_base, $_perc);
 
     color: $tc;
-
-    border-color: if($flat, if($_headerbar, $_bg, $backdrop_borders_color), $borders_color);
+    
+    border-color: if($flat, if($_headerbar, $_bg, if(is_special_color($c), $_bg, $backdrop_borders_color)), $borders_color);
     box-shadow: if($flat, none, 0 1px transparentize(black, 0.85));
 
     @if $flat {
