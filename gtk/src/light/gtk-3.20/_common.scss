@@ -2421,7 +2421,7 @@ popover.background {
     separator { background-image: image(darken($menu_border,13%)); }
     scrollbar slider { background-color: $scrollbar_slider_color; }
     entry:not(:focus), button { border-color: darken($inkstone,1%); &:backdrop { border-color: lighten($inkstone,5%); } }
-    button:not(button.emoji-section), button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
+    button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
     switch { @include switch($dark_fill, $success_color); }
   }
 }
@@ -4657,7 +4657,7 @@ button.emoji-section {
 
   &:checked {
     box-shadow: inset 0 2px $selected_bg_color;
-    
+    background-color: transparent;
     &:hover {
       box-shadow: inset 0 2px $selected_bg_color;
       background-color: $base_hover_color;
