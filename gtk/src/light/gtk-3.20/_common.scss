@@ -1615,7 +1615,7 @@ headerbar {
   label:backdrop { color: inherit; } // make sure to inherit the backdrop label color
 
   .title {
-    font-weight: 500;
+    font-weight: normal;
     padding-left: 12px;
     padding-right: 12px;
   }
@@ -2181,7 +2181,7 @@ treeview.view {
   header {
     button {
       @extend %column_header_button;
-      font-weight: 500;
+      font-weight: normal;
       box-shadow: none;
       -gtk-outline-radius: 0;
     }
@@ -2604,6 +2604,7 @@ notebook {
 
       &:checked {
         color: $fg_color;
+        font-weight: normal;
         background-color: $base_color;
         border-color: $_borders_color;
         & label {padding-bottom: 1px};
@@ -3934,8 +3935,8 @@ filechooser {
 
     .path-bar.linked button {
       background: if($variant==light, darken($_bg, 10%), darken($_bg, 5%));
-      &, & label { color: $text_color; }
-      &:checked label { font-weight: 500; }
+      &, & label { color: $insensitive_fg_color; }
+      &:checked { font-weight: normal;  &, &label, &image { color: $fg_color; } }
       &:backdrop {
         background: transparent;
         label { color: $backdrop_text_color; }
