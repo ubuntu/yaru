@@ -2591,7 +2591,6 @@ notebook {
 
       &:checked {
         color: $fg_color;
-        font-weight: 500;
         background-color: $base_color;
         border-color: $_borders_color;
         & label {padding-bottom: 1px};
