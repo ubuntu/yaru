@@ -156,7 +156,6 @@ terminal-window {
     &:checked {
       color: $terminal_fg_color;
       border-color: $inkstone;
-      border-bottom: 2px solid darken($selected_bg_color, 10%);
     }
   }
 
@@ -220,7 +219,6 @@ terminal-window {
         &:hover:checked:not(:backdrop) {
           background-color: lighten($headerbar_bg_color, 6%);
           border-color: $inkstone;
-          border-bottom: 2px solid $selected_bg_color;
         }
 
         &:backdrop {
