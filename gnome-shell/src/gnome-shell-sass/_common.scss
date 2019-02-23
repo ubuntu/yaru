@@ -1597,15 +1597,17 @@ StScrollBar {
     padding: 15px 20px;
 
     .page-indicator-icon {
-      width: 18px;
-      height: 18px;
-      background-image: url(resource:///org/gnome/shell/theme/page-indicator-inactive.svg);
+      width: 12px;
+      height: 12px;
+      background-color: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
     }
 
-    &:hover .page-indicator-icon { background-image: url(resource:///org/gnome/shell/theme/page-indicator-hover.svg); }
-    &:active .page-indicator-icon { background-image: url(resource:///org/gnome/shell/theme/page-indicator-active.svg); }
+    &:hover .page-indicator-icon { border-color: white; }
+    &:active .page-indicator-icon { border: none; margin: 2px; background-color:#fff; }
     &:checked .page-indicator-icon,
-    &:checked:active { background-image: url(resource:///org/gnome/shell/theme/page-indicator-checked.svg); }
+    &:checked:active { background-color: #fff;}
   }
 
   .no-frequent-applications-label { @extend %status_text; }
