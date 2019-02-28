@@ -101,10 +101,10 @@
   }
 
   &.opaque {
-    /* Temporary reduce traslucency, see https://gitlab.gnome.org/GNOME/gnome-shell/merge_requests/376      
+    /* Temporary reduce traslucency, see https://gitlab.gnome.org/GNOME/gnome-shell/merge_requests/376
      * background-color: transparentize($dash_bg_color, $dash-opaque-alpha-value);
      * transition-duration: 500ms; */
-    background-color: transparentize($dash_bg_color, 0.03);
+    background-color: $dash_bg_color;
     border-color: rgba(0, 0, 0, 0.4);
   }
 
@@ -112,7 +112,7 @@
     /* Temporary traslucency under overview state only. See https://gitlab.gnome.org/GNOME/gnome-shell/merge_requests/376
      * background-color: transparentize($dash_bg_color, $dash-alpha-value);
      * transition-duration: 500ms; */
-    background-color: transparentize($dash_bg_color, $dash-opaque-alpha-value);
+    background-color: $dash_bg_color;
     border-color: rgba(0, 0, 0, 0.1);
 
     &:overview {
