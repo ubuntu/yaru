@@ -101,10 +101,10 @@
   }
 
   &.opaque {
-    /* Temporary remove traslucency, see https://gitlab.gnome.org/GNOME/gnome-shell/merge_requests/376
+    /* Temporary reduce traslucency, see https://gitlab.gnome.org/GNOME/gnome-shell/merge_requests/376      
      * background-color: transparentize($dash_bg_color, $dash-opaque-alpha-value);
      * transition-duration: 500ms; */
-    background-color: transparentize($dash_bg_color, $dash-opaque-alpha-value);
+    background-color: transparentize($dash_bg_color, 0.03);
     border-color: rgba(0, 0, 0, 0.4);
   }
 
