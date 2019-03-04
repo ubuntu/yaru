@@ -3196,7 +3196,7 @@ scale {
     // OSD
     .osd & { }
   }
-  headerbar slider { &, &:disabled { border-color: transparent; } }
+  headerbar scale slider { &, &:disabled { border-color: transparent; } }
 
   value { color: gtkalpha(currentColor, 0.55); }
 
