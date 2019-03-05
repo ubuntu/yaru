@@ -70,7 +70,6 @@ data_sources = [
   'ubuntu-logo-icon.svg',
   'ws-switch-arrow-down.svg',
   'ws-switch-arrow-up.svg',
-  'activities.svg',
   'ubuntu-appgrid-icon.svg',
   'key-enter.svg',
   'key-hide.svg',
