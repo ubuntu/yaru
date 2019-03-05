@@ -975,7 +975,7 @@ StScrollBar {
     .world-clocks-button,
     .weather-button,
     .events-section-title {
-      &:hover,&:focus { background-color: $base_hover_color; }
+      &:hover,&:focus { background-color: lighten($bg_color, 5%);; }
       &:active {
         color: $active_fg_color;
         background-color: $base_active_color;
@@ -1003,12 +1003,44 @@ StScrollBar {
       font-size: 110%;
     }
 
-    .world-clocks-grid {
+    .weather-header.location {
+      font-weight: normal;
+      font-size: 0.9em;
+    }
+
+    .world-clocks-grid,
+    .weather-grid {
       spacing-rows: 0.4em;
     }
 
     .weather-box {
       spacing: 0.4em;
+    }
+
+    .world-clocks-city {
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    .world-clocks-time {
+      color: darken($fg_color,20%);
+      font-feature-settings: "tnum";
+      font-size: 1.2em;
+    }
+
+    .world-clocks-timezone {
+      color: darken($fg_color,40%);
+      font-feature-settings: "tnum";
+      font-size: 0.9em;
+    }
+
+    .weather-forecast-icon {
+      icon-size: 2.18em;
+    }
+
+    .weather-forecast-time {
+      color: darken($fg_color,40%);
+      font-size: 0.8em;
     }
 
     .calendar-month-label {
@@ -1047,7 +1079,7 @@ StScrollBar {
       margin: 2px;
       border-radius: $small_radius;
       font-feature-settings: "tnum";
-      &:hover,&:focus { background-color: lighten($bg_color,5%); }
+      &:hover,&:focus { background-color: lighten($bg_color, 5%); }
       &:selected {
         color: white;
         background-color: transparent;
@@ -1107,8 +1139,14 @@ StScrollBar {
         @include button(undecorated);
         border-color: lighten($bg_color,10%);
         &:hover,&:focus { @include button(hover); }
-        &:active { @include button(undecorated-active); color: darken($fg_color,25%);}
-        &:insensitive { @include button(undecorated); border-color: transparentize(darken($fg_color,40%),0.8);}
+        &:active {
+          @include button(undecorated-active);
+          color: darken($fg_color, 25%);
+        }
+        &:insensitive {
+          @include button(undecorated);
+          border-color: transparentize(darken($fg_color, 40%), 0.8);
+        }
         margin: 1.5em 1.5em 0;
       }
 
