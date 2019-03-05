@@ -46,8 +46,6 @@ data_sources = [
   'close-window-active.svg',
   'close-window-hover.svg',
   'close-window.svg',
-  'corner-ripple-ltr.svg',
-  'corner-ripple-rtl.svg',
   'dash-placeholder.svg',
   'dots.svg',
   'filter-selected-ltr.svg',

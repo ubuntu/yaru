@@ -1280,17 +1280,16 @@ StScrollBar {
     & > StIcon { icon-size: 16px; }
   }
 
-//Activities Ripples
+// Activities Ripples
 .ripple-box {
   width: 52px;
   height: 52px;
-  background-image: url("corner-ripple-ltr.svg");
-  background-size: contain;
+  border-radius: 0 0 52px 0; // radius the size of the box give us the curve
+  background-color: lighten(transparentize($selected_bg_color, 0.7), 40%);
+  box-shadow: 0 0 2px 2px lighten($selected_bg_color, 20%);
 }
 
-.ripple-box:rtl {
-  background-image: url("resource:///org/gnome/shell/theme/corner-ripple-rtl.png");
-}
+.ripple-box:rtl { border-radius: 0 0 0 52px; } // just a simple change to the border radius position
 
 // not really top bar only
 .popup-menu-arrow { width: 16px; height: 16px; }
