@@ -3,13 +3,13 @@
 //let's start by telling people not to edit the generated CSS:
 $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 /* #{$cakeisalie} */
-$panel-corner-radius: 0; // 6px;
+$panel-corner-radius: 0;
 
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
 
 $dash-alpha-value: 0.6;
-$dash-opaque-alpha-value: $panel_opaque_value;
+$dash-opaque-alpha-value: 0.0;
 
 $popover-alpha-value: 0.025;
 
@@ -823,13 +823,16 @@ StScrollBar {
 
 #panel {
   $_fg: darken($panel_fg_color, 5%);
-  background-color: transparentize($panel_bg_color, $panel-alpha-value);
-
-  /* transition from solid to transparent */
-  transition-duration: 500ms;
+  background-color: $panel_bg_color;
   font-weight: 450;
   height: 1.86em;
   font-feature-settings: "tnum";
+
+  &:overview {
+    background-color: transparentize($panel_bg_color, $panel-alpha-value);
+    /* transition from solid to transparent in overview */
+    transition-duration: 500ms;
+  }
 
   &.unlock-screen,
   &.login-screen,
@@ -924,32 +927,6 @@ StScrollBar {
   .screencast-indicator { color: $warning_color; }
 
   .remote-access-indicator { color: $warning_color; }
-
-  &.solid {
-    background-color: transparentize($panel_bg_color, $panel_opaque_value);
-    /* transition from transparent to solid */
-    box-shadow: none;
-    transition-duration: 500ms;
-
-    .panel-corner {
-      -panel-corner-background-color: black;
-    }
-
-    .panel-button {
-      color: $_fg;
-      text-shadow: none;
-
-      &:hover, &:active, &:overview, &:focus, &:checked {
-        color: $hover_fg_color;
-      }
-    }
-
-    .system-status-icon,
-    .app-menu-icon > StIcon,
-    .popup-menu-arrow {
-      icon-shadow: none;
-    }
-  }
 }
 
   // calendar popover
