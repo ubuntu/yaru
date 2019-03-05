@@ -1839,7 +1839,16 @@ StScrollBar {
 }
 
 #keyboard {
-    background-color: transparentize($osd_bg_color, 0.3);
+  background-color: transparentize($osd_bg_color, 0.3);
+
+  .page-indicator {
+    padding: 4px 4px;
+
+    .page-indicator-icon {
+      width: 6px;
+      height: 6px
+    }
+  }
 }
 
   .key-container {
@@ -1902,6 +1911,20 @@ StScrollBar {
     -arrow-rise: 10px;
     -boxpointer-gap: 5px;
   }
+
+.emoji-page {
+  .keyboard-key {
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.emoji-panel {
+  .keyboard-key:latched {
+    border-color: #005684;
+    background-color: #006098;
+  }
+}
 
 // IBus Candidate Popup
 
