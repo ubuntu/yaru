@@ -1701,21 +1701,20 @@ StScrollBar {
   .notification-banner {
     font-size: 11pt;
     width: 34em;
-    min-height: 64px;
     margin: 6px;
     border-radius: $medium-radius;
     border: none;
+    min-height: 64px;
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
-
-    &, &:focus, &:active {
-      & { background-color: $light_base_color }
-      .message-title { color: darken($dark_fg_color, 10%); }
-      .message-content { color: $dark_fg_color;
-       }
-    }
     &:hover { background: $light_base_color; }
+    &, &:focus, &:active {
+      background-color: $light_base_color;
+      .message-title { color: darken($dark_fg_color, 10%); }
+      .message-content { color: $dark_fg_color; }
+    }
+
     .message-icon-bin > StIcon {
-     color: $dark_fg_color;
+      color: $dark_fg_color;
     }
 
     StEntry {
