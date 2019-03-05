@@ -1174,9 +1174,9 @@ StScrollBar {
           }
 
           .message-icon-bin > StIcon {
-            -st-icon-style: symbolic;
             color: $inactive_element_color;
             icon-size: 1.09em;
+            -st-icon-style: symbolic;
           }
 
           .message-secondary-bin {
@@ -1242,6 +1242,11 @@ StScrollBar {
     spacing: 4px;
 
     .label-shadow { color: transparent; }
+  }
+
+  .app-menu,
+  .app-well-menu {
+    max-width: 27.25em;
   }
 
   .aggregate-menu {
