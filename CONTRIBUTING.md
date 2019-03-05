@@ -13,7 +13,7 @@ This installation method is to try out the theme while developing it. If you're 
 
 ```bash
 # Needed to build, test and contribute to the gtk, shell and icon themes
-sudo apt install libgtk-3-dev git meson sassc inkscape optipng
+sudo apt install libgtk-3-dev git meson sassc inkscape optipng ruby
 # Download the repository from github
 git clone https://github.com/ubuntu/yaru.git
 cd yaru
