@@ -457,7 +457,7 @@ StScrollBar {
   }
 
   .polkit-dialog-user-icon {
-    border-radius: $small_radius;
+    border-radius: 99px;
     background-size: contain;
     width: 48px;
     height: 48px;
@@ -1228,11 +1228,7 @@ StScrollBar {
 
   // a little unstructured mess:
 
-  .system-switch-user-submenu-icon.user-icon {
-    icon-size: 20px;
-    padding: 0 2px;
-  }
-  .system-switch-user-submenu-icon.default-icon {
+  .system-switch-user-submenu-icon {
     icon-size: 16px;
     padding: 0 4px;
   }
@@ -1960,13 +1956,12 @@ StScrollBar {
 
 /* Auth Dialogs & Screen Shield */
 
-.framed-user-icon {
+.user-icon {
   background-size: contain;
   border: 1px solid $light_borders_color;
   color: $fg_color;
-  border-radius: $small_radius;
+  border-radius: 99px;
   &:hover {
-    // TODO
     border-color: lighten($osd_fg_color,30%);
     color: lighten($osd_fg_color,30%);
   }
