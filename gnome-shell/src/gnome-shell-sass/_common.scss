@@ -1289,15 +1289,24 @@ StScrollBar {
 //close buttons
 
 .window-close {
-  transition-duration: 100ms;
-  background-image: url("close-window.svg");
-  background-size: 32px;
-  height: 32px;
-  width: 32px;
-  -shell-close-overlap: 13px;
+  background-color: $selected_bg_color;
+  color: white;
+  border-radius: 24px;
+  border: 2px solid $selected_bg_color;
+  height: 24px;
+  width: 24px;
+  -shell-close-overlap: 11px;
+  box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
 
-  &:hover { background-image: url("close-window-hover.svg"); }
-  &:active { background-image: url("close-window-active.svg"); }
+  &:hover {
+    background-color: lighten($selected_bg_color,5%);
+    border-color: lighten($selected_bg_color,5%);
+  }
+
+  &:active {
+    background-color: darken($selected_bg_color,5%);
+    border-color: darken($selected_bg_color,5%);
+  }
 }
 
 /* NETWORK DIALOGS */
