@@ -35,8 +35,6 @@ endforeach
 
 # static files to copy
 data_sources = [
-  'calendar-arrow-left.svg',
-  'calendar-arrow-right.svg',
   'calendar-today.svg',
   'checkbox-focused.svg',
   'checkbox-off-focused.svg',

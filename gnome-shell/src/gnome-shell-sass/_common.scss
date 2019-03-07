@@ -1061,13 +1061,8 @@ StScrollBar {
       &:active { background-color: $base_active_color; }
     }
 
-      .calendar-change-month-back { //arrow back
-        background-image: url("calendar-arrow-left.svg");
-        &:rtl { background-image: url("calendar-arrow-right.svg"); }
-      }
-      .calendar-change-month-forward { //arrow foreward
-        background-image: url("calendar-arrow-right.svg");
-        &:rtl { background-image: url("calendar-arrow-left.svg"); }
+      .calendar-change-month-back StIcon, .calendar-change-month-forward StIcon { // arrows
+        icon-size: 1.09em;
       }
 
     .calendar-day-base {
