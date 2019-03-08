@@ -866,7 +866,6 @@ StScrollBar {
     -minimum-hpadding: 6px;
     font-weight: 450;
     color: $_fg;
-    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
     transition-duration: 100ms;
 
     .app-menu-icon {
@@ -879,8 +878,6 @@ StScrollBar {
 
     &:hover {
       color: $hover_fg_color;
-      text-shadow: 0px 1px 4px rgba(0, 0, 0, 1);
-
     }
 
     &:active, &:overview, &:focus, &:checked {
@@ -1158,6 +1155,11 @@ StScrollBar {
             color: $inactive_element_color;
             icon-size: 1.09em;
             -st-icon-style: symbolic;
+          }
+
+          .message-icon-bin > .fallback-window-icon {
+            width: 1.09em;
+            height: 1.09em;
           }
 
           .message-secondary-bin {
