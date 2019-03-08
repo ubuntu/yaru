@@ -878,7 +878,6 @@ StScrollBar {
 
     .system-status-icon,
     .app-menu-icon > StIcon,
-    .popup-menu-arrow { }
 
     &:hover {
       color: $hover_fg_color;
@@ -886,7 +885,6 @@ StScrollBar {
 
       .system-status-icon,
       .app-menu-icon > StIcon,
-      .popup-menu-arrow { }
     }
 
     &:active, &:overview, &:focus, &:checked {
@@ -895,8 +893,6 @@ StScrollBar {
       background-color: rgba(0, 0, 0, 0.01);
       box-shadow: inset 0px -2px $selected_bg_color;
       color: lighten($_fg,10%);
-
-      & > .system-status-icon { }
     }
 
     .system-status-icon { icon-size: 1.09em; padding: 0 5px; }
