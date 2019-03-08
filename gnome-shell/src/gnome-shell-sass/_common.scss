@@ -876,15 +876,11 @@ StScrollBar {
       //dimensions of the icon are hardcoded
     }
 
-    .system-status-icon,
-    .app-menu-icon > StIcon,
 
     &:hover {
       color: $hover_fg_color;
       text-shadow: 0px 1px 4px rgba(0, 0, 0, 1);
 
-      .system-status-icon,
-      .app-menu-icon > StIcon,
     }
 
     &:active, &:overview, &:focus, &:checked {
