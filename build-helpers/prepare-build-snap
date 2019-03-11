@@ -18,6 +18,8 @@ if [ "$REPO" == "ubuntu" ] && ([ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$SOUR
         if [ "$TRAVIS_BRANCH" == "bionic" ]; then
                 channel="edge"
                 echo "Push to bionic ubuntu repo: will release to $channel"
+        elif
+                echo "No bionic target, nothing to snap"
         fi
 
         if [ ! -z "$channel" ]; then
@@ -27,10 +29,10 @@ elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
         echo "This PR doesn't originate from an ubuntu/ repo for an ubuntu/ destination repo. We can't upload automatically a snap on your beyond thus."
 fi
 
-docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
-
-# stop if this was just a test build without any snap pushed
+# stop if no channel is set for push
 [ -z "$channel" ] && exit 0
+
+docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
 # build now gtk-common-themes
 # FIXME: we won't need this once snapd can accept and auto-install theme snaps.
