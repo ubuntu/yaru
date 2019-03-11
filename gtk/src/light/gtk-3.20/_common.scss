@@ -1874,6 +1874,9 @@ headerbar {
       }
     }
   }
+
+  // grey borders look fuzzy on dark backgrounds - thus cutting the border in headerbar
+  scale slider { &, &:disabled { border-color: transparent; } }
 }
 
 headerbar {
