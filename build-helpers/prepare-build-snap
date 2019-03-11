@@ -14,7 +14,7 @@ SOURCE_REPO="${TRAVIS_PULL_REQUEST_SLUG%%/*}"
 YARU_BRANCH="$TRAVIS_BRANCH"
 channel=""
 if [ "$REPO" == "ubuntu" ] && ([ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$SOURCE_REPO" == "ubuntu" ]) ; then
-        # only push build to `bionic` branch are released, the rest will be as PR via dedicated channel
+        # only push build to `bionic` branch are released
         if [ "$TRAVIS_BRANCH" == "bionic" ]; then
                 channel="edge"
                 echo "Push to bionic ubuntu repo: will release to $channel"
