@@ -18,7 +18,7 @@ if [ "$REPO" == "ubuntu" ] && ([ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$SOUR
         if [ "$TRAVIS_BRANCH" == "bionic" ]; then
                 channel="edge"
                 echo "Push to bionic ubuntu repo: will release to $channel"
-        elif
+        else
                 echo "No bionic target, nothing to snap"
         fi
 
