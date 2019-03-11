@@ -1642,11 +1642,14 @@ headerbar {
     }
   }
 
-  // GNOME 3.32+ responsive design has been reverted again
-  // add "hdyleaflet" in front of "separator" when it is added/enabled again
-  separator.sidebar.vertical {
-    border-color: mix($inkstone, $headerbar_bg_color, 50%);
-    &:backdrop { border-color: mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%); }
+  // GNOME 3.32+ responsive design headerbar separators
+  separator, hdyleaflet separator {
+    &, &.sidebar {
+      &, &.vertical, &.horizontal {
+        border-color: mix($inkstone, $headerbar_bg_color, 50%);
+        &:backdrop { border-color: mix(darken($inkstone, 5%), $backdrop_headerbar_bg_color, 50%); }
+      }
+    }
   }
 
   & {
