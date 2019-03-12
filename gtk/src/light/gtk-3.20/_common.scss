@@ -4239,7 +4239,7 @@ paned {
       selection { @extend %selected_items; }
     }
   }
-  *:link { @extend %link_selected; }
+  *:link:selected { @extend %link_selected; }
 }
 
 /************
