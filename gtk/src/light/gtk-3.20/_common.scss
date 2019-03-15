@@ -3779,7 +3779,12 @@ row {
     }
   }
 
-  &:selected { @extend %selected_items; }
+  &:selected { 
+    background-color: $base_active_color;
+    color: $fg_color;
+    font-weight: 500;
+    box-shadow: inset 3px 0 0 $selected_bg_color;
+  }
 }
 
 
