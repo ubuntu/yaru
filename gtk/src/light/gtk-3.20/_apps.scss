@@ -167,7 +167,6 @@ terminal-window {
 
       button.flat {
         &, &:backdrop {
-          color: $terminal_fg_color;
           @each $state, $t in (':hover', 'hover'),
           (':active, &:checked', 'active'),
           (':backdrop', 'backdrop'),
@@ -177,7 +176,7 @@ terminal-window {
           (':disabled', 'insensitive') {
             &#{$state} {
               @include button($t, $headerbar_bg_color, $headerbar_bg_color, $flat:true);
-              color: $base_color;
+              color: $porcelain;
             }
           }
 
