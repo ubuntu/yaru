@@ -11,8 +11,20 @@ cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pw
 # Notes that the tokens are only available when the source repo is under ubuntu/ project.
 YARU_BRANCH="$TRAVIS_BRANCH"
 
-[ "$TRAVIS_BRANCH" != "bionic" ] && echo "skipping: snaps are only for bionic builds" && exit 0
-channel="edge"
+if [ "$TRAVIS_BRANCH" == "bionic" ]; then
+    if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+        # if it's a PR event, publish a special snap
+        channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
+        YARU_BRANCH="$TRAVIS_PULL_REQUEST_BRANCH"
+        echo "PR to bionic ubuntu repo: will release to $channel"
+    else
+        # this is an official edge snap
+        channel="edge"
+    fi
+else
+    echo "skipping: snaps are only for bionic builds"
+    exit 0
+fi
 
 echo "Push to bionic ubuntu repo: will release to $channel"
 
