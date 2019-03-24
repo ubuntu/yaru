@@ -466,7 +466,7 @@ entry {
 
 treeview, row {
   &:focus {
-    outline-color: transparentize(white, 0.2);
+    outline-color: gtkalpha(currentColor, 0.3);
     outline-offset: -2px;
     -gtk-outline-radius: $small_radius;
   }
@@ -2075,6 +2075,8 @@ treeview.view {
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
   &:selected {
+    outline-color: gtkalpha(white, 0.8);
+
     &:focus, & {
       @extend %selected_items;
       border-radius: 0;
