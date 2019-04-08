@@ -9,9 +9,15 @@ More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-t
 
 Detailed screenshots and reasoning behind the design can be found inside the Design Wiki: https://github.com/ubuntu/yaru/wiki
 
-![Files](https://i.imgur.com/XA00uS9.jpg)
+![Files](https://i.imgur.com/Qxl69M6.png)
 
-![Dash](https://i.imgur.com/TUFvhlk.png)
+![Dash](https://i.imgur.com/FnsYs32.png)
+
+![Appgrid](https://i.imgur.com/kMss4gR.png)
+
+![Popups](https://i.imgur.com/3oipHpm.png)
+
+![Files_and_Shotwell](https://i.imgur.com/lAUSNy5.png)
 
 ![widgetfactorylight](https://i.imgur.com/Iau8WZo.png)
 
