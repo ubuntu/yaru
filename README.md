@@ -15,7 +15,7 @@ Detailed screenshots and reasoning behind the design can be found inside the Des
 
 ![Appgrid](https://i.imgur.com/N0cmNXQ.png)
 
-![Popups](https://i.imgur.com/3oipHpm.png)
+![Popups](https://i.imgur.com/mNu0mYF.png)
 
 ![Files_and_Shotwell](https://i.imgur.com/fpz7IYG.png)
 
