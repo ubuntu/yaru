@@ -1,3 +1,19 @@
+yaru-theme (19.04.2) disco; urgency=medium
+
+  [ Feichtmeier ]
+  * New symlinks for gnome-control-center (LP:#1820135)
+  * Remove apt-daemon-download>updatenotifier symlinks
+  * Symlinks notes-app>org.gnome.Notes
+
+  [ Carlo Lobrano ]
+  * Remove border color from user-icon in login shell
+  * Prevent menu inside popover from having transparent background
+  * Support Gnome 3.32 apps icon name changes (LP:#1820767)
+  * Fix gnome-terminal tab close button hover color
+  * Add symlink for new baobab icon name org.gnome.baobab
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Mon, 18 Mar 2019 17:50:36 +0100
+
 yaru-theme (19.04.1) disco; urgency=medium
 
   [ Carlo Lobrano ]
