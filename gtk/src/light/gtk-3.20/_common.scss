@@ -3757,6 +3757,7 @@ list {
 row {
   outline-offset: -3px;
   transition: all 150ms $ease-out-quad;
+  color: if($variant=='light', lighten($fg_color, 3%), darken($fg_color, 3%));
 
   &:not(:selected) {
     outline-color: gtkalpha(currentColor, 0.3);
@@ -3780,9 +3781,8 @@ row {
   }
 
   &:selected { 
-    background-color: $base_active_color;
-    color: $fg_color;
-    font-weight: 500;
+    background-color: transparentize($color: black, $amount: 0.9);
+    color: if($variant=='light', darken($fg_color, 9%), white);
     box-shadow: inset 3px 0 0 $selected_bg_color;
   }
 }
