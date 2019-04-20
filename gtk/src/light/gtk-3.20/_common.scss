@@ -3757,13 +3757,16 @@ list {
 row {
   outline-offset: -3px;
   transition: all 150ms $ease-out-quad;
-  color: if($variant=='light', lighten($fg_color, 3%), darken($fg_color, 3%));
+  color: if($variant=='light', lighten($fg_color, 7%), darken($fg_color, 5%));
 
   &:not(:selected) {
     outline-color: gtkalpha(currentColor, 0.3);
     &:not(:backdrop):hover { background-color: $base_hover_color; }
     &:not(:backdrop):active { background-color: $base_active_color; }
   }
+
+  &:hover { background-color: $base_hover_color; }
+  &:active { background-color: $base_active_color; }
 
   &:backdrop { transition: $backdrop_transition; }
 
@@ -3780,8 +3783,7 @@ row {
     }
   }
 
-  &:selected { 
-    background-color: transparentize($color: black, $amount: 0.9);
+  &:selected {
     color: if($variant=='light', darken($fg_color, 9%), white);
     box-shadow: inset 3px 0 0 $selected_bg_color;
   }
