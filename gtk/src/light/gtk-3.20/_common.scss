@@ -1723,7 +1723,7 @@ headerbar {
       }
     }
 
-    .linked:not(.path-bar):not(.stack-switcher):not(buttonbox) button, .linked:not(.vertical) entry {
+    .linked:not(.path-bar):not(.nautilus-path-bar):not(.stack-switcher):not(buttonbox) button, .linked:not(.vertical) entry {
       // force linked buttons and entries to be separate
       // this needs a lot of testing
       &:focus {
@@ -1744,6 +1744,7 @@ headerbar {
       &:not(:last-child) { margin-right: 4px; }
     }
 
+    .nautilus-path-bar button,
     .stack-switcher.linked button,
     buttonbox.linked button,
     buttonbox.linked button.text-button ~ button {
@@ -1970,6 +1971,20 @@ headerbar { // headerbar border rounding
 /************
  * Pathbars *
  ************/
+.nautilus-path-bar button {
+  &:only-child, &:last-child {
+    @include button(active, $headerbar_bg_color, $headerbar_fg_color, $flat:true);
+    &:hover { @include button(hover, $headerbar_bg_color, $headerbar_fg_color, $flat:true); }
+  }
+  &:not(:only-child):last-child { border-radius: 0; }
+  &:only-child { border-radius: $small_radius 0 0 $small_radius; }
+}
+
+.path-bar-box.width-maximized {
+  border: 1px solid lighten($headerbar_bg_color, 10%); // same color as active button
+  border-radius: $small_radius;
+}
+
 %underline_focus_effect {
   // indeterminate is there to lazily force the style
   transition: 300ms ease;
@@ -1978,10 +1993,9 @@ headerbar { // headerbar border rounding
 
   &, &:backdrop { box-shadow: inset 0 -2px transparent; }
 }
-
-.path-bar button, .nautilus-path-bar button {  
+.path-bar button {
     &, &:dir(ltr), &:dir(rtl) {
-      &, &.text-button, &.image-button, &.image-button.text-button {  
+      &, &.text-button, &.image-button, &.image-button.text-button {
       @extend %underline_focus_effect;
       background-color: transparent;
       color: $insensitive_fg_color;
@@ -2053,7 +2067,6 @@ headerbar { // headerbar border rounding
     }
   }
 }
-
 /**************
  * Tree Views *
  **************/
@@ -3943,7 +3956,7 @@ filechooser {
         label { color: $backdrop_text_color; }
       }
     }
-    .slider-button { 
+    .slider-button {
       &:first-child { border-radius: $small_radius 0 0 $small_radius; }
       &:last-child { border-radius: 0 $small_radius $small_radius  0; }
     }
@@ -4449,7 +4462,7 @@ decoration {
   .ssd & { box-shadow: 0 0 0 1px $window_border; }
   //These shadows are applied to the context-menu!
   .csd.popup & {
-    border-radius: $small_radius;    
+    border-radius: $small_radius;
     box-shadow: $menu_shadow,
                 0 0 0 1px $menu_border;
   }
@@ -4701,4 +4714,10 @@ button.emoji-section {
   &:hover{@include button(hover)};
   &:active{@include button(active);}
   &:disabled{@include button(insensitive)}
+}
+
+/* This needs to stay after `.regular-button` or the margin setting
+ * will be overwritten */
+.path-bar-box.width-maximized > .nautilus-path-bar button {
+  margin: -1px;
 }
