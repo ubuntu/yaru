@@ -1976,8 +1976,6 @@ headerbar { // headerbar border rounding
     @include button(active, $headerbar_bg_color, $headerbar_fg_color, $flat:true);
     &:hover { @include button(hover, $headerbar_bg_color, $headerbar_fg_color, $flat:true); }
   }
-  &:not(:only-child):last-child { border-radius: 0; }
-  &:only-child { border-radius: $small_radius 0 0 $small_radius; }
 }
 
 .path-bar-box.width-maximized {
@@ -2006,12 +2004,12 @@ headerbar { // headerbar border rounding
       &, &:not(:first-child):not(:last-child), &:first-child, &:last-child { border-radius: 0; }
       box-shadow: none;
 
-      &:hover { 
+      &:hover {
         box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5);
         background-color: transparent;
-        color: $insensitive_fg_color; 
+        color: $insensitive_fg_color;
       }
-      
+
       &:active { box-shadow: inset 0 -2px $insensitive_fg_color; }
 
       &:checked, &:checked:active {
@@ -2026,8 +2024,8 @@ headerbar { // headerbar border rounding
         color: $backdrop_insensitive_color;
         border-color: transparent;
         box-shadow: inset 0 -2px transparent;
-        &:hover { 
-          box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5); 
+        &:hover {
+          box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5);
           background-color: transparent;
           color: $backdrop_insensitive_color;
         }
@@ -4720,4 +4718,6 @@ button.emoji-section {
  * will be overwritten */
 .path-bar-box.width-maximized > .nautilus-path-bar button {
   margin: -1px;
+  &:not(:only-child):last-child { border-radius: 0; }
+  &:only-child { border-radius: $small_radius 0 0 $small_radius; }
 }
