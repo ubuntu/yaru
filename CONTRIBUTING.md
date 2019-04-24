@@ -12,8 +12,8 @@ Yaru consists of one project with 3 distinct parts.
 This installation method is to try out the theme while developing it. If you're not a developer, follow the instructions in the [README.md](./README.md).
 
 ```bash
-# Needed to build, test and contribute to the gtk, shell and icon themes
-sudo apt install libgtk-3-dev git meson sassc inkscape optipng
+# Needed packages to clone the repository and build the source files
+sudo apt install libgtk-3-dev git meson sassc
 # Download the repository from github
 git clone https://github.com/ubuntu/yaru.git
 cd yaru
@@ -22,6 +22,12 @@ meson build
 cd build
 # Build and install
 sudo ninja install
+```
+
+### Useful one-liners for icon theme contributors
+```bash
+# Additionally installs packages needed to work on the icon theme
+sudo apt install libgtk-3-dev git meson sassc inkscape optipng ruby
 ```
 
 If you want to change the GDM look and point to the same stylesheet. You only need to do this once.
@@ -34,10 +40,11 @@ If you reboot, select the Yaru session in GDM and you should be all right.
 
 ### More granular changes
 
-Now everything should be in place. Select the GTK and sound theme via:
+Now everything should be in place. Select the GTK, icon and sound theme via:
 ```bash
 gsettings set org.gnome.desktop.interface gtk-theme Yaru
 gsettings set org.gnome.desktop.sound theme-name Yaru
+gsettings set org.gnome.desktop.interface icon-theme Yaru
 ```
 
 The GTK2 and GTK3 files go into `/usr/local/share/themes/Yaru`. The shell files go into `/usr/local/share/gnome-shell/theme/Yaru`. You can edit the `gtk.css` and `gnome-shell.css` files in those folders directly for testing, or you can edit the SCSS files inside the folder you cloned from GitHub.

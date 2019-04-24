@@ -1,3 +1,222 @@
+yaru-theme (19.04.2) disco; urgency=medium
+
+  [ Feichtmeier ]
+  * New symlinks for gnome-control-center (LP:#1820135)
+  * Remove apt-daemon-download>updatenotifier symlinks
+  * Symlinks notes-app>org.gnome.Notes
+
+  [ Carlo Lobrano ]
+  * Remove border color from user-icon in login shell
+  * Prevent menu inside popover from having transparent background
+  * Support Gnome 3.32 apps icon name changes (LP:#1820767)
+  * Fix gnome-terminal tab close button hover color
+  * Add symlink for new baobab icon name org.gnome.baobab
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Mon, 18 Mar 2019 17:50:36 +0100
+
+yaru-theme (19.04.1) disco; urgency=medium
+
+  [ Carlo Lobrano ]
+  * Fix link color in infobar
+  * Enforce integer sizes when rendering bitmaps
+  * Visible scrollbar trough improve slider visibility
+  * Move scrollbar trough styling from common to apps::firefox
+  * Increase visibility of slider in normal and hover state
+  * Actually release Yaru-dark in debian package
+  * Fixed osd button hover in light variant
+  * Convert literal to float first and then to int
+  * Allow generate-symlink providing a pattern
+  * fix audo-x mimetype symlinks
+  * fix symlinks
+  * fix symlinks
+  * Render again flac mimetype icon to fix thick borders
+  * remove desktop.ini files
+  * fix symlinks
+  * update places.list with inode-directory symlink
+  * Revert "Rename new email sound file"
+  * message.oga symlink of message-new-email.oga
+  * Fix symlink with relative path
+  * Remove orange bottom border in selected tab
+  * Do not change font-weight on checked tabs
+  * Removed commented code
+  * Patched generate-symlink script to handle emblems
+  * Add symlinks for the new emblems
+  * Increase border color
+  * Remove unused assets
+  * Add rendered PNGs
+  * Revert "Add rendered PNGs"
+  * sync gnome-shell upstream folder agains gnome-shell 3.30.2
+  * Synch gnome-shell upstream folder with upstream master 3.31.92 (6349f0feb)
+  * minor sync of docs files
+  * Set top-panel always full opaque
+  * removed activities.svg
+  * Sync world-clock style
+  * Restrict app menu width (from upstream)
+  * Replace corner ripple png assets with css
+  * search: Hide the separator line of the last result (from upstream)
+  * Minor fixes for notification-badge
+  * keyboard: add indicator and emoji page support from upstream
+  * Round avatar
+  * Use system arrows for calendar widget
+  * Use round user-icon in logout dialog
+  * Replace .window-close assets with scss
+  * Clean up some unused SVG images
+  * Removed doubled definition in dock.scss
+  * Remove icon-shadow in opaque panel
+  * Sync media-message-cover-icon icon-size and padding with upstream
+  * Completely remove icon-shadow
+  * Clean up of icon-shadow removal
+  * Removed text-shadow and fallback-window-icon as per upcoming changes
+  * Build snaps only for bionic branch
+  * Update comment about which content is built
+  * Actually prevent snapcraft to run if target is not Bionic
+  * Simplify prepare-build script
+  * Include gnome-shell MR !452
+
+  [ feichtmeier ]
+  * Add a polari icon and add polari>org.gnome.Polari symlink to the list
+  * Export png and symbolic polari icon
+  * Add symlinks polari>org.gnome.Polari
+  * Update readme with up-to-date screenshots
+  * Remove infobar styling which introduced backdrop bugs for fg_color
+  * Keep backdrop_bg_color for normal infobars in backdrop
+  * Use text_color for infobars
+  * Remove unused styling in backdrop for infobars
+  * Don't include entry:focus and entry selection in the jetpopoverwildcard
+  * Reduce menu box-shadow to avoid clipping on top menus
+  * Exclude dark menus
+  * Reorganize border and box-shadows, add box-shadow to windows
+  * Fix dark popover's separator and backdrop buttons/entries border
+  * Remove decoration.ssd boxshadow in backdrop
+  * Revert box-shadow removal for decoration.ssd in backdrop
+  * Add roundness to #pathbarbox sliderbuttons
+  * Add $borders_color to button.flat:hover when not in headerbar
+  * Adapt backdrop:hover
+  * Remove top highlight for switches in headerbar
+  * Remove border-top change and box-shadow also in backdrop for hb switches
+  * Remove whitespace
+
+  [ Eaglers ]
+  * Add icon for missing image
+  * Move icon for missing image to "status"
+  * Add symlink "gtk-image-missing"
+  * Improve existing emblems and add new
+  * Align the pictogram of emblem-shared icon location
+  * Inverse emblem-symbolic-link colors
+  * Revert emblem-symbolic-link color inversing
+  * Add 7z archive icon
+  * Fix gradient in some icons and align pictograms
+
+  [ ubuntujaggers ]
+  * adding a new version of source-symbolic.svg to optimise the Polari hash symbol for 16px and also adding the individual extracted polari-symbolic.svg
+  * making some small repairs to source-symbolic.svg and polari.svg
+  * adding light blue firefox icon - new SVG and all the pngs.
+  * adding a darker green Polari icon
+  * adding pngs for new darker green polari icon
+  * adding full colour SVG for quadrapassel app icon and all the pngs
+  * adding full size SVG for quadrapassel app icon that will scale better later, plus updated 256px pngs
+  * trying a new colour for quadrapassel
+  * adding new application-x-trash mimetype which is consistent with clock on image-loading icon
+  * adding version of quadrapassel based on madsrh's mockup
+  * adding symbolic icons for view-more and view-more-horizontal
+  * adding symbolic icons for view-more and view-more-horizontal
+  * setting up a new mergable branch with all the new non-uniform icons
+  * adding symlinks for disk usage app
+  * adding missing symlinks for apport --> error-app
+  * adding missing symlinks for clock-app
+  * adding non-uniform notes app and the symlinks
+  * improvement to 16px version of non-uniform software store
+  * Non-uniform version of messaging-app with symlinks
+  * Missing symlinks for Gnome Photos --> gallery-app
+  * Non-uniform icon for Ubiquity
+  * Non-uniform packages-app
+  * non-uniform ubiquity placing blue download arrow on disk utility app
+  * new rubbish bin copying current design but with pale bin, green logo and papers in disarray
+  * new symbolic for ubiquity
+  * darker green recycling logo
+  * redone symbolic icons for apps, for testing
+  * adding revise app symbols for testing
+  * new symbols for colour and font select under 'actions'
+  * adding preferences-system-applications that clones app store symbol
+  * non-uniform usage-app and symlinks
+  * non-uniform root-terminal-app icon
+  * revised source-symbolic and deletion of preferences-system-applications which didn't work
+  * preferences-applications-symbolic and preferences-apps-symbolic
+  * Non-uniform weather-app and symlinks
+  * deleting wrongly named app settings symbol and giving it the correct name in source-symbolic
+  * small correction to usage-app-symbolic and power-statistics-symbolic
+  * small improvements to ebook reader and scanner symbolics
+  * adding image-missing-symbolic SVG which was missing
+  * adding preferences-color and symlinks, plus preferences-desktop-accessibility which isn't used in ubuntu
+  * fixing preferences-color SVG
+
+  [ madsrh ]
+  * oga file extension for sounds
+  * new audio mime icons
+  * Removed unfinished icon
+  * Removed wrong icons
+  * Updated icons
+  * Fixed icons and added symlinks
+  * Adding a pgp mime icon
+  * Add mime icon for Audacity projects
+  * graphite-emblem-symbolic-link
+  * Add mime type icon for flac
+  * add symlink for python3 files
+  * Changed font to ubuntu
+  * added window-new-symbolic
+  * Updated logo
+  * Add mime-icon for GIMP
+  * Rename new email sound file
+  * Add more emblem icons
+  * more icons added
+  * Removed emblem-system
+  * Changed Star emblem to heart
+  * fix-missing-svg-emblem
+  * Add folder icons for Dropbox
+
+  [ Feichtmeier ]
+  * Fix active disabled/insensitive headerbar buttons to be
+  * Update Contributing with needed steps before building
+  * Adapt gtk tooltips border to shell
+  * Fix HB suggested- and destructive-action buttons border color
+  * Fix path-bar and nautilus-path-bar styling to the known underline design
+  * Fix first-child last child hover toggle + minimize selector+ fix bracket
+  * Create new symlinks to known apps for gnome 3.32 name changes
+  * Update CONTRIBUTING.md
+  * Add gnome-mines and -mahjongg full  color symlinks to new name convention
+  * Adapt symbolic icons
+  * system-monitor-app -> org.gnome.SystemMonitor symlinks
+  * Symlink: system-settings->org.gnome.Settings
+  * Symlink: log-viewer-app->org.gnome.Logs
+  * Fix selection-mode green buttons border-color on hover
+  * Adapt backdrop
+  * Fix Light/Dark emoji.popover button:checked difference
+  * Reduce complexity of the border-color control structure
+  * Revert "Fix Light/Dark emoji.popover button:checked difference"
+  * Style new hdyleaflet separators
+  * Symlink: passwords-app->org.gnome.seahorse.Application
+  * Replace page-indicator icons with SCSS /copied from upstream shell theme
+  * Remove welcome-app SVGs and pngs
+  * Update CONTRIBUTING.md
+  * Add round edges for desktop items selection frame
+  * Correctly style headerbar sidebar separator
+  * Remove border-color for sliders in headerbar
+  * Add hdyleaflet styling again
+
+  [ James Henstridge ]
+  * Add a build option to install compatibility stubs for communitheme theme name.
+
+  [ Thien Do ]
+  * Update "sound" part in contributing guideline
+
+  [ Aidan Harris ]
+  * Add inode-directory symlinks to folder icon
+
+  [ eaglersdeveloper ]
+  * Add fullcolor SSD icon
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 12 Mar 2019 13:08:43 +0100
+
 yaru-theme (19.04) disco; urgency=medium
 
   [ Carlo Lobrano ]

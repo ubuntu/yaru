@@ -9,33 +9,28 @@ cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pw
 
 # Only release as a snap from main repo (ubuntu slug), enabling other forks to test build the snap.
 # Notes that the tokens are only available when the source repo is under ubuntu/ project.
-REPO="${TRAVIS_REPO_SLUG%%/*}"
-SOURCE_REPO="${TRAVIS_PULL_REQUEST_SLUG%%/*}"
 YARU_BRANCH="$TRAVIS_BRANCH"
-channel=""
-if [ "$REPO" == "ubuntu" ] && ([ "$TRAVIS_PULL_REQUEST" == "false" ] || [ "$SOURCE_REPO" == "ubuntu" ]) ; then
-        # if it's a PR event from
-        if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-                channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
-                YARU_BRANCH="$TRAVIS_PULL_REQUEST_BRANCH"
-                echo "PR to main ubuntu repo: will release to $channel"
-        # only push build to master are released, the rest will be as PR via dedicated channel
-        elif [ "$TRAVIS_BRANCH" == "master" ]; then
-                channel="edge"
-                echo "Push to master ubuntu repo: will release to $channel"
-        fi
 
-        if [ ! -z "$channel" ]; then
-                cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
-        fi
-elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-        echo "This PR doesn't originate from an ubuntu/ repo for an ubuntu/ destination repo. We can't upload automatically a snap on your beyond thus."
+if [ "$TRAVIS_BRANCH" == "bionic" ]; then
+    if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+        # if it's a PR event, publish a special snap
+        channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
+        YARU_BRANCH="$TRAVIS_PULL_REQUEST_BRANCH"
+        echo "PR to bionic ubuntu repo: will release to $channel"
+    else
+        # this is an official edge snap
+        channel="edge"
+    fi
+else
+    echo "skipping: snaps are only for bionic builds"
+    exit 0
 fi
 
-docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
+echo "Push to bionic ubuntu repo: will release to $channel"
 
-# stop if this was just a test build without any snap pushed
-[ -z "$channel" ] && exit 0
+cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
+
+docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
 # build now gtk-common-themes
 # FIXME: we won't need this once snapd can accept and auto-install theme snaps.

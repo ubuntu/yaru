@@ -57,8 +57,8 @@ stage {
   border-right-width: 1px;
   @include button(normal);
   &:insensitive { @include button(insensitive); }
-  &:focus { @include button(focus); }
   &:hover { @include button(hover); }
+  &:focus { @include button(focus); }
   &:active { @include button(active); }
   padding: 12px;
 
@@ -267,8 +267,7 @@ StScrollBar {
   }
 
   .end-session-dialog-logout-icon {
-    //border: 2px solid #8b8b8b;
-    border-radius: 5px;
+    border-radius: 99px;
     width: 48px;
     height: 48px;
     background-size: contain;
@@ -428,7 +427,7 @@ StScrollBar {
   }
 
   .polkit-dialog-user-icon {
-    border-radius: 5px;
+    border-radius: 99px;
     background-size: contain;
     width: 48px;
     height: 48px;
@@ -508,6 +507,7 @@ StScrollBar {
 
   .popup-menu-arrow { } //defined globally in the TOP BAR
   .popup-sub-menu {
+    padding-bottom: 1px;
     background-color: darken($bg_color,2%);
     box-shadow: inset 0 -1px 0px lighten($borders_color,5%);
   }
@@ -689,7 +689,6 @@ StScrollBar {
     height: 50px;
     background-color: $selected_bg_color;
     color: $selected_fg_color;
-    //background-image: url("resource:///org/gnome/shell/theme/ws-switch-arrow-up.png");
     background-size: 32px;
     border-radius: 8px;
   }
@@ -730,9 +729,7 @@ StScrollBar {
 /* TOP BAR */
 
 #panel {
-  background-color: rgba(0, 0, 0, 0.35);
-  /* transition from solid to transparent */
-  transition-duration: 500ms;
+  background-color: black;
   font-weight: bold;
   height: 1.86em;
   font-feature-settings: "tnum";
@@ -749,7 +746,7 @@ StScrollBar {
 
   .panel-corner {
     -panel-corner-radius: $panel-corner-radius;
-    -panel-corner-background-color: rgba(0, 0, 0, 0.35);
+    -panel-corner-background-color: black;
     -panel-corner-border-width: 2px;
     -panel-corner-border-color: transparent;
 
@@ -768,9 +765,7 @@ StScrollBar {
     -natural-hpadding: 12px;
     -minimum-hpadding: 6px;
     font-weight: bold;
-    color: #eee;
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
-    transition-duration: 100ms;
+    color: #ccc;
 
     .app-menu-icon {
       -st-icon-style: symbolic;
@@ -779,21 +774,8 @@ StScrollBar {
       //dimensions of the icon are hardcoded
     }
 
-    .system-status-icon,
-    .app-menu-icon > StIcon,
-    .popup-menu-arrow {
-      icon-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
-    }
-
     &:hover {
       color: lighten($fg_color, 10%);
-      text-shadow: 0px 1px 6px rgba(0, 0, 0, 1);
-
-      .system-status-icon,
-      .app-menu-icon > StIcon,
-      .popup-menu-arrow {
-        icon-shadow: 0px 1px 6px rgba(0, 0, 0, 1);
-      }
     }
 
     &:active, &:overview, &:focus, &:checked {
@@ -802,8 +784,6 @@ StScrollBar {
       background-color: rgba(0, 0, 0, 0.01);
       box-shadow: inset 0 -2px 0px lighten($selected_bg_color,5%);
       color: lighten($fg_color,10%);
-
-      & > .system-status-icon { icon-shadow: black 0 2px 2px; }
     }
 
     .system-status-icon { icon-size: 1.09em; padding: 0 5px; }
@@ -828,31 +808,6 @@ StScrollBar {
   .screencast-indicator { color: $warning_color; }
 
   .remote-access-indicator { color: $warning_color; }
-
-  &.solid {
-    background-color: black;
-    /* transition from transparent to solid */
-    transition-duration: 300ms;
-
-    .panel-corner {
-      -panel-corner-background-color: black;
-    }
-
-    .panel-button {
-      color: #ccc;
-      text-shadow: none;
-
-      &:hover, &:active, &:overview, &:focus, &:checked {
-        color: lighten($fg_color, 10%);
-      }
-    }
-
-    .system-status-icon,
-    .app-menu-icon > StIcon,
-    .popup-menu-arrow {
-      icon-shadow: none;
-    }
-  }
 }
 
   // calendar popover
@@ -923,12 +878,45 @@ StScrollBar {
       font-weight: bold;
     }
 
-    .world-clocks-grid {
+    .weather-header.location {
+      font-weight: normal;
+      font-size: 0.9em;
+    }
+
+    .world-clocks-grid,
+    .weather-grid {
       spacing-rows: 0.4em;
+      spacing-columns: 0.8em;
     }
 
     .weather-box {
       spacing: 0.4em;
+    }
+
+    .world-clocks-city {
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    .world-clocks-time {
+      color: darken($fg_color,20%);
+      font-feature-settings: "tnum";
+      font-size: 1.2em;
+    }
+
+    .world-clocks-timezone {
+      color: darken($fg_color,40%);
+      font-feature-settings: "tnum";
+      font-size: 0.9em;
+    }
+
+    .weather-forecast-icon {
+      icon-size: 2.18em;
+    }
+
+    .weather-forecast-time {
+      color: darken($fg_color,40%);
+      font-size: 0.8em;
     }
 
     .calendar-month-label {
@@ -939,7 +927,6 @@ StScrollBar {
     }
 
     .pager-button {
-      color: white;
       background-color: transparent;
       width: 32px;
       border-radius: 4px;
@@ -947,13 +934,8 @@ StScrollBar {
       &:active { background-color: transparentize($bg_color,0.95); }
     }
 
-      .calendar-change-month-back { //arrow back
-        background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-left.svg");
-        &:rtl { background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-right.svg"); }
-      }
-      .calendar-change-month-forward { //arrow foreward
-        background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-right.svg");
-        &:rtl { background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-left.svg"); }
+      .calendar-change-month-back StIcon, .calendar-change-month-forward StIcon { // arrows
+        icon-size: 1.09em;
       }
 
     .calendar-day-base {
@@ -1091,18 +1073,14 @@ StScrollBar {
               background-color: $bg_color;
               border: 2px solid $bg_color;
               border-radius: 2px;
-              icon-size: 16px;
-              padding: 8px; }
+              icon-size: 32px !important;
+              padding: 6px; }
           }
 
 
   // a little unstructured mess:
 
-  .system-switch-user-submenu-icon.user-icon {
-    icon-size: 20px;
-    padding: 0 2px;
-  }
-  .system-switch-user-submenu-icon.default-icon {
+  .system-switch-user-submenu-icon {
     icon-size: 16px;
     padding: 0 4px;
   }
@@ -1112,6 +1090,11 @@ StScrollBar {
     spacing: 4px;
 
     .label-shadow { color: transparent; }
+  }
+
+  .app-menu,
+  .app-well-menu {
+    max-width: 27.25em;
   }
 
   .aggregate-menu {
@@ -1143,17 +1126,16 @@ StScrollBar {
     & > StIcon { icon-size: 16px; }
   }
 
-//Activities Ripples
+// Activities Ripples
 .ripple-box {
   width: 52px;
   height: 52px;
-  background-image: url("resource:///org/gnome/shell/theme/corner-ripple-ltr.png");
-  background-size: contain;
+  border-radius: 0 0 52px 0; // radius the size of the box give us the curve
+  background-color: lighten(transparentize($selected_bg_color, 0.7), 40%);
+  box-shadow: 0 0 2px 2px lighten($selected_bg_color, 20%);
 }
 
-.ripple-box:rtl {
-  background-image: url("resource:///org/gnome/shell/theme/corner-ripple-rtl.png");
-}
+.ripple-box:rtl { border-radius: 0 0 0 52px; } // just a simple change to the border radius position
 
 // not really top bar only
 .popup-menu-arrow { width: 16px; height: 16px; }
@@ -1162,14 +1144,26 @@ StScrollBar {
 //close buttons
 
 .window-close {
-  background-image: url("resource:///org/gnome/shell/theme/close-window.svg");
-  background-size: 32px;
-  height: 32px;
-  width: 32px;
-  -shell-close-overlap: 16px;
+  background-color: white;
+  border-radius: 24px;
+  border: 4px solid $selected_bg_color;
+  box-shadow: inset 0 -4px 0 0 transparentize($selected_bg_color, 0.5);
+  color: $selected_bg_color;
+  height: 24px;
+  width: 24px;
+  -shell-close-overlap: 14px;
 
-  &:hover { background-image: url("resource:///org/gnome/shell/theme/close-window-hover.svg"); }
-  &:active { background-image: url("resource:///org/gnome/shell/theme/close-window-active.svg"); }
+  &:hover {
+    background-color: $selected_bg_color;
+    border-color: white;
+    color: white;
+  }
+
+  &:active {
+    background-color: mix(white, $selected_bg_color, 75%);
+    border-color: $selected_bg_color;
+    color: $selected_bg_color;
+  }
 }
 
 /* NETWORK DIALOGS */
@@ -1289,6 +1283,8 @@ StScrollBar {
   .list-search-results { spacing: 3px; }
 
   .search-section-separator { height: 2px; background-color: rgba(255, 255, 255, 0.2); }
+
+  .search-section:last-child .search-section-separator { background-color: transparent; }
 
   .list-search-result-content { spacing: 30px; }
   .list-search-result-title { color: darken($osd_fg_color,5%); spacing: 12px; }
@@ -1448,15 +1444,17 @@ StScrollBar {
     padding: 15px 20px;
 
     .page-indicator-icon {
-      width: 18px;
-      height: 18px;
-      background-image: url(resource:///org/gnome/shell/theme/page-indicator-inactive.svg);
+      width: 12px;
+      height: 12px;
+      background-color: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius:12px;
     }
 
-    &:hover .page-indicator-icon { background-image: url(resource:///org/gnome/shell/theme/page-indicator-hover.svg); }
-    &:active .page-indicator-icon { background-image: url(resource:///org/gnome/shell/theme/page-indicator-active.svg); }
+    &:hover .page-indicator-icon { border-color: white; }
+    &:active .page-indicator-icon { border: none; margin: 2px; background-color:#fff; }
     &:checked .page-indicator-icon,
-    &:checked:active { background-image: url(resource:///org/gnome/shell/theme/page-indicator-checked.svg); }
+    &:checked:active { background-color: #fff;}
   }
 
   .no-frequent-applications-label { @extend %status_text; }
@@ -1640,6 +1638,15 @@ StScrollBar {
 
 #keyboard {
     background-color: transparentize($osd_bg_color, 0.3);
+
+    .page-indicator {
+        padding: 4px 4px;
+
+        .page-indicator-icon {
+            width: 6px;
+            height: 6px
+        }
+    }
 }
 
   .key-container {
@@ -1649,8 +1656,8 @@ StScrollBar {
 
   .keyboard-key {
     background-color: #393f3f;
-    min-height: 2em;
-    min-width: 2em;
+    min-height: 1.2em;
+    min-width: 1.2em;
     font-size: 16pt;
     border-radius: 3px;
     border: 1px solid #464d4d;
@@ -1701,6 +1708,20 @@ StScrollBar {
     -boxpointer-gap: 5px;
   }
 
+.emoji-page {
+  .keyboard-key {
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.emoji-panel {
+  .keyboard-key:latched {
+    border-color: #005684;
+    background-color: #006098;
+  }
+}
+
 // IBus Candidate Popup
 
 .candidate-popup-content {
@@ -1735,13 +1756,11 @@ StScrollBar {
 
 /* Auth Dialogs & Screen Shield */
 
-.framed-user-icon {
+.user-icon {
   background-size: contain;
-  border: 2px solid $osd_fg_color;
   color: $osd_fg_color;
-  border-radius: 3px;
+  border-radius: 99px;
   &:hover {
-    border-color: lighten($osd_fg_color,30%);
     color: lighten($osd_fg_color,30%);
   }
 }
