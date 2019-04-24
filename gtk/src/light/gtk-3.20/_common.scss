@@ -3785,6 +3785,7 @@ row {
 
   &:selected {
     color: if($variant=='light', darken($fg_color, 9%), white);
+    background-color: if($variant=='light', transparentize(black, 0.92), transparentize($silk, 0.8));
     box-shadow: inset 3px 0 0 $selected_bg_color;
   }
 }
