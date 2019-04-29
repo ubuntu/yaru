@@ -44,7 +44,7 @@ sed -e "s,CHANNEL,$channel,g" -e "s,REPO,$TRAVIS_REPO_SLUG," -e "s,BRANCH,$YARU_
 
 # build and push gtk-common-themes snap
 cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pwd) && snapcraft"
-cmd="$cmd && echo \"$SNAP_COMMON_THEMES_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
+cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
 docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
 # write on PR install instructions for the snap branch
