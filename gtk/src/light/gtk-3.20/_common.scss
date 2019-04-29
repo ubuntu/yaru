@@ -3760,12 +3760,16 @@ list {
 row {
   outline-offset: -3px;
   transition: all 150ms $ease-out-quad;
+  color: if($variant=='light', lighten($fg_color, 7%), darken($fg_color, 5%));
 
   &:not(:selected) {
     outline-color: gtkalpha(currentColor, 0.3);
     &:not(:backdrop):hover { background-color: $base_hover_color; }
     &:not(:backdrop):active { background-color: $base_active_color; }
   }
+
+  &:hover { background-color: $base_hover_color; }
+  &:active { background-color: $base_active_color; }
 
   &:backdrop { transition: $backdrop_transition; }
 
@@ -3782,7 +3786,10 @@ row {
     }
   }
 
-  &:selected { @extend %selected_items; }
+  &:selected {
+    color: if($variant=='light', darken($fg_color, 9%), white);
+    background-color: if($variant=='light', transparentize(black, 0.92), transparentize($silk, 0.8));
+  }
 }
 
 
