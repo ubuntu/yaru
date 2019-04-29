@@ -3779,7 +3779,10 @@ row {
     }
   }
 
-  &:selected { @extend %selected_items; }
+  &:selected {
+    color: if($variant=='light', darken($fg_color, 9%), white);
+    background-color: if($variant=='light', transparentize(black, 0.92), transparentize($silk, 0.8));
+  }
 }
 
 
