@@ -1657,10 +1657,7 @@ headerbar {
     $c: $headerbar_bg_color;
     $tc: $headerbar_fg_color;
 
-    switch {
-      @include switch(lighten($headerbar_bg_color, 25%));
-      &, &:backdrop { &, &:hover, &:checked, &:checked:hover { border-top-color: transparent; box-shadow: none; } }
-    }
+    switch { @include switch($headerbar_bg_color); }
 
     entry, %dark_entry {
       @include entry(normal, $c: $c, $tc: $tc);
