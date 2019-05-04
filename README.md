@@ -35,7 +35,7 @@ Yaru theme will be the default in 18.10. Once you install it, you will get it by
 
 You will receive there at regular intervals stable updates of the theme.
 
-## Using Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
+## Install Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
 
 > Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. It's up to date with bionic branch of Yaru where we try to cherry-pick as much Gtk and Icon theme changes from master as possible. However the shell theme is more or less set in stone now, since we can not theme both 3.28 and 3.30+ shell in one theme and at some point we will maybe stop to update the bionic branch completely
 
