@@ -47,6 +47,11 @@ Follow these steps in order to install and enable communitheme.
 2. Restart your computer. The login screen will now use Communitheme by default. Click on your user, click on the gear icon ans select the "Ubuntu with communitheme snap" session from the login screen, and login.
 3. Now everything is using the communitheme including applications, icons, sound notifications and cursor. Any new update of communitheme will come directly to you on a regular basis thanks to the snap without having to run any command!
 
+![install](https://i.imgur.com/Vykmt6N.gif)
+
+![login](https://i.imgur.com/1boZU4F.gif)
+
+
 ### Tracking latest bionic branch changes
 
 By default, you track manually tested and curated releases of communitheme snap. You can use the latest bionic branch changes, as a snap is built
