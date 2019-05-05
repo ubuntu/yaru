@@ -699,7 +699,7 @@
 
   slider {
     background-color: if($bg == $dark_fill, white, $headerbar_fg_color);
-    background-clip: padding-box;
+    background-clip: border-box;
     border-radius: $small_radius;
     border: 1px solid transparent;
     box-shadow: 0 1px 1px if($bg == $dark_fill, darken($bg, 7%), rgba(0, 0, 0, 0.15));
