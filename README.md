@@ -1,8 +1,8 @@
-# Yaru default ubuntu theme
+# Yaru gtk-, gnome-shell-, icon- and sound-theme for Ubuntu using the GNOME desktop
 
 Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch=master)](https://travis-ci.org/ubuntu/yaru)
 
-Yaru theme is the default theme for Ubuntu, entirely backed by the community.
+The Yaru theme is the default theme for Ubuntu, backed by the community.
 This is the theme that is shaped by the community on the Ubuntu hub, turned into the default theme starting from Ubuntu 18.10 Cosmic Cuttlefish.
 
 More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
@@ -26,7 +26,7 @@ Detailed screenshots and reasoning behind the design can be found inside the Des
 It contains:
  * a GNOME Shell theme
  * a GTK2 and GTK3 theme
- * an icon & cursor theme, derived from the [Suru icon](https://snwh.org/suru) theme.
+ * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme.
  * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes with an emphasis on making sound a usability feature instead of an annoyance.
 
 ## Yaru on Ubuntu 18.10
@@ -35,11 +35,9 @@ Yaru theme will be the default in 18.10. Once you install it, you will get it by
 
 You will receive there at regular intervals stable updates of the theme.
 
-## Testing Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
+## Install Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
 
-> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. It's still up to date with latest of development of Yaru, only the name differs.
-
-We're currently still developing the theme, but you can try it out for yourself. Be warned though, this is a pre-release alpha state and not (yet) officially supported. These packages are mainly intended for the Yaru designers to get a sense of what actually works in Ubuntu.
+> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. It's up to date with bionic branch of Yaru where we try to cherry-pick as much Gtk and Icon theme changes from master as possible. However the shell theme is more or less set in stone now, since we can not theme both 3.28 and 3.30+ shell in one theme and at some point we will maybe stop to update the bionic branch completely
 
 *Note that these steps only work on Ubuntu 18.04 (bionic beaver).*
 
@@ -49,14 +47,15 @@ Follow these steps in order to install and enable communitheme.
 2. Restart your computer. The login screen will now use Communitheme by default. Click on your user, click on the gear icon ans select the "Ubuntu with communitheme snap" session from the login screen, and login.
 3. Now everything is using the communitheme including applications, icons, sound notifications and cursor. Any new update of communitheme will come directly to you on a regular basis thanks to the snap without having to run any command!
 
-The following video guides you through these steps.
+![install](https://i.imgur.com/Vykmt6N.gif)
 
-[![Video guide](https://img.youtube.com/vi/azlreXxAigY/0.jpg)](https://www.youtube.com/watch?v=azlreXxAigY)
+![login](https://i.imgur.com/1boZU4F.gif)
 
-### Tracking latest of latest
 
-By default, you track manually tested and curated releases of communitheme snap. you can use the latest, as a snap is built
-and published to the snap store when any project related to yaru has changed (being GNOME Shell theme, or icon or…).
+### Tracking latest bionic branch changes
+
+By default, you track manually tested and curated releases of communitheme snap. You can use the latest bionic branch changes, as a snap is built
+and published to the snap store when any project related to the bionic yaru branch has changed (being GNOME Shell theme, or icon or…).
 
 For switching to it, you can switch to the **edge** channel, by running: `snap refresh communitheme --edge`.
 If you want to follow the **edge** content for snap applications, you will need as well to switch `gtk-common-theme` snap
