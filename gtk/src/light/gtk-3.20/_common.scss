@@ -4264,7 +4264,7 @@ tooltip {
   decoration { background-color: transparent; }
 
   > * { // Yeah this is ugly
-    min-height: 30px - (6px - 1px) * 2; // tooltip has hard-coded 6px padding
+    min-height: 29px - (6px - 1px) * 2; // tooltip has hard-coded 6px padding
     padding: 0 8px - (6px - 1px);       // and does not consider border-width
     background-color: transparent;
     color: $porcelain;
