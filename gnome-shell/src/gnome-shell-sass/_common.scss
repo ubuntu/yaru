@@ -1971,30 +1971,29 @@ StScrollBar {
   background-color: transparent;
 
   StEntry {
-    @extend %light_entry;
+    &:focus {
+      @include entry(focus, $fc:$inkstone);
+    }
   }
 
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
-    $c: darken($light_bg_color, 10%);
-    $tc: $dark_fg_color;
-    @include button(normal, $c, $tc); box-shadow: none; 
-    &:active { @include button(active, $c, $tc); }
+    @include button(normal, $inkstone); box-shadow: none;
+    &:active { @include button(active, $inkstone); }
     &:focus { box-shadow: none; border-color: $selected_bg_color;  }
-    &:hover { @include button(hover, $c, $tc); }
-    &:focus:hover { @include button(focus-hover, $c, $tc); }
-    &:insensitive { 
-      border-color: darken($c, 20%); 
-      background-color: darken($c, 20%);
+    &:hover { @include button(hover, $inkstone); }
+    &:focus:hover { @include button(focus-hover, $inkstone); }
+    &:insensitive {
+      border-color: darken($inkstone, 20%);
+      background-color: darken($inkstone, 20%);
       box-shadow: none;
-      color: lighten($tc, 5%);
     }
 
     &:default {
       padding-bottom: 5px;
       padding-top: 5px;
-      @include button(normal, $c:$success_color); box-shadow: none; 
+      @include button(normal, $c:$success_color); box-shadow: none;
       &:hover { @include button(hover, $c:$success_color); }
       &:focus { @include button(focus, $c:$success_color); }
       &:active { @include button(active, $c:$success_color); }
