@@ -433,7 +433,7 @@
 
     $_bc: if($c == $button_bg_color,
             if($variant=='light', $backdrop_borders_color, darken($backdrop_borders_color, 2%)),
-            backdrop_color(_border_color($c)));
+            _backdrop_color(_border_color($c)));
 
     background-color: $_bg;
     border-color: if($flat, $_bg, $_bc);
