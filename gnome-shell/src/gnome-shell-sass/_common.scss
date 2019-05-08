@@ -1370,7 +1370,7 @@ StScrollBar {
   }
 
   //search entry
-  .search-entry {
+  .search-entry, %search_entry {
     width: 320px;
     border-radius: $small_radius;
     border-color: $osd_borders_color;
@@ -1942,14 +1942,14 @@ StScrollBar {
   background-color: transparent;
 
   StEntry {
-    @extend %light_entry;
+    @extend %search_entry;
   }
 
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
-    $c: darken($light_bg_color, 10%);
-    $tc: $dark_fg_color;
+    $c: $inkstone;
+    $tc: $fg_color;
     @include button(normal, $c, $tc); box-shadow: none; 
     &:active { @include button(active, $c, $tc); }
     &:focus { box-shadow: none; border-color: $selected_bg_color;  }
@@ -2127,7 +2127,8 @@ $_screenshield_shadow: 0px 0px 6px rgba(0, 0, 0, 0.726);
 }
 
 #lockDialogGroup {
-  background-color: #2C001E;
+  background: darken($purple, 13%) url(resource:///org/gnome/shell/theme/noise-texture.png);
+  background-repeat: repeat;
 }
 
 #screenShieldNotifications {
