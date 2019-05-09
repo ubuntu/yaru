@@ -1972,7 +1972,8 @@ StScrollBar {
 
   StEntry {
     &:focus {
-      @include entry(focus, $fc:$inkstone);
+      @include entry(focus);
+      border-color: $inkstone;
     }
   }
 
