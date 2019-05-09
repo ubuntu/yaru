@@ -1980,11 +1980,12 @@ StScrollBar {
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
-    @include button(normal, $inkstone); box-shadow: none;
-    &:active { @include button(active, $inkstone); }
+    $c: darken($slate, 3%);
+    @include button(normal, $c); box-shadow: none; border: 1px solid darken($slate, 1%);
+    &:active { @include button(active, $c); }
     &:focus { box-shadow: none; border-color: $selected_bg_color;  }
-    &:hover { @include button(hover, $inkstone); }
-    &:focus:hover { @include button(focus-hover, $inkstone); }
+    &:hover { @include button(hover, $c); }
+    &:focus:hover { @include button(focus-hover, $c); }
     &:insensitive {
       border-color: darken($inkstone, 20%);
       background-color: darken($inkstone, 20%);
