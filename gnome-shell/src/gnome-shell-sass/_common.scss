@@ -1975,7 +1975,7 @@ StScrollBar {
   StEntry {
     &:focus {
       @include entry(focus);
-      border-color: $inkstone;
+      border: darken($slate, 3%);
     }
   }
 
@@ -1983,7 +1983,7 @@ StScrollBar {
   .modal-dialog-button {
     padding: 4px 18px;
     $c: darken($slate, 3%);
-    @include button(normal, $c); box-shadow: none; border: 1px solid darken($slate, 1%);
+    @include button(normal, $c); box-shadow: none;
     &:active { @include button(active, $c); }
     &:focus { box-shadow: none; border-color: $selected_bg_color;  }
     &:hover { @include button(hover, $c); }
