@@ -144,7 +144,6 @@
   @else if $t==hover {
   // active osd button
     background-color: lighten($c, 10%);
-    border-color: lighten($c, 10%);
   }
 
   @else if $t==focus-hover {
