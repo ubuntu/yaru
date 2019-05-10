@@ -1744,6 +1744,7 @@ headerbar {
       &:not(:last-child) { margin-right: 4px; }
     }
 
+    .path-bar,
     .nautilus-path-bar button,
     .stack-switcher.linked button,
     buttonbox.linked button,
@@ -1992,47 +1993,6 @@ headerbar { // headerbar border rounding
   &, &:backdrop { box-shadow: inset 0 -2px transparent; }
 }
 .path-bar button {
-    &, &:dir(ltr), &:dir(rtl) {
-      &, &.text-button, &.image-button, &.image-button.text-button {
-      @extend %underline_focus_effect;
-      background-color: transparent;
-      color: $insensitive_fg_color;
-      &:only-child, &:last-child {
-        &, &:hover { color: $headerbar_fg_color; }
-      }
-      border-style: none;
-      &, &:not(:first-child):not(:last-child), &:first-child, &:last-child { border-radius: 0; }
-      box-shadow: none;
-
-      &:hover {
-        box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5);
-        background-color: transparent;
-        color: $insensitive_fg_color;
-      }
-
-      &:active { box-shadow: inset 0 -2px $insensitive_fg_color; }
-
-      &:checked, &:checked:active {
-        color: $headerbar_fg_color;
-        background-color: transparent;
-        &:hover { box-shadow: inset 0 -2px $insensitive_fg_color; }
-        &:hover, &:backdrop { background-color: transparent; }
-      }
-
-      &:backdrop {
-        background-color: transparent;
-        color: $backdrop_insensitive_color;
-        border-color: transparent;
-        box-shadow: inset 0 -2px transparent;
-        &:hover {
-          box-shadow: inset 0 -2px transparentize($insensitive_fg_color, 0.5);
-          background-color: transparent;
-          color: $backdrop_insensitive_color;
-        }
-      }
-    }
-  }
-
   &.text-button, &.image-button, & {
     padding-left: 4px;
     padding-right: 4px;
