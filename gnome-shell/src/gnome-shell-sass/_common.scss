@@ -1922,6 +1922,8 @@ StScrollBar {
   border: 1px solid $light_borders_color;
   color: $fg_color;
   border-radius: $small_radius;
+  background-color: $purple;
+  padding: 5px;
   &:hover {
     // TODO
     border-color: lighten($osd_fg_color,30%);
