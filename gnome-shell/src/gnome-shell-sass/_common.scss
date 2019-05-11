@@ -1919,10 +1919,10 @@ StScrollBar {
 
 .framed-user-icon {
   background-size: contain;
-  border: 1px solid $light_borders_color;
+  border: 2px solid $fg_color;
   color: $fg_color;
   border-radius: $small_radius;
-  background-color: $purple;
+  background-color: $inkstone;
   padding: 5px;
   &:hover {
     // TODO
@@ -1945,7 +1945,8 @@ StScrollBar {
 
   StEntry {
     @extend %search_entry;
-    &:focus { border-color: transparentize(white, 0.6); }
+    border-width: 2px;
+    &:focus { border-color: $base_active_color; border-width: 2px; }
   }
 
   .modal-dialog-button-box { spacing: 3px; }
@@ -2002,8 +2003,8 @@ StScrollBar {
   .login-dialog-user-list {
     spacing: 12px;
     width: 23em;
-    &:expanded .login-dialog-user-list-item:selected { background-color: $purple; color: $selected_fg_color; }
-    &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $purple; }
+    &:expanded .login-dialog-user-list-item:selected { background-color: $base_hover_color; color: $fg_color; }
+    &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $base_hover_color; }
   }
   .login-dialog-user-list-item {
     border-radius: 5px;
