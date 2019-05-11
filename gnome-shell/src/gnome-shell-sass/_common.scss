@@ -2031,8 +2031,8 @@ StScrollBar {
   .login-dialog-user-list {
     spacing: 12px;
     width: 23em;
-    &:expanded .login-dialog-user-list-item:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
-    &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
+    &:expanded .login-dialog-user-list-item:selected { background-color: $purple; color: $selected_fg_color; }
+    &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $purple; }
   }
   .login-dialog-user-list-item {
     border-radius: 5px;
