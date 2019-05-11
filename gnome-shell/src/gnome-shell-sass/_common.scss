@@ -1945,6 +1945,7 @@ StScrollBar {
 
   StEntry {
     @extend %search_entry;
+    &:focus { border-color: transparentize(white, 0.6); }
   }
 
   .modal-dialog-button-box { spacing: 3px; }
