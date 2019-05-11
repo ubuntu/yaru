@@ -1955,7 +1955,7 @@ StScrollBar {
     $tc: $fg_color;
     @include button(normal, $c, $tc); box-shadow: none; 
     &:active { @include button(active, $c, $tc); }
-    &:focus { box-shadow: none; border-color: $selected_bg_color;  }
+    &:focus { border-color: white;  }
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
     &:insensitive { 
