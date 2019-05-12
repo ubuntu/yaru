@@ -1951,7 +1951,7 @@ StScrollBar {
 .user-icon {
   background-size: contain;
   color: $fg_color;
-  border: 2px solid $fg_color;
+  background-color: darken($slate, 8%);
   border-radius: 99px;
   padding: 5px;
   &:hover {
@@ -1974,8 +1974,7 @@ StScrollBar {
 
   StEntry {
     @extend %search_entry;
-    border-width: 2px;
-    &:focus { border-color: transparentize(white, 0.6); border-width: 2px; }
+    &:focus { border-color: transparentize(white, 0.6); }
   }
 
   .modal-dialog-button-box { spacing: 3px; }
