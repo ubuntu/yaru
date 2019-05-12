@@ -656,11 +656,15 @@ button {
     row:selected & {
       @if $variant == 'light' { border-color: _border_color($selected_bg_color); }
 
-      &.flat:not(:active):not(:checked):not(:hover):not(disabled) {
-        color: $selected_fg_color;
-        border-color: transparent;
+      &, &.flat{
+        &.small-button:not(:disabled) {
+          &, &:hover { 
+            color: $fg_color;
+            border-color: transparent;
 
-        &:backdrop { color: if($variant=='light', $backdrop_base_color, $backdrop_fg_color); }
+          }
+          &:backdrop { color: $backdrop_fg_color; }
+        }
       }
     }
   }
