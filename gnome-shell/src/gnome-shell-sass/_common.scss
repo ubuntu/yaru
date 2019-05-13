@@ -1951,7 +1951,8 @@ StScrollBar {
 .user-icon {
   background-size: contain;
   color: $fg_color;
-  background-color: darken($slate, 8%);
+  background-color: $slate;
+  border: 2px solid $fg_color;
   border-radius: 99px;
   padding: 5px;
   &:hover {
@@ -1989,7 +1990,7 @@ StScrollBar {
     &:focus:hover { @include button(focus-hover, $c, $tc); }
     &:insensitive { 
       border-color: darken($c, 20%); 
-      background-color: darken($c, 20%);
+      background-color: darken($c, 10%);
       box-shadow: none;
       color: lighten($tc, 5%);
     }
