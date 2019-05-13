@@ -1945,8 +1945,7 @@ StScrollBar {
 
   StEntry {
     @extend %search_entry;
-    border-width: 2px;
-    &:focus { border-color: $base_active_color; border-width: 2px; }
+    &:focus { border-color: transparentize(white, 0.6) }
   }
 
   .modal-dialog-button-box { spacing: 3px; }
@@ -1959,12 +1958,7 @@ StScrollBar {
     &:focus { border-color: white;  }
     &:hover { @include button(hover, $c, $tc); }
     &:focus:hover { @include button(focus-hover, $c, $tc); }
-    &:insensitive { 
-      border-color: darken($c, 20%); 
-      background-color: darken($c, 20%);
-      box-shadow: none;
-      color: lighten($tc, 5%);
-    }
+    &:insensitive { @include button(insensitive, $c, $tc); }
 
     &:default {
       padding-bottom: 5px;

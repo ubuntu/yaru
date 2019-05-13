@@ -167,7 +167,7 @@
     text-shadow: none;
     icon-shadow: none;
 
-    @if $c==$success_color {
+    @if $c==($success_color or $purple) {
       $_bg: darken($c, 20%);
       background-color: $_bg;
       border-color: $_bg;
