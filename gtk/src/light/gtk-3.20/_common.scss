@@ -654,11 +654,9 @@ button {
 
   @at-root %button_selected, & {
     row:selected & {
-      @if $variant == 'light' { border-color: _border_color($selected_bg_color); }
-
       &, &.flat{
         &.small-button:not(:disabled) {
-          &, &:hover { 
+          &, &:hover {
             color: $fg_color;
             border-color: transparent;
 
