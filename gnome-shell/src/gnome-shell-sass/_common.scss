@@ -189,14 +189,9 @@ StScrollBar {
   width: 65px;
   height: 22px;
   background-size: contain;
+  background-image: url("toggle-off.svg");
+  &:checked { background-image: url("toggle-on.svg"); }
 }
-
-  @each $v in us, intl {
-    .toggle-switch-#{$v} {
-      background-image: url("toggle-off.svg");
-      &:checked { background-image: url("toggle-on.svg"); }
-    }
-  }
 
 /* links */
 .shell-link {
@@ -1268,10 +1263,16 @@ StScrollBar {
   box-shadow: 0 0 2px 2px lighten($selected_bg_color, 20%);
 }
 
+// Rubberband for select-area screenshots
+.select-area-rubberband {
+  background-color: transparentize($selected_bg_color,0.7);
+  border: 1px solid $selected_bg_color;
+}
+
 .ripple-box:rtl { border-radius: 0 0 0 52px; } // just a simple change to the border radius position
 
 // not really top bar only
-.popup-menu-arrow {icon-size: 1.09em; }
+.popup-menu-arrow { icon-size: 1.09em; }
 .popup-menu-icon { icon-size: 1.09em; }
 
 //close buttons
@@ -1614,9 +1615,9 @@ StScrollBar {
     }
 
     &:hover .page-indicator-icon { border-color: white; }
-    &:active .page-indicator-icon { border: none; margin: 2px; background-color:#fff; }
+    &:active .page-indicator-icon { border: none; margin: 2px; background-color: white; }
     &:checked .page-indicator-icon,
-    &:checked:active { background-color: #fff;}
+    &:checked:active .page-indicator-icon { background-color: white;}
   }
 
   .no-frequent-applications-label { @extend %status_text; }
