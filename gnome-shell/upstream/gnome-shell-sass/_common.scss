@@ -157,17 +157,12 @@ StScrollBar {
 
 /* Switches */
 .toggle-switch {
-  width: 65px;
+  width: 46px;
   height: 22px;
   background-size: contain;
+  background-image: url("resource:///org/gnome/shell/theme/toggle-off-intl.svg");
+  &:checked { background-image: url("resource:///org/gnome/shell/theme/toggle-on-intl.svg"); }
 }
-
-  @each $v in us, intl {
-    .toggle-switch-#{$v} {
-      background-image: url("resource:///org/gnome/shell/theme/toggle-off-#{$v}.svg");
-      &:checked { background-image: url("resource:///org/gnome/shell/theme/toggle-on-#{$v}.svg"); }
-    }
-  }
 
 /* links */
 .shell-link {
@@ -392,7 +387,7 @@ StScrollBar {
 
   .prompt-dialog-error-label {
     font-size: 10pt;
-    color: $error_color;
+    color: $warning_color;
     padding-bottom: 8px;
   }
 
@@ -1031,6 +1026,11 @@ StScrollBar {
             -st-icon-style: symbolic;
           }
 
+          .message-icon-bin > .fallback-window-icon {
+            width: 1.09em;
+            height: 1.09em;
+          }
+
           .message-secondary-bin {
             padding: 0 0.82em;;
           }
@@ -1137,8 +1137,14 @@ StScrollBar {
 
 .ripple-box:rtl { border-radius: 0 0 0 52px; } // just a simple change to the border radius position
 
+// Rubberband for select-area screenshots
+.select-area-rubberband {
+  background-color: transparentize($selected_bg_color,0.7);
+  border: 1px solid $selected_bg_color;
+}
+
 // not really top bar only
-.popup-menu-arrow { width: 16px; height: 16px; }
+.popup-menu-arrow { icon-size: 1.09em; }
 .popup-menu-icon { icon-size: 1.09em; }
 
 //close buttons
@@ -1448,13 +1454,13 @@ StScrollBar {
       height: 12px;
       background-color: transparent;
       border: 2px solid rgba(255, 255, 255, 0.4);
-      border-radius:12px;
+      border-radius: 12px;
     }
 
     &:hover .page-indicator-icon { border-color: white; }
-    &:active .page-indicator-icon { border: none; margin: 2px; background-color:#fff; }
+    &:active .page-indicator-icon { border: none; margin: 2px; background-color: white; }
     &:checked .page-indicator-icon,
-    &:checked:active { background-color: #fff;}
+    &:checked:active .page-indicator-icon { background-color: white;}
   }
 
   .no-frequent-applications-label { @extend %status_text; }

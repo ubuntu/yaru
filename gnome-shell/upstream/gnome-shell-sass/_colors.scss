@@ -16,7 +16,7 @@ $link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), li
 $top_hilight: $borders_edge;
 
 $warning_color: #f57900;
-$error_color: #cc0000;
+$error_color: #ff8080;
 $success_color: if($variant == 'light', #33d17a, darken(#33d17a, 10%));
 $destructive_color: if($variant == 'light', #e01b24, darken(#e01b24, 10%));
 
