@@ -28,6 +28,7 @@ $terminal_borders_color: darken($terminal_bg_color, 10%);
 $headerbar_bg_color: #2B2929;
 $menubar_bg_color: $headerbar_bg_color;
 $headerbar_fg_color: $porcelain;
+$headerbar_border_color: lighten($headerbar_bg_color, 8%);
 $headerbar_text_color: $silk;
 $headerbar_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
 //
