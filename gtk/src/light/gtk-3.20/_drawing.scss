@@ -891,7 +891,7 @@
                                         to($_bg),
                                         to(transparent));
         &:backdrop {
-            $_bg: lighten($backdrop_headerbar_bg_color, 8%);
+            $_bg: if($c==$success_color, $success_color, lighten($backdrop_headerbar_bg_color, 8%));
             background-image: -gtk-gradient(radial,
                                         center center, 0,
                                         center center, $circle_size,
@@ -911,7 +911,7 @@
 
     @if $close == true {
         &:backdrop {
-            color: $backdrop_headerbar_fg_color;
+            color: if ($c==$success_color, white, $backdrop_headerbar_fg_color);
         }
     }
 }
