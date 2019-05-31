@@ -1969,9 +1969,15 @@ headerbar { // headerbar border rounding
 // hdyleaflet headerbars, including selection-mode have a different hierarchy
 // and it seems like they need all this dedicated styling
 // please fix if something smarter is on the horizon
-window headerbar hdyleaflet headerbar:first-child {
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
+window headerbar hdyleaflet headerbar {
+  &:first-child {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+  &:first-child:not(:only-child) {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 0px;
+  }
 }
 
 window headerbar.selection-mode.titlebar {
@@ -1987,7 +1993,18 @@ window headerbar.selection-mode.titlebar {
   hdyleaflet headerbar {
     @extend %selection-mode;
 
-    &:last-child { border-top-left-radius: 7px; border-top-right-radius: 7px; }
+    &:last-child:only-child {
+      border-top-left-radius: 7px;
+      border-top-right-radius: 7px;
+    }
+    &:last-child:not(:only-child) {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 7px;
+    }
+    &:first-child:not(:only-child) {
+      border-top-left-radius: 7px;
+      border-top-right-radius: 0px;
+    }
 
     button.titlebutton {
       $c: $success_color;
