@@ -1760,7 +1760,8 @@ headerbar {
     }
   }
 
-  &.selection-mode {
+  &.selection-mode,
+  .selection-mode & {
     $c: $success_color;
     color: $selected_fg_color;
     border-color: _border_color($c);
