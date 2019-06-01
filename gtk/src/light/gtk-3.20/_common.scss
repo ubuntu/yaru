@@ -1673,6 +1673,7 @@ headerbar {
           &,
           &:hover:backdrop,
           &:active { @include draw_circle($c, $close:true); }
+          &:hover { @include draw_circle($selected_bg_color, $close:true); }
           &:backdrop { @include draw_circle(_backdrop_color($c), $close:true); }
         }
       }
@@ -1990,31 +1991,6 @@ headerbar { // headerbar border rounding
   > separator { background-color: $borders_color; }  // FIXME: use darker border?
 
   @extend %titlebar;
-}
-
-headerbar.selection-mode {
-  separator.sidebar {
-    &, &.vertical, &.horizontal {
-      border-color: mix(white, $success_color, 30%);
-      &:backdrop { border-color: mix(darken(white, 15%), _backdrop_color($success_color), 40%); }
-    }
-  }
-
-  hdyleaflet headerbar {
-    button.titlebutton {
-      $c: $success_color;
-      &:not(.close):not(.appmenu) {
-        &:hover, &:active { @include draw_circle($c); }
-      }
-
-      &.close {
-        &,
-        &:hover:backdrop,
-        &:active { @include draw_circle($c, $close:true); }
-        &:backdrop { @include draw_circle(_backdrop_color($c), $close:true); }
-      }
-    }
-  }
 }
 
 /************
