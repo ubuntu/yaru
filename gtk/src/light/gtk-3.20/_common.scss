@@ -1765,6 +1765,7 @@ headerbar {
     $c: $success_color;
     color: $selected_fg_color;
     border-color: _border_color($c);
+    border-top-color: lighten($c, 10%);
     background-color: $c;
 
     ~ separator, separator {
@@ -1785,8 +1786,8 @@ headerbar {
 
     &:backdrop {
       $c: _backdrop_color($c);
-      border-color: _border_color($c);
       background-color: $c;
+      border-color: $c;
 
       ~ separator, separator {
         background-image: image(_border_color($c));
