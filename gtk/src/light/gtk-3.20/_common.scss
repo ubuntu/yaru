@@ -1768,11 +1768,17 @@ headerbar {
     background-color: $c;
 
     ~ separator, separator {
-      background-image: image(_border_color($c));
-      &.sidebar {
+      &, &.sidebar {
         &, &.vertical, &.horizontal {
-          border-color: mix(white, $success_color, 30%);
-          &:backdrop { border-color: mix(darken(white, 15%), _backdrop_color($success_color), 40%); }
+          $_color: mix(white, $success_color, 30%);
+          $_backdrop_color: mix(darken(white, 15%), _backdrop_color($success_color), 40%);
+
+          background-image: image($_color);
+          border-color: $_color;
+
+          &:backdrop {
+            background-image: image($_backdrop_color);
+            border-color: $_backdrop_color; }
         }
       }
     }
