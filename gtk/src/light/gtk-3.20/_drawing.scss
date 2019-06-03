@@ -911,7 +911,7 @@
 
     @if $close == true {
         &:backdrop {
-            color: if ($c==$success_color, white, $backdrop_headerbar_fg_color);
+            color: if($c==$success_color, white, $backdrop_headerbar_fg_color);
         }
     }
 }
