@@ -1654,32 +1654,6 @@ headerbar {
     }
   }
 
-  &.selection-mode {
-    separator.sidebar {
-      &, &.vertical, &.horizontal {
-        border-color: mix(white, $success_color, 30%);
-        &:backdrop { border-color: mix(darken(white, 15%), _backdrop_color($success_color), 40%); }
-      }
-    }
-
-    hdyleaflet headerbar {
-      button.titlebutton {
-        $c: $success_color;
-        &:not(.close):not(.appmenu) {
-          &:hover, &:active { @include draw_circle($c); }
-        }
-
-        &.close {
-          &,
-          &:hover:backdrop,
-          &:active { @include draw_circle($c, $close:true); }
-          &:hover { @include draw_circle($selected_bg_color, $close:true); }
-          &:backdrop { @include draw_circle(_backdrop_color($c), $close:true); }
-        }
-      }
-    }
-  }
-
   & {
     // style headerbar buttons and entries using the appropriate headerbar colors
     $c: $headerbar_bg_color;
@@ -1795,6 +1769,12 @@ headerbar {
 
     ~ separator, separator {
       background-image: image(_border_color($c));
+      &.sidebar {
+        &, &.vertical, &.horizontal {
+          border-color: mix(white, $success_color, 30%);
+          &:backdrop { border-color: mix(darken(white, 15%), _backdrop_color($success_color), 40%); }
+        }
+      }
     }
 
     &:backdrop {
@@ -1859,6 +1839,23 @@ headerbar {
           .arrow {
             -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
           }
+        }
+      }
+    }
+
+    hdyleaflet headerbar {
+      button.titlebutton {
+        $c: $success_color;
+        &:not(.close):not(.appmenu) {
+          &:hover, &:active { @include draw_circle($c); }
+        }
+
+        &.close {
+          &,
+          &:hover:backdrop,
+          &:active { @include draw_circle($c, $close:true); }
+          &:hover { @include draw_circle($selected_bg_color, $close:true); }
+          &:backdrop { @include draw_circle(_backdrop_color($c), $close:true); }
         }
       }
     }
