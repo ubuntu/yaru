@@ -1765,7 +1765,11 @@ headerbar {
     $c: $success_color;
     color: $selected_fg_color;
     border-color: _border_color($c);
-    border-top-color: lighten($c, 10%);
+    /* top highlight border reveals hdyleaflet headerbar radius corners.
+     * Since hdyleaflet responsive design hides and shows headebars
+     * without any notice in CSS, it doesn't seem possible to disable
+     * the highlight color when not necessary. */
+    border-top-color: transparent;
     background-color: $c;
 
     ~ separator, separator {
