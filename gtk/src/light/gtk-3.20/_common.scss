@@ -1723,32 +1723,13 @@ headerbar {
       }
     }
 
-    .linked:not(.path-bar):not(.nautilus-path-bar):not(.stack-switcher):not(buttonbox) button, .linked:not(.vertical) entry {
-      // force linked buttons and entries to be separate
-      // this needs a lot of testing
-      &:focus {
-        & + entry { border-left-color: _border_color($graphite); }
-        & + button { border-left-color: transparent; }
-
-        & + entry,
-        & + button {
-          &:disabled { border-left-color: transparent; }
-          &:backdrop { border-left-color: _border_color($headerbar_bg_color); }
-        }
-      }
-      border-width: 1px;
-      border-style: solid;
-      border-radius: $small_radius;
-      -gtk-outline-radius: $small_radius;
-
-      &:not(:last-child) { margin-right: 4px; }
-    }
-
     .path-bar,
     .nautilus-path-bar button,
     .stack-switcher.linked button,
     buttonbox.linked button,
-    buttonbox.linked button.text-button ~ button {
+    buttonbox.linked button.text-button ~ button,
+    box.linked button,
+    box.linked entry {
       border-style: solid;
       border-color: lighten($headerbar_border_color, 5%);
 
@@ -1981,6 +1962,7 @@ headerbar { // headerbar border rounding
 
 .path-bar-box.width-maximized {
   border: 1px solid lighten($headerbar_bg_color, 10%); // same color as active button
+  padding: 1px;
   border-radius: $small_radius;
 }
 
