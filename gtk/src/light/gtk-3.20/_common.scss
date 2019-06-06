@@ -1725,7 +1725,9 @@ headerbar {
 
     .stack-switcher.linked button,
     buttonbox.linked button,
-    buttonbox.linked button.text-button ~ button {
+    buttonbox.linked button.text-button ~ button,
+    box.linked button,
+    box.linked entry {
       border-style: solid;
       border-color: lighten($inkstone, 5%);
 
