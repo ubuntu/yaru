@@ -1723,11 +1723,30 @@ headerbar {
       }
     }
 
+    .linked:not(.path-bar):not(.stack-switcher):not(buttonbox) button, .linked:not(.vertical) entry {
+      // force linked buttons and entries to be separate
+      // this needs a lot of testing
+      &:focus {
+        & + entry { border-left-color: _border_color($graphite); }
+        & + button { border-left-color: transparent; }
+
+        & + entry,
+        & + button {
+          &:disabled { border-left-color: transparent; }
+          &:backdrop { border-left-color: _border_color($headerbar_bg_color); }
+        }
+      }
+      border-width: 1px;
+      border-style: solid;
+      border-radius: $small_radius;
+      -gtk-outline-radius: $small_radius;
+
+      &:not(:last-child) { margin-right: 4px; }
+    }
+
     .stack-switcher.linked button,
     buttonbox.linked button,
-    buttonbox.linked button.text-button ~ button,
-    box.linked button,
-    box.linked entry {
+    buttonbox.linked button.text-button ~ button {
       border-style: solid;
       border-color: lighten($headerbar_border_color, 5%);
 
