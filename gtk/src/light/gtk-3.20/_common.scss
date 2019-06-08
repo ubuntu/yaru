@@ -1979,12 +1979,6 @@ headerbar { // headerbar border rounding
   }
 }
 
-.path-bar-box.width-maximized {
-  border: 1px solid lighten($headerbar_bg_color, 10%); // same color as active button
-  border-radius: $small_radius;
-  padding: 1px;
-}
-
 %underline_focus_effect {
   // indeterminate is there to lazily force the style
   transition: 300ms ease;
