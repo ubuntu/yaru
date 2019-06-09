@@ -4668,11 +4668,3 @@ button.emoji-section {
   &:active{@include button(active);}
   &:disabled{@include button(insensitive)}
 }
-
-/* This needs to stay after `.regular-button` or the margin setting
- * will be overwritten */
-.path-bar-box.width-maximized > .nautilus-path-bar button {
-  margin: -1px;
-  &:not(:only-child):last-child { border-radius: 0; }
-  &:only-child { border-radius: $small_radius 0 0 $small_radius; }
-}
