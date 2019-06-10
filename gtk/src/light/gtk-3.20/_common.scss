@@ -1609,7 +1609,7 @@ headerbar {
 
   &:backdrop {
     background-color: $backdrop_headerbar_bg_color;
-    border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.7);
+    border-color: transparent;
     color: $backdrop_fg_color;
     transition: $backdrop_transition;
   }
