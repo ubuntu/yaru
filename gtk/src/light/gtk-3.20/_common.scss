@@ -2437,6 +2437,7 @@ popover.background {
     entry:not(:focus), button { border-color: darken($inkstone,1%); &:backdrop { border-color: lighten($inkstone,5%); } }
     button, button.circular, button.flat, button.text-button, modelbutton { @extend %jet_popover_button; }
     switch { @include switch($dark_fill, $success_color); }
+    *:selected { @extend %selected_items; }
   }
 }
 
