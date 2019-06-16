@@ -1898,6 +1898,8 @@ headerbar {
     }
   }
 
+  separator.titlebutton { opacity: 0; } /* hide the close button separator */
+
   .solid-csd & {
     &:backdrop, & {
       &:dir(rtl), &:dir(ltr) { // specificity bump
@@ -1918,11 +1920,12 @@ headerbar {
   // add vertical margins to common widget on the headerbar to avoid them spanning the whole height
   entry,
   spinbutton,
+  separator:not(.sidebar),
   button {
     margin-top: 5px;
     margin-bottom: 5px;
   }
-  switch, separator {
+  switch {
     margin-top: 8px;
     margin-bottom: 8px;
   }
@@ -1984,8 +1987,8 @@ headerbar { // headerbar border rounding
       &:first-child,
       &:last-child,
       &:only-child {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+        //border-top-left-radius: 0;
+        //border-top-right-radius: 0;
       }
     }
   }
