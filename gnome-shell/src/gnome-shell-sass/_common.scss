@@ -25,7 +25,7 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 
 /* GLOBALS */
 
-$panel-corner-radius: 6px;
+$panel-corner-radius: 0;
 $medium_radius: 6px;
 $small_radius: 4px;
 
@@ -174,11 +174,11 @@ StScrollBar {
   width: 46px;
   height: 22px;
   background-size: contain;
-  background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/toggle-off.svg"),
-					    url("resource:///org/gnome/shell/theme/toggle-off-dark.svg"));
+  background-image: if($variant == 'light', url("toggle-off.svg"),
+					    url("toggle-off-dark.svg"));
   &:checked { 
-    background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/toggle-on.svg"),
-					    url("resource:///org/gnome/shell/theme/toggle-on-dark.svg"));
+    background-image: if($variant == 'light', url("toggle-on.svg"),
+					    url("toggle-on-dark.svg"));
   }
 }
 
@@ -803,7 +803,7 @@ StScrollBar {
 /* TOP BAR */
 
 #panel {
-  background-color: #181818;
+  background-color: $panel_bg_color;
   font-weight: 450;
   height: 1.86em;
   font-feature-settings: "tnum";
@@ -818,9 +818,11 @@ StScrollBar {
     spacing: 4px;
   }
 
+  &:overview { @extend %overview-panel; }
+
   .panel-corner {
     -panel-corner-radius: $panel-corner-radius;
-    -panel-corner-background-color: #181818;
+    -panel-corner-background-color: $panel_bg_color;
     -panel-corner-border-width: 2px;
     -panel-corner-border-color: transparent;
 
@@ -1405,7 +1407,7 @@ StScrollBar {
     @extend %overview-panel;
     background-color: #181818;
     font-size: 9pt;
-    padding: 2px;
+    padding: 0;
     border-radius: 0;
 
     &:rtl {
@@ -2019,7 +2021,7 @@ StScrollBar {
   .user-widget-label {
     color: $osd_fg_color;
     font-size: 120%;
-    font-weight: bold;
+    font-weight: normal;
     text-align: left;
     padding-left: 15px;
   }
