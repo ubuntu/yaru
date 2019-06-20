@@ -84,6 +84,7 @@ stage {
 /* Entries */
 StEntry {
   border-radius: $small_radius;
+  min-height: 22px;
   padding: 4px;
   border-width: 1px;
   color: $fg_color;
@@ -1402,9 +1403,10 @@ StScrollBar {
 
   #dash {
     @extend %overview-panel;
+    background-color: #181818;
     font-size: 9pt;
-    padding: 4px 0;
-    border-radius: 0px 9px 9px 0px;
+    padding: 2px;
+    border-radius: 0;
 
     &:rtl {
       border-radius: 9px 0 0 9px;
@@ -1794,7 +1796,7 @@ StScrollBar {
     border: 1px solid #464d4d;
     color: #e5e5e5;
     &:focus { @include button(focus); }
-    &:hover,&:checked { @include button(hover); }
+    &:hover,&:checked { background-color: lighten(#393f3f, 5%); }
     &:active { @include button(active);}
     &:grayed { //FIXME
       background-color: $osd_bg_color;
@@ -1807,8 +1809,8 @@ StScrollBar {
       background-size: 20px;
     }
     &.enter-key {
-      border-color: #005684;
-      background-color: #006098;
+      border-color: darken($success_color, 5%);
+      background-color: $success_color;
       background-image: url("resource:///org/gnome/shell/theme/key-enter.svg");
     }
     &.shift-key-lowercase {
@@ -1848,8 +1850,8 @@ StScrollBar {
 
 .emoji-panel {
   .keyboard-key:latched {
-    border-color: #005684;
-    background-color: #006098;
+    border-color: $selected_bg_color;
+    background-color: $selected_borders_color;
   }
 }
 
