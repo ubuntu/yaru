@@ -76,4 +76,3 @@ $progress_bg_color: #19B6EE;
 $progress_border_color: if($variant=='light', darken($progress_bg_color, 15%), darken($progress_bg_color, 30%));
 $checkradio_bg_color: $suggested_bg_color;
 $checkradio_fg_color: #ffffff;
-$spinner_fg_color: $progress_bg_color;
