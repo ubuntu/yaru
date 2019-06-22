@@ -46,7 +46,7 @@ done
 wget_check=`which wget | wc -l`
 [ $wget_check == 0 ] && echo "install wget" && exit 1
 
-root=https://gitlab.gnome.org/GNOME/gtk/blob/master/gtk/theme/Adwaita
+root=https://gitlab.gnome.org/GNOME/gtk/raw/master/gtk/theme/Adwaita
 
 [ ! -d ${_destination} ] && echo ${_destination} folder does not exists && exit 1
 
@@ -66,7 +66,7 @@ files=(
     README
 )
 
-set -eu
+set -e
 for i in ${files[@]}; do
     wget ${root}/${i} -O ${_destination}/${i}
 done
