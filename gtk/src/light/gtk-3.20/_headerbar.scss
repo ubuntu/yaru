@@ -10,9 +10,7 @@ $small_radius: 4px;
     // $hc: top highlight color
     // $ov: a background layer for background shorthand (hence no commas!)
     //
-    $gradient: linear-gradient(to top, darken($c, 2%), lighten($c, 1%));
-
-    //@if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 4%), lighten($c, 6%)); }
+    $gradient: linear-gradient(to top, darken($c, 0%), lighten($c, 0%));
 
     @if $ov !=none {
         background: $c $ov, $gradient;
@@ -23,6 +21,7 @@ $small_radius: 4px;
     }
 
     box-shadow: inset 0 1px $hc; // top highlight
+    border-color: darken($inkstone, 11%);
 }
 
 @mixin draw_circle($c, $close:false, $size:24px) {
@@ -71,7 +70,7 @@ $small_radius: 4px;
 
 headerbar,
 .titlebar {
-    @include yaru_headerbar_fill($headerbar_bg_color);
+    @include yaru_headerbar_fill($headerbar_bg_color, $hc:$headerbar_border_color);
     color: $headerbar_fg_color;
 
     &,
@@ -83,10 +82,6 @@ headerbar,
             color: $headerbar_fg_color;
         }
     }
-
-    border-color: darken($inkstone, 11%);
-
-    box-shadow: inset 0 1px $headerbar_border_color;
 
     &:backdrop {
         border-color: mix(darken($inkstone, 11%), darken($inkstone, 1%), 80%);
@@ -129,7 +124,7 @@ headerbar,
 
                 &:active,
                 &:checked {
-                    @include button(backdrop-active, $headerbar_bg_color, $headerbar_fg_color);
+                    @include button(backdrop-active, lighten($headerbar_bg_color, 2%), $headerbar_fg_color);
 
                     border-color: $headerbar_border_color;
                 }
@@ -146,15 +141,6 @@ headerbar,
                         border-color: $headerbar_border_color;
                     }
                 }
-            }
-        }
-
-        &.flat {
-
-            &:backdrop,
-            &:disabled,
-            &:backdrop:disabled {
-                @include button(undecorated);
             }
         }
 
@@ -177,10 +163,26 @@ headerbar,
     }
 }
 
-// Window Close button
-button.titlebutton {
-    $c: $headerbar_bg_color;
-    $tc: $headerbar_fg_color;
+// flat headerbar buttons and titlebuttons
+button.titlebutton,
+headerbar button.flat {
+
+    &,
+    &.appmenu.popup.toggle {
+
+        &,
+        &:backdrop {
+            @include button(undecorated);
+        }
+
+        &:hover {
+            @include button(hover, $headerbar_bg_color, $headerbar_fg_color);
+        }
+
+        &:active {
+            @include button(active, $headerbar_bg_color, $headerbar_fg_color);
+        }
+    }
 
     &,
     &:hover,
@@ -205,11 +207,11 @@ button.titlebutton {
 
     &:not(.close):not(.appmenu) {
         &:hover {
-            @include draw_circle($c);
+            @include draw_circle($headerbar_bg_color);
         }
 
         &:active {
-            @include draw_circle($c);
+            @include draw_circle($headerbar_bg_color);
         }
     }
 
