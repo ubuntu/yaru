@@ -163,27 +163,9 @@ headerbar,
     }
 }
 
-// flat headerbar buttons and titlebuttons
-button.titlebutton,
-headerbar button.flat {
-
-    &,
-    &.appmenu.popup.toggle {
-
-        &,
-        &:backdrop {
-            @include button(undecorated);
-        }
-
-        &:hover {
-            @include button(hover, $headerbar_bg_color, $headerbar_fg_color);
-        }
-
-        &:active {
-            @include button(active, $headerbar_bg_color, $headerbar_fg_color);
-        }
-    }
-
+// titlebutton
+// TODO fix appmenu and flat buttons!
+button.titlebutton {
     &,
     &:hover,
     &:active {
