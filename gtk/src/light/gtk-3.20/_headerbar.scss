@@ -76,7 +76,7 @@ headerbar,
 
     &,
     & label,
-    & image {
+    &>image {
 
         &,
         &.title {
@@ -172,7 +172,7 @@ headerbar,
         background: image(darken(#3d3d3d, 11%));
     }
 
-    switch {
+    switch:checked {
         border-color: $suggested_bg_color;
     }
 }
