@@ -70,17 +70,11 @@ $small_radius: 4px;
 
 headerbar,
 .titlebar {
-    @include yaru_headerbar_fill($headerbar_bg_color, $hc:$headerbar_border_color);
+    @include yaru_headerbar_fill($headerbar_bg_color, $hc: $headerbar_border_color);
     color: $headerbar_fg_color;
 
-    &,
-    & label,
-    &>image {
-
-        &,
-        &.title {
-            color: $headerbar_fg_color;
-        }
+    label .title {
+        color: $headerbar_fg_color;
     }
 
     &:backdrop {
@@ -99,7 +93,10 @@ headerbar,
     button.text.button,
     button.toggle,
     box button.toggle,
-    buttonbox.toggle {
+    buttonbox.toggle,
+    stackswitcher button,
+    filechooser .path-bar.linked>button,
+    .path-bar button {
         @include button(normal, $headerbar_bg_color, $headerbar_fg_color);
 
         &:hover {
@@ -117,26 +114,26 @@ headerbar,
 
             &.flat,
             & {
-                @include button(backdrop, $headerbar_bg_color, $headerbar_fg_color);
+                @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
                 -gtk-icon-effect: none;
                 border-color: $headerbar_border_color;
 
                 &:active,
                 &:checked {
-                    @include button(backdrop-active, lighten($headerbar_bg_color, 2%), $headerbar_fg_color);
+                    @include button(backdrop-active, if($variant=='dark', lighten($backdrop_headerbar_bg_color, 10%), $backdrop_headerbar_bg_color), $backdrop_headerbar_fg_color);
 
                     border-color: $headerbar_border_color;
                 }
 
                 &:disabled {
-                    @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
+                    @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
 
                     border-color: $headerbar_border_color;
 
                     &:active,
                     &:checked {
-                        @include button(backdrop-insensitive-active, darken($headerbar_bg_color, 15%), $headerbar_fg_color);
+                        @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
                         border-color: $headerbar_border_color;
                     }
@@ -166,6 +163,7 @@ headerbar,
 // titlebutton
 // TODO fix appmenu and flat buttons!
 button.titlebutton {
+
     &,
     &:hover,
     &:active {
