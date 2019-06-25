@@ -21,7 +21,7 @@ $small_radius: 4px;
     }
 
     box-shadow: inset 0 1px $hc; // top highlight
-    border-color: darken($inkstone, 11%);
+    border-color: if($c==$suggested_bg_color, $c, darken($c, 7%));
 }
 
 @mixin draw_circle($c, $close:false, $size:24px) {
@@ -35,7 +35,7 @@ $small_radius: 4px;
         to(transparent));
 
     &:hover {
-        $_bg: if(lightness($c)<35%, lighten($c, 10%), lighten($c, 5%));
+        $_bg: if($c!=$selected_bg_color, transparentize(white, 0.8), lighten($c, 3%));
         background-image: -gtk-gradient(radial,
             center center, 0,
             center center, $circle_size,
@@ -43,7 +43,7 @@ $small_radius: 4px;
             to(transparent));
 
         &:backdrop {
-            $_bg: lighten($backdrop_headerbar_bg_color, 8%);
+            $_bg: transparentize(white, 0.9);
             background-image: -gtk-gradient(radial,
                 center center, 0,
                 center center, $circle_size,
@@ -53,7 +53,7 @@ $small_radius: 4px;
     }
 
     &:active {
-        $_bg: if(lightness($c)<35%, darken($c, 8%), darken($c, 7%));
+        $_bg: if($c!=$selected_bg_color, transparentize(white, 0.9), darken($c, 2%));
         background-image: -gtk-gradient(radial,
             center center, 0,
             center center, $circle_size,
@@ -170,7 +170,7 @@ headerbar,
       border-color: $suggested_border_color;
       text-shadow: 0 -1px transparentize(black, 0.5);
   
-      @include headerbar_fill($suggested_bg_color, $_hc);
+      @include yaru_headerbar_fill($suggested_bg_color, $_hc);
   
       &:backdrop {
         background-color: $suggested_bg_color;
@@ -302,6 +302,7 @@ button.titlebutton {
 
         headerbar &,
         .titlebar &,
+        headerbar.selection-mode 
         & {
 
             // spec bump otherwise :backdrop  will still have a bg
