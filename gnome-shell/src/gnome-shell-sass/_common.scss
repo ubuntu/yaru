@@ -83,7 +83,7 @@ stage {
 
 /* Entries */
 StEntry {
-  border-radius: $small_radius;
+  border-radius: 4px;
   min-height: 22px;
   padding: 4px;
   border-width: 1px;
@@ -140,7 +140,7 @@ StScrollBar {
   -barlevel-background-color: transparentize($fg_color, 0.9); //background of the trough
   -barlevel-border-color: $borders_color; //trough border color
   -barlevel-active-background-color: #19B6EE; //active trough fill
-  -barlevel-active-border-color: if($variant=='light', darken(#19B6EE, 15%), darken(#19B6EE, 30%)); //active trough border
+  -barlevel-active-border-color: if($variant=='light', darken($blue, 15%), darken($blue, 30%)); //active trough border
   -barlevel-overdrive-color: $destructive_color;
   -barlevel-overdrive-border-color: darken($destructive_color,10%);
   -barlevel-overdrive-separator-width: 0.2em;
@@ -237,12 +237,12 @@ StScrollBar {
   }
 
   .message-dialog-title {
-    font-weight: bormal;
+    font-weight: bold;
   }
 
   .message-dialog-subtitle {
     color: $fg_color;
-    font-weight: normal;
+    font-weight: bold;
   }
 
 /* End Session Dialog */
@@ -566,8 +566,8 @@ StScrollBar {
       color: $fg_color;
     }
     &:active { 
-      background-color: $_active_bg_color;
-      color: $fg_color;
+      background-color: $selected_bg_color;
+      color: $selected_fg_color;
      }
     &:insensitive { color: transparentize($fg_color,.5); }
   }
@@ -1202,8 +1202,8 @@ StScrollBar {
       padding: 14px;
     }
     &:active { 
-      background-color: $_active_bg_color;
-      color: $fg_color;
+      background-color: $selected_bg_color;
+      color: $selected_fg_color;
     }
 
     & > StIcon { icon-size: 16px; }
@@ -1405,10 +1405,9 @@ StScrollBar {
 
   #dash {
     @extend %overview-panel;
-    background-color: #181818;
     font-size: 9pt;
-    padding: 0;
-    border-radius: 0;
+    padding: 4px 0;
+    border-radius: 0px 9px 9px 0px;
 
     &:rtl {
       border-radius: 9px 0 0 9px;
@@ -1522,16 +1521,14 @@ StScrollBar {
   }
 
   .app-well-app-running-dot { //running apps indicator
-    width: 6px; height: 6px;
-    box-shadow: 1px 1px 5px 0px transparentize(black, 0.5);
-    border-radius: 3px;
+    width: 10px; height: 3px;
     background-color: $selected_bg_color;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
   }
 
   %icon_tile {
     color: $osd_fg_color;
-    border-radius: $small_radius;
+    border-radius: 4px;
     padding: 6px;
     border: 1px solid transparent;
     transition-duration: 100ms;
@@ -1913,7 +1910,7 @@ StScrollBar {
   background-color: transparent;
 
   $_gdm_fg: #f6f5f4;
-  $_gdm_bg: lighten(#762572, 19%);
+  $_gdm_bg: lighten($purple, 19%);
 
   StEntry {
     @extend %search_entry;
