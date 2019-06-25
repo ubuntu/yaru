@@ -103,6 +103,10 @@ $small_radius: 4px;
     }
 }
 
+.entry-tag {  
+    margin-top: if($_sizevariant=='default', 5px, 4px);
+    margin-bottom: if($_sizevariant=='default', 5px, 4px);
+}
 
 /***********
  * Terminal *
