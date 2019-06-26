@@ -130,8 +130,6 @@ headerbar,
                 &:disabled {
                     @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
 
-                    border-color: $headerbar_border_color;
-
                     &:active,
                     &:checked {
                         @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
