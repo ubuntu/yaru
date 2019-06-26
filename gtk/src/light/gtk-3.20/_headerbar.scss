@@ -123,9 +123,8 @@ headerbar,
 
                 &:active,
                 &:checked {
-                    @include button(backdrop-active, if($variant=='dark', lighten($backdrop_headerbar_bg_color, 10%), $backdrop_headerbar_bg_color), $backdrop_headerbar_fg_color);
-
-                    border-color: $headerbar_border_color;
+                    $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 12%), lighten($backdrop_headerbar_bg_color, 10%));
+                    @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
                 }
 
                 &:disabled {
