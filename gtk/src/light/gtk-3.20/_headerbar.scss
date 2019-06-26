@@ -97,12 +97,12 @@ headerbar,
     stackswitcher button,
     filechooser .path-bar.linked>button,
     .path-bar button {
-        @include button(normal, $headerbar_bg_color, $headerbar_fg_color);
+        @include button(normal, lighten($headerbar_bg_color, 4%), $headerbar_fg_color);
 
         &.flat { @include button(undecorated); }
 
         &:hover {
-            @include button(hover, $headerbar_bg_color, $headerbar_fg_color);
+            @include button(hover, lighten($headerbar_bg_color, 8%), $headerbar_fg_color);
         }
 
         &:active,
@@ -119,7 +119,7 @@ headerbar,
                 @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
                 -gtk-icon-effect: none;
-                border-color: $headerbar_border_color;
+                border-color: $backdrop_headerbar_bg_color;
 
                 &:active,
                 &:checked {
@@ -165,112 +165,112 @@ headerbar,
     .selection-mode &,
     &.selection-mode {
       $_hc: mix($top_hilight, $suggested_bg_color, 50%); // hilight color
-  
+
       color: $selected_fg_color;
       border-color: $suggested_border_color;
       text-shadow: 0 -1px transparentize(black, 0.5);
-  
+
       @include yaru_headerbar_fill($suggested_bg_color, $_hc);
-  
+
       &:backdrop {
         background-color: $suggested_bg_color;
         background-image: none;
         box-shadow: inset 0 1px mix($top_hilight, $suggested_bg_color, 60%);
-        
-        label { 
+
+        label {
           text-shadow: none;
-          color: $selected_fg_color; 
+          color: $selected_fg_color;
         }
       }
-  
+
       .subtitle:link { @extend *:link:selected;  }
-  
+
       button {
         @include button(normal, $suggested_bg_color, $selected_fg_color);
-  
+
         &.flat { @include button(undecorated); }
-  
+
         &:hover { @include button(hover, $suggested_bg_color, $selected_fg_color); }
-  
+
         &:active,
         &:checked,
         &.toggle:checked,
         &.toggle:active { @include button(active, $suggested_bg_color, $selected_fg_color); }
-  
+
         &:backdrop {
           &.flat, & {
             @include button(backdrop, $suggested_bg_color, $selected_fg_color);
-  
+
             -gtk-icon-effect: none;
             border-color: $suggested_border_color;
-  
+
             &:active,
             &:checked {
               @include button(backdrop-active, $suggested_bg_color, $selected_fg_color);
-  
+
               border-color: $suggested_border_color;
             }
-  
+
             &:disabled {
               @include button(backdrop-insensitive, $suggested_bg_color, $selected_fg_color);
-  
+
               border-color: $suggested_border_color;
-  
+
               &:active, &:checked {
                 @include button(backdrop-insensitive-active, $suggested_bg_color, $selected_fg_color);
-  
+
                 border-color: $suggested_border_color;
               }
             }
           }
         }
-  
+
         &.flat { &:backdrop, &:disabled, &:backdrop:disabled { @include button(undecorated); }}
-  
+
         &:disabled {
           @include button(insensitive, $suggested_bg_color, $selected_fg_color);
-  
+
           &:active,
           &:checked { @include button(insensitive-active, $suggested_bg_color, $selected_fg_color); }
         }
-  
+
         &.suggested-action {
           @include button(normal);
-  
+
           border-color: $suggested_border_color;
-  
+
           &:hover {
             @include button(hover);
-  
+
             border-color: $suggested_border_color;
           }
-  
+
           &:active {
             @include button(active);
-  
+
             border-color: $suggested_border_color;
           }
-  
+
           &:disabled {
             @include button(insensitive);
-  
+
             border-color: $suggested_border_color;
           }
-  
+
           &:backdrop {
             @include button(backdrop);
-  
+
             border-color: $suggested_border_color;
           }
-  
+
           &:backdrop:disabled {
             @include button(backdrop-insensitive);
-  
+
             border-color: $suggested_border_color;
           }
         }
       }
-  
+
       .selection-menu {
         &:backdrop, & {
           border-color: transparentize($suggested_bg_color, 1);
@@ -279,9 +279,9 @@ headerbar,
           box-shadow: none;
           min-height: 20px;
           padding: $_sel_menu_pad;
-  
+
           arrow { -GtkArrow-arrow-scaling: 1; }
-  
+
           .arrow {
             -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
             color: transparentize($selected_fg_color,0.5);
@@ -302,7 +302,7 @@ button.titlebutton {
 
         headerbar &,
         .titlebar &,
-        headerbar.selection-mode 
+        headerbar.selection-mode
         & {
 
             // spec bump otherwise :backdrop  will still have a bg
