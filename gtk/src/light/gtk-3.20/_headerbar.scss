@@ -91,6 +91,8 @@ headerbar,
     stackswitcher button,
     filechooser .path-bar.linked>button,
     .path-bar button {
+        $_btn_backdrop_border: darken($headerbar_border_color, 3%);
+
         @include button(normal, lighten($headerbar_bg_color, 4%), $headerbar_fg_color);
 
         &.flat { @include button(undecorated); }
@@ -113,22 +115,25 @@ headerbar,
                 @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
                 -gtk-icon-effect: none;
-                border-color: $backdrop_headerbar_bg_color;
+                border-color: $_btn_backdrop_border;
 
                 &:active,
                 &:checked {
                     $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 12%), lighten($backdrop_headerbar_bg_color, 10%));
                     @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
+                    border-color: $_btn_backdrop_border;
                 }
 
                 &:disabled {
                     @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
 
+                    border-color: $_btn_backdrop_border;
+
                     &:active,
                     &:checked {
                         @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
-                        border-color: $headerbar_border_color;
+                        border-color: $_btn_backdrop_border;
                     }
                 }
             }
@@ -163,6 +168,10 @@ headerbar,
 
       @include yaru_headerbar_fill($suggested_bg_color, $_hc);
 
+      separator {
+          background: image(lighten($suggested_bg_color, 5%));
+      }
+
       &:backdrop {
         background-color: $suggested_bg_color;
         background-image: none;
@@ -193,7 +202,7 @@ headerbar,
             @include button(backdrop, $suggested_bg_color, $selected_fg_color);
 
             -gtk-icon-effect: none;
-            border-color: $suggested_bg_color;
+            border-color: lighten($suggested_bg_color, 5%);
 
             &:active,
             &:checked {
