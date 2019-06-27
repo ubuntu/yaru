@@ -24,7 +24,7 @@ $small_radius: 4px;
     border-color: if($c==$suggested_bg_color, $c, darken($c, 7%));
 }
 
-@mixin draw_circle($c, $close:false, $size:24px) {
+@mixin draw_circle($c, $size:24px) {
     $button_size: $size + 2px * 2;
     $circle_size: 20px / $button_size / 2;
 
@@ -59,12 +59,6 @@ $small_radius: 4px;
             center center, $circle_size,
             to($_bg),
             to(transparent));
-    }
-
-    @if $close==true {
-        &:backdrop {
-            color: $backdrop_headerbar_fg_color;
-        }
     }
 }
 
@@ -326,14 +320,14 @@ button.titlebutton {
     }
 
     &.close {
-        @include draw_circle($selected_bg_color, $close: true);
+        @include draw_circle($selected_bg_color);
 
         &:hover {
-            @include draw_circle($selected_bg_color, $close: true);
+            @include draw_circle($selected_bg_color);
         }
 
         &:active {
-            @include draw_circle($selected_bg_color, $close: true);
+            @include draw_circle($selected_bg_color);
         }
     }
 }
