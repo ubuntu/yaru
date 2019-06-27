@@ -199,7 +199,7 @@ headerbar,
             @include button(backdrop, $suggested_bg_color, $selected_fg_color);
 
             -gtk-icon-effect: none;
-            border-color: $suggested_border_color;
+            border-color: $suggested_bg_color;
 
             &:active,
             &:checked {
