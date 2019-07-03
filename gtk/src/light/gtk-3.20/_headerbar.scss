@@ -84,6 +84,7 @@ headerbar,
 
   button,
   button.image-button,
+  button.image-button.toggle,
   button.text.button,
   button.toggle,
   box button.toggle,
@@ -105,7 +106,10 @@ headerbar,
     &:checked,
     &.toggle:checked,
     &.toggle:active {
-      @include button(active, $headerbar_bg_color, $headerbar_fg_color);
+      $_bg: lighten($headerbar_bg_color, if($variant==light, 0%, 1%));
+      @include button(active, $_bg, $headerbar_fg_color);
+      border-color: rgb(20, 19, 19);
+      background-image: image(darken($_bg, 9%));
     }
 
     &:backdrop {
@@ -119,7 +123,7 @@ headerbar,
 
         &:active,
         &:checked {
-          $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 12%), lighten($backdrop_headerbar_bg_color, 10%));
+          $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 9%), lighten($backdrop_headerbar_bg_color, 2%));
           @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
           border-color: $_btn_backdrop_border;
         }
@@ -141,6 +145,7 @@ headerbar,
 
     &:disabled {
       @include button(insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
+      border-color: darken($headerbar_bg_color, 6%);
 
       &:active,
       &:checked {
