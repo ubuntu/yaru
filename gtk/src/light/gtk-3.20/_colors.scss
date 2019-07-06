@@ -1,6 +1,6 @@
 // When color definition differs for dark and light variant
 // it gets @if ed depending on $variant
-
+@import 'ubuntu-colors';
 
 $base_color: if($variant == 'light', #ffffff, lighten(desaturate(#181818, 20%), 10%));
 $text_color: if($variant == 'light', black, white);
@@ -28,10 +28,10 @@ $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
 $scrollbar_slider_hover_color: mix($fg_color, $bg_color, 80%);
 $scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 10%));
 
-$warning_color: #f57900;
-$error_color: #cc0000;
-$success_color: if($variant == 'light', #3eb34f, darken(#3eb34f, 10%));
-$destructive_color: if($variant == 'light', #e01b24, darken(#e01b24, 10%));
+$warning_color: $yellow;
+$error_color: $red;
+$success_color: if($variant == 'light', $green, darken($green, 10%));
+$destructive_color: if($variant == 'light', $red, darken($red, 10%));
 
 $osd_fg_color: #eeeeec;
 $osd_text_color: white;
@@ -72,7 +72,7 @@ $backdrop_menu_color: if($variant == 'light', $backdrop_base_color, mix($backdro
 //special cased widget colors
 $suggested_bg_color: $success_color;
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), $suggested_bg_color);
-$progress_bg_color: #19B6EE;
-$progress_border_color: if($variant=='light', darken($progress_bg_color, 15%), darken($progress_bg_color, 30%));
+$progress_bg_color: $blue;
+$progress_border_color: $progress_bg_color;
 $checkradio_bg_color: $suggested_bg_color;
 $checkradio_fg_color: #ffffff;

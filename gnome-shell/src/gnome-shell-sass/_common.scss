@@ -140,7 +140,7 @@ StScrollBar {
   -barlevel-background-color: transparentize($fg_color, 0.9); //background of the trough
   -barlevel-border-color: $borders_color; //trough border color
   -barlevel-active-background-color: #19B6EE; //active trough fill
-  -barlevel-active-border-color: if($variant=='light', darken($blue, 15%), darken($blue, 30%)); //active trough border
+  -barlevel-active-border-color: transparent; //active trough border
   -barlevel-overdrive-color: $destructive_color;
   -barlevel-overdrive-border-color: darken($destructive_color,10%);
   -barlevel-overdrive-separator-width: 0.2em;
