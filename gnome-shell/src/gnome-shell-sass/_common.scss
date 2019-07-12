@@ -1915,12 +1915,12 @@ StScrollBar {
   StEntry {
     @extend %search_entry;
     border-radius: 5px;
-    @if $variant=='dark' {
+    // @if $variant=='dark' {
       $_gdm_entry_bg: transparentize(lighten(desaturate(#241f31, 20%), 2%), 0.5);
       background-color: $_gdm_entry_bg;
-      border-color: $_gdm_entry_bg;    
+      border-color: lighten($_gdm_entry_bg, 25%);    
       color: $osd_fg_color;
-    }
+    // }
   }
 
   .modal-dialog-button-box { spacing: 3px; }
