@@ -25,9 +25,10 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 
 /* GLOBALS */
 
+
+$modal_radius: 6px;
+$button_radius: 4px;
 $panel-corner-radius: 0;
-$medium_radius: 6px;
-$small_radius: 4px;
 
 $_trough_color: transparentize($fg_color, 0.9);
 $_bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
@@ -47,7 +48,7 @@ stage {
 
 /* Buttons */
 .button, %button {
-  border-radius: $small_radius;
+  border-radius: $button_radius;
   border-width: 1px;
   min-height: 22px;
   padding: 4px 32px;
@@ -69,22 +70,21 @@ stage {
   border-top: 1px solid $_bubble_borders_color;
 
   &:first-child {
-    border-radius: 0px 0px 0px $medium_radius;
+    border-radius: 0px 0px 0px $modal_radius;
   }
   &:last-child {
     border-right-width: 0px;
-    border-radius: 0px 0px $medium_radius 0px;
+    border-radius: 0px 0px $modal_radius 0px;
   }
   &:first-child:last-child {
     border-right-width: 0px;
-    border-radius: 0px 0px $medium_radius $medium_radius;
+    border-radius: 0px 0px $modal_radius $modal_radius;
   }
 }
 
 /* Entries */
 StEntry {
-  border-radius: 4px;
-  min-height: 22px;
+  border-radius: $button_radius;
   padding: 4px;
   border-width: 1px;
   color: $fg_color;
@@ -139,8 +139,8 @@ StScrollBar {
   -barlevel-height: 0.3em;
   -barlevel-background-color: transparentize($fg_color, 0.9); //background of the trough
   -barlevel-border-color: $borders_color; //trough border color
-  -barlevel-active-background-color: #19B6EE; //active trough fill
-  -barlevel-active-border-color: transparent; //active trough border
+  -barlevel-active-background-color: $blue; //active trough fill
+  -barlevel-active-border-color: $blue; //active trough border
   -barlevel-overdrive-color: $destructive_color;
   -barlevel-overdrive-border-color: darken($destructive_color,10%);
   -barlevel-overdrive-separator-width: 0.2em;
@@ -148,8 +148,7 @@ StScrollBar {
   -slider-handle-radius: 8px;
   -slider-handle-border-width: 1px;
   -slider-handle-border-color: $borders_color;
-  color: $bg_color; /* FIXME to match gtk, we'd need to style the border of the slider, not
-     the whole widget */
+  color: if($variant == 'light', lighten($bg_color, 10%), darken($bg_color,4%));
   &:hover { color: $_hover_bg_color; }
   &:active { color: $_active_bg_color; }
 }
@@ -195,7 +194,7 @@ StScrollBar {
 .flashspot { background-color: white; }
 
 .modal-dialog {
-  border-radius: 9px;
+  border-radius: $modal_radius;
   @extend %bubble-panel;
   .modal-dialog-content-box {
     padding: 24px;
@@ -592,7 +591,7 @@ StScrollBar {
   }
   .popup-menu-boxpointer,
   .candidate-popup-boxpointer {
-    -arrow-border-radius: $medium_radius;
+    -arrow-border-radius: $button_radius+2;
     -arrow-background-color: $bg_color;
     -arrow-border-width: 1px;
     -arrow-border-color: if($variant=='light', transparentize(black, 0.6), $borders_color);
@@ -817,8 +816,6 @@ StScrollBar {
   #panelLeft, #panelCenter { // spacing between activities<>app menu and such
     spacing: 4px;
   }
-
-  &:overview { @extend %overview-panel; }
 
   .panel-corner {
     -panel-corner-radius: $panel-corner-radius;
@@ -1160,7 +1157,7 @@ StScrollBar {
 
   // a little unstructured mess:
 
-  .system-switch-user-submenu-icon {
+  .system-switch-user-submenu-icon { // this needs removal for gnome-shell 3.33+
     icon-size: 16px;
     padding: 0 4px;
   }
@@ -1521,14 +1518,15 @@ StScrollBar {
   }
 
   .app-well-app-running-dot { //running apps indicator
-    width: 10px; height: 3px;
+    width: 5px; height: 5px;
+    border-radius: 9999px;
     background-color: $selected_bg_color;
     margin-bottom: 2px;
   }
 
   %icon_tile {
     color: $osd_fg_color;
-    border-radius: 4px;
+    border-radius: $button_radius;
     padding: 6px;
     border: 1px solid transparent;
     transition-duration: 100ms;
@@ -1635,7 +1633,7 @@ StScrollBar {
     font-size: 11pt;
     width: 34em;
     margin: 5px;
-    border-radius: $medium-radius;
+    border-radius: $modal_radius;
     border: if($variant == 'light', none, $_bubble_borders_color);
     min-height: 64px;
     box-shadow: 0 1px 2px transparentize(black, 0.7);
@@ -1787,30 +1785,36 @@ StScrollBar {
   }
 
   .keyboard-key {
-    background-color: #393f3f;
+    $_key_bg: opacify(lighten($osd_bg_color, 9%), 1);
+    background-color: $_key_bg;
     min-height: 1.2em;
     min-width: 1.2em;
     font-size: 16pt;
-    border-radius: 3px;
-    border: 1px solid #464d4d;
-    color: #e5e5e5;
+    border-radius: $button_radius;
+    border: 1px solid $osd_outer_borders_color;
+    color: $osd_fg_color;
     &:focus { @include button(focus); }
-    &:hover,&:checked { background-color: lighten(#393f3f, 5%); }
-    &:active { @include button(active);}
+    &:hover, &:checked { background-color: lighten($_key_bg, 3%); }
+    &:active { background-color: darken($_key_bg, 2%); }
     &:grayed { //FIXME
       background-color: $osd_bg_color;
       color: $osd_fg_color;
       border-color: $osd_borders_color;
     }
     &.default-key {
-      border-color: #2d3232;
-      background-color: #1d2020;
+      $_default_key_bg: opacify($osd_bg_color, 1);
+      border-color: $osd_outer_borders_color;
+      background-color: $_default_key_bg;
       background-size: 20px;
+      &:hover, &:checked { background-color: lighten($_default_key_bg, 3%); }
+      &:active { background-color: darken($_default_key_bg, 2%); }
     }
     &.enter-key {
-      border-color: darken($success_color, 5%);
-      background-color: $success_color;
+      border-color: lighten($selected_bg_color, 5%);
+      background-color: $selected_bg_color;
       background-image: url("resource:///org/gnome/shell/theme/key-enter.svg");
+      &:hover, &:checked { background-color: lighten($selected_bg_color, 3%); }
+      &:active { background-color: darken($selected_bg_color, 2%); }
     }
     &.shift-key-lowercase {
       background-image: url("resource:///org/gnome/shell/theme/key-shift.svg");
@@ -1849,8 +1853,8 @@ StScrollBar {
 
 .emoji-panel {
   .keyboard-key:latched {
-    border-color: $selected_bg_color;
-    background-color: $selected_borders_color;
+    border-color: lighten($selected_bg_color, 5%);
+    background-color: $selected_bg_color;
   }
 }
 
@@ -1914,7 +1918,7 @@ StScrollBar {
 
   StEntry {
     @extend %search_entry;
-    border-radius: 5px;
+    border-radius: $button_radius;
     // @if $variant=='dark' {
       $_gdm_entry_bg: transparentize(lighten(desaturate(#241f31, 20%), 2%), 0.5);
       background-color: $_gdm_entry_bg;
@@ -2224,4 +2228,3 @@ $_screenshield_shadow: 0px 0px 6px rgba(0, 0, 0, 0.726);
     border-radius: 4px;
     padding: 6px;
   }
-
