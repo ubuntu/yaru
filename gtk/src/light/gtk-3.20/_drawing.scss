@@ -53,7 +53,7 @@
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
   @if $t==focus {
-    @include _shadows(entry_focus_shadow($fc), $_entry_edge);
+    @if $variant=='dark' { @include _shadows(entry_focus_shadow($fc), $_entry_edge); }
     border-color: entry_focus_border($fc);
   }
   @if $t==insensitive {

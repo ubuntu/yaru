@@ -137,7 +137,7 @@ StScrollBar {
 .slider {
   height: 1em;
   -barlevel-height: 0.3em;
-  -barlevel-background-color: transparentize($fg_color, 0.9); //background of the trough
+  -barlevel-background-color: $borders_color; //background of the trough
   -barlevel-border-color: $borders_color; //trough border color
   -barlevel-active-background-color: $blue; //active trough fill
   -barlevel-active-border-color: $blue; //active trough border
@@ -756,7 +756,7 @@ StScrollBar {
   background-color: darken($bg_color, 2%);
   border-color: $_bubble_borders_color;
   box-shadow: none;
-  &:focus { border: 2px solid $selected_bg_color; }
+  &:focus { border: 1px solid $selected_bg_color; }
 }
 
 %bubble-panel {
@@ -1355,8 +1355,7 @@ StScrollBar {
     background-color: $base_color;
     border-color: $borders_color;
     &:focus {
-      padding: 6px 8px;
-      border-width: 2px;
+      border-width: 1px;
       border-color: $selected_bg_color;
     }
 
