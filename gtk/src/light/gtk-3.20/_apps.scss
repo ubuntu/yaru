@@ -454,13 +454,6 @@ headerbar button image ~ window decoration ~ menu separator {
     }
   }
 
-  .view {
-    // imports nautilus tweaks
-    // dim icons in backdrop and have only labels be colored when selected
-    &:selected { @extend %remove_folder_icon_tint; }
-    &:backdrop { @extend %dim_icons_in_backdrop; }
-  }
-
   toolbar.horizontal.primary-toolbar {
     // add border under toolbar
     border-bottom: 1px solid $borders_color;
