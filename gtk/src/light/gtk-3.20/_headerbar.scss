@@ -169,7 +169,6 @@ headerbar,
 
     color: $selected_fg_color;
     border-color: $suggested_border_color;
-    text-shadow: 0 -1px transparentize(black, 0.5);
 
     @include yaru_headerbar_fill($suggested_bg_color, $_hc);
 
@@ -190,7 +189,16 @@ headerbar,
 
     .subtitle:link { @extend *:link:selected;  }
 
-    button {
+    button,
+    button.image-button,
+    button.image-button.toggle,
+    button.text.button,
+    button.toggle,
+    box button.toggle,
+    buttonbox.toggle,
+    stackswitcher button,
+    filechooser .path-bar.linked>button,
+    .path-bar button {
       @include button(normal, $suggested_bg_color, $selected_fg_color);
 
       &.flat { @include button(undecorated); }
@@ -295,6 +303,9 @@ headerbar,
       }
     }
   }
+  * {
+    -gtk-icon-shadow: none;
+  }
 }
 
 // titlebutton
@@ -344,4 +355,33 @@ button.titlebutton {
       @include draw_circle($selected_bg_color);
     }
   }
+}
+
+* { text-shadow: none; }
+
+check,
+radio {
+
+    &,
+    &:hover,
+    &:active,
+    &:checked, &:disabled {
+
+        &,
+        &label {
+            box-shadow: none;
+            background-image: none;
+            -gtk-icon-shadow: none;
+        }
+    }
+
+
+    &:checked:not(:backdrop) {
+        border-color: $checkradio_bg_color;
+        background-color: $checkradio_bg_color;
+    }
+    &:disabled:checked { 
+      background-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
+      border-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
+    }
 }
