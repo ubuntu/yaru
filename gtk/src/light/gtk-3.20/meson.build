@@ -18,7 +18,7 @@ gtk3_scss_dependencies = [
   '_common.scss',
   '_apps.scss',
   '_drawing.scss',
-  '_headerbar.scss',
+  '_tweaks.scss',
 ]
 
 gtk3_assets = [

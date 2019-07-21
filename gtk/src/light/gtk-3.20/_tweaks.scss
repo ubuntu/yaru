@@ -367,8 +367,7 @@ radio {
     &:active,
     &:checked, &:disabled {
 
-        &:not(.selected),
-        &label {
+        &:not(.selected) {
             box-shadow: none;
             background-image: none;
             -gtk-icon-shadow: none;
@@ -376,12 +375,15 @@ radio {
     }
 
 
-    &:checked:not(:backdrop):not(.selected) {
+    &:not(:backdrop):checked:not(.selected) {
         border-color: $checkradio_bg_color;
         background-color: $checkradio_bg_color;
+        color: $checkradio_fg_color;
     }
-    &:disabled:checked:not(:backdrop) { 
+    &:not(:backdrop):disabled:checked { 
       background-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
       border-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
     }
 }
+
+spinner { &:not(:backdrop) { color: $progress_bg_color; }}
