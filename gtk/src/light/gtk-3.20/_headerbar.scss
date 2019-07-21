@@ -367,7 +367,7 @@ radio {
     &:active,
     &:checked, &:disabled {
 
-        &,
+        &:not(.selected),
         &label {
             box-shadow: none;
             background-image: none;
@@ -376,7 +376,7 @@ radio {
     }
 
 
-    &:checked:not(:backdrop) {
+    &:checked:not(:backdrop):not(.selected) {
         border-color: $checkradio_bg_color;
         background-color: $checkradio_bg_color;
     }
