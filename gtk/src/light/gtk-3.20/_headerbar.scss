@@ -380,7 +380,7 @@ radio {
         border-color: $checkradio_bg_color;
         background-color: $checkradio_bg_color;
     }
-    &:disabled:checked { 
+    &:disabled:checked:not(:backdrop) { 
       background-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
       border-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
     }
