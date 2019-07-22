@@ -456,6 +456,8 @@ terminal-window {
     // Removes rounded menus because the border bleeds in firefox
     // REMOVE THIS when firefox supports rounded menus
     menu, .menu,.context-menu { border-radius: 0; }
+
+    menubar, .menubar { color: $headerbar_fg_color; }
   
     // Adapt scrollbars a bit more to the GTK Scrollbar styling
     scrollbar {
