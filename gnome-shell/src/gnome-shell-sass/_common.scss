@@ -1924,6 +1924,7 @@ StScrollBar {
       background-color: $_gdm_entry_bg;
       border-color: lighten($_gdm_entry_bg, 25%);    
       color: $osd_fg_color;
+      &:focus { border-color: transparentize(white, 0.6); }
     // }
   }
 
@@ -2001,8 +2002,8 @@ StScrollBar {
   .login-dialog-user-list {
     spacing: 12px;
     width: 23em;
-    &:expanded .login-dialog-user-list-item:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
-    &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
+    &:expanded .login-dialog-user-list-item:selected { background-color: $base_hover_color; color: $fg_color; }
+    &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $base_hover_color; }
   }
   .login-dialog-user-list-item {
     border-radius: 5px;
