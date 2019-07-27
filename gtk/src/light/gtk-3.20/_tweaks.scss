@@ -377,11 +377,11 @@ radio {
 
     &:not(:backdrop):checked:not(.selected) {
         border-color: $checkradio_bg_color;
-        background-color: $checkradio_bg_color;
+        background-image: image($checkradio_bg_color);
         color: $checkradio_fg_color;
     }
     &:not(:backdrop):disabled:checked { 
-      background-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
+      background-image: image(mix($checkradio_bg_color, $insensitive_bg_color, 50%));
       border-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
     }
 }
