@@ -137,7 +137,7 @@ StScrollBar {
 .slider {
   height: 1em;
   -barlevel-height: 0.2em;
-  -barlevel-background-color: $borders_color; //background of the trough
+  -barlevel-background-color: transparentize($fg_color, 0.9);; //background of the trough
   -barlevel-border-color: $borders_color; //trough border color
   -barlevel-active-background-color: $blue; //active trough fill
   -barlevel-active-border-color: $blue; //active trough border
