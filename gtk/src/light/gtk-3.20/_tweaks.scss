@@ -62,27 +62,29 @@ $small_radius: 4px;
   }
 }
 
-headerbar.titlebar,
-.titlebar {
+headerbar.titlebar {
   &:not(.selection-mode) &,
     &:not(.selection-mode)
    {
-    @include yaru_headerbar_fill($headerbar_bg_color, $hc: $headerbar_border_color);
-    color: $headerbar_fg_color;
-
-    label .title {
+    
+    &, %yaru_titlebar {
+      @include yaru_headerbar_fill($headerbar_bg_color, $hc: $headerbar_border_color);
       color: $headerbar_fg_color;
-    }
 
-    &:backdrop {
-      border-color: mix(darken($inkstone, 11%), darken($inkstone, 1%), 80%);
-      background-color: $backdrop_headerbar_bg_color;
-      box-shadow: inset 0 1px $headerbar_border_color;
-    }
+      label .title {
+        color: $headerbar_fg_color;
+      }
 
-    .maximized &,
-    .fullscreen & {
-      box-shadow: none;
+      &:backdrop {
+        border-color: mix(darken($inkstone, 11%), darken($inkstone, 1%), 80%);
+        background-color: $backdrop_headerbar_bg_color;
+        box-shadow: inset 0 1px $headerbar_border_color;
+      }
+
+      .maximized &,
+      .fullscreen & {
+        box-shadow: none;
+      }
     }
 
     button:not(.titlebutton), button:not(.selection-menu).toggle {
@@ -147,10 +149,6 @@ headerbar.titlebar,
       }
     }
 
-    separator {
-      background: image(darken(#3d3d3d, 11%));
-    }
-
     switch:checked {
       border-color: $suggested_bg_color;
     }
@@ -158,6 +156,14 @@ headerbar.titlebar,
     * {
       -gtk-icon-shadow: none;
     }
+  }
+}
+
+.titlebar {
+  @extend %yaru_titlebar;
+
+  &:not(.selection-mode) separator {
+    background: image(darken($inkstone, 11%));
   }
 }
 
