@@ -151,11 +151,7 @@ headerbar.titlebar {
 
     switch:checked {
       border-color: $suggested_bg_color;
-    }
-
-    * {
-      -gtk-icon-shadow: none;
-    }
+    }    
   }
 }
 
@@ -221,7 +217,14 @@ button.titlebutton {
   }
 }
 
-* { text-shadow: none; }
+* {
+  text-shadow: none;
+}
+
+headerbar * {
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+}
 
 check,
 radio {
