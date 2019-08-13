@@ -62,7 +62,7 @@ $small_radius: 4px;
   }
 }
 
-headerbar.titlebar {
+headerbar {
   &:not(.selection-mode) &,
     &:not(.selection-mode)
    {
@@ -224,6 +224,7 @@ button.titlebutton {
 
 headerbar button.titlebutton.appmenu.popup.toggle {
   &, &:backdrop { @include button(undecorated); }
+  &:hover { @include button(hover, lighten($headerbar_bg_color, 8%), $headerbar_fg_color); }
 }
 
 headerbar * {
