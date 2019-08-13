@@ -211,19 +211,19 @@ button.titlebutton {
       @include draw_circle($selected_bg_color);
     }
   }
-
-  &.appmenu {
-    &, &:backdrop { @include button(undecorated); }
-  }
 }
 
-* {
-  text-shadow: none;
+headerbar button.titlebutton.appmenu.popup.toggle {
+  &, &:backdrop { @include button(undecorated); }
 }
 
 headerbar * {
   text-shadow: none;
   -gtk-icon-shadow: none;
+}
+
+* {
+  text-shadow: none;
 }
 
 check,
