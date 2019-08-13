@@ -4240,7 +4240,7 @@ infobar {
 
     selection { background-color: darken($bg_color, 10%); }
 
-    *:link { @extend %link_selected; }
+    *:link { color: $link_color; }
   }
 }
 
@@ -4538,6 +4538,14 @@ button.titlebutton {
   @extend %button_basic.flat;
 
   @include _button_text_shadow;
+
+  &:not(.appmenu) {
+    border-radius: 9999px;
+    padding: $_hb_btn_pad;
+    margin: 0 2px;
+    min-width: 0;
+    min-height: 0;
+  }
 
   .selection-mode & {
     @extend %button.flat.suggested-action;
