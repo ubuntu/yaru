@@ -1,3 +1,17 @@
+yaru-theme (19.04.3) disco; urgency=medium
+
+  * gbp.conf: Update branch for ubuntu/disco
+  * Sync Yaru with changes in GNOME Shell 3.32.1
+    - Fixes switches in VPN submenu (LP: #1829699)
+    - Fixes region screenshots (Shift + Print Screen) not displaying the
+      region properly (LP: #1830003)
+    - Fixes 1px gap next to some lists (e.g. gnome-control-center's users
+      panel) (LP: #1830203)
+    - Fixes clock on lock screen not being very readable with very bright
+      backgrounds (LP: #1830335)
+
+ -- Iain Lane <iain.lane@canonical.com>  Fri, 24 May 2019 09:36:47 +0100
+
 yaru-theme (19.04.2) disco; urgency=medium
 
   [ Feichtmeier ]
