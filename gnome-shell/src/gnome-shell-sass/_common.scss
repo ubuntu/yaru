@@ -84,6 +84,7 @@ stage {
 
 /* Entries */
 StEntry {
+  min-height: 22px;
   border-radius: $button_radius;
   padding: 4px;
   border-width: 1px;
@@ -770,7 +771,7 @@ StScrollBar {
   background-color: darken($bg_color, 2%);
   border-color: $_bubble_borders_color;
   box-shadow: none;
-  &:focus { border: 1px solid $selected_bg_color; }
+  &:focus { border: 2px solid $selected_bg_color; }
 }
 
 %bubble-panel {
@@ -943,7 +944,7 @@ StScrollBar {
     .world-clocks-button,
     .weather-button,
     .events-section-title {
-      &:hover, focus { background-color: $_hover_bg_color }
+      &:hover, &:focus { background-color: $_hover_bg_color }
       &:active { background-color: $_active_bg_color }
     }
 
@@ -1014,7 +1015,7 @@ StScrollBar {
       background-color: transparent;
       width: 32px;
       border-radius: 4px;
-      &:hover, focus { background-color: $_hover_bg_color; }
+      &:hover, &:focus { background-color: $_hover_bg_color; }
       &:active { background-color: transparentize($fg_color, 0.84); }
     }
 
@@ -1030,7 +1031,7 @@ StScrollBar {
       margin: 2px;
       border-radius: 1.4em;
       font-feature-settings: "tnum";
-      &:hover, focus { background-color: $_hover_bg_color; }
+      &:hover, &:focus { background-color: $_hover_bg_color; }
       &:active,&:selected {
         color: lighten($selected_fg_color,5%);
         background-color: $selected_bg_color;
@@ -1363,7 +1364,8 @@ StScrollBar {
     background-color: $base_color;
     border-color: $borders_color;
     &:focus {
-      border-width: 1px;
+      padding: 6px 8px;
+      border-width: 2px;
       border-color: $selected_bg_color;
     }
 
