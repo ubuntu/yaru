@@ -771,7 +771,7 @@ StScrollBar {
   background-color: darken($bg_color, 2%);
   border-color: $_bubble_borders_color;
   box-shadow: none;
-  &:focus { border: 1px solid $selected_bg_color; }
+  &:focus { border: 2px solid $selected_bg_color; }
 }
 
 %bubble-panel {
