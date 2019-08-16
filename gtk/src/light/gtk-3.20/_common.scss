@@ -2842,7 +2842,7 @@ switch {
 
       @include button(backdrop);
     }
-    // TODO: REMOVE the diff when we fixed this upstream (upstream has blue suggested border color)
+
     &:checked slider { border-color: if($variant == 'light', $suggested_bg_color, $suggested_border_color); }
 
     &:disabled slider { @include button(backdrop-insensitive); }
@@ -2855,7 +2855,7 @@ switch {
 
       &:backdrop { border-color: $selected_borders_color; }
 
-      slider { &:checked, & { border-color: $suggested_border_color; } }
+      slider { &:checked, & { border-color: $selected_borders_color; } }
     }
   }
 

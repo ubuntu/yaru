@@ -576,3 +576,17 @@ spinner {
     color: $progress_bg_color;
   }
 }
+
+// TODO: REMOVE the diff when we fixed this upstream (upstream has blue suggested border color)
+switch {
+  row:selected:not(:disabled) & {
+    @if $variant == 'light' {
+      box-shadow: none;
+      border-color: $selected_borders_color;
+
+      &:backdrop { border-color: $selected_borders_color; }
+
+      slider { &:checked { border-color: $suggested_border_color; } }
+    }
+  }
+}
