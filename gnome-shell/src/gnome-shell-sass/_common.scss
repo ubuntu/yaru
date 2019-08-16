@@ -1364,7 +1364,8 @@ StScrollBar {
     background-color: $base_color;
     border-color: $borders_color;
     &:focus {
-      border-width: 1px;
+      padding: 6px 8px;
+      border-width: 2px;
       border-color: $selected_bg_color;
     }
 
