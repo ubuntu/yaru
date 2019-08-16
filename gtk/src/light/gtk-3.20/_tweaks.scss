@@ -1,6 +1,8 @@
 @import 'ubuntu-colors';
 
 $small_radius: 4px;
+$_headerbar_button_bg: lighten($headerbar_bg_color, 4%);
+$_dark_border_color: rgb(20, 19, 19);;
 
 // copied from drawing, modified the gradients here to have less diff in drawing
 @mixin yaru_headerbar_fill($c:$headerbar_color, $hc:$top_hilight, $ov: none) {
@@ -97,7 +99,7 @@ headerbar,
   .path-bar button {
     $_btn_backdrop_border: darken($headerbar_border_color, 3%);
 
-    @include button(normal, lighten($headerbar_bg_color, 4%), $headerbar_fg_color);
+    @include button(normal, $_headerbar_button_bg, $headerbar_fg_color);
 
     &.flat {
       @include button(undecorated);
@@ -256,8 +258,40 @@ headerbar,
     background: image(darken(#3d3d3d, 11%));
   }
 
-  switch:checked {
-    border-color: $suggested_bg_color;
+  @if $variant=='light' {
+    switch {
+      border-color: $_dark_border_color;
+      color: $headerbar_fg_color;
+      background-color: $_headerbar_button_bg;
+      &:hover { background-color: lighten($_headerbar_button_bg, 2%); }
+      &:backdrop {
+        background-color: lighten($headerbar_bg_color,1%);
+        box-shadow: none;
+      }
+      &:disabled {
+        background-color: $headerbar_bg_color;
+        border-color: $_dark_border_color;
+      }
+  
+      &:checked {
+        color: $selected_fg_color;
+        border-color: $suggested_bg_color;
+        background-color: $suggested_bg_color;
+      }
+  
+      slider {
+        border-color: $_dark_border_color;
+        
+        &:checked {
+          border-color: $suggested_border_color;
+        }
+        &:disabled {
+          background-color: $headerbar_bg_color;
+          border-color: $_dark_border_color;
+          @include button(insensitive, $headerbar_bg_color);
+        }
+      }      
+    }
   }
 
   // re-insert the full selection mode section from common ...
@@ -491,7 +525,7 @@ headerbar button.titlebutton.appmenu.popup.toggle {
   &:active, &:checked {
     $_bg: lighten($headerbar_bg_color, if($variant==light, 0%, 1%));
     @include button(active, $_bg, $headerbar_fg_color);
-    border-color: rgb(20, 19, 19);
+    border-color: $_dark_border_color;
     background-image: image(darken($_bg, 9%));
   }
 }
