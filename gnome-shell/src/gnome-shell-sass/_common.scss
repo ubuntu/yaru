@@ -619,6 +619,18 @@ StScrollBar {
   app menu inside the main app window itself rather than the top bar
 */
 
+/*************
+ * App Icons *
+ *************/
+/* Outline for low res icons */
+.lowres-icon {
+    icon-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Drapshadow for large icons */
+.icon-dropshadow {
+  icon-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
 
 /* OSD */
 .osd-window {
@@ -728,7 +740,8 @@ StScrollBar {
     spacing: 8px;
   }
 
-  .ws-switcher-active-up, .ws-switcher-active-down {
+  .ws-switcher-active-up, .ws-switcher-active-down,
+  .ws-switcher-active-left, .ws-switcher-active-right {
     height: 50px;
     background-color: $selected_bg_color;
     color: $selected_fg_color;
@@ -1158,13 +1171,7 @@ StScrollBar {
 
   // a little unstructured mess:
 
-  .system-switch-user-submenu-icon { // this needs removal for gnome-shell 3.33+
-    icon-size: 16px;
-    padding: 0 4px;
-  }
-
   #appMenu {
-    spinner-image: url("resource:///org/gnome/shell/theme/process-working.svg");
     spacing: 4px;
 
     .label-shadow { color: transparent; }
@@ -1369,11 +1376,8 @@ StScrollBar {
 
   //search results
 
-  #searchResultsBin {
-    max-width: 1000px;
-  }
-
   #searchResultsContent {
+    max-width: 1000px;
     padding-left: 20px;
     padding-right: 20px;
     spacing: 16px;
@@ -1489,11 +1493,11 @@ StScrollBar {
   .search-provider-icon,
   .list-search-result {
     @extend %icon_tile;
-    &:active, &:checked { background-color: transparentize(darken($osd_bg_color,10%),.1); }
     &:focus, &:selected, &:hover {
       background-color: transparentize($osd_fg_color,.9);
       transition-duration: 200ms;
     }
+    &:active, &:checked { background-color: transparentize(darken($osd_bg_color,10%),.1); }
   }
   .app-well-app,
   .app-well-app.app-folder,
@@ -1501,10 +1505,6 @@ StScrollBar {
   .grid-search-result {
     & .overview-icon {
       @extend %icon_tile;
-    }
-    &:active .overview-icon,
-    &:checked .overview-icon {
-      background-color: transparentize(darken($osd_bg_color,10%), 0.5);
     }
     &:hover .overview-icon,
     &:focus .overview-icon,
@@ -1514,7 +1514,13 @@ StScrollBar {
       border-image: none;
       background-image: none;
     }
-
+    &:drop .overview-icon {
+      background-color: transparentize($selected_bg_color,.15);
+    }
+    &:active .overview-icon,
+    &:checked .overview-icon {
+      background-color: transparentize(darken($osd_bg_color,10%), 0.5);
+    }
   }
 
   .app-well-app-running-dot { //running apps indicator
@@ -1605,7 +1611,6 @@ StScrollBar {
   }
 
   //Some hacks I don't even
-  .search-display > StBoxLayout,
   .all-apps,
   .frequent-apps > StBoxLayout {
     // horizontal padding to make sure scrollbars or dash don't overlap content
