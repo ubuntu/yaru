@@ -1,3 +1,71 @@
+yaru-theme (19.10.1) UNRELEASED; urgency=medium
+
+  * Rebase Yaru on top of Adwaita 3.32
+    [ Feichtmeier ]
+    - Refresh Yaru with the latest upstream theme
+    - Move main differences to new _tweaks.scss dedicated file (headerbar and
+      included widgets, check/radio, switch, spinner)
+    - Apply Yaru color palette and geometry
+
+  * Icons
+    [ Carlo Lobrano ]
+    - Add missing rendering of preferences-desktop-font png
+
+    [ ubuntujaggers ]
+    - Adding Remmina's yaru icon plus pngs
+    - Adding Livepatch's yaru icon plus pngs
+    - Remove symlink for org.gnome.font-viewer-symbolic
+    - Fixing bottom left corner of 32px software centre icon
+    - New status icon for dialog-error which is also used as an emblem
+    - Adding revised emblem-symbolic-link
+    - Adding recoloured folders
+    - New symbolic icons to improve settings-app
+    - Adding new symbols for different applications categories
+    - New more simple software store
+    - New application-x-executable symbolic
+    - Moving the down arrow emblem on two app icons so they don't clash with real emblems
+    - Version of Sudoku icon with numerals
+    - New symbolic icons for application-x-appliance and applications-science
+    - Adding full colour version of drive-removable-media-symbolic
+    - Adding Yaru icon for Transmission
+    - Adding device icons for optical media
+    - Improvements to full colour printer icon
+    - Adding yaru app icons for LibreOffice
+    - Adding StartCenter icon
+    - Adding Snap Store icon
+    - Adding suggested replacement for files icon
+    - Adding icon for Jockey
+    - Updating camera-app-symbolic, filemanager-app-symbolic, jockey-symbolic and source-symbolic
+
+    [ Eaglers ]
+    - Improve Contacts icon
+    - Improve Archive Manager icon
+    - Improve Sudoku icon
+    - Add shadow of dog
+
+    [ Gustavo Costa ]
+    - Updated application-x-theme
+
+  * Tooling and infrastructure
+    [ Carlo Lobrano ]
+    - Add script to help sync upstream gtk-3-24 folder
+    - Enable again testing snap for bionic PR
+    [ Didier Roche ]
+    - Use single token for both snaps
+
+  * other:
+    [ Carlo Lobrano ]
+    - apps.scss: Nemo remove nautilus tweaks
+
+    [ Iain Lane ]
+    - Update gnome-shell upstream from 3.32.1
+    - Sync Yaru with changes in GNOME Shell 3.32.1 (LP: #1829699)
+
+    [ Marco Trevisan (Treviño) ]
+    - gnome-shell: Sync scss with upstream changes for 3.34
+
+ -- Carlo Lobrano <c.lobrano@gmail>  Fri, 16 Aug 2019 19:21:32 +0200
+
 yaru-theme (19.04.3) disco; urgency=medium
 
   * gbp.conf: Update branch for ubuntu/disco
