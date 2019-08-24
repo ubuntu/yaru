@@ -161,11 +161,15 @@ StScrollBar {
   StBin {
     width: 24px;
     height: 22px;
-    background-image: url("resource:///org/gnome/shell/theme/checkbox-off.svg");
+    background-image: if($variant=='light', url("resource:///org/gnome/shell/theme/checkbox-off.svg"), 
+                                            url("resource:///org/gnome/shell/theme/checkbox-off-dark.svg"));
   }
-  &:focus StBin { background-image: url("resource:///org/gnome/shell/theme/checkbox-off-focused.svg"); }
-  &:checked StBin { background-image: url("resource:///org/gnome/shell/theme/checkbox.svg"); }
-  &:focus:checked StBin { background-image: url("resource:///org/gnome/shell/theme/checkbox-focused.svg"); }
+  &:focus StBin { background-image: if($variant=='light', url("resource:///org/gnome/shell/theme/checkbox-off-focused.svg"),
+                                                          url("resource:///org/gnome/shell/theme/checkbox-off-focused-dark.svg")); }
+  &:checked StBin { background-image: if($variant=='light', url("resource:///org/gnome/shell/theme/checkbox.svg"),
+                                                            url("resource:///org/gnome/shell/theme/checkbox-dark.svg")); }
+  &:focus:checked StBin { background-image: if($variant=='light', url("resource:///org/gnome/shell/theme/checkbox-focused.svg"),
+                                                                  url("resource:///org/gnome/shell/theme/checkbox-focused-dark.svg")); }
 }
 
 /* Switches */
