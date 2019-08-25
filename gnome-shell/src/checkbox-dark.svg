@@ -15,9 +15,21 @@
    id="svg3199"
    version="1.1"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="checkbox-off.svg">
+   sodipodi:docname="checkbox-dark.svg">
   <defs
      id="defs3201">
+    <linearGradient
+       id="linearGradient15404"
+       inkscape:collect="always">
+      <stop
+         id="stop15406"
+         offset="0"
+         style="stop-color:#515151;stop-opacity:1" />
+      <stop
+         id="stop15408"
+         offset="1"
+         style="stop-color:#292929;stop-opacity:1" />
+    </linearGradient>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 526.18109 : 1"
@@ -32,6 +44,27 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5872-5-1"
+       id="linearGradient5891-0-4"
+       gradientUnits="userSpaceOnUse"
+       x1="205.84143"
+       y1="246.7094"
+       x2="206.74803"
+       y2="231.24142" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5872-5-1">
+      <stop
+         style="stop-color:#0b2e52;stop-opacity:1"
+         offset="0"
+         id="stop5874-4-4" />
+      <stop
+         style="stop-color:#1862af;stop-opacity:1"
+         offset="1"
+         id="stop5876-0-5" />
+    </linearGradient>
     <inkscape:path-effect
        effect="spiro"
        id="path-effect5837-4-6"
@@ -44,6 +77,16 @@
        effect="spiro"
        id="path-effect5884-4-7"
        is_visible="true" />
+    <linearGradient
+       y2="-388.72955"
+       x2="-93.031357"
+       y1="-396.34738"
+       x1="-93.031357"
+       gradientTransform="matrix(1.5918367,0,0,0.85714285,-256.56122,59.685418)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient14219"
+       xlink:href="#linearGradient15404"
+       inkscape:collect="always" />
     <linearGradient
        inkscape:collect="always"
        id="linearGradient10013-4-63-6">
@@ -111,17 +154,17 @@
      borderopacity="1"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="16"
-     inkscape:cx="-11.72124"
-     inkscape:cy="9.2872246"
+     inkscape:zoom="22.627417"
+     inkscape:cx="0.51646867"
+     inkscape:cy="9.1200617"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1850"
+     inkscape:window-width="1412"
      inkscape:window-height="1016"
-     inkscape:window-x="70"
+     inkscape:window-x="184"
      inkscape:window-y="27"
-     inkscape:window-maximized="1"
+     inkscape:window-maximized="0"
      borderlayer="true"
      inkscape:showpageshadow="false"
      inkscape:snap-nodes="false"
@@ -143,7 +186,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -154,7 +197,7 @@
      transform="translate(-342.5,-521.36218)">
     <rect
        ry="2.884424"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#f7f7f7;fill-opacity:1;stroke:#cccccc;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#3eb34f;fill-opacity:0.94117647;stroke:#3eb34f;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.94117647;marker:none;enable-background:accumulate"
        id="rect11803"
        width="19.008806"
        height="19.010983"
@@ -168,5 +211,11 @@
        height="21.943846"
        x="342.29913"
        y="521.58435" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#eeeeec;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+       d="m 361.65223,524.52745 -9.5602,9.36735 -2.56345,-2.56344 -2.92846,-0.0214 0.0153,2.32639 4.02203,4.02206 c 0.80341,0.80309 2.10565,0.80309 2.90906,0 l 10.95049,-11.05765 0.003,-2.1502 z"
+       id="path12830-4-17-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccc" />
   </g>
 </svg>
