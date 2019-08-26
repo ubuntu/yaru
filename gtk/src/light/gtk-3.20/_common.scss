@@ -3360,15 +3360,15 @@ scale {
             margin: -7px;
 
             @if $dir_class == 'horizontal' {
-              @if $marks_infix == 'scale-has-marks-above' { margin-top: -11px; }
+              @if $marks_infix == 'scale-has-marks-above' { margin-top: -5px; }
 
-              @else { margin-bottom: -11px; }
+              @else { margin-bottom: -5px; }
             }
 
             @else {
-              @if $marks_infix == 'scale-has-marks-above' { margin-left: -11px; }
+              @if $marks_infix == 'scale-has-marks-above' { margin-left: -5px; }
 
-              @else { margin-right: -11px; }
+              @else { margin-right: -5px; }
             }
           }
         }
