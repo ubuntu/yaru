@@ -1,8 +1,8 @@
 @import 'ubuntu-colors';
 
 $small_radius: 4px;
-$_headerbar_button_bg: lighten($headerbar_bg_color, 4%);
-$_dark_border_color: rgb(20, 19, 19);;
+$_headerbar_button_bg: lighten($headerbar_bg_color, 6%);
+$_dark_border_color: rgb(20, 19, 19);
 
 // copied from drawing, modified the gradients here to have less diff in drawing
 @mixin yaru_headerbar_fill($c:$headerbar_color, $hc:$top_hilight, $ov: none) {
@@ -100,52 +100,56 @@ headerbar,
     $_btn_backdrop_border: darken($headerbar_border_color, 3%);
 
     @include button(normal, $_headerbar_button_bg, $headerbar_fg_color);
+    border-color: lighten($_headerbar_button_bg, 6%);
+    box-shadow: 0px 1px darken($_headerbar_button_bg, 10%);
 
     &.flat {
       @include button(undecorated);
     }
 
     &:hover {
-      @include button(hover, lighten($headerbar_bg_color, 8%), $headerbar_fg_color);
+      @include button(hover, lighten($_headerbar_button_bg, 5%), $headerbar_fg_color);
+      border-color: lighten($_headerbar_button_bg, 6%);
     }
 
     &:active,
     &:checked,
     &.toggle:checked,
     &.toggle:active {
-      $_bg: lighten($headerbar_bg_color, if($variant==light, 0%, 1%));
+      $_bg: if($variant==light, darken($headerbar_bg_color, 1%), lighten($headerbar_bg_color, 1%));
       @include button(active, $_bg, $headerbar_fg_color);
-      border-color: rgb(20, 19, 19);
-      background-image: image(darken($_bg, 9%));
+      border-color: lighten($_headerbar_button_bg, 6%);
+      //border-color: $_dark_border_color;
+      //background-image: image(darken($_bg, 9%));
     }
 
     &:backdrop {
 
       &.flat,
       & {
-        @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
+          @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
-        -gtk-icon-effect: none;
-        border-color: $_btn_backdrop_border;
-
-        &:active,
-        &:checked {
-          $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 9%), lighten($backdrop_headerbar_bg_color, 2%));
-          @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
-          border-color: $_btn_backdrop_border;
-        }
-
-        &:disabled {
-          @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
-
+          -gtk-icon-effect: none;
           border-color: $_btn_backdrop_border;
 
           &:active,
           &:checked {
-            @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-
+            $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 9%), lighten($backdrop_headerbar_bg_color, 2%));
+            @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
             border-color: $_btn_backdrop_border;
           }
+
+          &:disabled {
+            @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
+
+            border-color: $_btn_backdrop_border;
+
+            &:active,
+            &:checked {
+              @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
+
+              border-color: $_btn_backdrop_border;
+            }
         }
       }
     }
