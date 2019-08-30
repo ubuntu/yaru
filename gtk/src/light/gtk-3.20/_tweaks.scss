@@ -120,8 +120,10 @@ headerbar,
     &.toggle:active {
       $_bg: if($variant==light, darken($headerbar_bg_color, 1%), lighten($headerbar_bg_color, 1%));
       @include button(active, $_bg, $headerbar_fg_color);
-      border-color: $_bg;// lighten($_headerbar_button_bg, 6%);
-      box-shadow: inset 0 0 0 1px lighten($_headerbar_button_bg, 6%);
+      border-color: $_bg;
+      // double inset box-shadow to fix the "pinch round border" issue
+      box-shadow: inset 0 0 0 1px lighten($_headerbar_button_bg, 6%),
+                  inset 0 0 0 1px lighten($_headerbar_button_bg, 6%);
       //border-color: $_dark_border_color;
       //background-image: image(darken($_bg, 9%));
     }
