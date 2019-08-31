@@ -1,33 +1,8 @@
 @import 'ubuntu-colors';
 
 $small_radius: 4px;
-$_headerbar_button_bg: lighten($headerbar_bg_color, 4%);
 $_dark_border_color: rgb(20, 19, 19);;
 
-// copied from drawing, modified the gradients here to have less diff in drawing
-@mixin yaru_headerbar_fill($c:$headerbar_color, $hc:$top_hilight, $ov: none) {
-  //
-  // headerbar fill
-  //
-  // $c:  base color
-  // $hc: top highlight color
-  // $ov: a background layer for background shorthand (hence no commas!)
-  //
-  $gradient: linear-gradient(to top, darken($c, 0%), lighten($c, 0%));
-
-  @if $ov !=none {
-    background: $c $ov, $gradient;
-  }
-
-  @else {
-    background: $c $gradient;
-  }
-
-  box-shadow: inset 0 1px $hc; // top highlight
-  border-color: if($c==$suggested_bg_color, $c, darken($c, 7%));
-}
-
-// helper mixin for the yaru titlebuttons
 @mixin draw_circle($c, $size:24px) {
   $button_size: $size + 2px * 2;
   $circle_size: 20px / $button_size / 2;
@@ -39,7 +14,7 @@ $_dark_border_color: rgb(20, 19, 19);;
                                   to(transparent));
 
   &:hover {
-    $_bg: if($c!=$selected_bg_color, transparentize(white, 0.8), lighten($c, 3%));
+    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.8, 0.6)), lighten($c, 3%));
     background-image: -gtk-gradient(radial,
                                     center center, 0,
                                     center center, $circle_size,
@@ -57,7 +32,7 @@ $_dark_border_color: rgb(20, 19, 19);;
   }
 
   &:active {
-    $_bg: if($c!=$selected_bg_color, transparentize(white, 0.9), darken($c, 2%));
+    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.6, 0.4)), darken($c, 2%));
     background-image: -gtk-gradient(radial,
                                     center center, 0,
                                     center center, $circle_size,
@@ -66,403 +41,39 @@ $_dark_border_color: rgb(20, 19, 19);;
   }
 }
 
-// overwriting the headerbar styling from common, for the inverted look in the light theme
-headerbar,
-.titlebar {
-  @include yaru_headerbar_fill($headerbar_bg_color, $hc: $headerbar_border_color);
-  color: $headerbar_fg_color;
+// with a flatter headerbar and buttons, we dont need that heavy shadows in the headerbar
+headerbar * {
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+}
+// same for the rest of the theme, but not axe the icon shadows, otherwise things don't work
+* {
+  text-shadow: none;
+}
 
-  label .title {
-    color: $headerbar_fg_color;
+// blue spinner
+spinner {
+  &:not(:backdrop) {
+    color: $progress_bg_color;
   }
+}
 
-  &:backdrop {
-    border-color: mix(darken($inkstone, 11%), darken($inkstone, 1%), 80%);
-    background-color: $backdrop_headerbar_bg_color;
-    box-shadow: inset 0 1px $headerbar_border_color;
-  }
+// TODO: REMOVE the diff when we fixed this upstream (upstream has blue suggested border color)
+switch {
+  row:selected:not(:disabled) & {
+    @if $variant == 'light' {
+      box-shadow: none;
+      border-color: $selected_borders_color;
 
-  .maximized &,
-  .fullscreen & {
-    box-shadow: none;
-  }
+      &:backdrop { border-color: $selected_borders_color; }
 
-  button,
-  button.image-button,
-  button.image-button.toggle,
-  button.text-button,
-  button.toggle,
-  box button.toggle,
-  buttonbox.toggle,
-  stackswitcher button,
-  filechooser .path-bar.linked>button,
-  .path-bar button {
-    $_btn_backdrop_border: darken($headerbar_border_color, 3%);
-
-    @include button(normal, $_headerbar_button_bg, $headerbar_fg_color);
-
-    &.flat {
-      @include button(undecorated);
-    }
-
-    &:hover {
-      @include button(hover, lighten($headerbar_bg_color, 8%), $headerbar_fg_color);
-    }
-
-    &:active,
-    &:checked,
-    &.toggle:checked,
-    &.toggle:active {
-      $_bg: lighten($headerbar_bg_color, if($variant==light, 0%, 1%));
-      @include button(active, $_bg, $headerbar_fg_color);
-      border-color: rgb(20, 19, 19);
-      background-image: image(darken($_bg, 9%));
-    }
-
-    &:backdrop {
-
-      &.flat,
-      & {
-        @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-
-        -gtk-icon-effect: none;
-        border-color: $_btn_backdrop_border;
-
-        &:active,
-        &:checked {
-          $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 9%), lighten($backdrop_headerbar_bg_color, 2%));
-          @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
-          border-color: $_btn_backdrop_border;
-        }
-
-        &:disabled {
-          @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
-
-          border-color: $_btn_backdrop_border;
-
-          &:active,
-          &:checked {
-            @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-
-            border-color: $_btn_backdrop_border;
-          }
-        }
-      }
-    }
-
-    &:disabled {
-      @include button(insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
-      border-color: darken($headerbar_bg_color, 6%);
-
-      &:active,
-      &:checked {
-        @include button(insensitive-active, $headerbar_bg_color, $headerbar_fg_color);
-      }
-    }
-
-    // Suggested and Destructive Action buttons, need to overwrite them again here
-    // copied from common, disabled buttons bg color changed to match the headerbar
-    @each $b_type,
-    $b_color in (suggested-action, $suggested_bg_color),
-    (destructive-action, $destructive_color) {
-      &.#{$b_type} {
-        @include button(normal, $b_color, white);
-
-        &.flat {
-          @include button(undecorated);
-
-          color: $b_color;
-        }
-
-        &:hover {
-          @include button(hover, $b_color, white);
-        }
-
-        &:active,
-        &:checked {
-          @include button(active, $b_color, white);
-        }
-
-        &:backdrop,
-        &.flat:backdrop {
-          @include button(backdrop, $b_color, white);
-
-          &:active,
-          &:checked {
-            @include button(backdrop-active, $b_color, white);
-          }
-
-          &:disabled {
-            @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
-
-            &:active,
-            &:checked {
-              @include button(backdrop-insensitive-active, $b_color, white);
-            }
-          }
-        }
-
-        &.flat {
-
-          &:backdrop,
-          &:disabled,
-          &:backdrop:disabled {
-            @include button(undecorated);
-
-            color: transparentize($b_color, 0.2);
-          }
-        }
-
-        &:disabled {
-          @include button(insensitive, if($variant== "light", darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
-
-          &:active,
-          &:checked {
-            @include button(insensitive-active, $b_color, white);
-          }
-        }
-
-        .osd & {
-          @include button(osd, $b_color);
-
-          &:hover {
-            @include button(osd-hover, $b_color);
-          }
-
-          &:active,
-          &:checked {
-
-            &:backdrop,
-            & {
-              @include button(osd-active, $b_color);
-            }
-          }
-
-          &:disabled {
-
-            &:backdrop,
-            & {
-              @include button(osd-insensitive, $b_color);
-            }
-          }
-
-          &:backdrop {
-            @include button(osd-backdrop, $b_color);
-          }
-        }
-      }
-    }
-  }
-
-  separator {
-    background: image(darken(#3d3d3d, 11%));
-  }
-
-  @if $variant=='light' {
-    switch {
-      border-color: $_dark_border_color;
-      color: $headerbar_fg_color;
-      background-color: $_headerbar_button_bg;
-      &:hover { background-color: lighten($_headerbar_button_bg, 2%); }
-      &:backdrop {
-        background-color: lighten($headerbar_bg_color,1%);
-        box-shadow: none;
-      }
-      &:disabled {
-        background-color: $headerbar_bg_color;
-        border-color: $_dark_border_color;
-      }
-  
-      &:checked {
-        color: $selected_fg_color;
-        border-color: transparentize($suggested_bg_color, 0.6);
-        background-color: $suggested_bg_color;
-      }
-  
-      slider {
-        border-color: $_dark_border_color;
-        
-        &:checked {
-          border-color: $suggested_border_color;
-        }
-        &:disabled {
-          background-color: $headerbar_bg_color;
-          border-color: $_dark_border_color;
-          @include button(insensitive, $headerbar_bg_color);
-        }
-      }      
-    }
-  }
-
-  // re-insert the full selection mode section from common ...
-  .selection-mode &,
-  &.selection-mode {
-    $_hc: mix($top_hilight, $suggested_bg_color, 50%); // hilight color
-
-    color: $selected_fg_color;
-    border-color: $suggested_border_color;
-
-    @include yaru_headerbar_fill($suggested_bg_color, $_hc);
-
-    separator {
-      background: image(lighten($suggested_bg_color, 5%));
-    }
-
-    &:backdrop {
-      background-color: $suggested_bg_color;
-      background-image: none;
-      box-shadow: inset 0 1px mix($top_hilight, $suggested_bg_color, 60%);
-
-      label {
-        text-shadow: none;
-        color: $selected_fg_color;
-      }
-    }
-
-    .subtitle:link {
-      @extend *:link:selected;
-    }
-
-    button,
-    button.image-button,
-    button.image-button.toggle,
-    button.text.button,
-    button.toggle,
-    box button.toggle,
-    buttonbox.toggle,
-    stackswitcher button,
-    filechooser .path-bar.linked>button,
-    .path-bar button {
-      @include button(normal, $suggested_bg_color, $selected_fg_color);
-
-      &.flat {
-        @include button(undecorated);
-      }
-
-      &:hover {
-        @include button(hover, $suggested_bg_color, $selected_fg_color);
-      }
-
-      &:active,
-      &:checked,
-      &.toggle:checked,
-      &.toggle:active {
-        @include button(active, $suggested_bg_color, $selected_fg_color);
-      }
-
-      &:backdrop {
-
-        &.flat,
-        & {
-          @include button(backdrop, $suggested_bg_color, $selected_fg_color);
-
-          -gtk-icon-effect: none;
-          border-color: lighten($suggested_bg_color, 5%);
-
-          &:active,
-          &:checked {
-            @include button(backdrop-active, $suggested_bg_color, $selected_fg_color);
-
-            border-color: $suggested_border_color;
-          }
-
-          &:disabled {
-            @include button(backdrop-insensitive, $suggested_bg_color, $selected_fg_color);
-
-            border-color: $suggested_border_color;
-
-            &:active,
-            &:checked {
-              @include button(backdrop-insensitive-active, $suggested_bg_color, $selected_fg_color);
-
-              border-color: $suggested_border_color;
-            }
-          }
-        }
-      }
-
-      &.flat {
-
-        &:backdrop,
-        &:disabled,
-        &:backdrop:disabled {
-          @include button(undecorated);
-        }
-      }
-
-      &:disabled {
-        @include button(insensitive, $suggested_bg_color, $selected_fg_color);
-
-        &:active,
-        &:checked {
-          @include button(insensitive-active, $suggested_bg_color, $selected_fg_color);
-        }
-      }
-
-      &.suggested-action {
-        @include button(normal);
-
-        border-color: $suggested_border_color;
-
-        &:hover {
-          @include button(hover);
-
-          border-color: $suggested_border_color;
-        }
-
-        &:active {
-          @include button(active);
-
-          border-color: $suggested_border_color;
-        }
-
-        &:disabled {
-          @include button(insensitive);
-
-          border-color: $suggested_border_color;
-        }
-
-        &:backdrop {
-          @include button(backdrop);
-
-          border-color: $suggested_border_color;
-        }
-
-        &:backdrop:disabled {
-          @include button(backdrop-insensitive);
-
-          border-color: $suggested_border_color;
-        }
-      }
-    }
-
-    .selection-menu {
-
-      &:backdrop,
-      & {
-        border-color: transparentize($suggested_bg_color, 1);
-        background-color: transparentize($suggested_bg_color, 1);
-        background-image: none;
-        box-shadow: none;
-        min-height: 20px;
-        padding: $_sel_menu_pad;
-
-        arrow {
-          -GtkArrow-arrow-scaling: 1;
-        }
-
-        .arrow {
-          -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
-          color: transparentize($selected_fg_color, 0.5);
-          -gtk-icon-shadow: none;
-        }
-      }
+      slider { &:checked { border-color: $suggested_border_color; } }
     }
   }
 }
 
 // titlebutton
-button.titlebutton {
+button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.close {
 
   &,
   &:hover,
@@ -485,15 +96,25 @@ button.titlebutton {
   min-width: 24px;
   padding: 2px;
 
-  &:not(.close):not(.appmenu) {
-    color: $headerbar_fg_color;
+  &.maximize {
 
     &:hover {
-      @include draw_circle($headerbar_bg_color);
+      @include draw_circle($purple);
     }
 
     &:active {
-      @include draw_circle($headerbar_bg_color);
+      @include draw_circle($purple);
+    }
+  }
+
+  &.minimize {
+
+    &:hover {
+      @include draw_circle($purple);
+    }
+
+    &:active {
+      @include draw_circle($purple);
     }
   }
 
@@ -508,36 +129,11 @@ button.titlebutton {
     &:active {
       @include draw_circle($selected_bg_color);
     }
+
+    &:backdrop {
+      color: $backdrop_fg_color;
+    }
   }
-}
-
-headerbar button.titlebutton.appmenu.popup.toggle {
-
-  &,
-  &:backdrop {
-    @include button(undecorated);
-  }
-
-  &:hover {
-    @include button(hover, lighten($headerbar_bg_color, 8%), $headerbar_fg_color);
-  }
-
-  &:active, &:checked {
-    $_bg: lighten($headerbar_bg_color, if($variant==light, 0%, 1%));
-    @include button(active, $_bg, $headerbar_fg_color);
-    border-color: $_dark_border_color;
-    background-image: image(darken($_bg, 9%));
-  }
-}
-
-// with a flatter headerbar and buttons, we dont need that heavy shadows in the headerbar
-headerbar * {
-  text-shadow: none;
-  -gtk-icon-shadow: none;
-}
-// same for the rest of the theme, but not axe the icon shadows, otherwise things don't work
-* {
-  text-shadow: none;
 }
 
 // make checks and radios more flat, remove this when upstream flattens their cheks/radios
@@ -567,26 +163,5 @@ radio {
   &:not(:backdrop):disabled:checked {
     background-image: image(mix($checkradio_bg_color, $insensitive_bg_color, 50%));
     border-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
-  }
-}
-
-// blue spinner
-spinner {
-  &:not(:backdrop) {
-    color: $progress_bg_color;
-  }
-}
-
-// TODO: REMOVE the diff when we fixed this upstream (upstream has blue suggested border color)
-switch {
-  row:selected:not(:disabled) & {
-    @if $variant == 'light' {
-      box-shadow: none;
-      border-color: $selected_borders_color;
-
-      &:backdrop { border-color: $selected_borders_color; }
-
-      slider { &:checked { border-color: $suggested_border_color; } }
-    }
   }
 }

@@ -3,7 +3,7 @@
 @import "ubuntu-colors";
 
 $base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 10%));
-$bg_color: if($variant == 'light', #F5F6F7, darken($inkstone, 1%));
+$bg_color: if($variant == 'light', darken(#F5F6F7, 1%), darken($inkstone, 1%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
 $selected_fg_color: #ffffff;
