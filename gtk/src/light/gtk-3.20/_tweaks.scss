@@ -100,10 +100,8 @@ headerbar,
     $_btn_backdrop_border: darken($headerbar_border_color, 3%);
 
     @include button(normal, $_headerbar_button_bg, $headerbar_fg_color);
-    //border-color: lighten($_headerbar_button_bg, 6%);
-    //box-shadow: 0px 1px darken($_headerbar_button_bg, 10%);
-    //box-shadow: inset 0 0 0 1px lighten($_headerbar_button_bg, 6%);
-    box-shadow: inset 0 1px 0 0px lighten($_headerbar_button_bg, 8%);
+    box-shadow: inset 0 1px 0 0px lighten($_headerbar_button_bg, 8%),
+                inset 0 -1px 0 0px lighten($_headerbar_button_bg, 3%);
 
     &.flat {
       @include button(undecorated);
@@ -111,7 +109,6 @@ headerbar,
 
     &:hover {
       @include button(hover, lighten($_headerbar_button_bg, 4%), $headerbar_fg_color);
-      //border-color: lighten($_headerbar_button_bg, 6%);
       box-shadow: inset 0 0 0 1px lighten($_headerbar_button_bg, 6%);
     }
 
@@ -120,32 +117,27 @@ headerbar,
       $_bg: if($variant==light, darken($headerbar_bg_color, 1%), lighten($headerbar_bg_color, 1%));
       @include button(active, $_bg, $headerbar_fg_color);
       border-color: $_bg;
-      // double inset box-shadow to fix the "pinch round border" issue
       box-shadow: inset 0 0 0 1px lighten($_headerbar_button_bg, 6%),
                   inset 0 0 0 1px lighten($_headerbar_button_bg, 6%);
-      //border-color: $_dark_border_color;
-      //background-image: image(darken($_bg, 9%));
     }
     &:checked,
     &.toggle:checked {
-      @include button(hover, lighten($_headerbar_button_bg, 7%), $headerbar_fg_color);
-      //border-color: lighten($_headerbar_button_bg, 6%);
-      //box-shadow: inset 0 0 0 1px lighten($_headerbar_button_bg, 6%);
-      box-shadow: inset 0 1px 0 0px lighten($_headerbar_button_bg, 8%);
+      @include button(hover, darken($headerbar_bg_color, 10%), $headerbar_fg_color);
     }
 
     &:backdrop {
-
-      &.flat,
-      & {
+      &,
+      &.flat {
           @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
           -gtk-icon-effect: none;
           border-color: $_btn_backdrop_border;
 
           &:active,
-          &:checked {
-            $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 9%), lighten($backdrop_headerbar_bg_color, 2%));
+          &.toggle:active,
+          &:checked,
+          &.toggle:checked {
+            $_bg: if($variant=='light', lighten($backdrop_headerbar_bg_color, 5%), lighten($backdrop_headerbar_bg_color, 5%));
             @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
             border-color: $_btn_backdrop_border;
           }
@@ -158,7 +150,6 @@ headerbar,
             &:active,
             &:checked {
               @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-
               border-color: $_btn_backdrop_border;
             }
         }
