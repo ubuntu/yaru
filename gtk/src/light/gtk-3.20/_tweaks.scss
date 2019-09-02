@@ -121,7 +121,7 @@ headerbar,
       $_bg: if($variant==light, darken($headerbar_bg_color, 1%), lighten($headerbar_bg_color, 1%));
       @include button(active, $_bg, $headerbar_fg_color);
       border-color: black;
-    } 
+    }
 
     &:backdrop {
       &,
@@ -282,16 +282,16 @@ headerbar,
         background-color: $headerbar_bg_color;
         border-color: $_dark_border_color;
       }
-  
+
       &:checked {
         color: $selected_fg_color;
         border-color: transparentize($suggested_bg_color, 0.6);
         background-color: $suggested_bg_color;
       }
-  
+
       slider {
         border-color: $_dark_border_color;
-        
+
         &:checked {
           border-color: $suggested_border_color;
         }
@@ -300,7 +300,7 @@ headerbar,
           border-color: $_dark_border_color;
           @include button(insensitive, $headerbar_bg_color);
         }
-      }      
+      }
     }
   }
 
