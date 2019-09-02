@@ -115,19 +115,13 @@ headerbar,
      }
     }
     &:active,
-    &.toggle:active {
+    &:checked,
+    &.toggle:active
+    &.toggle:checked {
       $_bg: if($variant==light, darken($headerbar_bg_color, 1%), lighten($headerbar_bg_color, 1%));
       @include button(active, $_bg, $headerbar_fg_color);
-      border-color: $_bg;
-      @if $variant == 'light' {
-        box-shadow: inset 0 0 0 1px lighten($_headerbar_button_bg, 6%),
-                    inset 0 0 0 1px lighten($_headerbar_button_bg, 6%);
-      }
-    }
-    &:checked,
-    &.toggle:checked {
-      @include button(hover, darken($headerbar_bg_color, 10%), $headerbar_fg_color);
-    }
+      border-color: black;
+    } 
 
     &:backdrop {
       &,
