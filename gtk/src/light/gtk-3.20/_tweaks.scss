@@ -118,7 +118,7 @@ headerbar,
     &:checked,
     &.toggle:active
     &.toggle:checked {
-      $_bg: if($variant==light, darken($headerbar_bg_color, 1%), lighten($headerbar_bg_color, 1%));
+      $_bg: if($variant==light, lighten($headerbar_bg_color, 3%), lighten($headerbar_bg_color, 1%));
       @include button(active, $_bg, $headerbar_fg_color);
       border-color: black;
     }
