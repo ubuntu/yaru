@@ -1821,11 +1821,11 @@ StScrollBar {
       &:active { background-color: darken($_default_key_bg, 2%); }
     }
     &.enter-key {
-      border-color: lighten($selected_bg_color, 5%);
-      background-color: $selected_bg_color;
+      border-color: lighten($success_color, 5%);
+      background-color: $success_color;
       background-image: url("key-enter.svg");
-      &:hover, &:checked { background-color: lighten($selected_bg_color, 3%); }
-      &:active { background-color: darken($selected_bg_color, 2%); }
+      &:hover, &:checked { background-color: lighten($success_color, 3%); }
+      &:active { background-color: darken($success_color, 2%); }
     }
     &.shift-key-lowercase {
       background-image: url("key-shift.svg");
