@@ -1067,7 +1067,7 @@ StScrollBar {
       .calendar-day-with-events {
         color: lighten($fg_color,10%);
         font-weight: bold;
-        background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
+        background-image: url("calendar-today.svg");
       }
       .calendar-other-month-day {
         color: transparentize($fg_color ,0.5);
@@ -1421,7 +1421,7 @@ StScrollBar {
     }
 
     .placeholder {
-      background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
+      background-image: url("dash-placeholder.svg");
       background-size: contain;
       height: 24px;
     }
@@ -1606,7 +1606,7 @@ StScrollBar {
     &:rtl { border-radius: 0 9px 9px 0;}
 
     .placeholder {
-      background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
+      background-image: url("dash-placeholder.svg");
       background-size: contain;
       height: 24px;
     }
@@ -1823,24 +1823,24 @@ StScrollBar {
     &.enter-key {
       border-color: lighten($selected_bg_color, 5%);
       background-color: $selected_bg_color;
-      background-image: url("resource:///org/gnome/shell/theme/key-enter.svg");
+      background-image: url("key-enter.svg");
       &:hover, &:checked { background-color: lighten($selected_bg_color, 3%); }
       &:active { background-color: darken($selected_bg_color, 2%); }
     }
     &.shift-key-lowercase {
-      background-image: url("resource:///org/gnome/shell/theme/key-shift.svg");
+      background-image: url("key-shift.svg");
     }
     &.shift-key-uppercase {
-      background-image: url("resource:///org/gnome/shell/theme/key-shift-uppercase.svg");
+      background-image: url("key-shift-uppercase.svg");
     }
     &.shift-key-uppercase:latched {
-      background-image: url("resource:///org/gnome/shell/theme/key-shift-latched-uppercase.svg");
+      background-image: url("key-shift-latched-uppercase.svg");
     }
     &.hide-key {
-      background-image: url("resource:///org/gnome/shell/theme/key-hide.svg");
+      background-image: url("key-hide.svg");
     }
     &.layout-key {
-      background-image: url("resource:///org/gnome/shell/theme/key-layout.svg");
+      background-image: url("key-layout.svg");
     }
   }
 
@@ -2138,7 +2138,7 @@ $_screenshield_shadow: 0px 0px 6px rgba(0, 0, 0, 0.726);
 }
 
 #lockDialogGroup {
-  background: darken($purple, 10%) url(resource:///org/gnome/shell/theme/noise-texture.png);
+  background: darken($purple, 10%) url(noise-texture.png);
   background-repeat: repeat;
 }
 
