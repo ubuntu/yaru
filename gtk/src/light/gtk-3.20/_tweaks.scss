@@ -1,7 +1,7 @@
 @import 'ubuntu-colors';
 
 $small_radius: 4px;
-$_dark_border_color: rgb(20, 19, 19);;
+$_dark_border_color: rgb(20, 19, 19);
 
 @mixin draw_circle($c, $size:24px) {
   $button_size: $size + 2px * 2;
@@ -14,7 +14,7 @@ $_dark_border_color: rgb(20, 19, 19);;
                                   to(transparent));
 
   &:hover {
-    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.8, 0.6)), lighten($c, 3%));
+    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.8, 0.05)), lighten($c, 3%));
     background-image: -gtk-gradient(radial,
                                     center center, 0,
                                     center center, $circle_size,
@@ -32,7 +32,7 @@ $_dark_border_color: rgb(20, 19, 19);;
   }
 
   &:active {
-    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.6, 0.4)), darken($c, 2%));
+    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.6, 0)), darken($c, 2%));
     background-image: -gtk-gradient(radial,
                                     center center, 0,
                                     center center, $circle_size,
@@ -95,26 +95,27 @@ button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.cl
   min-height: 24px;
   min-width: 24px;
   padding: 2px;
+  $_c: $inkstone;
 
   &.maximize {
 
     &:hover {
-      @include draw_circle($purple);
+      @include draw_circle($_c);
     }
 
     &:active {
-      @include draw_circle($purple);
+      @include draw_circle($_c);
     }
   }
 
   &.minimize {
 
     &:hover {
-      @include draw_circle($purple);
+      @include draw_circle($_c);
     }
 
     &:active {
-      @include draw_circle($purple);
+      @include draw_circle($_c);
     }
   }
 
@@ -163,5 +164,14 @@ radio {
   &:not(:backdrop):disabled:checked {
     background-image: image(mix($checkradio_bg_color, $insensitive_bg_color, 50%));
     border-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
+  }
+}
+
+// upstream headerbar is not exactly perfect, thus a tiny change to the bg and border colors
+headerbar {
+  &, &.titlebar:not(headerbar) {
+    border-color: if($variant=='light', #c8c9ca, lighten($alt_borders_color, 7%));
+
+    @include headerbar_fill(if($variant=='light', #e7eaed, darken($bg_color, 10%)));
   }
 }
