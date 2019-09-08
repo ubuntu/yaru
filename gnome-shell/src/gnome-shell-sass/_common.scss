@@ -34,7 +34,7 @@ $_trough_color: transparentize($fg_color, 0.9);
 $_bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
 // $_hover_bg_color: lighten($bg_color,if($variant=='light', 5%, 3%));
 $_hover_bg_color: transparentize($fg_color, 0.85);
-$_active_bg_color: if($variant == 'light', darken($bg_color, 14%), darken($bg_color, 9%));
+$_active_bg_color: transparentize($fg_color, 0.80);
 
 $font-size: 11;
 $font-family: Ubuntu, Cantarell, Sans-Serif;
