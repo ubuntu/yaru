@@ -590,3 +590,16 @@ switch {
     }
   }
 }
+
+// we prefered our gray hover for menus and popovers, orange is a very strong color
+menu,
+.menu,
+.context-menu {
+  menuitem {
+
+    &:hover {
+      color: $fg_color;
+      background-color: $popover_hover_color;
+    }
+  }
+}
