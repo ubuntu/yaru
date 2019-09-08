@@ -172,7 +172,7 @@ headerbar {
   &, &.titlebar:not(headerbar) {
     border-color: if($variant=='light', #c8c9ca, lighten($alt_borders_color, 7%));
 
-    @include headerbar_fill(if($variant=='light', #e7eaed, darken($bg_color, 10%)));
+    @include headerbar_fill(if($variant=='light', #dee1e6, darken($bg_color, 10%)));
   }
 }
 
