@@ -1,7 +1,8 @@
 @import 'ubuntu-colors';
 
 $small_radius: 4px;
-$_dark_border_color: rgb(20, 19, 19);
+$_base_hover_color: transparentize($fg_color, 0.85);
+$_base_active_color: transparentize($fg_color, 0.75);
 
 @mixin draw_circle($c, $size:24px) {
   $button_size: $size + 2px * 2;
@@ -12,24 +13,6 @@ $_dark_border_color: rgb(20, 19, 19);
                                   center center, $circle_size,
                                   to($c),
                                   to(transparent));
-
-  &:hover {
-    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.8, 0.05)), lighten($c, 4%));
-    background-image: -gtk-gradient(radial,
-                                    center center, 0,
-                                    center center, $circle_size,
-                                    to($_bg),
-                                    to(transparent));
-  }
-
-  &:active {
-    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.6, 0)), darken($c, 2%));
-    background-image: -gtk-gradient(radial,
-                                    center center, 0,
-                                    center center, $circle_size,
-                                    to($_bg),
-                                    to(transparent));
-  }
 }
 
 // with a flatter headerbar and buttons, we dont need that heavy shadows in the headerbar
@@ -86,27 +69,17 @@ button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.cl
   min-height: 24px;
   min-width: 24px;
   padding: 2px;
-  $_c: $inkstone;
 
-  &.maximize {
+  &.maximize, &.minimize {
 
-    &:hover {
-      @include draw_circle($_c);
-    }
+    &, &:backdrop {
+      &:hover {
+        @include draw_circle($_base_hover_color);
+      }
 
-    &:active {
-      @include draw_circle($_c);
-    }
-  }
-
-  &.minimize {
-
-    &:hover {
-      @include draw_circle($_c);
-    }
-
-    &:active {
-      @include draw_circle($_c);
+      &:active {
+        @include draw_circle($_base_active_color);
+      }
     }
   }
 
@@ -116,14 +89,17 @@ button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.cl
 
     &:hover {
       @include draw_circle($selected_bg_color);
+      @include draw_circle(lighten($selected_bg_color, 5%));
     }
 
     &:active {
       @include draw_circle($selected_bg_color);
+      @include draw_circle(darken($selected_bg_color, 5%));
     }
 
     &:backdrop {
-      @include draw_circle(lighten($inkstone, 40%));
+      @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
+      &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
     }
   }
 }
