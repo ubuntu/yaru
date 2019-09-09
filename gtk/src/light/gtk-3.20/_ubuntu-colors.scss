@@ -19,9 +19,9 @@ $blue: #19B6EE;
 $purple: #762572;
 
 // Terminal colors
-$terminal_bg_color: #300A24;
+$terminal_bg_color: if($variant=='light', $porcelain, #300A24);
 $terminal_base_color: lighten($terminal_bg_color, 5%);
-$terminal_fg_color: white;
+$terminal_fg_color: if($variant=='light', $inkstone, white);
 $terminal_borders_color: darken($terminal_bg_color, 10%);
 
 // Widget Colors
