@@ -86,16 +86,6 @@ $small_radius: 4px;
       &:backdrop { background-color: if($variant=='light', #EEEFF0, $backdrop_base_color);} // It should be _backdrop_color(white); but that does not work.
     }
   
-    @at-root %remove_folder_icon_tint,
-    scrolledwindow widget.view:selected {
-      // reduces orangeness of selected folder icons
-      background-color: rgba(255, 255, 255, 0.1); // folder icon is tinted based on this
-                                                  // near transparent white results in no tint
-                                                  // completely transparent tints the icon black
-      background-image: image($selected_bg_color); // label background becomes this
-      border-radius: $small_radius;
-    }
-  
     .nautilus-list-view .view {
       border-bottom: 1px solid transparentize($borders_color, 0.8);
   
@@ -230,7 +220,7 @@ terminal-window {
   box > list row.list-box-app-row {
       border: none;
   }
-  
+
   //Used as update count in GNOME software
   .counter-label {
     margin-top: 2px;
@@ -354,8 +344,7 @@ terminal-window {
   
     .view {
       // imports nautilus tweaks
-      // dim icons in backdrop and have only labels be colored when selected
-      &:selected { @extend %remove_folder_icon_tint; }
+      // dim icons in backdrop
       &:backdrop { @extend %dim_icons_in_backdrop; }
     }
   
