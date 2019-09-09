@@ -14,21 +14,12 @@ $_dark_border_color: rgb(20, 19, 19);
                                   to(transparent));
 
   &:hover {
-    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.8, 0.05)), lighten($c, 3%));
+    $_bg: if($c!=$selected_bg_color, transparentize($c, if($variant==light, 0.8, 0.05)), lighten($c, 4%));
     background-image: -gtk-gradient(radial,
                                     center center, 0,
                                     center center, $circle_size,
                                     to($_bg),
                                     to(transparent));
-
-    &:backdrop {
-      $_bg: transparentize(white, 0.9);
-      background-image: -gtk-gradient(radial,
-                                      center center, 0,
-                                      center center, $circle_size,
-                                      to($_bg),
-                                      to(transparent));
-    }
   }
 
   &:active {
@@ -120,7 +111,7 @@ button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.cl
   }
 
   &.close {
-    color: $headerbar_fg_color;
+    color: $selected_fg_color;
     @include draw_circle($selected_bg_color);
 
     &:hover {
@@ -132,7 +123,7 @@ button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.cl
     }
 
     &:backdrop {
-      color: $backdrop_fg_color;
+      @include draw_circle(lighten($inkstone, 40%));
     }
   }
 }
