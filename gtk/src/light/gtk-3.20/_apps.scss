@@ -26,42 +26,44 @@ $small_radius: 4px;
     *scrolledwindow:backdrop { opacity: 0.9; }
   
     paned box.floating-bar {
-      background: transparentize($jet, 0.1);
-      color: $porcelain;
-      border: none;
+      //background: transparentize($jet, 0.1);
+      //color: $porcelain;
+      border-style: solid;
+      border-color: $borders_color;
+      border-width: 1px 0 0 1px;
       border-radius: $small_radius 0 0 0;
-  
+
       /* stop upload folder button */
-      button.circular.flat.image-button {
-        // style both normal and hover at the same time is necessary
-        // otherwise gtk will take the style from somewhere else...
-        &, &:hover {
-          background-color: transparent;
-          border-color: transparent;
-          box-shadow: none;
-          color: $bg_color;
-          margin: 2px;
-        }
+      //button.circular.flat.image-button {
+        //// style both normal and hover at the same time is necessary
+        //// otherwise gtk will take the style from somewhere else...
+        //&, &:hover {
+          //background-color: transparent;
+          //border-color: transparent;
+          //box-shadow: none;
+          //color: $bg_color;
+          //margin: 2px;
+        //}
   
-        &:backdrop {
-          transition: none;
-          border-color: transparent;
-        }
+        //&:backdrop {
+          //transition: none;
+          //border-color: transparent;
+        //}
   
-        // ...and here style just the difference from normal
-        &:hover {
-          color: $destructive_color;
-        }
-      }
+        //// ...and here style just the difference from normal
+        //&:hover {
+          //color: $destructive_color;
+        //}
+      //}
   
-      &:backdrop {
-        @if $variant=='light' {
-          background: transparentize(darken($backdrop_bg_color, 10%), 0.1);
-        }
-        @else {
-          background: transparentize(lighten($jet, 10%), 0.1);
-        }
-      }
+      //&:backdrop {
+        //@if $variant=='light' {
+          //background: transparentize(darken($backdrop_bg_color, 10%), 0.1);
+        //}
+        //@else {
+          //background: transparentize(lighten($jet, 10%), 0.1);
+        //}
+      //}
     }
   
     .searchbar-container searchbar {
