@@ -10,7 +10,7 @@ $small_radius: 4px;
     // make the sidebar look like a normal sidebar
     background: transparent;
   }
-  
+
   /***********
    * Nautilus *
    ***********/
@@ -20,100 +20,67 @@ $small_radius: 4px;
     background-image: none;
     background-color: if($variant=='light', white, $base_color);
     &:backdrop { background-color: $backdrop_base_color }
-  
+
     // Makes icons less bright in backdrop
     @at-root %dim_icons_in_backdrop,
     *scrolledwindow:backdrop { opacity: 0.9; }
-  
+
     paned box.floating-bar {
-      //background: transparentize($jet, 0.1);
-      //color: $porcelain;
+      background: $bg_color;
       border-style: solid;
       border-color: $borders_color;
       border-width: 1px 0 0 1px;
       border-radius: $small_radius 0 0 0;
-
-      /* stop upload folder button */
-      //button.circular.flat.image-button {
-        //// style both normal and hover at the same time is necessary
-        //// otherwise gtk will take the style from somewhere else...
-        //&, &:hover {
-          //background-color: transparent;
-          //border-color: transparent;
-          //box-shadow: none;
-          //color: $bg_color;
-          //margin: 2px;
-        //}
-  
-        //&:backdrop {
-          //transition: none;
-          //border-color: transparent;
-        //}
-  
-        //// ...and here style just the difference from normal
-        //&:hover {
-          //color: $destructive_color;
-        //}
-      //}
-  
-      //&:backdrop {
-        //@if $variant=='light' {
-          //background: transparentize(darken($backdrop_bg_color, 10%), 0.1);
-        //}
-        //@else {
-          //background: transparentize(lighten($jet, 10%), 0.1);
-        //}
-      //}
     }
-  
+
     .searchbar-container searchbar {
       // get rid of a 1px white line shown at the top of the window
       // applies to the desktop too
       background: transparent;
       border-color: transparent;
     }
-  
+
     treeview:drop(active):focus {
       // drop target green bottom border was missing
       border-bottom: 1px solid $drop_target_color;
     }
-  
+
     treeview.view header button {
       background-color: if($variant=='light', $base_color, $base_color);
       background-image: none;
       border-color: transparentize($borders_color, 0.6);
       border-left: 1px;
-  
+
       &:hover {background-color: $bg_color;}
       &:backdrop { background-color: if($variant=='light', #EEEFF0, $backdrop_base_color);} // It should be _backdrop_color(white); but that does not work.
     }
-  
+
     .nautilus-list-view .view {
       border-bottom: 1px solid transparentize($borders_color, 0.8);
-  
+
       // Hide superfluous treeview drop target indication
       &.dnd { border-style: none; }
     }
-  
+
     notebook > header {
       background: if($variant==light, $porcelain, $bg_color);
     }
-  
+
     paned > separator {
       // separator between sidebar and main window view
       $_alpha: if($variant=='light', 0.08, 0.16);
       $_separator_color: rgba(0, 0, 0, $_alpha);
-  
+
       background-image: image($_separator_color);
       &:backdrop { background-image: image(transparentize($borders_color, 0.7)); }
     }
-  
+
     .nautilus-canvas-item.dim-label,
     .nautilus-list-dim-label {
         color: if($variant==light, lighten($text_color, 30%), darken($text_color, 25%));
         &:selected { color: transparentize($selected_fg_color, 0.3); }
     }
-  
+
     .nautilus-canvas-item {
       -gtk-outline-radius: $small_radius;
       outline-offset: -2px;
@@ -135,18 +102,18 @@ $small_radius: 4px;
       transition: border 200ms;
       transition: background-color 200ms;
       border-radius: $button_radius;
-    }    
+    }
 
     .path-bar-box.width-maximized {
       border: 1px solid $borders_color;
       background-color: $bg_color;
     }
-    
+
     .path-bar-box.width-maximized button:first-child {
         border-radius: $button_radius 0px 0px $button_radius;
         border-width: 0px 1px 0px 0px;
     }
-    
+
     .path-bar-box.width-maximized button:not(:first-child) {
         border-width: 0px 1px 0px 1px;
         border-radius: 0px 0px 0px 0px;
@@ -204,7 +171,7 @@ terminal-window {
         }
     }
 }
-  
+
   /******************
    * GNOME Software *
    ******************/
@@ -213,34 +180,34 @@ terminal-window {
     padding: 6px 12px;
     box-shadow: 0 1px 2.5px transparentize(black, 0.75);
     outline-offset: -1px;
-  
+
     &,
     &:not(:selected):not(:backdrop):hover,
     &:not(:selected):not(:backdrop):active { background-color: $base_color; }
-  
+
     &:backdrop { background-color: $backdrop_base_color; }
-  
+
     &:last-child { margin-bottom: 0; }
-  
+
     > grid { margin-top: -24px; }
   }
-  
+
   .app-listbox-header { background: $dark_fill; }
-  
+
   .list-box-app-row {
     border-radius: 0;
     border-color: $borders_color;
     border-style: none solid solid solid;
     border-width: 0 1px 1px 1px;
     margin: -1px 0 0 0;
-  
+
     & ~ separator {
       background-color: $bg_color;
       border: none;
       min-height: 0px;
     }
   }
-  
+
   // Avoid double border when list in included in a box (e.g. Updates view)
   box > list row.list-box-app-row {
       border: none;
@@ -255,21 +222,21 @@ terminal-window {
     padding-right: 2px;
     box-shadow: inset 0 0 10px 10px $success_color;
   }
-  
+
   /*********
    * Gedit *
    *********/
   .gedit-bottom-panel-paned notebook > header {
       background: if($variant==light, $porcelain, $bg_color);
   }
-  
+
   .gedit-bottom-panel-paned ~ statusbar {
     // give gedit's bottom panel a border
     border-top: 1px solid $borders_color;
-  
+
     &:backdrop { border-color: $backdrop_borders_color; }
   }
-  
+
   .gedit-search-slider {
     // gives gedit search entry some padding and a border
     // otherwise it's right under the headerbar
@@ -278,13 +245,13 @@ terminal-window {
     border-top-style: none;
     padding: 4px 8px;
     border-radius: 0 0 5px 5px; // same radius as tooltips
-  
+
     &:backdrop {
       background-color: $backdrop_bg_color;
       border-color: $backdrop_borders_color;
     }
   }
-  
+
   .gedit-search-entry-occurrences-tag {
       color: transparentize($fg_color, 0.65);
       border: none; // Removed ugly tag border
@@ -292,12 +259,12 @@ terminal-window {
       margin: 2px;
       padding: 2px;
   }
-  
+
   .gedit-document-panel { // 'documents' pane
-  
+
       background-color: $bg_color;
       row.activatable { padding: 6px; }
-  
+
       row button { // 'close' button
           min-width: 22px;
           min-height: 22px;
@@ -305,7 +272,7 @@ terminal-window {
           margin: 0;
           border: none;
       }
-  
+
       row:hover button {
           &:hover {
               background-color: rgba($fg_color, 0.15);
@@ -314,22 +281,22 @@ terminal-window {
               background-color: rgba($fg_color, 0.25);
           }
       }
-  
+
       row:hover:selected button:hover {
           color: $selected_fg_color;
       }
   }
-  
+
   /***************
    * GNOME Disks *
    ***************/
-  
+
   headerbar button image ~ window decoration ~ menu separator {
     // gnome disks headerbar menu seems to inherit the headerbar separator bg color
     // no unique class names or id used here so this rule is as specific as it can be
     background: $borders_color;
   }
-  
+
   /********
    * Nemo *
    ********/
@@ -338,7 +305,7 @@ terminal-window {
       // add margin to preferences buttons
       margin: 2px 6px 4px;
     }
-  
+
     toolbar stackswitcher.linked button {
       margin-right: 0;
       &:backdrop {
@@ -347,14 +314,14 @@ terminal-window {
       }
     }
   }
-  
+
   .nemo-window {
     .sidebar  {
       scrolledwindow.frame.nemo-places-sidebar {
         // get rid of double border in sidebar
         border: none;
       }
-  
+
       viewport.frame box.vertical treeview.view.places-treeview {
         // use sidebar bg color
         background-image: image($sidebar_bg_color);
@@ -366,34 +333,34 @@ terminal-window {
         }
       }
     }
-  
+
     .view {
       // imports nautilus tweaks
       // dim icons in backdrop
       &:backdrop { @extend %dim_icons_in_backdrop; }
     }
-  
+
     toolbar.horizontal.primary-toolbar {
       // add border under toolbar
       border-bottom: 1px solid $borders_color;
-  
+
       widget.linked.raised button {
         // use proper icons for next and left in stackswitcher-like pathbar
         &:first-child widget {-gtk-icon-source: -gtk-icontheme('go-previous-symbolic'); }
         &:last-child widget {-gtk-icon-source: -gtk-icontheme('go-next-symbolic'); }
       }
-  
+
       toolitem box widget * {
         // reset toolbar button dimensions
         min-height: 0;
         min-width: 0;
       }
-  
+
       .linked button {
         // link linked buttons
         margin-right: 0;
       }
-  
+
       button {
         // return non-flat buttons
         @each $state, $t in ("", "normal"),
@@ -410,11 +377,11 @@ terminal-window {
       }
     }
   }
-  
+
   /*************
   * GNOME ToDo *
   **************/
-  
+
   .org-gnome-Todo {
     taskrow.activatable.new-task-row button.popup.toggle {
      border-radius: 0px;
@@ -422,21 +389,21 @@ terminal-window {
      border-left: 1px solid $borders-color;
      padding-left: 10px; padding-right: 10px;
      -gtk-outline-radius: 0px;
-  
+
     }
-  
+
     viewport.view, listbox.transparent {
      background-color: darken($base_color,5%);
      &:backdrop { background-color: $backdrop_base_color}
     }
   }
-  
+
   /****************
    * GNOME Photos *
    ****************/
   //removes the black background for picture tiles
   .documents-scrolledwin.frame.frame widget flowboxchild.tile { background-color: transparent; }
-  
+
   /***********
    * Firefox *
    ***********/
@@ -444,12 +411,12 @@ terminal-window {
     // Removes rounded menus because the border bleeds in firefox
     // REMOVE THIS when firefox supports rounded menus
     menu, .menu,.context-menu { border-radius: 0; }
-  
+
     // Adapt scrollbars a bit more to the GTK Scrollbar styling
     scrollbar {
       background-color: transparent;
       border-color: transparent;
-  
+
       slider  {
         background-color: darken($scrollbar_slider_color, 10%);
         &:hover { background-color: darken($scrollbar_slider_hover_color, 10%); }
@@ -457,63 +424,63 @@ terminal-window {
         &:backdrop { background-color: $backdrop_scrollbar_slider_color; }
         &:disabled { background-color: transparent; }
       }
-  
+
       trough {
         background-color: transparentize($bg_color, 0.8);
       }
     }
   }
-  
-  /*********************	
-   * Chrome / Chromium *	
-   *********************/	
-   window.background.chromium {	
+
+  /*********************
+   * Chrome / Chromium *
+   *********************/
+   window.background.chromium {
     @if $variant=='dark' {
      menu { border: 1px solid lighten($inkstone,1%); }
     }
   }
-  
+
   normal-button {
     @include button(normal);
-  
+
     &:hover {
       @include button(hover);
     }
     &:active { @include button(active)}
-  
+
     &:disabled {@include button(insensitive);}
   }
-  
+
   /***********
    * Ubiquity *
    ***********/
-  
+
   #live_installer {
     #dot_grid {
       .empty { background-color: transparentize($blue, 0.6); }
     }
   }
   #dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
-  
+
   /***********
    * Geary *
    ***********/
-  
+
   .geary-expanded headerbar { border: none; }
-  
+
   /***********
    * usb-creator-gtk *
    ***********/
-  
+
    #dialog-action_area3 { margin: 5px; }
-  
+
    /***********
    * Evolution *
    ***********/
-  
+
    assistant.background scrolledwindow .vertical checkbutton {
      // checkbox is clipped but this is undetectable till it gets keyboard focus
      // so we're pushing it to the right to have the focus ring be displayed properly
      margin-left: 1px
   }
-  
+
