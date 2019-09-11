@@ -5,6 +5,7 @@ gtk3_dir = join_paths(theme_dir, 'gtk-3.20')
 
 # theme sources .scss files
 gtk3_scss_sources = [
+  'gtk-ambiance',
   'gtk-dark',   # applications requesting dark theme when using the light one.
   'gtk',
 ]
@@ -182,4 +183,4 @@ gnome.compile_resources('gtk', gresource_xml,
 )
 
 # Install stub CSS files
-install_data(['gtk.css', 'gtk-dark.css'], install_dir: gtk3_dir)
+install_data(['gtk.css', 'gtk-dark.css', 'gtk-ambiance.css'], install_dir: gtk3_dir)
