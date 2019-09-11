@@ -165,3 +165,35 @@ menubar,
     }
   }
 }
+
+// We don't want the app notifications to look like OSD because they are interactive
+.app-notification,
+.app-notification.frame {
+  padding: 10px;
+  margin: 12px;
+  color: $text_color;
+  border-radius: $menu_radius;
+  background: none;
+  background-color: $menu_color;
+  border: 1px solid $borders_color;
+  box-shadow: 0 2px 5px transparentize(black, 0.8);
+
+  box button {
+    @extend %button_basic;
+    &.flat {
+      &, &.image-button {
+        @extend %button;
+        @extend %button.flat;
+      }
+    }
+  }
+
+  &:backdrop {
+    background-color: $backdrop_bg_color;
+    color: $backdrop_text_color;
+    box-shadow: none;
+    transition: $backdrop_transition;
+  }
+
+  border { border: none; }
+}
