@@ -25,7 +25,7 @@ $terminal_fg_color: if($variant=='light', $inkstone, white);
 $terminal_borders_color: darken($terminal_bg_color, 10%);
 
 // Widget Colors
-$headerbar_bg_color: #2B2929;
+$headerbar_bg_color: #3A3737;
 $menubar_bg_color: $headerbar_bg_color;
 $headerbar_fg_color: $porcelain;
 $headerbar_border_color: lighten($headerbar_bg_color, 8%);
