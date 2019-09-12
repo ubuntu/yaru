@@ -550,6 +550,28 @@ headerbar button.titlebutton.appmenu.popup.toggle {
   }
 }
 
+// we prefered our gray hover for menus and popovers, orange is a very strong color
+menu,
+.menu,
+.context-menu {
+  menuitem {
+    &:hover {
+      color: $fg_color;
+      background-color: $popover_hover_color;
+    }
+  }
+}
+
+// We don't want menuitems to look like links, we should propose this upstream
+menubar,
+.menubar {
+  > menuitem {
+    &:hover {
+      color: $fg_color;
+    }
+  }
+}
+
 // with a flatter headerbar and buttons, we dont need that heavy shadows in the headerbar
 headerbar * {
   text-shadow: none;
