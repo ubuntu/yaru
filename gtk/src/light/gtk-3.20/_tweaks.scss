@@ -1,11 +1,9 @@
-@import 'ubuntu-colors';
-
-$small_radius: 4px;
 $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
+$_titlebutton_height: 24px;
 
 // Helper mixin for the titlebuttons
-@mixin draw_circle($c, $size:24px) {
+@mixin draw_circle($c, $size:$_titlebutton_height) {
   $button_size: $size + 2px * 2;
   $circle_size: 20px / $button_size / 2;
 
@@ -66,9 +64,9 @@ button.titlebutton:not(.appmenu) {
     }
   }
 
-  border-radius: $small_radius;
-  min-height: 24px;
-  min-width: 24px;
+  // Important - otherwise the circle size is wrong
+  min-height: $_titlebutton_height;
+  min-width: $_titlebutton_height;
   padding: 2px;
 
   headerbar &,
