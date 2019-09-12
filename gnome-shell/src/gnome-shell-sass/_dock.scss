@@ -212,7 +212,7 @@
 
     &:active .overview-icon,
     &:checked .overview-icon {
-      // when clicking on an app
+      background-color: $base_active_color; box-shadow: none;
     }
 
     &.focused .overview-icon {
