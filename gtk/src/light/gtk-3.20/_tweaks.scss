@@ -4,6 +4,7 @@ $small_radius: 4px;
 $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
 
+// Helper mixin for the titlebuttons
 @mixin draw_circle($c, $size:24px) {
   $button_size: $size + 2px * 2;
   $circle_size: 20px / $button_size / 2;
@@ -46,8 +47,8 @@ switch {
   }
 }
 
-// titlebutton
-button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.close {
+// yaru titlebuttons, optimized for the compact headerbar
+button.titlebutton:not(.appmenu) {
 
   &,
   &:hover,
@@ -70,36 +71,41 @@ button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.cl
   min-width: 24px;
   padding: 2px;
 
-  &.maximize, &.minimize {
+  headerbar &,
+  .titlebar &,
+  headerbar.selection-mode &,
+  & {
+    &.maximize, &.minimize {
 
-    &, &:backdrop {
+      &, &:backdrop {
+        &:hover {
+          @include draw_circle($_base_hover_color);
+        }
+  
+        &:active {
+          @include draw_circle($_base_active_color);
+        }
+      }
+    }
+  
+    &.close {
+      color: $selected_fg_color;
+      @include draw_circle($selected_bg_color);
+  
       &:hover {
-        @include draw_circle($_base_hover_color);
+        @include draw_circle($selected_bg_color);
+        @include draw_circle(lighten($selected_bg_color, 5%));
       }
-
+    
       &:active {
-        @include draw_circle($_base_active_color);
+        @include draw_circle($selected_bg_color);
+        @include draw_circle(darken($selected_bg_color, 5%));
       }
-    }
-  }
-
-  &.close {
-    color: $selected_fg_color;
-    @include draw_circle($selected_bg_color);
-
-    &:hover {
-      @include draw_circle($selected_bg_color);
-      @include draw_circle(lighten($selected_bg_color, 5%));
-    }
-
-    &:active {
-      @include draw_circle($selected_bg_color);
-      @include draw_circle(darken($selected_bg_color, 5%));
-    }
-
-    &:backdrop {
-      @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
-      &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
+    
+      &:backdrop {
+        @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
+        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
+      }
     }
   }
 }
