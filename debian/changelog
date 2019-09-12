@@ -1,3 +1,40 @@
+yaru-theme (19.10.2) UNRELEASED; urgency=medium
+
+  [ Feichtmeier ]
+  * Ubuntu dock permanent transparency
+  * Provide yaru checkbox assets for the shell
+  * Provide yaru checkboxes for the dark shell
+  * Use correct paths + improve SVGs
+  * Light headerbarb in light theme
+  * Fix asset paths and blue shift keys
+  * Green enter key, white enter asset
+  * Adapt gtk2 menu colors
+  * OSD keyboard asset changes
+  * Hover/Active color changes
+  * Change shell active gray
+  * Use fg_color for hovered menuitems
+  * OSD color and app notification changes
+  * Terminal additions
+  * Remove nautilus css that stopped working
+  * Close button changes
+  * Adapt ubiquity to the new light theme
+  * Refactor draw_circle
+  * Nautilus custom code
+  * Adapt shell toggle to gtk switch
+  * Round edges for desktop icons
+
+  [ Carlo Lobrano ]
+  * Fix slider fine-tune
+  * apps: Restyle Nautilus floating-bar for new light variant
+
+  [ ubuntujaggers ]
+  * improving top highlight on LibreOffice app icons
+  * tweaking lighting on file manager handles
+  * adding white dot symbol for record
+  * adding new battery symbols with ten divisions
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Wed, 11 Sep 2019 16:50:37 +0200
+
 yaru-theme (19.10.1) eoan; urgency=medium
 
   * Rebase Yaru on top of Adwaita 3.32
