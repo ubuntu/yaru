@@ -7,21 +7,21 @@ This is the theme that is shaped by the community on the Ubuntu hub, turned into
 
 More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
 
-Detailed screenshots and reasoning behind the design can be found inside the Design Wiki: https://github.com/ubuntu/yaru/wiki
+![Files](https://i.imgur.com/Z2rJUjN.png)
 
-![Files](https://i.imgur.com/ZNsVGmK.png)
+![FilesDark](https://i.imgur.com/6jE83Uc.png)
 
-![Dash](https://i.imgur.com/dT2JtVl.png)
+![Dash](https://i.imgur.com/clAKaoi.png)
 
-![Appgrid](https://i.imgur.com/N0cmNXQ.png)
+![Appgrid](https://i.imgur.com/SYiF2Sc.png)
 
-![Popups](https://i.imgur.com/mNu0mYF.png)
+![ShellPopups](https://i.imgur.com/lYdieEX.png)
 
-![Files_and_Shotwell](https://i.imgur.com/fpz7IYG.png)
+![Shell OSD](https://i.imgur.com/K3KRgzz.png)
 
-![System_shutdown](https://i.imgur.com/vMeQiCX.png)
+![widgetfactorylight](https://i.imgur.com/ZgT7rtu.png)
 
-![widgetfactorylight](https://i.imgur.com/Iau8WZo.png)
+![widgetfactorydark](https://i.imgur.com/5VG9wGB.png)
 
 It contains:
  * a GNOME Shell theme
@@ -29,17 +29,16 @@ It contains:
  * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme.
  * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes with an emphasis on making sound a usability feature instead of an annoyance.
 
-## Yaru on Ubuntu 18.10
+## Yaru on Ubuntu
 
-Yaru theme will be the default in 18.10. Once you install it, you will get it by default as part of the distribution soon and will be automatically migrated to it.
+Yaru theme is the default theme suite for Ubuntu and you receive it when installing Ubuntu 18.10+.
+Installing from source is not recommended for average usage.
 
-You will receive there at regular intervals stable updates of the theme.
+## Install legacy Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
 
-## Install Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
+> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. It's up to date with bionic branch of Yaru where we try to cherry-pick as much Gtk and Icon theme changes from master as possible. However only icon and sound updates will be pushed into this version of the theme suite.
 
-> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. It's up to date with bionic branch of Yaru where we try to cherry-pick as much Gtk and Icon theme changes from master as possible. However the shell theme is more or less set in stone now, since we can not theme both 3.28 and 3.30+ shell in one theme and at some point we will maybe stop to update the bionic branch completely
-
-*Note that these steps only work on Ubuntu 18.04 (bionic beaver).*
+*Note that these steps only work on Ubuntu 18.04 (bionic beaver). DO NOT install the snap on 18.10+ installations*
 
 Follow these steps in order to install and enable communitheme.
 
@@ -50,18 +49,6 @@ Follow these steps in order to install and enable communitheme.
 ![install](https://i.imgur.com/Vykmt6N.gif)
 
 ![login](https://i.imgur.com/1boZU4F.gif)
-
-
-### Tracking latest bionic branch changes
-
-By default, you track manually tested and curated releases of communitheme snap. You can use the latest bionic branch changes, as a snap is built
-and published to the snap store when any project related to the bionic yaru branch has changed (being GNOME Shell theme, or icon or…).
-
-For switching to it, you can switch to the **edge** channel, by running: `snap refresh communitheme --edge`.
-If you want to follow the **edge** content for snap applications, you will need as well to switch `gtk-common-theme` snap
-to the same channel: `snap refresh gtk-common-themes --edge`.
-
-If you haven't install the snap yet but want to directly track the edge channel, you can run `snap install communitheme --edge`.
 
 ## Copying or Reusing
 
