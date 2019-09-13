@@ -134,7 +134,7 @@ terminal-window {
 
         &:backdrop {
             background-color: lighten($terminal_bg_color, 2%);
-            color: $backdrop_fg_color;
+            color: $backdrop_selected_fg_color;
         }
     }
 

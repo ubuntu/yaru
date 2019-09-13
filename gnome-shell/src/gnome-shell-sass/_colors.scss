@@ -50,7 +50,7 @@ $hover_fg_color: lighten($selected_fg_color, .25);
 $active_fg_color: transparentize($selected_fg_color, .5);
 
 $panel_bg_color: lighten(#181818, 2%);
-$dash_bg_color: transparentize($panel_bg_color, 0.3);
+$dash_bg_color: $panel_bg_color;
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
 
