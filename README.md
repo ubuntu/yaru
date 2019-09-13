@@ -2,7 +2,7 @@
 
 Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch=master)](https://travis-ci.org/ubuntu/yaru)
 
-The Yaru theme is the default theme for Ubuntu, backed by the community.
+Yaru is the default theme for Ubuntu, backed by the community.
 
 It contains:
  * a GNOME Shell theme based on the upstream GNOME shell theme
@@ -29,16 +29,16 @@ It contains:
 
 ## Using Yaru on Ubuntu
 
-Yaru theme is the default theme suite for Ubuntu installed with Ubuntu 18.10+. No further steps are required to use it.
+The Yaru theme suite is installed with Ubuntu 18.10+ by default! No further steps are required to use it.
 
-*Installing from source is not recommended for average usage!*
+_Installing from source is not recommended for average usage!_
 
 
 ## Using a legacy Yaru/Communitheme version on Ubuntu 18.04 (bionic beaver) via snap installation
 
 > Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. Only icon and sound updates will be pushed into this version of the theme suite.
 
-*These steps only work on Ubuntu 18.04 (bionic beaver)! DO NOT install the snap on 18.10+ installations!*
+_These steps only work on Ubuntu 18.04 (bionic beaver)! DO NOT install the snap on 18.10+ installations!_
 
 Follow these steps in order to install and enable communitheme.
 
