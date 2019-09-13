@@ -499,11 +499,11 @@ UnityDecoration {
   -UnityDecoration-extents: 24px 1px 1px 1px;
   -UnityDecoration-input-extents: 10px;
 
-  -UnityDecoration-shadow-offset-x: 0px;
-  -UnityDecoration-shadow-offset-y: 0px;
+  -UnityDecoration-shadow-offset-x: 1px;
+  -UnityDecoration-shadow-offset-y: 1px;
   -UnityDecoration-active-shadow-color: transparentize(black, 0.5);
   -UnityDecoration-active-shadow-radius: 10px;
-  -UnityDecoration-inactive-shadow-color: transparent;
+  -UnityDecoration-inactive-shadow-color: transparentize(black, 0.999);
   -UnityDecoration-inactive-shadow-radius: 0px;
 
   -UnityDecoration-glow-size: 0px;
@@ -518,7 +518,7 @@ UnityDecoration {
     border: none;
     border-radius: $window_radius $window_radius 0 0;
     // padding used for the min/max/close titlebuttons
-    padding: 1px (6px + 3px) 0 (6px + 3px);
+    padding: 1px (4px + 3px) 0 (4px + 3px);
     background-color: $titlebar_bg_color;
     color: $titlebar_fg_color;
     text-shadow: none;
@@ -536,9 +536,10 @@ UnityDecoration {
     }
   }
 
-  // no idea what this is
+  // this is the window border outside of the titlebar!
   .left, .right, .bottom {
-    // what is this?
+    background-color: transparent;
+    &:backdrop { background-color: transparent; }
   }
 }
 
@@ -550,7 +551,6 @@ UnityPanelWidget, .unity-panel {
 }
 
 .unity-panel {
-  .menu, menu, .menubar { color: $panel_fg_color; }
   &.menuitem, .menuitem {
     border-width: 0 1px;
     color: $panel_fg_color;
