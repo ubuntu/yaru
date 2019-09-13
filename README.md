@@ -1,11 +1,14 @@
-# Yaru gtk-, gnome-shell-, icon- and sound-theme for Ubuntu using the GNOME desktop
+# Ubuntu Yaru theme suite
 
 Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch=master)](https://travis-ci.org/ubuntu/yaru)
 
 The Yaru theme is the default theme for Ubuntu, backed by the community.
-This is the theme that is shaped by the community on the Ubuntu hub, turned into the default theme starting from Ubuntu 18.10 Cosmic Cuttlefish.
 
-More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
+It contains:
+ * a GNOME Shell theme based on the upstream GNOME shell theme
+ * a light and dark GTK theme (gtk2 and gtk3) based on the upstream Adwaita Gtk theme
+ * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme.
+ * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes with an emphasis on making sound a usability feature instead of an annoyance.
 
 ![Files](https://i.imgur.com/Z2rJUjN.png)
 
@@ -23,28 +26,26 @@ More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-t
 
 ![widgetfactorydark](https://i.imgur.com/5VG9wGB.png)
 
-It contains:
- * a GNOME Shell theme
- * a GTK2 and GTK3 theme
- * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme.
- * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes with an emphasis on making sound a usability feature instead of an annoyance.
 
-## Yaru on Ubuntu
+## Using Yaru on Ubuntu
 
-Yaru theme is the default theme suite for Ubuntu and you receive it when installing Ubuntu 18.10+.
-Installing from source is not recommended for average usage.
+Yaru theme is the default theme suite for Ubuntu installed with Ubuntu 18.10+. No further steps are required to use it.
 
-## Install legacy Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
+*Installing from source is not recommended for average usage!*
 
-> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. It's up to date with bionic branch of Yaru where we try to cherry-pick as much Gtk and Icon theme changes from master as possible. However only icon and sound updates will be pushed into this version of the theme suite.
 
-*Note that these steps only work on Ubuntu 18.04 (bionic beaver). DO NOT install the snap on 18.10+ installations*
+## Using a legacy Yaru/Communitheme version on Ubuntu 18.04 (bionic beaver) via snap installation
+
+> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. Only icon and sound updates will be pushed into this version of the theme suite.
+
+*These steps only work on Ubuntu 18.04 (bionic beaver)! DO NOT install the snap on 18.10+ installations!*
 
 Follow these steps in order to install and enable communitheme.
 
 1. Install the communitheme snap on 18.04 by installing `communitheme` in the Ubuntu Software Application or running `snap install communitheme`.
-2. Restart your computer. The login screen will now use Communitheme by default. Click on your user, click on the gear icon ans select the "Ubuntu with communitheme snap" session from the login screen, and login.
-3. Now everything is using the communitheme including applications, icons, sound notifications and cursor. Any new update of communitheme will come directly to you on a regular basis thanks to the snap without having to run any command!
+2. Restart your computer.
+4. Click on your user, click on the gear icon and select the "Ubuntu with communitheme snap" session from the pop-up, and login.
+3. Now Ubuntu is using the communitheme including the system, applications, icons, sounds and the cursor.
 
 ![install](https://i.imgur.com/Vykmt6N.gif)
 
