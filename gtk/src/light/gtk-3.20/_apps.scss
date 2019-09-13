@@ -108,8 +108,15 @@ $small_radius: 4px;
     }
 
     .path-bar-box.width-maximized {
-      border: 1px solid $borders_color;
-      background-color: $bg_color;
+      @if $ambiance {
+        $_bg: if($variant=='light', lighten($headerbar_bg_color, 3%),
+                                    lighten($headerbar_bg_color, 1%));
+        border: 1px solid black;
+        background-color: $_bg;
+      } @else {
+        border: 1px solid $borders_color;
+        background-color: $bg_color;
+      }
     }
 
     .path-bar-box.width-maximized button:first-child {
@@ -123,9 +130,9 @@ $small_radius: 4px;
     }
   }
 
-  /***********
+/************
  * Terminal *
- ***********/
+ ************/
 terminal-window {
 
     // use unity 8 colors
