@@ -484,82 +484,84 @@ terminal-window {
      margin-left: 1px
   }
 
-  $panel_bg_color: lighten($jet, 2%);
-  $panel_fg_color: $porcelain;
-  $wm_border_unfocused: none;
-  $wm_border_focused: if($variant=='light', transparentize(black, 0.9), transparentize($borders_color, 0.1));
-  $titlebar_bg_color: $headerbar_bg_color;
-  $titlebar_fg_color: $headerbar_fg_color;
+/***********
+* Unity7 *
+***********/
 
-  UnityDecoration {
-    -UnityDecoration-extents: 24px 1px 1px 1px;
-    -UnityDecoration-input-extents: 10px;
+$panel_bg_color: lighten($jet, 2%);
+$panel_fg_color: $porcelain;
+$wm_border_unfocused: none;
+$wm_border_focused: if($variant=='light', transparentize(black, 0.9), transparentize($borders_color, 0.1));
+$titlebar_bg_color: $headerbar_bg_color;
+$titlebar_fg_color: $headerbar_fg_color;
 
-    -UnityDecoration-shadow-offset-x: 0px;
-    -UnityDecoration-shadow-offset-y: 0px;
-    -UnityDecoration-active-shadow-color: transparentize(black, 0.5);
-    -UnityDecoration-active-shadow-radius: 20px;
-    -UnityDecoration-inactive-shadow-color: transparent;
-    -UnityDecoration-inactive-shadow-radius: 0px;
+UnityDecoration {
+  -UnityDecoration-extents: 24px 1px 1px 1px;
+  -UnityDecoration-input-extents: 10px;
 
-    -UnityDecoration-glow-size: 0px;
-    -UnityDecoration-glow-color: $selected_bg_color;
+  -UnityDecoration-shadow-offset-x: 0px;
+  -UnityDecoration-shadow-offset-y: 0px;
+  -UnityDecoration-active-shadow-color: transparentize(black, 0.5);
+  -UnityDecoration-active-shadow-radius: 10px;
+  -UnityDecoration-inactive-shadow-color: transparent;
+  -UnityDecoration-inactive-shadow-radius: 0px;
 
-    -UnityDecoration-title-indent: 0px;
-    -UnityDecoration-title-fade: 0px;
-    -UnityDecoration-title-alignment: 0;
-    
-    
-    .top {
-        border: none;
-        border-bottom: 0;
-        border-radius: $window_radius $window_radius 0 0;
-        padding: 1px (4px + 3px) 0 (4px + 3px);
-        background-color: $titlebar_bg_color;
-        color: $titlebar_fg_color;
-        text-shadow: none;
-        box-shadow: inset 0 1px $headerbar_border_color;
+  -UnityDecoration-glow-size: 0px;
+  -UnityDecoration-glow-color: $selected_bg_color;
 
-        &:hover {
-            // border-radius: 0;
-            // border-color: mix($panel_bg_color, $panel_fg_color, .21);
-            // background-color: mix($panel_bg_color, $panel_fg_color, .21);
-            // background-image: none;
-            // color: shade($panel_fg_color, 1.08);
-        }
+  -UnityDecoration-title-indent: 0px;
+  -UnityDecoration-title-fade: 0px;
+  -UnityDecoration-title-alignment: 0;
+  
+  // Unity "titlebars"
+  .top {
+    border: none;
+    border-radius: $window_radius $window_radius 0 0;
+    // padding used for the min/max/close titlebuttons
+    padding: 1px (6px + 3px) 0 (6px + 3px);
+    background-color: $titlebar_bg_color;
+    color: $titlebar_fg_color;
+    text-shadow: none;
+    box-shadow: inset 0 1px $headerbar_border_color;
 
-        &:backdrop {
-            border: none;
-            background-color: $backdrop_headerbar_bg_color;
-            color: $backdrop_headerbar_fg_color;
-            box-shadow: none;
-        }
+    &:hover {
+      // nothing changes here
     }
 
-    .left, .right, .bottom {
-        background-color: $titlebar_bg_color;
-
-        &:backdrop { background-color: $backdrop_bg_color; }
+    &:backdrop {
+      border: none;
+      background-color: $backdrop_headerbar_bg_color;
+      color: $backdrop_headerbar_fg_color;
+      box-shadow: none;
     }
+  }
+
+  // no idea what this is
+  .left, .right, .bottom {
+    // what is this?
+  }
 }
 
+// unity 7 top panel - equivalent to the gnome panel
 UnityPanelWidget, .unity-panel {
-    background-color: $panel_bg_color;
-    color: $panel_fg_color;
-    border: 0;
+  background-color: $panel_bg_color;
+  color: $panel_fg_color;
+  border: 0;
 }
 
 .unity-panel {
-    * { color: $panel_fg_color; }
+  .menu, menu, .menubar { color: $panel_fg_color; }
+  &.menuitem, .menuitem {
+    border-width: 0 1px;
     color: $panel_fg_color;
-    &.menuitem, .menuitem {
-        border-width: 0 1px;
-        color: $panel_fg_color;
-
-        &:hover, *:hover {
-            box-shadow: inset 0 -2px 0 0 $selected_bg_color;
-        }
+    background-color: transparent;
+    
+    &:hover, *:hover {
+      box-shadow: inset 0 -2px 0 0 $selected_bg_color;
+      background-color: transparent;
+      color: $panel_fg_color;
     }
+  }
 }
 
 SheetStyleDialog.unity-force-quit { background-color: $bg_color; }
