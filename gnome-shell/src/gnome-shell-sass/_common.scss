@@ -657,16 +657,33 @@ StScrollBar {
   margin: 32px;
   min-width: 64px;
   min-height: 64px;
+  @extend %osd-panel;
 
   .osd-monitor-label { font-size: 3em; }
   .level {
-    height: 0.6em;
+    $c: darken($ash,5%);;
+    height: 0.3em;
+    border-radius: 0.3em;
     -barlevel-height: 0.3em;
-    -barlevel-background-color: transparentize($osd_fg_color, 0.9);
+    -barlevel-background-color: $c;
     -barlevel-active-background-color: $blue;
-    -barlevel-overdrive-color: $destructive_color;
+    -barlevel-overdrive-color: $blue;
     -barlevel-overdrive-separator-width: 0.2em;
+
+    /* START: VERSION SPECIFIC CODE (< 3.29.90) */
+    /* However, if we enable them, we break the theming for new versions,
+       so, it's probably better not to show a background at all than breaking
+       upstream version.  */
+    // background-color: $c;
+    // color: $c;
+    /* END: VERSION SPECIFIC CODE (< 3.29.90) */
   }
+  /* START: VERSION SPECIFIC CODE (< 3.29.90) */
+  .level-bar {
+    background-color: $indication_bg_color;
+    border-radius: 0.3em;
+  }
+  /* END: VERSION SPECIFIC CODE (< 3.29.90) */
 }
 
 /* Pad OSD */
