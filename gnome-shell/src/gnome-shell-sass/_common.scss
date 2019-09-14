@@ -680,7 +680,7 @@ StScrollBar {
   }
   /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   .level-bar {
-    background-color: $indication_bg_color;
+    background-color: $blue;
     border-radius: 0.3em;
   }
   /* END: VERSION SPECIFIC CODE (< 3.29.90) */
@@ -782,6 +782,9 @@ StScrollBar {
     background-size: 32px;
     border-radius: 8px;
   }
+
+  .ws-switcher-active-up { background-image: url("ws-switch-arrow-up.svg"); }
+  .ws-switcher-active-down {background-image: url("ws-switch-arrow-down.svg"); }
 
   .ws-switcher-box {
     height: 50px;
@@ -1652,6 +1655,7 @@ StScrollBar {
   // Workspace pager
   .workspace-thumbnails { //container ala dash
     @extend %overview-panel;
+    background-color: transparentize($panel_bg_color, $panel-alpha-value);
     visible-width: 32px; //amount visible before hover
     spacing: 11px;
     padding: 8px;
