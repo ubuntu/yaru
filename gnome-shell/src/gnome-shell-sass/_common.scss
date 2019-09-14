@@ -25,6 +25,11 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 
 /* GLOBALS */
 
+$panel-alpha-value: 0.6;
+$panel_opaque_value: 0.0;
+
+$dash-alpha-value: 0.6;
+$dash-opaque-alpha-value: $panel_opaque_value;
 
 $modal_radius: 6px;
 $button_radius: 4px;
@@ -832,6 +837,10 @@ StScrollBar {
   font-weight: 450;
   height: 1.86em;
   font-feature-settings: "tnum";
+  background-color: transparentize($panel_bg_color, $panel-alpha-value);
+
+  /* transition from solid to transparent */
+  transition-duration: 500ms;
 
   &.unlock-screen,
   &.login-screen,
@@ -907,6 +916,32 @@ StScrollBar {
   .screencast-indicator { color: $warning_color; }
 
   .remote-access-indicator { color: $warning_color; }
+
+  &.solid {
+    background-color: transparentize($panel_bg_color, $panel_opaque_value);
+    /* transition from transparent to solid */
+    box-shadow: none;
+    transition-duration: 500ms;
+
+    .panel-corner {
+      -panel-corner-background-color: black;
+    }
+
+    .panel-button {
+      color: $_fg;
+      text-shadow: none;
+
+      &:hover, &:active, &:overview, &:focus, &:checked {
+        color: $hover_fg_color;
+      }
+    }
+
+    .system-status-icon,
+    .app-menu-icon > StIcon,
+    .popup-menu-arrow {
+      icon-shadow: none;
+    }
+  }
 }
 
   // calendar popover
