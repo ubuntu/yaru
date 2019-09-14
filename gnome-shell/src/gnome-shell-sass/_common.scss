@@ -177,26 +177,30 @@ StScrollBar {
   StBin {
     width: 24px;
     height: 22px;
-    background-image: url("checkbox-off.svg");
+    background-image: if($variant=='light', url("checkbox-off.svg"), 
+                                            url("checkbox-off-dark.svg"));
   }
-  &:focus StBin { background-image: url("checkbox-off-focused.svg"); }
-  &:checked StBin { background-image: url("checkbox.svg"); }
-  &:focus:checked StBin { background-image: url("checkbox-focused.svg"); }
+  &:focus StBin { background-image: if($variant=='light', url("checkbox-off-focused.svg"),
+                                                          url("checkbox-off-focused-dark.svg")); }
+  &:checked StBin { background-image: if($variant=='light', url("checkbox.svg"),
+                                                            url("checkbox-dark.svg")); }
+  &:focus:checked StBin { background-image: if($variant=='light', url("checkbox-focused.svg"),
+                                                                  url("checkbox-focused-dark.svg")); }
 }
 
 /* Switches */
 .toggle-switch {
-  width: 65px;
+  color: $fg_color;
+  width: 46px;
   height: 22px;
   background-size: contain;
-}
-
-  @each $v in us, intl {
-    .toggle-switch-#{$v} {
-      background-image: url("toggle-off.svg");
-      &:checked { background-image: url("toggle-on.svg"); }
-    }
+  background-image: if($variant == 'light', url("toggle-off.svg"),
+					    url("toggle-off-dark.svg"));
+  &:checked { 
+    background-image: if($variant == 'light', url("toggle-on.svg"),
+					    url("toggle-on-dark.svg"));
   }
+}
 
 /* links */
 .shell-link {
