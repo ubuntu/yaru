@@ -1020,7 +1020,7 @@ StScrollBar {
       color: $fg_color;
       background-color: transparent;
       width: 32px;
-      border-radius: $small_radius;
+      border-radius: $button_radius;
       &:hover, &:focus { background-color: $base_hover_color; }
       &:active { background-color: $base_active_color; }
     }
