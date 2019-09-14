@@ -5,11 +5,11 @@ Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch
 Yaru is the default theme for Ubuntu, backed by the community.
 
 It contains:
- * a GNOME Shell theme based on the upstream GNOME shell theme
- * a light and dark GTK theme (gtk2 and gtk3) based on the upstream Adwaita Gtk theme
- * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme.
- * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes with an emphasis on making sound a usability feature instead of an annoyance.
-
+ * a GNOME Shell theme based on the [upstream GNOME shell theme](https://gitlab.gnome.org/GNOME/gnome-shell/tree/master/data/theme)
+ * a light and dark GTK theme (gtk2 and gtk3) based on the [upstream Adwaita Gtk theme](https://gitlab.gnome.org/GNOME/gtk/tree/gtk-3-24/gtk/theme)
+ * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme
+ * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes.
+ 
 ![Files](https://i.imgur.com/Z2rJUjN.png)
 
 ![FilesDark](https://i.imgur.com/6jE83Uc.png)
