@@ -138,6 +138,15 @@ radio {
   }
 }
 
+// upstream headerbar is not exactly perfect, thus a tiny change to the bg and border colors
+headerbar {
+  &, &.titlebar:not(headerbar) {
+    border-color: lighten($alt_borders_color, 5%);
+
+    @include headerbar_fill(darken($bg_color, if($variant=='light', 5%, 10%)));
+  }
+}
+
 // we prefered our gray hover for menus and popovers, orange is a very strong color
 menu,
 .menu,
