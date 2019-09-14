@@ -136,22 +136,29 @@ StScrollBar {
 /* Slider */
 
 .slider {
+  $_bg: $blue;
+  $_inactive_bg: transparentize($fg_color, 0.9);
   height: 1em;
-  -barlevel-height: 0.2em;
-  -barlevel-background-color: transparentize($fg_color, 0.9);; //background of the trough
+  -barlevel-height: 0.2em; //increase the height because of the border removal
+  -barlevel-background-color: $_inactive_bg; //background of the trough
   -barlevel-border-color: $borders_color; //trough border color
-  -barlevel-active-background-color: $blue; //active trough fill
-  -barlevel-active-border-color: $blue; //active trough border
+  -barlevel-active-background-color: $_bg; //active trough fill
+  -barlevel-active-border-color: $_bg; //active trough border
   -barlevel-overdrive-color: $destructive_color;
   -barlevel-overdrive-border-color: darken($destructive_color,10%);
   -barlevel-overdrive-separator-width: 0.2em;
-  -barlevel-border-width: 1px;
+  -barlevel-border-width: 0px; //remove the border for a more flat trough
   -slider-handle-radius: 8px;
-  -slider-handle-border-width: 1px;
-  -slider-handle-border-color: $borders_color;
-  color: if($variant == 'light', lighten($bg_color, 10%), darken($bg_color,4%));
-  &:hover { color: $_hover_bg_color; }
-  &:active { color: $_active_bg_color; }
+  color: $fg_color; //Color of the knob/slider-handle
+
+  /* START: VERSION SPECIFIC CODE (< 3.29.90) */
+  -slider-height: 0.2em; //increase the height because of the border removal
+  -slider-background-color:  $_inactive_bg;//background of the trough
+  -slider-border-color: $borders_color; //trough border color
+  -slider-active-background-color: $_bg; //active trough fill
+  -slider-active-border-color: $_bg; //active trough border
+  -slider-border-width: 0px; //remove the border for a more flat trough
+  /* END: VERSION SPECIFIC CODE (< 3.29.90) */
 }
 
 /* Check Boxes */
@@ -1898,11 +1905,16 @@ StScrollBar {
 
 /* Auth Dialogs & Screen Shield */
 
-.user-icon {
+.framed-user-icon {
   background-size: contain;
-  color: $osd_fg_color;
-  border-radius: 99px;
+  border: 2px solid $fg_color;
+  color: $fg_color;
+  border-radius: $button_radius;
+  background-color: $inkstone;
+  padding: 5px;
   &:hover {
+    // TODO
+    border-color: lighten($osd_fg_color,30%);
     color: lighten($osd_fg_color,30%);
   }
 }
