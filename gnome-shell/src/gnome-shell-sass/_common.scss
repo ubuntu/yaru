@@ -1107,7 +1107,7 @@ StScrollBar {
       .calendar-day-with-events {
         color: lighten($fg_color,10%);
         font-weight: bold;
-        background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
+        background-image: url("calendar-today.svg");
       }
       .calendar-other-month-day {
         color: transparentize($fg_color,0.85);
@@ -1226,7 +1226,7 @@ StScrollBar {
   }
 
   #appMenu {
-    spinner-image: url("resource:///org/gnome/shell/theme/process-working.svg");
+    spinner-image: url("process-working.svg");
     spacing: 4px;
 
     .label-shadow { color: transparent; }
@@ -1272,7 +1272,7 @@ StScrollBar {
 }
 
 .ripple-box:rtl {
-  background-image: url("resource:///org/gnome/shell/theme/corner-ripple-rtl.png");
+  background-image: url("corner-ripple-rtl.png");
 }
 
 // not really top bar only
@@ -1440,7 +1440,7 @@ StScrollBar {
     }
 
     .placeholder {
-      background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
+      background-image: url("dash-placeholder.svg");
       background-size: contain;
       height: 24px;
     }
@@ -1633,7 +1633,7 @@ StScrollBar {
 
 
     .placeholder {
-      background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
+      background-image: url("dash-placeholder.svg");
       background-size: contain;
       height: 24px;
     }
@@ -2128,7 +2128,7 @@ $_screenshield_shadow: 0px 0px 6px rgba(0, 0, 0, 0.726);
 }
 
 #lockDialogGroup {
-  background: darken($purple, 10%) url(resource:///org/gnome/shell/theme/noise-texture.png);
+  background: darken($purple, 10%) url(noise-texture.png);
   background-repeat: repeat;
 }
 
