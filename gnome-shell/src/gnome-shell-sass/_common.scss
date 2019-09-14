@@ -928,11 +928,11 @@ StScrollBar {
     }
 
     .panel-button {
-      color: $_fg;
+      color: $porcelain;
       text-shadow: none;
 
       &:hover, &:active, &:overview, &:focus, &:checked {
-        color: $hover_fg_color;
+        color: white;
       }
     }
 
