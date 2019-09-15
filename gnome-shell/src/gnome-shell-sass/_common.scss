@@ -1658,7 +1658,6 @@ StScrollBar {
   // Workspace pager
   .workspace-thumbnails { //container ala dash
     @extend %overview-panel;
-    background-color: transparentize($panel_bg_color, $panel-alpha-value);
     visible-width: 32px; //amount visible before hover
     spacing: 11px;
     padding: 8px;
@@ -1686,7 +1685,7 @@ StScrollBar {
 
 %overview-panel {
   color: $osd_fg_color;
-  background-color: transparentize($osd_bg_color, 0.1);
+  background-color: transparentize($panel_bg_color, $panel-alpha-value);
   border: none;
 }
 
