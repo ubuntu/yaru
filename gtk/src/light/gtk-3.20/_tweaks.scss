@@ -2,6 +2,8 @@ $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
 $_titlebutton_height: 24px;
 
+
+// Helper mixin for the titlebuttons
 @mixin draw_circle($c, $size:$_titlebutton_height) {
   $button_size: $size + 2px * 2;
   $circle_size: 20px / $button_size / 2;
@@ -44,7 +46,7 @@ switch {
   }
 }
 
-// titlebutton
+// yaru titlebuttons, optimized for the compact headerbar
 button.titlebutton:not(.appmenu) {
 
   &,
