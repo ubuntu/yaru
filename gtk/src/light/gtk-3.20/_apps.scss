@@ -1,9 +1,7 @@
 @import "ubuntu-colors";
 
 /* set $ambiance to null, unless already defined */
-$ambiance: null !default
-
-$small_radius: 4px;
+$ambiance: null !default;
 
 /***********
  * Tweak Tool *
@@ -33,7 +31,7 @@ $small_radius: 4px;
       border-style: solid;
       border-color: $borders_color;
       border-width: 1px 0 0 1px;
-      border-radius: $small_radius 0 0 0;
+      border-radius: $button_radius 0 0 0;
     }
 
     .searchbar-container searchbar {
@@ -85,7 +83,7 @@ $small_radius: 4px;
     }
 
     .nautilus-canvas-item {
-      -gtk-outline-radius: $small_radius;
+      -gtk-outline-radius: $button_radius;
       outline-offset: -2px;
       &:selected {
         outline-color: white;
