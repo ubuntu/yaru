@@ -2,7 +2,6 @@ $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
 $_titlebutton_height: 24px;
 
-// Helper mixin for the titlebuttons
 @mixin draw_circle($c, $size:$_titlebutton_height) {
   $button_size: $size + 2px * 2;
   $circle_size: 20px / $button_size / 2;
@@ -45,7 +44,7 @@ switch {
   }
 }
 
-// yaru titlebuttons, optimized for the compact headerbar
+// titlebutton
 button.titlebutton:not(.appmenu) {
 
   &,
@@ -77,32 +76,32 @@ button.titlebutton:not(.appmenu) {
 
       &, &:backdrop {
         &:hover {
-          @include draw_circle($_base_hover_color);
+          @include draw_circle(if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color));
         }
-  
+
         &:active {
-          @include draw_circle($_base_active_color);
+          @include draw_circle(if($ambiance==true, lighten($inkstone, 12%), $_base_active_color));
         }
       }
     }
-  
+
     &.close {
       color: $selected_fg_color;
       @include draw_circle($selected_bg_color);
-  
+
       &:hover {
         @include draw_circle($selected_bg_color);
         @include draw_circle(lighten($selected_bg_color, 5%));
       }
-    
+
       &:active {
         @include draw_circle($selected_bg_color);
         @include draw_circle(darken($selected_bg_color, 5%));
       }
-    
+
       &:backdrop {
-        @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
-        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
+        @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%)));
+        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%))); }
       }
     }
   }
@@ -202,4 +201,5 @@ menubar,
   border { border: none; }
 }
 
+// fix for gtk 3.28 switches to not show the on/off label
 switch { font-size: 0 }
