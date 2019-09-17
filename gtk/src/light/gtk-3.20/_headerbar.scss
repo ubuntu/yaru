@@ -9,6 +9,7 @@ headerbar,
 .titlebar {
   @include headerbar_fill($headerbar_bg_color, $hc: $headerbar_border_color);
   color: $headerbar_fg_color;
+  border-color: darken($headerbar_bg_color, 7%);
 
   label .title {
     color: $headerbar_fg_color;
