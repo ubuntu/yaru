@@ -1,10 +1,8 @@
-@import 'ubuntu-colors';
-
-$small_radius: 4px;
 $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
+$_titlebutton_height: 24px;
 
-@mixin draw_circle($c, $size:24px) {
+@mixin draw_circle($c, $size:$_titlebutton_height) {
   $button_size: $size + 2px * 2;
   $circle_size: 20px / $button_size / 2;
 
@@ -47,7 +45,7 @@ switch {
 }
 
 // titlebutton
-button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.close {
+button.titlebutton:not(.appmenu) {
 
   &,
   &:hover,
@@ -65,41 +63,46 @@ button.titlebutton.maximize,  button.titlebutton.minimize, button.titlebutton.cl
     }
   }
 
-  border-radius: $small_radius;
-  min-height: 24px;
-  min-width: 24px;
+  // Important - otherwise the circle size is wrong
+  min-height: $_titlebutton_height;
+  min-width: $_titlebutton_height;
   padding: 2px;
 
-  &.maximize, &.minimize {
+  headerbar &,
+  .titlebar &,
+  headerbar.selection-mode &,
+  & {
+    &.maximize, &.minimize {
 
-    &, &:backdrop {
+      &, &:backdrop {
+        &:hover {
+          @include draw_circle(if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color));
+        }
+
+        &:active {
+          @include draw_circle(if($ambiance==true, lighten($inkstone, 12%), $_base_active_color));
+        }
+      }
+    }
+
+    &.close {
+      color: $selected_fg_color;
+      @include draw_circle($selected_bg_color);
+
       &:hover {
-        @include draw_circle($_base_hover_color);
+        @include draw_circle($selected_bg_color);
+        @include draw_circle(lighten($selected_bg_color, 5%));
       }
 
       &:active {
-        @include draw_circle($_base_active_color);
+        @include draw_circle($selected_bg_color);
+        @include draw_circle(darken($selected_bg_color, 5%));
       }
-    }
-  }
 
-  &.close {
-    color: $selected_fg_color;
-    @include draw_circle($selected_bg_color);
-
-    &:hover {
-      @include draw_circle($selected_bg_color);
-      @include draw_circle(lighten($selected_bg_color, 5%));
-    }
-
-    &:active {
-      @include draw_circle($selected_bg_color);
-      @include draw_circle(darken($selected_bg_color, 5%));
-    }
-
-    &:backdrop {
-      @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
-      &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
+      &:backdrop {
+        @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%)));
+        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%))); }
+      }
     }
   }
 }
@@ -165,3 +168,38 @@ menubar,
     }
   }
 }
+
+// We don't want the app notifications to look like OSD because they are interactive
+.app-notification,
+.app-notification.frame {
+  padding: 10px;
+  margin: 12px;
+  color: $text_color;
+  border-radius: $menu_radius;
+  background: none;
+  background-color: $menu_color;
+  border: 1px solid $borders_color;
+  box-shadow: 0 2px 5px transparentize(black, 0.8);
+
+  box button {
+    @extend %button_basic;
+    &.flat {
+      &, &.image-button {
+        @extend %button;
+        @extend %button.flat;
+      }
+    }
+  }
+
+  &:backdrop {
+    background-color: $backdrop_bg_color;
+    color: $backdrop_text_color;
+    box-shadow: none;
+    transition: $backdrop_transition;
+  }
+
+  border { border: none; }
+}
+
+// fix for gtk 3.28 switches to not show the on/off label
+switch { font-size: 0 }
