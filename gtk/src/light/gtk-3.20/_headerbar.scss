@@ -26,6 +26,12 @@ headerbar,
     box-shadow: none;
   }
 
+  entry {
+    &, &:backdrop {
+      border-color: darken($headerbar_bg_color, 8%);
+    }
+  }
+
   button,
   button.image-button,
   button.image-button.toggle,
@@ -37,7 +43,6 @@ headerbar,
   stackswitcher button,
   filechooser .path-bar.linked>button,
   .path-bar button {
-    $_btn_backdrop_border: darken($headerbar_border_color, 3%);
 
     @include button(normal, $_headerbar_button_bg, $headerbar_fg_color);
     &.flat {
@@ -54,6 +59,7 @@ headerbar,
     }
 
     &:backdrop {
+      $_btn_backdrop_border: darken($headerbar_bg_color, 8%);
       &,
       &.flat {
           @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
