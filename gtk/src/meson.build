@@ -1,4 +1,3 @@
-subdir('light')
+subdir('default')
 subdir('dark')
-subdir('ambiance')
-subdir('ambiance-dark')
+subdir('light')
