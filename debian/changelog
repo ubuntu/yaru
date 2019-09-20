@@ -1,3 +1,26 @@
+yaru-theme (19.10.3) UNRELEASED; urgency=medium
+
+  [ Didier Roche ]
+  * Only install light, default, dark with symlinks. (LP: #1844643)
+
+  [ Feichtmeier ]
+  * Fix selection mode's titlebuttons
+  * Organize _tweaks.scss
+  * Use ubuntu-colors in colors sass
+  * Use transparent active color for dock apps
+  * Basic unity support
+  * Fix window border, add comments
+  * Update README.md
+  * Revert "Ubuntu dock permanent transparency"
+
+  [ Carlo Lobrano ]
+  * Revert "Terminal additions"
+
+  [ ubuntujaggers ]
+  * fixing battery icons which have an incorrect xml class on the fill (LP: #1844137)
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Thu, 20 Sep 2019 22:11:00 +0100
+
 yaru-theme (19.10.2) eoan; urgency=medium
 
   [ Feichtmeier ]
