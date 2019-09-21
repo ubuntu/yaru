@@ -194,7 +194,9 @@ headerbar,
   }
 
   separator {
-    background: image(darken(#3d3d3d, 11%));
+    &, &:backdrop {
+      background: image(darken(#3d3d3d, 11%));
+    }
   }
 
   @if $variant=='light' {
