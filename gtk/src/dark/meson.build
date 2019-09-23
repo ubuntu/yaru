@@ -9,4 +9,6 @@ configure_file(input : '../index.theme.in',
                install_dir: theme_dir)
 
 subdir('gtk-2.0')
-subdir('gtk-3.0')
+
+# CSS and assets gtk3 are just symlinks to the correct themes css from default
+meson.add_install_script('../install-theme.sh', theme_dir, meson.project_name(), 'gtk-dark.css')
