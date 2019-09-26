@@ -1088,12 +1088,12 @@ StScrollBar {
     }
 
       .calendar-change-month-back { //arrow back
-        background-image: url("calendar-arrow-left.svg");
-        &:rtl { background-image: url("calendar-arrow-right.svg"); }
+        background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-left.svg");
+        &:rtl { background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-right.svg"); }
       }
       .calendar-change-month-forward { //arrow foreward
-        background-image: url("calendar-arrow-right.svg");
-        &:rtl { background-image: url("calendar-arrow-left.svg"); }
+        background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-right.svg");
+        &:rtl { background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-left.svg"); }
       }
 
     .calendar-day-base {
