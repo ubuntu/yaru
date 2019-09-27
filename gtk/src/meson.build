@@ -1,2 +1,3 @@
-subdir('light')
+subdir('default')
 subdir('dark')
+subdir('light')
