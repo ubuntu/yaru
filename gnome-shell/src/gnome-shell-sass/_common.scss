@@ -1083,18 +1083,18 @@ StScrollBar {
       background-color: transparent;
       width: 32px;
       border-radius: $button_radius;
-      &:hover, &:focus { background-color: $base_hover_color; }
-      &:active { background-color: $base_active_color; }
+      &:hover, &:focus { background-color: $_hover_color; }
+      &:active { background-color: $_active_color; }
     }
 
-      .calendar-change-month-back { //arrow back
-        background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-left.svg");
-        &:rtl { background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-right.svg"); }
-      }
-      .calendar-change-month-forward { //arrow foreward
-        background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-right.svg");
-        &:rtl { background-image: url("resource:///org/gnome/shell/theme/calendar-arrow-left.svg"); }
-      }
+    .calendar-change-month-back { //arrow back
+      background-image: url("calendar-arrow-left.svg");
+      &:rtl { background-image: url("calendar-arrow-right.svg"); }
+    }
+    .calendar-change-month-forward { //arrow foreward
+      background-image: url("calendar-arrow-right.svg");
+      &:rtl { background-image: url("calendar-arrow-left.svg"); }
+    }
 
     .calendar-day-base {
       font-size: 80%;
