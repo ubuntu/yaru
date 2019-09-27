@@ -1084,7 +1084,7 @@ StScrollBar {
       width: 32px;
       border-radius: $button_radius;
       &:hover, &:focus { background-color: $_hover_bg_color; }
-      &:active { background-color: $_active__bg_color; }
+      &:active { background-color: $_active_bg_color; }
     }
 
     .calendar-change-month-back { //arrow back
