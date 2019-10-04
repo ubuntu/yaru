@@ -1,5 +1,5 @@
 name: communitheme
-version: '0.1'
+adopt-info: version
 architectures: [all]
 summary: The next Ubuntu theme built by the community.
 description: |
@@ -14,6 +14,14 @@ grade: stable
 confinement: strict
 
 parts:
+  version:
+    source: https://github.com/ubuntu/yaru.git
+    plugin: nil
+    override-pull: |
+      snapcraftctl pull
+      git checkout bionic
+      last_committed_tag_ver="$(git describe | cut -d'-' -f1,2 | sed 's/-/./g' | sed 's/r//g')"
+      snapcraftctl set-version "$last_committed_tag_ver"
   theme:
     source: .
     plugin: meson
