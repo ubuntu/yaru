@@ -1,60 +1,55 @@
-# Yaru default ubuntu theme
+# Ubuntu Yaru theme suite
 
 Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch=master)](https://travis-ci.org/ubuntu/yaru)
 
-Yaru theme is the default theme for Ubuntu, entirely backed by the community.
-This is the theme that is shaped by the community on the Ubuntu hub, turned into the default theme starting from Ubuntu 18.10 Cosmic Cuttlefish.
-
-More information is available at https://community.ubuntu.com/t/faq-ubuntu-new-theme/1930.
-
-Detailed screenshots and reasoning behind the design can be found inside the Design Wiki: https://github.com/ubuntu/yaru/wiki
-
-![Files](https://i.imgur.com/XA00uS9.jpg)
-
-![Dash](https://i.imgur.com/TUFvhlk.png)
-
-![widgetfactorylight](https://i.imgur.com/Iau8WZo.png)
+Yaru is the default theme for Ubuntu, backed by the community.
 
 It contains:
- * a GNOME Shell theme
- * a GTK2 and GTK3 theme
- * an icon & cursor theme, derived from the [Suru icon](https://snwh.org/suru) theme.
- * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes with an emphasis on making sound a usability feature instead of an annoyance.
+ * a GNOME Shell theme based on the [upstream GNOME shell theme](https://gitlab.gnome.org/GNOME/gnome-shell/tree/master/data/theme)
+ * a light and dark GTK theme (gtk2 and gtk3) based on the [upstream Adwaita Gtk theme](https://gitlab.gnome.org/GNOME/gtk/tree/gtk-3-24/gtk/theme)
+ * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme
+ * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes.
+ 
+![Files](https://i.imgur.com/Z2rJUjN.png)
 
-## Yaru on Ubuntu 18.10
+![FilesDark](https://i.imgur.com/6jE83Uc.png)
 
-Yaru theme will be the default in 18.10. Once you install it, you will get it by default as part of the distribution soon and will be automatically migrated to it.
+![Dash](https://i.imgur.com/clAKaoi.png)
 
-You will receive there at regular intervals stable updates of the theme.
+![Appgrid](https://i.imgur.com/SYiF2Sc.png)
 
-## Testing Yaru/Communitheme snap on Ubuntu 18.04 (bionic beaver)
+![ShellPopups](https://i.imgur.com/lYdieEX.png)
 
-> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. It's still up to date with latest of development of Yaru, only the name differs.
+![Shell OSD](https://i.imgur.com/K3KRgzz.png)
 
-We're currently still developing the theme, but you can try it out for yourself. Be warned though, this is a pre-release alpha state and not (yet) officially supported. These packages are mainly intended for the Yaru designers to get a sense of what actually works in Ubuntu.
+![widgetfactorylight](https://i.imgur.com/ZgT7rtu.png)
 
-*Note that these steps only work on Ubuntu 18.04 (bionic beaver).*
+![widgetfactorydark](https://i.imgur.com/5VG9wGB.png)
+
+
+## Using Yaru on Ubuntu
+
+The Yaru theme suite is installed with Ubuntu 18.10+ by default! No further steps are required to use it.
+
+_Installing from source is not recommended for average usage!_
+
+
+## Using a legacy Yaru/Communitheme version on Ubuntu 18.04 (bionic beaver) via snap installation
+
+> Note that for backward compatibility, we kept the name "communitheme" for bionic beaver. Only icon and sound updates will be pushed into this version of the theme suite.
+
+_These steps only work on Ubuntu 18.04 (bionic beaver)! DO NOT install the snap on 18.10+ installations!_
 
 Follow these steps in order to install and enable communitheme.
 
 1. Install the communitheme snap on 18.04 by installing `communitheme` in the Ubuntu Software Application or running `snap install communitheme`.
-2. Restart your computer. The login screen will now use Communitheme by default. Click on your user, click on the gear icon ans select the "Ubuntu with communitheme snap" session from the login screen, and login.
-3. Now everything is using the communitheme including applications, icons, sound notifications and cursor. Any new update of communitheme will come directly to you on a regular basis thanks to the snap without having to run any command!
+2. Restart your computer.
+4. Click on your user, click on the gear icon and select the "Ubuntu with communitheme snap" session from the pop-up, and login.
+3. Now Ubuntu is using the communitheme including the system, applications, icons, sounds and the cursor.
 
-The following video guides you through these steps.
+![install](https://i.imgur.com/Vykmt6N.gif)
 
-[![Video guide](https://img.youtube.com/vi/azlreXxAigY/0.jpg)](https://www.youtube.com/watch?v=azlreXxAigY)
-
-### Tracking latest of latest
-
-By default, you track manually tested and curated releases of communitheme snap. you can use the latest, as a snap is built
-and published to the snap store when any project related to yaru has changed (being GNOME Shell theme, or icon or…).
-
-For switching to it, you can switch to the **edge** channel, by running: `snap refresh communitheme --edge`.
-If you want to follow the **edge** content for snap applications, you will need as well to switch `gtk-common-theme` snap
-to the same channel: `snap refresh gtk-common-themes --edge`.
-
-If you haven't install the snap yet but want to directly track the edge channel, you can run `snap install communitheme --edge`.
+![login](https://i.imgur.com/1boZU4F.gif)
 
 ## Copying or Reusing
 
