@@ -19,3 +19,7 @@ install -m755 -d "${datadir}/themes/Communitheme-dark"
 for file in index.theme gtk-2.0 gtk-3.0 gtk-3.20; do
     ln -s "../Yaru-dark/${file}" "${datadir}/themes/Communitheme-dark/${file}"
 done
+install -m755 -d "${datadir}/themes/Communitheme-light"
+for file in index.theme gtk-2.0 gtk-3.0 gtk-3.20; do
+    ln -s "../Yaru-light/${file}" "${datadir}/themes/Communitheme-light/${file}"
+done
