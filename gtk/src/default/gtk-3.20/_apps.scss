@@ -24,7 +24,7 @@ $ambiance: null !default;
 
     // Makes icons less bright in backdrop
     @at-root %dim_icons_in_backdrop,
-    *scrolledwindow:backdrop { opacity: 0.9; }
+    & *scrolledwindow:backdrop { opacity: 0.9; }
 
     paned box.floating-bar {
       background: $bg_color;
@@ -427,7 +427,11 @@ terminal-window {
     menu, .menu,.context-menu { border-radius: 0; }
 
     @if $ambiance {
-      menubar, .menubar { background-color: $headerbar_bg_color; color:$headerbar_fg_color; }
+      menubar,
+      .menubar,
+      menubar > menuitem:hover
+      { background-color: $headerbar_bg_color; color:$headerbar_fg_color; }
+
     }
 
     // Adapt scrollbars a bit more to the GTK Scrollbar styling
