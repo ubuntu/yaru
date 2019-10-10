@@ -422,9 +422,10 @@ terminal-window {
     @if $ambiance {
       menubar,
       .menubar,
-      menubar > menuitem:hover,
-      { background-color: $headerbar_bg_color; color:$headerbar_fg_color; }
-
+      menubar > menuitem:hover {
+        background-color: $headerbar_bg_color;
+        color:$headerbar_fg_color;
+      }
     }
 
     // Adapt scrollbars a bit more to the GTK Scrollbar styling
