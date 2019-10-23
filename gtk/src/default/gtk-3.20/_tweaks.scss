@@ -107,36 +107,6 @@ button.titlebutton:not(.appmenu) {
   }
 }
 
-// make checks and radios more flat, remove this when upstream flattens their cheks/radios
-check,
-radio {
-
-  &,
-  &:hover,
-  &:active,
-  &:checked,
-  &:disabled {
-
-    &:not(.selected) {
-      box-shadow: none;
-      background-image: none;
-      -gtk-icon-shadow: none;
-    }
-  }
-
-
-  &:not(:backdrop):checked:not(.selected) {
-    border-color: $checkradio_bg_color;
-    background-image: image($checkradio_bg_color);
-    color: $checkradio_fg_color;
-  }
-
-  &:not(:backdrop):disabled:checked {
-    background-image: image(mix($checkradio_bg_color, $insensitive_bg_color, 50%));
-    border-color: mix($checkradio_bg_color, $insensitive_bg_color, 50%);
-  }
-}
-
 // upstream headerbar is not exactly perfect, thus a tiny change to the bg and border colors
 headerbar {
   &, &.titlebar:not(headerbar) {
