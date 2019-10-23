@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 project_name="$1"
-prefix="${MESON_INSTALL_DESTDIR_PREFIX}/share"
+destdir_prefix="${MESON_INSTALL_DESTDIR_PREFIX}/share"
+install_prefix="${MESON_INSTALL_PREFIX}/share"
 
-ln -sf "${prefix}/themes/${project_name}/gnome-shell" "${prefix}/gnome-shell/theme/${project_name}"
+mkdir -p "${destdir_prefix}/gnome-shell/theme/"
+ln -sf "${install_prefix}/themes/${project_name}/gnome-shell" "${destdir_prefix}/gnome-shell/theme/${project_name}"
