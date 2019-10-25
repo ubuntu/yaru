@@ -22,7 +22,7 @@ theme_deps = []
 
 sassc = find_program('sassc')
 foreach style: styles
-  theme_deps += custom_target('style-' + style,
+  theme_deps += custom_target('style-' + style + 'dark',
                               input: '@0@.scss'.format(style),
                               output: '@0@.css'.format(style),
                               command: [
