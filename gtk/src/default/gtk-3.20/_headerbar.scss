@@ -30,6 +30,7 @@ headerbar,
     &, &:backdrop {
       border-color: darken($headerbar_bg_color, 8%);
     }
+    &:focus {  @include entry(focus); }
   }
 
   button,
