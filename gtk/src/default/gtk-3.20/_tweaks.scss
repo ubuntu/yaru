@@ -151,12 +151,18 @@ menubar,
   border: 1px solid $borders_color;
   box-shadow: 0 2px 5px transparentize(black, 0.8);
 
-  box button {
-    @extend %button_basic;
-    &.flat {
-      &, &.image-button {
-        @extend %button;
-        @extend %button.flat;
+  button {
+    &, &:dir(ltr), &:dir(rtl) {
+      &.text-button, &.image-button, & {
+        @include button(normal);
+        &.flat { @include button(undecorated); }
+        &:hover { @include button(hover); }
+        &:active { @include button(active); }
+        &:backdrop { 
+          @include button(backdrop);
+          &.flat { @include button(undecorated); }
+        }
+        &:disabled { @include button(insensitive); }
       }
     }
   }
