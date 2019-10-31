@@ -71,7 +71,7 @@ $backdrop_menu_color: if($variant == 'light', $backdrop_base_color, mix($backdro
 
 //special cased widget colors
 $suggested_bg_color: $green;
-$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), darken($suggested_bg_color, 30%));
+$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), darken($suggested_bg_color, 40%));
 $progress_bg_color: $blue;
 $progress_border_color: $progress_bg_color;
 $checkradio_bg_color: $suggested_bg_color;
