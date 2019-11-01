@@ -1,5 +1,5 @@
 # destination directory
-install_dir = join_paths(gnomeshell_alt_themes_dir, meson.project_name(), 'gnome-shell')
+install_dir = join_paths(gnomeshell_default_theme_dir, meson.project_name())
 
 # generate .css files
 theme_sources = files([
