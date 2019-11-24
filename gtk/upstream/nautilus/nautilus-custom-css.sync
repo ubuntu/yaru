@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# -*- coding: UTF-8 -*-
+## Helper script to sync custom css that Nautilus uses for Adwaita only
+## usage:
+##
+##      nautilus-custom-css.sh --destination <path>
+##
+## options:
+##    -d, --destination <path>    Destination folder - [default:.]
+# CLInt GENERATED_CODE: start
+# Default values
+_destination=.
+
+# Converting long-options into short ones
+for arg in "$@"; do
+  shift
+  case "$arg" in
+"--destination") set -- "$@" "-d";;
+  *) set -- "$@" "$arg"
+  esac
+done
+
+function print_illegal() {
+    echo Unexpected flag in command line \"$@\"
+}
+
+# Parsing flags and arguments
+while getopts 'hd:' OPT; do
+    case $OPT in
+        h) sed -ne 's/^## \(.*\)/\1/p' $0
+           exit 1 ;;
+        d) _destination=$OPTARG ;;
+        \?) print_illegal $@ >&2;
+            echo "---"
+            sed -ne 's/^## \(.*\)/\1/p' $0
+            exit 1
+            ;;
+    esac
+done
+# CLInt GENERATED_CODE: end
+
+wget_check=`which wget | wc -l`
+[ $wget_check == 0 ] && echo "install wget" && exit 1
+
+css=https://gitlab.gnome.org/GNOME/nautilus/raw/master/src/resources/css/Adwaita.css
+
+[ ! -d ${_destination} ] && echo ${_destination} folder does not exists && exit 1
+
+wget ${css} -O ${_destination}/Adwaita.css
