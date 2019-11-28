@@ -13,14 +13,10 @@ $_titlebutton_height: 24px;
                                   to(transparent));
 }
 
-// with a flatter headerbar and buttons, we dont need that heavy shadows in the headerbar
-headerbar * {
+// with a flatter headerbar and buttons, we dont need that heavy shadows, remove this when upstream agrees
+headerbar *, button * {
   text-shadow: none;
   -gtk-icon-shadow: none;
-}
-// same for the rest of the theme, but not axe the icon shadows, otherwise things don't work
-* {
-  text-shadow: none;
 }
 
 // blue spinner
