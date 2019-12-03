@@ -100,28 +100,6 @@
     }
   }
 
-  &.opaque {
-    /* Temporary reduce traslucency, see https://gitlab.gnome.org/GNOME/gnome-shell/merge_requests/376
-     * background-color: transparentize($dash_bg_color, $dash-opaque-alpha-value);
-     * transition-duration: 500ms; */
-    background-color: $dash_bg_color;
-    border-color: rgba(0, 0, 0, 0.4);
-  }
-
-  &.transparent {
-    /* Temporary traslucency under overview state only. See https://gitlab.gnome.org/GNOME/gnome-shell/merge_requests/376
-     * background-color: transparentize($dash_bg_color, $dash-alpha-value);
-     * transition-duration: 500ms; */
-    background-color: $dash_bg_color;
-    border-color: rgba(0, 0, 0, 0.1);
-    transition-duration: 500ms;
-
-    &:overview {
-      background-color: transparentize($dash_bg_color, $dash-alpha-value);
-      transition-duration: 500ms;
-    }
-  }
-
   .number-overlay {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(0, 0, 0, 0.8);
