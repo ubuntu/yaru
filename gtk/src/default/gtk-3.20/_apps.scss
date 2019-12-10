@@ -412,6 +412,18 @@ terminal-window {
   //removes the black background for picture tiles
   .documents-scrolledwin.frame.frame widget flowboxchild.tile { background-color: transparent; }
 
+
+/****************
+* GNOME Weather *
+*****************/
+
+#weather-page-content-view button.radio.text-button {
+  background-image: none;
+  background-color: $bg_color;
+  &:hover { background-color: lighten($jet, 20%); }
+  &:checked { background-color: $jet; }
+}
+
   /***********
    * Firefox *
    ***********/
