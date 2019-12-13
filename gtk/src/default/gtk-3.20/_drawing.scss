@@ -183,7 +183,7 @@
 //
 // This mixin sets the $button_fill global variable which containts the button background-image
 //
-  $_hilight_color: _button_hilight_color($c);
+  $_hilight_color: $c;//_button_hilight_color($c);
   $_button_edge: if($edge == none, none, _widget_edge($edge));
   $_blank_edge: if($edge == none, none, _widget_edge(transparentize($edge,1)));
   $_button_shadow: 0 1px 2px transparentize($shadow_color, 0.03);
@@ -197,7 +197,7 @@
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     $button_fill: if($variant == 'light', linear-gradient(to top, darken($c, 2%) 2px, $c), linear-gradient(to top, darken($c,1%) 2px, $c)) !global;
-    background-image: $button_fill;
+    background-image: $c;
     @include _button_text_shadow($tc, $c);
     @include _shadows(inset 0 1px $_hilight_color, $_button_edge, $_button_shadow);
   }
@@ -220,7 +220,7 @@
       @include _button_text_shadow($tc,lighten($c, 6%));
       @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge, $_button_shadow);
     }
-    background-image: $button_fill;
+    background-image: lighten($c, 1%);
   }
 
   @if $t==normal-alt {
@@ -497,7 +497,7 @@
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
-
+  background: $c;
   box-shadow: inset 0 1px $hc; // top highlight
 }
 
