@@ -512,7 +512,7 @@ $titlebar_bg_color: $headerbar_bg_color;
 $titlebar_fg_color: $headerbar_fg_color;
 
 UnityDecoration {
-  -UnityDecoration-extents: 24px 1px 1px 1px;
+  -UnityDecoration-extents: 28px 0px 0px 0px;
   -UnityDecoration-input-extents: 10px;
 
   -UnityDecoration-shadow-offset-x: 1px;
@@ -554,6 +554,7 @@ UnityDecoration {
 
   // this is the window border outside of the titlebar!
   .left, .right, .bottom {
+    border: none;
     background-color: transparent;
     &:backdrop { background-color: transparent; }
   }
