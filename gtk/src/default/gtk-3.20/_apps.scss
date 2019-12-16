@@ -528,7 +528,7 @@ UnityDecoration {
   -UnityDecoration-title-indent: 0px;
   -UnityDecoration-title-fade: 0px;
   -UnityDecoration-title-alignment: 0;
-  
+
   // Unity "titlebars"
   .top {
     border: none;
@@ -571,7 +571,7 @@ UnityPanelWidget, .unity-panel {
     border-width: 0 1px;
     color: $panel_fg_color;
     background-color: transparent;
-    
+
     &:hover, *:hover {
       box-shadow: inset 0 -2px 0 0 $selected_bg_color;
       background-color: transparent;
