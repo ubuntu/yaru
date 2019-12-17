@@ -143,6 +143,7 @@ menubar,
   background-color: $menu_color;
   border: 1px solid $borders_color;
   box-shadow: 0 2px 5px transparentize(black, 0.8);
+  text-shadow: none;
 
   button {
     &, &:dir(ltr), &:dir(rtl) {
@@ -151,7 +152,7 @@ menubar,
         &.flat { @include button(undecorated); }
         &:hover { @include button(hover); }
         &:active { @include button(active); }
-        &:backdrop { 
+        &:backdrop {
           @include button(backdrop);
           &.flat { @include button(undecorated); }
         }
