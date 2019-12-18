@@ -616,6 +616,7 @@
   @if $t==hover {
     // background-image: if($c == white, image(darken($c, 5%)), linear-gradient(to bottom, lighten($c, 9%) 10%, lighten($c, 4%) 90%));
     background-image: if($c == white, image(darken($c, 4%)), image(lighten($c, 7%)));
+    border-color: if($c == white, darken($c, 4%), lighten($c, 7%));
   }
 
   @if $t==active {
