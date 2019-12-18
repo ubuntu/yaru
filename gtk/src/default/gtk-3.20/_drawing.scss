@@ -247,6 +247,7 @@
       @include _shadows(inset 0 1px $_hilight_color,
                         $_button_edge, $_button_shadow);
     }
+    background-image: image($c);
   }
 
   @else if $t==hover-alt {
