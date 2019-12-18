@@ -504,7 +504,7 @@ terminal-window {
 * Unity7 *
 ***********/
 
-$panel_bg_color: lighten($jet, 2%);
+$panel_bg_color: $headerbar_bg_color; //lighten($jet, 2%);
 $panel_fg_color: $porcelain;
 $wm_border_unfocused: none;
 $wm_border_focused: if($variant=='light', transparentize(black, 0.9), transparentize($borders_color, 0.1));
