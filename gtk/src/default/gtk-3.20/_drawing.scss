@@ -266,7 +266,7 @@
       @include _shadows(inset 0 1px $_hilight_color,
                         $_button_edge, $_button_shadow);
     }
-    background-image: $button_fill;
+    background-image: image(lighten($c, 1%));
   }
 
   @else if $t==active {
@@ -615,8 +615,8 @@
 
   @if $t==hover {
     // background-image: if($c == white, image(darken($c, 5%)), linear-gradient(to bottom, lighten($c, 9%) 10%, lighten($c, 4%) 90%));
-    background-image: if($c == white, image(darken($c, 4%)), image(lighten($c, 7%)));
-    border-color: if($c == white, darken($c, 4%), lighten($c, 7%));
+    background-image: if($c == $checkradio_bg_color, image(lighten($c, 7%))), image(darken($c, 4%));
+    border-color: if($c == $checkradio_bg_color, darken($c, 7%), $alt_borders_color);
   }
 
   @if $t==active {
