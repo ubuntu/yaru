@@ -218,12 +218,14 @@
     @if $variant == 'light' {
       // $button_fill: linear-gradient(to top, $c, lighten($c, 1%) 1px) !global;
       @include _button_text_shadow($tc, lighten($c, 6%));
-      @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)), $_button_edge, $_button_shadow);
+      // @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)), $_button_edge, $_button_shadow);
+      @include _shadows($_button_edge, $_button_shadow);
     }
     @else {
       // $button_fill: linear-gradient(to top, darken($c,1%), lighten($c, 1%) 1px) !global;
       @include _button_text_shadow($tc,lighten($c, 6%));
-      @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge, $_button_shadow);
+      // @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge, $_button_shadow);
+      @include _shadows($_button_edge, $_button_shadow);
     }
     // background-image: $button_fill;
     background-image: image(lighten($c, 1%));
