@@ -217,16 +217,16 @@ headerbar,
       }
 
       &:checked {
-        color: $selected_fg_color;
-        border-color: transparentize($suggested_bg_color, 0.6);
-        background-color: $suggested_bg_color;
+        // color: $selected_fg_color;
+        // border-color: transparentize($suggested_bg_color, 0.6);
+        // background-color: $suggested_bg_color;
       }
 
       slider {
         border-color: $_dark_border_color;
 
         &:checked {
-          border-color: $suggested_border_color;
+          // border-color: $suggested_border_color;
         }
         &:disabled {
           background-color: $headerbar_bg_color;
