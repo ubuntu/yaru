@@ -615,6 +615,13 @@ StScrollBar {
     border-bottom-style: solid;
   }
 
+// Rename popup
+.rename-folder-popup {
+  .rename-folder-popup-item {
+    spacing: 6px;
+    &:ltr, &:rtl { padding: 0, 12px; }
+  }
+}
 
 // Rename popup
 .rename-folder-popup {
@@ -755,7 +762,7 @@ StScrollBar {
 
   .ws-switcher-active-up, .ws-switcher-active-down,
   .ws-switcher-active-left, .ws-switcher-active-right {
-    height: 50px;
+    height: 52px;
     background-color: $selected_bg_color;
     color: $selected_fg_color;
     background-size: 32px;
@@ -1068,9 +1075,9 @@ StScrollBar {
       }
       .calendar-today {
         font-weight: bold;
-        //color: lighten($fg_color,10%);
-        //background-color: darken($bg_color,5%);
-        border: 1px solid $_bubble_borders_color;
+        color: lighten($fg_color,5%);
+        background-color: darken($bg_color,5%);
+        // border: 1px solid lighten($_bubble_borders_color,20%);
       }
       .calendar-day-with-events {
         color: lighten($fg_color,10%);
@@ -1160,14 +1167,21 @@ StScrollBar {
             padding: 10px;
           }
 
+          .message-close-button {
+            color: lighten($fg_color, 15%);
+            &:hover { color: if($variant=='light', lighten($fg_color, 30%), darken($fg_color, 10%)); }
+            &:active { color: if($variant=='light', lighten($fg_color, 40%), darken($fg_color, 20%)); }
+          }
+
           .message-media-control {
             padding: 12px;
             color: lighten($fg_color, 15%);
 
             &:last-child:ltr { padding-right: 18px; }
             &:last-child:rtl { padding-left: 18px; }
-            &:hover { color: $fg_color; }
-            &:insensitive { color: darken($fg_color,40%); }
+            &:hover { color: if($variant=='light', lighten($fg_color, 30%), darken($fg_color, 10%)); }
+            &:active { color: if($variant=='light', lighten($fg_color, 40%), darken($fg_color, 20%)); }
+            &:insensitive { color: if($variant=='light', lighten($fg_color, 50%), darken($fg_color, 40%)); }
           }
 
           .media-message-cover-icon {
@@ -1216,12 +1230,11 @@ StScrollBar {
     &:hover, &:focus {
       background-color: $_hover_bg_color;
       color: $fg_color;
-      border: none;
-      padding: 14px;
     }
     &:active { 
       background-color: $_active_bg_color;
       color: $fg_color;
+      //border-color: $selected_borders_color;
     }
 
     & > StIcon { icon-size: 16px; }
