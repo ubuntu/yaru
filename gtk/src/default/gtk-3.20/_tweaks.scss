@@ -92,16 +92,16 @@ button.titlebutton:not(.appmenu) {
 
     &.close {
       color: $selected_fg_color;
-      @include draw_circle($selected_bg_color);
+      @include draw_circle($warning_color);
 
       &:hover {
-        @include draw_circle($selected_bg_color);
-        @include draw_circle(lighten($selected_bg_color, 5%));
+        @include draw_circle($warning_color);
+        @include draw_circle(lighten($warning_color, 5%));
       }
 
       &:active {
-        @include draw_circle($selected_bg_color);
-        @include draw_circle(darken($selected_bg_color, 5%));
+        @include draw_circle($warning_color);
+        @include draw_circle(darken($warning_color, 5%));
       }
 
       &:backdrop {
@@ -146,6 +146,7 @@ menubar,
   background-color: $menu_color;
   border: 1px solid $borders_color;
   box-shadow: 0 2px 5px transparentize(black, 0.8);
+  text-shadow: none;
 
   button {
     &, &:dir(ltr), &:dir(rtl) {
