@@ -56,7 +56,7 @@ switch {
 }
 
 // Testing unity8 styled sliders
-switch, switch slider, scale slider { border-radius: $button_radius; }
+switch, switch slider, scale slider { border-radius: $button_radius; -gtk-outline-radius: $button_radius; }
 
 // titlebutton
 button.titlebutton:not(.appmenu) {
