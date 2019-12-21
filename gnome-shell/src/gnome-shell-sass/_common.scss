@@ -910,7 +910,7 @@ StScrollBar {
       // Trick due to St limitations. It needs a background to draw
       // a box-shadow
       background-color: rgba(0, 0, 0, 0.01);
-      box-shadow: inset 0 -2px 0px lighten($selected_bg_color,5%);
+      box-shadow: inset 0 -2px 0px $selected_fg_color;
       color: $selected_fg_color;
     }
 
@@ -1592,7 +1592,7 @@ StScrollBar {
   .app-well-app-running-dot { //running apps indicator
     width: 5px; height: 5px;
     border-radius: 9999px;
-    background-color: $selected_bg_color;
+    background-color: $selected_fg_color;
     margin-bottom: 2px;
   }
 
