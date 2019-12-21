@@ -25,6 +25,15 @@ headerbar {
   }
 }
 
+// dont darken top border for stackswitcher and toggle buttons in the headerbar
+stackswitcher button:checked,
+button.toggle:checked {
+  border-top-color: darken($borders_color, 3%);
+  &:backdrop {
+    @include button(backdrop-active);
+  }
+}
+
 // blue spinner
 spinner {
   &:not(:backdrop) {
@@ -77,7 +86,7 @@ button.titlebutton:not(.appmenu) {
   .titlebar &,
   headerbar.selection-mode &,
   & {
-    &.maximize, &.minimize {
+    &.maximize, &.minimize, &.close {
 
       &, &:backdrop {
         &:hover {
