@@ -12,3 +12,5 @@ for ver in gtk-3.0 gtk-3.20; do
   ln -sf "../../${project_name}/${ver}/gtk-dark.css" "${theme_dir}/${ver}/gtk-dark.css"
   ln -sf "../../${project_name}/${ver}/gtk.gresource" "${theme_dir}/${ver}/gtk.gresource"
 done
+
+ln -sf "../${project_name}/unity" "${theme_dir}/unity"
