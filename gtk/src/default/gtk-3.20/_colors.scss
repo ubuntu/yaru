@@ -8,7 +8,7 @@ $bg_color: if($variant == 'light', darken(white, 5%), darken($inkstone, 1%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
 $selected_fg_color: #ffffff;
-$selected_bg_color: if($variant == 'light', darken($bg_color, 50%), lighten($bg_color, 20%));
+$selected_bg_color: #335280;//if($variant == 'light', darken($bg_color, 50%), lighten($bg_color, 20%));
 
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 $borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 9%));
