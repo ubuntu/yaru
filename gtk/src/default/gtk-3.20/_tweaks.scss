@@ -100,7 +100,7 @@ button.titlebutton:not(.appmenu) {
     }
 
     &.close {
-      color: $selected_fg_color;
+      color: white;
       @include draw_circle($warning_color);
 
       &:hover {
