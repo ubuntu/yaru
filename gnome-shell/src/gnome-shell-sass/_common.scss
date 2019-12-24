@@ -1542,7 +1542,7 @@ StScrollBar {
 
     &:checked {
       color: $osd_fg_color;
-      box-shadow: inset 0 -2px $selected_bg_color;
+      box-shadow: inset 0 -2px $osd_fg_color;
     }
 
     &:first-child {
