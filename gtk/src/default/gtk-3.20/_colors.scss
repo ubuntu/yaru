@@ -7,8 +7,8 @@ $text_color: if($variant == 'light', black, white);
 $bg_color: if($variant == 'light', darken(white, 5%), darken($inkstone, 1%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
-$selected_fg_color: if($variant == 'light', #ffffff, $jet);
-$selected_bg_color: if($variant == 'light', darken($bg_color, 60%), lighten($bg_color, 40%));
+$selected_fg_color: #ffffff;
+$selected_bg_color: #335280;
 
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 $borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 9%));
@@ -73,6 +73,6 @@ $backdrop_menu_color: if($variant == 'light', $backdrop_base_color, mix($backdro
 $suggested_bg_color: if($variant=='light', $green, darken($green, 15%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), darken($suggested_bg_color, 40%));
 $progress_bg_color: $selected_bg_color;
-$progress_border_color: $selected_borders_color;
+$progress_border_color: $selected_bg_color;
 $checkradio_bg_color: $suggested_bg_color;
 $checkradio_fg_color: #ffffff;
