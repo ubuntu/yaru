@@ -1781,14 +1781,14 @@ headerbar {
 headerbar { // headerbar border rounding
 
   window separator:first-child + &,
-  window &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
-  window &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
+  window &:first-child { &:backdrop, & { border-top-left-radius: $window_radius; }}
+  window &:last-child { &:backdrop, & { border-top-right-radius: $window_radius; }}
 
   window stack & { // tackles the stacked headerbars case
     &:first-child, &:last-child {
       &:backdrop, & {
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
+        border-top-left-radius: $window_radius;
+        border-top-right-radius: $window_radius;
       }
     }
   }
