@@ -217,12 +217,17 @@ headerbar,
       }
 
       &:checked {
+        color: $selected_fg_color;
         border-color: darken($green, 55%);
         background-color: $suggested_bg_color;
       }
 
       slider {
         border-color: $_dark_border_color;
+
+        &:checked {
+          border-color: darken($green, 55%);
+        }
         &:disabled {
           background-color: $headerbar_bg_color;
           border-color: $_dark_border_color;

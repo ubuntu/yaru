@@ -238,17 +238,18 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    @include _button_text_shadow($tc, $c);
-    @if $variant == 'light' {
-      background-image: linear-gradient(to bottom, lighten($c, 5%) 20%, $c 90%);
-      @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
-                        $_button_edge, $_button_shadow);
-    }
-    @else {
-      background-image: linear-gradient(to bottom, darken($c, 3%) 20%, darken($c, 6%) 90%);
-      @include _shadows(inset 0 1px $_hilight_color,
-                        $_button_edge, $_button_shadow);
-    }
+    // @include _button_text_shadow($tc, $c);
+    // @if $variant == 'light' {
+    //   background-image: linear-gradient(to bottom, lighten($c, 5%) 20%, $c 90%);
+    //   @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
+    //                     $_button_edge, $_button_shadow);
+    // }
+    // @else {
+    //   background-image: linear-gradient(to bottom, darken($c, 3%) 20%, darken($c, 6%) 90%);
+    //   @include _shadows(inset 0 1px $_hilight_color,
+    //                     $_button_edge, $_button_shadow);
+    // }
+    box-shadow: 0 1px transparentize(black, 0.9);
     background-image: image($c);
   }
 
@@ -259,16 +260,17 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    @if $variant == 'light' {
-      $button_fill: linear-gradient(to bottom, lighten($c, 9%) 10%, lighten($c, 4%) 90%) !global;
-      @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
-                        $_button_edge, $_button_shadow);
-    }
-    @else {
-      $button_fill: linear-gradient(to bottom, $c 20%, darken($c, 4%) 90%) !global;
-      @include _shadows(inset 0 1px $_hilight_color,
-                        $_button_edge, $_button_shadow);
-    }
+    // @if $variant == 'light' {
+    //   $button_fill: linear-gradient(to bottom, lighten($c, 9%) 10%, lighten($c, 4%) 90%) !global;
+    //   @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
+    //                     $_button_edge, $_button_shadow);
+    // }
+    // @else {
+    //   $button_fill: linear-gradient(to bottom, $c 20%, darken($c, 4%) 90%) !global;
+    //   @include _shadows(inset 0 1px $_hilight_color,
+    //                     $_button_edge, $_button_shadow);
+    // }
+    box-shadow: 0 1px transparentize(black, 0.85);
     background-image: image(lighten($c, 1%));
   }
 
