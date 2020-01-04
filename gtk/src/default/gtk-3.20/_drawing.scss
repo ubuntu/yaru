@@ -196,7 +196,7 @@
     color: $tc;
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
-    border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
+    // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     $button_fill: image($c);
     // $button_fill: if($variant == 'light', linear-gradient(to top, darken($c, 4%) 2px, $c),
     //                                       linear-gradient(to top, darken($c,1%) 2px, $c)) !global;

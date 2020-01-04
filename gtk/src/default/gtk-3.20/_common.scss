@@ -6,13 +6,13 @@ $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
-$button_radius: 2px;
-$menu_radius: 2px;
+$button_radius: 3px;
+$menu_radius: $button_radius;
 $window_radius: $button_radius + 3;
 $popover_radius: $button_radius + 2;
 
 // Optional compact sizes for buttons, headerbar and headerbar widgets
-$_sizevariant: 'default'; //compact otherwise
+$_sizevariant: 'compact'; //compact otherwise
 $_headerbar_height: if($_sizevariant=='default', 46px, 40px);
 $_entry_height: if($_sizevariant=='default', 32px, 28px);
 $_btn_pad: if($_sizevariant=='default', 4px 9px, 2px 6px);
