@@ -1,0 +1,47 @@
+name: Update PR on upstream changes once landed on ubuntu
+on:
+  push:
+    paths:
+      - '.github/workflows/open-pr-on-changes.yaml'
+  schedule:
+    - cron: '8 0 * * *'
+
+jobs:
+  gnome-shell:
+    name: Check for GNOME Shell updates
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v1
+      - name: Download latest GNOME Shell source
+        id: checknewupstream
+        run: |
+          hasModif="false"
+          pushd /tmp
+          git clone --depth 1 https://gitlab.gnome.org/GNOME/gnome-shell.git
+          popd
+          rm -rf gnome-shell/upstream
+          cp -a /tmp/gnome-shell/data/theme/ gnome-shell/upstream
+          MODIFIED=$(git status --porcelain)
+          if [ -n "$MODIFIED" ]; then
+            hasModif="true"
+          fi
+          echo "::set-output name=modified::${hasModif}"
+      - name: Delete previous branch if present
+        if: steps.checknewupstream.outputs.modified == 'true'
+        run: |
+          git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
+          git push -d origin upstream-gnome-shell-update || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
+        if: steps.checknewupstream.outputs.modified == 'true'
+        uses: peter-evans/create-pull-request@v1
+        with:
+          commit-message: New upstream snapshot for GNOME Shell
+          title: Auto update new upstream snapshot for GNOME Shell
+          labels: "Area: GNOME-shell, automated pr, new upstream"
+          body: "[New upstream GNOME Shell changes](https://github.com/ubuntu/yaru/actions) by GitHub Action"
+          branch: upstream-gnome-shell-update
+          branch-suffix: none
+          token: ${{ secrets.GITHUB_TOKEN }}
