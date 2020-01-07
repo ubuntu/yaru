@@ -7,13 +7,18 @@ on:
     - cron: '8 0 * * *'
 
 jobs:
-  gnome-shell:
-    name: Check for GNOME Shell updates
+  refresh-upstream:
+    name: Check for upstream theme related changes
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        buildenv: [
+          { project: GNOME Shell },
+      ]
     steps:
       # Checkout code
       - uses: actions/checkout@v1
-      - name: Download latest GNOME Shell source
+      - name: Download latest ${{ matrix.buildenv.project }} source
         id: checknewupstream
         run: |
           hasModif="false"
