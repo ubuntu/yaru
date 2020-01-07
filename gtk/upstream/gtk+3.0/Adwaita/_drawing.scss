@@ -39,7 +39,7 @@
 //        use the default one
 //
 // possible $t values:
-// normal, focus, insensitive, backdrop, backdrop-insensitive, osd, osd-focus, osd-backdrop;
+// normal, focus, insensitive, backdrop, backdrop-insensitive, osd, osd-focus, osd-backdrop, block_cursor;
 //
 
   $_blank_edge: if($edge == none, none, 0 1px transparentize($edge, 1));
@@ -55,6 +55,7 @@
   @if $t==focus {
     @include _shadows(entry_focus_shadow($fc), $_entry_edge);
     border-color: entry_focus_border($fc);
+    outline: none;
   }
   @if $t==insensitive {
     color: $insensitive_fg_color;
@@ -109,6 +110,10 @@
     box-shadow: none;
     text-shadow: none;
     -gtk-icon-shadow: none;
+  }
+  @if $t==block_cursor {
+    color: $base_color;
+    background-color: $text_color;
   }
 }
 
@@ -234,7 +239,7 @@
     @include _button_text_shadow($tc, $c);
     @if $variant == 'light' {
       background-image: linear-gradient(to bottom, lighten($c, 5%) 20%, $c 90%);
-       @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
+      @include _shadows(inset 0 1px _button_hilight_color(lighten($c, 6%)),
                         $_button_edge, $_button_shadow);
     }
     @else {
@@ -285,8 +290,7 @@
   //
     $_bg: if($c != $bg_color, mix($c, $base_color, 85%), $insensitive_bg_color);
 
-    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color); }
-
+    color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color);
     border-color: if($c != $bg_color, _border_color($c), $insensitive_borders_color);
     $button_fill: image($_bg) !global;
     background-image: $button_fill;
@@ -304,8 +308,7 @@
     $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 6%));
     $_bc: if($c != $bg_color, _border_color($c), $insensitive_borders_color);
 
-    label, & { color: if($c != $bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color); }
-
+    color: if($c != $bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color);
     border-color: $_bc;
     $button_fill: image($_bg) !global;
     background-image: $button_fill;
@@ -321,8 +324,7 @@
     $_bg: if($c != $bg_color, $c, $backdrop_bg_color);
     $_bc: if($variant == 'light', $c, _border_color($c));
 
-    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
-
+    color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color);
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
     $button_fill: image($_bg) !global;
     background-image: $button_fill;
@@ -338,8 +340,7 @@
     $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 4%));
     $_bc: if($variant == 'light', $_bg ,_border_color($c));
 
-    label, & { color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color); }
-
+    color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color);
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
     $button_fill: image($_bg) !global;
     background-image: $button_fill;
@@ -354,8 +355,7 @@
     $_bg: if($c != $bg_color, mix($c, $base_color, 85%), $insensitive_bg_color);
     $_bc: if($variant == 'light', $_bg,_border_color($c));
 
-    label, & { color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
-
+    color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
     $button_fill: image($_bg) !global;
     background-image: $button_fill;
@@ -374,8 +374,7 @@
     $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 4%));
     $_bc: if($variant == 'light', $_bg, _border_color($c));
 
-    label { color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color); }
-
+    color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
     $button_fill: image($_bg) !global;
     background-image: $button_fill;
@@ -395,8 +394,8 @@
     background-image: $button_fill;
     background-clip: padding-box;
     box-shadow: inset 0 1px transparentize(white, 0.9);
-    text-shadow: 0 1px black;
-    -gtk-icon-shadow: 0 1px black;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
     outline-color: transparentize($osd_fg_color, 0.7);
   }
 
@@ -413,8 +412,8 @@
     background-image: $button_fill;
     background-clip: padding-box;
     box-shadow: inset 0 1px transparentize(white, 0.9);
-    text-shadow: 0 1px black;
-    -gtk-icon-shadow: 0 1px black;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
     outline-color: transparentize($osd_fg_color, 0.7);
   }
 
@@ -517,51 +516,34 @@
 // normal, backdrop
 //
 
-  $_small_gradient_length: 5%;
-  $_big_gradient_length: 100%;
+  $_small_gradient_length: 3%;
+  $_big_gradient_length: 50%;
 
-  $_position: center top;
   $_small_gradient_size: 100% $_small_gradient_length;
   $_big_gradient_size: 100% $_big_gradient_length;
 
-  @if $p==bottom {
-    $_position: center bottom;
-    $_linear_gradient_direction: to top;
-  }
-
-  @else if $p==right {
-    $_position: right center;
-    $_small_gradient_size: $_small_gradient_length 100%;
-    $_big_gradient_size: $_big_gradient_length 100%;
-  }
-
-  @else if $p==left {
-    $_position: left center;
+  @if $p==right or $p==left {
     $_small_gradient_size: $_small_gradient_length 100%;
     $_big_gradient_size: $_big_gradient_length 100%;
   }
 
   $_small_gradient_color: $c;
-  $_big_gradient_color: $c;
+  $_big_gradient_color: transparentize($c, 0.93);
 
   @if $c==$fg_color {
     $_small_gradient_color: darken($borders_color, 10%);
-    $_big_gradient_color: $fg_color;
+    $_big_gradient_color: transparentize($fg_color, 0.93);
 
     @if $t==backdrop { $_small_gradient_color: $backdrop_borders_color; }
   }
 
-  $_small_gradient: -gtk-gradient(radial,
-                                  $_position, 0,
-                                  $_position, 0.5,
-                                  to($_small_gradient_color),
-                                  to(transparentize($_small_gradient_color, 1)));
+  $_small_gradient: radial-gradient(farthest-side at $p,
+                                    $_small_gradient_color 85%,
+                                    transparentize($_small_gradient_color, 1));
 
-  $_big_gradient: -gtk-gradient(radial,
-                                $_position, 0,
-                                $_position, 0.6,
-                                from(transparentize($_big_gradient_color, 0.93)),
-                                to(transparentize($_big_gradient_color, 1)));
+  $_big_gradient: radial-gradient(farthest-side at $p,
+                                  $_big_gradient_color,
+                                  transparentize($_big_gradient_color, 1));
 
   @if $t==normal {
     background-image: $_small_gradient, $_big_gradient;
@@ -574,7 +556,7 @@
   }
 
   background-repeat: no-repeat;
-  background-position: $_position;
+  background-position: $p;
 
   background-color: transparent; // reset some properties to be sure to not inherit them somehow
   border: none;                  //
@@ -631,4 +613,3 @@
     color: transparentize($tc, 0.3);
   }
 }
-
