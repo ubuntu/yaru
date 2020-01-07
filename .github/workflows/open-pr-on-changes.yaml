@@ -7,41 +7,52 @@ on:
     - cron: '8 0 * * *'
 
 jobs:
-  gnome-shell:
-    name: Check for GNOME Shell updates
+  refresh-upstream:
+    name: Check for upstream theme related changes
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        buildenv: [
+          { project: GNOME Shell, repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git", projectdir: gnome-shell, src: data/theme/, dest: gnome-shell/upstream },
+      ]
     steps:
       # Checkout code
       - uses: actions/checkout@v1
-      - name: Download latest GNOME Shell source
+      - name: Download latest ${{ matrix.buildenv.project }} source
         id: checknewupstream
         run: |
           hasModif="false"
           pushd /tmp
-          git clone --depth 1 https://gitlab.gnome.org/GNOME/gnome-shell.git
+          git clone --depth 1 ${UPSTREAM_REPO_URL}
           popd
-          rm -rf gnome-shell/upstream
-          cp -a /tmp/gnome-shell/data/theme/ gnome-shell/upstream
+          rm -rf ${DEST}
+          cp -a /tmp/${PROJECT_DIR}/data/theme/ ${DEST}
           MODIFIED=$(git status --porcelain)
           if [ -n "$MODIFIED" ]; then
             hasModif="true"
           fi
           echo "::set-output name=modified::${hasModif}"
+        env:
+          UPSTREAM_REPO_URL: ${{ matrix.buildenv.repo }}
+          SRC: ${{ matrix.buildenv.src }}
+          DEST: ${{ matrix.buildenv.dest }}
+          PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
       - name: Delete previous branch if present
         if: steps.checknewupstream.outputs.modified == 'true'
         run: |
           git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
-          git push -d origin upstream-gnome-shell-update || true
+          git push -d origin upstream-${PROJECT_DIR}-update || true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
       - name: Create Pull Request
         if: steps.checknewupstream.outputs.modified == 'true'
         uses: peter-evans/create-pull-request@v1
         with:
-          commit-message: New upstream snapshot for GNOME Shell
-          title: Auto update new upstream snapshot for GNOME Shell
-          labels: "Area: GNOME-shell, automated pr, new upstream"
-          body: "[New upstream GNOME Shell changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+changes+once+landed+on+ubuntu%22) by GitHub Action"
-          branch: upstream-gnome-shell-update
+          commit-message: New upstream snapshot for ${{ matrix.buildenv.project }}
+          title: Auto update new upstream snapshot for ${{ matrix.buildenv.project }}
+          labels: automated pr, new upstream
+          body: "[New upstream ${{ matrix.buildenv.project }} changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+changes+once+landed+on+ubuntu%22) by GitHub Action"
+          branch: upstream-${{ matrix.buildenv.projectdir }}-update
           branch-suffix: none
           token: ${{ secrets.GITHUB_TOKEN }}
