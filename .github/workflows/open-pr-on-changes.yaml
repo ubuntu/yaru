@@ -41,7 +41,7 @@ jobs:
           commit-message: New upstream snapshot for GNOME Shell
           title: Auto update new upstream snapshot for GNOME Shell
           labels: "Area: GNOME-shell, automated pr, new upstream"
-          body: "[New upstream GNOME Shell changes](https://github.com/ubuntu/yaru/actions) by GitHub Action"
+          body: "[New upstream GNOME Shell changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+changes+once+landed+on+ubuntu%22) by GitHub Action"
           branch: upstream-gnome-shell-update
           branch-suffix: none
           token: ${{ secrets.GITHUB_TOKEN }}
