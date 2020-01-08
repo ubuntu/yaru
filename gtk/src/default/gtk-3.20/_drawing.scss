@@ -196,7 +196,7 @@
     outline-color: transparentize($tc, 0.7);
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    $button_fill: if($variant == 'light', linear-gradient(to top, darken($c, 0%) 2px, $c), linear-gradient(to top, darken($c,0%) 2px, $c)) !global;
+    $button_fill: if($variant == 'light', linear-gradient(to top, lighten($c, 2%) 2px, lighten($c, 2%)), linear-gradient(to top, lighten($c, 2%) 2px, lighten($c, 2%))) !global;
     background-image: $button_fill;
     // @include _button_text_shadow($tc, $c);
     @include _shadows(0 1px transparentize(black, 0.9));
@@ -220,8 +220,8 @@
       @include _button_text_shadow($tc,lighten($c, 6%));
       @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge, $_button_shadow);
     }
-    box-shadow: 0 1px transparentize(black, 0.9);
-    background-image: image(lighten($c, 1%));
+    box-shadow: 0 1px transparentize(black, if($variant=='light', 0.8, 0.85));
+    background-image: image(lighten($c, 4%));
   }
 
   @if $t==normal-alt {
@@ -242,8 +242,8 @@
       @include _shadows(inset 0 1px $_hilight_color,
                         $_button_edge, $_button_shadow);
     }
-    box-shadow: 0 1px transparentize(black, 0.9);
-    background-image: image($c);
+    box-shadow: 0 1px transparentize(black, if($variant=='light', 0.8, 0.85));
+    background-image: image(lighten($c, 4%));
   }
 
   @else if $t==hover-alt {
@@ -263,7 +263,8 @@
       @include _shadows(inset 0 1px $_hilight_color,
                         $_button_edge, $_button_shadow);
     }
-    background-image: image(lighten($c, 1%));
+    background-image: image(lighten($c, 6%));
+    box-shadow: 0 1px transparentize(black, 0.8);
   }
 
   @else if $t==active {

@@ -218,7 +218,7 @@ headerbar,
 
       &:checked {
         color: $selected_fg_color;
-        border-color: transparentize($switch_bg_color, 0.6);
+        border-color: darken($darkblue, 40%);
         background-color: $switch_bg_color;
       }
 
@@ -226,7 +226,7 @@ headerbar,
         border-color: $_dark_border_color;
 
         &:checked {
-          border-color: $switch_border_color;
+          border-color: darken($darkblue, 40%);
         }
         &:disabled {
           background-color: $headerbar_bg_color;

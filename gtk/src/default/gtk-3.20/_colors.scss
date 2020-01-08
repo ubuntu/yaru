@@ -2,9 +2,9 @@
 // it gets @if ed depending on $variant
 @import 'ubuntu-colors';
 
-$base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 10%));
+$base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 11%));
 $text_color: if($variant == 'light', black, white);
-$bg_color: if($variant == 'light', #f7f7f7, darken($inkstone, 1%));
+$bg_color: if($variant == 'light', #f7f7f7, lighten($inkstone, 0.5%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
 $selected_fg_color: #ffffff;
@@ -14,7 +14,7 @@ $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%),
 $borders_color: if($variant == 'light', darken($bg_color, 20%), darken($bg_color, 9%));
 $alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 18%));
 $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
-$link_color: if($variant == 'light', darken($blue, 10%), lighten($blue, 20%));
+$link_color: $linkblue;
 $link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 $top_hilight: $borders_edge;
 $dark_fill: mix($borders_color, $bg_color, 50%);
@@ -70,14 +70,14 @@ $backdrop_scrollbar_slider_color: mix($backdrop_fg_color, $backdrop_bg_color, 40
 $backdrop_menu_color: if($variant == 'light', $backdrop_base_color, mix($backdrop_bg_color, $backdrop_base_color, 20%));
 
 //special cased widget colors
-$suggested_bg_color: if($variant=='light', $green, darken($green, 15%));
-$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), darken($suggested_bg_color, 40%));
-$progress_bg_color: $darkblue;
-$progress_border_color: darken($darkblue, if($variant=='light', 0%, 15%));
-$checkradio_bg_color: $darkblue;
+$suggested_bg_color: if($variant=='light', $green, darken($green, 5%));
+$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), darken($suggested_bg_color, 30%));
+$progress_bg_color: if($variant=='light', $darkblue, lighten($darkblue, 4%));
+$progress_border_color: if($variant=='light', $darkblue, lighten($darkblue, 4%));
+$checkradio_bg_color: if($variant=='light', $darkblue, lighten($darkblue, 4%));
 $checkradio_fg_color: #ffffff;
-$switch_bg_color: $darkblue;
-$switch_border_color: darken($darkblue, if($variant=='light', 15%, 30%));
+$switch_bg_color: if($variant=='light', $darkblue, lighten($darkblue, 4%));
+$switch_border_color: if($variant=='light', darken($darkblue, 15%), darken(lighten($darkblue, 4%), 30%));
 $focus_border_color: darken($blue, if($variant=='light', 0%, 15%));
-$text_selected_bg_color: $darkblue;
+$text_selected_bg_color: $orange;
 $text_selected_fg_color: #ffffff;
