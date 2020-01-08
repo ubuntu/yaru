@@ -36,10 +36,8 @@ $_hover_bg_color: lighten($bg_color,if($variant=='light', 5%, 3%));
 $_active_bg_color: if($variant == 'light', darken($bg_color, 14%), darken($bg_color, 9%));
 
 $font-size: 11;
-$font-family: Cantarell, Sans-Serif;
 
 stage {
-  font-family: $font-family;
   @include fontsize($font-size);
   color: $fg_color;
 }
@@ -97,6 +95,11 @@ StEntry {
   StIcon.capslock-warning {
     icon-size: 16px;
     warning-color: $warning_color;
+    padding: 0 4px;
+  }
+
+  StIcon.peek-password {
+    icon-size: 1.09em;
     padding: 0 4px;
   }
 }
@@ -404,6 +407,11 @@ StScrollBar {
     font-size: 10pt;
     color: $warning_color;
     padding-bottom: 8px;
+  }
+
+  .prompt-dialog-caps-lock-warning {
+    @extend .prompt-dialog-error-label;
+    padding-left: 6.2em;
   }
 
   .prompt-dialog-info-label {
@@ -979,6 +987,7 @@ StScrollBar {
       spacing-columns: 0.8em;
     }
 
+    .weather-header-box,
     .weather-box {
       spacing: 0.4em;
     }
@@ -1197,33 +1206,14 @@ StScrollBar {
 
   .aggregate-menu {
     min-width: 21em;
-    .popup-menu-icon { padding: 0 4px; }
+    .popup-menu-icon { padding: 0 4px;
+                       -st-icon-style: symbolic; }
     .popup-sub-menu .popup-menu-item > :first-child {
       &:ltr { /* 12px spacing + 2*4px padding */
               padding-left: 20px; margin-left: 1.09em; }
       &:rtl { /* 12px spacing + 2*4px padding */
               padding-right: 20px; margin-right: 1.09em; }
     }
-  }
-
-  .system-menu-action {
-    -st-icon-style: symbolic;
-    color: $fg_color;
-    border-radius: 32px; /* wish we could do 50% */
-    padding: 13px;
-    border: 1px solid $_bubble_borders_color;
-
-    &:hover, &:focus {
-      background-color: $_hover_bg_color;
-      color: $fg_color;
-    }
-    &:active { 
-      background-color: $selected_bg_color;
-      color: $selected_fg_color;
-      border-color: $selected_borders_color;
-    }
-
-    & > StIcon { icon-size: 16px; }
   }
 
 // Activities Ripples
@@ -1577,20 +1567,14 @@ StScrollBar {
   }
 
   .page-indicator {
-    padding: 15px 20px;
+    padding: 7px 16px;
 
     .page-indicator-icon {
       width: 12px;
       height: 12px;
-      background-color: transparent;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      border-radius: 12px;
+      background-color: white;
+      border-radius: 6px;
     }
-
-    &:hover .page-indicator-icon { border-color: white; }
-    &:active .page-indicator-icon { border: none; margin: 2px; background-color: white; }
-    &:checked .page-indicator-icon,
-    &:checked:active .page-indicator-icon { background-color: white;}
   }
 
   .no-frequent-applications-label { @extend %status_text; }
@@ -1790,8 +1774,8 @@ StScrollBar {
         padding: 4px 4px;
 
         .page-indicator-icon {
-            width: 6px;
-            height: 6px
+            width: 8px;
+            height: 8px;
         }
     }
 }
