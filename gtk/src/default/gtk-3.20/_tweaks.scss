@@ -174,6 +174,9 @@ menubar,
 // fix for gtk 3.28 switches to not show the on/off label
 switch { font-size: 0 }
 
+// Since "we" missed to intoduce a switch color for Adwaita, we now need to restyle the switches in tweaks
+// This really needs an upstream change
+
 /**********
  * Switch *
  **********/
@@ -267,10 +270,7 @@ switch { font-size: 0 }
   }
 }
 
-entry selection { background-color: $text_selected_bg_color; color: $text_selected_fg_color; }
-
-textview.view {
-  text {
-    selection { &:focus, & { background-color: $text_selected_bg_color; color: $text_selected_fg_color; }}
-  }
+// Dark blue text selection
+entry selection, text selection, label selection, textview.view text selection {
+  &:focus, & { background-color: $text_selected_bg_color; color: $text_selected_fg_color; }
 }
