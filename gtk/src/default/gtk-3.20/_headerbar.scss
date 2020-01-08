@@ -218,15 +218,15 @@ headerbar,
 
       &:checked {
         color: $selected_fg_color;
-        border-color: transparentize($suggested_bg_color, 0.6);
-        background-color: $suggested_bg_color;
+        border-color: transparentize($switch_bg_color, 0.6);
+        background-color: $switch_bg_color;
       }
 
       slider {
         border-color: $_dark_border_color;
 
         &:checked {
-          border-color: $suggested_border_color;
+          border-color: $switch_border_color;
         }
         &:disabled {
           background-color: $headerbar_bg_color;

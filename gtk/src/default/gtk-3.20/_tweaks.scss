@@ -28,7 +28,7 @@ headerbar {
 // blue spinner
 spinner {
   &:not(:backdrop) {
-    color: $progress_bg_color;
+    color: $blue;
   }
 }
 
@@ -41,7 +41,7 @@ switch {
 
       &:backdrop { border-color: $selected_borders_color; }
 
-      slider { &:checked { border-color: $suggested_border_color; } }
+      slider { &:checked { border-color: $switch_border_color; } }
     }
   }
 }
@@ -173,3 +173,104 @@ menubar,
 
 // fix for gtk 3.28 switches to not show the on/off label
 switch { font-size: 0 }
+
+/**********
+ * Switch *
+ **********/
+ switch {
+  outline-offset: -4px;
+
+  // similar to the .scale
+  border: 1px solid $borders_color;
+  border-radius: 14px;
+  color: $fg_color;
+  background-color: $dark_fill;
+  text-shadow: 0 1px transparentize(black, 0.9);
+
+  &:checked {
+    color: $selected_fg_color;
+    border-color: $switch_border_color;
+    background-color: $switch_bg_color;
+    text-shadow: 0 1px transparentize($switch_border_color, 0.5),
+                 0 0 2px transparentize(white, 0.4);
+  }
+
+  &:disabled {
+    color: $insensitive_fg_color;
+    border-color: $borders_color;
+    background-color: $insensitive_bg_color;
+    text-shadow: none;
+  }
+
+  &:backdrop {
+    color: $backdrop_fg_color;
+    border-color: $backdrop_borders_color;
+    background-color: $backdrop_dark_fill;
+    text-shadow: none;
+    transition: $backdrop_transition;
+
+    &:checked {
+      @if $variant == 'light' { color: $backdrop_bg_color; }
+      border-color: if($variant=='light', $switch_bg_color, $switch_border_color);
+      background-color: $switch_bg_color;
+    }
+
+    &:disabled {
+      color: $backdrop_insensitive_color;
+      border-color: $backdrop_borders_color;
+      background-color: $insensitive_bg_color;
+    }
+  }
+
+  slider {
+    margin: -1px;
+    min-width: 24px;
+    min-height: 24px;
+    border: 1px solid;
+    border-radius: 50%;
+    transition: $button_transition;
+    -gtk-outline-radius: 20px;
+
+    @if $variant == 'light' {
+      @include button(normal-alt, $edge: $shadow_color);
+    } 
+    @else {
+      @include button(normal-alt, $c: lighten($bg_color,6%), $edge: $shadow_color);
+    }
+  }
+  
+  image { color: transparent; } /* only show i / o for the accessible theme */
+
+  &:hover slider {
+    @if $variant == 'light' {
+      @include button(hover-alt, $edge: $shadow_color);
+    }
+    @else {
+      @include button(hover-alt, $c: lighten($bg_color,6%), $edge: $shadow_color);
+    }
+  }
+
+  &:checked slider { border: 1px solid $switch_border_color; }
+
+  &:disabled slider { @include button(insensitive); }
+
+  &:backdrop {
+    slider {
+      transition: $backdrop_transition;
+
+      @include button(backdrop);
+    }
+
+    &:checked slider { border-color: if($variant == 'light', $switch_bg_color, $switch_border_color); }
+
+    &:disabled slider { @include button(backdrop-insensitive); }
+  }
+}
+
+entry selection { background-color: $text_selected_bg_color; color: $text_selected_fg_color; }
+
+textview.view {
+  text {
+    selection { &:focus, & { background-color: $text_selected_bg_color; color: $text_selected_fg_color; }}
+  }
+}
