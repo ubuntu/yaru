@@ -270,7 +270,24 @@ switch { font-size: 0 }
   }
 }
 
-// Dark blue text selection
+// Text selection - staying orange for 20.04 but with the variables we could easily change it here if we want to
 entry selection, text selection, label selection, textview.view text selection {
   &:focus, & { background-color: $text_selected_bg_color; color: $text_selected_fg_color; }
+}
+
+// Blue focus "ring" - upstream is also interested in this, so better get this into upstream at some time
+*:not(button) {
+  outline-color: $focus_border_color;
+  outline-style: solid;
+  outline-offset: -2px;
+  outline-width: 2px;
+  -gtk-outline-radius: $button-radius - 2;
+}
+// We need to re-evaluate where we want the ring though
+switch slider {
+  outline-color: $focus_border_color;
+  outline-style: solid;
+  outline-offset: -1px;
+  outline-width: 2px;
+  -gtk-outline-radius: 100%;
 }
