@@ -3,7 +3,7 @@
 @import "ubuntu-colors";
 
 $base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 10%));
-$bg_color: if($variant == 'light',lighten(#F5F6F7,1%), darken($inkstone, 1%));
+$bg_color: if($variant == 'light', #f7f7f7, lighten($inkstone, 0.5%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
 $selected_fg_color: #ffffff;
@@ -56,3 +56,16 @@ $panel_opaque_value: 0.0;
 
 $dash-alpha-value: 0.6;
 $dash-opaque-alpha-value: 0.0;
+
+//special cased widget colors
+$suggested_bg_color: if($variant=='light', $green, darken($green, 5%));
+$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), darken($suggested_bg_color, 30%));
+$progress_bg_color: if($variant=='light', $darkblue, lighten($darkblue, 4%));
+$progress_border_color: if($variant=='light', $darkblue, lighten($darkblue, 4%));
+$checkradio_bg_color: if($variant=='light', $darkblue, lighten($darkblue, 4%));
+$checkradio_fg_color: #ffffff;
+$switch_bg_color: if($variant=='light', $darkblue, lighten($darkblue, 4%));
+$switch_border_color: if($variant=='light', darken($darkblue, 15%), darken(lighten($darkblue, 4%), 30%));
+$focus_border_color: darken($blue, if($variant=='light', 0%, 15%));
+$text_selected_bg_color: $orange;
+$text_selected_fg_color: #ffffff;
