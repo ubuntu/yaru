@@ -18,7 +18,7 @@ jobs:
       ]
     steps:
       # Checkout code
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Download from ${{ matrix.buildenv.repo }}, on branch ${{ matrix.buildenv.branch }}
         id: checknewupstream
         run: |
@@ -39,22 +39,13 @@ jobs:
           SRC: ${{ matrix.buildenv.src }}
           DEST: ${{ matrix.buildenv.dest }}
           PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
-      - name: Delete previous branch if present
+      - name: Create or update Pull Request
         if: steps.checknewupstream.outputs.modified == 'true'
-        run: |
-          git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
-          git push -d origin upstream-${PROJECT_DIR}-update || true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
-      - name: Create Pull Request
-        if: steps.checknewupstream.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v1
+        uses: peter-evans/create-pull-request@v2
         with:
           commit-message: New upstream snapshot for ${{ matrix.buildenv.project }}
           title: Auto update new upstream snapshot for ${{ matrix.buildenv.project }}
           labels: automated pr, new upstream
           body: "[New upstream ${{ matrix.buildenv.project }} changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+changes+once+landed+on+ubuntu%22) by GitHub Action"
           branch: upstream-${{ matrix.buildenv.projectdir }}-update
-          branch-suffix: none
           token: ${{ secrets.GITHUB_TOKEN }}
