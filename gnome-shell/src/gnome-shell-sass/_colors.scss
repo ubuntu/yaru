@@ -2,8 +2,8 @@
 // it gets @if ed depending on $variant
 @import "ubuntu-colors";
 
-$base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 10%));
-$bg_color: if($variant == 'light',lighten(#F5F6F7,1%), darken($inkstone, 1%));
+$base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 11%));
+$bg_color: if($variant == 'light', #f7f7f7, lighten($inkstone, 0.5%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
 $selected_fg_color: #ffffff;
