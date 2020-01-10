@@ -10,10 +10,39 @@ $porcelain: #F7F7F7;
 $silk: #CCC;
 $ash: #878787;
 
+$light_aubergine: #77216F;
+$mid_aubergine: #5E2750;
+$dark_aubergine: #2C001E;
+
 // Utility
-$red: #ED3146;
+$red: #c7162b;
 $orange: #E95420;
-$yellow: #F89B0F;
-$green: #3EB34F;
+$yellow: #f99b11;
+$green: #0e8420;
 $blue: #19B6EE;
+$linkblue: #007aa6;
+$darkblue: #335280;
 $purple: #762572;
+
+$aubergine: if($variant == 'light', #924D8B, darken(#924D8B, 4%));
+$focus_ring: lighten($aubergine, 18%);
+
+// Terminal colors
+$terminal_bg_color: #300A24;
+$terminal_base_color: lighten($terminal_bg_color, 5%);
+$terminal_fg_color: white;
+$terminal_borders_color: darken($terminal_bg_color, 10%);
+
+// Widget Colors
+$headerbar_bg_color: #323030;
+$menubar_bg_color: $headerbar_bg_color;
+$headerbar_fg_color: $porcelain;
+$headerbar_border_color: lighten($headerbar_bg_color, 8%);
+$headerbar_text_color: $silk;
+$headerbar_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
+//
+$backdrop_headerbar_bg_color: $headerbar_bg_color;
+$backdrop_headerbar_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 70%);
+$backdrop_headerbar_text_color: mix($headerbar_text_color, $backdrop_headerbar_bg_color, 70%);
+$backdrop_headerbar_insensitive_color: mix($headerbar_fg_color, $backdrop_headerbar_bg_color, 70%);
+$backdrop_menubar_bg_color: lighten($menubar_bg_color, 5%);
