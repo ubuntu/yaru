@@ -1,0 +1,147 @@
+/* Message List */
+// a.k.a. notifications in the menu
+
+// main list
+.message-list {
+  width: 31.5em;
+  padding: 0 $base_padding * 2;
+}
+
+.message-list-sections {
+  spacing: $base_spacing;
+  margin: $base_margin * 4; // to account for scrollbar
+}
+
+.message-list-section,
+.message-list-section-list {
+  spacing: $base_spacing;
+}
+
+.message-list-section-list {
+  &:ltr {padding:0;}
+  &:rtl {padding:0;}
+}
+
+// clear button
+.message-list-clear-button {
+  margin:$base_margin $base_margin*2;
+  .button {
+    @extend %button;
+  }
+}
+
+// message bubbles
+.message {
+  @extend %notification_bubble;
+
+  // title
+  .message-title {
+    color: $fg_color;
+    font-weight: bold;
+    margin-bottom:4px;
+  }
+
+  // content
+  .message-content {
+    color: darken($fg_color, 10%);
+    padding: $base_padding 0;
+    margin:$base_margin * 2;
+    &:ltr {
+      margin-left: $base_margin;
+      padding-right:$base_padding;
+    }
+    &:rtl {
+      margin-right: $base_margin;
+      padding-left:$base_padding;
+    }
+  }
+
+  // close button
+  .message-close-button {
+    color: lighten($fg_color, 15%);
+    &:hover { color: if($variant=='light', lighten($fg_color, 30%), darken($fg_color, 10%)); }
+    &:active { color: if($variant=='light', lighten($fg_color, 40%), darken($fg_color, 20%)); }
+  }
+
+
+  // icon container
+  .message-icon-bin {
+    padding: $base_padding;
+    margin:$base_padding 0;
+
+    &:rtl {
+      // padding: $base_padding;
+    }
+
+    // icon size and color
+    > StIcon {
+      color: $fg_color;
+      icon-size: $base_icon_size*2; // 32px
+      -st-icon-style: symbolic;
+
+      padding:0;
+      margin:$base_padding;
+    }
+
+    // fallback
+    > .fallback-window-icon {
+      width: $base_icon_size;
+      height: $base_icon_size;
+    }
+  }
+
+  // secondary container in title box
+  .message-secondary-bin {
+    padding: 0;
+
+    // notification time stamp
+    > .event-time {
+      color: transparentize($fg_color, 0.5);
+      @include fontsize($base_font_size - 2);
+      text-align: right;
+      margin: 0 $base_margin * 2;
+      /* HACK: the label should be baseline-aligned with a 1em label, fake this with some bottom padding */
+      padding-bottom: $base_padding;
+    }
+  }
+
+}
+
+/* Media Controls */
+.message-media-control {
+  padding: $base_padding * 2 $base_padding * 4;
+  color: darken($fg_color, 15%);
+
+  // uses $hover_bg_color since the media controls are in a notification_bubble
+  &:hover {
+    background-color: lighten($hover_bg_color, 5%);
+    color: $fg_color;
+  }
+
+  &:active { 
+    background-color: darken($hover_bg_color, 2%);
+    color: $fg_color;
+  }
+
+  &:insensitive { color: darken($fg_color,40%); }
+  
+  // fix border-radius for last button on hover
+  &:last-child:ltr { &:hover {border-radius:  0 $base_border_radius+2 $base_border_radius+2 0;} }
+  &:last-child:rtl { &:hover {border-radius: $base_border_radius+2 0 0 $base_border_radius+2;} }
+}
+
+// album-art
+.media-message-cover-icon {
+  icon-size: $base_icon_size*2 !important; // 48px
+  border-radius: $base_border_radius;
+
+  // when there is no artwork
+  &.fallback {
+    color: darken($fg_color, 17%);
+    background-color: $bg_color;
+    border: 1px solid transparent;
+    border-radius: $base_border_radius;
+    icon-size: $base_icon_size * 2 !important;
+    padding: $base_padding * 2;
+  }
+}
