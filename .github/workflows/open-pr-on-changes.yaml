@@ -13,8 +13,8 @@ jobs:
     strategy:
       matrix:
         buildenv: [
-          { project: GNOME Shell, repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git", projectdir: gnome-shell, src: data/theme/, dest: gnome-shell/upstream },
-          { project: GTK, repo: "https://gitlab.gnome.org/GNOME/gtk.git", projectdir: gtk, src: gtk/theme/Adwaita/, dest: gtk/upstream/gtk+3.0/Adwaita },
+          { project: GNOME Shell, repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git", branch: master, projectdir: gnome-shell, src: data/theme/, dest: gnome-shell/upstream },
+          { project: GTK, repo: "https://gitlab.gnome.org/GNOME/gtk.git", branch: gtk-3-24, projectdir: gtk, src: gtk/theme/Adwaita/, dest: gtk/upstream/gtk+3.0/Adwaita },
       ]
     steps:
       # Checkout code
@@ -24,7 +24,7 @@ jobs:
         run: |
           hasModif="false"
           pushd /tmp
-          git clone --depth 1 ${UPSTREAM_REPO_URL}
+          git clone --branch ${BRANCH} --depth 1 ${UPSTREAM_REPO_URL}
           popd
           rm -rf ${DEST}
           cp -a /tmp/${PROJECT_DIR}/${SRC} ${DEST}
@@ -35,6 +35,7 @@ jobs:
           echo "::set-output name=modified::${hasModif}"
         env:
           UPSTREAM_REPO_URL: ${{ matrix.buildenv.repo }}
+          BRANCH: ${{ matrix.buildenv.branch }}
           SRC: ${{ matrix.buildenv.src }}
           DEST: ${{ matrix.buildenv.dest }}
           PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
