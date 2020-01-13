@@ -19,3 +19,6 @@ $blue: #19B6EE;
 $darkblue: #335280;
 $linkblue: #007aa6;
 $purple: #762572;
+
+$aubergine: if($variant == 'light', #924D8B, darken(#924D8B, 4%));
+$focus_ring: lighten($aubergine, 18%);

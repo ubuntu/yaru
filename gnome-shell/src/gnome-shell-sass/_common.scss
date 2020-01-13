@@ -138,10 +138,10 @@ StScrollBar {
 .slider {
   height: 1em;
   -barlevel-height: 0.2em;
-  -barlevel-background-color: transparentize($fg_color, 0.9);; //background of the trough
+  -barlevel-background-color: mix($borders_color, $bg_color, 50%);
   -barlevel-border-color: $borders_color; //trough border color
   -barlevel-active-background-color: $progress_bg_color; //active trough fill
-  -barlevel-active-border-color: $progress_bg_color; //active trough border
+  -barlevel-active-border-color: if($variant == 'light', $progress_bg_color, $borders_color); //active trough border
   -barlevel-overdrive-color: $destructive_color;
   -barlevel-overdrive-border-color: darken($destructive_color,10%);
   -barlevel-overdrive-separator-width: 0.2em;
@@ -149,7 +149,7 @@ StScrollBar {
   -slider-handle-radius: 8px;
   -slider-handle-border-width: 1px;
   -slider-handle-border-color: $borders_color;
-  color: if($variant == 'light', lighten($bg_color, 10%), darken($bg_color,4%));
+  color: lighten($bg_color, 4%);
   &:hover { color: $_hover_bg_color; }
   &:active { color: $_active_bg_color; }
 }
@@ -161,7 +161,7 @@ StScrollBar {
   StBin {
     width: 24px;
     height: 22px;
-    background-image: if($variant=='light', url("checkbox-off.svg"), 
+    background-image: if($variant=='light', url("checkbox-off.svg"),
                                             url("checkbox-off-dark.svg"));
   }
   &:focus StBin { background-image: if($variant=='light', url("checkbox-off-focused.svg"),
@@ -665,8 +665,10 @@ StScrollBar {
   .level {
     height: 0.6em;
     -barlevel-height: 0.3em;
-    -barlevel-background-color: transparent;
-    -barlevel-active-background-color: $progress_bg_color;
+    -barlevel-background-color: $inkstone;
+    -barlevel-border-color: $borders_color; //trough border color
+    -barlevel-active-background-color: $osd_fg_color;
+    -barlevel-active-border-color: $borders_color; //active trough border
     -barlevel-overdrive-color: $destructive_color;
     -barlevel-overdrive-separator-width: 0.2em;
   }
