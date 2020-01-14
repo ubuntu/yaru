@@ -131,17 +131,21 @@ $ambiance: null !default;
 /************
  * Terminal *
  ************/
+
+$_terminal_bg_color: #300A24;
+$_terminal_fg_color: white;
+
 terminal-window {
 
     // use unity 8 colors
     // only colors, let everything else be inherited
     .terminal-screen {
         // inherits from .background
-        background-color: $terminal_bg_color;
-        color: $terminal_fg_color;
+        background-color: $_terminal_bg_color;
+        color: $_terminal_fg_color;
 
         &:backdrop {
-            background-color: lighten($terminal_bg_color, 2%);
+            background-color: lighten($_terminal_bg_color, 2%);
             color: $backdrop_selected_fg_color;
         }
     }

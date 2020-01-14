@@ -72,12 +72,20 @@ $backdrop_menu_color: if($variant == 'light', $backdrop_base_color, mix($backdro
 //special cased widget colors
 $suggested_bg_color: if($variant=='light', $green, darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), darken($suggested_bg_color, 30%));
-$progress_bg_color: if($variant=='light', $aubergine, darken($aubergine, 4%));
-$progress_border_color: if($variant=='light', $aubergine, darken($aubergine, 4%));
-$checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 4%));
+$progress_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
+$progress_border_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
+$checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $checkradio_fg_color: #ffffff;
-$switch_bg_color: if($variant=='light', $aubergine, darken($aubergine, 4%));
-$switch_border_color: if($variant=='light', darken($aubergine, 15%), darken(lighten($aubergine, 4%), 30%));
-$focus_border_color: $focus_ring;
-$text_selected_bg_color: $orange;
-$text_selected_fg_color: #ffffff;
+$switch_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
+$switch_border_color: if($variant=='light', darken($aubergine, 15%), darken($borders_color, 5%));
+$focus_border_color: lighten($aubergine, 14%);
+// Headerbar bg colors for the "mixed" theme
+$headerbar_bg_color: #323030;
+$headerbar_fg_color: $porcelain;
+$headerbar_border_color: lighten($headerbar_bg_color, 8%);
+$headerbar_text_color: $silk;
+$headerbar_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
+$backdrop_headerbar_bg_color: $headerbar_bg_color;
+$backdrop_headerbar_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 70%);
+$backdrop_headerbar_text_color: mix($headerbar_text_color, $backdrop_headerbar_bg_color, 70%);
+$backdrop_headerbar_insensitive_color: mix($headerbar_fg_color, $backdrop_headerbar_bg_color, 70%);
