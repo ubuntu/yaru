@@ -32,20 +32,6 @@ spinner {
   }
 }
 
-// TODO: REMOVE the diff when we fixed this upstream (upstream has blue suggested border color)
-switch {
-  row:selected:not(:disabled) & {
-    @if $variant == 'light' {
-      box-shadow: none;
-      border-color: $selected_borders_color;
-
-      &:backdrop { border-color: $selected_borders_color; }
-
-      slider { &:checked { border-color: $switch_border_color; } }
-    }
-  }
-}
-
 // titlebutton
 button.titlebutton:not(.appmenu) {
 
@@ -171,11 +157,9 @@ menubar,
   border { border: none; }
 }
 
-// fix for gtk 3.28 switches to not show the on/off label
-switch { font-size: 0 }
-
-// Since "we" missed to intoduce a switch color for Adwaita, we now need to restyle the switches in tweaks
-// This really needs an upstream change
+// Since "we" missed to intoduce a switch color for Adwaita, we now need to re-insert the switches in tweaks
+// So it uses thew new switch color variables
+// This really needs an upstream change to remove this code
 
 /**********
  * Switch *
@@ -189,6 +173,7 @@ switch { font-size: 0 }
   color: $fg_color;
   background-color: $dark_fill;
   text-shadow: 0 1px transparentize(black, 0.9);
+  font-size: 0; // fix for gtk 3.28 switches to not show the on/off label
 
   &:checked {
     color: $selected_fg_color;
@@ -268,11 +253,17 @@ switch { font-size: 0 }
 
     &:disabled slider { @include button(backdrop-insensitive); }
   }
-}
 
-// Text selection - staying orange for 20.04 but with the variables we could easily change it here if we want to
-entry selection, text selection, label selection, textview.view text selection {
-  &:focus, & { background-color: $text_selected_bg_color; color: $text_selected_fg_color; }
+  row:selected:not(:disabled) & {
+    @if $variant == 'light' {
+      box-shadow: none;
+      border-color: $selected_borders_color;
+
+      &:backdrop { border-color: $selected_borders_color; }
+
+      slider { &:checked { border-color: $switch_border_color; } }
+    }
+  }
 }
 
 // Blue focus "ring" - upstream is also interested in this, so better get this into upstream at some time
