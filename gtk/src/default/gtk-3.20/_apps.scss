@@ -64,7 +64,7 @@ $ambiance: null !default;
     }
 
     notebook > header {
-      background: if($variant=='light', $porcelain, $bg_color);
+      background: $bg_color;
     }
 
     paned > separator {
