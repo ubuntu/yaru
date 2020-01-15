@@ -1947,8 +1947,8 @@ StScrollBar {
   border: none;
   background-color: transparent;
 
-  $_gdm_fg: #f6f5f4;
-  $_gdm_bg: lighten($purple, 19%);
+  $_gdm_fg: $jet;
+  $_gdm_bg: $porcelain;
 
   StEntry {
     @extend %search_entry;
@@ -1956,7 +1956,7 @@ StScrollBar {
     // @if $variant=='dark' {
       $_gdm_entry_bg: transparentize(lighten(desaturate(#241f31, 20%), 2%), 0.5);
       background-color: $_gdm_entry_bg;
-      border-color: lighten($_gdm_entry_bg, 25%);    
+      border-color: lighten($_gdm_entry_bg, 25%);
       color: $osd_fg_color;
       &:focus { border-color: transparentize(white, 0.6); }
     // }
@@ -1970,13 +1970,13 @@ StScrollBar {
     border-color: $_gdm_bg;
     color: $_gdm_fg;
 
-    $_hover_c: lighten($_gdm_bg, 5%);
+    $_hover_c: darken($_gdm_bg, 10%);
     &:hover, &:focus {
       background-color: $_hover_c;
       border-color: $_hover_c;
     }
     &:active {
-      $_active_c: darken($_gdm_bg, 5%);
+      $_active_c: darken($_gdm_bg, 25%);
       box-shadow: none;
       background-color: $_active_c;
       border-color: $_active_c;
@@ -1990,7 +1990,7 @@ StScrollBar {
     &:default {
       @include button(normal, $c:$success_color, $tc:$selected_fg_color);
       border-color: $success_color;
-      &:hover, &:focus { 
+      &:hover, &:focus {
         @include button(hover,$c:$success_color, $tc:$selected_fg_color);
         $_def_hover_c: lighten($success_color, 5%);
         background-color: $_def_hover_c;
