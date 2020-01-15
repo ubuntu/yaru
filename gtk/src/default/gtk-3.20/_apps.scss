@@ -138,17 +138,21 @@ $ambiance: null !default;
 /************
  * Terminal *
  ************/
+
+$_terminal_bg_color: #300A24;
+$_terminal_fg_color: white;
+
 terminal-window {
 
     // use unity 8 colors
     // only colors, let everything else be inherited
     .terminal-screen {
         // inherits from .background
-        background-color: $terminal_bg_color;
-        color: $terminal_fg_color;
+        background-color: $_terminal_bg_color;
+        color: $_terminal_fg_color;
 
         &:backdrop {
-            background-color: lighten($terminal_bg_color, 2%);
+            background-color: lighten($_terminal_bg_color, 2%);
             color: $backdrop_selected_fg_color;
         }
     }
@@ -429,9 +433,10 @@ terminal-window {
     @if $ambiance {
       menubar,
       .menubar,
-      menubar > menuitem:hover
-      { background-color: $headerbar_bg_color; color:$headerbar_fg_color; }
-
+      menubar > menuitem:hover {
+        background-color: $headerbar_bg_color;
+        color:$headerbar_fg_color;
+      }
     }
 
     // Adapt scrollbars a bit more to the GTK Scrollbar styling
@@ -510,7 +515,7 @@ terminal-window {
 * Unity7 *
 ***********/
 
-$panel_bg_color: lighten($jet, 2%);
+$panel_bg_color: $headerbar_bg_color; //lighten($jet, 2%);
 $panel_fg_color: $porcelain;
 $wm_border_unfocused: none;
 $wm_border_focused: if($variant=='light', transparentize(black, 0.9), transparentize($borders_color, 0.1));
@@ -518,7 +523,7 @@ $titlebar_bg_color: $headerbar_bg_color;
 $titlebar_fg_color: $headerbar_fg_color;
 
 UnityDecoration {
-  -UnityDecoration-extents: 24px 1px 1px 1px;
+  -UnityDecoration-extents: 32px 0px 0px 0px;
   -UnityDecoration-input-extents: 10px;
 
   -UnityDecoration-shadow-offset-x: 1px;
@@ -533,8 +538,8 @@ UnityDecoration {
 
   -UnityDecoration-title-indent: 0px;
   -UnityDecoration-title-fade: 0px;
-  -UnityDecoration-title-alignment: 0;
-  
+  -UnityDecoration-title-alignment: 0.5;
+
   // Unity "titlebars"
   .top {
     border: none;
@@ -554,12 +559,13 @@ UnityDecoration {
       border: none;
       background-color: $backdrop_headerbar_bg_color;
       color: $backdrop_headerbar_fg_color;
-      box-shadow: none;
+      box-shadow: inset 0 1px transparentize($headerbar_border_color, 0.4);
     }
   }
 
   // this is the window border outside of the titlebar!
   .left, .right, .bottom {
+    border: none;
     background-color: transparent;
     &:backdrop { background-color: transparent; }
   }
@@ -577,7 +583,7 @@ UnityPanelWidget, .unity-panel {
     border-width: 0 1px;
     color: $panel_fg_color;
     background-color: transparent;
-    
+
     &:hover, *:hover {
       box-shadow: inset 0 -2px 0 0 $selected_bg_color;
       background-color: transparent;

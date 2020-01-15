@@ -198,7 +198,7 @@
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     $button_fill: if($variant == 'light', linear-gradient(to top, lighten($c, 2%) 2px, lighten($c, 2%)), linear-gradient(to top, lighten($c, 2%) 2px, lighten($c, 2%))) !global;
     background-image: $button_fill;
-    // @include _button_text_shadow($tc, $c);
+    @include _button_text_shadow($tc, $c);
     @include _shadows(0 1px transparentize(black, 0.9));
   }
 
