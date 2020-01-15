@@ -1,0 +1,262 @@
+/* Modal Dialogs */
+
+.modal-dialog {
+  border-radius: $modal_radius;
+  @extend %bubble_panel;
+
+  .modal-dialog-content-box {
+    margin: 32px 40px;
+    spacing: 32px;
+    max-width: 28em;
+  }
+
+  .run-dialog-entry { width: 20em; margin-bottom: 6px; }
+  .run-dialog-error-box {
+    padding-top: 16px;
+    spacing: 6px;
+  }
+
+  .run-dialog-label {
+    @include fontsize($base_font_size + 1.1);
+    font-weight: normal;
+    color: $fg_color;
+    padding-bottom: .4em;
+  }
+}
+
+.mount-dialog-subject,
+.end-session-dialog-subject { //this should be a generic header class
+  @include fontsize($base_font_size + 3);
+}
+
+.modal-dialog-linked-button {
+  @extend %bubble_button;
+}
+
+/* Message Dialog */
+.message-dialog-content {
+  spacing: 18px;
+
+  .message-dialog-title {
+    text-align: center;
+    font-size: 18pt;
+    font-weight: 800;
+  }
+  .message-dialog-description { text-align: center; }
+}
+
+/* ShellMountOperation Dialogs */
+.shell-mount-operation-icon {
+  icon-size: $base_icon_size * 3;
+}
+
+.mount-dialog {
+  spacing: 24px;
+
+  .message-dialog-title {
+    padding-top: 10px;
+    padding-left: 17px;
+    padding-bottom: 6px;
+    max-width: 34em;
+  }
+
+  .message-dialog-title:rtl {
+    padding-left: 0px;
+    padding-right: 17px;
+  }
+
+  .message-dialog-description {
+    padding-left: 17px;
+    width: 28em;
+  }
+
+  .message-dialog-description:rtl {
+    padding-left: 0px;
+    padding-right: 17px;
+  }
+}
+
+.mount-dialog-app-list {
+  max-height: 200px;
+  padding-top: 24px;
+  padding-left: 49px;
+  padding-right: 32px;
+}
+
+.mount-dialog-app-list:rtl {
+  padding-right: 49px;
+  padding-left: 32px;
+}
+
+.mount-dialog-app-list-item {
+  color: lighten($fg_color,10%);
+  &:hover { color: $fg_color; }
+  &:ltr { padding-right: 1em; }
+  &:rtl { padding-left: 1em; }
+}
+
+.mount-dialog-app-list-item-icon {
+  &:ltr { padding-right: 17px; }
+  &:rtl { padding-left: 17px; }
+}
+
+.mount-dialog-app-list-item-name {
+  @include fontsize($base_font_size - 1);
+}
+
+
+/* Password or Authentication Dialog */
+
+.prompt-dialog {
+  @extend %bubble_panel;
+  //this is the width of the entire modal popup
+  width: 34em;
+
+  .message-dialog-content { spacing: $base_spacing * 4; }
+  .message-dialog-title { color: lighten($fg_color,15%); }
+}
+
+.prompt-dialog-description:rtl {
+  text-align: right;
+}
+
+.prompt-dialog-password-box {
+  spacing: 1em;
+  padding-bottom: 1em;
+}
+
+.prompt-dialog-error-label {
+  @include fontsize($base_font_size - 1);
+  color: $warning_color;
+  padding-bottom: 8px;
+}
+
+.prompt-dialog-info-label {
+  @include fontsize($base_font_size - 1);
+  padding-bottom: 8px;
+}
+
+.prompt-dialog-null-label {
+  @include fontsize($base_font_size - 1);
+  padding-bottom: 8px;
+}
+
+.prompt-dialog-pim-box {
+  spacing: 1em;
+}
+
+.prompt-dialog-grid {
+  spacing-rows: 15px;
+  spacing-columns: 1em;
+}
+
+.prompt-dialog-keyfiles-box {
+  spacing: 1em;
+}
+
+.prompt-dialog-button.button {
+  padding: 8px;
+}
+
+.prompt-dialog-caps-lock-warning {
+  @extend .prompt-dialog-error-label;
+  padding-left: 6.2em;
+}
+
+
+/* Polkit Dialog */
+
+.polkit-dialog-user-layout {
+  padding-left: 10px;
+  spacing: 10px;
+  &:rtl {
+    padding-left: 0px;
+    padding-right: 10px;
+  }
+}
+
+.polkit-dialog-user-root-label {
+  color: $warning_color;
+}
+
+.polkit-dialog-user-icon {
+  border-radius: 99px;
+  background-size: contain;
+  width: 48px;
+  height: 48px;
+}
+
+/* Audio selection dialog */
+.audio-device-selection-dialog {
+  @extend %bubble_panel;
+  spacing: 30px;
+}
+
+.audio-selection-content {
+  spacing: 20px;
+  padding: 24px;
+}
+
+.audio-selection-title {
+  font-weight: bold;
+  text-align: center;
+}
+
+.audio-selection-box {
+  spacing: 20px;
+}
+
+.audio-selection-device {
+  border: 1px solid $bubble_borders_color;
+  border-radius: 12px;
+  &:hover,&:focus { background-color: $hover_bg_color; }
+  &:active { 
+    background-color: $selected_bg_color;
+    color: $selected_fg_color;
+  }
+}
+
+.audio-selection-device-box {
+  padding: 20px;
+  spacing: 20px;
+}
+
+.audio-selection-device-icon {
+  icon-size: $base_icon_size * 4;
+}
+
+/* Access Dialog */
+.access-dialog {
+  @extend %bubble_panel;
+  spacing: 30px;
+}
+
+/* Geolocation Dialog */
+.geolocation-dialog {
+  @extend %bubble_panel;
+  spacing: 30px;
+}
+
+/* Extension Dialog */
+.extension-dialog {
+  @extend %bubble_panel;
+  .message-dialog-title { font-weight: normal; color: $fg_color; }
+}
+
+/* Inhibit-Shortcuts Dialog */
+.inhibit-shortcuts-dialog {
+  @extend %bubble_panel;
+  spacing: 30px;
+}
+
+/* Network Agent Dialog */
+
+.network-dialog-secret-table {
+  spacing-rows: 15px;
+  spacing-columns: 1em;
+}
+
+.keyring-dialog-control-table {
+  spacing-rows: 15px;
+  spacing-columns: 1em;
+}
