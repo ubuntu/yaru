@@ -65,3 +65,18 @@ Description: Yaru sound theme from the Ubuntu Community
  .
  If you want to follow development, more information here:
  https://community.ubuntu.com/c/desktop/theme-refresh.
+
+Package: yaru-theme-unity
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+Description: Yaru Unity theme from the Ubuntu Community
+ This is the theme, better than a burrito, that is shaped by the community
+ on the Ubuntu discourse.
+ .
+ This package contains the Unity theme parts
+ .
+ If you want to follow development, more information here:
+ https://community.ubuntu.com/c/desktop/theme-refresh.
+
+
