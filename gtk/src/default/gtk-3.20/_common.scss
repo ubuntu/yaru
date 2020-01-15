@@ -2339,7 +2339,7 @@ notebook {
     tabs { margin: -1px; }
 
     &.top {
-      border-bottom-style: solid;
+      border-style: solid;
       > tabs {
         margin-bottom: -2px;
         > tab {
@@ -2353,7 +2353,7 @@ notebook {
     }
 
     &.bottom {
-      border-top-style: solid;
+      border-style: solid;
       > tabs {
         margin-top: -2px;
         > tab {
@@ -2367,7 +2367,7 @@ notebook {
     }
 
     &.left {
-      border-right-style: solid;
+      border-style: solid;
       > tabs {
         margin-right: -2px;
         > tab {
@@ -2381,7 +2381,7 @@ notebook {
     }
 
     &.right {
-      border-left-style: solid;
+      border-style: solid;
       > tabs {
         margin-left: -2px;
         > tab {
@@ -3725,7 +3725,7 @@ scrolledwindow {
 
   // This is used when content is touch-dragged past boundaries.
   // draws a box on top of the content, the size changes programmatically.
-  overshoot {
+  overshoot, undershoot {
     &.top {
       @include overshoot(top);
 
