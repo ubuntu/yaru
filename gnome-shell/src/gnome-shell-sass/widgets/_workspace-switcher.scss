@@ -1,0 +1,71 @@
+/* Workspace Switcher */
+.workspace-switcher-group {
+  padding: $base_padding * 2;
+}
+
+.workspace-switcher-container {
+  @extend %osd_panel;
+}
+
+.workspace-switcher {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  spacing: $base_spacing * 2;
+}
+
+.ws-switcher-box {
+  // background: transparent;
+  background: transparent;
+  height: 50px;
+  background-size: 32px;
+  border: 1px solid transparentize($osd_fg_color,0.9);
+  border-radius: $base_border_radius + 3px;
+}
+
+// active workspace in the switcher
+.ws-switcher-active-up,
+.ws-switcher-active-down,
+.ws-switcher-active-left,
+.ws-switcher-active-right {
+  background-color: $selected_bg_color;
+  border: 1px solid if($variant=='light', darken($selected_bg_color, 8%), lighten($selected_bg_color, 5%));
+  color: $selected_fg_color;
+}
+
+/* Workspace pager */
+
+// thumbnails in overview
+.workspace-thumbnails { 
+  @extend %overview_panel;
+  visible-width: 32px; //amount visible before hover
+  spacing: $base_spacing;
+  padding: $base_padding;
+
+  border-radius: $modal_radius 0 0 $modal_radius;
+  border-right-width: 0 !important;
+  //fixme: can't have non uniform borders :(
+  border-top-left-radius:0 !important;
+  border-bottom-left-radius:0 !important;
+
+  &:rtl { 
+    border-radius: 0 $modal_radius $modal_radius 0; 
+    border-left-width: 0 !important;
+  }
+
+  // drag and drop indicator
+  .placeholder {
+    background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
+    background-size: contain;
+    height: 24px;
+  }
+}
+
+// selected indicator
+.workspace-thumbnail-indicator {
+  border: 3px solid $selected_bg_color;
+  border-radius: 3px;
+  padding: 0px;
+  // background-color: transparentize($selected_bg_color, 0.9);
+}
