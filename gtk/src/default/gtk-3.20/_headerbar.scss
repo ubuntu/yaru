@@ -120,6 +120,9 @@ headerbar,
         &:active,
         &:checked {
           @include button(active, $b_color, white);
+          @if $ambiance==true {
+            border-color: darken($suggested_bg_color, 15%);
+          }
         }
 
         &:backdrop,
@@ -353,7 +356,7 @@ headerbar,
         &:active {
           @include button(active);
 
-          border-color: $suggested_border_color;
+          border-color: darken($suggested_border_color, 10%);
         }
 
         &:disabled {
