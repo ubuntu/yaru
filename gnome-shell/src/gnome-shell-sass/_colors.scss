@@ -17,7 +17,7 @@ $top_hilight: $borders_edge;
 
 $warning_color: $yellow;
 $error_color: $red;
-$success_color: if($variant == 'light', $green, darken($green, 10%));
+$success_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
 $destructive_color: if($variant == 'light', $red, darken($red, 10%));
 
 $osd_fg_color: #eeeeec;
@@ -58,8 +58,8 @@ $dash-alpha-value: 0.6;
 $dash-opaque-alpha-value: 0.0;
 
 //special cased widget colors
-$suggested_bg_color: if($variant=='light', $green, darken($green, 5%));
-$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 15%), darken($suggested_bg_color, 30%));
+$suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
+$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
 $progress_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $progress_border_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
