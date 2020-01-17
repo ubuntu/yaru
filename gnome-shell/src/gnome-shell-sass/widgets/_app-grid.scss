@@ -130,11 +130,17 @@ $app_grid_fg_color: #fff;
   padding: 15px 20px;
 
   .page-indicator-icon {
-    width: 10px;
-    height: 10px;
-    border-radius: 10px; // the same as height&width
-    background-color: white;
+    width: 12px;
+    height: 12px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
   }
+
+  &:hover .page-indicator-icon { border-color: white; }
+  &:active .page-indicator-icon { border: none; margin: 2px; background-color: white; }
+  &:checked .page-indicator-icon,
+  &:checked:active .page-indicator-icon { background-color: white;}
 }
 
 // Some hacks I don't even know
