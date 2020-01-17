@@ -40,7 +40,8 @@ $default_key_bg_color: if($variant=='light', darken($osd_bg_color, 11%), lighten
   @include fontsize($base_font_size + 5);
   min-height: $key_size;
   min-width: $key_size;
-
+  border-width: 1px;
+  border-style: solid;
   border-radius: $key_border_radius;
 
   &:grayed { //FIXMEy

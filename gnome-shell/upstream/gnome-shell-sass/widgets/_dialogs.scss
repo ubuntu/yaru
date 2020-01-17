@@ -10,27 +10,14 @@
     max-width: 28em;
   }
 
-  .run-dialog-entry { width: 20em; margin-bottom: 6px; }
-  .run-dialog-error-box {
-    padding-top: 16px;
-    spacing: 6px;
-  }
-
-  .run-dialog-label {
-    @include fontsize($base_font_size + 1.1);
-    font-weight: normal;
-    color: $fg_color;
-    padding-bottom: .4em;
+  .modal-dialog-linked-button {
+    @extend %bubble_button;
   }
 }
 
 .mount-dialog-subject,
 .end-session-dialog-subject { //this should be a generic header class
   @include fontsize($base_font_size + 3);
-}
-
-.modal-dialog-linked-button {
-  @extend %bubble_button;
 }
 
 /* Message Dialog */
@@ -43,6 +30,22 @@
     font-weight: 800;
   }
   .message-dialog-description { text-align: center; }
+}
+
+/* Run Dialog */
+.run-dialog {
+  .run-dialog-entry { width: 20em; margin-bottom: 6px; }
+  .run-dialog-error-box {
+    padding-top: 16px;
+    spacing: 6px;
+  }
+
+  .run-dialog-label {
+    @include fontsize($base_font_size + 1.1);
+    font-weight: normal;
+    color: $fg_color;
+    padding-bottom: .4em;
+  }
 }
 
 /* ShellMountOperation Dialogs */
@@ -108,7 +111,6 @@
 /* Password or Authentication Dialog */
 
 .prompt-dialog {
-  @extend %bubble_panel;
   //this is the width of the entire modal popup
   width: 34em;
 
@@ -188,7 +190,6 @@
 
 /* Audio selection dialog */
 .audio-device-selection-dialog {
-  @extend %bubble_panel;
   spacing: 30px;
 }
 
@@ -227,25 +228,21 @@
 
 /* Access Dialog */
 .access-dialog {
-  @extend %bubble_panel;
   spacing: 30px;
 }
 
 /* Geolocation Dialog */
 .geolocation-dialog {
-  @extend %bubble_panel;
   spacing: 30px;
 }
 
 /* Extension Dialog */
 .extension-dialog {
-  @extend %bubble_panel;
   .message-dialog-title { font-weight: normal; color: $fg_color; }
 }
 
 /* Inhibit-Shortcuts Dialog */
 .inhibit-shortcuts-dialog {
-  @extend %bubble_panel;
   spacing: 30px;
 }
 
