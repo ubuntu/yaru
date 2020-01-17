@@ -3,11 +3,12 @@
 StEntry {
   border-radius: $base_border_radius;
   padding: 4px;
+  min-height: 22px;
   border-width: 1px;
   color: $fg_color;
   @include entry(normal);
   //&:hover { @include entry(hover);}
-  &:focus { @include entry(focus,$fc:transparentize($fg_color,0.5));}
+  &:focus { @include entry(focus);}
   &:insensitive { @include entry(insensitive);}
   selection-background-color: $selected_bg_color;
   selected-color: $selected_fg_color;

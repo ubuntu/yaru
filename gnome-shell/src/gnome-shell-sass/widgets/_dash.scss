@@ -1,13 +1,13 @@
 /* Dash */
 
 $dash_placeholder_size: 32px;
+$dash_spacing: $base_padding + 4px;
 $dash_border_radius: $modal_radius * 1.5;
 
 #dash {
   @extend %overview_panel;
   @include fontsize($base_font_size - 2);
-  padding: 0;
-  padding-bottom: $base_padding + 4px;
+  padding: ($dash_spacing / 2) 0;
 
   //fixme: can't have non uniform borders :(
   border-radius: 0 $dash_border_radius $dash_border_radius 0; 
@@ -32,8 +32,7 @@ $dash_border_radius: $modal_radius * 1.5;
 
 // Dash Items
 .dash-item-container > StWidget {
-  padding: $base_padding + 4px;
-  padding-bottom: 0;
+  padding: ($dash_spacing / 2) $dash_spacing;
 }
 
 // OSD Tooltip

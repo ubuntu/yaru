@@ -38,7 +38,29 @@
 @import 'widgets/window-picker';
 @import 'widgets/workspace-switcher';
 
+// Only needed for gnome-shell versions <= 3.34
 * {
+    font-family: Ubuntu;
     font-weight: normal;
     text-shadow: none;
 }
+// Only needed for gnome-shell versions <= 3.34
+.system-menu-action {
+    -st-icon-style: symbolic;
+    color: $fg_color;
+    border-radius: 32px; /* wish we could do 50% */
+    padding: 13px;
+    border: 1px solid $bubble_borders_color;
+
+    &:hover, &:focus {
+      background-color: $hover_bg_color;
+      color: $fg_color;
+    }
+    &:active { 
+      background-color: $active_bg_color;
+      color: $fg_color;
+      //border-color: $selected_borders_color;
+    }
+
+    & > StIcon { icon-size: 16px; }
+  }

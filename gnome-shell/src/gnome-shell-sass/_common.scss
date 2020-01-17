@@ -108,76 +108,12 @@ stage {
   color: $fg_color;
   background-color: $bg_color;
   border: 1px solid if($variant=='light', rgba(0,0,0, 0.6), $borders_color);
-
-  // entry
-  StEntry { @extend %bubble_entry;}
-
-  // button
-  .button {
-    background-color: $bg_color;
-    color: $fg_color;
-    box-shadow: none;
-
-    &, &:hover, &:focus, &:active, &:disabled { 
-      border-color: $bubble_borders_color;
-    }
-
-    &:hover { background-color: $hover_bg_color;}
-    &:active { 
-      background-color: $selected_bg_color;
-      color: $selected_fg_color;
-    }
-    &:disabled { color: $insensitive_fg_color;}
-  }
-}
-
-// entries in dialogs
-%bubble_entry {
-  color: $fg_color;
-  background-color: darken($bg_color, 2%);
-  border-color: $bubble_borders_color;
-  box-shadow: none;
-  &:focus { border: 2px solid $focus_border_color}
-}
-
-// buttons in dialogs
-%bubble_button {
-  @include button(normal);
-  padding: $base_padding * 2;
-  border-color: $bubble_borders_color;
-  border-width: 1px;
-  border-style: solid;
-  box-shadow:none !important;
-  border-top: 1px solid $bubble_borders_color;
-  border-bottom-width: 0px !important;
-  border-right-width: 0px !important;
-
-  &:insensitive { @include button(insensitive); }
-  &:hover { background-color: $hover_bg_color !important; }
-  &:focus { box-shadow: inset 0 0 0 2px $focus_border_color !important; }
-  &:active { background-color: $active_bg_color !important; }
-  
-
-  // radius is 2 pixel less to fit in bubble
-  &:first-child {
-    border-radius: 0 0 0 $modal_radius - 2px;
-    border-left-width: 0 !important;
-  }
-
-  &:last-child {
-    border-right-width: 0 !important;
-    border-radius: 0 0 $modal_radius - 2px 0;
-  }
-  
-  &:first-child:last-child {
-    border-radius: 0 0 $modal_radius - 2px $modal_radius - 2px;
-    border-right-width: 0 !important;
-  }
 }
 
 // button styling
 %button {
   border-radius: $base_border_radius;
+  border-style: solid;
   border-width: 1px;
   min-height: 22px;
   padding: $base_padding * 0.5 $base_padding * 4;
@@ -189,24 +125,55 @@ stage {
   &:active { @include button(active);}
 }
 
+// buttons in dialogs
+%bubble_button {
+  @include button(normal, $shadow: none);
+  padding: $base_padding * 2;
+  border-style: solid;
+  border-width: 1px;
+  border-left-width: 0;
+  border-bottom-width: 0;
+
+  &:insensitive { @include button(insensitive, $shadow: none); }
+  &:hover { @include button(hover, $shadow: none); }
+  &:focus { @include button(focus, $shadow: none); }
+  &:active { @include button(active, $shadow: none); }
+
+  // radius is 2 pixel less to fit in bubble
+  &:first-child {
+    border-radius: 0 0 0 $modal_radius - 2px;
+  }
+
+  &:last-child {
+    border-right-width: 0;
+    border-radius: 0 0 $modal_radius - 2px 0;
+  }
+  
+  &:first-child:last-child {
+    border-radius: 0 0 $modal_radius - 2px $modal_radius - 2px;
+  }
+}
+
 
 // notification styling
 %notification_bubble {
+  border-width: 1px;
+  border-style: solid;
   border-radius:$base_border_radius + 2px;
   padding: 0;
   margin: $base_margin;
 
   @include button(normal);
 
-  &:focus,
+  &:focus {
+    @include button(focus);
+  }
+
   &:hover {
-    // margin-top: $base_margin - 1px;
-    // margin-bottom: $base_margin + 1px;
     @include button(hover);
   }
 
   &:active {
     @include button(active);
-    // margin: $base_margin;
   }
 }

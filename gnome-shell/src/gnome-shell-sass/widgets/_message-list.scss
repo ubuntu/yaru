@@ -23,11 +23,8 @@
 }
 
 // clear button
-.message-list-clear-button {
+.message-list-clear-button.button {
   margin:$base_margin $base_margin*2;
-  .button {
-    @extend %button;
-  }
 }
 
 // message bubbles

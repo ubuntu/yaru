@@ -22,20 +22,13 @@
     padding: $base_padding * 1.5;
     margin: $base_margin;
     border: 1px solid transparent;
-
-    &:focus,
-    &:hover {
-      border-radius:$base_border_radius + 2px;
-      margin-top: $base_margin - 1px;
-      margin-bottom: $base_margin + 1px;
-    }
+    border-radius: $base_border_radius + 2px;
 
     &:hover { @include button(hover);}
     &:focus { @include button(focus);}
 
-    &:active { 
+    &:active {
       @include button(active);
-      margin: $base_margin;
     }
 
     // weekday label

@@ -5,7 +5,7 @@ $notification_banner_width: 34em;
 
 // Banner notifications
 .notification-banner {
-  min-height: $notification_banner_height * 0.5;
+  min-height: $notification_banner_height;
   width: $notification_banner_width;
   @include fontsize($base_font_size);
   margin: $base_margin;
@@ -27,9 +27,6 @@ $notification_banner_width: 34em;
     color: $fg_color;
   }
 
-  // entries
-  StEntry { @extend %bubble_entry; }
-
   .notification-icon {
     padding: 5px;
   }
@@ -43,18 +40,11 @@ $notification_banner_width: 34em;
 
   .notification-actions {
     padding-top: 0;
-    color: $fg_color;
-    border-top: 1px solid $bubble_borders_color;
     spacing: 0;
   }
 
   .notification-button {
     @extend %bubble_button;
-    min-height: $notification_banner_height * 0.4;
-    padding: $base_padding !important;
-    border-top-width: 0 !important;
-    
-    &:focus { box-shadow: none !important; }
   }
 }
 
