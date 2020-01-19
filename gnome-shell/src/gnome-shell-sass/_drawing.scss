@@ -43,9 +43,7 @@
 
   }
   @if $t==focus {
-    border-color: if($fc==$selected_bg_color,
-              $selected_borders_color,
-              darken($fc,35%));
+    border-color: $fc;
     box-shadow: inset 0 0 0 1px $fc;
   }
   @if $t==hover { }
