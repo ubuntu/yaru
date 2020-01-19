@@ -312,6 +312,7 @@ notebook {
           border-radius: 4px 4px 0 0;
 
           &:hover {
+            background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
           }
@@ -340,6 +341,7 @@ notebook {
           border-radius: 0 0 4px 4px;
 
           &:hover {
+            background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
           }
@@ -368,6 +370,7 @@ notebook {
           border-radius: 4px 0 0 4px;
 
           &:hover {
+            background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
           }
@@ -396,6 +399,7 @@ notebook {
           border-radius: 0 4px 4px 0;
 
           &:hover {
+            background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
           }
@@ -494,7 +498,7 @@ notebook {
       border-color: transparent; //
 
       &:hover {
-        color: mix($insensitive_fg_color, $fg_color, 50%);
+        color: $fg_color;
 
         &.reorderable-page {
           border-color: transparentize($borders_color, 0.7);
