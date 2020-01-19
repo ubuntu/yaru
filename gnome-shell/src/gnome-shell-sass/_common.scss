@@ -135,9 +135,9 @@ stage {
   border-bottom-width: 0;
 
   &:insensitive { @include button(insensitive, $shadow: none); }
-  &:hover { @include button(hover, $shadow: none); }
+  &:hover { background-color: $hover_bg_color !important; }
   &:focus { @include button(focus, $shadow: none); }
-  &:active { @include button(active, $shadow: none); }
+  &:active { background-color: $active_bg_color !important; }
 
   // radius is 2 pixel less to fit in bubble
   &:first-child {
