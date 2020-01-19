@@ -70,11 +70,11 @@ $default_key_bg_color: darken($key_bg_color, 4%);
   }
 
   // key assets
-  &.shift-key-lowercase {background-image: url("key-shift.svg");}
-  &.shift-key-uppercase {background-image: url("key-shift-uppercase.svg");}
-  &.shift-key-uppercase:latched {background-image: url("key-shift-latched-uppercase.svg");}
-  &.hide-key {background-image: url("key-hide.svg");}
-  &.layout-key {background-image: url("key-layout.svg");}
+  &.shift-key-lowercase { background-image: if($variant == 'light', url("key-shift.svg"), url("key-shift-dark.svg")); }
+  &.shift-key-uppercase { background-image: url("key-shift-uppercase.svg"); }
+  &.shift-key-uppercase:latched { background-image: url("key-shift-latched-uppercase.svg"); }
+  &.hide-key { background-image: f($variant == 'light', url("key-hide.svg"), url("key-hide-dark.svg")); }
+  &.layout-key {background-image: if($variant == 'light', url("key-layout.svg"), url("key-layout-dark.svg")); }
 
   &, &.default-key, &.enter-key { &, &:hover, &:checked, &:active { box-shadow: none; } }
 }
