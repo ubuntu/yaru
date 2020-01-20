@@ -6,11 +6,14 @@
 
 ## Render Scripts
 
-For simplified development, has various scripts to render and build the cursor set are provided
+For simplified development, has various scripts to render and build the cursor set are provided:
 
- - [**render-cursors.py**](./render-cursors.py) will render the cursor PNG assets into [bitmaps](./bitmaps) at the appropriate sizes; ran by passing the source filename to it: `./render-cursors.py source-cursors.svg`
- - [**x11-make.sh**](./x11-make.sh) builds the cursor assets into a Xcursor set
- - [**w32-make.sh**](./w32-make.sh) builds the cursor assets into a Windows cursor set
+ - [**render-cursors.py**](./render-cursors.py) will render the cursor PNG assets into [bitmaps](./bitmaps) at the appropriate sizes; run by passing the source filename to it: `./render-cursors.py source-cursors.svg`
+Inside the Bitmaps folder you'll find folders containing the rendered `.png` files (24x24, 32x32,...). These must be removed, but the `.in` files are needed for the script to run.
+
+ - [**x11-make.sh**](./x11-make.sh) builds the cursor assets into a Xcursor set and renders them to `/icons/Suru/cursors/`. These files have no extension.
+ 
+ - [**w32-make.sh**](./w32-make.sh) builds the cursor assets into a Windows cursor set and renders them to `/icons/Suru/cursors/`. These files have the `.cur`extension.
 
 ## Cursor SVG source
 
