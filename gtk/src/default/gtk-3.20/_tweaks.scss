@@ -662,7 +662,8 @@ scrolledwindow {
 /************
  * checkbox *
  ************/
-check {
+check,
+radio {
   menu menuitem & {
     &, &:checked, &:indeterminate {
       &, &:hover, &:disabled {
