@@ -2981,7 +2981,7 @@ radio {
   }
 
   &:backdrop { transition: $backdrop_transition; }
-  
+
   @if $variant == 'light' {
     // the borders of the light variant versions of checks and radios are too similar in luminosity to the selected background
     // color, hence we need special casing.

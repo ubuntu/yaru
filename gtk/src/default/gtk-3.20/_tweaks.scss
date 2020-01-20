@@ -662,3 +662,17 @@ scrolledwindow {
     }
   }
 }
+
+/************
+ * checkbox *
+ ************/
+check,
+radio {
+  menu menuitem & {
+    &, &:checked, &:indeterminate {
+      &, &:hover, &:disabled {
+        border-color: transparent;
+      }
+    }
+  }
+}
