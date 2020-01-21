@@ -141,9 +141,9 @@ StScrollBar {
   -barlevel-background-color: mix($borders_color, $bg_color, 50%);
   -barlevel-border-color: $borders_color; //trough border color
   -barlevel-active-background-color: $progress_bg_color; //active trough fill
-  -barlevel-active-border-color: if($variant == 'light', $progress_bg_color, $borders_color); //active trough border
+  -barlevel-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%)); //active trough border
   -barlevel-overdrive-color: $destructive_color;
-  -barlevel-overdrive-border-color: darken($destructive_color,10%);
+  -barlevel-overdrive-border-color: darken($destructive_color, 10%);
   -barlevel-overdrive-separator-width: 0.2em;
   -barlevel-border-width: 1px;
   -slider-handle-radius: 8px;
