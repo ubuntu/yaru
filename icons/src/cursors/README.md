@@ -28,4 +28,4 @@ Both the busy cursors (the large and pointer versions) require 60 different asse
 
 ## CSS Cursors test
 
-The [csscursors.html](./csscursors.html) let's you see your browser's cursor style and where the HOTSPOT is simply by hover over the boxes containing the CSS cursor name.
+The [csscursors.html](./csscursors.html) let's you see your browser's cursor style and where the HOTSPOT is simply by hover over the boxes containing the CSS cursor name. In `CURSORNAMES.md` you'll find the naming specification and a description of the cursors.
