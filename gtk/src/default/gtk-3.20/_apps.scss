@@ -476,12 +476,23 @@ terminal-window {
    ***********/
 
   #live_installer {
-    #dot_grid progressbar	{ border-radius: 100%; padding: 1px; background-color: white; border: 1px solid $progress_bg_color; }
+    #dot_grid progressbar	{
+      border-radius: 100%;
+      padding: 1px;
+      background-color: white;
+      border: 1px solid $progress_bg_color;
 
-    #dot_grid progressbar .empty { padding: 0px; background-color: white; box-shadow: inset 0 0 10px white; border-radius: 100%; }
-    
-    #dot_grid progressbar .full progress { padding: 1px; box-shadow: inset 0 0 10px $progress_bg_color; border-radius: 100%; }
+      .empty {
+        border-radius: 100%;
+        background-color: white;
+        padding: 0px;
+      }
 
+      .full progress {
+        border-radius: 100%;
+        padding: 1px;
+      }
+    }
   }
   #dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
 
