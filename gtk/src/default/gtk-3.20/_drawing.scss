@@ -193,7 +193,7 @@
   // normal button
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    outline-color: $focus_border_color;
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     $button_fill: if($variant == 'light', linear-gradient(to top, lighten($c, 2%) 2px, lighten($c, 2%)), linear-gradient(to top, lighten($c, 2%) 2px, lighten($c, 2%))) !global;
@@ -207,7 +207,7 @@
   // hovered button
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    outline-color: $focus_border_color;
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     @if $variant == 'light' {
@@ -229,7 +229,7 @@
   // normal button alternative look
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    outline-color: $focus_border_color;
     border-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     @include _button_text_shadow($tc, $c);
     @if $variant == 'light' {
@@ -251,7 +251,7 @@
   // hovered button alternative look
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    outline-color: $focus_border_color;
     border-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     @if $variant == 'light' {
       $button_fill: linear-gradient(to bottom, lighten($c, 9%) 10%, lighten($c, 4%) 90%) !global;
@@ -272,7 +272,7 @@
   // pushed button
   //
     color: $tc;
-    outline-color: transparentize($tc, 0.7);
+    outline-color: $focus_border_color;
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     $button_fill: if($variant == 'light', image(darken($c, 14%)), image(darken($c, 9%))) !global;
     background-image: $button_fill;
