@@ -675,4 +675,21 @@ radio {
       }
     }
   }
+
+  & {
+    // for checked
+    @each $t in (':checked'), (':indeterminate') {
+      &#{$t} {
+        @each $state, $t in ("", "normal"),
+                            (":hover", "hover"),
+                            (":active", "active") {
+          &#{$state} {
+            border-color: if($variant=='light', darken($checkradio_bg_color, 10%), lighten($checkradio_bg_color, 5%));
+          }
+        }
+      }
+    }
+  }
 }
+
+
