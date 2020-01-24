@@ -157,7 +157,7 @@ generated_css = []
 foreach f : gtk3_scss_sources
   generated_css += custom_target('light-gtk-3.20-' + f + '-generated.css',
       input: f + '.scss',
-      output: f + '-generated.css',
+      output: f + '-light-generated.css',
       depend_files: files(gtk3_scss_dependencies),
       command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
   )

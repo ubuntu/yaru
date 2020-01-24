@@ -6,7 +6,6 @@ gtk3_dir = join_paths(theme_dir, 'gtk-3.0')
 # theme sources .scss files
 gtk3_scss_sources = [
   'gtk',
-  'gtk-dark', # applications requesting dark theme
 ]
 
 
@@ -174,9 +173,9 @@ gtk3_assets = [
 # and install to themes/THEMENAME/gtk-3.0
 generated_css = []
 foreach f : gtk3_scss_sources
-  generated_css += custom_target('light-gtk-3.0-' + f + '-generated.css',
+  generated_css += custom_target('gtk-3.0-' + f + '-generated.css',
       input: f + '.scss',
-      output: f + '-generated.css',
+      output: f + '-dark-generated.css',
       depend_files: files(gtk3_scss_dependencies),
       command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
   )
@@ -204,7 +203,7 @@ gresource = gnome.compile_resources('gtk30', gresource_xml,
   dependencies: generated_css,
 )
 
-custom_target('light-gtk-3.0-gtk.gresource',
+custom_target('gtk-3.0.gresource',
   input: gresource,
   output: 'gtk.gresource',
   command: ['cp', '@INPUT@', '@OUTPUT@'],
@@ -213,4 +212,4 @@ custom_target('light-gtk-3.0-gtk.gresource',
 )
 
 # Install stub CSS files
-install_data(['gtk.css', 'gtk-dark.css'], install_dir: gtk3_dir)
+install_data(['gtk.css'], install_dir: gtk3_dir)
