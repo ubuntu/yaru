@@ -23,11 +23,8 @@ $_titlebutton_height: 24px;
   // top, bottom, right, left
   //
   
-  $us_shadow_color: $silk;
-  $us_shadow_alpha: 0.8;
-  @if $variant=='dark' {
-    $us_shadow_color: $jet;
-  }
+  $_us_shadow_color: if($variant=='light', $silk, $jet);
+  $_us_shadow_alpha: 0.8;
 
   $_gradient_dir: left;
   $_dash_bg_size: 10px 1px;
@@ -51,20 +48,20 @@ $_titlebutton_height: 24px;
   border: none;
 
   @if ($p == left) {
-    box-shadow: inset 2px 0 0 transparentize($us_shadow_color,$us_shadow_alpha),
-                inset 1px 0 0 transparentize(darken($us_shadow_color,20%),$us_shadow_alpha);
+    box-shadow: inset 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
   }
   @else if ($p == right) {
-    box-shadow: inset -2px 0 0 transparentize($us_shadow_color,$us_shadow_alpha),
-                inset -1px 0 0 transparentize(darken($us_shadow_color,20%),$us_shadow_alpha);
+    box-shadow: inset -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset -1px 0 0 transparentize(darken($us_shadow_color, 20%), $us_shadow_alpha);
   }
   @else if ($p == top) {
-    box-shadow: inset 0 2px 0 0 transparentize($us_shadow_color,$us_shadow_alpha),
-                inset 0 1px 0 0 transparentize(darken($us_shadow_color,20%),$us_shadow_alpha);
+    box-shadow: inset 0 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset 0 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
   }
   @else if ($p == bottom) {
-      box-shadow: inset 0 -2px 0 0 transparentize($us_shadow_color,$us_shadow_alpha),
-                  inset 0 -1px 0 0 transparentize(darken($us_shadow_color,20%),$us_shadow_alpha);
+      box-shadow: inset 0 -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                  inset 0 -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
   }
 }
 
