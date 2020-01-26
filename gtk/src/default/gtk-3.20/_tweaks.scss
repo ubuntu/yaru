@@ -274,12 +274,12 @@ menubar,
 
     @if $variant == 'light' {
       @include button(normal-alt, $edge: $shadow_color);
-    } 
+    }
     @else {
       @include button(normal-alt, $c: lighten($bg_color,6%), $edge: $shadow_color);
     }
   }
-  
+
   image { color: transparent; } /* only show i / o for the accessible theme */
 
   &:hover slider {
@@ -363,7 +363,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 4px 4px 0 0;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -392,7 +392,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 0 0 4px 4px;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -421,7 +421,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 4px 0 0 4px;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -450,7 +450,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 0 4px 4px 0;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
