@@ -583,6 +583,7 @@ notebook {
 
         &.reorderable-page {
           border-color: $backdrop_borders_color;
+          border-bottom-color: transparent;
           background-color: $backdrop_bg_color;
         }
       }
