@@ -369,7 +369,9 @@ notebook {
             border-color: $borders_color;
           }
 
-          &:backdrop { box-shadow: none; }
+          &:backdrop {
+            box-shadow: none;
+          }
 
           &:checked {
             background-color: $base_color;
@@ -378,6 +380,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -407,6 +410,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -436,6 +440,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -465,6 +470,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -570,6 +576,7 @@ notebook {
       &:checked {
         color: $fg_color;
         font-weight: bold;
+
         &.reorderable-page {
           border-color: transparentize($borders_color, 0.5);
           background-color: transparentize($bg_color, 0.5);
@@ -584,7 +591,7 @@ notebook {
         &.reorderable-page {
           border-color: $backdrop_borders_color;
           border-bottom-color: transparent;
-          background-color: $backdrop_bg_color;
+          background-color: $backdrop_base_color;
         }
       }
 
