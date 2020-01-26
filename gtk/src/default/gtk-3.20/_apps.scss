@@ -69,10 +69,7 @@ $ambiance: null !default;
 
     paned > separator {
       // separator between sidebar and main window view
-      $_alpha: if($variant=='light', 0.08, 0.16);
-      $_separator_color: rgba(0, 0, 0, $_alpha);
-
-      background-image: image($_separator_color);
+      background-image: image(if($variant=='light', transparentize($borders_color, 0.6), darken($borders_color, 1%)));
       &:backdrop { background-image: image(transparentize($borders_color, 0.7)); }
     }
 
