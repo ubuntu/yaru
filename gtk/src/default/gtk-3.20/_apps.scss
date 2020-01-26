@@ -26,7 +26,7 @@ $ambiance: null !default;
     @at-root %dim_icons_in_backdrop,
     & *scrolledwindow:backdrop { opacity: 0.9; }
 
-    paned box.floating-bar {  
+    paned box.floating-bar {
       background-color: mix($bg_color, $base_color, 50%);
       border-style: solid;
       border-color: if($variant=='light', lighten($borders_color, 8.3%), darken($borders_color, 1%));
