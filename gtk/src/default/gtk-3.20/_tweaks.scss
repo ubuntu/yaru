@@ -549,8 +549,8 @@ notebook {
 
       outline-offset: -5px;
 
-      color: $fg_color;
-      font-weight: 500;
+      color: transparentize($fg_color, 0.1);
+      font-weight: bold;
 
       border-width: 1px;         // for reorderable tabs
       border-color: transparent; //
