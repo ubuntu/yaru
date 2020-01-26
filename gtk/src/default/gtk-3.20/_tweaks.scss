@@ -695,6 +695,10 @@ radio {
   }
 }
 
+.sidebar {
+  background-color: $bg_color;
+}
+
 // Fix for slimed down circular buttons, could need a change upstream since this happens for
 // Some of the circular buttons too there
 * { & button.circular { min-width: 0; } }
