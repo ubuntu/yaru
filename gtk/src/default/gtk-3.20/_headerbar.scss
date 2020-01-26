@@ -59,7 +59,7 @@ headerbar,
     }
 
     &:backdrop {
-      $_btn_backdrop_border: darken($headerbar_bg_color, 8%);
+      $_btn_backdrop_border: $headerbar_bg_color;
       &,
       &.flat {
           @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
