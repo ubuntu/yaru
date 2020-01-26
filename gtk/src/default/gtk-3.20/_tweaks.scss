@@ -22,7 +22,7 @@ $_titlebutton_height: 24px;
   // possible $p values:
   // top, bottom, right, left
   //
-  
+
   $_us_shadow_color: if($variant=='light', $silk, $jet);
   $_us_shadow_alpha: 0.8;
 
@@ -39,7 +39,7 @@ $_titlebutton_height: 24px;
     $_gradient_repeat: repeat-y;
     $_bg_pos: $p center;
   }
-  
+
   padding-#{$p}: 1px;
   background-size: $_dash_bg_size;
   background-repeat: $_gradient_repeat;
