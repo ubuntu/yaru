@@ -549,7 +549,7 @@ notebook {
 
       outline-offset: -5px;
 
-      color: transparentize($fg_color, 0.1);
+      color: transparentize($fg_color, 0.2);
       font-weight: bold;
 
       border-width: 1px;         // for reorderable tabs
@@ -565,7 +565,7 @@ notebook {
       }
 
       &:backdrop {
-        color: mix($backdrop_fg_color, $backdrop_bg_color, 60%);
+        color: transparentize($backdrop_fg_color, 0.2);
 
         &.reorderable-page {
           border-color: transparent;
@@ -575,7 +575,6 @@ notebook {
 
       &:checked {
         color: $fg_color;
-        font-weight: bold;
 
         &.reorderable-page {
           border-color: transparentize($borders_color, 0.5);
