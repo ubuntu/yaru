@@ -70,12 +70,6 @@ headerbar *, button * {
   text-shadow: none;
   -gtk-icon-shadow: none;
 }
-// headerbar border-color is a bit too strong in the dark theme
-headerbar {
-  &, &.titlebar:not(headerbar) {
-    border-color: lighten($alt_borders_color, if($variant=='light', 0%, 8%));
-  }
-}
 
 // blue spinner
 spinner {
