@@ -22,7 +22,7 @@ $_titlebutton_height: 24px;
   // possible $p values:
   // top, bottom, right, left
   //
-  
+
   $_us_shadow_color: if($variant=='light', $silk, $jet);
   $_us_shadow_alpha: 0.8;
 
@@ -39,7 +39,7 @@ $_titlebutton_height: 24px;
     $_gradient_repeat: repeat-y;
     $_bg_pos: $p center;
   }
-  
+
   padding-#{$p}: 1px;
   background-size: $_dash_bg_size;
   background-repeat: $_gradient_repeat;
@@ -268,12 +268,12 @@ menubar,
 
     @if $variant == 'light' {
       @include button(normal-alt, $edge: $shadow_color);
-    } 
+    }
     @else {
       @include button(normal-alt, $c: lighten($bg_color,6%), $edge: $shadow_color);
     }
   }
-  
+
   image { color: transparent; } /* only show i / o for the accessible theme */
 
   &:hover slider {
@@ -366,11 +366,11 @@ notebook {
     border-color: $borders_color;
     border-width: 1px;
 
-    background: if($variant=='light', $porcelain, $bg_color);
+    background: $bg_color;
 
     &:backdrop {
       border-color: $backdrop_borders_color;
-      background-color: $backdrop_dark_fill;
+      background-color: $backdrop_bg_color;
     }
 
     tabs { margin: -1px; }
@@ -384,13 +384,15 @@ notebook {
           border: 1px solid transparent;
           border-radius: 4px 4px 0 0;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
           }
 
-          &:backdrop { box-shadow: none; }
+          &:backdrop {
+            box-shadow: none;
+          }
 
           &:checked {
             background-color: $base_color;
@@ -399,6 +401,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -413,7 +416,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 0 0 4px 4px;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -428,6 +431,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -442,7 +446,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 4px 0 0 4px;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -457,6 +461,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -471,7 +476,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 0 4px 4px 0;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -486,6 +491,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -580,7 +586,7 @@ notebook {
       }
 
       &:backdrop {
-        color: mix($backdrop_fg_color, $backdrop_bg_color, 60%);
+        color: transparentize($backdrop_fg_color, 0.2);
 
         &.reorderable-page {
           border-color: transparent;
@@ -590,7 +596,7 @@ notebook {
 
       &:checked {
         color: $fg_color;
-        font-weight: bold;
+
         &.reorderable-page {
           border-color: transparentize($borders_color, 0.5);
           background-color: transparentize($bg_color, 0.5);
@@ -604,7 +610,8 @@ notebook {
 
         &.reorderable-page {
           border-color: $backdrop_borders_color;
-          background-color: $backdrop_bg_color;
+          border-bottom-color: transparent;
+          background-color: $backdrop_base_color;
         }
       }
 
