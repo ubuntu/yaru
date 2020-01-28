@@ -345,11 +345,11 @@ notebook {
     border-color: $borders_color;
     border-width: 1px;
 
-    background: if($variant=='light', $porcelain, $bg_color);
+    background: $bg_color;
 
     &:backdrop {
       border-color: $backdrop_borders_color;
-      background-color: $backdrop_dark_fill;
+      background-color: $backdrop_bg_color;
     }
 
     tabs { margin: -1px; }
