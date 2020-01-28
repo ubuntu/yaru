@@ -7,7 +7,6 @@ gtk3_dir = join_paths(theme_dir, 'gtk-3.0')
 gtk3_scss_sources = [
   'gtk',
   'gtk-dark', # applications requesting dark theme
-  'gtk-light', # light variation of the light theme (with the same corresponding dark theme)
 ]
 
 
@@ -214,4 +213,4 @@ custom_target('light-gtk-3.0-gtk.gresource',
 )
 
 # Install stub CSS files
-install_data(['gtk.css', 'gtk-dark.css', 'gtk-light.css'], install_dir: gtk3_dir)
+install_data(['gtk.css', 'gtk-dark.css'], install_dir: gtk3_dir)

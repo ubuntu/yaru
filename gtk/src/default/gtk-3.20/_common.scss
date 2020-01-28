@@ -19,7 +19,7 @@ $_btn_pad: if($_sizevariant=='default', 4px 9px, 2px 6px);
 $_hb_btn_pad: if($_sizevariant=='default', 6px, 5px);
 $_img_btn_pad: if($_sizevariant=='default', 5px, 2px);
 $_sel_menu_pad: if($_sizevariant=='default', 6px 10px, 4px 10px);
-$_circ_btn_pad: if($_sizevariant=='default', 4px, 2px);
+$_circ_btn_pad: if($_sizevariant=='default', 4px, 2px 6px);
 $_switch_margin: if($_sizevariant=='default', 10px, 7px);
 
 * {
@@ -267,6 +267,47 @@ spinner {
   }
 }
 
+/**********************
+ * General Typography *
+ **********************/
+
+.large-title {
+   font-weight: 300;
+   font-size: 24pt;
+   letter-spacing: 0.2rem;
+}
+.title-1 {
+   font-weight: 800;
+   font-size: 20pt;
+}
+.title-2 {
+   font-weight: 800;
+   font-size: 15pt;
+}
+.title-3 {
+   font-weight: 700;
+   font-size: 15pt;
+}
+.title-4 {
+   font-weight: 700;
+   font-size: 13pt;
+}
+.heading {
+   font-weight: 700;
+   font-size: 11pt;
+}
+.body {
+   font-weight: 400;
+   font-size: 11pt;
+}
+.caption-heading {
+   font-weight: 700;
+   font-size: 9pt;
+}
+.caption {
+   font-weight: 400;
+   font-size: 9pt;
+}
 
 /****************
  * Text Entries *
@@ -2981,7 +3022,7 @@ radio {
   }
 
   &:backdrop { transition: $backdrop_transition; }
-
+  
   @if $variant == 'light' {
     // the borders of the light variant versions of checks and radios are too similar in luminosity to the selected background
     // color, hence we need special casing.
