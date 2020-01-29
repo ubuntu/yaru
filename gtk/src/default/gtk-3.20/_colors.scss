@@ -49,7 +49,7 @@ $shadow_color: transparentize(black, 0.9);
 $drop_target_color: $success_color;
 
 //insensitive state derived colors
-$insensitive_fg_color: if($variant == 'light', mix($fg_color, $bg_color, 50%), mix($fg_color, $bg_color, 33%));
+$insensitive_fg_color: if($variant == 'light', mix($fg_color, $bg_color, 50%), mix($fg_color, $bg_color, 40%));
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: $borders_color;
 
