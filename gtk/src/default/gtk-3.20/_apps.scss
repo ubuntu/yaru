@@ -27,9 +27,9 @@ $ambiance: null !default;
     & *scrolledwindow:backdrop { opacity: 0.9; }
 
     paned box.floating-bar {
-      background: $bg_color;
+      background-color: $bg_color;
       border-style: solid;
-      border-color: $borders_color;
+      border-color: if($variant=='light', lighten($borders_color, 8.3%), darken($borders_color, 1%));
       border-width: 1px 0 0 1px;
       border-radius: $button_radius 0 0 0;
     }
@@ -69,10 +69,7 @@ $ambiance: null !default;
 
     paned > separator {
       // separator between sidebar and main window view
-      $_alpha: if($variant=='light', 0.08, 0.16);
-      $_separator_color: rgba(0, 0, 0, $_alpha);
-
-      background-image: image($_separator_color);
+      background-image: image(if($variant=='light', transparentize($borders_color, 0.6), darken($borders_color, 1%)));
       &:backdrop { background-image: image(transparentize($borders_color, 0.7)); }
     }
 
@@ -127,6 +124,22 @@ $ambiance: null !default;
         border-radius: 0px 0px 0px 0px;
     }
   }
+
+  scrolledwindow widget.view:selected {
+      color: $text_color; // label color when right clicking
+      border: none;
+
+      // reduces orangeness of selected folder icons
+      background-color: rgba(255, 255, 255, 0.1);  // folder icon is tinted based on this
+                                                   // near transparent white results in no tint
+                                                   // completely transparent tints the icon black
+         &:backdrop {
+           background-color: $orange;
+           color: $selected_fg_color;
+         }
+  }
+
+scrolledwindow widget.view:active { background-color: $ash; } // icon color when right clicking and in backdrop
 
 /************
  * Terminal *
