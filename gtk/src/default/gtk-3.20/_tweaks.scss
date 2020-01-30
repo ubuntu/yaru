@@ -22,7 +22,7 @@ $_titlebutton_height: 24px;
   // possible $p values:
   // top, bottom, right, left
   //
-  
+
   $_us_shadow_color: if($variant=='light', $silk, $jet);
   $_us_shadow_alpha: 0.8;
 
@@ -39,7 +39,7 @@ $_titlebutton_height: 24px;
     $_gradient_repeat: repeat-y;
     $_bg_pos: $p center;
   }
-  
+
   padding-#{$p}: 1px;
   background-size: $_dash_bg_size;
   background-repeat: $_gradient_repeat;
@@ -69,12 +69,6 @@ $_titlebutton_height: 24px;
 headerbar *, button * {
   text-shadow: none;
   -gtk-icon-shadow: none;
-}
-// headerbar border-color is a bit too strong in the dark theme
-headerbar {
-  &, &.titlebar:not(headerbar) {
-    border-color: lighten($alt_borders_color, if($variant=='light', 0%, 8%));
-  }
 }
 
 // blue spinner
@@ -274,12 +268,12 @@ menubar,
 
     @if $variant == 'light' {
       @include button(normal-alt, $edge: $shadow_color);
-    } 
+    }
     @else {
       @include button(normal-alt, $c: lighten($bg_color,6%), $edge: $shadow_color);
     }
   }
-  
+
   image { color: transparent; } /* only show i / o for the accessible theme */
 
   &:hover slider {
@@ -319,21 +313,48 @@ menubar,
   }
 }
 
-// Blue focus "ring" - upstream is also interested in this, so better get this into upstream at some time
+// Focus "ring" - upstream is also interested in this, so better get this into upstream at some time
 *:not(button) {
   outline-color: $focus_border_color;
   outline-style: solid;
   outline-offset: -2px;
   outline-width: 2px;
-  -gtk-outline-radius: $button-radius - 2;
+  -gtk-outline-radius: $button-radius;
 }
-// We need to re-evaluate where we want the ring though
-switch slider {
+
+button {
   outline-color: $focus_border_color;
   outline-style: solid;
   outline-offset: -1px;
   outline-width: 2px;
+  -gtk-outline-radius: $button-radius;
+}
+
+switch slider {
+  outline-color: $focus_border_color;
+  outline-style: solid;
+  outline-offset: -2px;
+  outline-width: 2px;
   -gtk-outline-radius: 100%;
+}
+
+checkbutton,
+radiobutton {
+  outline-color: $focus_border_color;
+  outline-offset: 1px;
+  outline-width: 2px;
+}
+
+row {
+  outline-color: $focus_border_color;
+  outline-offset: -2px;
+
+  &:selected {
+    outline-color: $bg_color;
+    outline-style: dashed;
+    outline-width: 1px;
+    -gtk-outline-radius: 1px;
+  }
 }
 
 /*************
@@ -345,11 +366,11 @@ notebook {
     border-color: $borders_color;
     border-width: 1px;
 
-    background: if($variant=='light', $porcelain, $bg_color);
+    background: $bg_color;
 
     &:backdrop {
       border-color: $backdrop_borders_color;
-      background-color: $backdrop_dark_fill;
+      background-color: $backdrop_bg_color;
     }
 
     tabs { margin: -1px; }
@@ -363,13 +384,15 @@ notebook {
           border: 1px solid transparent;
           border-radius: 4px 4px 0 0;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
           }
 
-          &:backdrop { box-shadow: none; }
+          &:backdrop {
+            box-shadow: none;
+          }
 
           &:checked {
             background-color: $base_color;
@@ -378,6 +401,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -392,7 +416,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 0 0 4px 4px;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -407,6 +431,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -421,7 +446,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 4px 0 0 4px;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -436,6 +461,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -450,7 +476,7 @@ notebook {
           border: 1px solid transparent;
           border-radius: 0 4px 4px 0;
 
-          &:hover:not(:backdrop) {
+          &:hover:not(:checked):not(:backdrop) {
             background-color: transparentize($base_color, 0.5);
             box-shadow: none;
             border-color: $borders_color;
@@ -465,6 +491,7 @@ notebook {
             box-shadow: none;
 
             &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
           }
         }
       }
@@ -559,7 +586,7 @@ notebook {
       }
 
       &:backdrop {
-        color: mix($backdrop_fg_color, $backdrop_bg_color, 60%);
+        color: transparentize($backdrop_fg_color, 0.2);
 
         &.reorderable-page {
           border-color: transparent;
@@ -569,7 +596,7 @@ notebook {
 
       &:checked {
         color: $fg_color;
-        font-weight: bold;
+
         &.reorderable-page {
           border-color: transparentize($borders_color, 0.5);
           background-color: transparentize($bg_color, 0.5);
@@ -583,7 +610,8 @@ notebook {
 
         &.reorderable-page {
           border-color: $backdrop_borders_color;
-          background-color: $backdrop_bg_color;
+          border-bottom-color: transparent;
+          background-color: $backdrop_base_color;
         }
       }
 
@@ -699,6 +727,13 @@ radio {
   background-color: $bg_color;
 }
 
+/************
+ * Treeview *
+ ************/
+
+treeview:hover { background: $popover_hover_color; }
+
 // Fix for slimed down circular buttons, could need a change upstream since this happens for
 // Some of the circular buttons too there
 * { & button.circular { min-width: 0; } }
+
