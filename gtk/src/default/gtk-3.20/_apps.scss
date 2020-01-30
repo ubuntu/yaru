@@ -28,7 +28,6 @@ $ambiance: null !default;
 
     paned box.floating-bar {  
       background-color: $bg_color;
-
       border-style: solid;
       border-color: if($variant=='light', lighten($borders_color, 8.3%), darken($borders_color, 1%));
       border-width: 1px 0 0 1px;
