@@ -330,12 +330,11 @@ button {
   -gtk-outline-radius: $button-radius;
 }
 
-switch slider {
-  outline-color: $focus_border_color;
-  outline-style: solid;
-  outline-offset: -2px;
-  outline-width: 2px;
-  -gtk-outline-radius: 100%;
+switch {
+  &, &:hover { slider { outline-color: transparent; } }
+  &:focus {
+    box-shadow: 0 0 0 3px if($variant=='light', lighten(opacify($focus_border_color, 1), 20%), $focus_border_color);
+  }
 }
 
 checkbutton,
