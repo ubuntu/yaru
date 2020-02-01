@@ -14,7 +14,7 @@ headerbar,
   }
 
   &:backdrop {
-    border-color: mix(darken($inkstone, 11%), darken($inkstone, 1%), 80%);
+    border-color: $inkstone;
     background-color: $backdrop_headerbar_bg_color;
     box-shadow: inset 0 1px $headerbar_border_color;
   }
@@ -59,7 +59,7 @@ headerbar,
     }
 
     &:backdrop {
-      $_btn_backdrop_border: darken($headerbar_bg_color, 8%);
+      $_btn_backdrop_border: $headerbar_bg_color;
       &,
       &.flat {
           @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
@@ -120,6 +120,9 @@ headerbar,
         &:active,
         &:checked {
           @include button(active, $b_color, white);
+          @if $ambiance==true {
+            border-color: darken($suggested_bg_color, 15%);
+          }
         }
 
         &:backdrop,
@@ -353,7 +356,7 @@ headerbar,
         &:active {
           @include button(active);
 
-          border-color: $suggested_border_color;
+          border-color: darken($suggested_border_color, 10%);
         }
 
         &:disabled {
