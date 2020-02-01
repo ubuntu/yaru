@@ -1,0 +1,113 @@
+<!--
+  Credit to ComixCursors project:
+  Jens Luetkens <j.luetkens@limitland.de>
+  Ben Finney <ben+opendesktop@benfinney.id.au>
+  https://gitlab.com/limitland/comixcursors
+
+  Modifications for the Yaru project in 2020 by:
+  Mads Rosendahl <madsrh@gmail.com>
+  https://github.com/Ubuntu/Yaru
+-->
+
+<html>
+  <head>
+    <title>CSS cursors test</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <style type="text/css">
+      ul.cursor-demo li {
+        display: inline-grid;
+        width: 150px;
+        height: 150px;
+        margin: 5px;
+        padding: 10px 15px;
+        border: 1px #4d4d4d solid;
+        background: none;
+        list-style-type: none;
+        }
+      #position {
+        cursor: inherit;
+        position: absolute;
+        z-index: -1;
+        }
+    </style>
+    <script>
+      // Function to change webpage background color
+      function changeBodyBg(color){
+        document.body.style.background = color;
+      }
+
+      // Function to change heading background color
+      function changeHeadingBg(color){
+        document.body.style.color = color;
+      }
+
+</script>
+
+  </head>
+    <body style="font-family: 'Ubuntu', sans-serif;">
+
+      <h1>CSS cursors test</h1>
+      <p>Hover over the CSS cursor name to see your browser's cursor style and where the HOTSPOT is.</p>
+
+        <div>
+          <label>Change Webpage Background To:</label>
+            <button type="button" onclick="changeBodyBg('black'); changeHeadingBg('white');">Black</button>
+            <button type="button" onclick="changeBodyBg('white'); changeHeadingBg('black');">White</button>
+        </div>
+
+<ul class="cursor-demo">
+    <li style="cursor: default">default</li>
+    <li style="cursor: crosshair">crosshair</li>
+    <li style="cursor: hand">hand</li>
+    <li style="cursor: pointer">pointer</li>
+    <li style="cursor: not-allowed">not-allowed</li>
+    <li style="cursor: move">move</li>
+    <li style="cursor: text">text</li>
+    <li style="cursor: vertical-text">vertical-text</li>
+    <li style="cursor: wait">wait</li>
+    <li style="cursor: progress">progress</li>
+    <li style="cursor: help">help</li>
+    <li style="cursor: no-drop">no-drop</li>
+    <li style="cursor: n-resize">n-resize</li>
+    <li style="cursor: ne-resize">ne-resize</li>
+    <li style="cursor: e-resize">e-resize</li>
+    <li style="cursor: se-resize">se-resize</li>
+    <li style="cursor: s-resize">s-resize</li>
+    <li style="cursor: sw-resize">sw-resize</li>
+    <li style="cursor: w-resize">w-resize</li>
+    <li style="cursor: nw-resize">nw-resize</li>
+    <li style="cursor: all-scroll">all-scroll</li>
+    <li style="cursor: col-resize">col-resize</li>
+    <li style="cursor: row-resize">row-resize</li>
+</ul>
+
+<img id="position" src="positionmarker.png">
+
+<script type="text/javascript">
+(function() {
+    var tracker = document.getElementById('position');
+    document.onmousemove = handleMouseMove;
+    function handleMouseMove(event) {
+        var dot, eventDoc, doc, body, pageX, pageY;
+        event = event || window.event; // IE-ism
+        // If pageX/Y aren't available and clientX/Y are,
+        // calculate pageX/Y - logic taken from jQuery.
+        // (This is to support old IE)
+        if (event.pageX == null && event.clientX != null) {
+            eventDoc = (event.target && event.target.ownerDocument) || document;
+            doc = eventDoc.documentElement;
+            body = eventDoc.body;
+            event.pageX = event.clientX +
+              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+              (doc && doc.clientLeft || body && body.clientLeft || 0);
+            event.pageY = event.clientY +
+              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+              (doc && doc.clientTop  || body && body.clientTop  || 0 );
+        }
+        // Use event.pageX / event.pageY here
+        tracker.style.top = event.pageY;
+        tracker.style.left = event.pageX;
+    }
+})();
+</script>
+</body>

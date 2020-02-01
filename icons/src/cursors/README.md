@@ -6,11 +6,14 @@
 
 ## Render Scripts
 
-For simplified development, has various scripts to render and build the cursor set are provided
+For simplified development, has various scripts to render and build the cursor set are provided:
 
- - [**render-cursors.py**](./render-cursors.py) will render the cursor PNG assets into [bitmaps](./bitmaps) at the appropriate sizes; ran by passing the source filename to it: `./render-cursors.py source-cursors.svg`
- - [**x11-make.sh**](./x11-make.sh) builds the cursor assets into a Xcursor set
- - [**w32-make.sh**](./w32-make.sh) builds the cursor assets into a Windows cursor set
+ - [**render-cursors.py**](./render-cursors.py) will render the cursor PNG assets into [bitmaps](./bitmaps) at the appropriate sizes; run by passing the source filename to it: `./render-cursors.py source-cursors.svg`
+Inside the Bitmaps folder you'll find folders containing the rendered `.png` files (24x24, 32x32,...). These must be removed, but the `.in` files are needed for the script to run.
+
+ - [**x11-make.sh**](./x11-make.sh) builds the cursor assets into a Xcursor set and renders them to `/icons/Suru/cursors/`. These files have no extension.
+ 
+ - [**w32-make.sh**](./w32-make.sh) builds the cursor assets into a Windows cursor set and renders them to `/icons/Suru/cursors/`. These files have the `.cur`extension.
 
 ## Cursor SVG source
 
@@ -22,3 +25,7 @@ The [source SVG](./source-cursors.svg) for the cursors is laid out in such a way
  - `labels` are just labels
 
 Both the busy cursors (the large and pointer versions) require 60 different assets to achieve a 60 FPS animation when compiled (each variant is a 6&deg; rotation of the busy indicator).
+
+## CSS Cursors test
+
+The [csscursors.html](./csscursors.html) let's you see your browser's cursor style and where the HOTSPOT is simply by hover over the boxes containing the CSS cursor name. In `CURSORNAMES.md` you'll find the naming specification and a description of the cursors.

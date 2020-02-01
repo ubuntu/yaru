@@ -141,7 +141,7 @@ StScrollBar {
 /* Slider */
 
 .slider {
-  $_bg: $blue;
+  $_bg: $progress_bg_color;
   $_inactive_bg: transparentize($fg_color, 0.8);
   height: 1em;
   -barlevel-height: 0.2em; //increase the height because of the border removal
@@ -154,7 +154,7 @@ StScrollBar {
   -barlevel-overdrive-separator-width: 0.2em;
   -barlevel-border-width: 0px; //remove the border for a more flat trough
   -slider-handle-radius: 8px;
-  color: $blue; //Color of the knob/slider-handle
+  color: $progress_bg_color; //Color of the knob/slider-handle
 
   /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   -slider-height: 0.2em; //increase the height because of the border removal
@@ -666,8 +666,8 @@ StScrollBar {
     border-radius: 0.3em;
     -barlevel-height: 0.3em;
     -barlevel-background-color: $c;
-    -barlevel-active-background-color: $blue;
-    -barlevel-overdrive-color: $blue;
+    -barlevel-active-background-color: $progress_bg_color;
+    -barlevel-overdrive-color: $destructive_color;
     -barlevel-overdrive-separator-width: 0.2em;
 
     /* START: VERSION SPECIFIC CODE (< 3.29.90) */
@@ -680,7 +680,7 @@ StScrollBar {
   }
   /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   .level-bar {
-    background-color: $blue;
+    background-color: $progress_bg_color;
     border-radius: 0.3em;
   }
   /* END: VERSION SPECIFIC CODE (< 3.29.90) */
@@ -807,7 +807,7 @@ StScrollBar {
   background-color: darken($bg_color, 2%);
   border-color: $_bubble_borders_color;
   box-shadow: none;
-  &:focus { border: 2px solid $selected_bg_color; }
+  &:focus { border: 2px solid $focus_border_color; }
 }
 
 %bubble-panel {
@@ -2000,7 +2000,7 @@ StScrollBar {
       background-color: $_gdm_entry_bg;
       border-color: lighten($_gdm_entry_bg, 25%);    
       color: $osd_fg_color;
-      &:focus { border-color: transparentize(white, 0.6); }
+      &:focus { border-color: $focus_border_color }
     // }
   }
 
