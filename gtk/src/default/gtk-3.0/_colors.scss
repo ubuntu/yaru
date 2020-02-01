@@ -19,6 +19,7 @@ $borders_edge: if($variant == 'light', rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
 $top_hilight: $borders_edge;
 $dark_fill: if($variant == 'light',#CDCDCD, $ash);
 $menu_color: if($variant == 'light', $base_color, lighten($bg_color, 7%));
+$menu_bg_color: if($variant == 'light', $base_color, lighten($bg_color, 7%));
 $popover_bg_color: $bg_color;
 $popover_hover_color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 7%));
 //
