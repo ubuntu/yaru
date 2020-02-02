@@ -204,130 +204,85 @@ menubar,
   border { border: none; }
 }
 
-// Since "we" missed to intoduce a switch color for Adwaita, we now need to re-insert the switches in tweaks
+// Since "we" missed to intoduce a switch color for Adwaita
+// we now need to re-style border and background
 // So it uses thew new switch color variables
 // This really needs an upstream change to remove this code
 
-/**********
- * Switch *
- **********/
- switch {
-  outline-offset: -4px;
-
-  // similar to the .scale
-  border: 1px solid $borders_color;
-  border-radius: 14px;
-  color: $fg_color;
-  background-color: $dark_fill;
-  text-shadow: 0 1px transparentize(black, 0.9);
+switch {
   font-size: 0; // fix for gtk 3.28 switches to not show the on/off label
 
   &:checked {
-    color: $selected_fg_color;
-    border-color: $switch_border_color;
+    &, slider { border-color: $switch_border_color; }
     background-color: $switch_bg_color;
-    text-shadow: 0 1px transparentize($switch_border_color, 0.5),
-                 0 0 2px transparentize(white, 0.4);
-  }
-
-  &:disabled {
-    color: $insensitive_fg_color;
-    border-color: $borders_color;
-    background-color: $insensitive_bg_color;
-    text-shadow: none;
   }
 
   &:backdrop {
-    color: $backdrop_fg_color;
-    border-color: $backdrop_borders_color;
-    background-color: $backdrop_dark_fill;
-    text-shadow: none;
-    transition: $backdrop_transition;
 
     &:checked {
       @if $variant == 'light' { color: $backdrop_bg_color; }
-      border-color: if($variant=='light', $switch_bg_color, $switch_border_color);
+      &, slider { border-color: if($variant=='light', $switch_bg_color, $switch_border_color); }
       background-color: $switch_bg_color;
     }
-
-    &:disabled {
-      color: $backdrop_insensitive_color;
-      border-color: $backdrop_borders_color;
-      background-color: $insensitive_bg_color;
-    }
-  }
-
-  slider {
-    margin: -1px;
-    min-width: 24px;
-    min-height: 24px;
-    border: 1px solid;
-    border-radius: 50%;
-    transition: $button_transition;
-    -gtk-outline-radius: 20px;
-
-    @if $variant == 'light' {
-      @include button(normal-alt, $edge: $shadow_color);
-    }
-    @else {
-      @include button(normal-alt, $c: lighten($bg_color,6%), $edge: $shadow_color);
-    }
-  }
-
-  image { color: transparent; } /* only show i / o for the accessible theme */
-
-  &:hover slider {
-    @if $variant == 'light' {
-      @include button(hover-alt, $edge: $shadow_color);
-    }
-    @else {
-      @include button(hover-alt, $c: lighten($bg_color,6%), $edge: $shadow_color);
-    }
-  }
-
-  &:checked slider { border: 1px solid $switch_border_color; }
-
-  &:disabled slider { @include button(insensitive); }
-
-  &:backdrop {
-    slider {
-      transition: $backdrop_transition;
-
-      @include button(backdrop);
-    }
-
-    &:checked slider { border-color: if($variant == 'light', $switch_bg_color, $switch_border_color); }
-
-    &:disabled slider { @include button(backdrop-insensitive); }
   }
 
   row:selected:not(:disabled) & {
     @if $variant == 'light' {
-      box-shadow: none;
       border-color: $selected_borders_color;
 
       &:backdrop { border-color: $selected_borders_color; }
 
       slider { &:checked { border-color: $switch_border_color; } }
     }
+    box-shadow: 0 0 0 3px transparentize(white, 0.3);
+  }
+
+  slider {
+
+    @if $variant == 'dark' {
+      @include button(normal-alt, $c: $bg_color, $edge: $shadow_color);
+    }
   }
 }
 
-// Focus "ring" - upstream is also interested in this, so better get this into upstream at some time
+// 2 pixel transparentized focus rings
+// upstream is also interested in this
+
 *:not(button) {
   outline-color: $focus_border_color;
   outline-style: solid;
   outline-offset: -2px;
   outline-width: 2px;
   -gtk-outline-radius: $button-radius;
+  :selected & { outline-color: $coloured_focus_border_color; }
 }
 
 button {
   outline-color: $focus_border_color;
   outline-style: solid;
-  outline-offset: -1px;
+  outline-offset: -2px;
   outline-width: 2px;
   -gtk-outline-radius: $button-radius;
+
+  row:selected & { outline-color: $coloured_focus_border_color; }
+
+  &.suggested-action, &.destructive-action{ &, &:hover, &:active { outline-color: $coloured_focus_border_color; } }
+
+  messagedialog .dialog-action-area & {
+    &:first-child:not(:only-child) {
+      -gtk-outline-bottom-left-radius: $button_radius + 3;
+      -gtk-outline-top-left-radius: 0px;
+      -gtk-outline-top-right-radius: 0px;
+      -gtk-outline-bottom-right-radius: 0px;
+    }
+
+    &:last-child:not(:only-child) {
+      -gtk-outline-bottom-right-radius: $button_radius + 3;
+      -gtk-outline-top-right-radius: 0px;
+      -gtk-outline-bottom-left-radius: 0px;
+      -gtk-outline-top-left-radius: 0px;
+    }
+  }
 }
 
 switch {
@@ -335,6 +290,7 @@ switch {
   &:focus {
     box-shadow: 0 0 0 3px if($variant=='light', lighten(opacify($focus_border_color, 1), 20%), $focus_border_color);
   }
+  row:selected & { outline-color: $coloured_focus_border_color; }
 }
 
 checkbutton,
@@ -342,23 +298,32 @@ radiobutton {
   outline-color: $focus_border_color;
   outline-offset: 1px;
   outline-width: 2px;
+  row:selected & , treeview:selected & { outline-color: $coloured_focus_border_color; }
 }
 
 row {
   outline-color: $focus_border_color;
   outline-offset: -2px;
+  -gtk-outline-radius: 0px;
 
   &:selected {
-    outline-color: $bg_color;
-    outline-style: dashed;
-    outline-width: 1px;
-    -gtk-outline-radius: 1px;
+    outline-color: $coloured_focus_border_color;
   }
 }
 
-/*************
- * Notebooks *
- *************/
+treeview {
+  outline-color: $focus_border_color;
+  -gtk-outline-radius: 0px;
+
+  &:selected {
+    outline-color: $coloured_focus_border_color;
+  }
+}
+
+
+// We want users to understand tabs easier
+// They know this classic styling from popular web-browsers
+
 notebook {
   > header {
     padding: 1px;
@@ -696,6 +661,8 @@ notebook {
   }
 }
 
+// With the conservative tab styling scrolled windows need the undershoots
+
 scrolledwindow {
   undershoot {
     &.top { @include undershoot(top); }
@@ -708,9 +675,8 @@ scrolledwindow {
   }
 }
 
-/************
- * checkbox *
- ************/
+// Check/radios in menus do not need a border
+
 check,
 radio {
   menu menuitem & {
@@ -722,13 +688,11 @@ radio {
   }
 }
 
-.sidebar {
-  background-color: $bg_color;
-}
+// Reducing the amount of the palette's background colors to two
 
-/************
- * Treeview *
- ************/
+.sidebar { background-color: $bg_color; }
+
+// Treeview items misses a hover, port to upstream
 
 treeview:hover { background: $popover_hover_color; }
 
