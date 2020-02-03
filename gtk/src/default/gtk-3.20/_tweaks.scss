@@ -700,3 +700,19 @@ treeview:hover { background: $popover_hover_color; }
 // Some of the circular buttons too there
 * { & button.circular { min-width: 0; } }
 
+scale {
+  slider { 
+    .osd & {
+      @include button(osd);
+      background-image: image(darken($osd_fg_color, 2%));
+
+      &:hover {
+        background-image: image(darken($osd_fg_color, 10%));
+      }
+
+      &:active {
+        background-image: image(darken($osd_fg_color, 25%));
+      }
+    }
+  }
+}
