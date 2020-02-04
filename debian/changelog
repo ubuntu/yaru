@@ -1,3 +1,212 @@
+yaru-theme (20.04) UNRELEASED; urgency=medium
+
+  [ Carlo Lobrano ]
+  * apps: limit scrolledwindow backdrop opacity to Nautilus only
+  * headerbar: add mixed style to button.popup.toggle button
+  * application view: style rename-folder popup
+  * Update ISSUE_TEMPLATE.md
+  * shell: enable shell variant switch
+  * shell: install both variants in alt themes dir
+  * shell: add upstream sync script
+  * sounds: provide system-ready sound
+  * build: fix ppa build on bionic
+  * shell: fix shell installation directories
+  * gtk2: use same color for menu in gtk2 and gtk3
+  * index.theme: remove non-existent entries from Directory field
+  * script: Add sync script for Nautilus
+  * icons: swap weather-showers-scattered with weather-showers symbolic
+  * icons: fix warning color on battery icon 30/40 perc
+  * icons: sync battery icons in source symbolic
+  * gtk/tweaks: remove text shadow in osd
+  * apps/unity: better title position
+  * apps/unity: fix difference between window and titlebar borders
+  * apps/unity: keep minimal top border highlight on titlebars in backdrop
+  * unity: bigger titlebar
+  * unity: add windows control assets
+  * unity: panel and titlebar use the same color
+  * unity: install assets with meson build system
+  * unity: remove glossy effect on dock
+  * unity: remove icon shadow on dock
+  * audio: add missing audio file symlinks
+  * color: use aubergine as second accent color instead of blue
+  * shell: use aubergine for shell switches
+  * shell: white lock screen cancel button
+  * shell: fix color differences in toggles on and off
+  * shell: sync slider colors with gtk
+  * shell: sync slider's osd trough color in osd with the one in dark top panel
+  * shell: use osd_fg_color for barlevel background in place of aubergine
+  * gtk: grey selected filemenu item
+  * gtk: notebook's tab is an extension of the notebook
+  * tweaks: move notebook's tab style from common to tweaks
+  * debian: add -unity package configuration
+  * gtk: refactory due to bg_color really being already porcelain in light variant
+  * yaru-theme-unity.install: future proof install directory pattern
+  * tweaks: add missing undershoot style
+  * documentation: add git workflow to README
+  * headerbar: increase headerbar backdrop contrast
+  * build: rework folder structure and build system to make variants independent
+  * build: release a complete Yaru-light with support for pref.dark
+  * meson: selectively build components and variants
+  * tweaks: notebook tab hover text color
+  * tweaks: no borders for checkmarks in file menus and context menus
+  * tweaks: notebook tab no hover effect in backdrop
+  * tweaks: remove borders from menuitem's radiobox
+  * shell: improve scrollbar border in dark mode
+  * focus ring: review focus ring for some widgets
+  * apps: clean up whitespaces
+  * tweaks: fix notebook's tab checked-hover state
+  * tweaks: notebook tab revert to previous style
+  * headerbar: lighter backdrop button border
+  * common: use $bg_color for sidebar
+  * tweaks: tab text font weight and color
+  * tweaks: fix tab text backdrop color
+  * common: fix backdrop link color
+
+  [ ubuntujaggers ]
+  * adding new icon for evince
+  * symbolic icon for evince
+  * new full colour legacy actions for documents
+  * adding improved document-print icons
+  * new full colour device icon for printer
+  * favorite-new-symbolic, emblem-system-symbolic, application-x-addon-symbolic, and volume-warning-symbolic
+  * adding missing icon for weather-few-clouds-symbolic
+  * adding panel icon for remmina
+  * more legacy buttons: document-export, document-import, document-open-recent, document-revert
+  * changing document-export from red to blue arrow
+  * removing remmina icons from Yaru
+  * updating categories
+  * adding phone with improved proportions and reflections
+  * adding improved network-server full colour icon
+  * changing gradient of keyboard and server
+  * improving keyboard icon further
+  * improving definition of keys on keyboard
+  * fixing proportions on full size printer icon to match smaller icons
+  * adding missing full colour icon for dialog-information
+  * microscopic repair to 256px network-server icon
+  * adding icons and symlinks for full colour tick and cross actions
+  * adding the grey and purple folders from design fest
+  * slight fix to home folder gradient
+  * slightly revised grey folder icons
+  * updating dropbox, which i forgot in the last commit
+  * making sliders with marks consistent with the round slider
+  * making tick and cross actions consistent with the latest design from canonical
+  * making sliders with marks consistent with the round slider
+  * trying file manager icon that follows the suru design
+  * darker grey file manager icon and updating symbol to match new design
+  * adding applications-multimedia-symbolic
+  * adding version of ubiquity based on CoF forming from pixels
+  * improving pixellated Ubiquity icon
+  * adding yaru icons for speaker testing
+  * adding symlink so folder-drag-accept matches new folders
+  * updating open folder to have same edging as closed folder at 48px and 48*2px
+  * changing hand cursors to white hands
+  * adding missing versions of hand cursors
+  * improving contrast on transmission
+  * improving position of hotspot on arrow cursors
+  * full colour app icon for bluetooth
+  * adding full colour status --> avatar-default
+  * making backplate oblong to match symbol
+  * adding full colour icon for drive-multidisk
+
+  [ Ken VanDine ]
+  * When building with communitheme_compat, link the dark variant as well
+  * When building with communitheme_compat, link the light variant
+
+  [ chrisjbillington ]
+  * Ensure shell-theme link can be created when using DESTDIR
+  * Include shell themes in the shell Debian package, not the gtk package.
+
+  [ Feichtmeier ]
+  * Remove dowstream check/radio flattening
+  * Darken progress blue in dark themes
+  * Gtk3 upstream refresh containing...
+  * Medica optical changes
+  * Add a color for the finger print label
+  * Remove text and iconshadows for headerbar and btns
+  * Lighten headerbar border-color for the dark theme
+  * Vanilla color changes without touching common
+  * Button and color changes and comments
+  * Color and button changes
+  * Remove the headerbar gradient
+  * Color improvements
+  * Color and focus ring changes
+  * New upstream changes applied on _common.scss
+  * Reorganize colors and includes
+  * Reorganize colors and includes
+  * Green color improvements
+  * brighten up dark menus
+  * Upstream updates in _common for...
+  * Improve ubiquity dot grid
+  * Style ubiquity dotgrid with scss
+  * Typography update
+  * Bring back undershoots
+  * Update _tweaks.scss
+  * Add missing underscores
+  * Fix circular button padding
+  * Sligtly lighten up the headerbar border for the dark theme
+  * Update _apps.scss
+  * Special case switch focus
+  * Outline radii fixes and tweaks cleanup
+  * Common: change outline raddi for linked classes
+  * OSD button styling
+  * Fix app notification buttons
+  * Fix hb focused entries
+  * Adapt gtk2 menucolor to gtk3
+  * Darken dark theme switch border
+  * Increase blue darkening by 4%
+  * Remove the dedicated hb styling from tweaks
+
+  [ Merlijn Sebrechts ]
+  * overwrite softlinks so install-compat can handle multiple builds
+
+  [ Leandro Vital ]
+  * fix dock background opacity to dynamic
+  * Empty class declaration, as in dash to dock
+
+  [ Didier Roche ]
+  * Automate upstream GNOME Shell refresh
+  * Update link to point to refresh github action
+  * Factor out automatic PR updates from new upstream version
+  * Add GTK auto refresh
+  * Enhance package description.
+  * Select branch for autorebase
+  * Try updating an existing PR
+  * Dummy ommit to trigger first PR update automation
+  * New upstream snapshot for GNOME Shell
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell: Sync with 3.34.2 changes
+
+  [ github-actions[bot] ]
+  * New upstream snapshot for GTK
+
+  [ MadsRH ]
+  * Fix symlink badge for new folder icons (PR for 1742)
+  * Added cursor test
+  * Update README.md
+  * Mimetype icons for .PO translation files
+  * Mimetype icon for RSS
+  * Mimetype for application-x-python-bytecode to replace the Humanity fallback
+  * fixed missing "eyes and stroke covering the Python logo
+  * more contrast for context menus
+  * reverted popover
+  * Code cleanup
+  * styling for floating-bar
+  * Icon for mimetype MIDI
+  * Font fix
+  * New mimetype icon for application/x-java-archive
+  * added .png files
+  * Icons for mimetype colsol roms
+  * fixed missing .png
+  * Added symlinks
+  * added text
+  * Hover for treeview
+  * Use popover_hover_color instead
+  * Use old linkcolor in dark theme
+  * Added icon for mimetype inode-symlink
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Wed, 05 Feb 2020 09:28:53 +0100
+
 yaru-theme (19.10.5) eoan; urgency=medium
 
   * gnome-shell: Sync with 3.34.2 changes (LP: #1857037)
