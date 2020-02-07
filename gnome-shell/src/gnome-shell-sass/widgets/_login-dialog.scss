@@ -10,14 +10,19 @@
   border: none;
   background-color: transparent;
 
-  $_gdm_bg: lighten(#2e3436, 19%);
+  $_gdm_bg: $porcelain;
 
   StEntry {
-    @if $variant=='dark' {
+    @extend %search_entry;
+    min-height: 22px;
+    border-radius: $base_border_radius !important;
+    // @if $variant=='dark' {
       $_gdm_entry_bg: transparentize(lighten(desaturate(#241f31, 20%), 2%), 0.5);
-      background-color: $_gdm_entry_bg;
-      color: $osd_fg_color;
-    }
+      background-color: $_gdm_entry_bg !important;
+      border-color: lighten($_gdm_entry_bg, 25%) !important;    
+      color: $osd_fg_color !important;
+      &:focus { border-color: transparentize(white, 0.6) !important; }
+    // }
   }
 
   .modal-dialog-button-box { spacing: 3px; }
@@ -46,25 +51,26 @@
       color: transparentize($fg_color, 0.3);
     }
     &:default {
-      @include button(normal, $c:$selected_bg_color, $tc:$selected_fg_color);
-      border-color: $selected_bg_color;
+      @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
+      border-color: $suggested_bg_color;
+      padding: 4px 18px !important;
       &:hover, &:focus { 
-        @include button(hover,$c:$selected_bg_color, $tc:$selected_fg_color);
-        $_def_hover_c: lighten($selected_bg_color, 5%);
+        @include button(hover,$c:$suggested_bg_color, $tc:$selected_fg_color);
+        $_def_hover_c: lighten($suggested_bg_color, 5%);
         background-color: $_def_hover_c;
         border-color: $_def_hover_c;
       }
       &:active {
-        @include button(active,$c:$selected_bg_color, $tc:$selected_fg_color);
-        $_def_active_c: darken($selected_bg_color, 5%);
+        @include button(active,$c:$suggested_bg_color, $tc:$selected_fg_color);
+        $_def_active_c: darken($suggested_bg_color, 5%);
         background-color: $_def_active_c;
         border-color: $_def_active_c;
       }
       &:insensitive {
         @include button(insensitive);
-        border-color: darken($selected_bg_color, 10%);
-        background-color: darken($selected_bg_color, 10%);
-        color: transparentize($selected_fg_color, 0.3);
+        border-color: darken($suggested_bg_color, 10%) !important;
+        background-color: darken($suggested_bg_color, 10%) !important;
+        color: transparentize($selected_fg_color, 0.3) !important;
       }
     }
   }
@@ -95,8 +101,8 @@
 .login-dialog-user-list {
   spacing: 12px;
   width: 23em;
-  &:expanded .login-dialog-user-list-item:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
-  &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
+  &:expanded .login-dialog-user-list-item:selected { background-color: $hover_bg_color; color: $fg_color; }
+    &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $hover_bg_color; }
 }
 
 .login-dialog-user-list-item {
