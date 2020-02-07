@@ -9,7 +9,7 @@ $default_key_bg_color: $key_bg_color;
 
 // draw keys using button function
 #keyboard {
-  background-color: transparentize(if($variant=='light', darken($bg_color, 5%), darken($bg_color, 8%)), 0.1);
+  background-color: if($variant=='light', transparentize(darken($bg_color, 5%), 0.1), $base_color);
   // box-shadow: inset 0 1px 0 0 $osd_outer_borders_color;
 
   .page-indicator {
