@@ -11,7 +11,6 @@ $app_icon_padding: 24px;
 
   .overview-icon {
     icon-size: $app_icon_size;
-    StIcon { margin-bottom: $base_margin; } // margin on icon so label isn't close
   }
 }
 
@@ -33,47 +32,14 @@ $app_grid_fg_color: #fff;
 
 // Icon tiles in the app grid
 .app-well-app,
-.app-folder {
+%app-well-app {
+  @include overview-icon($app_grid_fg_color);
 
-  .overview-icon {
-    @extend %icon_tile;
-    color: $app_grid_fg_color !important;
-  }
+  .overview-icon.overview-icon-with-label {
+    padding: 10px 8px 5px 8px;
 
-  &:selected {
-    .overview-icon {
-      background-color: transparentize($osd_bg_color,0.7);
-      color: $app_grid_fg_color;
-    }
-  }
-
-  &:hover,
-  &:focus,
-  &:selected {
-    .overview-icon {
-      background-color: transparentize($osd_fg_color,0.9);
-      color: $osd_fg_color;
-    }
-  }
-
-  &:focus {
-    .overview-icon {
-      background-color: transparentize($osd_fg_color,0.7  );
-      // border-color: $selected_bg_color;
-      color: $app_grid_fg_color;
-    }
-  }
-
-  &:drop {
-    .overview-icon {
-      background-color: transparentize($selected_bg_color,.15);
-    }
-  }
-
-  &:active,
-  &:checked {
-    .overview-icon {
-      background-color: transparentize(darken($osd_bg_color,10%), 0.5);
+    > StBoxLayout {
+      spacing: $base_spacing;
     }
   }
 }
@@ -81,19 +47,52 @@ $app_grid_fg_color: #fff;
 /* App Folders */
 .app-folder {
   .overview-icon {
-    @extend %icon_tile;
   }
 }
 
 // expanded folder
-.app-folder-popup {
-  -arrow-border-radius: 8px;
-  -arrow-background-color: transparentize(darken($osd_bg_color,10%), 0.5);
-  -arrow-base: 24px;
-  -arrow-rise: 11px;
-}
+.app-folder-dialog {
+  border-radius: $modal_radius * 1.5;
+  border: 1px solid $osd_outer_borders_color;
+  spacing: 12px;
+  background-color: transparentize(darken($osd_bg_color,10%), 0.05);
 
-.app-folder-popup-bin { padding: $base_padding - 1px; }
+  & .folder-name-container {
+    padding: 24px 36px 0;
+    spacing: 12px;
+
+    & .folder-name-label,
+    & .folder-name-entry {
+      font-size: 18pt;
+      font-weight: bold;
+    }
+
+    & .folder-name-entry { width: 300px }
+
+    /* FIXME: this is to keep the label in sync with the entry */
+    & .folder-name-label { padding: 5px 7px }
+
+    & .edit-folder-button {
+      @extend %button;
+
+      padding: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+
+      & > StIcon { icon-size: 16px }
+    }
+  }
+
+  & StButton#vhandle,
+  & StButton#vhandle:hover,
+  & StButton#vhandle:active { background-color: transparent; }
+}
+.app-folder-dialog-container {
+  padding: 12px;
+  width: 800px;
+  height: 600px;
+}
 
 .app-folder-icon {
   padding: $base_padding;
@@ -144,11 +143,6 @@ $app_grid_fg_color: #fff;
   padding: 0px 88px 10px 88px;
 }
 
-.app-well-app > .overview-icon.overview-icon-with-label {
-  padding: 10px 8px 5px 8px;
-  spacing: $base_spacing;
-}
-
 // Label when no frequent apps
 .no-frequent-applications-label { @extend %status_text; }
 
@@ -168,41 +162,35 @@ $app_grid_fg_color: #fff;
 }
 
 // buttons
-.app-view-control { 
-  padding: $base_padding $base_padding*5;
-  margin: 0;
-  background-color: transparentize($osd_bg_color, 0.5);
-  border-width: 1px;
-  color: darken($osd_fg_color, 25%);
+.app-view-control {
+  padding: 4px 32px;
+  margin: 0 4px;
 
-  &:hover {
-    background-color: transparentize($osd_bg_color, 0.5) !important;
-    box-shadow:none !important;
+  &, &:hover, &:checked {
+    @include button(undecorated);
     color: darken($osd_fg_color, 25%);
   }
 
+  &:hover {
+    color: $osd_fg_color;
+    box-shadow: inset 0 -2px darken($osd_fg_color, 25%);
+  }
+
   &:active {
-    box-shadow: none;
-    background-color: $selected_bg_color !important;
-    &:hover {
-      background-color: lighten($selected_bg_color, 11%) !important;
-    }
+    box-shadow: inset 0 -2px $osd_fg_color;
   }
 
   &:checked {
-    background-color: $selected_bg_color !important;
-    color: $selected_fg_color;
-    box-shadow: none;
-    &:active { background-color: darken($selected_bg_color, 4%) !important; }
-    &:hover { background-color: lighten($selected_bg_color, 7%) !important; }
+    color: $osd_fg_color;
+    box-shadow: inset 0 -2px $selected_bg_color;
   }
 
   &:first-child {
-    border-right-width: 0 !important;
-    border-radius: $base_border_radius 0 0 $base_border_radius;
+    border-right-width: 0;
+    border-radius: 0;
   }
 
   &:last-child {
-    border-radius: 0 $base_border_radius $base_border_radius 0;
+    border-radius: 0;
   }
 }

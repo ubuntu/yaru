@@ -70,7 +70,7 @@ $_screenshield_shadow: 0px 0px 6px rgba(0, 0, 0, 0.726);
 }
 
 #lockDialogGroup {
-  background: darken($purple, 10%) url(resource:///org/gnome/shell/theme/noise-texture.png);
+  background: lighten(#2e3436, 8%) url(resource:///org/gnome/shell/theme/noise-texture.png);
   background-repeat: repeat;
 }
 

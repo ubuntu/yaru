@@ -2,15 +2,15 @@
 
 $key_size: 1.2em;
 $key_border_radius: $base_border_radius + 3px;
-$key_bg_color:  $bg_color;
-$default_key_bg_color: darken($key_bg_color, 4%);
-// $default_key_bg_color: if($variant=='light', darken($bg_color, 11%), lighten($bg_color, 2%));
+$key_bg_color: if(variant=='light', $bg_color, darken($bg_color, 1%));
+$default_key_bg_color: $key_bg_color;
+// $default_key_bg_color: if($variant=='light', darken($osd_bg_color, 11%), lighten($osd_bg_color, 2%));
 
 
 // draw keys using button function
 #keyboard {
   background-color: transparentize(if($variant=='light', darken($bg_color, 5%), darken($bg_color, 8%)), 0.1);
-  box-shadow: inset 0 1px 0 0 $osd_outer_borders_color !important;
+  // box-shadow: inset 0 1px 0 0 $osd_outer_borders_color;
 
   .page-indicator {
     padding: $base_padding;
@@ -40,7 +40,8 @@ $default_key_bg_color: darken($key_bg_color, 4%);
   @include fontsize($base_font_size + 5);
   min-height: $key_size;
   min-width: $key_size;
-
+  border-width: 1px;
+  border-style: solid;
   border-radius: $key_border_radius;
 
   &:grayed { //FIXMEy
@@ -76,16 +77,16 @@ $default_key_bg_color: darken($key_bg_color, 4%);
   &.hide-key { background-image: if($variant == 'light', url("key-hide.svg"), url("key-hide-dark.svg")); }
   &.layout-key {background-image: if($variant == 'light', url("key-layout.svg"), url("key-layout-dark.svg")); }
 
-  &, &.default-key, &.enter-key { &, &:hover, &:checked, &:active { box-shadow: none; } }
+  &, &.default-key, &.enter-key { &, &:hover, &:checked, &:active { box-shadow: none !important; } }
 }
 
 // long press on a key popup
 .keyboard-subkeys {
   color: $osd_fg_color;
   -arrow-border-radius: $modal_radius;
-  -arrow-background-color: $osd_bg_color;
+  -arrow-background-color: transparentize(if($variant=='light', darken($bg_color, 5%), darken($bg_color, 8%)), 0.1);
   -arrow-border-width: 1px;
-  -arrow-border-color: lighten($osd_bg_color, 9%);
+  -arrow-border-color: $borders_color;
   -arrow-base: 20px;
   -arrow-rise: 10px;
   -boxpointer-gap: $base_spacing;

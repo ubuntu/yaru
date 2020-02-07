@@ -91,13 +91,9 @@ stage {
 
 // icon tiles
 %icon_tile {
-  background-color: transparent; // no background
-  color: $osd_fg_color;
   border-radius: $base_border_radius + 4px;
   padding: $base_padding;
-  border-width: 2px;
-  border-style: solid;
-  border-color: transparent;
+  border: 2px solid transparent;
   transition-duration: 100ms;
   text-align: center;
 }
@@ -155,14 +151,17 @@ stage {
 
 
 // notification styling
-%notification_bubble {
+@mixin notification_bubble($flat: false) {
   border-width: 1px;
   border-style: solid;
-  border-radius:$base_border_radius + 2px;
-  padding: 0;
+  border-radius: $base_border_radius + 2px;
   margin: $base_margin;
 
-  @include button(normal);
+  @if $flat {
+    @include button(undecorated);
+  } @else {
+    @include button(normal);
+  }
 
   &:focus {
     @include button(focus);

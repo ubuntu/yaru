@@ -45,14 +45,11 @@
   padding: $base_padding;
 
   border-radius: $modal_radius 0 0 $modal_radius;
-  border-right-width: 0 !important;
-  //fixme: can't have non uniform borders :(
-  border-top-left-radius:0 !important;
-  border-bottom-left-radius:0 !important;
+  border-right-width: 0;
 
-  &:rtl { 
+  &:rtl {
     border-radius: 0 $modal_radius $modal_radius 0; 
-    border-left-width: 0 !important;
+    border-left-width: 0;
   }
 
   // drag and drop indicator

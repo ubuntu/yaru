@@ -13,7 +13,6 @@
 @import 'widgets/corner-ripple';
 @import 'widgets/dash';
 @import 'widgets/dialogs';
-@import 'widgets/end-session-dialog';
 @import 'widgets/entries';
 @import 'widgets/hotplug';
 @import 'widgets/ibus-popup';
@@ -42,7 +41,7 @@
 * {
     font-family: Ubuntu;
     font-weight: normal;
-    text-shadow: none;
+    text-shadow: none !important;
 }
 // Only needed for gnome-shell versions <= 3.34
 .system-menu-action {
@@ -63,4 +62,22 @@
     }
 
     & > StIcon { icon-size: 16px; }
+  }
+
+  // Only needed for gnome-shell versions <= 3.34
+  .page-indicator {
+    padding: 15px 20px;
+  
+    .page-indicator-icon {
+      width: 12px;
+      height: 12px;
+      background-color: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 12px;
+    }
+  
+    &:hover .page-indicator-icon { border-color: white; }
+    &:active .page-indicator-icon { border: none; margin: 2px; background-color: white; }
+    &:checked .page-indicator-icon,
+    &:checked:active .page-indicator-icon { background-color: white;}
   }

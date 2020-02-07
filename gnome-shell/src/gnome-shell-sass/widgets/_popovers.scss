@@ -73,8 +73,6 @@ $popover_arrow_height: 12px;
   box-shadow: none;
   border-top: 1px solid transparentize($borders_color, 0.2);
   border-bottom: 1px solid transparentize($borders_color, 0.2);
-
-  .popup-menu-item:hover {background-color: darken($bg_color, 7%);}
 }
 
 // container for radio and check boxes
@@ -89,7 +87,6 @@ $popover_arrow_height: 12px;
   height: 1px; //not really the whole box
   margin: 6px 64px;
   background-color: lighten($borders_color, 2%);
-  border: none !important;
 }
 
 // desktop background menu

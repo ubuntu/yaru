@@ -2,8 +2,7 @@
 
 StEntry {
   border-radius: $base_border_radius;
-  padding: 4px;
-  min-height: 22px;
+  padding: 8px;
   border-width: 1px;
   color: $fg_color;
   @include entry(normal);
@@ -20,5 +19,9 @@ StEntry {
   StIcon.peek-password {
     icon-size: $base_icon_size;
     padding: 0 4px;
+  }
+  StLabel.hint-text {
+    margin-left: 2px;
+    color: transparentize($fg_color, 0.3);
   }
 }

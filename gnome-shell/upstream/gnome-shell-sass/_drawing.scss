@@ -137,7 +137,7 @@
   // normal button
   @if $t==normal {
     color: $tc;
-    background-color: lighten($c, 3%) !important;
+    background-color: lighten($c, 3%);
     border-color: draw_border_color($c);
     @include draw_shadows($button_shadow);
     // box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
@@ -157,7 +157,7 @@
   // hover button
   @else if $t==hover {
     color: $tc;
-    background-color: lighten($c, if($variant == 'light', 8%, 5%)) !important;
+    background-color: lighten($c, if($variant == 'light', 8%, 5%));
     border-color: if($variant == 'light', draw_border_color(lighten($c, 7%)), draw_border_color($c));
     @include draw_shadows($button_shadow);
     text-shadow: 0 1px $text_shadow_color;
@@ -167,7 +167,7 @@
   // active button
   @else if $t==active {
     color: $tc;
-    background-color: darken($c,3%) !important;
+    background-color: darken($c,3%);
     border-color: draw_border_color(if($variant == 'light', $c, darken($c,7%)));
     text-shadow: none;
     icon-shadow: none;
@@ -178,7 +178,7 @@
   @else if $t==insensitive {
     color: $insensitive_fg_color;
     border-color: $insensitive_borders_color;
-    background-color: $insensitive_bg_color !important;
+    background-color: $insensitive_bg_color;
     box-shadow: none;
     text-shadow: none;
     icon-shadow: none;
@@ -192,5 +192,40 @@
     @include draw_shadows(inset 0 1px rgba(255,255,255,0),$blank_edge);
     text-shadow: none;
     icon-shadow: none;
+  }
+}
+
+// overview icons
+@mixin overview-icon($color) {
+  .overview-icon {
+    @extend %icon_tile;
+    color: $color;
+  }
+
+  &:hover,
+  &:selected {
+    .overview-icon {
+      background-color: transparentize($color, .9);
+    }
+  }
+
+  &:focus {
+    .overview-icon {
+      background-color: transparentize($color, .7);
+      // border-color: $selected_bg_color;
+    }
+  }
+
+  &:drop {
+    .overview-icon {
+      background-color: transparentize($selected_bg_color, .15);
+    }
+  }
+
+  &:active,
+  &:checked {
+    .overview-icon {
+      background-color: transparentize(darken($osd_bg_color, 10%), .5);
+    }
   }
 }

@@ -7,39 +7,8 @@ $notification_banner_width: 34em;
 .notification-banner {
   min-height: $notification_banner_height;
   width: $notification_banner_width;
-  @include fontsize($base_font_size);
-  margin: $base_margin;
-  border-radius: $modal_radius;
-
-  .message-title { color: $fg_color }
-  .message-content { color: $fg_color; }
-
-  &:hover { background: $bg_color; }
-  &, &:focus, &:active {
-    background-color: $bg_color;
-    .message-title { color: $fg_color }
-    .message-content { color: $fg_color; }
-  }
-
-  // icon
-  .message-icon-bin > StIcon {
-    icon-size: $base_icon_size * 2;
-    color: $fg_color;
-  }
-
-  .notification-icon {
-    padding: 5px;
-  }
-
-  .notification-content {
-    padding: 5px;
-    spacing: 5px;
-  }
-
-  .secondary-icon { icon-size: $base_icon_size; }
 
   .notification-actions {
-    padding-top: 0;
     spacing: 0;
   }
 
@@ -62,8 +31,6 @@ $notification_banner_width: 34em;
   box-shadow: 0 2px 2px rgba(0,0,0,0.5);
   border-radius: 0.9em; // should be 0.8 but whatever; wish I could do 50%;
 }
-
-.secondary-icon { icon-size: $base_icon_size; }
 
 // chat bubbles
 .chat-body { spacing: 5px; }

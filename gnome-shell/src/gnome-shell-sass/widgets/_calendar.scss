@@ -1,90 +1,64 @@
 /* Date/Time Menu */
 
+.clock-display-box { spacing: $base_spacing; }
+
 // overall menu
 #calendarArea {
   padding:0;
-  margin:0;
 }
 
 // Calendar menu side column
 .datemenu-calendar-column {
-  spacing: 0;
+  spacing: $base_spacing;
   border: 0 solid $bubble_borders_color;
-  padding: $base_padding * 2;
-  padding-bottom: 3em; // account for the notifications clear button
-  padding-top:0;
+  padding: 0 $base_padding * 2;
 
   &:ltr {margin-right: $base_margin * 2; border-left-width: 1px; }
   &:rtl {margin-left: $base_margin * 2; border-right-width: 1px; }
 
-  // today button (the date)
-  .datemenu-today-button {
-    padding: $base_padding * 1.5;
-    margin: $base_margin;
-    border: 1px solid transparent;
-    border-radius: $base_border_radius + 2px;
-
-    &:hover { @include button(hover);}
-    &:focus { @include button(focus);}
-
-    &:active {
-      @include button(active);
-    }
-
-    // weekday label
-    .day-label {
-      @include fontsize($base_font_size+1);
-      font-weight: normal;
-    }
-
-    // date label
-    .date-label {
-      @include fontsize($base_font_size+7);
-      font-weight: normal;
-    }
-  }
-
-  // calendar
-  .calendar {
-    @extend %notification_bubble;
-    margin:$base_margin !important;
-    margin-bottom: $base_padding + $base_margin !important;
-    padding:$base_padding !important;
-
-    // more below for sub-elements
-  }
-
   .datemenu-displays-section {
-    margin:0;
   }
 
   .datemenu-displays-box {
     spacing: $base_spacing;
-    margin:0;
-
-    // world clocks and weather
-    .world-clocks-button,
-    .weather-button {
-      @extend %notification_bubble;
-      padding:$base_padding !important;
-    }
   }
 }
 
 .events-section-title {
+  @include notification_bubble($flat: true);
   color: desaturate(darken($fg_color,40%), 10%);
-  font-weight: bold;
-  border-radius: 4px;
+  font-weight: normal;
   padding: .4em;
+}
+
+/* today button (the date) */
+.datemenu-today-button {
+  @include notification_bubble($flat: true);
+  padding: $base_padding * 1.5;
+
+  // weekday label
+  .day-label {
+    @include fontsize($base_font_size+1);
+    font-weight: normal;
+  }
+
+  // date label
+  .date-label {
+    @include fontsize($base_font_size+7);
+    font-weight: normal;
+  }
 }
 
 /* Calendar */
 .calendar {
+  @include notification_bubble;
+  box-shadow: none;
+  padding: $base_padding;
 
   // month
   .calendar-month-label {
     color: lighten($fg_color,5%);
-    font-weight: 500;
+    font-weight: normal;
     padding: 8px 0;
     &:focus {}
   }
@@ -130,6 +104,7 @@
       @include fontsize($base_font_size - 4);
     }
   }
+
   .calendar-day { //border collapse hack - see calendar.js
     border-width: 0;
   }
@@ -138,15 +113,19 @@
     border-top-width: 1px;
   }
 
-  .calendar-day-left { border-left-width: 1px; }
+  .calendar-day-left {
+    border-left-width: 1px;
+  }
+
   .calendar-work-day {}
+
   .calendar-nonwork-day {
     color: $insensitive_fg_color;
   }
 
   // Today
   .calendar-today {
-    font-weight: bold;
+    font-weight: normal;
     border: 1px solid transparent;
     background-color: $selected_bg_color;
     color: $selected_fg_color;
@@ -159,27 +138,27 @@
     &:active,&:selected {
       background-color: $selected_bg_color;
       color: $selected_fg_color;
+
       &:hover,&:focus {
         background-color:lighten($selected_bg_color, 3%);
         color: $selected_fg_color;
       }
     }
-
   }
+
   .calendar-day-with-events {
     color: lighten($fg_color,10%);
-    font-weight: bold;
+    font-weight: normal;
     background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
   }
 
   .calendar-other-month-day {
     color: transparentize($fg_color ,0.5);
-    opacity: 0.5;
   }
 
   .calendar-week-number {
     @include fontsize($base_font_size - 4);
-    font-weight: bold;
+    font-weight: normal;
     height: 1.8em;
     width: 2.3em; 
     border-radius: 2px;
@@ -190,15 +169,63 @@
   }
 }
 
+/* World clocks */
+.world-clocks-button {
+  @include notification_bubble;
+  padding: $base_padding * 2;
+
+  .world-clocks-grid {
+    spacing-rows: $base_spacing;
+    spacing-columns: $base_spacing * 2;
+  }
+
+  // title
+  .world-clocks-header {
+    color: desaturate(darken($fg_color,40%), 10%);
+    font-weight: normal;
+  }
+
+  // city label
+  .world-clocks-city {
+    color: $fg_color;
+    @include fontsize($base_font_size);
+    font-weight: normal;
+  }
+
+  // timezone time
+  .world-clocks-time {
+    font-weight: normal;
+    color: $fg_color;
+    font-feature-settings: "lnum";
+    @include fontsize($base_font_size);
+    text-align: right;
+  }
+
+  // timezone offset label
+  .world-clocks-timezone {
+    color: darken($fg_color,20%);
+    font-feature-settings: "tnum";
+    @include fontsize($base_font_size - 1);
+  }
+}
 
 /* Weather */
-.weather-box {
-  spacing: $base_spacing;
-  padding:$base_padding;
+.weather-button {
+  @include notification_bubble;
+  padding: $base_padding * 2;
+
+  .weather-box {
+    spacing: $base_spacing + $base_margin;
+  }
+
+  .weather-header-box {
+    spacing: $base_spacing;
+  }
 
   .weather-header {
     color: desaturate(darken($fg_color,40%), 10%);
-    font-weight: bold;
+    font-weight: normal;
+
     &.location {
       font-weight: normal;
       @include fontsize($base_font_size - 1);
@@ -206,7 +233,6 @@
   }
 
   .weather-grid {
-    margin-top: $base_margin;
     spacing-rows: $base_spacing;
     spacing-columns: $base_spacing * 2;
   }
@@ -225,42 +251,6 @@
   }
 
   .weather-forecast-temp {
-    font-weight: bold;
-  }
-}
-
-/* World clocks */
-.world-clocks-grid {
-  padding:$base_padding;
-  spacing-rows: $base_spacing;
-  spacing-columns: $base_spacing * 2;
-
-  // title
-  .world-clocks-header {
-    color: desaturate(darken($fg_color,40%), 10%);
-    font-weight: bold;
-  }
-
-  // city label
-  .world-clocks-city {
-    color: $fg_color;
-    @include fontsize($base_font_size);
     font-weight: normal;
-  }
-
-  // timezone time
-  .world-clocks-time {
-    font-weight: bold;
-    color: $fg_color;
-    font-feature-settings: "lnum";
-    @include fontsize($base_font_size);
-    text-align: right;
-  }
-
-  // timezone offset label
-  .world-clocks-timezone {
-    color: darken($fg_color,20%);
-    font-feature-settings: "tnum";
-    @include fontsize($base_font_size - 1);
   }
 }
