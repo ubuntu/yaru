@@ -135,7 +135,8 @@ headerbar,
           }
 
           &:disabled {
-            @include button(backdrop-insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
+            @include button(backdrop-insensitive, if($variant=='light', darken($backdrop_headerbar_bg_color, 14%), $headerbar_bg_color), $backdrop_headerbar_fg_color);
+            border-color: darken($backdrop_headerbar_bg_color, 3%);
 
             &:active,
             &:checked {
@@ -157,6 +158,8 @@ headerbar,
 
         &:disabled {
           @include button(insensitive, if($variant== "light", darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
+          border-color: darken($headerbar_bg_color, 5%);
+          background-image: image(lighten($headerbar_bg_color, 2%));
 
           &:active,
           &:checked {
