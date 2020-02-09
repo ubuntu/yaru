@@ -794,14 +794,14 @@ StScrollBar {
 
   StEntry { @extend %bubble-entry; }
   .button {
-    &, &:hover, &:focus, &:active, &:disabled { 
+    &, &:hover, &:focus, &:active, &:disabled {
       box-shadow: none;
       border-color: $_bubble_borders_color;
     }
     background-color: $bg_color;
     color: $fg_color;
     &:hover { background-color: $_hover_bg_color; }
-    &:active { 
+    &:active {
       background-color: $selected_bg_color;
       color: $selected_fg_color;
     }
@@ -811,8 +811,8 @@ StScrollBar {
 
 /* Tiled window previews */
 .tile-preview {
-  background-color: transparentize($porcelain, 0.8);
-  border: 1px solid $porcelain;
+  background-color: transparentize($ash, 0.8);
+  border: 1px solid $silk;
 }
 
   .tile-preview-left.on-primary {
