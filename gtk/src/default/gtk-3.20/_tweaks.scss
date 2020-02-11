@@ -716,3 +716,7 @@ scale {
     }
   }
 }
+
+// Fix for color chose buttons, should be moved to upstream as it is variable
+// If the min-height is not set, it stretches compact headerbars
+button.color { min-height: $_headerbar_height / 2; }
