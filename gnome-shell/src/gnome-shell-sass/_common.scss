@@ -141,27 +141,29 @@ StScrollBar {
 /* Slider */
 
 .slider {
-  $_bg: $blue;
-  $_inactive_bg: transparentize($fg_color, 0.8);
   height: 1em;
-  -barlevel-height: 0.2em; //increase the height because of the border removal
-  -barlevel-background-color: $_inactive_bg; //background of the trough
+  -barlevel-height: 0.2em;
+  -barlevel-background-color: mix($borders_color, $bg_color, 50%);
   -barlevel-border-color: $borders_color; //trough border color
-  -barlevel-active-background-color: $_bg; //active trough fill
-  -barlevel-active-border-color: $_bg; //active trough border
+  -barlevel-active-background-color: $progress_bg_color; //active trough fill
+  -barlevel-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%)); //active trough border
   -barlevel-overdrive-color: $destructive_color;
-  -barlevel-overdrive-border-color: darken($destructive_color,10%);
+  -barlevel-overdrive-border-color: darken($destructive_color, 10%);
   -barlevel-overdrive-separator-width: 0.2em;
-  -barlevel-border-width: 0px; //remove the border for a more flat trough
+  -barlevel-border-width: 1px;
   -slider-handle-radius: 8px;
-  color: $blue; //Color of the knob/slider-handle
+  -slider-handle-border-width: 1px;
+  -slider-handle-border-color: $borders_color;
+  color: lighten($bg_color, 4%);
+  &:hover { color: $_hover_bg_color; }
+  &:active { color: $_active_bg_color; }
 
   /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   -slider-height: 0.2em; //increase the height because of the border removal
-  -slider-background-color:  $_inactive_bg;//background of the trough
+  -slider-background-color:  mix($borders_color, $bg_color, 50%);
   -slider-border-color: $borders_color; //trough border color
-  -slider-active-background-color: $_bg; //active trough fill
-  -slider-active-border-color: $_bg; //active trough border
+  -slider-active-background-color: $progress_bg_color; //active trough fill
+  -slider-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%));; //active trough border
   -slider-border-width: 0px; //remove the border for a more flat trough
   /* END: VERSION SPECIFIC CODE (< 3.29.90) */
 }
@@ -173,7 +175,7 @@ StScrollBar {
   StBin {
     width: 24px;
     height: 22px;
-    background-image: if($variant=='light', url("checkbox-off.svg"), 
+    background-image: if($variant=='light', url("checkbox-off.svg"),
                                             url("checkbox-off-dark.svg"));
   }
   &:focus StBin { background-image: if($variant=='light', url("checkbox-off-focused.svg"),
@@ -662,12 +664,14 @@ StScrollBar {
   .osd-monitor-label { font-size: 3em; }
   .level {
     $c: darken($ash,5%);;
-    height: 0.3em;
+    height: 0.6em;
     border-radius: 0.3em;
     -barlevel-height: 0.3em;
-    -barlevel-background-color: $c;
-    -barlevel-active-background-color: $blue;
-    -barlevel-overdrive-color: $blue;
+    -barlevel-background-color: $inkstone;
+    -barlevel-border-color: $borders_color; //trough border color
+    -barlevel-active-background-color: $osd_fg_color;
+    -barlevel-active-border-color: $borders_color; //active trough border
+    -barlevel-overdrive-color: $destructive_color;
     -barlevel-overdrive-separator-width: 0.2em;
 
     /* START: VERSION SPECIFIC CODE (< 3.29.90) */
@@ -680,7 +684,7 @@ StScrollBar {
   }
   /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   .level-bar {
-    background-color: $blue;
+    background-color: $blue; // TODO review this color (might be aubergine)
     border-radius: 0.3em;
   }
   /* END: VERSION SPECIFIC CODE (< 3.29.90) */
@@ -776,7 +780,7 @@ StScrollBar {
 
   .ws-switcher-active-up, .ws-switcher-active-down,
   .ws-switcher-active-left, .ws-switcher-active-right {
-    height: 50px;
+    height: 52px;
     background-color: $selected_bg_color;
     color: $selected_fg_color;
     background-size: 32px;
@@ -807,7 +811,7 @@ StScrollBar {
   background-color: darken($bg_color, 2%);
   border-color: $_bubble_borders_color;
   box-shadow: none;
-  &:focus { border: 2px solid $selected_bg_color; }
+  &:focus { border: 2px solid $focus_border_color; }
 }
 
 %bubble-panel {
@@ -853,11 +857,10 @@ StScrollBar {
 /* TOP BAR */
 
 #panel {
-  background-color: $panel_bg_color;
+  background-color: transparentize($panel_bg_color, $panel-alpha-value);;
   font-weight: 450;
   height: 1.86em;
   font-feature-settings: "tnum";
-  background-color: transparentize($panel_bg_color, $panel-alpha-value);
 
   /* transition from solid to transparent */
   transition-duration: 500ms;
@@ -937,6 +940,7 @@ StScrollBar {
 
   .remote-access-indicator { color: $warning_color; }
 
+  // TODO review these colors, since in master this .solid section does not exist
   &.solid {
     background-color: transparentize($panel_bg_color, $panel_opaque_value);
     /* transition from transparent to solid */
@@ -1078,13 +1082,11 @@ StScrollBar {
     }
 
     .pager-button {
-      transition-duration: 100ms;
-      color: $fg_color;
       background-color: transparent;
       width: 32px;
-      border-radius: $button_radius;
+      border-radius: 4px;
       &:hover, &:focus { background-color: $_hover_bg_color; }
-      &:active { background-color: $_active_bg_color; }
+      &:active { background-color: transparentize($fg_color, 0.84); }
     }
 
     .calendar-change-month-back { //arrow back
@@ -1098,7 +1100,6 @@ StScrollBar {
 
     .calendar-day-base {
       font-size: 80%;
-      font-weight: 500;
       text-align: center;
       width: 2.4em; height: 2.4em;
       padding: 0.1em;
@@ -1130,9 +1131,9 @@ StScrollBar {
       }
       .calendar-today {
         font-weight: bold;
-        //color: lighten($fg_color,10%);
-        //background-color: darken($bg_color,5%);
-        border: 1px solid $_bubble_borders_color;
+        color: lighten($fg_color,5%);
+        background-color: darken($bg_color,5%);
+        // border: 1px solid lighten($_bubble_borders_color,20%);
       }
       .calendar-day-with-events {
         color: lighten($fg_color,10%);
@@ -1222,14 +1223,21 @@ StScrollBar {
             padding: 10px;
           }
 
+          .message-close-button {
+            color: lighten($fg_color, 15%);
+            &:hover { color: if($variant=='light', lighten($fg_color, 30%), darken($fg_color, 10%)); }
+            &:active { color: if($variant=='light', lighten($fg_color, 40%), darken($fg_color, 20%)); }
+          }
+
           .message-media-control {
             padding: 12px;
             color: lighten($fg_color, 15%);
 
             &:last-child:ltr { padding-right: 18px; }
             &:last-child:rtl { padding-left: 18px; }
-            &:hover { color: $fg_color; }
-            &:insensitive { color: darken($fg_color,40%); }
+            &:hover { color: if($variant=='light', lighten($fg_color, 30%), darken($fg_color, 10%)); }
+            &:active { color: if($variant=='light', lighten($fg_color, 40%), darken($fg_color, 20%)); }
+            &:insensitive { color: if($variant=='light', lighten($fg_color, 50%), darken($fg_color, 40%)); }
           }
 
           .media-message-cover-icon {
@@ -1262,6 +1270,11 @@ StScrollBar {
     .label-shadow { color: transparent; }
   }
 
+  .app-menu,
+  .app-well-menu {
+    max-width: 27.25em;
+  }
+
   .aggregate-menu {
     min-width: 21em;
     .popup-menu-icon { padding: 0 4px; }
@@ -1283,8 +1296,6 @@ StScrollBar {
     &:hover, &:focus {
       background-color: $_hover_bg_color;
       color: $fg_color;
-      border: none;
-      padding: 14px;
     }
     &:active { 
       background-color: $_active_bg_color;
@@ -1327,15 +1338,23 @@ StScrollBar {
 //close buttons
 
 .window-close {
-  transition-duration: 100ms;
   background-image: url("close-window.svg");
   background-size: 32px;
-  height: 32px;
-  width: 32px;
-  -shell-close-overlap: 13px;
+  height: 24px;
+  width: 24px;
+  -shell-close-overlap: 11px;
 
   &:hover { background-image: url("close-window-hover.svg"); }
   &:active { background-image: url("close-window-active.svg"); }
+}
+
+// Pointer accessibility notifications
+.pie-timer {
+  width: 60px;
+  height: 60px;
+  -pie-border-width: 3px;
+  -pie-border-color: $selected_bg_color;
+  -pie-background-color: lighten(transparentize($selected_bg_color, 0.7), 40%);
 }
 
 /* NETWORK DIALOGS */
@@ -1444,6 +1463,7 @@ StScrollBar {
   }
 
   #searchResultsContent {
+    max-width: 1000px;
     padding-left: 20px;
     padding-right: 20px;
     spacing: 16px;
@@ -1685,7 +1705,7 @@ StScrollBar {
 
 %overview-panel {
   color: $osd_fg_color;
-  background-color: transparentize($panel_bg_color, $panel-alpha-value);
+  background-color: transparentize($osd_bg_color, 0.1);
   border: none;
 }
 
@@ -1962,7 +1982,7 @@ StScrollBar {
   .candidate-page-button-icon { icon-size: 1em; }
 
 /* Auth Dialogs & Screen Shield */
-
+// TODO review this widget which is without frame in master
 .framed-user-icon {
   background-size: contain;
   border: 2px solid $osd_fg_color;
@@ -1989,8 +2009,8 @@ StScrollBar {
   border: none;
   background-color: transparent;
 
-  $_gdm_fg: #f6f5f4;
-  $_gdm_bg: lighten($purple, 19%);
+  $_gdm_fg: $jet;
+  $_gdm_bg: $porcelain;
 
   StEntry {
     @extend %search_entry;
@@ -1998,7 +2018,7 @@ StScrollBar {
     // @if $variant=='dark' {
       $_gdm_entry_bg: transparentize(lighten(desaturate(#241f31, 20%), 2%), 0.5);
       background-color: $_gdm_entry_bg;
-      border-color: lighten($_gdm_entry_bg, 25%);    
+      border-color: lighten($_gdm_entry_bg, 25%);
       color: $osd_fg_color;
       &:focus { border-color: transparentize(white, 0.6); }
     // }
@@ -2012,13 +2032,13 @@ StScrollBar {
     border-color: $_gdm_bg;
     color: $_gdm_fg;
 
-    $_hover_c: lighten($_gdm_bg, 5%);
+    $_hover_c: darken($_gdm_bg, 10%);
     &:hover, &:focus {
       background-color: $_hover_c;
       border-color: $_hover_c;
     }
     &:active {
-      $_active_c: darken($_gdm_bg, 5%);
+      $_active_c: darken($_gdm_bg, 25%);
       box-shadow: none;
       background-color: $_active_c;
       border-color: $_active_c;
@@ -2032,7 +2052,7 @@ StScrollBar {
     &:default {
       @include button(normal, $c:$success_color, $tc:$selected_fg_color);
       border-color: $success_color;
-      &:hover, &:focus { 
+      &:hover, &:focus {
         @include button(hover,$c:$success_color, $tc:$selected_fg_color);
         $_def_hover_c: lighten($success_color, 5%);
         background-color: $_def_hover_c;
