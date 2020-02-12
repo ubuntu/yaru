@@ -1,7 +1,7 @@
-
-$_headerbar_button_bg_color: lighten($headerbar_bg_color, 6%);
-$_headerbar_button_border_color: darken($headerbar_bg_color, 9%);
-$_backdrop_headerbar_button_border_color: $headerbar_bg_color;
+// Color variables dependant on $headerbar_bg_color defined in _colors.scss
+$_button_bg_color: lighten($headerbar_bg_color, 6%);
+$_button_border_color: darken($headerbar_bg_color, 9%);
+$_backdrop_button_border_color: $headerbar_bg_color;
 
 // overwriting the headerbar styling from common, for the inverted look in the ambiance theme
 headerbar,
@@ -45,17 +45,17 @@ headerbar,
   filechooser .path-bar.linked>button,
   .path-bar button {
 
-    @include button(normal, $_headerbar_button_bg_color, $headerbar_fg_color);
+    @include button(normal, $_button_bg_color, $headerbar_fg_color);
     &.flat {
       @include button(undecorated);
     }
 
     &:hover {
-      @include button(hover, $_headerbar_button_bg_color, $headerbar_fg_color);
+      @include button(hover, $_button_bg_color, $headerbar_fg_color);
     }
     &:active,
     &:checked {
-      @include button(active, $_headerbar_button_bg_color, $headerbar_fg_color);
+      @include button(active, $_button_bg_color, $headerbar_fg_color);
       border-color: black;
     }
 
@@ -66,7 +66,7 @@ headerbar,
           @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
           -gtk-icon-effect: none;
-          border-color: $_backdrop_headerbar_button_border_color;
+          border-color: $_backdrop_button_border_color;
 
           &:active,
           &.toggle:active,
@@ -74,18 +74,18 @@ headerbar,
           &.toggle:checked {
             $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 8%), $backdrop_headerbar_bg_color);
             @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
-            border-color: $_backdrop_headerbar_button_border_color;
+            border-color: $_backdrop_button_border_color;
           }
 
           &:disabled {
             @include button(backdrop-insensitive, darken($backdrop_headerbar_bg_color, 14%), $backdrop_headerbar_fg_color);
 
-            border-color: $_backdrop_headerbar_button_border_color;
+            border-color: $_backdrop_button_border_color;
 
             &:active,
             &:checked {
               @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-              border-color: $_backdrop_headerbar_button_border_color;
+              border-color: $_backdrop_button_border_color;
             }
         }
       }
@@ -201,48 +201,48 @@ headerbar,
   }
 
   separator {
-    background: image(lighten($_headerbar_button_border_color, 5%));
+    background: image(lighten($_button_border_color, 5%));
     &:backdrop {
-      background: image($_backdrop_headerbar_button_border_color);
+      background: image($_backdrop_button_border_color);
     }
   }
 
   // Re-style switches because they are drawn on a dark headerbar
   switch {
-    border-color: $_headerbar_button_border_color;
+    border-color: $_button_border_color;
     color: $headerbar_fg_color;
-    background-color: $_headerbar_button_bg_color;
-    &:hover { background-color: lighten($_headerbar_button_bg_color, 2%); }
+    background-color: $_button_bg_color;
+    &:hover { background-color: lighten($_button_bg_color, 2%); }
     &:backdrop {
       background-color: lighten($backdrop_headerbar_bg_color, 2%);
-      &, &:checked { border-color: darken($_backdrop_headerbar_button_border_color, 4%); }
+      &, &:checked { border-color: darken($_backdrop_button_border_color, 4%); }
       box-shadow: none;
       &:disabled { 
         background-color: $backdrop_headerbar_bg_color;
-        border-color: $_backdrop_headerbar_button_border_color;
+        border-color: $_backdrop_button_border_color;
       }
     }
     &:disabled {
       background-color: $headerbar_bg_color;
-      border-color: $_headerbar_button_border_color;
+      border-color: $_button_border_color;
     }
 
     &:checked {
       color: $selected_fg_color;
-      border-color: $_headerbar_button_border_color;
+      border-color: $_button_border_color;
       background-color: $switch_bg_color;
     }
 
     slider {
-      @include button(normal-alt, $_headerbar_button_bg_color);
+      @include button(normal-alt, $_button_bg_color);
 
       &:backdrop {
-        @include button(backdrop-alt, $_headerbar_button_bg_color);
-        &:checked, &:disabled, &:checked:disabled { border-color: $_backdrop_headerbar_button_border_color; }
+        @include button(backdrop-alt, $_button_bg_color);
+        &:checked, &:disabled, &:checked:disabled { border-color: $_backdrop_button_border_color; }
       }      
 
       &:checked {
-        border-color: $_headerbar_button_border_color;
+        border-color: $_button_border_color;
       }
       &:disabled {
         @include button(insensitive, darken($headerbar_bg_color, 8%));
