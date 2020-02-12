@@ -71,6 +71,17 @@ headerbar *, button * {
   -gtk-icon-shadow: none;
 }
 
+// Leave border-color of headerbar buttons evenly colored
+// But darken the border-color a little bit to keep legibility
+// This is consistent with the "default theme"
+headerbar, .titlebar {
+  stackswitcher button:checked,
+    button.toggle:checked {
+      border-color: darken($borders_color, 6%);
+      border-top-color: darken($borders_color, 6%);
+    }
+  }
+
 // blue spinner
 spinner {
   &:not(:backdrop) {
