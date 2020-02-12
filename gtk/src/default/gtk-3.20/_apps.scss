@@ -124,19 +124,17 @@ $ambiance: null !default;
         border-radius: 0px 0px 0px 0px;
     }
 
- widget.view {
-          background-color: rgba(255, 255, 255, 0.1); // reduces orangeness of selected folder icons
-          color: $text_color;
+    widget.view {
+      background-color: rgba(255, 255, 255, 0.1); // reduces orangeness of selected folder icons
+      color: $text_color;
 
-          &:backdrop {
-                       background-color: $selected_bg_color;
-                       color: $backdrop_text_color;
-                     }
-          &:selected { color: $selected_fg_color; }
-        }
+      &:backdrop {
+        background-color: if($variant=='light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 5%));
+        color: $backdrop_text_color;
+      }
+    }
 
  scrolledwindow widget.view:active { background-color: none; } // icon color when right clicking and in backdrop
-
 }
 
 
