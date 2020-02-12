@@ -7,7 +7,6 @@ gtk3_dir = join_paths(theme_dir, 'gtk-3.20')
 gtk3_scss_sources = [
   'gtk',
   'gtk-dark', # applications requesting dark theme
-  'gtk-light', # light variation of the light theme (with the same corresponding dark theme)
 ]
 
 
@@ -156,7 +155,7 @@ gtk3_assets = [
 # and install to themes/THEMENAME/gtk-3.20
 generated_css = []
 foreach f : gtk3_scss_sources
-  generated_css += custom_target('light-gtk-3.20-' + f + '-generated.css',
+  generated_css += custom_target('gtk-3.20-' + f + '-generated.css',
       input: f + '.scss',
       output: f + '-generated.css',
       depend_files: files(gtk3_scss_dependencies),
@@ -184,4 +183,4 @@ gnome.compile_resources('gtk', gresource_xml,
 )
 
 # Install stub CSS files
-install_data(['gtk.css', 'gtk-dark.css', 'gtk-light.css'], install_dir: gtk3_dir)
+install_data(['gtk.css', 'gtk-dark.css'], install_dir: gtk3_dir)
