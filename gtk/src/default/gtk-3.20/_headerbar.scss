@@ -1,6 +1,7 @@
 
 $_headerbar_button_bg: lighten($headerbar_bg_color, 6%);
 $_dark_border_color: rgb(20, 19, 19);
+$_btn_backdrop_border: $headerbar_bg_color;
 
 // overwriting the headerbar styling from common, for the inverted look in the ambiance theme
 headerbar,
@@ -59,7 +60,7 @@ headerbar,
     }
 
     &:backdrop {
-      $_btn_backdrop_border: $headerbar_bg_color;
+
       &,
       &.flat {
           @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
@@ -205,38 +206,45 @@ headerbar,
     }
   }
 
-  @if $variant=='light' {
-    switch {
+  // Re-style switches because they are drawn on a dark headerbar
+  switch {
+    border-color: $_dark_border_color;
+    color: $headerbar_fg_color;
+    background-color: $_headerbar_button_bg;
+    &:hover { background-color: lighten($_headerbar_button_bg, 2%); }
+    &:backdrop {
+      background-color: lighten($backdrop_headerbar_bg_color, 2%);
+      &, &:checked { border-color: darken($_btn_backdrop_border, 4%); }
+      box-shadow: none;
+      &:disabled { 
+        background-color: $backdrop_headerbar_bg_color;
+        border-color: $_btn_backdrop_border;
+      }
+    }
+    &:disabled {
+      background-color: $headerbar_bg_color;
       border-color: $_dark_border_color;
-      color: $headerbar_fg_color;
-      background-color: $_headerbar_button_bg;
-      &:hover { background-color: lighten($_headerbar_button_bg, 2%); }
+    }
+
+    &:checked {
+      color: $selected_fg_color;
+      border-color: $_dark_border_color;
+      background-color: $switch_bg_color;
+    }
+
+    slider {
+      @include button(normal-alt, $_headerbar_button_bg);
+
       &:backdrop {
-        background-color: lighten($headerbar_bg_color,1%);
-        box-shadow: none;
-      }
-      &:disabled {
-        background-color: $headerbar_bg_color;
-        border-color: $_dark_border_color;
-      }
+        @include button(backdrop-alt, $_headerbar_button_bg);
+        &:checked, &:disabled, &:checked:disabled { border-color: $_btn_backdrop_border; }
+      }      
 
       &:checked {
-        color: $selected_fg_color;
-        border-color: darken($darkblue, 40%);
-        background-color: $switch_bg_color;
-      }
-
-      slider {
         border-color: $_dark_border_color;
-
-        &:checked {
-          border-color: darken($darkblue, 40%);
-        }
-        &:disabled {
-          background-color: $headerbar_bg_color;
-          border-color: $_dark_border_color;
-          @include button(insensitive, $headerbar_bg_color);
-        }
+      }
+      &:disabled {
+        @include button(insensitive, darken($headerbar_bg_color, 8%));
       }
     }
   }
