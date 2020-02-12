@@ -731,3 +731,9 @@ scale {
 // Fix for color chose buttons, should be moved to upstream as it is variable
 // If the min-height is not set, it stretches compact headerbars
 button.color { min-height: $_headerbar_height / 2; }
+
+// Entries drown if drawn on widgets with $base_color
+// Fixing this at least for notebooks, since entries on tabs is a common pattern
+@if $variant=='dark' {
+  notebook entry { background-color: darken($base_color, 2%); }
+}
