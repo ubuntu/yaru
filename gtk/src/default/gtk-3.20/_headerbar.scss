@@ -201,8 +201,9 @@ headerbar,
   }
 
   separator {
-    &, &:backdrop {
-      background: image(darken(#3d3d3d, 11%));
+    background: image($_dark_border_color);
+    &:backdrop {
+      background: image($_btn_backdrop_border);
     }
   }
 
