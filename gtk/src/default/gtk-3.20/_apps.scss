@@ -26,7 +26,7 @@ $ambiance: null !default;
     @at-root %dim_icons_in_backdrop,
     & *scrolledwindow:backdrop { opacity: 0.9; }
 
-    paned box.floating-bar {  
+    paned box.floating-bar {
       background-color: $bg_color;
       border-style: solid;
       border-color: if($variant=='light', lighten($borders_color, 8.3%), darken($borders_color, 1%));
@@ -81,9 +81,9 @@ $ambiance: null !default;
 
     .nautilus-canvas-item {
       -gtk-outline-radius: $button_radius;
-      outline-offset: -2px;
+      outline-offset: -1px;
       &:selected {
-        outline-color: white;
+        outline-color: if($variant=='light', white, $base_color);
       }
     }
 
@@ -123,7 +123,22 @@ $ambiance: null !default;
         border-width: 0px 1px 0px 1px;
         border-radius: 0px 0px 0px 0px;
     }
-  }
+
+ widget.view {
+          background-color: rgba(255, 255, 255, 0.1); // reduces orangeness of selected folder icons
+          color: $text_color;
+
+          &:backdrop {
+                       background-color: $selected_bg_color;
+                       color: $backdrop_text_color;
+                     }
+          &:selected { color: $selected_fg_color; }
+        }
+
+ scrolledwindow widget.view:active { background-color: none; } // icon color when right clicking and in backdrop
+
+}
+
 
 /************
  * Terminal *
