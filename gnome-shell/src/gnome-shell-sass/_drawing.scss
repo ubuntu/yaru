@@ -25,7 +25,7 @@
 
 // entries
 
-@mixin entry($t, $fc:$selected_bg_color, $edge: $borders_edge) {
+@mixin entry($t, $fc:$focus_border_color, $edge: $borders_edge) {
 //
 // Entries drawing function
 //
@@ -44,9 +44,7 @@
 
   }
   @if $t==focus {
-    border-color: if($fc==$selected_bg_color,
-                     $selected_borders_color,
-                     darken($fc,35%));
+    border-color: $focus_border_color;
   }
   @if $t==hover { }
   @if $t==insensitive {
@@ -148,7 +146,7 @@
     color: $tc;
     text-shadow: 0 1px black;
     icon-shadow: 0 1px black;
-    box-shadow: inset 0px 0px 0px 2px $selected_bg_color;
+    box-shadow: inset 0px 0px 0px 2px $focus_border_color
     //border-color: $selected_bg_color;
   }
 

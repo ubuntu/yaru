@@ -163,7 +163,7 @@ StScrollBar {
   -slider-background-color:  mix($borders_color, $bg_color, 50%);
   -slider-border-color: $borders_color; //trough border color
   -slider-active-background-color: $progress_bg_color; //active trough fill
-  -slider-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%));; //active trough border
+  -slider-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%)); //active trough border
   -slider-border-width: 0px; //remove the border for a more flat trough
   /* END: VERSION SPECIFIC CODE (< 3.29.90) */
 }
@@ -861,9 +861,6 @@ StScrollBar {
   font-weight: 450;
   height: 1.86em;
   font-feature-settings: "tnum";
-
-  /* transition from solid to transparent */
-  transition-duration: 500ms;
 
   &.unlock-screen,
   &.login-screen,
