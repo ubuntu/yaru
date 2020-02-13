@@ -13,36 +13,79 @@ $_titlebutton_height: 24px;
                                   to(transparent));
 }
 
+@mixin undershoot($p) {
+  //
+  // undershoot
+  //
+  // $p: position
+  //
+  // possible $p values:
+  // top, bottom, right, left
+  //
+
+  $_us_shadow_color: if($variant=='light', $silk, $jet);
+  $_us_shadow_alpha: 0.8;
+
+  $_gradient_dir: left;
+  $_dash_bg_size: 10px 1px;
+  $_gradient_repeat: repeat-x;
+  $_bg_pos: center $p;
+
+  background-color: transparent; // shouldn't be needed, but better to be sure;
+
+  @if ($p == left) or ($p == right) {
+    $_gradient_dir: top;
+    $_dash_bg_size: 1px 10px;
+    $_gradient_repeat: repeat-y;
+    $_bg_pos: $p center;
+  }
+
+  padding-#{$p}: 1px;
+  background-size: $_dash_bg_size;
+  background-repeat: $_gradient_repeat;
+  background-origin: content-box;
+  background-position: $_bg_pos;
+  border: none;
+
+  @if ($p == left) {
+    box-shadow: inset 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == right) {
+    box-shadow: inset -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == top) {
+    box-shadow: inset 0 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset 0 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == bottom) {
+      box-shadow: inset 0 -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                  inset 0 -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+}
+
 // with a flatter headerbar and buttons, we dont need that heavy shadows, remove this when upstream agrees
 headerbar *, button * {
   text-shadow: none;
   -gtk-icon-shadow: none;
 }
-// headerbar border-color is a bit too strong in the dark theme
-headerbar {
-  &, &.titlebar:not(headerbar) {
-    border-color: lighten($alt_borders_color, if($variant=='light', 0%, 8%));
+
+// Leave border-color of headerbar buttons evenly colored
+// But darken the border-color a little bit to keep legibility
+// This is consistent with the "default theme"
+headerbar, .titlebar {
+  stackswitcher button:checked,
+    button.toggle:checked {
+      border-color: darken($borders_color, 6%);
+      border-top-color: darken($borders_color, 6%);
+    }
   }
-}
 
 // blue spinner
 spinner {
   &:not(:backdrop) {
-    color: $progress_bg_color;
-  }
-}
-
-// TODO: REMOVE the diff when we fixed this upstream (upstream has blue suggested border color)
-switch {
-  row:selected:not(:disabled) & {
-    @if $variant == 'light' {
-      box-shadow: none;
-      border-color: $selected_borders_color;
-
-      &:backdrop { border-color: $selected_borders_color; }
-
-      slider { &:checked { border-color: $suggested_border_color; } }
-    }
+    color: $blue;
   }
 }
 
@@ -128,6 +171,7 @@ menubar,
   > menuitem {
     &:hover {
       color: $fg_color;
+      background-color: $popover_hover_color;
     }
   }
 }
@@ -143,6 +187,7 @@ menubar,
   background-color: $menu_color;
   border: 1px solid $borders_color;
   box-shadow: 0 2px 5px transparentize(black, 0.8);
+  text-shadow: none;
 
   button {
     &, &:dir(ltr), &:dir(rtl) {
@@ -151,7 +196,7 @@ menubar,
         &.flat { @include button(undecorated); }
         &:hover { @include button(hover); }
         &:active { @include button(active); }
-        &:backdrop { 
+        &:backdrop {
           @include button(backdrop);
           &.flat { @include button(undecorated); }
         }
@@ -170,5 +215,519 @@ menubar,
   border { border: none; }
 }
 
-// fix for gtk 3.28 switches to not show the on/off label
-switch { font-size: 0 }
+// Since "we" missed to intoduce a switch color for Adwaita
+// we now need to re-style border and background
+// So it uses thew new switch color variables
+// This really needs an upstream change to remove this code
+
+switch {
+  font-size: 0; // fix for gtk 3.28 switches to not show the on/off label
+
+  &:checked {
+    &, slider { border-color: $switch_border_color; }
+    background-color: $switch_bg_color;
+  }
+
+  &:backdrop {
+
+    &:checked {
+      @if $variant == 'light' { color: $backdrop_bg_color; }
+      &, slider { border-color: if($variant=='light', $switch_bg_color, $switch_border_color); }
+      background-color: $switch_bg_color;
+    }
+  }
+
+  row:selected:not(:disabled) & {
+    @if $variant == 'light' {
+      border-color: $selected_borders_color;
+
+      &:backdrop { border-color: $selected_borders_color; }
+
+      slider { &:checked { border-color: $switch_border_color; } }
+    }
+    box-shadow: 0 0 0 3px transparentize(white, 0.3);
+  }
+
+  slider {
+
+    @if $variant == 'dark' {
+      @include button(normal-alt, $c: $bg_color, $edge: $shadow_color);
+    }
+  }
+}
+
+// 2 pixel transparentized focus rings
+// upstream is also interested in this
+
+*:not(button) {
+  outline-color: $focus_border_color;
+  outline-style: solid;
+  outline-offset: -2px;
+  outline-width: 2px;
+  -gtk-outline-radius: $button-radius;
+  :selected & { outline-color: $coloured_focus_border_color; }
+}
+
+button {
+  outline-color: $focus_border_color;
+  outline-style: solid;
+  outline-offset: -2px;
+  outline-width: 2px;
+  -gtk-outline-radius: $button-radius;
+
+  row:selected & { outline-color: $coloured_focus_border_color; }
+
+  &.suggested-action, &.destructive-action{ &, &:hover, &:active { outline-color: $coloured_focus_border_color; } }
+
+  messagedialog .dialog-action-area & {
+    &:first-child:not(:only-child) {
+      -gtk-outline-bottom-left-radius: $button_radius + 3;
+      -gtk-outline-top-left-radius: 0px;
+      -gtk-outline-top-right-radius: 0px;
+      -gtk-outline-bottom-right-radius: 0px;
+    }
+
+    &:last-child:not(:only-child) {
+      -gtk-outline-bottom-right-radius: $button_radius + 3;
+      -gtk-outline-top-right-radius: 0px;
+      -gtk-outline-bottom-left-radius: 0px;
+      -gtk-outline-top-left-radius: 0px;
+    }
+  }
+}
+
+switch {
+  &, &:hover { slider { outline-color: transparent; } }
+  &:focus {
+    box-shadow: 0 0 0 3px if($variant=='light', lighten(opacify($focus_border_color, 1), 20%), $focus_border_color);
+  }
+  row:selected & { outline-color: $coloured_focus_border_color; }
+}
+
+checkbutton,
+radiobutton {
+  outline-color: $focus_border_color;
+  outline-offset: 1px;
+  outline-width: 2px;
+  row:selected & , treeview:selected & { outline-color: $coloured_focus_border_color; }
+}
+
+row {
+  outline-color: $focus_border_color;
+  outline-offset: -2px;
+  -gtk-outline-radius: 0px;
+
+  &:selected {
+    outline-color: $coloured_focus_border_color;
+  }
+}
+
+treeview {
+  outline-color: $focus_border_color;
+  -gtk-outline-radius: 0px;
+
+  &:selected {
+    outline-color: $coloured_focus_border_color;
+  }
+}
+
+
+// We want users to understand tabs easier
+// They know this classic styling from popular web-browsers
+
+notebook {
+  > header {
+    padding: 1px;
+    border-color: $borders_color;
+    border-width: 1px;
+
+    background: $bg_color;
+
+    &:backdrop {
+      border-color: $backdrop_borders_color;
+      background-color: $backdrop_bg_color;
+    }
+
+    tabs { margin: -1px; }
+
+    &.top {
+      border-style: none none solid none;
+      > tabs {
+        margin-bottom: -2px;
+        padding-top: 4px;
+        > tab {
+          border: 1px solid transparent;
+          border-radius: 4px 4px 0 0;
+
+          &:hover:not(:checked):not(:backdrop) {
+            background-color: transparentize($base_color, 0.5);
+            box-shadow: none;
+            border-color: $borders_color;
+          }
+
+          &:backdrop {
+            box-shadow: none;
+          }
+
+          &:checked {
+            background-color: $base_color;
+            border: 1px solid $borders_color;
+            border-bottom-color: transparent;
+            box-shadow: none;
+
+            &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
+          }
+        }
+      }
+    }
+
+    &.bottom {
+      border-style: solid none none none;
+      > tabs {
+        margin-top: -2px;
+        padding-bottom: 4px;
+        > tab {
+          border: 1px solid transparent;
+          border-radius: 0 0 4px 4px;
+
+          &:hover:not(:checked):not(:backdrop) {
+            background-color: transparentize($base_color, 0.5);
+            box-shadow: none;
+            border-color: $borders_color;
+          }
+
+          &:backdrop { box-shadow: none; }
+
+          &:checked {
+            background-color: $base_color;
+            border: 1px solid $borders_color;
+            border-top-color: transparent;
+            box-shadow: none;
+
+            &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
+          }
+        }
+      }
+    }
+
+    &.left {
+      border-style: none solid none none;
+      > tabs {
+        margin-right: -2px;
+        padding-left: 4px;
+        > tab {
+          border: 1px solid transparent;
+          border-radius: 4px 0 0 4px;
+
+          &:hover:not(:checked):not(:backdrop) {
+            background-color: transparentize($base_color, 0.5);
+            box-shadow: none;
+            border-color: $borders_color;
+          }
+
+          &:backdrop { box-shadow: none; }
+
+          &:checked {
+            background-color: $base_color;
+            border: 1px solid $borders_color;
+            border-right-color: transparent;
+            box-shadow: none;
+
+            &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
+          }
+        }
+      }
+    }
+
+    &.right {
+      border-style: none none none solid;
+      > tabs {
+        margin-left: -2px;
+        padding-right: 4px;
+        > tab {
+          border: 1px solid transparent;
+          border-radius: 0 4px 4px 0;
+
+          &:hover:not(:checked):not(:backdrop) {
+            background-color: transparentize($base_color, 0.5);
+            box-shadow: none;
+            border-color: $borders_color;
+          }
+
+          &:backdrop { box-shadow: none; }
+
+          &:checked {
+            background-color: $base_color;
+            border: 1px solid $borders_color;
+            border-left-color: transparent;
+            box-shadow: none;
+
+            &:hover { background-color: $base_color; }
+            &:backdrop { background-color: $backdrop_base_color; }
+          }
+        }
+      }
+    }
+
+    &.top > tabs > arrow {
+      @extend %notebook_vert_arrows;
+
+      border-top-style: none;
+    }
+
+    &.bottom > tabs > arrow {
+      @extend %notebook_vert_arrows;
+
+      border-bottom-style: none;
+    }
+
+    @at-root %notebook_vert_arrows {
+      margin-left: -5px;
+      margin-right: -5px;
+      padding-left: 4px;
+      padding-right: 4px;
+
+      &.down { -gtk-icon-source: -gtk-icontheme('pan-start-symbolic'); }
+
+      &.up { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic'); }
+    }
+
+    &.left > tabs > arrow {
+      @extend %notebook_horz_arrows;
+
+      border-left-style: none;
+    }
+
+    &.right > tabs > arrow {
+      @extend %notebook_horz_arrows;
+
+      border-right-style: none;
+    }
+
+    @at-root %notebook_horz_arrows {
+      margin-top: -5px;
+      margin-bottom: -5px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+
+      &.down { -gtk-icon-source: -gtk-icontheme('pan-up-symbolic'); }
+
+      &.up { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
+    }
+
+    > tabs > arrow {
+      @extend %button_basic;
+
+      @extend %button_basic.flat;
+
+      min-height: 16px;
+      min-width: 16px;
+      border-radius: 0;
+
+      &:hover:not(:active):not(:backdrop) {
+        background-clip: padding-box;
+        background-image: none;
+        background-color: transparentize(white, 0.7);
+        border-color: transparent;
+        box-shadow: none;
+      }
+
+      &:disabled { @include button(undecorated); }
+    }
+
+    tab {
+      min-height: 30px;
+      min-width: 30px;
+      padding: 3px 12px;
+
+      outline-offset: -5px;
+
+      color: $fg_color;
+      font-weight: normal;
+
+      border-width: 1px;         // for reorderable tabs
+      border-color: transparent; //
+
+      &:hover {
+        color: $fg_color;
+
+        &.reorderable-page {
+          border-color: transparentize($borders_color, 0.7);
+          background-color: transparentize($bg_color, 0.8);
+        }
+      }
+
+      &:backdrop {
+        color: transparentize($backdrop_fg_color, 0.2);
+
+        &.reorderable-page {
+          border-color: transparent;
+          background-color: transparent;
+        }
+      }
+
+      &:checked {
+        color: $fg_color;
+
+        &.reorderable-page {
+          border-color: transparentize($borders_color, 0.5);
+          background-color: transparentize($bg_color, 0.5);
+
+          &:hover { background-color: transparentize($bg_color, 0.3); }
+        }
+      }
+
+      &:backdrop:checked {
+        color: $backdrop_fg_color;
+
+        &.reorderable-page {
+          border-color: $backdrop_borders_color;
+          border-bottom-color: transparent;
+          background-color: $backdrop_base_color;
+        }
+      }
+
+      // colors the button like the label, overridden otherwise
+      button.flat {
+        &:hover { color: currentColor; }
+
+        &, &:backdrop { color: gtkalpha(currentColor, 0.3); }
+
+        padding: 0;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        // FIXME: generalize .small-button?
+        min-width: 20px;
+        min-height: 20px;
+
+        &:last-child {
+          margin-left: 4px;
+          margin-right: -4px;
+        }
+
+        &:first-child {
+          margin-left: -4px;
+          margin-right: 4px;
+        }
+      }
+    }
+
+    &.top,
+    &.bottom {
+      tabs {
+        padding-left: 4px;
+        padding-right: 4px;
+
+        &:not(:only-child) {
+          margin-left: 3px;
+          margin-right: 3px;
+
+          &:first-child { margin-left: -1px; }
+          &:last-child { margin-right: -1px; }
+        }
+
+        tab {
+          margin-left: 4px;
+          margin-right: 4px;
+
+          &.reorderable-page { border-style: solid solid; }
+        }
+      }
+    }
+
+    &.left,
+    &.right {
+      tabs {
+        padding-top: 4px;
+        padding-bottom: 4px;
+
+        &:not(:only-child) {
+          margin-top: 3px;
+          margin-bottom: 3px;
+
+          &:first-child { margin-top: -1px; }
+          &:last-child { margin-bottom: -1px; }
+        }
+
+        tab {
+          margin-top: 4px;
+          margin-bottom: 4px;
+
+          &.reorderable-page { border-style: solid solid; }
+        }
+      }
+    }
+
+    &.top tab { padding-bottom: 4px; }
+    &.bottom tab { padding-top: 4px; }
+  }
+
+  > stack:not(:only-child) { // the :not(:only-child) is for "hidden" notebooks
+    background-color: $base_color;
+
+    &:backdrop { background-color: $backdrop_base_color; }
+  }
+}
+
+// With the conservative tab styling scrolled windows need the undershoots
+
+scrolledwindow {
+  undershoot {
+    &.top { @include undershoot(top); }
+
+    &.bottom { @include undershoot(bottom); }
+
+    &.left { @include undershoot(left); }
+
+    &.right { @include undershoot(right); }
+  }
+}
+
+// Check/radios in menus do not need a border
+
+check,
+radio {
+  menu menuitem & {
+    &, &:checked, &:indeterminate {
+      &, &:hover, &:disabled {
+        border-color: transparent;
+      }
+    }
+  }
+}
+
+// Reducing the amount of the palette's background colors to two
+
+.sidebar { background-color: $bg_color; }
+
+// Treeview items misses a hover, port to upstream
+
+treeview:hover { background: $popover_hover_color; }
+
+// Fix for slimed down circular buttons, could need a change upstream since this happens for
+// Some of the circular buttons too there
+* { & button.circular { min-width: 0; } }
+
+scale {
+  slider { 
+    .osd & {
+      @include button(osd);
+      background-image: image(darken($osd_fg_color, 2%));
+
+      &:hover {
+        background-image: image(darken($osd_fg_color, 10%));
+      }
+
+      &:active {
+        background-image: image(darken($osd_fg_color, 25%));
+      }
+    }
+  }
+}
+
+// Fix for color chose buttons, should be moved to upstream as it is variable
+// If the min-height is not set, it stretches compact headerbars
+button.color { min-height: $_headerbar_height / 2; }
