@@ -278,22 +278,6 @@ button {
   row:selected & { outline-color: $coloured_focus_border_color; }
 
   &.suggested-action, &.destructive-action{ &, &:hover, &:active { outline-color: $coloured_focus_border_color; } }
-
-  messagedialog .dialog-action-area & {
-    &:first-child:not(:only-child) {
-      -gtk-outline-bottom-left-radius: $button_radius + 3;
-      -gtk-outline-top-left-radius: 0px;
-      -gtk-outline-top-right-radius: 0px;
-      -gtk-outline-bottom-right-radius: 0px;
-    }
-
-    &:last-child:not(:only-child) {
-      -gtk-outline-bottom-right-radius: $button_radius + 3;
-      -gtk-outline-top-right-radius: 0px;
-      -gtk-outline-bottom-left-radius: 0px;
-      -gtk-outline-top-left-radius: 0px;
-    }
-  }
 }
 
 switch {
