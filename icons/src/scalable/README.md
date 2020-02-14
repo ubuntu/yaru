@@ -1,6 +1,6 @@
 ## Symbolic Icons Source
 
- - To add or modify an symbolic icon, edit source SVG file found in this directory
+ - To add or modify a symbolic icon, edit source SVG file found in this directory
  - For simplified development, has various scripts to extract or render icons from the larger SVG source files.
  - To edit the icons you will need `inkscape` and you'll need `ruby` installed to run the render script.
 
