@@ -716,7 +716,7 @@ scale {
 .rubberband,
 rubberband {
   background-color: transparentize($ash, 0.8);
-  border: 1px solid if($variant == 'light', $silk, darken($silk, 10%));
+  border: 1px solid if($variant == 'light', transparentize($silk, 0.2), transparentize(darken($silk, 10%), 0.4));
 }
 // Fix for color chose buttons, should be moved to upstream as it is variable
 // If the min-height is not set, it stretches compact headerbars

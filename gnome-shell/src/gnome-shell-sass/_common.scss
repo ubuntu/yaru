@@ -812,7 +812,7 @@ StScrollBar {
 /* Tiled window previews */
 .tile-preview {
   background-color: transparentize($ash, 0.8);
-  border: 1px solid $silk;
+  border: 1px solid transparentize($silk, 0.2);
 }
 
   .tile-preview-left.on-primary {
