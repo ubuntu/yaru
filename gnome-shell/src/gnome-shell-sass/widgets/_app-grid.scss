@@ -20,16 +20,6 @@ $app_icon_padding: 24px;
 
 $app_grid_fg_color: #fff;
 
-// Outline for low res icons
-.lowres-icon {
-  icon-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-// Dropshadow for large icons
-.icon-dropshadow {
-  icon-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
 // Icon tiles in the app grid
 .app-well-app,
 %app-well-app {

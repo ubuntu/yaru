@@ -52,7 +52,6 @@
 /* Calendar */
 .calendar {
   @include notification_bubble;
-  box-shadow: none;
   padding: $base_padding;
 
   // month

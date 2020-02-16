@@ -2,8 +2,8 @@
 // a.k.a. the panel
 
 $panel_corner_radius: 0;
-// $panel_bg_color: if($variant == 'light', rgba(0,0,0,0.9), #000);
-// $panel_fg_color: if($variant == 'light', darken($fg_color, 15%), darken($fg_color, 10%));
+// $panel_bg_color: #000;
+// $panel_fg_color: #ccc;
 $panel_height: 1.86em;
 
 
@@ -15,8 +15,7 @@ $panel_height: 1.86em;
 
   // transparent panel on lock & login screens
   &.unlock-screen,
-  &.login-screen,
-  &.lock-screen {
+  &.login-screen {
     background-color: transparent;
 
     .panel-corner {
@@ -55,9 +54,9 @@ $panel_height: 1.86em;
     }
 
     &:active, &:overview, &:focus, &:checked {
-      background-color: rgba(0, 0, 0, 0.01); // Trick due to St limitations. It needs a background to draw a box-shadow
+      // Trick due to St limitations. It needs a background to draw a box-shadow
+      background-color: rgba(0, 0, 0, 0.01);
       box-shadow: inset 0 -2px 0 0 lighten($selected_bg_color,5%);
-
       color: lighten($panel_fg_color, 20%);
     }
 
@@ -77,8 +76,7 @@ $panel_height: 1.86em;
 
     // lock & login screen styles
     .unlock-screen &,
-    .login-screen &,
-    .lock-screen & {
+    .login-screen & {
       color: lighten($fg_color, 10%);
       &:focus, &:hover, &:active { color: lighten($fg_color, 10%); }
     }

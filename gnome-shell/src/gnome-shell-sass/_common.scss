@@ -54,8 +54,8 @@ $base_font_size: 11;
 $text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
 
 // icons
-// $base_icon_size: 1.09em;
-$base_icon_size: 16px;
+$base_icon_size: 1.09em;
+// $base_icon_size: 16px;
 
 // Stage
 stage {
@@ -131,9 +131,9 @@ stage {
   border-bottom-width: 0;
 
   &:insensitive { @include button(insensitive, $shadow: none); }
-  &:hover { background-color: $hover_bg_color !important; }
+  &:hover { background-color: $hover_bg_color; }
   &:focus { @include button(focus, $shadow: none); }
-  &:active { background-color: $active_bg_color !important; }
+  &:active { background-color: $active_bg_color; }
 
   // radius is 2 pixel less to fit in bubble
   &:first-child {

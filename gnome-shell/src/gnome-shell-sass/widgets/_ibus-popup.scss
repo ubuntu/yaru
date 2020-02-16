@@ -1,4 +1,9 @@
 // IBus Candidate Popup
+
+.candidate-popup-boxpointer {
+  @extend .popup-menu-boxpointer;
+}
+
 .candidate-popup-content {
   padding: 0.5em;
   spacing: 0.3em;

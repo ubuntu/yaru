@@ -3,15 +3,17 @@ install_dir = join_paths(gnomeshell_default_theme_dir, meson.project_name())
 
 # generate .css files
 theme_sources = files([
-  'gnome-shell-high-contrast.scss',
+	'gnome-shell-high-contrast.scss',
   'gnome-shell.scss',
   'gnome-shell-sass/_colors.scss',
+'gnome-shell-sass/_ubuntu-colors.scss',
   'gnome-shell-sass/_common.scss',
   'gnome-shell-sass/_drawing.scss',
   'gnome-shell-sass/_high-contrast-colors.scss',
   'gnome-shell-sass/_widgets.scss',
+  'gnome-shell-sass/widgets/_a11y.scss',
   'gnome-shell-sass/widgets/_app-grid.scss',
-  'gnome-shell-sass/widgets/_app-switcher.scss',
+  'gnome-shell-sass/widgets/_base.scss',
   'gnome-shell-sass/widgets/_buttons.scss',
   'gnome-shell-sass/widgets/_calendar.scss',
   'gnome-shell-sass/widgets/_check-box.scss',
@@ -37,10 +39,12 @@ theme_sources = files([
   'gnome-shell-sass/widgets/_search-entry.scss',
   'gnome-shell-sass/widgets/_search-results.scss',
   'gnome-shell-sass/widgets/_slider.scss',
+  'gnome-shell-sass/widgets/_switcher-popup.scss',
   'gnome-shell-sass/widgets/_switches.scss',
   'gnome-shell-sass/widgets/_tiled-previews.scss',
   'gnome-shell-sass/widgets/_window-picker.scss',
-  'gnome-shell-sass/widgets/_workspace-switcher.scss'
+  'gnome-shell-sass/widgets/_workspace-switcher.scss',
+  'gnome-shell-sass/widgets/_workspace-thumbnails.scss'
 ])
 
 styles = [

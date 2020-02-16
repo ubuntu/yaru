@@ -1,30 +1,7 @@
-// Links/URLs
-.shell-link {
-  color: $link_color;
-  &:hover { color: lighten($link_color,10%); }
-}
-
-.url-highlighter { link-color: $link_color; }
-
 // Rubberband for select-area screenshots
 .select-area-rubberband {
   background-color: transparentize($selected_bg_color,0.7);
   border: 1px solid $selected_bg_color;
-}
-
-// Pointer accessibility notifications
-.pie-timer {
-  width: 60px;
-  height: 60px;
-  -pie-border-width: 3px;
-  -pie-border-color: $selected_bg_color;
-  -pie-background-color: lighten(transparentize($selected_bg_color, 0.7), 40%);
-}
-
-// Screen zoom/Magnifier
-.magnifier-zoom-region {
-  border: 2px solid $selected_bg_color;
-  &.full-screen { border-width: 0; }
 }
 
 // User icon
@@ -35,22 +12,23 @@
   &:hover {
     color: lighten($osd_fg_color,30%);
   }
+
+  & StIcon {
+    background-color: transparentize($osd_fg_color,0.95);
+    padding: 18px 20px 22px 20px;
+    width: 88px; height: 88px;
+    border-radius: 99px;
+  }
 }
 
-// Input Source Switcher
-.input-source-switcher-symbol {
-  font-size: 34pt;
-  width: 96px;
-  height: 96px;
+.user-widget.vertical .user-icon {
+  icon-size: 128px;
 }
 
-// Window cycler highlight
-.cycler-highlight {
-  border: 5px solid $selected_bg_color;
+.user-widget.horizontal .user-icon {
+  icon-size: 64px;
 }
 
-// Text
-.headline { @include fontsize($base_font_size + 1); }
 .lightbox { background-color: black; }
 .flashspot { background-color: white; }
 
