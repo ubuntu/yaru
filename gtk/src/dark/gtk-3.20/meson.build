@@ -174,7 +174,7 @@ gresource_xml = configure_file(
   output: 'gtk.gresource.xml',
   configuration: conf_data)
 
-gnome.compile_resources('dark-gtk', gresource_xml,
+gnome.compile_resources('gtk', gresource_xml,
   gresource_bundle: true,
   dependencies: generated_css,
   install: true,
