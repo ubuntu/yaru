@@ -10,11 +10,20 @@ To edit the icon sources (or create a new one using a template) you will need `i
 
 ### Templates
 
-There's a couple provided templates that make creating a new icon simple (as an alternative to deriving an icon from one of the pre-existing icons).
+There's a few provided templates that make creating a new icon simple (as an alternative to deriving an icon from one of the pre-existing icons).
 
-**[App Icon Template.svg](./App%20Icon%20Template.svg) - an app icon template**
+**[Horizontal Oblong App Icon Template.svg](./Horizontal%20Oblong%20App%20Icon%20Template.svg) - an app icon template for oblong icons with landscape orientation**
  - a blank template file for Suru application icons 
- - the only layers that need modifying are the `Background` layer (to change the color of the icon) and the `Pictogram` layer (where you add the icon's distinct overall pictogram)
+ - the only layers that need modifying are the `Baseplate` layer (to name and categorise the icon), the `Background` layer (to change the color of the icon) and the `Pictogram` layer (where you add the icon's distinct overall pictogram)
+
+**[Round App Icon Template.svg](./Round%20App%20Icon%20Template.svg) - an app icon template for circular icons**
+ - same principles as above
+
+**[Square App Icon Template.svg](./Square%20App%20Icon%20Template.svg) - an app icon template for square icons**
+ - same principles as above
+
+**[Vertical Oblong App Icon Template.svg](./Vertical%20Oblong%20App%20Icon%20Template.svg) - an app icon template for oblong icons with portrait orientation**
+ - same principles as above
 
 **[Blank Template.svg](./Blank%20Template.svg) - a blank icon template**
  - a completely blank template file for the fullcolor Suru icons (every icon follows this template.)
