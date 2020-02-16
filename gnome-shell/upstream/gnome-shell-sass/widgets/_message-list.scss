@@ -90,6 +90,11 @@
   }
 }
 
+// URLs in messages
+.url-highlighter {
+  link-color: $link_color;
+}
+
 /* Media Controls */
 .message-media-control {
   padding: $base_padding * 2 $base_padding * 4;

@@ -1,5 +1,9 @@
 /* Modal Dialogs */
 
+.headline {
+  @include fontsize($base_font_size + 1);
+}
+
 .modal-dialog {
   border-radius: $modal_radius;
   @extend %bubble_panel;

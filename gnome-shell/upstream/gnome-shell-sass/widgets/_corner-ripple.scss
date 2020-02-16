@@ -13,12 +13,3 @@ $ripple_size: 50px;
   // just a simple change to the border radius position
   &:rtl { border-radius: 0 0 0 $ripple_size + 2px; }
 }
-
-// Pointer location
-.ripple-pointer-location {
-  width: $ripple_size;
-  height: $ripple_size;
-  border-radius: $ripple_size * 0.5; // radius equals the size of the box to give us the curve
-  background-color: lighten(transparentize($selected_bg_color, 0.7), 30%);
-  box-shadow: 0 0 2px 2px lighten($selected_bg_color, 20%);
-}
