@@ -184,3 +184,4 @@ gnome.compile_resources('light-gtk', gresource_xml,
 
 # Install stub CSS files
 install_data(['gtk.css', 'gtk-dark.css'], install_dir: gtk3_dir)
+meson.add_install_script('../../post_install.py', get_option('datadir'), meson.project_name(), 'light')
