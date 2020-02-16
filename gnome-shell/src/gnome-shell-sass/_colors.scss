@@ -2,7 +2,7 @@
 // it gets @if ed depending on $variant
 @import "ubuntu-colors";
 
-$base_color: if($variant == 'light', hsl(0, 0%, 100%), lighten(desaturate($jet, 20%), 10%));
+$base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 10%));
 $bg_color: if($variant == 'light', $porcelain, lighten($inkstone, 0.5%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
@@ -67,4 +67,4 @@ $checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $checkradio_fg_color: #ffffff;
 $switch_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $switch_border_color: if($variant=='light', darken($aubergine, 15%), darken($borders_color, 5%));
-$focus_border_color: lighten($aubergine, 14%);
+$focus_border_color: lighten($orange, 14%);
