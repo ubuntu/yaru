@@ -66,4 +66,4 @@ $checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $checkradio_fg_color: #ffffff;
 $switch_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $switch_border_color: if($variant=='light', darken($aubergine, 15%), darken($borders_color, 5%));
-$focus_border_color: lighten($aubergine, 14%);
+$focus_border_color: lighten($orange, 14%);
