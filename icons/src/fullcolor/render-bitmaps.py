@@ -29,7 +29,7 @@ INKSCAPE = ['/usr/bin/inkscape','--shell']
 OPTIPNG = '/usr/bin/optipng'
 MAINDIR = '../../Suru'
 # SRC = 'fullcolor'
-SOURCES = ('apps', 'categories', 'emblems', 'devices', 'mimetypes', 'places', 'status')
+SOURCES = ('actions', 'apps', 'categories', 'devices', 'emblems', 'legacy', 'mimetypes', 'places', 'status', 'wip')
 
 # DPI multipliers to render at
 DPIS = [1, 2]

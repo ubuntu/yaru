@@ -7,14 +7,17 @@ Yaru consists of one project with 3 distinct parts.
 - `sound` contains all sound themes related information, combining both [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix).
 - `suru-icon-theme` contains all the icons, derives from the [Suru icon](https://snwh.org/suru) theme.
 
+
 ## Build and install themes from source
 
 This installation method is to try out the theme while developing it. If you're not a developer, follow the instructions in the [README.md](./README.md).
 
-```bash
 # Needed packages to clone the repository and build the source files
-sudo apt install libgtk-3-dev git meson sassc
+```bash
+# apt install libgtk-3-dev git meson sassc
+```
 # Download the repository from github
+```bash
 git clone https://github.com/ubuntu/yaru.git
 cd yaru
 # Initialize build system (only required once per repo)
@@ -132,3 +135,66 @@ We remove on new version import:
 - `*.in`, `Makefile.*`, `meson.build`: we have our own build system.
 - `adwaita_engine.c`: we use the default adwaita engine
 - `*.css`: we build these from the `*.cscc` sources
+
+
+## Get your copy of Yaru and make a Pull Request (PR)
+
+On our GitHub page (where you are probably reading this), *fork* the Yaru repository, then clone your copy locally on your computer and build it for the first time to verify that everyting is in place.
+
+```bash
+git clone https://github.com/yourusername/yaru.git
+cd yaru
+meson build
+sudo -i -H ninja install -C build
+```
+
+now create a feature branch for development
+
+```bash
+git checkout -b branch-name
+```
+
+A good branch name should recall the intended change; if it is a fix for a bug with number 1234 a good name could be something like `issue1234/fix-for-something`
+
+Once you are done with your work, use `git status` to see the list of changed (and eventually new) files and *stage* them with `git add` and commit your work with `git commit`
+
+```bash
+$ git status
+On branch issue1234/fix-for-something
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   CONTRIBUTING.md
+...
+```
+
+```bash
+$ git add CONTRIBUTING.md
+```
+
+
+```$bash
+$ git commit
+```
+
+Now think about a good *commit message*. The expected format is like the following
+
+> short explaination of the commit
+> 
+> A more detailed explaination, possibly explaining the current state,
+> why a change is needed and how you implemented the change. Try to find
+> a good compromise between too short and too long.
+> 
+> if it is a fix for a bug numbered 1234 inform GitHub system so that it
+> can close it automatically when the PR is merged.
+>
+> closes #1234
+
+Finally, make a Pull Request (PR) from *branch-name*
+
+```bash
+git push --set-upstream origin add-git-workflow
+```
+
+Open Yaru GitHub repository page, a link to "Create your Pull request" should appear on the main page

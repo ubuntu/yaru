@@ -27,9 +27,9 @@ $ambiance: null !default;
     & *scrolledwindow:backdrop { opacity: 0.9; }
 
     paned box.floating-bar {
-      background: $bg_color;
+      background-color: $bg_color;
       border-style: solid;
-      border-color: $borders_color;
+      border-color: if($variant=='light', lighten($borders_color, 8.3%), darken($borders_color, 1%));
       border-width: 1px 0 0 1px;
       border-radius: $button_radius 0 0 0;
     }
@@ -64,30 +64,13 @@ $ambiance: null !default;
     }
 
     notebook > header {
-      background: if($variant==light, $porcelain, $bg_color);
+      background: $bg_color;
     }
 
     paned > separator {
       // separator between sidebar and main window view
-      $_alpha: if($variant=='light', 0.08, 0.16);
-      $_separator_color: rgba(0, 0, 0, $_alpha);
-
-      background-image: image($_separator_color);
+      background-image: image(if($variant=='light', transparentize($borders_color, 0.6), darken($borders_color, 1%)));
       &:backdrop { background-image: image(transparentize($borders_color, 0.7)); }
-    }
-
-    .nautilus-canvas-item.dim-label,
-    .nautilus-list-dim-label {
-        color: if($variant==light, lighten($text_color, 30%), darken($text_color, 25%));
-        &:selected { color: transparentize($selected_fg_color, 0.3); }
-    }
-
-    .nautilus-canvas-item {
-      -gtk-outline-radius: $button_radius;
-      outline-offset: -2px;
-      &:selected {
-        outline-color: white;
-      }
     }
 
     // custom code from nautilus Adwaita.css for entries and the pathbar
@@ -126,7 +109,23 @@ $ambiance: null !default;
         border-width: 0px 1px 0px 1px;
         border-radius: 0px 0px 0px 0px;
     }
-  }
+
+    // This is the Icon + Text beneath - it's one widget
+    .nautilus-canvas-item {
+      outline-width: 0;
+      // First, remove the background
+      background-color: rgba(255, 255, 255, 0.1);
+      // Then bring it back for when it receives a direction
+      &:dir(ltr) { 
+        background-color: $selected_bg_color;
+      }
+      
+      &:backdrop {
+        background-color: transparentize($fg_color, 0.8);
+        color: $backdrop_text_color;
+      }
+    }
+}
 
 /************
  * Terminal *
@@ -476,8 +475,22 @@ terminal-window {
    ***********/
 
   #live_installer {
-    #dot_grid {
-      .empty { background-color: transparentize($blue, 0.6); }
+    #dot_grid progressbar	{
+      border-radius: 100%;
+      padding: 1px;
+      background-color: white;
+      border: 1px solid $progress_bg_color;
+
+      .empty {
+        border-radius: 100%;
+        background-color: white;
+        padding: 0px;
+      }
+
+      .full progress {
+        border-radius: 100%;
+        padding: 1px;
+      }
     }
   }
   #dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }

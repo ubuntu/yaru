@@ -1,3 +1,124 @@
+yaru-theme (20.04.1) focal; urgency=medium
+
+  [ Carlo Lobrano ]
+  * apps: fix Tilix backdrop transparency
+  * headerbar: fix Gedit "Documents" button
+  * application view: import rename-folder popup style
+  * shell: enable selection of both Shell variants
+  * sounds: provide system-ready sound
+  * gtk2: use same color for menu in gtk2 and gtk3
+  * icons: fix wrong weather symbolic icons
+  * icons: fix warning color on battery icon 30/40 perc
+  * gtk/tweaks: remove text shadow in osd
+  * unity: provide an up to date Yaru theme for Unity
+  * unity: remove glossy effect and icon shadow on dock
+  * audio: link device-added/removed audio file with power-plug/unplug
+  * color: use aubergine as second accent color instead of blue
+  * shell: white lock screen cancel button
+  * shell: fix color differences in on/off toggles
+  * shell: sync slider colors with gtk
+  * gtk: use grey for selected filemenu item
+  * gtk: style notebook's tab as it extends the notebook area
+  * debian: add -unity package configuration
+  * headerbar: increase headerbar backdrop contrast
+  * build: rework folder structure and build system to make variants independent
+  * build: release a complete Yaru-light with support for "prefer dark" app
+  * tweaks: remove borders from menuitem's radiobox and checkbox
+  * shell: improve scrollbar border in dark mode
+  * headerbar: make button border less dark in backdrop
+  * common: uniform background color for sidebars
+  * common: fix backdrop link color
+
+  [ ubuntujaggers ]
+  * adding new icon for evince
+  * symbolic icon for evince
+  * new full colour legacy actions for documents
+  * adding improved document-print icons
+  * new full colour device icon for printer
+  * favorite-new-symbolic, emblem-system-symbolic,
+    application-x-addon-symbolic, and volume-warning-symbolic
+  * adding missing icon for weather-few-clouds-symbolic
+  * adding panel icon for remmina
+  * add legacy buttons: document-export, document-import,
+    document-open-recent, document-revert
+  * changing document-export from red to blue arrow
+  * removing remmina icons from Yaru
+  * adding phone icon with improved proportions and reflections
+  * adding improved network-server full colour icon
+  * changing gradient of keyboard and server
+  * improving definition of keys on keyboard
+  * fixing proportions on full size printer icon to match smaller icons
+  * adding missing full colour icon for dialog-information
+  * adding icons and symlinks for full colour tick and cross actions
+  * adding the grey and purple folders from design fest
+  * updating dropbox icon
+  * making sliders with marks consistent with the round slider
+  * making tick and cross actions consistent with the latest design from
+    canonical
+  * update file manager icon according to suru design
+  * adding applications-multimedia-symbolic
+  * adding version of ubiquity based on CoF forming from pixels
+  * adding icons for speaker testing
+  * adding symlink so folder-drag-accept matches new folders
+  * updating open folder to have same edging as closed folder at 48px and 48*2px
+  * making hand cursors easier to recognize
+  * improving contrast on transmission icon
+  * improving position of hotspot on arrow cursors
+  * full colour app icon for bluetooth
+  * adding full colour status --> avatar-default
+  * making backplate oblong to match symbol
+  * adding full colour icon for drive-multidisk
+
+  [ Feichtmeier ]
+  * improve media optical icons
+  * improve visibility of fingerprint label
+  * remove text and icons shadows for headerbar and buttons
+  * lighten headerbar border-color for the dark theme
+  * sync colors with Vanilla framework
+  * make the headerbar flatter removing the gradient
+  * brighten up dark menus
+  * style ubiquity dotgrid with scss
+  * bring back undershoots style
+  * add missing underscores
+  * fix circular button padding
+  * OSD button styling
+  * fix app notification buttons
+  * focus ring: make focus ring more uniform and less distracting
+  * adapt gtk2 menucolor to gtk3
+  * darken dark theme switch border
+
+  [ Leandro Vital ]
+  * fix dock background opacity to dynamic
+  * empty class declaration, as in dash to dock
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell: Sync with 3.34.2 changes
+
+  [ MadsRH ]
+  * fix symlink badge for new folder icons (PR for 1742)
+  * mimetype icons for .PO translation files
+  * mimetype icon for RSS
+  * mimetype for application-x-python-bytecode to replace the Humanity fallback
+  * fixed missing "eyes and stroke covering the Python logo
+  * improve context menus contrast
+  * sync Nautilus floating-bar style with sidebar
+  * icon for mimetype MIDI
+  * fix audio-midi mimetype
+  * new mimetype icon for application/x-java-archive
+  * mimetype icons for consol roms
+  * add hover style for treeview
+  * revert linkcolor in dark theme for better visibility
+  * added icon for mimetype inode-symlink
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Thu, 06 Feb 2020 17:25:21 +0000
+
+yaru-theme (19.10.5) eoan; urgency=medium
+
+  * gnome-shell: Sync with 3.34.2 changes (LP: #1857037)
+  * debian/gbp.conf: Target ubuntu/eoan branch
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 08 Jan 2020 13:54:22 +0000
+
 yaru-theme (19.10.4) eoan; urgency=medium
 
   [ Carlo Lobrano ]
