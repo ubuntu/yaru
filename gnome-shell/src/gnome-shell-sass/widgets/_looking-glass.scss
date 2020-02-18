@@ -5,9 +5,8 @@
   background-color: $osd_bg_color;
   spacing: $base_spacing;
   padding: 4px;
-  border: 2px solid transparentize($osd_fg_color, 0.8);
-  border-top-width:0;
-  border-radius: 0 0 $base_border_radius $base_border_radius;
+  border: 1px solid transparentize($osd_fg_color, 0.8);
+  border-radius: $base_border_radius;
   color: $osd_fg_color;
 
   & > #Toolbar {
@@ -21,18 +20,19 @@
     -natural-hpadding: $base_padding * 2;
     -minimum-hpadding: 6px;
     font-weight: bold;
-    color: $osd_fg_color;
+    color: darken($osd_fg_color, 15%);
     transition-duration: 100ms;
     padding-left: .3em;
     padding-right: .3em;
+    border-bottom-width: 2px;
     &:hover {
-      color: white;
+      color: $osd_fg_color;
       text-shadow: black 0px 2px 2px;
     }
     &:selected {
       border-bottom-width: 2px;
-      border-color: lighten($selected_bg_color,5%);
-      color: white;
+      box-shadow: inset 0 -2px 0 0 lighten($selected_bg_color, 5%);
+      color: $osd_fg_color;
       text-shadow: black 0px 2px 2px;
     }
   }
@@ -42,12 +42,17 @@
 
 .lg-dialog {
   StEntry {
+    background-color: transparentize(lighten($osd_bg_color, 5%), 0.4);
+    color: $osd_fg_color;
+    border-color: transparentize($osd_fg_color, 0.8);
+    min-height: 22px;
     selection-background-color: $selected_bg_color;
-    selected-color: $osd_bg_color;
+    selected-color: $selected_fg_color;
   }
   .shell-link {
-    color: darken($osd_fg_color, 5%);
-    &:hover { color: $osd_fg_color; }
+    color: $link_color;
+    &:hover { color: lighten($link_color, 10%); }
+    &:active { color: darken($link_color, 10%); }
    }
 }
 
