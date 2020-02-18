@@ -9,7 +9,7 @@ $panel_height: 1.86em;
 
 #panel {
   background-color: $panel_bg_color;
-  font-weight: bold;
+  font-weight: normal;
   height: $panel_height;
   font-feature-settings: "tnum";
 
@@ -44,7 +44,7 @@ $panel_height: 1.86em;
 
   // panel menus
   .panel-button {
-    font-weight: bold;
+    font-weight: normal;
     color: $panel_fg_color;
     -natural-hpadding: $base_padding * 2;
     -minimum-hpadding: $base_padding;
