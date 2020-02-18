@@ -50,63 +50,7 @@
 @import 'widgets/login-dialog';
 @import 'widgets/screen-shield';
 
-// Only needed for gnome-shell versions <= 3.34
 * {
-    font-family: Ubuntu;
     font-weight: normal;
     text-shadow: none !important;
-}
-
-// Only needed for gnome-shell versions <= 3.34
-.system-menu-action {
-    -st-icon-style: symbolic;
-    color: $fg_color;
-    border-radius: 32px;
-    /* wish we could do 50% */
-    padding: 13px;
-    border: 1px solid $bubble_borders_color;
-
-    &:hover,
-    &:focus {
-        background-color: $hover_bg_color;
-        color: $fg_color;
-    }
-
-    &:active {
-        background-color: $active_bg_color;
-        color: $fg_color;
-        //border-color: $selected_borders_color;
-    }
-
-    &>StIcon {
-        icon-size: 16px;
-    }
-}
-
-// Only needed for gnome-shell versions <= 3.34
-.page-indicator {
-    padding: 15px 20px;
-
-    .page-indicator-icon {
-        width: 12px;
-        height: 12px;
-        background-color: transparent;
-        border: 2px solid rgba(255, 255, 255, 0.4);
-        border-radius: 12px;
-    }
-
-    &:hover .page-indicator-icon {
-        border-color: white;
-    }
-
-    &:active .page-indicator-icon {
-        border: none;
-        margin: 2px;
-        background-color: white;
-    }
-
-    &:checked .page-indicator-icon,
-    &:checked:active .page-indicator-icon {
-        background-color: white;
-    }
 }
