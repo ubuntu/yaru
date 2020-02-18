@@ -169,10 +169,13 @@ gtk3_assets = [
   'assets/text-select-start.png',
 ]
 
+# Do not sync this part with master
+
 # generate .css files
 # and install to themes/THEMENAME/gtk-3.0
 generated_css = []
 foreach f : gtk3_scss_sources
+
   target = 'dark-gtk-3.0-' + f + '-generated.css'
   message('generating: ' + target)
   generated_css += custom_target(target,

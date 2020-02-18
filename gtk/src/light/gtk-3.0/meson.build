@@ -170,6 +170,8 @@ gtk3_assets = [
   'assets/text-select-start.png',
 ]
 
+# Do not sync this part with master
+
 # generate .css files
 # and install to themes/THEMENAME/gtk-3.0
 generated_css = []
