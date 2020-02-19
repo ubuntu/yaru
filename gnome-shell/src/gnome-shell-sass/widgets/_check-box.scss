@@ -1,0 +1,18 @@
+/* Check Boxes */
+
+// these are equal to the size of the SVG assets
+$check_height: 22px;
+$check_width: 24px;
+
+
+.check-box {
+  StBoxLayout { spacing: .8em; }
+  StBin {
+    width: $check_width;
+    height: $check_height;
+    background-image: if($variant == 'light', url("checkbox-off.svg"), url("checkbox-off-dark.svg"));
+  }
+  &:focus StBin { background-image: if($variant == 'light', url("checkbox-off-focused.svg"), url("checkbox-off-focused-dark.svg")); }
+  &:checked StBin { background-image: if($variant == 'light', url("checkbox.svg"), url("checkbox-dark.svg")); }
+  &:focus:checked StBin { background-image: if($variant == 'light', url("checkbox-focused.svg"), url("checkbox-focused-dark.svg")); }
+}
