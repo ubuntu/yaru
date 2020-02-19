@@ -14,13 +14,13 @@ $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%),
 $borders_color: if($variant == 'light', darken($bg_color, 20%), darken($bg_color, 9%));
 $alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 10%));
 $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
-$link_color: if($variant == 'light', $linkblue, $blue); 
+$link_color: if($variant == 'light', $linkblue, $blue);
 $link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 $top_hilight: $borders_edge;
 $dark_fill: mix($borders_color, $bg_color, 50%);
 $headerbar_color: if($variant == 'light', lighten($bg_color, 5%), darken($bg_color, 3%));
 $menu_color: if($variant == 'light', $base_color, lighten($bg_color, 2%));
-$popover_bg_color: lighten($bg_color, if($variant == 'light', 1%, 0%));
+$popover_bg_color: $bg_color;
 $popover_hover_color: transparentize($fg_color, 0.85);
 
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
@@ -77,7 +77,7 @@ $progress_border_color: if($variant=='light', $aubergine, darken($aubergine, 8%)
 $checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $checkradio_fg_color: #ffffff;
 $switch_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
-$switch_border_color: if($variant=='light', darken($aubergine, 15%), darken($borders_color, 5%));
+$switch_border_color: if($variant=='light', darken($aubergine, 15%), darken($borders_color, 8%));
 $focus_border_color: transparentize(lighten($orange, 14%), 0.3);
 $coloured_focus_border_color: transparentize(white, 0.3);
 // Headerbar bg colors for the "mixed" theme
