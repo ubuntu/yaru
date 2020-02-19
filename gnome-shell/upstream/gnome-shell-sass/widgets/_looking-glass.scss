@@ -1,0 +1,97 @@
+/* Looking Glass */
+
+// Dialog
+#LookingGlassDialog {
+  background-color: $osd_bg_color;
+  spacing: $base_spacing;
+  padding: 4px;
+  border: 2px solid transparentize($osd_fg_color, 0.8);
+  border-top-width:0;
+  border-radius: 0 0 $base_border_radius $base_border_radius;
+
+  & > #Toolbar {
+    border: none;
+    border-radius: $base_border_radius;
+    background-color: darken($osd_bg_color, 10%);
+  }
+
+  .labels { spacing: $base_spacing; }
+  .notebook-tab {
+    -natural-hpadding: $base_padding * 2;
+    -minimum-hpadding: 6px;
+    font-weight: bold;
+    color: $fg_color;
+    transition-duration: 100ms;
+    padding-left: .3em;
+    padding-right: .3em;
+    &:hover {
+      color: white;
+      text-shadow: black 0px 2px 2px;
+    }
+    &:selected {
+      border-bottom-width: 2px;
+      border-color: lighten($selected_bg_color,5%);
+      color: white;
+      text-shadow: black 0px 2px 2px;
+    }
+  }
+  StBoxLayout#EvalBox { padding: 4px; spacing: $base_spacing; }
+  StBoxLayout#ResultsArea { spacing: $base_spacing; }
+}
+
+.lg-dialog {
+  StEntry {
+    selection-background-color: #bbbbbb;
+    selected-color: $osd_bg_color;
+  }
+  .shell-link {
+    color: #999999;
+    &:hover { color: #dddddd; }
+   }
+}
+
+.lg-completions-text {
+    font-size: .9em;
+    font-style: italic;
+}
+
+.lg-obj-inspector-title {
+    spacing: $base_spacing;
+}
+
+.lg-obj-inspector-button {
+    border: 1px solid gray;
+    padding: 4px;
+    border-radius: $base_border_radius;
+    &:hover { border: 1px solid #ffffff; }
+}
+
+// Extensions
+#lookingGlassExtensions { padding: 4px; }
+
+.lg-extensions-list {
+    padding: 4px;
+    spacing: 6px;
+}
+
+.lg-extension {
+    border: 1px solid $osd_borders_color;
+    border-radius: $base_border_radius;
+    padding: 4px;
+}
+
+.lg-extension-name {
+    font-weight: bold;
+}
+
+.lg-extension-meta {
+    spacing: 6px;
+}
+
+// Inspector
+#LookingGlassPropertyInspector {
+  background: $osd_bg_color;
+  border: 1px solid $osd_borders_color;
+  border-radius: $base_border_radius;
+  padding: 6px;
+}

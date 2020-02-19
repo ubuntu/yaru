@@ -1,0 +1,45 @@
+// Rubberband for select-area screenshots
+.select-area-rubberband {
+  background-color: transparentize($selected_bg_color,0.7);
+  border: 1px solid $selected_bg_color;
+}
+
+// User icon
+.user-icon {
+  background-size: contain;
+  color: $osd_fg_color;
+  border-radius: 99px;
+  &:hover {
+    color: lighten($osd_fg_color,30%);
+  }
+
+  & StIcon {
+    background-color: transparentize($osd_fg_color,0.95);
+    padding: 18px 20px 22px 20px;
+    width: 88px; height: 88px;
+    border-radius: 99px;
+  }
+}
+
+.user-widget.vertical .user-icon {
+  icon-size: 128px;
+}
+
+.user-widget.horizontal .user-icon {
+  icon-size: 64px;
+}
+
+.lightbox { background-color: black; }
+.flashspot { background-color: white; }
+
+
+// Hidden
+.hidden { color: rgba(0,0,0,0);}
+
+// Caps-lock warning
+.caps-lock-warning-label {
+  text-align: center;
+  padding-bottom: 8px;
+  @include fontsize($base_font_size - 1);
+  color: $warning_color;
+}
