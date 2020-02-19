@@ -133,7 +133,7 @@ $ambiance: null !default;
 
 $_disk_space_unknown: $insensitive_bg_color;
 $_disk_space_used: $progress_bg_color;
-$_disk_space_free: $bg_color;
+$_disk_space_free: if($variant=='light', darken($bg_color, 10%), $bg_color);
 
 .disk-space-display {
     border-style: solid;
