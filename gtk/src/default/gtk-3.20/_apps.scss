@@ -92,7 +92,8 @@ $ambiance: null !default;
       @if $ambiance {
         $_bg: if($variant=='light', lighten($headerbar_bg_color, 3%),
                                     lighten($headerbar_bg_color, 1%));
-        border: 1px solid black;
+        border: 1px solid if($ambiance, darken($headerbar_bg_color, 9%), $borders_color);
+        &:backdrop { border-color: if($ambiance, $headerbar_bg_color, $backdrop_borders_color);}
         background-color: $_bg;
       } @else {
         border: 1px solid $borders_color;
