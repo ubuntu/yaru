@@ -73,20 +73,6 @@ $ambiance: null !default;
       &:backdrop { background-image: image(transparentize($borders_color, 0.7)); }
     }
 
-    .nautilus-canvas-item.dim-label,
-    .nautilus-list-dim-label {
-        color: if($variant==light, lighten($text_color, 30%), darken($text_color, 25%));
-        &:selected { color: transparentize($selected_fg_color, 0.3); }
-    }
-
-    .nautilus-canvas-item {
-      -gtk-outline-radius: $button_radius;
-      outline-offset: -2px;
-      &:selected {
-        outline-color: white;
-      }
-    }
-
     // custom code from nautilus Adwaita.css for entries and the pathbar
     entry.search > * {
       margin: 5px;
@@ -123,15 +109,23 @@ $ambiance: null !default;
         border-width: 0px 1px 0px 1px;
         border-radius: 0px 0px 0px 0px;
     }
-  }
 
-  // TODO double check this is still necessary in bionic
-  .nautilus-desktop-window {
-    .nautilus-desktop.view {
-      color: $selected_fg_color;
-      text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    // This is the Icon + Text beneath - it's one widget
+    .nautilus-canvas-item {
+      outline-width: 0;
+      // First, remove the background
+      background-color: rgba(255, 255, 255, 0.1);
+      // Then bring it back for when it receives a direction
+      &:dir(ltr) { 
+        background-color: $selected_bg_color;
+      }
+      
+      &:backdrop {
+        background-color: transparentize($fg_color, 0.8);
+        color: $backdrop_text_color;
+      }
     }
-  }
+}
 
 /************
  * Terminal *
