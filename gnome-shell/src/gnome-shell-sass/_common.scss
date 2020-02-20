@@ -25,6 +25,11 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
 
 /* GLOBALS */
 
+$panel-alpha-value: 0.6;
+$panel_opaque_value: 0.0;
+
+$dash-alpha-value: 0.6;
+$dash-opaque-alpha-value: $panel_opaque_value;
 
 $modal_radius: 6px;
 $button_radius: 4px;
@@ -152,6 +157,15 @@ StScrollBar {
   color: lighten($bg_color, 4%);
   &:hover { color: $_hover_bg_color; }
   &:active { color: $_active_bg_color; }
+
+  /* START: VERSION SPECIFIC CODE (< 3.29.90) */
+  -slider-height: 0.2em; //increase the height because of the border removal
+  -slider-background-color:  mix($borders_color, $bg_color, 50%);
+  -slider-border-color: $borders_color; //trough border color
+  -slider-active-background-color: $progress_bg_color; //active trough fill
+  -slider-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%)); //active trough border
+  -slider-border-width: 0px; //remove the border for a more flat trough
+  /* END: VERSION SPECIFIC CODE (< 3.29.90) */
 }
 
 /* Check Boxes */
@@ -652,10 +666,13 @@ StScrollBar {
   margin: 32px;
   min-width: 64px;
   min-height: 64px;
+  @extend %osd-panel;
 
   .osd-monitor-label { font-size: 3em; }
   .level {
+    $c: darken($ash,5%);;
     height: 0.6em;
+    border-radius: 0.3em;
     -barlevel-height: 0.3em;
     -barlevel-background-color: $inkstone;
     -barlevel-border-color: $borders_color; //trough border color
@@ -663,7 +680,21 @@ StScrollBar {
     -barlevel-active-border-color: $borders_color; //active trough border
     -barlevel-overdrive-color: $destructive_color;
     -barlevel-overdrive-separator-width: 0.2em;
+
+    /* START: VERSION SPECIFIC CODE (< 3.29.90) */
+    /* However, if we enable them, we break the theming for new versions,
+       so, it's probably better not to show a background at all than breaking
+       upstream version.  */
+    // background-color: $c;
+    // color: $c;
+    /* END: VERSION SPECIFIC CODE (< 3.29.90) */
   }
+  /* START: VERSION SPECIFIC CODE (< 3.29.90) */
+  .level-bar {
+    background-color: $blue; // TODO review this color (might be aubergine)
+    border-radius: 0.3em;
+  }
+  /* END: VERSION SPECIFIC CODE (< 3.29.90) */
 }
 
 /* Pad OSD */
@@ -763,6 +794,9 @@ StScrollBar {
     border-radius: 8px;
   }
 
+  .ws-switcher-active-up { background-image: url("ws-switch-arrow-up.svg"); }
+  .ws-switcher-active-down {background-image: url("ws-switch-arrow-down.svg"); }
+
   .ws-switcher-box {
     height: 50px;
     border: 1px solid transparentize($osd_fg_color,0.9);
@@ -830,7 +864,7 @@ StScrollBar {
 /* TOP BAR */
 
 #panel {
-  background-color: $panel_bg_color;
+  background-color: transparentize($panel_bg_color, $panel-alpha-value);;
   font-weight: 450;
   height: 1.86em;
   font-feature-settings: "tnum";
@@ -909,6 +943,33 @@ StScrollBar {
   .screencast-indicator { color: $warning_color; }
 
   .remote-access-indicator { color: $warning_color; }
+
+  // TODO review these colors, since in master this .solid section does not exist
+  &.solid {
+    background-color: transparentize($panel_bg_color, $panel_opaque_value);
+    /* transition from transparent to solid */
+    box-shadow: none;
+    transition-duration: 500ms;
+
+    .panel-corner {
+      -panel-corner-background-color: black;
+    }
+
+    .panel-button {
+      color: $porcelain;
+      text-shadow: none;
+
+      &:hover, &:active, &:overview, &:focus, &:checked {
+        color: white;
+      }
+    }
+
+    .system-status-icon,
+    .app-menu-icon > StIcon,
+    .popup-menu-arrow {
+      icon-shadow: none;
+    }
+  }
 }
 
   // calendar popover
@@ -1032,9 +1093,14 @@ StScrollBar {
       &:active { background-color: transparentize($fg_color, 0.84); }
     }
 
-      .calendar-change-month-back StIcon, .calendar-change-month-forward StIcon { // arrows
-        icon-size: 1.09em;
-      }
+    .calendar-change-month-back { //arrow back
+      background-image: url("calendar-arrow-left.svg");
+      &:rtl { background-image: url("calendar-arrow-right.svg"); }
+    }
+    .calendar-change-month-forward { //arrow foreward
+      background-image: url("calendar-arrow-right.svg");
+      &:rtl { background-image: url("calendar-arrow-left.svg"); }
+    }
 
     .calendar-day-base {
       font-size: 80%;
@@ -1192,7 +1258,17 @@ StScrollBar {
 
   // a little unstructured mess:
 
+  .system-switch-user-submenu-icon.user-icon {
+    icon-size: 20px;
+    padding: 0 2px;
+  }
+  .system-switch-user-submenu-icon.default-icon {
+    icon-size: 16px;
+    padding: 0 4px;
+  }
+
   #appMenu {
+    spinner-image: url("process-working.svg");
     spacing: 4px;
 
     .label-shadow { color: transparent; }
@@ -1228,7 +1304,6 @@ StScrollBar {
     &:active {
       background-color: $_active_bg_color;
       color: $fg_color;
-      //border-color: $selected_borders_color;
     }
 
     & > StIcon { icon-size: 16px; }
@@ -1247,9 +1322,8 @@ StScrollBar {
 
 // Rubberband for select-area screenshots
 .select-area-rubberband {
-  background-color: transparentize($ash, 0.8);
-  border: 1px solid transparentize($silk, 0.2);
-
+  background-color: transparentize($selected_bg_color,0.7);
+  border: 1px solid $selected_bg_color;
 }
 
 // Pointer location
@@ -1268,24 +1342,15 @@ StScrollBar {
 //close buttons
 
 .window-close {
-  background-color: $selected_bg_color;
-  color: white;
-  border-radius: 24px;
-  border: 2px solid $selected_bg_color;
+  background-image: url("close-window.svg");
+  background-size: 32px;
   height: 24px;
   width: 24px;
   -shell-close-overlap: 11px;
   box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
 
-  &:hover {
-    background-color: lighten($selected_bg_color, 5%);
-    border-color: lighten($selected_bg_color, 5%);
-  }
-
-  &:active {
-    background-color: darken($selected_bg_color, 5%);
-    border-color: darken($selected_bg_color, 5%);
-  }
+  &:hover { background-image: url("close-window-hover.svg"); }
+  &:active { background-image: url("close-window-active.svg"); }
 }
 
 // Pointer accessibility notifications
@@ -1397,6 +1462,10 @@ StScrollBar {
   }
 
   //search results
+
+  #searchResultsBin {
+    max-width: 1000px;
+  }
 
   #searchResultsContent {
     max-width: 1000px;
@@ -1918,12 +1987,17 @@ StScrollBar {
   .candidate-page-button-icon { icon-size: 1em; }
 
 /* Auth Dialogs & Screen Shield */
-
-.user-icon {
+// TODO review this widget which is without frame in master
+.framed-user-icon {
   background-size: contain;
-  color: $osd_fg_color;
-  border-radius: 99px;
+  border: 2px solid $osd_fg_color;
+  color:  $osd_fg_color;
+  border-radius: $button_radius;
+  background-color: $inkstone;
+  padding: 5px;
   &:hover {
+    // TODO
+    border-color: lighten($osd_fg_color,30%);
     color: lighten($osd_fg_color,30%);
   }
 }
