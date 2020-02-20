@@ -19,12 +19,7 @@
   }
 }
 
-.mount-dialog-subject {
-  @include fontsize($base_font_size + 3);
-}
-
 /* End Session Dialog */
-
 .end-session-dialog {
   width: 30em;
 
@@ -42,6 +37,11 @@
     text-align: center;
     font-size: 18pt;
     font-weight: 800;
+
+    &.leightweight {
+      font-size: 13pt;
+      font-weight: 800;
+    }
   }
   .message-dialog-description { text-align: center; }
 }

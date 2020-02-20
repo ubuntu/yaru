@@ -150,7 +150,7 @@
     color: $tc;
     text-shadow: 0 1px $text_shadow_color;
     icon-shadow: 0 1px $text_shadow_color;
-    box-shadow: inset 0 0 0 2px transparentize($selected_bg_color, 0.7);
+    box-shadow: inset 0 0 0 2px transparentize($selected_bg_color, 0.4);
     //border-color: $selected_bg_color;
   }
 
