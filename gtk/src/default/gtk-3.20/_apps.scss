@@ -92,7 +92,8 @@ $ambiance: null !default;
       @if $ambiance {
         $_bg: if($variant=='light', lighten($headerbar_bg_color, 3%),
                                     lighten($headerbar_bg_color, 1%));
-        border: 1px solid black;
+        border: 1px solid if($ambiance, darken($headerbar_bg_color, 9%), $borders_color);
+        &:backdrop { border-color: if($ambiance, $headerbar_bg_color, $backdrop_borders_color);}
         background-color: $_bg;
       } @else {
         border: 1px solid $borders_color;
@@ -101,7 +102,7 @@ $ambiance: null !default;
     }
 
     .path-bar-box.width-maximized button:first-child {
-        border-radius: $button_radius 0px 0px $button_radius;
+        border-radius: ($button_radius - 1.5) 0px 0px ($button_radius - 1.5);
         border-width: 0px 1px 0px 0px;
     }
 
@@ -125,6 +126,46 @@ $ambiance: null !default;
         color: $backdrop_text_color;
       }
     }
+}
+
+// Nautilus disk space dialogue styling
+// Copied from the nautilus adwaita.css
+// keeping the CSS code style to make upstream updates easier
+
+$_disk_space_unknown: $insensitive_bg_color;
+$_disk_space_used: $progress_bg_color;
+$_disk_space_free: if($variant=='light', darken($bg_color, 10%), $bg_color);
+
+.disk-space-display {
+    border-style: solid;
+    border-width: 2px;
+}
+
+.disk-space-display.unknown {
+    background-color: $_disk_space_unknown;
+    border-color: transparentize($_disk_space_unknown, 0.7);
+    color: $_disk_space_unknown;
+}
+.disk-space-display.unknown.border {
+    color: transparentize($_disk_space_unknown, 0.7);
+}
+
+.disk-space-display.used {
+    background-color: $_disk_space_used;
+    border-color: transparentize($_disk_space_used, 0.7);
+    color: $_disk_space_used;
+}
+.disk-space-display.used.border {
+    color: transparentize($_disk_space_used, 0.7);
+}
+
+.disk-space-display.free {
+    background-color: $_disk_space_free;
+    border-color: transparentize($_disk_space_free, 0.7);
+    color: $_disk_space_free;
+}
+.disk-space-display.free.border {
+    color: transparentize($_disk_space_free, 0.7);
 }
 
 /************
