@@ -161,7 +161,8 @@ StScrollBar {
   /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   -slider-height: 0.2em; //increase the height because of the border removal
   -slider-background-color:  mix($borders_color, $bg_color, 50%);
-  -slider-border-color: $borders_color; //trough border color
+  -slider-border-color: red; //trough border color
+  -slider-border-width: 1px;
   -slider-active-background-color: $progress_bg_color; //active trough fill
   -slider-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%)); //active trough border
   -slider-border-width: 0px; //remove the border for a more flat trough
