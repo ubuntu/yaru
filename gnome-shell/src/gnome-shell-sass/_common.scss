@@ -691,7 +691,7 @@ StScrollBar {
   }
   /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   .level-bar {
-    background-color: $blue; // TODO review this color (might be aubergine)
+    background-color: $osd_fg_color;
     border-radius: 0.3em;
   }
   /* END: VERSION SPECIFIC CODE (< 3.29.90) */
