@@ -519,6 +519,7 @@ terminal-window {
     #dot_grid progressbar	{
       border-radius: 100%;
       padding: 1px;
+      padding-top: 2px;
       background-color: white;
       border: 1px solid $progress_bg_color;
 
@@ -531,6 +532,8 @@ terminal-window {
       .full progress {
         border-radius: 100%;
         padding: 1px;
+        padding-top: 2px;
+        margin-bottom: 2px;
       }
     }
   }
