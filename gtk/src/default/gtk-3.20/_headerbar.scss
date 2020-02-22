@@ -231,17 +231,19 @@ headerbar,
       border-color: $_button_border_color;
       background-color: $switch_bg_color;
     }
-
+  }
+  // Re-style sliders for switches and scales do make them look sharp on the dark headerbar
+  switch, scale {
     slider {
       @include button(normal-alt, $_button_bg_color);
-
+  
       &:backdrop {
         @include button(backdrop-alt, $_button_bg_color);
         &, &:checked, &:disabled, &:checked:disabled { 
           border-color: darken($_backdrop_button_border_color, 4%); box-shadow: none;
         }
       }      
-
+  
       &:checked {
         border-color: $_button_border_color;
       }
