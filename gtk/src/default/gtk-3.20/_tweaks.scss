@@ -682,6 +682,15 @@ radio {
     }
   }
 }
+// Fixes selected disabled check/radios leaking selected_bg_color, should move to upstream
+treeview.view check,
+treeview.view radio {
+    &:selected {
+      &:focus, & {
+        &:disabled { color: $insensitive_fg_color; }
+    }
+  }
+}
 
 // Reducing the amount of the palette's background colors to two
 
