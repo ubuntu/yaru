@@ -5,7 +5,7 @@ $popover_arrow_height: 12px;
 //.the popover itself
 .popup-menu-boxpointer {
   -arrow-border-radius: $base_border_radius + 2;
-  -arrow-background-color: $bg_color;
+  -arrow-background-color: $porcelain; //$bg_color;
   -arrow-border-width: 1px;
   -arrow-border-color: if($variant=='light', transparentize(black, 0.65), $borders_color);
   -arrow-base: $popover_arrow_height * 2;
@@ -47,7 +47,7 @@ $popover_arrow_height: 12px;
     color: $fg_color;
   }
 
-  &:active { 
+  &:active {
     background-color: $active_bg_color;
     color: $fg_color;
   }
@@ -109,7 +109,7 @@ $popover_arrow_height: 12px;
   min-width: 21em;
 
   // lock screen, shutdown, etc. buttons
-  .popup-menu-icon { 
+  .popup-menu-icon {
     padding:0;
     margin: 0 $base_margin;
     -st-icon-style: symbolic;
@@ -118,7 +118,7 @@ $popover_arrow_height: 12px;
   .popup-sub-menu .popup-menu-item > :first-child {
     // account for icons in submenus with padding
     &:ltr {
-      padding-left: $base_padding + $base_margin * 2; 
+      padding-left: $base_padding + $base_margin * 2;
       margin-left: $base_icon_size;
     }
     &:rtl {
