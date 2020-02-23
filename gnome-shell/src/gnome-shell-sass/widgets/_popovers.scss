@@ -5,7 +5,7 @@ $popover_arrow_height: 12px;
 //.the popover itself
 .popup-menu-boxpointer {
   -arrow-border-radius: $base_border_radius + 2;
-  -arrow-background-color: $porcelain; //$bg_color;
+  -arrow-background-color: $porcelain;
   -arrow-border-width: 1px;
   -arrow-border-color: if($variant=='light', transparentize(black, 0.65), $borders_color);
   -arrow-base: $popover_arrow_height * 2;
