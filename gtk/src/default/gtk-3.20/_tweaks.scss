@@ -315,28 +315,27 @@ treeview {
   }
 }
 
-
-// Make the tabs slightly less heavy
 notebook > header {
   &, &:backdrop { background: transparent; }
   tabs {
     &, &:hover, &:backdrop {
       &, &.right, &.left, &.top, &.bottom {
         background-color: transparent;
-        tab { 
-          &, &:backdrop {
-            &, &:checked {
-              &, &:hover, &:active {
-                &, &:dir(ltr), &:dir(rtl)  {
+        tab {
+          &, &:dir(ltr), &:dir(rtl) {
+            &, &:backdrop {
+              &, &:checked {
+                &, &:hover, &:active {                
                   background-color: transparent;
-                  border-color: transparent;
-                }  
-              }              
+                  border-color: transparent;                
+                }
+              }
+              &:hover:not(:checked) { color: $insensitive_fg_color; }
             }
           }
         }
       }
-    }  
+    }
   }
 }
 
