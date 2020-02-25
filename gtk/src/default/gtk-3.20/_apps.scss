@@ -63,6 +63,10 @@ $ambiance: null !default;
       &.dnd { border-style: none; }
     }
 
+    notebook > header {
+      background: $bg_color;
+    }
+
     paned > separator {
       // separator between sidebar and main window view
       background-image: image(if($variant=='light', transparentize($borders_color, 0.6), darken($borders_color, 1%)));
