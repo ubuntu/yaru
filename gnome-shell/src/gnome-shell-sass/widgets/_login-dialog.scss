@@ -114,8 +114,8 @@
 .login-dialog-user-list {
   spacing: 12px;
   width: 23em;
-  &:expanded .login-dialog-user-list-item:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
-  &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
+  &:expanded .login-dialog-user-list-item:selected { background-color: transparentize($selected_fg_color, 0.9); color: $selected_fg_color; }
+  &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid transparentize($selected_fg_color, 0.9); }
 }
 
 .login-dialog-user-list-item {
