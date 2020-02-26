@@ -50,8 +50,9 @@
 @import 'widgets/login-dialog';
 @import 'widgets/screen-shield';
 
+// Yaru change: make font normal here to have less diff in the widgets
 * {
-    font-weight: normal;
+    font-weight: normal !important;
     text-shadow: none !important;
 }
 

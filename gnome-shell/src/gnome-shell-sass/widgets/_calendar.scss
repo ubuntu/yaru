@@ -1,6 +1,13 @@
 /* Date/Time Menu */
 
-.clock-display-box { spacing: $base_spacing; }
+.clock-display-box {
+  spacing: $base_spacing / 2;
+
+  .clock {
+    padding-left: $base_padding;
+    padding-right: $base_padding;
+  }
+}
 
 // overall menu
 #calendarArea {
@@ -27,7 +34,7 @@
 .events-section-title {
   @include notification_bubble($flat: true);
   color: desaturate(darken($fg_color,40%), 10%);
-  font-weight: normal;
+  font-weight: bold;
   padding: .4em;
 }
 
@@ -39,13 +46,13 @@
   // weekday label
   .day-label {
     @include fontsize($base_font_size+1);
-    font-weight: normal;
+    font-weight: bold;
   }
 
   // date label
   .date-label {
     @include fontsize($base_font_size+7);
-    font-weight: normal;
+    font-weight: 1000;
   }
 }
 
@@ -57,7 +64,7 @@
   // month
   .calendar-month-label {
     color: lighten($fg_color,5%);
-    font-weight: normal;
+    font-weight: bold;
     padding: 8px 0;
     &:focus {}
   }
@@ -124,7 +131,7 @@
 
   // Today
   .calendar-today {
-    font-weight: normal;
+    font-weight: bold;
     border: 1px solid transparent;
     background-color: $selected_bg_color;
     color: $selected_fg_color;
@@ -147,7 +154,7 @@
 
   .calendar-day-with-events {
     color: lighten($fg_color,10%);
-    font-weight: normal;
+    font-weight: bold;
     background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
   }
 
@@ -157,7 +164,7 @@
 
   .calendar-week-number {
     @include fontsize($base_font_size - 4);
-    font-weight: normal;
+    font-weight: bold;
     height: 1.8em;
     width: 2.3em; 
     border-radius: 2px;
@@ -181,7 +188,7 @@
   // title
   .world-clocks-header {
     color: desaturate(darken($fg_color,40%), 10%);
-    font-weight: normal;
+    font-weight: bold;
   }
 
   // city label
@@ -193,7 +200,7 @@
 
   // timezone time
   .world-clocks-time {
-    font-weight: normal;
+    font-weight: bold;
     color: $fg_color;
     font-feature-settings: "lnum";
     @include fontsize($base_font_size);
@@ -223,7 +230,7 @@
 
   .weather-header {
     color: desaturate(darken($fg_color,40%), 10%);
-    font-weight: normal;
+    font-weight: bold;
 
     &.location {
       font-weight: normal;
@@ -250,6 +257,6 @@
   }
 
   .weather-forecast-temp {
-    font-weight: normal;
+    font-weight: bold;
   }
 }
