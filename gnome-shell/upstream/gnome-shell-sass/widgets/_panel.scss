@@ -54,9 +54,6 @@ $panel_height: 1.86em;
     }
 
     &:active, &:overview, &:focus, &:checked {
-      // Trick due to St limitations. It needs a background to draw a box-shadow
-      background-color: rgba(0, 0, 0, 0.01);
-      box-shadow: inset 0 -2px 0 0 lighten($selected_bg_color,5%);
       color: lighten($panel_fg_color, 20%);
     }
 
@@ -79,6 +76,26 @@ $panel_height: 1.86em;
     .login-screen & {
       color: lighten($fg_color, 10%);
       &:focus, &:hover, &:active { color: lighten($fg_color, 10%); }
+    }
+  }
+
+  .panel-button {
+    &:active, &:overview, &:focus, &:checked {
+      // Trick due to St limitations. It needs a background to draw a box-shadow
+      background-color: rgba(0, 0, 0, 0.01);
+      box-shadow: inset 0 -2px 0 0 lighten($selected_bg_color,5%);
+    }
+  }
+
+  .panel-button.clock-display {
+    // Move highlight from .panel-button to .clock
+    &:active, &:overview, &:focus, &:checked {
+      box-shadow: none;
+
+      .clock {
+        background-color: rgba(0, 0, 0, 0.01);
+        box-shadow: inset 0 -2px 0 0 lighten($selected_bg_color,5%);
+      }
     }
   }
 
