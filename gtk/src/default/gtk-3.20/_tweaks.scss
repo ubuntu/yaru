@@ -322,6 +322,7 @@ notebook > header {
       &, &.right, &.left, &.top, &.bottom {
         background-color: transparent;
         tab {
+          outline-color: transparent;
           &, &:dir(ltr), &:dir(rtl) {
             &, &:backdrop {
               &, &:checked {
@@ -330,13 +331,14 @@ notebook > header {
                   border-color: transparent;                
                 }
               }
-              &:hover:not(:checked) { color: $insensitive_fg_color; }
+              &:hover:not(:checked):not(:backdrop) { color: $insensitive_fg_color; }
             }
           }
         }
       }
     }
   }
+  &:focus { box-shadow: 0 0 0 3px $focus_border_color;}
 }
 
 // With the conservative tab styling scrolled windows need the undershoots
