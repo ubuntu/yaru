@@ -1,3 +1,95 @@
+yaru-theme (20.04.2) focal; urgency=medium
+
+  [ ubuntujaggers ]
+  * trying new icon for dconf editor
+  * tweaking new icon for dconf editor
+  * trying more suru version of media-flash
+  * adding missing shadow to 48px
+  * pixel fitting floppy disk icon
+  * tweaking edging
+  * adding highlights
+  * trying version of network-server without folds
+  * Symlink drive-removable-media-usb -> media-removable (#1892)
+  * DRAFT: Icons spring clean: round icons (#1952)
+
+  [ MadsRH ]
+  * added icon for mimetype geo
+  * Device icon for floppy
+  * Add icon for mimetype message-rfc822
+  * Add icon for mimetype x-pkcs7-certificates
+  * Add icon for mimetype karbon
+  * Added device icon for media-flash
+  * Added icon for mimetype text-x-meson
+  * New color from Suru color palette
+  * Changed design to white background with colored @
+  * Added paper fold effect
+  * Additional full color emblems  (#1905)
+  * Remove orange tint on icons (#1900)
+  * Added icon for subtitles (#1887)
+  * More render-bitmaps sources (#1922)
+  * Add symlink for .stl (#1913)
+  * Add icon for mimetype icc profile (#1876)
+  * Emblem for documents, downloads and photos (#1911)
+  * Update legacy folder icon and add document-print-preview (#1934)
+  * Mimetype icons for Krita, desktop, makefile + symlinks (#1931)
+  * Symlink for selection-checked (#1932)
+  * Added icons for list-add and list-remove in Yaru style (#1928)
+  * Added mimetype icon for firmware (#1926)
+  * Firmware icon updated (#1943)
+  * Updated document-print-preview icon to be less ambiguous. Fixes 1962 (#1966)
+  * Color change for document-export (#1975)
+
+  [ Feichtmeier ]
+  * Fix headerbar distorted transition
+  * Disabled backdrop fixes
+  * Fix suggested action disabled buttons
+  * Fix for color chose buttons (#1894)
+  * Leave border-color of headerbar buttons evenly colored (#1898)
+  * Default theme: re-style switches (#1901)
+  * Default theme: headerbar separator improvements (#1902)
+  * Default theme: switch backdrop improvements (#1910)
+  * Dark theme: darken entries in notebooks (#1904)
+  * Gtk theme updates from upstream (#1916)
+  * Fix nautilus selection
+  * Shell and Gtk: make the focus ring golden (#1919)
+  * Increase contrast for buttons and switches in the dark theme (#1918)
+  * Shell theme rebased on upstream (#1746)
+  * Gtk theme upstream nautilus sync and pathbar fixes (#1949)
+  * .osd and .circular button changes from upstream (#1953)
+  * Round the desktop icons (#1954)
+  * Make ubiquity progressbars look like circles (#1956)
+  * Headerbars.scss: sharpen sliders (#1961)
+  * Gtk3: Fix for checks in selected treeviews (#1964)
+  * IconTheme: add auth-fingerprint to source (#1967)
+  * Update check radio assets (#1990)
+  * Revert to upstream tabs but make them less heavy (#1983)
+
+  [ Carlo Lobrano ]
+  * shell: remove double rename-folder-popup style
+  * shell/gtk: use silver color for mouse selection (#1883) (Closes: #1727)
+  * build: rework render-assets script
+  * shell/gtk: rework link color
+
+  [ Jupiter007 ]
+  * Add full color printer-network icon (#1915)
+  * Fix crooked wheel tooth on settings-app-symbolic.svg (#1866)
+  * Add full colour gaming controller icon (#1978)
+  * Add full color audio-speakers icon (#1977)
+
+  [ github-actions[bot] ]
+  * New upstream snapshot for GTK (#1860)
+  * New upstream snapshot for GNOME Shell (#1721)
+  * New upstream snapshot for GNOME Shell (#1950)
+  * New upstream snapshot for GTK (#1945)
+
+  [ Jeremie Tamburini ]
+  * added icon for mimetype nim (#1888) (Closes: #1868)
+
+  [ Stuart Hayhurst ]
+  * Documentation: fix typo in number of Yaru project parts
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 26 Feb 2020 15:08:33 +0100
+
 yaru-theme (20.04.1) focal; urgency=medium
 
   [ Carlo Lobrano ]
