@@ -82,13 +82,6 @@ headerbar, .titlebar {
     }
   }
 
-// blue spinner
-spinner {
-  &:not(:backdrop) {
-    color: $blue;
-  }
-}
-
 // titlebutton
 button.titlebutton:not(.appmenu) {
 
