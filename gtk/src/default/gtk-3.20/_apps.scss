@@ -32,6 +32,10 @@ $ambiance: null !default;
       border-color: if($variant=='light', lighten($borders_color, 8.3%), darken($borders_color, 1%));
       border-width: 1px 0 0 1px;
       border-radius: $button_radius 0 0 0;
+
+      button:dir(ltr).circular.flat.image-button:hover {
+        color: $destructive_color;
+      }
     }
 
     .searchbar-container searchbar {
