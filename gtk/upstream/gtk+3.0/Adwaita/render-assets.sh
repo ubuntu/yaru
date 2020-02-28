@@ -8,7 +8,7 @@ ASSETS_DIR="assets"
 INDEX="assets.txt"
 
 for i in `cat $INDEX`
-do 
+do
 if [ -f $ASSETS_DIR/$i.png ]; then
     echo $ASSETS_DIR/$i.png exists.
 else
