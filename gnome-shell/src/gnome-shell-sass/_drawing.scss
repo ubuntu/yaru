@@ -130,7 +130,7 @@
   $hilight_color: draw_button_hilight_color($c);
   $button_edge: if($edge == none, none, draw_widget_edge($edge));
   $blank_edge: if($edge == none, none, draw_widget_edge(transparentize($edge,1)));
-  $button_shadow: if($shadow == none, none, 0 1px transparentize(black, 0.9));
+  $button_shadow: if($shadow == none, none, 0 1px $shadow);
 
   // normal button
   @if $t==normal {
@@ -157,7 +157,7 @@
     color: $tc;
     background-color: lighten($c, if($variant == 'light', 8%, 5%)) !important;
     border-color: if($variant == 'light', draw_border_color(lighten($c, 7%)), draw_border_color($c));
-    @include draw_shadows(if($shadow == none, none, 0 1px transparentize(black, 0.85)));
+    @include draw_shadows(0 1px opacify($shadow_color, 0.05));
     text-shadow: 0 1px $text_shadow_color;
     icon-shadow: 0 1px $text_shadow_color;
   }
@@ -165,7 +165,7 @@
   // active button
   @else if $t==active {
     color: $tc;
-    background-color: darken($c,3%) !important;
+    background-color: darken($c,3%);
     border-color: draw_border_color(if($variant == 'light', $c, darken($c,7%)));
     text-shadow: none;
     icon-shadow: none;

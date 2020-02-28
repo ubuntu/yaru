@@ -27,13 +27,11 @@
     border-bottom-width: 2px;
     &:hover {
       color: $osd_fg_color;
-      text-shadow: black 0px 2px 2px;
     }
     &:selected {
       border-bottom-width: 2px;
       box-shadow: inset 0 -2px 0 0 lighten($selected_bg_color, 5%);
       color: $osd_fg_color;
-      text-shadow: black 0px 2px 2px;
     }
   }
   StBoxLayout#EvalBox { padding: 4px; spacing: $base_spacing; }
@@ -41,6 +39,7 @@
 }
 
 .lg-dialog {
+  color: $osd_fg_color;
   StEntry {
     background-color: transparentize(lighten($osd_bg_color, 5%), 0.4);
     color: $osd_fg_color;
@@ -59,10 +58,12 @@
 .lg-completions-text {
     font-size: .9em;
     font-style: italic;
+    color: $osd_fg_color;
 }
 
 .lg-obj-inspector-title {
     spacing: $base_spacing;
+    color: $osd_fg_color;
 }
 
 .lg-obj-inspector-button {
@@ -70,6 +71,7 @@
     padding: 4px;
     border-radius: $base_border_radius;
     &:hover { border: 1px solid #ffffff; }
+    color: $osd_fg_color;
 }
 
 // Extensions

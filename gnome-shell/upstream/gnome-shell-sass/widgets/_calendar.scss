@@ -1,6 +1,13 @@
 /* Date/Time Menu */
 
-.clock-display-box { spacing: $base_spacing; }
+.clock-display-box {
+  spacing: $base_spacing / 2;
+
+  .clock {
+    padding-left: $base_padding;
+    padding-right: $base_padding;
+  }
+}
 
 // overall menu
 #calendarArea {

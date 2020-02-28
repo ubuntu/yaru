@@ -13,16 +13,11 @@
   $_gdm_bg: $porcelain;
 
   StEntry {
-    @extend %search_entry;
-    min-height: 22px;
-    border-radius: $base_border_radius !important;
-    // @if $variant=='dark' {
+    @if $variant=='dark' {
       $_gdm_entry_bg: transparentize(lighten(desaturate(#241f31, 20%), 2%), 0.5);
-      background-color: $_gdm_entry_bg !important;
-      border-color: lighten($_gdm_entry_bg, 25%) !important;    
-      color: $osd_fg_color !important;
-      &:focus { border-color: $focus_border_color !important; }
-    // }
+      background-color: $_gdm_entry_bg;
+      color: $osd_fg_color;
+    }
   }
 
   .modal-dialog-button-box { spacing: 3px; }
@@ -31,7 +26,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     background-color: $_gdm_bg;
     border-color: $_gdm_bg;
-    color: $fg_color;
+    color: $inkstone;
 
     $_hover_c: lighten($_gdm_bg, 5%);
     &:hover, &:focus {
@@ -53,7 +48,6 @@
     &:default {
       @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
       border-color: $suggested_bg_color;
-      padding: 4px 18px !important;
       &:hover, &:focus { 
         @include button(hover,$c:$suggested_bg_color, $tc:$selected_fg_color);
         $_def_hover_c: lighten($suggested_bg_color, 5%);
@@ -68,9 +62,9 @@
       }
       &:insensitive {
         @include button(insensitive);
-        border-color: darken($suggested_bg_color, 10%) !important;
-        background-color: darken($suggested_bg_color, 10%) !important;
-        color: transparentize($selected_fg_color, 0.3) !important;
+        border-color: darken($suggested_bg_color, 10%);
+        background-color: darken($suggested_bg_color, 10%);
+        color: transparentize($selected_fg_color, 0.3);
       }
     }
   }
@@ -120,8 +114,8 @@
 .login-dialog-user-list {
   spacing: 12px;
   width: 23em;
-  &:expanded .login-dialog-user-list-item:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
-  &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid $selected_bg_color; }
+  &:expanded .login-dialog-user-list-item:selected { background-color: transparentize($selected_fg_color, 0.9); color: $selected_fg_color; }
+  &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid transparentize($selected_fg_color, 0.9); }
 }
 
 .login-dialog-user-list-item {
@@ -167,7 +161,6 @@
 }
 
 .login-dialog-prompt-entry {
-  width: 17.89em;
   height: 1.5em;
 }
 
@@ -176,11 +169,5 @@
   @include fontsize($base_font_size + 1);
   padding-top: 1em;
 }
-
-
-
-
-
-
 
 
