@@ -33,8 +33,16 @@ $ambiance: null !default;
       border-width: 1px 0 0 1px;
       border-radius: $button_radius 0 0 0;
 
-      button:dir(ltr).circular.flat.image-button:hover {
+      button:dir(ltr).circular.flat.image-button {
+        background: radial-gradient(circle at 50%, white 35%, $bg_color 1%);
         color: $destructive_color;
+      }
+
+      button:dir(ltr).circular.flat.image-button:hover {
+        border: 1px solid $borders_color;
+        background: radial-gradient(circle at 50%, white 30%, $base_hover_color 16%);
+        color: lighten($destructive_color, 5%);
+
       }
     }
 
