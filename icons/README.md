@@ -53,5 +53,3 @@ gsettings reset org.gnome.desktop.interface cursor-theme
 ## Contributing
 
 Contributions are obviously welcome! If you would like to contribute to this project, please have [read this](/CONTRIBUTING.md) regarding contributions.
-
-Alternatively, if you would like to support development by making a donation you can do so [here](https://snwh.org/donate).
