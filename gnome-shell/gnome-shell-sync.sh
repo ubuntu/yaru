@@ -43,7 +43,9 @@ done
 wget_check=`which wget | wc -l`
 [ $wget_check == 0 ] && echo "install wget" && exit 1
 
-root=https://gitlab.gnome.org/GNOME/gnome-shell/raw/gnome-3-34/data/theme
+
+data=https://gitlab.gnome.org/GNOME/gnome-shell/raw/gnome-3-34/data
+root=${data}/theme
 
 [ ! -d ${_destination} ] && echo ${_destination} folder does not exists && exit 1
 [ ! -d gnome-shell-sass ] && mkdir ${_destination}/gnome-shell-sass
@@ -86,7 +88,15 @@ files=(
   toggle-on-intl.svg
 )
 
+data_files=(
+  gnome-shell-theme.gresource.xml
+)
+
 set -e
 for i in ${files[@]}; do
     wget ${root}/${i} -O ${_destination}/${i}
+done
+
+for i in ${data_files[@]}; do
+    wget ${data}/${i} -O ${_destination}/data/${i}
 done
