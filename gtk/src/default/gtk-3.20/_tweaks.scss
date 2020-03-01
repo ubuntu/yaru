@@ -422,3 +422,15 @@ button.color { min-height: $_headerbar_height / 2; }
 @if $variant=='dark' {
   notebook entry { background-color: darken($base_color, 2%); }
 }
+
+// Make all :not:(.empty) level bars green - should be moved to upstream
+levelbar {
+  block {
+    &.high,
+    &:not(.empty) {
+      border-color: if($variant == 'light', darken($success_color, 20%), $success_color);
+      background-color: $success_color;
+      &:backdrop { border-color: $success_color; }
+    }
+  }
+}
