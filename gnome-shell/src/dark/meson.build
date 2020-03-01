@@ -67,50 +67,37 @@ foreach style: styles
                               depend_files: theme_sources)
 endforeach
 
+gresource_xml = files('data/gnome-shell-theme.gresource.xml')[0]
+gresource_files_path = '../'
+data_sources = run_command(
+  gresources_xml_parser, [
+    join_paths(meson.source_root(), '@0@'.format(gresource_xml)),
+    '--path',
+      gresource_files_path,
+    '--filter', '*.css',
+  ],
+).stdout().strip().split('\n')
+
+assert(data_sources.length() > 0 and data_sources[0] != '', 'No data sources found')
+
 # static files to copy
-data_sources = [
-  '../calendar-today.svg',
-  '../checkbox-focused.svg',
-  '../checkbox-off-focused.svg',
-  '../checkbox-off.svg',
-  '../checkbox.svg',
+data_sources += [
   '../checkbox-focused-dark.svg',
   '../checkbox-off-focused-dark.svg',
   '../checkbox-off-dark.svg',
   '../checkbox-dark.svg',
-  '../dash-placeholder.svg',
-  '../key-enter.svg',
-  '../key-hide.svg',
   '../key-hide-dark.svg',
-  '../key-layout.svg',
   '../key-layout-dark.svg',
-  '../key-shift-latched-uppercase.svg',
-  '../key-shift.svg',
   '../key-shift-dark.svg',
-  '../key-shift-uppercase.svg',
   '../lockscreen-gradient.svg',
   '../logged-in-indicator.svg',
-  '../message-indicator-symbolic.svg',
-  '../no-events.svg',
   '../noise-texture.png',
-  '../no-notifications.svg',
   '../pad-osd.css',
-  '../pointer-double-click-symbolic.svg',
-  '../pointer-drag-symbolic.svg',
-  '../pointer-primary-click-symbolic.svg',
-  '../pointer-secondary-click-symbolic.svg',
-  '../process-working.svg',
   '../running-indicator.svg',
   '../source-button-border.svg',
   '../summary-counter.svg',
-  '../toggle-off-dark.svg',
-  '../toggle-off-hc.svg',
   '../toggle-off-intl.svg',
-  '../toggle-off.svg',
-  '../toggle-on-dark.svg',
-  '../toggle-on-hc.svg',
   '../toggle-on-intl.svg',
-  '../toggle-on.svg',
   '../ws-switch-arrow-down.svg',
   '../ws-switch-arrow-up.svg',
 ]
