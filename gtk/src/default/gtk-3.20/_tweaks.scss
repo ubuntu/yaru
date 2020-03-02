@@ -227,33 +227,30 @@ switch {
 
   &:checked {
     background-color: $switch_bg_color;
+    &, & slider { border-color: $switch_border_color; }
 
-    &, slider {
-      border-color: $switch_border_color;
-    }
-    &:disabled slider { @include button(insensitive); }
     &:disabled {
       color: $insensitive_fg_color;
       border-color: $borders_color;
       background-color: $insensitive_bg_color;
       text-shadow: none;
 
-      &:disabled {
-        color: $backdrop_insensitive_color;
-        border-color: $backdrop_borders_color;
-        background-color: $insensitive_bg_color;
-      }
-
+      & slider { @include button(insensitive); }
     }
   }
 
   &:backdrop {
     &:checked {
-      @if $variant == 'light' { color: $backdrop_bg_color; }
-      &, slider { border-color: if($variant=='light', $switch_bg_color, $switch_border_color); }
       background-color: $switch_bg_color;
+      &, & slider { border-color: if($variant=='light', $switch_bg_color, $switch_border_color); }
 
-      &:disabled slider { @include button(backdrop-insensitive); }
+      @if $variant == 'light' { color: $backdrop_bg_color; }
+
+      &:disabled {
+        color: $backdrop_insensitive_color;
+        border-color: $backdrop_borders_color;
+        background-color: $insensitive_bg_color;
+      }
     }
   }
 
@@ -269,11 +266,12 @@ switch {
   }
 
   slider {
-
     @if $variant == 'dark' {
       @include button(normal-alt, $c: $bg_color, $edge: $shadow_color);
     }
   }
+
+  &:disabled:backdrop slider { @include button(backdrop-insensitive); }
 }
 
 // 2 pixel transparentized focus rings
@@ -346,9 +344,9 @@ notebook > header {
           &, &:dir(ltr), &:dir(rtl) {
             &, &:backdrop {
               &, &:checked {
-                &, &:hover, &:active {                
+                &, &:hover, &:active {
                   background-color: transparent;
-                  border-color: transparent;                
+                  border-color: transparent;
                 }
               }
               &:hover:not(:checked):not(:backdrop) { color: $insensitive_fg_color; }
