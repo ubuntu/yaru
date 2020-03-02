@@ -90,7 +90,6 @@ data_sources = [
   '../key-shift-uppercase.svg',
   '../lockscreen-gradient.svg',
   '../logged-in-indicator.svg',
-  '../meson.build',
   '../message-indicator-symbolic.svg',
   '../no-events.svg',
   '../noise-texture.png',
