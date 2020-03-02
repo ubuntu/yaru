@@ -82,13 +82,6 @@ assert(data_sources.length() > 0 and data_sources[0] != '', 'No data sources fou
 
 # static files to copy
 data_sources += [
-  '../checkbox-focused-dark.svg',
-  '../checkbox-off-focused-dark.svg',
-  '../checkbox-off-dark.svg',
-  '../checkbox-dark.svg',
-  '../key-hide-dark.svg',
-  '../key-layout-dark.svg',
-  '../key-shift-dark.svg',
   '../lockscreen-gradient.svg',
   '../logged-in-indicator.svg',
   '../noise-texture.png',
