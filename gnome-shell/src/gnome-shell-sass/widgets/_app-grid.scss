@@ -159,7 +159,6 @@ $app_grid_fg_color: #fff;
   &, &:hover, &:checked {
     @include button(undecorated);
     color: darken($osd_fg_color, 25%);
-    background-color: transparent !important;
   }
 
   &:hover {
