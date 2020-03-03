@@ -120,10 +120,10 @@
 
   .notification-badge {
     color: rgba(255, 255, 255, 1);
-    background-color: $green;
+    background-color: $success_color;
     padding: 0.2em 0.5em;
     border-radius: 1em;
-    border: 1px solid darken($green,10%);
+    border: 1px solid darken($success_color,10%);
     box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
     font-weight: bold;
     text-align: center;
@@ -202,7 +202,7 @@
 
     &:active .overview-icon,
     &:checked .overview-icon {
-      // when clicking on an app
+      background-color: $base_active_color; box-shadow: none;
     }
 
     &.focused .overview-icon {
