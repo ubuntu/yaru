@@ -155,7 +155,7 @@
   // hover button
   @else if $t==hover {
     color: $tc;
-    background-color: lighten($c, if($variant == 'light', 8%, 5%)) !important;
+    background-color: lighten($c, if($variant == 'light', 8%, 5%));
     border-color: if($variant == 'light', draw_border_color(lighten($c, 7%)), draw_border_color($c));
     @include draw_shadows(0 1px opacify($shadow_color, 0.05));
     text-shadow: 0 1px $text_shadow_color;
