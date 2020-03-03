@@ -1,5 +1,8 @@
 sassc = find_program('sassc')
 
+gnomeshell_theme_dir = join_paths(gnomeshell_default_theme_dir,
+  meson.project_name())
+
 styles = [
   'gnome-shell',
   'gnome-shell-high-contrast',
@@ -9,6 +12,7 @@ variants = [
   'dark',
 ]
 
+theme_css = []
 theme_sources = files(
   run_command(
     'find', meson.current_source_dir(), '-name', '*.scss'
@@ -16,12 +20,42 @@ theme_sources = files(
 )
 assert(theme_sources.length() > 0, 'No theme sources found')
 
+source_deps = []
+css_sources_path = meson.current_source_dir()
+if not gnomeshell_use_gresource
+  css_sources_path = meson.current_build_dir()
+  foreach src: theme_sources
+    out_name = '___'.join('@0@'.format(src).split('/'))
+    source_deps += custom_target(out_name,
+      input: src,
+      output: out_name,
+      command: [
+        'bash', '-c',
+        ';'.join([
+          'output="$1/$(realpath --relative-to="'+ meson.current_source_dir() + '" $0)"',
+          'mkdir -p $(dirname "$output")',
+          'sed "s,resource:///org/gnome/shell/theme/,,g" "$0" > "$output"',
+        ]),
+        '@INPUT@',
+        '@OUTDIR@',
+      ],
+      install: false,
+    )
+  endforeach
+endif
+
 foreach variant: variants
   is_variant = variant != 'light'
   variant_sufix = is_variant ? '-@0@'.format(variant)  : ''
-  install_dir = join_paths(
-    gnomeshell_default_theme_dir,
-    meson.project_name() + variant_sufix)
+
+  if gnomeshell_use_gresource
+    install_dir = join_paths(
+      gnomeshell_alt_themes_dir,
+      meson.project_name() + variant_sufix,
+      'gnome-shell')
+  else
+    install_dir = gnomeshell_theme_dir + variant_sufix
+  endif
 
   conf_data = configuration_data()
   conf_data.set('ThemeVariant', variant)
@@ -45,13 +79,16 @@ foreach variant: variants
       output: '@0@.css'.format(stylename),
       command: [
         sassc, '-a', '@INPUT@', '@OUTPUT@',
-        '-I', meson.current_source_dir(),
+        '-I', css_sources_path,
       ],
-      install: not is_variant,
+      install: not is_variant and not gnomeshell_use_gresource,
       install_dir: install_dir,
+      depends: source_deps,
       depend_files: theme_sources,
     )
   endforeach
+
+  theme_css += style_css
 
   # This is an hack we need to remove once meson fixes this issue:
   #  https://github.com/mesonbuild/meson/issues/2320
@@ -98,5 +135,16 @@ foreach variant: variants
   install_data(data_sources, install_dir: install_dir)
 endforeach
 
-# Symlink default variant
-meson.add_install_script('install-shell.sh', meson.project_name())
+if gnomeshell_use_gresource
+  gnome.compile_resources(
+    'gnome-shell-theme',
+    gresource_xml,
+    dependencies: theme_css,
+    gresource_bundle: true,
+    install: true,
+    install_dir: gnomeshell_theme_dir,
+)
+else
+  # Symlink default variant
+  meson.add_install_script('install-shell.sh', meson.project_name())
+endif
