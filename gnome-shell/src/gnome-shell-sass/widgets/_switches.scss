@@ -9,8 +9,8 @@ $switch_width: 46px;
   height: $switch_height;
   width: $switch_width;
   background-size: contain;
-  background-image: if($variant == 'light', url("toggle-off.svg"),url("toggle-off-dark.svg"));
+  background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/toggle-off.svg"),url("resource:///org/gnome/shell/theme/toggle-off-dark.svg"));
   &:checked { 
-    background-image: if($variant == 'light', url("toggle-on.svg"),url("toggle-on-dark.svg"));
+    background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/toggle-on.svg"),url("resource:///org/gnome/shell/theme/toggle-on-dark.svg"));
   }
 }

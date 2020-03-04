@@ -63,7 +63,7 @@ $default_key_bg_color: $key_bg_color;
 
   // enter key is suggested-action
   &.enter-key {
-    background-image: url("key-enter.svg");
+    background-image: url("resource:///org/gnome/shell/theme/key-enter.svg");
 
     @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
     &:hover, &:checked { @include button(hover, $c: lighten($suggested_bg_color, 3%));}
@@ -71,11 +71,11 @@ $default_key_bg_color: $key_bg_color;
   }
 
   // key assets
-  &.shift-key-lowercase { background-image: if($variant == 'light',  url("key-shift.svg"), url("key-shift-dark.svg")); }
-  &.shift-key-uppercase { background-image: url("key-shift-uppercase.svg"); }
-  &.shift-key-uppercase:latched { background-image: url("key-shift-latched-uppercase.svg"); }
-  &.hide-key { background-image: if($variant == 'light', url("key-hide.svg"), url("key-hide-dark.svg")); }
-  &.layout-key {background-image: if($variant == 'light', url("key-layout.svg"), url("key-layout-dark.svg")); }
+  &.shift-key-lowercase { background-image: if($variant == 'light',  url("resource:///org/gnome/shell/theme/key-shift.svg"), url("resource:///org/gnome/shell/theme/key-shift-dark.svg")); }
+  &.shift-key-uppercase { background-image: url("resource:///org/gnome/shell/theme/key-shift-uppercase.svg"); }
+  &.shift-key-uppercase:latched { background-image: url("resource:///org/gnome/shell/theme/key-shift-latched-uppercase.svg"); }
+  &.hide-key { background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/key-hide.svg"), url("resource:///org/gnome/shell/theme/key-hide-dark.svg")); }
+  &.layout-key {background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/key-layout.svg"), url("resource:///org/gnome/shell/theme/key-layout-dark.svg")); }
 
   &, &.default-key, &.enter-key { &, &:hover, &:checked, &:active { box-shadow: none !important; } }
 }

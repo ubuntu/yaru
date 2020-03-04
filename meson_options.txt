@@ -1,5 +1,6 @@
 option('icons', type: 'boolean', value: true, description:'build icons component')
 option('gnome-shell', type: 'boolean', value: true, description:'build gnome-shell component')
+option('gnome-shell-gresource', type: 'boolean', value: false, description: 'build gnome-shell component in gresources')
 option('gtk', type: 'boolean', value: true, description:'build gtk component')
 option('sounds', type: 'boolean', value: true, description:'build sounds component')
 option('sessions', type: 'boolean', value: true, description:'build sessions component')

@@ -4,6 +4,9 @@ conf_data = configuration_data()
 conf_data.set('ThemeName', meson.project_name())
 conf_data.set('LowerCaseThemeName', meson.project_name().to_lower())
 
+resource_path = gnomeshell_use_gresource ? join_paths('theme', meson.project_name(), '') : ''
+conf_data.set('ThemeResourcePath', resource_path)
+
 # NOTE: GNOME Shell only accept lowercase mode names.
 configure_file(input : 'mode.json.in',
               output : meson.project_name().to_lower()+'.json',
