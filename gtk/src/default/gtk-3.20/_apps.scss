@@ -462,12 +462,6 @@ terminal-window {
     }
   }
 
-  /****************
-   * GNOME Photos *
-   ****************/
-  //removes the black background for picture tiles
-  .documents-scrolledwin.frame.frame widget flowboxchild.tile { background-color: transparent; }
-
   /***********
    * Firefox *
    ***********/
@@ -500,15 +494,6 @@ terminal-window {
       trough {
         background-color: transparentize($bg_color, 0.8);
       }
-    }
-  }
-
-  /*********************
-   * Chrome / Chromium *
-   *********************/
-   window.background.chromium {
-    @if $variant=='dark' {
-     menu { border: 1px solid lighten($inkstone,1%); }
     }
   }
 
