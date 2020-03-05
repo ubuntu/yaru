@@ -106,7 +106,7 @@ headerbar,
       &.#{$b_type} {
         @include button(normal, $b_color, white);
         border-color: $b_color;
-        outline-color: $coloured_focus_border_color;
+
         &.flat {
           @include button(undecorated);
           color: $b_color;
@@ -124,6 +124,8 @@ headerbar,
             border-color: darken($suggested_bg_color, 15%);
           }
         }
+
+        &, &:hover, &:focus:active { outline-color: $coloured_focus_border_color; }
 
         &:backdrop,
         &.flat:backdrop {
