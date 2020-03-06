@@ -26,7 +26,10 @@ $ambiance: null !default;
     @at-root %dim_icons_in_backdrop,
     & *scrolledwindow:backdrop { opacity: 0.9; }
 
-    infobar { background-color: if($variant=="light", lighten($silk, 10%), $slate); }
+    infobar {
+      background-color: if($variant=="light", lighten($silk, 10%), $slate);
+      &:backdrop { background-color: $backdrop_bg_color; }
+    }
 
     paned box.floating-bar {
       background-color: $bg_color;
