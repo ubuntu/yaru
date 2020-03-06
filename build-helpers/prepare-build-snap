@@ -30,6 +30,7 @@ fi
 
 
 echo "Build now gtk-common-themes"
+channel=${channel:-"edge"}
 # FIXME: we won't need this once snapd can accept and auto-install theme snaps.
 mkdir -p ../gtk-common-themes/snap
 cd ../gtk-common-themes
