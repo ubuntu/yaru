@@ -21,18 +21,15 @@ if [ "$TRAVIS_BRANCH" == "bionic" ]; then
         # this is an official edge snap
         channel="edge"
     fi
-else
-    echo "skipping: snaps are only for bionic builds"
-    exit 0
+    echo "Push to bionic ubuntu repo: will release to $channel"
+
+    cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
+
+    docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 fi
 
-echo "Push to bionic ubuntu repo: will release to $channel"
 
-cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && snapcraft push *.snap --release=$channel"
-
-docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
-
-# build now gtk-common-themes
+echo "Build now gtk-common-themes"
 # FIXME: we won't need this once snapd can accept and auto-install theme snaps.
 mkdir -p ../gtk-common-themes/snap
 cd ../gtk-common-themes
@@ -49,6 +46,8 @@ docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
 # write on PR install instructions for the snap branch
 [ "$TRAVIS_PULL_REQUEST" == "false" ] && exit 0
-curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
-        -d "{\"body\": \"A new test snap version is available using: \`snap refresh communitheme --channel=$channel\`.\nFurther available updates will track that pull request then.\n\nSwitch back to stable or edge snap with \`snap refresh communitheme --stable\` or \`snap refresh communitheme --edge\` once you are done with it!\nYou may want to download as well \`gtk-common-themes\` snap from \`$channel\` channel to test your snaps with those changes.\n\nReplace \`refresh\` with \`install\` if you haven't installed the snap yet.\"}" \
-        "https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
+if [ "$TRAVIS_BRANCH" == "bionic" ]; then
+    curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST \
+            -d "{\"body\": \"A new test snap version is available using: \`snap refresh communitheme --channel=$channel\`.\nFurther available updates will track that pull request then.\n\nSwitch back to stable or edge snap with \`snap refresh communitheme --stable\` or \`snap refresh communitheme --edge\` once you are done with it!\nYou may want to download as well \`gtk-common-themes\` snap from \`$channel\` channel to test your snaps with those changes.\n\nReplace \`refresh\` with \`install\` if you haven't installed the snap yet.\"}" \
+            "https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments"
+fi
