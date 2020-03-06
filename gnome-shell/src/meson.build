@@ -145,6 +145,12 @@ if gnomeshell_use_gresource
     install_dir: gnomeshell_theme_dir,
 )
 else
-  # Symlink default variant
-  meson.add_install_script('install-shell.sh', meson.project_name())
+  # Symlink variants
+  foreach v: variants
+    if v == 'light'
+      meson.add_install_script('install-shell.sh', meson.project_name())
+    else
+      meson.add_install_script('install-shell.sh', meson.project_name() + '-' + v)
+    endif
+  endforeach
 endif
