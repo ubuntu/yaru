@@ -20,7 +20,7 @@ $slider_size: 15px;
   // slider hander
   -slider-handle-radius: $slider_size * 0.5; // half the size of the size
   -slider-handle-border-width: 1px;
-  -slider-handle-border-color: if($variant == 'light', $borders_color, $fg_color);
+  -slider-handle-border-color: darken($alt_borders_color, 3%); //if($variant == 'light', $borders_color, $fg_color);
 
   color: if($variant == 'light', lighten($bg_color, 10%), $fg_color);
   &:hover { color: $hover_bg_color; }
