@@ -1,3 +1,58 @@
+yaru-theme (20.04.3) UNRELEASED; urgency=medium
+
+  [ Carlo Lobrano ]
+  * shell: re-use silver color for mouse selection
+  * light themes: slightly brighten up shell and gtk popovers
+  * nautilus: use destructive color for "stop loading" floating button
+    (Closes: #1980)
+  * gtk: update assets for new color palette (Closes: #1730)
+  * switch: stronger disabled state in default and light variants
+    (Closes: #2016)
+  * shell: use straight tile-preview corners
+  * headerbar: white outline for suggested-action button (Closes: #2019)
+  * apps/nautilus: make infobar more visible (Closes: #1989)
+  * shell: use the same gtk style for slider borders
+
+  [ Jupiter007 ]
+  * Remove input gaming legacy
+  * Improve full colour audio-speakers icon
+
+  [ Feichtmeier ]
+  * Tweaks.scss: notebook tab improvements
+  * Shell theme upstream fixes
+  * Shell theme: Provide a Yaru process-working asset
+  * Gtk3: headerbar button fixes
+  * Adapt gtk2 to gtk3
+  * Gtk3: Make level bars green that aren't low
+  * ShellTheme: colorize app grid rename dialog label
+  * Change shell spinner from blue to #f7f7f7
+  * Fix headerbar button regression caused by #2010
+  * Dark gt3k theme: darken $borders_color by 2%
+  * Clean up third party app styling
+  * Gtk3: darken progressbar border colors
+  * headerbar: fix missing states in suggested button outline
+  * Provide application health, preferences-desktop and system-shutdown icons
+  * Update software-update-available icon
+  * Fix check/radio backdrop
+  * Ubiquity: title box improvements
+
+  [ MadsRH ]
+  * Updated documentation
+
+  [ ubuntujaggers ]
+  * adding preferences-ubuntu-panel-symbolic icon
+  * adding missing full colour status actions for software-updater
+  * adding snap store category symbols for reference and education
+  * Adding colour icons for headphones and headset
+  * Spring clean square apps, including new Tweaks icon
+  * changing proportions of download symbol to match folder icon
+  * Provide full colour Yaru legacy action icons
+
+  [ Marco Trevisan ]
+  * GNOME Shell generate gresource (Closes: #1938)
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 10 Mar 2020 22:43:02 +0100
+
 yaru-theme (20.04.2) focal; urgency=medium
 
   [ ubuntujaggers ]
