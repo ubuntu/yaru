@@ -518,6 +518,16 @@ terminal-window {
    ***********/
 
   #live_installer {
+
+    #title_eventbox { 
+      background-color: $bg_color;
+      color: $fg_color;
+      &:backdrop {
+        background-color: $backdrop_bg_color;
+        color: $backdrop_fg_color;
+      }
+    }
+
     #dot_grid progressbar	{
       border-radius: 100%;
       padding: 1px;
