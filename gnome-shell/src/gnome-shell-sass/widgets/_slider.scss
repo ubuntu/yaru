@@ -6,20 +6,21 @@ $slider_size: 15px;
   height: $slider_size;
   // slider trough
   -barlevel-height: 3px; // has to be an odd number
-  -barlevel-background-color: $borders_color; //background of the trough
-  -barlevel-border-width: 1px; 
+  -barlevel-background-color: if($variant=='light', $dark_fill, $inkstone); //background of the trough
+  -barlevel-border-width: 1px;
   -barlevel-border-color: $borders_color; // trough border color
   // fill style
   -barlevel-active-background-color: $progress_bg_color; //active trough fill
-  -barlevel-active-border-color: if($variant == 'light', darken($progress_bg_color, 4%), lighten($progress_bg_color, 2%)); //active trough border
+
+  -barlevel-active-border-color: $progress_border_color; //active trough border
   // overfill style (red in this case)
   -barlevel-overdrive-color: $destructive_color;
-  -barlevel-overdrive-border-color: if($variant == 'light', darken($destructive_color, 4%), lighten($destructive_color, 2%)); //trough border when red;
+  -barlevel-overdrive-border-color: if($variant == 'light', darken($destructive_color, 4%), darken($destructive_color, 20%)); //trough border when red;
   -barlevel-overdrive-separator-width:1px;
   // slider hander
   -slider-handle-radius: $slider_size * 0.5; // half the size of the size
   -slider-handle-border-width: 1px;
-  -slider-handle-border-color: if($variant == 'light', $borders_color, $fg_color);
+  -slider-handle-border-color: darken($alt_borders_color, 3%); //if($variant == 'light', $borders_color, $fg_color);
 
   color: if($variant == 'light', lighten($bg_color, 10%), $fg_color);
   &:hover { color: $hover_bg_color; }
