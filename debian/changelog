@@ -4,16 +4,16 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
   * shell: re-use silver color for mouse selection
   * light themes: slightly brighten up shell and gtk popovers
   * nautilus: use destructive color for "stop loading" floating button
-    (Closes: #1980)
-  * gtk: update assets for new color palette (Closes: #1730)
+    (Fixes: #1980)
+  * gtk: update assets for new color palette (Fixes: #1730)
   * switch: stronger disabled state in default and light variants
-    (Closes: #2016)
+    (Fixes: #2016)
   * shell: use straight tile-preview corners
-  * headerbar: white outline for suggested-action button (Closes: #2019)
-  * apps/nautilus: make infobar more visible (Closes: #1989)
+  * headerbar: white outline for suggested-action button (Fixes: #2019)
+  * apps/nautilus: make infobar more visible (Fixes: #1989)
   * shell: use the same gtk style for slider borders
   * build/shell: symlink shell variants to alternate theme directory for
-    theme selection (Closes: #2043)
+    theme selection (Fixes: #2043)
 
   [ Jupiter007 ]
   * Remove input gaming legacy
@@ -52,7 +52,7 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
   * Adding more legacy icons (mostly mail-related)
 
   [ Marco Trevisan ]
-  * GNOME Shell generate gresource (Closes: #1938)
+  * GNOME Shell generate gresource (Fixes: #1938)
 
  -- Carlo Lobrano <c.lobrano@gmail.com>  Wed, 11 Mar 2020 12:12:34 +0100
 
