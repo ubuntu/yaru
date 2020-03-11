@@ -46,22 +46,22 @@ endif
 
 foreach variant: variants
   is_variant = variant != 'light'
-  variant_sufix = is_variant ? '-@0@'.format(variant)  : ''
+  variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
 
   if gnomeshell_use_gresource
     install_dir = join_paths(
       gnomeshell_alt_themes_dir,
-      meson.project_name() + variant_sufix,
+      meson.project_name() + variant_suffix,
       'gnome-shell')
   else
-    install_dir = gnomeshell_theme_dir + variant_sufix
+    install_dir = gnomeshell_theme_dir + variant_suffix
   endif
 
   conf_data = configuration_data()
   conf_data.set('ThemeVariant', variant)
   theme_main_file = configure_file(
     input: 'gnome-shell.scss.in',
-    output: 'gnome-shell@0@.scss'.format(variant_sufix),
+    output: 'gnome-shell@0@.scss'.format(variant_suffix),
     configuration: conf_data,
   )
 
@@ -70,7 +70,7 @@ foreach variant: variants
   output_styles = []
 
   foreach style: styles
-    stylename = style + variant_sufix
+    stylename = style + variant_suffix
     output_styles += '@0@.css'.format(style)
 
     style_css += custom_target(
@@ -145,6 +145,9 @@ if gnomeshell_use_gresource
     install_dir: gnomeshell_theme_dir,
 )
 else
-  # Symlink default variant
-  meson.add_install_script('install-shell.sh', meson.project_name())
+  # Symlink variants
+  foreach variant: variants
+    variant_suffix = (variant != 'light') ? '-@0@'.format(variant)  : ''
+    meson.add_install_script('install-shell.sh', meson.project_name() + variant_suffix)
+  endforeach
 endif
