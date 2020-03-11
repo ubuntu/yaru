@@ -12,6 +12,8 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
   * headerbar: white outline for suggested-action button (Closes: #2019)
   * apps/nautilus: make infobar more visible (Closes: #1989)
   * shell: use the same gtk style for slider borders
+  * build/shell: symlink shell variants to alternate theme directory for
+    theme selection (Closes: #2043)
 
   [ Jupiter007 ]
   * Remove input gaming legacy
@@ -19,7 +21,7 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
 
   [ Feichtmeier ]
   * Tweaks.scss: notebook tab improvements
-  * Shell theme upstream fixes
+  * Shell theme upstream fixes (LP: #1865563)
   * Shell theme: Provide a Yaru process-working asset
   * Gtk3: headerbar button fixes
   * Adapt gtk2 to gtk3
@@ -51,7 +53,7 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
   [ Marco Trevisan ]
   * GNOME Shell generate gresource (Closes: #1938)
 
- -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 10 Mar 2020 22:43:02 +0100
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Wed, 11 Mar 2020 08:54:41 +0100
 
 yaru-theme (20.04.2) focal; urgency=medium
 
