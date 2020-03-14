@@ -1,7 +1,8 @@
 // Color variables dependant on $headerbar_bg_color defined in _colors.scss
 $_button_bg_color: lighten($headerbar_bg_color, 6%);
 $_button_border_color: darken($headerbar_bg_color, 9%);
-$_backdrop_button_border_color: $headerbar_bg_color;
+// deducted from the color used in common which is $backdrop_borders_color: mix($borders_color, $bg_color, 80%);
+$_backdrop_button_border_color: darken($inkstone, 9%);
 
 // overwriting the headerbar styling from common, for the inverted look in the ambiance theme
 headerbar,
