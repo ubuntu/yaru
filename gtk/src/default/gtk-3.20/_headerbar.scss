@@ -91,7 +91,7 @@ headerbar,
     }
 
     &:disabled {
-      @include button(insensitive, if($variant=='light', darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
+      @include button(insensitive, if($variant=='light', darken($headerbar_bg_color, 9%), $headerbar_bg_color), $headerbar_fg_color);
       border-color: darken($headerbar_bg_color, 6%);
 
       &:active,
