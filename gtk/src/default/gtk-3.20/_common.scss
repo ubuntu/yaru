@@ -920,14 +920,14 @@ button {
 
     $_border_bg: linear-gradient(to top, $alt-borders-color 25%, $borders-color 50%);
 
-    &:not(.flat):not(:checked):not(:active):not(:disabled):not(:backdrop) {
+    &:not(.flat):not(.osd):not(:checked):not(:active):not(:disabled):not(:backdrop) {
       @include button(normal);
 
       background-image: $button_fill, $_border_bg;
       border-color: transparent;
     }
 
-    &:hover:not(:checked):not(:active):not(:disabled):not(:backdrop) {
+    &:hover:not(.osd):not(:checked):not(:active):not(:disabled):not(:backdrop) {
       @include button(hover);
 
       background-image: $button_fill, $_border_bg;
@@ -1618,8 +1618,8 @@ headerbar {
   button.toggle:checked {
 
     background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
-    border-color: darken($borders_color, 3%);
-    border-top-color: darken($borders_color, 8%);
+    border-color: darken($borders_color, 6%);
+    // border-top-color: darken($borders_color, 8%);
     &:backdrop {
       @include button(backdrop-active);
     }
