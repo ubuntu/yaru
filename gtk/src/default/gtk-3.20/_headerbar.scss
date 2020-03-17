@@ -61,9 +61,7 @@ headerbar,
     }
 
     &:backdrop {
-
-      &,
-      &.flat {
+      &, &.flat {
           @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
           -gtk-icon-effect: none;
@@ -109,6 +107,7 @@ headerbar,
       &.#{$b_type} {
         @include button(normal, $b_color, white);
         border-color: $b_color;
+
         &.flat {
           @include button(undecorated);
           color: $b_color;
@@ -126,6 +125,8 @@ headerbar,
             border-color: darken($suggested_bg_color, 15%);
           }
         }
+
+        &, &:hover, &:focus:active { outline-color: $coloured_focus_border_color; }
 
         &:backdrop,
         &.flat:backdrop {
@@ -148,7 +149,6 @@ headerbar,
         }
 
         &.flat {
-
           &:backdrop,
           &:disabled,
           &:backdrop:disabled {
@@ -217,7 +217,7 @@ headerbar,
     &:backdrop {
       background-color: lighten($backdrop_headerbar_bg_color, 2%);
       &, &:checked { border-color: darken($_backdrop_button_border_color, 4%); }
-      &:disabled { 
+      &:disabled {
         background-color: $backdrop_headerbar_bg_color;
         border-color: $_backdrop_button_border_color;
       }
@@ -232,16 +232,18 @@ headerbar,
       border-color: $_button_border_color;
       background-color: $switch_bg_color;
     }
-
+  }
+  // Re-style sliders for switches and scales do make them look sharp on the dark headerbar
+  switch, scale {
     slider {
       @include button(normal-alt, $_button_bg_color);
 
       &:backdrop {
         @include button(backdrop-alt, $_button_bg_color);
-        &, &:checked, &:disabled, &:checked:disabled { 
+        &, &:checked, &:disabled, &:checked:disabled {
           border-color: darken($_backdrop_button_border_color, 4%); box-shadow: none;
         }
-      }      
+      }
 
       &:checked {
         border-color: $_button_border_color;
