@@ -630,6 +630,7 @@
 
   @if $t==backdrop {
     background-image: image($c);
+    border-color: $_border_color;
     box-shadow: none;
     color: $tc;
   }
