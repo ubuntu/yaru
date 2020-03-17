@@ -14,6 +14,7 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
   * shell: use the same gtk style for slider borders
   * build/shell: symlink shell variants to alternate theme directory for
     theme selection (Fixes: #2043)
+  * Reduce differences between default and dark variant headerbar buttons
 
   [ Jupiter007 ]
   * Remove input gaming legacy
@@ -50,11 +51,15 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
   * changing proportions of download symbol to match folder icon
   * Provide full colour Yaru legacy action icons
   * Adding more legacy icons (mostly mail-related)
+  * adding eye assets with thinner strokes (#2061)
+  * Add redesign of network-workgroup icon (#2062)
+  * adding new extensions app icon and symbol (#2063)
+  * adding symbol for edit-clear-all (#2068)
 
   [ Marco Trevisan ]
   * GNOME Shell generate gresource (Fixes: #1938)
 
- -- Carlo Lobrano <c.lobrano@gmail.com>  Wed, 11 Mar 2020 12:12:34 +0100
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 17 Mar 2020 18:27:37 +0100
 
 yaru-theme (20.04.2) focal; urgency=medium
 
