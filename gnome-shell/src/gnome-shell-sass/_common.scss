@@ -59,7 +59,7 @@ stage {
   padding: 4px 32px;
   @include button(normal);
   &:focus { @include button(focus, $c:$_hover_bg_color, $tc:$fg_color); }
-  &:hover { @include button(hover, $c:$_hover_bg_color, $tc:$fg_color); }
+  &:hover { @include button(hover); }
   &:insensitive { @include button(insensitive); }
   &:active { @include button(active, $c:$_active_bg_color, $tc:$fg_color); }
 }
