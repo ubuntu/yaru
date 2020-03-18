@@ -135,7 +135,7 @@
     color: $tc;
     background-color: $c;
     border-color: $borders_color;
-    box-shadow: $_button_shadow;
+    box-shadow: 0 1px transparentize(black, 0.9);
     text-shadow: 0 1px black;
     icon-shadow: 0 1px black;
   }
@@ -157,7 +157,7 @@
     color: $tc;
     border-color: $borders_color;
     background-color: $c;
-    box-shadow: $_button_shadow;
+    box-shadow: 0 1px transparentize(black, if($variant=='light', 0.8, 0.85));
     text-shadow: 0 1px black;
     icon-shadow: 0 1px black;
 
