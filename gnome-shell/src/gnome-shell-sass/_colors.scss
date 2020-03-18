@@ -15,6 +15,7 @@ $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentiz
 $link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
 $link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 $top_hilight: $borders_edge;
+$dark_fill: mix($borders_color, $bg_color, 50%);
 
 $warning_color: $yellow;
 $error_color: $red;
