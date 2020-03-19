@@ -59,7 +59,7 @@ stage {
   padding: 4px 32px;
   @include button(normal);
   &:focus { @include button(focus, $c:$_hover_bg_color, $tc:$fg_color); }
-  &:hover { @include button(hover, $c:$_hover_bg_color, $tc:$fg_color); }
+  &:hover { @include button(hover); }
   &:insensitive { @include button(insensitive); }
   &:active { @include button(active, $c:$_active_bg_color, $tc:$fg_color); }
 }
@@ -143,7 +143,7 @@ StScrollBar {
 .slider {
   height: 1em;
   -barlevel-height: 0.2em;
-  -barlevel-background-color: mix($borders_color, $bg_color, 50%);
+  -barlevel-background-color: if($variant=='light', $dark_fill, $inkstone);
   -barlevel-border-color: $borders_color; //trough border color
   -barlevel-active-background-color: $progress_bg_color; //active trough fill
   -barlevel-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%)); //active trough border
@@ -153,7 +153,7 @@ StScrollBar {
   -barlevel-border-width: 1px;
   -slider-handle-radius: 8px;
   -slider-handle-border-width: 1px;
-  -slider-handle-border-color: $borders_color;
+  -slider-handle-border-color: darken($alt_borders_color, 3%);
   color: lighten($bg_color, 4%);
   &:hover { color: $_hover_bg_color; }
   &:active { color: $_active_bg_color; }
@@ -161,7 +161,7 @@ StScrollBar {
   /* START: VERSION SPECIFIC CODE (< 3.29.90) */
   -slider-height: 0.2em; //increase the height because of the border removal
   -slider-background-color:  mix($borders_color, $bg_color, 50%);
-  -slider-border-color: $borders_color; //trough border color
+  -slider-border-color: darken($alt_borders_color, 3%); //trough border color
   -slider-active-background-color: $progress_bg_color; //active trough fill
   -slider-active-border-color: if($variant == 'light', $progress_bg_color, darken($progress_bg_color, 10%)); //active trough border
   -slider-border-width: 0px; //remove the border for a more flat trough
