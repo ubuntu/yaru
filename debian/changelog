@@ -19,6 +19,8 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
   [ Jupiter007 ]
   * Remove input gaming legacy
   * Improve full colour audio-speakers icon
+  * Legacy 16px *-remove.svg icons pixel perfect (#2087)
+  * Fix twisted paths in legacy 16px svgs (#2085)
 
   [ Feichtmeier ]
   * Tweaks.scss: notebook tab improvements
@@ -41,6 +43,7 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
 
   [ MadsRH ]
   * Updated documentation
+  * Legacy icon for object locked / unlocked (#2083)
 
   [ ubuntujaggers ]
   * adding preferences-ubuntu-panel-symbolic icon
@@ -55,11 +58,17 @@ yaru-theme (20.04.3) UNRELEASED; urgency=medium
   * Add redesign of network-workgroup icon (#2062)
   * adding new extensions app icon and symbol (#2063)
   * adding symbol for edit-clear-all (#2068)
+  * Adding emblems to 32px folders (#2088)
 
-  [ Marco Trevisan ]
+  [ Marco Trevisan (Treviño) ]
   * GNOME Shell generate gresource (Fixes: #1938)
+  * gnome-shell-theme.gresource: Set gdm3.css theme alias to Yaru
+  * debian/control: Breaks versions prior to 3.36.0
+  * debian/rules: Enable gnome-shell-gresource in ubuntu
+  * yaru-theme-gnome-shell.{preinst,postinst,prerm}:
+    - Install gdm3-theme.gresource alternative
 
- -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 17 Mar 2020 18:27:37 +0100
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 20 Mar 2020 01:10:31 +0100
 
 yaru-theme (20.04.2) focal; urgency=medium
 
