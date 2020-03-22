@@ -16,6 +16,10 @@ $ambiance: null !default;
    * Nautilus *
    ***********/
   .nautilus-window {
+    .nautilus-canvas-item.dim-label,
+    .nautilus-list-dim-label {
+        color: mix($text_color, $base_color);
+    }
     // keep details box visible
     // details box looks ugly when many items are selected and it floats above the orange
     background-image: none;
