@@ -52,10 +52,6 @@ $default_key_bg_color: $key_bg_color;
 
   // non-character keys
   &.default-key {
-
-    // size of the icon asset
-    background-size: 24px;
-
     @include button(normal, $c:$default_key_bg_color);
     &:hover, &:checked {@include button(hover, $c: $default_key_bg_color);}
     &:active { @include button(active, $c: $default_key_bg_color);}
@@ -63,21 +59,14 @@ $default_key_bg_color: $key_bg_color;
 
   // enter key is suggested-action
   &.enter-key {
-    background-image: url("resource:///org/gnome/shell/theme/key-enter.svg");
-
     @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
     &:hover, &:checked { @include button(hover, $c: lighten($suggested_bg_color, 3%));}
     &:active {@include button(active, $c: darken($suggested_bg_color, 2%));}
   }
 
-  // key assets
-  &.shift-key-lowercase { background-image: if($variant == 'light',  url("resource:///org/gnome/shell/theme/key-shift.svg"), url("resource:///org/gnome/shell/theme/key-shift-dark.svg")); }
-  &.shift-key-uppercase { background-image: url("resource:///org/gnome/shell/theme/key-shift-uppercase.svg"); }
-  &.shift-key-uppercase:latched { background-image: url("resource:///org/gnome/shell/theme/key-shift-latched-uppercase.svg"); }
-  &.hide-key { background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/key-hide.svg"), url("resource:///org/gnome/shell/theme/key-hide-dark.svg")); }
-  &.layout-key {background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/key-layout.svg"), url("resource:///org/gnome/shell/theme/key-layout-dark.svg")); }
+  &.shift-key-uppercase { color: $suggested_bg_color }
 
-  &, &.default-key, &.enter-key { &, &:hover, &:checked, &:active { box-shadow: none !important; } }
+  StIcon { icon-size: 1.125em; }
 }
 
 // long press on a key popup

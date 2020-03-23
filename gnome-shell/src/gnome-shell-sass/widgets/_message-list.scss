@@ -60,7 +60,7 @@
 
   // title
   .message-title {
-    font-weight: normal;
+    font-weight: bold;
   }
 
   // secondary container in title box
@@ -102,7 +102,7 @@
 
   // uses $hover_bg_color since the media controls are in a notification_bubble
   &:hover {
-    background-color: $hover_bg_color;
+    background-color: lighten($hover_bg_color, 5%);
     color: $fg_color;
   }
 

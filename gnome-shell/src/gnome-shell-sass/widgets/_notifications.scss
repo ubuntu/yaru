@@ -20,7 +20,7 @@ $notification_banner_width: 34em;
 // counter
 .summary-source-counter {
   font-size: $base_font_size - 1pt;
-  font-weight: normal;
+  font-weight: bold;
   height: 1.6em;
   width: 1.6em;
   -shell-counter-overlap-x: 3px;
@@ -51,7 +51,7 @@ $notification_banner_width: 34em;
 .chat-meta-message {
   padding-left: 4px;
   @include fontsize($base_font_size - 2);
-  font-weight: normal;
+  font-weight: bold;
   color: lighten($fg_color,18%);
   &:rtl { padding-left: 0; padding-right: 4px; }
 }
