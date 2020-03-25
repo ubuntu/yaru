@@ -18,8 +18,18 @@ $ambiance: null !default;
   .nautilus-window {
     .nautilus-canvas-item.dim-label,
     .nautilus-list-dim-label {
-        color: mix($text_color, $base_color);
+      color: mix($text_color, $base_color);
+      &:backdrop {
+        color: transparentize(mix($text_color, $base_color), 0.2);
+      }
+      &:selected {
+        color: transparentize($selected_fg_color, 0.3);
+        &:backdrop {
+          color: transparentize(mix($text_color, $base_color), 0.4);
+        }
+      }
     }
+
     // keep details box visible
     // details box looks ugly when many items are selected and it floats above the orange
     background-image: none;
@@ -138,10 +148,10 @@ $ambiance: null !default;
       // First, remove the background
       background-color: rgba(255, 255, 255, 0.1);
       // Then bring it back for when it receives a direction
-      &:dir(ltr) { 
+      &:dir(ltr) {
         background-color: $selected_bg_color;
       }
-      
+
       &:backdrop {
         background-color: transparentize($fg_color, 0.8);
         color: $backdrop_text_color;
@@ -523,7 +533,7 @@ terminal-window {
 
   #live_installer {
 
-    #title_eventbox { 
+    #title_eventbox {
       background-color: $bg_color;
       color: $fg_color;
       &:backdrop {
