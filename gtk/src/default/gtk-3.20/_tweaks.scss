@@ -327,7 +327,8 @@ notebook > header {
       &, &.right, &.left, &.top, &.bottom {
         background-color: transparent;
         tab {
-          outline-color: transparent;
+          outline-width: 1px;
+          outline-offset: -1px;
           &, &:dir(ltr), &:dir(rtl) {
             &, &:backdrop {
               &, &:checked {
