@@ -14,4 +14,3 @@ foreach component: components
 endforeach
 
 subdir('communitheme-compat')
-meson.add_install_script('debug-snap-build.sh')
