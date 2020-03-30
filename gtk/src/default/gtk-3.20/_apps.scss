@@ -148,8 +148,9 @@ $ambiance: null !default;
       // First, remove the background
       background-color: rgba(255, 255, 255, 0.1);
       // Then bring it back for when it receives a direction
-      &:dir(ltr) {
-        background-color: $selected_bg_color;
+      &:selected:not(:backdrop) {
+        &:dir(ltr) { background-color: $selected_bg_color; }
+        &:not(:dir(ltr)) { background-color: rgba(175, 175, 175, 0.5); }
       }
 
       &:backdrop {
