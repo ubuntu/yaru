@@ -279,9 +279,7 @@ headerbar,
       }
     }
 
-    .subtitle:link {
-      @extend *:link:selected;
-    }
+    .subtitle:link { @extend %link_selected; }
 
     button,
     button.image-button,
