@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 # -*- coding: UTF-8 -*-
-set -x
-
-pwd
 project_name="$1"
 destdir_prefix="${MESON_INSTALL_DESTDIR_PREFIX}/share"
 install_prefix="${MESON_INSTALL_PREFIX}/share"

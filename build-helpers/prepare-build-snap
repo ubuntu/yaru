@@ -10,9 +10,10 @@ cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pw
 # Only release as a snap from main repo (ubuntu slug), enabling other forks to test build the snap.
 # Notes that the tokens are only available when the source repo is under ubuntu/ project.
 YARU_BRANCH="$TRAVIS_BRANCH"
-if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-    echo "building PR $TRAVIS_PULL_REQUEST_BRANCH"
-    YARU_BRANCH="$TRAVIS_PULL_REQUEST_BRANCH"
+
+if [ "$TRAVIS_BRANCH" == "master" ]; then
+    # build gtk-common-themes only for Pushes to master
+    [ "$TRAVIS_PULL_REQUEST" == "false" ] && exit 0
 fi
 
 if [ "$TRAVIS_BRANCH" == "bionic" ]; then
@@ -44,7 +45,7 @@ sed -e "s,CHANNEL,$channel,g" -e "s,REPO,$TRAVIS_REPO_SLUG," -e "s,BRANCH,$YARU_
 
 # build and push gtk-common-themes snap
 cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pwd) && snapcraft"
-cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - && unsquashfs -ll *.snap | grep Yaru && snapcraft push *.snap --release=$channel"
+cmd="$cmd && echo \"$SNAP_TOKEN\" | snapcraft login --with - | grep Yaru && snapcraft push *.snap --release=$channel"
 docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 
 # write on PR install instructions for the snap branch
