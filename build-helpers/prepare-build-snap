@@ -10,12 +10,15 @@ cmd="sed -i s/xenial/bionic/g /etc/apt/sources.list && apt update -qq && cd $(pw
 # Only release as a snap from main repo (ubuntu slug), enabling other forks to test build the snap.
 # Notes that the tokens are only available when the source repo is under ubuntu/ project.
 YARU_BRANCH="$TRAVIS_BRANCH"
+if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+    echo "building PR $TRAVIS_PULL_REQUEST_BRANCH"
+    YARU_BRANCH="$TRAVIS_PULL_REQUEST_BRANCH"
+fi
 
 if [ "$TRAVIS_BRANCH" == "bionic" ]; then
     if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
         # if it's a PR event, publish a special snap
         channel="edge/${TRAVIS_REPO_SLUG#*/}-pr$TRAVIS_PULL_REQUEST"
-        YARU_BRANCH="$TRAVIS_PULL_REQUEST_BRANCH"
         echo "PR to bionic ubuntu repo: will release to $channel"
     else
         # this is an official edge snap
@@ -27,7 +30,6 @@ if [ "$TRAVIS_BRANCH" == "bionic" ]; then
 
     docker run -v $(pwd):$(pwd) -t snapcore/snapcraft:stable sh -c "$cmd"
 fi
-
 
 echo "Build now gtk-common-themes"
 channel=${channel:-"edge"}
