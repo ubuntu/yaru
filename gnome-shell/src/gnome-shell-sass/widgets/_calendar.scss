@@ -156,6 +156,9 @@
     background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
     &.calendar-work-day {
       color: lighten($fg_color,10%);
+      &.calendar-today {
+        color: $selected_fg_color;
+      }
       font-weight: bold;
     }
   }
