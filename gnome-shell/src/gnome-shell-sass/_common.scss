@@ -46,7 +46,8 @@ $font-family: Ubuntu, Cantarell, Sans-Serif;
 stage {
   font-family: $font-family;
   @include fontsize($font-size);
-  color: $fg_color;
+  color: $osd_fg_color;
+  background-color: $osd_bg_color;
 }
 
 /* WIDGETS */
