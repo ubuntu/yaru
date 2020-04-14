@@ -1,3 +1,22 @@
+yaru-theme (20.04.5) UNRELEASED; urgency=medium
+
+  [ Carlo Lobrano ]
+  * apps/nautilus: fix dim-label in selection and backdrop (LP: #1869141)
+  * tweaks: use outline for tabs accessibility
+  * gnome-shell/calendar: darken event dot (LP: #1870938)
+  * gnome-shell/calendar: do not change color of day with events
+  * shell/switcher-popup: improve contrast of highlighted app
+
+  [ ubuntujaggers ]
+  * Updating symbols for Tweaks and Configurator
+  * Remove new legacy icons and include some from Humanity (LP: #1870925)
+  * Adding symbols for system-reboot and system-log-out (LP: #1868385)
+  * Adding missing symlinks for extensions app (Fixes: #2096)
+  * suggested (more yaru-style) icon for extensions
+  * adding dialog-warning and symlinks (Fixes: #2103)
+
+ -- Carlo Lobrano <c.lobrano@gmail.com>  Tue, 14 Apr 2020 17:45:05 +0200
+
 yaru-theme (20.04.4) focal; urgency=medium
 
   [ Carlo Lobrano ]
