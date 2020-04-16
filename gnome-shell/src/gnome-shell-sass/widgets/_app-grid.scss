@@ -73,10 +73,6 @@ $app_grid_fg_color: #fff;
       & > StIcon { icon-size: 16px }
     }
   }
-
-  & StButton#vhandle,
-  & StButton#vhandle:hover,
-  & StButton#vhandle:active { background-color: transparent; }
 }
 .app-folder-dialog-container {
   padding: 12px;
