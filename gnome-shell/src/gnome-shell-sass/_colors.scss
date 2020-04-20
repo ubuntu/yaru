@@ -3,17 +3,19 @@
 @import "ubuntu-colors";
 
 $base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 10%));
-$bg_color: if($variant == 'light', #f7f7f7, lighten($inkstone, 0.5%));
+$bg_color: if($variant == 'light', #FAFAFA, lighten($inkstone, 0.5%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
 $selected_fg_color: #ffffff;
 $selected_bg_color: if($variant == 'light', $orange, darken($orange, 4%));
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 $borders_color: if($variant == 'light', darken($bg_color, 20%), darken($bg_color, 9%));
+$alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 10%));
 $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
 $link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
-$link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+$link_visited_color: if($variant == 'light', darken($link_color, 20%), lighten($link_color, 10%));
 $top_hilight: $borders_edge;
+$dark_fill: mix($borders_color, $bg_color, 50%);
 
 $warning_color: $yellow;
 $error_color: $red;
@@ -49,7 +51,8 @@ $base_active_color: transparentize(white, 0.75);
 $hover_fg_color: lighten($selected_fg_color, .25);
 $active_fg_color: transparentize($selected_fg_color, .5);
 
-$panel_bg_color: lighten(#181818, 2%);
+$panel_bg_color: lighten($jet, 2%);
+$panel_fg_color: darken($porcelain, 2%);
 $dash_bg_color: $panel_bg_color;
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
@@ -61,9 +64,9 @@ $dash-opaque-alpha-value: 0.0;
 $suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
 $progress_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
-$progress_border_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
+$progress_border_color: if($variant== 'light', darken($progress_bg_color, 5%), darken($progress_bg_color, 20%));
 $checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $checkradio_fg_color: #ffffff;
 $switch_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $switch_border_color: if($variant=='light', darken($aubergine, 15%), darken($borders_color, 5%));
-$focus_border_color: lighten($aubergine, 14%);
+$focus_border_color: lighten($orange, 14%);
