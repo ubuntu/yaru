@@ -385,6 +385,8 @@ $_dot_color: if($variant=='light', $selected_bg_color,
   outline-radius: $small_radius;
 
   @include button(normal);
+
+  @at-root %button_basic_flat,
   &.flat {
     @include button(undecorated);
     // to avoid adiacent buttons borders clashing when transitioning, the transition on the normal state is set
@@ -714,9 +716,9 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 .inline-toolbar.toolbar GtkToolButton,
 .inline-toolbar.toolbar GtkToolButton:backdrop {
   & > .button.flat { @extend %linked_middle; }
-  &:first-child > .button.flat { @extend %linked:first-child; }
-  &:last-child > .button.flat { @extend %linked:last-child; }
-  &:only-child > .button.flat { @extend %linked:only-child; }
+  &:first-child > .button.flat { @extend %linked_first_child; }
+  &:last-child > .button.flat { @extend %linked_last_child; }
+  &:only-child > .button.flat { @extend %linked_only_child; }
 }
 
 %linked_middle {
@@ -726,15 +728,19 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
 %linked {
   @extend %linked_middle;
+
+  @at-root %linked_first_child
   &:first-child {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
   }
+  @at-root %linked_last_child
   &:last-child {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border-right-style: solid;
   }
+  @at-root %linked_only_child
   &:only-child {
     border-radius: 3px;
     border-style: solid;
@@ -748,15 +754,18 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
 %linked_vertical{
   @extend %linked_vertical_middle;
+  @at-root %linked_vertical_first_child
   &:first-child {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
   }
+  @at-root %linked_vertical_last_child
   &:last-child {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     border-style: solid;
   }
+  @at-root %linked_vertical_only_child
   &:only-child {
     border-radius: 3px;
     border-style: solid;
@@ -804,7 +813,7 @@ GtkColorButton.button {
 /*********
  * Links *
  *********/
-
+%link,
 *:link {
   color: $link_color;
   &:visited {
@@ -822,6 +831,8 @@ GtkColorButton.button {
   &:backdrop, &:backdrop:hover, &:backdrop:hover:selected {
     color: _backdrop_color($link_color);
   }
+
+  @at-root %link_selected,
   &:selected, *:selected & {
     color: mix($selected_fg_color, $link_color, 80%);
   }
@@ -829,7 +840,7 @@ GtkColorButton.button {
 
 .button:link, .button:visited {
   @extend %undecorated_button;
-  @extend *:link;
+  @extend %link;
   text-shadow: none;
   &:hover, &:active, &:checked {
     @extend %undecorated_button;
@@ -1058,25 +1069,25 @@ GtkComboBox {
 }
 .linked > GtkComboBox:first-child > .the-button-in-the-combobox,
 .linked > GtkComboBoxText:first-child > .the-button-in-the-combobox {
-  @extend %linked:first-child;
+  @extend %linked_first_child;
 }
 .linked > GtkComboBox:last-child > .the-button-in-the-combobox,
 .linked > GtkComboBoxText:last-child > .the-button-in-the-combobox {
-  @extend %linked:last-child;
+  @extend %linked_last_child;
 }
 .linked > GtkComboBox:only-child > .the-button-in-the-combobox,
 .linked > GtkComboBoxText:only-child > .the-button-in-the-combobox {
-  @extend %linked:only-child;
+  @extend %linked_only_child;
 }
 
 .linked.vertical > GtkComboBoxText > .the-button-in-the-combobox,
 .linked.vertical > GtkComboBox > .the-button-in-the-combobox { @extend %linked_vertical_middle; }
 .linked.vertical > GtkComboBoxText:first-child > .the-button-in-the-combobox,
-.linked.vertical > GtkComboBox:first-child > .the-button-in-the-combobox { @extend %linked_vertical:first-child; }
+.linked.vertical > GtkComboBox:first-child > .the-button-in-the-combobox { @extend %linked_vertical_first_child; }
 .linked.vertical > GtkComboBoxText:last-child > .the-button-in-the-combobox,
-.linked.vertical > GtkComboBox:last-child > .the-button-in-the-combobox { @extend %linked_vertical:last-child; }
+.linked.vertical > GtkComboBox:last-child > .the-button-in-the-combobox { @extend %linked_vertical_last_child; }
 .linked.vertical > GtkComboBoxText:only-child > .the-button-in-the-combobox,
-.linked.vertical > GtkComboBox:only-child > .the-button-in-the-combobox { @extend %linked_vertical:only-child; }
+.linked.vertical > GtkComboBox:only-child > .the-button-in-the-combobox { @extend %linked_vertical_only_child; }
 
 /************
  * Toolbars *
@@ -1196,7 +1207,7 @@ GtkComboBox {
       box-shadow: inset 0 1px mix($top_hilight, $selected_bg_color, 60%);
     }
 
-    .subtitle:link { @extend *:link:selected;  }
+    .subtitle:link { @extend %link_selected; }
 
     .button {
       @include button(normal, $selected_bg_color, $selected_fg_color, $_hc);
@@ -1670,7 +1681,7 @@ column-header {
       transition: none; //I shouldn't need this
     }
     &.dnd {
-      @extend column-header.button.dnd;
+      @extend %column_header_button_dnd;
     }
   }
   &:last-child .button,
@@ -1681,15 +1692,16 @@ column-header {
   }
 }
 
+%column_header_button_dnd,
 column-header.button.dnd { // for treeview-like derive widgets
   transition: none;
   color: $selected_bg_color;
   box-shadow: inset 1px 1px 0 1px $selected_bg_color,
               inset -1px 0 0 1px $selected_bg_color,
               inset 1px 1px $base_color, inset -1px 0 $base_color;;
-  &:active { @extend column-header.button.dnd; }
-  &:selected { @extend column-header.button.dnd; }
-  &:hover { @extend column-header.button.dnd; }
+  &:active { @extend %column_header_button_dnd; }
+  &:selected { @extend %column_header_button_dnd; }
+  &:hover { @extend %column_header_button_dnd; }
 }
 
 %column_header_button {
@@ -2947,7 +2959,7 @@ GtkCalendar {
   border: 1px solid $borders_color;
 
   &:selected {
-    @extend .view:selected;
+    @extend %selected_items;
   }
 
   &.header {
@@ -3146,8 +3158,8 @@ GtkPlacesSidebar.sidebar {
   .list-row:selected:active { box-shadow: none; }
 
    // looks like the label doesn't get all the states so work around
-  .list-row:selected:insensitive .label { @extend %selected_items:insensitive; }
-  .list-row:selected:backdrop:insensitive .label { @extend %selected_items:backdrop:insensitive; }
+  .list-row:selected:insensitive .label { @extend %selected_items_insensitive; }
+  .list-row:selected:backdrop:insensitive .label { @extend %selected_items_backdrop_insensitive; }
 
   .sidebar-placeholder-row {
     border: solid 1px $selected_bg_color;
@@ -3163,7 +3175,7 @@ GtkPlacesSidebar.sidebar {
 
     &.image-button { padding: 5px; }
 
-    @extend .button.flat;
+    @extend %button_basic_flat;
     border-radius: 100%;
     outline-radius: 100%;
     &:not(:hover):not(:active) > GtkImage,
@@ -3171,7 +3183,7 @@ GtkPlacesSidebar.sidebar {
   }
   // this is for indicating which sidebar row generated a popover
   // see https://bugzilla.gnome.org/show_bug.cgi?id=754411
-  .has-open-popup { @extend .list-row.activatable:hover; }
+  .has-open-popup { @extend %list_row_activatable_hover; }
 }
 
 .sidebar-item {
@@ -3201,6 +3213,7 @@ GtkPlacesView {
     -gtk-icon-transform: rotate(-0.5turn);
   }
 
+  @at-root %list_row_activatable_hover
   .list-row.activatable:hover {
     background-color: transparent;
   }
@@ -3593,9 +3606,12 @@ GtkVolumeButton.button {
   @if $variant == 'light' {
     outline-color: transparentize($selected_fg_color, 0.7);
   }
+  @at-root %selected_items_insensitive
   &:insensitive { color: mix($selected_fg_color, $selected_bg_color, 50%); }
   &:backdrop {
     color: $backdrop_selected_fg_color;
+
+    @at-root %selected_items_backdrop_insensitive
     &:insensitive {
       color: mix($backdrop_selected_fg_color, $selected_bg_color, 30%);
     }

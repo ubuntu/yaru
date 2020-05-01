@@ -196,7 +196,7 @@
     outline-color: $focus_border_color;
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     // border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    $button_fill: if($variant == 'light', linear-gradient(to top, lighten($c, 2%) 2px, lighten($c, 2%)), linear-gradient(to top, lighten($c, 2%) 2px, lighten($c, 2%))) !global;
+    $button_fill: if($c == $bg_color, if($variant == 'light', image(lighten($c, 2%)), image(lighten($c, 4%))), image(lighten($c, 2%))) !global;
     background-image: $button_fill;
     @include _button_text_shadow($tc, $c);
     @include _shadows(0 1px transparentize(black, 0.9));
@@ -221,7 +221,7 @@
       @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge, $_button_shadow);
     }
     box-shadow: 0 1px transparentize(black, if($variant=='light', 0.8, 0.85));
-    background-image: image(lighten($c, 4%));
+    background-image: if($c == $bg_color, if($variant == 'light', image(lighten($c, 4%)), image(lighten($c, 6%))), image(lighten($c, 4%)));
   }
 
   @if $t==normal-alt {
@@ -495,13 +495,13 @@
 // $hc: top highlight color
 // $ov: a background layer for background shorthand (hence no commas!)
 //
-  $gradient: linear-gradient(to top, darken($c, 2%), lighten($c, 1%));
+  $gradient: linear-gradient(to top, darken($c, 0%), lighten($c, 0%));
 
-  @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 4%), lighten($c, 6%)); }
+  @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 3%), lighten($c, 3%)); }
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
-  background: image(if($variant=='dark', lighten($c, 3%), $c));
+
   box-shadow: inset 0 1px $hc; // top highlight
 }
 
@@ -630,6 +630,7 @@
 
   @if $t==backdrop {
     background-image: image($c);
+    border-color: $_border_color;
     box-shadow: none;
     color: $tc;
   }

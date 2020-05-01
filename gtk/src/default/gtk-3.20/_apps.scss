@@ -16,6 +16,20 @@ $ambiance: null !default;
    * Nautilus *
    ***********/
   .nautilus-window {
+    .nautilus-canvas-item.dim-label,
+    .nautilus-list-dim-label {
+      color: mix($text_color, $base_color);
+      &:backdrop {
+        color: transparentize(mix($text_color, $base_color), 0.2);
+      }
+      &:selected {
+        color: transparentize($selected_fg_color, 0.3);
+        &:backdrop {
+          color: transparentize(mix($text_color, $base_color), 0.4);
+        }
+      }
+    }
+
     // keep details box visible
     // details box looks ugly when many items are selected and it floats above the orange
     background-image: none;
@@ -26,12 +40,29 @@ $ambiance: null !default;
     @at-root %dim_icons_in_backdrop,
     & *scrolledwindow:backdrop { opacity: 0.9; }
 
-    paned box.floating-bar {  
+    infobar {
+      background-color: if($variant=="light", lighten($silk, 10%), $slate);
+      &:backdrop { background-color: $backdrop_bg_color; }
+    }
+
+    paned box.floating-bar {
       background-color: $bg_color;
       border-style: solid;
       border-color: if($variant=='light', lighten($borders_color, 8.3%), darken($borders_color, 1%));
       border-width: 1px 0 0 1px;
       border-radius: $button_radius 0 0 0;
+
+      button:dir(ltr).circular.flat.image-button {
+        background: radial-gradient(circle at 50%, white 35%, $bg_color 1%);
+        color: $destructive_color;
+      }
+
+      button:dir(ltr).circular.flat.image-button:hover {
+        border: 1px solid $borders_color;
+        background: radial-gradient(circle at 50%, white 30%, $base_hover_color 16%);
+        color: lighten($destructive_color, 5%);
+
+      }
     }
 
     .searchbar-container searchbar {
@@ -73,20 +104,6 @@ $ambiance: null !default;
       &:backdrop { background-image: image(transparentize($borders_color, 0.7)); }
     }
 
-    .nautilus-canvas-item.dim-label,
-    .nautilus-list-dim-label {
-        color: if($variant==light, lighten($text_color, 30%), darken($text_color, 25%));
-        &:selected { color: transparentize($selected_fg_color, 0.3); }
-    }
-
-    .nautilus-canvas-item {
-      -gtk-outline-radius: $button_radius;
-      outline-offset: -2px;
-      &:selected {
-        outline-color: white;
-      }
-    }
-
     // custom code from nautilus Adwaita.css for entries and the pathbar
     entry.search > * {
       margin: 5px;
@@ -106,7 +123,8 @@ $ambiance: null !default;
       @if $ambiance {
         $_bg: if($variant=='light', lighten($headerbar_bg_color, 3%),
                                     lighten($headerbar_bg_color, 1%));
-        border: 1px solid black;
+        border: 1px solid if($ambiance, darken($headerbar_bg_color, 9%), $borders_color);
+        &:backdrop { border-color: if($ambiance, $headerbar_bg_color, $backdrop_borders_color);}
         background-color: $_bg;
       } @else {
         border: 1px solid $borders_color;
@@ -115,7 +133,7 @@ $ambiance: null !default;
     }
 
     .path-bar-box.width-maximized button:first-child {
-        border-radius: $button_radius 0px 0px $button_radius;
+        border-radius: ($button_radius - 1.5) 0px 0px ($button_radius - 1.5);
         border-width: 0px 1px 0px 0px;
     }
 
@@ -123,7 +141,64 @@ $ambiance: null !default;
         border-width: 0px 1px 0px 1px;
         border-radius: 0px 0px 0px 0px;
     }
-  }
+
+    // This is the Icon + Text beneath - it's one widget
+    .nautilus-canvas-item {
+      outline-width: 0;
+      // First, remove the background
+      background-color: rgba(255, 255, 255, 0.1);
+      // Then bring it back for when it receives a direction
+      &:selected:not(:backdrop) {
+        &:dir(ltr) { background-color: $selected_bg_color; }
+        &:not(:dir(ltr)) { background-color: rgba(175, 175, 175, 0.5); }
+      }
+
+      &:backdrop {
+        background-color: transparentize($fg_color, 0.8);
+        color: $backdrop_text_color;
+      }
+    }
+}
+
+// Nautilus disk space dialogue styling
+// Copied from the nautilus adwaita.css
+// keeping the CSS code style to make upstream updates easier
+
+$_disk_space_unknown: $insensitive_bg_color;
+$_disk_space_used: $progress_bg_color;
+$_disk_space_free: if($variant=='light', darken($bg_color, 10%), $bg_color);
+
+.disk-space-display {
+    border-style: solid;
+    border-width: 2px;
+}
+
+.disk-space-display.unknown {
+    background-color: $_disk_space_unknown;
+    border-color: transparentize($_disk_space_unknown, 0.7);
+    color: $_disk_space_unknown;
+}
+.disk-space-display.unknown.border {
+    color: transparentize($_disk_space_unknown, 0.7);
+}
+
+.disk-space-display.used {
+    background-color: $_disk_space_used;
+    border-color: transparentize($_disk_space_used, 0.7);
+    color: $_disk_space_used;
+}
+.disk-space-display.used.border {
+    color: transparentize($_disk_space_used, 0.7);
+}
+
+.disk-space-display.free {
+    background-color: $_disk_space_free;
+    border-color: transparentize($_disk_space_free, 0.7);
+    color: $_disk_space_free;
+}
+.disk-space-display.free.border {
+    color: transparentize($_disk_space_free, 0.7);
+}
 
 /************
  * Terminal *
@@ -407,12 +482,6 @@ terminal-window {
     }
   }
 
-  /****************
-   * GNOME Photos *
-   ****************/
-  //removes the black background for picture tiles
-  .documents-scrolledwin.frame.frame widget flowboxchild.tile { background-color: transparent; }
-
   /***********
    * Firefox *
    ***********/
@@ -448,15 +517,6 @@ terminal-window {
     }
   }
 
-  /*********************
-   * Chrome / Chromium *
-   *********************/
-   window.background.chromium {
-    @if $variant=='dark' {
-     menu { border: 1px solid lighten($inkstone,1%); }
-    }
-  }
-
   normal-button {
     @include button(normal);
 
@@ -473,9 +533,20 @@ terminal-window {
    ***********/
 
   #live_installer {
+
+    #title_eventbox {
+      background-color: $bg_color;
+      color: $fg_color;
+      &:backdrop {
+        background-color: $backdrop_bg_color;
+        color: $backdrop_fg_color;
+      }
+    }
+
     #dot_grid progressbar	{
       border-radius: 100%;
       padding: 1px;
+      padding-top: 2px;
       background-color: white;
       border: 1px solid $progress_bg_color;
 
@@ -488,6 +559,8 @@ terminal-window {
       .full progress {
         border-radius: 100%;
         padding: 1px;
+        padding-top: 2px;
+        margin-bottom: 2px;
       }
     }
   }
