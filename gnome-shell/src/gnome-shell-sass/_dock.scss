@@ -67,6 +67,8 @@
     &.top #dash, &.right #dash,
     &.bottom #dash, &.left #dash {
       border-radius: 0;
+      padding-top: 0px;
+      padding-bottom: 0px;
     }
 
     &.top #dash, &.bottom #dash {
@@ -171,10 +173,13 @@
   &.dashtodock.left #dash,
   &.shrink.right #dash,
   &.dashtodock.right #dash {
-    // don't let the first icon be too close to the shadow + panel
     background: $dash_bg_color;
-    padding-top: 2px;
-    padding-bottom: 2px;
+
+    // don't let the first icon be too close to the shadow + panel
+    #dashtodockDashScrollview {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
   }
 
   .show-apps {
