@@ -82,6 +82,12 @@
     }
   }
 
+  &.top #dash .placeholder,
+  &.bottom #dash .placeholder {
+    width: 32px;
+    height: 1px;
+  }
+
   &.running-dots .app-well-app.running > .overview-icon,
   &.dashtodock .app-well-app.running > .overview-icon {
     /* Running and focused application style */
@@ -100,6 +106,21 @@
     #dash {
       background: #2e3436;
     }
+  }
+
+ /*
+  * These are applied to a dummy actor. Only the alpha value for the background
+  * and border color and the transition-duration are used
+  */
+  &.dummy-opaque {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-color: rgba(0, 0, 0, 0.4);
+    transition-duration: 300ms;
+  }
+  &.dummy-transparent {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.1);
+    transition-duration: 500ms;
   }
 
   &.opaque {
