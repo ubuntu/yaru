@@ -71,10 +71,14 @@ headerbar *, button * {
   -gtk-icon-shadow: none;
 }
 
-// blue spinner
+// blue spinner, white spinner for colored buttons
 spinner {
   &:not(:backdrop) {
     color: $blue;
+  }
+  button.suggested-ation &, button.destructive-action & {
+    color: $selected_fg_color;
+    &:backrop { color: $backdrop_selected_fg_color; }
   }
 }
 
