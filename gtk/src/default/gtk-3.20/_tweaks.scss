@@ -76,7 +76,7 @@ spinner {
   &:not(:backdrop) {
     color: $blue;
   }
-  button.suggested-ation &, button.destructive-action & {
+  button.suggested-action &, button.destructive-action & {
     color: $selected_fg_color;
     &:backrop { color: $backdrop_selected_fg_color; }
   }
