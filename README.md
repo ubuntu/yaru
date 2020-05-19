@@ -10,21 +10,24 @@ It contains:
  * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme
  * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes.
  
-![Files](https://i.imgur.com/Z2rJUjN.png)
+![Files](.github/readme_pics/nautilus-def.png)
 
-![FilesDark](https://i.imgur.com/6jE83Uc.png)
+![FilesDark](.github/readme_pics/nautilus-dark.png)
 
-![Dash](https://i.imgur.com/clAKaoi.png)
+![FilesLight](.github/readme_pics/nautilus-light.png)
 
-![Appgrid](https://i.imgur.com/SYiF2Sc.png)
+![widgetfactory](.github/readme_pics/factory-def.png)
 
-![ShellPopups](https://i.imgur.com/lYdieEX.png)
+![widgetfactorydark](.github/readme_pics/factory-dark.png)
 
-![Shell OSD](https://i.imgur.com/K3KRgzz.png)
+![widgetfactorylight](.github/readme_pics/factory-light.png)
 
-![widgetfactorylight](https://i.imgur.com/ZgT7rtu.png)
+![ShellPopups](.github/readme_pics/shell-light.png)
 
-![widgetfactorydark](https://i.imgur.com/5VG9wGB.png)
+![ShellPopupsDark](.github/readme_pics/shell-dark.png)
+
+![Appgrid](.github/readme_pics/appgrid.png)
+
 
 
 ## Using Yaru on Ubuntu
