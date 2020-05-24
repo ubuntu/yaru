@@ -230,7 +230,7 @@ headerbar,
     &:checked {
       color: $selected_fg_color;
       border-color: $_button_border_color;
-      background-color: $switch_bg_color;
+      background-color: $checkradio_bg_color;
     }
   }
   // Re-style sliders for switches and scales do make them look sharp on the dark headerbar
