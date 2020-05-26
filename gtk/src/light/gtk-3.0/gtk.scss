@@ -1,1 +1,6 @@
-../../default/gtk-3.0/gtk-light.scss
+$variant: 'light';
+
+@import 'colors';
+@import 'drawing';
+@import 'common';
+@import 'colors-public';

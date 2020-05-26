@@ -6,6 +6,7 @@ option('sounds', type: 'boolean', value: true, description:'build sounds compone
 option('sessions', type: 'boolean', value: true, description:'build sessions component')
 option('communitheme_compat', type: 'boolean', value: false, description:'build communitheme-compact')
 
-option('default', type: 'boolean', value: true, description:'build Yaru gtk default variant')
-option('dark', type: 'boolean', value: true, description:'build Yaru gtk dark variant')
-option('light', type: 'boolean', value: true, description:'build Yaru gtk light variant')
+option('default', type: 'boolean', value: true, description:'build Yaru gtk default flavour')
+option('dark', type: 'boolean', value: true, description:'build Yaru gtk dark flavour')
+option('light', type: 'boolean', value: true, description:'build Yaru gtk light flavour')
+option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
