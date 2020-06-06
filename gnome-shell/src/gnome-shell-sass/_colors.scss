@@ -34,7 +34,7 @@ $tooltip_borders_color: $osd_outer_borders_color;
 $shadow_color: transparentize(black, 0.9);
 
 //insensitive state derived colors
-$insensitive_fg_color: mix($fg_color, $bg_color, 70%);
+$insensitive_fg_color: mix($fg_color, $bg_color, 50%);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: $borders_color;
 
