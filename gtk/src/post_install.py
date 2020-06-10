@@ -6,7 +6,7 @@ import sys
 from os import environ, path
 from shutil import move
 
-PREFIX = environ.get('MESON_INSTALL_PREFIX', '/usr')
+PREFIX = environ.get('MESON_INSTALL_DESTDIR_PREFIX', '/usr')
 data_dir = sys.argv[1]
 project_name = sys.argv[2]
 flavours = sys.argv[3:]
