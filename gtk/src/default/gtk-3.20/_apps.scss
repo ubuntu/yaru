@@ -416,6 +416,26 @@ terminal-window {
           &:not(:backdrop):hover { background-image: image($base_hover_color); }
         }
       }
+
+    }
+
+    .nemo-window-pane {
+      widget.entry {
+        // Add border around rename text entry
+        border: 1px solid;
+        border-radius: 3px;
+        color: $fg_color;
+        border-color: $selected_bg_color;
+        background-color: $bg_color;
+      }
+      widget.entry:selected {
+        // Add highlighting to selected text in rename text entry
+        border: 1px solid;
+        border-radius: 3px;
+        color: $selected_fg_color;
+        border-color: $selected_bg_color;
+        background-color: $selected_bg_color;
+      }
     }
 
     .view {
