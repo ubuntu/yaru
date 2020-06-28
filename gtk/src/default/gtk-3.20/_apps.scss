@@ -419,6 +419,11 @@ terminal-window {
 
     }
 
+    .nemo-inactive-pane .view, .nemo-inactive-pane iconview {
+      // Shades the background of the inactive pane
+      background-color: $bg_color;
+    }
+
     .nemo-window-pane {
       widget.entry {
         // Add border around rename text entry
