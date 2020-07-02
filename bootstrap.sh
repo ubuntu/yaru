@@ -54,7 +54,7 @@ function log {
   echo "[+]" $@
 }
 
-development_deps=(meson sassc)
+development_deps=(meson sassc libgtk-3-dev)
 testing_deps=(libgtk-3-dev gtk-3-examples gnome-tweaks)
 
 function install {
