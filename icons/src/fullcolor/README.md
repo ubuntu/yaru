@@ -28,6 +28,6 @@ There's a few provided templates that make creating a new icon simple (as an alt
  - same principles as above
 
 **[Blank Template.svg](./Blank%20Template.svg) - a blank icon template**
- - a completely blank template file for the fullcolor Suru icons (every icon follows this template.)
+ - a completely blank template file for the fullcolor Suru icons (every icon follows this template)
 
-Both templates have a `Baseplate` layer which contain the necessary metadata for rendering an icon: it's **context** (such as `apps` or `status`, etc.) and **icon-name** (the asset filename). This layer must also be hidden or it will appear in your render.
+All templates have a "Baseplate" layer which contain the necessary metadata for rendering an icon: the icon's **context** (such as "apps" or "status", etc.) and **icon-name** (the asset filename). This layer must also be hidden or it will appear in your render.
