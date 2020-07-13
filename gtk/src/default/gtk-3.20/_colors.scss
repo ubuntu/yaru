@@ -76,8 +76,7 @@ $progress_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $progress_border_color: if($variant== 'light', darken($progress_bg_color, 5%), darken($progress_bg_color, 20%));
 $checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
 $checkradio_fg_color: #ffffff;
-$switch_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
-$switch_border_color: if($variant=='light', darken($aubergine, 15%), darken($borders_color, 8%));
+$checkradio_borders_color: if($variant == 'light', darken($checkradio_bg_color,20%), darken($checkradio_bg_color,40%));
 $focus_border_color: transparentize(lighten($orange, 14%), 0.3);
 $coloured_focus_border_color: transparentize(white, 0.3);
 // Headerbar bg colors for the "mixed" theme

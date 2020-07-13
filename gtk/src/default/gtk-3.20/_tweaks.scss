@@ -71,10 +71,14 @@ headerbar *, button * {
   -gtk-icon-shadow: none;
 }
 
-// blue spinner
+// blue spinner, white spinner for colored buttons
 spinner {
   &:not(:backdrop) {
     color: $blue;
+  }
+  button.suggested-action &, button.destructive-action & {
+    color: $selected_fg_color;
+    &:backdrop { color: $backdrop_selected_fg_color; }
   }
 }
 
@@ -202,63 +206,6 @@ menubar,
   }
 
   border { border: none; }
-}
-
-// Since "we" missed to intoduce a switch color for Adwaita
-// we now need to re-style border and background
-// So it uses thew new switch color variables
-// This really needs an upstream change to remove this code
-
-switch {
-  font-size: 0; // fix for gtk 3.28 switches to not show the on/off label
-
-  &:checked {
-    background-color: $switch_bg_color;
-    &, & slider { border-color: $switch_border_color; }
-
-    &:disabled {
-      color: $insensitive_fg_color;
-      border-color: $borders_color;
-      background-color: $insensitive_bg_color;
-      text-shadow: none;
-
-      & slider { @include button(insensitive); }
-    }
-  }
-
-  &:backdrop {
-    &:checked {
-      background-color: $switch_bg_color;
-      &, & slider { border-color: if($variant=='light', $switch_bg_color, $switch_border_color); }
-
-      @if $variant == 'light' { color: $backdrop_bg_color; }
-
-      &:disabled {
-        color: $backdrop_insensitive_color;
-        border-color: $backdrop_borders_color;
-        background-color: $insensitive_bg_color;
-      }
-    }
-  }
-
-  row:selected:not(:disabled) & {
-    @if $variant == 'light' {
-      border-color: $selected_borders_color;
-
-      &:backdrop { border-color: $selected_borders_color; }
-
-      slider { &:checked { border-color: $switch_border_color; } }
-    }
-    box-shadow: 0 0 0 3px transparentize(white, 0.3);
-  }
-
-  slider {
-    @if $variant == 'dark' {
-      @include button(normal-alt, $c: $bg_color, $edge: $shadow_color);
-    }
-  }
-
-  &:disabled:backdrop slider { @include button(backdrop-insensitive); }
 }
 
 // 2 pixel transparentized focus rings
@@ -436,5 +383,15 @@ levelbar {
       background-color: $success_color;
       &:backdrop { border-color: $success_color; }
     }
+  }
+}
+
+// Strengthen the menu shadows to increase visibility
+decoration {
+  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
+  .csd.popup & {
+    border-radius: $menu_radius;
+    box-shadow: 0 1px 2px 1px transparentize(black, 0.7),
+                0 0 0 1px $_wm_border;
   }
 }
