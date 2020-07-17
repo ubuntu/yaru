@@ -1,3 +1,69 @@
+yaru-theme (20.10.2) UNRELEASED; urgency=medium
+
+  [ Carlo Lobrano ]
+  * update README pictures (LP: #1887383)
+  * build: deduplicate meson.build and introduce Flavours (#1884) (LP: #1887383)
+  * fix Yaru project name (LP: #1887383)
+  * Fix spinner typo in tweaks.scss (LP: #1887383)
+  * bootstrap: libgtk-3-dev is needed for building too (#2222) (LP: #1887383)
+
+  [ Feichtmeier ]
+  * Gtk theme new changes from upstream (#2195)
+  * Special case  spinners in destructive, suggested action buttons (#2187)
+    (LP: #1887298)
+  * Make wacom overlay visible (#2198) (LP: #1887300)
+  * Shell: revert insensitive fg color change (#2199)
+  * Gtk3: increase menu visibility (#2232) (LP: #1887297)
+  * Shell: popup and notification improvements (#2236) (LP: #1887297)
+
+  [ github-actions[bot] ]
+  * New upstream snapshot for GTK (#2084)
+
+  [ Ԝеѕ ]
+  * icons - add application/x-sharedlib alias for x-executable (#2204)
+  * Use CD image icon for apple disk images (#2233)
+
+  [ Chris Billington ]
+  * Use MESON_INSTALL_DESTDIR_PREFIX in post_install.py (#2206) (LP: #1887383)
+
+  [ ubuntujaggers ]
+  * adding second user to system-users (#2209) (LP: #1887411)
+  * Adding mimetype for LMMS projects (#2249) (LP: #1887388)
+  * Some missing icons for Lollypop UI (#2235) (LP: #1887419)
+  * Adding new non-uniform app icon templates (#1920)
+  * removing green from network-cellular-connected-symbolic (#2252) (LP:
+    #1887420)
+  * rounding corners on avatar-default-symbolic (#2253)
+
+  [ R. David Dunphy ]
+  * Nemo selected text highlighting and inactive pane shading (#2220)
+
+  [ John Losito ]
+  * Check for updates to GitHub Actions every weekday (#2223) (LP: #1887383)
+
+  [ Jupiter007 ]
+  * Add a solid background to microphone icons (#2200) (Closes: #2185)
+    (LP: #1887389)
+  * Re: Fix lock icons twisted path (#2205) (Closes: #2201) (LP: #1887393)
+  * Add missing Simple-scan symbolic icons (#2244)
+
+  [ MadsRH ]
+  * Added text to img and iso icons (#2213)
+  * Added mimetype for Lilypond music files (#2230) (LP: #1887388)
+  * Added icon for QML mimetypes (#2226) (LP: #1887388)
+  * Added mimetype icon for log files (#2229) (LP: #1887388)
+  * Added more mimetype icons again (#2234) (LP: #1887388)
+  * Added mimetype icon for Scala files (#2231) (LP: #1887388)
+
+  [ Muqtadir ]
+  * mimetype application-x-theme (#2243) (LP: #1887388)
+  * Mimetypes application x rss+xml (#2248) (LP: #1887388)
+
+  [ Marco Trevisan (Treviño) ]
+  * debian/rules: enable building unity theme
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 17 Jul 2020 02:35:30 +0200
+
 yaru-theme (20.10.1) groovy; urgency=medium
 
   [ ubuntujaggers ]
