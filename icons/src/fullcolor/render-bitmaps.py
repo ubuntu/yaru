@@ -25,8 +25,8 @@ import argparse
 
 
 # INKSCAPE = ['/usr/bin/flatpak','run','org.inkscape.Inkscape','--shell']
-INKSCAPE = ['/usr/bin/inkscape','--shell']
-OPTIPNG = '/usr/bin/optipng'
+INKSCAPE = ['inkscape','--shell']
+OPTIPNG = 'optipng'
 MAINDIR = '../../Suru'
 # SRC = 'fullcolor'
 SOURCES = ('actions', 'apps', 'categories', 'devices', 'emblems', 'legacy', 'mimetypes', 'places', 'status', 'wip')
@@ -184,11 +184,10 @@ def main(args, SRC):
 
 
     if not args.svg:
+        print ('Rendering all SVGs in' % SRC)
         if not os.path.exists(MAINDIR):
             os.mkdir(MAINDIR)
-        print ('')
-        print ('Rendering from SVGs in', SRC)
-        print ('')
+
         for file in os.listdir(SRC):
             if file[-4:] == '.svg':
                 file = os.path.join(SRC, file)
@@ -196,12 +195,15 @@ def main(args, SRC):
                 xml.sax.parse(open(file), handler)
         print ('')
     else:
-        file = os.path.join(SRC, args.svg + '.svg')
+        svg = args.svg + '.svg'
+        file = os.path.join(SRC, svg)
 
-        if os.path.exists(os.path.join(file)):
+        if os.path.exists(file):
+            print ('Rendering SVG "%s" in %s' % (svg, SRC))
             handler = ContentHandler(file, True, filter=args.filter)
             xml.sax.parse(open(file), handler)
         else:
+            print ('Could not find SVG "%s" in %s, looking into the next one' % (svg, SRC))
             # icon not in this directory, try the next one
             pass
 
