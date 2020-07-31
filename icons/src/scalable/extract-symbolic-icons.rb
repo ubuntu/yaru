@@ -62,11 +62,17 @@ def chopSVG(icon)
 	end
 end #end of function
 
-def get_output_filename(d,n)
-	if (/rtl$/.match(n))
-		outfile = "#{d}/#{n.chomp('-rtl')}-symbolic-rtl.svg"
+
+# Remove the "-rtl" substring from icon_name if exists
+# SVG file does not have "-rtl" substring even if the
+# icon name has it.
+# +directory+:: directory containing the SVG file
+# +icon_name+:: icon name
+def get_canonical_filename(directory, icon_name)
+	if (/rtl$/.match(icon_name))
+		outfile = "#{directory}/#{icon_name.chomp('-rtl')}-symbolic-rtl.svg"
 	else
-		outfile = "#{d}/#{n}-symbolic.svg"
+		outfile = "#{directory}/#{icon_name}-symbolic.svg"
 	end
 	return outfile
 end
@@ -91,7 +97,7 @@ if (ARGV[0].nil?) #render all SVGs
 				chopSVG({ :name => icon_name,
 						:id => icon.attributes.get_attribute("id"),
 						:dir => dir,
-						:file => get_output_filename(dir, icon_name)})
+						:file => get_canonical_filename(dir, icon_name)})
 			end
 		end
 	end
@@ -104,7 +110,7 @@ else #only render the icons passed
 		chopSVG({ :name => icon_name,
 				:id => icon.attributes["id"],
 				:dir => dir,
-				:file => get_output_filename(dir, icon_name),
+				:file => get_canonical_filename(dir, icon_name),
 				:forcerender => true})
 	end
 	puts "\nrendered #{ARGV.length} icons"
