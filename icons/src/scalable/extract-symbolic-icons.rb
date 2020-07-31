@@ -33,7 +33,7 @@ SVGO = '/usr/local/bin/svgo'
 def chopSVG(icon)
 	FileUtils.mkdir_p(icon[:dir]) unless File.exists?(icon[:dir])
 	unless (File.exists?(icon[:file]) && !icon[:forcerender])
-		FileUtils.cp(SRC,icon[:file]) 
+		FileUtils.cp(SRC,icon[:file])
 		puts " >> #{icon[:name]}"
 		cmd = "#{INKSCAPE} -f #{icon[:file]} --select #{icon[:id]} --verb=FitCanvasToSelection  --verb=EditInvertInAllLayers "
 		cmd += "--verb=EditDelete --verb=EditSelectAll --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=StrokeToPath --verb=FileVacuum "
@@ -47,8 +47,8 @@ def chopSVG(icon)
 		system(cmd)
 		# crop
 		svgcrop = Document.new(File.new(icon[:file], 'r'))
-		svgcrop.root.each_element("//rect") do |rect| 
-			w = ((rect.attributes["width"].to_f * 10).round / 10.0).to_i #get rid of 16 vs 15.99999 
+		svgcrop.root.each_element("//rect") do |rect|
+			w = ((rect.attributes["width"].to_f * 10).round / 10.0).to_i #get rid of 16 vs 15.99999
 			h = ((rect.attributes["width"].to_f * 10).round / 10.0).to_i #Inkscape bugs
 			if w == 16 && h == 16
 				rect.remove
@@ -78,8 +78,8 @@ svg = Document.new(File.new(SRC, 'r'))
 if (ARGV[0].nil?) #render all SVGs
 	puts "Rendering from icons in #{SRC}"
 	# Go through every layer.
-	svg.root.each_element("/svg/g[@inkscape:groupmode='layer']") do |context| 
-		context_name = context.attributes.get_attribute("inkscape:label").value  
+	svg.root.each_element("/svg/g[@inkscape:groupmode='layer']") do |context|
+		context_name = context.attributes.get_attribute("inkscape:label").value
 		puts "Going through layer '" + context_name + "'"
 		context.each_element("g") do |icon|
 			#puts "DEBUG #{icon.attributes.get_attribute('id')}"
