@@ -18,9 +18,21 @@
 # Thanks to the GNOME icon developers for the original version of this script
 
 
+require "docopt"
 require "rexml/document"
 require "fileutils"
 include REXML
+
+doc = <<DOCOPT
+Usage:
+    #{__FILE__} all
+    #{__FILE__} only <icon>...
+
+Options:
+    all  extract all icon in the SVG file
+    only extract only the list of given icon names
+
+DOCOPT
 
 # INKSCAPE = 'flatpak run org.inkscape.Inkscape'
 INKSCAPE = '/usr/bin/inkscape'
@@ -77,43 +89,50 @@ def get_canonical_filename(directory, icon_name)
 	return outfile
 end
 
-#main
-# Open SVG file.
-svg = Document.new(File.new(SRC, 'r'))
 
-if (ARGV[0].nil?) #render all SVGs
-	puts "Rendering from icons in #{SRC}"
-	# Go through every layer.
-	svg.root.each_element("/svg/g[@inkscape:groupmode='layer']") do |context|
-		context_name = context.attributes.get_attribute("inkscape:label").value
-		puts "Going through layer '" + context_name + "'"
-		context.each_element("g") do |icon|
-			#puts "DEBUG #{icon.attributes.get_attribute('id')}"
-			dir = "#{PREFIX}/#{context_name}"
-			icon_name = icon.attributes.get_attribute("inkscape:label").value
-			if icon_name.end_with?("-alt")
-				puts " >> skipping icon '" + icon_name + "'"
-			else
-				chopSVG({ :name => icon_name,
-						:id => icon.attributes.get_attribute("id"),
-						:dir => dir,
-						:file => get_canonical_filename(dir, icon_name)})
-			end
-		end
-	end
-	puts "\nrendered all SVGs"
-else #only render the icons passed
-	icons = ARGV
-	ARGV.each do |icon_name|
-		icon = svg.root.elements["//g[@inkscape:label='#{icon_name}']"]
-		dir = "#{PREFIX}/#{icon.parent.attributes['inkscape:label']}"
-		chopSVG({ :name => icon_name,
-				:id => icon.attributes["id"],
-				:dir => dir,
-				:file => get_canonical_filename(dir, icon_name),
-				:forcerender => true})
-	end
-	puts "\nrendered #{ARGV.length} icons"
+begin
+    options = Docopt::docopt(doc)
+
+    svg = Document.new(File.new(SRC, 'r'))
+
+    if options["all"]
+        puts "Rendering from icons in #{SRC}"
+        # Go through every layer.
+        svg.root.each_element("/svg/g[@inkscape:groupmode='layer']") do |context|
+            context_name = context.attributes.get_attribute("inkscape:label").value
+            puts "Going through layer '" + context_name + "'"
+            context.each_element("g") do |icon|
+                #puts "DEBUG #{icon.attributes.get_attribute('id')}"
+                dir = "#{PREFIX}/#{context_name}"
+                icon_name = icon.attributes.get_attribute("inkscape:label").value
+                if icon_name.end_with?("-alt")
+                    puts " >> skipping icon '" + icon_name + "'"
+                else
+                    puts "chopSVG: name:#{icon_name}, id:#{icon.attributes.get_attribute("id")}, dir:#{dir}, file:#{get_canonical_filename(dir, icon_name)}"
+                    #chopSVG({ :name => icon_name,
+                    #:id => icon.attributes.get_attribute("id"),
+                    #:dir => dir,
+                    #:file => get_canonical_filename(dir, icon_name)})
+                end
+            end
+        end
+        puts "\nrendered all SVGs"
+    end
+
+    if options["only"] == true
+        options["<icon>"].each do |icon_name|
+            icon = svg.root.elements["//g[@inkscape:label='#{icon_name}']"]
+            dir = "#{PREFIX}/#{icon.parent.attributes['inkscape:label']}"
+
+            puts "chopSVG: name:#{icon_name}, id:#{icon.attributes["id"]}, dir:#{dir}, file:#{get_canonical_filename(dir, icon_name)}"
+            #chopSVG({ :name => icon_name,
+            #:id => icon.attributes["id"],
+            #:dir => dir,
+            #:file => get_canonical_filename(dir, icon_name),
+            #:forcerender => true})
+        end
+        puts "\nrendered #{ARGV.length} icons"
+    end
+rescue Docopt::Exit => e
+    puts e.message
 end
-
-#EOF
