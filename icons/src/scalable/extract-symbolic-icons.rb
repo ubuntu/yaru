@@ -39,12 +39,12 @@ Examples:
 DOCOPT
 
 # INKSCAPE = 'flatpak run org.inkscape.Inkscape'
-INKSCAPE = '/usr/bin/inkscape'
+INKSCAPE = 'inkscape'
 SRCS = ["./source-symbolic.svg"]
 PREFIX = "../../Suru/scalable"
 
 # install with `sudo npm install -g svgo`
-SVGO = '/usr/local/bin/svgo'
+SVGO = 'svgo'
 
 def chopSVG(svg_file_name, icon)
 	FileUtils.mkdir_p(icon[:dir]) unless File.exists?(icon[:dir])
