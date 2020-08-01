@@ -25,38 +25,46 @@ include REXML
 
 doc = <<DOCOPT
 Usage:
-    #{__FILE__} all
-    #{__FILE__} only <icon>...
+    #{__FILE__} [force] all
+    #{__FILE__} [force] only <icon>...
 
 Options:
-    all  extract all icon in the SVG file
-    only extract only the list of given icon names
+    all     extract all icon in the SVG file
+    only    extract only the list of given icon names
+    force   force extraction of already existing icon [optional]
+
+Examples:
+    #{__FILE__} only image1 image2
 
 DOCOPT
 
 # INKSCAPE = 'flatpak run org.inkscape.Inkscape'
 INKSCAPE = '/usr/bin/inkscape'
-SRC = "./source-symbolic.svg"
+SRCS = ["./source-symbolic.svg"]
 PREFIX = "../../Suru/scalable"
 
 # install with `sudo npm install -g svgo`
 SVGO = '/usr/local/bin/svgo'
 
-def chopSVG(icon)
+def chopSVG(svg_file_name, icon)
 	FileUtils.mkdir_p(icon[:dir]) unless File.exists?(icon[:dir])
 	unless (File.exists?(icon[:file]) && !icon[:forcerender])
-		FileUtils.cp(SRC,icon[:file])
+		FileUtils.cp(svg_file_name, icon[:file])
+
 		puts " >> #{icon[:name]}"
 		cmd = "#{INKSCAPE} -f #{icon[:file]} --select #{icon[:id]} --verb=FitCanvasToSelection  --verb=EditInvertInAllLayers "
 		cmd += "--verb=EditDelete --verb=EditSelectAll --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=StrokeToPath --verb=FileVacuum "
 		cmd += "--verb=FileSave --verb=FileQuit > /dev/null 2>&1"
 		system(cmd)
+
 		#saving as plain SVG gets rid of the classes :/
 		cmd = "#{INKSCAPE} --vacuum-defs -z #{icon[:file]} --export-plain-svg=#{icon[:file]} > /dev/null 2>&1"
 		system(cmd)
+
 		#completely vaccuum with svgo
 		cmd = "#{SVGO} --pretty --disable=convertShapeToPath -i  #{icon[:file]} -o  #{icon[:file]} > /dev/null 2>&1"
 		system(cmd)
+
 		# crop
 		svgcrop = Document.new(File.new(icon[:file], 'r'))
 		svgcrop.root.each_element("//rect") do |rect|
