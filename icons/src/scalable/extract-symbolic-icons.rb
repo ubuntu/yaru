@@ -101,45 +101,41 @@ end
 begin
     options = Docopt::docopt(doc)
 
-    svg = Document.new(File.new(SRC, 'r'))
+    # Get all the icons from the SVG files
+    icons = []
+    SRCS.each do |src|
+        puts "Getting icons from #{src}"
+        svg = Document.new(File.new(src, 'r'))
 
-    if options["all"]
-        puts "Rendering from icons in #{SRC}"
         # Go through every layer.
         svg.root.each_element("/svg/g[@inkscape:groupmode='layer']") do |context|
             context_name = context.attributes.get_attribute("inkscape:label").value
-            puts "Going through layer '" + context_name + "'"
+
             context.each_element("g") do |icon|
                 #puts "DEBUG #{icon.attributes.get_attribute('id')}"
-                dir = "#{PREFIX}/#{context_name}"
                 icon_name = icon.attributes.get_attribute("inkscape:label").value
-                if icon_name.end_with?("-alt")
-                    puts " >> skipping icon '" + icon_name + "'"
-                else
-                    puts "chopSVG: name:#{icon_name}, id:#{icon.attributes.get_attribute("id")}, dir:#{dir}, file:#{get_canonical_filename(dir, icon_name)}"
-                    #chopSVG({ :name => icon_name,
-                    #:id => icon.attributes.get_attribute("id"),
-                    #:dir => dir,
-                    #:file => get_canonical_filename(dir, icon_name)})
-                end
+                dir = "#{PREFIX}/#{context_name}"
+
+                icons << { :src => src,
+                           :name => icon_name,
+                           :id => icon.attributes.get_attribute("id").value,
+                           :dir => dir,
+                           :file => get_canonical_filename(dir, icon_name),
+                           :skip => icon_name.end_with?("-alt"),
+                           :forcerender => options["force"]}
             end
         end
-        puts "\nrendered all SVGs"
     end
 
-    if options["only"] == true
-        options["<icon>"].each do |icon_name|
-            icon = svg.root.elements["//g[@inkscape:label='#{icon_name}']"]
-            dir = "#{PREFIX}/#{icon.parent.attributes['inkscape:label']}"
-
-            puts "chopSVG: name:#{icon_name}, id:#{icon.attributes["id"]}, dir:#{dir}, file:#{get_canonical_filename(dir, icon_name)}"
-            #chopSVG({ :name => icon_name,
-            #:id => icon.attributes["id"],
-            #:dir => dir,
-            #:file => get_canonical_filename(dir, icon_name),
-            #:forcerender => true})
+    icons.each do |icon|
+        if options["only"] and !options["<icon>"].include? icon[:name]
+            icon[:skip] = true
         end
-        puts "\nrendered #{ARGV.length} icons"
+
+        if !icon[:skip]
+            #puts "chopping #{icon}"
+            chopSVG(icon[:src], icon)
+        end
     end
 rescue Docopt::Exit => e
     puts e.message
