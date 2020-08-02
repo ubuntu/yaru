@@ -72,7 +72,8 @@ end
 # check whether the dependencies are met
 def check_deps(dependencies)
     dependencies.each do |dependency|
-        syscall("could not find #{dependency}", false, "which", dependency)
+        syscall("could not find #{dependency}. Please install the dependencies listed in the README", false,
+                "which", dependency)
     end
 end
 
