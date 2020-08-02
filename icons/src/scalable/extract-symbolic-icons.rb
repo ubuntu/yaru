@@ -51,18 +51,28 @@ PREFIX = "../../Suru/scalable"
 SVGO = 'svgo'
 
 
-def check_deps(dependencies)
-    dependencies.each do |dependency|
-        begin
-            stdout, stderr, status = Open3.capture3("which", dependency)
-            if not status.success?
-                puts "could not find \"#{dependency}\". See README for needed dependencies"
-                exit 1
+# run syscall capturing output and return code,
+# exiting in case of failure
+def syscall(custom_err_message, verbose, *cmd)
+    begin
+        stdout, stderr, status = Open3.capture3(*cmd)
+        if not status.success?
+            puts custom_err_message
+            if verbose
+                puts cmd.join(' ')
+                puts stderr
             end
-        rescue
-            puts "rescue"
             exit 1
         end
+    rescue
+        exit 1
+    end
+end
+
+# check whether the dependencies are met
+def check_deps(dependencies)
+    dependencies.each do |dependency|
+        syscall("could not find #{dependency}", false, "which", dependency)
     end
 end
 
@@ -71,19 +81,20 @@ def chopSVG(svg_file_name, icon)
 	unless (File.exists?(icon[:file]) && !icon[:forcerender])
 		FileUtils.cp(svg_file_name, icon[:file])
 
-		puts " >> #{icon[:name]}"
-		cmd = "#{INKSCAPE} -f #{icon[:file]} --select #{icon[:id]} --verb=FitCanvasToSelection  --verb=EditInvertInAllLayers "
-		cmd += "--verb=EditDelete --verb=EditSelectAll --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=SelectionUnGroup --verb=StrokeToPath --verb=FileVacuum "
-		cmd += "--verb=FileSave --verb=FileQuit > /dev/null 2>&1"
-		system(cmd)
+        puts "Rendering #{icon[:name]}..."
+        syscall("could not extract icon #{icon[:name]}", true,
+                "#{INKSCAPE}", "--file=#{icon[:file]}",
+                "--select=#{icon[:id]}", "--verb=FitCanvasToSelection", "--verb=EditInvertInAllLayers",
+                "--verb=EditDelete", "--verb=EditSelectAll", "--verb=SelectionUnGroup", "--verb=SelectionUnGroup",
+                "--verb=SelectionUnGroup", "--verb=StrokeToPath", "--verb=FileVacuum", "--verb=FileSave", "--verb=FileQuit")
 
-		#saving as plain SVG gets rid of the classes :/
-		cmd = "#{INKSCAPE} --vacuum-defs -z #{icon[:file]} --export-plain-svg=#{icon[:file]} > /dev/null 2>&1"
-		system(cmd)
+		# saving as plain SVG gets rid of the classes :/
+        syscall("could not save #{icon[:file]} in plain SVG", true,
+                "#{INKSCAPE}", "--vacuum-defs", "--without-gui", "#{icon[:file]}", "--export-plain-svg=#{icon[:file]}")
 
-		#completely vaccuum with svgo
-		cmd = "#{SVGO} --pretty --disable=convertShapeToPath -i  #{icon[:file]} -o  #{icon[:file]} > /dev/null 2>&1"
-		system(cmd)
+		# completely vaccuum with svgo
+        syscall("could not clean #{icon[:file]} with svgo", true,
+                "#{SVGO}", "--pretty", "--disable=convertShapeToPath", "--input=#{icon[:file]}", "--output=#{icon[:file]}")
 
 		# crop
 		svgcrop = Document.new(File.new(icon[:file], 'r'))
@@ -100,7 +111,7 @@ def chopSVG(svg_file_name, icon)
 	else
 		puts " -- #{icon[:name]} already exists"
 	end
-end #end of function
+end
 
 
 # Remove the "-rtl" substring from icon_name if exists
