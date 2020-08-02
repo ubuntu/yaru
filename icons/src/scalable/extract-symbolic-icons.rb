@@ -18,6 +18,7 @@
 # Thanks to the GNOME icon developers for the original version of this script
 
 
+require "open3"
 require "docopt"
 require "rexml/document"
 require "fileutils"
@@ -48,6 +49,22 @@ PREFIX = "../../Suru/scalable"
 
 # install with `sudo npm install -g svgo`
 SVGO = 'svgo'
+
+
+def check_deps(dependencies)
+    dependencies.each do |dependency|
+        begin
+            stdout, stderr, status = Open3.capture3("which", dependency)
+            if not status.success?
+                puts "could not find \"#{dependency}\". See README for needed dependencies"
+                exit 1
+            end
+        rescue
+            puts "rescue"
+            exit 1
+        end
+    end
+end
 
 def chopSVG(svg_file_name, icon)
 	FileUtils.mkdir_p(icon[:dir]) unless File.exists?(icon[:dir])
@@ -102,6 +119,8 @@ end
 
 
 begin
+    check_deps([INKSCAPE, SVGO])
+
     options = Docopt::docopt(doc)
 
     # Get all the icons from the SVG files
