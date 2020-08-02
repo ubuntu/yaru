@@ -34,7 +34,10 @@ Options:
     force   force extraction of already existing icon [optional]
 
 Examples:
-    #{__FILE__} only image1 image2
+    #{__FILE__} only image1 image2  # render only image1 and image2 if not already rendered
+    #{__FILE__} force only image3   # render only image3 even if already rendered
+    #{__FILE__} all                 # render all images, if not already rendered
+    #{__FILE__} force all           # render all images even if already rendered
 
 DOCOPT
 
