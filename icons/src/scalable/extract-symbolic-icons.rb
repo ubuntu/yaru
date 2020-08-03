@@ -77,6 +77,11 @@ def check_deps(dependencies)
     end
 end
 
+# extract the given icon from the collection in the
+# svg file
+# +svg_file_name+: SVG filename containing the given icon
+# +icon+: dictionary containing the following icon information: icon name,
+# image id, destination directory, destination filename
 def chopSVG(svg_file_name, icon)
 	FileUtils.mkdir_p(icon[:dir]) unless File.exists?(icon[:dir])
 	unless (File.exists?(icon[:file]) && !icon[:forcerender])
