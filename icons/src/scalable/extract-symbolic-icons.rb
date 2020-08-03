@@ -84,14 +84,15 @@ def chopSVG(svg_file_name, icon)
 
         puts "Rendering #{icon[:name]}..."
         syscall("could not extract icon #{icon[:name]}", true,
-                "#{INKSCAPE}", "--file=#{icon[:file]}",
+                "#{INKSCAPE}",
                 "--select=#{icon[:id]}", "--verb=FitCanvasToSelection", "--verb=EditInvertInAllLayers",
                 "--verb=EditDelete", "--verb=EditSelectAll", "--verb=SelectionUnGroup", "--verb=SelectionUnGroup",
-                "--verb=SelectionUnGroup", "--verb=StrokeToPath", "--verb=FileVacuum", "--verb=FileSave", "--verb=FileQuit")
+                "--verb=SelectionUnGroup", "--verb=StrokeToPath", "--verb=FileVacuum", "--verb=FileSave", "--verb=FileQuit",
+                "#{icon[:file]}")
 
 		# saving as plain SVG gets rid of the classes :/
         syscall("could not save #{icon[:file]} in plain SVG", true,
-                "#{INKSCAPE}", "--vacuum-defs", "--without-gui", "#{icon[:file]}", "--export-plain-svg=#{icon[:file]}")
+                "#{INKSCAPE}", "--vacuum-defs", "#{icon[:file]}", "--export-plain-svg=#{icon[:file]}")
 
 		# completely vaccuum with svgo
         syscall("could not clean #{icon[:file]} with svgo", true,
