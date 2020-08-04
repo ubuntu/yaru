@@ -1,3 +1,4 @@
+option('libreoffice-icons', type: 'boolean', value: true, description:'build libreoffice icons component')
 option('icons', type: 'boolean', value: true, description:'build icons component')
 option('gnome-shell', type: 'boolean', value: true, description:'build gnome-shell component')
 option('gnome-shell-gresource', type: 'boolean', value: false, description: 'build gnome-shell component in gresources')
