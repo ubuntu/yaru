@@ -54,4 +54,18 @@ Please report the Yaru version in your system using one of the following command
 
     `$ git describe`
 
-Thanks!
+**Upstream check**
+
+Please also check if the problem also occurs with the Adwaita upstream theme:
+
+- If the bug is related to an application, change the Gtk theme by running the following command:
+
+    `gsettings set org.gnome.desktop.interface gtk-theme Adwaita`
+
+- If the bug is about the icon theme, switch to Adwaita icon theme with this one:
+
+    `gsettings set org.gnome.desktop.interface icon-theme Adwaita`
+
+- If the bug concerns Gnome-shell, log-out then reconnect you using the Gnome session (click on the gear for switch).
+
+Then check if the problem is still there.
