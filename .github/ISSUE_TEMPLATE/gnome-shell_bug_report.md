@@ -1,8 +1,8 @@
 ---
-name: Bug report
-about: Report a bug to help us improve Yaru
+name: Gnome-shell bug report
+about: Report a bug related to our Gnome-shell theme to help us improve Yaru
 title: ''
-labels: ''
+labels: 'Area: GNOME-shell'
 assignees: ''
 
 ---
@@ -26,27 +26,31 @@ Thanks a lot!
 
 (What happened instead)
 
+**Screenshots**
+
+(Insert here some screenshots to help explain your problem)
+
 **Steps to Reproduce the Problem**
 
-  1.
-  1.
-  1.
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See problem
 
-**Software that presents the issue**
+**System information**
 
-- Name:
-- Version:
-
+- Shell version: (run `$ gnome-shell --version`) [e.g. 3.36.3]
+- OS version: (run `$ lsb_release -a`) [e.g. Ubuntu 20.04.1]
 
 **Yaru version**
 
 Please report the Yaru version in your system using one of the following commands
 
-* If you installed Yaru from PPA
+* If you just use the default Ubuntu session (since Ubuntu 18.10)
 
-    `$ apt show communitheme`
+    `$ apt show yaru-theme-gnome-shell`
 
-* If you installed Yaru via Snap
+* If you installed Yaru via Snap (since Ubuntu 18.10)
 
     `$ snap info communitheme`
 
@@ -56,16 +60,6 @@ Please report the Yaru version in your system using one of the following command
 
 **Upstream check**
 
-Please also check if the problem also occurs with the Adwaita upstream theme:
-
-- If the bug is related to an application, change the Gtk theme by running the following command:
-
-    `gsettings set org.gnome.desktop.interface gtk-theme Adwaita`
-
-- If the bug is about the icon theme, switch to Adwaita icon theme with this one:
-
-    `gsettings set org.gnome.desktop.interface icon-theme Adwaita`
-
-- If the bug concerns Gnome-shell, log-out then reconnect you using the Gnome session (click on the gear for switch).
+Please also check if the problem also occurs with the Adwaita upstream theme. Log-out then reconnect you using the Gnome session (click on the gear for switch).
 
 Then check if the problem is still there.
