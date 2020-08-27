@@ -1,1 +1,91 @@
-../../default/gtk-3.20/_colors.scss
+// When color definition differs for dark and light variant
+// it gets @if ed depending on $variant
+@import 'ubuntu-colors';
+
+$base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 11%));
+$text_color: if($variant == 'light', black, white);
+$bg_color: if($variant == 'light', $porcelain, lighten($inkstone, 0.5%));
+$fg_color: if($variant == 'light', $inkstone, $porcelain);
+
+$selected_fg_color: #ffffff;
+$selected_bg_color: if($variant == 'light', #78ab50, darken(#78ab50, 4%));
+
+$selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+$borders_color: if($variant == 'light', darken($bg_color, 20%), darken($bg_color, 11%));
+$alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 10%));
+$borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
+$link_color: if($variant == 'light', $linkblue, $blue);
+$link_visited_color: if($variant == 'light', darken($link_color, 20%), lighten($link_color, 10%));
+$top_hilight: $borders_edge;
+$dark_fill: mix($borders_color, $bg_color, 50%);
+$headerbar_color: if($variant == 'light', lighten($bg_color, 5%), darken($bg_color, 3%));
+$menu_color: if($variant == 'light', #FAFAFA, lighten($inkstone, 1%));
+$popover_bg_color: if($variant == 'light', #FAFAFA, lighten($inkstone, 1%));
+$popover_hover_color: transparentize($fg_color, 0.85);
+
+$scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
+$scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
+$scrollbar_slider_hover_color: mix($fg_color, $bg_color, 80%);
+$scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 10%));
+
+$warning_color: $yellow;
+$error_color: $red;
+$success_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
+$destructive_color: if($variant == 'light', $red, darken($red, 10%));
+
+$osd_fg_color: #eeeeec;
+$osd_text_color: white;
+$osd_bg_color: transparentize(lighten($jet, 2%),0.025);
+$osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
+$osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
+$osd_borders_color: transparentize(black, 0.3);
+
+$sidebar_bg_color: mix($bg_color, $base_color, 50%);
+$base_hover_color: transparentize($fg_color, 0.95);
+
+$tooltip_borders_color: transparentize(white, 0.9);
+$shadow_color: transparentize(black, 0.9);
+
+$drop_target_color: $success_color;
+
+//insensitive state derived colors
+$insensitive_fg_color: mix($fg_color, $bg_color, 50%);
+$insensitive_bg_color: mix($bg_color, $base_color, 60%);
+$insensitive_borders_color: $borders_color;
+
+//colors for the backdrop state, derived from the main colors.
+$backdrop_base_color: if($variant == 'light', darken($base_color, 1%), lighten($base_color, 1%));
+$backdrop_text_color: mix($text_color, $backdrop_base_color, 80%);
+$backdrop_bg_color: $bg_color;
+$backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 50%);
+$backdrop_insensitive_color: if($variant == 'light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 15%));
+$backdrop_selected_fg_color: if($variant == 'light', $backdrop_base_color, $backdrop_text_color);
+$backdrop_borders_color: mix($borders_color, $bg_color, 80%);
+$backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
+$backdrop_sidebar_bg_color: mix($backdrop_bg_color, $backdrop_base_color, 50%);
+
+$backdrop_scrollbar_bg_color: darken($backdrop_bg_color, 3%);
+$backdrop_scrollbar_slider_color: mix($backdrop_fg_color, $backdrop_bg_color, 40%);
+
+$backdrop_menu_color: if($variant == 'light', $backdrop_base_color, mix($backdrop_bg_color, $backdrop_base_color, 20%));
+
+//special cased widget colors
+$suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
+$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
+$progress_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
+$progress_border_color: if($variant== 'light', darken($progress_bg_color, 5%), darken($progress_bg_color, 20%));
+$checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
+$checkradio_fg_color: #ffffff;
+$checkradio_borders_color: if($variant == 'light', darken($checkradio_bg_color,20%), darken($checkradio_bg_color,40%));
+$focus_border_color: transparentize(lighten($orange, 14%), 0.3);
+$coloured_focus_border_color: transparentize(white, 0.3);
+// Headerbar bg colors for the "mixed" theme
+$headerbar_bg_color: #323030;
+$headerbar_fg_color: $porcelain;
+$headerbar_border_color: lighten($headerbar_bg_color, 8%);
+$headerbar_text_color: $silk;
+$headerbar_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
+$backdrop_headerbar_bg_color: lighten($headerbar_bg_color, 5%);
+$backdrop_headerbar_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 70%);
+$backdrop_headerbar_text_color: mix($headerbar_text_color, $backdrop_headerbar_bg_color, 70%);
+$backdrop_headerbar_insensitive_color: mix($headerbar_fg_color, $backdrop_headerbar_bg_color, 70%);
