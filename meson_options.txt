@@ -10,3 +10,4 @@ option('default', type: 'boolean', value: true, description:'build Yaru gtk defa
 option('dark', type: 'boolean', value: true, description:'build Yaru gtk dark flavour')
 option('light', type: 'boolean', value: true, description:'build Yaru gtk light flavour')
 option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
+option('mate', type: 'boolean', value: true, description:'build Yaru gtk MATE flavour')
