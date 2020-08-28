@@ -30,7 +30,7 @@ $scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color,
 
 $warning_color: $yellow;
 $error_color: $red;
-$success_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
+$success_color: lighten($green, 5%);
 $destructive_color: if($variant == 'light', $red, darken($red, 10%));
 
 $osd_fg_color: #eeeeec;
@@ -72,8 +72,8 @@ $backdrop_menu_color: if($variant == 'light', $backdrop_base_color, mix($backdro
 //special cased widget colors
 $suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
-$progress_bg_color: if($variant=='light', $secondary_accent_bg_color, darken($secondary_accent_bg_color, 8%));
-$progress_border_color: if($variant== 'light', darken($progress_bg_color, 5%), darken($progress_bg_color, 20%));
+$progress_bg_color: $secondary_accent_bg_color;
+$progress_border_color: if($variant== 'light', darken($progress_bg_color, 5%), darken($progress_bg_color, 40%));
 $checkradio_bg_color: if($variant=='light', $secondary_accent_bg_color, darken($secondary_accent_bg_color, 8%));
 $checkradio_fg_color: $secondary_accent_fg_color;
 $checkradio_borders_color: if($variant == 'light', darken($checkradio_bg_color,20%), darken($checkradio_bg_color,40%));
