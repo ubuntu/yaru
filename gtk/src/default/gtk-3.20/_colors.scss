@@ -1,6 +1,6 @@
 // When color definition differs for dark and light variant
 // it gets @if ed depending on $variant
-@import 'ubuntu-colors';
+@import 'palette';
 
 $base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 11%));
 $text_color: if($variant == 'light', black, white);

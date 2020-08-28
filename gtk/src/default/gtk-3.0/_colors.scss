@@ -1,7 +1,7 @@
 // When color definition differs for dark and light variant
 // it gets @if ed depending on $variant
 
-@import 'ubuntu-colors';
+@import 'palette';
 
 $light: if($variant=='light', true, false);
 $base_color: if($variant == 'light', #FFFFFF, $inkstone);
