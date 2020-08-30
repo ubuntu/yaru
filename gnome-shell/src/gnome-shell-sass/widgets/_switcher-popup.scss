@@ -48,9 +48,9 @@
 
 .switcher-arrow {
   border-color: rgba(0,0,0,0);
-  color: transparentize($fg_color,0.2);
+  color: transparentize($osd_fg_color,0.2);
   &:highlighted {
-    color: $fg_color;
+    color: $osd_fg_color;
   }
 }
 
