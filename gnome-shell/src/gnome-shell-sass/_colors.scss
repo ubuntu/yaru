@@ -1,13 +1,13 @@
 // When color definition differs for dark and light variant,
 // it gets @if ed depending on $variant
-@import "ubuntu-colors";
+@import 'palette';
 
 $base_color: if($variant == 'light', #ffffff, lighten(desaturate($jet, 20%), 10%));
 $bg_color: if($variant == 'light', #FAFAFA, lighten($inkstone, 0.5%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
-$selected_fg_color: #ffffff;
-$selected_bg_color: if($variant == 'light', $orange, darken($orange, 4%));
+$selected_fg_color: $primary_accent_fg_color;
+$selected_bg_color: if($variant == 'light', $primary_accent_bg_color, darken($primary_accent_bg_color, 4%));
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 $borders_color: if($variant == 'light', darken($bg_color, 20%), darken($bg_color, 11%));
 $alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 10%));
@@ -63,10 +63,10 @@ $dash-opaque-alpha-value: 0.0;
 //special cased widget colors
 $suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
-$progress_bg_color: $aubergine;
+$progress_bg_color: $secondary_accent_bg_color;
 $progress_border_color: if($variant== 'light', darken($progress_bg_color, 5%), darken($borders_color, 5%));
-$checkradio_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
-$checkradio_fg_color: #ffffff;
-$switch_bg_color: if($variant=='light', $aubergine, darken($aubergine, 8%));
-$switch_border_color: if($variant=='light', darken($aubergine, 15%), darken($borders_color, 5%));
-$focus_border_color: lighten($orange, 14%);
+$checkradio_bg_color: if($variant=='light', $secondary_accent_bg_color, darken($secondary_accent_bg_color, 8%));
+$checkradio_fg_color: $secondary_accent_fg_color;
+$switch_bg_color: if($variant=='light', $secondary_accent_bg_color, darken($secondary_accent_bg_color, 8%));
+$switch_border_color: if($variant=='light', darken($secondary_accent_bg_color, 15%), darken($borders_color, 5%));
+$focus_border_color: lighten($primary_accent_bg_color, 14%);
