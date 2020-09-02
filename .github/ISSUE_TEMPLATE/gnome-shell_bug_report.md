@@ -50,7 +50,7 @@ Please report the Yaru version in your system using one of the following command
 
     `$ apt show yaru-theme-gnome-shell`
 
-* If you installed Yaru via Snap (since Ubuntu 18.10)
+* If you installed Yaru via Snap (Ubuntu 18.04 only)
 
     `$ snap info communitheme`
 
