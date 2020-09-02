@@ -60,6 +60,8 @@ Please report the Yaru version in your system using one of the following command
 
 **Upstream check**
 
-Please also check if the problem also occurs with the Adwaita upstream theme. Log-out then reconnect you using the Gnome session (click on the gear for switch).
+Please also check if the problem also occurs with the Adwaita upstream theme. To do that, firstly install Gnome session:
 
-Then check if the problem is still there.
+    `$ sudo apt install gnome-session`
+
+Then log-out, reconnect you using the Gnome session (click on the gear for switch), and check if the problem is still there.
