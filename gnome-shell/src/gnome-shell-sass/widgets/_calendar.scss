@@ -153,14 +153,9 @@
   }
 
   .calendar-day-with-events {
+    color: lighten($fg_color,10%);
+    font-weight: bold;
     background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
-    &.calendar-work-day {
-      color: lighten($fg_color,10%);
-      &.calendar-today {
-        color: $selected_fg_color;
-      }
-      font-weight: bold;
-    }
   }
 
   .calendar-other-month-day {
@@ -171,7 +166,7 @@
     @include fontsize($base_font_size - 4);
     font-weight: bold;
     height: 1.8em;
-    width: 2.3em;
+    width: 2.3em; 
     border-radius: 2px;
     padding: 0.5em 0 0;
     margin: 6px;

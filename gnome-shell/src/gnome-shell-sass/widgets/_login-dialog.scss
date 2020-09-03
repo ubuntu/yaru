@@ -10,7 +10,7 @@
   border: none;
   background-color: transparent;
 
-  $_gdm_bg: $porcelain;
+  $_gdm_bg: $porcelain; // Yaru: we force the light colors because GDM doesn't change on shell theme switch
 
   StEntry {
     @if $variant=='dark' {
@@ -26,7 +26,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     background-color: $_gdm_bg;
     border-color: $_gdm_bg;
-    color: $inkstone;
+    color: $inkstone; // Yaru: we force the light colors because GDM doesn't change on shell theme switch
 
     $_hover_c: lighten($_gdm_bg, 5%);
     &:hover, &:focus {
@@ -45,7 +45,7 @@
       background-color: darken($_gdm_bg, 5%);
       color: transparentize($fg_color, 0.3);
     }
-    &:default {
+    &:default { // Yaru: our suggested action color is green
       @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
       border-color: $suggested_bg_color;
       &:hover, &:focus { 
@@ -77,14 +77,14 @@
     width: $base_icon_size * 2;
     height: $base_icon_size * 2;
     border-color: transparentize($bg_color,0.7);
-    background-color: $_gdm_bg;
+    background-color: $_gdm_bg; // Yaru: we force the light colors because GDM doesn't change on shell theme switch
     color: $inkstone;
 
     StIcon { icon-size: $base_icon_size; }
   }
 
   .caps-lock-warning-label,
-  .login-dialog-message {
+  .login-dialog-message-warning {
     color: $osd_fg_color;
   }
 }
@@ -111,7 +111,7 @@
 }
 
 .login-dialog-user-list-view { -st-vfade-offset: 1em; }
-.login-dialog-user-list {
+.login-dialog-user-list { // Yaru: we want the gray hover to work on GDM, thus the transparentized fg color
   spacing: 12px;
   width: 23em;
   &:expanded .login-dialog-user-list-item:selected { background-color: transparentize($selected_fg_color, 0.9); color: $selected_fg_color; }

@@ -1,9 +1,9 @@
 
 /* Tiled window previews */
-$tile_corner_radius: 0;
+$tile_corner_radius: 0; // Yaru: we can't round the desktop borders because of the dock
 .tile-preview {
-  background-color: transparentize($ash, 0.8);
-  border: 1px solid transparentize($silk, 0.2);
+  background-color: transparentize($selected_bg_color,0.5); // Yaru: orange is too strong for this, thus use grays
+  border: 1px solid $selected_bg_color; // Yaru: orange is too strong for this, thus use grays
 }
 
 .tile-preview-left.on-primary {

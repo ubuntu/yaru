@@ -2,13 +2,13 @@
 
 $key_size: 1.2em;
 $key_border_radius: $base_border_radius + 3px;
-$key_bg_color: if(variant=='light', $bg_color, darken($bg_color, 1%));
-$default_key_bg_color: $key_bg_color;
+$key_bg_color: if(variant=='light', $bg_color, darken($bg_color, 1%)); // Yaru: Make keyboard buttons work on both variants
+$default_key_bg_color: $key_bg_color; // Yaru: Make keyboard buttons work on both variants
 // $default_key_bg_color: if($variant=='light', darken($osd_bg_color, 11%), lighten($osd_bg_color, 2%));
 
 
 // draw keys using button function
-#keyboard {
+#keyboard { // Yaru: Make keyboard work on both variants
   background-color: if($variant=='light', transparentize(darken($bg_color, 5%), 0.1), $base_color);
   // box-shadow: inset 0 1px 0 0 $osd_outer_borders_color;
 
@@ -58,19 +58,19 @@ $default_key_bg_color: $key_bg_color;
   }
 
   // enter key is suggested-action
-  &.enter-key {
+  &.enter-key { // Yaru: our suggested action color is green
     @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
     &:hover, &:checked { @include button(hover, $c: lighten($suggested_bg_color, 3%));}
     &:active {@include button(active, $c: darken($suggested_bg_color, 2%));}
   }
 
-  &.shift-key-uppercase { color: $suggested_bg_color }
+  &.shift-key-uppercase { &, &:hover { color: $suggested_bg_color } } // Yaru: our suggested action color is green
 
   StIcon { icon-size: 1.125em; }
 }
 
 // long press on a key popup
-.keyboard-subkeys {
+.keyboard-subkeys { // Yaru: Make keyboard popups work on both variants
   color: $osd_fg_color;
   -arrow-border-radius: $modal_radius;
   -arrow-background-color: transparentize(if($variant=='light', darken($bg_color, 5%), darken($bg_color, 8%)), 0.1);

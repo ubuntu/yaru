@@ -35,9 +35,9 @@ $app_grid_fg_color: #fff;
 }
 
 /* App Folders */
-.app-well-app.app-folder {
-  background-color: transparentize($osd_bg_color, 0.8);
-  border-radius: $base_border_radius + 4px; // same as %icon_tile
+.app-folder {
+  .overview-icon {
+  }
 }
 
 // expanded folder
@@ -60,7 +60,7 @@ $app_grid_fg_color: #fff;
     & .folder-name-entry { width: 300px }
 
     /* FIXME: this is to keep the label in sync with the entry */
-    & .folder-name-label { padding: 5px 7px; color: $osd_fg_color; }
+    & .folder-name-label { padding: 5px 7px }
 
     & .edit-folder-button {
       @extend %button;
@@ -73,6 +73,10 @@ $app_grid_fg_color: #fff;
       & > StIcon { icon-size: 16px }
     }
   }
+
+  & StButton#vhandle,
+  & StButton#vhandle:hover,
+  & StButton#vhandle:active { background-color: transparent; }
 }
 .app-folder-dialog-container {
   padding: 12px;
@@ -92,7 +96,7 @@ $app_grid_fg_color: #fff;
   height: 5px;
   width: 5px;
   border-radius:5px;
-  background-color: $selected_bg_color;
+  background-color: $selected_bg_color; // Yaru: we want an orange dot
   margin-bottom: 1px;
 }
 

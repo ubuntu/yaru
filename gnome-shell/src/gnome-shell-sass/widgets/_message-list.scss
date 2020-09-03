@@ -107,7 +107,7 @@
   }
 
   &:active { 
-    background-color: $active_bg_color;
+    background-color: $active_bg_color; // Yaru: make play/pause/next buttons active visible
     color: $fg_color;
   }
 

@@ -39,7 +39,7 @@
 }
 
 .lg-dialog {
-  color: $osd_fg_color;
+  color: $osd_fg_color; // Yaru: needed for the light theme
   StEntry {
     background-color: transparentize(lighten($osd_bg_color, 5%), 0.4);
     color: $osd_fg_color;
@@ -58,12 +58,12 @@
 .lg-completions-text {
     font-size: .9em;
     font-style: italic;
-    color: $osd_fg_color;
+    color: $osd_fg_color; // Yaru: needed for the light theme
 }
 
 .lg-obj-inspector-title {
     spacing: $base_spacing;
-    color: $osd_fg_color;
+    color: $osd_fg_color; // Yaru: needed for the light theme
 }
 
 .lg-obj-inspector-button {
@@ -71,7 +71,7 @@
     padding: 4px;
     border-radius: $base_border_radius;
     &:hover { border: 1px solid #ffffff; }
-    color: $osd_fg_color;
+    color: $osd_fg_color; // Yaru: needed for the light theme
 }
 
 // Extensions

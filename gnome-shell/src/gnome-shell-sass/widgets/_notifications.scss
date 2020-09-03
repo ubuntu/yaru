@@ -14,7 +14,7 @@ $notification_banner_width: 34em;
 
   .notification-button {
     @extend %bubble_button;
-  }
+  } // Yaru: make notifications more visible on different headerbars:
   box-shadow: 0 1px 3px 1px transparentize(black, 0.8);
   border-color: $borders_color;
 }

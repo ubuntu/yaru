@@ -31,20 +31,20 @@ $base_margin: 4px;
 $base_spacing: 6px;
 
 // border radii
-$base_border_radius: 4px;
+$base_border_radius: 4px; // Yaru: we want a smaller border-radius
 
-$modal_radius:$base_border_radius + 2;
+$modal_radius:$base_border_radius + 2; // Yaru: we want a smaller border-radius
 
 // non-standard colors
 $bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
 // $bubble_borders_color: if($variant == 'light', rgba(255,255,255,0.1), rgba(0,0,0,0.3));
 
-// hover
+// hover Yaru: we want the hover bg to be a visible gray for dark and light shell themes
 $hover_bg_color: transparentize($fg_color, 0.9);
 $hover_fg_color: $fg_color;
 $hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 3%));
 
-// active
+// active Yaru: we want the active bg to be a visible gray for dark and light shell themes
 $active_bg_color: transparentize($fg_color, 0.8);
 $active_fg_color: darken($fg_color,if($variant=='light', 5%, 3%));
 $active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
@@ -79,7 +79,7 @@ stage {
   border: 1px solid $osd_outer_borders_color;
   border-radius: $base_border_radius * 2 + 4px;
   padding: $base_padding * 2;
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // Yaru: OSDs need to be visible on dark backgrounds
 }
 
 // Overview panels 
@@ -92,7 +92,7 @@ stage {
 
 // icon tiles
 %icon_tile {
-  border-radius: $base_border_radius;
+  border-radius: $base_border_radius; // Yaru: tile radius is too big for our theme
   padding: $base_padding;
   border: 2px solid transparent;
   transition-duration: 100ms;
@@ -131,9 +131,9 @@ stage {
   border-bottom-width: 0;
 
   &:insensitive { @include button(insensitive, $shadow: none); }
-  &:hover { background-color: $hover_bg_color; }
+  &:hover { background-color: $hover_bg_color; } // Yaru: notification buttons should work like dialog buttons ( gray hover ) 
   &:focus { @include button(focus, $shadow: none); }
-  &:active { background-color: $active_bg_color; }
+  &:active { background-color: $active_bg_color; } // Yaru: notification buttons should work like dialog buttons ( dark gray active ) 
 
   // radius is 2 pixel less to fit in bubble
   &:first-child {

@@ -22,14 +22,14 @@ $window_close_button_padding: 3px;
 
 // Borders on window thumbnails
 .window-clone-border {
-  border-width: 5px;
+  border-width: 5px; // Yaru: don't make the clone border thicker than 5px
   border-style: solid;
   border-color: $window_thumbnail_border_color;
   border-radius: $base_border_radius + 2;
   // For window decorations with round corners we can't match
   // the exact shape when the window is scaled. So apply a shadow
   // to fix that case
-  box-shadow: inset 0 0 0 1px $window_thumbnail_border_color;
+  box-shadow: inset 0 0 0 1px $window_thumbnail_border_color; // Yaru: use the same color as the clone border
 }
 
 // Window titles
