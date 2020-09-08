@@ -55,7 +55,7 @@ Please report the Yaru version in your system using one of the following command
 
     `$ snap info communitheme`
 
-* I you installed from the sources, go the Yaru folder and copy the output of the following terminal command instead
+* If you installed from the sources, go the Yaru folder and copy the output of the following terminal command instead
 
     `$ git describe`
 
