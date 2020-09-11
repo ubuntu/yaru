@@ -1,3 +1,89 @@
+yaru-theme (20.10.3) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell: Make world clock times tabular
+  * gnome-shell: Sync upstream scss files
+  * gnome-shell: Use proper path for upstream files
+  * gnome-shell: Sync upstream icon files
+  * gnome-shell: Apply upstream changes to yaru (keeping our ones)
+  * gnome-shell: Sync yaru gresource including missing icon from upstream
+
+  [ Jupiter007 ]
+  * Add geary icons (#2259)
+  * Down crease Folder-document pictogram height (#2267)
+  * Add display Settings icons (#2260)
+  * Fix fullcolor icons crooked path (#2245)
+  * Fix symbolic icons crooked path (#2242)
+  * Remove the cable from video-single-display-symbolic icon (#2282)
+  * Add text on archives icons (#2284)
+  * Rounding some more symbolic icons (#2297)
+  * Increase image symbolic width (#2295)
+  * Add a triangle to single and join display icons (#2300)
+  * Link gpx to geo+json (#2289)
+  * Add application-x-gzip mimetype (#2287)
+  * Remove floating particles from process-working icon (#2299)
+  * Add pgp-signature mimetype (#2291)
+  * Replace disk image symbolic pictograms by fullcolor ones (#2275)
+  * Add Virtualbox mimetypes icons (#2309)
+
+  [ Muqtadir ]
+  * Mimetype text x scala (#2256)
+  * Removes extra texts and layers from the following mimetype (#2313)
+
+  [ avil25 ]
+  * added similar style for apple disk image as for iso and img files (#2264)
+
+  [ MadsRH ]
+  * Added mimetype icon for Musescore (#2270)
+  * Updated the snap mimetype icon with a more colorful version (#2269)
+  * Added mimetype icon for Maven XML (#2279)
+  * Added mimetype icon for Docker (#2280)
+  * Removed hidden layer in systemd mimetype icon (#2294)
+  * Added mimetype icon for dart files (#2273)
+
+  [ ubuntujaggers ]
+  * redoing rounded icons without conflicts (#2283)
+  * Executable mimetypes based on upstream (#2293)
+  * Making image mimetypes landscape (#2317)
+  * making new window symbol more rounded (#2327)
+  * adding new ubiquity icon design (#2340)
+  * Mimetypes with logos (#2321)
+  * removing green color from network-wireless-connected-symbolic (#2345)
+
+  [ mads ]
+  * Added mimetype icon for System D files
+
+  [ Carlo Lobrano ]
+  * Nautilus: fix gray label in backdrop (#2276) (Closes: #2216)
+  * Rework extract symbolic icons (#2303)
+  * Rework color palette (#2332)
+  * Rework shell palette (#2342)
+
+  [ Paul Kepinski ]
+  * Add view layout symbolic icon (#2315)
+  * Fix typo .cscc -> .scss (#2318)
+  * Lighten dark theme(s) $success_color (#2312)
+  * Add fullcolor pictogram on application-x-gameboy-rom (#2304)
+  * Add gnome-disks-state-standby-symbolic icon (#2325)
+  * Rom icon pixel fighting (#2330)
+  * Add html-template icon (#2329)
+  * Create some symlink icons (#2337)
+  * Remove outline from audio-speakers-bluetooth-symbolic icon (#2348)
+  * Add gettext-translation-template icon (#2339)
+
+  [ Jordan Petridis ]
+  * remove third party gnome app overrides (#2301)
+
+  [ Frederik Feichtmeier ]
+  * Improve dark theme(s) progress contrast (#2311)
+
+  [ Feichtmeier ]
+  * Use OSD fg color on switcher OSDs
+  * Upstream shell sync + keep yaru design changes
+  * New upstream snapshot for GNOME Shell Resources
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 11 Sep 2020 03:00:41 +0200
+
 yaru-theme (20.10.2) groovy; urgency=medium
 
   [ Carlo Lobrano ]
