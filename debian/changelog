@@ -1,3 +1,16 @@
+yaru-theme (20.04.9) UNRELEASED; urgency=medium
+
+  * debian: Update gbp.conf and control references to ubuntu/focal branch
+  * debian/README.sources: add documentation to explain gnome-shell/upstream
+  * gnome-shell, Sync with 3.36.6 fixes (LP: #1896334):
+    - Use proper path for upstream files
+    - Sync with upstream 3.36 branch
+    - Sync yaru theme with upstream 3.36.6
+    - Sync yaru gresource with gnome 3.36.6
+    - Make world clock times tabular
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Sat, 19 Sep 2020 18:10:52 +0200
+
 yaru-theme (20.04.8) focal; urgency=medium
 
   [ Carlo Lobrano, Chris Billington, John Losito, ubuntujaggers ]
