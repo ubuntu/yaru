@@ -1606,7 +1606,7 @@ headerbar {
   button.toggle:checked {
 
     background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
-    border-color: darken($borders_color, 6%); // Yaru change: with our paper buttons we dont need this
+    border-color: darken($borders_color, 6%); // Yaru change: with our button styling we do not want a stronger bottom border
     // border-top-color: darken($borders_color, 8%);
     &:backdrop {
       @include button(backdrop-active);
