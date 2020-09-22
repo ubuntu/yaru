@@ -395,3 +395,8 @@ decoration {
                 0 0 0 1px $_wm_border;
   }
 }
+
+// Fix "hdy" windows border radius used in "newer" gtk apps
+// Need to investigate how upstream does this without changing _common.scss
+deck box headerbar { border-radius: $window_radius $window_radius 0 0; }
+window.csd.unified  { border-radius: $window_radius $window_radius 0 0; }

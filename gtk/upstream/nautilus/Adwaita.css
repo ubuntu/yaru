@@ -45,32 +45,28 @@
 
 /* Path bar */
 
-.nautilus-path-bar button { /* undecorate the buttons */
+.path-bar-box {
+  border-radius: 5px;
+  border: 1px @borders solid;
+  background-color: @theme_bg_color;
+  padding-right: 6px;
+}
+
+.nautilus-path-bar button {
   margin: 0px;
 }
 
+.nautilus-path-bar button:first-child {
+  border-width: 0px 1px 0px 0px;
+  border-radius: 3.5px 0px 0px 3.5px;
+}
+
+.nautilus-path-bar button:not(:first-child) {
+  border-width: 0px 1px 0px 1px;
+  border-radius: 0px 0px 0px 0px;
+}
+
 .nautilus-path-bar button:not(:checked) image { opacity: 0.8; } /* dim the icon when not checked */
-
-.path-bar-box {
-  transition: border 200ms;
-  transition: background-color 200ms;
-  border-radius: 5px;
-}
-
-.path-bar-box.width-maximized {
-  border: 1px @borders solid;
-  background-color: @theme_bg_color;
-}
-
-.path-bar-box.width-maximized button:first-child {
-    border-radius: 3.5px 0px 0px 3.5px;
-    border-width: 0px 1px 0px 0px;
-}
-
-.path-bar-box.width-maximized button:not(:first-child) {
-    border-width: 0px 1px 0px 1px;
-    border-radius: 0px 0px 0px 0px;
-}
 
 /* Make the tags fit into the box */
 entry.search > * {
