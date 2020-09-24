@@ -49,10 +49,10 @@ $app_grid_fg_color: #fff;
     & .folder-name-entry {
       font-size: 18pt;
       font-weight: 800;
-      color: $osd_fg_color;
+      color: $osd_fg_color; // Yaru change: needed for light theme, otherwise invisible text
     }
-
-    & .folder-name-entry { width: 300px }
+    // Yaru change: needed for the light theme, otherwise dark text in orange selection, can't set selected-color here
+    & .folder-name-entry { width: 300px; background-color: lighten($osd_bg_color, 4%); border-color: $osd_outer_borders_color;}
 
     /* FIXME: this is to keep the label in sync with the entry */
     & .folder-name-label { padding: 5px 7px }
