@@ -14,7 +14,7 @@ jobs:
       matrix:
         buildenv: [
           { project: GNOME Shell, repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git", branch: master, projectdir: gnome-shell, src: data/theme/, dest: gnome-shell/upstream },
-          { project: GNOME Shell Resources, repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git", branch: master, projectdir: gnome-shell, src: data/gnome-shell-theme.gresource.xml, dest: gnome-shell/upstream/data },
+          { project: GNOME Shell Resources, repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git", branch: master, projectdir: gnome-shell, src: data/gnome-shell-theme.gresource.xml, dest: gnome-shell/upstream/data/gnome-shell-theme.gresource.xml },
           { project: GTK, repo: "https://gitlab.gnome.org/GNOME/gtk.git", branch: gtk-3-24, projectdir: gtk, src: gtk/theme/Adwaita/, dest: gtk/upstream/gtk+3.0/Adwaita },
       ]
     steps:
