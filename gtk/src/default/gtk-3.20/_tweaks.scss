@@ -337,10 +337,6 @@ treeview.view radio {
 
 treeview:hover { background: $popover_hover_color; }
 
-// Fix for slimed down circular buttons, could need a change upstream since this happens for
-// Some of the circular buttons there too
-* { & button.circular { min-width: 0; } }
-
 scale {
   slider {
     .osd & {
