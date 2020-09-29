@@ -1,3 +1,48 @@
+yaru-theme (20.10.6) UNRELEASED; urgency=medium
+
+  [ Paul Kepinski ]
+  * Link insync emblems to our ones (#2375)
+  * Fix question_arrow cursor outline color (#2385)
+
+  [ Frederik Feichtmeier ]
+  * Adapt shell links to gtk links: orange->blue (#2378)
+  * Gtk theme: less shadows, gray sidebars (#2376)
+  * Style HDY window widgets from libhandy (#2382)
+  * Backdrop and border improvements (#2389)
+    - fix switch border in the dark theme being overly pronounced in the
+      backdrop
+    - default theme pathbar border improvements for active and backdrop
+    - fix nautilus list view to use $backdrop_selected_fg_color and not some
+      gray
+    - fix nautilus list view header to have the same bg color as the rest of
+      the treeview in the backdrop
+    - revert nautilus icon view to be orange in the backdrop but with
+      $backdrop_selected_fg_color
+
+  [ Carlo Lobrano ]
+  * Fix typo in meson project name.
+  * calendar-other-month-day color shall not change if the day has an event.
+    (#2380, #2164)
+
+  [ Muqtadir ]
+  * add system-run-symbolic icon (#2379)
+  * symlink text-x-r-source to text-x-r (#2374)
+  * Gnome-clocks: added symlinks to alarm and globe (#2387)
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Tue, 06 Oct 2020 14:13:01 +0200
+
+yaru-theme (20.10.5) groovy; urgency=medium
+
+  [ Paul Kepinski ]
+  * Books rounded corners (#2363)
+  * Links all disk icons to media-optical (#2369)
+  * Add text-x-patch mimetype icon (#2353)
+
+  [ Frederik Feichtmeier ]
+  * _tweaks: remove circular button min-width (#2370)
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Tue, 06 Oct 2020 14:11:42 +0200
+
 yaru-theme (20.10.4) groovy; urgency=medium
 
   [ Paul Kepinski ]
