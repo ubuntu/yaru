@@ -395,9 +395,14 @@ window.csd.unified  { border-radius: $window_radius $window_radius 0 0; }
         &, image, label { color: mix($fg_color, $text_color, 0.5); }
       }      
       &:backdrop {
-        color: mix($backdrop_fg_color, $backdrop_text_color, 0.15);
+        &, image, label { color: $backdrop_text_color; }
         background-color: transparentize($color: $fg_color, $amount: if($variant=='light', 0.85, 0.92));
       }
     }    
+  }
+}
+.nautilus-window.sidebar-row {
+  &:backdrop {
+    &, image, label { opacity: $_placesidebar_icons_opacity; }
   }
 }
