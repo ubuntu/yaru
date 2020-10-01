@@ -391,8 +391,8 @@ window.csd.unified  { border-radius: $window_radius $window_radius 0 0; }
   &:selected {
     &, &.activatable {
       &, &:hover {
-        background-color: transparentize($fg_color, if($variant=='light', 0.85, 0.9));  
-        &, image, label { color: mix($fg_color, $text_color, 0.5); }
+        background-color: transparentize($fg_color, if($variant=='light', 0.85, 0.88));  
+        &, image, label { color: if($variant=='light', mix($fg_color, $text_color, 0.5), $selected_fg_color); }
       }      
       &:backdrop {
         &, image, label { color: $backdrop_text_color; }
