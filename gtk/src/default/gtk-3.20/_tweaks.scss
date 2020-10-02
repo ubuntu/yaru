@@ -378,10 +378,96 @@ decoration {
   }
 }
 
-// Fix "hdy" windows border radius used in "newer" gtk apps
+// Fixes for hdy leaflet window and headerbar styling in gtk 3.38+
 // Need to investigate how upstream does this without changing _common.scss
-deck box headerbar { border-radius: $window_radius $window_radius 0 0; }
-window.csd.unified  { border-radius: $window_radius $window_radius 0 0; }
+window.background.csd.unified {
+  &, deck box headerbar { border-radius: $window_radius $window_radius 0 0; }
+  decoration { border-radius: $window_radius; }
+
+  headerbar button.radio {
+    $_button_bg: if($ambiance, $headerbar_bg_color, darken($bg_color, if($variant=='light', 10%, 7%)));
+    background: $_button_bg;
+    &:hover {
+      background-color: lighten($_button_bg, 4%);
+    }
+    &:active {
+      background-color: darken($_button_bg, 4%);
+    }
+    &:checked {
+      background-color: darken($_button_bg, if($variant=='light', 10%, 5%));
+    }
+    &:backdrop {
+      $_backdrop_button_bg: if($ambiance, $backdrop_headerbar_bg_color,$backdrop_bg_color);
+      background-color: $_backdrop_button_bg;
+      &:checked {
+        background-color: darken($_backdrop_button_bg, 7%);
+      }
+    }
+    min-height: $_headerbar_height; 
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-top-color: if($ambiance, $headerbar_border_color, $top_hilight);
+  }
+  headerbar button box {
+    &.horizontal.wide {
+      margin-right: $_headerbar_height / 2.5;
+      margin-left: $_headerbar_height / 2.5;
+    }
+    &.vertical.narrow label {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  viewswitcherbar {
+    box {
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    
+    actionbar {
+      button.radio {
+        border-radius: 0;
+        min-height: $_headerbar_height; 
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 0;
+        border-width: 0;
+        border: none;
+
+        $_button_bg: $bg_color;
+        background: $_button_bg;
+        &:hover {
+          background-color: lighten($_button_bg, 4%);
+        }
+        &:active {
+          background-color: darken($_button_bg, 7%);
+        }
+        &:checked {
+          background-color: darken($_button_bg, 9%);
+        }
+        &:backdrop {
+          $_backdrop_button_bg: $backdrop_bg_color;
+          background-color: $_backdrop_button_bg;
+          &:checked {
+            background-color: darken($_backdrop_button_bg, 9%);
+          }
+        }
+      }
+    }
+  }
+}
 
 // Align all sidebar (not treeview) row selections to upstream nautilus 
 // Upstream only applies this if the theme is "Adwaita"
