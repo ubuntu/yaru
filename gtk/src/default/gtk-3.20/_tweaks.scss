@@ -409,7 +409,10 @@ window.background.csd.unified {
     margin-top: 0;
     margin-bottom: 0;
     border-radius: 0;
-    border-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-top-color: if($ambiance, $headerbar_border_color, $top_hilight);
   }
   headerbar button box {
     &.horizontal.wide {
