@@ -394,7 +394,7 @@ window.background.csd.unified {
       background-color: darken($_button_bg, 4%);
     }
     &:checked {
-      background-color: darken($_button_bg, 7%);
+      background-color: darken($_button_bg, if($variant=='light', 10%, 5%));
     }
     &:backdrop {
       $_backdrop_button_bg: if($ambiance, $backdrop_headerbar_bg_color,$backdrop_bg_color);
