@@ -11,8 +11,9 @@ headerbar,
   color: $headerbar_fg_color;
   border-color: darken($headerbar_bg_color, 7%);
 
-  label .title {
+  .title, label.title {
     color: $headerbar_fg_color;
+    &:backdrop { color: $backdrop_headerbar_fg_color; opacity: 0.7; }
   }
 
   &:backdrop {
