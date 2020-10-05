@@ -13,7 +13,7 @@ headerbar,
 
   .title, label.title {
     color: $headerbar_fg_color;
-    &:backdrop { color: $backdrop_headerbar_fg_color; opacity: 0.7; }
+    &:backdrop { color: $backdrop_headerbar_fg_color; }
   }
 
   &:backdrop {
