@@ -475,7 +475,7 @@ window.background.csd.unified {
   outline-color: $focus_border_color;
   -gtk-outline-radius: 0;
   &:backdrop {
-    &, image, label { color: transparentize($backdrop_fg_color, 0.04); }
+    &, image, label { &:not(switch &) {color: transparentize($backdrop_fg_color, 0.04); } }
   }
   &:selected {
     &, &.activatable {
@@ -493,5 +493,14 @@ window.background.csd.unified {
 .nautilus-window.sidebar-row {
   &:backdrop {
     &, image, label { opacity: $_placesidebar_icons_opacity; }
+  }
+}
+
+// Reduce hyper prominent dark theme check switch border in backdrop
+switch {
+  &:backdrop {
+    &:checked {
+      &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
+    }
   }
 }
