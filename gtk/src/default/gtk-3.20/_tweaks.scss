@@ -475,24 +475,21 @@ window.background.csd.unified {
   outline-color: $focus_border_color;
   -gtk-outline-radius: 0;
   &:backdrop {
-    &, image, label { &:not(switch &) {color: transparentize($backdrop_fg_color, 0.04); } }
+    &, image, label { color: $backdrop_fg_color; }
+    switch image { color: transparent; }
   }
   &:selected {
     &, &.activatable {
+      slider, trough, progress, button, check, radio { border-color: $borders_color; }
       &, &:hover {
-        background-color: transparentize($fg_color, if($variant=='light', 0.85, 0.88));  
-        &, image, label { color: if($variant=='light', mix($fg_color, $text_color, 0.5), $selected_fg_color); }
+        background-color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 6%));
+        &, image, label { color: if($variant=='light', black, white); }
       }      
       &:backdrop {
-        &, image, label { color: transparentize($backdrop_fg_color, 0.02); }
-        background-color: transparentize($color: $fg_color, $amount: if($variant=='light', 0.85, 0.92));
+        &, image, label { color: $backdrop_fg_color; }
+        background-color: if($variant=='light', darken($backdrop_bg_color, 7%), lighten($backdrop_bg_color, 5%));
       }
     }    
-  }
-}
-.nautilus-window.sidebar-row {
-  &:backdrop {
-    &, image, label { opacity: $_placesidebar_icons_opacity; }
   }
 }
 
