@@ -70,7 +70,7 @@ $ambiance: null !default;
       border-left: 1px;
 
       &:hover {background-color: $bg_color;}
-      &:backdrop { background-color: if($variant=='light', #EEEFF0, $backdrop_base_color);} // It should be _backdrop_color(white); but that does not work.
+      &:backdrop { background-color: $backdrop_base_color;}
     }
 
     .nautilus-list-view .view {
@@ -78,6 +78,15 @@ $ambiance: null !default;
 
       // Hide superfluous treeview drop target indication
       &.dnd { border-style: none; }
+    }
+
+    .nautilus-list-view .view:selected {
+      &:backdrop {
+        &, &:dir(ltr), &:dir(rtl) {
+          &, image, label, row { color: if($variant=='light', darken($backdrop_fg_color, 7%), lighten($backdrop_fg_color, 6%)); }
+          background-color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 6%));
+        }  
+      }
     }
 
     notebook > header {
@@ -101,6 +110,7 @@ $ambiance: null !default;
       &:backdrop { border-color: if($ambiance, $headerbar_bg_color, $backdrop_borders_color);}
       background-color: if($ambiance, lighten($headerbar_bg_color, 3%), $bg_color);
       padding-right: 6px;
+      &:backdrop { border-color: if($ambiance, darken($inkstone, 9%), $backdrop_borders_color); }
     }
 
     .nautilus-path-bar button {
