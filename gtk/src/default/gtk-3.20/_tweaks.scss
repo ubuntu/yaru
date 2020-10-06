@@ -469,30 +469,6 @@ window.background.csd.unified {
   }
 }
 
-// Align all sidebar (not treeview) row selections to upstream nautilus 
-// Upstream only applies this if the theme is "Adwaita"
-.nautilus-window.sidebar-row, row, row:dir(ltr), row:dir(rtl) {
-  outline-color: $focus_border_color;
-  -gtk-outline-radius: 0;
-  &:backdrop {
-    &, image, label { color: $backdrop_fg_color; }
-    switch image { color: transparent; }
-  }
-  &:selected {
-    &, &.activatable {
-      slider, trough, progress, button, check, radio { border-color: $borders_color; }
-      &, &:hover {
-        background-color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 6%));
-        &, image, label { color: if($variant=='light', black, white); }
-      }      
-      &:backdrop {
-        &, image, label { color: $backdrop_fg_color; }
-        background-color: if($variant=='light', darken($backdrop_bg_color, 7%), lighten($backdrop_bg_color, 5%));
-      }
-    }    
-  }
-}
-
 // Reduce hyper prominent dark theme check switch border in backdrop
 switch {
   &:backdrop {
