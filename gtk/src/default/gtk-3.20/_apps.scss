@@ -131,7 +131,7 @@ $ambiance: null !default;
         &:not(:dir(ltr)) { background-color: rgba(175, 175, 175, 0.5); }
       }
 
-      &:backdrop {
+      &:backdrop:selected {
         background-color: $selected_bg_color;
         color: $backdrop_selected_fg_color;
       }
