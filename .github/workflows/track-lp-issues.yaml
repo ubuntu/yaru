@@ -28,8 +28,8 @@ jobs:
           hasModif="false"
           hasNew="false"
 
-          python3 .github/lpbugtracker.py --get-lp-bugs --destination ${LP_BUGS}
-          python3 .github/lpbugtracker.py --diff-bugs --source ${LP_BUGS} --destination ${DIFF_BUGS}
+          python .github/lpbugtracker.py --get-lp-bugs --destination ${LP_BUGS}
+          python .github/lpbugtracker.py --diff-bugs --source ${LP_BUGS} --destination ${DIFF_BUGS}
 
           rm -f ${YARU_BUGS}
           cp -a ${LP_BUGS} ${YARU_BUGS}
