@@ -2,7 +2,7 @@ name: Report LP issue on GitHub
 on:
   push:
     paths:
-      - '.github/workflows/open-pr-on-changes.yaml'
+      - '.github/workflows/track-lp-issues.yaml'
   schedule:
     - cron: '8 0 * * *'
 
