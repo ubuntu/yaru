@@ -111,16 +111,3 @@ if __name__ == "__main__":
 
     if args.diff_bugs:
         diff_bugs(args.source, args.destination)
-
-    # lp_bugs = get_yaru_launchpad_bugs()
-    # already_stored_bugs = get_bug_list(YARU_LP_BUGS_FILE)
-
-    # lp_bugs_new = []
-    # for id in lp_bugs:
-    # if already_stored_bugs.get(id, None) is None:
-    # lp_bugs_new.append(id)
-    # print(lp_bugs_new)
-    # if len(lp_bugs_new):
-    # save_bug_list(lp_bugs, YARU_LP_BUGS_FILE)
-
-    # save_bug_list(lp_bugs)
