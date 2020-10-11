@@ -34,16 +34,18 @@ jobs:
           rm -f ${YARU_BUGS}
           cp -a ${LP_BUGS} ${YARU_BUGS}
           [[ $(diff -q ${YARU_BUGS} ${LP_BUGS} 2>/dev/null) != 0 ]] && hasModif="true"
-          echo "::set-output name=modified::${hasModif}"
+          echo "MODIFIED_BUGS=${hasModif}" >> $GITHUB_ENV
 
           [ -f ${DIFF_BUGS} ] && hasNew="true"
-          echo "::set-output name=new::${hasNew}"
+          echo "NEW_BUGS=${hasNew}" >> $GITHUB_ENV
         env:
           YARU_BUGS: launchpad/yaru_lp_bugs.json
           LP_BUGS: /tmp/lpbugs.json
           DIFF_BUGS: /tmp/diffbugs.json
+          MODIFIED_BUGS: false
+          NEW_BUGS: false
       - name: Create or update Pull Request
-        if: steps.getlpbugs.outputs.modified == 'true'
+        if: ${{ MODIFIED_BUGS }} == 'true'
         uses: peter-evans/create-pull-request@v2
         with:
           commit-message: Update LP bug list
