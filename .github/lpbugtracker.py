@@ -50,7 +50,7 @@ def create_issue(id, title, weblink):
             "issue",
             "create",
             "--message",
-            "LP:#{} {}".format(id, title),
+            "LP#{} {}".format(id, title),
             "--message",
             "Reported first on Launchpad at {}".format(weblink),
         ]
