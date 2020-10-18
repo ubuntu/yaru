@@ -11,12 +11,14 @@ stored in the json file to show if any new issue was created since last check.
 import os
 import json
 import argparse
+import subprocess
 from launchpadlib.launchpad import Launchpad
 
 HOME = os.path.expanduser("~")
 CACHEDIR = os.path.join(HOME, ".launchpadlib", "cache")
 YARU_LP_BUGS_FILE = "yaru_lp_bugs.json"
 YARU_LP_BUGS_DIR = "launchpad"
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -38,6 +40,21 @@ def main():
 
     if args.diff_bugs:
         diff_bugs(args.source, args.destination)
+
+
+def create_issue(id, title, weblink):
+    """ Create a new Bug using HUB """
+    subprocess.run(
+        [
+            "hub",
+            "issue",
+            "create",
+            "--message",
+            "LP:#{} {}".format(id, title),
+            "--message",
+            "Reported first on Launchpad at {}".format(weblink),
+        ]
+    )
 
 
 def get_lp_bugs(dest):
@@ -70,7 +87,9 @@ def diff_bugs(source, destination):
             bugs_diff[id] = bugs_ref[id]
 
     if len(bugs_diff):
-        save_bug_list(bugs_diff, destination)
+        # save_bug_list(bugs_diff, destination)
+        for id, data in bugs_diff.items():
+            create_issue(id, data["title"], data["link"])
 
 
 def get_yaru_launchpad_bugs():
@@ -114,4 +133,3 @@ def get_bug_list(source):
 
 if __name__ == "__main__":
     main()
-
