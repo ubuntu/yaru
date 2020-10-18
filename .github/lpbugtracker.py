@@ -46,7 +46,7 @@ def create_issue(id, title, weblink):
     """ Create a new Bug using HUB """
     subprocess.run(
         [
-            "hub",
+            ".github/hub",
             "issue",
             "create",
             "--message",
