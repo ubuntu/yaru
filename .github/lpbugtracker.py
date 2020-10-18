@@ -18,6 +18,27 @@ CACHEDIR = os.path.join(HOME, ".launchpadlib", "cache")
 YARU_LP_BUGS_FILE = "yaru_lp_bugs.json"
 YARU_LP_BUGS_DIR = "launchpad"
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--get-lp-bugs", action="store_true", help="get Yaru active bugs on Launchpad"
+    )
+    parser.add_argument(
+        "--diff-bugs",
+        action="store_true",
+        help="compare bug lists and save the new bugs.",
+    )
+    parser.add_argument("--destination", help="json file path to save a bug list")
+    parser.add_argument("--source", help="json file path containing a bug list to read")
+
+    args = parser.parse_args()
+
+    if args.get_lp_bugs:
+        get_lp_bugs(args.destination)
+
+    if args.diff_bugs:
+        diff_bugs(args.source, args.destination)
+
 
 def get_lp_bugs(dest):
     """ Get LP active bugs and save in dest as json file """
@@ -92,22 +113,5 @@ def get_bug_list(source):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--get-lp-bugs", action="store_true", help="get Yaru active bugs on Launchpad"
-    )
-    parser.add_argument(
-        "--diff-bugs",
-        action="store_true",
-        help="compare bug lists and save the new bugs.",
-    )
-    parser.add_argument("--destination", help="json file path to save a bug list")
-    parser.add_argument("--source", help="json file path containing a bug list to read")
+    main()
 
-    args = parser.parse_args()
-
-    if args.get_lp_bugs:
-        get_lp_bugs(args.destination)
-
-    if args.diff_bugs:
-        diff_bugs(args.source, args.destination)
