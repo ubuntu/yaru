@@ -42,6 +42,7 @@ jobs:
           YARU_BUGS: launchpad/yaru_lp_bugs.json
           LP_BUGS: /tmp/lpbugs.json
           DIFF_BUGS: /tmp/diffbugs.json
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create or update Pull Request
         if: steps.getlpbugs.outputs.modified == 'true'
         uses: peter-evans/create-pull-request@v2
