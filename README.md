@@ -30,7 +30,7 @@ It contains:
 
 
 
-## Using Yaru on Ubuntu
+## Using yaru on Ubuntu
 
 The Yaru theme suite is installed with Ubuntu 18.10+ by default! No further steps are required to use it.
 
