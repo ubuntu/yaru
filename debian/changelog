@@ -1,3 +1,17 @@
+yaru-theme (20.04.10) UNRELEASED; urgency=medium
+
+  [ Feichtmeier ]
+  * Sync gtk3 button metrics with upstream & groovy (LP: #1899731)
+    - in groovy we moved away from altering the upstream button sizes, because
+      those sizes are sometimes hardcoded in gtk apps, which ends in
+      inconsistent button sizes in the desktop (slim beneath big, or vice versa)
+      and because it can cause newer gtk3 apps to have a stretched headerbar
+    - additionally because gtk-common-themes will receive the updated yaru
+      version from groovy this change destroys the chance gtk3 snaps using
+      yaru have different button sizes than gtk3 debs using yaru
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 22 Oct 2020 20:08:59 +0200
+
 yaru-theme (20.04.9) focal; urgency=medium
 
   * debian: Update gbp.conf and control references to ubuntu/focal branch
