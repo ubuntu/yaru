@@ -43,8 +43,6 @@ SOURCES = (
 # DPI multipliers to render at
 DPIS = [1, 2]
 
-inkscape_process = None
-
 
 def main(args, SRC):
     def optimize_png(png_file):
