@@ -77,7 +77,17 @@ def main(args, SRC):
             "--export-filename={}".format(output_file),
             icon_file,
         ]
-        subprocess.run(cmd)
+        ret = subprocess.run(cmd, capture_output=True)
+        if ret.returncode != 0:
+            print("execution of")
+            print('  %s' % "".join(cmd))
+            print("returned with error %d" % ret.returncode)
+            print(5*"=", "stdout", 5*"=")
+            print(ret.stdout.decode())
+            print(5*"=", "stderr", 5*"=")
+            print(ret.stderr.decode())
+            return
+
         optimize_png(output_file)
 
     class ContentHandler(xml.sax.ContentHandler):
