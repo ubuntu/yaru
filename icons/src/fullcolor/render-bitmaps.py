@@ -26,7 +26,6 @@ import argparse
 
 OPTIPNG = "optipng"
 MAINDIR = "../../Suru"
-# SRC = 'fullcolor'
 SOURCES = (
     "actions",
     "apps",
@@ -209,7 +208,7 @@ def main(args, SRC):
             self.chars += chars.strip()
 
     if not args.svg:
-        print("Rendering all SVGs in" % SRC)
+        print("Rendering all SVGs in", SRC)
         if not os.path.exists(MAINDIR):
             os.mkdir(MAINDIR)
 
