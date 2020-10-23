@@ -226,9 +226,6 @@ button {
   outline-offset: -2px;
   outline-width: 2px;
   -gtk-outline-radius: $button-radius;
-
-  row:selected & { outline-color: $coloured_focus_border_color; }
-
   &.suggested-action, &.destructive-action{ &, &:hover, &:active { outline-color: $coloured_focus_border_color; } }
 }
 
@@ -237,7 +234,6 @@ switch {
   &:focus {
     box-shadow: 0 0 0 3px if($variant=='light', lighten(opacify($focus_border_color, 1), 20%), $focus_border_color);
   }
-  row:selected & { outline-color: $coloured_focus_border_color; }
 }
 
 checkbutton,
@@ -246,16 +242,6 @@ radiobutton {
   outline-offset: 1px;
   outline-width: 2px;
   row:selected & , treeview:selected & { outline-color: $coloured_focus_border_color; }
-}
-
-row {
-  outline-color: $focus_border_color;
-  outline-offset: -2px;
-  -gtk-outline-radius: 0px;
-
-  &:selected {
-    outline-color: $coloured_focus_border_color;
-  }
 }
 
 treeview {
@@ -337,10 +323,6 @@ treeview.view radio {
 
 treeview:hover { background: $popover_hover_color; }
 
-// Fix for slimed down circular buttons, could need a change upstream since this happens for
-// Some of the circular buttons there too
-* { & button.circular { min-width: 0; } }
-
 scale {
   slider {
     .osd & {
@@ -393,5 +375,105 @@ decoration {
     border-radius: $menu_radius;
     box-shadow: 0 1px 2px 1px transparentize(black, 0.7),
                 0 0 0 1px $_wm_border;
+  }
+}
+
+// Fixes for hdy leaflet window and headerbar styling in gtk 3.38+
+// Need to investigate how upstream does this without changing _common.scss
+window.background.csd.unified {
+  &, deck box headerbar { border-radius: $window_radius $window_radius 0 0; }
+  decoration { border-radius: $window_radius; }
+
+  headerbar button.radio {
+    $_button_bg: if($ambiance, $headerbar_bg_color, darken($bg_color, if($variant=='light', 10%, 7%)));
+    background: $_button_bg;
+    &:hover {
+      background-color: lighten($_button_bg, 4%);
+    }
+    &:active {
+      background-color: darken($_button_bg, 4%);
+    }
+    &:checked {
+      background-color: darken($_button_bg, if($variant=='light', 10%, 5%));
+    }
+    &:backdrop {
+      $_backdrop_button_bg: if($ambiance, $backdrop_headerbar_bg_color,$backdrop_bg_color);
+      background-color: $_backdrop_button_bg;
+      &:checked {
+        background-color: darken($_backdrop_button_bg, 7%);
+      }
+    }
+    min-height: $_headerbar_height; 
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-top-color: if($ambiance, $headerbar_border_color, $top_hilight);
+  }
+  headerbar button box {
+    &.horizontal.wide {
+      margin-right: $_headerbar_height / 2.5;
+      margin-left: $_headerbar_height / 2.5;
+    }
+    &.vertical.narrow label {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  viewswitcherbar {
+    box {
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    
+    actionbar {
+      button.radio {
+        border-radius: 0;
+        min-height: $_headerbar_height; 
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 0;
+        border-width: 0;
+        border: none;
+
+        $_button_bg: $bg_color;
+        background: $_button_bg;
+        &:hover {
+          background-color: lighten($_button_bg, 4%);
+        }
+        &:active {
+          background-color: darken($_button_bg, 7%);
+        }
+        &:checked {
+          background-color: darken($_button_bg, 9%);
+        }
+        &:backdrop {
+          $_backdrop_button_bg: $backdrop_bg_color;
+          background-color: $_backdrop_button_bg;
+          &:checked {
+            background-color: darken($_backdrop_button_bg, 9%);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Reduce hyper prominent dark theme check switch border in backdrop
+switch {
+  &:backdrop {
+    &:checked {
+      &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
+    }
   }
 }

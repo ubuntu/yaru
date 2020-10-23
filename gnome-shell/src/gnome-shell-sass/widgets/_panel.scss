@@ -1,8 +1,8 @@
 /* Top Bar */
 // a.k.a. the panel
 
-$panel_corner_radius: 0;
-// $panel_bg_color: #000;
+$panel_corner_radius: 0; // Yaru: because of the dock we can't round the desktop corners
+// $panel_bg_color: #000; // Yaru: we define those colors in _colors.scss for _dock.scss to use it
 // $panel_fg_color: #ccc;
 $panel_height: 1.86em;
 

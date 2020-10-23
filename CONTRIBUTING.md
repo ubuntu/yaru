@@ -134,7 +134,7 @@ We remove on new version import:
 
 - `*.in`, `Makefile.*`, `meson.build`: we have our own build system.
 - `adwaita_engine.c`: we use the default adwaita engine
-- `*.css`: we build these from the `*.cscc` sources
+- `*.css`: we build these from the `*.scss` sources
 
 
 ## Get your copy of Yaru and make a Pull Request (PR)

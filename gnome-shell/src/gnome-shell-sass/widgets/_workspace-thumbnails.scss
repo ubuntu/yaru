@@ -6,7 +6,7 @@
   visible-width: 32px; //amount visible before hover
   spacing: $base_spacing;
   padding: $base_padding;
-  border-color: transparent;
+  border-color: transparent; // Yaru: adapt the workspace osd border to the dock border
 
   border-radius: $modal_radius 0 0 $modal_radius;
   border-right-width: 0;

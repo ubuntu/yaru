@@ -1,4 +1,4 @@
-@import "ubuntu-colors";
+@import "palette";
 
 /* set $ambiance to null, unless already defined */
 $ambiance: null !default;
@@ -16,20 +16,6 @@ $ambiance: null !default;
    * Nautilus *
    ***********/
   .nautilus-window {
-    .nautilus-canvas-item.dim-label,
-    .nautilus-list-dim-label {
-      color: mix($text_color, $base_color);
-      &:backdrop {
-        color: transparentize(mix($text_color, $base_color), 0.2);
-      }
-      &:selected {
-        color: transparentize($selected_fg_color, 0.3);
-        &:backdrop {
-          color: transparentize(mix($text_color, $base_color), 0.4);
-        }
-      }
-    }
-
     // keep details box visible
     // details box looks ugly when many items are selected and it floats above the orange
     background-image: none;
@@ -84,7 +70,7 @@ $ambiance: null !default;
       border-left: 1px;
 
       &:hover {background-color: $bg_color;}
-      &:backdrop { background-color: if($variant=='light', #EEEFF0, $backdrop_base_color);} // It should be _backdrop_color(white); but that does not work.
+      &:backdrop { background-color: $backdrop_base_color;}
     }
 
     .nautilus-list-view .view {
@@ -109,38 +95,30 @@ $ambiance: null !default;
       margin: 5px;
     }
 
-    .nautilus-path-bar button { /* undecorate the buttons */
+    .path-bar-box {
+      border-radius: 5px;
+      border: 1px solid if($ambiance, darken($headerbar_bg_color, 9%), $borders_color);
+      &:backdrop { border-color: if($ambiance, $headerbar_bg_color, $backdrop_borders_color);}
+      background-color: if($ambiance, lighten($headerbar_bg_color, 6.5%), $bg_color);
+      padding-right: 6px;
+      &:backdrop { border-color: if($ambiance, darken($inkstone, 9%), $backdrop_borders_color); }
+    }
+
+    .nautilus-path-bar button {
       margin: 0px;
     }
 
-    .path-bar-box {
-      transition: border 200ms;
-      transition: background-color 200ms;
-      border-radius: $button_radius;
+    .nautilus-path-bar button:first-child {
+      border-width: 0px 1px 0px 0px;
+      border-radius: 3.5px 0px 0px 3.5px;
     }
 
-    .path-bar-box.width-maximized {
-      @if $ambiance {
-        $_bg: if($variant=='light', lighten($headerbar_bg_color, 3%),
-                                    lighten($headerbar_bg_color, 1%));
-        border: 1px solid if($ambiance, darken($headerbar_bg_color, 9%), $borders_color);
-        &:backdrop { border-color: if($ambiance, $headerbar_bg_color, $backdrop_borders_color);}
-        background-color: $_bg;
-      } @else {
-        border: 1px solid $borders_color;
-        background-color: $bg_color;
-      }
+    .nautilus-path-bar button:not(:first-child) {
+      border-width: 0px 1px 0px 1px;
+      border-radius: 0px 0px 0px 0px;
     }
 
-    .path-bar-box.width-maximized button:first-child {
-        border-radius: ($button_radius - 1.5) 0px 0px ($button_radius - 1.5);
-        border-width: 0px 1px 0px 0px;
-    }
-
-    .path-bar-box.width-maximized button:not(:first-child) {
-        border-width: 0px 1px 0px 1px;
-        border-radius: 0px 0px 0px 0px;
-    }
+    .nautilus-path-bar button:not(:checked) image { opacity: 0.8; } /* dim the icon when not checked */
 
     // This is the Icon + Text beneath - it's one widget
     .nautilus-canvas-item {
@@ -153,9 +131,9 @@ $ambiance: null !default;
         &:not(:dir(ltr)) { background-color: rgba(175, 175, 175, 0.5); }
       }
 
-      &:backdrop {
-        background-color: transparentize($fg_color, 0.8);
-        color: $backdrop_text_color;
+      &:backdrop:selected {
+        background-color: $selected_bg_color;
+        color: $backdrop_selected_fg_color;
       }
     }
 }

@@ -52,7 +52,7 @@ $dash_border_radius: $modal_radius * 1.5;
 
   &:focus,
   &:checked {
-    .overview-icon {
+    .overview-icon { // Yaru: we want the app grid icon to feel like everything else on the dock
       // background-color: darken($osd_bg_color,10%);
       color: $osd_fg_color;
     }

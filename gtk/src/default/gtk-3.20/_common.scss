@@ -6,20 +6,20 @@ $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
-$button_radius: 4px;
-$menu_radius: 4px;
+$button_radius: 4px; // Yaru change: we want everything to be less round
+$menu_radius: 4px; // Yaru change: we want everything to be less round
 $window_radius: $button_radius + 3;
-$popover_radius: $button_radius + 2;
+$popover_radius: $button_radius + 2; // Yaru change: we want everything to be less round
 
 // Optional compact sizes for buttons, headerbar and headerbar widgets
-$_sizevariant: 'compact'; //compact otherwise
+$_sizevariant: 'default'; //compact otherwise
 $_headerbar_height: if($_sizevariant=='default', 46px, 40px);
 $_entry_height: if($_sizevariant=='default', 32px, 28px);
 $_btn_pad: if($_sizevariant=='default', 4px 9px, 2px 6px);
 $_hb_btn_pad: if($_sizevariant=='default', 6px, 5px);
 $_img_btn_pad: if($_sizevariant=='default', 5px, 2px);
 $_sel_menu_pad: if($_sizevariant=='default', 6px 10px, 4px 10px);
-$_circ_btn_pad: if($_sizevariant=='default', 4px, 2px 6px);
+$_circ_btn_pad: if($_sizevariant=='default', 4px, 2px);
 $_switch_margin: if($_sizevariant=='default', 10px, 7px);
 
 * {
@@ -205,6 +205,12 @@ label {
   &:backdrop {
     selection { @extend %selected_items_backdrop; }
   }
+
+  &.error {
+    color: $error_color;
+    &:disabled { color: transparentize($error_color,0.5); }
+    &:disabled:backdrop { color: transparentize($error_color,0.6); }
+  }
 }
 
 .dim-label {
@@ -274,7 +280,6 @@ spinner {
 .large-title {
    font-weight: 300;
    font-size: 24pt;
-   letter-spacing: 0.2rem;
 }
 .title-1 {
    font-weight: 800;
@@ -474,6 +479,8 @@ entry {
       + combobox > box > button.combo { border-top-color: $drop_target_color; }
     }
   }
+
+  &.error { color: $error_color; }
 }
 
 treeview entry {
@@ -1599,7 +1606,7 @@ headerbar {
   button.toggle:checked {
 
     background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
-    border-color: darken($borders_color, 6%);
+    border-color: darken($borders_color, 6%); // Yaru change: with our button styling we do not want a stronger bottom border
     // border-top-color: darken($borders_color, 8%);
     &:backdrop {
       @include button(backdrop-active);
@@ -2376,11 +2383,11 @@ notebook {
       > tabs {
         margin-bottom: -2px;
         > tab {
-          &:hover { box-shadow: inset 0 -3px $borders_color; }
+          &:hover { box-shadow: inset 0 -3px $borders_color; } // Yaru change: 4px underlines are too much
 
           &:backdrop { box-shadow: none; }
 
-          &:checked { box-shadow: inset 0 -3px $selected_bg_color; }
+          &:checked { box-shadow: inset 0 -3px $selected_bg_color; } // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2390,11 +2397,11 @@ notebook {
       > tabs {
         margin-top: -2px;
         > tab {
-          &:hover { box-shadow: inset 0 3px $borders_color; }
+          &:hover { box-shadow: inset 0 3px $borders_color; } // Yaru change: 4px underlines are too much
 
           &:backdrop { box-shadow: none; }
 
-          &:checked { box-shadow: inset 0 3px $selected_bg_color; }
+          &:checked { box-shadow: inset 0 3px $selected_bg_color; } // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2404,11 +2411,11 @@ notebook {
       > tabs {
         margin-right: -2px;
         > tab {
-          &:hover { box-shadow: inset -3px 0 $borders_color; }
+          &:hover { box-shadow: inset -3px 0 $borders_color; } // Yaru change: 4px underlines are too much
 
           &:backdrop { box-shadow: none; }
 
-          &:checked { box-shadow: inset -3px 0 $selected_bg_color; }
+          &:checked { box-shadow: inset -3px 0 $selected_bg_color; } // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2418,11 +2425,11 @@ notebook {
       > tabs {
         margin-left: -2px;
         > tab {
-          &:hover { box-shadow: inset 3px 0 $borders_color; }
+          &:hover { box-shadow: inset 3px 0 $borders_color; } // Yaru change: 4px underlines are too much
 
           &:backdrop { box-shadow: none; }
 
-          &:checked { box-shadow: inset 3px 0 $selected_bg_color; }
+          &:checked { box-shadow: inset 3px 0 $selected_bg_color; } // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2500,14 +2507,15 @@ notebook {
 
       outline-offset: -5px;
 
-      color: $insensitive_fg_color;
-      font-weight: bold;
+      color: $fg_color;
+      font-weight: normal;
 
       border-width: 1px;         // for reorderable tabs
       border-color: transparent; //
 
       &:hover {
-        color: mix($insensitive_fg_color, $fg_color, 50%);
+        color: $fg_color;
+        background-color: darken($bg_color,4%);
 
         &.reorderable-page {
           border-color: transparentize($borders_color, 0.7);
@@ -2820,7 +2828,7 @@ switch {
     color: $selected_fg_color;
     border-color: $checkradio_borders_color;
     background-color: $checkradio_bg_color;
-    text-shadow: 0 1px transparentize($checkradio_borders_color, 0.5),
+    text-shadow: 0 1px transparentize($selected_borders_color, 0.5),
                  0 0 2px transparentize(white, 0.4);
   }
 
@@ -2841,7 +2849,7 @@ switch {
     &:checked {
       @if $variant == 'light' { color: $backdrop_bg_color; }
       border-color: if($variant == 'light', $checkradio_borders_color,
-                                            $checkradio_borders_color);
+                                            $selected_borders_color);
       background-color: $checkradio_bg_color;
     }
 
@@ -2929,7 +2937,7 @@ switch {
   (':backdrop:checked', '-gtk-icontheme(\'object-select-symbolic\')', '#{transparentize($osd_fg_color, 0.2)}', '#{desaturate($checkradio_bg_color, 100%)}'), {
 
   .view.content-view.check#{$check_state}:not(list),
-  .content-view .tile check#{$check_state}:not(list) {
+  .content-view:not(list) check#{$check_state} {
     margin: 4px;
     min-width: 32px;
     min-height: 32px;
@@ -4573,8 +4581,6 @@ decoration {
   .tiled-left & { border-radius: 0; }
 
   .popup & { box-shadow: none; }
-
-  .csd & { background-color: black; } // transparent makes gtk3 leak light on the corners #2537
 
   // server-side decorations as used by mutter
   .ssd & { box-shadow: 0 0 0 1px $_wm_border; } //just doing borders, wm draws actual shadows

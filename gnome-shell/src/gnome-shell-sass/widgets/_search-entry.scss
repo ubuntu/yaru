@@ -13,6 +13,7 @@ $search_entry_height: 36px;
   border-color: $borders_color;
 
   &:hover {
+    // background-color: $hover_bg_color; Yaru: we can't use our hover color here otherwise it becomes transparent
     border-color: $hover_borders_color;
     color: $hover_fg_color;
   }
@@ -21,9 +22,9 @@ $search_entry_height: 36px;
     padding: $base_padding $base_padding+2; // 1px less to account for wider border
     border-width: 2px;
     border-style: solid;
-    border-color: $focus_border_color;
+    border-color: $focus_border_color; // Yaru: we detached focus from selected
     color: $fg_color;
-    // box-shadow: inset 0 1px 2px 1px rgba(0,0,0,0.2);
+    // box-shadow: inset 0 1px 2px 1px rgba(0,0,0,0.2); // Yaru: we want a flat search entry
   }
 
   .search-entry-icon { 
