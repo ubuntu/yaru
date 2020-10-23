@@ -24,8 +24,6 @@ import subprocess
 import argparse
 
 
-# INKSCAPE = ['/usr/bin/flatpak','run','org.inkscape.Inkscape','--shell']
-INKSCAPE = ['inkscape','--shell']
 OPTIPNG = 'optipng'
 MAINDIR = '../../Suru'
 # SRC = 'fullcolor'
@@ -58,21 +56,9 @@ def main(args, SRC):
             output += process.stdout.read(1)
             output = output[1:]
 
-    def start_inkscape():
-        process = subprocess.Popen(INKSCAPE, bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        wait_for_prompt(process)
-        return process
-
     def inkscape_render_rect(icon_file, rect, dpi, output_file):
-        global inkscape_process
-        if inkscape_process is None:
-            inkscape_process = start_inkscape()
-
-        cmd = [icon_file,
-               '--export-dpi', str(dpi),
-               '-i', rect,
-               '-e', output_file]
-        wait_for_prompt(inkscape_process, ' '.join(cmd))
+        cmd = [ 'inkscape', '--batch-process', '--export-dpi={}'.format(str(dpi)), '-i', rect, '--export-filename={}'.format(output_file), icon_file]
+        subprocess.run(cmd)
         optimize_png(output_file)
 
     class ContentHandler(xml.sax.ContentHandler):
