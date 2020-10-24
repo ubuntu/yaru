@@ -24,55 +24,67 @@ import subprocess
 import argparse
 
 
-# INKSCAPE = ['/usr/bin/flatpak','run','org.inkscape.Inkscape','--shell']
-INKSCAPE = ['/usr/bin/inkscape','--shell']
-OPTIPNG = '/usr/bin/optipng'
-MAINDIR = '../../Suru'
-# SRC = 'fullcolor'
-SOURCES = ('actions', 'apps', 'categories', 'devices', 'emblems', 'legacy', 'mimetypes', 'places', 'status', 'wip')
+OPTIPNG = "optipng"
+MAINDIR = "../../Suru"
+SOURCES = (
+    "actions",
+    "apps",
+    "categories",
+    "devices",
+    "emblems",
+    "legacy",
+    "mimetypes",
+    "places",
+    "status",
+    "wip",
+)
 
 # DPI multipliers to render at
 DPIS = [1, 2]
 
-inkscape_process = None
 
 def main(args, SRC):
-
     def optimize_png(png_file):
         if os.path.exists(OPTIPNG):
-            process = subprocess.Popen([OPTIPNG, '-quiet', '-o7', png_file])
+            process = subprocess.Popen([OPTIPNG, "-quiet", "-o7", png_file])
             process.wait()
 
     def wait_for_prompt(process, command=None):
         if command is not None:
-            process.stdin.write((command+'\n').encode('utf-8'))
+            process.stdin.write((command + "\n").encode("utf-8"))
 
         # This is kinda ugly ...
         # Wait for just a '>', or '\n>' if some other char appearead first
         output = process.stdout.read(1)
-        if output == b'>':
+        if output == b">":
             return
 
         output += process.stdout.read(1)
-        while output != b'\n>':
+        while output != b"\n>":
             output += process.stdout.read(1)
             output = output[1:]
 
-    def start_inkscape():
-        process = subprocess.Popen(INKSCAPE, bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        wait_for_prompt(process)
-        return process
-
     def inkscape_render_rect(icon_file, rect, dpi, output_file):
-        global inkscape_process
-        if inkscape_process is None:
-            inkscape_process = start_inkscape()
+        cmd = [
+            "inkscape",
+            "--batch-process",
+            "--export-dpi={}".format(str(dpi)),
+            "-i",
+            rect,
+            "--export-filename={}".format(output_file),
+            icon_file,
+        ]
+        ret = subprocess.run(cmd, capture_output=True)
+        if ret.returncode != 0:
+            print("execution of")
+            print('  %s' % "".join(cmd))
+            print("returned with error %d" % ret.returncode)
+            print(5*"=", "stdout", 5*"=")
+            print(ret.stdout.decode())
+            print(5*"=", "stderr", 5*"=")
+            print(ret.stderr.decode())
+            return
 
-        cmd = [icon_file,
-               '--export-dpi', str(dpi),
-               '-i', rect,
-               '-e', output_file]
-        wait_for_prompt(inkscape_process, ' '.join(cmd))
         optimize_png(output_file)
 
     class ContentHandler(xml.sax.ContentHandler):
@@ -81,6 +93,7 @@ def main(args, SRC):
         LAYER = 2
         OTHER = 3
         TEXT = 4
+
         def __init__(self, path, force=False, filter=None):
             self.stack = [self.ROOT]
             self.inside = [self.ROOT]
@@ -101,8 +114,13 @@ def main(args, SRC):
                     self.inside.append(self.SVG)
                     return
             elif self.inside[-1] == self.SVG:
-                if (name == "g" and ('inkscape:groupmode' in attrs) and ('inkscape:label' in attrs)
-                   and attrs['inkscape:groupmode'] == 'layer' and attrs['inkscape:label'].startswith('Baseplate')):
+                if (
+                    name == "g"
+                    and ("inkscape:groupmode" in attrs)
+                    and ("inkscape:label" in attrs)
+                    and attrs["inkscape:groupmode"] == "layer"
+                    and attrs["inkscape:label"].startswith("Baseplate")
+                ):
                     self.stack.append(self.LAYER)
                     self.inside.append(self.LAYER)
                     self.context = None
@@ -110,16 +128,24 @@ def main(args, SRC):
                     self.rects = []
                     return
             elif self.inside[-1] == self.LAYER:
-                if name == "text" and ('inkscape:label' in attrs) and attrs['inkscape:label'] == 'context':
+                if (
+                    name == "text"
+                    and ("inkscape:label" in attrs)
+                    and attrs["inkscape:label"] == "context"
+                ):
                     self.stack.append(self.TEXT)
                     self.inside.append(self.TEXT)
-                    self.text='context'
+                    self.text = "context"
                     self.chars = ""
                     return
-                elif name == "text" and ('inkscape:label' in attrs) and attrs['inkscape:label'] == 'icon-name':
+                elif (
+                    name == "text"
+                    and ("inkscape:label" in attrs)
+                    and attrs["inkscape:label"] == "icon-name"
+                ):
                     self.stack.append(self.TEXT)
                     self.inside.append(self.TEXT)
-                    self.text='icon-name'
+                    self.text = "icon-name"
                     self.chars = ""
                     return
                 elif name == "rect":
@@ -127,17 +153,16 @@ def main(args, SRC):
 
             self.stack.append(self.OTHER)
 
-
         def endElement(self, name):
             stacked = self.stack.pop()
             if self.inside[-1] == stacked:
                 self.inside.pop()
 
             if stacked == self.TEXT and self.text is not None:
-                assert self.text in ['context', 'icon-name']
-                if self.text == 'context':
+                assert self.text in ["context", "icon-name"]
+                if self.text == "context":
                     self.context = self.chars
-                elif self.text == 'icon-name':
+                elif self.text == "icon-name":
                     self.icon_name = self.chars
                 self.text = None
             elif stacked == self.LAYER:
@@ -147,12 +172,12 @@ def main(args, SRC):
                 if self.filter is not None and not self.icon_name in self.filter:
                     return
 
-                print (self.context, self.icon_name)
+                print(self.context, self.icon_name)
                 for rect in self.rects:
                     for dpi_factor in DPIS:
-                        width = int(float(rect['width']))
-                        height = int(float(rect['height']))
-                        id = rect['id']
+                        width = int(float(rect["width"]))
+                        height = int(float(rect["height"]))
+                        id = rect["id"]
                         dpi = 96 * dpi_factor
 
                         size_str = "%sx%s" % (width, height)
@@ -160,60 +185,74 @@ def main(args, SRC):
                             size_str += "@%sx" % dpi_factor
 
                         dir = os.path.join(MAINDIR, size_str, self.context)
-                        outfile = os.path.join(dir, self.icon_name+'.png')
+                        outfile = os.path.join(dir, self.icon_name + ".png")
                         if not os.path.exists(dir):
                             os.makedirs(dir)
                         # Do a time based check!
                         if self.force or not os.path.exists(outfile):
                             inkscape_render_rect(self.path, id, dpi, outfile)
-                            sys.stdout.write('.')
+                            sys.stdout.write(".")
                         else:
                             stat_in = os.stat(self.path)
                             stat_out = os.stat(outfile)
                             if stat_in.st_mtime > stat_out.st_mtime:
                                 inkscape_render_rect(self.path, id, dpi, outfile)
-                                sys.stdout.write('.')
+                                sys.stdout.write(".")
                             else:
-                                sys.stdout.write('-')
+                                sys.stdout.write("-")
                         sys.stdout.flush()
-                sys.stdout.write('\n')
+                sys.stdout.write("\n")
                 sys.stdout.flush()
 
         def characters(self, chars):
             self.chars += chars.strip()
 
-
     if not args.svg:
+        print("Rendering all SVGs in", SRC)
         if not os.path.exists(MAINDIR):
             os.mkdir(MAINDIR)
-        print ('')
-        print ('Rendering from SVGs in', SRC)
-        print ('')
+
         for file in os.listdir(SRC):
-            if file[-4:] == '.svg':
+            if file[-4:] == ".svg":
                 file = os.path.join(SRC, file)
                 handler = ContentHandler(file)
                 xml.sax.parse(open(file), handler)
-        print ('')
+        print("")
     else:
-        file = os.path.join(SRC, args.svg + '.svg')
+        svg = args.svg + ".svg"
+        file = os.path.join(SRC, svg)
 
-        if os.path.exists(os.path.join(file)):
+        if os.path.exists(file):
+            print('Rendering SVG "%s" in %s' % (svg, SRC))
             handler = ContentHandler(file, True, filter=args.filter)
             xml.sax.parse(open(file), handler)
         else:
+            print(
+                'Could not find SVG "%s" in %s, looking into the next one' % (svg, SRC)
+            )
             # icon not in this directory, try the next one
             pass
 
-parser = argparse.ArgumentParser(description='Render icons from SVG to PNG')
 
-parser.add_argument('svg', type=str, nargs='?', metavar='SVG',
-                    help="Optional SVG names (without extensions) to render. If not given, render all icons")
-parser.add_argument('filter', type=str, nargs='?', metavar='FILTER',
-                    help="Optional filter for the SVG file")
+parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
+
+parser.add_argument(
+    "svg",
+    type=str,
+    nargs="?",
+    metavar="SVG",
+    help="Optional SVG names (without extensions) to render. If not given, render all icons",
+)
+parser.add_argument(
+    "filter",
+    type=str,
+    nargs="?",
+    metavar="FILTER",
+    help="Optional filter for the SVG file",
+)
 
 args = parser.parse_args()
 
 for source in SOURCES:
-    SRC = os.path.join('.', source)
+    SRC = os.path.join(".", source)
     main(args, SRC)
