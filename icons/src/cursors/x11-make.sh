@@ -42,6 +42,7 @@ xcursorgen grabbing.in $DIR/$THEME/cursors/fleur
 xcursorgen grabbing.in $DIR/$THEME/cursors/grabbing
 xcursorgen grabbing.in $DIR/$THEME/cursors/size_all
 xcursorgen hand1.in $DIR/$THEME/cursors/hand1
+xcursorgen hand1.in $DIR/$THEME/cursors/grab
 xcursorgen hand2.in $DIR/$THEME/cursors/hand2
 xcursorgen hand2.in $DIR/$THEME/cursors/pointer
 xcursorgen left_ptr.in $DIR/$THEME/cursors/left_ptr
@@ -74,6 +75,7 @@ xcursorgen ul_angle.in $DIR/$THEME/cursors/ul_angle
 xcursorgen ur_angle.in $DIR/$THEME/cursors/ur_angle
 xcursorgen vertical-text.in $DIR/$THEME/cursors/vertical-text
 xcursorgen watch.in $DIR/$THEME/cursors/watch
+xcursorgen watch.in $DIR/$THEME/cursors/wait
 xcursorgen X_cursor.in $DIR/$THEME/cursors/X_cursor
 xcursorgen xterm.in $DIR/$THEME/cursors/xterm
 xcursorgen zoom-in.in $DIR/$THEME/cursors/zoom-in
