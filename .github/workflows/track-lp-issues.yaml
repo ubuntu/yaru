@@ -22,34 +22,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install launchpadlib
-      - name: Download Yaru bugs from Launchpad
+      - name: Mirror Yaru bugs from Launchpad
         id: getlpbugs
         run: |
-          hasModif="false"
-          hasNew="false"
+          python .github/lpbugtracker.py
 
-          python .github/lpbugtracker.py --get-lp-bugs --destination ${LP_BUGS}
-          python .github/lpbugtracker.py --diff-bugs --source ${LP_BUGS} --destination ${DIFF_BUGS}
-
-          rm -f ${YARU_BUGS}
-          cp -a ${LP_BUGS} ${YARU_BUGS}
-          [[ $(diff -q ${YARU_BUGS} ${LP_BUGS} 2>/dev/null) != 0 ]] && hasModif="true"
-          echo "::set-output name=modified::${hasModif}"
-
-          [ -f ${DIFF_BUGS} ] && hasNew="true"
-          echo "::set-output name=new::${hasNew}"
         env:
-          YARU_BUGS: launchpad/yaru_lp_bugs.json
-          LP_BUGS: /tmp/lpbugs.json
-          DIFF_BUGS: /tmp/diffbugs.json
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create or update Pull Request
-        if: steps.getlpbugs.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v2
-        with:
-          commit-message: Update LP bug list
-          title: Auto update list of Yaru bugs on Launchpad
-          labels: automated pr, launchpad
-          body: "The list of Yaru bugs on Launchpad on launchpad/yaru_lp_bugs.json was updated."
-          branch: launchpad-tracker-update
-          token: ${{ secrets.GITHUB_TOKEN }}
