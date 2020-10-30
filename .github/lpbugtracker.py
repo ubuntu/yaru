@@ -2,100 +2,40 @@
 # -*- coding: utf-8 -*-
 # vi: set ft=python :
 """
-LP Bug Tracker uses launchpadlib to get the Yaru-theme bugs.
+Launchpad Bug Tracker uses launchpadlib to get the Yaru-theme bugs.
 The first time, the full list is saved in a json file.
-The next times, the newly get list of LP yaru-theme bugs are compared with the ones
+The next times, the newly get list of Launchpad yaru-theme bugs are compared with the ones
 stored in the json file to show if any new issue was created since last check.
 """
 
 import os
-import json
-import argparse
 import subprocess
+import logging
 from launchpadlib.launchpad import Launchpad
 
+log = logging.getLogger("lpbugtracker")
+log.setLevel(logging.DEBUG)
+
+HUB = ".github/hub"
 HOME = os.path.expanduser("~")
 CACHEDIR = os.path.join(HOME, ".launchpadlib", "cache")
-YARU_LP_BUGS_FILE = "yaru_lp_bugs.json"
-YARU_LP_BUGS_DIR = "launchpad"
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--get-lp-bugs", action="store_true", help="get Yaru active bugs on Launchpad"
-    )
-    parser.add_argument(
-        "--diff-bugs",
-        action="store_true",
-        help="compare bug lists and save the new bugs.",
-    )
-    parser.add_argument("--destination", help="json file path to save a bug list")
-    parser.add_argument("--source", help="json file path containing a bug list to read")
-
-    args = parser.parse_args()
-
-    if args.get_lp_bugs:
-        get_lp_bugs(args.destination)
-
-    if args.diff_bugs:
-        diff_bugs(args.source, args.destination)
-
-
-def create_issue(id, title, weblink):
-    """ Create a new Bug using HUB """
-    subprocess.run(
-        [
-            ".github/hub",
-            "issue",
-            "create",
-            "--message",
-            "LP#{} {}".format(id, title),
-            "--message",
-            "Reported first on Launchpad at {}".format(weblink),
-            "-l",
-            "Launchpad"
-        ]
-    )
-
-
-def get_lp_bugs(dest):
-    """ Get LP active bugs and save in dest as json file """
-    bugs = get_yaru_launchpad_bugs()
-    if not dest:
-        dest = YARU_LP_BUGS_FILE
-    elif os.path.isdir(dest):
-        dest = os.path.join(dest, YARU_LP_BUGS_FILE)
-
-    save_bug_list(bugs, dest)
-
-
-def diff_bugs(source, destination):
-    """Reads a list of bugs from the {source} json file,
-    compares them with the ones stored in Yaru repo and
-    save the list of the untracked bugs as json file in
-    {destination}."""
-
-    bugs_ref = get_bug_list(source)
-    if not bugs_ref:
-        print("[!] cannot find bugs in %s" % source)
+    lp_bugs = get_yaru_launchpad_bugs()
+    if len(lp_bugs) == 0:
         return
 
-    bugs_stored = get_bug_list(os.path.join(YARU_LP_BUGS_DIR, YARU_LP_BUGS_FILE))
-    bugs_diff = {}
-    for id in bugs_ref:
-        if bugs_stored.get(id, None) is None:
-            print("Untracked LP bug: %s - %s" % (id, bugs_ref[id]["title"]))
-            bugs_diff[id] = bugs_ref[id]
+    gh_tracked_lp_bugs = get_gh_bugs()
 
-    if len(bugs_diff):
-        # save_bug_list(bugs_diff, destination)
-        for id, data in bugs_diff.items():
-            create_issue(id, data["title"], data["link"])
+    for id in lp_bugs:
+        tag = "LP#%s" % id
+        if tag not in gh_tracked_lp_bugs:
+            create_issue(id, lp_bugs[id]["title"], lp_bugs[id]["link"])
 
 
 def get_yaru_launchpad_bugs():
-    """Get a list of active bugs from Launchpad"""
+    """Get a list of Yaru bugs from Launchpad"""
 
     lp = Launchpad.login_anonymously(
         "Yaru LP bug checker", "production", CACHEDIR, version="devel"
@@ -119,18 +59,41 @@ def get_yaru_launchpad_bugs():
     return bugs
 
 
-def save_bug_list(bugs, destination):
-    with open(destination, "w") as f:
-        f.write(json.dumps(bugs, indent=2))
+def get_gh_bugs():
+    """Get the list of the LP bug already tracked in GitHub.
+
+    Launchpad bugs tracked on GitHub have a title like
+
+    "LP#<id> <title>"
+
+    this function returns a list of the "LP#<id>" substring for each bug,
+    open or closed, found on Yaru repository on GitHub.
+    """
+
+    output = subprocess.check_output(
+        [HUB, "issue", "--labels", "Launchpad", "--state", "all"]
+    )
+    return [
+        line.strip().split()[1] for line in output.decode().split("\n") if "LP#" in line
+    ]
 
 
-def get_bug_list(source):
-    try:
-        with open(source, "r") as f:
-            bugs = json.loads(f.read())
-    except FileNotFoundError:
-        bugs = {}
-    return bugs
+def create_issue(id, title, weblink):
+    """ Create a new Bug using HUB """
+    print("creating:", id, title, weblink)
+    subprocess.run(
+        [
+            HUB,
+            "issue",
+            "create",
+            "--message",
+            "LP#{} {}".format(id, title),
+            "--message",
+            "Reported first on Launchpad at {}".format(weblink),
+            "-l",
+            "Launchpad",
+        ]
+    )
 
 
 if __name__ == "__main__":
