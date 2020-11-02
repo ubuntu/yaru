@@ -199,7 +199,7 @@
     $button_fill: if($c == $bg_color, if($variant == 'light', image(lighten($c, 2%)), image(lighten($c, 4%))), image(lighten($c, 2%))) !global;
     background-image: $button_fill;
     @include _button_text_shadow($tc, $c);
-    @include _shadows(0 1px transparentize(black, 0.9));
+    @include _shadows(0 1px transparentize(black, 0.95));
   }
 
   @else if $t==hover {
@@ -220,7 +220,7 @@
       @include _button_text_shadow($tc,lighten($c, 6%));
       @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge, $_button_shadow);
     }
-    box-shadow: 0 1px transparentize(black, if($variant=='light', 0.8, 0.85));
+    box-shadow: 0 1px transparentize(black, if($variant=='light', 0.85, 0.9));
     background-image: if($c == $bg_color, if($variant == 'light', image(lighten($c, 4%)), image(lighten($c, 6%))), image(lighten($c, 4%)));
   }
 
@@ -242,7 +242,7 @@
       @include _shadows(inset 0 1px $_hilight_color,
                         $_button_edge, $_button_shadow);
     }
-    box-shadow: 0 1px transparentize(black, if($variant=='light', 0.8, 0.85));
+    box-shadow: 0 1px transparentize(black, 0.95);
     background-image: image(lighten($c, 10%));
   }
 
@@ -264,7 +264,7 @@
                         $_button_edge, $_button_shadow);
     }
     background-image: image(lighten($c, 6%));
-    box-shadow: 0 1px transparentize(black, 0.8);
+    box-shadow: 0 1px transparentize(black, 0.85);
   }
 
   @else if $t==active {
