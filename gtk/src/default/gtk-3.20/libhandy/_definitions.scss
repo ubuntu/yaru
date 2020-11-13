@@ -1,4 +1,4 @@
-@import 'drawing';
+//@import 'drawing';
 
 @function hdyalpha($c, $a) {
   @return unquote("alpha(#{$c}, #{$a})");
@@ -12,10 +12,10 @@ $leaflet_dimming: rgba(0, 0, 0, if($variant == 'light', 0.12, 0.24));
 $leaflet_border: rgba(0, 0, 0, if($variant == 'light', 0.05, 0.2));
 $leaflet_outline: rgba(255, 255, 255, if($variant == 'light', 0.2, 0.05));
 
-@if $high_contrast {
-  $leaflet_border: $borders_color;
-  $leaflet_outline: transparent;
-}
+//@if $high_contrast {
+//  $leaflet_border: $borders_color;
+//  $leaflet_outline: transparent;
+//}
 
 @mixin background-shadow($direction) {
   background-image:
