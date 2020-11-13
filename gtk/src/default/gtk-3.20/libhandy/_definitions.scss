@@ -1,0 +1,66 @@
+@import 'drawing';
+
+@function hdyalpha($c, $a) {
+  @return unquote("alpha(#{$c}, #{$a})");
+}
+
+@function hdymix($c1, $c2, $r) {
+  @return unquote("mix(#{$c1}, #{$c2}, #{$r})");
+}
+
+$leaflet_dimming: rgba(0, 0, 0, if($variant == 'light', 0.12, 0.24));
+$leaflet_border: rgba(0, 0, 0, if($variant == 'light', 0.05, 0.2));
+$leaflet_outline: rgba(255, 255, 255, if($variant == 'light', 0.2, 0.05));
+
+@if $high_contrast {
+  $leaflet_border: $borders_color;
+  $leaflet_outline: transparent;
+}
+
+@mixin background-shadow($direction) {
+  background-image:
+    linear-gradient($direction,
+                    rgba(0, 0, 0, if($variant == 'light', 0.05, 0.1)),
+                    rgba(0, 0, 0, if($variant == 'light', 0.01, 0.02)) 40px,
+                    rgba(0, 0, 0, 0) 56px),
+    linear-gradient($direction,
+                    rgba(0, 0, 0, if($variant == 'light', 0.03, 0.06)),
+                    rgba(0, 0, 0, if($variant == 'light', 0.01, 0.02)) 7px,
+                    rgba(0, 0, 0, 0) 24px);
+}
+
+// Makes the corners of the given border rounded.
+// $border must be top, bottom, left, or right.
+@mixin rounded-border($border) {
+  // The floors (top, bottom) and walls (left, right) of the corners matching
+  // $border. This is needed to easily form floor-wall pairs regardless of
+  // whether $border is a floor or a wall.
+  $corners: (
+    'top': (('top'), ('left', 'right')),
+    'bottom': (('bottom'), ('left', 'right')),
+    'left': (('top', 'bottom'), ('left')),
+    'right': (('top', 'bottom'), ('right')),
+  );
+
+  @if not map-get($corners, $border) {
+    @error "Unknown border type: #{$border}";
+  }
+
+  // Loop through the floors and walls of the corners of $border.
+  @each $floor in nth(map-get($corners, $border), 1) {
+    @each $wall in nth(map-get($corners, $border), 2) {
+      border-#{$floor}-#{$wall}-radius: 8px;
+      -gtk-outline-#{$floor}-#{$wall}-radius: 7px;
+    }
+  }
+}
+
+@mixin margin-start($margin) {
+  &:dir(ltr) {
+    margin-left: $margin;
+  }
+
+  &:dir(rtl) {
+    margin-right: $margin;
+  }
+}
