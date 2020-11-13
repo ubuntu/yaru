@@ -123,7 +123,7 @@ viewswitcher {
     }
 
     &:not(:checked):hover:backdrop {
-      background-image: image($bg_color);
+      background-image: image($fg_color);
     }
 
     // View switcher in a header bar
@@ -131,7 +131,7 @@ viewswitcher {
       &:hover:not(:backdrop) {
         // Reimplementation of $button_fill from Adwaita. The colors are made
         // only 70% visible to avoid the highlight to be too strong.
-        $c: hdyalpha($bg_color, 0.7);
+        $c: hdyalpha($fg_color, 0.7);
         $button_fill: if($variant == 'light', linear-gradient(to top, shade($c, 0.96) 2px, $c),
                                               linear-gradient(to top, shade($c, 0.99) 2px, $c)) !global;
         background-image: $button_fill;
@@ -148,7 +148,7 @@ viewswitcher {
       }
 
       &:hover:backdrop {
-        background-image: image($bg_color);
+        background-image: image($fg_color);
       }
     }
 
@@ -312,7 +312,7 @@ button.list-button:not(:active):not(:checked):not(:hover) {
 window.csd.unified:not(.solid-csd):not(.fullscreen) {
   // Remove the sheen on headerbar...
   headerbar {
-    box-shadow: inset 0 1px rgba(255, 255, 255, if($variant == 'light', 0.7, 0));
+    // box-shadow: inset 0 1px rgba(255, 255, 255, if($variant == 'light', 0.7, 0)); Yaru: drop headerbar box-shadow overwrite
 
     &.selection-mode {
       box-shadow: none;
@@ -323,7 +323,7 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
   > decoration-overlay {
     // Use a white sheen instead of @borders, as it has to be neutral enough
     // for any content and not just headerbar background
-    box-shadow: inset 0 1px rgba(255, 255, 255, if($variant == 'light', 0.34, 0.065));
+    // box-shadow: inset 0 1px rgba(255, 255, 255, if($variant == 'light', 0.34, 0.065)); Yaru: drop headerbar box-shadow overwrite
   }
 
   &:not(.tiled):not(.tiled-top):not(.tiled-bottom):not(.tiled-left):not(.tiled-right):not(.maximized) {
