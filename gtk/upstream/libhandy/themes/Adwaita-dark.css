@@ -1,0 +1,199 @@
+/*************************** Check and Radio buttons * */
+row label.subtitle { font-size: smaller; opacity: 0.55; text-shadow: none; }
+
+row > box.header { margin-left: 12px; margin-right: 12px; min-height: 50px; }
+
+row > box.header > box.title { margin-top: 8px; margin-bottom: 8px; }
+
+row.expander { background-color: transparent; }
+
+row.expander list.nested > row { background-color: alpha(#353535, 0.5); border-color: alpha(#1b1b1b, 0.7); border-style: solid; border-width: 1px 0px 0px 0px; }
+
+row.expander image.expander-row-arrow { transition: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+row.expander:checked image.expander-row-arrow { -gtk-icon-transform: rotate(0turn); }
+
+row.expander:not(:checked) image.expander-row-arrow { opacity: 0.55; text-shadow: none; }
+
+row.expander:not(:checked) image.expander-row-arrow:dir(ltr) { -gtk-icon-transform: rotate(-0.25turn); }
+
+row.expander:not(:checked) image.expander-row-arrow:dir(rtl) { -gtk-icon-transform: rotate(0.25turn); }
+
+row.expander:checked image.expander-row-arrow:not(:disabled) { color: #15539e; }
+
+row.expander image.expander-row-arrow:disabled { color: #919190; }
+
+deck > dimming, leaflet > dimming { background: rgba(0, 0, 0, 0.24); }
+
+deck > border, leaflet > border { min-width: 1px; min-height: 1px; background: rgba(0, 0, 0, 0.2); }
+
+deck > shadow, leaflet > shadow { min-width: 56px; min-height: 56px; }
+
+deck > shadow.left, leaflet > shadow.left { background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.02) 40px, rgba(0, 0, 0, 0) 56px), linear-gradient(to right, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.02) 7px, rgba(0, 0, 0, 0) 24px); }
+
+deck > shadow.right, leaflet > shadow.right { background-image: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.02) 40px, rgba(0, 0, 0, 0) 56px), linear-gradient(to left, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.02) 7px, rgba(0, 0, 0, 0) 24px); }
+
+deck > shadow.up, leaflet > shadow.up { background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.02) 40px, rgba(0, 0, 0, 0) 56px), linear-gradient(to bottom, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.02) 7px, rgba(0, 0, 0, 0) 24px); }
+
+deck > shadow.down, leaflet > shadow.down { background-image: linear-gradient(to top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.02) 40px, rgba(0, 0, 0, 0) 56px), linear-gradient(to top, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.02) 7px, rgba(0, 0, 0, 0) 24px); }
+
+deck > outline, leaflet > outline { min-width: 1px; min-height: 1px; background: rgba(255, 255, 255, 0.05); }
+
+avatar { border-radius: 9999px; -gtk-outline-radius: 9999px; font-weight: bold; }
+
+avatar.color1 { background-image: linear-gradient(#83b6ec, #337fdc); color: #cfe1f5; }
+
+avatar.color2 { background-image: linear-gradient(#7ad9f1, #0f9ac8); color: #caeaf2; }
+
+avatar.color3 { background-image: linear-gradient(#8de6b1, #29ae74); color: #cef8d8; }
+
+avatar.color4 { background-image: linear-gradient(#b5e98a, #6ab85b); color: #e6f9d7; }
+
+avatar.color5 { background-image: linear-gradient(#f8e359, #d29d09); color: #f9f4e1; }
+
+avatar.color6 { background-image: linear-gradient(#ffcb62, #d68400); color: #ffead1; }
+
+avatar.color7 { background-image: linear-gradient(#ffa95a, #ed5b00); color: #ffe5c5; }
+
+avatar.color8 { background-image: linear-gradient(#f78773, #e62d42); color: #f8d2ce; }
+
+avatar.color9 { background-image: linear-gradient(#e973ab, #e33b6a); color: #fac7de; }
+
+avatar.color10 { background-image: linear-gradient(#cb78d4, #9945b5); color: #e7c2e8; }
+
+avatar.color11 { background-image: linear-gradient(#9e91e8, #7a59ca); color: #d5d2f5; }
+
+avatar.color12 { background-image: linear-gradient(#e3cf9c, #b08952); color: #f2eade; }
+
+avatar.color13 { background-image: linear-gradient(#be916d, #785336); color: #e5d6ca; }
+
+avatar.color14 { background-image: linear-gradient(#c0bfbc, #6e6d71); color: #d8d7d3; }
+
+avatar.contrasted { color: #fff; }
+
+avatar.image { background: none; }
+
+viewswitchertitle viewswitcher { margin-left: 12px; margin-right: 12px; }
+
+/*************************** Check and Radio buttons * */
+popover.combo list { min-width: 200px; }
+
+window.csd.unified:not(.solid-csd) headerbar { border-radius: 0; }
+
+.windowhandle, .windowhandle * { -GtkWidget-window-dragging: true; }
+
+popover.combo { padding: 0px; }
+
+popover.combo list { border-style: none; background-color: transparent; }
+
+popover.combo list > row { padding: 0px 12px 0px 12px; min-height: 50px; }
+
+popover.combo list > row:not(:last-child) { border-bottom: 1px solid alpha(#1b1b1b, 0.5); }
+
+popover.combo list > row:first-child { border-top-left-radius: 8px; -gtk-outline-top-left-radius: 7px; border-top-right-radius: 8px; -gtk-outline-top-right-radius: 7px; }
+
+popover.combo list > row:last-child { border-bottom-left-radius: 8px; -gtk-outline-bottom-left-radius: 7px; border-bottom-right-radius: 8px; -gtk-outline-bottom-right-radius: 7px; }
+
+popover.combo overshoot.top { border-top-left-radius: 8px; -gtk-outline-top-left-radius: 7px; border-top-right-radius: 8px; -gtk-outline-top-right-radius: 7px; }
+
+popover.combo overshoot.bottom { border-bottom-left-radius: 8px; -gtk-outline-bottom-left-radius: 7px; border-bottom-right-radius: 8px; -gtk-outline-bottom-right-radius: 7px; }
+
+popover.combo scrollbar.vertical { padding-top: 2px; padding-bottom: 2px; }
+
+popover.combo scrollbar.vertical:dir(ltr) { border-top-right-radius: 8px; -gtk-outline-top-right-radius: 7px; border-bottom-right-radius: 8px; -gtk-outline-bottom-right-radius: 7px; }
+
+popover.combo scrollbar.vertical:dir(rtl) { border-top-left-radius: 8px; -gtk-outline-top-left-radius: 7px; border-bottom-left-radius: 8px; -gtk-outline-bottom-left-radius: 7px; }
+
+row.expander { padding: 0px; }
+
+row.expander image.expander-row-arrow:dir(ltr) { margin-left: 6px; }
+
+row.expander image.expander-row-arrow:dir(rtl) { margin-right: 6px; }
+
+keypad .digit { font-size: 200%; font-weight: bold; }
+
+keypad .letters { font-size: 70%; }
+
+keypad .symbol { font-size: 160%; }
+
+viewswitcher, viewswitcher button { margin: 0; padding: 0; }
+
+viewswitcher button { border-radius: 0; border-top: 0; border-bottom: 0; box-shadow: none; font-size: 1rem; }
+
+viewswitcher button:not(:checked):not(:hover) { background: transparent; }
+
+viewswitcher button:not(:only-child):not(:last-child) { border-right-width: 0px; }
+
+viewswitcher button:not(only-child):first-child:not(:checked):not(:hover), viewswitcher button:not(:checked):not(:hover) + button:not(:checked):not(:hover) { border-left-color: transparent; }
+
+viewswitcher button:not(only-child):last-child:not(:checked):not(:hover) { border-right-color: transparent; }
+
+viewswitcher button:not(:checked):hover:not(:backdrop) { background-image: image(lighter(#353535)); }
+
+viewswitcher button:not(only-child):first-child:not(:checked):hover, viewswitcher button:not(:checked):hover + button:not(:checked):not(:hover), viewswitcher button:not(:checked):not(:hover) + button:not(:checked):hover { border-left-color: shade(#1b1b1b, 1.15); }
+
+viewswitcher button:not(only-child):last-child:not(:checked):hover { border-right-color: shade(#1b1b1b, 1.15); }
+
+viewswitcher button:not(:checked):hover:backdrop { background-image: image(#353535); }
+
+headerbar viewswitcher button:not(:checked):hover:not(:backdrop) { background-image: linear-gradient(to top, shade(alpha(#353535, 0.7), 0.99) 2px, alpha(#353535, 0.7)); }
+
+headerbar viewswitcher button:not(:checked):not(only-child):first-child:hover, headerbar viewswitcher button:not(:checked):hover + button:not(:checked):not(:hover), headerbar viewswitcher button:not(:checked):not(:hover) + button:not(:checked):hover { border-left-color: #1b1b1b; }
+
+headerbar viewswitcher button:not(:checked):not(only-child):last-child:hover { border-right-color: #1b1b1b; }
+
+headerbar viewswitcher button:not(:checked):hover:backdrop { background-image: image(#353535); }
+
+viewswitcher button > stack > box.narrow { font-size: 0.75rem; padding-top: 7px; padding-bottom: 5px; }
+
+viewswitcher button > stack > box.narrow image, viewswitcher button > stack > box.narrow label { padding-left: 8px; padding-right: 8px; }
+
+viewswitcher button > stack > box.wide { padding: 8px 12px; }
+
+viewswitcher button > stack > box.wide label:dir(ltr) { padding-right: 7px; }
+
+viewswitcher button > stack > box.wide label:dir(rtl) { padding-left: 7px; }
+
+viewswitcher button > stack > box label.active { font-weight: bold; }
+
+viewswitcher button.needs-attention:active > stack > box label, viewswitcher button.needs-attention:checked > stack > box label { animation: none; background-image: none; }
+
+viewswitcher button.needs-attention > stack > box label { animation: needs_attention 150ms ease-in; background-image: -gtk-gradient(radial, center center, 0, center center, 0.5, to(#3584e4), to(transparent)), -gtk-gradient(radial, center center, 0, center center, 0.5, to(rgba(255, 255, 255, 0.769231)), to(transparent)); background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; background-position: right 0px, right 1px; }
+
+viewswitcher button.needs-attention > stack > box label:backdrop { background-size: 6px 6px, 0 0; }
+
+viewswitcher button.needs-attention > stack > box label:dir(rtl) { background-position: left 0px, left 1px; }
+
+viewswitcherbar actionbar > revealer > box { padding: 0; }
+
+list.content, list.content list { background-color: transparent; }
+
+list.content list.nested > row:not(:active):not(:hover):not(:selected), list.content list.nested > row:not(:active):hover:not(.activatable):not(:selected) { background-color: mix(#353535, #2d2d2d, 0.5); }
+
+list.content list.nested > row.activatable:not(:active):hover:not(:selected) { background-color: mix(#eeeeec, #2d2d2d, 0.95); }
+
+list.content > row:not(.expander):not(:active):not(:hover):not(:selected), list.content > row:not(.expander):not(:active):hover:not(.activatable):not(:selected), list.content > row.expander row.header:not(:active):not(:hover):not(:selected), list.content > row.expander row.header:not(:active):hover:not(.activatable):not(:selected) { background-color: #2d2d2d; }
+
+list.content > row.activatable:not(.expander):not(:active):hover:not(:selected), list.content > row.expander row.header.activatable:not(:active):hover:not(:selected) { background-color: mix(#eeeeec, #2d2d2d, 0.95); }
+
+list.content > row, list.content > row list > row { border-color: alpha(#1b1b1b, 0.7); border-style: solid; transition: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+list.content > row:not(:last-child) { border-width: 1px 1px 0px 1px; }
+
+list.content > row:first-child, list.content > row.expander:first-child row.header, list.content > row.expander:checked, list.content > row.expander:checked row.header, list.content > row.expander:checked + row, list.content > row.expander:checked + row.expander row.header { border-top-left-radius: 8px; -gtk-outline-top-left-radius: 7px; border-top-right-radius: 8px; -gtk-outline-top-right-radius: 7px; }
+
+list.content > row:last-child, list.content > row.checked-expander-row-previous-sibling, list.content > row.expander:checked { border-width: 1px; }
+
+list.content > row:last-child, list.content > row.checked-expander-row-previous-sibling, list.content > row.expander:checked, list.content > row.expander:not(:checked):last-child row.header, list.content > row.expander.checked-expander-row-previous-sibling:not(:checked) row.header, list.content > row.expander.empty:checked row.header, list.content > row.expander list.nested > row:last-child { border-bottom-left-radius: 8px; -gtk-outline-bottom-left-radius: 7px; border-bottom-right-radius: 8px; -gtk-outline-bottom-right-radius: 7px; }
+
+list.content > row.expander:checked:not(:first-child), list.content > row.expander:checked + row { margin-top: 6px; }
+
+button.list-button:not(:active):not(:checked):not(:hover) { background: none; border: 1px solid alpha(#1b1b1b, 0.5); box-shadow: none; }
+
+window.csd.unified:not(.solid-csd):not(.fullscreen) headerbar { box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
+
+window.csd.unified:not(.solid-csd):not(.fullscreen) headerbar.selection-mode { box-shadow: none; }
+
+window.csd.unified:not(.solid-csd):not(.fullscreen) > decoration-overlay { box-shadow: inset 0 1px rgba(255, 255, 255, 0.065); }
+
+window.csd.unified:not(.solid-csd):not(.fullscreen):not(.tiled):not(.tiled-top):not(.tiled-bottom):not(.tiled-left):not(.tiled-right):not(.maximized), window.csd.unified:not(.solid-csd):not(.fullscreen):not(.tiled):not(.tiled-top):not(.tiled-bottom):not(.tiled-left):not(.tiled-right):not(.maximized) > decoration, window.csd.unified:not(.solid-csd):not(.fullscreen):not(.tiled):not(.tiled-top):not(.tiled-bottom):not(.tiled-left):not(.tiled-right):not(.maximized) > decoration-overlay { border-radius: 8px; }

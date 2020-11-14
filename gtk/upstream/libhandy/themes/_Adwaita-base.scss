@@ -1,0 +1,336 @@
+// Include base styling.
+@import 'fallback-base';
+@import 'shared-base';
+
+// HdyComboRow
+
+popover.combo {
+  padding: 0px;
+
+  list {
+    border-style: none;
+    background-color: transparent;
+
+    > row {
+      padding: 0px 12px 0px 12px;
+      min-height: 50px;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid hdyalpha($borders_color, 0.5)
+      }
+
+      &:first-child {
+        @include rounded-border(top);
+      }
+
+      &:last-child {
+        @include rounded-border(bottom);
+      }
+    }
+  }
+
+  @each $border in top, bottom {
+    overshoot.#{$border} {
+      @include rounded-border($border);
+    }
+  }
+
+  scrollbar.vertical {
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    &:dir(ltr) {
+      @include rounded-border(right);
+    }
+
+    &:dir(rtl) {
+      @include rounded-border(left);
+    }
+  }
+}
+
+// HdyExpanderRow
+
+row.expander {
+  padding: 0px;
+
+  image.expander-row-arrow {
+    @include margin-start(6px);
+  }
+}
+
+// HdyKeypad
+
+keypad {
+  .digit {
+    font-size: 200%;
+    font-weight: bold;
+  }
+
+  .letters {
+    font-size: 70%;
+  }
+
+  .symbol {
+    font-size: 160%;
+  }
+}
+
+// HdyViewSwitcher
+
+viewswitcher {
+  &, & button {
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    border-radius: 0;
+    border-top: 0;
+    border-bottom: 0;
+    box-shadow: none;
+    font-size: 1rem;
+
+    &:not(:checked):not(:hover) {
+      background: transparent;
+    }
+
+    &:not(:only-child):not(:last-child) {
+      border-right-width: 0px;
+    }
+
+    &:not(only-child):first-child:not(:checked):not(:hover),
+    &:not(:checked):not(:hover) + button:not(:checked):not(:hover) {
+      border-left-color: transparent;
+    }
+
+    &:not(only-child):last-child:not(:checked):not(:hover) {
+      border-right-color: transparent;
+    }
+
+    &:not(:checked):hover:not(:backdrop) {
+      background-image: image(lighter($bg_color));
+    }
+
+    &:not(only-child):first-child:not(:checked):hover,
+    &:not(:checked):hover + button:not(:checked):not(:hover),
+    &:not(:checked):not(:hover) + button:not(:checked):hover {
+      border-left-color: shade($borders_color, 1.15);
+    }
+
+    &:not(only-child):last-child:not(:checked):hover {
+      border-right-color: shade($borders_color, 1.15);
+    }
+
+    &:not(:checked):hover:backdrop {
+      background-image: image($bg_color);
+    }
+
+    // View switcher in a header bar
+    headerbar &:not(:checked) {
+      &:hover:not(:backdrop) {
+        // Reimplementation of $button_fill from Adwaita. The colors are made
+        // only 70% visible to avoid the highlight to be too strong.
+        $c: hdyalpha($bg_color, 0.7);
+        $button_fill: if($variant == 'light', linear-gradient(to top, shade($c, 0.96) 2px, $c),
+                                              linear-gradient(to top, shade($c, 0.99) 2px, $c)) !global;
+        background-image: $button_fill;
+      }
+
+      &:not(only-child):first-child:hover,
+      &:hover + button:not(:checked):not(:hover),
+      &:not(:hover) + button:not(:checked):hover {
+        border-left-color: $borders_color;
+      }
+
+      &:not(only-child):last-child:hover {
+        border-right-color: $borders_color;
+      }
+
+      &:hover:backdrop {
+        background-image: image($bg_color);
+      }
+    }
+
+    // View switcher button
+    > stack > box {
+      &.narrow {
+        font-size: 0.75rem;
+        padding-top: 7px;
+        padding-bottom: 5px;
+
+        image,
+        label {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+      }
+
+      &.wide {
+        padding: 8px 12px;
+
+        label {
+          &:dir(ltr) {
+            padding-right: 7px;
+          }
+
+          &:dir(rtl) {
+            padding-left: 7px;
+          }
+        }
+      }
+
+      label.active {
+        font-weight: bold;
+      }
+    }
+
+    &.needs-attention {
+      &:active > stack > box label,
+      &:checked > stack > box label {
+        animation: none;
+        background-image: none;
+      }
+
+      > stack > box label {
+        animation: needs_attention 150ms ease-in;
+        background-image: -gtk-gradient(radial, center center, 0, center center, 0.5, to(#3584e4), to(transparent)), -gtk-gradient(radial, center center, 0, center center, 0.5, to(rgba(255, 255, 255, 0.769231)), to(transparent));
+        background-size: 6px 6px, 6px 6px;
+        background-repeat: no-repeat;
+        background-position: right 0px, right 1px;
+
+        &:backdrop {
+          background-size: 6px 6px, 0 0;
+        }
+
+        &:dir(rtl) {
+          background-position: left 0px, left 1px;
+        }
+      }
+    }
+  }
+}
+
+// HdyViewSwitcherBar
+
+viewswitcherbar actionbar > revealer > box {
+  padding: 0;
+}
+
+// Content list
+
+list.content {
+  &,
+  list {
+    background-color: transparent;
+  }
+
+  // Nested rows background
+  list.nested > row:not(:active) {
+    &:not(:hover):not(:selected),
+    &:hover:not(.activatable):not(:selected) {
+      background-color: hdymix($bg_color, $base_color, 0.5);
+    }
+
+    &:hover.activatable:not(:selected) {
+      background-color: hdymix($fg_color, $base_color, 0.95);
+    }
+  }
+
+  > row {
+    // Regular rows and expander header rows background
+    &:not(.expander):not(:active):not(:hover):not(:selected),
+    &:not(.expander):not(:active):hover:not(.activatable):not(:selected),
+    &.expander row.header:not(:active):not(:hover):not(:selected),
+    &.expander row.header:not(:active):hover:not(.activatable):not(:selected) {
+      background-color: $base_color;
+    }
+
+    &:not(.expander):not(:active):hover.activatable:not(:selected),
+    &.expander row.header:not(:active):hover.activatable:not(:selected) {
+      background-color: hdymix($fg_color, $base_color, 0.95);
+    }
+
+    &,
+    list > row {
+      border-color: hdyalpha($borders_color, 0.7);
+      border-style: solid;
+      transition: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    // Top border
+    &:not(:last-child) {
+      border-width: 1px 1px 0px 1px;
+    }
+
+    // Rounded top
+    &:first-child,
+    &.expander:first-child row.header,
+    &.expander:checked,
+    &.expander:checked row.header,
+    &.expander:checked + row,
+    &.expander:checked + row.expander row.header {
+      @include rounded-border(top);
+    }
+
+    // Bottom border
+    &:last-child,
+    &.checked-expander-row-previous-sibling,
+    &.expander:checked {
+      border-width: 1px;
+    }
+
+    // Rounded bottom
+    &:last-child,
+    &.checked-expander-row-previous-sibling,
+    &.expander:checked,
+    &.expander:not(:checked):last-child row.header,
+    &.expander:not(:checked).checked-expander-row-previous-sibling row.header,
+    &.expander.empty:checked row.header,
+    &.expander list.nested > row:last-child {
+      @include rounded-border(bottom);
+    }
+
+    // Add space around expanded rows
+    &.expander:checked:not(:first-child),
+    &.expander:checked + row {
+      margin-top: 6px;
+    }
+  }
+}
+
+// List button
+
+button.list-button:not(:active):not(:checked):not(:hover) {
+  background: none;
+  border: 1px solid hdyalpha($borders_color, 0.5);
+  box-shadow: none;
+}
+
+// Unified window
+
+window.csd.unified:not(.solid-csd):not(.fullscreen) {
+  // Remove the sheen on headerbar...
+  headerbar {
+    box-shadow: inset 0 1px rgba(255, 255, 255, if($variant == 'light', 0.7, 0));
+
+    &.selection-mode {
+      box-shadow: none;
+    }
+  }
+
+  // ...and add it on the window itself
+  > decoration-overlay {
+    // Use a white sheen instead of @borders, as it has to be neutral enough
+    // for any content and not just headerbar background
+    box-shadow: inset 0 1px rgba(255, 255, 255, if($variant == 'light', 0.34, 0.065));
+  }
+
+  &:not(.tiled):not(.tiled-top):not(.tiled-bottom):not(.tiled-left):not(.tiled-right):not(.maximized) {
+    &,
+    > decoration,
+    > decoration-overlay {
+      border-radius: 8px;
+    }
+  }
+}
