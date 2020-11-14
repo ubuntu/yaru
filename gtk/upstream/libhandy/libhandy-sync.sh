@@ -48,10 +48,23 @@ root=https://gitlab.gnome.org/GNOME/libhandy/-/raw/master/src/themes/
 # [ ! -d ${_destination} ] && echo ${_destination} folder does not exists && exit 1
 
 files=(
+    Adwaita-dark.css
+    Adwaita-dark.scss
+    Adwaita.css
+    Adwaita.scss
+    HighContrast.css
+    HighContrast.scss
+    HighContrastInverse.css
+    HighContrastInverse.scss
     _Adwaita-base.scss
     _definitions.scss
     _fallback-base.scss
     _shared-base.scss
+    fallback.css
+    fallback.scss
+    parse-sass.sh
+    shared.css
+    shared.scss
 )
 
 set -e
