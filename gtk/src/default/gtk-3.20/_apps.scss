@@ -16,6 +16,10 @@ $ambiance: null !default;
    * Nautilus *
    ***********/
   .nautilus-window {
+    .nautilus-canvas-item.dim-label,
+    .nautilus-list-dim-label {
+        color: mix($text_color, $base_color);
+    }
     // keep details box visible
     // details box looks ugly when many items are selected and it floats above the orange
     background-image: none;
@@ -129,6 +133,7 @@ $ambiance: null !default;
       &:selected:not(:backdrop) {
         &:dir(ltr) { background-color: $selected_bg_color; }
         &:not(:dir(ltr)) { background-color: rgba(175, 175, 175, 0.5); }
+        color: $backdrop_selected_fg_color;
       }
 
       &:backdrop:selected {
