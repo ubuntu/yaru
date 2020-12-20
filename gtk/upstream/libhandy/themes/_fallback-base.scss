@@ -69,6 +69,7 @@ row.expander {
 
 // Shadows
 
+flap,
 deck,
 leaflet {
   > dimming {
@@ -146,3 +147,26 @@ viewswitchertitle viewswitcher {
   margin-left: 12px;
   margin-right: 12px;
 }
+
+// HdyStatusPage
+
+statuspage > scrolledwindow > viewport > box {
+  margin: 36px 12px;
+
+  > clamp > box {
+    > .icon {
+      margin-bottom: 36px;
+      opacity: 0.5;
+    }
+
+    > .title {
+      margin-bottom: 12px;
+    }
+
+    > .description {
+      margin-bottom: 36px;
+    }
+  }
+}
+
+
