@@ -44,6 +44,7 @@ ${GEN} grabbing$s.in $DIR/$THEME/cursors/grabbing.cur
 ${GEN} grabbing$s.in $DIR/$THEME/cursors/fleur.cur
 ${GEN} grabbing$s.in $DIR/$THEME/cursors/size_all.cur
 ${GEN} hand1$s.in $DIR/$THEME/cursors/hand1.cur
+${GEN} hand1$s.in $DIR/$THEME/cursors/grab.cur
 ${GEN} hand2$s.in $DIR/$THEME/cursors/hand2.cur
 ${GEN} hand2$s.in $DIR/$THEME/cursors/pointer.cur
 ${GEN} left_ptr$s.in $DIR/$THEME/cursors/left_ptr.cur
@@ -75,6 +76,7 @@ ${GEN} ul_angle$s.in $DIR/$THEME/cursors/ul_angle.cur
 ${GEN} ur_angle$s.in $DIR/$THEME/cursors/ur_angle.cur
 ${GEN} vertical-text$s.in $DIR/$THEME/cursors/vertical-text.cur
 ${GEN} watch$s.in $DIR/$THEME/cursors/watch.ani
+${GEN} watch$s.in $DIR/$THEME/cursors/wait.ani
 ${GEN} X_cursor$s.in $DIR/$THEME/cursors/X_cursor.cur
 ${GEN} xterm$s.in $DIR/$THEME/cursors/xterm.cur
 ${GEN} zoom-in$s.in $DIR/$THEME/cursors/zoom-in.cur
