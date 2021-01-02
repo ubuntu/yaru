@@ -1,0 +1,9 @@
+// Fix for Libhandy headerbar sidebar separator
+
+.windowhandle separator.sidebar.vertical {
+    background: image(lighten($_button_border_color, 5%));
+
+    &:backdrop {
+      background: image($_backdrop_button_border_color);
+    }
+}
