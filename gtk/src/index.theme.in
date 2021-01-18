@@ -1,9 +1,13 @@
-[X-GNOME-Metatheme]
-Name=@FlavourThemeName@
+[Desktop Entry]
 Type=X-GNOME-Metatheme
+Name=@FlavourThemeName@
 Comment=Ubuntu @FlavourThemeName@ theme
 Encoding=UTF-8
+
+[X-GNOME-Metatheme]
 GtkTheme=@FlavourThemeName@
+MetacityTheme=@FlavourThemeName@
 IconTheme=@ThemeName@
 CursorTheme=@ThemeName@
 CursorSize=24
+ButtonLayout=:minimize,maximize,close
