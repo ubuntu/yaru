@@ -19,14 +19,6 @@ foreach flavour: flavours
   conf_data.set('ThemeName', theme_name)
   conf_data.set('FlavourThemeName', theme_name)
 
-  if suffix == '-dark'
-    conf_data.set('IconName', 'Ambiant-MATE')
-  elif suffix == '-light'
-    conf_data.set('IconName', 'Radiant-MATE')
-  else
-    conf_data.set('IconName', 'Radiant-MATE')
-  endif
-
   configure_file(input: 'index.theme.in',
     output: '@0@-index.theme'.format(theme_name),
     configuration: conf_data,
