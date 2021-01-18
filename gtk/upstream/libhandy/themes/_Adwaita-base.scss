@@ -334,3 +334,13 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
     }
   }
 }
+
+// HdyStatusPage
+
+statuspage > scrolledwindow > viewport > box > clamp > box > .icon {
+  color: transparentize($fg_color, 0.5);
+
+  &:backdrop {
+    color: transparentize($backdrop_fg_color, 0.5);
+  }
+}
