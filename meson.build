@@ -5,7 +5,7 @@ project('Yaru-MATE',
         default_options: ['prefix=/usr'])
 
 
-components = ['icons', 'gnome-shell', 'gtk', 'sounds', 'sessions']
+components = ['icons', 'metacity', 'gnome-shell', 'gtk', 'sounds', 'sessions']
 
 foreach component: components
   if not get_option(component)
