@@ -683,8 +683,6 @@ SheetStyleDialog.unity-force-quit { background-color: $bg_color; }
 * Mate *
 ***********/
 
-// Insert mate specific style classes
-
 $_base_bg_color: if($ambiance==true, $headerbar_bg_color, $bg_color);
 $_base_fg_color:  if($ambiance==true, $headerbar_fg_color, $fg_color);
 $_base_insensitive_fg_color: if($ambiance==true, lighten($headerbar_fg_color, 10%), $insensitive_fg_color);
@@ -699,23 +697,23 @@ $_wm_shadow: 0 3px 9px 1px transparentize(black, 0.5), 0 0 0 1px $_wm_border; //
  * Mate-Panel *
  **************/
 
-
 /* the panel bar itself */
 #PanelPlug,
 .mate-panel-menu-bar,
 PanelToplevel.background {
     background-color: $_base_bg_color;
     background-image: none;
-    /* normal panel */
-    color: $_base_fg_color;
-    /* transparent panel, light desktop background*/
-    /* color: @fg_color; */
+    color: $fg_color;
     text-shadow: none;
+    menu, menu ~ menu {
+      border-radius: $button_radius;
+    }
 }
 
 /* workaround to avoid unwanted black frames behind menus if switching compositor on/off */
 .mate-panel-menu-bar .window-frame.csd.popup {
     box-shadow: none;
+    border-radius: $button_radius;
 }
 
 /* hide buttons */
@@ -759,6 +757,10 @@ MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
 .mate-panel-menu-bar menubar > menuitem {
     color: $_base_fg_color;
     text-shadow: none;
+    &:hover {
+      color: $_base_fg_color;
+      box-shadow: inset 0 -3px 0 0 $selected_bg_color;
+    }
 }
 
 /* outlines */
@@ -766,13 +768,13 @@ window.background, /* selector where outlines are writen on GtkTrayIcon */
 .mate-panel-menu-bar menubar,
 .mate-panel-menu-bar button,
 .mate-panel-menu-bar PanelApplet {
-    outline-style: dotted;
+    outline-style: solid;
     outline-offset: -2px;
     outline-color: $focus_border_color;
 }
 
 PanelApplet.wnck-applet .wnck-pager {
-    outline-style: dotted;
+    outline-style: solid;
     outline-offset: -1px;
     outline-color: $focus_border_color;
 }
@@ -826,31 +828,31 @@ PanelApplet.wnck-applet .wnck-pager {
 .mate-panel-menu-bar #PanelApplet button.flat.toggle:hover:active
 .mate-panel-menu-bar #PanelApplet button.flat:backdrop,
 .mate-panel-menu-bar #PanelApplet button:backdrop {
-    background-image: $_base_active_color;
+    background-image: image($_base_active_color);
     border-color: $_base_border_color;
     border-radius: 3px;
     border-image: none;
-    color: $_base_fg_color;
+    color: $selected_fg_color;
 }
 
 .mate-panel-menu-bar #PanelApplet button:hover,
 .mate-panel-menu-bar #PanelApplet button.flat:hover,
 .mate-panel-menu-bar #PanelApplet button.toggle:hover,
 .mate-panel-menu-bar #PanelApplet button.flat.toggle:hover {
-    background-image: image(gtkalpha(currentColor, 0.75));
+    background-image: image($_base_bg_color);
     border-color: $_base_hover_color;
     border-left-color: $_base_hover_color;
     border-radius: 3px;
     border-image: none;
-    color: $headerbar_fg_color;
+    color: $_base_fg_color;
 }
 
 .mate-panel-menu-bar #PanelApplet button:checked,
 .mate-panel-menu-bar #PanelApplet button.flat:checked,
 .mate-panel-menu-bar #PanelApplet button.toggle:checked,
 .mate-panel-menu-bar #PanelApplet button.flat.toggle:checked {
-    background-image: $_base_hover_color;
-    color: $headerbar_fg_color;
+    background-image: image($_base_bg_color);
+    color: $_base_fg_color;
     border-radius: 3px;
     border-image: none;
 }
@@ -860,30 +862,24 @@ na-tray-applet {
 }
 
 /* clock-applet */
-.mate-panel-menu-bar #PanelApplet #clock-applet-button.flat.toggle,
-.mate-panel-menu-bar #PanelApplet #clock-applet-button.flat.toggle:hover {
+.mate-panel-menu-bar #PanelApplet #clock-applet-button.flat.toggle {
+  &, &:hover {
     background-color: transparent;
     background-image: none;
     border-width: 0;
     color: $_base_fg_color;
     text-shadow: none;
     padding: 3px 5px 3px 5px;
-    border: 1px solid transparent;
-}
-
-.mate-panel-menu-bar #PanelApplet #clock-applet-button.flat.toggle:checked,
-.mate-panel-menu-bar #PanelApplet #clock-applet-button.flat.toggle:checked:hover {
-    background-color: transparent;
-    background-clip: border-box;
-    background-image: $_base_hover_color;
-    box-shadow: none;
-    color: $_base_fg_color;
-    text-shadow: none;
+    border-radius: 0;
+    &:checked {
+      box-shadow: inset 0 -3px 0 0 $selected_bg_color;
+    }
+  }    
 }
 
 /* clock window */
 #MatePanelPopupWindow {
-	border-radius: 3px;
+	border-radius: $button_radius;
 }
 
 /* Weird, this sets the border color of the clockmap */
@@ -927,6 +923,9 @@ na-tray-applet {
     border-image: none;
     color: $_base_fg_color;
     margin: 0px;
+    &:checked {
+      box-shadow: inset 0 -3px 0 0 $selected_bg_color;
+    }
 }
 
 /* mate-indicator-applet */
@@ -963,178 +962,156 @@ window.background.mate-terminal > box.vertical > notebook > stack > box {
 /* vte use hardcoded colors as upstream, ubuntu is patched */
 window.background.mate-terminal vte-terminal {
     -TerminalScreen-background-darkness: 0.95;
-    background-color:$_base_bg_color;
-    color: $_base_fg_color;
-}
-
-/*********
- * Pluma *
- *********/
-
-.pluma-window .notebook .header {
-    border-width: 1px 1px 0px 1px;
-    border-radius: 0px;
-}
-
-.pluma-window .notebook tab.top {
-    padding: 5px 3px 5px 6px;
-    border-width: 1px 1px 0px 1px;
-}
-
-/* pluma line numbers */
-.pluma-window textview {
-    background-color: $_base_bg_color;
+    background-color: $bg_color;
+    color: $fg_color;
 }
 
 /*************
- * Mate-Menu *
+ * Mate-Menu * // WHAT IS THIS?
  *************/
 
 #mate-menu.background {
-    background-image: none;
-    background-color: $_base_bg_color;
-    border-color: $_base_border_color;
-    border-width: 1px;
-    border-style: solid;
-    border-radius:2px;
+    // background-image: none;
+    // background-color: $_base_bg_color;
+    // border-color: $_base_border_color;
+    // border-width: 1px;
+    // border-style: solid;
+    // border-radius: $button_radius;
+    // background-color: red;
 }
 
-#mate-menu.background notebook,
-#mate-menu.background viewport,
-#mate-menu.background viewport grid,
-#mate-menu.background > widget > box > widget > box,
-#mate-menu.background > widget > box > widget > box > box > widget {
-    background-image: none;
-    background-color: $_base_bg_color;
-}
+// #mate-menu.background notebook,
+// #mate-menu.background viewport,
+// #mate-menu.background viewport grid,
+// #mate-menu.background > widget > box > widget > box,
+// #mate-menu.background > widget > box > widget > box > box > widget {
+//     background-image: none;
+//     background-color: $_base_bg_color;
+// }
 
-#mate-menu.background viewport,
-#mate-menu.background notebook {
-    border-radius: 0px;
-    border-width: 0px;
-    border-style: none;
-}
+// #mate-menu.background viewport,
+// #mate-menu.background notebook {
+//     border-radius: 0px;
+//     border-width: 0px;
+//     border-style: none;
+// }
 
-#mate-menu.background scrolledwindow {
-    border-color: transparent;
-    border-width: 0px;
-    border-style: none;
-    border-radius: 0px;
-}
+// #mate-menu.background scrolledwindow {
+//     border-color: transparent;
+//     border-width: 0px;
+//     border-style: none;
+//     border-radius: 0px;
+// }
 
-#mate-menu.background label,
-#mate-menu.background button,
-#mate-menu.background button.flat {
-    text-shadow: none;
-    color: $_base_fg_color;
-}
+// #mate-menu.background label,
+// #mate-menu.background button,
+// #mate-menu.background button.flat {
+//     text-shadow: none;
+//     color: $_base_fg_color;
+// }
 
-#mate-menu.background button:hover label,
-#mate-menu.background button:hover,
-#mate-menu.background button.flat:hover {
-    color: $selected_fg_color;
-    text-shadow: none;
-}
+// #mate-menu.background button:hover label,
+// #mate-menu.background button:hover,
+// #mate-menu.background button.flat:hover {
+//     color: $selected_fg_color;
+//     text-shadow: none;
+// }
 
-#mate-menu.background button,
-#mate-menu.background button.flat {
-    background-color: transparent;
-    background-image: none;
-    border-radius: 6px;
-    border-image: none;
-    border-style: solid;
-    border-width: 1px;
-    border-color: $_base_border_color;
-    padding: 4px;
-}
+// #mate-menu.background button,
+// #mate-menu.background button.flat {
+//     background-color: transparent;
+//     background-image: none;
+//     border-radius: 6px;
+//     border-image: none;
+//     border-style: solid;
+//     border-width: 1px;
+//     border-color: $_base_border_color;
+//     padding: 4px;
+// }
 
-#mate-menu.background button:hover,
-#mate-menu.background button.flat:hover {
-    background-image: $_base_hover_color;
-    border-image-width: 0px;
-    box-shadow: none;
-}
+// #mate-menu.background button:hover,
+// #mate-menu.background button.flat:hover {
+//     background-image: $_base_hover_color;
+//     border-image-width: 0px;
+//     box-shadow: none;
+// }
 
-#mate-menu.background separator,
-#mate-menu.background widget notebook viewport grid widget separator {
-    min-height: 0px;
-    background-color: transparent;
-    border-color: transparent;
-    border-style: none;
-    border-width: 0px 0px 0px 0px;
-}
+// #mate-menu.background separator,
+// #mate-menu.background widget notebook viewport grid widget separator {
+//     min-height: 0px;
+//     background-color: transparent;
+//     border-color: transparent;
+//     border-style: none;
+//     border-width: 0px 0px 0px 0px;
+// }
 
-#mate-menu.background scrollbar {
-    background-image: none;
-    border-style: solid;
-    border-color: $_base_border_color;
-    min-width: 11px;
-}
+// #mate-menu.background scrollbar {
+//     background-image: none;
+//     border-style: solid;
+//     border-color: $_base_border_color;
+//     min-width: 11px;
+// }
 
-#mate-menu.background scrollbar.vertical trough {
-    background-image: none;
-    border-color: $_base_border_color;
-    min-width: 11px;
-}
+// #mate-menu.background scrollbar.vertical trough {
+//     background-image: none;
+//     border-color: $_base_border_color;
+//     min-width: 11px;
+// }
 
-scrollbar.vertical slider {
-    min-width: 11px;
-    min-height: 42px;
-    margin: 0px -1px 0px -1px;
-}
+// scrollbar.vertical slider {
+//     min-width: 11px;
+//     min-height: 42px;
+//     margin: 0px -1px 0px -1px;
+// }
 
-#mate-menu.background scrollbar.vertical button {
-    border-radius: 0px;
-    background-image: none;
-    box-shadow: none;
-    min-width: 11px;
-}
+// #mate-menu.background scrollbar.vertical button {
+//     border-radius: 0px;
+//     background-image: none;
+//     box-shadow: none;
+//     min-width: 11px;
+// }
 
-#mate-menu.background scrollbar.vertical button:disabled {
-    background-color: transparent;
-    color: $insensitive_fg_color;
-}
+// #mate-menu.background scrollbar.vertical button:disabled {
+//     background-color: transparent;
+//     color: $insensitive_fg_color;
+// }
 
-#mate-menu.background entry {
-    background-color: transparent;
-    background-image: image($_base_bg_color);
-    color:  $_base_fg_color;
-    border-image: none;
-}
+// #mate-menu.background entry {
+//     background-color: transparent;
+//     background-image: image($_base_bg_color);
+//     color:  $_base_fg_color;
+//     border-image: none;
+// }
 
-#mate-menu.background entry,
-#mate-menu.background entry:focus {
-  box-shadow: inset 0 0 0 -1px $focus_border_color; 
-    /* color of the cursor */
-	caret-color:  $_base_fg_color;
-}
+// #mate-menu.background entry,
+// #mate-menu.background entry:focus {
+//   box-shadow: inset 0 0 0 -1px $focus_border_color; 
+//     /* color of the cursor */
+// 	caret-color:  $_base_fg_color;
+// }
 
-#mate-menu.background entry selection,
-#mate-menu.background entry selection:focus {
-    background-color: $_base_bg_color;
-    color:  $_base_fg_color;
-}
+// #mate-menu.background entry selection,
+// #mate-menu.background entry selection:focus {
+//     background-color: $_base_bg_color;
+//     color:  $_base_fg_color;
+// }
 
-/* mate-screensaver lock dialog */
+// /* mate-screensaver lock dialog */
 
 .lock-dialog {
-    border-radius: 0px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: $_base_border_color;
-    /* not sure if box-shadow works here */
-    box-shadow: 0 0 0 1px $_wm_border, 0 2px 8px 3px $_wm_shadow;
+  //  border-radius: $window_radius;
+  // box-shadow: 0 0 0 1px $_wm_border, 0 2px 8px 3px $_wm_shadow;
 }
 
-.lock-dialog frame {
-    border-radius: 0px;
-    border-style: none;
-    border-width: 0px;
-}
+// .lock-dialog frame {
+//     border-radius: 0px;
+//     border-style: none;
+//     border-width: 0px;
+// }
 
-.lock-dialog notebook {
-    background-color: $_base_bg_color;
-}
+// .lock-dialog notebook {
+//     background-color: $_base_bg_color;
+// }
 
 /******************
  * multimedia OSD *
@@ -1145,7 +1122,7 @@ MsdOsdWindow.background.osd.msd-osd-window-solid {
 	border-radius: 0px;
 	border-width: 2px;
 	border-style:solid;
-	border-color: $_base_border_color;
+  border-color: $_base_border_color;
 }
 
 MsdOsdWindow.background.osd.msd-osd-window-solid progressbar {
@@ -1155,24 +1132,8 @@ MsdOsdWindow.background.osd.msd-osd-window-solid progressbar {
 
 MsdOsdWindow.background.osd.msd-osd-window-solid progressbar trough,
 MsdOsdWindow.background.osd.msd-osd-window-solid progressbar progress {
-	border-radius: 8px;
-}
-
-/***********************
- * Mate-Control-Center *
- ***********************/
-
-#MyControlCenter button.flat {
-    outline-style: solid;
-    outline-color: $focus_border_color;
-    -gtk-outline-radius: 5px;
-    outline-offset: -2px;
-}
-
-/* disable, to avoid strange flashes during tabbing,
-   use outlines instead */
-#MyControlCenter button.flat:focus {
-    box-shadow: none;
+  border-radius: 8px;
+  background: $osd_fg_color;
 }
 
 /**************
@@ -1180,156 +1141,41 @@ MsdOsdWindow.background.osd.msd-osd-window-solid progressbar progress {
  **************/
 
 .background.brisk-menu {
-    background-color: $_base_bg_color;
-    color: $_base_fg_color;
-}
+  // background-color: $_base_bg_color;
+  // color: $_base_fg_color;
+  .apps-list, .categories-list, entry {
+    margin: 4px;
+  }
+  &, .apps-list, .categories-list, .csd.popup { border-radius: $button_radius; }
+  
+  /* classic session button */
+  button.flat.session-button {
+      padding: 5px 6px;
+      min-width: 24px;
+  }
 
-.background.brisk-menu .apps-list,
-.background.brisk-menu .categories-list {
-    background-color: $_base_bg_color;
-    border-color: $_base_border_color;
-    border-style: solid;
-    border-width: 1px;
-}
-
-.background.brisk-menu button.flat {
-    background: transparent;
-    color: $_base_fg_color;
-    padding: 5px;
-}
-
-.background.brisk-menu button.flat:checked {
-    border-radius: 0;
-    background-image: image($_base_active_color);
-    border-image: image($_base_border_color);
-
-    border-image-width: 1px;
-    box-shadow: none;
-
-    color: $selected_fg_color;
-    text-shadow: none;
-}
-
-.background.brisk-menu button.flat:hover {
-    border-radius: 0;
-    background-image: image($_base_active_color);
-    border-image: image($_base_border_color);
-    border-image-width: 1px;
-    box-shadow: none;
-
-    color: $selected_fg_color;
-    text-shadow: none;
-}
-
-/* classic session button */
-.background.brisk-menu button.flat.session-button {
-    padding: 5px 6px;
-    border-radius: 8px;
-    min-width: 24px;
-}
-
-.background.brisk-menu button.flat.session-button:hover {
-    background-image: $_base_bg_color;
-    border-image-source: -gtk-scaled(url("../assets/backdrop-button-toolbar.png"),
-                                     url("../assets/backdrop-button-toolbar@2.png"));
-    border-image-width: 10px 12px 10px 12px;
-    border-image-slice: 10 12 10 12;
-    border-image-repeat: stretch;
-    box-shadow: none;
-    color: if($ambiance==true, $headerbar_fg_color, $fg_color);
-}
-
-.background.brisk-menu separator {
+  scrolledwindow {
     border-width: 1px;
     border-style: solid;
-    border-color: $_base_border_color;
-    border-bottom-color: $_base_border_color;
-    border-right-color: $_base_border_color;
-}
+    border-color: transparent;
+    margin: 4px;
+  }
 
-.background.brisk-menu scrolledwindow {
-    border-width: 1px;
-    border-style: solid;
-    border-color: $_base_border_color;
-}
-
-.background.brisk-menu overshoot {
+  overshoot {
     background: none;
-}
+  }
 
-.background.brisk-menu scrollbar {
+  scrollbar {
     background-image: none;
+    background-color: transparent;
     border-style: solid;
-    border-color: $_base_border_color;
-    min-width: 11px;
+    border-color: none;
+  }
 }
 
-.background.brisk-menu scrollbar.vertical trough {
-    background-image: none;
-    border-color: $_base_border_color;
-    min-width: 11px;
-}
-
-.background.brisk-menu scrollbar.vertical button {
-    border-radius: 0px;
-    background-image: none;
-    box-shadow: none;
-    color: $_base_fg_color;
-    min-width: 11px;
-}
-
-.background.brisk-menu scrollbar.vertical button:disabled {
-    background-color: transparent;
-    color: $_base_insensitive_fg_color;
-}
-
-.background.brisk-menu scrollbar.vertical button.up,
-.background.brisk-menu scrollbar.vertical .button.up,
-.background.brisk-menu scrollbar.vertical button.up:hover,
-.background.brisk-menu scrollbar.vertical .button.up:hover {
-    box-shadow: none;
-}
-
-.background.brisk-menu scrollbar.vertical button.down,
-.background.brisk-menu scrollbar.vertical .button.down,
-.background.brisk-menu scrollbar.vertical button.down:hover,
-.background.brisk-menu scrollbar.vertical .button.down:hover {
-    box-shadow: none;
-}
-
-.background.brisk-menu entry {
-    background-color: transparent;
-    background-image: -gtk-gradient(linear,
-                                    left top, left bottom,
-                                    from       (shade(if($ambiance==true, $headerbar_bg_color, $bg_color), 1.16)),
-                                    color-stop (0.15, shade(if($ambiance==true, $headerbar_bg_color, $bg_color), 1.26)),
-                                    color-stop (0.50, shade(if($ambiance==true, $headerbar_bg_color, $bg_color), 1.28)),
-                                    to         (shade(if($ambiance==true, $headerbar_bg_color, $bg_color), 1.30)));
-    color: shade (if($ambiance==true, $headerbar_fg_color, $fg_color), 1.0);
-    border-image: none;
-}
-
-.background.brisk-menu entry,
-.background.brisk-menu entry:focus {
-  box-shadow: inset 0 0 0 -1px $focus_border_color;
-    /* color of the cursor */
-	caret-color: $_base_fg_color;
-}
-
-.background.brisk-menu entry selection,
-.background.brisk-menu entry selection:focus {
-    background-color: $selected_bg_color;
-    color: $selected_fg_color;
-}
-
-.background.brisk-menu label,
-.background.brisk-menu label.dim-label {
-    text-shadow: none;
-}
-
-/* panel button */
-.mate-panel-menu-bar #PanelApplet button.flat.toggle.brisk-button,
-.mate-panel-menu-bar #PanelApplet button.flat.toggle.brisk-button:hover {
+/* Brisk menu's panel button */
+.mate-panel-menu-bar #PanelApplet button.flat.toggle.brisk-button {
+  &, &:hover {
     background-image: none;
     background-color: transparent;
     padding: 3px 5px;
@@ -1338,26 +1184,17 @@ MsdOsdWindow.background.osd.msd-osd-window-solid progressbar progress {
     border-color: transparent;
     border-image: none;
     text-shadow: none;
-}
-
-.mate-panel-menu-bar #PanelApplet button.flat.toggle.brisk-button:checked {
-    background-color: transparent;
-    background-clip: border-box;
-    background-image: $_base_active_color;
-    box-shadow: none;
-    padding: 3px 5px;
-    border-width: 1px 1px 1px 0px;
-    border-radius: 4px 4px 0 0;
-    border-color: $_base_border_color;
-    border-image: none;
-    text-shadow: none;
+    &:checked {
+      box-shadow: inset 0 -3px 0 0 $selected_bg_color;
+    }
+  }    
 }
 
 /* mate-keyboard-layout-view, mate-keyboard-layout-chooser */
 /* this way it styles only the border of the keys, the bg of the map itself
    use the .view class */
 matekbd-keyboard-drawing {
-    background-color: shade (if($ambiance==true, $headerbar_bg_color, $bg_color), 1.0);
+    background-color: $_base_bg_color;
 }
 
 matekbd-keyboard-drawing:selected {
