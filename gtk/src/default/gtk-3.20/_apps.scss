@@ -705,15 +705,19 @@ PanelToplevel.background {
     background-image: none;
     color: $fg_color;
     text-shadow: none;
-    menu, menu ~ menu {
-      border-radius: $button_radius;
+    menu {
+      border-radius: $menu_radius;
+      .csd & {
+        border: none; // axes borders in a composited env
+        border-radius: $menu_radius;
+      }
     }
 }
 
 /* workaround to avoid unwanted black frames behind menus if switching compositor on/off */
 .mate-panel-menu-bar .window-frame.csd.popup {
     box-shadow: none;
-    border-radius: $button_radius;
+    border-radius: $menu_radius;
 }
 
 /* hide buttons */
@@ -728,14 +732,8 @@ PanelToplevel > widget > button {
     color: $_base_fg_color;
 }
 
-PanelToplevel > widget > button:hover,
-PanelToplevel > widget > button:hover:active {
-    border-radius: 0px;
-    background-image: $_base_hover_color;
-}
-
 #PanelApplet {
-    border-width: 0;
+    border-radius: $menu_radius;
 }
 
 PanelWidget > PanelSeparator {
@@ -1146,7 +1144,7 @@ MsdOsdWindow.background.osd.msd-osd-window-solid progressbar progress {
   .apps-list, .categories-list, entry {
     margin: 4px;
   }
-  &, .apps-list, .categories-list, .csd.popup { border-radius: $button_radius; }
+  &, .apps-list, .categories-list, .csd.popup, .csd { border-radius: $menu_radius; }
   
   /* classic session button */
   button.flat.session-button {
