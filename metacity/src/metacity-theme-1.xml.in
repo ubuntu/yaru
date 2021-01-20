@@ -171,7 +171,7 @@
 
 	<draw_ops name="rounded_border_focused">
 		<line color="C_titlebar_border_focused" x1="2" y1="0" x2="width-3" y2="0" />
-		<line color="C_border_unfocused" x1="1" y1="top_height-1" x2="width-1" y2="top_height-1" />
+		<line color="C_titlebar_border_unfocused" x1="1" y1="top_height-1" x2="width-1" y2="top_height-1" />
 		<line color="C_border_focused" x1="0" y1="height-1" x2="width-1" y2="height-1" />
 		<line color="C_border_focused" x1="0" y1="2" x2="0" y2="height-2" />
 		<line color="C_border_focused" x1="width-1" y1="2" x2="width-1" y2="height-2" />
@@ -202,7 +202,7 @@
 
 	<draw_ops name="rounded_border_unfocused">
 		<line color="C_titlebar_border_unfocused" x1="2" y1="0" x2="width-3" y2="0" />
-		<line color="C_border_unfocused" x1="1" y1="top_height-1" x2="width-1" y2="top_height-1" />
+		<line color="C_titlebar_border_unfocused" x1="1" y1="top_height-1" x2="width-1" y2="top_height-1" />
 		<line color="C_border_unfocused" x1="0" y1="height-1" x2="width-1" y2="height-1" />
 		<line color="C_border_unfocused" x1="0" y1="2" x2="0" y2="height-2" />
 		<line color="C_border_unfocused" x1="width-1" y1="2" x2="width-1" y2="height-2" />
