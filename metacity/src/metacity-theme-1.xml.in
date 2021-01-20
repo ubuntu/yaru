@@ -200,6 +200,10 @@
     		<color value="C_border_focused" />
   		</gradient>
 
+		<!-- title bar top highlight -->
+		<line color="C_titlebar_highlight_focused" x1="5" y1="1" x2="width-6" y2="1" />
+		<line color="C_titlebar_highlight_focused" x1="3" x2="4" y1="2" y2="2" />
+		<line color="C_titlebar_highlight_focused" x1="width-5" x2="width-4" y1="2" y2="2" />
 	</draw_ops>
 
 	<draw_ops name="rounded_border_unfocused">
@@ -230,6 +234,11 @@
     		<color value="C_titlebar_border_unfocused" />
     		<color value="C_border_unfocused" />
   		</gradient>
+
+		<!-- title bar top highlight -->
+		<line color="C_titlebar_highlight_unfocused" x1="5" y1="1" x2="width-6" y2="1" />
+		<line color="C_titlebar_highlight_unfocused" x1="3" x2="4" y1="2" y2="2" />
+		<line color="C_titlebar_highlight_unfocused" x1="width-5" x2="width-4" y1="2" y2="2" />
 	</draw_ops>
 
 	<draw_ops name="border_right_focused">
