@@ -11,6 +11,8 @@ foreach flavour: flavours
   if flavour == 'dark'
     conf_data.set('titlebar', '#2c2c2c')
     conf_data.set('titlebar_unfocused', '#3e3e3e')
+    conf_data.set('titlebar_border_focused', '#232323')
+    conf_data.set('titlebar_border_unfocused', '#222222')
     conf_data.set('border_focused', '#232323')
     conf_data.set('border_unfocused', '#222222')
     conf_data.set('title_focused', '#f5f5f5')
@@ -25,6 +27,8 @@ foreach flavour: flavours
   elif flavour == 'light'
     conf_data.set('titlebar', '#dedede')
     conf_data.set('titlebar_unfocused', '#f7f7f7')
+    conf_data.set('titlebar_border_focused', '#919191')
+    conf_data.set('titlebar_border_unfocused', '#b8b8b8')
     conf_data.set('border_focused', '#919191')
     conf_data.set('border_unfocused', '#b8b8b8')
     conf_data.set('title_focused', '#000000')
@@ -39,6 +43,8 @@ foreach flavour: flavours
   elif flavour == 'default'
     conf_data.set('titlebar', '#323030')
     conf_data.set('titlebar_unfocused', '#3f3c3c')
+    conf_data.set('titlebar_border_focused', '#232323')
+    conf_data.set('titlebar_border_unfocused', '#222222')
     conf_data.set('border_focused', '#919191')
     conf_data.set('border_unfocused', '#b8b8b8')
     conf_data.set('title_focused', '#f5f5f5')
