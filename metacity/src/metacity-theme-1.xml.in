@@ -33,8 +33,8 @@
 		<distance name="right_titlebar_edge" value="0" />
 		<distance name="title_vertical_pad" value="0" />
 		<aspect_ratio name="button" value="1" />
-		<border name="title_border" left="8" right="8" top="14" bottom="14" />
-		<border name="button_border" left="4" right="4" top="8" bottom="7" />
+		<border name="title_border" left="0" right="0" top="8" bottom="8" />
+		<border name="button_border" left="5" right="6" top="4" bottom="1" />
 	</frame_geometry>
 
 	<!-- unfocused window -->
@@ -64,8 +64,6 @@
 
 	<!-- small window -->
 	<frame_geometry name="small" title_scale="medium" rounded_top_left="4" rounded_top_right="4" parent="normal">
-		<border name="title_border" left="4" right="4" top="7" bottom="7" />
-		<border name="button_border" left="4" right="4" top="4" bottom="4" />
 	</frame_geometry>
 
 	<!-- small unfocused window -->
