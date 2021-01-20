@@ -25,7 +25,7 @@
 
 	<!-- GEOMETRY -->
 	<!-- focused window -->
-	<frame_geometry name="normal" title_scale="medium" rounded_top_left="4" rounded_top_right="4">
+	<frame_geometry name="normal" title_scale="medium" rounded_top_left="true" rounded_top_right="true">
 		<distance name="left_width" value="1" />
 		<distance name="right_width" value="1" />
 		<distance name="bottom_height" value="1" />
@@ -38,7 +38,7 @@
 	</frame_geometry>
 
 	<!-- unfocused window -->
-	<frame_geometry name="normal_unfocused" title_scale="medium" rounded_top_left="4" rounded_top_right="4" parent="normal">
+	<frame_geometry name="normal_unfocused" title_scale="medium" rounded_top_left="true" rounded_top_right="true" parent="normal">
 	</frame_geometry>
 
 	<!-- maximized window -->
@@ -63,11 +63,11 @@
 	</frame_geometry>
 
 	<!-- small window -->
-	<frame_geometry name="small" title_scale="medium" rounded_top_left="4" rounded_top_right="4" parent="normal">
+	<frame_geometry name="small" title_scale="medium" rounded_top_left="true" rounded_top_right="true" parent="normal">
 	</frame_geometry>
 
 	<!-- small unfocused window -->
-	<frame_geometry name="small_unfocused" title_scale="medium" rounded_top_left="4" rounded_top_right="4" parent="small">
+	<frame_geometry name="small_unfocused" title_scale="medium" rounded_top_left="true" rounded_top_right="true" parent="small">
 	</frame_geometry>
 
 	<!-- no buttons -->
@@ -95,11 +95,11 @@
 	</frame_geometry>
 
 	<!-- modal -->
-	<frame_geometry name="modal" title_scale="medium" hide_buttons="true" rounded_top_left="4" rounded_top_right="4" parent="small">
+	<frame_geometry name="modal" title_scale="medium" hide_buttons="true" rounded_top_left="true" rounded_top_right="true" parent="small">
 	</frame_geometry>
 
-	<frame_geometry name="attached" title_scale="medium" hide_buttons="true" rounded_top_left="4" rounded_top_right="4" parent="normal">
-		<distance name="title_vertical_pad" value="8"/>
+	<!-- attached -->
+	<frame_geometry name="attached" title_scale="medium" hide_buttons="true" rounded_top_left="true" rounded_top_right="true" parent="normal">
 		<distance name="bottom_height" value="1"/>
 		<distance name="left_width" value="1"/>
 		<distance name="right_width" value="1"/>
