@@ -244,6 +244,14 @@
 
 	<draw_ops name="border_left_unfocused">
 		<line color="C_border_unfocused" x1="0" y1="0" x2="0" y2="height" />
+	<draw_ops name="flat_border_focused">
+		<line color="C_titlebar_border_focused" x1="0" y1="0" x2="width" y2="0" />
+		<line color="C_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
+	</draw_ops>
+
+	<draw_ops name="flat_border_unfocused">
+		<line color="C_titlebar_border_unfocused" x1="0" y1="0" x2="width" y2="0" />
+		<line color="C_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
 	</draw_ops>
 
 	<!-- BUTTON ICONS -->
@@ -460,6 +468,7 @@
 		<piece position="entire_background" draw_ops="entire_background_focused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
+        <piece position="overlay" draw_ops="flat_border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
 		<button function="close" state="prelight" draw_ops="close_focused_prelight" />
 		<button function="close" state="pressed" draw_ops="close_focused_pressed" />
@@ -492,6 +501,7 @@
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
+		<piece position="overlay" draw_ops="flat_border_focused" />
 		<button function="close" state="normal" draw_ops="close_unfocused" />
 		<button function="close" state="prelight" draw_ops="close_unfocused_prelight" />
 		<button function="close" state="pressed" draw_ops="close_unfocused_pressed" />
@@ -524,7 +534,7 @@
 		<piece position="entire_background" draw_ops="entire_background_focused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
-		<piece position="overlay"><draw_ops><line x1="0" y1="height-1" x2="width" y2="height-1" color="C_border_focused" /></draw_ops></piece>
+		<piece position="overlay" draw_ops="flat_border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
 		<button function="close" state="prelight" draw_ops="close_focused_prelight" />
 		<button function="close" state="pressed" draw_ops="close_focused_pressed" />
@@ -557,7 +567,7 @@
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
-		<piece position="overlay"><draw_ops><line x1="0" y1="height-1" x2="width" y2="height-1" color="C_border_unfocused" /></draw_ops></piece>
+		<piece position="overlay" draw_ops="flat_border_unfocused" />
 		<button function="close" state="normal" draw_ops="close_unfocused" />
 		<button function="close" state="prelight" draw_ops="close_unfocused_prelight" />
 		<button function="close" state="pressed" draw_ops="close_unfocused_pressed" />
