@@ -178,11 +178,17 @@
 		<line color="C_border_focused" x1="0" y1="height-1" x2="width-1" y2="height-1" />
 		<line color="C_border_focused" x1="0" y1="2" x2="0" y2="height-2" />
 		<line color="C_border_focused" x1="width-1" y1="2" x2="width-1" y2="height-2" />
-		<arc color="C_border_focused" x="0" y="0" width="3" height="3"  start_angle="270" extent_angle="90" />
-		<arc color="C_border_focused" x="width-3" y="0" width="2" height="3"  start_angle="0" extent_angle="90" />
-		<!-- double arcs for darker borders -->
-		<arc color="C_border_focused" x="0" y="0" width="3" height="3"  start_angle="270" extent_angle="90" />
-		<arc color="C_border_focused" x="width-3" y="0" width="2" height="3"  start_angle="0" extent_angle="90" />
+
+		<!-- left arch -->
+		<line color="C_border_focused" x1="0" x2="4" y1="1" y2="1" />
+		<line color="C_border_focused" x1="0" x2="2" y1="2" y2="2" />
+		<line color="C_border_focused" x1="0" x2="1" y1="3" y2="3" />
+		<line color="C_border_focused" x1="0" x2="1" y1="4" y2="4" />
+		<!-- right arch -->
+		<line color="C_border_focused" x1="width-5" x2="width" y1="1" y2="1" />
+		<line color="C_border_focused" x1="width-3" x2="width" y1="2" y2="2" />
+		<line color="C_border_focused" x1="width-2" x2="width" y1="3" y2="3" />
+		<line color="C_border_focused" x1="width-2" x2="width" y1="4" y2="4" />
 	</draw_ops>
 
 	<draw_ops name="rounded_border_unfocused">
@@ -191,11 +197,17 @@
 		<line color="C_border_unfocused" x1="0" y1="height-1" x2="width-1" y2="height-1" />
 		<line color="C_border_unfocused" x1="0" y1="2" x2="0" y2="height-2" />
 		<line color="C_border_unfocused" x1="width-1" y1="2" x2="width-1" y2="height-2" />
-		<arc color="C_border_unfocused" x="0" y="0" width="3" height="3"  start_angle="270" extent_angle="90" />
-		<arc color="C_border_unfocused" x="width-3" y="0" width="2" height="3"  start_angle="0" extent_angle="90" />
-		<!-- double arcs for darker borders -->
-		<arc color="C_border_unfocused" x="0" y="0" width="3" height="3"  start_angle="270" extent_angle="90" />
-		<arc color="C_border_unfocused" x="width-3" y="0" width="2" height="3"  start_angle="0" extent_angle="90" />
+
+		<!-- left arch -->
+		<line color="C_border_unfocused" x1="0" x2="4" y1="1" y2="1" />
+		<line color="C_border_unfocused" x1="0" x2="2" y1="2" y2="2" />
+		<line color="C_border_unfocused" x1="0" x2="1" y1="3" y2="3" />
+		<line color="C_border_unfocused" x1="0" x2="1" y1="4" y2="4" />
+		<!-- right arch -->
+		<line color="C_border_unfocused" x1="width-5" x2="width" y1="1" y2="1" />
+		<line color="C_border_unfocused" x1="width-3" x2="width" y1="2" y2="2" />
+		<line color="C_border_unfocused" x1="width-2" x2="width" y1="3" y2="3" />
+		<line color="C_border_unfocused" x1="width-2" x2="width" y1="4" y2="4" />
 	</draw_ops>
 
 	<draw_ops name="border_right_focused">
