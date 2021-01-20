@@ -161,12 +161,22 @@
 		<line color="C_titlebar_border_focused" x1="0" x2="2" y1="2" y2="2" />
 		<line color="C_titlebar_border_focused" x1="0" x2="1" y1="3" y2="3" />
 		<line color="C_titlebar_border_focused" x1="0" x2="1" y1="4" y2="4" />
+		<!-- left title bar edge -->
+  		<gradient type="vertical" x="0" y="2" width="1" height="height/3">
+    		<color value="C_titlebar_border_focused" />
+    		<color value="C_border_focused" />
+  		</gradient>
 
 		<!-- right arch -->
 		<line color="C_titlebar_border_focused" x1="width-5" x2="width" y1="1" y2="1" />
 		<line color="C_titlebar_border_focused" x1="width-3" x2="width" y1="2" y2="2" />
 		<line color="C_titlebar_border_focused" x1="width-2" x2="width" y1="3" y2="3" />
 		<line color="C_titlebar_border_focused" x1="width-2" x2="width" y1="4" y2="4" />
+		<!-- right title bar edge -->
+  		<gradient type="vertical" x="width-1" y="2" width="1" height="height/3">
+    		<color value="C_titlebar_border_focused" />
+    		<color value="C_border_focused" />
+  		</gradient>
 
 		<!-- title bar top highlight -->
 		<line color="C_titlebar_highlight_focused" x1="5" y1="1" x2="width-6" y2="1" />
@@ -188,12 +198,22 @@
 		<line color="C_titlebar_border_unfocused" x1="0" x2="2" y1="2" y2="2" />
 		<line color="C_titlebar_border_unfocused" x1="0" x2="1" y1="3" y2="3" />
 		<line color="C_titlebar_border_unfocused" x1="0" x2="1" y1="4" y2="4" />
+		<!-- left title bar edge -->
+  		<gradient type="vertical" x="0" y="2" width="1" height="height/3">
+    		<color value="C_titlebar_border_unfocused" />
+    		<color value="C_border_unfocused" />
+  		</gradient>
 
 		<!-- right arch -->
 		<line color="C_titlebar_border_unfocused" x1="width-5" x2="width" y1="1" y2="1" />
 		<line color="C_titlebar_border_unfocused" x1="width-3" x2="width" y1="2" y2="2" />
 		<line color="C_titlebar_border_unfocused" x1="width-2" x2="width" y1="3" y2="3" />
 		<line color="C_titlebar_border_unfocused" x1="width-2" x2="width" y1="4" y2="4" />
+		<!-- right title bar edge -->
+  		<gradient type="vertical" x="width-1" y="2" width="1" height="height/3">
+    		<color value="C_titlebar_border_unfocused" />
+    		<color value="C_border_unfocused" />
+  		</gradient>
 
 		<!-- title bar top highlight -->
 		<line color="C_titlebar_highlight_unfocused" x1="5" y1="1" x2="width-6" y2="1" />
