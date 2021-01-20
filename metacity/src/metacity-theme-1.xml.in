@@ -258,13 +258,13 @@
 	</draw_ops>
 
 	<draw_ops name="flat_border_focused">
-		<line color="C_titlebar_border_focused" x1="0" y1="0" x2="width" y2="0" />
-		<line color="C_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
+		<line color="C_titlebar_highlight_focused" x1="0" y1="0" x2="width" y2="0" />
+		<line color="C_titlebar_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
 	</draw_ops>
 
 	<draw_ops name="flat_border_unfocused">
-		<line color="C_titlebar_border_unfocused" x1="0" y1="0" x2="width" y2="0" />
-		<line color="C_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
+		<line color="C_titlebar_highlight_unfocused" x1="0" y1="0" x2="width" y2="0" />
+		<line color="C_titlebar_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
 	</draw_ops>
 
 	<!-- BUTTON ICONS -->
