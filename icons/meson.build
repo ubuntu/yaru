@@ -26,7 +26,7 @@ foreach flavour: ['default', 'dark', 'light']
   elif flavour == 'light'
     conf_data.set('InheritThemes', 'Radiant-MATE,ubuntu-mono-light,Humanity,gnome,hicolor,mate')
   else
-    conf_data.set('InheritThemes', 'Radiant-MATE,ubuntu-mono-light,Humanity,gnome,hicolor,mate')
+    conf_data.set('InheritThemes', 'Ambiant,ubuntu-mono-light,Humanity,gnome,hicolor,mate')
   endif
 
   foreach theme: themes_f
