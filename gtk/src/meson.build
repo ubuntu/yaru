@@ -24,7 +24,7 @@ foreach flavour: flavours
   elif flavour == 'light'
     conf_data.set('IconTheme', 'Radiant-MATE')
   else
-    conf_data.set('IconTheme', 'Radiant-MATE')
+    conf_data.set('IconTheme', 'Ambiant-MATE')
   endif
 
   configure_file(input: 'index.theme.in',
