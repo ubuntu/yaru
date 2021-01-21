@@ -34,10 +34,6 @@
 		<border name="button_border" left="4" right="8" top="3" bottom="3" />
 	</frame_geometry>
 
-	<!-- unfocused window -->
-	<frame_geometry name="normal_unfocused" title_scale="medium" rounded_top_left="true" rounded_top_right="true" parent="normal">
-	</frame_geometry>
-
 	<!-- maximized window -->
 	<frame_geometry name="max" title_scale="medium" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false" parent="normal">
 		<distance name="left_width" value="0" />
@@ -55,10 +51,6 @@
 
 	<!-- small window -->
 	<frame_geometry name="small" title_scale="medium" rounded_top_left="true" rounded_top_right="true" parent="normal">
-	</frame_geometry>
-
-	<!-- small unfocused window -->
-	<frame_geometry name="small_unfocused" title_scale="medium" rounded_top_left="true" rounded_top_right="true" parent="small">
 	</frame_geometry>
 
 	<!-- no buttons -->
@@ -113,25 +105,13 @@
 		<rectangle color="C_titlebar" x="0" y="0" width="width" height="height" filled="true" />
 	</draw_ops>
 
-	<draw_ops name="titlebar_fill_attached_focused">
-		<include name="entire_background_focused" />
-	</draw_ops>
-
 	<draw_ops name="titlebar_fill_unfocused">
 		<rectangle color="C_titlebar_unfocused" x="0" y="0" width="width" height="height" filled="true" />
 	</draw_ops>
 
-	<draw_ops name="titlebar_focused">
-		<include name="titlebar_fill_focused" />
-	</draw_ops>
-
  	<!-- titlebar for attached and modal dialogs -->
-	<draw_ops name="titlebar_attached_focused">
-		<include name="titlebar_fill_attached_focused" />
-	</draw_ops>
-
-	<draw_ops name="rounded_titlebar_focused">
-		<include name="titlebar_fill_focused" />
+	<draw_ops name="titlebar_fill_attached_focused">
+		<include name="entire_background_focused" />
 	</draw_ops>
 
 	<draw_ops name="border_focused">
@@ -373,7 +353,7 @@
 	<!-- FRAME STYLES -->
 	<frame_style name="normal_focused" geometry="normal">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="rounded_titlebar_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
 		<piece position="overlay" draw_ops="rounded_border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
@@ -404,7 +384,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="normal_unfocused" geometry="normal_unfocused">
+	<frame_style name="normal_unfocused" geometry="normal">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
@@ -571,7 +551,7 @@
 
 	<frame_style name="dialog_focused" geometry="nobuttons">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="rounded_titlebar_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
 		<piece position="overlay" draw_ops="rounded_border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
@@ -637,7 +617,7 @@
 
 	<frame_style name="modal_dialog_focused" geometry="modal">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="titlebar_attached_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
 		<piece position="title" draw_ops="title_focused" />
 		<piece position="overlay" draw_ops="border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
@@ -703,7 +683,7 @@
 
 	<frame_style name="utility_focused" geometry="small">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="titlebar_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
 		<piece position="overlay" draw_ops="border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
@@ -734,7 +714,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="utility_unfocused" geometry="small_unfocused">
+	<frame_style name="utility_unfocused" geometry="small">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
@@ -848,7 +828,7 @@
 
 	<frame_style name="attached_focused" geometry="attached">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="titlebar_attached_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
 		<piece position="title" draw_ops="title_focused" />
 		<piece position="overlay" draw_ops="border_focused" />
 		<button function="close" state="normal"><draw_ops></draw_ops></button>
@@ -877,7 +857,7 @@
 
 	<frame_style name="attached_unfocused" geometry="attached">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
-		<piece position="titlebar" draw_ops="titlebar_attached_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
 		<piece position="title" draw_ops="title_unfocused" />
 		<piece position="overlay" draw_ops="border_unfocused" />
 		<button function="close" state="normal"><draw_ops></draw_ops></button>
