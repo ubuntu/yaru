@@ -120,6 +120,14 @@
 		<rectangle color="C_titlebar_unfocused" x="0" y="0" width="width" height="height" filled="true" />
 	</draw_ops>
 
+	<draw_ops name="titlebar_tiled_focused">
+		<rectangle color="C_titlebar" x="0" y="0" width="width" height="height" filled="true" />
+	</draw_ops>
+
+	<draw_ops name="titlebar_tiled_unfocused">
+		<rectangle color="C_titlebar_unfocused" x="0" y="0" width="width" height="height" filled="true" />
+	</draw_ops>
+
  	<!-- titlebar for attached and modal dialogs -->
 	<draw_ops name="titlebar_fill_attached_focused">
 		<include name="entire_background_focused" />
