@@ -203,22 +203,7 @@
 		<line color="C_titlebar_highlight_unfocused" x1="width-3" x2="width-3" y1="3" y2="3" />
 	</draw_ops>
 
-	<draw_ops name="border_right_focused">
-		<line color="C_border_focused" x1="width-1" y1="0" x2="width-1" y2="height" />
-	</draw_ops>
-
-	<draw_ops name="border_right_unfocused">
-		<line color="C_border_unfocused" x1="width-1" y1="0" x2="width-1" y2="height" />
-	</draw_ops>
-
-	<draw_ops name="border_left_focused">
-		<line color="C_border_focused" x1="0" y1="0" x2="0" y2="height" />
-	</draw_ops>
-
-	<draw_ops name="border_left_unfocused">
-		<line color="C_border_unfocused" x1="0" y1="0" x2="0" y2="height" />
-	</draw_ops>
-
+    <!-- Use for maximized, tiled_left and tiled_right frame styles -->
 	<draw_ops name="flat_border_focused">
 		<line color="C_titlebar_highlight_focused" x1="0" y1="0" x2="width" y2="0" />
 		<line color="C_titlebar_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
