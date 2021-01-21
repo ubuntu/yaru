@@ -41,12 +41,23 @@
 		<distance name="bottom_height" value="0" />
 	</frame_geometry>
 
-	<!-- left tiled window -->
-	<frame_geometry name="tiled_left" title_scale="medium" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false" parent="max">
+	<!-- tiled -->
+	<frame_geometry name="tiled_left_active" parent="max">
 	</frame_geometry>
 
-	<!-- right tiled window -->
-	<frame_geometry name="tiled_right" title_scale="medium" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false" parent="max">
+	<frame_geometry name="tiled_left_inactive" parent="max">
+	</frame_geometry>
+
+	<!-- tiled_right have a left_width so a border is always rendered so when
+	     two windows are tiled next to each other a single pixel line
+		 can be draw to separate them
+	-->
+	<frame_geometry name="tiled_right_active" parent="max">
+		<distance name="left_width" value="1" />
+	</frame_geometry>
+
+	<frame_geometry name="tiled_right_inactive" parent="max">
+		<distance name="left_width" value="1" />
 	</frame_geometry>
 
 	<!-- small window -->
