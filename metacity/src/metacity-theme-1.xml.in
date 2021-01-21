@@ -106,27 +106,11 @@
 
 	<!-- title -->
 	<draw_ops name="title_focused">
-	<title version="< 3.1"
-		x="(0 `max` ((width - title_width) / 2))"
-		y="(0 `max` ((height - title_height) / 2))"
-		color="C_title_focused"/>
-	<title version=">= 3.1"
-		x="(0 `max` ((frame_x_center - title_width / 2) `min` (width - title_width)))"
-		y="(0 `max` ((height - title_height) / 2))"
-		ellipsize_width="width"
-		color="C_title_focused"/>
+		<title x="(0 `max` ((frame_x_center - title_width / 2) `min` (width - title_width)))" y="(0 `max` ((height - title_height) / 2))" color="C_title_focused" />
 	</draw_ops>
 
 	<draw_ops name="title_unfocused">
-	<title version="< 3.1"
-		x="(0 `max` ((width - title_width) / 2))"
-		y="(0 `max` ((height - title_height) / 2))"
-		color="C_title_unfocused"/>
-	<title version=">= 3.1"
-		x="(0 `max` ((frame_x_center - title_width / 2) `min` (width - title_width)))"
-		y="(0 `max` ((height - title_height) / 2))"
-		ellipsize_width="width"
-		color="C_title_unfocused"/>
+		<title x="(0 `max` ((frame_x_center - title_width / 2) `min` (width - title_width)))" y="(0 `max` ((height - title_height) / 2))" color="C_title_unfocused" />
 	</draw_ops>
 
 	<!-- WINDOW DECORATIONS -->
