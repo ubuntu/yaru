@@ -926,11 +926,11 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="tiled_left_focused" geometry="tiled_left">
+	<frame_style name="tiled_left_focused" geometry="tiled_left_active">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
+		<piece position="titlebar" draw_ops="titlebar_tiled_focused" />
 		<piece position="title" draw_ops="title_focused" />
-		<piece position="overlay" draw_ops="flat_border_focused" />
+		<piece position="overlay" draw_ops="tiled_left_border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
 		<button function="close" state="prelight" draw_ops="close_focused_prelight" />
 		<button function="close" state="pressed" draw_ops="close_focused_pressed" />
@@ -959,11 +959,11 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="tiled_left_unfocused" geometry="tiled_left">
+	<frame_style name="tiled_left_unfocused" geometry="tiled_left_inactive">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
-		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
+		<piece position="titlebar" draw_ops="titlebar_tiled_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
-		<piece position="overlay" draw_ops="flat_border_unfocused" />
+		<piece position="overlay" draw_ops="tiled_left_border_unfocused" />
 		<button function="close" state="normal" draw_ops="close_unfocused" />
 		<button function="close" state="prelight" draw_ops="close_unfocused_prelight" />
 		<button function="close" state="pressed" draw_ops="close_unfocused_pressed" />
@@ -992,11 +992,11 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="tiled_right_focused" geometry="tiled_right">
+	<frame_style name="tiled_right_focused" geometry="tiled_right_active">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
+		<piece position="titlebar" draw_ops="titlebar_tiled_focused" />
 		<piece position="title" draw_ops="title_focused" />
-		<piece position="overlay" draw_ops="flat_border_focused" />
+		<piece position="overlay" draw_ops="tiled_right_border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
 		<button function="close" state="prelight" draw_ops="close_focused_prelight" />
 		<button function="close" state="pressed" draw_ops="close_focused_pressed" />
@@ -1025,11 +1025,11 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="tiled_right_unfocused" geometry="tiled_right">
+	<frame_style name="tiled_right_unfocused" geometry="tiled_right_inactive">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
-		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
+		<piece position="titlebar" draw_ops="titlebar_tiled_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
-		<piece position="overlay" draw_ops="flat_border_unfocused" />
+		<piece position="overlay" draw_ops="tiled_right_border_unfocused" />
 		<button function="close" state="normal" draw_ops="close_unfocused" />
 		<button function="close" state="prelight" draw_ops="close_unfocused_prelight" />
 		<button function="close" state="pressed" draw_ops="close_unfocused_pressed" />
