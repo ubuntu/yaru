@@ -35,7 +35,7 @@
 	</frame_geometry>
 
 	<!-- maximized window -->
-	<frame_geometry name="max" title_scale="medium" rounded_top_left="false" rounded_top_right="false" rounded_bottom_left="false" rounded_bottom_right="false" parent="normal">
+	<frame_geometry name="max" title_scale="medium" rounded_top_left="false" rounded_top_right="false" parent="normal">
 		<distance name="left_width" value="0" />
 		<distance name="right_width" value="0" />
 		<distance name="bottom_height" value="0" />
@@ -50,7 +50,7 @@
 	</frame_geometry>
 
 	<!-- small window -->
-	<frame_geometry name="small" title_scale="medium" rounded_top_left="true" rounded_top_right="true" parent="normal">
+	<frame_geometry name="small" parent="normal">
 	</frame_geometry>
 
 	<!-- no buttons -->
@@ -80,7 +80,7 @@
 	</frame_geometry>
 
 	<!-- attached -->
-	<frame_geometry name="attached" title_scale="medium" hide_buttons="true" rounded_top_left="true" rounded_top_right="true" parent="normal">
+	<frame_geometry name="attached" hide_buttons="true" parent="normal">
 	</frame_geometry>
 
 	<!-- title -->
