@@ -226,6 +226,29 @@
 		<line color="C_titlebar_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
 	</draw_ops>
 
+	<!-- tiled -->
+	<draw_ops name="tiled_left_border_focused">
+		<include name="max_border_focused" />
+	</draw_ops>
+
+	<draw_ops name="tiled_left_border_unfocused">
+		<include name="max_border_unfocused" />
+	</draw_ops>
+
+	<draw_ops name="tiled_right_border_focused">
+		<line color="C_titlebar_highlight_focused" x1="0" y1="0" x2="width" y2="0" />
+		<line color="C_titlebar_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
+		<line color="C_titlebar_border_focused" x1="0" y1="1" x2="0" y2="top_height-2" />
+		<line color="C_titlebar_border_focused" x1="0" y1="top_height" x2="0" y2="height" />
+	</draw_ops>
+
+	<draw_ops name="tiled_right_border_unfocused">
+		<line color="C_titlebar_highlight_unfocused" x1="0" y1="0" x2="width" y2="0" />
+		<line color="C_titlebar_border_unfocused" x1="0" y1="top_height-1" x2="width" y2="top_height-1" />
+		<line color="C_titlebar_border_focused" x1="0" y1="1" x2="0" y2="top_height-2" />
+		<line color="C_titlebar_border_focused" x1="0" y1="top_height" x2="0" y2="height" />
+	</draw_ops>
+
 	<!-- BUTTON ICONS -->
 	<!-- note: negative values in x or y causes gnome-shell to crash -->
 
