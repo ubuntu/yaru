@@ -718,7 +718,23 @@ PanelToplevel.background {
 /* workaround to avoid unwanted black frames behind menus if switching compositor on/off */
 .mate-panel-menu-bar .window-frame.csd.popup {
     box-shadow: none;
-    border-radius: $menu_radius;
+}
+
+// Force round menus for MATE, because they are populated from the top/bottom panels
+// And thus for MATE not just "legacy" menus used in "old" applications
+menubar,
+.menubar {
+  
+  > menuitem {
+    
+    menu {
+      &:dir(rtl), &:dir(ltr) { // specificity bump
+        border-radius: $menu_radius;
+      }
+    }    
+  }
+  
+  .csd.popup decoration { border-radius: $menu_radius; }
 }
 
 /* hide buttons */
@@ -969,7 +985,7 @@ window.background.mate-terminal vte-terminal {
  * Mate-Menu * // WHAT IS THIS?
  *************/
 
-#mate-menu.background {
+#mate-menu.background .csd.popup {
     // background-image: none;
     // background-color: $_base_bg_color;
     // border-color: $_base_border_color;
