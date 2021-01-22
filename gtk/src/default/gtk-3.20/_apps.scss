@@ -686,6 +686,8 @@ $_panel_bg_color: lighten($jet, 2%);
 $_panel_fg_color: darken($porcelain, 2%);
 $_base_bg_color: if($ambiance==true, $_panel_bg_color, if($variant=='light', $bg_color, $_panel_bg_color));
 $_base_fg_color:  if($ambiance==true, $_panel_fg_color, if($variant=='light', $fg_color, $_panel_fg_color));
+$_backdrop_base_bg_color: lighten(if($ambiance==true, $_panel_bg_color, if($variant=='light', $bg_color, $_panel_bg_color)), 3%);
+$_backdrop_base_fg_color:  transparentize(if($ambiance==true, $_panel_fg_color, if($variant=='light', $fg_color, $_panel_fg_color)), 0.3);
 $_base_insensitive_fg_color: if($ambiance==true, lighten($_panel_fg_color, 10%), if($variant=='light', $insensitive_fg_color, lighten($_panel_fg_color, 10%)));
 $_base_border_color: if($ambiance==true, $headerbar_border_color, if($variant=='light', $borders_color, $headerbar_border_color));
 $_base_hover_color: if($ambiance==true, lighten($_panel_bg_color, 4%), if($variant=='light', darken($bg_color, 4%), lighten($_panel_bg_color, 4%)));
@@ -975,141 +977,58 @@ window.background.mate-terminal > box.vertical > notebook > stack > box {
 }
 
 /* vte use hardcoded colors as upstream, ubuntu is patched */
-window.background.mate-terminal vte-terminal {
-    -TerminalScreen-background-darkness: 0.95;
-    background-color: $bg_color;
-    color: $fg_color;
+window.background.mate-terminal {
+  &, menubar, vte-terminal {
+    background-color: $_base_bg_color;
+    color: $_base_fg_color;
+    &:backdrop {
+      color: $_backdrop_base_fg_color;
+    }
+  }
+  scrollbar {
+    &, &.vertical {
+      &, &:backdrop {
+        background-color: transparent;
+      }
+    }
+    
+  }
+
+  menubar,
+  .menubar {      
+    > menuitem {
+      &:hover {
+        color: $_base_fg_color;
+      }
+    }
+  }
+
+  notebook {
+    stack box.vertical box.horizontal scrollbar.vertical {
+      background-color: $_backdrop_base_bg_color;
+    }
+   
+    tab {
+      color: $_base_fg_color;
+      &:backdrop {
+        color: $_backdrop_base_fg_color;
+      }
+      button {
+        &:hover {
+          background-image: image($_backdrop_base_bg_color);
+          color: $_base_fg_color;
+          border-color: $_base_border_color;
+        }
+        &:active {
+          background-image: image(darken($_backdrop_base_bg_color, 4%));
+          color: darken($_base_fg_color, 4%);
+          border-color: darken($_base_border_color, 4%);
+        }
+        
+      }
+    }
+  }
 }
-
-/*************
- * Mate-Menu * // WHAT IS THIS?
- *************/
-
-#mate-menu.background .csd.popup {
-    // background-image: none;
-    // background-color: $_base_bg_color;
-    // border-color: $_base_border_color;
-    // border-width: 1px;
-    // border-style: solid;
-    // border-radius: $button_radius;
-    // background-color: red;
-}
-
-// #mate-menu.background notebook,
-// #mate-menu.background viewport,
-// #mate-menu.background viewport grid,
-// #mate-menu.background > widget > box > widget > box,
-// #mate-menu.background > widget > box > widget > box > box > widget {
-//     background-image: none;
-//     background-color: $_base_bg_color;
-// }
-
-// #mate-menu.background viewport,
-// #mate-menu.background notebook {
-//     border-radius: 0px;
-//     border-width: 0px;
-//     border-style: none;
-// }
-
-// #mate-menu.background scrolledwindow {
-//     border-color: transparent;
-//     border-width: 0px;
-//     border-style: none;
-//     border-radius: 0px;
-// }
-
-// #mate-menu.background label,
-// #mate-menu.background button,
-// #mate-menu.background button.flat {
-//     text-shadow: none;
-//     color: $_base_fg_color;
-// }
-
-// #mate-menu.background button:hover label,
-// #mate-menu.background button:hover,
-// #mate-menu.background button.flat:hover {
-//     color: $selected_fg_color;
-//     text-shadow: none;
-// }
-
-// #mate-menu.background button,
-// #mate-menu.background button.flat {
-//     background-color: transparent;
-//     background-image: none;
-//     border-radius: 6px;
-//     border-image: none;
-//     border-style: solid;
-//     border-width: 1px;
-//     border-color: $_base_border_color;
-//     padding: 4px;
-// }
-
-// #mate-menu.background button:hover,
-// #mate-menu.background button.flat:hover {
-//     background-image: $_base_hover_color;
-//     border-image-width: 0px;
-//     box-shadow: none;
-// }
-
-// #mate-menu.background separator,
-// #mate-menu.background widget notebook viewport grid widget separator {
-//     min-height: 0px;
-//     background-color: transparent;
-//     border-color: transparent;
-//     border-style: none;
-//     border-width: 0px 0px 0px 0px;
-// }
-
-// #mate-menu.background scrollbar {
-//     background-image: none;
-//     border-style: solid;
-//     border-color: $_base_border_color;
-//     min-width: 11px;
-// }
-
-// #mate-menu.background scrollbar.vertical trough {
-//     background-image: none;
-//     border-color: $_base_border_color;
-//     min-width: 11px;
-// }
-
-// scrollbar.vertical slider {
-//     min-width: 11px;
-//     min-height: 42px;
-//     margin: 0px -1px 0px -1px;
-// }
-
-// #mate-menu.background scrollbar.vertical button {
-//     border-radius: 0px;
-//     background-image: none;
-//     box-shadow: none;
-//     min-width: 11px;
-// }
-
-// #mate-menu.background scrollbar.vertical button:disabled {
-//     background-color: transparent;
-//     color: $insensitive_fg_color;
-// }
-
-// #mate-menu.background entry {
-//     background-color: transparent;
-//     background-image: image($_base_bg_color);
-//     color:  $_base_fg_color;
-//     border-image: none;
-// }
-
-// #mate-menu.background entry,
-// #mate-menu.background entry:focus {
-//   box-shadow: inset 0 0 0 -1px $focus_border_color; 
-//     /* color of the cursor */
-// 	caret-color:  $_base_fg_color;
-// }
-
-// #mate-menu.background entry selection,
-// #mate-menu.background entry selection:focus {
-//     background-color: $_base_bg_color;
-//     color:  $_base_fg_color;
-// }
 
 // /* mate-screensaver lock dialog */
 
@@ -1132,37 +1051,40 @@ window.background.mate-terminal vte-terminal {
  * multimedia OSD *
  ******************/
 
-/*For mate-settings-daemon noncomposited osd windows*/
-MsdOsdWindow.background.osd.msd-osd-window-solid {
-	border-radius: 0px;
-	border-width: 2px;
-	border-style:solid;
-  border-color: $_base_border_color;
+MsdOsdWindow.background.osd {
+	border-radius: $window_radius;
+  border: 1px solid transparentize(white, 0.85);
+  background-color: $osd_bg_color;
+  color: $osd_fg_color;
+
+  .trough {
+    border-radius: $button_radius;
+    border: none;
+    background: darken($osd_fg_color, 70%);
+  }
+
+  .progressbar {
+    border-radius: $button_radius;
+    background-color: $osd_fg_color;
+    border: none;
+    height: 100%;
+  }
 }
 
-MsdOsdWindow.background.osd.msd-osd-window-solid progressbar {
-	border-radius: 8px;
-    background: transparent;
-}
-
-MsdOsdWindow.background.osd.msd-osd-window-solid progressbar trough,
-MsdOsdWindow.background.osd.msd-osd-window-solid progressbar progress {
-  border-radius: 8px;
-  background: $osd_fg_color;
-}
 
 /**************
  * Brisk-menu *
  **************/
 
-.background.brisk-menu {
-  // background-color: $_base_bg_color;
-  // color: $_base_fg_color;
+.brisk-menu {
   .apps-list, .categories-list, entry {
     margin: 4px;
   }
-  &, .apps-list, .categories-list, .csd.popup, .csd { border-radius: $menu_radius; }
-  
+
+  &, .apps-list, .categories-list {
+    border-radius: $menu_radius;
+  }
+
   /* classic session button */
   button.flat.session-button {
       padding: 5px 6px;
@@ -1174,10 +1096,6 @@ MsdOsdWindow.background.osd.msd-osd-window-solid progressbar progress {
     border-style: solid;
     border-color: transparent;
     margin: 4px;
-  }
-
-  overshoot {
-    background: none;
   }
 
   scrollbar {
@@ -1219,4 +1137,9 @@ matekbd-keyboard-drawing:selected {
 
 #xkb-layout-chooser > box.dialog-vbox > box.vertical > box.vertical > frame > border {
     border-radius: 0px;
+}
+
+scrollbar {
+  background-image: none;
+  background-color: transparent;
 }
