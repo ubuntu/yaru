@@ -763,7 +763,7 @@ PanelWidget > PanelSeparator {
 
 /* the grid left from wnckpager and wncktasklist */
 MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
-    background-image: -gtk-scaled(url("assets/panel-grid.svg"));
+    background-image: none;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: left;
@@ -807,7 +807,7 @@ PanelApplet.wnck-applet .wnck-pager {
 .mate-panel-menu-bar menubar > menuitem:hover {
     background-color: transparent;
     background-clip: border-box;
-    background-image: $_base_hover_color;
+    background-image: image($_base_hover_color);
 }
 
 /* set normal menubar menu menuitem */
@@ -1071,7 +1071,6 @@ MsdOsdWindow.background.osd {
     border-radius: $button_radius;
     background-color: $osd_fg_color;
     border: none;
-    height: 100%;
   }
 }
 
@@ -1117,7 +1116,7 @@ MsdOsdWindow.background.osd {
     background-image: none;
     background-color: transparent;
     border-style: solid;
-    border-color: none;
+    border-color: transparent;
   }
 }
 
