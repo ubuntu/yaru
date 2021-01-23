@@ -1143,3 +1143,16 @@ scrollbar {
   background-image: none;
   background-color: transparent;
 }
+
+// Axing the border-radii for classic (not csd) dialog buttons
+// So we don't end up with rounded buttons in a squared dialog frame
+messagedialog.background:not(.csd)  {
+  box.dialog-vbox.vertical {
+    button {
+      &, &:hover, &:active, &:checked, &:backdrop {
+        border-radius: 0;
+        -gtk-outline-radius: 0;
+      }
+    }
+  }  
+}
