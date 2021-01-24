@@ -1162,9 +1162,26 @@ scrollbar {
 messagedialog.background:not(.csd)  {
   box.dialog-vbox.vertical {
     button {
+      &.default {
+        &:dir(ltr), &:dir(rtl) {
+          &, label {
+            color: $selected_bg_color;
+          }
+        }        
+      }
+      box-shadow: none;
       &, &:hover, &:active, &:checked, &:backdrop {
         border-radius: 0;
+        border-right-width: 0;
+        border-left-width: 0;
+        border-bottom-width: 0;
         -gtk-outline-radius: 0;
+        &:last-child {
+          border-left-width: 1px;
+        }
+        &:not(:last-child):not(:first-child) {
+          border-right-width: 1px;
+        }
       }
     }
   }  
