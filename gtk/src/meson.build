@@ -19,14 +19,6 @@ foreach flavour: flavours
   conf_data.set('ThemeName', meson.project_name())
   conf_data.set('FlavourThemeName', theme_name)
 
-  if flavour == 'dark'
-    conf_data.set('IconTheme', 'Ambiant-MATE')
-  elif flavour == 'light'
-    conf_data.set('IconTheme', 'Radiant-MATE')
-  else
-    conf_data.set('IconTheme', 'Ambiant-MATE')
-  endif
-
   configure_file(input: 'index.theme.in',
     output: '@0@-index.theme'.format(theme_name),
     configuration: conf_data,
