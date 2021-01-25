@@ -26,7 +26,7 @@
 		<distance name="left_width" value="1" />
 		<distance name="right_width" value="1" />
 		<distance name="bottom_height" value="1" />
-		<distance name="left_titlebar_edge" value="0" />
+		<distance name="left_titlebar_edge" value="8" />
 		<distance name="right_titlebar_edge" value="0" />
 		<distance name="title_vertical_pad" value="0" />
 		<aspect_ratio name="button" value="1" />
@@ -334,22 +334,22 @@
 
 	<!-- Menu icon -->
 	<draw_ops name="menu_focused">
-		<image filename="menu_focused_normal.png" x="0" y="6" width="object_width" height="object_height" />
+		<image filename="menu_focused_normal.svg" x="0" y="2" width="object_width" height="object_height" />
 	</draw_ops>
 	<draw_ops name="menu_focused_prelight">
-		<image filename="menu_focused_prelight.png" x="0" y="6" width="object_width" height="object_height" />
+		<image filename="menu_focused_prelight.svg" x="0" y="2" width="object_width" height="object_height" />
 	</draw_ops>
 	<draw_ops name="menu_focused_pressed">
-		<image filename="menu_focused_pressed.png" x="0" y="6" width="object_width" height="object_height" />
+		<image filename="menu_focused_pressed.svg" x="0" y="2" width="object_width" height="object_height" />
 	</draw_ops>
 	<draw_ops name="menu_unfocused">
-		<image filename="menu_unfocused.png" x="0" y="6" width="object_width" height="object_height" />
+		<image filename="menu_unfocused.svg" x="0" y="2" width="object_width" height="object_height" />
 	</draw_ops>
 	<draw_ops name="menu_unfocused_prelight">
-		<image filename="menu_unfocused_prelight.png" x="0" y="6" width="object_width" height="object_height" />
+		<image filename="menu_unfocused_prelight.svg" x="0" y="2" width="object_width" height="object_height" />
 	</draw_ops>
 	<draw_ops name="menu_unfocused_pressed">
-		<image filename="menu_unfocused_pressed.png" x="0" y="6" width="object_width" height="object_height" />
+		<image filename="menu_unfocused_pressed.svg" x="0" y="2" width="object_width" height="object_height" />
 	</draw_ops>
 
 	<!-- FRAME STYLES -->
