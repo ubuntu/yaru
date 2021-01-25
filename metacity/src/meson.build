@@ -51,15 +51,11 @@ foreach flavour: flavours
 
   # install metacity assets
   metacity_asset_dir = join_paths(flavour, 'metacity-1')
-  metacity_png_data = run_command(
-    'find', metacity_asset_dir, '-name', '*.png'
-    ).stdout().strip().split('\n')
   metacity_svg_data = run_command(
     'find', metacity_asset_dir, '-name', '*.svg'
     ).stdout().strip().split('\n')
 
   metacity_assets_dest = join_paths(theme_dir, 'metacity-1')
-  install_data(metacity_png_data, install_dir: metacity_assets_dest)
   install_data(metacity_svg_data, install_dir: metacity_assets_dest)
 
   meson.add_install_script('post_install.py', get_option('datadir'), meson.project_name(), flavour)
