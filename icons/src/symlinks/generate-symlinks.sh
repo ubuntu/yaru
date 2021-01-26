@@ -78,7 +78,7 @@ THEME="Suru"
 
 # echo $DIR
 # Icon sizes and contextthe s
-CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "status" "emblems")
+CONTEXTS=("actions" "apps" "devices" "categories" "legacy" "mimetypes" "places" "status" "emblems")
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
 
 # Fullcolor icons
@@ -97,8 +97,11 @@ do
 			while read line;
 			do
 				if [[ $line == *"$needle"* ]]; then
-					echo linking $line in $SIZE"/"$CONTEXT
-					ln -sf $line
+					# Don't symlink legacy icon to 16x16 sizes
+				    if [ "${CONTEXT}" != "legacy" ] && [[ $SIZE != *"16"* ]]; then
+						echo linking $line in $SIZE"/"$CONTEXT
+						ln -sf $line
+					fi
 				else
 					dlog "[match only mode] skipping $line"
 				fi
