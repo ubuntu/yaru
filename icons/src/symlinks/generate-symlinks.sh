@@ -98,7 +98,9 @@ do
 			do
 				if [[ $line == *"$needle"* ]]; then
 					# Don't symlink legacy icon to 16x16 sizes
-				    if [ "${CONTEXT}" != "legacy" ] && [[ $SIZE != *"16"* ]]; then
+				    if [ "${CONTEXT}" == "legacy" ] && [[ $SIZE == *"16"* ]]; then
+						continue
+					else
 						echo linking $line in $SIZE"/"$CONTEXT
 						ln -sf $line
 					fi
