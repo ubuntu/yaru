@@ -33,6 +33,11 @@
 		<border name="title_border" left="0" right="0" top="8" bottom="8" />
 		<border name="button_border" left="4" right="8" top="3" bottom="3" />
 	</frame_geometry>
+	<frame_geometry name="normal_shaded" rounded_bottom_left="true" rounded_bottom_right="true" parent="normal" />
+
+	<!-- no buttons -->
+	<frame_geometry name="nobuttons" hide_buttons="true" parent="normal" />
+	<frame_geometry name="nobuttons_shaded" rounded_bottom_left="true" rounded_bottom_right="true" parent="nobuttons" />
 
 	<!-- maximized window -->
 	<frame_geometry name="max" title_scale="medium" rounded_top_left="false" rounded_top_right="false" parent="normal">
@@ -57,9 +62,6 @@
 	<frame_geometry name="tiled_right_inactive" parent="max">
 		<distance name="left_width" value="1" />
 	</frame_geometry>
-
-	<!-- no buttons -->
-	<frame_geometry name="nobuttons" hide_buttons="true" parent="normal" />
 
 	<!-- border -->
 	<frame_geometry name="border" has_title="false" rounded_top_left="false" rounded_top_right="false" parent="normal">
