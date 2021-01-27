@@ -60,10 +60,6 @@
 		<distance name="left_width" value="1" />
 	</frame_geometry>
 
-	<!-- small window -->
-	<frame_geometry name="small" parent="normal">
-	</frame_geometry>
-
 	<!-- no buttons -->
 	<frame_geometry name="nobuttons" hide_buttons="true" parent="normal">
 	</frame_geometry>
@@ -84,14 +80,6 @@
 		<distance name="bottom_height" value="0" />
 		<border name="title_border" left="0" right="0" top="0" bottom="0" />
 		<border name="button_border" left="0" right="0" top="0" bottom="0" />
-	</frame_geometry>
-
-	<!-- modal -->
-	<frame_geometry name="modal" title_scale="medium" hide_buttons="true" rounded_top_left="true" rounded_top_right="true" parent="small">
-	</frame_geometry>
-
-	<!-- attached -->
-	<frame_geometry name="attached" hide_buttons="true" parent="normal">
 	</frame_geometry>
 
 	<!-- title -->
@@ -617,7 +605,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="modal_dialog_focused" geometry="modal">
+	<frame_style name="modal_dialog_focused" geometry="nobuttons">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
 		<piece position="title" draw_ops="title_focused" />
@@ -650,7 +638,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="modal_dialog_unfocused" geometry="modal">
+	<frame_style name="modal_dialog_unfocused" geometry="nobuttons">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
@@ -683,7 +671,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="utility_focused" geometry="small">
+	<frame_style name="utility_focused" geometry="normal">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
@@ -716,7 +704,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="utility_unfocused" geometry="small">
+	<frame_style name="utility_unfocused" geometry="normal">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
@@ -828,7 +816,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="attached_focused" geometry="attached">
+	<frame_style name="attached_focused" geometry="nobuttons">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
 		<piece position="title" draw_ops="title_focused" />
@@ -857,7 +845,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="attached_unfocused" geometry="attached">
+	<frame_style name="attached_unfocused" geometry="nobuttons">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
 		<piece position="title" draw_ops="title_unfocused" />
