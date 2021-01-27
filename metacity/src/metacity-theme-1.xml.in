@@ -42,11 +42,9 @@
 	</frame_geometry>
 
 	<!-- tiled -->
-	<frame_geometry name="tiled_left_active" parent="max">
-	</frame_geometry>
+	<frame_geometry name="tiled_left_active" parent="max" />
 
-	<frame_geometry name="tiled_left_inactive" parent="max">
-	</frame_geometry>
+	<frame_geometry name="tiled_left_inactive" parent="max" />
 
 	<!-- tiled_right have a left_width so a border is always rendered so when
 		 two windows are tiled next to each other a single pixel line
@@ -61,8 +59,7 @@
 	</frame_geometry>
 
 	<!-- no buttons -->
-	<frame_geometry name="nobuttons" hide_buttons="true" parent="normal">
-	</frame_geometry>
+	<frame_geometry name="nobuttons" hide_buttons="true" parent="normal" />
 
 	<!-- border -->
 	<frame_geometry name="border" has_title="false" rounded_top_left="false" rounded_top_right="false" parent="normal">
