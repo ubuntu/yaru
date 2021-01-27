@@ -97,7 +97,7 @@
 	</draw_ops>
 
 	<draw_ops name="entire_background_unfocused">
-		<include name="entire_background_focused" />
+		<rectangle color="C_titlebar_unfocused" x="0" y="0" width="width" height="height" filled="true" />
 	</draw_ops>
 
 	<draw_ops name="titlebar_fill_focused">
@@ -114,11 +114,6 @@
 
 	<draw_ops name="titlebar_tiled_unfocused">
 		<rectangle color="C_titlebar_unfocused" x="0" y="0" width="width" height="height" filled="true" />
-	</draw_ops>
-
- 	<!-- titlebar for attached and modal dialogs -->
-	<draw_ops name="titlebar_fill_attached_focused">
-		<include name="entire_background_focused" />
 	</draw_ops>
 
 	<draw_ops name="border_focused">
@@ -607,7 +602,7 @@
 
 	<frame_style name="modal_dialog_focused" geometry="nobuttons">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
 		<piece position="overlay" draw_ops="border_focused" />
 		<button function="close" state="normal" draw_ops="close_focused" />
@@ -818,7 +813,7 @@
 
 	<frame_style name="attached_focused" geometry="nobuttons">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
-		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
 		<piece position="overlay" draw_ops="border_focused" />
 		<button function="close" state="normal"><draw_ops></draw_ops></button>
@@ -847,7 +842,7 @@
 
 	<frame_style name="attached_unfocused" geometry="nobuttons">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
-		<piece position="titlebar" draw_ops="titlebar_fill_attached_focused" />
+		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
 		<piece position="overlay" draw_ops="border_unfocused" />
 		<button function="close" state="normal"><draw_ops></draw_ops></button>
