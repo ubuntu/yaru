@@ -1161,13 +1161,16 @@ scrollbar {
 // So we don't end up with rounded buttons in a squared dialog frame
 messagedialog.background:not(.csd) {
   .dialog-action-area button {
-    border-right-style: none;
-    border-bottom-style: none;
-    border-radius: 0;
-    -gtk-outline-radius: 0;
-
+    border-radius: $button_radius;
+    -gtk-outline-radius: $button_radius;
+    border: 1px solid $borders_color;
+    margin: 4px;
+    margin-bottom: 6px;
     &:first-child {
-      border-left-style: none;
+      margin-left: 6px;
+    }
+    &:last-child {
+      margin-right: 6px;
     }
   }
 }
