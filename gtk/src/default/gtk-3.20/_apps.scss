@@ -710,6 +710,7 @@ PanelToplevel.background {
     text-shadow: none;
     menu {
       border-radius: $menu_radius;
+      padding: 4px 0px;
       .csd & {
         border: none; // axes borders in a composited env
         border-radius: $menu_radius;
@@ -907,42 +908,41 @@ na-tray-applet {
 /* volume applet */
 .mate-panel-applet-slider,
 .mate-panel-applet-slider.background {
-    background: transparent;
-}
+  border-radius: $menu_radius;
+  border: 1px solid $_wm_border;
+  background: transparent;
 
-.mate-panel-applet-slider frame,
-.mate-panel-applet-slider.background frame {
-    background-color: $_base_bg_color;
-    padding: 0px;
-    margin: 0px;
-}
+  frame {
+    background-color: $bg_color;
+    border-radius: $menu_radius;
+    padding: 1px;
+    margin: 1px;
 
-.mate-panel-applet-slider frame border,
-.mate-panel-applet-slider.background frame border {
-    border-image: none;
-    border-style: none;
-    border-radius:2px;
-}
-
-.mate-panel-applet-slider frame frame,
-.mate-panel-applet-slider.background frame frame {
-    background-color:transparent;
-    padding: 3px;
-}
-
-/* brightness applet */
-.mate-panel-applet-slider frame button,
-.mate-panel-applet-slider.background frame button {
-    padding: 4px 5px 4px 0px;
-    background-image: none;
-    background-color: transparent;
-    border-style: none;
-    border-image: none;
-    color: $_base_fg_color;
-    margin: 0px;
-    &:checked {
-      box-shadow: inset 0 -3px 0 0 $selected_bg_color;
+    border {
+      border-image: none;
+      border-style: none;
+      border-radius:2px;
     }
+
+    frame {
+      background-color:transparent;
+      padding: 3px;
+    }
+
+    /* brightness applet */
+    button {
+      padding: 4px 5px 4px 0px;
+      background-image: none;
+      background-color: transparent;
+      border-style: none;
+      border-image: none;
+      color: $_base_fg_color;
+      margin: 0px;
+      &:checked {
+        box-shadow: inset 0 -3px 0 0 $selected_bg_color;
+      }
+    }
+  }
 }
 
 /* mate-indicator-applet */
@@ -1159,32 +1159,20 @@ scrollbar {
 
 // Axing the border-radii for classic (not csd) dialog buttons
 // So we don't end up with rounded buttons in a squared dialog frame
-messagedialog.background:not(.csd)  {
-  box.dialog-vbox.vertical {
-    button {
-      &.default {
-        &:dir(ltr), &:dir(rtl) {
-          &, label {
-            color: $selected_bg_color;
-          }
-        }        
-      }
-      box-shadow: none;
-      &, &:hover, &:active, &:checked, &:backdrop {
-        border-radius: 0;
-        border-right-width: 0;
-        border-left-width: 0;
-        border-bottom-width: 0;
-        -gtk-outline-radius: 0;
-        &:last-child {
-          border-left-width: 1px;
-        }
-        &:not(:last-child):not(:first-child) {
-          border-right-width: 1px;
-        }
-      }
+messagedialog.background:not(.csd) {
+  .dialog-action-area button {
+    border-radius: $button_radius;
+    -gtk-outline-radius: $button_radius;
+    border: 1px solid $borders_color;
+    margin: 4px;
+    margin-bottom: 6px;
+    &:first-child {
+      margin-left: 6px;
     }
-  }  
+    &:last-child {
+      margin-right: 6px;
+    }
+  }
 }
 
 /**************
