@@ -75,3 +75,15 @@ $switch_borders_color: if($variant == 'light',darken($switch_bg_color,15%),darke
 $focus_border_color: if($variant == 'light', transparentize($selected_bg_color, 0.5), transparentize($selected_bg_color, 0.3));
 $alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), transparentize(white,0.7));
 $dim_label_opacity: 0.55;
+$coloured_focus_border_color: transparentize(white, 0.3);
+
+// Headerbar bg colors for the "mixed" theme
+$headerbar_bg_color: #323030;
+$headerbar_fg_color: $porcelain;
+$headerbar_border_color: lighten($headerbar_bg_color, 8%);
+$headerbar_text_color: $silk;
+$headerbar_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
+$backdrop_headerbar_bg_color: lighten($headerbar_bg_color, 5%);
+$backdrop_headerbar_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 70%);
+$backdrop_headerbar_text_color: mix($headerbar_text_color, $backdrop_headerbar_bg_color, 70%);
+$backdrop_headerbar_insensitive_color: mix($headerbar_fg_color, $backdrop_headerbar_bg_color, 70%);
