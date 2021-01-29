@@ -146,12 +146,13 @@ headerbar {
       border-color: darken($_button_border_color, 6%);
     }
 
-    separator {
+    // BUG: this cause wrong separator in app menu
+    /*separator {
       background: image(lighten($_button_border_color, 5%));
       &:backdrop {
         background: image($_backdrop_button_border_color);
       }
-    }
+  }*/
 
     // TODO: Style switches, scales, selection-mode, selection-menu
 }
