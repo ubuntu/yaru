@@ -1,6 +1,58 @@
 $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
 
+@mixin undershoot($p) {
+  //
+  // undershoot
+  //
+  // $p: position
+  //
+  // possible $p values:
+  // top, bottom, right, left
+  //
+
+  $_us_shadow_color: if($variant=='light', $silk, $jet);
+  $_us_shadow_alpha: 0.8;
+
+  $_gradient_dir: left;
+  $_dash_bg_size: 10px 1px;
+  $_gradient_repeat: repeat-x;
+  $_bg_pos: center $p;
+
+  background-color: transparent; // shouldn't be needed, but better to be sure;
+
+  @if ($p == left) or ($p == right) {
+    $_gradient_dir: top;
+    $_dash_bg_size: 1px 10px;
+    $_gradient_repeat: repeat-y;
+    $_bg_pos: $p center;
+  }
+
+  padding-#{$p}: 1px;
+  background-size: $_dash_bg_size;
+  background-repeat: $_gradient_repeat;
+  background-origin: content-box;
+  background-position: $_bg_pos;
+  border: none;
+
+  @if ($p == left) {
+    box-shadow: inset 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == right) {
+    box-shadow: inset -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == top) {
+    box-shadow: inset 0 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset 0 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == bottom) {
+      box-shadow: inset 0 -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                  inset 0 -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+}
+
 windowcontrols {
     button {
         padding: 2px;
@@ -38,5 +90,45 @@ windowcontrols {
                 color: $headerbar_fg_color;
             }
         }
+    }
+}
+
+notebook > header {
+    &, &:backdrop { background: transparent; }
+    tabs {
+        &, &:hover, &:backdrop {
+            &, &.right, &.left, &.top, &.bottom {
+                background-color: transparent;
+                tab {
+                    outline-width: 1px;
+                    outline-offset: -2px;
+                    &, &:dir(ltr), &:dir(rtl) {
+                        &, &:backdrop {
+                            &, &:checked {
+                                &, &:hover, &:active {
+                                    background-color: transparent;
+                                    border-color: transparent;
+                                }
+                            }
+                            &:hover:not(:checked):not(:backdrop) { color: $insensitive_fg_color; }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// With the conservative tab styling scrolled windows need the undershoots
+
+scrolledwindow {
+    undershoot {
+        &.top { @include undershoot(top); }
+
+        &.bottom { @include undershoot(bottom); }
+
+        &.left { @include undershoot(left); }
+
+        &.right { @include undershoot(right); }
     }
 }

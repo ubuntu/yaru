@@ -2030,10 +2030,10 @@ notebook {
       > tabs {
         margin-bottom: -2px;
         > tab {
-          &:hover { box-shadow: inset 0 -4px $borders_color; }
+          &:hover { box-shadow: inset 0 -3px $borders_color; }  // Yaru change: 4px underlines are too much
 
 
-          &:checked { box-shadow: inset 0 -4px $selected_bg_color; }
+          &:checked { box-shadow: inset 0 -3px $selected_bg_color; }  // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2043,9 +2043,9 @@ notebook {
       > tabs {
         margin-top: -2px;
         > tab {
-          &:hover { box-shadow: inset 0 4px $borders_color; }
+          &:hover { box-shadow: inset 0 3px $borders_color; } // Yaru change: 4px underlines are too much
 
-          &:checked { box-shadow: inset 0 4px $selected_bg_color; }
+          &:checked { box-shadow: inset 0 3px $selected_bg_color; }  // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2055,9 +2055,9 @@ notebook {
       > tabs {
         margin-right: -2px;
         > tab {
-          &:hover { box-shadow: inset -4px 0 $borders_color; }
+          &:hover { box-shadow: inset -3px 0 $borders_color; }  // Yaru change: 4px underlines are too much
 
-          &:checked { box-shadow: inset -4px 0 $selected_bg_color; }
+          &:checked { box-shadow: inset -3px 0 $selected_bg_color; }  // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2067,9 +2067,9 @@ notebook {
       > tabs {
         margin-left: -2px;
         > tab {
-          &:hover { box-shadow: inset 4px 0 $borders_color; }
+          &:hover { box-shadow: inset 3px 0 $borders_color; }  // Yaru change: 4px underlines are too much
 
-          &:checked { box-shadow: inset 4px 0 $selected_bg_color; }
+          &:checked { box-shadow: inset 3px 0 $selected_bg_color; }  // Yaru change: 4px underlines are too much
         }
       }
     }
