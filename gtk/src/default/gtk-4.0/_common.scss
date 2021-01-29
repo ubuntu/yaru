@@ -1936,9 +1936,9 @@ popover.menu {
   }
 
   //only menu radios have a border
-  /*radio { border-color: $borders_color;  // Yaru change: no border on menu radio
+  radio { border-color: $borders_color;
     &:active { border-color: transparentize($borders_color,0.5); }
-}*/
+  }
 
   arrow.left,
   radio.left,

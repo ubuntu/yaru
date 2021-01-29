@@ -2,55 +2,72 @@ $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
 
 @mixin undershoot($p) {
-  //
-  // undershoot
-  //
-  // $p: position
-  //
-  // possible $p values:
-  // top, bottom, right, left
-  //
+    //
+    // undershoot
+    //
+    // $p: position
+    //
+    // possible $p values:
+    // top, bottom, right, left
+    //
 
-  $_us_shadow_color: if($variant=='light', $silk, $jet);
-  $_us_shadow_alpha: 0.8;
+    $_us_shadow_color: if($variant=='light', $silk, $jet);
+    $_us_shadow_alpha: 0.8;
 
-  $_gradient_dir: left;
-  $_dash_bg_size: 10px 1px;
-  $_gradient_repeat: repeat-x;
-  $_bg_pos: center $p;
+    $_gradient_dir: left;
+    $_dash_bg_size: 10px 1px;
+    $_gradient_repeat: repeat-x;
+    $_bg_pos: center $p;
 
-  background-color: transparent; // shouldn't be needed, but better to be sure;
+    background-color: transparent; // shouldn't be needed, but better to be sure;
 
-  @if ($p == left) or ($p == right) {
-    $_gradient_dir: top;
-    $_dash_bg_size: 1px 10px;
-    $_gradient_repeat: repeat-y;
-    $_bg_pos: $p center;
-  }
+    @if ($p == left) or ($p == right) {
+        $_gradient_dir: top;
+        $_dash_bg_size: 1px 10px;
+        $_gradient_repeat: repeat-y;
+        $_bg_pos: $p center;
+    }
 
-  padding-#{$p}: 1px;
-  background-size: $_dash_bg_size;
-  background-repeat: $_gradient_repeat;
-  background-origin: content-box;
-  background-position: $_bg_pos;
-  border: none;
+    padding-#{$p}: 1px;
+    background-size: $_dash_bg_size;
+    background-repeat: $_gradient_repeat;
+    background-origin: content-box;
+    background-position: $_bg_pos;
+    border: none;
 
-  @if ($p == left) {
-    box-shadow: inset 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
-                inset 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
-  }
-  @else if ($p == right) {
-    box-shadow: inset -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
-                inset -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
-  }
-  @else if ($p == top) {
-    box-shadow: inset 0 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
-                inset 0 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
-  }
-  @else if ($p == bottom) {
-      box-shadow: inset 0 -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
-                  inset 0 -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
-  }
+    @if ($p == left) {
+        box-shadow: inset 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+        inset 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+    }
+    @else if ($p == right) {
+        box-shadow: inset -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+        inset -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+    }
+    @else if ($p == top) {
+        box-shadow: inset 0 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+        inset 0 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+    }
+    @else if ($p == bottom) {
+        box-shadow: inset 0 -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+        inset 0 -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+    }
+}
+
+// with a flatter headerbar and buttons, we dont need that heavy shadows, remove this when upstream agrees
+headerbar *, button * {
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+}
+
+// blue spinner, white spinner for colored buttons
+spinner {
+    &:not(:backdrop) {
+        color: $blue;
+    }
+    button.suggested-action &, button.destructive-action & {
+        color: $selected_fg_color;
+        &:backdrop { color: $backdrop_selected_fg_color; }
+    }
 }
 
 windowcontrols {
@@ -93,6 +110,64 @@ windowcontrols {
     }
 }
 
+// we prefered our gray hover for menus and popovers, orange is a very strong color
+menu,
+.menu,
+.context-menu {
+    item:selected {
+        color: $fg_color;
+        background-color: $popover_hover_color;
+    }
+}
+
+// We don't want menuitems to look like links, we should propose this upstream
+menubar,
+.menubar {
+    item:selected {
+        color: $fg_color;
+        background-color: $popover_hover_color;
+    }
+}
+
+// We don't want the app notifications to look like OSD because they are interactive
+.app-notification,
+.app-notification.frame {
+    padding: 5px 10px;
+    margin: 12px;
+    color: $text_color;
+    border-radius: $menu_radius;
+    background: none;
+    background-color: $menu_color;
+    border: 1px solid $borders_color;
+    box-shadow: 0 2px 5px transparentize(black, 0.8);
+    text-shadow: none;
+
+    button {
+        &, &:dir(ltr), &:dir(rtl) {
+            &.text-button, &.image-button, & {
+                @include button(normal);
+                &.flat { @include button(undecorated); }
+                &:hover { @include button(hover); }
+                &:active { @include button(active); }
+                &:backdrop {
+                    @include button(backdrop);
+                    &.flat { @include button(undecorated); }
+                }
+                &:disabled { @include button(insensitive); }
+            }
+        }
+    }
+
+    &:backdrop {
+        background-color: $backdrop_bg_color;
+        color: $backdrop_text_color;
+        box-shadow: none;
+        transition: $backdrop_transition;
+    }
+
+    border { border: none; }
+}
+
 notebook > header {
     &, &:backdrop { background: transparent; }
     tabs {
@@ -120,7 +195,6 @@ notebook > header {
 }
 
 // With the conservative tab styling scrolled windows need the undershoots
-
 scrolledwindow {
     undershoot {
         &.top { @include undershoot(top); }
@@ -130,5 +204,90 @@ scrolledwindow {
         &.left { @include undershoot(left); }
 
         &.right { @include undershoot(right); }
+    }
+}
+
+// Check/radios in menus do not need a border
+popover.menu {
+    check,
+    radio {
+        &, &:checked, &:indeterminate {
+            &, &:hover, &:disabled {
+                border-color: transparent;
+                background: transparent;
+            }
+        }
+    }
+}
+
+// Fixes selected disabled check/radios leaking selected_bg_color, should move to upstream
+treeview.view check,
+treeview.view radio {
+    &:selected {
+        &:focus, & {
+            &:disabled { color: $insensitive_fg_color; }
+        }
+    }
+}
+
+// Reducing the amount of the palette's background colors to two
+.sidebar { background-color: $bg_color; }
+
+scale {
+    > trough > slider {
+        .osd & {
+            @include button(osd);
+            background-image: image(darken($osd_fg_color, 2%));
+
+            &:hover {
+                background-image: image(darken($osd_fg_color, 10%));
+            }
+
+            &:active {
+                background-image: image(darken($osd_fg_color, 25%));
+            }
+        }
+    }
+}
+
+// Rubberband selection shall match with shell's tile-preview
+.rubberband,
+rubberband {
+    background-color: transparentize($ash, 0.8);
+    border: 1px solid if($variant == 'light', transparentize($silk, 0.2), transparentize(darken($silk, 10%), 0.4));
+}
+
+// Entries drown if drawn on widgets with $base_color
+// Fixing this at least for notebooks, since entries on tabs is a common pattern
+@if $variant=='dark' {
+    notebook entry { background-color: darken($base_color, 2%); }
+}
+
+// Make all :not:(.empty) level bars green - should be moved to upstream
+levelbar > trough > block {
+    &.high,
+    &:not(.empty) {
+        border-color: if($variant == 'light', darken($success_color, 20%), $success_color);
+        background-color: $success_color;
+        &:backdrop { border-color: $success_color; }
+    }
+}
+
+// Strengthen the menu shadows to increase visibility
+decoration {
+    $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
+    .csd.popup & {
+        border-radius: $menu_radius;
+        box-shadow: 0 1px 2px 1px transparentize(black, 0.7),
+        0 0 0 1px $_wm_border;
+    }
+}
+
+// Reduce hyper prominent dark theme check switch border in backdrop
+switch {
+    &:backdrop {
+        &:checked {
+            &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
+        }
     }
 }
