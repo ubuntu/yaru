@@ -1391,9 +1391,9 @@ windowcontrols {
   }
 
   button {
-    @extend %button_basic;
+    //@extend %button_basic;
 
-    @extend %button_basic_flat;
+    //@extend %button_basic_flat;
 
 
     border-radius: 9999px;
@@ -1401,12 +1401,12 @@ windowcontrols {
     margin: 0 2px;
     min-width: 0;
     min-height: 0;
-    &:hover {
+    //&:hover {
       //special case hover colors inside a headerbar
-      @include button(undecorated-hover,$c:darken($headerbar_bg_color,6%));
-    }
-    &:active,
-    &:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
+      //@include button(undecorated-hover,$c:darken($headerbar_bg_color,6%));
+    //}
+    //&:active,
+    //&:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
   }
 }
 

@@ -1,0 +1,41 @@
+$_base_hover_color: transparentize($fg_color, 0.85);
+$_base_active_color: transparentize($fg_color, 0.75);
+
+windowcontrols {
+  button {
+    padding: 2px;
+    margin: 0 5px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+
+    &.maximize, &.minimize {
+      &, &:backdrop {
+        &:hover {
+          background: if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color);
+        }
+
+        &:active {
+          background: if($ambiance==true, lighten($inkstone, 12%), $_base_active_color);
+        }
+      }
+    }
+
+    &.close {
+       background: $selected_bg_color;
+
+       &:hover {
+           background: lighten($selected_bg_color, 5%);
+       }
+
+       image {
+           color: white;
+       }
+
+       &:backdrop {
+           background: lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%));
+           &:hover { background: lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%)); }
+       }
+    }
+  }
+}
