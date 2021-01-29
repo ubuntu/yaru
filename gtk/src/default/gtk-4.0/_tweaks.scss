@@ -2,41 +2,41 @@ $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
 
 windowcontrols {
-  button {
-    padding: 2px;
-    margin: 0 7px;
-    border: none;
-    box-shadow: none;
-    background: transparent;
-
-    &.maximize, &.minimize {
-      &, &:backdrop {
+    button {
+        padding: 2px;
+        margin: 0 7px;
+        border: none;
+        box-shadow: none;
         background: transparent;
-        &:hover {
-          background: if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color);
+
+        &.maximize, &.minimize {
+            &, &:backdrop {
+                background: transparent;
+                &:hover {
+                    background: if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color);
+                }
+
+                &:active {
+                    background: if($ambiance==true, lighten($inkstone, 12%), $_base_active_color);
+                }
+            }
         }
 
-        &:active {
-          background: if($ambiance==true, lighten($inkstone, 12%), $_base_active_color);
+        &.close {
+            background: $selected_bg_color;
+
+            &:hover {
+                background: lighten($selected_bg_color, 5%);
+            }
+
+            &:backdrop {
+                background: lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%));
+                &:hover { background: lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%)); }
+            }
+
+            image {
+                color: $headerbar_fg_color;
+            }
         }
-      }
     }
-
-    &.close {
-       background: $selected_bg_color;
-
-       &:hover {
-           background: lighten($selected_bg_color, 5%);
-       }
-
-       &:backdrop {
-           background: lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%));
-           &:hover { background: lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%)); }
-       }
-
-       image {
-           color: $headerbar_fg_color;
-       }
-    }
-  }
 }

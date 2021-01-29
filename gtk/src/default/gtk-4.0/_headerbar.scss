@@ -34,125 +34,125 @@ headerbar {
     filechooser .path-bar.linked>button,
     .path-bar button {
 
-      @include button(normal, $_button_bg_color, $headerbar_fg_color);
-      &.flat {
-        @include button(undecorated);
-      }
-
-      &:hover {
-        @include button(hover, $_button_bg_color, $headerbar_fg_color);
-      }
-      &:active,
-      &:checked {
-        @include button(active, $_button_bg_color, $headerbar_fg_color);
-        border-color: black;
-      }
-
-      &:checked:hover { @include button(checked-hover, $_button_bg_color, $headerbar_fg_color); }
-      &:checked:active { @include button(checked-active, $_button_bg_color, $headerbar_fg_color); }
-
-      &:backdrop {
-        &, &.flat {
-            @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-
-            -gtk-icon-effect: none;
-            border-color: $_backdrop_button_border_color;
-
-            &:active,
-            &.toggle:active,
-            &:checked,
-            &.toggle:checked {
-              $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 8%), $backdrop_headerbar_bg_color);
-              @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
-              border-color: $_backdrop_button_border_color;
-            }
-
-            &:disabled {
-              @include button(backdrop-insensitive, darken($backdrop_headerbar_bg_color, 14%), $backdrop_headerbar_fg_color);
-
-              border-color: $_backdrop_button_border_color;
-
-              &:active,
-              &:checked {
-                @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-                border-color: $_backdrop_button_border_color;
-              }
-          }
+        @include button(normal, $_button_bg_color, $headerbar_fg_color);
+        &.flat {
+            @include button(undecorated);
         }
-      }
 
-      &:disabled {
-        @include button(insensitive, if($variant=='light', darken($headerbar_bg_color, 9%), $headerbar_bg_color), $headerbar_fg_color);
-        border-color: darken($headerbar_bg_color, 6%);
-
+        &:hover {
+            @include button(hover, $_button_bg_color, $headerbar_fg_color);
+        }
         &:active,
         &:checked {
-          @include button(insensitive-active, $headerbar_bg_color, $headerbar_fg_color);
+            @include button(active, $_button_bg_color, $headerbar_fg_color);
+            border-color: black;
         }
-      }
 
-      // Suggested and Destructive Action buttons, need to overwrite them again here
-      // copied from common, disabled buttons bg color changed to match the headerbar
-      @each $b_type, $b_color in (suggested-action, $suggested_bg_color),
-                                 (destructive-action, $destructive_color) {
-        &.#{$b_type} {
-          @include button(normal, $b_color, white);
-          @include focus-ring($fc: $alt_focus_border_color);
+        &:checked:hover { @include button(checked-hover, $_button_bg_color, $headerbar_fg_color); }
+        &:checked:active { @include button(checked-active, $_button_bg_color, $headerbar_fg_color); }
 
-          &.flat {
-            @include button(undecorated);
+        &:backdrop {
+            &, &.flat {
+                @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
 
-            color: $b_color;
-          }
+                -gtk-icon-effect: none;
+                border-color: $_backdrop_button_border_color;
 
-          &:hover { @include button(hover, $b_color, white); }
+                &:active,
+                &.toggle:active,
+                &:checked,
+                &.toggle:checked {
+                    $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 8%), $backdrop_headerbar_bg_color);
+                    @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
+                    border-color: $_backdrop_button_border_color;
+                }
 
-          &:active,
-          &:checked { @include button(active, $b_color, white); }
+                &:disabled {
+                    @include button(backdrop-insensitive, darken($backdrop_headerbar_bg_color, 14%), $backdrop_headerbar_fg_color);
 
-          &.flat {
-            &:disabled {
-              @include button(undecorated);
+                    border-color: $_backdrop_button_border_color;
 
-              color: transparentize($b_color, 0.2);
+                    &:active,
+                    &:checked {
+                        @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
+                        border-color: $_backdrop_button_border_color;
+                    }
+                }
             }
-          }
-
-          &:disabled {
-            @include button(insensitive, if($variant== "light", darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
-
-            &:active,
-            &:checked { @include button(insensitive-active, $b_color, white); }
-          }
-
-          .osd & {
-            @include button(osd, $b_color);
-
-            &:hover { @include button(osd-hover, $b_color); }
-
-            &:active,
-            &:checked { &:backdrop, & { @include button(osd-active, $b_color); }}
-
-            &:disabled { &:backdrop, & { @include button(osd-insensitive, $b_color); }}
-
-          }
         }
-      }
+
+        &:disabled {
+            @include button(insensitive, if($variant=='light', darken($headerbar_bg_color, 9%), $headerbar_bg_color), $headerbar_fg_color);
+            border-color: darken($headerbar_bg_color, 6%);
+
+            &:active,
+            &:checked {
+                @include button(insensitive-active, $headerbar_bg_color, $headerbar_fg_color);
+            }
+        }
+
+        // Suggested and Destructive Action buttons, need to overwrite them again here
+        // copied from common, disabled buttons bg color changed to match the headerbar
+        @each $b_type, $b_color in (suggested-action, $suggested_bg_color),
+        (destructive-action, $destructive_color) {
+            &.#{$b_type} {
+                @include button(normal, $b_color, white);
+                @include focus-ring($fc: $alt_focus_border_color);
+
+                &.flat {
+                    @include button(undecorated);
+
+                    color: $b_color;
+                }
+
+                &:hover { @include button(hover, $b_color, white); }
+
+                &:active,
+                &:checked { @include button(active, $b_color, white); }
+
+                &.flat {
+                    &:disabled {
+                        @include button(undecorated);
+
+                        color: transparentize($b_color, 0.2);
+                    }
+                }
+
+                &:disabled {
+                    @include button(insensitive, if($variant== "light", darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
+
+                    &:active,
+                    &:checked { @include button(insensitive-active, $b_color, white); }
+                }
+
+                .osd & {
+                    @include button(osd, $b_color);
+
+                    &:hover { @include button(osd-hover, $b_color); }
+
+                    &:active,
+                    &:checked { &:backdrop, & { @include button(osd-active, $b_color); }}
+
+                    &:disabled { &:backdrop, & { @include button(osd-insensitive, $b_color); }}
+
+                }
+            }
+        }
     }
 
     stackswitcher > button:checked,
     button.toggle:checked {
-      background: image(darken($_button_bg_color, 9%));
-      border-color: darken($_button_border_color, 6%);
+        background: image(darken($_button_bg_color, 9%));
+        border-color: darken($_button_border_color, 6%);
     }
 
     // BUG: this cause wrong separator in app menu
     /*separator {
-      background: image(lighten($_button_border_color, 5%));
-      &:backdrop {
-        background: image($_backdrop_button_border_color);
-      }
-  }*/
+        background: image(lighten($_button_border_color, 5%));
+        &:backdrop {
+            background: image($_backdrop_button_border_color);
+        }
+    }*/
 
     // TODO: Style switches, scales, selection-mode, selection-menu
 }
