@@ -105,7 +105,7 @@
 
 @function _border_color($c, $darker: false) {
   @if $darker == true { @return darken($c, 20%); }
-  @else { @return darken($c, 10%); }
+  @else { @return darken($c, 10%); } // Yaru change: less darken 15% -> 10%
 }
 
 $_default_button_c: lighten($bg_color,2%);
@@ -130,7 +130,7 @@ $_default_button_c: lighten($bg_color,2%);
   //
     color: $tc;
     outline-color: if($c != $_default_button_c, $alt_focus_border_color, $focus_border_color);
-    border-color: if($c!=$_default_button_c, _border_color($c, false), $borders_color); //tint if not default button color
+    border-color: if($c!=$_default_button_c, _border_color($c, false), $borders_color); //tint if not default button color - Yaru change: less darken border-color
     background-image: if($c == $bg_color, if($variant == 'light', image(lighten($c, 2%)), image(lighten($c, 4%))), image(lighten($c, 2%))); // Yaru change: remove gradient
     @include _shadows($_button_shadow);
   }
