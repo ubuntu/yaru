@@ -62,7 +62,7 @@ headerbar *, button * {
 // blue spinner, white spinner for colored buttons
 spinner {
     &:not(:backdrop) {
-        color: $blue;
+        color: $spinner_color;
     }
     button.suggested-action &, button.destructive-action & {
         color: $selected_fg_color;

@@ -7,11 +7,11 @@ $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
 $focus_transition: outline-width 200ms $ease-out-quad, outline-offset 200ms $ease-out-quad;
-$button_radius: 4px;
-$menu_radius: 3px;
+$button_radius: 4px; // Yaru change: we want everything to be less round
+$menu_radius: 3px; // Yaru change: we want everything to be less round
 $menu_margin: $menu_radius; //margin around menuitems & sidebar items
 $window_radius: $button_radius + 3;
-$popover_radius: $button_radius + 2;
+$popover_radius: $button_radius + 2; // Yaru change: we want everything to be less round
 
 /***************
  * Base States *
@@ -223,7 +223,6 @@ window.aboutdialog image.large-icons {
 }
 
 spinner {
-  &:not(:backdrop) { color: $spinner_color; }
   background: none;
   opacity: 0; // non spinning spinner makes no sense
   -gtk-icon-source: -gtk-icontheme('process-working-symbolic');
@@ -669,7 +668,7 @@ button {
   }
 
   // Suggested and Destructive Action buttons
-  @each $b_type, $b_color in (suggested-action, $suggested_bg_color),
+  @each $b_type, $b_color in (suggested-action, $suggested_bg_color), // Yaru change: use our own palette
                              (destructive-action, $destructive_color) {
     &.#{$b_type} {
       @include button(normal, $b_color, white);
@@ -1390,7 +1389,7 @@ windowcontrols {
     }
   }
 
-  button {
+  button { // Yaru changes: disable default windowcontrols button look (see _tweaks for yaru style)
     //@extend %button_basic;
 
     //@extend %button_basic_flat;
@@ -1453,7 +1452,7 @@ headerbar {
   button.toggle:checked {
 
     background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
-    border-color: darken($borders_color, 6%);
+    border-color: darken($borders_color, 6%); // Yaru changes: modify borders
     // border-top-color: darken($borders_color, 8%);
     &:backdrop {
       @include button(backdrop-active);
@@ -2021,7 +2020,7 @@ notebook {
     padding: 1px;
     border-color: $borders_color;
     border-width: 1px;
-    background-color: transparent;
+    background-color: transparent; // Yaru change: remove notebook background
 
     > tabs { margin: -1px; }
 
@@ -2577,9 +2576,9 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
 }
 
 %scale_highlight {
-  border: 1px solid $progress_bg_color;
+  border: 1px solid $progress_bg_color; // Yaru change: use our own palette
   border-radius: 3px;
-  background-color: $progress_bg_color;
+  background-color: $progress_bg_color; // Yaru change: use our own palette
 
   &:disabled {
     background-color: transparent;
@@ -2688,7 +2687,7 @@ scale {
 
     &:hover { @include button(hover); }
 
-    &:active { border-color: $progress_bg_color; }
+    &:active { border-color: $progress_bg_color; } // Yaru change: use our own palette
 
     &:disabled { @include button(insensitive); }
 
@@ -3128,8 +3127,8 @@ levelbar {
 
     &.high,
     &:not(.empty) {
-      border-color: $progress_bg_color;
-      background-color: $progress_bg_color;
+      border-color: $progress_bg_color; // Yaru change: use our own palette
+      background-color: $progress_bg_color; // Yaru change: use our own palette
     }
 
     &.full {
@@ -3138,8 +3137,8 @@ levelbar {
     }
 
     &.empty {
-      background-color: $dark_fill;
-      border-color: $dark_fill;
+      background-color: $dark_fill; // Yaru change: use our own palette
+      border-color: $dark_fill; // Yaru change: use our own palette
     }
   }
 }
