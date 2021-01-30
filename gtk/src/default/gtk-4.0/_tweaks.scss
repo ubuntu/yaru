@@ -267,7 +267,7 @@ rubberband {
 levelbar > trough > block {
     &.high,
     &:not(.empty) {
-        border-color: if($variant == 'light', darken($success_color, 20%), $success_color);
+        border-color: $success_color;
         background-color: $success_color;
         &:backdrop { border-color: $success_color; }
     }
