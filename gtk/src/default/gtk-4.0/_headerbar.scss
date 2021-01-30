@@ -98,6 +98,7 @@ headerbar {
             &.#{$b_type} {
                 @include button(normal, $b_color, white);
                 @include focus-ring($fc: $alt_focus_border_color);
+                border-color: $b_color;
 
                 &.flat {
                     @include button(undecorated);
@@ -105,10 +106,15 @@ headerbar {
                     color: $b_color;
                 }
 
-                &:hover { @include button(hover, $b_color, white); }
+                &:hover {
+                    @include button(hover, $b_color, white);
+                    border-color: $b_color;
+                }
 
                 &:active,
-                &:checked { @include button(active, $b_color, white); }
+                &:checked {
+                    @include button(active, $b_color, white);
+                }
 
                 &.flat {
                     &:disabled {
