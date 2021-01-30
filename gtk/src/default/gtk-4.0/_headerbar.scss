@@ -151,16 +151,79 @@ headerbar {
         background: image(darken($_button_bg_color, 9%));
         border-color: darken($_button_border_color, 6%);
     }
-
-    // BUG: this cause wrong separator in app menu
-    /*separator {
+/*
+    separator {
         background: image(lighten($_button_border_color, 5%));
         &:backdrop {
             background: image($_backdrop_button_border_color);
         }
-    }*/
+    }
+*/
+    switch {
+        border-color: $_button_border_color;
+        color: $headerbar_fg_color;
+        background-color: $_button_bg_color;
 
-    // TODO: Style switches, scales, selection-mode, selection-menu
+        &:checked {
+            color: $selected_fg_color;
+            border-color: $_button_border_color;
+            background-color: $checkradio_bg_color;
+        }
+
+        &:disabled {
+            color: $insensitive_fg_color;
+            background-color: $headerbar_bg_color;
+            border-color: $_button_border_color;
+        }
+
+        &:backdrop {
+            color: $backdrop_fg_color;
+            border-color: $backdrop_borders_color;
+            background-color: lighten($backdrop_headerbar_bg_color, 2%);
+
+            &:checked {
+                color: $selected_fg_color;
+                border-color: $_button_border_color;
+                background-color: $checkradio_bg_color;
+            }
+
+            &:disabled {
+                color: $backdrop_insensitive_color;
+                background-color: $backdrop_headerbar_bg_color;
+                border-color: $_backdrop_button_border_color;
+            }
+        }
+    }
+
+    switch, scale {
+        slider {
+            @include button(normal-alt, $_button_bg_color);
+        }
+
+        &:hover slider {
+            @include button(hover-alt, $_button_bg_color);
+        }
+
+        &:checked > slider { border-color: $_button_border_color; }
+
+        &:disabled slider { @include button(insensitive, darken($headerbar_bg_color, 8%)); }
+
+        &:backdrop {
+            slider {
+                @include button(backdrop, $_button_bg_color);
+            }
+
+            &, &:checked, &:disabled, &:checked:disabled {
+              > slider { border-color: darken($_backdrop_button_border_color, 4%); box-shadow: none; }
+            }
+
+            &:checked > slider { border-color: $_button_border_color; }
+
+            &:disabled slider { @include button(backdrop-insensitive, $_button_bg_color); }
+        }
+    }
+
+    // TODO: Style selection-mode, selection-menu
 }
 
 windowcontrols button image {
