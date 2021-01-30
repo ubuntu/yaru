@@ -132,7 +132,7 @@ menubar,
 // We don't want the app notifications to look like OSD because they are interactive
 .app-notification,
 .app-notification.frame {
-    padding: 5px 10px;
+    padding: 0px 10px;
     margin: 12px;
     color: $text_color;
     border-radius: $menu_radius;
