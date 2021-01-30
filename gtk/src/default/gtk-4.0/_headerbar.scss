@@ -151,14 +151,7 @@ headerbar {
         background: image(darken($_button_bg_color, 9%));
         border-color: darken($_button_border_color, 6%);
     }
-/*
-    separator {
-        background: image(lighten($_button_border_color, 5%));
-        &:backdrop {
-            background: image($_backdrop_button_border_color);
-        }
-    }
-*/
+
     switch {
         border-color: $_button_border_color;
         color: $headerbar_fg_color;
@@ -224,6 +217,8 @@ headerbar {
     }
 
     // TODO: Style selection-mode, selection-menu
+    // TODO: Test separator
+    // TODO: Test switches
 }
 
 windowcontrols button image {
