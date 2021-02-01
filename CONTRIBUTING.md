@@ -41,6 +41,30 @@ update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /us
 
 If you reboot, select the Yaru session in GDM and you should be all right.
 
+### Help to install Gtk4
+
+If you want to test the Gtk4 theme, you need to compile Gtk from source (awaiting an official ubuntu packaging).
+
+Firstly clone the repository:
+```bash
+git clone git@gitlab.gnome.org:GNOME/gtk.git
+```
+
+Then, you need to install dependencies (please report if more ones are needed):
+```bash
+sudo apt install libgraphene-1.0-dev
+```
+
+And finally compile using meson:
+```bash
+meson --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libdir=lib/x86_64-linux-gnu _build .
+cd _build
+ninja
+sudo ninja install
+```
+
+Now you can use the "gtk4-widget-factory" app.
+
 ### More granular changes
 
 Now everything should be in place. Select the GTK, icon and sound theme via:
@@ -181,11 +205,11 @@ $ git commit
 Now think about a good *commit message*. The expected format is like the following
 
 > short explaination of the commit
-> 
+>
 > A more detailed explaination, possibly explaining the current state,
 > why a change is needed and how you implemented the change. Try to find
 > a good compromise between too short and too long.
-> 
+>
 > if it is a fix for a bug numbered 1234 inform GitHub system so that it
 > can close it automatically when the PR is merged.
 >
