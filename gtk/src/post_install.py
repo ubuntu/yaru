@@ -28,7 +28,7 @@ for f in flavours:
         theme_index_dst = path.join(flavour_dir, 'index.theme')
         move(theme_index_src, theme_index_dst)
 
-    for gtkver in ['3.0', '3.20']:
+    for gtkver in ['3.0', '3.20', '4.0']:
         gtk_dir = path.join(flavour_dir, 'gtk-' + gtkver)
 
         # rename gresource
