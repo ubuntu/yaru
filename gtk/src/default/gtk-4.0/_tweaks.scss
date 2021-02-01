@@ -295,7 +295,7 @@ switch {
 // Add some transitions on checks and radios
 check,
 radio {
-    transition-property: background border;
+    transition-property: background, border;
     transition-duration: 200ms;
     transition-timing-function: ease;
 }
