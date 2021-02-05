@@ -1,20 +1,17 @@
 /* Dash */
 
+$dash_background_color: #3b3b3b;
 $dash_placeholder_size: 32px;
 $dash_spacing: $base_padding + 4px;
 $dash_border_radius: $modal_radius * 1.5;
 
 #dash {
-  @extend %overview_panel;
+  background-color: $dash_background_color;
   @include fontsize($base_font_size - 2);
+  margin: $base_margin * 4 $base_margin * 2;
   padding: ($dash_spacing / 2) 0;
 
-  border-radius: 0 $dash_border_radius $dash_border_radius 0; 
-  border-left-width: 0;
-  &:rtl {
-    border-radius: $dash_border_radius 0 0 $dash_border_radius;
-    border-right-width: 0;
-  }
+  border-radius: $dash_border_radius;
 
   .placeholder {
     // background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
@@ -30,8 +27,17 @@ $dash_border_radius: $modal_radius * 1.5;
 }
 
 // Dash Items
-.dash-item-container > StWidget {
-  padding: ($dash_spacing / 2) $dash_spacing;
+.dash-item-container {
+  & > StWidget {
+     padding: ($dash_spacing / 2) 0; //all compact
+  }
+}
+
+.app-well-app:first-child {
+  padding-left: $dash_spacing; //first one padded
+}
+.show-apps:last-child { //last one padded slightly from the favorites
+  padding: ($dash_spacing / 2) $dash_spacing ($dash_spacing / 2) ($dash_spacing / 2);
 }
 
 // OSD Tooltip
@@ -43,7 +49,7 @@ $dash_border_radius: $modal_radius * 1.5;
   color: $osd_fg_color;
   padding: $base_padding $base_padding + 2px;
   text-align: center;
-  -x-offset: $base_margin * 2; // distance from the dash edge
+  -y-offset: $base_margin * 3; // distance from the dash edge
 }
 
 // Show apps button
@@ -53,7 +59,7 @@ $dash_border_radius: $modal_radius * 1.5;
   &:focus,
   &:checked {
     .overview-icon {
-      background-color: darken($osd_bg_color,10%);
+      background-color: transparentize($osd_bg_color,0.5);
       color: $fg_color;
     }
   }
