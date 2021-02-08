@@ -54,8 +54,6 @@ headerbar {
         &:backdrop {
             &, &.flat {
                 @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-
-                -gtk-icon-effect: none;
                 border-color: $_backdrop_button_border_color;
 
                 &:active,
