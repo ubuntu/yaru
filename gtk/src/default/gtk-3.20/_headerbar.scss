@@ -125,7 +125,7 @@ headerbar:not(.selection-mode),
         &:active,
         &:checked {
           @include button(active, $b_color, white);
-          border-color: darken($suggested_bg_color, 15%);
+          border-color: darken($b_color, 27%);
         }
 
         &, &:hover, &:focus:active { outline-color: $coloured_focus_border_color; }
