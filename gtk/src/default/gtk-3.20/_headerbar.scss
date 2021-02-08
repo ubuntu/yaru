@@ -266,3 +266,19 @@ headerbar:not(.selection-mode),
     }
   }
 }
+
+window.devel {
+  headerbar.titlebar:not(.selection-mode) {
+    $c: darken($headerbar_bg_color, 10%);
+      $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+                 linear-gradient(to right, transparent 65%, transparentize($c, 0.9)),
+                 linear-gradient(to top, lighten($c, 3%) 3px, lighten($c, 5%));
+
+    background: $headerbar_bg_color $gradient;
+
+    &:backdrop {
+      background: $headerbar_bg_color cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+                  image($headerbar_bg_color); /* background-color would flash */
+    }
+  }
+}
