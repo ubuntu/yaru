@@ -31,10 +31,10 @@ headerbar {
     box button.toggle,
     buttonbox.toggle,
     stackswitcher button,
-    filechooser .path-bar.linked>button,
+    filechooser .path-bar.linked > button,
     .path-bar button {
-
         @include button(normal, $_button_bg_color, $headerbar_fg_color);
+
         &.flat {
             @include button(undecorated);
         }
@@ -42,50 +42,54 @@ headerbar {
         &:hover {
             @include button(hover, $_button_bg_color, $headerbar_fg_color);
         }
+
         &:active,
         &:checked {
             @include button(active, $_button_bg_color, $headerbar_fg_color);
             border-color: black;
         }
 
-        &:checked:hover { @include button(checked-hover, $_button_bg_color, $headerbar_fg_color); }
-        &:checked:active { @include button(checked-active, $_button_bg_color, $headerbar_fg_color); }
-
-        &:backdrop {
-            &, &.flat {
-                @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-                border-color: $_backdrop_button_border_color;
-
-                &:active,
-                &.toggle:active,
-                &:checked,
-                &.toggle:checked {
-                    $_bg: if($variant=='light', darken($backdrop_headerbar_bg_color, 8%), $backdrop_headerbar_bg_color);
-                    @include button(backdrop-active, $_bg, $backdrop_headerbar_fg_color);
-                    border-color: $_backdrop_button_border_color;
-                }
-
-                &:disabled {
-                    @include button(backdrop-insensitive, darken($backdrop_headerbar_bg_color, 14%), $backdrop_headerbar_fg_color);
-
-                    border-color: $_backdrop_button_border_color;
-
-                    &:active,
-                    &:checked {
-                        @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
-                        border-color: $_backdrop_button_border_color;
-                    }
-                }
-            }
+        &:checked {
+            &:hover { @include button(checked-hover, $_button_bg_color, $headerbar_fg_color); }
+            &:active { @include button(checked-active, $_button_bg_color, $headerbar_fg_color); }
         }
 
         &:disabled {
-            @include button(insensitive, if($variant=='light', darken($headerbar_bg_color, 9%), $headerbar_bg_color), $headerbar_fg_color);
+            @include button(insensitive, $headerbar_bg_color, $headerbar_fg_color);
             border-color: darken($headerbar_bg_color, 6%);
 
             &:active,
             &:checked {
                 @include button(insensitive-active, $headerbar_bg_color, $headerbar_fg_color);
+            }
+        }
+
+        &:backdrop {
+            &, &.flat {
+                @include button(backdrop, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
+
+                &:active,
+                &:checked {
+                    @include button(backdrop-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
+                }
+
+                &:disabled {
+                    @include button(backdrop-insensitive, darken($backdrop_headerbar_bg_color, 14%), $backdrop_headerbar_fg_color);
+
+                    &:active,
+                    &:checked {
+                        @include button(backdrop-insensitive-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
+                    }
+                }
+
+                &,
+                &:disabled {
+                    &,
+                    &:active,
+                    &:checked {
+                        border-color: $_backdrop_button_border_color;
+                    }
+                }
             }
         }
 
@@ -100,7 +104,6 @@ headerbar {
 
                 &.flat {
                     @include button(undecorated);
-
                     color: $b_color;
                 }
 
@@ -112,18 +115,18 @@ headerbar {
                 &:active,
                 &:checked {
                     @include button(active, $b_color, white);
+                    border-color: darken($b_color, 27%);
                 }
 
                 &.flat {
                     &:disabled {
                         @include button(undecorated);
-
                         color: transparentize($b_color, 0.2);
                     }
                 }
 
                 &:disabled {
-                    @include button(insensitive, if($variant== "light", darken($headerbar_bg_color, 15%), $headerbar_bg_color), $headerbar_fg_color);
+                    @include button(insensitive, $headerbar_bg_color, $headerbar_fg_color);
 
                     &:active,
                     &:checked { @include button(insensitive-active, $b_color, white); }
@@ -220,4 +223,21 @@ headerbar {
 
 windowcontrols button image {
     color: $headerbar_fg_color;
+}
+
+window.devel {
+    headerbar.titlebar {
+        $c: darken($bg_color, 10%);
+
+        $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+        linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.9)),
+        linear-gradient(to top, lighten($c, 3%) 3px, lighten($c, 5%));
+
+        background: $bg_color $gradient;
+
+        &:backdrop {
+            background: $bg_color cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+            image($bg_color); /* background-color would flash */
+        }
+    }
 }
