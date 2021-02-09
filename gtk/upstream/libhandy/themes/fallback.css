@@ -77,8 +77,16 @@ viewswitchertitle viewswitcher { margin-left: 12px; margin-right: 12px; }
 
 statuspage > scrolledwindow > viewport > box { margin: 36px 12px; }
 
-statuspage > scrolledwindow > viewport > box > clamp > box > .icon { margin-bottom: 36px; opacity: 0.5; }
+statuspage > scrolledwindow > viewport > box > clamp > box > .icon { margin-bottom: 36px; }
 
 statuspage > scrolledwindow > viewport > box > clamp > box > .title { margin-bottom: 12px; }
 
 statuspage > scrolledwindow > viewport > box > clamp > box > .description { margin-bottom: 36px; }
+
+preferencespage > scrolledwindow > viewport > clamp { margin: 18px 12px; }
+
+preferencesgroup > box > label:not(:first-child) { margin-top: 6px; }
+
+preferencesgroup > box > box:not(:first-child) { margin-top: 12px; }
+
+tabbar .tab-indicator:not(.clickable) { background: none; box-shadow: none; border-color: transparent; }
