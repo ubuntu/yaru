@@ -75,7 +75,7 @@ headerbar {
     }
 
     &:disabled {
-      @include button(insensitive, $headerbar_bg_color, $headerbar_fg_color);
+      @include button(insensitive, darken($headerbar_bg_color, 9%), $headerbar_fg_color);
       border-color: darken($headerbar_bg_color, 6%);
 
       &:active,
@@ -90,7 +90,7 @@ headerbar {
 
         &:active,
         &:checked {
-          @include button(backdrop-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
+          @include button(backdrop-active, darken($backdrop_headerbar_bg_color, 8%), $backdrop_headerbar_fg_color);
         }
 
         &:disabled {
@@ -146,7 +146,7 @@ headerbar {
         }
 
         &:disabled {
-          @include button(insensitive, $headerbar_bg_color, $headerbar_fg_color);
+          @include button(insensitive, darken($headerbar_bg_color, 15%), $headerbar_fg_color);
 
           &:active,
           &:checked { @include button(insensitive-active, $b_color, white); }

@@ -67,7 +67,7 @@ headerbar,
       }
 
       &:disabled {
-        @include button(insensitive, $headerbar_bg_color, $headerbar_fg_color);
+        @include button(insensitive, darken($headerbar_bg_color, 9%), $headerbar_fg_color);
         border-color: darken($headerbar_bg_color, 6%);
 
         &:active,
@@ -82,7 +82,7 @@ headerbar,
 
           &:active,
           &:checked {
-            @include button(backdrop-active, $backdrop_headerbar_bg_color, $backdrop_headerbar_fg_color);
+            @include button(backdrop-active, darken($backdrop_headerbar_bg_color, 8%), $backdrop_headerbar_fg_color);
           }
 
           &:disabled {
@@ -132,7 +132,7 @@ headerbar,
           &, &:hover, &:focus:active { outline-color: $coloured_focus_border_color; }
 
           &:disabled {
-            @include button(insensitive, $headerbar_bg_color, $headerbar_fg_color);
+            @include button(insensitive, darken($headerbar_bg_color, 15%), $headerbar_fg_color);
             border-color: darken($headerbar_bg_color, 5%);
             background-image: image(lighten($headerbar_bg_color, 2%));
 
@@ -152,7 +152,7 @@ headerbar,
               }
 
               &:disabled {
-                @include button(backdrop-insensitive, $headerbar_bg_color, $backdrop_headerbar_fg_color);
+                @include button(backdrop-insensitive, darken($backdrop_headerbar_bg_color, 14%), $backdrop_headerbar_fg_color);
                 border-color: darken($backdrop_headerbar_bg_color, 3%);
 
                 &:active,
