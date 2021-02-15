@@ -492,7 +492,7 @@
 //
   $gradient: linear-gradient(to top, darken($c, 0%), lighten($c, 0%)); // Yaru change: no gradients
 
-  @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 3%), lighten($c, 3%)); } // Yaru change: no gradients
+  @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 6%), lighten($c, 6%)); } // Yaru change: no gradients
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
