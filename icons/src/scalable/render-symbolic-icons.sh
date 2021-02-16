@@ -90,7 +90,7 @@ optimize() {
   OUTPUT=../../Suru/scalable/${GROUP}/${NAME}
   [[ ! -d ${OUTDIR} ]] && fatal "could not find output directory: ${OUTDIR}"
 
-  cmd="svgo --pretty --disable=convertShapeToPath --input=${INPUT} --output=${OUTPUT}"
+  cmd="scour -i ${INPUT} -o ${OUTPUT}"
   #echo "$cmd"
   $cmd >/dev/null
 }
