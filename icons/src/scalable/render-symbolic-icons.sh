@@ -90,7 +90,7 @@ optimize() {
   OUTPUT=../../Suru/scalable/${GROUP}/${NAME}
   [[ ! -d ${OUTDIR} ]] && fatal "could not find output directory: ${OUTDIR}"
 
-  cmd="scour -i ${INPUT} -o ${OUTPUT}"
+  cmd="scour -i ${INPUT} -o ${OUTPUT} --enable-viewboxing --create-groups --shorten-ids --enable-id-stripping --enable-comment-stripping --disable-embed-rasters --remove-metadata --strip-xml-prolog"
   #echo "$cmd"
   $cmd >/dev/null
 }
