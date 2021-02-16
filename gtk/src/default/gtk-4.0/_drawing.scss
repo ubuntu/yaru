@@ -357,7 +357,7 @@ $_default_button_c: lighten($bg_color,2%);
 // $c:  base color
 // $ov: a background layer for background shorthand (hence no commas!)
 //
-  $gradient: if($variant=='light', image($c), image(lighten($c, 4%)));  // Yaru change: remove gradient
+  $gradient: if($variant=='light', image($c), image(lighten($c, 6%)));  // Yaru change: remove gradient
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
