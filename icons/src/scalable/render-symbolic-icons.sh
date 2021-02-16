@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # -*- coding: UTF-8 -*-
-## Optimize SVG icons with [svgo](https://github.com/svg/svgo)
+## Optimize SVG icons with [scour](https://github.com/scour-project/scour)
 ## usage:
 ##
 ## options:
@@ -70,9 +70,9 @@ if [[ ! ${CWD} =~ "icons/src/scalable" ]]; then
 fi
 info "working directory OK."
 
-command -v svgo 1>&2>/dev/null
+command -v scour 1>&2>/dev/null
 if [[ $? == 1 ]]; then
-  fatal "missing dependency: svgo."
+  fatal "missing dependency: scour."
 fi
 info "dependencies OK."
 
