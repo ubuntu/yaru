@@ -933,6 +933,14 @@ list > row button.image-button:not(.flat) {
   &:hover { @include button(hover); }
   &:active,
   &:checked { @include button(active); }
+
+  @each $b_type, $b_color in (suggested-action, $selected_bg_color),
+                         (destructive-action, $destructive_color) {
+    &.#{$b_type} { // allow colored buttons in lists #3643
+      @include button(normal, $b_color, white);
+      @include focus-ring($fc: $alt_focus_border_color);
+    }
+  }
 }
 
 /*********
@@ -2270,11 +2278,15 @@ notebook {
 /**************
  * Scrollbars *
  **************/
+
 scrollbar {
   $_slider_min_length: 40px;
+  $_slider_width: 8px;
+  $_scrollbar_transition: all 300ms $ease-out-quad;
+  $_fine-tune_slider_border: $_slider_width - 3; //#3672
 
   background-color: $scrollbar_bg_color;
-  transition: 300ms $ease-out-quad;
+  transition: $_scrollbar_transition;
 
   // scrollbar border
   &.top { border-bottom: 1px solid $borders_color; }
@@ -2283,13 +2295,14 @@ scrollbar {
   &.right { border-left: 1px solid $borders_color; }
 
   > range > trough > slider {
-    min-width: 10px;
-    min-height: 10px;
+    min-width: $_slider_width;
+    min-height: $_slider_width;
     margin: -1px;
     border: 4px solid transparent;
     border-radius: 10px;
     background-clip: padding-box;
     background-color: $scrollbar_slider_color;
+    transition: $_scrollbar_transition;
 
     &:hover { background-color: $scrollbar_slider_hover_color; }
 
@@ -2300,12 +2313,13 @@ scrollbar {
 
   > range.fine-tune {
     > trough > slider {
-      min-width: 6px;
-      min-height: 6px;
+      transition: none;
+      min-width: $_fine-tune_slider_border+1;
+      min-height: $_fine-tune_slider_border+1;
     }
 
-    &.horizontal > trough > slider { border-width: 6px 4px; }
-    &.vertical > trough > slider { border-width: 4px 6px; }
+    &.horizontal > trough > slider { border-width: $_fine-tune_slider_border 4px; }
+    &.vertical > trough > slider { border-width: 4px $_fine-tune_slider_border; }
   }
 
   &.overlay-indicator {
@@ -4095,12 +4109,18 @@ window {
   }
 
   &.maximized,
-  &.fullscreen,
+  &.fullscreen { border-radius: 0; box-shadow: none; }
+
   &.tiled,
   &.tiled-top,
   &.tiled-left,
   &.tiled-right,
-  &.tiled-bottom { border-radius: 0; }
+  &.tiled-bottom {
+   border-radius: 0;
+   box-shadow: 0 0 0 1px $_wm_border_backdrop;
+
+   &:backdrop { box-shadow: 0 0 0 1px $_wm_border_backdrop; }
+  }
 
   &.popup { box-shadow: none; }
 
