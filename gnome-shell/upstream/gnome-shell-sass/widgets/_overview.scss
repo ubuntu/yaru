@@ -1,8 +1,11 @@
 /* OVERVIEW */
 
-#overview {
+.controls-manager {
   spacing: 24px;
-  background-color: transparent;
+}
+
+#overviewGroup {
+  background-color: $system_bg_color;
 }
 
 .overview-controls {
