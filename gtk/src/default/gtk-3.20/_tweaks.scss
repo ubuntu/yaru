@@ -379,6 +379,7 @@ decoration {
 popover.background {  
   .csd &, & {
     border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+    &:backdrop { border-color: $backdrop_borders_color; }
   }
 }
 
