@@ -29,7 +29,7 @@ $ambiance: null !default;
     placessidebar {
       background-color: if($variant=='light', $bg_color, $base_color);
       &:backdrop {
-        background-color: if($variant=='light', $backdrop_bg_color, $backdrop_base_color);
+        background-color: $backdrop_bg_color;
       }
     }
 
