@@ -2,6 +2,9 @@
 @import 'fallback-base';
 @import 'shared-base';
 
+$tab_bg: darken($bg_color, if($variant == 'dark', 6%, 12%));
+$tab_bg_backdrop: darken($backdrop_bg_color, 6%);
+
 // HdyComboRow
 
 popover.combo {
@@ -331,6 +334,230 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
     > decoration,
     > decoration-overlay {
       border-radius: 8px;
+    }
+  }
+}
+
+// HdyStatusPage
+
+statuspage > scrolledwindow > viewport > box > clamp > box > .icon {
+  color: transparentize($fg_color, 0.5);
+
+  &:backdrop {
+    color: transparentize($backdrop_fg_color, 0.5);
+  }
+}
+
+// Tabs
+
+@mixin undershoot-gradient($dir) {
+  @if $variant == 'dark' {
+    background: linear-gradient(to #{$dir},
+                                transparentize(black, .6),
+                                transparentize(black, 1) 20px);
+  }
+  @else {
+    background: linear-gradient(to #{$dir},
+                                transparentize(black, .93),
+                                transparentize(black, 1) 20px);
+  }
+}
+
+@mixin need-attention-gradient($dir) {
+  background: linear-gradient(to #{$dir},
+                              transparentize($selected_bg_color, .3),
+                              transparentize($selected_bg_color, .5) 1px,
+                              transparentize($selected_bg_color, 1) 20px);
+}
+
+tabbar {
+  .box {
+    min-height: 38px;
+    background: darken($tab_bg, 3%);
+    border-bottom: 1px solid $alt_borders_color;
+
+    &:backdrop {
+      background-color: darken($tab_bg_backdrop, 3%);
+      border-color: $backdrop_borders_color;
+    }
+  }
+
+  scrolledwindow.pinned {
+    undershoot {
+      border: 0 solid $alt_borders_color;
+    }
+
+    &:dir(rtl) undershoot.left {
+      border-left-width: 1px;
+    }
+
+    &:dir(ltr) undershoot.right {
+      border-right-width: 1px;
+    }
+
+    &:backdrop undershoot {
+      border-color: $backdrop_borders_color;
+    }
+
+    tabbox {
+      &:dir(ltr) {
+        padding-right: 1px;
+        box-shadow: inset -1px 0 $alt_borders_color;
+
+        &:backdrop {
+          box-shadow: inset -1px 0 $backdrop_borders_color;
+        }
+      }
+
+      &:dir(rtl) {
+        padding-left: 1px;
+        box-shadow: inset 1px 0 $alt_borders_color;
+
+        &:backdrop {
+          box-shadow: inset 1px 0 $backdrop_borders_color;
+        }
+      }
+    }
+  }
+
+  undershoot {
+    transition: none;
+
+    &.left {
+      @include undershoot-gradient("right");
+    }
+
+    &.right {
+      @include undershoot-gradient("left");
+    }
+  }
+
+  .needs-attention-left undershoot.left {
+    @include need-attention-gradient("right");
+  }
+
+  .needs-attention-right undershoot.right {
+    @include need-attention-gradient("left");
+  }
+
+  tab {
+    border-style: solid;
+    border-color: $alt_borders_color;
+    border-width: 0 1px 0 1px;
+    transition: background 150ms ease-in-out;
+    background-color: $tab_bg;
+
+    &:checked {
+      background-color: lighten($tab_bg, 6%);
+
+      &:hover {
+        background-color: lighten($tab_bg, 9%);
+      }
+    }
+
+    &:hover {
+      background-color: lighten($tab_bg, 3%);
+    }
+
+    &:backdrop {
+      border-color: $backdrop_borders_color;
+      background-color: $tab_bg_backdrop;
+
+      &:checked {
+        background-color: $backdrop_bg_color;
+      }
+    }
+  }
+
+  .start-action,
+  .end-action {
+    background: $tab_bg;
+    border-color: $alt_borders_color;
+    border-style: solid;
+    transition: background 150ms ease-in-out;
+
+    &:backdrop {
+      border-color: $backdrop_borders_color;
+      background-color: $tab_bg_backdrop;
+    }
+
+    button {
+      border: none;
+      border-radius: 0;
+    }
+  }
+
+  .start-action:dir(ltr),
+  .end-action:dir(rtl) {
+    border-right-width: 1px;
+
+    > * {
+      margin-right: 1px;
+    }
+  }
+
+  .start-action:dir(rtl),
+  .end-action:dir(ltr) {
+    border-left-width: 1px;
+
+    > * {
+      margin-left: 1px;
+    }
+  }
+}
+
+.tab-drag-icon {
+  tab {
+    min-height: 26px;
+    background-color: lighten($tab_bg, 9%);
+
+    $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
+
+    box-shadow: 0 3px 9px 1px transparentize(black, 0.75),
+                0 0 0 1px $_wm_border, //doing borders with box-shadow
+                inset 0 1px $top_hilight;
+
+    margin: 25px;
+  }
+}
+
+tabbar,
+.tab-drag-icon {
+  tab {
+    padding: 6px;
+
+    &.needs-attention {
+      background-image:
+        radial-gradient(ellipse at bottom,
+                        transparentize(white, .2),
+                        transparentize($selected_bg_color, .8) 15%,
+                        transparentize($selected_bg_color, 1) 15%);
+    }
+
+    .tab-close-button,
+    .tab-indicator {
+      padding: 0;
+      margin: 0;
+      min-width: 24px;
+      min-height: 24px;
+      border-radius: 99px;
+
+      border: none;
+      box-shadow: none;
+      -gtk-icon-shadow: none;
+      text-shadow: none;
+      background: none;
+    }
+
+    .tab-close-button,
+    .tab-indicator.clickable {
+      &:hover {
+        background: hdyalpha($fg_color, .15);
+      }
+
+      &:active {
+        background: hdyalpha(black, .2);
+      }
     }
   }
 }
