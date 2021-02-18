@@ -230,7 +230,7 @@ $_default_button_c: lighten($bg_color,2%);
   // backdrop insensitive button
   //
 
-    $_bg: if($c != $_default_button_c, mix($c, $base_color, 85%), $insensitive_bg_color);
+    $_bg: if($c != $bg_color, mix($c, $base_color, 85%), if($variant=='light', $insensitive_bg_color, lighten($insensitive_bg_color, 3%))); // Yaru change
     $_bc: if($variant == 'light', $_bg,_border_color($c));
 
     color: if($c != $_default_button_c, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
@@ -357,7 +357,7 @@ $_default_button_c: lighten($bg_color,2%);
 // $c:  base color
 // $ov: a background layer for background shorthand (hence no commas!)
 //
-  $gradient: if($variant=='light', image($c), image(lighten($c, 4%)));  // Yaru change: remove gradient
+  $gradient: if($variant=='light', image($c), image(lighten($c, 6%)));  // Yaru change: remove gradient
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
