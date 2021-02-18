@@ -175,7 +175,7 @@
   // insensitive button
   @else if $t==insensitive {
     color: $insensitive_fg_color;
-    border-color: $insensitive_borders_color;
+    border-color: if($variant=='light', $insensitive_borders_color, darken($c, 5%)); // Yaru change: dark buttons need a dark border
     background-color: $insensitive_bg_color;
     box-shadow: none;
     text-shadow: none;
