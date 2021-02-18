@@ -23,8 +23,15 @@ $ambiance: null !default;
     // keep details box visible
     // details box looks ugly when many items are selected and it floats above the orange
     background-image: none;
-    background-color: if($variant=='light', white, $base_color);
-    &:backdrop { background-color: $backdrop_base_color }
+    background-color: if($variant=='light', white, $bg_color);
+    &:backdrop { background-color: if($variant=='light',  $backdrop_base_color, $backdrop_bg_color); }
+
+    placessidebar {
+      background-color: if($variant=='light', $bg_color, $base_color);
+      &:backdrop {
+        background-color: $backdrop_bg_color;
+      }
+    }
 
     // Makes icons less bright in backdrop
     @at-root %dim_icons_in_backdrop,

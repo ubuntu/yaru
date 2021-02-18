@@ -351,7 +351,7 @@
   // backdrop insensitive button
   //
 
-    $_bg: if($c != $bg_color, mix($c, $base_color, 85%), $insensitive_bg_color);
+    $_bg: if($c != $bg_color, mix($c, $base_color, 85%), if($variant=='light', $insensitive_bg_color, lighten($insensitive_bg_color, 3%))); // Yaru change
     $_bc: if($variant == 'light', $_bg,_border_color($c));
 
     color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
@@ -492,7 +492,7 @@
 //
   $gradient: linear-gradient(to top, darken($c, 0%), lighten($c, 0%)); // Yaru change: no gradients
 
-  @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 3%), lighten($c, 3%)); } // Yaru change: no gradients
+  @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 6%), lighten($c, 6%)); } // Yaru change: no gradients
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
