@@ -321,8 +321,8 @@ list row, placessidebar row, sidebar row, .sidebar row {
         &, button { &, & image { color: $text_color; } }
         box-shadow: inset 4px 0 0 $selected_bg_color;
         &:backdrop {
-          color: $backdrop_fg_color;
-          background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
+            &, button { &, & image { color: $backdrop_fg_color; } }
+            background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
         }      
       }
     }
