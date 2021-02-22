@@ -318,7 +318,7 @@ list row, placessidebar row, sidebar row, .sidebar row {
     &.activatable, & {
       &, &:hover {
         background-color: $_selection_bg;
-        &, button { &, & image { color: if($variant=='light', $fg_color, darken($fg_color, 10%)); } }
+        &, button { &, & image { color: $text_color; } }
         box-shadow: inset 4px 0 0 $selected_bg_color;
         &:backdrop {
           color: $backdrop_fg_color;
