@@ -308,3 +308,23 @@ radio {
     transition-duration: 200ms;
     transition-timing-function: ease;
 }
+
+// Due to the ubuntu orange beeing quiet bright
+// we change the sidebar selection from a full orange
+// row to a thin orange stripe plus a soft gray selection
+$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
+list row, placessidebar row, sidebar row, .sidebar row {
+  &:selected {
+    &.activatable, & {
+      &, &:hover {
+        background-color: $_selection_bg;
+        &, button { &, & image { color: if($variant=='light', $fg_color, darken($fg_color, 10%)); } }
+        box-shadow: inset 4px 0 0 $selected_bg_color;
+        &:backdrop {
+          color: $backdrop_fg_color;
+          background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
+        }      
+      }
+    }
+  }
+}
