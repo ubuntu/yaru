@@ -7,7 +7,8 @@ variants = [
 ]
 gtk_versions = [
   '3.0',
-  '3.20'
+  '3.20',
+  '4.0'
 ]
 
 foreach flavour: flavours

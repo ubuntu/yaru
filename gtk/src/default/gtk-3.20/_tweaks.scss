@@ -270,7 +270,6 @@ notebook > header {
                   border-color: transparent;
                 }
               }
-              &:hover:not(:checked):not(:backdrop) { color: $insensitive_fg_color; }
             }
           }
         }
@@ -368,13 +367,19 @@ levelbar {
   }
 }
 
-// Strengthen the menu shadows to increase visibility
+// Strengthen the menu shadows
+// And lighten up the dark shell menu/popover border to increase visibility
+$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 12%);
 decoration {
-  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
   .csd.popup & {
-    border-radius: $menu_radius;
-    box-shadow: 0 1px 2px 1px transparentize(black, 0.7),
-                0 0 0 1px $_wm_border;
+    box-shadow: 0 1px 2px 1px transparentize(black, if($variant=='light', 0.7, 0.6)),
+                0 0 0 1px if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+  }
+}
+popover.background {  
+  .csd &, & {
+    border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+    &:backdrop { border-color: $backdrop_borders_color; }
   }
 }
 
@@ -383,6 +388,26 @@ switch {
   &:backdrop {
     &:checked {
       &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
+    }
+  }
+}
+
+// Due to the ubuntu orange beeing quiet bright
+// we change the sidebar selection from a full orange
+// row to a thin orange stripe plus a soft gray selection
+$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
+list row, placessidebar row, sidebar row, .sidebar row {
+  &:selected {
+    &.activatable, & {
+      &, &:hover {
+        background-color: $_selection_bg;
+        &, button { &, & image { color: $text_color; } }
+        box-shadow: inset 4px 0 0 $selected_bg_color;
+        &:backdrop {
+          &, button { &, & image { color: $backdrop_fg_color; } }
+          background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
+        }      
+      }
     }
   }
 }
