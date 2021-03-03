@@ -89,6 +89,21 @@ $ambiance: null !default;
 
       // Hide superfluous treeview drop target indication
       &.dnd { border-style: none; }
+
+      $_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
+      treeview {
+        &:selected {
+          background-color: $_selection_bg;
+          color: $fg_color;
+          &:hover {
+            background-color: if($variant=='light', darken($_selection_bg, 5%), lighten($_selection_bg, 5%));
+          }
+          &:backdrop {
+            color: $backdrop_fg_color;
+            background-color: $_selection_bg;
+          }
+        }
+      }
     }
 
     notebook > header {

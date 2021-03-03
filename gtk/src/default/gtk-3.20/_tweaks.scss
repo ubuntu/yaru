@@ -369,7 +369,7 @@ levelbar {
 
 // Strengthen the menu shadows
 // And lighten up the dark shell menu/popover border to increase visibility
-$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 12%);
+$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 14%);
 decoration {
   .csd.popup & {
     box-shadow: 0 1px 2px 1px transparentize(black, if($variant=='light', 0.7, 0.6)),
@@ -388,6 +388,26 @@ switch {
   &:backdrop {
     &:checked {
       &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
+    }
+  }
+}
+
+// Due to the ubuntu orange beeing quiet bright
+// we change the sidebar selection from a full orange
+// row to a thin orange stripe plus a soft gray selection
+$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
+list row, placessidebar row, sidebar row, .sidebar row {
+  &:selected {
+    &.activatable, & {
+      &, &:hover {
+        background-color: $_selection_bg;
+        &, button { &, & image { color: $text_color; } }
+        box-shadow: inset 4px 0 0 $selected_bg_color;
+        &:backdrop {
+          &, button { &, & image { color: $backdrop_fg_color; } }
+          background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
+        }      
+      }
     }
   }
 }

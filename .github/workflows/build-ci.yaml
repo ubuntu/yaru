@@ -1,0 +1,16 @@
+name: Build CI test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt install meson sassc
+
+    - name: Build and Install
+      run: meson build && cd build && sudo ninja install
