@@ -279,7 +279,7 @@ levelbar > trough > block {
 
 // Strengthen the menu shadows
 // And lighten up the dark shell menu/popover border to increase visibility
-$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 12%);
+$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 14%);
 decoration {
   .csd.popup & {
     box-shadow: 0 1px 2px 1px transparentize(black, if($variant=='light', 0.7, 0.6)),
