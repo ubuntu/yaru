@@ -279,27 +279,28 @@ levelbar > trough > block {
 
 // Strengthen the menu shadows
 // And lighten up the dark shell menu/popover border to increase visibility
-$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 12%);
+$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 14%);
 decoration {
   .csd.popup & {
     box-shadow: 0 1px 2px 1px transparentize(black, if($variant=='light', 0.7, 0.6)),
                 0 0 0 1px if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
   }
 }
-popover.background {  
+@if $variant=='dark' {
+  menu separator {
+    background-color: $_dark_theme_outer_menu_border;
+  }
+}
+popover.background {
   .csd &, & {
     border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
     &:backdrop { border-color: $backdrop_borders_color; }
   }
-}
-
-// Reduce hyper prominent dark theme check switch border in backdrop
-switch {
-    &:backdrop {
-        &:checked {
-            &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
-        }
+  @if $variant=='dark' {
+    separator {
+      background-color: $_dark_theme_outer_menu_border;
     }
+  }  
 }
 
 // Add some transitions on checks and radios
