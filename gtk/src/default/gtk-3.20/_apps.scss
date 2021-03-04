@@ -739,6 +739,8 @@ PanelToplevel.background {
       }
     }
 }
+// Axe the border under panel menubars
+#PanelPlug menubar { box-shadow: none; }
 
 /* workaround to avoid unwanted black frames behind menus if switching compositor on/off */
 .mate-panel-menu-bar .window-frame.csd.popup {
@@ -1142,6 +1144,15 @@ MsdOsdWindow.background.osd {
   }
 }
 
+// This should move into _tweaks.scss
+// Or best would be adwaita, since there is no :hover for iconview there
+iconview {
+  border-radius: $button_radius;
+  &:hover {
+    background-color: $popover_hover_color;
+  }
+}
+
 /* Brisk menu's panel button */
 .mate-panel-menu-bar #PanelApplet button.flat.toggle.brisk-button {
   &, &:hover {
@@ -1200,6 +1211,8 @@ messagedialog.background:not(.csd) {
 /**************
  * Caja *
  **************/
+
+window.background.caja-navigation-window #Toolbar:backdrop { background-color: $backdrop_bg_color; }
 
 .caja-pathbar button {
   min-width: 24px;
