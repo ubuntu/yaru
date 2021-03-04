@@ -22,11 +22,11 @@ for FLAVOUR in default dark light; do
             close_unfocused="575757"
             close_unfocused_glyphs="D2D2D2"
             focused_glyphs="F7F7F7"
-            focused_normal="2C2C2C"
+            focused_normal="222222"
             focused_prelight="4A4A4A"
             focused_pressed="5E5E5E"
             unfocused_glyphs="D2D2D2"
-            unfocused_normal="3E3E3E"
+            unfocused_normal="2C2C2C"
             unfocused_prelight="5A5A5A"
             unfocused_pressed="5E5E5E"
             ;;
