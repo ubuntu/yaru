@@ -396,7 +396,7 @@ popover.background {
 // Reduce hyper prominent dark theme check switch border in backdrop
 switch {
   &:backdrop {
-    &:checked {
+    &:checked:not(:disabled) {
       &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
     }
   }
