@@ -210,12 +210,15 @@ headerbar {
   }
 
   switch, scale {
+    &:checked {
+      border-color: $checkradio_borders_color;
+    }
     slider {
-      @include button(normal-alt, $_button_bg_color);
+      @include button(normal, $_button_bg_color);
     }
 
     &:hover slider {
-      @include button(hover-alt, $_button_bg_color);
+      @include button(hover, $_button_bg_color);
     }
 
     &:checked > slider { border-color: $_button_border_color; }
