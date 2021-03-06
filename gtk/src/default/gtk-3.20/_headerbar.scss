@@ -244,6 +244,9 @@ headerbar,
   // Re-style sliders for switches and scales do make them look sharp on the dark headerbar
   switch, scale {
     slider {
+      &:checked {
+        border-color: $checkradio_borders_color;
+      }
       &:backdrop {
         @include button(backdrop-alt, $_button_bg_color);
 
