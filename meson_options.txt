@@ -3,6 +3,7 @@ option('gnome-shell', type: 'boolean', value: true, description:'build gnome-she
 option('gnome-shell-gresource', type: 'boolean', value: false, description: 'build gnome-shell component in gresources')
 option('gtk', type: 'boolean', value: true, description:'build gtk component')
 option('gtksourceview', type: 'boolean', value: true, description:'build gtksourceview component')
+option('metacity', type: 'boolean', value: true, description:'build metacity component')
 option('sounds', type: 'boolean', value: true, description:'build sounds component')
 option('sessions', type: 'boolean', value: true, description:'build sessions component')
 option('communitheme_compat', type: 'boolean', value: false, description:'build communitheme-compact')
