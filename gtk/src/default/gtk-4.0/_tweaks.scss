@@ -299,7 +299,7 @@ popover.background {
     separator {
       background-color: $_dark_theme_outer_menu_border;
     }
-  }  
+  }
 }
 
 // Add some transitions on checks and radios
@@ -324,8 +324,60 @@ list row, placessidebar row, sidebar row, .sidebar row {
         &:backdrop {
             &, button { &, & image { color: $backdrop_fg_color; } }
             background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
-        }      
+        }
       }
+    }
+  }
+}
+
+// Adapt dark gtk3 scale and levelbar troughs to the shell
+@if $variant=='dark' {
+  scale, progressbar {
+    > trough {
+      background-color: $_dark_theme_outer_menu_border;
+      &, &:disabled {
+          border-color: $_dark_theme_outer_menu_border;
+      }
+    }
+    &:backdrop {
+      > trough {
+        border-color: darken($_dark_theme_outer_menu_border, 5%);
+        background-color: darken($_dark_theme_outer_menu_border, 5%);
+      }
+    }
+  }
+  levelbar > trough > block.empty {
+    border-color: $_dark_theme_outer_menu_border;
+    background-color: $_dark_theme_outer_menu_border;
+    &:backdrop {
+      border-color: darken($_dark_theme_outer_menu_border, 5%);
+      background-color: darken($_dark_theme_outer_menu_border, 5%);
+    }
+  }
+}
+
+// Adapt switch and scale slider troughs to the shell
+@if $variant=='dark' {
+  switch, scale > trough {
+    &:not(:backdrop):not(:disabled){
+        > slider {
+          background-image: image($warm_gray);
+        }
+
+        &:hover {
+          > slider {
+            background-image: image(lighten($warm_gray, 4%));
+          }
+        }
+    }
+  }
+}
+
+// Reduce hyper prominent dark theme check switch border in backdrop
+switch {
+  &:backdrop {
+    &:checked:not(:disabled) {
+      &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
     }
   }
 }
