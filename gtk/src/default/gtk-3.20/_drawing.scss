@@ -245,6 +245,7 @@
     }
     @include _shadows(0 1px transparentize(black, 0.95)); // Yaru change: stronger shadows for flatter buttons
     background-image: image(if($variant=='light', lighten($c, 10%), $warm_gray)); // Yaru change: brighter alt
+    background-clip: padding-box; // Yaru change: fix background overflow
   }
 
   @else if $t==hover-alt {
