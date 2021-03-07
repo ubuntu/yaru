@@ -363,6 +363,7 @@ list row, placessidebar row, sidebar row, .sidebar row {
     &:not(:backdrop):not(:disabled){
         > slider {
           background-image: image($warm_gray);
+          background-clip: padding-box; // fix background overflow
         }
 
         &:hover {
