@@ -376,6 +376,9 @@ list row, placessidebar row, sidebar row, .sidebar row {
 
 // Reduce hyper prominent dark theme check switch border in backdrop
 switch {
+  @if $variant=='dark' {
+    &:not(:checked):not(:backdrop):not(:disabled) { background-color: lighten($bg_color, 5%); }
+  }
   &:backdrop {
     &:checked:not(:disabled) {
       &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
