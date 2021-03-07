@@ -243,7 +243,7 @@
       @include _shadows(inset 0 1px $_hilight_color,
                         $_button_edge, $_button_shadow);
     }
-    @include _shadows(0 1px transparentize(black, 0.95)); // Yaru change: stronger shadows for flatter buttons
+    @include _shadows(0 1px transparentize(black, 0.99)); // Yaru change: less shadows for flatter buttons
     background-image: image(if($variant=='light', lighten($c, 10%), $warm_gray)); // Yaru change: brighter alt
   }
 
