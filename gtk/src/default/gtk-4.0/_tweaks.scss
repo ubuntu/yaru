@@ -78,7 +78,7 @@ windowcontrols {
         box-shadow: none;
         background: transparent;
 
-        &.maximize, &.minimize {
+        &.maximize, &.minimize, &.close {
             &, &:backdrop {
                 background: transparent;
                 &:hover {
@@ -92,8 +92,6 @@ windowcontrols {
         }
 
         &.close {
-            background: $selected_bg_color;
-
             &:hover {
                 background: lighten($selected_bg_color, 5%);
             }
@@ -103,7 +101,6 @@ windowcontrols {
             }
 
             &:backdrop {
-                background: lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%));
                 &:hover { background: lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%)); }
             }
 
