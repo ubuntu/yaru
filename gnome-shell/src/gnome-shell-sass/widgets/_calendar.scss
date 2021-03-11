@@ -17,7 +17,7 @@
 // Calendar menu side column
 .datemenu-calendar-column {
   spacing: $base_spacing;
-  border: 0 solid $bubble_borders_color;
+  border: 0 solid if($variant=='light', $bubble_borders_color, darken($bubble_borders_color, 5%));
   padding: 0 $base_padding * 2;
 
   &:ltr {margin-right: $base_margin * 2; border-left-width: 1px; }
