@@ -34,16 +34,15 @@ $app_grid_fg_color: #fff;
 
 /* App Folders */
 .app-well-app.app-folder {
-  background-color: transparentize($osd_bg_color, 0.8);
+  background-color: darken($system_bg_color, 3%);
   border-radius: $base_border_radius + 4px; // same as %icon_tile
 }
 
 // expanded folder
-.app-folder-dialog {
+.app-folder-dialog { //style like the dash
   border-radius: $modal_radius * 1.5;
-  border: 1px solid $osd_outer_borders_color;
-  background-color: transparentize(darken($osd_bg_color,10%), 0.05);
-  padding: 12px;
+  background-color: $dash_background_color;
+  padding: 12px 0px 12px 0px;
 
   & .folder-name-container {
     padding: 24px 36px 0;
@@ -77,6 +76,8 @@ $app_grid_fg_color: #fff;
     column-spacing: $base_spacing * 5;
     page-padding-top: 0;
     page-padding-bottom: 0;
+    page-padding-left: 0;
+    page-padding-right: 0;
   }
 
   & .page-indicators {
@@ -124,10 +125,8 @@ $app_grid_fg_color: #fff;
   }
 }
 
-// Some hacks I don't even know
-.all-apps {
-  // horizontal padding to make sure scrollbars or dash don't overlap content
-  padding: 0 88px;
+.apps-scroll-view {
+  padding: 0;
 }
 
 // shutdown and other actions in the grid
@@ -136,4 +135,34 @@ $app_grid_fg_color: #fff;
   color: #fff;
   border-radius: 99px;
   icon-size: $app_icon_size * 0.5;
+}
+
+.page-navigation-hint {
+  width: 300px;
+
+  &.dnd {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &.next:ltr,
+  &.previous:rtl {
+    background-gradient-start: rgba(255, 255, 255, 0.05);
+    background-gradient-end: transparent;
+    background-gradient-direction: horizontal;
+    border-radius: 15px 0px 0px 15px;
+  }
+
+  &.previous:ltr,
+  &.next:rtl {
+    background-gradient-start: transparent;
+    background-gradient-end: rgba(255, 255, 255, 0.05);
+    background-gradient-direction: horizontal;
+    border-radius: 0px 15px 15px 0px;
+  }
+}
+
+.page-navigation-arrow {
+  margin: 6px;
+  width: 24px;
+  height: 24px;
 }

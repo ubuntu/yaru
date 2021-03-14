@@ -1,7 +1,7 @@
 /* OVERVIEW */
 
-.controls-manager {
-  spacing: 24px;
+.controls-manager, .secondary-monitor-workspaces {
+  spacing: $base_spacing * 2;
 }
 
 #overviewGroup {
