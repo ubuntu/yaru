@@ -6,6 +6,7 @@
 
 // User icon
 .user-icon {
+  /* Yaru: See commit 3d4aca768250 */
   background-size: contain;
   color: $fg_color;
   border-radius: 99px;
@@ -34,6 +35,7 @@
     padding-top: $base_padding * 3; // 18 px
     padding-bottom: $base_padding * 3 + 4px; // 22px
     width: $base_icon_size * 5.5; height:  $base_icon_size * 5.5; // 88px;
+    /* Yaru: See commit 3d4aca768250 */
   }
 }
 
