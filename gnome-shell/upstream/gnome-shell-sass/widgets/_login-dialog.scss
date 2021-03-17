@@ -5,8 +5,7 @@
   max-width: 23em;
 }
 
-.login-dialog,
-.unlock-dialog {
+.login-dialog {
   //reset
   border: none;
   background-color: transparent;
@@ -93,6 +92,7 @@
 .login-dialog-banner { color: darken($osd_fg_color,10%); }
 .login-dialog-button-box { width: 23em; spacing: 5px; }
 .login-dialog-message { text-align: center; }
+.login-dialog-message-hint { padding-top: 0; padding-bottom: 20px; }
 .login-dialog-user-selection-box { padding: 100px 0px; }
 .login-dialog-not-listed-label {
   padding-left: 2px;
