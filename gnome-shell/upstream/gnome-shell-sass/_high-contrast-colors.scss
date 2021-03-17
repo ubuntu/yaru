@@ -26,7 +26,6 @@ $osd_borders_color: rgba(0,0,0, 0.7);
 $osd_outer_borders_color: rgba(255,255,255, 0.1);
 
 $shadow_color: rgba(0,0,0, 0.1);
-$system_bg_color: desaturate(#241f31,100%); //neutralize the HIG color
 
 //insensitive state derived colors
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
