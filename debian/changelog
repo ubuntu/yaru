@@ -1,3 +1,174 @@
+yaru-theme (21.04.1) UNRELEASED; urgency=medium
+
+  [ Carlo Lobrano ]
+  * Do not specify binaries full paths
+  * Lp bug tracker (#2407)
+  * Replace single symbolic file with one file for each symbol
+  * Rename group flag into context.
+  * Update README according to the new file organization and script.
+  * create a main function for the business logic.
+  * add create_issue function
+  * hub binary is supposed to be installed under .github folder
+  * Add hub binary
+  * Add github token for HUB
+  * Remove one of the stored ticket to test GH action
+  * Adjust issue title template
+  * Clean up LP tracked bugs to trigger automatic issue creation
+  * Add Launchpad label to created issue.
+  * Fix label HUB flag.
+  * change gh action execution time
+  * render-bitmaps: fix inkscape options for version >= 1.0
+  * Fix source format with Black
+  * check inkscape return code
+  * Remove unused variable
+  * Fix wrong formatted print.
+  * Do not store LP issues json for lpbugtracker
+  * Update track-lp-issues action to the new lpbugtracker script.
+  * Remove track-lp-issues.yaml
+  * Render scalable svg icons
+  * Describe the process to add a new GTK Variant using Default as base
+
+  [ Ian Santopietro ]
+  * Add widget files to sync script
+
+  [ Paul Kepinski ]
+  * Add wine icon (#2404)
+  * Add missing view-sidebar symbolic icon (#2401)
+  * Include libhandy SCSS in yaru (#2482)
+  * Add configure icons (#2477)
+  * Libhandy upstream sync (#2483)
+  * Fix application-x-addon crooked paths (#2485)
+  * Add application-vnd.openofficeorg.extension mimetype icon (#2487)
+  * Rework fullscreen symbolic icon (#2486)
+  * New issue template workflow (#2490)
+  * Add emoji categories symbolic icons (#2492)
+  * Fix Libhandy needs-attention color (#2495)
+  * Sync libhandy with upstream (#2513)
+  * Re-Install grab and wait cursors (#2518)
+  * Add more cursors to csscursors.html (#2521)
+  * Fix Libhandy headerbar sidebar separator background (#2523)
+  * Add .ini file mimetype (#2534)
+  * Add XPInstall mimetype (#2532)
+  * Add msdownload (.dll) mimetype (#2530)
+  * Add some missing symbolics caegories icons (#2561)
+  * Remove duplicated icons (#2563)
+  * Pixel perfect indeterminate checkbox (#2582)
+  * Add Gtk-4.0 support (#2578)
+  * Pixel perfect gtk2 assets (#2594)
+  * Add pan-* icons (#2593)
+  * Add eye status icons (#2595)
+  * Add Gtk4 install instructions (#2596)
+  * Fix parsing error (#2598)
+  * GTK4 upstream sync (#2600)
+  * Update open-pr-on-changes.yaml (#2603)
+  * Update open-pr-on-changes.yaml (#2606)
+  * Add in/decrease symbolics icons (#2609)
+  * Add nvidia-settings icons (#2618)
+  * Remove gtk-icon-effect (#2624)
+  * Use different branch for each projects (#2617)
+  * Add missing GTK4 close button active state (#2629)
+  * Use scour instead of svgo for SVGs optimization (#2654)
+  * Inverted _headerbar refresh (#2628)
+  * Remove some duplicated symbolic icons (#2650)
+  * Add Build CI test (#2672)
+  * Tweaks Gtk4 sliders (#2694)
+  * Add power-profile-*-symbolic icons (#2702)
+  * Gtk4: dark switch improvements (#2706)
+  * Fix sliders background overflow (#2708)
+  * Add missing inode-directory-symbolic icon (#2711)
+  * Add Yaru notification symbolic icons (#2722)
+  * Sync gtk2 assets with Gtk3/4 (#2727)
+
+  [ Muqtadir ]
+  * add multimedia-player device (#2394)
+  * symlink gtk-apply to dialog-apply (#2414)
+  * change emblem colors to palette colors (#2417)
+  * symlink shotwell with org.gnome.Shotwell (#2480)
+  * fix file-lables not dim in nautilus (#2491)
+  * symlink ubuntusoftware-symbolic to software-store-symbolic (#2466)
+  * remove text-x-scss (#2700)
+  * removed text-x-plain.svg and rendered text-x-script.png (#2723)
+
+  [ seb128 ]
+  * Install grab and wait cursors (#2453)
+
+  [ ubuntujaggers ]
+  * Draft PR for folded corners on text icons (#2406)
+  * Test branch for legacy button colour icons (#2371)
+  * Make pictogram clearer on Gedit app icon (#2479)
+  * Making "tweak tool" icon more obvious in Inkscape (#2484)
+  * Adding more descriptive gnome characters icon (#2527)
+  * Making network-server-symbolic more like the Yaru style (#2528)
+  * Improving contrast on full colour network-server (#2619)
+  * full colour icon for gnome sound recorder (#2648)
+  * Improved Transmission app icon (#2653)
+
+  [ Jan Schröder ]
+  * Added missing assets
+
+  [ Stuart Hayhurst ]
+  * Added symlink for org.gnome.Shell.Extensions.png (#2499)
+  * Corrected og.gnome.Shotwell-symbolic to org.gnome.Shotwell-symbolic (#2508)
+  * Add MS Publisher and QEMU disk image mimetype icons (#2535)
+
+  [ Frederik Feichtmeier ]
+  * Update README.md pics with groovy yaru (#2501)
+  * GtkTheme: do not change tab fg color on hover (#2607)
+  * Gtk4 theme fix tab fg color (#2608)
+  * ShellTheme: make the dark shell darker (#2646)
+  * ShellTheme: dark shell sliders, switches and button improvements (#2649)
+  * ShellTheme: default to the dark shell theme (#2647)
+  * Gtk theme: darker dark theme (#2655)
+  * GtkTheme: tone down selected rows (#2675)
+  * Shell and gtk themes: do not transparentize border (#2687)
+  * GtkTheme: align dark themes separators to shell (#2688)
+  * GtkThemes: fixes for backdrop text and headerbar switches (#2696)
+  * ShellTheme: fixes for sliders and avatar (#2703)
+  * GtkTheme: dark switch improvements (#2704)
+  * Dark shell theme: tone down calendar separator (#2718)
+  * gtk: Slighlty lighten up dark alt borders (#2729)
+
+  [ didrocks ]
+  * New upstream snapshot for Libhandy
+
+  [ Martin Wimpress ]
+  * gtksourceview: Add dark and light styles (#2546)
+  * Update Unity window buttons and add Metacity themes (#2581)
+  * Fix build failure (#2693)
+
+  [ Vitaliy Kanev ]
+  * Add symbolic link for 'htop' (#2565)
+
+  [ Marco Trevisan ]
+  * gnome-shell: Use $osd_fg_color for all the login messages (again) (#2634)
+  * Gnome 3.38 resync (#2728)
+  * debian/yaru-theme-gnome-shell.install: Install Yaru-light variant
+  * debian/yaru-theme-gtk.install:
+    - Include the GtkSourceView styles
+    - Spread the Yaru-light selection into its variants
+    - Install gtk-4.0 theme for all the variants
+    - Include metacity themes
+
+  [ Feichtmeier ]
+  * Add $warm_gray: #AEA79F; to _palette.scss files
+  * Use light_aubergine as secondary accent
+  * Fix border color for disabled switches in backdrop
+  * Update sliders and knobs for dark shell/gtk themes
+  * lighten up slider colors
+  * Update shell assets
+  * Use same border as active progress fill
+  * Adapt dark gtk3 scale and levelbar troughs to the shell
+
+  [ Jupiter007 ]
+  * Update all Gtk3/4 assets
+  * Add power-profile-*-symbolic icons
+  * Revert last commit (57ed75ec3fd650d172c7601b15aa626da52c29d6)
+
+  [ Elio Qoshi ]
+  * update LibreOffice icons (#2726)
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 18 Mar 2021 16:45:09 +0100
+
 yaru-theme (20.10.6.1) groovy; urgency=medium
 
   [ Frederik Feichtmeier ]
