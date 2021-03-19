@@ -1,0 +1,387 @@
+$_base_hover_color: transparentize($fg_color, 0.85);
+$_base_active_color: transparentize($fg_color, 0.75);
+
+@mixin undershoot($p) {
+    //
+    // undershoot
+    //
+    // $p: position
+    //
+    // possible $p values:
+    // top, bottom, right, left
+    //
+
+    $_us_shadow_color: if($variant=='light', $silk, $jet);
+    $_us_shadow_alpha: 0.8;
+
+    $_gradient_dir: left;
+    $_dash_bg_size: 10px 1px;
+    $_gradient_repeat: repeat-x;
+    $_bg_pos: center $p;
+
+    background-color: transparent; // shouldn't be needed, but better to be sure;
+
+    @if ($p == left) or ($p == right) {
+        $_gradient_dir: top;
+        $_dash_bg_size: 1px 10px;
+        $_gradient_repeat: repeat-y;
+        $_bg_pos: $p center;
+    }
+
+    padding-#{$p}: 1px;
+    background-size: $_dash_bg_size;
+    background-repeat: $_gradient_repeat;
+    background-origin: content-box;
+    background-position: $_bg_pos;
+    border: none;
+
+    @if ($p == left) {
+        box-shadow: inset 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+        inset 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+    }
+    @else if ($p == right) {
+        box-shadow: inset -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+        inset -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+    }
+    @else if ($p == top) {
+        box-shadow: inset 0 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+        inset 0 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+    }
+    @else if ($p == bottom) {
+        box-shadow: inset 0 -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+        inset 0 -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+    }
+}
+
+// with a flatter headerbar and buttons, we dont need that heavy shadows, remove this when upstream agrees
+headerbar *, button * {
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+}
+
+// blue spinner, white spinner for colored buttons
+spinner {
+    &:not(:backdrop) {
+        color: $spinner_color;
+    }
+    button.suggested-action &, button.destructive-action & {
+        color: $selected_fg_color;
+        &:backdrop { color: $backdrop_selected_fg_color; }
+    }
+}
+
+windowcontrols {
+    button {
+        padding: 2px;
+        margin: 0 7px;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+
+        &.maximize, &.minimize {
+            &, &:backdrop {
+                background: transparent;
+                &:hover {
+                    background: if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color);
+                }
+
+                &:active {
+                    background: if($ambiance==true, lighten($inkstone, 12%), $_base_active_color);
+                }
+            }
+        }
+
+        &.close {
+            background: $selected_bg_color;
+
+            &:hover {
+                background: lighten($selected_bg_color, 5%);
+            }
+
+            &:active {
+                background: darken($selected_bg_color, 5%);
+            }
+
+            &:backdrop {
+                background: lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%));
+                &:hover { background: lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%)); }
+            }
+
+            image {
+                color: $headerbar_fg_color;
+            }
+        }
+    }
+}
+
+// we prefered our gray hover for menus and popovers, orange is a very strong color
+menu,
+.menu,
+.context-menu {
+    item:selected {
+        color: $fg_color;
+        background-color: $popover_hover_color;
+    }
+}
+
+// We don't want menuitems to look like links, we should propose this upstream
+menubar,
+.menubar {
+    item:selected {
+        color: $fg_color;
+        background-color: $popover_hover_color;
+    }
+}
+
+// We don't want the app notifications to look like OSD because they are interactive
+.app-notification,
+.app-notification.frame {
+    padding: 0px 10px;
+    margin: 12px;
+    color: $text_color;
+    border-radius: $menu_radius;
+    background: none;
+    background-color: $menu_color;
+    border: 1px solid $borders_color;
+    box-shadow: 0 2px 5px transparentize(black, 0.8);
+    text-shadow: none;
+
+    button {
+        &, &:dir(ltr), &:dir(rtl) {
+            &.text-button, &.image-button, & {
+                @include button(normal);
+                &.flat { @include button(undecorated); }
+                &:hover { @include button(hover); }
+                &:active { @include button(active); }
+                &:backdrop {
+                    @include button(backdrop);
+                    &.flat { @include button(undecorated); }
+                }
+                &:disabled { @include button(insensitive); }
+            }
+        }
+    }
+
+    &:backdrop {
+        background-color: $backdrop_bg_color;
+        color: $backdrop_text_color;
+        box-shadow: none;
+        transition: $backdrop_transition;
+    }
+
+    border { border: none; }
+}
+
+notebook > header {
+    &, &:backdrop { background: transparent; }
+    tabs {
+        &, &:hover, &:backdrop {
+            &, &.right, &.left, &.top, &.bottom {
+                background-color: transparent;
+                tab {
+                    outline-width: 1px;
+                    outline-offset: -2px;
+                    &, &:dir(ltr), &:dir(rtl) {
+                        &, &:backdrop {
+                            &, &:checked {
+                                &, &:hover, &:active {
+                                    background-color: transparent;
+                                    border-color: transparent;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// With the conservative tab styling scrolled windows need the undershoots
+scrolledwindow {
+    undershoot {
+        &.top { @include undershoot(top); }
+
+        &.bottom { @include undershoot(bottom); }
+
+        &.left { @include undershoot(left); }
+
+        &.right { @include undershoot(right); }
+    }
+}
+
+// Check/radios in menus do not need a border
+popover.menu {
+    check,
+    radio {
+        &, &:checked, &:indeterminate {
+            &, &:hover, &:disabled {
+                border-color: transparent;
+                background: transparent;
+            }
+        }
+    }
+}
+
+// Fixes selected disabled check/radios leaking selected_bg_color, should move to upstream
+treeview.view check,
+treeview.view radio {
+    &:selected {
+        &:focus, & {
+            &:disabled { color: $insensitive_fg_color; }
+        }
+    }
+}
+
+// Reducing the amount of the palette's background colors to two
+.sidebar { background-color: $bg_color; }
+
+scale {
+    > trough > slider {
+        .osd & {
+            @include button(osd);
+            background-image: image(darken($osd_fg_color, 2%));
+
+            &:hover {
+                background-image: image(darken($osd_fg_color, 10%));
+            }
+
+            &:active {
+                background-image: image(darken($osd_fg_color, 25%));
+            }
+        }
+    }
+}
+
+// Rubberband selection shall match with shell's tile-preview
+.rubberband,
+rubberband {
+    background-color: transparentize($ash, 0.8);
+    border: 1px solid if($variant == 'light', transparentize($silk, 0.2), transparentize(darken($silk, 10%), 0.4));
+}
+
+// Entries drown if drawn on widgets with $base_color
+// Fixing this at least for notebooks, since entries on tabs is a common pattern
+@if $variant=='dark' {
+    notebook entry { background-color: darken($base_color, 2%); }
+}
+
+// Make all :not:(.empty) level bars green - should be moved to upstream
+levelbar > trough > block {
+    &.high,
+    &:not(.empty) {
+        border-color: $success_color;
+        background-color: $success_color;
+        &:backdrop { border-color: $success_color; }
+    }
+}
+
+// Strengthen the menu shadows
+// And lighten up the dark shell menu/popover border to increase visibility
+$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 14%);
+decoration {
+  .csd.popup & {
+    box-shadow: 0 1px 2px 1px transparentize(black, if($variant=='light', 0.7, 0.6)),
+                0 0 0 1px if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+  }
+}
+@if $variant=='dark' {
+  menu separator {
+    background-color: $_dark_theme_outer_menu_border;
+  }
+}
+popover.background {
+  .csd &, & {
+    border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+    &:backdrop { border-color: $backdrop_borders_color; }
+  }
+  @if $variant=='dark' {
+    separator {
+      background-color: $_dark_theme_outer_menu_border;
+    }
+  }
+}
+
+// Add some transitions on checks and radios
+check,
+radio {
+    transition-property: background, border;
+    transition-duration: 200ms;
+    transition-timing-function: ease;
+}
+
+// Due to the ubuntu orange beeing quiet bright
+// we change the sidebar selection from a full orange
+// row to a thin orange stripe plus a soft gray selection
+$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
+list row, placessidebar row, sidebar row, .sidebar row {
+  &:selected {
+    &.activatable, & {
+      &, &:hover {
+        background-color: $_selection_bg;
+        &, button { &, & image { color: $text_color; } }
+        box-shadow: inset 4px 0 0 $selected_bg_color;
+        &:backdrop {
+            &, button { &, & image { color: $backdrop_fg_color; } }
+            background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
+        }
+      }
+    }
+  }
+}
+
+// Adapt dark gtk3 scale and levelbar troughs to the shell
+@if $variant=='dark' {
+  scale, progressbar {
+    > trough {
+      background-color: $_dark_theme_outer_menu_border;
+      &, &:disabled {
+          border-color: $_dark_theme_outer_menu_border;
+      }
+    }
+    &:backdrop {
+      > trough {
+        border-color: darken($_dark_theme_outer_menu_border, 5%);
+        background-color: darken($_dark_theme_outer_menu_border, 5%);
+      }
+    }
+  }
+  levelbar > trough > block.empty {
+    border-color: $_dark_theme_outer_menu_border;
+    background-color: $_dark_theme_outer_menu_border;
+    &:backdrop {
+      border-color: darken($_dark_theme_outer_menu_border, 5%);
+      background-color: darken($_dark_theme_outer_menu_border, 5%);
+    }
+  }
+}
+
+// Adapt switch and scale slider troughs to the shell
+@if $variant=='dark' {
+  switch, scale > trough {
+    &:not(:backdrop):not(:disabled){
+        > slider {
+          background-image: image($warm_gray);
+          background-clip: padding-box; // fix background overflow
+        }
+
+        &:hover {
+          > slider {
+            background-image: image(lighten($warm_gray, 4%));
+          }
+        }
+    }
+  }
+}
+
+// Reduce hyper prominent dark theme check switch border in backdrop
+switch {
+  @if $variant=='dark' {
+    &:not(:checked):not(:backdrop):not(:disabled) { background-color: lighten($bg_color, 5%); }
+  }
+  &:backdrop {
+    &:checked:not(:disabled) {
+      &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
+    }
+  }
+}

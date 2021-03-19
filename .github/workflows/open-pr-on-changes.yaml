@@ -13,20 +13,61 @@ jobs:
     strategy:
       matrix:
         buildenv: [
-          { project: GNOME Shell, repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git", branch: master, projectdir: gnome-shell, src: data/theme/, dest: gnome-shell/upstream },
-          { project: GNOME Shell Resources, repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git", branch: master, projectdir: gnome-shell, src: data/gnome-shell-theme.gresource.xml, dest: gnome-shell/upstream/data/gnome-shell-theme.gresource.xml },
-          { project: GTK, repo: "https://gitlab.gnome.org/GNOME/gtk.git", branch: gtk-3-24, projectdir: gtk, src: gtk/theme/Adwaita/, dest: gtk/upstream/gtk+3.0/Adwaita },
-          { project: Libhandy, repo: "https://gitlab.gnome.org/GNOME/libhandy.git", branch: master, projectdir: libhandy, src: src/themes/, dest: gtk/upstream/libhandy/themes },
+          {
+            project: GNOME Shell,
+            repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git",
+            upstreambranch: master,
+            localbranch: gnome-shell,
+            projectdir: gnome-shell,
+            src: data/theme/,
+            dest: gnome-shell/upstream
+          },
+          {
+            project: GNOME Shell Resources,
+            repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git",
+            upstreambranch: master,
+            localbranch: gnome-shell-resources,
+            projectdir: gnome-shell,
+            src: data/gnome-shell-theme.gresource.xml,
+            dest: gnome-shell/upstream/data/gnome-shell-theme.gresource.xml
+          },
+          {
+            project: GTK3,
+            repo: "https://gitlab.gnome.org/GNOME/gtk.git",
+            upstreambranch: gtk-3-24,
+            localbranch: gtk3,
+            projectdir: gtk,
+            src: gtk/theme/Adwaita/,
+            dest: gtk/upstream/gtk+3.0/Adwaita
+          },
+          {
+            project: GTK4,
+            repo: "https://gitlab.gnome.org/GNOME/gtk.git",
+            upstreambranch: master,
+            localbranch: gtk4,
+            projectdir: gtk,
+            src: gtk/theme/Adwaita/,
+            dest: gtk/upstream/gtk+4.0/Adwaita
+          },
+          {
+            project: Libhandy,
+            repo: "https://gitlab.gnome.org/GNOME/libhandy.git",
+            upstreambranch: master,
+            localbranch: libhandy,
+            projectdir: libhandy,
+            src: src/themes/,
+            dest: gtk/upstream/libhandy/themes
+          },
       ]
     steps:
       # Checkout code
       - uses: actions/checkout@v2
-      - name: Download from ${{ matrix.buildenv.repo }}, on branch ${{ matrix.buildenv.branch }}
+      - name: Download from ${{ matrix.buildenv.repo }}, on branch ${{ matrix.buildenv.upstreambranch }}
         id: checknewupstream
         run: |
           hasModif="false"
           pushd /tmp
-          git clone --branch ${BRANCH} --depth 1 ${UPSTREAM_REPO_URL}
+          git clone --branch ${UPSTEAM_BRANCH} --depth 1 ${UPSTREAM_REPO_URL}
           popd
           rm -rf ${DEST}
           cp -a /tmp/${PROJECT_DIR}/${SRC} ${DEST}
@@ -37,17 +78,17 @@ jobs:
           echo "::set-output name=modified::${hasModif}"
         env:
           UPSTREAM_REPO_URL: ${{ matrix.buildenv.repo }}
-          BRANCH: ${{ matrix.buildenv.branch }}
+          UPSTEAM_BRANCH: ${{ matrix.buildenv.upstreambranch }}
           SRC: ${{ matrix.buildenv.src }}
           DEST: ${{ matrix.buildenv.dest }}
           PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
       - name: Create or update Pull Request
         if: steps.checknewupstream.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v3.7.0
+        uses: peter-evans/create-pull-request@v3.8.2
         with:
           commit-message: New upstream snapshot for ${{ matrix.buildenv.project }}
           title: Auto update new upstream snapshot for ${{ matrix.buildenv.project }}
           labels: automated pr, new upstream
           body: "[New upstream ${{ matrix.buildenv.project }} changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+changes+once+landed+on+ubuntu%22) by GitHub Action"
-          branch: upstream-${{ matrix.buildenv.projectdir }}-update
+          branch: upstream-${{ matrix.buildenv.localbranch }}-update
           token: ${{ secrets.GITHUB_TOKEN }}

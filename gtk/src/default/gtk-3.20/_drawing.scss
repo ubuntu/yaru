@@ -244,7 +244,8 @@
                         $_button_edge, $_button_shadow);
     }
     @include _shadows(0 1px transparentize(black, 0.95)); // Yaru change: stronger shadows for flatter buttons
-    background-image: image(lighten($c, 10%)); // Yaru change: brighter alt
+    background-image: image(if($variant=='light', lighten($c, 10%), $warm_gray)); // Yaru change: brighter alt
+    background-clip: padding-box; // Yaru change: fix background overflow
   }
 
   @else if $t==hover-alt {
@@ -264,7 +265,7 @@
       @include _shadows(inset 0 1px $_hilight_color,
                         $_button_edge, $_button_shadow);
     }
-    background-image: image(lighten($c, 16%)); // Yaru change: brighter alt hover
+    background-image: image(if($variant=='light', lighten($c, 16%), lighten($warm_gray, 4%))); // Yaru change: brighter alt hover
     box-shadow: 0 1px transparentize(black, 0.85); // Yaru change: stronger shadows for flatter buttons
   }
 
@@ -351,7 +352,7 @@
   // backdrop insensitive button
   //
 
-    $_bg: if($c != $bg_color, mix($c, $base_color, 85%), $insensitive_bg_color);
+    $_bg: if($c != $bg_color, mix($c, $base_color, 85%), if($variant=='light', $insensitive_bg_color, lighten($insensitive_bg_color, 3%))); // Yaru change
     $_bc: if($variant == 'light', $_bg,_border_color($c));
 
     color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
@@ -492,7 +493,7 @@
 //
   $gradient: linear-gradient(to top, darken($c, 0%), lighten($c, 0%)); // Yaru change: no gradients
 
-  @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 3%), lighten($c, 3%)); } // Yaru change: no gradients
+  @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 6%), lighten($c, 6%)); } // Yaru change: no gradients
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
@@ -637,4 +638,3 @@
     background-image: image($insensitive_bg_color);
   }
 }
-

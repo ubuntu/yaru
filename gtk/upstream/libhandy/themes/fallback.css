@@ -77,8 +77,30 @@ viewswitchertitle viewswitcher { margin-left: 12px; margin-right: 12px; }
 
 statuspage > scrolledwindow > viewport > box { margin: 36px 12px; }
 
-statuspage > scrolledwindow > viewport > box > clamp > box > .icon { margin-bottom: 36px; opacity: 0.5; }
+statuspage > scrolledwindow > viewport > box > clamp:not(:last-child) > box { margin-bottom: 36px; }
 
-statuspage > scrolledwindow > viewport > box > clamp > box > .title { margin-bottom: 12px; }
+statuspage > scrolledwindow > viewport > box > clamp > box > .icon:not(:last-child) { margin-bottom: 36px; }
 
-statuspage > scrolledwindow > viewport > box > clamp > box > .description { margin-bottom: 36px; }
+statuspage > scrolledwindow > viewport > box > clamp > box > .title:not(:last-child) { margin-bottom: 12px; }
+
+preferencespage > scrolledwindow > viewport > clamp { margin: 0 12px; transition: margin-bottom 200ms ease; }
+
+preferencespage > scrolledwindow > viewport > clamp > box > preferencesgroup { transition: margin-top 200ms ease; }
+
+preferencespage > scrolledwindow > viewport > clamp.small { margin-bottom: 18px; }
+
+preferencespage > scrolledwindow > viewport > clamp.small > box > preferencesgroup { margin-top: 18px; }
+
+preferencespage > scrolledwindow > viewport > clamp.medium { margin-bottom: 24px; }
+
+preferencespage > scrolledwindow > viewport > clamp.medium > box > preferencesgroup { margin-top: 24px; }
+
+preferencespage > scrolledwindow > viewport > clamp.large { margin-bottom: 30px; }
+
+preferencespage > scrolledwindow > viewport > clamp.large > box > preferencesgroup { margin-top: 30px; }
+
+preferencesgroup > box > label:not(:first-child) { margin-top: 6px; }
+
+preferencesgroup > box > box:not(:first-child) { margin-top: 12px; }
+
+tabbar .tab-indicator:not(.clickable) { background: none; box-shadow: none; border-color: transparent; }

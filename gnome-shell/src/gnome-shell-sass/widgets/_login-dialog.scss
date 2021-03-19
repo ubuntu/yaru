@@ -84,7 +84,7 @@
   }
 
   .caps-lock-warning-label,
-  .login-dialog-message-warning {
+  .login-dialog-message { // Yaru: we want all login messages to use OSD fg color
     color: $osd_fg_color;
   }
 }
