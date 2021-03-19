@@ -848,75 +848,25 @@ PanelApplet.wnck-applet .wnck-pager {
 }
 
 /* all applets */
-.mate-panel-menu-bar #PanelApplet button,
-.mate-panel-menu-bar #PanelApplet button.flat,
-.mate-panel-menu-bar #PanelApplet button.toggle,
-.mate-panel-menu-bar #PanelApplet button.flat.toggle {
-    background-image: none;
-    background-color: transparent;
-    /* normal panel */
-    color: $_base_fg_color;
-    /* transparent panel light desktop background*/
-    /* color: @fg_color; */
-    padding: 2px;
-    border-radius: 3px;
-    border-image: none;
-    text-shadow: none;
-}
+.mate-panel-menu-bar #PanelApplet button {
+  &, &.flat {
+    &.toggle {
+      background-image: none;
+      background-color: transparent;
+      color: $_base_fg_color;
+      padding: 2px;
+      border-radius: 0;
+      border-image: none;
+      text-shadow: none;
 
-.mate-panel-menu-bar #PanelApplet button:hover:active,
-.mate-panel-menu-bar #PanelApplet button.flat:hover:active,
-.mate-panel-menu-bar #PanelApplet button.toggle:hover:active,
-.mate-panel-menu-bar #PanelApplet button.flat.toggle:hover:active
-.mate-panel-menu-bar #PanelApplet button.flat:backdrop,
-.mate-panel-menu-bar #PanelApplet button:backdrop {
-    background-image: image($_base_active_color);
-    border-color: $_base_border_color;
-    border-radius: 3px;
-    border-image: none;
-    color: $selected_fg_color;
-}
-
-.mate-panel-menu-bar #PanelApplet button:hover,
-.mate-panel-menu-bar #PanelApplet button.flat:hover,
-.mate-panel-menu-bar #PanelApplet button.toggle:hover,
-.mate-panel-menu-bar #PanelApplet button.flat.toggle:hover {
-    background-image: image($_base_bg_color);
-    border-color: $_base_hover_color;
-    border-left-color: $_base_hover_color;
-    border-radius: 3px;
-    border-image: none;
-    color: $_base_fg_color;
-}
-
-.mate-panel-menu-bar #PanelApplet button:checked,
-.mate-panel-menu-bar #PanelApplet button.flat:checked,
-.mate-panel-menu-bar #PanelApplet button.toggle:checked,
-.mate-panel-menu-bar #PanelApplet button.flat.toggle:checked {
-    background-image: image($_base_bg_color);
-    color: $_base_fg_color;
-    border-radius: 3px;
-    border-image: none;
-}
-
-na-tray-applet {
-    -NaTrayApplet-icon-padding: 1px; /*any more and outlines get cut off*/
-}
-
-/* clock-applet */
-.mate-panel-menu-bar #PanelApplet #clock-applet-button.flat.toggle {
-  &, &:hover {
-    background-color: transparent;
-    background-image: none;
-    border-width: 0;
-    color: $_base_fg_color;
-    text-shadow: none;
-    padding: 3px 5px 3px 5px;
-    border-radius: 0;
-    &:checked {
-      box-shadow: inset 0 -3px 0 0 $selected_bg_color;
+      &:hover, &:active:hover, &:checked:hover {
+        background-image: image(if($variant=='light', darken($_base_bg_color, 12%), lighten($_base_bg_color, 15%)));
+      }
+      &:checked {
+        background-image: image(if($variant=='light', darken($_base_bg_color, 5%), lighten($_base_bg_color, 8%)));
+      }
     }
-  }    
+  }
 }
 
 /* clock window */
@@ -1121,6 +1071,7 @@ MsdOsdWindow.background.osd {
 
   .apps-list, .categories-list {
     border-radius: $menu_radius;
+    row:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
   }
 
   /* classic session button */
