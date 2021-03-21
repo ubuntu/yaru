@@ -224,7 +224,7 @@
   &:active,
   &:checked {
     .overview-icon {
-      background-color: transparentize(darken($osd_bg_color, 10%), .5);
+      background-color: transparentize($color, .8); // Yaru: use lighten color instead of dark color
     }
   }
 }
