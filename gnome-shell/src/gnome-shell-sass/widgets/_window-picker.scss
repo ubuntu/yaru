@@ -40,7 +40,7 @@ $window_close_button_padding: 3px;
   }
 
   &:active {
-    color: transparentize($osd_fg_color, 0.2);
+    // color: transparentize($osd_fg_color, 0.2); // Yaru: don't change icon color when :active
     background-color: darken($selected_bg_color, 5%);
   }
 }
