@@ -43,6 +43,7 @@ $app_grid_fg_color: #fff;
   border-radius: $modal_radius * 1.5;
   background-color: $dash_background_color;
   padding: 12px 0px 12px 0px;
+  border: 1px solid $borders_color; // Yaru: add border
 
   & .folder-name-container {
     padding: 24px 36px 0;
