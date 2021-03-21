@@ -194,7 +194,7 @@
   &.dashtodock.left #dash,
   &.shrink.right #dash,
   &.dashtodock.right #dash {
-    background: $dash_bg_color;
+    background: $dash_background_color;
 
     // don't let the first icon be too close to the shadow + panel
     #dashtodockDashScrollview {

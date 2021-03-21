@@ -1,6 +1,6 @@
 /* Dash */
 
-$dash_background_color: #3b3b3b;
+//$dash_background_color: #3b3b3b; // Yaru: we define those colors in _colors.scss for _dock.scss to use it
 $dash_placeholder_size: 32px;
 $dash_padding: $base_padding + 4px; // 10px
 $dash_spacing: $base_padding / 4;
@@ -36,6 +36,7 @@ $dash_border_radius: $modal_radius * 1.5;
   margin-bottom: $dash_bottom_margin;
   padding: $dash_padding;
   border-radius: $dash_border_radius;
+  border: 1px solid $borders_color; // Yaru: add border
 }
 
 // Dash Items
