@@ -9,7 +9,7 @@ $search_entry_height: 36px;
   padding: $base_padding+1 $base_padding+3;
   border-radius: $search_entry_height * 0.5; // half the height
   color: transparentize($fg_color,0.3);
-  background-color: $bg_color;
+  background-color: $dash_background_color; // Yaru: use same background as dash
   border-color: $borders_color;
   margin-top: $base_spacing * 2;
   margin-bottom: $base_spacing;
