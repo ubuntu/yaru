@@ -25,7 +25,7 @@
 
 // entries
 
-@mixin entry($t, $fc:$selected_bg_color, $edge: $borders_edge) { // Yaru: we detached focus from selected
+@mixin entry($t, $fc:$focus_border_color, $edge: $borders_edge) { // Yaru: we detached focus from selected
 //
 // Entries drawing function
 //
