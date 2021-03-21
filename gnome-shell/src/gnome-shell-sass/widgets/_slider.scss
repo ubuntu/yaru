@@ -7,7 +7,7 @@ $slider_size: 15px;
   // slider trough
   -barlevel-height: 3px; // has to be an odd number
   -barlevel-background-color: $borders_color; //background of the trough
-  -barlevel-border-width: 1px; 
+  -barlevel-border-width: 0px; 
   -barlevel-border-color: $borders_color; // trough border color
   // fill style
   -barlevel-active-background-color: $progress_bg_color; //active trough fill // Yaru: we detached progress from selected
