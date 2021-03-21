@@ -24,7 +24,7 @@ $window_close_button_padding: 3px;
 
 // Close button
 .window-close {
-  background-color: $osd_bg_color;
+  background-color: $selected_bg_color;
   color: $osd_fg_color;
   border-radius: $window_close_button_size * 0.5 + $window_close_button_padding * 2;
   padding: $window_close_button_padding;
@@ -36,12 +36,12 @@ $window_close_button_padding: 3px;
   & StIcon { icon-size: 24px; }
 
   &:hover {
-    background-color: lighten($osd_bg_color, 15%);
+    background-color: lighten($selected_bg_color, 5%);
   }
 
   &:active {
     color: transparentize($osd_fg_color, 0.2);
-    background-color: darken($osd_bg_color, 5%);
+    background-color: darken($selected_bg_color, 5%);
   }
 }
 
