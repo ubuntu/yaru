@@ -53,8 +53,8 @@ jobs:
         if: steps.checknewupstream.outputs.modified == 'true'
         uses: peter-evans/create-pull-request@v3.8.2
         with:
-          commit-message: New upstream snapshot for ${{ matrix.buildenv.project }}
-          title: Auto update new upstream snapshot for ${{ matrix.buildenv.project }}
+          commit-message: New upstream icons list for ${{ matrix.buildenv.project }}
+          title: Auto update new upstream  icons list for ${{ matrix.buildenv.project }}
           labels: automated pr, new upstream
           body: "[New upstream ${{ matrix.buildenv.project }} changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+icons+changes%22) by GitHub Action"
           branch: upstream-${{ matrix.buildenv.localbranch }}-update
