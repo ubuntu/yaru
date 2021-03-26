@@ -88,7 +88,7 @@ for i in `cat $INDEX`; do
     fi
   fi
 
-  if [ "$_dir" == "gtk-3.0" ] || [ "$_dir" == "gtk-3.20" ]; then
+  if [ "$_dir" == "gtk-3.0" ] || [ "$_dir" == "gtk-3.20" ] || [ "$_dir" == "gtk-4.0" ]; then
     if [ -f $_dir/$ASSETS_DIR/$i.png ] && [ $_force == 0 ]; then
         echo $_dir/$ASSETS_DIR/$i.png exists.
     else
