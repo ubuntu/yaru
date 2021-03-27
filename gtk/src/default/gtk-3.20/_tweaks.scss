@@ -392,11 +392,37 @@ popover.background {
     }
   }  
 }
+// Adapt dark gtk3 scale and levelbar troughs to the shell
+@if $variant=='dark' {
+  scale, progressbar {
+    trough {
+      border-color: $_dark_theme_outer_menu_border;
+      background-color: $_dark_theme_outer_menu_border;
+    }
+    &:backdrop {
+      trough {
+        border-color: darken($_dark_theme_outer_menu_border, 5%);
+        background-color: darken($_dark_theme_outer_menu_border, 5%);
+      }
+    }
+  }
+  levelbar block.empty {
+    border-color: $_dark_theme_outer_menu_border;
+    background-color: $_dark_theme_outer_menu_border;
+    &:backdrop {
+      border-color: darken($_dark_theme_outer_menu_border, 5%);
+      background-color: darken($_dark_theme_outer_menu_border, 5%);
+    }
+  }
+}
 
 // Reduce hyper prominent dark theme check switch border in backdrop
 switch {
+  @if $variant=='dark' {
+    &:not(:checked):not(:backdrop):not(:disabled) { background-color: lighten($bg_color, 5%); }
+  }
   &:backdrop {
-    &:checked {
+    &:checked:not(:disabled) {
       &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
     }
   }

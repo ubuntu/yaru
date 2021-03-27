@@ -3,7 +3,7 @@
 
 $panel_corner_radius: $base_border_radius+1;
 $panel_bg_color: #000;
-$panel_fg_color: #ccc;
+$panel_fg_color: #ddd;
 $panel_height: 2.2em;
 $panel_transition_duration: 250ms; // same as the overview transition duration
 
@@ -99,8 +99,6 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
   &.login-screen,
   &:overview {
     .panel-button {
-      color: lighten($fg_color, 3%);
-
       &:hover, &:active, &:overview, &:focus, &:checked {
         box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.15);
 
