@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=@ThemeName@ session on wayland
-Comment=This session logs you with @ThemeName@ on wayland
+Name=@ThemeName@ session on xorg
+Comment=This session logs you with @ThemeName@ on xorg
 Exec=env GNOME_SHELL_SESSION_MODE=@LowerCaseThemeName@ gnome-session
 TryExec=gnome-session
 Type=Application
