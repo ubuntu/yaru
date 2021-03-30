@@ -1193,3 +1193,14 @@ window.background.caja-navigation-window #Toolbar:backdrop { background-color: $
   border-radius: 0;
   box-shadow: none;
 }
+
+// style mate control center
+#slab_section_style2.vertical:dir(ltr)  {
+  background-color: $base_color; 
+  &, label {
+    &, &:dir(ltr) {
+      color: $text_color;
+      &:backdrop { color: $backdrop_text_color; }
+    }    
+  }
+}
