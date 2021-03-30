@@ -1204,3 +1204,17 @@ window.background.caja-navigation-window #Toolbar:backdrop { background-color: $
     }    
   }
 }
+
+// Style mate panel pull down terminal search bar
+window#Main.background {
+  $_pull_down_terminal_border_color: if($variant=='light', $borders_color, lighten(desaturate($base_color, 100%), 14%));
+  #search {
+    background: $base_color;
+    color: $fg_color;
+    box-shadow: inset 100px 100px $base_color; // very dirty hack, otherwise we can't set the bg
+    border-bottom: 1px solid $_pull_down_terminal_border_color;
+    entry { border-color: $_pull_down_terminal_border_color; }
+  }
+  
+  
+}
