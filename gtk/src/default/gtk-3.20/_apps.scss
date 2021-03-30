@@ -1107,9 +1107,15 @@ iconview {
 /* Brisk menu's panel button */
 .mate-panel-menu-bar #PanelApplet button.flat.toggle.brisk-button {
   &, &:hover {
+    image {
+      margin: 0px;
+      padding: 0px;
+    }
     background-image: none;
     background-color: transparent;
-    padding: 3px 5px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
     border-color: transparent;
     border-radius: 0;
     border-image: none;
