@@ -16,12 +16,12 @@ configure_file(input : 'mode.json.in',
 configure_file(input : 'THEMENAME.desktop.in',
               output : meson.project_name()+'.desktop',
               configuration : conf_data,
-              install_dir: join_paths(get_option('datadir'), 'xsessions'))
-
-configure_file(input : 'THEMENAME-wayland.desktop.in',
-              output : meson.project_name()+'-wayland.desktop',
-              configuration : conf_data,
               install_dir: join_paths(get_option('datadir'), 'wayland-sessions'))
+
+configure_file(input : 'THEMENAME-xorg.desktop.in',
+              output : meson.project_name()+'-xorg.desktop',
+              configuration : conf_data,
+              install_dir: join_paths(get_option('datadir'), 'xsessions'))
 
 configure_file(input : 'THEMENAME.gschema.override.in',
               output : '99_'+meson.project_name()+'.gschema.override',
