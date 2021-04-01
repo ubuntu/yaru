@@ -1437,7 +1437,6 @@ headerbar {
     border-color: $backdrop_borders_color;
     background-color: $bg_color;
     background-image: none;
-    box-shadow: inset 0 1px $top_hilight;
 
     transition: $backdrop_transition;
   }
@@ -1545,16 +1544,6 @@ headerbar {
     margin-top: 10px;
     margin-bottom: 10px;
   }
-
-  &.titlebar headerbar:not(.titlebar) {
-    // Drop the background of non-titlebar nested headerbars. This is needed to
-    // work around headerbar sliding animation issues without refactoring
-    // Adwaita's support of titlebars and headerbars as it may break
-    // applications.
-    // See https://gitlab.gnome.org/GNOME/gtk/issues/1264 for more information.
-    background: none;
-    box-shadow: none;
-  }
 }
 
 
@@ -1566,7 +1555,6 @@ headerbar {
     background-image: none;
     border-style: none;
     border-color: transparent;
-    box-shadow: none;
   }
 
   separator { background-color: $borders_color; }  // FIXME: use darker border?
@@ -1833,7 +1821,7 @@ popover.background {
 
   > arrow,
   > contents {
-    $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
+    $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
 
     background-color: $menu_color;
     background-clip: padding-box;
@@ -3601,6 +3589,7 @@ stacksidebar {
   }
   row {
     padding: 10px 4px;
+    @include focus-ring();
 
     > label {
       padding-left: 6px;
@@ -3618,11 +3607,6 @@ stacksidebar {
     }
     &:selected:hover:dir(ltr), &:selected:hover:dir(rtl) {
       background-color: darken($menu_selected_color,5%);
-    }
-    &:focus:focus-visible {
-      outline-width: 0;
-      background-color: $selected_bg_color;
-      color: $selected_fg_color;
     }
     &.activatable:active, &.activatable:selected:active {
       box-shadow: none; // #3413
@@ -3651,9 +3635,8 @@ separator.sidebar {
     padding: 0 8px;
     border-radius: $menu-margin;
     margin: 0 $menu-margin 2px;
-
-    &:hover,
-    &:focus-visible:focus-within {
+    @include focus-ring($focus-state: 'focus-visible:focus-within');
+    &:hover {
       background-color: darken($menu_selected_color, 5%);
     }
 
@@ -3665,12 +3648,6 @@ separator.sidebar {
         background-color: darken($menu_selected_color,5%);
       }
 
-      &:focus-visible:focus-within {
-        outline-width: 0;
-        color: $selected_fg_color;
-        background-color: $selected_bg_color;
-        &:hover { background-color: darken($selected_bg_color,10%); }
-      }
     }
 
     &:disabled { color: $insensitive_fg_color; }
@@ -4066,8 +4043,8 @@ window {
 
   // this needs to be transparent
   // see bug #722563
-  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
-  $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.82), transparentize($borders_color, 0.1));
+  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
+  $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.82), transparentize(black, 0.25));
 
   &.csd {
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
