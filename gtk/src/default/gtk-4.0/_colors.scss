@@ -67,7 +67,7 @@ $suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green,
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
 $progress_bg_color: if($variant== 'light', lighten($secondary_accent_bg_color, 10%), lighten($secondary_accent_bg_color, 5%));
 $progress_border_color: $progress_bg_color;
-$spinner_color: $tertiary_accent_fg_color;
+$spinner_color: $progress_bg_color;
 $checkradio_bg_color: if($variant=='light', lighten($secondary_accent_bg_color, 5%), $secondary_accent_bg_color);
 $checkradio_fg_color: $secondary_accent_fg_color;
 $checkradio_borders_color: if($variant == 'light', darken($checkradio_bg_color, 10%), darken($checkradio_bg_color,40%));
