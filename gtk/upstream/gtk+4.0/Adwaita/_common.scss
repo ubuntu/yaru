@@ -4,6 +4,7 @@
 
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
+$assets: if($contrast=='normal', 'assets', 'assets-hc');
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
 $focus_transition: outline-width 200ms $ease-out-quad, outline-offset 200ms $ease-out-quad;
@@ -492,6 +493,7 @@ button {
       -gtk-icon-filter: brightness(1.2);
     }
 
+    &.keyboard-activating,
     &:active,
     &:checked {
       @include button(active);
@@ -602,7 +604,7 @@ button {
     min-width: 26px;
     min-height: 32px;
 
-    &.image-button { 
+    &.image-button {
       min-width: 30px;
       &:only-child {
         margin: 4px;
@@ -2394,7 +2396,7 @@ switch {
     border-radius: 50%;
     transition: $button_transition;
   }
-  
+
   > image { color: transparent; } /* only show i / o for the accessible theme */
 
   &:hover > slider {
@@ -2503,7 +2505,7 @@ radio {
       }
     }
   }
-  
+
   @if $variant == 'light' {
     // the borders of the light variant versions of checks and radios are too similar in luminosity to the selected background
     // color, hence we need special casing.
@@ -2524,11 +2526,11 @@ check {
   border-radius: 3px;
   -gtk-icon-size: 14px;
 
-  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-symbolic.symbolic.png")),
-                                            -gtk-recolor(url("assets/check@2-symbolic.symbolic.png"))); }
+  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("#{$assets}/check-symbolic.symbolic.png")),
+                                            -gtk-recolor(url("#{$assets}/check@2-symbolic.symbolic.png"))); }
 
-  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.symbolic.png")),
-                                                  -gtk-recolor(url("assets/dash@2-symbolic.symbolic.png"))); }
+  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("#{$assets}/dash-symbolic.symbolic.png")),
+                                                  -gtk-recolor(url("#{$assets}/dash@2-symbolic.symbolic.png"))); }
 }
 
 %radio,
@@ -2536,11 +2538,11 @@ radio {
   border-radius: 100%;
   -gtk-icon-size: 14px;
 
-  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-symbolic.symbolic.png")),
-                                            -gtk-recolor(url("assets/bullet@2-symbolic.symbolic.png"))); }
+  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("#{$assets}/bullet-symbolic.symbolic.png")),
+                                            -gtk-recolor(url("#{$assets}/bullet@2-symbolic.symbolic.png"))); }
 
-  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.symbolic.png")),
-                                                  -gtk-recolor(url("assets/dash@2-symbolic.symbolic.png"))); }
+  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("#{$assets}/dash-symbolic.symbolic.png")),
+                                                  -gtk-recolor(url("#{$assets}/dash@2-symbolic.symbolic.png"))); }
 }
 
 treeview.view check,
@@ -2804,7 +2806,7 @@ scale {
               // an asymmetric slider asset is used here, so the margins are uneven, the smaller
               // margin is set on the point side.
               margin: -10px;
-              $_scale_asset: 'assets/slider-#{$dir_infix}-#{$marks_infix}#{$state_infix}#{$suffix}';
+              $_scale_asset: '#{$assets}/slider-#{$dir_infix}-#{$marks_infix}#{$state_infix}#{$suffix}';
               border-style: none;
               border-radius: 0;
 
@@ -4050,7 +4052,7 @@ window {
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
                 0 0 0 1px $_wm_border; //doing borders with box-shadow
     margin: 0px;
-    border-radius: $window_radius $window_radius 0 0;
+    border-radius: $window_radius;
     &:backdrop {
       // the transparent shadow here is to enforce that the shadow extents don't
       // change when we go to backdrop, to prevent jumping windows.
@@ -4069,7 +4071,6 @@ window {
     }
 
     &.dialog.message {
-      border-radius: $window_radius;
       box-shadow: 0 1px 2px transparentize(black, 0.8),
                   0 0 0 1px transparentize($_wm_border, 0.1);
     }
@@ -4150,19 +4151,19 @@ cursor-handle {
                   (':hover','-hover'),
                   (':active','-active') { //no need for insensitive and backdrop
     &.top#{$s}:dir(ltr), &.bottom#{$s}:dir(rtl) {
-      $_url: 'assets/text-select-start#{$as}#{$asset_suffix}';
+      $_url: '#{$assets}/text-select-start#{$as}#{$asset_suffix}';
       -gtk-icon-source: -gtk-scaled(url('#{$_url}.png'),
                                     url('#{$_url}@2.png'));
     }
 
     &.bottom#{$s}:dir(ltr), &.top#{$s}:dir(rtl) {
-      $_url: 'assets/text-select-end#{$as}#{$asset_suffix}';
+      $_url: '#{$assets}/text-select-end#{$as}#{$asset_suffix}';
       -gtk-icon-source: -gtk-scaled(url('#{$_url}.png'),
                                     url('#{$_url}@2.png'));
     }
 
     &.insertion-cursor#{$s}:dir(ltr), &.insertion-cursor#{$s}:dir(rtl) {
-      $_url: 'assets/slider-horz-scale-has-marks-above#{$as}#{$asset_suffix}';
+      $_url: '#{$assets}/slider-horz-scale-has-marks-above#{$as}#{$asset_suffix}';
       -gtk-icon-source: -gtk-scaled(url('#{$_url}.png'),
                                     url('#{$_url}@2.png'));
     }
@@ -4336,3 +4337,5 @@ menubutton {
     }
   }
 }
+
+@import 'custom';
