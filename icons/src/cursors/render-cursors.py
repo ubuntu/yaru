@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 #
 # SVGSlice
 #
@@ -94,7 +94,7 @@ def stderr_reader(inkscape, inkscape_stderr):
 		if line and len (line.rstrip ('\n').rstrip ('\r')) > 0:
 			fatalError('ABORTING: Inkscape failed to render a slice: {}'.format (line))
 		elif line:
-			print "STDERR> {}".format (line)
+			print("STDERR> {}".format(line))
 		else:
 			raise UnexpectedEndOfStream
 
@@ -358,7 +358,7 @@ class SVGHandler(handler.ContentHandler):
 	def isFloat(self, stringVal):
 		try:
 			return (float(stringVal), True)[1]
-		except (ValueError, TypeError), e:
+		except (ValueError, TypeError) as e:
 			return False
 	
 	def parseCoordinates(self, val):
@@ -669,7 +669,7 @@ if __name__ == '__main__':
 	xmlParser.setContentHandler(svgLayerHandler)
 	try:
 		xmlParser.parse(svgFilename)
-	except SAXParseException, e:
+	except SAXParseException as e:
 		fatalError("Error parsing SVG file '%s': line %d,col %d: %s.  If you're seeing this within inkscape, it probably indicates a bug that should be reported." % (svgFilename, e.getLineNumber(), e.getColumnNumber(), e.getMessage()))
 	
 	# verify that the svg file actually contained some rectangles.
