@@ -45,7 +45,7 @@ jobs:
             repo: "https://gitlab.gnome.org/GNOME/libadwaita.git",
             upstreambranch: main,
             localbranch: gtk4,
-            projectdir: gtk,
+            projectdir: libadwaita,
             src:  src/stylesheet/,
             dest: gtk/upstream/gtk+4.0/Adwaita
           },
