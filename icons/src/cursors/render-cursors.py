@@ -190,11 +190,12 @@ class SVGRect:
             if os.path.exists (output):
                 skipped[output] = True
                 return
-            command = '-w {size} -h {size} --export-id="{export_id}" --export-png="{export_png}" {svg}\n'.format (size=size, export_id=self.name, export_png=output, svg=svgFName)
-            dbg("Command: {}".format (command))
 
-            inkscape = subprocess.Popen (['inkscape', '--batch-process', '--shell'], stdin=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-            inkscape_instances[roundrobin[0]][0].stdin.write(command.encode())
+            command = 'inkscape --batch-process -w {size} -h {size} --export-id="{export_id}" --export-png="{export_png}" {svg}\n'.format (size=size, export_id=self.name, export_png=output, svg=svgFName)
+            dbg("Command: {}".format (command))
+            outcome = subprocess.run(command, shell=True, check=True, capture_output=True)
+            if outcome.returncode:
+                fatalError(outcome.stdout)
 
         pngsliceFName = slicename + '.png'
         hotsliceFName = slicename + '.hotspot.png'
@@ -650,13 +651,13 @@ if __name__ == '__main__':
 
     inkscape_instances = []
 
-    for i in range (0, options.number_of_renderers):
-        inkscape = subprocess.Popen (['inkscape', '--batch-process', '--shell'], stdin=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        if inkscape is None:
-            fatalError("Failed to start Inkscape shell process")
-        inkscape_stderr = inkscape.stderr
-        inkscape_stderr_thread = Thread (target = stderr_reader, args=(inkscape, inkscape_stderr))
-        inkscape_instances.append ([inkscape, inkscape_stderr, inkscape_stderr_thread])
+    # for i in range (0, options.number_of_renderers):
+        # inkscape = subprocess.Popen (['inkscape', '--batch-process', '--shell'], stdin=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        # if inkscape is None:
+            # fatalError("Failed to start Inkscape shell process")
+        # inkscape_stderr = inkscape.stderr
+        # inkscape_stderr_thread = Thread (target = stderr_reader, args=(inkscape, inkscape_stderr))
+        # inkscape_instances.append ([inkscape, inkscape_stderr, inkscape_stderr_thread])
 
     # initialise results before actually attempting to parse the SVG file
     svgBounds = SVGRect(0,0,0,0)
