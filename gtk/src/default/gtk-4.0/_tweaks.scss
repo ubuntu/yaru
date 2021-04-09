@@ -305,9 +305,7 @@ popover.background {
 // Add some transitions on checks and radios
 check,
 radio {
-    transition-property: background, border;
-    transition-duration: 200ms;
-    transition-timing-function: ease;
+    transition: $button_transition;
 }
 
 // Due to the ubuntu orange beeing quiet bright
@@ -382,6 +380,17 @@ switch {
   &:backdrop {
     &:checked:not(:disabled) {
       &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
+    }
+  }
+}
+
+// Force buttons state transitions
+%button,
+button {
+  @each $b_type, $b_color in (suggested-action, $suggested_bg_color),
+  (destructive-action, $destructive_color) {
+    &, &.#{$b_type} {
+      transition: $button_transition;
     }
   }
 }

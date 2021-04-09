@@ -4,6 +4,7 @@
 
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
+$assets: if($contrast=='normal', 'assets', 'assets-hc');
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
 $focus_transition: outline-width 200ms $ease-out-quad, outline-offset 200ms $ease-out-quad;
@@ -492,6 +493,7 @@ button {
       -gtk-icon-filter: brightness(1.2);
     }
 
+    &.keyboard-activating,
     &:active,
     &:checked {
       @include button(active);
@@ -746,6 +748,7 @@ button {
 
   .linked.vertical > & { @extend %linked_vertical; }
 
+  menubutton.circular &,
   &.circular { // force circular button shape
     min-width: 32px;
     min-height: 32px;
@@ -932,6 +935,14 @@ list > row button.image-button:not(.flat) {
   &:hover { @include button(hover); }
   &:active,
   &:checked { @include button(active); }
+
+  @each $b_type, $b_color in (suggested-action, $selected_bg_color),
+                         (destructive-action, $destructive_color) {
+    &.#{$b_type} { // allow colored buttons in lists #3643
+      @include button(normal, $b_color, white);
+      @include focus-ring($fc: $alt_focus_border_color);
+    }
+  }
 }
 
 /*********
@@ -1536,16 +1547,6 @@ headerbar {
     margin-top: 10px;
     margin-bottom: 10px;
   }
-
-  &.titlebar headerbar:not(.titlebar) {
-    // Drop the background of non-titlebar nested headerbars. This is needed to
-    // work around headerbar sliding animation issues without refactoring
-    // Adwaita's support of titlebars and headerbars as it may break
-    // applications.
-    // See https://gitlab.gnome.org/GNOME/gtk/issues/1264 for more information.
-    background: none;
-    box-shadow: none;
-  }
 }
 
 
@@ -1557,7 +1558,6 @@ headerbar {
     background-image: none;
     border-style: none;
     border-color: transparent;
-    box-shadow: none;
   }
 
   separator { background-color: $borders_color; }  // FIXME: use darker border?
@@ -1766,6 +1766,17 @@ treeview.view {
         color: $fg_color;
         transition: none; //I shouldn't need this
       }
+      sort-indicator {
+        &.ascending {
+          -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+        }
+        &.descending {
+          -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+        }
+
+        min-height: 16px;
+        min-width: 16px;
+      }
     }
   }
 
@@ -1813,7 +1824,7 @@ popover.background {
 
   > arrow,
   > contents {
-    $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
+    $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
 
     background-color: $menu_color;
     background-clip: padding-box;
@@ -2258,11 +2269,15 @@ notebook {
 /**************
  * Scrollbars *
  **************/
+
 scrollbar {
   $_slider_min_length: 40px;
+  $_slider_width: 6px; // Yaru: reduce slider width
+  $_scrollbar_transition: all 300ms $ease-out-quad;
+  $_fine-tune_slider_border: $_slider_width - 3; //#3672
 
   background-color: $scrollbar_bg_color;
-  transition: 300ms $ease-out-quad;
+  transition: $_scrollbar_transition;
 
   // scrollbar border
   &.top { border-bottom: 1px solid $borders_color; }
@@ -2271,13 +2286,14 @@ scrollbar {
   &.right { border-left: 1px solid $borders_color; }
 
   > range > trough > slider {
-    min-width: 6px;
-    min-height: 6px;
+    min-width: $_slider_width;
+    min-height: $_slider_width;
     margin: -1px;
     border: 4px solid transparent;
-    border-radius: 8px;
+    border-radius: 8px; // Yaru: smaller border-radius
     background-clip: padding-box;
     background-color: $scrollbar_slider_color;
+    transition: $_scrollbar_transition;
 
     &:hover { background-color: $scrollbar_slider_hover_color; }
 
@@ -2288,12 +2304,13 @@ scrollbar {
 
   > range.fine-tune {
     > trough > slider {
-      min-width: 4px;
-      min-height: 4px;
+      transition: none;
+      min-width: $_fine-tune_slider_border+1;
+      min-height: $_fine-tune_slider_border+1;
     }
 
-    &.horizontal > trough > slider { border-width: 5px 4px; }
-    &.vertical > trough > slider { border-width: 4px 5px; }
+    &.horizontal > trough > slider { border-width: $_fine-tune_slider_border 4px; }
+    &.vertical > trough > slider { border-width: 4px $_fine-tune_slider_border; }
   }
 
   &.overlay-indicator {
@@ -2510,11 +2527,11 @@ check {
   border-radius: 3px;
   -gtk-icon-size: 14px;
 
-  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-symbolic.symbolic.png")),
-                                            -gtk-recolor(url("assets/check@2-symbolic.symbolic.png"))); }
+  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("#{$assets}/check-symbolic.symbolic.png")),
+                                            -gtk-recolor(url("#{$assets}/check@2-symbolic.symbolic.png"))); }
 
-  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.symbolic.png")),
-                                                  -gtk-recolor(url("assets/dash@2-symbolic.symbolic.png"))); }
+  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("#{$assets}/dash-symbolic.symbolic.png")),
+                                                  -gtk-recolor(url("#{$assets}/dash@2-symbolic.symbolic.png"))); }
 }
 
 %radio,
@@ -2522,11 +2539,11 @@ radio {
   border-radius: 100%;
   -gtk-icon-size: 14px;
 
-  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-symbolic.symbolic.png")),
-                                            -gtk-recolor(url("assets/bullet@2-symbolic.symbolic.png"))); }
+  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("#{$assets}/bullet-symbolic.symbolic.png")),
+                                            -gtk-recolor(url("#{$assets}/bullet@2-symbolic.symbolic.png"))); }
 
-  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.symbolic.png")),
-                                                  -gtk-recolor(url("assets/dash@2-symbolic.symbolic.png"))); }
+  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("#{$assets}/dash-symbolic.symbolic.png")),
+                                                  -gtk-recolor(url("#{$assets}/dash@2-symbolic.symbolic.png"))); }
 }
 
 treeview.view check,
@@ -2790,7 +2807,7 @@ scale {
               // an asymmetric slider asset is used here, so the margins are uneven, the smaller
               // margin is set on the point side.
               margin: -10px;
-              $_scale_asset: 'assets/slider-#{$dir_infix}-#{$marks_infix}#{$state_infix}#{$suffix}';
+              $_scale_asset: '#{$assets}/slider-#{$dir_infix}-#{$marks_infix}#{$state_infix}#{$suffix}';
               border-style: none;
               border-radius: 0;
 
@@ -3575,6 +3592,7 @@ stacksidebar {
   }
   row {
     padding: 10px 4px;
+    @include focus-ring();
 
     > label {
       padding-left: 6px;
@@ -3592,11 +3610,6 @@ stacksidebar {
     }
     &:selected:hover:dir(ltr), &:selected:hover:dir(rtl) {
       background-color: darken($menu_selected_color,5%);
-    }
-    &:focus:focus-visible {
-      outline-width: 0;
-      background-color: $selected_bg_color;
-      color: $selected_fg_color;
     }
     &.activatable:active, &.activatable:selected:active {
       box-shadow: none; // #3413
@@ -3625,9 +3638,8 @@ separator.sidebar {
     padding: 0 8px;
     border-radius: $menu-margin;
     margin: 0 $menu-margin 2px;
-
-    &:hover,
-    &:focus-visible:focus-within {
+    @include focus-ring($focus-state: 'focus-visible:focus-within');
+    &:hover {
       background-color: darken($menu_selected_color, 5%);
     }
 
@@ -3639,12 +3651,6 @@ separator.sidebar {
         background-color: darken($menu_selected_color,5%);
       }
 
-      &:focus-visible:focus-within {
-        outline-width: 0;
-        color: $selected_fg_color;
-        background-color: $selected_bg_color;
-        &:hover { background-color: darken($selected_bg_color,10%); }
-      }
     }
 
     &:disabled { color: $insensitive_fg_color; }
@@ -4047,7 +4053,7 @@ window {
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
                 0 0 0 1px $_wm_border; //doing borders with box-shadow
     margin: 0px;
-    border-radius: $window_radius $window_radius 0 0;
+    border-radius: $window_radius;
     &:backdrop {
       // the transparent shadow here is to enforce that the shadow extents don't
       // change when we go to backdrop, to prevent jumping windows.
@@ -4066,7 +4072,6 @@ window {
     }
 
     &.dialog.message {
-      border-radius: $window_radius;
       box-shadow: 0 1px 2px transparentize(black, 0.8),
                   0 0 0 1px transparentize($_wm_border, 0.1);
     }
@@ -4083,12 +4088,20 @@ window {
   }
 
   &.maximized,
-  &.fullscreen,
+  &.fullscreen { border-radius: 0; box-shadow: none; }
+
   &.tiled,
   &.tiled-top,
   &.tiled-left,
   &.tiled-right,
-  &.tiled-bottom { border-radius: 0; }
+  &.tiled-bottom {
+   border-radius: 0;
+   box-shadow: 0 0 0 1px $_wm_border_backdrop,
+               0 0 0 20px transparent; //transparent control workaround -- #3670
+   }
+   &:backdrop { box-shadow: 0 0 0 1px $_wm_border_backdrop,
+                            0 0 0 20px transparent; // #3670
+  }
 
   &.popup { box-shadow: none; }
 
@@ -4139,19 +4152,19 @@ cursor-handle {
                   (':hover','-hover'),
                   (':active','-active') { //no need for insensitive and backdrop
     &.top#{$s}:dir(ltr), &.bottom#{$s}:dir(rtl) {
-      $_url: 'assets/text-select-start#{$as}#{$asset_suffix}';
+      $_url: '#{$assets}/text-select-start#{$as}#{$asset_suffix}';
       -gtk-icon-source: -gtk-scaled(url('#{$_url}.png'),
                                     url('#{$_url}@2.png'));
     }
 
     &.bottom#{$s}:dir(ltr), &.top#{$s}:dir(rtl) {
-      $_url: 'assets/text-select-end#{$as}#{$asset_suffix}';
+      $_url: '#{$assets}/text-select-end#{$as}#{$asset_suffix}';
       -gtk-icon-source: -gtk-scaled(url('#{$_url}.png'),
                                     url('#{$_url}@2.png'));
     }
 
     &.insertion-cursor#{$s}:dir(ltr), &.insertion-cursor#{$s}:dir(rtl) {
-      $_url: 'assets/slider-horz-scale-has-marks-above#{$as}#{$asset_suffix}';
+      $_url: '#{$assets}/slider-horz-scale-has-marks-above#{$as}#{$asset_suffix}';
       -gtk-icon-source: -gtk-scaled(url('#{$_url}.png'),
                                     url('#{$_url}@2.png'));
     }
@@ -4303,3 +4316,27 @@ popover.entry-completion > contents {
 statusbar {
   padding: 6px 10px 6px 10px;
 }
+
+menubutton {
+  arrow {
+    min-height: 16px;
+    min-width: 16px;
+    &.none {
+      -gtk-icon-source: -gtk-icontheme('open-menu-symbolic');
+    }
+    &.down {
+      -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+    }
+    &.up {
+      -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+    }
+    &.left {
+      -gtk-icon-source: -gtk-icontheme('pan-start-symbolic');
+    }
+    &.right {
+      -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+    }
+  }
+}
+
+@import 'custom';
