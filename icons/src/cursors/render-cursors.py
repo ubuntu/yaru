@@ -27,6 +27,7 @@ Please remember to HIDE the slices layer before exporting, so that the rectangle
 # all of the slices in once place, and perhaps a starting point for more layout work.
 #
 
+#TODO OptionParser vs Argparse?
 from optparse import OptionParser
 
 optParser = OptionParser()
@@ -52,6 +53,7 @@ from PIL import Image
 import multiprocessing
 import io
 
+# TODO get rid of global variables
 svgFilename = None
 hotsvgFilename = None
 sizes = [24,32,48,64,96]
@@ -66,6 +68,7 @@ def natural_sort(l):
     alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ]
     return sorted(l, key = alphanum_key)
 
+# TODO add proper logger
 def dbg(msg):
     if options.debug:
         sys.stderr.write(msg+'\n')
@@ -83,6 +86,7 @@ def cleanup():
     if hotsvgFilename != None and os.path.exists(hotsvgFilename):
         os.unlink(hotsvgFilename)
 
+# TODO manage fatal errors with exceptions
 def fatalError(msg):
     sys.stderr.write(msg)
     cleanup()
@@ -158,6 +162,7 @@ def cropalign (size, filename):
     return result
 
 def cropalign_hotspot (new_base, size, filename):
+    # TODO if not new_base: ?
     if new_base is None:
         return
     img = Image.open (filename)
@@ -184,7 +189,7 @@ class SVGRect:
         dbg("New SVGRect: (%s)" % name)
 
     def renderFromSVG(self, svgFName, slicename, skipped, roundrobin, hotsvgFName):
-
+        # TODO didn't closures use the same context? Do I need to pass svgFName for example?
         def do_res (size, output, svgFName, skipped, roundrobin):
             global inkscape_instances
             if os.path.exists (output):
@@ -366,6 +371,7 @@ class SVGHandler(handler.ContentHandler):
 
     def parseCoordinates(self, val):
         """Strips the units from a coordinate, and returns just the value."""
+        # TODO this could just be a loop
         if val.endswith('px'):
             val = float(val.rstrip('px'))
         elif val.endswith('pt'):
@@ -452,6 +458,7 @@ class SVGLayerHandler(SVGHandler):
             self.startElement_layer(name, attrs)
         elif name == 'rect':
             self.startElement_rect(name, attrs)
+        #TODO last else branch missing?
 
     def endElement(self, name):
         """Generic hook called when the parser is leaving each SVG tag"""
@@ -614,6 +621,7 @@ def autodetect_threadcount ():
     return count
 
 if __name__ == '__main__':
+    # TODO use a main function
     # parse command line into arguments and options
     (options, args) = optParser.parse_args()
 
