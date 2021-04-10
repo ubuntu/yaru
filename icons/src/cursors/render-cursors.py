@@ -27,22 +27,7 @@ Please remember to HIDE the slices layer before exporting, so that the rectangle
 # all of the slices in once place, and perhaps a starting point for more layout work.
 #
 
-#TODO OptionParser vs Argparse?
-from optparse import OptionParser
-
-optParser = OptionParser()
-optParser.add_option('-d','--debug',action='store_true',dest='debug',help='Enable extra debugging info.')
-optParser.add_option('-t','--test',action='store_true',dest='testing',help='Test mode: leave temporary files for examination.')
-optParser.add_option('-p','--sliceprefix',action='store',dest='sliceprefix',help='Specifies the prefix to use for individual slice filenames.')
-optParser.add_option('-r','--remove-shadows',action='store_true',dest='remove_shadows',help='Remove shadows the cursors have.')
-optParser.add_option('-o','--hotspots',action='store_true',dest='hotspots',help='Produce hotspot images and hotspot datafiles.')
-optParser.add_option('-s','--scales',action='store_true',dest='scales',help='Produce 125% (Large) and 150% (Extra Large) scaled versions of each image as well.')
-optParser.add_option('-m','--min-canvas-size',action='store',type='int',dest='min_canvas_size',default=-1, help='Cursor canvas must be at least this big (defaults to -1).')
-optParser.add_option('-f','--fps',action='store',type='int',dest='fps',default=60,help='Assume that all animated cursors have this FPS (defaults to 60).')
-optParser.add_option('-a','--anicursorgen',action='store_true',dest='anicur',default=False,help='Assume that anicursorgen will be used to assemble cursors (xcursorgen is assumed by default).')
-optParser.add_option('-c','--corner-align',action='store_true',dest='align_corner',default=False,help='Align cursors to the top-left corner (by default they are centered).')
-optParser.add_option('-i','--invert',action='store_true',dest='invert',default=False,help='Invert colors (disabled by default).')
-optParser.add_option('-n','--number-of-renderers',action='store',type='int',dest='number_of_renderers',default=1, help='Number of renderer instances run in parallel. Defaults to 1. Set to 0 for autodetection.')
+import argparse
 
 from xml.sax import saxutils, make_parser, SAXParseException, handler, xmlreader
 from xml.sax.handler import feature_namespaces
@@ -62,6 +47,26 @@ mode_shadows = ['shadows']
 mode_hotspots = ['hotspots']
 mode_slices = ['slices']
 mode_invert = ['invert']
+
+
+def configure():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('originalFilename', help='The input SVG file')
+    parser.add_argument('-d', '--debug', action='store_true', dest='debug', help='Enable extra debugging info.')
+    parser.add_argument('-t', '--test', action='store_true', dest='testing', help='Test mode: leave temporary files for examination.')
+    parser.add_argument('-p', '--sliceprefix', action='store', dest='sliceprefix', help='Specifies the prefix to use for individual slice filenames.')
+    parser.add_argument('-r', '--remove-shadows', action='store_true', dest='remove_shadows', help='Remove shadows the cursors have.')
+    parser.add_argument('-o', '--hotspots', action='store_true', dest='hotspots', help='Produce hotspot images and hotspot datafiles.')
+    parser.add_argument('-s', '--scales', action='store_true', dest='scales', help='Produce 125 and 150 percent (Large, and Extra Large) scaled versions of each image as well.')
+    parser.add_argument('-m', '--min-canvas-size', action='store', type=int, dest='min_canvas_size', default=-1, help='Cursor canvas must be at least this big (defaults to -1).')
+    parser.add_argument('-f', '--fps', action='store', type=int, dest='fps', default=60, help='Assume that all animated cursors have this FPS (defaults to 60).')
+    parser.add_argument('-a', '--anicursorgen', action='store_true', dest='anicur', default=False, help='Assume that anicursorgen will be used to assemble cursors (xcursorgen is assumed by default).')
+    parser.add_argument('-c', '--corner-align', action='store_true', dest='align_corner', default=False, help='Align cursors to the top-left corner (by default they are centered).')
+    parser.add_argument('-i', '--invert', action='store_true', dest='invert', default=False, help='Invert colors (disabled by default).')
+    parser.add_argument('-n', '--number-of-renderers', action='store', type=int, dest='number_of_renderers', default=1, help='Number of renderer instances run in parallel. Defaults to 1. Set to 0 for autodetection.')
+
+    return parser.parse_args()
+
 
 def natural_sort(l):
     convert = lambda text: int(text) if text.isdigit() else text.lower()
@@ -623,14 +628,10 @@ def autodetect_threadcount ():
 if __name__ == '__main__':
     # TODO use a main function
     # parse command line into arguments and options
-    (options, args) = optParser.parse_args()
+    options = configure()
 
-    if len(args) != 1:
-        fatalError("\nCall me with the SVG as a parameter.\n\n")
-    originalFilename = args[0]
-
-    svgFilename = originalFilename + '.svg'
-    hotsvgFilename = originalFilename + '.hotspots.svg'
+    svgFilename = options.originalFilename + '.svg'
+    hotsvgFilename = options.originalFilename + '.hotspots.svg'
     modes = ['slices']
     if options.remove_shadows:
         modes.append ('shadows')
@@ -638,11 +639,11 @@ if __name__ == '__main__':
         modes.append ('invert')
 
     with open (svgFilename, 'wb') as output:
-        filter_svg(originalFilename, output, modes)
+        filter_svg(options.originalFilename, output, modes)
 
     if options.hotspots:
         with open (hotsvgFilename, 'wb') as output:
-            filter_svg(originalFilename, output, ['hotspots'])
+            filter_svg(options.originalFilename, output, ['hotspots'])
     # setup program variables from command line (in other words, handle non-option args)
     basename = os.path.splitext(svgFilename)[0]
 
