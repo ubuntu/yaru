@@ -28,7 +28,6 @@ Please remember to HIDE the slices layer before exporting, so that the rectangle
 #
 
 import argparse
-
 from xml.sax import saxutils, make_parser, SAXParseException, handler, xmlreader
 from xml.sax.handler import feature_namespaces
 import os, sys, tempfile, shutil, subprocess
@@ -54,7 +53,7 @@ def configure():
     parser.add_argument('originalFilename', help='The input SVG file')
     parser.add_argument('-d', '--debug', action='store_true', dest='debug', help='Enable extra debugging info.')
     parser.add_argument('-t', '--test', action='store_true', dest='testing', help='Test mode: leave temporary files for examination.')
-    parser.add_argument('-p', '--sliceprefix', action='store', dest='sliceprefix', help='Specifies the prefix to use for individual slice filenames.')
+    parser.add_argument('-p', '--sliceprefix', action='store', dest='sliceprefix', default='', help='Specifies the prefix to use for individual slice filenames.')
     parser.add_argument('-r', '--remove-shadows', action='store_true', dest='remove_shadows', help='Remove shadows the cursors have.')
     parser.add_argument('-o', '--hotspots', action='store_true', dest='hotspots', help='Produce hotspot images and hotspot datafiles.')
     parser.add_argument('-s', '--scales', action='store_true', dest='scales', help='Produce 125 and 150 percent (Large, and Extra Large) scaled versions of each image as well.')
@@ -625,41 +624,36 @@ def autodetect_threadcount ():
         count = 1
     return count
 
-if __name__ == '__main__':
-    # TODO use a main function
-    # parse command line into arguments and options
-    options = configure()
-
-    svgFilename = options.originalFilename + '.svg'
-    hotsvgFilename = options.originalFilename + '.hotspots.svg'
+def get_modes(options):
     modes = ['slices']
     if options.remove_shadows:
         modes.append ('shadows')
     if options.invert:
         modes.append ('invert')
+    return modes
 
+
+if __name__ == '__main__':
+    # parse command line into arguments and options
+    options = configure()
+    modes = get_modes(options)
+
+    svgFilename = options.originalFilename + '.svg'
     with open (svgFilename, 'wb') as output:
         filter_svg(options.originalFilename, output, modes)
 
+    hotsvgFilename = options.originalFilename + '.hotspots.svg'
     if options.hotspots:
         with open (hotsvgFilename, 'wb') as output:
             filter_svg(options.originalFilename, output, ['hotspots'])
-    # setup program variables from command line (in other words, handle non-option args)
-    basename = os.path.splitext(svgFilename)[0]
-
-    if options.sliceprefix:
-        sliceprefix = options.sliceprefix
-    else:
-        sliceprefix = ''
 
     if not options.scales:
         del scale_pairs[:]
 
     if options.number_of_renderers <= 0:
-        options.number_of_renderers = autodetect_threadcount ()
+        options.number_of_renderers = autodetect_threadcount()
 
     inkscape_instances = []
-
     # for i in range (0, options.number_of_renderers):
         # inkscape = subprocess.Popen (['inkscape', '--batch-process', '--shell'], stdin=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         # if inkscape is None:
@@ -668,15 +662,9 @@ if __name__ == '__main__':
         # inkscape_stderr_thread = Thread (target = stderr_reader, args=(inkscape, inkscape_stderr))
         # inkscape_instances.append ([inkscape, inkscape_stderr, inkscape_stderr_thread])
 
-    # initialise results before actually attempting to parse the SVG file
-    svgBounds = SVGRect(0,0,0,0)
-    rectList = []
-
     # Try to parse the svg file
     xmlParser = make_parser()
     xmlParser.setFeature(feature_namespaces, 0)
-
-    # setup XML Parser with an SVGLayerHandler class as a callback parser ####
     svgLayerHandler = SVGLayerHandler()
     xmlParser.setContentHandler(svgLayerHandler)
     try:
@@ -692,21 +680,22 @@ if __name__ == '__main__':
     else:
         dbg("Parsing successful.")
 
-    #svgLayerHandler.generateXHTMLPage()
+    # TODO why explicit delete?
     del xmlParser
 
+    dbg("Loop through each slice rectangle, and render a PNG image for it")
     skipped = {}
     roundrobin = [0]
+    prefix = options.sliceprefix
 
-    dbg("Loop through each slice rectangle, and render a PNG image for it")
     for rect in svgLayerHandler.svg_rects:
-        slicename = sliceprefix + rect.name
+        slicename = prefix + rect.name
         rect.renderFromSVG(svgFilename, slicename, skipped, roundrobin, hotsvgFilename)
 
     cleanup()
 
     for rect in svgLayerHandler.svg_rects:
-        slicename = sliceprefix + rect.name
+        slicename = prefix + rect.name
         postprocess_slice(slicename, skipped)
         if options.hotspots:
             write_xcur(slicename)
@@ -714,7 +703,7 @@ if __name__ == '__main__':
     if options.hotspots:
         passed = {}
         for rect in svgLayerHandler.svg_rects:
-            slicename = sliceprefix + rect.name
+            slicename = prefix + rect.name
             sort_xcur(slicename, passed)
             #if not option.testing:
             #	delete_hotspot(slicename)
