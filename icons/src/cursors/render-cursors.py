@@ -182,53 +182,67 @@ def negative (img):
             r, g, b, a = pixels[x,y]
             pixels[x,y] = (255 - r, 255 - g, 255 - b, a)
 
+
 class SVGRect:
     """Manages a simple rectangular area, along with certain attributes such as a name"""
+
     def __init__(self, x1,y1,x2,y2, name=None):
         self.x1 = x1
         self.y1 = y1
         self.x2 = x2
         self.y2 = y2
         self.name = name
-        dbg("New SVGRect: (%s)" % name)
+        dbg(f"New SVGRect: {name}")
 
     def renderFromSVG(self, svgFName, slicename, skipped, roundrobin, hotsvgFName):
-        # TODO didn't closures use the same context? Do I need to pass svgFName for example?
-        def do_res (size, output, svgFName, skipped, roundrobin):
+
+        def do_res (size, output, svgFName):
             global inkscape_instances
+            nonlocal skipped, roundrobin
             if os.path.exists (output):
+                dbg(f"{output} exists, skip rendering")
                 skipped[output] = True
                 return
 
-            command = 'inkscape --batch-process -w {size} -h {size} --export-id="{export_id}" --export-png="{export_png}" {svg}\n'.format (size=size, export_id=self.name, export_png=output, svg=svgFName)
-            dbg("Command: {}".format (command))
+            command = 'inkscape --batch-process'
+            command += f' -w {size} -h {size} --export-id="{self.name}" --export-png="{output}" {svgFName}\n'
+
+            dbg(f"Command: {command}")
             outcome = subprocess.run(command, shell=True, check=True, capture_output=True)
             if outcome.returncode:
                 fatalError(outcome.stdout)
 
-        pngsliceFName = slicename + '.png'
-        hotsliceFName = slicename + '.hotspot.png'
+        pngsliceFName = f'{slicename}.png'
+        hotsliceFName = f'{slicename}.hotspot.png'
 
-        dbg('Saving slice as: "%s"' % pngsliceFName)
+        dbg(f'Saving slice as "{pngsliceFName}"')
         for i, size in enumerate (sizes):
-            subdir = 'bitmaps/{}x{}'.format (size, size)
+            subdir = f'bitmaps/{size}x{size}'
+
             if not os.path.exists (subdir):
                 os.makedirs (subdir)
-            relslice = '{}/{}'.format (subdir, pngsliceFName)
-            do_res (size, relslice, svgFName, skipped, roundrobin)
+
+            relslice = f'{subdir}/{pngsliceFName}'
+            do_res (size, relslice, svgFName)
+
             if options.hotspots:
-                hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
-                do_res (size, hotrelslice, hotsvgFName, skipped, roundrobin)
+                hotrelslice = f'{subdir}/{hotsliceFName}'
+                do_res (size, hotrelslice, hotsvgFName)
+
             for scale in scale_pairs:
-                subdir = 'bitmaps/{}x{}_{}'.format (size, size, scale[1])
-                relslice = '{}/{}'.format (subdir, pngsliceFName)
+                subdir = f'bitmaps/{size}x{size}_{scale[1]}'
+                relslice = f'{subdir}/{pngsliceFName}'
+
                 if not os.path.exists (subdir):
                     os.makedirs (subdir)
+
                 scaled_size = int (size * scale[0])
-                do_res (scaled_size, relslice, svgFName, skipped, roundrobin)
+                do_res (scaled_size, relslice, svgFName)
+
                 if options.hotspots:
-                    hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
-                    do_res (scaled_size, hotrelslice, hotsvgFName, skipped, roundrobin)
+                    hotrelslice = f'{subdir}/{hotsliceFName}'
+                    do_res (scaled_size, hotrelslice, hotsvgFName)
+
             # This is not inside do_res() because we want each instance to work all scales in case scales are enabled,
             # otherwise instances that get mostly smallscale renders will finish up way before the others
             roundrobin[0] += 1
