@@ -633,6 +633,34 @@ def get_modes(options):
     return modes
 
 
+def parse_svg_file(filename):
+    """Parse the SVG input file"""
+    xml_parser = make_parser()
+    xml_parser.setFeature(feature_namespaces, 0)
+    handler = SVGLayerHandler()
+    xml_parser.setContentHandler(handler)
+    try:
+        xml_parser.parse(filename)
+    except SAXParseException as e:
+        lineno = e.getLineNumber()
+        colno = e.getColumnNumber()
+        msg = e.getMessage()
+        sys.stderr.write(f"Error parsing {filename}, line:{lineno}, column:{colno}, message:{msg}.\n")
+        fatalError("If are seeing this within inkscape, it probably indicates a bug that should be reported.")
+
+    if len(handler.svg_rects) == 0:
+        fatalError(
+"""No slices were found in this SVG file.
+Please refer to the documentation for guidance on how to use this SVGSlice.
+As a quick summary:
+""" + usageMsg)
+    else:
+        dbg("Parsing successful.")
+
+    # TODO why explicit delete?
+    del xml_parser
+    return handler
+
 if __name__ == '__main__':
     # parse command line into arguments and options
     options = configure()
@@ -662,26 +690,7 @@ if __name__ == '__main__':
         # inkscape_stderr_thread = Thread (target = stderr_reader, args=(inkscape, inkscape_stderr))
         # inkscape_instances.append ([inkscape, inkscape_stderr, inkscape_stderr_thread])
 
-    # Try to parse the svg file
-    xmlParser = make_parser()
-    xmlParser.setFeature(feature_namespaces, 0)
-    svgLayerHandler = SVGLayerHandler()
-    xmlParser.setContentHandler(svgLayerHandler)
-    try:
-        xmlParser.parse(svgFilename)
-    except SAXParseException as e:
-        fatalError("Error parsing SVG file '%s': line %d,col %d: %s.  If you're seeing this within inkscape, it probably indicates a bug that should be reported." % (svgFilename, e.getLineNumber(), e.getColumnNumber(), e.getMessage()))
-
-    # verify that the svg file actually contained some rectangles.
-    if len(svgLayerHandler.svg_rects) == 0:
-        fatalError("""No slices were found in this SVG file.  Please refer to the documentation for guidance on how to use this SVGSlice.  As a quick summary:
-
-""" + usageMsg)
-    else:
-        dbg("Parsing successful.")
-
-    # TODO why explicit delete?
-    del xmlParser
+    svgLayerHandler = parse_svg_file(svgFilename)
 
     dbg("Loop through each slice rectangle, and render a PNG image for it")
     skipped = {}
