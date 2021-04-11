@@ -44,23 +44,21 @@ dbg = logging.debug
 inf = logging.info
 wrn = logging.warning
 
+MODE_HOTSPOTS = ['hotspots']
+MODE_INVERT = ['invert']
+MODE_SHADOWS = ['shadows']
+MODE_SLICES = ['slices']
+SCALE_PAIRS = [(1.25, 's1'), (1.50, 's2')]
+SIZES = [24, 32, 48, 64, 96]
+SVG_HOTSPOT_WORKING_COPY = "hotspot-working-copy.svg"
+SVG_WORKING_COPY = "working-copy.svg"
+
 
 # TODO manage fatal errors cleanup with exceptions
 def fatalError(msg):
     logging.critical(msg)
     cleanup()
     sys.exit(20)
-
-
-# TODO get rid of global variables
-svgFilename = None
-hotsvgFilename = None
-sizes = [24,32,48,64,96]
-scale_pairs = [(1.25, 's1'), (1.50, 's2')]
-mode_shadows = ['shadows']
-mode_hotspots = ['hotspots']
-mode_slices = ['slices']
-mode_invert = ['invert']
 
 
 def configure():
@@ -95,10 +93,10 @@ def cleanup():
         del inkscape_stderr_thread
         del inkscape_stderr
     del inkscape_instances
-    if svgFilename != None and os.path.exists(svgFilename):
-        os.unlink(svgFilename)
-    if hotsvgFilename != None and os.path.exists(hotsvgFilename):
-        os.unlink(hotsvgFilename)
+    if SVG_WORKING_COPY != None and os.path.exists(SVG_WORKING_COPY):
+        os.unlink(SVG_WORKING_COPY)
+    if SVG_HOTSPOT_WORKING_COPY != None and os.path.exists(SVG_HOTSPOT_WORKING_COPY):
+        os.unlink(SVG_HOTSPOT_WORKING_COPY)
 
 def stderr_reader(inkscape, inkscape_stderr):
     while True:
@@ -220,7 +218,7 @@ class SVGRect:
         hotsliceFName = f'{slicename}.hotspot.png'
 
         dbg(f'Saving slice as "{pngsliceFName}"')
-        for i, size in enumerate (sizes):
+        for i, size in enumerate (SIZES):
             subdir = f'bitmaps/{size}x{size}'
 
             if not os.path.exists (subdir):
@@ -233,7 +231,7 @@ class SVGRect:
                 hotrelslice = f'{subdir}/{hotsliceFName}'
                 do_res (size, hotrelslice, hotsvgFName)
 
-            for scale in scale_pairs:
+            for scale in SCALE_PAIRS:
                 subdir = f'bitmaps/{size}x{size}_{scale[1]}'
                 relslice = f'{subdir}/{pngsliceFName}'
 
@@ -263,7 +261,7 @@ def get_next_size (index, current_size):
 
 def get_csize (index, current_size):
     size = current_size
-    if len (scale_pairs) > 0:
+    if len (SCALE_PAIRS) > 0:
         size = get_next_size (index, size)
     return max (options.min_canvas_size, size)
 
@@ -271,7 +269,7 @@ def postprocess_slice (slicename, skipped):
     pngsliceFName = slicename + '.png'
     hotsliceFName = slicename + '.hotspot.png'
 
-    for i, size in enumerate (sizes):
+    for i, size in enumerate (SIZES):
         subdir = 'bitmaps/{}x{}'.format (size, size)
         relslice = '{}/{}'.format (subdir, pngsliceFName)
         csize = get_csize (i, size)
@@ -280,7 +278,7 @@ def postprocess_slice (slicename, skipped):
             if options.hotspots:
                 hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
                 # cropalign_hotspot (new_base, csize, hotrelslice)
-        for scale in scale_pairs:
+        for scale in SCALE_PAIRS:
             subdir = 'bitmaps/{}x{}_{}'.format (size, size, scale[1])
             relslice = '{}/{}'.format (subdir, pngsliceFName)
             if relslice not in skipped:
@@ -318,17 +316,17 @@ def write_xcur(slicename):
             fps_field = ' {}'.format (int (1000.0 / options.fps))
     xcur = {}
     xcur['s0'] = open ('bitmaps/{}.in'.format (slicename), mode)
-    if len (scale_pairs) > 0:
+    if len (SCALE_PAIRS) > 0:
         xcur['s1'] = open ('bitmaps/{}.s1.in'.format (slicename), mode)
         xcur['s2'] = open ('bitmaps/{}.s2.in'.format (slicename), mode)
-    for i, size in enumerate (sizes):
+    for i, size in enumerate (SIZES):
         subdir = 'bitmaps/{}x{}'.format (size, size)
         relslice = '{}/{}'.format (subdir, pngsliceFName)
         hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
         hot = find_hotspot (hotrelslice)
         csize = get_csize (i, size)
         xcur['s0'].write ("{csize} {hotx} {hoty} {filename}{fps_field}\n".format (csize=csize, hotx=hot[0], hoty=hot[1], filename='{}x{}/{}'.format (size, size, pngsliceFName), fps_field=fps_field))
-        for scale in scale_pairs:
+        for scale in SCALE_PAIRS:
             subdir = 'bitmaps/{}x{}_{}'.format (size, size, scale[1])
             relslice = '{}/{}'.format (subdir, pngsliceFName)
             scaled_size = int (size * scale[0])
@@ -336,7 +334,7 @@ def write_xcur(slicename):
             hot = find_hotspot (hotrelslice)
             xcur[scale[1]].write ("{csize} {hotx} {hoty} {filename}{fps_field}\n".format (csize=csize, hotx=hot[0], hoty=hot[1], filename='{}x{}_{}/{}'.format (size, size, scale[1], pngsliceFName), fps_field=fps_field))
     xcur['s0'].close ()
-    if len (scale_pairs) > 0:
+    if len (SCALE_PAIRS) > 0:
         xcur['s1'].close ()
         xcur['s2'].close ()
 
@@ -362,23 +360,24 @@ def sort_xcur(slicename, passed):
     passed[slicename] = True
 
     sort_file ('bitmaps/{}.in'.format (slicename))
-    if len (scale_pairs) > 0:
+    if len (SCALE_PAIRS) > 0:
         sort_file ('bitmaps/{}.s1.in'.format (slicename))
         sort_file ('bitmaps/{}.s2.in'.format (slicename))
 
 def delete_hotspot(slicename):
     hotsliceFName = slicename + '.hotspot.png'
 
-    for i, size in enumerate (sizes):
+    for i, size in enumerate (SIZES):
         subdir = 'bitmaps/{}x{}'.format (size, size)
         hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
         if os.path.exists (hotrelslice):
             os.unlink (hotrelslice)
-        for scale in scale_pairs:
+        for scale in SCALE_PAIRS:
             subdir = 'bitmaps/{}x{}_{}'.format (size, size, scale[1])
             hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
             if os.path.exists (hotrelslice):
                 os.unlink (hotrelslice)
+
 
 class SVGHandler(handler.ContentHandler):
     """Base class for SVG parsers"""
@@ -550,10 +549,10 @@ class SVGFilter (saxutils.XMLFilterBase):
                 elif key == 'inkscape:groupmode':
                     if value == 'layer':
                         is_layer = True
-        if mode_shadows in self.mode and is_shadows:
+        if MODE_SHADOWS in self.mode and is_shadows:
             # Only remove the shadows
             is_throwaway_layer = True
-        elif mode_hotspots in self.mode and not (is_hotspots or is_slices):
+        elif MODE_HOTSPOTS in self.mode and not (is_hotspots or is_slices):
             # Remove all layers but hotspots and slices
             if localname == 'g':
                 is_throwaway_layer = True
@@ -570,13 +569,13 @@ class SVGFilter (saxutils.XMLFilterBase):
                 # no circumstances where we *want* to render slices
                 value = modify_style (value, 'display', 'display:none')
             if alocalname == 'style' and is_hotspots:
-                if mode_hotspots in self.mode:
+                if MODE_HOTSPOTS in self.mode:
                     # Make hotspots visible in hotspots mode
                     value = modify_style (value, 'display', 'display:inline')
                 else:
                     # Make hotspots invisible otherwise
                     value = modify_style (value, 'display', 'display:none')
-            if alocalname == 'style' and mode_invert in self.mode and is_layer and is_shadows:
+            if alocalname == 'style' and MODE_INVERT in self.mode and is_layer and is_shadows:
                 value = modify_style (value, None, 'filter:url(#InvertFilter)')
             dict[key] = value
 
@@ -597,7 +596,7 @@ class SVGFilter (saxutils.XMLFilterBase):
             return
         self._downstream.endElement(localname)
 
-def filter_svg (input, output, mode):
+def filter_svg(input, output, mode):
     """filter_svg(input:file, output:file, mode)
 
     Parses the SVG input from the input stream.
@@ -607,15 +606,7 @@ def filter_svg (input, output, mode):
     For mode == 'shadows' it filters out the shadows layer.
     """
 
-    mode_objs = []
-    if 'hotspots' in mode:
-        mode_objs.append (mode_hotspots)
-    if 'shadows' in mode:
-        mode_objs.append (mode_shadows)
-    if 'slices' in mode:
-        mode_objs.append (mode_slices)
-    if 'invert' in mode:
-        mode_objs.append (mode_invert)
+    mode_objs = [ [m] for m in mode ]
     if len (mode_objs) == 0:
         raise ValueError()
 
@@ -689,17 +680,15 @@ if __name__ == '__main__':
         logging.basicConfig(level=logging.INFO, format=INF_FORMAT)
 
     modes = get_modes(options)
-    svgFilename = options.originalFilename + '.svg'
-    with open (svgFilename, 'wb') as output:
+    with open (SVG_WORKING_COPY, 'wb') as output:
         filter_svg(options.originalFilename, output, modes)
 
-    hotsvgFilename = options.originalFilename + '.hotspots.svg'
     if options.hotspots:
-        with open (hotsvgFilename, 'wb') as output:
+        with open (SVG_HOTSPOT_WORKING_COPY, 'wb') as output:
             filter_svg(options.originalFilename, output, ['hotspots'])
 
     if not options.scales:
-        del scale_pairs[:]
+        del SCALE_PAIRS[:]
 
     if options.number_of_renderers <= 0:
         options.number_of_renderers = autodetect_threadcount()
@@ -713,7 +702,7 @@ if __name__ == '__main__':
         # inkscape_stderr_thread = Thread (target = stderr_reader, args=(inkscape, inkscape_stderr))
         # inkscape_instances.append ([inkscape, inkscape_stderr, inkscape_stderr_thread])
 
-    svgLayerHandler = parse_svg_file(svgFilename)
+    svgLayerHandler = parse_svg_file(SVG_WORKING_COPY)
 
     dbg("Loop through each slice rectangle, and render a PNG image for it")
     skipped = {}
@@ -722,7 +711,7 @@ if __name__ == '__main__':
 
     for rect in svgLayerHandler.svg_rects:
         slicename = prefix + rect.name
-        rect.renderFromSVG(svgFilename, slicename, skipped, roundrobin, hotsvgFilename)
+        rect.renderFromSVG(SVG_WORKING_COPY, slicename, skipped, roundrobin, SVG_HOTSPOT_WORKING_COPY)
 
     cleanup()
 
