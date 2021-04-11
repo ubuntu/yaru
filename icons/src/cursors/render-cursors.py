@@ -179,8 +179,7 @@ def cropalign (size, filename):
     return result
 
 def cropalign_hotspot (new_base, size, filename):
-    # TODO if not new_base: ?
-    if new_base is None:
+    if not new_base:
         return
     img = Image.open (filename)
     expimg = img.crop ((new_base[0], new_base[1], new_base[0] + size, new_base[1] + size))
@@ -414,28 +413,26 @@ class SVGHandler(handler.ContentHandler):
 
     def parseCoordinates(self, val):
         """Strips the units from a coordinate, and returns just the value."""
-        # TODO this could just be a loop
-        if val.endswith('px'):
-            val = float(val.rstrip('px'))
-        elif val.endswith('pt'):
-            val = float(val.rstrip('pt'))
-        elif val.endswith('cm'):
-            val = float(val.rstrip('cm'))
-        elif val.endswith('mm'):
-            val = float(val.rstrip('mm'))
-        elif val.endswith('in'):
-            val = float(val.rstrip('in'))
-        elif val.endswith('%'):
-            val = float(val.rstrip('%'))
-        elif self.isFloat(val):
-            val = float(val)
-        else:
-            fatal(f"Coordinate value {val} has unrecognised units. Only px,pt,cm,mm,and in units are currently supported.")
-        return val
+
+        if self.isFloat(val):
+            return float(val)
+
+        res = None
+        supported_units = "px, pt, cm, mm, in, %"
+        for unit in supported_units.split(", "):
+            if val.endswith(unit):
+                res = float(val.rstrip(unit))
+                break
+
+        if not res:
+            fatal(f"Unsupported unit in value {val}. Valid units are {supported_units}.")
+
+        return res
+
 
     def startElement_svg(self, name, attrs):
         """Callback hook which handles the start of an svg image"""
-        dbg('startElement_svg called')
+
         width = attrs.get('width', None)
         height = attrs.get('height', None)
         self.pageBounds.x2 = self.parseCoordinates(width)
@@ -443,11 +440,12 @@ class SVGHandler(handler.ContentHandler):
 
     def endElement(self, name):
         """General callback for the end of a tag"""
-        dbg('Ending element "%s"' % name)
+        dbg(f'Ending element "{name}"')
 
 
 class SVGLayerHandler(SVGHandler):
     """Parses an SVG file, extracing slicing rectangles from a "slices" layer"""
+
     def __init__(self):
         SVGHandler.__init__(self)
         self.svg_rects = []
@@ -464,7 +462,8 @@ class SVGLayerHandler(SVGHandler):
         """Callback hook for parsing layer elements
 
         Checks to see if we're starting to parse a slices layer, and sets the appropriate flags.  Otherwise, the layer will simply be ignored."""
-        dbg('found layer: name="%s" id="%s"' % (name, attrs['id']))
+        id = attrs['id']
+        dbg(f'found layer: name="{name}" id="{id}"')
         if attrs.get('inkscape:groupmode', None) == 'layer':
             if self.inSlicesLayer() or attrs['inkscape:label'] == 'slices':
                 self.layer_nests += 1
@@ -473,7 +472,7 @@ class SVGLayerHandler(SVGHandler):
         """Callback for leaving a layer in the SVG file
 
         Just undoes any flags set previously."""
-        dbg('leaving layer: name="%s"' % name)
+        dbg(f'leaving layer: name="{name}"')
         if self.inSlicesLayer():
             self.layer_nests -= 1
 
@@ -482,6 +481,7 @@ class SVGLayerHandler(SVGHandler):
 
         Checks if we're currently in a special "slices" layer using flags set by startElement_layer().  If we are, the current rectangle is considered to be a slice, and is added to the list of parsed
         rectangles.  Otherwise, it will be ignored."""
+
         if self.inSlicesLayer():
             x1 = self.parseCoordinates(attrs['x'])
             y1 = self.parseCoordinates(attrs['y'])
@@ -493,7 +493,8 @@ class SVGLayerHandler(SVGHandler):
 
     def startElement(self, name, attrs):
         """Generic hook for examining and/or parsing all SVG tags"""
-        dbg('Beginning element "%s"' % name)
+
+        dbg(f'Beginning element "{name}"')
         if name == 'svg':
             self.startElement_svg(name, attrs)
         elif name == 'g':
@@ -501,7 +502,6 @@ class SVGLayerHandler(SVGHandler):
             self.startElement_layer(name, attrs)
         elif name == 'rect':
             self.startElement_rect(name, attrs)
-        #TODO last else branch missing?
 
     def endElement(self, name):
         """Generic hook called when the parser is leaving each SVG tag"""
