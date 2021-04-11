@@ -103,17 +103,17 @@ def natural_sort(l):
 def cleanup():
     global RENDERERS
     for inkscape, inkscape_stderr, inkscape_stderr_thread in RENDERERS:
-        inkscape.communicate ('quit\n'.encode())
+        inkscape.communicate('quit\n'.encode())
         del inkscape
         del inkscape_stderr_thread
         del inkscape_stderr
     del RENDERERS
 
     if SVG_WORKING_COPY != None and os.path.exists(SVG_WORKING_COPY):
-        os.unlink(SVG_WORKING_COPY)
+        os.remove(SVG_WORKING_COPY)
 
     if SVG_HOTSPOT_WORKING_COPY != None and os.path.exists(SVG_HOTSPOT_WORKING_COPY):
-        os.unlink(SVG_HOTSPOT_WORKING_COPY)
+        os.remove(SVG_HOTSPOT_WORKING_COPY)
 
 
 def find_hotspot (hotfile):
@@ -148,11 +148,14 @@ def cropalign (size, filename):
             top = 0
             bottom = 0
         content_dimensions = (content_dimensions[0] + left, content_dimensions[1] + top, content_dimensions[2] - right, content_dimensions[3] - bottom)
-        sys.stderr.write ("WARNING: {} is too big to be cleanly cropped to {} ({}x{} at best), cropping to {}x{}!\n".format (filename, size, hcropped, vcropped, content_dimensions[2] - content_dimensions[0], content_dimensions[3] - content_dimensions[1]))
-        sys.stderr.flush ()
+        warn(f"{filename} is too big to be cleanly cropped to {size} ({hcropped}x{vcropped} at best)")
+        warn("cropping to {}x{}!".format(content_dimensions[2] - content_dimensions[0], content_dimensions[3] - content_dimensions[1]))
+
     if options.testing:
         img.save (filename + ".orig.png", "png")
-    dbg("{} content is {} {} {} {}".format (filename, content_dimensions[0], content_dimensions[1], content_dimensions[2], content_dimensions[3]))
+
+    dbg(f"{filename} content is {content_dimensions[0]} {content_dimensions[1]} {content_dimensions[2]} {content_dimensions[3]}")
+
     cropimg = img.crop ((content_dimensions[0], content_dimensions[1], content_dimensions[2], content_dimensions[3]))
     pixels = cropimg.load ()
     if options.testing:
@@ -267,37 +270,35 @@ def get_next_size (index, current_size):
         # 32->48, 64->96, 128->192, 256->384
         return (current_size * 3) / 2
 
+
 def get_csize (index, current_size):
     size = current_size
     if len (SCALE_PAIRS) > 0:
         size = get_next_size (index, size)
     return max (options.min_canvas_size, size)
 
+
 def postprocess_slice (slicename, skipped):
-    pngsliceFName = slicename + '.png'
-    hotsliceFName = slicename + '.hotspot.png'
+    pngsliceFName = f'{slicename}.png'
+    hotsliceFName = f'{slicename}.hotspot.png'
 
     for i, size in enumerate (SIZES):
-        subdir = 'bitmaps/{}x{}'.format (size, size)
-        relslice = '{}/{}'.format (subdir, pngsliceFName)
+        subdir = f'bitmaps/{size}x{size}'
+        relslice = f'{subdir}/{pngsliceFName}'
         csize = get_csize (i, size)
         if relslice not in skipped:
-            # new_base = cropalign (csize, relslice)
             if options.hotspots:
-                hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
-                # cropalign_hotspot (new_base, csize, hotrelslice)
+                hotrelslice = f'{subdir}/{hotsliceFName}'
         for scale in SCALE_PAIRS:
-            subdir = 'bitmaps/{}x{}_{}'.format (size, size, scale[1])
-            relslice = '{}/{}'.format (subdir, pngsliceFName)
+            subdir = f'bitmaps/{size}x{size}_{scale[1]}'
+            relslice = f'{subdir}/{pngsliceFName}'
             if relslice not in skipped:
-                # new_base = cropalign (csize, relslice)
                 if options.hotspots:
-                    hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
-                    # cropalign_hotspot (new_base, csize, hotrelslice)
+                    hotrelslice = f'{subdir}/{hotsliceFName}'
 
 def write_xcur(slicename):
-    pngsliceFName = slicename + '.png'
-    hotsliceFName = slicename + '.hotspot.png'
+    pngsliceFName = f'{slicename}.png'
+    hotsliceFName = f'{slicename}.hotspot.png'
 
     framenum = -1
     if slicename[-5:].startswith ('_'):
@@ -322,29 +323,40 @@ def write_xcur(slicename):
         else:
             # For xcursorgen use milliseconds
             fps_field = ' {}'.format (int (1000.0 / options.fps))
+
     xcur = {}
-    xcur['s0'] = open ('bitmaps/{}.in'.format (slicename), mode)
+    xcur['s0'] = open (f'bitmaps/{slicename}.in', mode)
     if len (SCALE_PAIRS) > 0:
-        xcur['s1'] = open ('bitmaps/{}.s1.in'.format (slicename), mode)
-        xcur['s2'] = open ('bitmaps/{}.s2.in'.format (slicename), mode)
+        xcur['s1'] = open (f'bitmaps/{slicename}.s1.in', mode)
+        xcur['s2'] = open (f'bitmaps/{slicename}.s2.in', mode)
+
     for i, size in enumerate (SIZES):
-        subdir = 'bitmaps/{}x{}'.format (size, size)
-        relslice = '{}/{}'.format (subdir, pngsliceFName)
-        hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
+        subdir = f'bitmaps/{size}x{size}'
+        relslice = f'{subdir}/{pngsliceFName}'
+        filename = f'{size}x{size}/{pngsliceFName}'
+        hotrelslice = f'{subdir}/{hotsliceFName}'
+
         hot = find_hotspot (hotrelslice)
         csize = get_csize (i, size)
-        xcur['s0'].write ("{csize} {hotx} {hoty} {filename}{fps_field}\n".format (csize=csize, hotx=hot[0], hoty=hot[1], filename='{}x{}/{}'.format (size, size, pngsliceFName), fps_field=fps_field))
+
+        xcur['s0'].write (f"{csize} {hot[0]} {hot[1]} {filename}{fps_field}\n")
+
         for scale in SCALE_PAIRS:
-            subdir = 'bitmaps/{}x{}_{}'.format (size, size, scale[1])
-            relslice = '{}/{}'.format (subdir, pngsliceFName)
+            subdir = f'bitmaps/{size}x{size}_{scale[1]}'
+            relslice = f'{subdir}/{pngsliceFName}'
+            filename = f'{size}x{size}/{scale[1]}'
             scaled_size = int (size * scale[0])
-            hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
+            hotrelslice = f'{subdir}/{hotsliceFName}'
+
             hot = find_hotspot (hotrelslice)
-            xcur[scale[1]].write ("{csize} {hotx} {hoty} {filename}{fps_field}\n".format (csize=csize, hotx=hot[0], hoty=hot[1], filename='{}x{}_{}/{}'.format (size, size, scale[1], pngsliceFName), fps_field=fps_field))
+
+            xcur[scale[1]].write(f"{csize} {hot[0]} {hot[1]} {filename}{fps_field}\n")
+
     xcur['s0'].close ()
     if len (SCALE_PAIRS) > 0:
         xcur['s1'].close ()
         xcur['s2'].close ()
+
 
 def sort_file(filename):
     with open (filename, 'rb') as src:
@@ -353,8 +365,9 @@ def sort_file(filename):
         for line in natural_sort (contents):
             dst.write (line)
 
+
 def sort_xcur(slicename, passed):
-    pngsliceFName = slicename + '.png'
+    pngsliceFName = f'{slicename}.png'
 
     framenum = -1
     if slicename[-5:].startswith ('_'):
@@ -367,22 +380,23 @@ def sort_xcur(slicename, passed):
         return
     passed[slicename] = True
 
-    sort_file ('bitmaps/{}.in'.format (slicename))
+    sort_file ('bitmaps/{slicename}.in')
     if len (SCALE_PAIRS) > 0:
-        sort_file ('bitmaps/{}.s1.in'.format (slicename))
-        sort_file ('bitmaps/{}.s2.in'.format (slicename))
+        sort_file (f'bitmaps/{slicename}.s1.in')
+        sort_file (f'bitmaps/{slicename}.s2.in')
+
 
 def delete_hotspot(slicename):
-    hotsliceFName = slicename + '.hotspot.png'
+    hotsliceFName = f'{slicename}.hotspot.png'
 
     for i, size in enumerate (SIZES):
-        subdir = 'bitmaps/{}x{}'.format (size, size)
-        hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
+        subdir = f'bitmaps/{size}x{size}'
+        hotrelslice = f'{subdir}/{hotsliceFName}'
         if os.path.exists (hotrelslice):
             os.unlink (hotrelslice)
         for scale in SCALE_PAIRS:
-            subdir = 'bitmaps/{}x{}_{}'.format (size, size, scale[1])
-            hotrelslice = '{}/{}'.format (subdir, hotsliceFName)
+            subdir = f'bitmaps/{size}x{size}_{scale[1]}'
+            hotrelslice = f'{subdir}/{hotsliceFName}'
             if os.path.exists (hotrelslice):
                 os.unlink (hotrelslice)
 
@@ -416,7 +430,7 @@ class SVGHandler(handler.ContentHandler):
         elif self.isFloat(val):
             val = float(val)
         else:
-            fatal("Coordinate value %s has unrecognised units.  Only px,pt,cm,mm,and in units are currently supported." % val)
+            fatal(f"Coordinate value {val} has unrecognised units. Only px,pt,cm,mm,and in units are currently supported.")
         return val
 
     def startElement_svg(self, name, attrs):
