@@ -49,9 +49,10 @@ SIZES = [24, 32, 48, 64, 96]
 SVG_HOTSPOT_WORKING_COPY = "hotspot-working-copy.svg"
 SVG_WORKING_COPY = "working-copy.svg"
 
-dbg = logging.debug
-inf = logging.info
-wrn = logging.warning
+debug = logging.debug
+error = logging.error
+info = logging.info
+warning = logging.warning
 
 
 def fatal(msg):
@@ -161,10 +162,10 @@ def configure():
 
     # More detailed logging format if debug is enabled
     if options.debug:
-        fmt = "[%(levelname)s] %(message)s"
+        fmt = "[%(levelname)s] %(lineno)d:%(funcName)-s - %(message)s"
         level = logging.DEBUG
     else:
-        fmt = "[%(levelname)s] %(lineno)d:%(funcName)-s - %(message)s"
+        fmt = "[%(levelname)s] %(message)s"
         level = logging.INFO
     logging.basicConfig(level=level, format=fmt)
 
@@ -251,7 +252,7 @@ def cropalign(size, filename):
     if options.testing:
         img.save(filename + ".orig.png", "png")
 
-    dbg(
+    debug(
         f"{filename} content is {content_dimensions[0]} {content_dimensions[1]} {content_dimensions[2]} {content_dimensions[3]}"
     )
 
@@ -314,29 +315,29 @@ class SVGRect:
         self.x2 = x2
         self.y2 = y2
         self.name = name
-        dbg(f"New SVGRect: {name}")
+        debug(f"New SVGRect: {name}")
 
     def renderFromSVG(self, svgFName, slicename, skipped, roundrobin, hotsvgFName):
         def do_res(size, output, svgFName):
             global RENDERERS
             nonlocal skipped, roundrobin
             if os.path.exists(output):
-                dbg(f"{output} exists, skip rendering")
+                debug(f"{output} exists, skip rendering")
                 skipped[output] = True
                 return
 
+            debug(f"rendering {output}")
             command = f"export-width:{size};"
             command += f" export-height:{size};"
             command += f" export-id:{self.name};"
             command += f" export-filename:{output};"
             command += f" export-do\n"
-            inf(f"inkscape: {command}")
+            debug(f"inkscape command: {command}")
             RENDERERS[roundrobin[0]][0].stdin.write(command.encode())
 
         pngsliceFName = f"{slicename}.png"
         hotsliceFName = f"{slicename}.hotspot.png"
 
-        dbg(f'Saving slice as "{pngsliceFName}"')
         for i, size in enumerate(SIZES):
             subdir = f"bitmaps/{size}x{size}"
 
@@ -553,7 +554,7 @@ class SVGHandler(handler.ContentHandler):
 
     def endElement(self, name):
         """General callback for the end of a tag"""
-        dbg(f'Ending element "{name}"')
+        debug(f'Ending element "{name}"')
 
 
 class SVGLayerHandler(SVGHandler):
@@ -576,7 +577,7 @@ class SVGLayerHandler(SVGHandler):
 
         Checks to see if we're starting to parse a slices layer, and sets the appropriate flags.  Otherwise, the layer will simply be ignored."""
         id = attrs["id"]
-        dbg(f'found layer: name="{name}" id="{id}"')
+        debug(f'found layer: name="{name}" id="{id}"')
         if attrs.get("inkscape:groupmode", None) == "layer":
             if self.inSlicesLayer() or attrs["inkscape:label"] == "slices":
                 self.layer_nests += 1
@@ -585,7 +586,7 @@ class SVGLayerHandler(SVGHandler):
         """Callback for leaving a layer in the SVG file
 
         Just undoes any flags set previously."""
-        dbg(f'leaving layer: name="{name}"')
+        debug(f'leaving layer: name="{name}"')
         if self.inSlicesLayer():
             self.layer_nests -= 1
 
@@ -607,7 +608,7 @@ class SVGLayerHandler(SVGHandler):
     def startElement(self, name, attrs):
         """Generic hook for examining and/or parsing all SVG tags"""
 
-        dbg(f'Beginning element "{name}"')
+        debug(f'Beginning element "{name}"')
         if name == "svg":
             self.startElement_svg(name, attrs)
         elif name == "g":
@@ -618,7 +619,7 @@ class SVGLayerHandler(SVGHandler):
 
     def endElement(self, name):
         """Generic hook called when the parser is leaving each SVG tag"""
-        dbg('Ending element "%s"' % name)
+        debug('Ending element "%s"' % name)
         if name == "g":
             self.endElement_layer(name)
 
@@ -802,12 +803,13 @@ def parse_svg_file(filename):
     handler = SVGLayerHandler()
     xml_parser.setContentHandler(handler)
     try:
+        info(f"parsing {filename}")
         xml_parser.parse(filename)
     except SAXParseException as e:
         lineno = e.getLineNumber()
         colno = e.getColumnNumber()
         msg = e.getMessage()
-        sys.stderr.write(
+        error(
             f"Error parsing {filename}, line:{lineno}, column:{colno}, message:{msg}.\n"
         )
         fatal(
@@ -823,7 +825,7 @@ As a quick summary:
             + usageMsg
         )
     else:
-        dbg("Parsing successful.")
+        debug("Parsing successful.\n")
 
     # TODO why explicit delete?
     del xml_parser
@@ -845,6 +847,7 @@ def stderr_reader(inkscape, inkscape_stderr):
 
 def spawn_inkscape(number_of_renderers, filename):
     """ Spawn multiple instances of inkscape as for image rendering """
+    info(f"spawning {number_of_renderers} inkscape instances")
     for i in range(number_of_renderers):
         proc = subprocess.Popen(
             ["inkscape", "--shell", filename],
@@ -860,7 +863,7 @@ def spawn_inkscape(number_of_renderers, filename):
 
 
 def render_pngs(svgLayerHandler, sliceprefix):
-    dbg("Loop through each slice rectangle, and render a PNG image for it")
+    debug("Loop through each slice rectangle, and render a PNG image for it")
 
     skipped = {}
     roundrobin = [0]
@@ -905,6 +908,6 @@ if __name__ == "__main__":
         svgLayerHandler = parse_svg_file(SVG_WORKING_COPY)
         skipped = render_pngs(svgLayerHandler, options.sliceprefix)
         postprocess(svgLayerHandler, options.sliceprefix, skipped, options.hotspots)
-        dbg("Slicing complete.")
+        debug("Slicing complete.")
     finally:
         cleanup()
