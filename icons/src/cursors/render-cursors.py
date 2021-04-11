@@ -28,6 +28,7 @@ Please remember to HIDE the slices layer before exporting, so that the rectangle
 #
 
 import argparse
+import logging
 from xml.sax import saxutils, make_parser, SAXParseException, handler, xmlreader
 from xml.sax.handler import feature_namespaces
 import os, sys, tempfile, shutil, subprocess
@@ -36,6 +37,20 @@ from threading import Thread
 from PIL import Image
 import multiprocessing
 import io
+
+INF_FORMAT = '[%(levelname)s] %(message)s'
+DBG_FORMAT = '[%(levelname)s] %(lineno)d:%(funcName)-s - %(message)s'
+dbg = logging.debug
+inf = logging.info
+wrn = logging.warning
+
+
+# TODO manage fatal errors cleanup with exceptions
+def fatalError(msg):
+    logging.critical(msg)
+    cleanup()
+    sys.exit(20)
+
 
 # TODO get rid of global variables
 svgFilename = None
@@ -72,11 +87,6 @@ def natural_sort(l):
     alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ]
     return sorted(l, key = alphanum_key)
 
-# TODO add proper logger
-def dbg(msg):
-    if options.debug:
-        sys.stderr.write(msg+'\n')
-
 def cleanup():
     global inkscape_instances
     for inkscape, inkscape_stderr, inkscape_stderr_thread in inkscape_instances:
@@ -89,12 +99,6 @@ def cleanup():
         os.unlink(svgFilename)
     if hotsvgFilename != None and os.path.exists(hotsvgFilename):
         os.unlink(hotsvgFilename)
-
-# TODO manage fatal errors with exceptions
-def fatalError(msg):
-    sys.stderr.write(msg)
-    cleanup()
-    sys.exit(20)
 
 def stderr_reader(inkscape, inkscape_stderr):
     while True:
@@ -678,8 +682,13 @@ As a quick summary:
 if __name__ == '__main__':
     # parse command line into arguments and options
     options = configure()
-    modes = get_modes(options)
+    # More detailed logging format if debug is enabled
+    if options.debug:
+        logging.basicConfig(level=logging.DEBUG, format=DBG_FORMAT)
+    else:
+        logging.basicConfig(level=logging.INFO, format=INF_FORMAT)
 
+    modes = get_modes(options)
     svgFilename = options.originalFilename + '.svg'
     with open (svgFilename, 'wb') as output:
         filter_svg(options.originalFilename, output, modes)
