@@ -116,16 +116,6 @@ def cleanup():
         os.unlink(SVG_HOTSPOT_WORKING_COPY)
 
 
-def stderr_reader(inkscape, inkscape_stderr):
-    while True:
-        line = inkscape_stderr.readline()
-        if line and len (line.rstrip ('\n').rstrip ('\r')) > 0:
-            fatal('ABORTING: Inkscape failed to render a slice: {}'.format (line))
-        elif line:
-            print("STDERR> {}".format(line))
-        else:
-            raise UnexpectedEndOfStream
-
 def find_hotspot (hotfile):
     img = Image.open(hotfile)
     pixels = img.load()
@@ -224,13 +214,13 @@ class SVGRect:
                 skipped[output] = True
                 return
 
-            command = 'inkscape --batch-process'
-            command += f' -w {size} -h {size} --export-id="{self.name}" --export-png="{output}" {svgFName}\n'
-
-            dbg(f"Command: {command}")
-            outcome = subprocess.run(command, shell=True, check=True, capture_output=True)
-            if outcome.returncode:
-                fatal(outcome.stdout)
+            command = f'export-width:{size};'
+            command += f' export-height:{size};'
+            command += f' export-id:{self.name};'
+            command += f' export-filename:{output};'
+            command += f' export-do\n'
+            inf(f"inkscape: {command}")
+            RENDERERS[roundrobin[0]][0].stdin.write(command.encode())
 
         pngsliceFName = f'{slicename}.png'
         hotsliceFName = f'{slicename}.hotspot.png'
@@ -689,15 +679,31 @@ As a quick summary:
     return handler
 
 
-def spawn_inkscape(number_of_renderers):
+def stderr_reader(inkscape, inkscape_stderr):
+    """Read from a file descriptor
+    Used to read from inkscape process stderr"""
+    while True:
+        line = inkscape_stderr.readline()
+        if line:
+            line = line.rstrip('\n').rstrip ('\r')
+            print(f"inkscape STDERR> {line}")
+            fatal(f'inkscape failed to render a slice. Aborting now')
+        else:
+            raise UnexpectedEndOfStream
+
+
+def spawn_inkscape(number_of_renderers, filename):
     """ Spawn multiple instances of inkscape as for image rendering """
     for i in range(number_of_renderers):
-        inkscape = subprocess.Popen (['inkscape', '--batch-process', '--shell'], stdin=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        if inkscape is None:
+        proc = subprocess.Popen (['inkscape', '--shell', filename],
+                                 stdin=subprocess.PIPE,
+                                 stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE)
+        if not proc:
             fatal("Failed to start Inkscape shell process")
-        inkscape_stderr = inkscape.stderr
-        inkscape_stderr_thread = Thread (target = stderr_reader, args=(inkscape, inkscape_stderr))
-        RENDERERS.append ([inkscape, inkscape_stderr, inkscape_stderr_thread])
+
+        thread = Thread(target=stderr_reader, args=(proc, proc.stderr))
+        RENDERERS.append ([proc, proc.stderr, thread])
 
 
 def render_pngs(svgLayerHandler, sliceprefix):
@@ -739,7 +745,7 @@ if __name__ == '__main__':
             filter_svg(options.originalFilename, output, ['hotspots'])
 
     try:
-        # spawn_inkscape(options.number_of_renderers)
+        spawn_inkscape(options.number_of_renderers, SVG_WORKING_COPY)
         svgLayerHandler = parse_svg_file(SVG_WORKING_COPY)
         skipped = render_pngs(svgLayerHandler, options.sliceprefix)
         postprocess(svgLayerHandler, options.sliceprefix, skipped, options.hotspots)
