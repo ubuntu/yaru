@@ -38,26 +38,22 @@ from PIL import Image
 import multiprocessing
 import io
 
-INF_FORMAT = '[%(levelname)s] %(message)s'
-DBG_FORMAT = '[%(levelname)s] %(lineno)d:%(funcName)-s - %(message)s'
-dbg = logging.debug
-inf = logging.info
-wrn = logging.warning
 
 MODE_HOTSPOTS = ['hotspots']
 MODE_INVERT = ['invert']
 MODE_SHADOWS = ['shadows']
 MODE_SLICES = ['slices']
+RENDERERS = []
 SCALE_PAIRS = [(1.25, 's1'), (1.50, 's2')]
 SIZES = [24, 32, 48, 64, 96]
 SVG_HOTSPOT_WORKING_COPY = "hotspot-working-copy.svg"
 SVG_WORKING_COPY = "working-copy.svg"
 
-
-# TODO manage fatal errors cleanup with exceptions
-def fatalError(msg):
+dbg = logging.debug
+inf = logging.info
+wrn = logging.warning
+def fatal(msg):
     logging.critical(msg)
-    cleanup()
     sys.exit(20)
 
 
@@ -77,7 +73,26 @@ def configure():
     parser.add_argument('-i', '--invert', action='store_true', dest='invert', default=False, help='Invert colors (disabled by default).')
     parser.add_argument('-n', '--number-of-renderers', action='store', type=int, dest='number_of_renderers', default=1, help='Number of renderer instances run in parallel. Defaults to 1. Set to 0 for autodetection.')
 
-    return parser.parse_args()
+    options = parser.parse_args()
+
+    # More detailed logging format if debug is enabled
+    if options.debug:
+        fmt = '[%(levelname)s] %(message)s'
+        level = logging.DEBUG
+    else:
+        fmt = '[%(levelname)s] %(lineno)d:%(funcName)-s - %(message)s'
+        level = logging.INFO
+    logging.basicConfig(level=level, format=fmt)
+
+    options.modes = get_modes(options)
+
+    if not options.scales:
+        del SCALE_PAIRS[:]
+
+    if options.number_of_renderers <= 0:
+        options.number_of_renderers = autodetect_threadcount()
+    return options
+
 
 
 def natural_sort(l):
@@ -86,23 +101,26 @@ def natural_sort(l):
     return sorted(l, key = alphanum_key)
 
 def cleanup():
-    global inkscape_instances
-    for inkscape, inkscape_stderr, inkscape_stderr_thread in inkscape_instances:
+    global RENDERERS
+    for inkscape, inkscape_stderr, inkscape_stderr_thread in RENDERERS:
         inkscape.communicate ('quit\n'.encode())
         del inkscape
         del inkscape_stderr_thread
         del inkscape_stderr
-    del inkscape_instances
+    del RENDERERS
+
     if SVG_WORKING_COPY != None and os.path.exists(SVG_WORKING_COPY):
         os.unlink(SVG_WORKING_COPY)
+
     if SVG_HOTSPOT_WORKING_COPY != None and os.path.exists(SVG_HOTSPOT_WORKING_COPY):
         os.unlink(SVG_HOTSPOT_WORKING_COPY)
+
 
 def stderr_reader(inkscape, inkscape_stderr):
     while True:
         line = inkscape_stderr.readline()
         if line and len (line.rstrip ('\n').rstrip ('\r')) > 0:
-            fatalError('ABORTING: Inkscape failed to render a slice: {}'.format (line))
+            fatal('ABORTING: Inkscape failed to render a slice: {}'.format (line))
         elif line:
             print("STDERR> {}".format(line))
         else:
@@ -199,7 +217,7 @@ class SVGRect:
     def renderFromSVG(self, svgFName, slicename, skipped, roundrobin, hotsvgFName):
 
         def do_res (size, output, svgFName):
-            global inkscape_instances
+            global RENDERERS
             nonlocal skipped, roundrobin
             if os.path.exists (output):
                 dbg(f"{output} exists, skip rendering")
@@ -212,7 +230,7 @@ class SVGRect:
             dbg(f"Command: {command}")
             outcome = subprocess.run(command, shell=True, check=True, capture_output=True)
             if outcome.returncode:
-                fatalError(outcome.stdout)
+                fatal(outcome.stdout)
 
         pngsliceFName = f'{slicename}.png'
         hotsliceFName = f'{slicename}.hotspot.png'
@@ -408,7 +426,7 @@ class SVGHandler(handler.ContentHandler):
         elif self.isFloat(val):
             val = float(val)
         else:
-            fatalError("Coordinate value %s has unrecognised units.  Only px,pt,cm,mm,and in units are currently supported." % val)
+            fatal("Coordinate value %s has unrecognised units.  Only px,pt,cm,mm,and in units are currently supported." % val)
         return val
 
     def startElement_svg(self, name, attrs):
@@ -655,10 +673,10 @@ def parse_svg_file(filename):
         colno = e.getColumnNumber()
         msg = e.getMessage()
         sys.stderr.write(f"Error parsing {filename}, line:{lineno}, column:{colno}, message:{msg}.\n")
-        fatalError("If are seeing this within inkscape, it probably indicates a bug that should be reported.")
+        fatal("If are seeing this within inkscape, it probably indicates a bug that should be reported.")
 
     if len(handler.svg_rects) == 0:
-        fatalError(
+        fatal(
 """No slices were found in this SVG file.
 Please refer to the documentation for guidance on how to use this SVGSlice.
 As a quick summary:
@@ -670,51 +688,31 @@ As a quick summary:
     del xml_parser
     return handler
 
-if __name__ == '__main__':
-    # parse command line into arguments and options
-    options = configure()
-    # More detailed logging format if debug is enabled
-    if options.debug:
-        logging.basicConfig(level=logging.DEBUG, format=DBG_FORMAT)
-    else:
-        logging.basicConfig(level=logging.INFO, format=INF_FORMAT)
 
-    modes = get_modes(options)
-    with open (SVG_WORKING_COPY, 'wb') as output:
-        filter_svg(options.originalFilename, output, modes)
+def spawn_inkscape(number_of_renderers):
+    """ Spawn multiple instances of inkscape as for image rendering """
+    for i in range(number_of_renderers):
+        inkscape = subprocess.Popen (['inkscape', '--batch-process', '--shell'], stdin=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        if inkscape is None:
+            fatal("Failed to start Inkscape shell process")
+        inkscape_stderr = inkscape.stderr
+        inkscape_stderr_thread = Thread (target = stderr_reader, args=(inkscape, inkscape_stderr))
+        RENDERERS.append ([inkscape, inkscape_stderr, inkscape_stderr_thread])
 
-    if options.hotspots:
-        with open (SVG_HOTSPOT_WORKING_COPY, 'wb') as output:
-            filter_svg(options.originalFilename, output, ['hotspots'])
 
-    if not options.scales:
-        del SCALE_PAIRS[:]
-
-    if options.number_of_renderers <= 0:
-        options.number_of_renderers = autodetect_threadcount()
-
-    inkscape_instances = []
-    # for i in range (0, options.number_of_renderers):
-        # inkscape = subprocess.Popen (['inkscape', '--batch-process', '--shell'], stdin=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        # if inkscape is None:
-            # fatalError("Failed to start Inkscape shell process")
-        # inkscape_stderr = inkscape.stderr
-        # inkscape_stderr_thread = Thread (target = stderr_reader, args=(inkscape, inkscape_stderr))
-        # inkscape_instances.append ([inkscape, inkscape_stderr, inkscape_stderr_thread])
-
-    svgLayerHandler = parse_svg_file(SVG_WORKING_COPY)
-
+def render_pngs(svgLayerHandler, sliceprefix):
     dbg("Loop through each slice rectangle, and render a PNG image for it")
+
     skipped = {}
     roundrobin = [0]
-    prefix = options.sliceprefix
 
     for rect in svgLayerHandler.svg_rects:
-        slicename = prefix + rect.name
+        slicename = sliceprefix + rect.name
         rect.renderFromSVG(SVG_WORKING_COPY, slicename, skipped, roundrobin, SVG_HOTSPOT_WORKING_COPY)
 
-    cleanup()
+    return skipped
 
+def postprocess(svgLayerHandler, prefix, skipped, hotspots):
     for rect in svgLayerHandler.svg_rects:
         slicename = prefix + rect.name
         postprocess_slice(slicename, skipped)
@@ -729,4 +727,22 @@ if __name__ == '__main__':
             #if not option.testing:
             #	delete_hotspot(slicename)
 
-    dbg('Slicing complete.')
+
+if __name__ == '__main__':
+    options = configure()
+
+    with open (SVG_WORKING_COPY, 'wb') as output:
+        filter_svg(options.originalFilename, output, options.modes)
+
+    if options.hotspots:
+        with open (SVG_HOTSPOT_WORKING_COPY, 'wb') as output:
+            filter_svg(options.originalFilename, output, ['hotspots'])
+
+    try:
+        # spawn_inkscape(options.number_of_renderers)
+        svgLayerHandler = parse_svg_file(SVG_WORKING_COPY)
+        skipped = render_pngs(svgLayerHandler, options.sliceprefix)
+        postprocess(svgLayerHandler, options.sliceprefix, skipped, options.hotspots)
+        dbg('Slicing complete.')
+    finally:
+        cleanup()
