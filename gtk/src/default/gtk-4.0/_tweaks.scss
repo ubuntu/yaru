@@ -266,16 +266,6 @@ rubberband {
     notebook entry { background-color: darken($base_color, 2%); }
 }
 
-// Make all :not:(.empty) level bars green - should be moved to upstream
-levelbar > trough > block {
-    &.high,
-    &:not(.empty) {
-        border-color: $success_color;
-        background-color: $success_color;
-        &:backdrop { border-color: $success_color; }
-    }
-}
-
 // Strengthen the menu shadows
 // And lighten up the dark shell menu/popover border to increase visibility
 $_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 14%);
@@ -285,11 +275,13 @@ decoration {
                 0 0 0 1px if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
   }
 }
+
 @if $variant=='dark' {
   menu separator {
     background-color: $_dark_theme_outer_menu_border;
   }
 }
+
 popover.background {
   .csd &, & {
     border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
@@ -328,28 +320,16 @@ list row, placessidebar row, sidebar row, .sidebar row {
   }
 }
 
-// Adapt dark gtk3 scale and levelbar troughs to the shell
+// Adapt dark disabled and backdrop scale and levelbar troughs to the shell
 @if $variant=='dark' {
-  scale, progressbar {
-    > trough {
-      background-color: $_dark_theme_outer_menu_border;
-      &, &:disabled {
-          border-color: $_dark_theme_outer_menu_border;
-      }
-    }
-    &:backdrop {
-      > trough {
-        border-color: darken($_dark_theme_outer_menu_border, 5%);
-        background-color: darken($_dark_theme_outer_menu_border, 5%);
-      }
-    }
-  }
+  scale > trough,
+  progressbar > trough,
   levelbar > trough > block.empty {
-    border-color: $_dark_theme_outer_menu_border;
-    background-color: $_dark_theme_outer_menu_border;
-    &:backdrop {
-      border-color: darken($_dark_theme_outer_menu_border, 5%);
-      background-color: darken($_dark_theme_outer_menu_border, 5%);
+    .osd &, & {
+      &:disabled, &:backdrop {
+        border-color: $backdrop_scale_trough_bg_color;
+        background-color: $backdrop_scale_trough_bg_color;
+      }
     }
   }
 }
@@ -380,17 +360,6 @@ switch {
   &:backdrop {
     &:checked:not(:disabled) {
       &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
-    }
-  }
-}
-
-// Force buttons state transitions
-%button,
-button {
-  @each $b_type, $b_color in (suggested-action, $suggested_bg_color),
-  (destructive-action, $destructive_color) {
-    &, &.#{$b_type} {
-      transition: $button_transition;
     }
   }
 }

@@ -1439,7 +1439,6 @@ headerbar {
     border-color: $backdrop_borders_color;
     background-color: $bg_color;
     background-image: none;
-    box-shadow: inset 0 1px $top_hilight;
 
     transition: $backdrop_transition;
   }
@@ -1624,8 +1623,8 @@ pathbar > button {
  * Tree Views *
  **************/
 
-$_treeview_borders_color: if($variant=='light',mix($borders_color, $base_color,80%),mix($fg_color, $base_color, 20%));
-$_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_color, $base_color, 80%),mix($backdrop_fg_color, $base_color, 20%));
+$_treeview_borders_color: $bg_color; // Yaru: less invasive border color
+$_treeview_backdrop_borders_color: $bg_color; // Yaru: less invasive border color
 columnview.view,
 treeview.view {
   border-left-color:  $_treeview_borders_color; // this is actually the tree lines color,
@@ -2040,10 +2039,10 @@ notebook {
       > tabs {
         margin-bottom: -2px;
         > tab {
-          &:hover { box-shadow: inset 0 -3px $borders_color; }  // Yaru change: 4px underlines are too much
+          &:hover { box-shadow: inset 0 -3px $borders_color; } // Yaru change: 4px underlines are too much
 
 
-          &:checked { box-shadow: inset 0 -3px $selected_bg_color; }  // Yaru change: 4px underlines are too much
+          &:checked { box-shadow: inset 0 -3px $selected_bg_color; } // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2055,7 +2054,7 @@ notebook {
         > tab {
           &:hover { box-shadow: inset 0 3px $borders_color; } // Yaru change: 4px underlines are too much
 
-          &:checked { box-shadow: inset 0 3px $selected_bg_color; }  // Yaru change: 4px underlines are too much
+          &:checked { box-shadow: inset 0 3px $selected_bg_color; } // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2065,9 +2064,9 @@ notebook {
       > tabs {
         margin-right: -2px;
         > tab {
-          &:hover { box-shadow: inset -3px 0 $borders_color; }  // Yaru change: 4px underlines are too much
+          &:hover { box-shadow: inset -3px 0 $borders_color; } // Yaru change: 4px underlines are too much
 
-          &:checked { box-shadow: inset -3px 0 $selected_bg_color; }  // Yaru change: 4px underlines are too much
+          &:checked { box-shadow: inset -3px 0 $selected_bg_color; } // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2077,9 +2076,9 @@ notebook {
       > tabs {
         margin-left: -2px;
         > tab {
-          &:hover { box-shadow: inset 3px 0 $borders_color; }  // Yaru change: 4px underlines are too much
+          &:hover { box-shadow: inset 3px 0 $borders_color; } // Yaru change: 4px underlines are too much
 
-          &:checked { box-shadow: inset 3px 0 $selected_bg_color; }  // Yaru change: 4px underlines are too much
+          &:checked { box-shadow: inset 3px 0 $selected_bg_color; } // Yaru change: 4px underlines are too much
         }
       }
     }
@@ -2564,11 +2563,11 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
  * GtkScale *
  ************/
 %scale_trough {
-  border: 1px solid $dark_fill;
+  border: 1px solid $scale_trough_bg_color; // Yaru change: use our own colors
   border-radius: 3px;
-  background-color: $dark_fill;
+  background-color: $scale_trough_bg_color; // Yaru change: use our own colors
 
-  headerbar & { background-color: darken($dark_fill,8%); } //3504
+  // headerbar & { background-color: darken($scale_trough_bg_color,8%); } //3504 - Yaru change: use our own colors
 
   &:disabled {
    background-color: $insensitive_bg_color;
@@ -3144,8 +3143,8 @@ levelbar {
 
     &.high,
     &:not(.empty) {
-      border-color: $progress_bg_color; // Yaru change: use our own palette
-      background-color: $progress_bg_color; // Yaru change: use our own palette
+      border-color: $success_color; // Yaru change: use our own palette
+      background-color: $success_color; // Yaru change: use our own palette
     }
 
     &.full {
@@ -3154,8 +3153,8 @@ levelbar {
     }
 
     &.empty {
-      background-color: $dark_fill; // Yaru change: use our own palette
-      border-color: $dark_fill; // Yaru change: use our own palette
+      background-color: $scale_trough_bg_color; // Yaru change: use our own colors
+      border-color: $scale_trough_bg_color; // Yaru change: use our own colors
     }
   }
 }
@@ -4046,8 +4045,8 @@ window {
 
   // this needs to be transparent
   // see bug #722563
-  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
-  $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.82), transparentize($borders_color, 0.1));
+  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
+  $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.82), transparentize(black, 0.25));
 
   &.csd {
     box-shadow: 0 3px 9px 1px transparentize(black, 0.5),

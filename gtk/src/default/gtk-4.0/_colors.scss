@@ -76,6 +76,8 @@ $alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), tra
 $switch_bg_color: if($variant=='light', lighten($secondary_accent_bg_color, 5%), $secondary_accent_bg_color);
 $switch_borders_color: if($variant == 'light', darken($checkradio_bg_color, 10%), darken($checkradio_bg_color,40%));
 $dim_label_opacity: 0.55;
+$scale_trough_bg_color: if($variant == 'light', $dark_fill, lighten(desaturate($base_color, 100%), 14%));
+$backdrop_scale_trough_bg_color: if($variant == 'light', $scale_trough_bg_color, darken($scale_trough_bg_color, 5%));
 
 // Headerbar bg colors for the "mixed" theme
 $headerbar_bg_color: #323030;

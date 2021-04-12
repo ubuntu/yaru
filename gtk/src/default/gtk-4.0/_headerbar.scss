@@ -121,7 +121,6 @@ headerbar {
         @include button(normal, $b_color, white);
         @include focus-ring($fc: $alt_focus_border_color);
         border-color: $b_color;
-        transition: $button_transition; // Force buttons state transitions
 
         &.flat {
           @include button(undecorated);
@@ -174,48 +173,36 @@ headerbar {
     border-color: darken($_button_border_color, 6%);
   }
 
-  switch {
-    border-color: $_button_border_color;
+  // TODO: Test slides
+  // TODO: Test separator
+  // TODO: Test switches
+
+  windowcontrols button image {
     color: $headerbar_fg_color;
-    background-color: $_button_bg_color;
+  }
 
-    &:checked {
-      color: $selected_fg_color;
-      border-color: $_button_border_color;
-      background-color: $checkradio_bg_color;
-    }
-
-    &:disabled {
-      color: $insensitive_fg_color;
-      background-color: $headerbar_bg_color;
-      border-color: $_button_border_color;
-    }
-
-    &:backdrop {
-      color: $backdrop_fg_color;
-      border-color: $backdrop_borders_color;
-      background-color: lighten($backdrop_headerbar_bg_color, 2%);
-
-      &:checked {
-        color: $selected_fg_color;
-        border-color: $_button_border_color;
-        background-color: $checkradio_bg_color;
+  // Fix missing window controls margin
+  windowcontrols {
+    &:not(.empty) {
+      &.start:dir(ltr),
+      &.end:dir(rtl) {
+        margin-right: 7px;
       }
 
-      &:disabled {
-        color: $backdrop_insensitive_color;
-        background-color: $backdrop_headerbar_bg_color;
-        border-color: $_backdrop_button_border_color;
+      &.start:dir(rtl),
+      &.end:dir(ltr) {
+        margin-left: 7px;
       }
     }
   }
-
-  // TODO: Test separator
-  // TODO: Test switches
 }
 
-windowcontrols button image {
-  color: $headerbar_fg_color;
+popover.menu {
+  .title,
+  label.title {
+    color: $text_color;
+    &:backdrop { color: $backdrop_text_color; }
+  }
 }
 
 window.devel {
@@ -262,7 +249,6 @@ viewswitcher {
 }
 
 // Fix for Libadwaita headerbar sidebar separator
-
 windowhandle separator.sidebar.vertical {
     background: image(lighten($_button_border_color, 5%));
 
