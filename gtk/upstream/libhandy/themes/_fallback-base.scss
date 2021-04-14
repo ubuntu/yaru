@@ -172,11 +172,13 @@ statuspage > scrolledwindow > viewport > box {
 
 // Preferences
 
+window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp,
 preferencespage > scrolledwindow > viewport > clamp {
   margin: 0 12px;
 
   transition: margin-bottom 200ms ease;
 
+  > list,
   > box > preferencesgroup {
     transition: margin-top 200ms ease;
   }
@@ -187,6 +189,7 @@ preferencespage > scrolledwindow > viewport > clamp {
     &.#{$name} {
       margin-bottom: $size;
 
+      > list,
       > box > preferencesgroup { margin-top: $size; }
     }
   }
