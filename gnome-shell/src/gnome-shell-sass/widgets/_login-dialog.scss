@@ -11,7 +11,9 @@
   border: none;
   background-color: transparent;
 
-  $_gdm_bg: $porcelain; // Yaru: we force the light colors because GDM doesn't change on shell theme switch
+   // Yaru: we force the light colors because GDM doesn't change on shell theme switch
+  $_gdm_bg: $porcelain;
+  $_gdm_fg: $inkstone;
 
   StEntry {
     @if $variant=='dark' {
@@ -78,8 +80,8 @@
     width: $base_icon_size * 2;
     height: $base_icon_size * 2;
     border-color: transparentize($bg_color,0.7);
-    background-color: $_gdm_bg; // Yaru: we force the light colors because GDM doesn't change on shell theme switch
-    color: $inkstone;
+    background-color: $_gdm_bg;
+    color: $_gdm_fg;
 
     StIcon { icon-size: $base_icon_size; }
   }
