@@ -10,6 +10,8 @@
   .workspace-thumbnail {
     @extend %overview_panel;
     border-radius: 3px;
+    background-color: $dash_background_color; // Yaru: use same background as dash
+    border: 1px solid $borders_color; // Yaru: use same border as dash
   }
 
   // drag and drop indicator
@@ -22,7 +24,7 @@
 
 // selected indicator
 .workspace-thumbnail-indicator {
-  border: 3px solid $selected_bg_color;
+  border: 2px solid $focus_border_color; // Yaru: we detached focus from selected
   border-radius: 3px;
   padding: 0px;
   // background-color: transparentize($selected_bg_color, 0.9);
