@@ -362,3 +362,9 @@ switch {
   }
 }
 
+// Reinsert this to fix vertical entries border-radius-right
+%linked_not_right {
+  border-right-style: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
