@@ -341,10 +341,8 @@ list row, placessidebar row, sidebar row, .sidebar row {
         > slider {
           background-image: image($warm_gray);
           background-clip: padding-box; // fix background overflow
-        }
 
-        &:hover {
-          > slider {
+          &:hover {
             background-image: image(lighten($warm_gray, 4%));
           }
         }
@@ -363,3 +361,4 @@ switch {
     }
   }
 }
+
