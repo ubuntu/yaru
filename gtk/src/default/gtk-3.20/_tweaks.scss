@@ -110,10 +110,13 @@ button.titlebutton:not(.appmenu) {
   .titlebar &,
   headerbar.selection-mode &,
   & {
+    color: transparent;
     &.maximize, &.minimize {
 
+      @include draw_circle(if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color));
       &, &:backdrop {
         &:hover {
+        color: if($ambiance==true, lighten($headerbar_fg_color, 7%), $fg_color);
           @include draw_circle(if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color));
         }
 
@@ -124,22 +127,26 @@ button.titlebutton:not(.appmenu) {
     }
 
     &.close {
-      color: $selected_fg_color;
       @include draw_circle($selected_bg_color);
 
       &:hover {
+        color: $selected_fg_color;
         @include draw_circle($selected_bg_color);
         @include draw_circle(lighten($selected_bg_color, 5%));
       }
 
       &:active {
+        color: $selected_fg_color;
         @include draw_circle($selected_bg_color);
         @include draw_circle(darken($selected_bg_color, 5%));
       }
 
       &:backdrop {
         @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%)));
-        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%))); }
+        &:hover {
+          color: $selected_fg_color;
+          @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%)));
+        }
       }
     }
   }

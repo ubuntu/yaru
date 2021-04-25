@@ -77,11 +77,14 @@ windowcontrols {
         border: none;
         box-shadow: none;
         background: transparent;
+        color: transparent;
 
         &.maximize, &.minimize {
+            @include draw_circle(if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color));
             &, &:backdrop {
                 background: transparent;
                 &:hover {
+                    color: if($ambiance==true, lighten($headerbar_fg_color, 7%), $fg_color);
                     background: if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color);
                 }
 
@@ -95,16 +98,21 @@ windowcontrols {
             background: $selected_bg_color;
 
             &:hover {
+                color: $selected_fg_color;
                 background: lighten($selected_bg_color, 5%);
             }
 
             &:active {
+                color: $selected_fg_color;
                 background: darken($selected_bg_color, 5%);
             }
 
             &:backdrop {
                 background: lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%));
-                &:hover { background: lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%)); }
+                &:hover {
+                    color: $selected_fg_color;
+                    background: lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%));
+                }
             }
 
             image {
