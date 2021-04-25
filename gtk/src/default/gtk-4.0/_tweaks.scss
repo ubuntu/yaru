@@ -80,7 +80,7 @@ windowcontrols {
         color: transparent;
 
         &.maximize, &.minimize {
-            @include draw_circle(if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color));
+            background: if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color);
             &, &:backdrop {
                 background: transparent;
                 &:hover {
