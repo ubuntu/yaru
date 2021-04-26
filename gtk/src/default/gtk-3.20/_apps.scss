@@ -123,11 +123,11 @@ $ambiance: null !default;
 
     .path-bar-box {
       border-radius: 5px;
-      border: 1px solid if($ambiance, darken($headerbar_bg_color, 9%), $borders_color);
-      &:backdrop { border-color: if($ambiance, $headerbar_bg_color, $backdrop_borders_color);}
-      background-color: if($ambiance, lighten($headerbar_bg_color, 6.5%), $bg_color);
+      border: 1px solid $borders_color;
+      &:backdrop { border-color: $backdrop_borders_color;}
+      background-color: $bg_color;
       padding-right: 6px;
-      &:backdrop { border-color: if($ambiance, darken($inkstone, 9%), $backdrop_borders_color); }
+      &:backdrop { border-color: $backdrop_borders_color; }
     }
 
     .nautilus-path-bar button {
@@ -518,15 +518,6 @@ terminal-window {
   #MozillaGtkWidget.background  {
     // REMOVE THIS when firefox supports rounded menus
     menu, .menu,.context-menu { border-radius: 0; }
-
-    @if $ambiance {
-      menubar,
-      .menubar,
-      menubar > menuitem:hover {
-        background-color: $headerbar_bg_color;
-        color:$headerbar_fg_color;
-      }
-    }
 
     // Adapt scrollbars a bit more to the GTK Scrollbar styling
     scrollbar {
