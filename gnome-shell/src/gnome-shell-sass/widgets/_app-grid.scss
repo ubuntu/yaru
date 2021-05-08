@@ -40,7 +40,7 @@ $app_grid_fg_color: #fff;
 
 // expanded folder
 .app-folder-dialog { //style like the dash
-  border-radius: $modal_radius * 1.5;
+  border-radius: $dash_border_radius;  // Yaru: use same borser-radius as dash
   background-color: $dash_background_color;
   padding: 12px 0px 12px 0px;
   border: 1px solid $borders_color; // Yaru: add border
@@ -151,7 +151,7 @@ $app_grid_fg_color: #fff;
     background-gradient-start: rgba(255, 255, 255, 0.05);
     background-gradient-end: transparent;
     background-gradient-direction: horizontal;
-    border-radius: 15px 0px 0px 15px;
+    border-radius: $dash_border_radius 0px 0px $dash_border_radius; // Yaru: use same borser-radius as dash
   }
 
   &.previous:ltr,
@@ -159,7 +159,7 @@ $app_grid_fg_color: #fff;
     background-gradient-start: transparent;
     background-gradient-end: rgba(255, 255, 255, 0.05);
     background-gradient-direction: horizontal;
-    border-radius: 0px 15px 15px 0px;
+    border-radius: 0px $dash_border_radius $dash_border_radius 0px; // Yaru: use same borser-radius as dash
   }
 }
 
