@@ -94,7 +94,7 @@
   @else { @return darken($c, 10%); } // Yaru change: less darken 15% -> 10%
 }
 
-$_default_button_c: lighten($bg_color,2%);
+$_default_button_c: if($ambiance, lighten($bg_color, 7.5%), lighten($bg_color, 2%)); // Yaru change: 
 @mixin button($t, $c:$_default_button_c, $tc:$fg_color) {
 //
 // Button drawing function
