@@ -1,0 +1,436 @@
+// stuff for .needs-attention
+$_dot_color: if($variant=='light', $selected_bg_color,
+                                   lighten($selected_bg_color,15%));
+@keyframes needs_attention {
+  from { background-image: radial-gradient(farthest-side, $_dot_color 0%, transparentize($_dot_color, 1) 0%); }
+  to { background-image: radial-gradient(farthest-side, $_dot_color 95%, transparentize($_dot_color, 1)); }
+}
+
+%button,
+button {
+  @at-root %button_basic, & {
+    min-height: 24px;
+    min-width: 16px;
+    padding: 4px 9px;
+    border: 1px solid;
+    border-radius: $button_radius;
+    transition: $button_transition;
+
+    @include button(normal);
+
+    @include focus-ring();
+
+    &:hover {
+      @include button(hover);
+    }
+
+    &.keyboard-activating,
+    &:active,
+    &:checked {
+      @include button(active);
+
+      transition-duration: 50ms;
+    }
+
+    &:checked:hover { @include button(checked-hover); }
+    &:checked:active { @include button(checked-active); }
+
+    &:disabled {
+      @include button(insensitive);
+
+      &:active,
+      &:checked { @include button(insensitive-active); }
+    }
+
+    @at-root %button_basic_flat,
+    &.flat {
+      @include button(undecorated);
+      // to avoid adjacent buttons borders clashing when transitioning, the transition on the normal state is set
+      // to none, while it's added back in the hover state, so the button decoration will fade in on hover, but
+      // it won't fade out when the pointer leave the button allocation area. To make the transition more evident
+      // in this case the duration is increased.
+      transition: none;
+
+      &:hover {
+        @include button(undecorated-hover);
+        transition: $button_transition;
+        transition-duration: 500ms;
+      }
+      &:active,
+      &:checked {
+        @include button(undecorated-active);
+        transition: $button_transition;
+      }
+      &:disabled { @include button(undecorated); }
+    }
+
+    &.image-button {
+      min-width: 24px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    &.text-button {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    &.text-button.image-button {
+      padding-left: 8px;
+      padding-right: 8px;
+
+      label {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+    }
+
+    @at-root %button_basic_drop_active,
+    &:drop(active) {
+      color: $drop_target_color;
+      border-color: $drop_target_color;
+      box-shadow: inset 0 0 0 1px $drop_target_color;
+    }
+  }
+
+  @at-root %button_selected, & {
+    row:selected & {
+      @if $variant == 'light' { border-color: $selected_borders_color; }
+    }
+
+    @at-root %button_selected_flat, &.flat {
+      row:selected & {
+        &:not(:active):not(:checked):not(:hover):not(disabled) {
+          color: $selected_fg_color;
+          border-color: transparent;
+        }
+      }
+    }
+  }
+
+  // big standalone buttons like in Documents pager
+  &.osd {
+    min-width: 26px;
+    min-height: 32px;
+
+    &.image-button {
+      min-width: 30px;
+      &:only-child {
+        margin: 4px;
+        border-radius: 50%; // completely round when it is a single button
+        box-shadow: 0 1px 2px transparentize(black, 0.8); // drop shadow for the only child
+      };
+    }
+
+    color: $osd_fg_color;
+    border-radius: 5px;
+
+    @include button(osd);
+
+    border: none;
+    box-shadow: none;
+
+    &:hover {
+      @include button(osd-hover);
+
+      border: none;
+      box-shadow: none;
+    }
+
+    &:active,
+    &:checked {
+      @include button(osd-active);
+
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  //overlay / OSD style
+  @at-root %osd_button,
+  .osd & {
+    @include button(osd);
+
+    &:hover { @include button(osd-hover); }
+
+    &:active,
+    &:checked { @include button(osd-active); }
+
+    &:disabled { @include button(osd-insensitive); }
+
+    &.flat {
+      @include button(undecorated);
+
+      box-shadow: none;
+
+      &:hover { @include button(osd-hover); }
+
+      &:disabled {
+        @include button(osd-insensitive);
+        background-image: none;
+        border-color: transparent;
+        box-shadow: none;
+      }
+
+      &:active,
+      &:checked { @include button(osd-active); }
+    }
+  }
+
+  // Suggested and Destructive Action buttons
+  @each $b_type, $b_color in (suggested-action, $selected_bg_color),
+                             (destructive-action, $destructive_color) {
+    &.#{$b_type} {
+      @include button(normal, $b_color, white);
+      @include focus-ring($fc: $alt_focus_border_color);
+
+      &.flat {
+        @include button(undecorated);
+
+        color: $b_color; //FIXME: does it work on the dark variant?
+      }
+
+      &:hover { @include button(hover, $b_color, white); }
+
+      &:active,
+      &:checked { @include button(active, $b_color, white); }
+
+      &.flat {
+        &:disabled {
+          @include button(undecorated);
+
+          color: transparentize($b_color, 0.2);
+        }
+      }
+
+      &:disabled {
+        @include button(insensitive);
+
+        &:active,
+        &:checked { @include button(insensitive-active, $b_color, white); }
+      }
+
+      .osd & {
+        @include button(osd, $b_color);
+
+        &:hover { @include button(osd-hover, $b_color); }
+
+        &:active,
+        &:checked { @include button(osd-active, $b_color); }
+
+        &:disabled { @include button(osd-insensitive, $b_color); }
+      }
+    }
+  }
+
+  stackswitcher > & {
+    // to position the needs attention dot, padding is added to the button
+    // child, a label needs just lateral padding while an icon needs vertical
+    // padding added too.
+
+    > label {
+      padding: 0 6px;
+      margin: 0 -6px;
+    }
+
+    > image {
+      padding: 3px 6px;
+      margin: -3px -6px;
+    }
+
+    &.needs-attention {
+      > label,
+      > image { @extend %needs_attention; }
+    }
+  }
+
+  // hide separators
+  &.font{
+    separator { background-color: transparent; }
+    > box { border-spacing: 6px; }
+    > box > box > label { font-weight: bold; }
+  }
+
+  .linked:not(.vertical) > & { @extend %linked; }
+
+  .linked.vertical > & { @extend %linked_vertical; }
+
+  menubutton.circular &,
+  &.circular { // force circular button shape
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0;
+    border-radius: 9999px;
+
+    label { padding: 0; }
+  }
+}
+
+%needs_attention {
+  // the dot is drawn by using two radial gradient, the first one is the actual dot, the other
+  // simulates the shadow labels and icons normally have in buttons.
+  animation: needs_attention 150ms ease-in;
+
+  background-image: radial-gradient(farthest-side, $_dot_color 96%, transparentize($_dot_color,1 ));
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+
+  @if $variant == 'light' { background-position: right 3px, right 4px; }
+
+  @else { background-position: right 3px, right 2px; }
+
+  &:dir(rtl) {
+    @if $variant == 'light' { background-position: left 3px, left 4px; }
+
+    @else { background-position: left 3px, left 2px; }
+  }
+}
+
+
+%linked_not_left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+%linked_not_right {
+  border-right-style: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+// 1st/last child are at text start/end
+%linked {
+  &:dir(ltr) {
+    &:not(:first-child) { @extend %linked_not_left; }
+    &:not(:last-child) { @extend %linked_not_right; }
+  }
+
+  &:dir(rtl) {
+    &:not(:first-child) { @extend %linked_not_right; }
+    &:not(:last-child) { @extend %linked_not_left; }
+  }
+}
+
+%linked_not_top {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+%linked_not_bottom {
+  border-bottom-style: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+%linked_vertical {
+  &:not(:first-child) { @extend %linked_not_top; }
+
+  &:not(:last-child) { @extend %linked_not_bottom; }
+}
+
+%undecorated_button {
+  background-color: transparent;
+  background-image: none;
+  border-color: transparent;
+  box-shadow: inset 0 1px transparentize(white, 1),
+              0 1px transparentize(white, 1);
+}
+
+.linked:not(.vertical) > menubutton,
+.linked:not(.vertical) > dropdown,
+.linked:not(.vertical) > colorbutton,
+.linked:not(.vertical) > fontbutton {
+  &:dir(ltr) {
+    &:not(:first-child) > button { @extend %linked_not_left; }
+    &:not(:last-child) > button { @extend %linked_not_right; }
+  }
+
+  &:dir(rtl) {
+    &:not(:first-child) > button { @extend %linked_not_right; }
+    &:not(:last-child) > button { @extend %linked_not_left; }
+  }
+}
+
+.linked.vertical > menubutton,
+.linked.vertical > dropdown,
+.linked.vertical > colorbutton,
+.linked.vertical > fontbutton {
+  &:not(:first-child) > button { @extend %linked_not_top; }
+  &:not(:last-child) > button { @extend %linked_not_bottom; }
+}
+
+/* oldstyle toolbar buttons */
+
+.toolbar button {
+  margin: 1px;
+  @extend %undecorated_button;
+
+  &:hover { @include button(undecorated-hover); }
+  &:active { @include button(undecorated-active); }
+  &:disabled { @include button(undecorated); }
+}
+
+button.color {
+  padding: 4px;
+
+  > colorswatch:only-child {
+    &, > overlay { border-radius: 0; }
+
+    @if $variant == 'light' {
+      box-shadow: 0 1px $shadow_color;
+
+      .osd & { box-shadow: none; }
+    }
+  }
+
+  @if $variant == 'light' {
+    .osd &, & {
+      &:disabled,
+      &:active,
+      &:checked { colorswatch:only-child { box-shadow: none; }}
+    }
+  }
+}
+
+/* list buttons */
+/* tone down as per new designs, see issue #1473 */
+%outline_button,
+button.outline {
+  @extend %undecorated_button;
+  border: 1px solid transparentize($borders_color, .5);
+
+  &:hover { @include button(hover); }
+
+  &:active,
+  &:checked { @include button(active); }
+
+  @each $b_type, $b_color in (suggested-action, $selected_bg_color),
+                             (destructive-action, $destructive_color) {
+    &.#{$b_type} { // allow colored buttons in lists #3643
+      @include button(normal, $b_color, white);
+      @include focus-ring($fc: $alt_focus_border_color);
+    }
+  }
+}
+
+menubutton {
+  arrow {
+    min-height: 16px;
+    min-width: 16px;
+    &.none {
+      -gtk-icon-source: -gtk-icontheme('open-menu-symbolic');
+    }
+    &.down {
+      -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+    }
+    &.up {
+      -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+    }
+    &.left {
+      -gtk-icon-source: -gtk-icontheme('pan-start-symbolic');
+    }
+    &.right {
+      -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+    }
+  }
+}

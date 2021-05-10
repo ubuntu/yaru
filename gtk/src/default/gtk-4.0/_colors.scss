@@ -52,16 +52,6 @@ $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
-//colors for the backdrop state, derived from the main colors.
-$backdrop_base_color: if($variant == 'light', darken($base_color, 1%), lighten($base_color, 3%));
-$backdrop_text_color: if($variant == 'light', transparentize($text_color, 0.31), transparentize(white, 0.45));
-$backdrop_bg_color: if($variant == 'light', $bg_color, lighten($bg_color, 3%));
-$backdrop_fg_color: if($variant == 'light', mix($fg_color, $backdrop_bg_color, 80%), transparentize(white, 0.35));
-$backdrop_insensitive_color: if($variant == 'light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 15%));
-$backdrop_selected_fg_color: if($variant == 'light', $backdrop_base_color, $backdrop_text_color);
-$backdrop_borders_color: mix($borders_color, $bg_color, 80%);
-$backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
-
 //special cased widget colors
 $suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
