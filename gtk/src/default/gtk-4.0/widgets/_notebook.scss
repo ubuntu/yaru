@@ -138,7 +138,7 @@ notebook {
 
       &:hover {
         color: $fg_color;
-        background-color: darken($dark_fill,4%);
+        background-color: transparent; // Yaru change: remove notebook tab hover background
 
         &.reorderable-page {
           border-color: transparentize($borders_color, 0.7);
