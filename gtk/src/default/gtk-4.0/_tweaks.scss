@@ -33,6 +33,11 @@ windowcontrols {
     }
 }
 
+// Fix windowcontrols misalignement
+windowcontrols {
+    margin-left: 7px;
+}
+
 // we prefered our gray hover for menus and popovers, orange is a very strong color
 menu,
 .menu,
