@@ -1,15 +1,21 @@
 $variant: 'dark';
 $ambiance: true;
 
-// Headerbar bg colors for the "mixed" theme
-$headerbar_border_color: lighten($headerbar_bg_color, 8%); // TODO: headerbar border-color
-
 @import 'colors';
 @import 'drawing';
 
+// Dirty-fix for window light background overflow on top corners of the inverted headerbar
+window.background.csd {
+  background-image: linear-gradient(to bottom, $bg_color $window_radius, $bg_color_light 1px);
+}
+
 headerbar {
   @import 'widgets/buttons';
-  @import 'widgets/switch';
 }
 
 @import 'widgets/header-bar';
+
+// Must be imported after _header-bar
+headerbar {
+  @import 'widgets/view-switcher';
+}

@@ -1,8 +1,15 @@
 $_header_bar_color: darken($bg_color, 10%);
 $_header_bar_gradient: linear-gradient(to top, darken($_header_bar_color, 0%), lighten($_header_bar_color, 0%)); // Yaru change: no gradients
+$_backdrop_header_bar_color: $bg_color; // Yaru change: add backdrop var for inverted headerbar
 
 @if $variant == 'dark' {
   $_header_bar_gradient: linear-gradient(to top, lighten($_header_bar_color, 6%), lighten($_header_bar_color, 6%));
+}
+
+@if $ambiance { // Yaru change: add ambiance style vars
+  $_header_bar_color: $bg_color;
+  $_header_bar_gradient: linear-gradient(to top, $_header_bar_color, $_header_bar_color);
+  $_backdrop_header_bar_color: lighten($_header_bar_color, 5%);
 }
 
 headerbar {
@@ -12,6 +19,8 @@ headerbar {
   border-style: solid;
   border-color: $alt_borders_color;
   background-image: $_header_bar_gradient;
+  color: $fg_color; // Yaru change: reinsert color for inverted headerbar
+  box-shadow: inset 0 1px $top_hilight; // Yaru change: add top highlight
 
   > windowhandle > box {
     &,
@@ -22,7 +31,7 @@ headerbar {
   }
 
   &:backdrop {
-    background-image: linear-gradient(to top, $bg_color, $bg_color);
+    background-image: linear-gradient(to top, $_backdrop_header_bar_color, $_backdrop_header_bar_color); // Yaru change: add backdrop var for inverted headerbar
 
     transition: $backdrop_transition;
 
