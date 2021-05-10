@@ -2,7 +2,7 @@ $_header_bar_color: darken($bg_color, 10%);
 $_header_bar_gradient: linear-gradient(to top, darken($_header_bar_color, 0%), lighten($_header_bar_color, 0%)); // Yaru change: no gradients
 
 @if $variant == 'dark' {
-  $_header_bar_gradient: linear-gradient(to top, lighten($_header_bar_color, 6%), lighten($_header_bar_color, 6%)); // Yaru change: no gradients
+  $_header_bar_gradient: linear-gradient(to top, lighten($_header_bar_color, 6%), lighten($_header_bar_color, 6%));
 }
 
 headerbar {

@@ -6,11 +6,11 @@
 
 $variant: 'light';
 $contrast: 'normal';
-$ambiance: true;
+$ambiance: false;
 
 @import 'colors';
 @import 'drawing';
 @import 'common';
 @import 'colors-public';
 //@import 'tweaks';
-//@import 'headerbar';
+@import 'headerbar';

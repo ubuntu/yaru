@@ -4,7 +4,7 @@
 
 $base_color: if($variant == 'light', #ffffff, lighten($jet, 6%));
 $text_color: if($variant == 'light', black, white);
-$bg_color: if($variant == 'light', #FAFAFA, lighten($jet, 8%));
+$bg_color: if($ambiance, #323030, if($variant == 'light', #FAFAFA, lighten($jet, 8%)));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
 $selected_fg_color: $primary_accent_fg_color;
@@ -68,14 +68,3 @@ $switch_borders_color: if($variant == 'light', darken($checkradio_bg_color, 10%)
 $dim_label_opacity: 0.55;
 $scale_trough_bg_color: if($variant == 'light', $dark_fill, lighten(desaturate($base_color, 100%), 14%));
 $backdrop_scale_trough_bg_color: if($variant == 'light', $scale_trough_bg_color, darken($scale_trough_bg_color, 5%));
-
-// Headerbar bg colors for the "mixed" theme
-$headerbar_bg_color: #323030;
-$headerbar_fg_color: $porcelain;
-$headerbar_border_color: lighten($headerbar_bg_color, 8%);
-$headerbar_text_color: $silk;
-$headerbar_insensitive_color: mix($headerbar_fg_color, $headerbar_bg_color, 50%);
-$backdrop_headerbar_bg_color: lighten($headerbar_bg_color, 5%);
-$backdrop_headerbar_fg_color: mix($headerbar_fg_color, $headerbar_bg_color, 70%);
-$backdrop_headerbar_text_color: mix($headerbar_text_color, $backdrop_headerbar_bg_color, 70%);
-$backdrop_headerbar_insensitive_color: mix($headerbar_fg_color, $backdrop_headerbar_bg_color, 70%);
