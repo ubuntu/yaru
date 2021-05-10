@@ -82,7 +82,7 @@ stage {
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // Yaru: OSDs need to be visible on dark backgrounds
 }
 
-// Overview panels 
+// Overview panels
 // for the dash and workspace switcher
 %overview_panel {
   color: $osd_fg_color;
@@ -130,8 +130,8 @@ stage {
   border-bottom-width: 0;
 
   &:insensitive { @include button(insensitive, $shadow: none); }
-  &:hover { background-color: $hover_bg_color; } // Yaru: notification buttons should work like dialog buttons ( gray hover ) 
   &:focus { @include button(focus, $shadow: none); }
+  &:hover { background-color: $hover_bg_color; } // Yaru: notification buttons should work like dialog buttons ( gray hover ) 
   &:active { background-color: $active_bg_color; } // Yaru: notification buttons should work like dialog buttons ( dark gray active ) 
 
   // radius is 2 pixel less to fit in bubble
@@ -143,7 +143,7 @@ stage {
     border-right-width: 0;
     border-radius: 0 0 $modal_radius - 2px 0;
   }
-  
+
   &:first-child:last-child {
     border-radius: 0 0 $modal_radius - 2px $modal_radius - 2px;
   }
