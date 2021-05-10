@@ -11,24 +11,204 @@ spinner {
 // Orange close button
 windowcontrols {
     button {
-      &.close {
-        background: $selected_bg_color;
-  
-        &:hover {
-            background: lighten($selected_bg_color, 5%);
+        &.close {
+            background: $selected_bg_color;
+
+            &:hover {
+                background: lighten($selected_bg_color, 5%);
+            }
+
+            &:active {
+                background: darken($selected_bg_color, 5%);
+            }
+
+            &:backdrop {
+                background: desaturate($selected_bg_color, 100%);
+            }
+
+            image {
+                color: $porcelain;
+            }
         }
-  
-        &:active {
-            background: darken($selected_bg_color, 5%);
+    }
+}
+
+// we prefered our gray hover for menus and popovers, orange is a very strong color
+menu,
+.menu,
+.context-menu {
+    item:selected {
+        color: $fg_color;
+        background-color: $popover_hover_color;
+    }
+}
+
+// We don't want menuitems to look like links, we should propose this upstream
+menubar,
+.menubar {
+    item:selected {
+        color: $fg_color;
+        background-color: $popover_hover_color;
+    }
+}
+
+// We don't want the app notifications to look like OSD because they are interactive
+.app-notification,
+.app-notification.frame {
+    padding: 0px 10px;
+    margin: 12px;
+    color: $text_color;
+    border-radius: $menu_radius;
+    background: none;
+    background-color: $menu_color;
+    border: 1px solid $borders_color;
+    box-shadow: 0 2px 5px transparentize(black, 0.8);
+    text-shadow: none;
+
+    button {
+        &, &:dir(ltr), &:dir(rtl) {
+            &.text-button, &.image-button, & {
+                @include button(normal);
+                &.flat { @include button(undecorated); }
+                &:hover { @include button(hover); }
+                &:active { @include button(active); }
+                &:backdrop {
+                    @include button(backdrop);
+                    &.flat { @include button(undecorated); }
+                }
+                &:disabled { @include button(insensitive); }
+            }
         }
-  
-        &:backdrop {
-            background: desaturate($selected_bg_color, 100%);
+    }
+
+    border { border: none; }
+}
+
+// Check/radios in menus do not need a border
+popover.menu {
+    check,
+    radio {
+        &, &:checked, &:indeterminate {
+            &, &:hover, &:disabled {
+                border-color: transparent;
+                background: transparent;
+            }
         }
-  
-        image {
-            color: $porcelain;
+    }
+}
+
+// Reducing the amount of the palette's background colors to two
+.sidebar { background-color: $bg_color; }
+
+// increasing brightness and contrast of sliders and buttons in OSDs
+scale {
+    > trough > slider {
+        .osd & {
+            @include button(osd);
+            background-image: image(darken($osd_fg_color, 2%));
+
+            &:hover {
+                background-image: image(darken($osd_fg_color, 10%));
+            }
+
+            &:active {
+                background-image: image(darken($osd_fg_color, 25%));
+            }
         }
+    }
+}
+
+// Entries drown if drawn on widgets with $base_color
+// Fixing this at least for notebooks, since entries on tabs is a common pattern
+@if $variant=='dark' {
+    notebook entry { background-color: darken($base_color, 2%); }
+}
+
+// Strengthen the menu shadows
+// And lighten up the dark shell menu/popover border to increase visibility
+$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 14%);
+decoration {
+  .csd.popup & {
+    box-shadow: 0 1px 2px 1px transparentize(black, if($variant=='light', 0.7, 0.6)),
+                0 0 0 1px if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+  }
+}
+
+@if $variant=='dark' {
+  menu separator {
+    background-color: $_dark_theme_outer_menu_border;
+  }
+}
+
+popover.background {
+  .csd &, & {
+    border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+  }
+  @if $variant=='dark' {
+    separator {
+      background-color: $_dark_theme_outer_menu_border;
+    }
+  }
+}
+
+// Add some transitions on checks and radios
+check,
+radio {
+    transition: $button_transition;
+}
+
+// Due to the ubuntu orange beeing quiet bright
+// we change the sidebar selection from a full orange
+// row to a thin orange stripe plus a soft gray selection
+$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
+list row, placessidebar row, sidebar row, .sidebar row {
+  &:selected {
+    &.activatable, & {
+      &, &:hover {
+        background-color: $_selection_bg;
+        &, button { &, & image { color: $text_color; } }
+        box-shadow: inset 4px 0 0 $selected_bg_color;
+        //&:backdrop {
+            //&, button { &, & image { color: $backdrop_fg_color; } }
+            //background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
+        //}
       }
     }
   }
+}
+
+
+
+// Adapt switch and scale slider troughs to the shell
+@if $variant=='dark' {
+  switch, scale > trough {
+    &:not(:backdrop):not(:disabled){
+        > slider {
+          background-image: image($warm_gray);
+
+          &:hover {
+            background-image: image(lighten($warm_gray, 4%));
+          }
+        }
+    }
+  }
+}
+
+// fix background overflow
+switch, scale > trough {
+    > slider {
+        background-clip: padding-box;
+    } 
+}
+
+// Reduce hyper prominent dark theme check switch border in backdrop
+@if $variant=='dark' {
+    switch {
+        &:not(:checked):not(:backdrop):not(:disabled) { background-color: lighten($bg_color, 5%); }
+        &:backdrop {
+            &:checked:not(:disabled) {
+                &, slider { border-color: mix($borders_color, $bg_color, 80%); }
+            }
+        }
+    }
+}
