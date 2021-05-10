@@ -118,26 +118,31 @@ windowcontrols {
   border-spacing: 6px;
 
   button {
-    @extend %button_basic;
-    @extend %button_basic_flat;
+    // Yaru change: disable default button look
+    // @extend %button_basic;
+    // @extend %button_basic_flat;
 
     border-radius: 9999px;
-    padding: 6px;
-    margin: 0 2px;
+    padding: 2px; // Yaru change: smaller window controls
+    margin: 0 7px; // Yaru change: increase vertical margin because of smaller window controls
     min-width: 0;
     min-height: 0;
+    border: none; // Yaru change: no border
+    box-shadow: none; // Yaru change: no box-shadow
+    background: transparent; // Yaru change: transparent background
   }
 }
 
+// Yaru change: disable default button look
 // special case hover colors inside a headerbar
-headerbar button.flat,
-headerbar windowcontrols button {
-  &:hover {
-    @include button(undecorated-hover,$c:darken($headerbar_bg_color,6%));
-  }
-  &:active,
-  &:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
-}
+// headerbar button.flat,
+// headerbar windowcontrols button {
+  // &:hover {
+    // @include button(undecorated-hover,$c:darken($headerbar_bg_color,6%));
+  // }
+  // &:active,
+  // &:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
+// }
 
 /******************
  * AdwWindowTitle *
