@@ -1,0 +1,45 @@
+calendar {
+  color: $text_color;
+  border: 1px solid $borders_color;
+
+  > header {
+    border-bottom: 1px solid $borders_color;
+
+    > button {
+      border: none;
+      background: none;
+      box-shadow: none;
+      border-radius: 0;
+    }
+  }
+
+  > grid {
+    > label.today {
+      box-shadow: inset 0px -2px $borders_color;
+
+      &:selected {
+        box-shadow: none;
+      }
+    }
+
+    > label:focus {
+      outline-color: $focus_border_color;
+      outline-offset: -2px;
+      outline-width: 2px;
+      outline-style: solid;
+    }
+
+    > label.day-number {
+      padding: 4px;
+
+      &:selected {
+        @extend %selected_items;
+        border-radius: 3px;
+      }
+    }
+
+    > label.day-number.other-month {
+      color: gtkalpha(currentColor, 0.3);
+    }
+  }
+}

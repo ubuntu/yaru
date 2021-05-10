@@ -12,7 +12,7 @@ $menu_margin: $menu_radius; //margin around menuitems & sidebar items
 $window_radius: $button_radius + 3;
 $popover_radius: $button_radius + 2; // Yaru change: we want everything to be less round
 
-$treeview_borders_color: if($variant=='light',mix($borders_color, $base_color,80%),mix($fg_color, $base_color, 20%));
+$treeview_borders_color: $bg_color;
 
 .background {
   color: $fg_color;

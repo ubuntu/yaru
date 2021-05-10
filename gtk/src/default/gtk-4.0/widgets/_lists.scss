@@ -1,0 +1,298 @@
+listview,
+list {
+  color: $text_color;
+  background-color: $base_color;
+  border-color: $borders_color;
+
+  > row { padding: 2px; }
+  > row.expander { padding: 0px; }
+  > row.expander .row-header { padding: 2px; }
+
+  &.horizontal row.separator,
+  &.separators.horizontal > row:not(.separator) {
+    border-left: 1px solid $treeview_borders_color;
+  }
+  &:not(.horizontal) row.separator,
+  &.separators:not(.horizontal) > row:not(.separator) {
+    border-bottom: 1px solid $treeview_borders_color;
+  }
+}
+
+row {
+  @include focus-ring();
+
+  &.activatable {
+    &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
+
+    &:hover { background-color: if(variant == light, transparentize($fg_color, 0.9), transparentize($fg_color, 0.95)); }
+
+    &:active { box-shadow: inset 0 2px 2px -2px transparentize(black, 0.8); }
+
+    &:selected {
+      &:active { box-shadow: inset 0 2px 3px -1px transparentize(black, 0.5); }
+
+      &.has-open-popup,
+      &:hover { background-color: mix($fg_color, $selected_bg_color, 10%); }
+    }
+  }
+
+  &:selected {
+    outline-color: $alt_focus_border_color;
+
+    @extend %selected_items;
+  }
+}
+
+/*******************************************************
+ * Rich Lists                                          *
+ * Large list usually containing lots of widgets       *
+ * https://gitlab.gnome.org/GNOME/gtk/-/issues/3073    *
+ *******************************************************/
+
+.rich-list { /* rich lists usually containing other widgets than just labels/text */
+  & > row {
+    padding: 8px 12px;
+    min-height: 32px; /* should be tall even when only containing a label */
+
+    & > box {
+      border-spacing: 12px;
+    }
+  }
+}
+
+/****************
+ * AdwActionRow *
+ ****************/
+
+row {
+  label.subtitle {
+    font-size: smaller;
+    @extend .dim-label;
+  }
+
+  > box.header {
+    margin-left: 12px;
+    margin-right: 12px;
+    min-height: 50px;
+
+    > box.title {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+/***************
+ * AdwComboRow *
+ ***************/
+
+popover.background.combo > contents {
+  padding: 0px;
+
+  list, listview {
+    border-style: none;
+    background-color: transparent;
+    min-width: 200px;
+
+    & > row {
+      padding: 0px 12px 0px 12px;
+      min-height: 50px;
+      border-bottom: 1px solid transparentize($borders_color, 0.5);
+
+      &:selected {
+        outline-color: $alt_focus_border_color;
+        color: $text-color;
+        background-color: $menu_selected_color;
+      }
+
+      &:first-child {
+        border-top-left-radius: $popover_radius - 2;
+        border-top-right-radius: $popover_radius - 2;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: $popover_radius - 2;
+        border-bottom-right-radius: $popover_radius - 2;
+        border-bottom: none;
+      }
+    }
+  }
+
+  scrollbar.vertical {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
+
+listview.inline {
+  background: none;
+}
+
+/******************
+ * AdwExpanderRow *
+ ******************/
+
+@mixin margin-start($margin) {
+  &:dir(ltr) {
+    margin-left: $margin;
+  }
+
+  &:dir(rtl) {
+    margin-right: $margin;
+  }
+}
+
+row.expander {
+  // Drop transparent background on expander rows to let nested rows handle it,
+  // avoiding double highlights.
+  background-color: transparent;
+  padding: 0px;
+
+  list.nested > row {
+    background-color: transparentize($bg_color, 0.5);
+    border-color: transparentize($borders_color, 0.3);
+    border-style: solid;
+    border-width: 1px 0px 0px 0px;
+  }
+
+  // AdwExpanderRow arrow rotation
+
+  image.expander-row-arrow {
+    transition: 200ms $ease-out-quad;
+    @include margin-start(6px);
+  }
+
+  &:checked image.expander-row-arrow {
+    -gtk-icon-transform: rotate(0turn);
+  }
+
+  &:not(:checked) image.expander-row-arrow {
+    @extend .dim-label;
+
+    &:dir(ltr) {
+      -gtk-icon-transform: rotate(-0.25turn);
+    }
+
+    &:dir(rtl) {
+      -gtk-icon-transform: rotate(0.25turn);
+    }
+  }
+
+  &:checked image.expander-row-arrow:not(:disabled) {
+    color: $selected_bg_color;
+  }
+
+  & image.expander-row-arrow:disabled {
+    color: $insensitive_fg_color;
+  }
+}
+
+/*****************
+ * Content Lists *
+ *****************/
+
+// Makes the corners of the given border rounded.
+// $border must be top, bottom, left, or right.
+@mixin rounded-border($border) {
+  // The floors (top, bottom) and walls (left, right) of the corners matching
+  // $border. This is needed to easily form floor-wall pairs regardless of
+  // whether $border is a floor or a wall.
+  $corners: (
+    'top': (('top'), ('left', 'right')),
+    'bottom': (('bottom'), ('left', 'right')),
+    'left': (('top', 'bottom'), ('left')),
+    'right': (('top', 'bottom'), ('right')),
+  );
+
+  @if not map-get($corners, $border) {
+    @error "Unknown border type: #{$border}";
+  }
+
+  // Loop through the floors and walls of the corners of $border.
+  @each $floor in nth(map-get($corners, $border), 1) {
+    @each $wall in nth(map-get($corners, $border), 2) {
+      border-#{$floor}-#{$wall}-radius: 8px;
+    }
+  }
+}
+
+list.content,
+listview.content {
+  &,
+  list {
+    background-color: transparent;
+  }
+
+  // Nested rows background
+  list.nested > row:not(:active) {
+    &:not(:hover):not(:selected),
+    &:hover:not(.activatable):not(:selected) {
+      background-color: mix($bg_color, $base_color, 0.5);
+    }
+
+    &:hover.activatable:not(:selected) {
+      background-color: mix($fg_color, $base_color, 0.95);
+    }
+  }
+
+  > row {
+    // Regular rows and expander header rows background
+    &:not(.expander):not(:active):not(:hover):not(:selected),
+    &:not(.expander):not(:active):hover:not(.activatable):not(:selected),
+    &.expander row.header:not(:active):not(:hover):not(:selected),
+    &.expander row.header:not(:active):hover:not(.activatable):not(:selected) {
+      background-color: $base_color;
+    }
+
+    &:not(.expander):not(:active):hover.activatable:not(:selected),
+    &.expander row.header:not(:active):hover.activatable:not(:selected) {
+      background-color: mix($fg_color, $base_color, 0.95);
+    }
+
+    &,
+    list > row {
+      border-color: transparentize($borders_color, 0.3);
+      border-style: solid;
+      transition: 200ms $ease-out-quad;
+    }
+
+    // Top border
+    &:not(:last-child) {
+      border-width: 1px 1px 0px 1px;
+    }
+
+    // Rounded top
+    &:first-child,
+    &.expander:first-child row.header,
+    &.expander:checked,
+    &.expander:checked row.header,
+    &.expander:checked + row,
+    &.expander:checked + row.expander row.header {
+      @include rounded-border(top);
+    }
+
+    // Bottom border
+    &:last-child,
+    &.checked-expander-row-previous-sibling,
+    &.expander:checked {
+      border-width: 1px;
+    }
+
+    // Rounded bottom
+    &:last-child,
+    &.checked-expander-row-previous-sibling,
+    &.expander:checked,
+    &.expander:not(:checked):last-child row.header,
+    &.expander:not(:checked).checked-expander-row-previous-sibling row.header,
+    &.expander.empty:checked row.header,
+    &.expander list.nested > row:last-child {
+      @include rounded-border(bottom);
+    }
+
+    // Add space around expanded rows
+    &.expander:checked:not(:first-child),
+    &.expander:checked + row {
+      margin-top: 6px;
+    }
+  }
+}
