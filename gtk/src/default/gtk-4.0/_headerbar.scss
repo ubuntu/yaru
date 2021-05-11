@@ -31,6 +31,10 @@ headerbar {
   }
 }
 
+windowhandle separator.vertical {
+	background: $borders_color;
+}
+
 @import 'widgets/header-bar';
 
 // Must be imported after _header-bar
