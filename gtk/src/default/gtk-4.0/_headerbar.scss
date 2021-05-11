@@ -17,6 +17,18 @@ headerbar {
   @import 'widgets/switch';
   @import 'widgets/scale';
   @import 'widgets/entries';
+  
+  // Adapt switch and scale slider troughs to the shell
+  // Similar to _tweaks, but has been removed: ":not(:backdrop)" and ":not(:disabled)" selectors to avoid wrong look into light popover menus
+  switch, scale > trough {
+    > slider {
+      background-image: image($warm_gray);
+
+      &:hover {
+        background-image: image(lighten($warm_gray, 4%));
+      }
+    }
+  }
 }
 
 @import 'widgets/header-bar';
