@@ -140,7 +140,7 @@ decoration {
 }
 
 @if $variant=='dark' {
-  menu separator {
+  popover.background > contents separator {
     background-color: $_dark_theme_outer_menu_border;
   }
 }
