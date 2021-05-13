@@ -11,7 +11,7 @@
     @extend %overview_panel;
     border-radius: 3px;
     background-color: $dash_background_color; // Yaru: use same background as dash
-    border: 1px solid $borders_color; // Yaru: use same border as dash
+    border: 1px solid $borders_color_dark; // Yaru: use same border as dash
   }
 
   // drag and drop indicator
