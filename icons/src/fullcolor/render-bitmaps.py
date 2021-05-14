@@ -114,42 +114,30 @@ def main(args, SRC):
                     self.inside.append(self.SVG)
                     return
             elif self.inside[-1] == self.SVG:
-                if (
-                    name == "g"
-                    and ("inkscape:groupmode" in attrs)
-                    and ("inkscape:label" in attrs)
-                    and attrs["inkscape:groupmode"] == "layer"
-                    and attrs["inkscape:label"].startswith("Baseplate")
-                ):
-                    self.stack.append(self.LAYER)
-                    self.inside.append(self.LAYER)
-                    self.context = None
-                    self.icon_name = None
-                    self.rects = []
-                    return
+                for attr in attrs.values():
+                    if attr == 'Baseplate':
+                        self.stack.append(self.LAYER)
+                        self.inside.append(self.LAYER)
+                        self.context = None
+                        self.icon_name = None
+                        self.rects = []
+                        return
             elif self.inside[-1] == self.LAYER:
-                if (
-                    name == "text"
-                    and ("inkscape:label" in attrs)
-                    and attrs["inkscape:label"] == "context"
-                ):
-                    self.stack.append(self.TEXT)
-                    self.inside.append(self.TEXT)
-                    self.text = "context"
-                    self.chars = ""
-                    return
-                elif (
-                    name == "text"
-                    and ("inkscape:label" in attrs)
-                    and attrs["inkscape:label"] == "icon-name"
-                ):
-                    self.stack.append(self.TEXT)
-                    self.inside.append(self.TEXT)
-                    self.text = "icon-name"
-                    self.chars = ""
-                    return
-                elif name == "rect":
-                    self.rects.append(attrs)
+                for attr in attrs.values():
+                    if attr == "context":
+                        self.stack.append(self.TEXT)
+                        self.inside.append(self.TEXT)
+                        self.text='context'
+                        self.chars = ""
+                        return
+                    if attr == "icon-name":
+                        self.stack.append(self.TEXT)
+                        self.inside.append(self.TEXT)
+                        self.text='icon-name'
+                        self.chars = ""
+                        return
+                    if name == "rect":
+                        self.rects.append(attrs)
 
             self.stack.append(self.OTHER)
 
