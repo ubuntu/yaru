@@ -36,6 +36,7 @@ The Yaru theme suite is installed with Ubuntu 18.10+ by default! No further step
 
 _Installing from source is not recommended for average usage!_
 
+**⚠ Yaru gnome-shell theme from master require Gnome Shell 40+**
 
 ## Copying or Reusing
 
