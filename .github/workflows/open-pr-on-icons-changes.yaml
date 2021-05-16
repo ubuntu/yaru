@@ -25,7 +25,7 @@ jobs:
       ]
     steps:
       # Checkout code
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - name: Download from ${{ matrix.buildenv.repo }}, on branch ${{ matrix.buildenv.upstreambranch }}
         id: checknewupstream
         run: |
@@ -51,7 +51,7 @@ jobs:
           PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
       - name: Create or update Pull Request
         if: steps.checknewupstream.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v3.8.2
+        uses: peter-evans/create-pull-request@v3.9.2
         with:
           commit-message: New upstream icons list for ${{ matrix.buildenv.project }}
           title: Auto update new upstream  icons list for ${{ matrix.buildenv.project }}

@@ -53,3 +53,9 @@
   @include fontsize($base_font_size - 1);
   color: $warning_color;
 }
+
+/* Workspace animation */
+
+.workspace-animation {
+  background-color: $system_bg_color;
+}

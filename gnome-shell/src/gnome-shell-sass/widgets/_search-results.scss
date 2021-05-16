@@ -22,9 +22,9 @@
 
 // content
 .search-section-content {
-  background-color: transparentize(lighten($osd_bg_color, 5%), 0.2);
+  background-color: $dash_background_color; // Yaru: use same background as dash
   border-radius: $modal_radius+3;
-  border: 1px solid $osd_outer_borders_color;
+  border: 1px solid $borders_color_dark; // Yaru: use same border-color as dash
   box-shadow: 0 2px 4px 0 $shadow_color;
   text-shadow: 0 1px if($variant == 'light', rgba(255,255,255,0.2), rgba(0,0,0,0.2));
   color: $osd_fg_color;
