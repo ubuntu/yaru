@@ -438,9 +438,11 @@ list row, placessidebar row, sidebar row, .sidebar row {
       &, &:hover {
         background-color: $_selection_bg;
         &, button { &, & image { color: $text_color; } }
+        button.suggested-action, button.destructive-action { &, & image { color: white; } }
         box-shadow: inset 4px 0 0 $selected_bg_color;
         &:backdrop {
           &, button { &, & image { color: $backdrop_fg_color; } }
+          button.suggested-action, button.destructive-action { &, & image { color: white; } }
           background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
         }      
       }
