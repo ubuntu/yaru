@@ -1,0 +1,175 @@
+$_header_bar_color: darken($bg_color, 10%);
+$_header_bar_gradient: linear-gradient(to top, darken($_header_bar_color, 2%), lighten($_header_bar_color, 1%));
+
+@if $variant == 'dark' {
+  $_header_bar_gradient: linear-gradient(to top, lighten($_header_bar_color, 4%), lighten($_header_bar_color, 6%));
+}
+
+headerbar {
+  padding: 0 6px;
+  min-height: 46px;
+  border-width: 0 0 1px;
+  border-style: solid;
+  border-color: $alt_borders_color;
+  background-image: $_header_bar_gradient;
+
+  > windowhandle > box {
+    &,
+    > box.start,
+    > box.end {
+      border-spacing: 6px;
+    }
+  }
+
+  &:backdrop {
+    background-image: linear-gradient(to top, $bg_color, $bg_color);
+
+    transition: $backdrop_transition;
+
+    > windowhandle {
+      // opacity looks weird with GtkSwitch, but filter works fine
+      filter: opacity(0.5);
+
+      transition: $backdrop_transition;
+    }
+  }
+
+  /* Darken switchbuttons for headerbars. issue #1588 */
+  stackswitcher > button:checked,
+  button.toggle:checked {
+
+    background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
+    border-color: darken($borders_color, 3%);
+    border-top-color: darken($borders_color, 8%);
+  }
+
+  &.default-decoration {
+    min-height: 28px;
+    padding: 4px;
+
+    windowcontrols {
+      button,
+      menubutton {
+        min-height: 26px;
+        min-width: 26px;
+        margin: 0;
+        padding: 0;
+      }
+
+      menubutton button {
+        min-height: 20px;
+        min-width: 20px;
+        margin: 0;
+        padding: 4px;
+      }
+    }
+  }
+
+  .solid-csd & {
+    &:backdrop, & {
+      &:dir(rtl), &:dir(ltr) { // specificity bump
+        margin-left: -1px;
+        margin-right: -1px;
+        margin-top: -1px;
+      }
+    }
+  }
+
+  // add vertical margins to common widget on the headerbar to avoid them spanning the whole height
+  entry,
+  spinbutton,
+  separator:not(.sidebar),
+  button,
+  menubutton {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  // Reset margins for buttons inside menubutton
+  menubutton > button {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  switch {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.titlebar:not(headerbar) {
+  separator { background-color: $borders_color; }  // FIXME: use darker border?
+}
+
+/*********************
+ * GtkWindowControls *
+ *********************/
+
+windowcontrols {
+  border-spacing: 6px;
+
+  button {
+    @extend %button_basic;
+    @extend %button_basic_flat;
+
+    border-radius: 9999px;
+    padding: 6px;
+    margin: 0 2px;
+    min-width: 0;
+    min-height: 0;
+  }
+}
+
+// special case hover colors inside a headerbar
+headerbar button.flat,
+headerbar windowcontrols button {
+  &:hover {
+    @include button(undecorated-hover,$c:darken($headerbar_bg_color,6%));
+  }
+  &:active,
+  &:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
+}
+
+/******************
+ * AdwWindowTitle *
+ ******************/
+
+headerbar,
+windowtitle {
+  .title {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-weight: bold;
+  }
+
+  .subtitle {
+    font-size: smaller;
+    padding-left: 12px;
+    padding-right: 12px;
+    @extend .dim-label;
+  }
+}
+
+// Development versions of apps to use a differently styled headerbar
+
+window.devel {
+  headerbar {
+    $c: darken($bg_color, 10%);
+    $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+               linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.8)),
+               $_header_bar_gradient;
+    @if $variant == 'dark' {
+      $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+                 linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.9)),
+                 $_header_bar_gradient;
+    }
+
+    background: $bg_color $gradient;
+
+    &:backdrop {
+      background: $bg_color cross-fade(5% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+                  linear-gradient(to right, transparent 65%, transparent),
+                  linear-gradient(to top, $bg_color, $bg_color);
+    }
+  }
+}

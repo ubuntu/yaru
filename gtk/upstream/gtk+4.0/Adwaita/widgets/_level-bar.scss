@@ -1,0 +1,83 @@
+$_levelbar_size: 9px;
+$_levelbar_border_radius: 5px;
+
+levelbar {
+  &.horizontal {
+    trough > block {
+      min-height: $_levelbar_size;
+      border-radius: $_levelbar_border_radius;
+
+      &:dir(rtl) {
+        border-radius: 0 $_levelbar_border_radius $_levelbar_border_radius 0;
+      }
+
+      &:dir(ltr) {
+        border-radius: $_levelbar_border_radius 0 0 $_levelbar_border_radius;
+      }
+
+      &.empty,
+      &.full {
+        border-radius: $_levelbar_border_radius;
+      }
+    }
+
+    // segmented level bar
+    &.discrete > trough > block {
+      min-height: 2px;
+      margin: 1px;
+      min-width: 24px;
+      border-radius: 0;
+
+      &:first-child {
+        border-radius: 2px 0 0 2px;
+      }
+
+      &:last-child {
+        border-radius: 0 2px 2px 0;
+      }
+    }
+  }
+
+  &.vertical {
+    trough > block {
+      min-width: $_levelbar_size;
+      border-radius: $_levelbar_border_radius;
+    }
+
+    &.discrete > trough > block {
+      min-width: $_levelbar_size - 7px;
+      margin: 1px 0;
+      min-height: 32px;
+    }
+  }
+
+  > trough {
+    padding: 0;
+
+    // level bar colours
+    > block {
+      border: 1px solid;
+
+      &.low {
+        border-color: $warning_color;
+        background-color: $warning_color;
+      }
+
+      &.high,
+      &:not(.empty) {
+        border-color: $selected_bg_color;
+        background-color: $selected_bg_color;
+      }
+
+      &.full {
+        border-color: $success_color;
+        background-color: $success_color;
+      }
+
+      &.empty {
+        background-color: darken($bg_color, 5%);
+        border-color: darken($bg_color, 5%);
+      }
+    }
+  }
+}

@@ -1,0 +1,177 @@
+$tab_bg: darken($bg_color, if($variant == 'dark', 6%, 12%));
+
+@mixin undershoot-gradient($dir) {
+  @if $variant == 'dark' {
+    background: linear-gradient(to #{$dir},
+                                transparentize(black, .6),
+                                transparentize(black, 1) 20px);
+  }
+  @else {
+    background: linear-gradient(to #{$dir},
+                                transparentize(black, .93),
+                                transparentize(black, 1) 20px);
+  }
+}
+
+@mixin need-attention-gradient($dir) {
+  background: linear-gradient(to #{$dir},
+                              transparentize($selected_bg_color, .3),
+                              transparentize($selected_bg_color, .5) 1px,
+                              transparentize($selected_bg_color, 1) 20px);
+}
+
+tabbar {
+  .box {
+    min-height: 38px;
+    background: darken($tab_bg, 3%);
+    border-bottom: 1px solid $alt_borders_color;
+  }
+
+  scrolledwindow.pinned {
+    undershoot {
+      border: 0 solid $alt_borders_color;
+    }
+
+    &:dir(rtl) undershoot.left {
+      border-left-width: 1px;
+    }
+
+    &:dir(ltr) undershoot.right {
+      border-right-width: 1px;
+    }
+
+    tabbox {
+      &:dir(ltr) {
+        box-shadow: inset -1px 0 $alt_borders_color;
+      }
+
+      &:dir(rtl) {
+        box-shadow: inset 1px 0 $alt_borders_color;
+      }
+    }
+  }
+
+  undershoot {
+    transition: background 150ms ease-in-out;
+
+    &.left {
+      @include undershoot-gradient("right");
+    }
+
+    &.right {
+      @include undershoot-gradient("left");
+    }
+  }
+
+  .needs-attention-left undershoot.left {
+    @include need-attention-gradient("right");
+  }
+
+  .needs-attention-right undershoot.right {
+    @include need-attention-gradient("left");
+  }
+
+  tab {
+    border-style: solid;
+    border-color: $alt_borders_color;
+    border-width: 0 1px 0 1px;
+    transition: background 150ms ease-in-out, $focus_transition;
+    background-color: $tab_bg;
+
+    @include focus-ring();
+
+    &:checked {
+      background-color: lighten($tab_bg, 6%);
+
+      &:hover {
+        background-color: lighten($tab_bg, 9%);
+      }
+    }
+
+    &:hover {
+      background-color: lighten($tab_bg, 3%);
+    }
+  }
+
+  .start-action,
+  .end-action {
+    background: $tab_bg;
+    border-color: $alt_borders_color;
+    border-style: solid;
+    transition: background 150ms ease-in-out;
+
+    button {
+      border: none;
+      border-radius: 0;
+    }
+  }
+
+  .start-action:dir(ltr),
+  .end-action:dir(rtl) {
+    border-right-width: 1px;
+  }
+
+  .start-action:dir(rtl),
+  .end-action:dir(ltr) {
+    border-left-width: 1px;
+  }
+}
+
+dnd tab {
+  min-height: 26px;
+  background-color: lighten($tab_bg, 9%);
+
+  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
+
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.75),
+              0 0 0 1px $_wm_border;
+
+  @if $variant == 'dark' {
+    $_wm_outline: if($contrast=='high', transparentize(white, .7), transparentize(white, .9));
+
+    outline: 1px solid $_wm_outline;
+    outline-offset: -1px;
+  }
+
+  margin: 25px;
+}
+
+tabbar,
+dnd {
+  tab {
+    padding: 6px;
+
+    &.needs-attention {
+      background-image:
+        radial-gradient(ellipse at bottom,
+                        transparentize(white, .2),
+                        transparentize($selected_bg_color, .8) 15%,
+                        transparentize($selected_bg_color, 1) 15%);
+    }
+
+    button.image-button {
+      padding: 0;
+      margin: 0;
+      min-width: 24px;
+      min-height: 24px;
+      border-radius: 99px;
+
+      border: none;
+      box-shadow: none;
+      background: none;
+
+      &:hover {
+        background: gtkalpha($fg_color, .15);
+      }
+
+      &:active {
+        background: gtkalpha(black, .2);
+      }
+    }
+  }
+}
+
+tabview:drop(active),
+tabbox:drop(active) {
+  box-shadow: none;
+}

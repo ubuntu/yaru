@@ -1,0 +1,61 @@
+switch {
+  // similar to the .scale
+  border: 1px solid $borders_color;
+  border-radius: 14px;
+  color: $fg_color;
+  background-color: $dark_fill;
+  transition: $focus_transition;
+
+  @include focus-ring($offset: 0, $outer: true);
+
+  headerbar & { background-color: darken($dark_fill,8%); } //3504
+
+  &:checked {
+    color: $selected_fg_color;
+    border-color: $switch_borders_color;
+    background-color: $switch_bg_color;
+  }
+
+  &:disabled {
+    color: $insensitive_fg_color;
+    border-color: $borders_color;
+    background-color: $insensitive_bg_color;
+  }
+
+  > slider {
+    @include button(normal);
+
+    margin: -1px;
+    min-width: 24px;
+    min-height: 24px;
+    border: 1px solid;
+    border-color: $borders_color;
+    border-radius: 50%;
+    transition: $button_transition;
+  }
+
+  /* only show i / o for the accessible theme */
+  @if $contrast == 'normal' {
+    > image { color: transparent; }
+  }
+
+  &:hover > slider {
+    @include button(hover);
+  }
+
+  &:checked > slider { border: 1px solid $switch_borders_color; }
+
+  &:disabled > slider { @include button(insensitive); }
+
+
+  // row:selected & { // Yaru change: due to grey row selection background we no more need to modify row:selected look
+    // outline-color: $alt_focus_border_color;
+
+    // @if $variant == 'light' {
+      // box-shadow: none;
+      // border-color: $switch_borders_color;
+
+      // > slider { &:checked, & { border-color: $switch_borders_color; } }
+    // }
+  // }
+}

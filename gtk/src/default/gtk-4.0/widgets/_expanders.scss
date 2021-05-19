@@ -1,0 +1,23 @@
+expander {
+  min-width: 16px;
+  min-height: 16px;
+  -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+  &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
+
+  &:disabled { color: $insensitive_fg_color; }
+
+  &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
+}
+
+expander-widget {
+  @include focus-ring("> box > title");
+
+  > box > title {
+    transition: $focus_transition;
+    border-radius: $button_radius;
+
+    &:hover > expander {
+      color: lighten($fg_color,30%); //only lightens the icon
+    }
+  }
+}

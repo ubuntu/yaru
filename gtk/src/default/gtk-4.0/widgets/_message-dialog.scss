@@ -1,0 +1,44 @@
+window.dialog.message {
+  .titlebar {
+    min-height: 20px;
+    background-image: none;
+    background-color: $bg_color;
+    border-style: none;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  box.dialog-vbox.vertical {
+    border-spacing: 10px;
+  }
+
+  & label.title {
+    font-weight: 800;
+    font-size: 15pt;
+  }
+
+  &.csd {
+    &.background {
+      // bigger radius for better antialiasing
+      border-bottom-left-radius: $window_radius+1;
+      border-bottom-right-radius: $window_radius+1;
+    }
+
+    .dialog-action-area button {
+      padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
+      border-radius: 0;
+      border-left-style: solid;
+      border-right-style: none;
+      border-bottom-style: none;
+
+      &:first-child {
+        border-left-style: none;
+        border-bottom-left-radius: 7px;
+      }
+
+      &:last-child {
+        border-bottom-right-radius: 7px;
+      }
+    }
+  }
+}

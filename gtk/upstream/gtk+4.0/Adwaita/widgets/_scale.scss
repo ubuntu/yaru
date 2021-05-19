@@ -1,0 +1,361 @@
+%scale_trough {
+  border: 1px solid $dark_fill;
+  border-radius: 3px;
+  background-color: $dark_fill;
+
+  headerbar & { background-color: darken($dark_fill,8%); } //3504
+
+  &:disabled {
+   background-color: $insensitive_bg_color;
+   border-color: $insensitive_borders_color;
+  }
+
+  // ...on selected list rows
+  row:selected & {
+    &:disabled, & {
+      outline-color: $alt_focus_border_color;
+      border-color: $selected_borders_color;
+    }
+  }
+
+  // OSD
+  .osd & {
+    border-color: $osd_borders_color;
+    background-color: transparentize($osd_borders_color, 0.2);
+
+    &:disabled { background-color: $osd_insensitive_bg_color; }
+  }
+}
+
+%scale_highlight {
+  border: 1px solid $selected_bg_color;
+  border-radius: 3px;
+  background-color: $selected_bg_color;
+
+  &:disabled {
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  // ...on selected list rows
+  row:selected & { &:disabled, & { border-color: $selected_borders_color; }}
+
+  // OSD
+  .osd & {
+    border-color: $osd_borders_color;
+
+    &:disabled { border-color: transparent; }
+  }
+}
+
+scale {
+  // sizing
+  $_marks_length: 6px;
+  $_marks_distance: 6px;
+
+  min-height: 10px;
+  min-width: 10px;
+  padding: 12px;
+
+  @include focus-ring("> trough", $offset: 10px);
+
+  > trough {
+    transition: $focus_transition;
+    @extend %scale_trough;
+
+    // those are inside the trough node, I need them to show their own border over the trough one, so negative margin
+    > fill,
+    > highlight { margin: -1px; }
+
+    // the colored part of the backing bit
+    > highlight { @extend %scale_highlight; }
+
+    // this is another differently styled part of the backing bit, the most relevant use case is for example
+    // in media player to indicate how much video stream as been cached
+    > fill {
+      @extend %scale_trough;
+
+      &:disabled {
+        border-color: transparent;
+        background-color: transparent;
+      }
+
+      // OSD
+      .osd & {
+        background-color: mix($osd_fg_color, $osd_borders_color, 25%);
+
+        &:disabled {
+         border-color: transparent;
+         background-color: transparent;
+        }
+      }
+    }
+
+    > slider {
+      @include button(normal);
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 100%;
+      transition: $button_transition;
+      transition-property: background, border, box-shadow;
+
+      // the slider is inside the trough, so to have make it bigger there's a negative margin
+      min-height: 18px;
+      min-width: 18px;
+      margin: -9px;
+
+      &:hover { @include button(hover); }
+
+      &:active { border-color: $selected_borders_color; }
+
+      &:disabled { @include button(insensitive); }
+
+      // ...on selected list rows
+      row:selected & { &:disabled, & { border-color: $selected_borders_color; } }
+
+      // OSD
+      .osd & {
+        @include button(osd);
+        border-color: darken($osd_borders_color, 3%);
+        background-color: opacify($osd_bg_color, 1); // solid background needed here
+
+        &:hover {
+          @include button(osd-hover);
+          background-color: opacify($osd_bg_color, 1); // solid background needed here
+        }
+
+        &:active {
+          @include button(osd-active);
+          background-color: opacify($osd_bg_color, 1); // solid background needed here
+        }
+
+        &:disabled {
+          @include button(osd-insensitive);
+          background-color: opacify($osd_bg_color, 1); // solid background needed here
+        }
+      }
+    }
+  }
+
+  // click-and-hold the slider to activate
+  &.fine-tune {
+    &.horizontal {
+      padding-top: 9px;
+      padding-bottom: 9px;
+      min-height: 16px;
+    }
+
+    &.vertical {
+      padding-left: 9px;
+      padding-right: 9px;
+      min-width: 16px;
+    }
+
+    > trough {
+      // to make the trough grow in fine-tune mode
+      > slider { margin: -6px; }
+
+      > fill,
+      > highlight,
+      & {
+        border-radius: 5px;
+      }
+    }
+  }
+
+  > value {
+    color: gtkalpha(currentColor, 0.55);
+    font-feature-settings: "tnum";
+  }
+
+  &.marks-before, &.marks-after {
+    > trough > slider {
+      // Adjust box-shadow for the 45deg rotation, for 0 1px we ideally want
+      // 1/√2px 1/√2px, round that to 1px 1px
+      $_button_shadow: 1px 1px 2px transparentize($shadow_color, 0.03);
+
+      box-shadow: $_button_shadow;
+      transform: rotate(45deg);
+    }
+  }
+
+  &.horizontal {
+    > marks {
+      color: gtkalpha(currentColor, 0.55);
+      &.top    { margin-bottom: $_marks_distance; }
+      &.bottom { margin-top: $_marks_distance; }
+
+      indicator {
+        background-color: currentColor;
+        min-height: $_marks_length;
+        min-width: 1px;
+      }
+    }
+
+    > value.left  { margin-right: 9px; }
+    > value.right { margin-left: 9px; }
+
+    &.fine-tune > marks {
+      &.top { margin-top: 3px; }
+      &.bottom { margin-bottom: 3px; }
+
+      indicator { min-height: ($_marks_length - 3px); }
+    }
+
+    &.marks-before > trough > slider {
+      border-top-left-radius: 0;
+    }
+
+    &.marks-after > trough > slider {
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &.vertical {
+    > marks {
+      color: gtkalpha(currentColor, 0.55);
+      &.top    { margin-right: $_marks_distance; }
+      &.bottom { margin-left: $_marks_distance; }
+
+      indicator {
+        background-color: currentColor;
+        min-height: 1px;
+        min-width: $_marks_length;
+      }
+    }
+
+    > value.top    { margin-bottom: 9px; }
+    > value.bottom { margin-top: 9px; }
+
+    &.fine-tune > marks {
+      &.top { margin-left: 3px; }
+      &.bottom { margin-right: 3px; }
+
+      indicator { min-height: ($_marks_length - 3px); }
+    }
+
+    &.marks-before > trough > slider {
+      border-bottom-left-radius: 0;
+    }
+
+    &.marks-after > trough > slider {
+      border-top-right-radius: 0;
+    }
+  }
+
+  &.color {
+    min-height: 0;
+    min-width: 0;
+
+    > trough {
+      background-image: image($borders_color);
+      background-repeat: no-repeat;
+    }
+
+    &.horizontal {
+      padding: 0 0 15px 0;
+
+      > trough {
+        padding-bottom: 4px;
+        background-position: 0 -3px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+
+        > slider {
+          &:dir(ltr), &:dir(rtl) { // specificity bump
+            &:hover, &:disabled, & {
+              margin-bottom: -15px;
+              margin-top: 6px;
+            }
+          }
+        }
+      }
+    }
+
+    &.vertical {
+      &:dir(ltr) {
+        padding: 0 0 0 15px;
+
+        > trough {
+          padding-left: 4px;
+          background-position: 3px 0;
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+
+          > slider {
+            &:hover, &:disabled, & {
+              margin-left: -15px;
+              margin-right: 6px;
+            }
+          }
+        }
+      }
+
+      &:dir(rtl) {
+        padding: 0 15px 0 0;
+
+        > trough {
+          padding-right: 4px;
+          background-position: -3px 0;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+
+          > slider {
+            &:hover, &:disabled, & {
+              margin-right: -15px;
+              margin-left: 6px;
+            }
+          }
+        }
+      }
+    }
+
+    &.fine-tune {
+      &.horizontal {
+        &:dir(ltr), &:dir(rtl) { // specificity bump
+          padding: 0 0 12px 0;
+
+          > trough {
+            padding-bottom: 7px;
+            background-position: 0 -6px;
+
+            > slider {
+              margin-bottom: -15px;
+              margin-top: 6px;
+            }
+          }
+        }
+      }
+
+      &.vertical {
+        &:dir(ltr) {
+          padding: 0 0 0 12px;
+
+          > trough {
+            padding-left: 7px;
+            background-position: 6px 0;
+
+            > slider {
+              margin-left: -15px;
+              margin-right: 6px;
+            }
+          }
+        }
+
+        &:dir(rtl) {
+          padding: 0 12px 0 0;
+
+          > trough {
+            padding-right: 7px;
+            background-position: -6px 0;
+
+            > slider {
+              margin-right: -15px;
+              margin-left: 6px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

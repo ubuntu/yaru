@@ -6,6 +6,14 @@ Summary
 * Note that meson always builds out-of-tree, so the modified css files will
   appear in your builddir.
 
+Theme variants
+--------------
+
+The Adwaita theme comes in 4 variants: light, dark, hc (highcontrast) and
+hc-dark (highcontrast inverse). The generated CSS files for the variants
+are called Adwaita-$variant.css. For technical reasons, GTK adds one level
+of include wrappers around these, which are called gtk-$variant.css.
+
 How to tweak the theme
 ----------------------
 
@@ -32,6 +40,6 @@ _drawing.scss       - drawing helper mixings/functions to allow easier
 
 _common.scss        - actual definitions of style for each widget. This is
                       where you are likely to add/remove your changes.
-                      
+
 You can read about SASS at http://sass-lang.com/documentation/. Once you make
-your changes to the _common.scss file, GTK will rebuild the CSS files.
+your changes to the _common.scss file, libadwaita will rebuild the CSS files.

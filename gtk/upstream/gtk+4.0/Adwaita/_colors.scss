@@ -18,7 +18,10 @@ $top_hilight: $borders_edge;
 $dark_fill: mix($borders_color, $bg_color, 50%);
 $headerbar_bg_color: if($variant == 'light', lighten($bg_color, 5%), darken($bg_color, 3%));
 $menu_color: $base_color;
-$menu_selected_color: if($variant == 'light', darken($bg_color, 6%), darken($bg_color, 8%));
+$menu_hover_color: transparentize($text_color, .93);
+$menu_selected_color: transparentize($text_color, .9);
+$menu_selected_hover_color: transparentize($text_color, .87);
+$menu_active_color: if($variant == 'light', transparentize(black, .85), transparentize(black, .1));
 
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
@@ -49,16 +52,6 @@ $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
-//colors for the backdrop state, derived from the main colors.
-$backdrop_base_color: if($variant == 'light', darken($base_color, 1%), lighten($base_color, 1%));
-$backdrop_text_color: mix($text_color, $backdrop_base_color, 80%);
-$backdrop_bg_color: $bg_color;
-$backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 50%);
-$backdrop_insensitive_color: if($variant == 'light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 15%));
-$backdrop_selected_fg_color: if($variant == 'light', $backdrop_base_color, $backdrop_text_color);
-$backdrop_borders_color: mix($borders_color, $bg_color, 80%);
-$backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
-
 //special cased widget colors
 $suggested_bg_color: $selected_bg_color;
 $suggested_border_color: $selected_borders_color;
@@ -72,3 +65,30 @@ $switch_borders_color: if($variant == 'light',darken($switch_bg_color,15%),darke
 $focus_border_color: if($variant == 'light', transparentize($selected_bg_color, 0.5), transparentize($selected_bg_color, 0.3));
 $alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), transparentize(white,0.7));
 $dim_label_opacity: 0.55;
+
+// High Contrast color overrides
+@if $contrast == 'high' {
+
+  $fg_color: if($variant == 'light', darken($fg_color, 3%), lighten($fg_color, 2%));
+  $bg_color: if($variant == 'light', lighten($bg_color, 3%), darken($bg_color, 2%));
+  $selected_bg_color: darken($selected_bg_color,10%);
+  $selected_borders_color: darken($selected_borders_color, 10%);
+  $borders_color: if($variant == 'light', darken($borders_color, 30%), lighten($borders_color, 30%));
+  $alt_borders_color: if($variant == 'light', darken($alt_borders_color, 33%), lighten($alt_borders_color, 28%));
+  $menu_color: $base_color;
+  $menu_selected_color: darken($bg_color,10%);
+
+  //insensitive state derived colors
+  $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
+  $insensitive_bg_color: mix($bg_color, $base_color, 60%);
+  $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
+
+  //focus rings
+  $focus_border_color: if($variant == 'light', transparentize($selected_bg_color, 0.2), transparentize(white, 0.4));
+  $alt_focus_border_color: if($variant == 'light', white, transparentize(white,0.4));
+
+  $dim_label_opacity: 0.9;
+
+  $switch_borders_color: if($variant == 'light',darken($switch_bg_color,15%),lighten($switch_bg_color,15%));
+
+}
