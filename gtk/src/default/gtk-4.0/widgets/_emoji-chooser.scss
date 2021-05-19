@@ -1,36 +1,43 @@
-popover.emoji-picker > contents,
-popover.entry-completion > contents {
+popover.background.emoji-picker > contents {
   padding: 0;
 }
 
 .emoji-searchbar {
   padding: 6px;
-  border-spacing: 6px;
   border-bottom: 1px solid $borders_color;
 }
 
 .emoji-toolbar {
-  padding: 6px;
-  border-spacing: 6px;
+  // flowbox children already have 3px padding, so we only need 3px more to
+  // get the regular 6px. We also don't need spacing, for the same reason.
+  padding: 3px;
   border-top: 1px solid $borders_color;
 }
 
 button.emoji-section {
-  border-color: transparent;
-  border-width: 3px;
-  border-style: none none solid;
-  border-radius: 0;
-
-  padding: 3px 0 0;
   min-width: 32px;
-  min-height: 28px;
+  min-height: 32px;
+  border-radius: 16px;
 
-  /* reset props inherited from the button style */
+  padding: 0;
   background: none;
-  box-shadow: none;
+  transition: none;
 
-  &:hover { border-color: if($variant == 'light', $borders_color, transparentize($fg_color, .9)); }
-  &:checked { border-color: $selected_bg_color; }
+  &:hover {
+    background: $menu_hover_color;
+  }
+
+  &:checked {
+    background: $menu_selected_color;
+
+    &:hover {
+      background: $menu_selected_hover_color;
+    }
+  }
+
+  &:hover:active {
+    background: $menu_active_color;
+  }
 }
 
 popover.emoji-picker emoji {
@@ -40,24 +47,41 @@ popover.emoji-picker emoji {
 
   &:focus,
   &:hover {
-    background: $selected_bg_color;
+    background: $menu_selected_color;
+
+    &:active {
+      background: $menu_active_color;
+    }
   }
 }
 
+// Emoji completion popover
+
+popover.background.emoji-completion > contents {
+  padding: $menu_margin;
+  padding-bottom: $menu_margin - 2px;
+}
+
 emoji-completion-row {
+  // emoji extends quite a bit into the padding, so we can't use the same padding on all sides
+  padding: $menu_padding - 6px;
+  margin-bottom: 2px;
+  border-radius: $menu_radius;
+
+  &:dir(ltr) { padding-right: $menu_padding; }
+  &:dir(rtl) { padding-left: $menu_padding; }
+
    > box {
-    border-spacing: 10px;
-    padding: 2px 10px;
+    border-spacing: $menu_padding - 6px;
   }
 
-  :focus,
-  :hover {
-    background-color: $selected_bg_color;
-    color: $selected_fg_color;
-  }
-
-  emoji:focus,
-  emoji:hover {
+  &:focus,
+  &:hover {
     background-color: $menu_selected_color;
+    color: $text-color;
+
+    &:active {
+      background-color: $menu_active_color; // matching buttons
+    }
   }
 }

@@ -21,7 +21,10 @@ $top_hilight: if($ambiance, lighten($bg_color, 8%), $borders_edge);
 $dark_fill: mix($borders_color, $bg_color, 50%);
 $headerbar_bg_color: if($variant == 'light', lighten($bg_color, 5%), darken($bg_color, 3%));
 $menu_color: if($variant == 'light', $bg_color, $base_color);
-$menu_selected_color: if($variant == 'light', darken($bg_color, 6%), darken($bg_color, 8%));
+$menu_hover_color: transparentize($text_color, .93);
+$menu_selected_color: transparentize($text_color, .9);
+$menu_selected_hover_color: transparentize($text_color, .87);
+$menu_active_color: if($variant == 'light', transparentize(black, .85), transparentize(black, .1));
 $popover_bg_color: if($variant == 'light', $bg_color, $base_color);
 $popover_hover_color: transparentize($fg_color, 0.85);
 
