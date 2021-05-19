@@ -1,13 +1,19 @@
-#MozillaGtkWidget.background  {
+#MozillaGtkWidget.background {
+
     // REMOVE THIS when firefox supports rounded menus
-    menu, .menu,.context-menu { border-radius: 0; }
+    menu,
+    .menu,
+    .context-menu {
+        border-radius: 0;
+    }
 
     @if $ambiance {
+
         menubar,
         .menubar,
-        menubar > menuitem:hover {
+        menubar>menuitem:hover {
             background-color: $headerbar_bg_color;
-            color:$headerbar_fg_color;
+            color: $headerbar_fg_color;
         }
     }
 
@@ -16,12 +22,24 @@
         background-color: transparent;
         border-color: transparent;
 
-        slider  {
+        slider {
             background-color: darken($scrollbar_slider_color, 10%);
-            &:hover { background-color: darken($scrollbar_slider_hover_color, 10%); }
-            &:hover:active { background-color: $scrollbar_slider_active_color; }
-            &:backdrop { background-color: $backdrop_scrollbar_slider_color; }
-            &:disabled { background-color: transparent; }
+
+            &:hover {
+                background-color: darken($scrollbar_slider_hover_color, 10%);
+            }
+
+            &:hover:active {
+                background-color: $scrollbar_slider_active_color;
+            }
+
+            &:backdrop {
+                background-color: $backdrop_scrollbar_slider_color;
+            }
+
+            &:disabled {
+                background-color: transparent;
+            }
         }
 
         trough {
@@ -36,7 +54,12 @@ normal-button {
     &:hover {
         @include button(hover);
     }
-    &:active { @include button(active)}
 
-    &:disabled {@include button(insensitive);}
+    &:active {
+        @include button(active)
+    }
+
+    &:disabled {
+        @include button(insensitive);
+    }
 }

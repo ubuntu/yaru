@@ -2,13 +2,14 @@
     #title_eventbox {
         background-color: $bg_color;
         color: $fg_color;
+
         &:backdrop {
             background-color: $backdrop_bg_color;
             color: $backdrop_fg_color;
         }
     }
 
-    #dot_grid progressbar	{
+    #dot_grid progressbar {
         border-radius: 100%;
         padding: 1px;
         padding-top: 2px;
@@ -29,4 +30,8 @@
         }
     }
 }
-#dialog-action_area1 { padding-bottom: 5px; padding-right: 5px }
+
+#dialog-action_area1 {
+    padding-bottom: 5px;
+    padding-right: 5px
+}

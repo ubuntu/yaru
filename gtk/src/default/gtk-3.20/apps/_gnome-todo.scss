@@ -3,12 +3,17 @@
         border-radius: 0px;
         border: none;
         border-left: 1px solid $borders-color;
-        padding-left: 10px; padding-right: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
         -gtk-outline-radius: 0px;
     }
 
-    viewport.view, listbox.transparent {
-        background-color: darken($base_color,5%);
-        &:backdrop { background-color: $backdrop_base_color}
+    viewport.view,
+    listbox.transparent {
+        background-color: darken($base_color, 5%);
+
+        &:backdrop {
+            background-color: $backdrop_base_color
+        }
     }
 }

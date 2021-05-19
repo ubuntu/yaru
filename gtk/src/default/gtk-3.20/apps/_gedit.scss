@@ -1,27 +1,29 @@
-.gedit-bottom-panel-paned notebook > header {
+.gedit-bottom-panel-paned notebook>header {
     background: if($variant==light, $porcelain, $bg_color);
 }
 
-.gedit-bottom-panel-paned ~ statusbar {
-  // give gedit's bottom panel a border
-  border-top: 1px solid $borders_color;
+.gedit-bottom-panel-paned~statusbar {
+    // give gedit's bottom panel a border
+    border-top: 1px solid $borders_color;
 
-  &:backdrop { border-color: $backdrop_borders_color; }
+    &:backdrop {
+        border-color: $backdrop_borders_color;
+    }
 }
 
 .gedit-search-slider {
-  // gives gedit search entry some padding and a border
-  // otherwise it's right under the headerbar
-  background: $bg_color;
-  border: 1px solid $borders_color;
-  border-top-style: none;
-  padding: 4px 8px;
-  border-radius: 0 0 5px 5px; // same radius as tooltips
+    // gives gedit search entry some padding and a border
+    // otherwise it's right under the headerbar
+    background: $bg_color;
+    border: 1px solid $borders_color;
+    border-top-style: none;
+    padding: 4px 8px;
+    border-radius: 0 0 5px 5px; // same radius as tooltips
 
-  &:backdrop {
-    background-color: $backdrop_bg_color;
-    border-color: $backdrop_borders_color;
-  }
+    &:backdrop {
+        background-color: $backdrop_bg_color;
+        border-color: $backdrop_borders_color;
+    }
 }
 
 .gedit-search-entry-occurrences-tag {
@@ -32,12 +34,17 @@
     padding: 2px;
 }
 
-.gedit-document-panel { // 'documents' pane
+.gedit-document-panel {
+    // 'documents' pane
 
     background-color: $bg_color;
-    row.activatable { padding: 6px; }
 
-    row button { // 'close' button
+    row.activatable {
+        padding: 6px;
+    }
+
+    row button {
+        // 'close' button
         min-width: 22px;
         min-height: 22px;
         padding: 0;
@@ -49,6 +56,7 @@
         &:hover {
             background-color: rgba($fg_color, 0.15);
         }
+
         &:active {
             background-color: rgba($fg_color, 0.25);
         }

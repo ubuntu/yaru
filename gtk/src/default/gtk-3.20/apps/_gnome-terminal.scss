@@ -2,6 +2,7 @@ $_terminal_bg_color: #300A24;
 $_terminal_fg_color: white;
 
 terminal-window {
+
     // use unity 8 colors
     // only colors, let everything else be inherited
     .terminal-screen {
@@ -33,7 +34,7 @@ terminal-window {
                 border-width: 3px;
 
                 &:backdrop {
-                  background-color: gtkalpha(currentColor, 0.1);
+                    background-color: gtkalpha(currentColor, 0.1);
                 }
 
                 &:disabled {

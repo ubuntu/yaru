@@ -35,44 +35,55 @@ UnityDecoration {
         box-shadow: inset 0 1px $headerbar_border_color;
 
         &:hover {
-        // nothing changes here
+            // nothing changes here
         }
 
         &:backdrop {
-        border: none;
-        background-color: $backdrop_headerbar_bg_color;
-        color: $backdrop_headerbar_fg_color;
-        box-shadow: inset 0 1px transparentize($headerbar_border_color, 0.4);
+            border: none;
+            background-color: $backdrop_headerbar_bg_color;
+            color: $backdrop_headerbar_fg_color;
+            box-shadow: inset 0 1px transparentize($headerbar_border_color, 0.4);
         }
     }
 
     // this is the window border outside of the titlebar!
-    .left, .right, .bottom {
+    .left,
+    .right,
+    .bottom {
         border: none;
         background-color: transparent;
-        &:backdrop { background-color: transparent; }
+
+        &:backdrop {
+            background-color: transparent;
+        }
     }
 }
 
 // unity 7 top panel - equivalent to the gnome panel
-UnityPanelWidget, .unity-panel {
+UnityPanelWidget,
+.unity-panel {
     background-color: $panel_bg_color;
     color: $panel_fg_color;
     border: 0;
 }
 
 .unity-panel {
-    &.menuitem, .menuitem {
+
+    &.menuitem,
+    .menuitem {
         border-width: 0 1px;
         color: $panel_fg_color;
         background-color: transparent;
 
-        &:hover, *:hover {
-        box-shadow: inset 0 -2px 0 0 $selected_bg_color;
-        background-color: transparent;
-        color: $panel_fg_color;
+        &:hover,
+        *:hover {
+            box-shadow: inset 0 -2px 0 0 $selected_bg_color;
+            background-color: transparent;
+            color: $panel_fg_color;
         }
     }
 }
 
-SheetStyleDialog.unity-force-quit { background-color: $bg_color; }
+SheetStyleDialog.unity-force-quit {
+    background-color: $bg_color;
+}

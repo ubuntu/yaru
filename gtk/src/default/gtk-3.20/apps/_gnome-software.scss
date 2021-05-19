@@ -6,16 +6,26 @@
 
     &,
     &:not(:selected):not(:backdrop):hover,
-    &:not(:selected):not(:backdrop):active { background-color: $base_color; }
+    &:not(:selected):not(:backdrop):active {
+        background-color: $base_color;
+    }
 
-    &:backdrop { background-color: $backdrop_base_color; }
+    &:backdrop {
+        background-color: $backdrop_base_color;
+    }
 
-    &:last-child { margin-bottom: 0; }
+    &:last-child {
+        margin-bottom: 0;
+    }
 
-    > grid { margin-top: -24px; }
+    >grid {
+        margin-top: -24px;
+    }
 }
 
-.app-listbox-header { background: $dark_fill; }
+.app-listbox-header {
+    background: $dark_fill;
+}
 
 .list-box-app-row {
     border-radius: 0;
@@ -24,15 +34,15 @@
     border-width: 0 1px 1px 1px;
     margin: -1px 0 0 0;
 
-    & ~ separator {
-    background-color: $bg_color;
-    border: none;
-    min-height: 0px;
+    &~separator {
+        background-color: $bg_color;
+        border: none;
+        min-height: 0px;
     }
 }
 
 // Avoid double border when list in included in a box (e.g. Updates view)
-box > list row.list-box-app-row {
+box>list row.list-box-app-row {
     border: none;
 }
 
