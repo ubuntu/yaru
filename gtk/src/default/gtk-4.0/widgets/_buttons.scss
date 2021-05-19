@@ -94,17 +94,17 @@ button {
   }
 
   @at-root %button_selected, & {
-    row:selected & {
-      @if $variant == 'light' { border-color: $selected_borders_color; }
-    }
+    // row:selected & { // Yaru change: due to grey row selection background we no more need to modify buttons border-color
+      // @if $variant == 'light' { border-color: $selected_borders_color; }
+    // }
 
     @at-root %button_selected_flat, &.flat {
-      row:selected & {
-        &:not(:active):not(:checked):not(:hover):not(disabled) {
-          color: $selected_fg_color;
-          border-color: transparent;
-        }
-      }
+      // row:selected & {
+        // &:not(:active):not(:checked):not(:hover):not(disabled) {
+          // color: $selected_fg_color;
+          // border-color: transparent;
+        // }
+      // }
     }
   }
 

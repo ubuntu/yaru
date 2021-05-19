@@ -11,12 +11,12 @@
   }
 
   // ...on selected list rows
-  row:selected & {
-    &:disabled, & {
-      outline-color: $alt_focus_border_color;
-      border-color: $selected_borders_color;
-    }
-  }
+  // row:selected & { // Yaru change: due to grey row selection background we no more need to modify row:selected look
+    // &:disabled, & {
+      // outline-color: $alt_focus_border_color;
+      // border-color: $selected_borders_color;
+    // }
+  // }
 
   // OSD
   .osd & {
@@ -38,7 +38,7 @@
   }
 
   // ...on selected list rows
-  row:selected & { &:disabled, & { border-color: $selected_borders_color; }}
+  //row:selected & { &:disabled, & { border-color: $selected_borders_color; }} // Yaru change: due to grey row selection background we no more need to modify row:selected look
 
   // OSD
   .osd & {
@@ -111,7 +111,7 @@ scale {
       &:disabled { @include button(insensitive); }
 
       // ...on selected list rows
-      row:selected & { &:disabled, & { border-color: $selected_borders_color; } }
+      // row:selected & { &:disabled, & { border-color: $selected_borders_color; } } // Yaru change: due to grey row selection background we no more need to modify row:selected look
 
       // OSD
       .osd & {

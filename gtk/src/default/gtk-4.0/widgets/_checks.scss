@@ -48,11 +48,11 @@ radio {
     }
   }
 
-  @if $variant == 'light' {
+  // @if $variant == 'light' { // Yaru change: due to grey row selection background we no more need to modify row:selected look
     // the borders of the light variant versions of checks and radios are too similar in luminosity to the selected background
     // color, hence we need special casing.
-    row:selected & { border-color: $checkradio_borders_color; }
-  }
+    // row:selected & { border-color: $checkradio_borders_color; }
+  // }
 
   .osd & {
     @include button(osd);
