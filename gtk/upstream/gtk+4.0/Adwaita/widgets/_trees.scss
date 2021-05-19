@@ -210,11 +210,6 @@ columnview row:not(:selected) cell editablelabel.editing:focus-within {
   outline: 2px solid $selected_bg_color;
 }
 
-columnview row:not(:selected) cell editablelabel.editing text selection {
-  color: $selected_fg_color;
-  background-color: $selected_bg_color;
-}
-
 treeexpander {
   border-spacing: 4px;
 }
