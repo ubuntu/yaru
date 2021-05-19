@@ -1,11 +1,8 @@
-$_menu-padding: 12px; //inner menuitem padding
-//global $menu-margin for outside menuitems
-
 popover.menu {
   padding: 0;
 
   box.inline-buttons {
-    padding: 0 $_menu-padding;
+    padding: 0 $menu_padding;
 
     button.image-button.model {
       @include button(undecorated);
@@ -22,7 +19,7 @@ popover.menu {
   }
 
   box.circular-buttons {
-    padding: $_menu-padding $_menu-padding 6px;
+    padding: $menu_padding $menu_padding 6px;
 
     button.circular.image-button.model {
       @extend %outline_button;
@@ -48,8 +45,8 @@ popover.menu {
   accelerator {
     color: gtkalpha(currentColor, 0.55);
 
-    &:dir(ltr) { margin-left: $_menu-padding; }
-    &:dir(rtl) { margin-right: $_menu-padding; }
+    &:dir(ltr) { margin-left: $menu_padding; }
+    &:dir(rtl) { margin-right: $menu_padding; }
   }
 
   check,
@@ -88,7 +85,7 @@ popover.menu {
   modelbutton {
     min-height: 30px;
     min-width: 40px;
-    padding: 0 $_menu-padding;
+    padding: 0 $menu_padding;
     border-radius: $menu-margin;
 
     @extend %undecorated_button;
@@ -99,7 +96,7 @@ popover.menu {
       background-color: $menu_selected_color;
 
       &:active {
-        background-color: darken($bg_color,14%); // matching buttons
+        background-color: $menu_active_color; // matching buttons
       }
     }
 
@@ -121,7 +118,7 @@ popover.menu {
 
   label.title {
     font-weight: bold;
-    padding: 4px ($_menu-padding + 20px); //this will fall apart with font sizing
+    padding: 4px ($menu_padding + 20px); //this will fall apart with font sizing
   }
 }
 
@@ -132,10 +129,10 @@ menubar {
   > item {
     min-height: 16px;
     padding: 4px 8px;
+    border-radius: $button_radius;
 
     &:selected { //Seems like it :hover even with keyboard focus
-      box-shadow: inset 0 -3px $selected_bg_color;
-      color: $link_color;
+      background-color: $menu_selected_color;
     }
 
     &:disabled {
