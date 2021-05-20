@@ -436,13 +436,13 @@ list row, placessidebar row, sidebar row, .sidebar row {
   &:selected {
     &.activatable, & {
       &, &:hover {
-        background-image: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
+        background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
         &, button, button image { color: $text_color; }
         button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
         &:backdrop {
           &, button, button image { color: $backdrop_fg_color; }
           button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
-          background-image: linear-gradient(
+          background: linear-gradient(
             to right,
             $selected_bg_color 4px,
             if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%)) 1px
