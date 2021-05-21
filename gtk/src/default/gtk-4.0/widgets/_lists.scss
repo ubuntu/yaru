@@ -19,28 +19,27 @@ list {
 }
 
 row {
-  @include focus-ring();
+  @include focus-ring($focus-state: 'focus-visible:focus-within');
 
   &.activatable {
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
+    &:hover { background-color: $menu_hover_color; }
 
-    &:hover { background-color: if(variant == light, transparentize($fg_color, 0.9), transparentize($fg_color, 0.95)); }
-
-    &:active { box-shadow: inset 0 2px 2px -2px transparentize(black, 0.8); }
+    &:active { background-color: $menu_active_color; }
 
     &:selected {
-      &:active { box-shadow: inset 0 2px 3px -1px transparentize(black, 0.5); }
-
       &.has-open-popup,
-      &:hover { background-color: mix($fg_color, $selected_bg_color, 10%); }
+      &:hover { background-color: $menu_selected_hover_color; }
+
+      &:active { background-color: $menu_active_color; }
     }
   }
 
   &:selected {
-    outline-color: $alt_focus_border_color;
-
-    @extend %selected_items;
+    background-color: $menu_selected_color;
   }
+
+  &:disabled { color: gtkalpha(currentColor, .55); }
 }
 
 /*******************************************************
@@ -98,12 +97,6 @@ popover.background.combo > contents {
       padding: 0px 12px 0px 12px;
       min-height: 50px;
       border-bottom: 1px solid transparentize($borders_color, 0.5);
-
-      &:selected {
-        outline-color: $alt_focus_border_color;
-        color: $text-color;
-        background-color: $menu_selected_color;
-      }
 
       &:first-child {
         border-top-left-radius: $popover_radius - 2;
@@ -227,11 +220,11 @@ listview.content {
   list.nested > row:not(:active) {
     &:not(:hover):not(:selected),
     &:hover:not(.activatable):not(:selected) {
-      background-color: mix($bg_color, $base_color, 0.5);
+      background-color: mix($bg_color, $base_color, 50%);
     }
 
     &:hover.activatable:not(:selected) {
-      background-color: mix($fg_color, $base_color, 0.95);
+      background-color: mix($fg_color, $base_color, 5%);
     }
   }
 
@@ -244,9 +237,13 @@ listview.content {
       background-color: $base_color;
     }
 
-    &:not(.expander):not(:active):hover.activatable:not(:selected),
-    &.expander row.header:not(:active):hover.activatable:not(:selected) {
-      background-color: mix($fg_color, $base_color, 0.95);
+    &:not(.expander):hover.activatable:not(:selected),
+    &.expander row.header:hover.activatable:not(:selected) {
+      background-color: mix($fg_color, $base_color, 5%);
+
+      &:active {
+        background-color: mix($fg_color, $base_color, 10%);
+      }
     }
 
     &,

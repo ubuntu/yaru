@@ -10,7 +10,7 @@
 
   &:selected {
     &:focus, & {
-      @extend %selected_items;
+      background-color: $menu_selected_color;
 
       border-radius: 3px;
     }
@@ -32,7 +32,7 @@ textview {
 }
 
 iconview {
-  @extend .view;
+  @extend %view;
 
   @include focus-ring();
 
@@ -60,9 +60,7 @@ flowbox {
     @include focus-ring();
 
     &:selected {
-      outline-color: $alt_focus_border_color;
-
-      @extend %selected_items;
+      background-color: $menu_selected_color;
     }
   }
 }
@@ -75,9 +73,7 @@ gridview {
     @include focus-ring();
 
     &:selected {
-      outline-color: $alt_focus_border_color;
-
-      @extend %selected_items;
+      background-color: $menu_selected_color;
     }
 
     box { //cells
