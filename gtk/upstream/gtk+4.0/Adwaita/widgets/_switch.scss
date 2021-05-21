@@ -1,61 +1,67 @@
 switch {
-  // similar to the .scale
-  border: 1px solid $borders_color;
+  // similar to GtkScale
   border-radius: 14px;
-  color: $fg_color;
-  background-color: $dark_fill;
+  padding: 2px;
+
   transition: $focus_transition;
+
+  @if $contrast == "high" {
+     background-color: $borders_color;
+     color: white;
+
+     &:hover {
+      background-color: mix($borders_color, $text_color, 90%);
+
+      &:active { background-color: mix($borders_color, black, 80%); }
+    }
+   }
+   @else {
+     background-color: transparentize($text_color, .85);
+     color: $fg_color;
+
+     &:hover {
+      background-color: transparentize($text_color, .8);
+
+      &:active { background-color: transparentize(black, .75); }
+    }
+
+    > image { color: transparent; }
+   }
 
   @include focus-ring($offset: 0, $outer: true);
 
-  headerbar & { background-color: darken($dark_fill,8%); } //3504
-
-  &:checked {
-    color: $selected_fg_color;
-    border-color: $switch_borders_color;
-    background-color: $switch_bg_color;
-  }
-
   &:disabled {
-    color: $insensitive_fg_color;
-    border-color: $borders_color;
-    background-color: $insensitive_bg_color;
+    filter: opacity(0.5);
   }
 
   > slider {
-    @include button(normal);
-
-    margin: -1px;
-    min-width: 24px;
-    min-height: 24px;
-    border: 1px solid;
-    border-color: $borders_color;
+    min-width: 22px;
+    min-height: 22px;
     border-radius: 50%;
-    transition: $button_transition;
-  }
+    background-color: mix(white, $base_color, 80%);
+    box-shadow: 0 2px 4px transparentize(black, .8);
 
-  /* only show i / o for the accessible theme */
-  @if $contrast == 'normal' {
-    > image { color: transparent; }
+    &:disabled {
+      box-shadow: 0 2px 4px transparent;
+    }
   }
 
   &:hover > slider {
-    @include button(hover);
+    background: white;
   }
 
-  &:checked > slider { border: 1px solid $switch_borders_color; }
+  &:checked {
+    color: $selected_fg_color;
+    background-color: $selected_bg_color;
 
-  &:disabled > slider { @include button(insensitive); }
+    &:hover {
+      background-color: mix($selected_bg_color, $text_color, 90%);
 
+      &:active { background-color: mix($selected_bg_color, black, 80%); }
+    }
 
-  row:selected & {
-    outline-color: $alt_focus_border_color;
-
-    @if $variant == 'light' {
-      box-shadow: none;
-      border-color: $switch_borders_color;
-
-      > slider { &:checked, & { border-color: $switch_borders_color; } }
+    > slider {
+      background-color: $selected_fg_color;
     }
   }
 }

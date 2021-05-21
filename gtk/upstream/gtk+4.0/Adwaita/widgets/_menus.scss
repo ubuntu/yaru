@@ -51,36 +51,33 @@ popover.menu {
 
   check,
   radio {
-    @include check('menu', 'transparent', $text_color);
+    &, &:hover, &:hover:active, &:checked, &:disabled {
+      background: none;
+      color: $text_color;
 
-    &:hover { @include check('menu-active', 'transparent', $text_color); }
-    &:active { @include check('menu-active', 'transparent', $text_color); }
+      transform: scale(0.8);
+    }
   }
 
   //only menu radios have a border
   radio {
-    border-color: $borders_color;
-
-    &:active { border-color: transparentize($borders_color,0.5); }
+    padding: 0;
+    border: 1.2px solid transparentize($text_color, if($contrast == "high", 0, 0.7));
   }
 
-  arrow.left,
-  radio.left,
-  check.left {
-    margin-left: -2px;
-    margin-right: 6px;
-  }
+  check,
+  radio,
+  arrow {
+    &.left {
+      margin-left: -2px;
+      margin-right: 6px;
+    }
 
-  arrow.right,
-  radio.right,
-  check.right {
-    margin-left: 6px;
-    margin-right: -2px;
+    &.right {
+      margin-left: 6px;
+      margin-right: -2px;
+    }
   }
-
-  arrow:disabled,
-  check:disabled,
-  radio:disabled { -gtk-icon-filter: opacity(0.5); }
 
   modelbutton {
     min-height: 30px;
@@ -100,15 +97,19 @@ popover.menu {
       }
     }
 
-    &:disabled { color: $insensitive_fg_color; }
-
     arrow {
       background: none;
       min-width: 16px;
       min-height: 16px;
-      opacity: 0.3; // dim icon
+      @if $contrast != "high" {
+        opacity: 0.3; // dim icon
+      }
 
       &:hover { background: none; }
+
+      &:disabled {
+        filter: opacity(0.5);
+      }
 
       &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
 

@@ -93,21 +93,6 @@ button {
     }
   }
 
-  @at-root %button_selected, & {
-    row:selected & {
-      @if $variant == 'light' { border-color: $selected_borders_color; }
-    }
-
-    @at-root %button_selected_flat, &.flat {
-      row:selected & {
-        &:not(:active):not(:checked):not(:hover):not(disabled) {
-          color: $selected_fg_color;
-          border-color: transparent;
-        }
-      }
-    }
-  }
-
   // big standalone buttons like in Documents pager
   &.osd {
     min-width: 26px;
