@@ -33,8 +33,12 @@ calendar {
       padding: 4px;
 
       &:selected {
-        @extend %selected_items;
         border-radius: 3px;
+
+        background-color: $selected_bg_color;
+        color: $selected_fg_color;
+
+        &:disabled { color: mix($selected_fg_color, $selected_bg_color, 50%); }
       }
     }
 

@@ -3,37 +3,34 @@ progressbar {
   &.horizontal {
     > trough {
       min-width: 150px;
-      &, > progress { min-height: 2px; }
+      &, > progress { min-height: 4px; }
     }
   }
 
   &.vertical {
     > trough {
       min-height: 80px;
-      &, > progress { min-width: 2px; }
+      &, > progress { min-width: 4px; }
     }
   }
-
-  &.horizontal > trough > progress { margin: 0 -1px; } // the progress node is positioned after the trough border
-  &.vertical > trough > progress { margin: -1px 0; }   // this moves it over it.
 
   // FIXME: insensitive state missing and some other state should be set probably
   font-size: smaller;
   color: transparentize($fg_color, 0.6);
   font-feature-settings: "tnum";
 
+  &:disabled {
+    filter: opacity(.5);
+  }
+
   > trough {
     @extend %scale_trough;
 
     > progress {
       @extend %scale_highlight; /* share most of scales' */
-      /* override insensitive that is specific to progress */
-      &:disabled {
-        background-color: $insensitive_fg_color;
-        border-color: $insensitive_fg_color;
-      }
 
       border-radius: 1.5px;
+
       $_progress-radius: 5px;
       &.left {
         border-top-left-radius: $_progress-radius;

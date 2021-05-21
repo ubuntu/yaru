@@ -35,21 +35,6 @@ stacksidebar row {
     @extend %needs_attention;
     background-size: 6px 6px, 0 0;
   }
-
-  &:selected {
-    background-color: $menu_selected_color;
-    border-radius: $menu_radius;
-    color: $fg_color;
-
-    &:hover {
-      background-color: darken($menu_selected_color, 5%);
-    }
-  }
-
-  &.activatable:active,
-  &.activatable:selected:active {
-    box-shadow: none; // #3413
-  }
 }
 
 separator.sidebar {
@@ -70,24 +55,8 @@ separator.sidebar {
   > row {
     min-height: 36px;
     padding: 0 8px;
-    border-radius: $menu-margin;
-    margin: 0 $menu-margin 2px;
-    @include focus-ring($focus-state: 'focus-visible:focus-within');
-
-    &:hover {
-      background-color: darken($menu_selected_color, 5%);
-    }
-
-    &:selected {
-      background-color: $menu_selected_color;
-      color: inherit;
-
-      &:hover {
-        background-color: darken($menu_selected_color,5%);
-      }
-    }
-
-    &:disabled { color: $insensitive_fg_color; }
+    border-radius: $menu_radius;
+    margin: 0 $menu_margin 2px;
   }
 }
 
@@ -127,7 +96,6 @@ placessidebar {
     @at-root button.sidebar-button {
       @extend %button_basic_flat;
 
-      @extend %button_selected_flat;
       min-height: 26px;
       min-width: 26px;
       margin-top: 3px;
@@ -150,13 +118,7 @@ placessidebar {
 
     &:drop(active):not(:disabled) {
       color: $drop_target_color;
-      box-shadow: inset 0 1px $drop_target_color,
-                  inset 0 -1px $drop_target_color;
-
-      &:selected {
-        color: $selected_fg_color;
-        background-color: $drop_target_color;
-      }
+      box-shadow: inset 0 0 0 1px $drop_target_color;
     }
   }
 }

@@ -1,51 +1,20 @@
 %scale_trough {
-  border: 1px solid $dark_fill;
   border-radius: 3px;
-  background-color: $dark_fill;
+  background-color: transparentize($text_color, .85);
 
-  headerbar & { background-color: darken($dark_fill,8%); } //3504
-
-  &:disabled {
-   background-color: $insensitive_bg_color;
-   border-color: $insensitive_borders_color;
-  }
-
-  // ...on selected list rows
-  row:selected & {
-    &:disabled, & {
-      outline-color: $alt_focus_border_color;
-      border-color: $selected_borders_color;
-    }
+  @if $contrast == "high" {
+    box-shadow: inset 0 0 0 1px $borders_color;
   }
 
   // OSD
   .osd & {
-    border-color: $osd_borders_color;
-    background-color: transparentize($osd_borders_color, 0.2);
-
-    &:disabled { background-color: $osd_insensitive_bg_color; }
+    background-color: transparentize($osd_text_color, .85);
   }
 }
 
 %scale_highlight {
-  border: 1px solid $selected_bg_color;
   border-radius: 3px;
   background-color: $selected_bg_color;
-
-  &:disabled {
-    background-color: transparent;
-    border-color: transparent;
-  }
-
-  // ...on selected list rows
-  row:selected & { &:disabled, & { border-color: $selected_borders_color; }}
-
-  // OSD
-  .osd & {
-    border-color: $osd_borders_color;
-
-    &:disabled { border-color: transparent; }
-  }
 }
 
 scale {
@@ -63,10 +32,6 @@ scale {
     transition: $focus_transition;
     @extend %scale_trough;
 
-    // those are inside the trough node, I need them to show their own border over the trough one, so negative margin
-    > fill,
-    > highlight { margin: -1px; }
-
     // the colored part of the backing bit
     > highlight { @extend %scale_highlight; }
 
@@ -75,85 +40,74 @@ scale {
     > fill {
       @extend %scale_trough;
 
-      &:disabled {
-        border-color: transparent;
-        background-color: transparent;
-      }
-
       // OSD
       .osd & {
         background-color: mix($osd_fg_color, $osd_borders_color, 25%);
-
-        &:disabled {
-         border-color: transparent;
-         background-color: transparent;
-        }
       }
     }
 
     > slider {
-      @include button(normal);
-      border-width: 1px;
-      border-style: solid;
+      background-color: mix(white, $base_color, 80%);
+      box-shadow: 0 2px 4px transparentize(black, .8);
+      outline: 1px solid transparentize(black, .9);
+
       border-radius: 100%;
       transition: $button_transition;
       transition-property: background, border, box-shadow;
 
       // the slider is inside the trough, so to have make it bigger there's a negative margin
-      min-height: 18px;
-      min-width: 18px;
-      margin: -9px;
+      min-width: 20px;
+      min-height: 20px;
+      margin: -8px;
+    }
+  }
 
-      &:hover { @include button(hover); }
+  &:hover {
+    > trough {
+      background-color: transparentize($text_color, .8);
 
-      &:active { border-color: $selected_borders_color; }
+      > highlight {
+        background-color: mix($selected_bg_color, $text_color, 90%);
+      }
 
-      &:disabled { @include button(insensitive); }
+      > slider {
+        background-color: white;
+      }
+    }
+  }
 
-      // ...on selected list rows
-      row:selected & { &:disabled, & { border-color: $selected_borders_color; } }
+  &:disabled {
+    filter: opacity(.5);
 
-      // OSD
-      .osd & {
-        @include button(osd);
-        border-color: darken($osd_borders_color, 3%);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
+    > trough > slider {
+      box-shadow: 0 2px 4px transparent;
+      outline-color: transparentize(black, .8);
+    }
+  }
 
-        &:hover {
-          @include button(osd-hover);
-          background-color: opacify($osd_bg_color, 1); // solid background needed here
-        }
-
-        &:active {
-          @include button(osd-active);
-          background-color: opacify($osd_bg_color, 1); // solid background needed here
-        }
-
-        &:disabled {
-          @include button(osd-insensitive);
-          background-color: opacify($osd_bg_color, 1); // solid background needed here
-        }
+  @if $contrast == "high" {
+    &, &:hover, &.dragging, &:disabled {
+      > trough > slider {
+        outline-color: transparentize(black, .5);
       }
     }
   }
 
   // click-and-hold the slider to activate
   &.fine-tune {
+    padding: 9px;
+
     &.horizontal {
-      padding-top: 9px;
-      padding-bottom: 9px;
       min-height: 16px;
     }
 
     &.vertical {
-      padding-left: 9px;
-      padding-right: 9px;
       min-width: 16px;
     }
 
     > trough {
       // to make the trough grow in fine-tune mode
-      > slider { margin: -6px; }
+      > slider { margin: -5px; }
 
       > fill,
       > highlight,
@@ -169,13 +123,24 @@ scale {
   }
 
   &.marks-before, &.marks-after {
-    > trough > slider {
-      // Adjust box-shadow for the 45deg rotation, for 0 1px we ideally want
-      // 1/√2px 1/√2px, round that to 1px 1px
-      $_button_shadow: 1px 1px 2px transparentize($shadow_color, 0.03);
+    // Adjust box-shadow for the 45deg rotation, for 0px 2px we ideally want
+    // 1/√2px 1/√2px, round that to 1px 1px
+    $_shadow_size: 1px 1px;
 
-      box-shadow: $_button_shadow;
+    > trough > slider {
       transform: rotate(45deg);
+
+      box-shadow: $_shadow_size 4px transparentize(black, .8);
+    }
+
+    &:hover > trough > slider {
+      box-shadow: $_shadow_size 4px transparentize(black, .6);
+    }
+
+    &.dragging, &:disabled {
+      > trough > slider {
+        box-shadow: $_shadow_size 4px transparent;
+      }
     }
   }
 
