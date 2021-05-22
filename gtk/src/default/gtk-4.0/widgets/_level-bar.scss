@@ -89,7 +89,7 @@ levelbar {
       }
 
       &.empty {
-        background-color: transparentize($text_color, .85);
+        background-color: $trough_color;
 
         @if $contrast == "high" {
           box-shadow: inset 0 0 0 1px $borders_color;

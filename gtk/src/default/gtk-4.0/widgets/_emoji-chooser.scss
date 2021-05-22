@@ -24,19 +24,19 @@ button.emoji-section {
   transition: none;
 
   &:hover {
-    background: $menu_hover_color;
+    background: $view_hover_color;
   }
 
   &:checked {
-    background: $menu_selected_color;
+    background: $view_selected_color;
 
     &:hover {
-      background: $menu_selected_hover_color;
+      background: $view_selected_hover_color;
     }
   }
 
   &:hover:active {
-    background: $menu_active_color;
+    background: $view_active_color;
   }
 }
 
@@ -47,10 +47,10 @@ popover.emoji-picker emoji {
 
   &:focus,
   &:hover {
-    background: $menu_selected_color;
+    background: $view_selected_color;
 
     &:active {
-      background: $menu_active_color;
+      background: $view_active_color;
     }
   }
 }
@@ -77,11 +77,11 @@ emoji-completion-row {
 
   &:focus,
   &:hover {
-    background-color: $menu_selected_color;
+    background-color: $view_selected_color;
     color: $text-color;
 
     &:active {
-      background-color: $menu_active_color; // matching buttons
+      background-color: $view_active_color; // matching buttons
     }
   }
 }

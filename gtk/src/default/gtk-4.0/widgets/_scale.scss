@@ -1,6 +1,6 @@
 %scale_trough {
   border-radius: 3px;
-  background-color: $scale_trough_bg_color; // Yaru change: use our own colors
+  background-color: $trough_color;
 
   @if $contrast == "high" {
     box-shadow: inset 0 0 0 1px $borders_color;
@@ -14,7 +14,7 @@
 
 %scale_highlight {
   border-radius: 3px;
-  background-color: $progress_bg_color; // Yaru change: use our own palette
+  background-color: $fill_color;
 }
 
 scale {
@@ -47,7 +47,7 @@ scale {
     }
 
     > slider {
-      background-color: mix(white, $base_color, 80%);
+      background-color: $slider_color;
       box-shadow: 0 2px 4px transparentize(black, .8);
       outline: 1px solid transparentize(black, .9);
 
@@ -64,14 +64,14 @@ scale {
 
   &:hover {
     > trough {
-      background-color: transparentize($text_color, .8);
+      background-color: $trough_hover_color;
 
       > highlight {
-        background-color: mix($progress_bg_color, $text_color, 90%);
+        background-color: $fill_hover_color;
       }
 
       > slider {
-        background-color: white;
+        background-color: $slider_hover_color;
       }
     }
   }

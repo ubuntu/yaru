@@ -16,13 +16,13 @@ switch {
     }
    }
    @else {
-     background-color: transparentize($text_color, .85);
+     background-color: $trough_color;
      color: $fg_color;
 
      &:hover {
-      background-color: transparentize($text_color, .8);
+      background-color: $trough_hover_color;
 
-      &:active { background-color: transparentize(black, .75); }
+      &:active { background-color: $trough_active_color; }
     }
 
     > image { color: transparent; }
@@ -38,7 +38,7 @@ switch {
     min-width: 22px;
     min-height: 22px;
     border-radius: 50%;
-    background-color: mix(white, $base_color, 80%);
+    background-color: $slider_color;
     box-shadow: 0 2px 4px transparentize(black, .8);
 
     &:disabled {
@@ -47,21 +47,21 @@ switch {
   }
 
   &:hover > slider {
-    background: white;
+    background: $slider_hover_color;
   }
 
   &:checked {
-    color: $checkradio_fg_color;
-    background-color: $checkradio_bg_color;
+    color: $fill_text_color;
+    background-color: $fill_color;
 
     &:hover {
-      background-color: mix($checkradio_bg_color, $text_color, 90%);
+      background-color: $fill_hover_color;
 
-      &:active { background-color: mix($checkradio_bg_color, black, 80%); }
+      &:active { background-color: $fill_active_color; }
     }
 
     > slider {
-      background-color: $checkradio_fg_color;
+      background-color: $slider_hover_color;
     }
   }
 }
