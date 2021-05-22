@@ -10,7 +10,7 @@
 
   &:selected {
     &:focus, & {
-      @extend %selected_items;
+      background-color: $view_selected_color;
 
       border-radius: 3px;
     }
@@ -32,7 +32,7 @@ textview {
 }
 
 iconview {
-  @extend .view;
+  @extend %view;
 
   @include focus-ring();
 
@@ -43,13 +43,13 @@ iconview {
   > dndtarget:drop(active) {
     border-style: solid;
     border-width: 1px;
-    border-color: $selected_borders_color;
+    border-color: $drop_target_color;
   }
 }
 
 rubberband {
-  border: 1px solid darken($selected_bg_color, 10%);
-  background-color: transparentize(darken($selected_bg_color, 10%), 0.8);
+  border: 1px solid $selected_bg_color;
+  background-color: transparentize($selected_bg_color, 0.8);
 }
 
 flowbox {
@@ -60,9 +60,7 @@ flowbox {
     @include focus-ring();
 
     &:selected {
-      outline-color: $alt_focus_border_color;
-
-      @extend %selected_items;
+      background-color: $view_selected_color;
     }
   }
 }
@@ -75,9 +73,7 @@ gridview {
     @include focus-ring();
 
     &:selected {
-      outline-color: $alt_focus_border_color;
-
-      @extend %selected_items;
+      background-color: $view_selected_color;
     }
 
     box { //cells

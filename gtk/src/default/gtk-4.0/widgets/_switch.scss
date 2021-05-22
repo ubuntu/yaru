@@ -1,61 +1,67 @@
 switch {
-  // similar to the .scale
-  border: 1px solid $borders_color;
+  // similar to GtkScale
   border-radius: 14px;
-  color: $fg_color;
-  background-color: $dark_fill;
+  padding: 2px;
+
   transition: $focus_transition;
+
+  @if $contrast == "high" {
+     background-color: $borders_color;
+     color: white;
+
+     &:hover {
+      background-color: mix($borders_color, $text_color, 90%);
+
+      &:active { background-color: mix($borders_color, black, 80%); }
+    }
+   }
+   @else {
+     background-color: $trough_color;
+     color: $fg_color;
+
+     &:hover {
+      background-color: $trough_hover_color;
+
+      &:active { background-color: $trough_active_color; }
+    }
+
+    > image { color: transparent; }
+   }
 
   @include focus-ring($offset: 0, $outer: true);
 
-  headerbar & { background-color: darken($dark_fill,8%); } //3504
-
-  &:checked {
-    color: $selected_fg_color;
-    border-color: $switch_borders_color;
-    background-color: $switch_bg_color;
-  }
-
   &:disabled {
-    color: $insensitive_fg_color;
-    border-color: $borders_color;
-    background-color: $insensitive_bg_color;
+    filter: opacity(0.5);
   }
 
   > slider {
-    @include button(normal);
-
-    margin: -1px;
-    min-width: 24px;
-    min-height: 24px;
-    border: 1px solid;
-    border-color: $borders_color;
+    min-width: 22px;
+    min-height: 22px;
     border-radius: 50%;
-    transition: $button_transition;
-  }
+    background-color: $slider_color;
+    box-shadow: 0 2px 0px transparentize(black, .8); // Yaru change: flatter slider
 
-  /* only show i / o for the accessible theme */
-  @if $contrast == 'normal' {
-    > image { color: transparent; }
+    &:disabled {
+      box-shadow: 0 2px 4px transparent;
+    }
   }
 
   &:hover > slider {
-    @include button(hover);
+    background: $slider_hover_color;
   }
 
-  &:checked > slider { border: 1px solid $switch_borders_color; }
+  &:checked {
+    color: $fill_text_color;
+    background-color: $fill_color;
 
-  &:disabled > slider { @include button(insensitive); }
+    &:hover {
+      background-color: $fill_hover_color;
 
+      &:active { background-color: $fill_active_color; }
+    }
 
-  // row:selected & { // Yaru change: due to grey row selection background we no more need to modify row:selected look
-    // outline-color: $alt_focus_border_color;
-
-    // @if $variant == 'light' {
-      // box-shadow: none;
-      // border-color: $switch_borders_color;
-
-      // > slider { &:checked, & { border-color: $switch_borders_color; } }
-    // }
-  // }
+    > slider {
+      background-color: $slider_hover_color;
+    }
+  }
 }
