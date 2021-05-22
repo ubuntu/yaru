@@ -1,5 +1,5 @@
 // To be used for opaque elements overlaid atop the selected row
-$treeview_selection_opaque: mix(opacify($menu_selected_color, 1), $base_color, 100% * alpha($menu_selected_color));
+$treeview_selection_opaque: mix(opacify($view_selected_color, 1), $base_color, 100% * alpha($view_selected_color));
 
 columnview.view,
 treeview.view {
@@ -26,7 +26,7 @@ treeview.view {
   > dndtarget:drop(active) {
     border-style: solid none;
     border-width: 1px;
-    border-color: $selected_borders_color;
+    border-color: $drop_target_color;
 
     &.after { border-top-style: none; }
 
