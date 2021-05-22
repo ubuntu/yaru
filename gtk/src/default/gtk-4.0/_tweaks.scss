@@ -156,9 +156,14 @@ popover.background {
   }
 }
 
-// Add some transitions on checks and radios
+// Add some transitions on widgets
 check,
-radio {
+radio,
+switch,
+switch slider,
+scale > trough,
+scale > trough > slider,
+scale > trough > highlight {
     transition: $button_transition;
 }
 
@@ -176,26 +181,4 @@ list row, placessidebar row, sidebar row, .sidebar row {
       }
     }
   }
-}
-
-// Adapt switch and scale slider troughs to the shell
-@if $variant=='dark' {
-  switch, scale > trough {
-    &:not(:backdrop):not(:disabled){
-        > slider {
-          background-image: image($warm_gray);
-
-          &:hover {
-            background-image: image(lighten($warm_gray, 4%));
-          }
-        }
-    }
-  }
-}
-
-// fix background overflow
-switch, scale > trough {
-    > slider {
-        background-clip: padding-box;
-    } 
 }

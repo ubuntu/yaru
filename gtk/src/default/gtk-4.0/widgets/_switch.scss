@@ -39,7 +39,7 @@ switch {
     min-height: 22px;
     border-radius: 50%;
     background-color: $slider_color;
-    box-shadow: 0 2px 4px transparentize(black, .8);
+    box-shadow: 0 2px 0px transparentize(black, .8); // Yaru change: flatter slider
 
     &:disabled {
       box-shadow: 0 2px 4px transparent;

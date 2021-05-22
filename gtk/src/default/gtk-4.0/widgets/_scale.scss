@@ -48,7 +48,7 @@ scale {
 
     > slider {
       background-color: $slider_color;
-      box-shadow: 0 2px 4px transparentize(black, .8);
+      box-shadow: 0 2px 0px transparentize(black, .8); // Yaru change: flatter slider
       outline: 1px solid transparentize(black, .9);
 
       border-radius: 100%;
