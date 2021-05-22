@@ -14,14 +14,22 @@ $alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_c
 $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
 $link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
 $link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
-$top_hilight: $borders_edge;
 $dark_fill: mix($borders_color, $bg_color, 50%);
 $headerbar_bg_color: if($variant == 'light', lighten($bg_color, 5%), darken($bg_color, 3%));
 $menu_color: $base_color;
-$menu_hover_color: transparentize($text_color, .93);
-$menu_selected_color: transparentize($text_color, .9);
-$menu_selected_hover_color: transparentize($text_color, .87);
-$menu_active_color: transparentize(black, .85);
+$view_hover_color: transparentize($text_color, .93);
+$view_selected_color: transparentize($text_color, .9);
+$view_selected_hover_color: transparentize($text_color, .87);
+$view_active_color: transparentize(black, .85);
+$trough_color: transparentize($text_color, .85);
+$trough_hover_color: transparentize($text_color, .8);
+$trough_active_color: transparentize(black, .75);
+$fill_color: $selected_bg_color;
+$fill_text_color: $selected_fg_color;
+$fill_hover_color: mix($selected_bg_color, $text_color, 90%);
+$fill_active_color: mix($selected_bg_color, black, 80%);
+$slider_color: mix(white, $base_color, 80%);
+$slider_hover_color: white;
 
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
@@ -68,8 +76,6 @@ $dim_label_opacity: 0.55;
   $selected_borders_color: darken($selected_borders_color, 10%);
   $borders_color: if($variant == 'light', darken($borders_color, 30%), lighten($borders_color, 30%));
   $alt_borders_color: if($variant == 'light', darken($alt_borders_color, 33%), lighten($alt_borders_color, 28%));
-  $menu_color: $base_color;
-  $menu_selected_color: darken($bg_color,10%);
 
   //insensitive state derived colors
   $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
