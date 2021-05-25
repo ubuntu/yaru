@@ -23,15 +23,15 @@ import xml.sax
 import subprocess
 import argparse
 
-INKSCAPE = '/usr/bin/inkscape'
-OPTIPNG = '/usr/bin/optipng'
-MAINDIR = '../usr/share/icons/Mint-Y'
-SOURCES = ['apps', 'categories']
+INKSCAPE_PATH = '/usr/bin/inkscape'
+OPTIPNG_PATH = '/usr/bin/optipng'
+OUTPUT_DIRECTORY = '../../Suru'
+CATEGORIES_TO_RENDER = ['apps', 'categories']
 
 # assert ('linux' in sys.platform), "This code runs on Linux only."
-assert (os.path.isfile(INKSCAPE)), "Expected to find Inkscape at /usr/bin/inkscape, but file does not exist."
-assert (os.path.isfile(OPTIPNG)), "Expected to find OptiPNG at /usr/bin/optipng, but file does not exist."
-assert (os.path.isdir(MAINDIR)), "Expected to find Mint-Y at ../usr/share/icons/Mint-Y, but directory does not exist."
+assert (os.path.isfile(INKSCAPE_PATH)), "Expected to find Inkscape at " + INKSCAPE_PATH + ", but file does not exist."
+assert (os.path.isfile(OPTIPNG_PATH)), "Expected to find OptiPNG at " + OPTIPNG_PATH + " but file does not exist."
+assert (os.path.isdir(OUTPUT_DIRECTORY)), "Expected to find output directory at " + OUTPUT_DIRECTORY + ", but directory does not exist."
 
 # the resolution that non-hi-dpi icons are rendered at (may be 90 or 96 depending on your inkscape build)
 inkscape_version = str(subprocess.check_output(['inkscape', '-V'])).split(' ')[1].split('.')
@@ -49,8 +49,8 @@ inkscape_process = None
 def main(args, SRC):
 
     def optimize_png(png_file):
-        if os.path.exists(OPTIPNG):
-            process = subprocess.Popen([OPTIPNG, '-quiet', '-o7', png_file])
+        if os.path.exists(OPTIPNG_PATH):
+            process = subprocess.Popen([OPTIPNG_PATH, '-quiet', '-o7', png_file])
             process.wait()
 
     def wait_for_prompt(process, command=None):
@@ -69,7 +69,7 @@ def main(args, SRC):
             output = output[1:]
 
     def start_inkscape():
-        process = subprocess.Popen([INKSCAPE, '--shell'], bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        process = subprocess.Popen([INKSCAPE_PATH, '--shell'], bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         wait_for_prompt(process)
         return process
 
@@ -79,9 +79,9 @@ def main(args, SRC):
             inkscape_process = start_inkscape()
 
         cmd = [icon_file,
-               '--export-dpi', str(dpi),
-               '-i', rect,
-               '-e', output_file]
+               '--export-dpi={}'.format(str(dpi)),
+               '--export-id={}'.format(str(rect)),
+               '--export-filename={}'.format(output_file)]
         wait_for_prompt(inkscape_process, ' '.join(cmd))
         optimize_png(output_file)
 
@@ -175,7 +175,7 @@ def main(args, SRC):
                         if dpi_factor != 1:
                             size_str += "@%sx" % dpi_factor
 
-                        dir = os.path.join(MAINDIR, self.context, size_str)
+                        dir = os.path.join(OUTPUT_DIRECTORY, self.context, size_str)
                         outfile = os.path.join(dir, self.icon_name+'.png')
                         if not os.path.exists(dir):
                             os.makedirs(dir)
@@ -184,7 +184,7 @@ def main(args, SRC):
                         if self.force or not os.path.exists(outfile):
                             inkscape_render_rect(self.path, id, dpi, outfile)
                             if args.verbose:
-                                print("├─ Rendered new \"".decode('utf-8') + outfile + "\"")
+                                print("├─ Rendered new \"" + outfile + "\"")
                             new_renders += 1
 
                         # If PNG exists, compare modify time to that of SVG
@@ -196,27 +196,27 @@ def main(args, SRC):
                             if stat_in.st_mtime > stat_out.st_mtime:
                                 inkscape_render_rect(self.path, id, dpi, outfile)
                                 if args.verbose:
-                                    print("├─ Rendered updated \"".decode('utf-8') + outfile + "\"")
+                                    print("├─ Rendered updated \"" + outfile + "\"")
                                 # print("Rendered updated " + outfile)
                                 updated_renders += 1
 
                             # If PNG is newer than SVG, leave PNG as is
                             else:
                                 if args.verbose:
-                                    print("├─ \"".decode('utf-8') + outfile + "\" is newer than SVG")
+                                    print("├─ \"" + outfile + "\" is newer than SVG")
                                 skipped_renders += 1
                 if args.verbose:
-                    print("├────────────────────────────────┤".decode('utf-8'))
+                    print("├────────────────────────────────┤")
                 if args.svg is None:
                     print("")
-                    print("┌────────────────────────────────┐".decode('utf-8'))
-                    print("│ Directory: ".decode('utf-8') + self.context)
-                    print("│ Icon Name: ".decode('utf-8') + self.icon_name)
-                    print("├────────────────────────────────┤".decode('utf-8'))
-                    print("├─ Rendered %d new PNGs".decode('utf-8') % new_renders)
-                    print("├─ Rendered %d updated PNGs".decode('utf-8') % updated_renders)
-                    print("├─ Skipped %d up-to-date PNGs".decode('utf-8') % skipped_renders)
-                    print("└────────────────────────────────┘".decode('utf-8'))
+                    print("┌────────────────────────────────┐")
+                    print("│ Directory: " + self.context)
+                    print("│ Icon Name: " + self.icon_name)
+                    print("├────────────────────────────────┤")
+                    print("├─ Rendered %d new PNGs" % new_renders)
+                    print("├─ Rendered %d updated PNGs" % updated_renders)
+                    print("├─ Skipped %d up-to-date PNGs" % skipped_renders)
+                    print("└────────────────────────────────┘")
                     print("")
 
         def characters(self, chars):
@@ -227,20 +227,20 @@ def main(args, SRC):
         file = os.path.join(SRC, args.svg + '.svg')
 
         if os.path.exists(os.path.join(file)):
-            print("├─ Rendering from \"".decode('utf-8') + os.path.join(file) + "\"")
+            print("├─ Rendering from \"" + os.path.join(file) + "\"")
             handler = ContentHandler(file, True, filter=args.filter)
             xml.sax.parse(open(file), handler)
             return True
         else:
             # icon not in this directory, try the next one
-            print("├─ Input file \"".decode('utf-8') + file + "\" does not exist.")
+            print("├─ Input file \"" + file + "\" does not exist.")
             return False
 
     # If invocation does not include a file name, process all SVGs in listed sources
     else:
-        print("Rendering from path \"".decode('utf-8') + SRC + "\"")
-        if not os.path.exists(MAINDIR):
-            os.mkdir(MAINDIR)
+        print("Rendering from path \"" + SRC + "\"")
+        if not os.path.exists(OUTPUT_DIRECTORY):
+            os.mkdir(OUTPUT_DIRECTORY)
 
         for file in os.listdir(SRC):
             if file[-4:] == '.svg':
@@ -265,17 +265,17 @@ args = parser.parse_args()
 
 if args.svg is None:
     print("\nNo arguments provided; processing listed sources:\n")
-    for source in SOURCES:
+    for source in CATEGORIES_TO_RENDER:
         print("-- \"" + os.path.join('.', source) + "\"")
     print("")
 else:
-    print("┌────────────────────────────────┐".decode('utf-8'))
-    print("│ Rendering from command-line argument \"".decode('utf-8') + args.svg + "\"")
-    print("├────────────────────────────────┤".decode('utf-8'))
+    print("┌────────────────────────────────┐")
+    print("│ Rendering from command-line argument \"" + args.svg + "\"")
+    print("├────────────────────────────────┤")
 
 success_directory = ""
 
-for source in SOURCES:
+for source in CATEGORIES_TO_RENDER:
     if os.path.exists(os.path.join('.', source)):
         SRC = os.path.join('.', source)
         if main(args, SRC):
@@ -283,7 +283,7 @@ for source in SOURCES:
     else:
         print("Source path \"" + os.path.join('.', source) + "\" does not exist.")
 if args.svg is not None:
-    print("└────────────────────────────────┘".decode('utf-8'))
+    print("└────────────────────────────────┘")
 
 if success_directory != "" and args.svg is not None:
     print("\nSuccessfully processed \"" + args.svg + "\" in \"" + success_directory + "\".\n")
