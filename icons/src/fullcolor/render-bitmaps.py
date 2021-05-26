@@ -43,7 +43,33 @@ SOURCES = (
 DPIS = [1, 2]
 
 
+def parse():
+
+    parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
+
+    parser.add_argument(
+        "svg",
+        type=str,
+        nargs="?",
+        metavar="SVG",
+        help="Optional SVG names (without extensions) to render. If not given, render all icons",
+    )
+    parser.add_argument(
+        "filter",
+        type=str,
+        nargs="?",
+        metavar="FILTER",
+        help="Optional filter for the SVG file",
+    )
+
+    args = parser.parse_args()
+
+    for source in SOURCES:
+        SRC = os.path.join(".", source)
+        main(args, SRC)
+
 def main(args, SRC):
+
     def optimize_png(png_file):
         if os.path.exists(OPTIPNG):
             process = subprocess.Popen([OPTIPNG, "-quiet", "-o7", png_file])
@@ -65,15 +91,17 @@ def main(args, SRC):
             output = output[1:]
 
     def inkscape_render_rect(icon_file, rect, dpi, output_file):
+
         cmd = [
             "inkscape",
             "--batch-process",
             "--export-dpi={}".format(str(dpi)),
-            "-i",
-            rect,
+            "-i", rect,
             "--export-filename={}".format(output_file),
             icon_file,
         ]
+
+        
         ret = subprocess.run(cmd, capture_output=True)
         if ret.returncode != 0:
             print("execution of")
@@ -221,26 +249,4 @@ def main(args, SRC):
             # icon not in this directory, try the next one
             pass
 
-
-parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
-
-parser.add_argument(
-    "svg",
-    type=str,
-    nargs="?",
-    metavar="SVG",
-    help="Optional SVG names (without extensions) to render. If not given, render all icons",
-)
-parser.add_argument(
-    "filter",
-    type=str,
-    nargs="?",
-    metavar="FILTER",
-    help="Optional filter for the SVG file",
-)
-
-args = parser.parse_args()
-
-for source in SOURCES:
-    SRC = os.path.join(".", source)
-    main(args, SRC)
+parse()
