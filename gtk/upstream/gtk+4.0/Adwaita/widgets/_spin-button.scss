@@ -48,42 +48,6 @@ spinbutton {
 
       &:dir(rtl):first-child { border-radius: $button_radius 0 0 $button_radius; }
     }
-
-    .osd {
-      > button.image-button.up:not(.flat),
-      > button.image-button.down:not(.flat) {
-        @include button(undecorated);
-
-        color: $osd_fg_color;
-        border-style: none none none solid;
-        border-color: transparentize($osd_borders_color, 0.3);
-        border-radius: 0;
-        box-shadow: none;
-
-        &:dir(rtl) { border-style: none solid none none; }
-
-        &:hover {
-          @include button(undecorated);
-
-          color: $osd_fg_color;
-          border-color: transparentize(opacify($osd_borders_color, 1), 0.5);
-          background-color: darken($osd_bg_color,10%);
-          box-shadow: none;
-        }
-
-        &:disabled {
-          @include button(undecorated);
-
-          color: $osd_insensitive_fg_color;
-          border-color: transparentize(opacify($osd_borders_color, 1), 0.5);
-          box-shadow: none;
-        }
-
-        &:dir(ltr):last-child { border-radius: 0 $button_radius $button_radius 0; }
-
-        &:dir(rtl):first-child { border-radius: $button_radius 0 0 $button_radius; }
-      }
-    }
   }
 
   // Vertical
@@ -133,17 +97,6 @@ spinbutton {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
-  }
-
-  // OSD vertical
-  .osd &.vertical > button:first-child {
-    @include button(osd);
-
-    &:hover { @include button(osd-hover);}
-
-    &:active { @include button(osd-active); }
-
-    &:disabled { @include button(osd-insensitive); }
   }
 
   // Misc

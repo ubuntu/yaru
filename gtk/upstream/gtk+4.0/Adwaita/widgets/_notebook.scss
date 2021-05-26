@@ -106,7 +106,6 @@ notebook {
 
     > tabs > arrow {
       @extend %button_basic;
-
       @extend %button_basic_flat;
 
       min-height: 16px;
@@ -120,8 +119,6 @@ notebook {
         border-color: transparent;
         box-shadow: none;
       }
-
-      &:disabled { @include button(undecorated); }
     }
 
     > tabs > tab {

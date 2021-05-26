@@ -256,22 +256,25 @@ $_default_button_c: lighten($bg_color,2%);
     border-color: transparent;
     background-image: none;
     box-shadow: none;
-    @if $variant == 'light' {
-      background-color: darken($c,14%);
-    } @else {
-      background-color: darken($c,1%);
-    }
+    background-color: $view_hover_color;
   }
   @else if $t==undecorated-active {
     border-color: transparent;
     background-image: none;
     box-shadow: none;
-    @if $variant == 'light' {
-      background-color: darken($c,20%);
-    }
-    @else {
-      background-color: darken($c,5%);
-    }
+    background-color: $view_active_color;
+  }
+  @else if $t==undecorated-checked {
+    border-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    background-color: $view_selected_color;
+  }
+  @else if $t==undecorated-checked-hover {
+    border-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    background-color: $view_selected_hover_color;
   }
 }
 

@@ -1,21 +1,18 @@
-Summary
--------
+## Summary
 
 * To be able to use the latest/adequate version of sass, install sassc
 * meson will regenerate the CSS every time you modify the SCSS files.
 * Note that meson always builds out-of-tree, so the modified css files will
   appear in your builddir.
 
-Theme variants
---------------
+## Theme Variants
 
 The Adwaita theme comes in 4 variants: light, dark, hc (highcontrast) and
 hc-dark (highcontrast inverse). The generated CSS files for the variants
 are called Adwaita-$variant.css. For technical reasons, GTK adds one level
 of include wrappers around these, which are called gtk-$variant.css.
 
-How to tweak the theme
-----------------------
+## How to Tweak the Theme
 
 Adwaita is a complex theme, so to keep it maintainable it's written and
 processed in SASS. The generated CSS is then transformed into a gresource file

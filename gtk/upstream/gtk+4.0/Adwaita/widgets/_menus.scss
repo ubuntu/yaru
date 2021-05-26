@@ -5,7 +5,7 @@ popover.menu {
     padding: 0 $menu_padding;
 
     button.image-button.model {
-      @include button(undecorated);
+      @extend %button_basic_flat;
 
       min-height: 30px;
       min-width: 30px;
