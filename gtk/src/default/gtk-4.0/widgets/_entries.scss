@@ -95,49 +95,6 @@ entry {
       box-shadow: none;
     }
   }
-
-   // linked entries
-  .linked:not(.vertical) > & { @extend %linked; }
-
-  .linked:not(.vertical) > &:drop(active) + &,
-  .linked:not(.vertical) > &:drop(active) + button,
-  .linked:not(.vertical) > &:drop(active) + menubutton > button,
-  .linked:not(.vertical) > &:drop(active) + dropdown > button,
-  .linked:not(.vertical) > &:drop(active) + colorbutton > button,
-  .linked:not(.vertical) > &:drop(active) + fontbutton > button,
-  .linked:not(.vertical) > &:drop(active) + appchooserbutton > combobox > box > button.combo,
-  .linked:not(.vertical) > &:drop(active) + combobox > box > button.combo { border-left-color: $drop_target_color; }
-
-  // Vertically linked entries
-  // FIXME: take care of "colored" entries
-  .linked.vertical > & {
-    @extend %linked_vertical;
-
-    // brighter border between linked entries
-    &:not(:disabled) + entry:not(:disabled),
-    &:not(:disabled) + %entry:not(:disabled) {
-      border-top-color: mix($borders_color, $base_color, 30%);
-    }
-
-    // brighter border between linked insensitive entries
-    &:disabled + %entry:disabled,
-    &:disabled + entry:disabled { border-top-color: mix($borders_color, $base_color, 30%); }
-
-    + %entry:drop(active):not(:only-child),
-    + entry:drop(active):not(:only-child) { border-top-color: $drop_target_color; }
-
-    &:drop(active):not(:only-child) {
-      + %entry,
-      + entry,
-      + button,
-      + menubutton > button,
-      + dropdown > button,
-      + colorbutton > button,
-      + fontbutton > button,
-      + appchooserbutton > combobox > box > button.combo,
-      + combobox > box > button.combo { border-top-color: $drop_target_color; }
-    }
-  }
 }
 
 treeview entry {

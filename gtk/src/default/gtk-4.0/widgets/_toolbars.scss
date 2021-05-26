@@ -1,6 +1,6 @@
 .toolbar {
-  padding: 4px;
-  border-spacing: 4px;
+  padding: 5px;
+  border-spacing: 5px;
   background-color: $bg_color;
 
   // on OSD
@@ -8,7 +8,7 @@
 
   // stand-alone OSD toolbars
   &.osd {
-    padding: 13px;
+    padding: 14px;
     border: none;
     border-radius: 5px;
     background-color: $osd_bg_color;
@@ -20,8 +20,12 @@
   }
 
   // toolbar separators
-  &.horizontal > separator { margin: 4px 0; }
-  &.vertical > separator { margin: 0 4px; }
+  &.horizontal > separator { margin: 5px 0; }
+  &.vertical > separator { margin: 0 5px; }
+
+  button {
+    @extend %button_basic_flat;
+  }
 }
 
 /****************
