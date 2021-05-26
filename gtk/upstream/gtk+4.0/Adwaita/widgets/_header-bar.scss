@@ -36,7 +36,7 @@ headerbar {
 
   /* Darken switchbuttons for headerbars. issue #1588 */
   stackswitcher > button:checked,
-  button.toggle:checked {
+  button:not(.flat).toggle:checked {
 
     background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
     border-color: darken($borders_color, 3%);
@@ -109,7 +109,6 @@ windowcontrols {
   border-spacing: 6px;
 
   button {
-    @extend %button_basic;
     @extend %button_basic_flat;
 
     border-radius: 9999px;
@@ -118,16 +117,6 @@ windowcontrols {
     min-width: 0;
     min-height: 0;
   }
-}
-
-// special case hover colors inside a headerbar
-headerbar button.flat,
-headerbar windowcontrols button {
-  &:hover {
-    @include button(undecorated-hover,$c:darken($headerbar_bg_color,6%));
-  }
-  &:active,
-  &:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
 }
 
 /******************

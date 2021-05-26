@@ -22,13 +22,6 @@ combobox {
     padding-right: 9px;
   }
 
-  &.linked {
-    button:nth-child(2) {
-      &:dir(ltr) { @extend %linked_not_left; }
-      &:dir(rtl) { @extend %linked_not_right; }
-    }
-  }
-
   &:drop(active) { // FIXME: untested
     box-shadow: none;
 
@@ -56,40 +49,3 @@ combobox {
   }
 }
 
-// the combo is a composite widget so the way we do button linking doesn't
-// work, special case needed. See
-// https://bugzilla.gnome.org/show_bug.cgi?id=733979
-
-.linked:not(.vertical) > combobox {
-  &:dir(ltr) {
-    &:not(:first-child) > box > button.combo { @extend %linked_not_left; }
-    &:not(:last-child) > box > button.combo { @extend %linked_not_right; }
-  }
-
-  &:dir(rtl) {
-    &:not(:first-child) > box > button.combo { @extend %linked_not_right; }
-    &:not(:last-child) > box > button.combo { @extend %linked_not_left; }
-  }
-}
-
-.linked.vertical > combobox {
-  &:not(:first-child) > box > button.combo { @extend %linked_not_top; }
-  &:not(:last-child) > box > button.combo { @extend %linked_not_bottom; }
-}
-
-.linked:not(.vertical) > appchooserbutton {
-  &:dir(ltr) {
-    &:not(:first-child) > combobox > box > button.combo { @extend %linked_not_left; }
-    &:not(:last-child) > combobox > box > button.combo { @extend %linked_not_right; }
-  }
-
-  &:dir(rtl) {
-    &:not(:first-child) > combobox > box > button.combo { @extend %linked_not_right; }
-    &:not(:last-child) > combobox > box > button.combo { @extend %linked_not_left; }
-  }
-}
-
-.linked.vertical > appchooserbutton {
-  &:not(:first-child) > combobox > box > button.combo { @extend %linked_not_top; }
-  &:not(:last-child) > combobox > box > button.combo { @extend %linked_not_bottom; }
-}
