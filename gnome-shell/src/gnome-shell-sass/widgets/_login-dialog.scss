@@ -11,27 +11,25 @@
   border: none;
   background-color: transparent;
 
-   // Yaru: we force the light colors because GDM doesn't change on shell theme switch
-  $_gdm_bg: $porcelain;
-  $_gdm_fg: $inkstone;
+  $_gdm_bg: $base_color; // Yaru change: use $base_color for dark/light theme switch
 
-  StEntry {
+  /* StEntry { // Yaru change: don't overwrite entry style on dark theme
     @if $variant=='dark' {
       $_gdm_entry_bg: darken($system_bg_color, 3%);
       background-color: $_gdm_entry_bg;
       color: $fg_color;
     }
-  }
+  } */
 
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    background-color: darken($system_bg_color, 3%);
-    border-color: darken($system_bg_color, 3%);
-    color: $inkstone; // Yaru: we force the light colors because GDM doesn't change on shell theme switch
+    background-color: darken($_gdm_bg, 3%); // Yaru change: use $_gdm_bg
+    border-color: darken($_gdm_bg, 3%); // Yaru change: use $_gdm_bg
+    color: $fg_color; // Yaru change: use $fg_color for dark/light theme
 
-    $_hover_c: lighten($_gdm_bg, 5%);
+    $_hover_c: if($variant == 'light', darken($_gdm_bg, 15%), lighten($_gdm_bg, 5%)); // Yaru change: use $_gdm_bg and modify light theme background
     &:hover, &:focus {
       background-color: $_hover_c;
       border-color: $_hover_c;
@@ -46,7 +44,7 @@
       @include button(insensitive);
       border-color: darken($_gdm_bg, 5%);
       background-color: darken($_gdm_bg, 5%);
-      color: transparentize($osd_fg_color, 0.3);
+      color: transparentize($fg_color, 0.3); // Yaru change: use $fg_color for dark/light theme
     }
     &:default { // Yaru: our suggested action color is green
       @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
@@ -79,9 +77,8 @@
     border-radius: 99px;
     width: $base_icon_size * 2;
     height: $base_icon_size * 2;
-    border-color: transparentize($bg_color,0.7);
-    background-color: $_gdm_bg;
-    color: $_gdm_fg;
+    border-color: darken($_gdm_bg, 3%); // Yaru change: use $_gdm_bg
+    background-color: darken($_gdm_bg, 3%); // Yaru change: use $_gdm_bg
 
     StIcon { icon-size: $base_icon_size; }
   }
