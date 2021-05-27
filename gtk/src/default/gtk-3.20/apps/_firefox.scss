@@ -1,12 +1,5 @@
 #MozillaGtkWidget.background {
 
-    // REMOVE THIS when firefox supports rounded menus
-    menu,
-    .menu,
-    .context-menu {
-        border-radius: 0;
-    }
-
     @if $ambiance {
 
         menubar,
