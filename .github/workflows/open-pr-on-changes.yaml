@@ -38,7 +38,7 @@ jobs:
             localbranch: gtk3,
             projectdir: gtk,
             src: gtk/theme/Adwaita/,
-            dest: gtk/upstream/gtk+3.0/Adwaita
+            dest: gtk/upstream/gtk-3.0/Adwaita
           },
           {
             project: GTK4,
@@ -47,7 +47,7 @@ jobs:
             localbranch: gtk4,
             projectdir: libadwaita,
             src:  src/stylesheet/,
-            dest: gtk/upstream/gtk+4.0/Adwaita
+            dest: gtk/upstream/gtk-4.0/Adwaita
           },
           {
             project: Libhandy,
