@@ -94,7 +94,7 @@
   @else { @return darken($c, 10%); } // Yaru change: less darken 15% -> 10%
 }
 
-$_default_button_c: if($ambiance, lighten($bg_color, 7.5%), lighten($bg_color, 2%)); // Yaru change: 
+$_default_button_c: if($ambiance, lighten($bg_color, 7.5%), lighten($bg_color, 2%)); // Yaru change: lighten bg color for ambiance theme
 @mixin button($t, $c:$_default_button_c, $tc:$fg_color) {
 //
 // Button drawing function
@@ -117,7 +117,7 @@ $_default_button_c: if($ambiance, lighten($bg_color, 7.5%), lighten($bg_color, 2
     outline-color: if($c != $_default_button_c, $alt_focus_border_color, $focus_border_color);
     border-color: if($c!=$_default_button_c, _border_color($c, false), $borders_color); //tint if not default button color - Yaru change: less darken border-color
     background-image: if($c == $bg_color, if($variant == 'light', image(lighten($c, 2%)), image(lighten($c, 4%))), image(lighten($c, 2%))); // Yaru change: remove gradient
-    @include _shadows($_button_shadow);
+    @include _shadows(0 1px transparentize(black, 0.95)); // Yaru change: stronger shadows for flatter buttons
   }
 
   @else if $t==hover {
