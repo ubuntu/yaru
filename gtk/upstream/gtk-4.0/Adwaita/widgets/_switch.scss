@@ -28,7 +28,7 @@ switch {
     > image { color: transparent; }
    }
 
-  @include focus-ring($offset: 0, $outer: true);
+  @include focus-ring($offset: 1px, $outer: true);
 
   &:disabled {
     filter: opacity(0.5);
