@@ -123,24 +123,12 @@ scale {
   }
 
   &.marks-before, &.marks-after {
-    // Adjust box-shadow for the 45deg rotation, for 0px 2px we ideally want
-    // 1/√2px 1/√2px, round that to 1px 1px
-    $_shadow_size: 1px 1px;
-
     > trough > slider {
       transform: rotate(45deg);
 
-      box-shadow: $_shadow_size 4px transparentize(black, .8);
-    }
-
-    &:hover > trough > slider {
-      box-shadow: $_shadow_size 4px transparentize(black, .6);
-    }
-
-    &.dragging, &:disabled {
-      > trough > slider {
-        box-shadow: $_shadow_size 4px transparent;
-      }
+      // Adjust box-shadow for the 45deg rotation, for 0px 2px we ideally want
+      // 1/√2px 1/√2px, round that to 1px 1px
+      box-shadow: 1px 1px 4px transparentize(black, .8);
     }
   }
 
