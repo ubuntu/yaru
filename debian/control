@@ -2,7 +2,7 @@ Source: yaru-theme
 Section: misc
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
-Build-Depends: debhelper (>= 10.3),
+Build-Depends: debhelper-compat (= 13)
 Build-Depends-Indep: libglib2.0-dev,
                      meson (>= 0.51),
                      sassc,
