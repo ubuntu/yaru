@@ -71,17 +71,6 @@ headerbar *, button * {
   -gtk-icon-shadow: none;
 }
 
-// blue spinner, white spinner for colored buttons
-spinner {
-  &:not(:backdrop) {
-    color: $blue;
-  }
-  button.suggested-action &, button.destructive-action & {
-    color: $selected_fg_color;
-    &:backdrop { color: $backdrop_selected_fg_color; }
-  }
-}
-
 // titlebutton
 button.titlebutton:not(.appmenu) {
 
