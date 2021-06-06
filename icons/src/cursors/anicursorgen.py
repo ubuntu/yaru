@@ -151,7 +151,8 @@ def main():
     if args.input_config == "-":
         input_config = sys.stdin
     else:
-        input_config = open(args.input_config, "rb")
+        print(f"opening {args.input_config}")
+        input_config = open(args.input_config, "r")
 
     if args.output_file == "-":
         output_file = sys.stdout
