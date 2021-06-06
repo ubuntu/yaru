@@ -25,6 +25,7 @@ import shlex
 import io
 import struct
 import math
+import functools
 from PIL import Image
 from PIL import ImageFilter
 
@@ -217,7 +218,7 @@ def make_cur(frames, args, animated=False):
         else:
             return 0
 
-    frames = sorted(frames, frame_size_cmp, reverse=True)
+    frames = sorted(frames, key=functools.cmp_to_key(frame_size_cmp), reverse=True)
 
     for frame in frames:
         width = frame[0]
@@ -331,7 +332,7 @@ def make_framesets(frames):
         else:
             return 0
 
-    framesets = sorted(framesets, frameset_size_cmp, reverse=True)
+    framesets = sorted(framesets, key=functools.cmp_to_key(frameset_size_cmp), reverse=True)
 
     return framesets
 
