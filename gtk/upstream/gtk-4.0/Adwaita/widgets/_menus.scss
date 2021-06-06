@@ -1,0 +1,158 @@
+popover.menu {
+  padding: 0;
+
+  box.inline-buttons {
+    padding: 0 $menu_padding;
+
+    button.image-button.model {
+      @extend %button_basic_flat;
+
+      min-height: 30px;
+      min-width: 30px;
+      padding: 0;
+      border: none;
+      outline: none;
+      transition: none;
+
+      &:selected { background: image($view_selected_color); }
+    }
+  }
+
+  box.circular-buttons {
+    padding: $menu_padding $menu_padding 6px;
+
+    button.circular.image-button.model {
+      @extend %outline_button;
+
+      padding: 11px;
+      &:focus {
+         background-color: $view_selected_color;
+         border-color: $view_selected_color;
+      }
+    }
+  }
+
+  & > arrow,
+  &.background > contents {
+    background-color: $menu_color;
+    padding: $menu-margin;
+  }
+
+  &.background separator {
+    margin: 6px 0;
+  }
+
+  accelerator {
+    color: gtkalpha(currentColor, 0.55);
+
+    &:dir(ltr) { margin-left: $menu_padding; }
+    &:dir(rtl) { margin-right: $menu_padding; }
+  }
+
+  check,
+  radio {
+    &, &:hover, &:hover:active, &:checked, &:disabled {
+      background: none;
+      color: $text_color;
+
+      transform: scale(0.8);
+    }
+  }
+
+  //only menu radios have a border
+  radio {
+    padding: 0;
+    border: 1.2px solid transparentize($text_color, if($contrast == "high", 0, 0.7));
+  }
+
+  check,
+  radio,
+  arrow {
+    &.left {
+      margin-left: -2px;
+      margin-right: 6px;
+    }
+
+    &.right {
+      margin-left: 6px;
+      margin-right: -2px;
+    }
+  }
+
+  modelbutton {
+    min-height: 30px;
+    min-width: 40px;
+    padding: 0 $menu_padding;
+    border-radius: $menu-margin;
+
+    @extend %undecorated_button;
+
+    &:hover,
+    &:selected {
+      color: $text-color;
+      background-color: $view_selected_color;
+
+      &:active {
+        background-color: $view_active_color; // matching buttons
+      }
+    }
+
+    arrow {
+      background: none;
+      min-width: 16px;
+      min-height: 16px;
+      @if $contrast != "high" {
+        opacity: 0.3; // dim icon
+      }
+
+      &:hover { background: none; }
+
+      &:disabled {
+        filter: opacity(0.5);
+      }
+
+      &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
+
+      &.right { -gtk-icon-source: -gtk-icontheme("go-next-symbolic"); }
+    }
+  }
+
+  label.title {
+    font-weight: bold;
+    padding: 4px ($menu_padding + 20px); //this will fall apart with font sizing
+  }
+}
+
+menubar {
+  padding: 0px;
+  box-shadow: inset 0 -1px transparentize(black, 0.9);
+
+  > item {
+    min-height: 16px;
+    padding: 4px 8px;
+    border-radius: $button_radius;
+
+    &:selected { //Seems like it :hover even with keyboard focus
+      background-color: $view_selected_color;
+    }
+
+    &:disabled {
+      color: $insensitive_fg_color;
+      box-shadow: none;
+    }
+
+    popover.menu.background > contents {
+      padding: $menu-margin;
+    }
+
+    //nested submenus
+    popover.menu popover.menu {
+      padding: 0 0 4px 0;
+    }
+
+    popover.menu.background popover.menu.background > contents {
+      margin: 0;
+      border-radius: $popover_radius; //including top
+    }
+  }
+}

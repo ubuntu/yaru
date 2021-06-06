@@ -1,0 +1,115 @@
+%entry,
+entry {
+  %entry_basic, & {
+    min-height: 32px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid;
+    border-radius: $button_radius;
+    border-spacing: 6px;
+    transition: all 200ms $ease-out-quad;
+
+    @include entry(normal);
+
+    @include focus-ring($focus-state: 'focus-within');
+
+    > text {
+      > placeholder {
+        @extend .dim-label;
+      }
+
+      > block-cursor {
+        @include entry(block_cursor);
+      }
+    }
+
+    &.flat {
+      &:focus-within, &:disabled, & {
+        min-height: 0;
+        padding: 2px;
+        background-color: transparent;
+        border-color: transparent;
+        border-radius: 0;
+      }
+    }
+
+    &:disabled { @include entry(insensitive); }
+
+    // entry error and warning style
+    @each $e_type, $e_color in (error, $error_color),
+                               (warning, $warning_color) {
+      &.#{$e_type} {
+        color: mix($e_color, $text_color, 70%);
+
+        @include focus-ring($focus-state: 'focus-within', $fc: transparentize($e_color, 0.5));
+
+        > text {
+          > selection:focus-within { background-color: transparentize($e_color, .8); }
+
+          > cursor-handle > contents { background-color: $e_color; }
+        }
+      }
+    }
+
+    > image { // icons inside the entry
+      color: mix($fg_color, $base_color, 80%);
+
+      &:hover { color: $fg_color; }
+
+      &:active { color: $selected_bg_color; }
+
+      &.left { margin-right: 6px; }
+      &.right { margin-left: 6px; }
+    }
+
+    &.password image.caps-lock-indicator {
+      opacity: 0.5;
+    }
+
+    &:drop(active) {
+      &:focus-within, & {
+        border-color: $drop_target_color;
+        box-shadow: inset 0 0 0 1px $drop_target_color;
+      }
+    }
+
+    .osd & {
+      @include entry(osd);
+
+      &:focus-within { @include entry(osd-focus); }
+
+      &:disabled { @include entry(osd-insensitive); }
+    }
+  }
+
+  > progress {
+    margin-bottom: 2px;
+
+    > trough > progress {
+      background-color: transparent;
+      background-image: none;
+      border-radius: 0;
+      border-width: 0 0 2px;
+      border-color: $selected_bg_color;
+      border-style: solid;
+      box-shadow: none;
+    }
+  }
+}
+
+treeview entry {
+  &:focus-within {
+    &:dir(rtl), &:dir(ltr) { // specificity bump hack
+      background-color: $base_color;
+      transition-property: color, background;
+    }
+  }
+
+  &.flat, & {
+    border-radius: 0;
+    background-image: none;
+    background-color: $base_color;
+
+    &:focus-within { border-color: $selected_bg_color; }
+  }
+}

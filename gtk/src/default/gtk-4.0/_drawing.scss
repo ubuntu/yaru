@@ -9,7 +9,10 @@
 // If $outer is true, the focus ring extends outward. Otherwise, it extends inward.
 // If $within is true, use focus-within instead of focus:focus-visible
 //
-@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: 'focus:focus-visible', $fc: $focus_border_color) {
+@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: 'focus:focus-visible', $fc: $focus_border_color) { // Yaru: fix missing buttons transition
+  // transition-property: outline, outline-width, outline-offset, outline-color;
+  // transition-duration: 300ms;
+  // animation-timing-function: ease-in-out;
   & #{$target} {
     outline: 0 solid transparent;
     outline-offset: if($outer, $offset + 4px, $offset + $width + 4px);
@@ -45,7 +48,7 @@
 // $fc: focus color
 //
 // possible $t values:
-// normal, focus, insensitive, backdrop, backdrop-insensitive, osd, osd-focus, osd-backdrop, block_cursor;
+// normal, insensitive, osd, osd-focus, block_cursor;
 //
 
   @if $t==normal {
@@ -59,23 +62,12 @@
     border-color: $borders_color;
     background-color: $insensitive_bg_color;
   }
-  @if $t==backdrop {
-    color: $backdrop_text_color;
-    border-color: $backdrop_borders_color;
-    background-color: $backdrop_base_color;
-  }
-  @if $t==backdrop-insensitive {
-    color: $backdrop_insensitive_color;
-    border-color: $backdrop_borders_color;
-    background-color: $insensitive_bg_color;
-  }
   @if $t==osd {
     color: $osd_text_color;
     border-color: $osd_borders_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
     box-shadow: none;
-    -gtk-icon-shadow: 0 1px black;
   }
   @if $t==osd-focus {
     color: $osd_text_color;
@@ -87,12 +79,6 @@
     color: $osd_insensitive_fg_color;
     border-color: $osd_borders_color;
     background-color: $osd_insensitive_bg_color;
-    background-clip: padding-box;
-  }
-  @if $t==osd-backdrop {
-    color: $osd_text_color;
-    border-color: $osd_borders_color;
-    background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
   }
   @if $t==block_cursor {
@@ -108,7 +94,7 @@
   @else { @return darken($c, 10%); } // Yaru change: less darken 15% -> 10%
 }
 
-$_default_button_c: lighten($bg_color,2%);
+$_default_button_c: if($ambiance, lighten($bg_color, 7.5%), lighten($bg_color, 2%)); // Yaru change: lighten bg color for ambiance theme
 @mixin button($t, $c:$_default_button_c, $tc:$fg_color) {
 //
 // Button drawing function
@@ -119,10 +105,9 @@ $_default_button_c: lighten($bg_color,2%);
 //
 // possible $t values:
 // normal, hover, active, checked-hover, checked-active, insensitive, insensitive-active,
-// backdrop, backdrop-active, backdrop-insensitive, backdrop-insensitive-active,
-// osd, osd-hover, osd-active, osd-insensitive, osd-backdrop, undecorated
+// osd, osd-hover, osd-active, osd-insensitive, undecorated
 //
-  $_button_shadow: 0 1px transparentize(black, 0.95); // Yaru changes: use solid shadow
+  $_button_shadow: 0 1px 2px transparentize($shadow_color, 0.03);
 
   @if $t==normal {
   //
@@ -132,7 +117,7 @@ $_default_button_c: lighten($bg_color,2%);
     outline-color: if($c != $_default_button_c, $alt_focus_border_color, $focus_border_color);
     border-color: if($c!=$_default_button_c, _border_color($c, false), $borders_color); //tint if not default button color - Yaru change: less darken border-color
     background-image: if($c == $bg_color, if($variant == 'light', image(lighten($c, 2%)), image(lighten($c, 4%))), image(lighten($c, 2%))); // Yaru change: remove gradient
-    @include _shadows($_button_shadow);
+    @include _shadows(0 1px transparentize(black, 0.95)); // Yaru change: stronger shadows for flatter buttons
   }
 
   @else if $t==hover {
@@ -199,60 +184,6 @@ $_default_button_c: lighten($bg_color,2%);
     box-shadow: none;
   }
 
-  @else if $t==backdrop {
-  //
-  // backdrop button
-  //
-    $_bg: if($c != $_default_button_c, $c, $backdrop_bg_color);
-    $_bc: if($variant == 'light', $c, _border_color($c));
-
-    color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color);
-    border-color: if($c != $_default_button_c, $_bc, $backdrop_borders_color);
-    background-image: image($_bg);
-    box-shadow: none;
-  }
-
-  @else if $t==backdrop-active {
-  //
-  // backdrop pushed button
-  //
-    $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 4%));
-    $_bc: if($variant == 'light', $_bg ,_border_color($c));
-
-    color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color);
-    border-color: if($c != $_default_button_c, $_bc, $backdrop_borders_color);
-    background-image: image($_bg);
-    box-shadow: none;
-  }
-
-  @else if $t==backdrop-insensitive {
-  //
-  // backdrop insensitive button
-  //
-
-    $_bg: if($c != $bg_color, mix($c, $base_color, 85%), if($variant=='light', $insensitive_bg_color, lighten($insensitive_bg_color, 3%))); // Yaru change
-    $_bc: if($variant == 'light', $_bg,_border_color($c));
-
-    color: if($c != $_default_button_c, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
-    border-color: if($c != $_default_button_c, $_bc, $backdrop_borders_color);
-    background-image: image($_bg);
-    box-shadow: none;
-  }
-
-  @else if $t==backdrop-insensitive-active {
-  //
-  // backdrop insensitive pushed button
-  //
-
-    $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 4%));
-    $_bc: if($variant == 'light', $_bg, _border_color($c));
-
-    color: if($c != $_default_button_c, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
-    border-color: if($c != $_default_button_c, $_bc, $backdrop_borders_color);
-    background-image: image($_bg);
-    box-shadow: none;
-  }
-
   @else if $t==osd {
   //
   // normal osd button
@@ -305,19 +236,6 @@ $_default_button_c: lighten($bg_color,2%);
     background-clip: padding-box;
   }
 
-  @else if $t==osd-backdrop {
-  //
-  // backdrop osd button
-  //
-    $_bg: if($c != $_default_button_c, transparentize($c, 0.5), $osd_bg_color);
-
-    color: $osd_fg_color;
-    border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($_bg);
-    background-clip: padding-box;
-  }
-
   @else if $t==undecorated {
   //
   // reset
@@ -331,41 +249,29 @@ $_default_button_c: lighten($bg_color,2%);
     border-color: transparent;
     background-image: none;
     box-shadow: none;
-    @if $variant == 'light' {
-      background-color: darken($c,14%);
-    } @else {
-      background-color: darken($c,1%);
-    }
+    background-color: $view_hover_color;
   }
   @else if $t==undecorated-active {
     border-color: transparent;
     background-image: none;
     box-shadow: none;
-    @if $variant == 'light' {
-      background-color: darken($c,20%);
-    }
-    @else {
-      background-color: darken($c,5%);
-    }
+    background-color: $view_active_color;
+  }
+  @else if $t==undecorated-checked {
+    border-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    background-color: $view_selected_color;
+  }
+  @else if $t==undecorated-checked-hover {
+    border-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    background-color: $view_selected_hover_color;
   }
 }
 
-@mixin headerbar_fill($c:$headerbar_bg_color, $ov: none) {
-//
-// headerbar fill
-//
-// $c:  base color
-// $ov: a background layer for background shorthand (hence no commas!)
-//
-  $gradient: if($variant=='light', image($c), image(lighten($c, 6%)));  // Yaru change: remove gradient
-
-  @if $ov != none { background: $c $ov, $gradient; }
-  @else { background: $c $gradient; }
-
-  box-shadow: inset 0 1px $top_hilight; // Yaru change: headerbar top hilight
-}
-
-@mixin overshoot($p, $t:normal, $c:$fg_color) {
+@mixin overshoot($p, $c:$fg_color) {
 //
 // overshoot
 //
@@ -375,9 +281,6 @@ $_default_button_c: lighten($bg_color,2%);
 //
 // possible $p values:
 // top, bottom, right, left
-//
-// possible $t values:
-// normal, backdrop
 //
 
   $_small_gradient_length: 3%;
@@ -397,8 +300,6 @@ $_default_button_c: lighten($bg_color,2%);
   @if $c==$fg_color {
     $_small_gradient_color: darken($borders_color, 10%);
     $_big_gradient_color: transparentize($fg_color, 0.93);
-
-    @if $t==backdrop { $_small_gradient_color: $backdrop_borders_color; }
   }
 
   $_small_gradient: radial-gradient(farthest-side at $p,
@@ -409,15 +310,8 @@ $_default_button_c: lighten($bg_color,2%);
                                   $_big_gradient_color,
                                   transparentize($_big_gradient_color, 1));
 
-  @if $t==normal {
-    background-image: $_small_gradient, $_big_gradient;
-    background-size: $_small_gradient_size, $_big_gradient_size;
-  }
-
-  @else if $t==backdrop {
-    background-image: $_small_gradient;
-    background-size: $_small_gradient_size;
-  }
+  background-image: $_small_gradient, $_big_gradient;
+  background-size: $_small_gradient_size, $_big_gradient_size;
 
   background-repeat: no-repeat;
   background-position: $p;
@@ -425,82 +319,4 @@ $_default_button_c: lighten($bg_color,2%);
   background-color: transparent; // reset some properties to be sure to not inherit them somehow
   border: none;                  //
   box-shadow: none;              //
-}
-
-/***************************
- * Check and Radio buttons *
- ***************************/
-
- @mixin check($t, $c:$checkradio_bg_color, $tc:$checkradio_fg_color, $checked: false) {
-  // Check/Radio drawing function
-  //
-  // $t:        check/radio type,
-  // $c:        base button color for colored* types
-  // $tc:       optional text color for colored* types
-  // $checked:  bool to chose between checked/unchecked
-  //
-  // possible $t values:
-  // normal, hover, active, insensitive, backdrop, backdrop-insensitive, menu
-
-  $_border_color: if($c==$checkradio_bg_color, $c, $alt_borders_color); // Yaru change: use background color as border color
-  $_dim_border_color: transparentize($_border_color, if($variant == 'light', 0.3, 0.7));
-
-  @if $t==normal  { // Yaru change: no gradients, better borders
-    background-clip: if($checked, border-box, padding-box);
-    background-image: image(lighten($c, if($variant=='dark', if($c==$checkradio_bg_color, 0%, 5%), 0%)));
-    border-color: $_border_color;
-    box-shadow: 0 1px transparentize(black, 0.95);
-    color: $tc;
-  }
-
-  @if $t==hover {
-    background-image: image(if($c==$checkradio_bg_color, lighten($c, 7%), if($variant=='light', darken($c, 4%), lighten($c, 7%))));
-    border-color: if($c == $checkradio_bg_color, lighten($c, 7%), $alt_borders_color);
-  }
-
-  @if $t==active {
-    border-color: if($c==white, $_border_color, darken($c, 7%));
-    background-image: image(if($c==white, $_border_color, darken($c, 7%)));
-    box-shadow: none;
-  }
-
-  @if $t==insensitive {
-    box-shadow: none;
-    color: $insensitive_fg_color;
-    border-color: $insensitive_borders_color;
-    background-image: image($insensitive_bg_color);
-  }
-
-  @if $t==backdrop {
-    background-image: image($c);
-    border-color: $_border_color;
-    box-shadow: none;
-    color: $tc;
-  }
-
-  @if $t==backdrop-insensitive {
-    box-shadow: none;
-    color: $backdrop_fg_color;
-    border-color: $insensitive_borders_color;
-    background-image: image($insensitive_bg_color);
-  }
-
-  // Yaru changes: remove border and scaling into menus
-  @if $t==menu {
-   //transform: scale(0.8);
-   //border-width: 1.2px;
-   border-color: transparent;
-   box-shadow: none;
-   background-image: image(transparent);
-   color: $tc;
-  }
-
-  @if $t==menu-active {
-   //transform: scale(0.8);
-   //border-width: 1.2px;
-   border-color: transparent;
-   color: $tc;
-   box-shadow: none;
-   background-image: image(transparent);
-  }
 }

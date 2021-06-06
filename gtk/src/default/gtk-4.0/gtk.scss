@@ -5,11 +5,12 @@
 // - if you need to inverse a color function use the @if directive to match for dark $variant
 
 $variant: 'light';
-$ambiance: true;
+$contrast: 'normal';
+$ambiance: false;
 
 @import 'colors';
 @import 'drawing';
 @import 'common';
 @import 'colors-public';
 @import 'tweaks';
-@import 'headerbar';
+@import 'headerbar'; // ⚠ Must be in last position

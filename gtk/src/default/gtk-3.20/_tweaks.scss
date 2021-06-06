@@ -71,17 +71,6 @@ headerbar *, button * {
   -gtk-icon-shadow: none;
 }
 
-// blue spinner, white spinner for colored buttons
-spinner {
-  &:not(:backdrop) {
-    color: $blue;
-  }
-  button.suggested-action &, button.destructive-action & {
-    color: $selected_fg_color;
-    &:backdrop { color: $backdrop_selected_fg_color; }
-  }
-}
-
 // titlebutton
 button.titlebutton:not(.appmenu) {
 
@@ -167,45 +156,6 @@ menubar,
       background-color: $popover_hover_color;
     }
   }
-}
-
-// We don't want the app notifications to look like OSD because they are interactive
-.app-notification,
-.app-notification.frame {
-  padding: 10px;
-  margin: 12px;
-  color: $text_color;
-  border-radius: $menu_radius;
-  background: none;
-  background-color: $menu_color;
-  border: 1px solid $borders_color;
-  box-shadow: 0 2px 5px transparentize(black, 0.8);
-  text-shadow: none;
-
-  button {
-    &, &:dir(ltr), &:dir(rtl) {
-      &.text-button, &.image-button, & {
-        @include button(normal);
-        &.flat { @include button(undecorated); }
-        &:hover { @include button(hover); }
-        &:active { @include button(active); }
-        &:backdrop {
-          @include button(backdrop);
-          &.flat { @include button(undecorated); }
-        }
-        &:disabled { @include button(insensitive); }
-      }
-    }
-  }
-
-  &:backdrop {
-    background-color: $backdrop_bg_color;
-    color: $backdrop_text_color;
-    box-shadow: none;
-    transition: $backdrop_transition;
-  }
-
-  border { border: none; }
 }
 
 // 2 pixel transparentized focus rings
@@ -376,17 +326,53 @@ decoration {
                 0 0 0 1px if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
   }
 }
-popover.background {  
+@if $variant=='dark' {
+  menu separator {
+    background-color: $_dark_theme_outer_menu_border;
+  }
+}
+popover.background {
   .csd &, & {
     border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
     &:backdrop { border-color: $backdrop_borders_color; }
+  }
+  @if $variant=='dark' {
+    separator {
+      background-color: $_dark_theme_outer_menu_border;
+    }
+  }  
+}
+// Adapt dark gtk3 scale and levelbar troughs to the shell
+@if $variant=='dark' {
+  scale, progressbar {
+    trough {
+      border-color: $_dark_theme_outer_menu_border;
+      background-color: $_dark_theme_outer_menu_border;
+    }
+    &:backdrop {
+      trough {
+        border-color: darken($_dark_theme_outer_menu_border, 5%);
+        background-color: darken($_dark_theme_outer_menu_border, 5%);
+      }
+    }
+  }
+  levelbar block.empty {
+    border-color: $_dark_theme_outer_menu_border;
+    background-color: $_dark_theme_outer_menu_border;
+    &:backdrop {
+      border-color: darken($_dark_theme_outer_menu_border, 5%);
+      background-color: darken($_dark_theme_outer_menu_border, 5%);
+    }
   }
 }
 
 // Reduce hyper prominent dark theme check switch border in backdrop
 switch {
+  @if $variant=='dark' {
+    &:not(:checked):not(:backdrop):not(:disabled) { background-color: lighten($bg_color, 5%); }
+  }
   &:backdrop {
-    &:checked {
+    &:checked:not(:disabled) {
       &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
     }
   }
@@ -400,13 +386,18 @@ list row, placessidebar row, sidebar row, .sidebar row {
   &:selected {
     &.activatable, & {
       &, &:hover {
-        background-color: $_selection_bg;
-        &, button { &, & image { color: $text_color; } }
-        box-shadow: inset 4px 0 0 $selected_bg_color;
+        background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
+        &, button, button image { color: $text_color; }
+        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
         &:backdrop {
-          &, button { &, & image { color: $backdrop_fg_color; } }
-          background-color: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
-        }      
+          &, button, button image { color: $backdrop_fg_color; }
+          button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
+          background: linear-gradient(
+            to right,
+            $selected_bg_color 4px,
+            if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%)) 1px
+          );
+        }    
       }
     }
   }

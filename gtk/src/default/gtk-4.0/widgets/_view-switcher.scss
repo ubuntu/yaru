@@ -1,0 +1,81 @@
+viewswitcher {
+  &, & button {
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+    font-size: 1rem;
+    border-width: 0; // Yaru change: remove headerbar buttons border
+    &:not(:checked):not(:hover){ background: transparent; } // Yaru change: drop button background
+
+    > stack > box {
+      &.narrow {
+        font-size: 0.75rem;
+        padding-top: 7px;
+        padding-bottom: 5px;
+
+        label {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+      }
+
+      &.wide {
+        padding: 8px 12px;
+
+        label {
+          &:dir(ltr) {
+            padding-right: 7px;
+          }
+
+          &:dir(rtl) {
+            padding-left: 7px;
+          }
+        }
+      }
+
+      label.active {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+/**********************
+ * AdwViewSwitcherBar *
+ **********************/
+
+viewswitcherbar actionbar > revealer > box {
+  padding: 0;
+}
+
+/************************
+ * AdwViewSwitcherTitle *
+ ************************/
+
+viewswitchertitle viewswitcher {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+/*******************
+ * AdwIndicatorBin *
+ *******************/
+
+indicatorbin {
+  > indicator { margin: 1px; }
+  > mask { padding: 1px; }
+
+  > indicator, > mask {
+    $_indicator_color: #3584e4;
+
+    background: $_indicator_color;
+    min-width: 6px;
+    min-height: 6px;
+    border-radius: 100%;
+  }
+}

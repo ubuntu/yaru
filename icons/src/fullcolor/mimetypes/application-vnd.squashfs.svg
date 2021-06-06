@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -64,7 +62,8 @@
      inkscape:snap-smooth-nodes="true"
      inkscape:pagecheckerboard="false"
      showborder="false"
-     inkscape:snap-to-guides="true">
+     inkscape:snap-to-guides="true"
+     inkscape:document-rotation="0">
     <inkscape:grid
        spacingy="1"
        spacingx="1"
@@ -94,26 +93,6 @@
   </sodipodi:namedview>
   <defs
      id="defs3">
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath9430">
-      <path
-         sodipodi:nodetypes="sssssssss"
-         inkscape:connector-curvature="0"
-         id="path9432"
-         d="m 166.0625,-196 h 179.875 C 491.2348,-196 512,-175.28677 512,-30.125 v 148.25 C 512,263.28618 491.2348,284 345.9375,284 H 166.0625 C 20.7652,284 0,263.28618 0,118.125 V -30.125 C 0,-175.28677 20.7652,-196 166.0625,-196 Z"
-         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:new" />
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath1082">
-      <path
-         sodipodi:nodetypes="sssssssss"
-         inkscape:connector-curvature="0"
-         id="path1084"
-         d="M 361.9375,-212 C 507.2348,-212 528,-191.28677 528,-46.125 V 70.125 C 528,215.28618 507.2348,236 361.9375,236 H 214.0625 C 68.7652,236 48,215.28618 48,70.125 V -46.125 C 48,-191.28677 68.7652,-212 214.0625,-212 Z"
-         style="display:inline;opacity:1;fill:#8c59d9;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;enable-background:new" />
-    </clipPath>
     <filter
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
@@ -324,28 +303,6 @@
        y2="251"
        gradientUnits="userSpaceOnUse" />
     <linearGradient
-       id="linearGradient3045">
-      <stop
-         id="stop3047"
-         offset="0"
-         style="stop-color:#847784;stop-opacity:0.99607843" />
-      <stop
-         id="stop3049"
-         offset="1"
-         style="stop-color:#695f69;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient4213">
-      <stop
-         style="stop-color:#b1d7f3;stop-opacity:1"
-         offset="0"
-         id="stop4215" />
-      <stop
-         style="stop-color:#8fafda;stop-opacity:1"
-         offset="1"
-         id="stop4217" />
-    </linearGradient>
-    <linearGradient
        osb:paint="gradient"
        id="linearGradient5460">
       <stop
@@ -365,130 +322,6 @@
          offset="0"
          style="stop-color:#772953;stop-opacity:1;" />
     </linearGradient>
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter4154">
-      <feComposite
-         operator="arithmetic"
-         k4="0"
-         result="composite1"
-         k1="0"
-         k2="1"
-         k3="0"
-         in2="SourceGraphic"
-         id="feComposite4156" />
-      <feColorMatrix
-         in="composite1"
-         result="colormatrix1"
-         values="0"
-         type="saturate"
-         id="feColorMatrix4158" />
-      <feFlood
-         flood-color="rgb(72,59,72)"
-         result="flood1"
-         id="feFlood4160" />
-      <feBlend
-         in="flood1"
-         in2="colormatrix1"
-         mode="multiply"
-         result="blend1"
-         id="feBlend4162" />
-      <feBlend
-         result="blend2"
-         in2="blend1"
-         mode="screen"
-         id="feBlend4164" />
-      <feColorMatrix
-         in="blend2"
-         result="colormatrix2"
-         values="1"
-         type="saturate"
-         id="feColorMatrix4166" />
-      <feComposite
-         in="colormatrix2"
-         in2="SourceGraphic"
-         result="composite2"
-         operator="in"
-         id="feComposite4168" />
-    </filter>
-    <clipPath
-       id="clipPath3062"
-       clipPathUnits="userSpaceOnUse">
-      <rect
-         y="-194.96773"
-         x="34.167744"
-         height="445.93549"
-         width="475.66452"
-         id="rect3064"
-         style="color:#000000;fill:url(#linearGradient3066);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:40;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new" />
-    </clipPath>
-    <linearGradient
-       y2="288"
-       x2="256"
-       y1="50"
-       x1="256"
-       gradientTransform="matrix(1.8580645,0,0,1.8736786,4.4387126,-288.65166)"
-       gradientUnits="userSpaceOnUse"
-       id="linearGradient3066"
-       xlink:href="#linearGradient3045"
-       inkscape:collect="always" />
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter4154-6">
-      <feComposite
-         operator="arithmetic"
-         k4="0"
-         result="composite1"
-         k1="0"
-         k2="1"
-         k3="0"
-         in2="SourceGraphic"
-         id="feComposite4156-9" />
-      <feColorMatrix
-         in="composite1"
-         result="colormatrix1"
-         values="0"
-         type="saturate"
-         id="feColorMatrix4158-6" />
-      <feFlood
-         flood-color="rgb(72,59,72)"
-         result="flood1"
-         id="feFlood4160-4" />
-      <feBlend
-         in="flood1"
-         in2="colormatrix1"
-         mode="multiply"
-         result="blend1"
-         id="feBlend4162-9" />
-      <feBlend
-         result="blend2"
-         in2="blend1"
-         mode="screen"
-         id="feBlend4164-4" />
-      <feColorMatrix
-         in="blend2"
-         result="colormatrix2"
-         values="1"
-         type="saturate"
-         id="feColorMatrix4166-3" />
-      <feComposite
-         in="colormatrix2"
-         in2="SourceGraphic"
-         result="composite2"
-         operator="in"
-         id="feComposite4168-5" />
-    </filter>
-    <clipPath
-       id="clipPath3062-9"
-       clipPathUnits="userSpaceOnUse">
-      <rect
-         y="-194.96773"
-         x="34.167744"
-         height="445.93549"
-         width="475.66452"
-         id="rect3064-9"
-         style="color:#000000;fill:url(#linearGradient3066);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:40;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:new" />
-    </clipPath>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient1048"
@@ -1067,7 +900,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:ubuntu;-inkscape-font-specification:ubuntu;text-align:center;text-anchor:middle;fill:#888888;fill-opacity:1">sqsh</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:7.56199217px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#888888;fill-opacity:1;stroke:none;stroke-width:0.18475923;enable-background:new"
+         style="font-style:normal;font-weight:normal;font-size:7.56199px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#888888;fill-opacity:1;stroke:none;stroke-width:0.184759;enable-background:new"
          x="342.81882"
          y="98.733414"
          id="text130-3"
@@ -1076,10 +909,10 @@
            id="tspan128-6"
            x="342.81882"
            y="98.733414"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.07439041px;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#888888;fill-opacity:1;stroke-width:0.18475923">sqsh</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.07439px;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#888888;fill-opacity:1;stroke-width:0.184759">sqsh</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:5.65798616px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#888888;fill-opacity:1;stroke:none;stroke-width:0.14144966;enable-background:new"
+         style="font-style:normal;font-weight:normal;font-size:5.65799px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#888888;fill-opacity:1;stroke:none;stroke-width:0.14145;enable-background:new"
          x="329.13913"
          y="159.03409"
          id="text130-3-7"><tspan
@@ -1087,10 +920,10 @@
            id="tspan128-6-5"
            x="329.13913"
            y="159.03409"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.78958321px;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#888888;fill-opacity:1;stroke-width:0.14144966">sqsh</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.78958px;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#888888;fill-opacity:1;stroke-width:0.14145">sqsh</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:4.61895561px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#888888;fill-opacity:1;stroke:none;stroke-width:0.1154739;enable-background:new"
+         style="font-style:normal;font-weight:normal;font-size:4.61896px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#888888;fill-opacity:1;stroke:none;stroke-width:0.115474;enable-background:new"
          x="326.39871"
          y="209.02089"
          id="text130-3-7-3"><tspan
@@ -1098,7 +931,7 @@
            id="tspan128-6-5-5"
            x="326.39871"
            y="209.02089"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.54274654px;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#888888;fill-opacity:1;stroke-width:0.1154739">sqsh</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.54275px;font-family:ubuntu;-inkscape-font-specification:ubuntu;fill:#888888;fill-opacity:1;stroke-width:0.115474">sqsh</tspan></text>
       <path
          style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:0.4;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.99999952;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
          d="m 180,268 60,-60 v 22.48388 C 239.9477,264.47969 236.19732,268 201.8259,268 Z"

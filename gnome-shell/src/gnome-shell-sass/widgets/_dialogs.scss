@@ -135,10 +135,6 @@
   spacing: 8px;
   margin-bottom: 6px;
 
-  .polkit-dialog-user-icon {
-    border-radius: 99px;
-    background-size: contain;
-  }
   .polkit-dialog-user-root-label { color: $warning_color; }
 }
 
@@ -165,4 +161,13 @@
 
 .audio-selection-device-icon {
   icon-size: $base_icon_size * 4;
+}
+
+/* Welcome dialog */
+.welcome-dialog-image {
+  background-image: url("resource:///org/gnome/shell/theme/gnome-shell-start.svg");
+  background-size: contain;
+  /* Reasonable maximum dimensions */
+  height: 300px;
+  width: 300px;
 }

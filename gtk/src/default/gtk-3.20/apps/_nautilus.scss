@@ -1,0 +1,225 @@
+.nautilus-window {
+
+    .nautilus-canvas-item.dim-label,
+    .nautilus-list-dim-label {
+        color: mix($text_color, $base_color);
+    }
+
+    // keep details box visible
+    // details box looks ugly when many items are selected and it floats above the orange
+    background-image: none;
+    background-color: if($variant=='light', white, $bg_color);
+
+    &:backdrop {
+        background-color: if($variant=='light', $backdrop_base_color, $backdrop_bg_color);
+    }
+
+    placessidebar {
+        background-color: if($variant=='light', $bg_color, $base_color);
+
+        &:backdrop {
+            background-color: $backdrop_bg_color;
+        }
+    }
+
+    // Makes icons less bright in backdrop
+    @at-root %dim_icons_in_backdrop,
+    & *scrolledwindow:backdrop {
+        opacity: 0.9;
+    }
+
+    infobar {
+        background-color: if($variant=="light", lighten($silk, 10%), $slate);
+
+        &:backdrop {
+            background-color: $backdrop_bg_color;
+        }
+    }
+
+    paned box.floating-bar {
+        background-color: $bg_color;
+        border-style: solid;
+        border-color: if($variant=='light', lighten($borders_color, 8.3%), darken($borders_color, 1%));
+        border-width: 1px 0 0 1px;
+        border-radius: $button_radius 0 0 0;
+
+        button:dir(ltr).circular.flat.image-button {
+            background: radial-gradient(circle at 50%, white 35%, $bg_color 1%);
+            color: $destructive_color;
+        }
+
+        button:dir(ltr).circular.flat.image-button:hover {
+            border: 1px solid $borders_color;
+            background: radial-gradient(circle at 50%, white 30%, $base_hover_color 16%);
+            color: lighten($destructive_color, 5%);
+
+        }
+    }
+
+    .searchbar-container searchbar {
+        // get rid of a 1px white line shown at the top of the window
+        // applies to the desktop too
+        background: transparent;
+        border-color: transparent;
+    }
+
+    treeview:drop(active):focus {
+        // drop target green bottom border was missing
+        border-bottom: 1px solid $drop_target_color;
+    }
+
+    treeview.view header button {
+        background-color: if($variant=='light', $base_color, $base_color);
+        background-image: none;
+        border-color: transparentize($borders_color, 0.6);
+        border-left: 1px;
+
+        &:hover {
+            background-color: $bg_color;
+        }
+
+        &:backdrop {
+            background-color: $backdrop_base_color;
+        }
+    }
+
+    .nautilus-list-view .view {
+        border-bottom: 1px solid transparentize($borders_color, 0.8);
+
+        // Hide superfluous treeview drop target indication
+        &.dnd {
+            border-style: none;
+        }
+
+        treeview {
+            &:selected {
+                &:backdrop {
+                    color: $backdrop_fg_color;
+                    background-color: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
+                }
+            }
+        }
+    }
+
+    notebook>header {
+        background: $bg_color;
+    }
+
+    paned>separator {
+        // separator between sidebar and main window view
+        background-image: image(if($variant=='light', transparentize($borders_color, 0.6), darken($borders_color, 1%)));
+
+        &:backdrop {
+            background-image: image(transparentize($borders_color, 0.7));
+        }
+    }
+
+    // custom code from nautilus Adwaita.css for entries and the pathbar
+    entry.search>* {
+        margin: 5px;
+    }
+
+    .path-bar-box {
+        border-radius: 5px;
+        border: 1px solid if($ambiance, darken($headerbar_bg_color, 9%), $borders_color);
+
+        &:backdrop {
+            border-color: if($ambiance, $headerbar_bg_color, $backdrop_borders_color);
+        }
+
+        background-color: if($ambiance, lighten($headerbar_bg_color, 6.5%), $bg_color);
+        padding-right: 6px;
+
+        &:backdrop {
+            border-color: if($ambiance, darken($inkstone, 9%), $backdrop_borders_color);
+        }
+    }
+
+    .nautilus-path-bar button {
+        margin: 0px;
+    }
+
+    .nautilus-path-bar button:first-child {
+        border-width: 0px 1px 0px 0px;
+        border-radius: 3.5px 0px 0px 3.5px;
+    }
+
+    .nautilus-path-bar button:not(:first-child) {
+        border-width: 0px 1px 0px 1px;
+        border-radius: 0px 0px 0px 0px;
+    }
+
+    .nautilus-path-bar button:not(:checked) image {
+        opacity: 0.8;
+    }
+
+    /* dim the icon when not checked */
+
+    // This is the Icon + Text beneath - it's one widget
+    .nautilus-canvas-item {
+        outline-width: 0;
+        // First, remove the background
+        background-color: rgba(255, 255, 255, 0.1);
+
+        // Then bring it back for when it receives a direction
+        &:selected:not(:backdrop) {
+            &:dir(ltr) {
+                background-color: $selected_bg_color;
+            }
+
+            &:not(:dir(ltr)) {
+                background-color: rgba(175, 175, 175, 0.5);
+            }
+
+            color: $selected_fg_color;
+        }
+
+        &:backdrop:selected {
+            background-color: $selected_bg_color;
+            color: $backdrop_selected_fg_color;
+        }
+    }
+}
+
+// Nautilus disk space dialogue styling
+// Copied from the nautilus adwaita.css
+// keeping the CSS code style to make upstream updates easier
+
+$_disk_space_unknown: $insensitive_bg_color;
+$_disk_space_used: $progress_bg_color;
+$_disk_space_free: if($variant=='light', darken($bg_color, 10%), $bg_color);
+
+.disk-space-display {
+    border-style: solid;
+    border-width: 2px;
+}
+
+.disk-space-display.unknown {
+    background-color: $_disk_space_unknown;
+    border-color: transparentize($_disk_space_unknown, 0.7);
+    color: $_disk_space_unknown;
+}
+
+.disk-space-display.unknown.border {
+    color: transparentize($_disk_space_unknown, 0.7);
+}
+
+.disk-space-display.used {
+    background-color: $_disk_space_used;
+    border-color: transparentize($_disk_space_used, 0.7);
+    color: $_disk_space_used;
+}
+
+.disk-space-display.used.border {
+    color: transparentize($_disk_space_used, 0.7);
+}
+
+.disk-space-display.free {
+    background-color: $_disk_space_free;
+    border-color: transparentize($_disk_space_free, 0.7);
+    color: $_disk_space_free;
+}
+
+.disk-space-display.free.border {
+    color: transparentize($_disk_space_free, 0.7);
+}

@@ -2,6 +2,8 @@
 <gresources>
   <gresource prefix="/org/gnome/shell/theme">
     <file>calendar-today.svg</file>
+    <file alias="icons/scalable/status/carousel-arrow-next-24-symbolic.svg">carousel-arrow-next-24-symbolic.svg</file>
+    <file alias="icons/scalable/status/carousel-arrow-back-24-symbolic.svg">carousel-arrow-back-24-symbolic.svg</file>
     <file>checkbox-focused.svg</file>
     <file>checkbox-focused-dark.svg</file>
     <file>checkbox-off-focused.svg</file>
@@ -39,7 +41,7 @@
     <file alias="gdm3.css">gnome-shell.css</file>
     <file alias="Yaru/gnome-shell.css">gnome-shell.css</file>
     <file alias="Yaru/gnome-shell-high-contrast.css">gnome-shell-high-contrast.css</file>
-    <file alias="Yaru-dark/gnome-shell.css">gnome-shell-dark.css</file>
-    <file alias="Yaru-dark/gnome-shell-high-contrast.css">gnome-shell-high-contrast-dark.css</file>
+    <file alias="Yaru-light/gnome-shell.css">gnome-shell-light.css</file>
+    <file alias="Yaru-light/gnome-shell-high-contrast.css">gnome-shell-high-contrast-light.css</file>
   </gresource>
 </gresources>

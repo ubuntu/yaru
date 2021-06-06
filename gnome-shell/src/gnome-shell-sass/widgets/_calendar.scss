@@ -1,11 +1,11 @@
 /* Date/Time Menu */
 
 .clock-display-box {
-  spacing: $base_spacing / 2;
+  spacing: 2px;
 
   .clock {
-    padding-left: $base_padding;
-    padding-right: $base_padding;
+    padding-left: $base_padding * 2;
+    padding-right: $base_padding * 2;
   }
 }
 
@@ -17,7 +17,7 @@
 // Calendar menu side column
 .datemenu-calendar-column {
   spacing: $base_spacing;
-  border: 0 solid $bubble_borders_color;
+  border: 0 solid if($variant=='light', $bubble_borders_color, darken($bubble_borders_color, 5%));  // Yaru: Dark shell theme: tone down calendar separator
   padding: 0 $base_padding * 2;
 
   &:ltr {margin-right: $base_margin * 2; border-left-width: 1px; }
@@ -154,7 +154,7 @@
 
   .calendar-day-with-events {
     background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
-    &.calendar-work-day:not(.calendar-other-month-day) {
+    &.calendar-work-day:not(.calendar-other-month-day) {  // Yaru: calendar-other-month-day color shall not change if the day has an event
        color: lighten($fg_color,10%);
        font-weight: bold;
     }

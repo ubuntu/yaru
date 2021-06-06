@@ -9,13 +9,13 @@ $fg_color: if($variant == 'light', $inkstone, $porcelain);
 $selected_fg_color: $primary_accent_fg_color;
 $selected_bg_color: if($variant == 'light', $primary_accent_bg_color, darken($primary_accent_bg_color, 4%));
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
-$borders_color: if($variant == 'light', darken($bg_color, 20%), lighten(desaturate($base_color, 100%), 14%));
+$borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%); // Yaru: used for dash and other dark elements on light theme
+$borders_color: if($variant == 'light', darken($bg_color, 20%), $borders_color_dark);
 $alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 10%));
 $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
-$link_color: if($variant == 'light', $linkblue, $blue);
-$link_visited_color: if($variant == 'light', darken($link_color, 20%), lighten($link_color, 10%));
+$link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
+$link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 $top_hilight: $borders_edge;
-$dark_fill: mix($borders_color, $bg_color, 50%);
 
 $warning_color: $yellow;
 $error_color: $red;
@@ -30,8 +30,8 @@ $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
 $osd_borders_color: transparentize(black, 0.3);
 $osd_outer_borders_color: transparentize(white, 0.84);
 
-$tooltip_borders_color: $osd_outer_borders_color;
 $shadow_color: transparentize(black, 0.9);
+$system_bg_color: lighten($jet, 4%); // Lighten than dash but darken than bg-color
 
 //insensitive state derived colors
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
@@ -53,7 +53,7 @@ $active_fg_color: transparentize($selected_fg_color, .5);
 
 $panel_bg_color: lighten($jet, 2%);
 $panel_fg_color: darken($porcelain, 2%);
-$dash_bg_color: $panel_bg_color;
+$dash_background_color: $panel_bg_color;
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
 
@@ -63,7 +63,7 @@ $dash-opaque-alpha-value: 0.0;
 //special cased widget colors
 $suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
-$progress_bg_color: $secondary_accent_bg_color;
+$progress_bg_color: if($variant== 'light', lighten($secondary_accent_bg_color, 10%), lighten($secondary_accent_bg_color, 5%));
 $progress_border_color: if($variant== 'light', darken($progress_bg_color, 5%), darken($borders_color, 5%));
 $checkradio_bg_color: if($variant=='light', $secondary_accent_bg_color, darken($secondary_accent_bg_color, 8%));
 $checkradio_fg_color: $secondary_accent_fg_color;
