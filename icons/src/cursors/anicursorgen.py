@@ -395,7 +395,7 @@ def make_ani(frames, out, args):
         copy_to(buf, cur)
         pos = buf.seek(0, io.SEEK_END)
         if pos % 2 != 0:
-            buf.write("\x00" * (2 - (pos % 2)))
+            buf.write(b"\x00" * (2 - (pos % 2)))
 
     end_at = buf.seek(0, io.SEEK_CUR)
     buf.seek(riff_len_pos, io.SEEK_SET)
@@ -432,7 +432,7 @@ def write_cur(out, frame, frame_png):
             acc_pos += 1
             if acc_pos == 8:
                 acc_pos = 0
-                out.write(chr(acc))
+                out.write(chr(acc).encode())
                 wrote += 1
         if wrote % 4 != 0:
             out.write(b"\x00" * (4 - wrote % 4))
