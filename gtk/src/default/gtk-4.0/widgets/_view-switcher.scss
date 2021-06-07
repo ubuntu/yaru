@@ -9,8 +9,6 @@ viewswitcher {
     border-top: none;
     border-bottom: none;
     font-size: 1rem;
-    border-width: 0; // Yaru change: remove headerbar buttons border
-    &:not(:checked):not(:hover){ background: transparent; } // Yaru change: drop button background
 
     > stack > box {
       &.narrow {

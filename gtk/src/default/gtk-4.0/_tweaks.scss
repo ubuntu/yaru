@@ -65,19 +65,3 @@ scale > trough > slider,
 scale > trough > highlight {
     transition: $button_transition;
 }
-
-// Due to the ubuntu orange beeing quiet bright
-// we change the sidebar selection from a full orange
-// row to a thin orange stripe plus a soft gray selection
-$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
-list row, placessidebar row, sidebar row, .sidebar row {
-  &:selected {
-    &.activatable, & {
-      &, &:hover {
-        background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
-        &, button, button image { color: $text_color; }
-        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
-      }
-    }
-  }
-}
