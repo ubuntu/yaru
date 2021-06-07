@@ -68,7 +68,7 @@ ninja
 sudo ninja install
 ```
 
-Now you can use the "gtk4-widget-factory" app.
+Now you can use the `gtk4-widget-factory` app.
 
 #### Install Libadwaita
 
@@ -91,7 +91,13 @@ ninja
 sudo ninja install
 ```
 
-Now you can use the "adwaita-1-demo" app.
+Now you can run the `adwaita-1-demo` using the console:
+
+```console
+adwaita-1-demo
+```
+
+**Note:** regardless of your current gtk theme, `adwaita-1-demo` use **Adwaita** by default. You must switch to **Yaru** using the gtk inspector.
 
 ### More granular changes
 
