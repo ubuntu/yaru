@@ -61,6 +61,7 @@ sudo apt install sassc clang libglib2.0-dev libcairo2-dev libpango1.0-dev libgdk
 
 And finally compile using meson:
 ```console
+cd gtk
 meson --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libdir=lib/x86_64-linux-gnu _build .
 cd _build
 ninja
@@ -83,6 +84,7 @@ sudo apt install sassc valac libglib2.0-dev
 
 And finally compile using meson:
 ```console
+cd libadwaita
 meson --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libdir=lib/x86_64-linux-gnu _build .
 cd _build
 ninja
