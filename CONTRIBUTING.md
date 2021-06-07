@@ -41,22 +41,26 @@ update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /us
 
 If you reboot, select the Yaru session in GDM and you should be all right.
 
-### Help to install Gtk4
+### Help to install Gtk4 and Libadwaita
 
-If you want to test the Gtk4 theme, you need to compile Gtk from source (awaiting an official ubuntu packaging).
+If you want to test the Gtk4 theme, you need to install both Gtk4 and Libadwaita.
+
+#### Install Gtk4
+
+**Note:** If you don't want to install Gtk4 from source, just install `libgtk-4-dev` package (Ubuntu > 21.04 only).
 
 Firstly clone the repository:
-```bash
-git clone git@gitlab.gnome.org:GNOME/gtk.git
+```console
+git clone https://gitlab.gnome.org/GNOME/gtk.git
 ```
 
 Then, you need to install dependencies (please report if more ones are needed):
-```bash
-sudo apt install libgraphene-1.0-dev
+```console
+sudo apt install sassc clang libglib2.0-dev libcairo2-dev libpango1.0-dev libgdk-pixbuf-2.0-dev libepoxy-dev libxkbcommon-dev libgraphene-1.0-dev cmake libwayland-dev libxrandr-dev libxi-dev
 ```
 
 And finally compile using meson:
-```bash
+```console
 meson --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libdir=lib/x86_64-linux-gnu _build .
 cd _build
 ninja
@@ -64,6 +68,28 @@ sudo ninja install
 ```
 
 Now you can use the "gtk4-widget-factory" app.
+
+#### Install Libadwaita
+
+Firstly clone the repository:
+```console
+git clone https://gitlab.gnome.org/GNOME/libadwaita.git
+```
+
+Then, you need to install dependencies (please report if more ones are needed):
+```console
+sudo apt install sassc valac libglib2.0-dev
+```
+
+And finally compile using meson:
+```console
+meson --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libdir=lib/x86_64-linux-gnu _build .
+cd _build
+ninja
+sudo ninja install
+```
+
+Now you can use the "adwaita-1-demo" app.
 
 ### More granular changes
 
