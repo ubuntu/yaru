@@ -14,11 +14,11 @@ window {
     margin: 0px;
     border-radius: $window_radius;
 
-    // @if $variant == 'dark' { // Yaru change: remove window outline on dark variant
-      // $_window_outline: if($contrast=='high', transparentize(white, .7), transparentize(white, .9));
-      // outline: 1px solid $_window_outline;
-      // outline-offset: -1px;
-    // }
+    @if $variant == 'dark' {
+      $_window_outline: if($contrast=='high', transparentize(white, .7), transparentize(white, .9));
+      outline: 1px solid $_window_outline;
+      outline-offset: -1px;
+    }
 
     &:backdrop {
       // the transparent shadow here is to enforce that the shadow extents don't

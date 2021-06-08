@@ -64,6 +64,7 @@ button {
       &:checked {
         @include button(undecorated-checked);
         transition: $button_transition;
+
         &:hover {
           @include button(undecorated-checked-hover);
 
@@ -102,21 +103,6 @@ button {
       color: $drop_target_color;
       border-color: $drop_target_color;
       box-shadow: inset 0 0 0 1px $drop_target_color;
-    }
-  }
-
-  @at-root %button_selected, & {
-    // row:selected & { // Yaru change: due to grey row selection background we no more need to modify buttons border-color
-      // @if $variant == 'light' { border-color: $selected_borders_color; }
-    // }
-
-    @at-root %button_selected_flat, &.flat {
-      // row:selected & {
-        // &:not(:active):not(:checked):not(:hover):not(disabled) {
-          // color: $selected_fg_color;
-          // border-color: transparent;
-        // }
-      // }
     }
   }
 

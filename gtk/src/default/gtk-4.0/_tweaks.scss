@@ -28,38 +28,6 @@ windowcontrols {
     margin-left: 7px;
 }
 
-// we prefered our gray hover for menus and popovers, orange is a very strong color
-menu,
-.menu,
-.context-menu {
-    item:selected {
-        color: $fg_color;
-        background-color: $popover_hover_color;
-    }
-}
-
-// We don't want menuitems to look like links, we should propose this upstream
-menubar,
-.menubar {
-    item:selected {
-        color: $fg_color;
-        background-color: $popover_hover_color;
-    }
-}
-
-// Check/radios in menus do not need a border
-popover.menu {
-    check,
-    radio {
-        &, &:checked, &:indeterminate {
-            &, &:hover, &:disabled {
-                border-color: transparent;
-                background: transparent;
-            }
-        }
-    }
-}
-
 // Reducing the amount of the palette's background colors to two
 .sidebar { background-color: $bg_color; }
 
@@ -87,33 +55,6 @@ scale {
     notebook entry { background-color: darken($base_color, 2%); }
 }
 
-// Strengthen the menu shadows
-// And lighten up the dark shell menu/popover border to increase visibility
-$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 14%);
-decoration {
-  .csd.popup & {
-    box-shadow: 0 1px 2px 1px transparentize(black, if($variant=='light', 0.7, 0.6)),
-                0 0 0 1px if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
-  }
-}
-
-@if $variant=='dark' {
-  popover.background > contents separator {
-    background-color: $_dark_theme_outer_menu_border;
-  }
-}
-
-popover.background {
-  .csd &, & {
-    border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
-  }
-  @if $variant=='dark' {
-    separator {
-      background-color: $_dark_theme_outer_menu_border;
-    }
-  }
-}
-
 // Add some transitions on widgets
 check,
 radio,
@@ -123,20 +64,4 @@ scale > trough,
 scale > trough > slider,
 scale > trough > highlight {
     transition: $button_transition;
-}
-
-// Due to the ubuntu orange beeing quiet bright
-// we change the sidebar selection from a full orange
-// row to a thin orange stripe plus a soft gray selection
-$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
-list row, placessidebar row, sidebar row, .sidebar row {
-  &:selected {
-    &.activatable, & {
-      &, &:hover {
-        background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
-        &, button, button image { color: $text_color; }
-        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
-      }
-    }
-  }
 }
