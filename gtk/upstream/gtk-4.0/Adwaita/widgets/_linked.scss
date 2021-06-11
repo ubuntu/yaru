@@ -10,20 +10,23 @@ $_linked_widgets: ("%button",          ""),
                   ("%entry",           ""),
                   ("entry",            "");
 
+.linked {
+  border-spacing: 3px;
+}
+
 @each $widget, $child in $_linked_widgets {
   .linked:not(.vertical) > {
     #{$widget} {
       &:dir(ltr):not(:first-child) #{$child},
       &:dir(rtl):not(:last-child) #{$child} {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
       }
 
       &:dir(ltr):not(:last-child) #{$child},
       &:dir(rtl):not(:first-child) #{$child} {
-        border-right-style: none;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
       }
     }
   }
@@ -31,48 +34,13 @@ $_linked_widgets: ("%button",          ""),
   .linked.vertical {
     #{$widget} {
       &:not(:first-child) #{$child} {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
       }
 
       &:not(:last-child) #{$child} {
-        border-bottom-style: none;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-    }
-  }
-}
-
-%entry,
-entry {
-  // Vertically linked entries
-  // FIXME: take care of "colored" entries
-  .linked.vertical > & {
-    // brighter border between linked entries
-    &:not(:disabled) + entry:not(:disabled),
-    &:not(:disabled) + %entry:not(:disabled) {
-      border-top-color: mix($borders_color, $base_color, 30%);
-    }
-
-    // brighter border between linked insensitive entries
-    &:disabled + %entry:disabled,
-    &:disabled + entry:disabled { border-top-color: mix($borders_color, $base_color, 30%); }
-
-    + %entry:drop(active):not(:only-child),
-    + entry:drop(active):not(:only-child) { border-top-color: $drop_target_color; }
-  }
-
-  @each $widget, $child in $_linked_widgets {
-    .linked:not(.vertical) > &:drop(active):not(:only-child) + {
-      #{$widget} #{$child} {
-        border-left-color: $drop_target_color;
-      }
-    }
-
-    .linked.vertical > &:drop(active):not(:only-child) + {
-      #{$widget} #{$child} {
-        border-top-color: $drop_target_color;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
       }
     }
   }

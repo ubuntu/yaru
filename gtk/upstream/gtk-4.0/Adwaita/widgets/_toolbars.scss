@@ -43,8 +43,8 @@ searchbar > revealer > box {
   background-color: mix($bg_color, $borders_color, 70%);
 
  .close {
-    min-width: 16px;
-    min-height: 16px;
+    min-width: 18px;
+    min-height: 18px;
     padding: 4px;
     border-radius: 50%;
     @extend %button_basic_flat;
@@ -91,8 +91,8 @@ infobar {
   }
 
  .close {
-    min-width: 16px;
-    min-height: 16px;
+    min-width: 18px;
+    min-height: 18px;
     padding: 4px;
     border-radius: 50%;
     @extend %button_basic_flat;

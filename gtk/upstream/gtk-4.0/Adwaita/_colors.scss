@@ -7,39 +7,54 @@ $bg_color: if($variant == 'light', #f6f5f4, darken(desaturate(#3d3846, 100%), 4%
 $fg_color: if($variant == 'light', #2e3436, #eeeeec);
 
 $selected_fg_color: #ffffff;
-$selected_bg_color: if($variant == 'light', #3584e4, darken(#3584e4, 20%));
-$selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+$selected_bg_color: if($variant == 'light', #3584e4, #62a0ea);
+$selected_borders_color: darken($selected_bg_color, 15%);
 $borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 10%));
 $alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 18%));
 $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
-$link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
-$link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+$link_color:darken($selected_bg_color, 10%);
+$link_visited_color: darken($selected_bg_color, 20%);
 $dark_fill: mix($borders_color, $bg_color, 50%);
-$headerbar_bg_color: if($variant == 'light', lighten($bg_color, 5%), darken($bg_color, 3%));
+$headerbar_bg_color: $bg_color;
 $menu_color: $base_color;
-$view_hover_color: transparentize($text_color, .93);
-$view_selected_color: transparentize($text_color, .9);
-$view_selected_hover_color: transparentize($text_color, .87);
-$view_active_color: transparentize(black, .85);
-$trough_color: transparentize($text_color, .85);
-$trough_hover_color: transparentize($text_color, .8);
-$trough_active_color: transparentize(black, .75);
+
+$view_hover_color: #{"alpha(currentColor, .07)"};
+$view_active_color: #{"alpha(currentColor, .16)"};
+$view_selected_color: #{"alpha(currentColor, .1)"};
+$view_selected_hover_color: #{"alpha(currentColor, .13)"};
+$view_selected_active_color: #{"alpha(currentColor, .19)"};
+
+$trough_color: #{"alpha(currentColor, .15)"};
+$trough_hover_color: #{"alpha(currentColor, .2)"};
+$trough_active_color: #{"alpha(currentColor, .25)"};
+
+$button_color: #{"alpha(currentColor, .1)"};
+$button_hover_color: #{"alpha(currentColor, .15)"};
+$button_active_color: #{"alpha(currentColor, .25)"};
+$button_checked_color: #{"alpha(currentColor, .2)"};
+$button_checked_hover_color: #{"alpha(currentColor, .25)"};
+$button_checked_active_color: #{"alpha(currentColor, .35)"};
+
 $fill_color: $selected_bg_color;
 $fill_text_color: $selected_fg_color;
 $fill_hover_color: mix($selected_bg_color, $text_color, 90%);
-$fill_active_color: mix($selected_bg_color, black, 80%);
+$fill_active_color: mix($selected_bg_color, $text_color, 80%);
+
 $slider_color: mix(white, $base_color, 80%);
 $slider_hover_color: white;
 
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
 $scrollbar_slider_hover_color: mix($fg_color, $bg_color, 80%);
-$scrollbar_slider_active_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 10%));
+$scrollbar_slider_active_color: darken($selected_bg_color, 10%);
 
 $warning_color: #f57900;
 $error_color: #cc0000;
 $success_color: if($variant == 'light', #33d17a, darken(#33d17a, 10%));
+$suggested_color: $selected_bg_color;
+$suggested_text_color: if($variant == 'light', darken($suggested_color, 10%), lighten($suggested_color, 10%));
 $destructive_color: if($variant == 'light', #e01b24, darken(#e01b24, 10%));
+$destructive_text_color: if($variant == 'light', darken($destructive_color, 10%), lighten($destructive_color, 20%));
 
 $osd_fg_color: #eeeeec;
 $osd_text_color: white;
@@ -63,7 +78,7 @@ $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 //special cased widget colors
 $suggested_bg_color: $selected_bg_color;
 $suggested_border_color: $selected_borders_color;
-$focus_border_color: if($variant == 'light', transparentize($selected_bg_color, 0.5), transparentize($selected_bg_color, 0.3));
+$focus_border_color:  transparentize($selected_bg_color, 0.5);
 $alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), transparentize(white,0.7));
 $dim_label_opacity: 0.55;
 
@@ -83,7 +98,7 @@ $dim_label_opacity: 0.55;
   $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
   //focus rings
-  $focus_border_color: if($variant == 'light', transparentize($selected_bg_color, 0.2), transparentize(white, 0.4));
+  $focus_border_color: transparentize($selected_bg_color, 0.2);
   $alt_focus_border_color: if($variant == 'light', white, transparentize(white,0.4));
 
   $dim_label_opacity: 0.9;

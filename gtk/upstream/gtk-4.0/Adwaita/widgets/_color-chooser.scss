@@ -107,6 +107,7 @@ colorswatch {
     > overlay {
       @extend %button_basic;
 
+      border: none;
       border-radius: $_colorswatch_radius 0 0 $_colorswatch_radius;
     }
 

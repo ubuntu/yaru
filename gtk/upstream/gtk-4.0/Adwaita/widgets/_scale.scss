@@ -5,11 +5,6 @@
   @if $contrast == "high" {
     box-shadow: inset 0 0 0 1px $borders_color;
   }
-
-  // OSD
-  .osd & {
-    background-color: transparentize($osd_text_color, .85);
-  }
 }
 
 %scale_highlight {
@@ -39,11 +34,6 @@ scale {
     // in media player to indicate how much video stream as been cached
     > fill {
       @extend %scale_trough;
-
-      // OSD
-      .osd & {
-        background-color: mix($osd_fg_color, $osd_borders_color, 25%);
-      }
     }
 
     > slider {

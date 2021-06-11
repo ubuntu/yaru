@@ -1,13 +1,31 @@
 spinbutton {
+  @extend %entry;
+
+  padding: 0;
+  border-spacing: 0;
+
+  /* :not here just to bump specificity above that of the list button styling */
+  > button.image-button.up:not(.flat),
+  > button.image-button.down:not(.flat) {
+    margin: 0;
+    background: none;
+    border-style: solid;
+    border-color: transparentize($borders_color, 0.7);
+    border-radius: 0;
+    box-shadow: none;
+    color: inherit;
+
+    &:hover {
+      color: $text_color;
+      background-color: $view_hover_color;
+    }
+
+    &:active {
+      background-color: $view_active_color;
+    }
+  }
+
   &:not(.vertical) {
-    // in this horizontal configuration, the whole spinbutton
-    // behaves as the entry, so we extend the entry styling
-    // and nuke the style on the internal entry
-    @extend %entry;
-
-    padding: 0;
-    border-spacing: 0;
-
     > text {
       min-width: 28px;
       padding: 6px;
@@ -17,32 +35,12 @@ spinbutton {
     > button.image-button.up:not(.flat),
     > button.image-button.down:not(.flat) {
       min-height: 16px;
-      margin: 0;
+      min-width: 22px;
       padding-bottom: 0;
       padding-top: 0;
-      color: mix($fg_color, $base_color, 90%);
-      background-image: none;
-      border-style: none none none solid;
-      border-color: transparentize($borders_color, 0.7);
-      border-radius: 0;
-      box-shadow: none;
+      border-width: 0 0 0 1px;
 
-      &:dir(rtl) { border-style: none solid none none; }
-
-      &:hover {
-        color: $fg_color;
-        background-color: darken($bg_color,5%);
-      }
-
-      &:disabled {
-        color: transparentize($insensitive_fg_color, 0.7);
-        background-color: transparent;
-      }
-
-      &:active {
-        background-color: transparentize(black, 0.9);
-        box-shadow: inset 0 2px 3px -1px transparentize(black, 0.8);
-      }
+      &:dir(rtl) { border-width: 0 1px 0 0; }
 
       &:dir(ltr):last-child { border-radius: 0 $button_radius $button_radius 0; }
 
@@ -50,52 +48,24 @@ spinbutton {
     }
   }
 
-  // Vertical
   &.vertical {
-    // in the vertical configuration, we treat the spinbutton
-    // as a box, and tweak the style of the entry in the middle
-    // so that it's linked
-
-    // FIXME: this should not be set at all, but otherwise it gets the wrong
-    // color
-    &:disabled { color: $insensitive_fg_color; }
-
-    &:drop(active) {
-      border-color: transparent;
-      box-shadow: none;
-    }
-
     > text {
-      @extend %entry;
-
-      min-height: 32px;
-      min-width: 32px;
-      padding: 0;
-      border-radius: 0;
-
-      > block-cursor { @include entry(block_cursor); }
+      min-height: 30px;
+      min-width: 30px;
     }
 
-    > button {
-      min-height: 32px;
-      min-width: 32px;
-      padding: 0;
+    /* :not here just to bump specificity above that of the list button styling */
+    > button.image-button.up:not(.flat),
+    > button.image-button.down:not(.flat) {
+      &:last-child {
+        border-width: 1px 0 0 0;
+        border-radius: 0 0 $button_radius $button_radius;
+      }
 
-      &.up { @extend %top_button; }
-
-      &.down { @extend %bottom_button; }
-    }
-
-    %top_button {
-      border-bottom-style: none;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    %bottom_button {
-      border-top-style: none;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
+      &:first-child {
+        border-width: 0 0 1px 0;
+        border-radius: $button_radius $button_radius 0 0;
+      }
     }
   }
 

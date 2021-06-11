@@ -113,10 +113,6 @@ notebook {
       border-radius: 0;
 
       &:hover:not(:active) {
-        background-clip: padding-box;
-        background-image: none;
-        background-color: transparentize(white, 0.7);
-        border-color: transparent;
         box-shadow: none;
       }
     }
