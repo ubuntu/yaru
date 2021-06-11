@@ -1,9 +1,7 @@
 // stuff for .needs-attention
-$_dot_color: if($variant=='light', $selected_bg_color,
-                                   lighten($selected_bg_color,15%));
 @keyframes needs_attention {
-  from { background-image: radial-gradient(farthest-side, $_dot_color 0%, transparentize($_dot_color, 1) 0%); }
-  to { background-image: radial-gradient(farthest-side, $_dot_color 95%, transparentize($_dot_color, 1)); }
+  from { background-image: radial-gradient(farthest-side, $selected_bg_color 0%, transparentize($selected_bg_color, 1) 0%); }
+  to { background-image: radial-gradient(farthest-side, $selected_bg_color 95%, transparentize($selected_bg_color, 1)); }
 }
 
 %button,
@@ -11,86 +9,61 @@ button {
   @at-root %button_basic, & {
     min-height: 24px;
     min-width: 16px;
-    padding: 4px 9px;
-    border: 1px solid;
+    padding: 5px 10px;
     border-radius: $button_radius;
-    transition: $button_transition;
+    background-color: $button_color;
 
-    @include button(normal);
+    @if $contrast == 'high' {
+      box-shadow: inset 0 0 0 1px $borders_color;
+    }
 
     @include focus-ring();
+    transition: $button_transition;
 
     &:hover {
-      @include button(hover);
+      background-color: $button_hover_color;
     }
 
     &.keyboard-activating,
-    &:active,
+    &:active {
+      background-color: $button_active_color;
+    }
+
     &:checked {
-      @include button(active);
-
-      transition-duration: 50ms;
-    }
-
-    &:checked:hover { @include button(checked-hover); }
-    &:checked:active { @include button(checked-active); }
-
-    &:disabled {
-      @include button(insensitive);
-
-      &:active,
-      &:checked { @include button(insensitive-active); }
-    }
-
-    @at-root %button_basic_flat,
-    &.flat {
-      @include button(undecorated);
-      // to avoid adjacent buttons borders clashing when transitioning, the transition on the normal state is set
-      // to none, while it's added back in the hover state, so the button decoration will fade in on hover, but
-      // it won't fade out when the pointer leave the button allocation area. To make the transition more evident
-      // in this case the duration is increased.
-      transition: none;
+      background-color: $button_checked_color;
 
       &:hover {
-        @include button(undecorated-hover);
-        transition: $button_transition;
-        transition-duration: 500ms;
-
-        &:active {
-          @include button(undecorated-active);
-        }
+        background-color: $button_checked_hover_color;
       }
 
-      &:checked {
-        @include button(undecorated-checked);
-        transition: $button_transition;
-
-        &:hover {
-          @include button(undecorated-checked-hover);
-
-          &:active {
-            @include button(undecorated-active);
-          }
-        }
+      &.keyboard-activating,
+      &:active {
+        background-color: $button_checked_active_color;
       }
+    }
 
-      &:disabled { @include button(undecorated); }
+    &:disabled {
+      filter: opacity(.5);
+
+      label {
+        filter: none;
+      }
     }
 
     &.image-button {
       min-width: 24px;
-      padding-left: 5px;
-      padding-right: 5px;
+      padding-left: 6px;
+      padding-right: 6px;
     }
 
     &.text-button {
-      padding-left: 16px;
-      padding-right: 16px;
+      padding-left: 17px;
+      padding-right: 17px;
     }
 
     &.text-button.image-button {
-      padding-left: 8px;
-      padding-right: 8px;
+      padding-left: 9px;
+      padding-right: 9px;
 
       label {
         padding-left: 8px;
@@ -101,123 +74,140 @@ button {
     @at-root %button_basic_drop_active,
     &:drop(active) {
       color: $drop_target_color;
-      border-color: $drop_target_color;
-      box-shadow: inset 0 0 0 1px $drop_target_color;
+      box-shadow: inset 0 0 0 2px $drop_target_color;
     }
   }
 
   // big standalone buttons like in Documents pager
   &.osd {
-    min-width: 26px;
+    min-width: 32px;
     min-height: 32px;
 
-    &.image-button {
-      min-width: 30px;
-      &:only-child {
-        margin: 4px;
-        border-radius: 50%; // completely round when it is a single button
-        box-shadow: 0 1px 2px transparentize(black, 0.8); // drop shadow for the only child
-      };
-    }
+    @include focus-ring($outer: true, $offset: 1px);
+    transition: $button_transition;
 
     color: $osd_fg_color;
-    border-radius: 5px;
+    background-color: $osd_bg_color;
 
-    @include button(osd);
-
-    border: none;
-    box-shadow: none;
+    @if $contrast == 'high' {
+      box-shadow: 0 0 0 1px currentColor;
+    }
 
     &:hover {
-      @include button(osd-hover);
-
-      border: none;
-      box-shadow: none;
+      color: white;
+      background-color: lighten($osd_bg_color, 10%);
     }
 
-    &:active,
+    &.keyboard-activating,
+    &:active {
+      color: white;
+      background-color: lighten($osd_bg_color, 20%);
+    }
+
     &:checked {
-      @include button(osd-active);
+      background-color: lighten($osd_bg_color, 15%);
 
-      border: none;
-      box-shadow: none;
-    }
-  }
-
-  //overlay / OSD style
-  @at-root %osd_button,
-  .osd & {
-    @include button(osd);
-
-    &:hover { @include button(osd-hover); }
-
-    &:active,
-    &:checked { @include button(osd-active); }
-
-    &:disabled { @include button(osd-insensitive); }
-
-    &.flat {
-      @include button(undecorated);
-
-      box-shadow: none;
-
-      &:hover { @include button(osd-hover); }
-
-      &:disabled {
-        @include button(osd-insensitive);
-        background-image: none;
-        border-color: transparent;
-        box-shadow: none;
+      &:hover {
+        background-color: lighten($osd_bg_color, 25%);
       }
 
-      &:active,
-      &:checked { @include button(osd-active); }
+      &.keyboard-activating,
+      &:active {
+        background-color: lighten($osd_bg_color, 30%);
+      }
+    }
+
+    // Specificity bump
+    &:drop(active) {
+      @extend %button_basic_drop_active;
     }
   }
 
   // Suggested and Destructive Action buttons
-  @each $b_type, $b_color in (suggested-action, $selected_bg_color),
+  @each $b_type, $b_color in (suggested-action, $suggested_color),
                              (destructive-action, $destructive_color) {
     &.#{$b_type} {
-      @include button(normal, $b_color, white);
-      @include focus-ring($fc: $alt_focus_border_color);
+      color: white;
+      background-color: $b_color;
 
-      &.flat {
-        @include button(undecorated);
+      box-shadow: none;
 
-        color: $b_color; //FIXME: does it work on the dark variant?
+      @include focus-ring($outer: true, $offset: 1px);
+      transition: $button_transition;
+
+      &:hover {
+        background-color: shade($b_color, 0.95);
       }
 
-      &:hover { @include button(hover, $b_color, white); }
+      &.keyboard-activating,
+      &:active {
+        background-color: shade($b_color, 0.8);
+      }
 
-      &:active,
-      &:checked { @include button(active, $b_color, white); }
+      &:checked {
+        background-color: shade($b_color, 0.85);
 
-      &.flat {
-        &:disabled {
-          @include button(undecorated);
+        &:hover {
+          background-color: shade($b_color, 0.8);
+        }
 
-          color: transparentize($b_color, 0.2);
+        &.keyboard-activating,
+        &:active {
+          background-color: shade($b_color, 0.7);
         }
       }
+    }
+  }
 
-      &:disabled {
-        @include button(insensitive);
+  @at-root %button_basic_flat,
+  &.flat {
+    background-color: transparent;
+    @include focus-ring();
+    transition: $button_transition;
 
-        &:active,
-        &:checked { @include button(insensitive-active, $b_color, white); }
+    box-shadow: none;
+
+    @if $contrast == 'high' {
+      &:hover,
+      &.keyboard-activating,
+      &:active,
+      &:checked {
+        box-shadow: inset 0 0 0 1px $borders_color;
+      }
+    }
+
+    &:hover {
+      background-color: $view_hover_color;
+    }
+
+    &.keyboard-activating,
+    &:active {
+      background-color: $view_active_color;
+    }
+
+    &:checked {
+      background-color: $view_selected_color;
+
+      &:hover {
+        background-color: $view_selected_hover_color;
       }
 
-      .osd & {
-        @include button(osd, $b_color);
-
-        &:hover { @include button(osd-hover, $b_color); }
-
-        &:active,
-        &:checked { @include button(osd-active, $b_color); }
-
-        &:disabled { @include button(osd-insensitive, $b_color); }
+      &.keyboard-activating,
+      &:active {
+        background-color: $view_selected_active_color;
       }
+    }
+
+    @each $b_type, $b_color in (suggested-action, $suggested_text_color),
+                               (destructive-action, $destructive_text_color) {
+      &.#{$b_type} {
+        color: $b_color;
+      }
+    }
+
+    // Specificity bump
+    &:drop(active) {
+      @extend %button_basic_drop_active;
     }
   }
 
@@ -251,8 +241,8 @@ button {
 
   menubutton.circular &,
   &.circular { // force circular button shape
-    min-width: 32px;
-    min-height: 32px;
+    min-width: 34px;
+    min-height: 34px;
     padding: 0;
     border-radius: 9999px;
 
@@ -265,7 +255,7 @@ button {
   // simulates the shadow labels and icons normally have in buttons.
   animation: needs_attention 150ms ease-in;
 
-  background-image: radial-gradient(farthest-side, $_dot_color 96%, transparentize($_dot_color,1 ));
+  background-image: radial-gradient(farthest-side, $selected_bg_color 96%, transparentize($selected_bg_color, 1));
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
 
@@ -289,21 +279,18 @@ button {
 }
 
 button.color {
-  padding: 4px;
+  padding: 5px;
 
   > colorswatch:only-child {
     &, > overlay { border-radius: 0; }
 
     @if $variant == 'light' {
       box-shadow: 0 1px $shadow_color;
-
-      .osd & { box-shadow: none; }
     }
   }
 
   @if $variant == 'light' {
     .osd &, & {
-      &:disabled,
       &:active,
       &:checked { colorswatch:only-child { box-shadow: none; }}
     }
@@ -314,20 +301,22 @@ button.color {
 /* tone down as per new designs, see issue #1473 */
 %outline_button,
 button.outline {
-  @extend %undecorated_button;
-  border: 1px solid transparentize($borders_color, .5);
+  @extend %button_basic_flat;
 
-  &:hover { @include button(hover); }
+  @if $contrast == 'high' {
+    box-shadow: inset 0 0 0 1px $borders_color;
+  }
+  @else {
+    box-shadow: inset 0 0 0 1px #{"alpha(currentColor, .15)"};
 
-  &:active,
-  &:checked { @include button(active); }
-
-  @each $b_type, $b_color in (suggested-action, $selected_bg_color),
-                             (destructive-action, $destructive_color) {
-    &.#{$b_type} { // allow colored buttons in lists #3643
-      @include button(normal, $b_color, white);
-      @include focus-ring($fc: $alt_focus_border_color);
+    &:hover, &:active, &:checked {
+      box-shadow: none;
     }
+  }
+
+  // Specificity bump
+  &:drop(active) {
+    @extend %button_basic_drop_active;
   }
 }
 

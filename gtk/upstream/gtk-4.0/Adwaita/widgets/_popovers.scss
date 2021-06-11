@@ -54,9 +54,4 @@ popover.background {
       box-shadow: none;
     }
   }
-
-  &.touch-selection,
-  &.magnifier {
-    button { @extend %osd_button; }
-  }
 }

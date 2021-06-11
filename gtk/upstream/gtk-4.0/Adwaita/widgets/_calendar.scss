@@ -6,9 +6,7 @@ calendar {
     border-bottom: 1px solid $borders_color;
 
     > button {
-      border: none;
-      background: none;
-      box-shadow: none;
+      @extend %button_basic_flat;
       border-radius: 0;
     }
   }
