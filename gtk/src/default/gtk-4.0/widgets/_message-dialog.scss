@@ -24,20 +24,24 @@ window.dialog.message {
       border-bottom-right-radius: $window_radius+1;
     }
 
-    .dialog-action-area button {
-      padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
-      border-radius: 0;
-      border-left-style: solid;
-      border-right-style: none;
-      border-bottom-style: none;
+    .dialog-action-area {
+      border-top: 1px solid $borders_color;
 
-      &:first-child {
-        border-left-style: none;
-        border-bottom-left-radius: 7px;
-      }
+      > button {
+        @extend %button_basic_flat;
+        padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
+        border-radius: 0;
+        border: none;
+        border-left: 1px solid $borders_color;
 
-      &:last-child {
-        border-bottom-right-radius: 7px;
+        &:first-child {
+          border-bottom-left-radius: $window_radius+1;
+          border-left: none;
+        }
+
+        &:last-child {
+          border-bottom-right-radius: $window_radius+1;
+        }
       }
     }
   }
