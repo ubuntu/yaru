@@ -31,24 +31,6 @@ windowcontrols {
 // Reducing the amount of the palette's background colors to two
 .sidebar { background-color: $bg_color; }
 
-// increasing brightness and contrast of sliders and buttons in OSDs
-scale {
-    > trough > slider {
-        .osd & {
-            @include button(osd);
-            background-image: image(darken($osd_fg_color, 2%));
-
-            &:hover {
-                background-image: image(darken($osd_fg_color, 10%));
-            }
-
-            &:active {
-                background-image: image(darken($osd_fg_color, 25%));
-            }
-        }
-    }
-}
-
 // Entries drown if drawn on widgets with $base_color
 // Fixing this at least for notebooks, since entries on tabs is a common pattern
 @if $variant=='dark' {

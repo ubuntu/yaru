@@ -31,7 +31,7 @@ row {
       &.has-open-popup,
       &:hover { background-color: $view_selected_hover_color; }
 
-      &:active { background-color: $view_active_color; }
+      &:active { background-color: $view_selected_active_color; }
     }
   }
 

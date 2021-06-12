@@ -14,7 +14,13 @@ popover.menu {
       outline: none;
       transition: none;
 
-      &:selected { background: image($view_selected_color); }
+      &:selected {
+        background-color: $view_selected_color;
+
+        &:active {
+          background-color: $view_selected_active_color;
+        }
+      }
     }
   }
 
@@ -24,10 +30,14 @@ popover.menu {
     button.circular.image-button.model {
       @extend %outline_button;
 
+      outline: none;
       padding: 11px;
-      &:focus {
-         background-color: $view_selected_color;
-         border-color: $view_selected_color;
+      &:selected {
+        background-color: $view_selected_color;
+
+        &:active {
+          background-color: $view_selected_active_color;
+        }
       }
     }
   }
@@ -93,7 +103,7 @@ popover.menu {
       background-color: $view_selected_color;
 
       &:active {
-        background-color: $view_active_color; // matching buttons
+        background-color: $view_selected_active_color; // matching buttons
       }
     }
 

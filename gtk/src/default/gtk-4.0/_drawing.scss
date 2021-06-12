@@ -53,13 +53,13 @@
 
   @if $t==normal {
     color: $text_color;
-    border-color: $borders_color;
+    border-color: mix($borders_color, $base_color, 75%);
     background-color: $base_color;
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
   @if $t==insensitive {
     color: $insensitive_fg_color;
-    border-color: $borders_color;
+    border-color: mix($borders_color, $insensitive_bg_color, 75%);
     background-color: $insensitive_bg_color;
   }
   @if $t==osd {
@@ -91,184 +91,7 @@
 
 @function _border_color($c, $darker: false) {
   @if $darker == true { @return darken($c, 20%); }
-  @else { @return darken($c, 10%); } // Yaru change: less darken 15% -> 10%
-}
-
-$_default_button_c: if($ambiance, lighten($bg_color, 7.5%), lighten($bg_color, 2%)); // Yaru change: lighten bg color for ambiance theme
-@mixin button($t, $c:$_default_button_c, $tc:$fg_color) {
-//
-// Button drawing function
-//
-// $t:    button type,
-// $c:    base button color for colored* types
-// $tc:   optional text color for colored* types
-//
-// possible $t values:
-// normal, hover, active, checked-hover, checked-active, insensitive, insensitive-active,
-// osd, osd-hover, osd-active, osd-insensitive, undecorated
-//
-  $_button_shadow: 0 1px 2px transparentize($shadow_color, 0.03);
-
-  @if $t==normal {
-  //
-  // normal button
-  //
-    color: $tc;
-    outline-color: if($c != $_default_button_c, $alt_focus_border_color, $focus_border_color);
-    border-color: if($c!=$_default_button_c, _border_color($c, false), $borders_color); //tint if not default button color - Yaru change: less darken border-color
-    background-image: if($c == $bg_color, if($variant == 'light', image(lighten($c, 2%)), image(lighten($c, 4%))), image(lighten($c, 2%))); // Yaru change: remove gradient
-    @include _shadows(0 1px transparentize(black, 0.95)); // Yaru change: stronger shadows for flatter buttons
-  }
-
-  @else if $t==hover {
-  //
-  // hovered button
-  //
-    color: $tc;
-    border-color: if($c != $_default_button_c, _border_color($c), $borders_color);
-    background-image: if($c == $bg_color, if($variant == 'light', image(lighten($c, 4%)), image(lighten($c, 6%))), image(lighten($c, 4%)));  // Yaru change: remove gradient
-    @include _shadows(0 1px transparentize(black, if($variant=='light', 0.85, 0.9)));
-  }
-
-  @else if $t==active {
-  //
-  // pushed button
-  //
-    color: $tc;
-    border-color: if($c != $_default_button_c, _border_color($c), $borders_color);
-    background-image: if($variant == 'light', image(darken($c, 14%)), image(darken($c, 9%)));
-    box-shadow: none;
-  }
-
-  @else if $t==checked-hover {
-  //
-  // pushed togglebutton hover
-  //
-    color: $tc;
-    border-color: if($c != $_default_button_c, _border_color($c), $borders_color);
-    background-image: if($variant == 'light', image(darken($c, 18%)), image(darken($c, 12%)));
-    box-shadow: none;
-  }
-
-  @else if $t==checked-active {
-  //
-  // pushed togglebutton pushed further :)
-  //
-    color: $tc;
-    border-color: if($c != $_default_button_c, _border_color($c), $borders_color);
-    background-image: if($variant == 'light', image(darken($c, 22%)), image(darken($c, 14%)));
-    box-shadow: none;
-  }
-
-  @else if $t==insensitive {
-  //
-  // insensitive button
-  //
-    $_bg: if($c != $_default_button_c, mix($c, $base_color, 85%), $insensitive_bg_color);
-
-    color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color);
-    border-color: if($c != $_default_button_c, _border_color($c), $insensitive_borders_color);
-    background-image: image($_bg);
-  }
-
-  @else if $t==insensitive-active {
-  //
-  // insensitive pushed button
-  //
-    $_bg: if($variant == 'light', darken(mix($c, $base_color, 85%), 8%), darken(mix($c, $base_color, 85%), 6%));
-    $_bc: if($c != $_default_button_c, _border_color($c), $insensitive_borders_color);
-
-    color: if($c != $_default_button_c, mix($tc, $_bg, 60%), $insensitive_fg_color);
-    border-color: $_bc;
-    background-image: image($_bg);
-    box-shadow: none;
-  }
-
-  @else if $t==osd {
-  //
-  // normal osd button
-  //
-    $_bg: if($c != $_default_button_c, transparentize($c, 0.5), $osd_bg_color);
-
-    color: $osd_fg_color;
-    outline-color: if($c != $_default_button_c, $alt_focus_border_color, $focus_border_color);
-    border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($_bg);
-    background-clip: padding-box;
-  }
-
-  @else if $t==osd-hover {
-  //
-  // active osd button
-  //
-    $_bg: if($c != $_default_button_c, transparentize($c, 0.3), darken($osd_bg_color, 10%));
-
-    color: white;
-    border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($_bg);
-    background-clip: padding-box;
-  }
-
-  @else if $t==osd-active {
-  //
-  // active osd button
-  //
-    $_bg: if($c != $_default_button_c, $c, darken($osd_bg_color, 20%));
-
-    color: white;
-    border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($_bg);
-    background-clip: padding-box;
-    box-shadow: none;
-  }
-
-  @else if $t==osd-insensitive {
-  //
-  // insensitive osd button
-  //
-    color: $osd_insensitive_fg_color;
-    border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($osd_insensitive_bg_color);
-    background-clip: padding-box;
-  }
-
-  @else if $t==undecorated {
-  //
-  // reset
-  //
-    border-color: transparent;
-    background-color: transparent;
-    background-image: none;
-    box-shadow: none;
-  }
-  @else if $t==undecorated-hover {
-    border-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    background-color: $view_hover_color;
-  }
-  @else if $t==undecorated-active {
-    border-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    background-color: $view_active_color;
-  }
-  @else if $t==undecorated-checked {
-    border-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    background-color: $view_selected_color;
-  }
-  @else if $t==undecorated-checked-hover {
-    border-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    background-color: $view_selected_hover_color;
-  }
+  @else { @return darken($c, 15%); }
 }
 
 @mixin overshoot($p, $c:$fg_color) {
