@@ -47,6 +47,14 @@ scale > trough > highlight {
     transition: $button_transition;
 }
 
+// Fix popover wiggling effect (see #2903)
+popover.menu {
+    check,
+    radio {
+        transition: none;
+    }
+}
+
 // Use our own palette for 
 levelbar {
     > trough {
