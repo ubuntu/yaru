@@ -1,30 +1,10 @@
-$_header_bar_color: darken($bg_color, 10%);
-$_header_bar_gradient: linear-gradient(to top, darken($_header_bar_color, 0%), lighten($_header_bar_color, 0%)); // Yaru change: no gradients
-$_backdrop_header_bar_color: $bg_color; // Yaru change: add backdrop var for inverted headerbar
-
-@if $variant == 'dark' {
-  $_header_bar_gradient: linear-gradient(to top, lighten($_header_bar_color, 6%), lighten($_header_bar_color, 6%));
-}
-
-@if $ambiance { // Yaru change: add ambiance style vars
-  $_header_bar_color: $bg_color;
-  $_header_bar_gradient: linear-gradient(to top, $_header_bar_color, $_header_bar_color);
-  $_backdrop_header_bar_color: lighten($_header_bar_color, 5%);
-}
-
 headerbar {
   padding: 0 6px;
   min-height: 46px;
   border-width: 0 0 1px;
   border-style: solid;
   border-color: $alt_borders_color;
-  @if $ambiance {
-    box-shadow: inset 0 1px lighten($_header_bar_color, 6%); // Yaru change: add top highlight for the ambiance version
-    background-image: $_header_bar_gradient;  // Yaru change
-  } else {  // Yaru change
-    background-color: $headerbar_bg_color;  // Yaru change
-  }   // Yaru change
-  color: $fg_color; // Yaru change: reinsert color for inverted headerbar
+  background-color: $headerbar_bg_color;
 
   > windowhandle > box {
     &,
@@ -116,8 +96,8 @@ windowcontrols {
     @extend %button_basic_flat;
 
     border-radius: 9999px;
-    padding: 2px; // Yaru change: smaller window controls
-    margin: 0 7px; // Yaru change: increase vertical margin because of smaller window controls
+    padding: 7px;
+    margin: 0 2px;
     min-width: 0;
     min-height: 0;
   }

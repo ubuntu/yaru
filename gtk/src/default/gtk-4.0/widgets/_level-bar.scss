@@ -81,7 +81,7 @@ levelbar {
 
       &.high,
       &:not(.empty) {
-        background-color: $success_color; // Yaru change: use our own palette
+        background-color: $fill_color;
       }
 
       &.full {

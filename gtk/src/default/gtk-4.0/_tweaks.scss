@@ -1,6 +1,8 @@
-// Orange close button
+// Smaller windowcontrols and orange close button
 windowcontrols {
     button {
+        padding: 2px;
+        margin: 0 7px;
         &.close {
             background: $selected_bg_color;
 
@@ -23,11 +25,6 @@ windowcontrols {
     }
 }
 
-// Fix windowcontrols misalignement
-windowcontrols {
-    margin-left: 7px;
-}
-
 // Reducing the amount of the palette's background colors to two
 .sidebar { background-color: $bg_color; }
 
@@ -47,3 +44,16 @@ scale > trough > slider,
 scale > trough > highlight {
     transition: $button_transition;
 }
+
+// Use our own palette for 
+levelbar {
+    > trough {
+        > block {
+            &.high,
+            &:not(.empty) {
+                background-color: $success_color;
+            }
+        }
+    }
+}
+  

@@ -13,6 +13,8 @@ window.background.csd {
 }
 
 headerbar {
+  color: $fg_color; // reinsert fg_color
+
   @import 'widgets/buttons';
   @import 'widgets/switch';
   @import 'widgets/scale';
@@ -24,6 +26,19 @@ windowhandle separator.vertical {
 }
 
 @import 'widgets/header-bar';
+
+// Inverted headerbar tweaks
+headerbar {
+  box-shadow: inset 0 1px lighten($headerbar_bg_color, 6%); // Top highlight
+
+  // Reinsert windowcontrols size tweak
+  windowcontrols {
+    button {
+      padding: 2px;
+      margin: 0 7px;
+    }
+  }
+}
 
 // Must be imported after _header-bar
 headerbar {
