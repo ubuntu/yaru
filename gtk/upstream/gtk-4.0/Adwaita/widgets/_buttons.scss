@@ -198,10 +198,10 @@ button {
       }
     }
 
-    @each $b_type, $b_color in (suggested-action, $suggested_text_color),
-                               (destructive-action, $destructive_text_color) {
+    @each $b_type, $b_color in (suggested-action, $suggested_color),
+                               (destructive-action, $destructive_color) {
       &.#{$b_type} {
-        color: $b_color;
+        color: if($variant == 'light', darken($b_color, 10%), lighten($b_color, 10%));
       }
     }
 
