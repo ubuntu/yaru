@@ -1,5 +1,4 @@
 headerbar {
-  padding: 0 6px;
   min-height: 46px;
   border-width: 0 0 1px;
   border-style: solid;
@@ -7,6 +6,8 @@ headerbar {
   background-color: $headerbar_bg_color;
 
   > windowhandle > box {
+    padding: 0 6px;
+
     &,
     > box.start,
     > box.end {
@@ -28,8 +29,11 @@ headerbar {
   }
 
   &.default-decoration {
-    min-height: 28px;
-    padding: 4px;
+    min-height: 36px;
+
+    > windowhandle > box {
+      padding: 0 4px;
+    }
 
     windowcontrols {
       button,
