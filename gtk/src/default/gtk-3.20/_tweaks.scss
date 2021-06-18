@@ -114,16 +114,16 @@ button.titlebutton:not(.appmenu) {
 
     &.close {
       color: $selected_fg_color;
-      @include draw_circle(#E95420);
+      @include draw_circle($selected_bg_color);
 
       &:hover {
         @include draw_circle($selected_bg_color);
-        @include draw_circle(lighten(#E95420, 5%));
+        @include draw_circle(lighten($selected_bg_color, 5%));
       }
 
       &:active {
         @include draw_circle($selected_bg_color);
-        @include draw_circle(darken(#E95420, 5%));
+        @include draw_circle(darken($selected_bg_color, 5%));
       }
 
       &:backdrop {
