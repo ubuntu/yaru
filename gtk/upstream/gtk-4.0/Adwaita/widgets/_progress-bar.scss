@@ -14,10 +14,11 @@ progressbar {
     }
   }
 
-  // FIXME: insensitive state missing and some other state should be set probably
-  font-size: smaller;
-  color: transparentize($fg_color, 0.6);
-  font-feature-settings: "tnum";
+  > text {
+    @extend .dim-label;
+    font-size: smaller;
+    font-feature-settings: "tnum";
+  }
 
   &:disabled {
     filter: opacity(.5);

@@ -29,10 +29,10 @@ calendar {
         &:selected {
           border-radius: 3px;
 
-          background-color: $selected_bg_color;
-          color: $selected_fg_color;
+          background-color: $accent_color;
+          color: $accent_text;
 
-          &:disabled { color: mix($selected_fg_color, $selected_bg_color, 50%); }
+          &:disabled { color: gtkmix($accent_text, $accent_color, 50%); }
         }
       }
 

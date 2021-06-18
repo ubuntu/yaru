@@ -45,6 +45,7 @@ popover.menu {
   & > arrow,
   &.background > contents {
     background-color: $menu_color;
+    color: $text_color;
     padding: $menu-margin;
   }
 
@@ -63,7 +64,7 @@ popover.menu {
   radio {
     &, &:hover, &:hover:active, &:checked, &:disabled {
       background: none;
-      color: $text_color;
+      color: inherit;
 
       transform: scale(0.8);
     }
@@ -72,7 +73,7 @@ popover.menu {
   //only menu radios have a border
   radio {
     padding: 0;
-    border: 1.2px solid transparentize($text_color, if($contrast == "high", 0, 0.7));
+    border: 1.2px solid gtkalpha(currentColor, if($contrast == "high", 1, 0.3));
   }
 
   check,
@@ -99,7 +100,6 @@ popover.menu {
 
     &:hover,
     &:selected {
-      color: $text-color;
       background-color: $view_selected_color;
 
       &:active {

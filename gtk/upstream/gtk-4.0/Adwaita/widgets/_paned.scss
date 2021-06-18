@@ -9,7 +9,7 @@ paned {
     background-image: image($borders_color);
     background-size: 1px 1px;
 
-    &:selected { background-image: image($selected_bg_color); } // FIXME is this needed?
+    &:selected { background-image: image($accent_color); } // FIXME is this needed?
 
     &.wide {
       min-width: 5px;

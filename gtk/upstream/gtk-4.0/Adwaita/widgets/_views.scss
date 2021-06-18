@@ -48,8 +48,8 @@ iconview {
 }
 
 rubberband {
-  border: 1px solid $selected_bg_color;
-  background-color: transparentize($selected_bg_color, 0.8);
+  border: 1px solid $accent_color;
+  background-color: gtkalpha($accent_color, 0.2);
 }
 
 flowbox {

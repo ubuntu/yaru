@@ -8,15 +8,14 @@ link {
   }
 
   &:hover {
-    $_fg: lighten($link_color, 10%);
-    color: $_fg;
+    color: gtkshade($link_color, 1.1);
   }
 
   &:active {
     color: $link_color;
   }
 
-  &:disabled { color: transparentize(desaturate($link_color, 100%), 0.2); }
+  &:disabled { color: gtkalpha(currentColor, 0.5); }
 }
 
 link {
