@@ -9,14 +9,22 @@
 // define variables for them in _colors.scss
 
 // The main accent color and the matching text value
-@define-color accent_color #{$blue_3};
+@define-color accent_color #{$orange_5};
 @define-color accent_text #{$light_1};
 
 // destructive-action buttons
-@define-color destructive_color #{$red_3};
+@define-color destructive_color #{$red_4};
 @define-color destructive_text #{$light_1};
 
 // Levelbars, entries, labels and infobars. These don't need text colors
-@define-color success_color #{$green_3};
+@define-color success_color #{$green_4};
 @define-color warning_color #{$yellow_5};
-@define-color error_color #{$red_3};
+@define-color error_color #{$red_4};
+
+// The secondary accent color and the matching text value - Yaru change
+@define-color fill_color #{#77216F};
+@define-color fill_text #{$light_1};
+
+// suggested-action buttons and levelbar - Yaru change
+@define-color suggested_color #{$green_4};
+@define-color suggested_text #{$light_1};
