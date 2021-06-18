@@ -8,6 +8,9 @@ $variant: 'dark';
 $contrast: 'normal';
 $ambiance: false;
 
+@import 'palette';
+@import 'defaults';
+@import 'functions';
 @import 'colors';
 @import 'drawing';
 @import 'common';

@@ -39,12 +39,12 @@ entry {
     @each $e_type, $e_color in (error, $error_color),
                                (warning, $warning_color) {
       &.#{$e_type} {
-        color: mix($e_color, $text_color, 70%);
+        color: gtkmix($e_color, $text_color, 70%);
 
-        @include focus-ring($focus-state: 'focus-within', $fc: transparentize($e_color, 0.5));
+        @include focus-ring($focus-state: 'focus-within', $fc: gtkalpha($e_color, 0.5));
 
         > text {
-          > selection:focus-within { background-color: transparentize($e_color, .8); }
+          > selection:focus-within { background-color: gtkalpha($e_color, .2); }
 
           > cursor-handle > contents { background-color: $e_color; }
         }
@@ -56,7 +56,7 @@ entry {
 
       &:hover { color: $fg_color; }
 
-      &:active { color: $selected_bg_color; }
+      &:active { color: $accent_standalone_color; }
 
       &.left { margin-right: 6px; }
       &.right { margin-left: 6px; }
@@ -90,7 +90,7 @@ entry {
       background-image: none;
       border-radius: 0;
       border-width: 0 0 2px;
-      border-color: $selected_bg_color;
+      border-color: $accent_color;
       border-style: solid;
       box-shadow: none;
     }
@@ -110,6 +110,6 @@ treeview entry {
     background-image: none;
     background-color: $base_color;
 
-    &:focus-within { border-color: $selected_bg_color; }
+    &:focus-within { border-color: $accent_color; }
   }
 }

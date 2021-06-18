@@ -1,69 +1,7 @@
-// Smaller windowcontrols and orange close button
-windowcontrols {
-    margin-left: 7px; // Fix windowcontrols misalignement caused by smaller windowcontrols
-
-    button {
-        padding: 2px;
-        margin: 0 7px;
-        &.close {
-            background: $selected_bg_color;
-
-            &:hover {
-                background: lighten($selected_bg_color, 5%);
-            }
-
-            &:active {
-                background: darken($selected_bg_color, 5%);
-            }
-
-            &:backdrop {
-                background: desaturate($selected_bg_color, 100%);
-            }
-
-            image {
-                color: $porcelain;
-            }
-        }
-    }
-}
-
-// Reducing the amount of the palette's background colors to two
-.sidebar { background-color: $bg_color; }
-
-// Entries drown if drawn on widgets with $base_color
-// Fixing this at least for notebooks, since entries on tabs is a common pattern
-@if $variant=='dark' {
-    notebook entry { background-color: darken($base_color, 2%); }
-}
-
-// Add some transitions on widgets
-check,
-radio,
-switch,
-switch slider,
-scale > trough,
-scale > trough > slider,
-scale > trough > highlight {
-    transition: $button_transition;
-}
-
-// Fix popover wiggling effect (see #2903)
-popover.menu {
-    check,
-    radio {
-        transition: none;
-    }
-}
-
-// Use our own palette for high and not empty levelbar
-levelbar {
-    > trough {
-        > block {
-            &.high,
-            &:not(.empty) {
-                background-color: $success_color;
-            }
-        }
-    }
-}
-  
+@import 'tweaks/orange-close-windowcontrols.scss';
+@import 'tweaks/sidebar-background.scss';
+@import 'tweaks/notebook-entry-background.scss';
+@import 'tweaks/widgets-transitions.scss';
+@import 'tweaks/popover-checks-transition-fix.scss';
+@import 'tweaks/green-levelbar.scss';
+@import 'tweaks/green-suggested-buttons.scss';

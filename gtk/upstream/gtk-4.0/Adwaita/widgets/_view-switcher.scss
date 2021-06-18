@@ -69,9 +69,7 @@ indicatorbin {
   > mask { padding: 1px; }
 
   > indicator, > mask {
-    $_indicator_color: #3584e4;
-
-    background: $_indicator_color;
+    background: $accent_color;
     min-width: 6px;
     min-height: 6px;
     border-radius: 100%;

@@ -9,7 +9,7 @@ $ambiance: true;
 
 // Fix for window light background overflow on top corners of the inverted headerbar
 window.background.csd {
-  background-image: linear-gradient(to bottom, $bg_color $window_radius, $bg_color_light 1px);
+  background-image: linear-gradient(to bottom, $bg_color $window_radius, $light_bg 1px);
 }
 
 headerbar {
@@ -45,6 +45,13 @@ headerbar {
   @import 'widgets/view-switcher';
 }
 
+// Reinsert tweaks
+headerbar {
+  @import 'tweaks/widgets-transitions.scss';
+  @import 'tweaks/green-levelbar.scss';
+  @import 'tweaks/green-suggested-buttons.scss'
+}
+
 //
 // Fixes for popover menus, as they are children of the headerbar we must restyle them once again to avoid dark widgets into light menus
 //
@@ -60,4 +67,12 @@ popover {
   @import 'widgets/switch';
   @import 'widgets/scale';
   @import 'widgets/entries';
+
+  // Reinsert tweaks
+  @import 'tweaks/widgets-transitions.scss';
+  @import 'tweaks/green-levelbar.scss';
+  @import 'tweaks/green-suggested-buttons.scss';
 }
+
+// Already have popover selector
+@import 'tweaks/popover-checks-transition-fix.scss';

@@ -1,7 +1,3 @@
-@function gtkalpha($c,$a) {
-  @return unquote("alpha(#{$c},#{$a})");
-}
-
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
@@ -47,7 +43,7 @@ selection {
   color: transparent;
 
   &:focus-within {
-    background-color: transparentize($selected_bg_color, 0.7);
+    background-color: gtkalpha($accent_color, 0.3);
   }
 }
 

@@ -1,65 +1,76 @@
 // When color definition differs for dark and light variant
 // it gets @if ed depending on $variant
-@import 'palette';
 
-$base_color: if($variant == 'light', #ffffff, lighten($jet, 6%));
+$light_fg: $dark_3;
+$dark_fg: $light_2;
+$light_bg: #FAFAFA;
+$dark_bg: lighten(#181818, 8%);
+$ambiance_bg: #323030;
+
+$accent_color: gtkcolor(accent_color);
+$accent_text: gtkcolor(accent_text);
+$fill_color: gtkcolor(fill_color);
+$fill_text: gtkcolor(fill_text);
+$destructive_color: gtkcolor(destructive_color);
+$destructive_text: gtkcolor(destructive_text);
+$suggested_color: gtkcolor(suggested_color);
+$suggested_text: gtkcolor(suggested_text);
+
+$success_color: gtkcolor(success_color);
+$warning_color: gtkcolor(warning_color);
+$error_color: gtkcolor(error_color);
+
+$base_color: if($variant == 'light', $light_1, lighten(#181818, 6%));
 $text_color: if($variant == 'light', black, white);
-$bg_color_light: #FAFAFA;
-$bg_color_dark: lighten($jet, 8%);
-$bg_color: if($ambiance, #323030, if($variant == 'light', $bg_color_light, $bg_color_dark));
-$fg_color: if($variant == 'light', $inkstone, $porcelain);
+$bg_color: if($ambiance, $ambiance_bg, if($variant == 'light', $light_bg, $dark_bg));
+$fg_color: if($variant == 'light', $light_fg, $dark_fg);
 
-$selected_fg_color: $primary_accent_fg_color;
-$selected_bg_color: if($variant == 'light', $primary_accent_bg_color, darken($primary_accent_bg_color, 6%));
-$selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+$accent_standalone_color: gtkmix($accent_color, $text_color, if($variant == 'dark', 50%, 75%));
+$destructive_standalone_color: gtkmix($destructive_color, $text_color, if($variant == 'dark', 50%, 75%));
+$suggested_standalone_color: gtkmix($suggested_color, $text_color, if($variant == 'dark', 50%, 75%));
+
 $borders_color: if($variant == 'light', darken($bg_color, 20%), darken($bg_color, 8%));
 $alt_borders_color: if($ambiance, darken($bg_color, 7%), if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 8%)));
 $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
-$link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
-$link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+$link_color: $accent_standalone_color;
+$link_visited_color: gtkmix($accent_standalone_color, $text_color, 80%);
 $dark_fill: mix($borders_color, $bg_color, 50%);
 $headerbar_bg_color: $bg_color;
 $menu_color: $base_color;
 
-$view_hover_color: #{"alpha(currentColor, .07)"};
-$view_active_color: #{"alpha(currentColor, .16)"};
-$view_selected_color: #{"alpha(currentColor, .1)"};
-$view_selected_hover_color: #{"alpha(currentColor, .13)"};
-$view_selected_active_color: #{"alpha(currentColor, .19)"};
+$view_hover_color: gtkalpha(currentColor, .07);
+$view_active_color: gtkalpha(currentColor, .16);
+$view_selected_color: gtkalpha(currentColor, .1);
+$view_selected_hover_color: gtkalpha(currentColor, .13);
+$view_selected_active_color: gtkalpha(currentColor, .19);
 
-$trough_color: #{"alpha(currentColor, .15)"};
-$trough_hover_color: #{"alpha(currentColor, .2)"};
-$trough_active_color: #{"alpha(currentColor, .25)"};
+$trough_color: gtkalpha(currentColor, .15);
+$trough_hover_color: gtkalpha(currentColor, .2);
+$trough_active_color: gtkalpha(currentColor, .25);
 
-$button_color: #{"alpha(currentColor, .1)"};
-$button_hover_color: #{"alpha(currentColor, .15)"};
-$button_active_color: #{"alpha(currentColor, .25)"};
-$button_checked_color: #{"alpha(currentColor, .2)"};
-$button_checked_hover_color: #{"alpha(currentColor, .25)"};
-$button_checked_active_color: #{"alpha(currentColor, .35)"};
+$button_color: gtkalpha(currentColor, .1);
+$button_hover_color: gtkalpha(currentColor, .15);
+$button_active_color: gtkalpha(currentColor, .25);
+$button_checked_color: gtkalpha(currentColor, .2);
+$button_checked_hover_color: gtkalpha(currentColor, .25);
+$button_checked_active_color: gtkalpha(currentColor, .35);
 
-$fill_color: $secondary_accent_bg_color;
-$fill_text_color: $selected_fg_color;
-$fill_hover_color: mix($secondary_accent_bg_color, $text_color, 90%);
-$fill_active_color: mix($secondary_accent_bg_color, $text_color, 80%);
+$fill_color: $fill_color;
+$fill_text_color: $fill_text;
+$fill_hover_color: gtkmix($fill_color, currentColor, 90%);
+$fill_active_color: gtkmix($fill_color, black, 80%);
 
-$slider_color: if($variant == 'light', mix(white, $base_color, 80%), $warm_gray);
-$slider_hover_color: if($variant == 'light', white, lighten($warm_gray, 4%));
+$slider_color: if($variant == 'light', mix(white, $base_color, 80%), #AEA79F);
+$slider_hover_color: if($variant == 'light', white, lighten(#AEA79F, 4%));
 
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
 $scrollbar_slider_hover_color: mix($fg_color, $bg_color, 80%);
-$scrollbar_slider_active_color: darken($selected_bg_color, 10%);
-
-$warning_color: $yellow;
-$error_color: $red;
-$success_color: lighten($green, 5%);
-$suggested_color: $success_color;
-$destructive_color: if($variant == 'light', $red, darken($red, 10%));
+$scrollbar_slider_active_color: $accent_color;
 
 $osd_fg_color: #eeeeec;
 $osd_text_color: white;
-$osd_bg_color: transparentize(lighten($jet, 2%),0.025);
+$osd_bg_color: transparentize(lighten($dark_4, 2%),0.025);
 $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
 $osd_borders_color: transparentize(black, 0.3);
@@ -77,6 +88,6 @@ $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
 //special cased widget colors
-$focus_border_color: transparentize(lighten($primary_accent_bg_color, 14%), 0.3);
+$focus_border_color:  gtkalpha($accent_color, 0.5);
 $alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), transparentize(white,0.7));
 $dim_label_opacity: 0.55;

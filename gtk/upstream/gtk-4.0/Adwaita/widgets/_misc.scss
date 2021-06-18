@@ -80,7 +80,7 @@ window.dialog.print {
 
     paper {
       background: white;
-      color: #2e3436;
+      color: $light_fg;
       border: 1px solid $borders_color;
     }
   }
@@ -137,7 +137,7 @@ statuspage > scrolledwindow > viewport > box {
 
     > .icon {
       @if $contrast == 'normal' {
-        color: transparentize($fg_color, 0.5);
+        color: gtkalpha(currentColor, 0.5);
       }
 
       &:not(:last-child) {

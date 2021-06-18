@@ -1,7 +1,7 @@
 // stuff for .needs-attention
 @keyframes needs_attention {
-  from { background-image: radial-gradient(farthest-side, $selected_bg_color 0%, transparentize($selected_bg_color, 1) 0%); }
-  to { background-image: radial-gradient(farthest-side, $selected_bg_color 95%, transparentize($selected_bg_color, 1)); }
+  from { background-image: radial-gradient(farthest-side, $accent_color 0%, transparent 0%); }
+  to { background-image: radial-gradient(farthest-side, $accent_color 95%, transparent); }
 }
 
 %button,
@@ -101,19 +101,19 @@ button {
     &.keyboard-activating,
     &:active {
       color: white;
-      background-color: lighten($osd_bg_color, 20%);
+      background-color: darken($osd_bg_color, 20%);
     }
 
     &:checked {
-      background-color: lighten($osd_bg_color, 15%);
+      background-color: darken($osd_bg_color, 15%);
 
       &:hover {
-        background-color: lighten($osd_bg_color, 25%);
+        background-color: darken($osd_bg_color, 5%);
       }
 
       &.keyboard-activating,
       &:active {
-        background-color: lighten($osd_bg_color, 30%);
+        background-color: darken($osd_bg_color, 30%);
       }
     }
 
@@ -123,45 +123,58 @@ button {
     }
   }
 
-  // Suggested and Destructive Action buttons
-  @each $b_type, $b_color in (suggested-action, $suggested_color),
-                             (destructive-action, $destructive_color) {
-    &.#{$b_type} {
-      color: white;
-      background-color: $b_color;
+  @at-root %filled_button {
+    box-shadow: none;
 
-      box-shadow: none;
+    @include focus-ring($outer: true, $offset: 1px);
+    transition: $button_transition;
 
-      @include focus-ring($outer: true, $offset: 1px);
-      transition: $button_transition;
+    &:hover {
+      background-image: image(gtkalpha(currentColor, .1));
+    }
+
+    &.keyboard-activating,
+    &:active {
+      background-image: image(transparentize(black, .8));
+    }
+
+    &:checked {
+      background-image: image(transparentize(black, .85));
 
       &:hover {
-        background-color: shade($b_color, 0.95);
+        background-image: image(transparentize(black, .95));
       }
 
       &.keyboard-activating,
       &:active {
-        background-color: shade($b_color, 0.8);
+        background-image: image(transparentize(black, .7));
       }
+    }
+  }
 
-      &:checked {
-        background-color: shade($b_color, 0.85);
+  &.destructive-action {
+    @extend %filled_button;
 
-        &:hover {
-          background-color: shade($b_color, 0.8);
-        }
+    color: $destructive_text;
 
-        &.keyboard-activating,
-        &:active {
-          background-color: shade($b_color, 0.7);
-        }
-      }
+    &, &:checked {
+      background-color: $destructive_color;
+    }
+  }
+
+  &.suggested-action {
+    @extend %filled_button;
+
+    color: $accent_text;
+
+    &, &:checked {
+      background-color: $accent_color;
     }
   }
 
   @at-root %button_basic_flat,
   &.flat {
-    background-color: transparent;
+    background: transparent;
     @include focus-ring();
     transition: $button_transition;
 
@@ -177,32 +190,33 @@ button {
     }
 
     &:hover {
-      background-color: $view_hover_color;
+      background: $view_hover_color;
     }
 
     &.keyboard-activating,
     &:active {
-      background-color: $view_active_color;
+      background: $view_active_color;
     }
 
     &:checked {
-      background-color: $view_selected_color;
+      background: $view_selected_color;
 
       &:hover {
-        background-color: $view_selected_hover_color;
+        background: $view_selected_hover_color;
       }
 
       &.keyboard-activating,
       &:active {
-        background-color: $view_selected_active_color;
+        background: $view_selected_active_color;
       }
     }
 
-    @each $b_type, $b_color in (suggested-action, $suggested_color),
-                               (destructive-action, $destructive_color) {
-      &.#{$b_type} {
-        color: if($variant == 'light', darken($b_color, 10%), lighten($b_color, 10%));
-      }
+    &.suggested-action {
+      color: $accent_standalone_color;
+    }
+
+    &.destructive-action {
+      color: $destructive_standalone_color;
     }
 
     // Specificity bump
@@ -255,7 +269,7 @@ button {
   // simulates the shadow labels and icons normally have in buttons.
   animation: needs_attention 150ms ease-in;
 
-  background-image: radial-gradient(farthest-side, $selected_bg_color 96%, transparentize($selected_bg_color, 1));
+  background-image: radial-gradient(farthest-side, $accent_color 96%, transparent);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
 
@@ -282,17 +296,20 @@ button.color {
   padding: 5px;
 
   > colorswatch:only-child {
-    &, > overlay { border-radius: 0; }
+    border-radius: 2.5px;
+
+    > overlay {
+      border-radius: 2px;
+    }
+
+    &:disabled {
+      filter: none;
+    }
 
     @if $variant == 'light' {
-      box-shadow: 0 1px $shadow_color;
-    }
-  }
-
-  @if $variant == 'light' {
-    .osd &, & {
-      &:active,
-      &:checked { colorswatch:only-child { box-shadow: none; }}
+      &.light > overlay {
+        border-color: transparentize(black, .8);
+      }
     }
   }
 }
@@ -307,7 +324,7 @@ button.outline {
     box-shadow: inset 0 0 0 1px $borders_color;
   }
   @else {
-    box-shadow: inset 0 0 0 1px #{"alpha(currentColor, .15)"};
+    box-shadow: inset 0 0 0 1px gtkalpha(currentColor, .15);
 
     &:hover, &:active, &:checked {
       box-shadow: none;

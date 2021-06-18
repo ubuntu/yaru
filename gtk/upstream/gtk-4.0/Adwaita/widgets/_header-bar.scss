@@ -132,11 +132,11 @@ windowtitle {
 window.devel {
   headerbar {
     $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-               linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.8));
+               linear-gradient(to right, transparent 65%, gtkalpha($accent_color, 0.2));
 
     @if $variant == 'dark' {
       $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-                 linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.9));
+                 linear-gradient(to right, transparent 65%, gtkalpha($accent_color, 0.1));
     }
 
     background: $headerbar_bg_color $gradient;
