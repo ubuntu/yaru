@@ -6,22 +6,22 @@ windowcontrols {
         padding: 2px;
         margin: 0 7px;
         &.close {
-            background: $selected_bg_color;
+            background: $orange_5;
 
             &:hover {
-                background: lighten($selected_bg_color, 5%);
+                background: lighten($orange_5, 5%);
             }
 
             &:active {
-                background: darken($selected_bg_color, 5%);
+                background: darken($orange_5, 5%);
             }
 
             &:backdrop {
-                background: desaturate($selected_bg_color, 100%);
+                background: desaturate($orange_5, 100%);
             }
 
             image {
-                color: $porcelain;
+                color: $light_2;
             }
         }
     }

@@ -9,7 +9,7 @@ $ambiance: true;
 
 // Fix for window light background overflow on top corners of the inverted headerbar
 window.background.csd {
-  background-image: linear-gradient(to bottom, $bg_color $window_radius, $bg_color_light 1px);
+  background-image: linear-gradient(to bottom, $bg_color $window_radius, $light_bg 1px);
 }
 
 headerbar {
