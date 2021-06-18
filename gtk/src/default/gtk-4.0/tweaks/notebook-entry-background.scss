@@ -1,0 +1,5 @@
+// Entries drown if drawn on widgets with $base_color
+// Fixing this at least for notebooks, since entries on tabs is a common pattern
+@if $variant=='dark' {
+    notebook entry { background-color: darken($base_color, 2%); }
+}

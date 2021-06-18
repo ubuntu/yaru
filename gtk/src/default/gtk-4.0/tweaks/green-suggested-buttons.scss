@@ -1,0 +1,19 @@
+// Green suggested buttons
+%button,
+button {
+    &.suggested-action {
+        color: $suggested_text;
+    
+        &, &:checked {
+            &:not(.flat) {
+                background-color: $suggested_color;
+            }
+        }
+    }
+
+    &.flat {
+        &.suggested-action {
+            color: $suggested_standalone_color;
+        }
+    }
+}
