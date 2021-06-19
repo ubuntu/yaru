@@ -30,8 +30,8 @@ Let's say we want a Blue Yaru variant from Default.
         +++ b/gtk/meson.build
         @@ -1,5 +1,5 @@
         flavours = []
-        -foreach flavour: ['default', 'dark', 'light']
-        +foreach flavour: ['default', 'dark', 'light', 'blue']
+        -foreach flavour: ['default', 'dark']
+        +foreach flavour: ['default', 'dark', 'blue']
         if not get_option(flavour)
             message('skip flavour ' + flavour)
             continue
