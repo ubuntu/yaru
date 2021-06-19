@@ -103,11 +103,11 @@ button.titlebutton:not(.appmenu) {
 
       &, &:backdrop {
         &:hover {
-          @include draw_circle(if($ambiance==true, lighten($inkstone, 7%), $_base_hover_color));
+          @include draw_circle($_base_hover_color);
         }
 
         &:active {
-          @include draw_circle(if($ambiance==true, lighten($inkstone, 12%), $_base_active_color));
+          @include draw_circle($_base_active_color);
         }
       }
     }
@@ -127,8 +127,8 @@ button.titlebutton:not(.appmenu) {
       }
 
       &:backdrop {
-        @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 15%, 40%), 10%)));
-        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', if($ambiance==true, 20%, 45%), 15%))); }
+        @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
+        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
       }
     }
   }

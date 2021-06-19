@@ -1,8 +1,4 @@
 @import "palette";
-
-/* set $ambiance to null, unless already defined */
-$ambiance: null !default;
-
 @import 'apps/tweak-tool';
 @import 'apps/nautilus';
 @import 'apps/gnome-terminal';
