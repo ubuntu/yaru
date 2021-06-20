@@ -1,8 +1,8 @@
-$panel_bg_color: lighten($jet, 2%);
+$panel_bg_color: #323030;
 $panel_fg_color: $porcelain;
 $wm_border_unfocused: none;
 $wm_border_focused: if($variant=='light', transparentize(black, 0.9), transparentize($borders_color, 0.1));
-$titlebar_bg_color: #323030;
+$titlebar_bg_color: $panel_bg_color;
 $titlebar_fg_color: $porcelain;
 
 UnityDecoration {
