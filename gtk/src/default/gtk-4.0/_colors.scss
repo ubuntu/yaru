@@ -8,8 +8,8 @@ $dark_bg: lighten(#181818, 8%);
 
 $accent_color: gtkcolor(accent_color);
 $accent_text: gtkcolor(accent_text);
-$fill_color: gtkcolor(fill_color);
-$fill_text: gtkcolor(fill_text);
+$fill_color: gtkcolor(accent_color);
+$fill_text: gtkcolor(accent_text);
 $destructive_color: gtkcolor(destructive_color);
 $destructive_text: gtkcolor(destructive_text);
 $suggested_color: gtkcolor(suggested_color);
