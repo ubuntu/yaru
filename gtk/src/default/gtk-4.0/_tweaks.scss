@@ -1,7 +1,94 @@
-@import 'tweaks/orange-close-windowcontrols.scss';
-@import 'tweaks/sidebar-background.scss';
-@import 'tweaks/notebook-entry-background.scss';
-@import 'tweaks/widgets-transitions.scss';
-@import 'tweaks/popover-checks-transition-fix.scss';
-@import 'tweaks/green-levelbar.scss';
-@import 'tweaks/green-suggested-buttons.scss';
+// Smaller windowcontrols and orange close button
+windowcontrols {
+    margin-left: 7px; // Fix windowcontrols misalignement caused by smaller windowcontrols
+
+    button {
+        padding: 2px;
+        margin: 0 7px;
+        &.close {
+            background: $orange_5;
+
+            &:hover {
+                background: lighten($orange_5, 5%);
+            }
+
+            &:active {
+                background: darken($orange_5, 5%);
+            }
+
+            &:backdrop {
+                background: desaturate($orange_5, 100%);
+            }
+
+            image {
+                color: $light_2;
+            }
+        }
+    }
+}
+
+// Reducing the amount of the palette's background colors to two
+.sidebar {
+    background-color: $bg_color;
+}
+
+// Entries drown if drawn on widgets with $base_color
+// Fixing this at least for notebooks, since entries on tabs is a common pattern
+// Remove this when upstream makes entries have a light border in the dark theme
+@if $variant== "dark" {
+    notebook entry {
+        background-color: darken($base_color, 2%);
+    }
+}
+
+// Add some transitions on widgets
+check,
+radio,
+switch,
+switch slider,
+scale > trough,
+scale > trough > slider,
+scale > trough > highlight {
+    transition: $button_transition;
+}
+
+// Fix popover wiggling effect (see #2903)
+popover.menu {
+    check,
+    radio {
+        transition: none;
+    }
+}
+
+// Use our own palette for high and not empty levelbar
+levelbar {
+    > trough {
+        > block {
+            &.high,
+            &:not(.empty) {
+                background-color: $success_color;
+            }
+        }
+    }
+}
+
+// Green suggested buttons
+%button,
+button {
+    &.suggested-action {
+        color: $suggested_text;
+
+        &,
+        &:checked {
+            &:not(.flat) {
+                background-color: $suggested_color;
+            }
+        }
+    }
+
+    &.flat {
+        &.suggested-action {
+            color: $suggested_standalone_color;
+        }
+    }
+}
