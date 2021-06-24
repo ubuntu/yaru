@@ -87,6 +87,6 @@ $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
 //special cased widget colors
-$focus_border_color:  gtkalpha($accent_color, 0.5);
+$focus_border_color:  gtkalpha($accent_color, if($variant=='light', 0.5, 0.8));
 $alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), transparentize(white,0.7));
 $dim_label_opacity: 0.55;
