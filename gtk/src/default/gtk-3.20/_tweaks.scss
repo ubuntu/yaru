@@ -114,15 +114,13 @@ button.titlebutton:not(.appmenu) {
 
     &.close {
       color: $selected_fg_color;
-      @include draw_circle($selected_bg_color);
+      @include draw_circle($orange);
 
       &:hover {
-        @include draw_circle($selected_bg_color);
-        @include draw_circle(lighten($selected_bg_color, 5%));
+        @include draw_circle(lighten($orange, 5%));
       }
 
       &:active {
-        @include draw_circle($selected_bg_color);
         @include draw_circle(darken($selected_bg_color, 5%));
       }
 
@@ -386,7 +384,7 @@ list row, placessidebar row, sidebar row, .sidebar row {
   &:selected {
     &.activatable, & {
       &, &:hover {
-        background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
+        background: linear-gradient(to right, $primary_accent_bg_color 4px, $_selection_bg 1px);
         &, button, button image { color: $text_color; }
         button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
         &:backdrop {
@@ -394,7 +392,7 @@ list row, placessidebar row, sidebar row, .sidebar row {
           button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
           background: linear-gradient(
             to right,
-            $selected_bg_color 4px,
+            $primary_accent_bg_color 4px,
             if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%)) 1px
           );
         }    

@@ -21,7 +21,7 @@ $slider_size: 15px;
   -slider-handle-border-width: 1px;
   -slider-handle-border-color: if($variant=='light', darken($alt_borders_color, 3%), darken($warm_gray, 70%)); // Yaru: the handle border needs to be darker for the light theme
 
-  color: if($variant=='light', white, $warm_gray); // Yaru: adapt knob to gtk
+  color: white; // Yaru: adapt knob to gtk
   &:hover { color: $hover_bg_color; }
   &:active { color: $active_bg_color; }
 }

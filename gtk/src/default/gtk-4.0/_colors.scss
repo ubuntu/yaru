@@ -59,8 +59,8 @@ $fill_text_color: $fill_text;
 $fill_hover_color: gtkmix($fill_color, currentColor, 90%);
 $fill_active_color: gtkmix($fill_color, black, 80%);
 
-$slider_color: if($variant == 'light', mix(white, $base_color, 80%), #AEA79F);
-$slider_hover_color: if($variant == 'light', white, lighten(#AEA79F, 4%));
+$slider_color: mix(white, $base_color, 80%);
+$slider_hover_color: white;
 
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
