@@ -45,6 +45,7 @@ ${GEN} grabbing$s.in $DIR/$THEME/cursors/fleur.cur
 ${GEN} grabbing$s.in $DIR/$THEME/cursors/size_all.cur
 ${GEN} hand1$s.in $DIR/$THEME/cursors/hand1.cur
 ${GEN} hand1$s.in $DIR/$THEME/cursors/grab.cur
+${GEN} hand1$s $DIR/$THEME/cursors/openhand.cur
 ${GEN} hand2$s.in $DIR/$THEME/cursors/hand2.cur
 ${GEN} hand2$s.in $DIR/$THEME/cursors/pointer.cur
 ${GEN} left_ptr$s.in $DIR/$THEME/cursors/left_ptr.cur
