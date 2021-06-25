@@ -43,6 +43,7 @@ xcursorgen grabbing.in $DIR/$THEME/cursors/grabbing
 xcursorgen grabbing.in $DIR/$THEME/cursors/size_all
 xcursorgen hand1.in $DIR/$THEME/cursors/hand1
 xcursorgen hand1.in $DIR/$THEME/cursors/grab
+xcursorgen hand1.in $DIR/$THEME/cursors/openhand
 xcursorgen hand2.in $DIR/$THEME/cursors/hand2
 xcursorgen hand2.in $DIR/$THEME/cursors/pointer
 xcursorgen left_ptr.in $DIR/$THEME/cursors/left_ptr
