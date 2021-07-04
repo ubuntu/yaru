@@ -8,7 +8,7 @@ styles = [
   'gnome-shell-high-contrast',
 ]
 variants = [
-  'light',
+  'default',
   'dark',
 ]
 
@@ -45,7 +45,7 @@ if not gnomeshell_use_gresource
 endif
 
 foreach variant: variants
-  is_variant = variant != 'dark'
+  is_variant = variant != 'default'
   variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
 
   if gnomeshell_use_gresource
@@ -87,6 +87,16 @@ foreach variant: variants
       depend_files: theme_sources,
     )
   endforeach
+  
+  if not gnomeshell_use_gresource
+    meson.add_install_script(
+      'install-themes-for-switching.sh',
+      meson.project_name(),
+      meson.project_name().to_lower(),
+      gnomeshell_default_theme_dir,
+      variant_suffix
+    )
+  endif
 
   theme_css += style_css
 
@@ -95,6 +105,10 @@ foreach variant: variants
   # by just making the style_css to have an output in the 'variant' subdir
   if is_variant
     subdir(variant)
+  endif
+  
+  if not is_variant
+    subdir('default')
   endif
 
   ignore_variants = []
@@ -145,9 +159,6 @@ if gnomeshell_use_gresource
     install_dir: gnomeshell_theme_dir,
 )
 else
-  # Symlink variants
-  foreach variant: variants
-    variant_suffix = (variant != 'dark') ? '-@0@'.format(variant)  : ''
-    meson.add_install_script('install-shell.sh', meson.project_name() + variant_suffix)
-  endforeach
+  # Symlink default variant
+  meson.add_install_script('install-shell.sh', meson.project_name())
 endif
