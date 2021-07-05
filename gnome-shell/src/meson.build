@@ -8,7 +8,7 @@ styles = [
   'gnome-shell-high-contrast',
 ]
 variants = [
-  'default',
+  'light',
   'dark',
 ]
 
@@ -45,7 +45,7 @@ if not gnomeshell_use_gresource
 endif
 
 foreach variant: variants
-  is_variant = variant != 'default'
+  is_variant = variant != 'light'
   variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
 
   if gnomeshell_use_gresource
@@ -108,7 +108,7 @@ foreach variant: variants
   endif
   
   if not is_variant
-    subdir('default')
+    subdir('light')
   endif
 
   ignore_variants = []
