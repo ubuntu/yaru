@@ -1,6 +1,6 @@
 option('icons', type: 'boolean', value: true, description:'build icons component')
 option('gnome-shell', type: 'boolean', value: true, description:'build gnome-shell component')
-option('gnome-shell-gresource', type: 'boolean', value: true, description: 'build gnome-shell component in gresources')
+option('gnome-shell-gresource', type: 'boolean', value: false, description: 'build gnome-shell component in gresources')
 option('gtk', type: 'boolean', value: true, description:'build gtk component')
 option('gtksourceview', type: 'boolean', value: true, description:'build gtksourceview component')
 option('metacity', type: 'boolean', value: true, description:'build metacity component')
@@ -11,3 +11,4 @@ option('communitheme_compat', type: 'boolean', value: false, description:'build 
 option('default', type: 'boolean', value: true, description:'build Yaru gtk default flavour')
 option('dark', type: 'boolean', value: true, description:'build Yaru gtk dark flavour')
 option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
+option('inverted', type: 'boolean', value: false, description:'build for Yaru-inverted')
