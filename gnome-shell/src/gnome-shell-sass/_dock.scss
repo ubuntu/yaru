@@ -1,238 +1,340 @@
 /* Default Ubuntu Dock styling, append !important to any changed rules */
 
-#dashtodockContainer {
-  // Shrink the dash by reducing padding and border radius
-  &.shrink #dash,
-  &.dashtodock #dash {
-    border: 1px;
-    padding: 0px;
-  }
+// Stock
+$dock_side_margin: $dash_bottom_margin / 4;
+$dock_fixed_inner_margin: $dock_side_margin;
 
-  &.shrink.left #dash,
-  &.dashtodock.left #dash {
-    border-left: 0px;
-    border-radius: 0px 9px 9px 0px;
-  }
+// Adapted to $dock_bottom_margin
 
-  &.shrink.right #dash,
-  &.dashtodock.right #dash {
-    border-right: 0px;
-    border-radius: 9px 0px 0px 9px;
-  }
-
-  &.shrink.top #dash,
-  &.dashtodock.top #dash {
-    border-top: 0px;
-    border-radius: 0px 0px 9px 9px;
-  }
-
-  &.shrink.bottom #dash,
-  &.dashtodock.bottom #dash {
-    border-bottom: 0px;
-    border-radius: 9px 9px 0px 0px;
-  }
-
-  &.straight-corner #dash,
-  &.shrink.straight-corner #dash {
-    border-radius: 0px;
-  }
+@function shrink($val) {
+    @return round($val / 4);
 }
 
+@function opposite($val) {
+    @return map-get(
+        (
+            left: right,
+            right: left,
+            top: bottom,
+            bottom: top,
+        ),
+        $val
+    );
+}
+
+$osd_fg_color: #eeeeec;
+
+@each $side in bottom, top, left, right {
+    #dashtodockContainer.#{$side} {
+        #dash {
+            margin: 0px;
+            padding: 0px;
+
+            .dash-background {
+                margin: 0;
+                margin-#{$side}: $dock_side_margin;
+                padding: 0;
+            }
+
+            .dash-separator {
+                @if $side == top or $side == bottom {
+                    margin-bottom: 0;
+                } @else {
+                    height: 1px;
+                    margin: ($dash_spacing + ($dash_padding / 2)) 0;
+                    background-color: transparentize($osd_fg_color, 0.7);
+                }
+            }
+
+            #dashtodockDashContainer {
+                padding: $dash_padding;
+                padding-#{$side}: 0;
+                padding-#{opposite($side)}: 0;
+            }
+
+            .dash-item-container {
+                .app-well-app,
+                .show-apps {
+                    padding: $dash_spacing;
+                    padding-#{$side}: $dash_padding + $dock_side_margin;
+                    padding-#{opposite($side)}: $dash_padding;
+                }
+            }
+        }
+
+        &.shrink {
+            #dash {
+                .dash-background {
+                    margin-#{$side}: shrink($dock_side_margin);
+                    padding: shrink($dash_padding);
+                    border-radius: $dash_border_radius / 2;
+                }
+
+                #dashtodockDashContainer {
+                    padding: shrink($dash_padding);
+                }
+
+                .dash-item-container {
+                    .app-well-app,
+                    .show-apps {
+                        padding: shrink($dash_spacing);
+                        padding-#{$side}: shrink($dash_padding + $dock_side_margin);
+                        padding-#{opposite($side)}: shrink($dash_padding);
+                    }
+                }
+            }
+
+            &.fixed {
+                #dash {
+                    .dash-background {
+                        margin-#{opposite($side)}: shrink($dock_fixed_inner_margin);
+                    }
+
+                    .dash-item-container {
+                        .app-well-app,
+                        .show-apps {
+                            padding-#{opposite($side)}: shrink($dash_padding + $dock_fixed_inner_margin);
+                        }
+                    }
+                }
+            }
+        }
+
+        &.fixed {
+            #dash {
+                .dash-background {
+                    margin-#{opposite($side)}: $dock_fixed_inner_margin;
+                }
+
+                .dash-item-container {
+                    .app-well-app,
+                    .show-apps {
+                        padding-#{opposite($side)}: $dash_padding + $dock_fixed_inner_margin;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@each $side in bottom, top, left, right {
+    #dashtodockContainer.extended.#{$side} {
+        #dash {
+            .dash-background {
+                margin: 0;
+                padding: 0;
+                border-radius: 0;
+            }
+
+            #dashtodockDashContainer {
+                padding: $dash_padding - $dash_spacing;
+                padding-#{$side}: 0;
+                padding-#{opposite($side)}: 0;
+            }
+
+            .dash-item-container {
+                .app-well-app,
+                .show-apps {
+                    padding: $dash_spacing;
+                    padding-#{$side}: $dash_padding;
+                    padding-#{opposite($side)}: $dash_padding;
+                }
+            }
+        }
+
+        &.shrink {
+            #dash {
+                #dashtodockDashContainer {
+                    padding: shrink($dash_padding - $dash_spacing);
+                    padding-#{$side}: 0;
+                    padding-#{opposite($side)}: 0;
+                }
+
+                .dash-item-container {
+                    .app-well-app,
+                    .show-apps {
+                        padding: shrink($dash_spacing);
+                        padding-#{$side}: shrink($dash_padding);
+                        padding-#{opposite($side)}: shrink($dash_padding);
+                    }
+                }
+            }
+        }
+
+        &.shrink.fixed {
+            #dash {
+                .dash-background {
+                    margin-#{opposite($side)}: 0;
+                }
+            }
+        }
+    }
+}
+
+#dashtodockContainer.top.shrink #dash .dash-background {
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+#dashtodockContainer.straight-corner #dash .dash-background,
+#dashtodockContainer.shrink.straight-corner #dash .dash-background {
+    border-radius: 0px;
+}
+
+/* Scrollview style */
 .bottom #dashtodockDashScrollview,
 .top #dashtodockDashScrollview {
-  // Scrollview style -vertical
-  -st-hfade-offset: 24px;
+    -st-hfade-offset: 24px;
 }
 
 .left #dashtodockDashScrollview,
 .right #dashtodockDashScrollview {
-  // Scrollview style -horizontal
-  -st-vfade-offset: 24px;
+    -st-vfade-offset: 24px;
 }
 
-#dashtodockContainer {
-  &.running-dots .dash-item-container > StButton,
-  &.dashtodock .dash-item-container > StButton {
+#dashtodockContainer.running-dots .dash-item-container > StButton,
+#dashtodockContainer.dashtodock .dash-item-container > StButton {
     transition-duration: 250;
     background-size: contain;
-  }
+}
 
-  &.shrink .dash-item-container > StButton,
-  &.dashtodock .dash-item-container > StButton {
-    padding: 2px 4px !important;
-  }
+/* Running and focused application style */
 
-  &.extended {
-    // Dash height extended to the whole available vertical space */
-    &.top #dash, &.right #dash,
-    &.bottom #dash, &.left #dash {
-      border-radius: 0;
-      padding-top: 0px;
-      padding-bottom: 0px;
-    }
+#dashtodockContainer.running-dots .app-well-app.running > .overview-icon,
+#dashtodockContainer.dashtodock .app-well-app.running > .overview-icon {
+    background-image: none;
+}
 
-    &.top #dash, &.bottom #dash {
-      border-left: 0px;
-      border-right: 0px;
-    }
+#dashtodockContainer.running-dots .app-well-app.focused .overview-icon,
+#dashtodockContainer.dashtodock .app-well-app.focused .overview-icon {
+    background-color: rgba(238, 238, 236, 0.2);
+}
 
-    &.right #dash, &.left #dash {
-      border-top: 0px;
-      border-bottom: 0px;
-    }
-  }
+#dashtodockContainer.dashtodock #dash .dash-background {
+    background: #2e3436;
+}
 
-  &.top #dash .placeholder,
-  &.bottom #dash .placeholder {
+#dashtodockContainer.dashtodock .progress-bar {
+    /* Customization of the progress bar style, e.g.:
+      -progress-bar-background: rgba(0.8, 0.8, 0.8, 1);
+      -progress-bar-border: rgba(0.9, 0.9, 0.9, 1);
+    */
+}
+
+#dashtodockContainer.top #dash .placeholder,
+#dashtodockContainer.bottom #dash .placeholder {
     width: 32px;
     height: 1px;
-  }
+}
 
-  &.running-dots .app-well-app.running > .overview-icon,
-  &.dashtodock .app-well-app.running > .overview-icon {
-    /* Running and focused application style */
-    background-image: none;
-  }
-
-  &.running-dots .app-well-app.focused .overview-icon {
-    background-color: rgba(238, 238, 236, 0.2);
-  }
-
-  &.dashtodock {
-    .app-well-app.focused .overview-icon {
-      background-color: rgba(238, 238, 236, 0.1);
-    }
-
-    #dash {
-      background: #2e3436;
-    }
-  }
-
- /*
-  * These are applied to a dummy actor. Only the alpha value for the background
-  * and border color and the transition-duration are used
-  */
-  &.dummy-opaque {
+/*
+ * This is applied to a dummy actor. Only the alpha value for the background and border color
+ * and the transition-duration are used
+ */
+#dashtodockContainer.dummy-opaque {
     background-color: rgba(0, 0, 0, 0.8);
     border-color: rgba(0, 0, 0, 0.4);
     transition-duration: 300ms;
-  }
-  &.dummy-transparent {
+}
+
+/*
+ * This is applied to a dummy actor. Only the alpha value for the background and border color
+ * and the transition-duration are used
+ */
+#dashtodockContainer.dummy-transparent {
     background-color: rgba(0, 0, 0, 0.2);
     border-color: rgba(0, 0, 0, 0.1);
     transition-duration: 500ms;
-  }
+}
 
-  &.opaque {
-  }
-
-  &.transparent {
-  }
-
-  .number-overlay {
+#dashtodockContainer .number-overlay {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(0, 0, 0, 0.8);
     text-align: center;
-  }
+}
 
-  .notification-badge {
+#dashtodockContainer .notification-badge {
     color: rgba(255, 255, 255, 1);
-    background-color: $success_color;
+    background-color: rgba(255, 0, 0, 1);
     padding: 0.2em 0.5em;
     border-radius: 1em;
-    border: 1px solid darken($success_color,10%);
-    box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
     font-weight: bold;
     text-align: center;
     margin: 2px;
-  }
 }
 
 #dashtodockPreviewSeparator.popup-separator-menu-item-horizontal {
-  width: 1px;
-  height: auto;
-  border-right-width: 1px;
-  margin: 32px 0px;
+    width: 1px;
+    height: auto;
+    border-right-width: 1px;
+    margin: 32px 0px;
+}
+
+.dashtodock-app-well-preview-menu-item {
+    padding: 1em 1em 0.5em 1em;
+}
+
+#dashtodockContainer .metro .overview-icon {
+    border-radius: 0px;
 }
 
 /* Yaru Dock styling */
 
-#dashtodockContainer {
-  // without "border: none", there is a 1px gap between windows and the dock
-  &.shrink #dash,
-  &.dashtodock #dash {
-    border: none !important;
-    box-shadow: inset 0 1px 2px -1px rgba(0, 0, 0, 0.4) !important;
-  }
+@each $side in bottom, top, left, right {
+    #dashtodockContainer.#{$side} {
+        &.dashtodock #dash,
+        &.shrink #dash {
+            // without "border: none", there is a 1px gap between windows and the dock
+            border: none !important;
+            box-shadow: inset 0 1px 2px -1px rgba(0, 0, 0, 0.4) !important;
+            background: $dash_background_color;
 
-  &.shrink.left #dash,
-  &.dashtodock.left #dash {
-    border: none !important;
-  }
+            @if $side == left or $side == right {
+                // don't let the first icon be too close to the shadow + panel
+                #dashtodockDashScrollview {
+                padding-top: 2px;
+                padding-bottom: 2px;
+                }
+            }
+        }
 
-  &.shrink.right #dash,
-  &.dashtodock.right #dash {
-    border: none !important;
-  }
+        .show-apps {
+            .overview-icon {
+                border-radius: $base_border_radius;
+            }
+            &:active, &:checked {
+                .overview-icon {
+                    background-color: $base_active_color; box-shadow: none;
+                }
+            }
+        }
 
-  &.shrink.top #dash,
-  &.dashtodock.top #dash {
-    border: none !important;
-  }
+        .app-well-app {
+            // regular app icons
+            &, & .overview-icon {
+                // normal
+            }
 
-  &.shrink.bottom #dash,
-  &.dashtodock.bottom #dash {
-    border: none !important;
-  }
+            &:active .overview-icon,
+            &:checked .overview-icon {
+                background-color: $base_active_color; box-shadow: none;
+            }
 
-  &.straight-corner #dash,
-  &.shrink.straight-corner #dash {
-    border: none !important;
-  }
+            &.focused .overview-icon {
+                // when an app is focused
+            }
 
-  &.shrink.left #dash,
-  &.dashtodock.left #dash,
-  &.shrink.right #dash,
-  &.dashtodock.right #dash {
-    background: $dash_background_color;
+            &:hover .overview-icon,
+            &:focus .overview-icon,
+            &:selected .overview-icon {
+                // when hovering over an app
+            }
+        }
 
-    // don't let the first icon be too close to the shadow + panel
-    #dashtodockDashScrollview {
-      padding-top: 2px;
-      padding-bottom: 2px;
+        .notification-badge {
+            background-color: $success_color;
+            border: 1px solid darken($success_color,10%);
+            box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
+        }
     }
-  }
-
-  .show-apps {
-    .overview-icon {
-      border-radius: $base_border_radius;
-    }
-    &:active, &:checked {
-      .overview-icon {
-        background-color: $base_active_color; box-shadow: none;
-      }
-    }
-  }
-
-  .app-well-app {
-    // regular app icons
-    &, & .overview-icon {
-      // normal
-    }
-
-    &:active .overview-icon,
-    &:checked .overview-icon {
-      background-color: $base_active_color; box-shadow: none;
-    }
-
-    &.focused .overview-icon {
-      // when an app is focused
-    }
-
-    &:hover .overview-icon,
-    &:focus .overview-icon,
-    &:selected .overview-icon {
-      // when hovering over an app
-    }
-  }
 }
