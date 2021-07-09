@@ -11,4 +11,4 @@ option('communitheme_compat', type: 'boolean', value: false, description:'build 
 option('default', type: 'boolean', value: true, description:'build Yaru gtk default flavour')
 option('dark', type: 'boolean', value: true, description:'build Yaru gtk dark flavour')
 option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
-option('inverted', type: 'boolean', value: false, description:'build for Yaru-inverted')
+option('mix', type: 'boolean', value: false, description:'build for Yaru-mixed theme symlinks')
