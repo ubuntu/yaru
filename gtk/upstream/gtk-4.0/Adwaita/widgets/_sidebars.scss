@@ -114,7 +114,7 @@ placessidebar {
       background-clip: content-box;
     }
 
-    &.sidebar-new-bookmark-row { color: $accent_standalone_color; }
+    &.sidebar-new-bookmark-row { color: $accent_color; }
 
     &:drop(active):not(:disabled) {
       color: $drop_target_color;

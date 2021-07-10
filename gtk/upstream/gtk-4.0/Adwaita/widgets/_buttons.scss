@@ -1,7 +1,7 @@
 // stuff for .needs-attention
 @keyframes needs_attention {
-  from { background-image: radial-gradient(farthest-side, $accent_color 0%, transparent 0%); }
-  to { background-image: radial-gradient(farthest-side, $accent_color 95%, transparent); }
+  from { background-image: radial-gradient(farthest-side, $accent_bg_color 0%, transparent 0%); }
+  to { background-image: radial-gradient(farthest-side, $accent_bg_color 95%, transparent); }
 }
 
 %button,
@@ -12,6 +12,7 @@ button {
     padding: 5px 10px;
     border-radius: $button_radius;
     background-color: $button_color;
+    font-weight: bold;
 
     @if $contrast == 'high' {
       box-shadow: inset 0 0 0 1px $borders_color;
@@ -79,10 +80,10 @@ button {
   }
 
   // big standalone buttons like in Documents pager
+  @at-root %osd_button,
   &.osd {
     min-width: 32px;
     min-height: 32px;
-
     @include focus-ring($outer: true, $offset: 1px);
     transition: $button_transition;
 
@@ -155,20 +156,20 @@ button {
   &.destructive-action {
     @extend %filled_button;
 
-    color: $destructive_text;
+    color: $destructive_fg_color;
 
     &, &:checked {
-      background-color: $destructive_color;
+      background-color: $destructive_bg_color;
     }
   }
 
   &.suggested-action {
     @extend %filled_button;
 
-    color: $accent_text;
+    color: $accent_fg_color;
 
     &, &:checked {
-      background-color: $accent_color;
+      background-color: $accent_bg_color;
     }
   }
 
@@ -212,11 +213,11 @@ button {
     }
 
     &.suggested-action {
-      color: $accent_standalone_color;
+      color: $accent_color;
     }
 
     &.destructive-action {
-      color: $destructive_standalone_color;
+      color: $destructive_color;
     }
 
     // Specificity bump
@@ -247,13 +248,13 @@ button {
   }
 
   // hide separators
-  &.font{
+  &.font {
     separator { background-color: transparent; }
     > box { border-spacing: 6px; }
     > box > box > label { font-weight: bold; }
   }
 
-  menubutton.circular &,
+  @at-root %circular_button,
   &.circular { // force circular button shape
     min-width: 34px;
     min-height: 34px;
@@ -269,7 +270,7 @@ button {
   // simulates the shadow labels and icons normally have in buttons.
   animation: needs_attention 150ms ease-in;
 
-  background-image: radial-gradient(farthest-side, $accent_color 96%, transparent);
+  background-image: radial-gradient(farthest-side, $accent_bg_color 96%, transparent);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
 
@@ -286,10 +287,6 @@ button {
 
 %undecorated_button {
   background-color: transparent;
-  background-image: none;
-  border-color: transparent;
-  box-shadow: inset 0 1px transparentize(white, 1),
-              0 1px transparentize(white, 1);
 }
 
 button.color {
@@ -338,6 +335,25 @@ button.outline {
 }
 
 menubutton {
+  > button > box {
+    border-spacing: 6px;
+  }
+
+  > button.arrow-button > box {
+    border-spacing: 3px;
+  }
+
+  &.osd {
+    background: none;
+    color: inherit;
+
+    > button { @extend %osd_button; }
+  }
+
+  &.circular > button { @extend %circular_button; }
+  &.flat > button { @extend %button_basic_flat; }
+  &.outline > button { @extend %outline_button; }
+
   arrow {
     min-height: 16px;
     min-width: 16px;

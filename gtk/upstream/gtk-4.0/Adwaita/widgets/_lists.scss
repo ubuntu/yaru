@@ -172,7 +172,7 @@ row.expander {
   }
 
   &:checked image.expander-row-arrow:not(:disabled) {
-    color: $accent_standalone_color;
+    color: $accent_color;
   }
 
   & image.expander-row-arrow:disabled {

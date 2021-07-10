@@ -43,7 +43,7 @@ selection {
   color: transparent;
 
   &:focus-within {
-    background-color: gtkalpha($accent_color, 0.3);
+    background-color: gtkalpha($accent_bg_color, 0.3);
   }
 }
 
