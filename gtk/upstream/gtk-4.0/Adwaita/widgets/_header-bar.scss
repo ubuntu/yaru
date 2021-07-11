@@ -16,7 +16,7 @@ headerbar {
   }
 
   &:backdrop {
-    background-color: $headerbar_bg_color;
+    background-color: $bg_color;
 
     transition: $backdrop_transition;
 
@@ -130,22 +130,7 @@ windowtitle {
 // Development versions of apps to use a differently styled headerbar
 
 window.devel {
-  headerbar {
-    $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-               linear-gradient(to right, transparent 65%, gtkalpha($accent_color, 0.2));
-
-    @if $variant == 'dark' {
-      $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-                 linear-gradient(to right, transparent 65%, gtkalpha($accent_color, 0.1));
-    }
-
-    background: $headerbar_bg_color $gradient;
-
-    &:backdrop {
-      $gradient: cross-fade(5% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-                 linear-gradient(to right, transparent 65%, transparent);
-
-      background: $headerbar_bg_color $gradient;
-    }
+  headerbar > windowhandle {
+    background: cross-fade(8% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat;
   }
 }

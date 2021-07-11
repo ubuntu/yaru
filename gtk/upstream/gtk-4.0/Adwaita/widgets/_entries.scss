@@ -56,7 +56,7 @@ entry {
 
       &:hover { color: $fg_color; }
 
-      &:active { color: $accent_standalone_color; }
+      &:active { color: $accent_color; }
 
       &.left { margin-right: 6px; }
       &.right { margin-left: 6px; }
@@ -90,7 +90,7 @@ entry {
       background-image: none;
       border-radius: 0;
       border-width: 0 0 2px;
-      border-color: $accent_color;
+      border-color: $accent_bg_color;
       border-style: solid;
       box-shadow: none;
     }
@@ -110,6 +110,6 @@ treeview entry {
     background-image: none;
     background-color: $base_color;
 
-    &:focus-within { border-color: $accent_color; }
+    &:focus-within { border-color: $accent_bg_color; }
   }
 }
