@@ -16,8 +16,8 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
 
   // transparent panel on lock & login screens
   &.unlock-screen,
-  &.login-screen,
-  &:overview {
+  &.login-screen {
+  // &:overview { Yaru change: static background into overview
     background-color: transparent;
 
     .panel-corner {
