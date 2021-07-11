@@ -76,19 +76,19 @@ levelbar {
 %button,
 button {
     &.suggested-action {
-        color: $suggested_text;
+        color: $suggested_fg_color;
 
         &,
         &:checked {
             &:not(.flat) {
-                background-color: $suggested_color;
+                background-color: $suggested_bg_color;
             }
         }
     }
 
     &.flat {
         &.suggested-action {
-            color: $suggested_standalone_color;
+            color: $suggested_color;
         }
     }
 }
