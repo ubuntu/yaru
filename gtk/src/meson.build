@@ -17,7 +17,7 @@ foreach flavour: flavours
   theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
 
   conf_data = configuration_data()
-  conf_data.set('ThemeName', theme_name)
+  conf_data.set('ThemeName', meson.project_name())
   conf_data.set('FlavourThemeName', theme_name)
   configure_file(input: 'index.theme.in',
     output: '@0@-index.theme'.format(theme_name),
