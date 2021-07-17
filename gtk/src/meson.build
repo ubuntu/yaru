@@ -35,6 +35,16 @@ foreach flavour: flavours
     unity_assets_dest = join_paths(theme_dir, 'unity')
     install_data(unity_asset_data, install_dir: unity_assets_dest)
   endif
+  
+  if flavour == 'dark' and get_option('ubuntu-unity')
+    unity_asset_dir = join_paths('dark', 'unity')
+    unity_asset_data = run_command(
+      'find', unity_asset_dir, '-name', '*.svg'
+      ).stdout().strip().split('\n')
+
+    unity_assets_dest = join_paths(theme_dir, 'unity')
+    install_data(unity_asset_data, install_dir: unity_assets_dest)
+  endif
 
   # install gtk2 data
   gtk2_sources_dir = join_paths(flavour, 'gtk-2.0')
