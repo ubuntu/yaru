@@ -1,9 +1,9 @@
-$panel_bg_color: #323030;
+$panel_bg_color: $jet;
 $panel_fg_color: $porcelain;
 $wm_border_unfocused: none;
 $wm_border_focused: if($variant=='light', transparentize(black, 0.9), transparentize($borders_color, 0.1));
-$titlebar_bg_color: $panel_bg_color;
-$titlebar_fg_color: $porcelain;
+$titlebar_bg_color: if($variant=='light', darken($porcelain, 9%), lighten($jet, 4%));
+$titlebar_fg_color: if($variant=='light', $inkstone, $porcelain);
 
 UnityDecoration {
     -UnityDecoration-extents: 32px 0px 0px 0px;
