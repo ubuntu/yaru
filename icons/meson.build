@@ -6,6 +6,14 @@ install_subdir('Suru',
     exclude_files: ['index.theme', 'cursor.theme'],
 )
 
+  # install unity-panel icons
+  if get_option('ubuntu-unity')
+    install_subdir('unity-panel',
+    install_dir: theme_dir,
+    strip_directory: true,
+    )
+  endif
+
 themes_f = [
   'cursor.theme',
   'index.theme',

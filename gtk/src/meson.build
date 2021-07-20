@@ -17,7 +17,7 @@ foreach flavour: flavours
   theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
 
   conf_data = configuration_data()
-  conf_data.set('ThemeName', theme_name)
+  conf_data.set('ThemeName', meson.project_name())
   conf_data.set('FlavourThemeName', theme_name)
   configure_file(input: 'index.theme.in',
     output: '@0@-index.theme'.format(theme_name),
@@ -28,6 +28,16 @@ foreach flavour: flavours
   # install unity assets
   if flavour == 'default' and get_option('ubuntu-unity')
     unity_asset_dir = join_paths('default', 'unity')
+    unity_asset_data = run_command(
+      'find', unity_asset_dir, '-name', '*.svg'
+      ).stdout().strip().split('\n')
+
+    unity_assets_dest = join_paths(theme_dir, 'unity')
+    install_data(unity_asset_data, install_dir: unity_assets_dest)
+  endif
+  
+  if flavour == 'dark' and get_option('ubuntu-unity')
+    unity_asset_dir = join_paths('dark', 'unity')
     unity_asset_data = run_command(
       'find', unity_asset_dir, '-name', '*.svg'
       ).stdout().strip().split('\n')
