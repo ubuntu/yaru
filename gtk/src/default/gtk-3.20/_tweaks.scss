@@ -380,25 +380,32 @@ switch {
 
 // Due to the ubuntu orange beeing quiet bright
 // we change the sidebar selection from a full orange
-// row to a thin orange stripe plus a soft gray selection
-$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
+// row to a soft gray selection (plus a thin orange stripe on nautilus)
+$_selection_bg: if($variant=='light', darken($bg_color, 7%), lighten($base_color, 7%));
+$_backdrop_selection_bg: if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%));
+
 list row, placessidebar row, sidebar row, .sidebar row {
   &:selected {
     &.activatable, & {
       &, &:hover {
-        background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
+        background: $_selection_bg;
         &, button, button image { color: $text_color; }
-        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
+        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image {color: white; } } }
+
         &:backdrop {
           &, button, button image { color: $backdrop_fg_color; }
           button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
-          background: linear-gradient(
-            to right,
-            $selected_bg_color 4px,
-            if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%)) 1px
-          );
+          background: $_backdrop_selection_bg;
         }    
       }
     }
+  }
+}
+
+.nautilus-window .sidebar row:selected {
+  background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
+
+  &:backdrop {
+    background: linear-gradient(to right, $selected_bg_color 4px, $_backdrop_selection_bg 1px );
   }
 }
