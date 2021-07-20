@@ -402,10 +402,16 @@ list row, placessidebar row, sidebar row, .sidebar row {
   }
 }
 
-.nautilus-window .sidebar row:selected {
-  background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
+.nautilus-window .sidebar row {
+  &:selected {
+    &.activatable, & {
+      &, &:hover {
+        background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
 
-  &:backdrop {
-    background: linear-gradient(to right, $selected_bg_color 4px, $_backdrop_selection_bg 1px );
+        &:backdrop {
+          background: linear-gradient(to right, $selected_bg_color 4px, $_backdrop_selection_bg 1px );
+        }
+      }
+    }
   }
 }
