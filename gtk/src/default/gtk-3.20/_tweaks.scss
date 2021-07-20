@@ -390,7 +390,7 @@ list row, placessidebar row, sidebar row, .sidebar row {
       &, &:hover {
         background: $_selection_bg;
         &, button, button image { color: $text_color; }
-        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image {color: white; } } }
+        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
 
         &:backdrop {
           &, button, button image { color: $backdrop_fg_color; }
