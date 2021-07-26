@@ -268,10 +268,6 @@ treeview.view radio {
 
 .sidebar { background-color: $bg_color; }
 
-// Treeview items misses a hover, port to upstream
-
-treeview:hover { background: $popover_hover_color; }
-
 scale {
   slider {
     .osd & {
@@ -379,25 +375,36 @@ switch {
 }
 
 // Due to the ubuntu orange beeing quiet bright
-// we change the sidebar selection from a full orange
-// row to a thin orange stripe plus a soft gray selection
-$_selection_bg: if($variant=='light', darken($bg_color, 5%), lighten($base_color, 5%));
-list row, placessidebar row, sidebar row, .sidebar row {
+// we change the row selection from a full orange
+// row to a soft gray selection
+$_row_hover_bg: if($variant=='light', transparentize(black, 0.96), transparentize(white, 0.96));
+$_row_selection_bg: if($variant=='light', transparentize(black, 0.91), transparentize(white, 0.91));
+$_backdrop_row_selection_bg: if($variant=='light', $_row_selection_bg, lighten($_row_selection_bg, 2%));
+
+list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
+  &:hover:not(:backdrop):not(:selected) {
+    background: $_row_hover_bg;
+  }
+
   &:selected {
     &.activatable, & {
-      &, &:hover {
-        background: linear-gradient(to right, $selected_bg_color 4px, $_selection_bg 1px);
+      &:focus, &:disabled, & {
+        background: $_row_selection_bg;
+      }
+
+      &:disabled {
+        &, button, button image { color: $insensitive_fg_color; }
+      }
+
+      &:focus, & {
         &, button, button image { color: $text_color; }
+        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }  
+      }
+
+      &:backdrop {
+        &, button, button image { color: $backdrop_fg_color; }
         button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
-        &:backdrop {
-          &, button, button image { color: $backdrop_fg_color; }
-          button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
-          background: linear-gradient(
-            to right,
-            $selected_bg_color 4px,
-            if($variant=='light', $_selection_bg, lighten($_selection_bg, 2%)) 1px
-          );
-        }    
+        background: $_backdrop_row_selection_bg;
       }
     }
   }

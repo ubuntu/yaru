@@ -1969,19 +1969,19 @@ treeview.view {
       @extend %selected_items;
     }
 
-    &:backdrop, & {
+    /*&:backdrop, & {  // Yaru change: due to grey row selection background we no more need to modify border-color
       border-left-color: mix($selected_fg_color, $selected_bg_color, 50%);
       border-top-color: transparentize($fg_color, 0.9); // doesn't work unfortunatelly
-    }
+    }*/
   }
 
   &:disabled {
     color: $insensitive_fg_color;
 
-    &:selected {
+    /*&:selected {
       color: mix($selected_fg_color, $selected_bg_color, 40%);
       &:backdrop { color: mix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
-    }
+    }*/
 
     &:backdrop { color: $backdrop_insensitive_color; }
   }
@@ -2016,13 +2016,13 @@ treeview.view {
 
     &:hover { color: $text_color; }
 
-    &:selected {
+    /*&:selected { // Yaru change: due to grey row selection background we no more need to modify expander icon color
       color: mix($selected_fg_color, $selected_bg_color, 70%);
 
       &:hover { color: $selected_fg_color; }
 
       &:backdrop { color: mix($backdrop_selected_fg_color, $selected_bg_color, 70%); }
-    }
+    }*/
 
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
 
@@ -2036,7 +2036,7 @@ treeview.view {
     background-image: image($progress_bg_color);
     box-shadow: none;
 
-    &:selected {
+    /*&:selected { // Yaru change: due to grey row selection background we no more need to modify selected look
       &:focus, & {
 
         @if $variant == 'light' {
@@ -2055,7 +2055,7 @@ treeview.view {
           background-color: $backdrop_base_color;
         }
       }
-    }
+    }*/
 
     &:backdrop {
       @if $variant == 'light' { color: $backdrop_base_color; }
@@ -2069,14 +2069,14 @@ treeview.view {
   &.trough { // progress bar trough in treeviews
     background-color: transparentize($fg_color,0.9);
 
-    &:selected {
+    /*&:selected { // Yaru change: due to grey row selection background we no more need to modify selected look
       &:focus, & {
         background-color: if($variant == 'light',
                              transparentize($selected_fg_color, 0.7),
                              darken($selected_bg_color, 10%));
 
       }
-    }
+    }*/
   }
 
   header {
@@ -3103,7 +3103,7 @@ menu menuitem {
   }
 }
 
-treeview.view check,
+/*treeview.view check, // Yaru change: due to grey row selection background we no more need to modify selected look
 treeview.view radio {
   &:selected {
     &:focus, & {
@@ -3114,7 +3114,7 @@ treeview.view radio {
   }
 }
 
-treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a workaround
+treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a workaround */
 
 
 /************
