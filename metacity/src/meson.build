@@ -19,7 +19,7 @@ foreach flavour: flavours
     conf_data.set('border_unfocused', '#222222')
     conf_data.set('title_focused', '#f7f7f7')
     conf_data.set('title_unfocused', '#d2d2d2')
-  elif flavour == 'light'
+  elif flavour == 'default'
     conf_data.set('titlebar', '#dedede')
     conf_data.set('titlebar_unfocused', '#f7f7f7')
     conf_data.set('titlebar_border_focused', '#919191')
@@ -30,17 +30,6 @@ foreach flavour: flavours
     conf_data.set('border_unfocused', '#b8b8b8')
     conf_data.set('title_focused', '#3d3d3d')
     conf_data.set('title_unfocused', '#626262')
-  elif flavour == 'default'
-    conf_data.set('titlebar', '#323030')
-    conf_data.set('titlebar_unfocused', '#3f3c3c')
-    conf_data.set('titlebar_border_focused', '#232323')
-    conf_data.set('titlebar_border_unfocused', '#222222')
-    conf_data.set('titlebar_highlight_focused', '#474444')
-    conf_data.set('titlebar_highlight_unfocused', '#474444')
-    conf_data.set('border_focused', '#919191')
-    conf_data.set('border_unfocused', '#b8b8b8')
-    conf_data.set('title_focused', '#f7f7f7')
-    conf_data.set('title_unfocused', '#bcbcbc')
   endif
 
   configure_file(input: 'metacity-theme-1.xml.in',
