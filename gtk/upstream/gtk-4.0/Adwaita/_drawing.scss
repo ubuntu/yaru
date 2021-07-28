@@ -71,7 +71,7 @@
   }
   @if $t==osd-focus {
     color: $osd_text_color;
-    border-color: $accent_color;
+    border-color: $accent_bg_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
   }

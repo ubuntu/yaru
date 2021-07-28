@@ -36,7 +36,10 @@ sudo apt install libgtk-3-dev git meson sassc inkscape optipng ruby
 If you want to change the GDM look and point to the same stylesheet. You only need to do this once.
 
 ```sh
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/Yaru/gnome-shell.css 15
+update-alternatives --install /usr/share/gnome-shell/theme/gdm.css gdm.css /usr/share/gnome-shell/theme/Yaru/gnome-shell.css 15
+
+# Otherwise using a gresource file
+update-alternatives --install /usr/share/gnome-shell/gdm-theme.gresource gdm-theme.gresource /usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource 15
 ```
 
 If you reboot, select the Yaru session in GDM and you should be all right.

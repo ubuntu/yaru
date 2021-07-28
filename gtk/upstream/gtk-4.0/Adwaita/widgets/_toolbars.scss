@@ -1,6 +1,6 @@
 .toolbar {
-  padding: 5px;
-  border-spacing: 5px;
+  padding: 6px;
+  border-spacing: 6px;
   background-color: $bg_color;
 
   // on OSD
@@ -20,8 +20,8 @@
   }
 
   // toolbar separators
-  &.horizontal > separator { margin: 5px 0; }
-  &.vertical > separator { margin: 0 5px; }
+  &.horizontal > separator { margin: 6px 0; }
+  &.vertical > separator { margin: 0 6px; }
 
   button {
     @extend %button_basic_flat;
@@ -83,8 +83,8 @@ infobar {
     background-image: image(gtkalpha(currentColor, .1));
   }
 
-  @each $i_type, $i_color in (info, $accent_color),
-                             (question, $accent_color),
+  @each $i_type, $i_color in (info, $accent_bg_color),
+                             (question, $accent_bg_color),
                              (warning, $warning_color),
                              (error, $error_color) {
     &.#{$i_type} > revealer > box {

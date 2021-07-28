@@ -2,7 +2,7 @@
 #export DH_VERBOSE = 1
 
 %:
-	dh $@ --buildsystem=meson
+	dh $@ --buildsystem=meson --with migrations
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -17,6 +17,3 @@ override_dh_install:
 	rm -r debian/tmp/usr/share/xsessions
 	rm -r debian/tmp/usr/share/wayland-sessions
 	dh_install
-
-override_dh_missing:
-	dh_missing --fail-missing

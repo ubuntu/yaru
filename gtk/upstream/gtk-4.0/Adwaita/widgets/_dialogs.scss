@@ -1,0 +1,51 @@
+.dialog-action-area {
+  margin: 6px;
+  border-spacing: 6px;
+}
+
+/****************
+ * Print dialog *
+*****************/
+
+window.dialog.print {
+  drawing {
+    color: $fg_color;
+    background: none;
+    border: none;
+    padding: 0;
+
+    paper {
+      background: white;
+      color: $light_fg;
+      border: 1px solid $borders_color;
+    }
+  }
+}
+
+/****************
+ * GtkAssistant *
+ ****************/
+
+window.assistant {
+  .sidebar {
+    padding: $menu-margin;
+    border-top: 1px solid $borders_color;
+  }
+
+  &.csd .sidebar { border-top-style: none; }
+
+  .sidebar > label { padding: 6px 12px; }
+
+  .sidebar > label.highlight {
+    background-color: $view_selected_color;
+    border-radius: $menu-margin;
+  }
+}
+
+/****************
+ * GtkAboutDialog *
+ ****************/
+
+window.aboutdialog image.large-icons {
+  -gtk-icon-size: 128px;
+}

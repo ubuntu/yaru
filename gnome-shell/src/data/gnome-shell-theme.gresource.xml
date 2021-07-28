@@ -39,10 +39,18 @@
     <file>toggle-on-hc.svg</file>
 
     <!-- Use Yaru files for ubuntu's special gdm and default gnome-shell css -->
+<<<<<<< HEAD
     <file alias="gdm.css">gnome-shell-dark.css</file>
     <file>gnome-shell.css</file>
     <file>gnome-shell-high-contrast.css</file>
     <file>gnome-shell-dark.css</file>
     <file>gnome-shell-high-contrast-dark.css</file>
+=======
+    <file alias="gdm.css">gnome-shell.css</file>
+    <file alias="Yaru/gnome-shell.css">gnome-shell.css</file>
+    <file alias="Yaru/gnome-shell-high-contrast.css">gnome-shell-high-contrast.css</file>
+    <file alias="Yaru-light/gnome-shell.css">gnome-shell-light.css</file>
+    <file alias="Yaru-light/gnome-shell-high-contrast.css">gnome-shell-high-contrast-light.css</file>
+>>>>>>> master
   </gresource>
 </gresources>

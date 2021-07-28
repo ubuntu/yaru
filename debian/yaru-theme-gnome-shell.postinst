@@ -2,12 +2,4 @@
 
 set -e
 
-if [ "$1" = configure ]; then
-  update-alternatives --install \
-    /usr/share/gnome-shell/gdm3-theme.gresource \
-    gdm3-theme.gresource \
-    /usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource \
-    15
-fi
-
 #DEBHELPER#

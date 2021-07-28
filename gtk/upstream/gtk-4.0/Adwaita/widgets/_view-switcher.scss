@@ -1,14 +1,15 @@
 viewswitcher {
-  &, & button {
+  &, & button.toggle {
     margin: 0;
     padding: 0;
   }
 
-  button {
+  button.toggle {
     border-radius: 0;
     border-top: none;
     border-bottom: none;
     font-size: 1rem;
+    font-weight: inherit;
 
     > stack > box {
       &.narrow {
@@ -16,7 +17,7 @@ viewswitcher {
         padding-top: 7px;
         padding-bottom: 5px;
 
-        label {
+        > stack > label {
           padding-left: 8px;
           padding-right: 8px;
         }
@@ -25,7 +26,7 @@ viewswitcher {
       &.wide {
         padding: 8px 12px;
 
-        label {
+        > stack > label {
           &:dir(ltr) {
             padding-right: 7px;
           }
@@ -65,13 +66,33 @@ viewswitchertitle viewswitcher {
  *******************/
 
 indicatorbin {
-  > indicator { margin: 1px; }
-  > mask { padding: 1px; }
-
   > indicator, > mask {
-    background: $accent_color;
     min-width: 6px;
     min-height: 6px;
-    border-radius: 100%;
+    border-radius: 100px;
+  }
+
+  > indicator {
+    margin: 1px;
+    background: gtkalpha(currentColor, .4);
+
+    > label {
+      font-size: 0.6rem;
+      font-weight: bold;
+      padding: 1px 4px;
+      color: white;
+      font-feature-settings: "tnum";
+    }
+  }
+
+  > mask {
+    padding: 1px;
+    background: black;
+  }
+
+  &.needs-attention > indicator {
+    background: $accent_bg_color;
+
+    > label { color: $accent_fg_color; }
   }
 }

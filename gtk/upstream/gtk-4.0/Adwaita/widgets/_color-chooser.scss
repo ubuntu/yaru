@@ -56,6 +56,12 @@ colorswatch {
     }
   }
 
+  @if $contrast == 'high' {
+    > overlay {
+      box-shadow: inset 0 0 0 1px transparentize($text_color, .5);
+    }
+  }
+
   &.dark > overlay {
     color: white;
   }
@@ -63,7 +69,7 @@ colorswatch {
   &.light > overlay {
     color: transparentize(black, .25);
 
-    @if $variant == 'light' {
+    @if $variant == 'light' and $contrast != 'high' {
       box-shadow: inset 0 0 0 1px transparentize(black, 0.9);
     }
   }

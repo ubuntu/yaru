@@ -6,10 +6,13 @@ $dark_fg: #eeeeec;
 $light_bg: $light_2;
 $dark_bg: darken(desaturate($dark_3, 100%), 4%);
 
+$accent_bg_color: gtkcolor(accent_bg_color);
+$accent_fg_color: gtkcolor(accent_fg_color);
 $accent_color: gtkcolor(accent_color);
-$accent_text: gtkcolor(accent_text);
+
+$destructive_bg_color: gtkcolor(destructive_bg_color);
+$destructive_fg_color: gtkcolor(destructive_fg_color);
 $destructive_color: gtkcolor(destructive_color);
-$destructive_text: gtkcolor(destructive_text);
 
 $success_color: gtkcolor(success_color);
 $warning_color: gtkcolor(warning_color);
@@ -20,16 +23,13 @@ $text_color: if($variant == 'light', black, white);
 $bg_color: if($variant == 'light', $light_bg, $dark_bg);
 $fg_color: if($variant == 'light', $light_fg, $dark_fg);
 
-$accent_standalone_color: gtkmix($accent_color, $text_color, if($variant == 'dark', 50%, 75%));
-$destructive_standalone_color: gtkmix($destructive_color, $text_color, if($variant == 'dark', 50%, 75%));
-
 $borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 10%));
 $alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 18%));
 $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
-$link_color: $accent_standalone_color;
-$link_visited_color: gtkmix($accent_standalone_color, $text_color, 80%);
+$link_color: $accent_color;
+$link_visited_color: gtkmix($accent_color, $text_color, 80%);
 $dark_fill: mix($borders_color, $bg_color, 50%);
-$headerbar_bg_color: $bg_color;
+$headerbar_bg_color: darken($bg_color, if($variant == 'dark', 5%, 10%));
 $menu_color: $base_color;
 
 $view_hover_color: gtkalpha(currentColor, .07);
@@ -49,10 +49,10 @@ $button_checked_color: gtkalpha(currentColor, .2);
 $button_checked_hover_color: gtkalpha(currentColor, .25);
 $button_checked_active_color: gtkalpha(currentColor, .35);
 
-$fill_color: $accent_color;
-$fill_text_color: $accent_text;
-$fill_hover_color: gtkmix($accent_color, currentColor, 90%);
-$fill_active_color: gtkmix($accent_color, black, 80%);
+$fill_color: $accent_bg_color;
+$fill_text_color: $accent_fg_color;
+$fill_hover_color: gtkmix($accent_bg_color, currentColor, 90%);
+$fill_active_color: gtkmix($accent_bg_color, black, 80%);
 
 $slider_color: mix(white, $base_color, 80%);
 $slider_hover_color: white;
@@ -60,7 +60,7 @@ $slider_hover_color: white;
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
 $scrollbar_slider_hover_color: mix($fg_color, $bg_color, 80%);
-$scrollbar_slider_active_color: $accent_color;
+$scrollbar_slider_active_color: $accent_bg_color;
 
 $osd_fg_color: $dark_fg;
 $osd_text_color: white;
@@ -82,7 +82,7 @@ $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
 //special cased widget colors
-$focus_border_color:  gtkalpha($accent_color, 0.5);
+$focus_border_color:  gtkalpha($accent_bg_color, 0.5);
 $alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), transparentize(white,0.7));
 $dim_label_opacity: 0.55;
 
@@ -100,7 +100,7 @@ $dim_label_opacity: 0.55;
   $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
   //focus rings
-  $focus_border_color: gtkalpha($accent_color, 0.2);
+  $focus_border_color: gtkalpha($accent_bg_color, 0.8);
   $alt_focus_border_color: if($variant == 'light', white, transparentize(white,0.4));
 
   $dim_label_opacity: 0.9;

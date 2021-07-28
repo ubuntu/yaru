@@ -25,6 +25,8 @@ window.dialog.message {
 
     .dialog-action-area {
       border-top: 1px solid $borders_color;
+      margin: 0;
+      border-spacing: 0;
 
       > button {
         @extend %button_basic_flat;

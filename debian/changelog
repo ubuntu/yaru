@@ -1,3 +1,133 @@
+yaru-theme (21.10.1) impish; urgency=medium
+
+  [ Stuart Hayhurst ]
+  * Removed unused defs (#2573)
+
+  [ Paul Kepinski ]
+  * Fix Gnome-shell blurry slider (#2737)
+  * Add symlink for update-notifier icon (#2735)
+  * Fix Login Screen disabled button color (#2748)
+  * Add fullcolor appointment-soon icon (#2758)
+  * Add nm-device-wireless fullcolor icon (#2756)
+  * Update purple icons (#2763)
+  * Move GS upstreams files to a theme subfolder (#2741)
+  * Check upstream icons changes (#2743)
+  * Add Winetricks fullcolor icon (#2774)
+  * Update audio-speaker-* icons purple (#2775)
+  * Sync libhandy with master (#2792)
+  * Fix app grid folder border-radius (#2803)
+  * Add all missing symbolics icons (#2806)
+  * Update Gtk2 assets render scripts (#2816)
+  * Define gnome-shell-gresource build option to true (#2825)
+  * Update meson_options.txt (#2832)
+  * Initial support of GS40 (#2736)
+  * Fix row:selected widgets (#2850)
+  * Better list row border left (#2855)
+  * Split _apps into multiple files (#2856)
+  * Sync Gtk4 with Libadwaita (#2783)
+  * Fix list rows orange flash when unselected (#2859)
+  * Sync gtk4 with upstream (#2862)
+  * Sync gtk4 with upstream (#2866)
+  * Make GDM widgets compliant with GS theme variant (#2871)
+  * Rename upstream gtk folders from gtk+ to gtk (#2876)
+  * fix gtk4 button mixin (#2877)
+  * Sync Gtk4 with upstream (#2879)
+  * Add Gtk4 and Libadwaita install infos (#2889)
+  * Add gnome-calendar 40 symbolic icons (#2897)
+  * Gtk4 symlink to upstream (#2902)
+  * Fix menus checks wiggling effect (#2904)
+  * Rename snap-symbolic to snapcraft-symbolic (#2909)
+  * Fix cursors shape and colors (#2926)
+  * Add openhand cursor (#2931)
+  * Update software-properties-symbolic icon (#2932)
+  * Fix left_ptr_watch spinner gradient (#2934)
+  * Sync symbolics with upstream (#2937)
+
+  [ github-actions[bot] ]
+  * New upstream icons list for Adwaita symbolics
+  * New upstream snapshot for GNOME Shell
+  * New upstream snapshot for GNOME Shell Resources
+  * New upstream snapshot for GTK3
+  * New upstream snapshot for GTK4
+  * New upstream snapshot for Libhandy
+
+  [ Muqtadir ]
+  * rename sessions according to ubuntu 21.04 sessions (#2751)
+  * rendered all cursors and symlinked them (#2916)
+  * rename windows-close-24-symbolic.svg to preview-close-symbolic.svg (#2917)
+
+  [ ubuntujaggers ]
+  * Adding Yaru icon for gparted (if it's a default app now) (#2776)
+  * Adding full colour device icon for computer (#2786)
+  * inverting hand cursors (#2848)
+  * fixing watch cursors (#2851)
+  * minor improvement to full size accessories-colour-map (#2893)
+  * missing snapping icons for inkscape (#2907)
+
+  [ Carlo Lobrano ]
+  * Update render-cursors script for inkscape 1.0 (#2782)
+  * Add todo items
+  * Replace deprecated optparse with argparse
+  * Minimal rework of the main function
+  * Wrap SVG file parsing in a proper function
+  * SVGRect class clean up
+  * Add logging facility
+  * Rework global variables
+  * Refactored main function
+  * Use multiple instances of inkscape
+  * 100 papercuts
+  * Code cleanup
+  * Fix format with Black utility
+  * Improve logging
+  * Porting anicursor to python3 (#2887)
+
+  [ Jan Schröder ]
+  * fixed assets.svg in gtk2 dark (#2817)
+
+  [ Chris Billington ]
+  * Add scalable/ui folder to index.theme (#2831)
+
+  [ Elsie Hupp ]
+  * @elsiehupp (#2835)
+  * Add symbolic Snap app and mimetype icons (#2845)
+
+  [ Frederik Feichtmeier ]
+  * Gtk3 theme: remove firefox border axing (#2869)
+  * Gtk3 Nautilus list view change (#2881)
+  * GtkTheme: monochrome spinners and orange links (#2883)
+  * ShellTheme: update to orange link colors (#2884)
+  * GtkThemes: revert to upstreams app notifications (#2886)
+  * Gtk4Theme: remove outdated tweaks (#2890)
+  * Gtk4: yaru upstream sync with tweak fixes (#2901)
+  * Remove "yaru-light" and keep "yaru" as the fully light theme (#2922)
+  * Gnome-software: remove css except green counter (#2942)
+
+  [ benni3-1415 ]
+  * Simpler cursor shape & Updated spinner colors (#2868)
+
+  [ Linux Lovin' Llama ]
+  * workspace-placeholder instead of dash-placeholder (#2891)
+
+  [ Marco Trevisan (Treviño) ]
+  * meson: Bump upstream version to 21.10.1
+  * debian/control: Update breaks on gnome-shell 40
+  * debian/control: Bump dependency on mutter 0.51
+  * debian/control: Use debhelper 13
+  * debian/yaru-theme-gnome-shell.alternatives: Use dh_installalternatives.
+    And switch to new alternative name (gdm-theme.gresource) as previous is
+    not supported by gnome-shell >= 40. The shell will also care about
+    removing all the gdm3-theme.gresource alternatives so we don't have to
+    handle that here.
+  * debian/yaru-theme-gtk.install: Do not install Yaru-light themes anymore
+    They are not provided anymore as per commit 37c779.
+    There's only one yaru now.
+  * debian: Add migration script to migrate users from Yaru-light to Yaru.
+    We use session-migration through dh-migrations in d/control
+  * gnome-shell/dock: Update theme to follow dash-to-dock changes
+  * gnome-shell-theme.gresource.xml: Use gdm.css as stylesheet
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 07 Jul 2021 09:01:50 +0200
+
 yaru-theme (21.04.1) hirsute; urgency=medium
 
   [ Carlo Lobrano ]
