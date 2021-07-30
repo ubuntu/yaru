@@ -11,3 +11,4 @@ option('communitheme_compat', type: 'boolean', value: false, description:'build 
 option('default', type: 'boolean', value: true, description:'build Yaru gtk default flavour')
 option('dark', type: 'boolean', value: true, description:'build Yaru gtk dark flavour')
 option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
+option('xfwm4', type: 'boolean', value: true, description:'build Yaru with xfwm4 assets')
