@@ -388,7 +388,7 @@ list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
 
   &:selected {
     &.activatable, & {
-      &:focus, &:disabled, & {
+      &:focus, &:hover, &:disabled, & {
         background: $_row_selection_bg;
       }
 
@@ -396,7 +396,7 @@ list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
         &, button, button image { color: $insensitive_fg_color; }
       }
 
-      &:focus, & {
+      &:focus, &:hover, & {
         &, button, button image { color: $text_color; }
         button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }  
       }
