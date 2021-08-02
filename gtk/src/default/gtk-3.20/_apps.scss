@@ -223,6 +223,11 @@ terminal-window {
     }
 
     notebook {
+        // Fix bugged transparent headerbar background
+        > header {
+          &, &:backdrop { background: $bg_color; }
+        }
+
         scrollbar {
             // inherits from scrollbar
             background-color: transparent;
