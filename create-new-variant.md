@@ -21,7 +21,7 @@ Let's say we want a Blue Yaru variant from Default.
         option('light', type: 'boolean', value: true, description:'build Yaru gtk light flavour')
         option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
         +option('blue', type: 'boolean', value: true, description:'build Yaru gtk blue flavour')
-```
+        ```
     2. Add the new variant name to `gtk/meson.build`
         ```
         diff --git a/gtk/meson.build b/gtk/meson.build
