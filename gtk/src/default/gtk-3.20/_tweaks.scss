@@ -112,7 +112,7 @@ button.titlebutton:not(.appmenu) {
       }
     }
 
-    &.close { // Special selector to untarget unified window (see #2980)
+    &.close {
       color: $selected_fg_color;
       @include draw_circle($selected_bg_color);
 
