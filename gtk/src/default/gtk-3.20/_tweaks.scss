@@ -112,7 +112,7 @@ button.titlebutton:not(.appmenu) {
       }
     }
 
-    window:not(.toolbox) &.close { // Special selector to untarget unified window (see #2980)
+    &.close { // Special selector to untarget unified window (see #2980)
       color: $selected_fg_color;
       @include draw_circle($selected_bg_color);
 
@@ -129,6 +129,20 @@ button.titlebutton:not(.appmenu) {
       &:backdrop {
         @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
         &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
+      }
+    }
+
+    window.toolbox &.close { // Special selector to target unified window (see #2980)
+      color: $fg_color;
+
+      &, &:backdrop {
+        &:hover {
+          @include draw_circle($_base_hover_color);
+        }
+
+        &:active {
+          @include draw_circle($_base_active_color);
+        }
       }
     }
   }
