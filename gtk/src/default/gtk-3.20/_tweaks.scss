@@ -99,7 +99,7 @@ button.titlebutton:not(.appmenu) {
   .titlebar &,
   headerbar.selection-mode &,
   & {
-    &.maximize, &.minimize {
+    &.maximize, &.minimize, &.close {
 
       &, &:backdrop {
         &:hover {
@@ -112,7 +112,7 @@ button.titlebutton:not(.appmenu) {
       }
     }
 
-    &.close {
+    window:not(.toolbox) &.close { // Special selector to untarget unified window (see #2980)
       color: $selected_fg_color;
       @include draw_circle($selected_bg_color);
 
