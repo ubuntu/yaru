@@ -118,17 +118,10 @@ foreach variant: variants
 
   # static files to copy
   data_sources += files([
-    'lockscreen-gradient.svg',
-    'logged-in-indicator.svg',
-    'noise-texture.png',
     'pad-osd.css',
     'running-indicator.svg',
-    'source-button-border.svg',
-    'summary-counter.svg',
     'toggle-off-intl.svg',
     'toggle-on-intl.svg',
-    'ws-switch-arrow-down.svg',
-    'ws-switch-arrow-up.svg',
   ])
 
   # install static data files

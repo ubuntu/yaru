@@ -22,6 +22,7 @@ xcursorgen bottom_side.in $DIR/$THEME/cursors/bottom_side
 xcursorgen bottom_tee.in $DIR/$THEME/cursors/bottom_tee
 # xcursorgen center_ptr.in $DIR/$THEME/cursors/center_ptr
 xcursorgen circle.in $DIR/$THEME/cursors/circle
+xcursorgen color-picker.in $DIR/$THEME/cursors/color-picker
 xcursorgen context-menu.in $DIR/$THEME/cursors/context-menu
 xcursorgen copy.in $DIR/$THEME/cursors/copy
 xcursorgen cross.in $DIR/$THEME/cursors/cross
@@ -77,6 +78,7 @@ xcursorgen ur_angle.in $DIR/$THEME/cursors/ur_angle
 xcursorgen vertical-text.in $DIR/$THEME/cursors/vertical-text
 xcursorgen watch.in $DIR/$THEME/cursors/watch
 xcursorgen watch.in $DIR/$THEME/cursors/wait
+xcursorgen wayland_cursor.in $DIR/$THEME/cursors/wayland_cursor
 xcursorgen X_cursor.in $DIR/$THEME/cursors/X_cursor
 xcursorgen xterm.in $DIR/$THEME/cursors/xterm
 xcursorgen zoom-in.in $DIR/$THEME/cursors/zoom-in
