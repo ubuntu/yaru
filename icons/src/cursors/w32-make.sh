@@ -25,6 +25,7 @@ ${GEN} bottom_side$s.in $DIR/$THEME/cursors/bottom_side.cur
 ${GEN} bottom_tee$s.in $DIR/$THEME/cursors/bottom_tee.cur
 # ${GEN} center_ptr$s.in $DIR/$THEME/cursors/center_ptr.cur
 ${GEN} circle$s.in $DIR/$THEME/cursors/circle.cur
+${GEN} color-picker$s.in $DIR/$THEME/cursors/color-picker.cur
 ${GEN} context-menu$s.in $DIR/$THEME/cursors/context-menu.cur
 ${GEN} copy$s.in $DIR/$THEME/cursors/copy.cur
 ${GEN} cross$s.in $DIR/$THEME/cursors/cross.cur
@@ -78,6 +79,7 @@ ${GEN} ur_angle$s.in $DIR/$THEME/cursors/ur_angle.cur
 ${GEN} vertical-text$s.in $DIR/$THEME/cursors/vertical-text.cur
 ${GEN} watch$s.in $DIR/$THEME/cursors/watch.ani
 ${GEN} watch$s.in $DIR/$THEME/cursors/wait.ani
+${GEN} wayland_cursor$s.in $DIR/$THEME/cursors/wayland_cursor.cur
 ${GEN} X_cursor$s.in $DIR/$THEME/cursors/X_cursor.cur
 ${GEN} xterm$s.in $DIR/$THEME/cursors/xterm.cur
 ${GEN} zoom-in$s.in $DIR/$THEME/cursors/zoom-in.cur
