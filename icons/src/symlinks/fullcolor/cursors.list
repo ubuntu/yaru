@@ -4,6 +4,7 @@ bd_double_arrow size_fdiag
 bottom_left_corner sw-resize
 bottom_right_corner se-resize
 bottom_side s-resize
+circle 03b6e0fcb3499374a867c041f52298f0
 copy 1081e37283d90000800003c07f3ef6bf
 copy 6407b0e94181790501fd1e167b474872
 cross cross_reverse
@@ -12,6 +13,7 @@ cross diamond_cross
 crossed_circle 03b6e0fcb3499374a867c041f52298f0
 crossed_circle not-allowed
 dnd-link alias
+dnd-none closedhand
 dnd-no-drop no-drop
 dotbox dot_box_mask
 dotbox draped_box
@@ -21,10 +23,10 @@ fd_double_arrow fcf1c3c7cd4491d801f1e1c78f100000
 fd_double_arrow nesw-resize
 fd_double_arrow size_bdiag
 fleur size_all
-grabbing fleur
 h_double_arrow 028006030e0e7ebffc7f7070c0600140
 h_double_arrow size_hor
-hand pointer
+hand1 pointer
+hand1 pointing_hand
 hand1 grab
 hand2 9d800788f1b08800ae810202380a0822
 hand2 e29285e634086352946a0e7090d73106
@@ -38,28 +40,51 @@ left_ptr_watch progress
 left_side w-resize
 link 3085a0e285430894940527032f8b26df
 link 640fb0e74195791501fd1ed57b41487f
+link a2a266d0498c3104214a47bd64ab0fc8
 move 4498f0e0c1937ffe01fd06f973665830
 move 9081237383d90e509aa00f00170e968f
+move fcf21c00b30f7e3f83fe0dfd12e71cff
+pencil draft
+plus cell
+progress 00000000000000020006000e7e9ffc3f
+progress 08e8e1c95fe2fc01f976f1e063a24ccd
+progress 3ecb610c1bf2410f44200f48c40d3599
+progress half-busy
 question_arrow 5c6cd98b3f3ebcb1f9c7f1c204630408
 question_arrow d9ce0ab605698f320427677b458ad60b
 question_arrow help
 question_arrow left_ptr_help
+question_arrow whats_this
 right_ptr draft_large
 right_ptr draft_small
 right_side e-resize
+sb_left_arrow left-arrow
+sb_right_arrow right-arrow
+sb_down_arrow down-arrow
+sb_up_arrow up-arrow
 sb_h_double_arrow 14fef782d02440884392942c11205230
 sb_h_double_arrow col-resize
+sb_h_double_arrow split_h
 sb_h_double_arrow ew-resize
 sb_h_double_arrow h_double_arrow
+sb_v_double_arrow 00008160000006810000408080010102
 sb_v_double_arrow 2870a09082c103050810ffdffffe0204
 sb_v_double_arrow double_arrow
 sb_v_double_arrow ns-resize
 sb_v_double_arrow row-resize
+sb_v_double_arrow split_v
 sb_v_double_arrow v_double_arrow
 top_left_corner nw-resize
 top_right_corner ne-resize
 top_side n-resize
 v_double_arrow 00008160000006810000408080010102
 v_double_arrow size_ver
+watch wait
 X_cursor pirate
+X_cursor x-cursor
 xterm text
+
+
+
+
+
