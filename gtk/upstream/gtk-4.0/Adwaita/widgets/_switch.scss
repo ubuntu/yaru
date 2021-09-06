@@ -5,27 +5,15 @@ switch {
 
   transition: $focus_transition;
 
-  @if $contrast == "high" {
-     background-color: $borders_color;
-     color: white;
+   background-color: $trough_color;
 
-     &:hover {
-      background-color: mix($borders_color, $text_color, 90%);
+   &:hover {
+    background-color: $trough_hover_color;
 
-      &:active { background-color: mix($borders_color, black, 80%); }
-    }
-   }
-   @else {
-     background-color: $trough_color;
+    &:active { background-color: $trough_active_color; }
+  }
 
-     &:hover {
-      background-color: $trough_hover_color;
-
-      &:active { background-color: $trough_active_color; }
-    }
-
-    > image { color: transparent; }
-   }
+  > image { color: if($contrast == 'high', white, transparent); }
 
   @include focus-ring($offset: 1px, $outer: true);
 
@@ -61,6 +49,10 @@ switch {
 
     > slider {
       background-color: $slider_hover_color;
+    }
+
+    @if $contrast == "high" {
+      > image {  color: inherit; }
     }
   }
 }

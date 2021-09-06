@@ -17,6 +17,7 @@ window.dialog.print {
     paper {
       background: white;
       color: $light_fg;
+      background-clip: padding-box;
       border: 1px solid $borders_color;
     }
   }
@@ -29,6 +30,7 @@ window.dialog.print {
 window.assistant {
   .sidebar {
     padding: $menu-margin;
+    background-clip: padding-box;
     border-top: 1px solid $borders_color;
   }
 

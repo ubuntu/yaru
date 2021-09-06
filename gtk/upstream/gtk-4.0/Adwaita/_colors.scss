@@ -23,13 +23,13 @@ $text_color: if($variant == 'light', black, white);
 $bg_color: if($variant == 'light', $light_bg, $dark_bg);
 $fg_color: if($variant == 'light', $light_fg, $dark_fg);
 
-$borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 10%));
-$alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 18%));
-$borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
+$borders_color: gtkalpha(currentColor, .15);
+$thin_borders_color: gtkalpha(currentColor, .05);
 $link_color: $accent_color;
 $link_visited_color: gtkmix($accent_color, $text_color, 80%);
-$dark_fill: mix($borders_color, $bg_color, 50%);
+$dark_fill: if($variant == 'light', darken($bg_color, 9%), darken($bg_color, 5%));
 $headerbar_bg_color: darken($bg_color, if($variant == 'dark', 5%, 10%));
+$headerbar_border_color: transparentize($fg_color, .85);
 $menu_color: $base_color;
 
 $view_hover_color: gtkalpha(currentColor, .07);
@@ -67,7 +67,6 @@ $osd_text_color: white;
 $osd_bg_color: if($variant == 'light', transparentize($dark_bg,0.3), transparentize(darken(desaturate($dark_3, 100%), 10%),0.3));
 $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
-$osd_borders_color: transparentize(black, 0.3);
 
 $sidebar_bg_color: mix($bg_color, $base_color, 50%);
 
@@ -79,7 +78,6 @@ $drop_target_color: if($variant == 'light', $green_4, $green_5);
 //insensitive state derived colors
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
-$insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
 //special cased widget colors
 $focus_border_color:  gtkalpha($accent_bg_color, 0.5);
@@ -91,13 +89,14 @@ $dim_label_opacity: 0.55;
 
   $fg_color: if($variant == 'light', darken($fg_color, 3%), lighten($fg_color, 2%));
   $bg_color: if($variant == 'light', lighten($bg_color, 3%), darken($bg_color, 2%));
-  $borders_color: if($variant == 'light', darken($borders_color, 30%), lighten($borders_color, 30%));
-  $alt_borders_color: if($variant == 'light', darken($alt_borders_color, 33%), lighten($alt_borders_color, 28%));
+  $borders_color: gtkalpha(currentColor, .5);
+  $thin_borders_color: gtkalpha(currentColor, .25);
+
+  $headerbar_border_color: transparentize($fg_color, .5);
 
   //insensitive state derived colors
   $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
   $insensitive_bg_color: mix($bg_color, $base_color, 60%);
-  $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
 
   //focus rings
   $focus_border_color: gtkalpha($accent_bg_color, 0.8);
@@ -105,4 +104,7 @@ $dim_label_opacity: 0.55;
 
   $dim_label_opacity: 0.9;
 
+  $trough_color: gtkalpha(currentColor, .3);
+  $trough_hover_color: gtkalpha(currentColor, .4);
+  $trough_active_color: gtkalpha(currentColor, .5);
 }

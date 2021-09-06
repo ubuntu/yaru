@@ -1,5 +1,6 @@
 spinbutton {
   @extend %entry;
+  @extend .numeric;
 
   padding: 0;
   border-spacing: 0;
@@ -10,7 +11,7 @@ spinbutton {
     margin: 0;
     background: none;
     border-style: solid;
-    border-color: transparentize($borders_color, 0.7);
+    border-color: $thin_borders_color;
     border-radius: 0;
     box-shadow: none;
     color: inherit;
@@ -80,6 +81,4 @@ spinbutton {
       padding: 1px 2px;
     }
   }
-
-  font-feature-settings: "tnum";
 }

@@ -44,7 +44,7 @@
   }
   @if $t==focus { // Yaru: we detached focus from selected
     border-color: $fc;
-    box-shadow: inset 0 0 0 1px $fc;
+    box-shadow: inset 0 0 0 1px $fc; // Yaru: 2px is too big
   }
   @if $t==hover { }
   @if $t==insensitive {

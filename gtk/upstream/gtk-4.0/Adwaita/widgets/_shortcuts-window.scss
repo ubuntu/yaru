@@ -21,10 +21,11 @@ shortcut {
 
     color: $fg_color;
     background-color: $base_color;
+    background-clip: padding-box;
     border: 1px solid;
-    border-color: if($variant == 'light', mix($borders_color, $bg_color, 50%), $borders_color);
+    border-color: $borders_color;
     border-radius: 5px;
-    box-shadow: if($variant == 'light', inset 0 -3px mix($base_color, $bg_color, 20%), inset 0 -3px mix($borders_color, $base_color, 60%));
+    box-shadow: inset 0 -3px $thin_borders_color;
     font-size: smaller;
   }
 }

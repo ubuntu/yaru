@@ -11,6 +11,6 @@ will then be synchronized periodically before releases.
 GNOME Shell Sass is distributed under the terms of the GNU General Public
 License, version 2 or later. See the [COPYING][license] file for details.
 
-[shell-subtree]: https://gitlab.gnome.org/GNOME/gnome-shell/tree/master/data/theme/gnome-shell-sass
+[shell-subtree]: https://gitlab.gnome.org/GNOME/gnome-shell/tree/HEAD/data/theme/gnome-shell-sass
 [sass-repo]: https://gitlab.gnome.org/GNOME/gnome-shell-sass
 [license]: COPYING

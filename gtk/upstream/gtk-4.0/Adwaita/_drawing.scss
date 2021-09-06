@@ -9,7 +9,7 @@
 // If $outer is true, the focus ring extends outward. Otherwise, it extends inward.
 // If $within is true, use focus-within instead of focus:focus-visible
 //
-@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: 'focus:focus-visible', $fc: $focus_border_color) {
+@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: ':focus:focus-visible', $fc: $focus_border_color) {
   transition-property: outline, outline-width, outline-offset, outline-color;
   transition-duration: 300ms;
   animation-timing-function: ease-in-out;
@@ -18,7 +18,7 @@
     outline-offset: if($outer, $offset + 4px, $offset + $width + 4px);
   }
 
-  &:#{$focus-state} #{$target} {
+  &#{$focus-state} #{$target} {
     outline-color: $fc;
     outline-width: $width;
     outline-offset: $offset;
@@ -53,31 +53,31 @@
 
   @if $t==normal {
     color: $text_color;
-    border-color: mix($borders_color, $base_color, 75%);
+    border-color: $borders_color;
     background-color: $base_color;
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
   @if $t==insensitive {
     color: $insensitive_fg_color;
-    border-color: mix($borders_color, $insensitive_bg_color, 75%);
+    border-color: $borders_color;
     background-color: $insensitive_bg_color;
   }
   @if $t==osd {
     color: $osd_text_color;
-    border-color: $osd_borders_color;
-    background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
+    border-color: $borders_color;
+    background-color: transparentize(black, 0.5);
     background-clip: padding-box;
     box-shadow: none;
   }
   @if $t==osd-focus {
     color: $osd_text_color;
-    border-color: $accent_bg_color;
-    background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
+    border-color: $borders_color;
+    background-color: transparentize(black, 0.5);
     background-clip: padding-box;
   }
   @if $t==osd-insensitive {
     color: $osd_insensitive_fg_color;
-    border-color: $osd_borders_color;
+    border-color: $borders_color;
     background-color: $osd_insensitive_bg_color;
     background-clip: padding-box;
   }
@@ -94,13 +94,11 @@
   @else { @return darken($c, 15%); }
 }
 
-@mixin overshoot($p, $c:$fg_color) {
+@mixin overshoot($p) {
 //
 // overshoot
 //
 // $p: position
-// $t: type
-// $c: base color
 //
 // possible $p values:
 // top, bottom, right, left
@@ -117,21 +115,13 @@
     $_big_gradient_size: $_big_gradient_length 100%;
   }
 
-  $_small_gradient_color: $c;
-  $_big_gradient_color: transparentize($c, 0.93);
-
-  @if $c==$fg_color {
-    $_small_gradient_color: darken($borders_color, 10%);
-    $_big_gradient_color: transparentize($fg_color, 0.93);
-  }
-
   $_small_gradient: radial-gradient(farthest-side at $p,
-                                    $_small_gradient_color 85%,
-                                    transparentize($_small_gradient_color, 1));
+                                    gtkalpha(currentColor, 0.2) 85%,
+                                    gtkalpha(currentColor, 0));
 
   $_big_gradient: radial-gradient(farthest-side at $p,
-                                  $_big_gradient_color,
-                                  transparentize($_big_gradient_color, 1));
+                                  gtkalpha(currentColor, 0.07),
+                                  gtkalpha(currentColor, 0));
 
   background-image: $_small_gradient, $_big_gradient;
   background-size: $_small_gradient_size, $_big_gradient_size;
