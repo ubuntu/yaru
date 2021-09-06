@@ -1,6 +1,4 @@
 label {
-  @include focus-ring();
-
   &.separator {
     @extend .dim-label;
   }
@@ -73,6 +71,10 @@ label {
 
 .monospace {
   font-family: monospace;
+}
+
+.numeric {
+  font-feature-settings: "tnum";
 }
 
 /*******************

@@ -108,11 +108,12 @@ scale {
   }
 
   > value {
-    color: gtkalpha(currentColor, 0.55);
-    font-feature-settings: "tnum";
+    @extend .dim-label;
+    @extend .numeric;
   }
 
-  &.marks-before, &.marks-after {
+  &.marks-before:not(.marks-after),
+  &.marks-after:not(.marks-before) {
     > trough > slider {
       transform: rotate(45deg);
 
@@ -151,6 +152,10 @@ scale {
 
     &.marks-after > trough > slider {
       border-bottom-right-radius: 0;
+    }
+
+    &.marks-before.marks-after > trough > slider {
+      border-radius: 100%;
     }
   }
 

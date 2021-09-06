@@ -33,6 +33,7 @@ window.dialog.message {
         padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
         border-radius: 0;
         border: none;
+        background-clip: padding-box;
         border-left: 1px solid $borders_color;
 
         &:first-child {
