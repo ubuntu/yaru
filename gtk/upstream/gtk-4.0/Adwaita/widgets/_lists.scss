@@ -2,24 +2,32 @@ listview,
 list {
   color: $text_color;
   background-color: $base_color;
+  background-clip: padding-box;
   border-color: $borders_color;
 
-  > row { padding: 2px; }
+  > row {
+    padding: 2px;
+    background-clip: padding-box;
+  }
+
   > row.expander { padding: 0px; }
   > row.expander .row-header { padding: 2px; }
 
   &.horizontal row.separator,
   &.separators.horizontal > row:not(.separator) {
-    border-left: 1px solid $treeview_borders_color;
+    border-left: 1px solid $borders_color;
   }
+
   &:not(.horizontal) row.separator,
   &.separators:not(.horizontal) > row:not(.separator) {
-    border-bottom: 1px solid $treeview_borders_color;
+    border-bottom: 1px solid $borders_color;
   }
 }
 
 row {
-  @include focus-ring($focus-state: 'focus-visible:focus-within');
+  @include focus-ring();
+
+  background-clip: padding-box;
 
   &.activatable {
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
@@ -49,11 +57,11 @@ row {
  *******************************************************/
 
 .rich-list { /* rich lists usually containing other widgets than just labels/text */
-  & > row {
+  > row {
     padding: 8px 12px;
     min-height: 32px; /* should be tall even when only containing a label */
 
-    & > box {
+    > box {
       border-spacing: 12px;
     }
   }
@@ -93,10 +101,10 @@ popover.background.combo > contents {
     background-color: transparent;
     min-width: 200px;
 
-    & > row {
+    > row {
       padding: 0px 12px 0px 12px;
       min-height: 50px;
-      border-bottom: 1px solid transparentize($borders_color, 0.5);
+      border-bottom: 1px solid $borders_color;
 
       &:first-child {
         border-top-left-radius: $popover_radius - 2;
@@ -143,7 +151,7 @@ row.expander {
 
   list.nested > row {
     background-color: transparentize($bg_color, 0.5);
-    border-color: transparentize($borders_color, 0.3);
+    border-color: $borders_color;
     border-style: solid;
     border-width: 1px 0px 0px 0px;
   }
@@ -248,7 +256,7 @@ listview.content {
 
     &,
     list > row {
-      border-color: transparentize($borders_color, 0.3);
+      border-color: $borders_color;
       border-style: solid;
       transition: 200ms $ease-out-quad;
     }

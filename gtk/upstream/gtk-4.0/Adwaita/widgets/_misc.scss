@@ -19,7 +19,7 @@ frame {
  **************/
 
 separator {
-  background: lighten($borders_color, 5%);
+  background: $borders_color;
   min-width: 1px;
   min-height: 1px;
 }
@@ -67,21 +67,35 @@ statusbar {
  * AdwStatusPage *
  *****************/
 
-statuspage > scrolledwindow > viewport > box {
-  margin: 36px 12px;
-  border-spacing: 36px;
+statuspage {
+  > scrolledwindow > viewport > box {
+    margin: 36px 12px;
+    border-spacing: 36px;
 
-  > clamp > box {
-    border-spacing: 12px;
+    > clamp > box {
+      border-spacing: 12px;
 
+      > .icon {
+        -gtk-icon-size: 128px;
+
+        @if $contrast == 'normal' {
+          color: gtkalpha(currentColor, 0.5);
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 24px;
+        }
+      }
+    }
+  }
+
+  &.compact > scrolledwindow > viewport > box > clamp > box {
     > .icon {
-      @if $contrast == 'normal' {
-        color: gtkalpha(currentColor, 0.5);
-      }
+      -gtk-icon-size: 96px;
+    }
 
-      &:not(:last-child) {
-        margin-bottom: 24px;
-      }
+    > .title {
+      font-size: 18pt;
     }
   }
 }

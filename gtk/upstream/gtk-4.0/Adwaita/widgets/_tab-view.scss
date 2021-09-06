@@ -1,4 +1,5 @@
 $tab_bg: $headerbar_bg_color;
+$tab_border: mix(opacify($headerbar_border_color, 1), $headerbar_bg_color, 100% * alpha($headerbar_border_color));
 
 @mixin undershoot-gradient($dir) {
   @if $variant == 'dark' {
@@ -24,12 +25,12 @@ tabbar {
   .box {
     min-height: 38px;
     background: darken($tab_bg, 3%);
-    border-bottom: 1px solid $alt_borders_color;
+    border-bottom: 1px solid $tab_border;
   }
 
   scrolledwindow.pinned {
     undershoot {
-      border: 0 solid $alt_borders_color;
+      border: 0 solid $tab_border;
     }
 
     &:dir(rtl) undershoot.left {
@@ -42,11 +43,11 @@ tabbar {
 
     tabbox {
       &:dir(ltr) {
-        box-shadow: inset -1px 0 $alt_borders_color;
+        box-shadow: inset -1px 0 $tab_border;
       }
 
       &:dir(rtl) {
-        box-shadow: inset 1px 0 $alt_borders_color;
+        box-shadow: inset 1px 0 $tab_border;
       }
     }
   }
@@ -73,7 +74,7 @@ tabbar {
 
   tab {
     border-style: solid;
-    border-color: $alt_borders_color;
+    border-color: $tab_border;
     border-width: 0 1px 0 1px;
     transition: background 150ms ease-in-out, $focus_transition;
     background-color: $tab_bg;
@@ -96,7 +97,7 @@ tabbar {
   .start-action,
   .end-action {
     background: $tab_bg;
-    border-color: $alt_borders_color;
+    border-color: $tab_border;
     border-style: solid;
     transition: background 150ms ease-in-out;
 

@@ -1,5 +1,6 @@
 calendar {
   color: $text_color;
+  background-clip: padding-box;
   border: 1px solid $borders_color;
 
   > header {
@@ -21,7 +22,7 @@ calendar {
     }
 
     > label {
-      @include focus-ring($focus-state: 'focus');
+      @include focus-ring($focus-state: ':focus');
 
       &.day-number {
         padding: 4px;

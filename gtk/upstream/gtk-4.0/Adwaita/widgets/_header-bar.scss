@@ -1,12 +1,15 @@
 headerbar {
-  min-height: 46px;
-  border-width: 0 0 1px;
-  border-style: solid;
-  border-color: $alt_borders_color;
+  min-height: 47px;
   background-color: $headerbar_bg_color;
+  box-shadow: inset 0 -1px $headerbar_border_color,
+              inset  1px 0 $headerbar_border_color,
+              inset -1px 0 $headerbar_border_color;
+
+  margin-left: -1px;
+  margin-right: -1px;
 
   > windowhandle > box {
-    padding: 0 6px;
+    padding: 0 7px 1px 7px;
 
     &,
     > box.start,
@@ -29,10 +32,10 @@ headerbar {
   }
 
   &.default-decoration {
-    min-height: 36px;
+    min-height: 37px;
 
     > windowhandle > box {
-      padding: 0 4px;
+      padding: 0 4px 1px 4px;
     }
 
     windowcontrols {
@@ -53,12 +56,27 @@ headerbar {
     }
   }
 
+  &.flat {
+    background: none;
+    box-shadow: none;
+
+    min-height: 46px;
+
+    > windowhandle > box {
+      padding-bottom: 0;
+    }
+
+    &.default-decoration {
+      min-height: 36px;
+    }
+  }
+
   .solid-csd & {
     &:backdrop, & {
       &:dir(rtl), &:dir(ltr) { // specificity bump
-        margin-left: -1px;
-        margin-right: -1px;
         margin-top: -1px;
+
+        > windowhandle > box { padding-top: 1px; }
       }
     }
   }

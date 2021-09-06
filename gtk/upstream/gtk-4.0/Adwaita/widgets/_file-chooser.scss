@@ -17,9 +17,7 @@ placesview {
 }
 
 filechooser {
-  .dialog-action-box {
-    border-top: 1px solid $borders_color;
-  }
+  box-shadow: 0 1px $borders_color;
 
   #pathbarbox { border-bottom: 1px solid $bg_color; }
 

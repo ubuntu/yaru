@@ -1,12 +1,15 @@
 // To be used for opaque elements overlaid atop the selected row
 $treeview_selection_default: transparentize($text_color, .9);
 $treeview_selection_opaque: mix(opacify($treeview_selection_default, 1), $base_color, 100% * alpha($treeview_selection_default));
+$treeview_borders_opaque: mix($text_color, $base_color, if($contrast == 'high', 40%, 20%));
+
+treeview.view {
+  border-left-color: $treeview_borders_opaque; // this is actually the tree lines color,
+  border-top-color: $treeview_borders_opaque; // while this is the grid lines color, better then nothing
+}
 
 columnview.view,
 treeview.view {
-  border-left-color: $treeview_borders_color; // this is actually the tree lines color,
-  border-top-color: $treeview_borders_color; // while this is the grid lines color, better then nothing
-
   @include focus-ring();
 
   &:selected {
@@ -17,7 +20,7 @@ treeview.view {
 
   &.separator {
     min-height: 2px;
-    color: $treeview_borders_color;
+    color: $borders_color;
   }
 
   &:drop(active) {
@@ -130,7 +133,7 @@ treeview.view {
   background-image: none;
   border-style: solid;
   border-width: 0 0 1px 1px;
-  border-color: $treeview_borders_color;
+  border-color: $borders_color;
   border-radius: 0;
 
   &:disabled {
@@ -164,7 +167,7 @@ columnview {
 
   // make column separators visible when :show-column-separators is true
   &.column-separators > listview > row > cell {
-    border-left-color: $treeview_borders_color;
+    border-left-color: $borders_color;
   }
 
   // shrink vertically for .data-table
