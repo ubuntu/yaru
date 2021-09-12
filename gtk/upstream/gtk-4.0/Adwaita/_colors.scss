@@ -57,6 +57,8 @@ $fill_active_color: gtkmix($accent_bg_color, black, 80%);
 $slider_color: mix(white, $base_color, 80%);
 $slider_hover_color: white;
 
+$card_bg_color: if($variant == 'light', white, transparentize(white, .8));
+
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
 $scrollbar_slider_hover_color: mix($fg_color, $bg_color, 80%);

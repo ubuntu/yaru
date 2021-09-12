@@ -1,0 +1,79 @@
+stackswitcher,
+.toggle-group {
+  background-color: gtkalpha(currentColor, .1);
+  padding: 3px;
+  border-radius: $button_radius + 3px;
+  border-spacing: 3px;
+
+  @if $contrast == 'high' {
+    box-shadow: inset 0 0 0 1px $borders_color;
+  }
+
+  button.toggle,
+  %toggle_group_button {
+    @extend %button_basic_flat;
+
+    @include focus-ring($offset: 0px);
+    transition: $button_transition;
+
+    padding: 2px 10px;
+    font-weight: normal;
+
+    &.image-button {
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+
+    &.text-button {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    &.text-button.image-button,
+    &.image-text-button,
+    &.arrow-button {
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+
+    &:checked {
+      &, &:hover, &:active, &.keyboard-activating {
+        background: $card_bg_color;
+      }
+
+      box-shadow: 0 2px 4px transparentize(black, .8);
+
+      @if $contrast == 'high' {
+        box-shadow: inset 0 0 0 1px $borders_color,
+                    0 2px 4px transparentize(black, .8);
+      }
+    }
+  }
+}
+
+/********************
+ * GtkStackSwitcher *
+ ********************/
+
+stackswitcher {
+  > button {
+    // to position the needs attention dot, padding is added to the button
+    // child, a label needs just lateral padding while an icon needs vertical
+    // padding added too.
+
+    > label {
+      padding: 0 6px;
+      margin: 0 -6px;
+    }
+
+    > image {
+      padding: 3px 6px;
+      margin: -3px -6px;
+    }
+
+    &.needs-attention {
+      > label,
+      > image { @extend %needs_attention; }
+    }
+  }
+}

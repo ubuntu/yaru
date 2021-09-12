@@ -1,9 +1,3 @@
-// stuff for .needs-attention
-@keyframes needs_attention {
-  from { background-image: radial-gradient(farthest-side, $accent_bg_color 0%, transparent 0%); }
-  to { background-image: radial-gradient(farthest-side, $accent_bg_color 95%, transparent); }
-}
-
 %button,
 button {
   @at-root %button_basic, & {
@@ -246,27 +240,6 @@ button {
     }
   }
 
-  stackswitcher > & {
-    // to position the needs attention dot, padding is added to the button
-    // child, a label needs just lateral padding while an icon needs vertical
-    // padding added too.
-
-    > label {
-      padding: 0 6px;
-      margin: 0 -6px;
-    }
-
-    > image {
-      padding: 3px 6px;
-      margin: -3px -6px;
-    }
-
-    &.needs-attention {
-      > label,
-      > image { @extend %needs_attention; }
-    }
-  }
-
   // hide separators
   &.font {
     separator { background-color: transparent; }
@@ -287,26 +260,6 @@ button {
   &.pill {
     padding: 10px 32px;
     border-radius: 9999px;
-  }
-}
-
-%needs_attention {
-  // the dot is drawn by using two radial gradient, the first one is the actual dot, the other
-  // simulates the shadow labels and icons normally have in buttons.
-  animation: needs_attention 150ms ease-in;
-
-  background-image: radial-gradient(farthest-side, $accent_bg_color 96%, transparent);
-  background-size: 6px 6px, 6px 6px;
-  background-repeat: no-repeat;
-
-  @if $variant == 'light' { background-position: right 3px, right 4px; }
-
-  @else { background-position: right 3px, right 2px; }
-
-  &:dir(rtl) {
-    @if $variant == 'light' { background-position: left 3px, left 4px; }
-
-    @else { background-position: left 3px, left 2px; }
   }
 }
 
