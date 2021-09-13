@@ -8,6 +8,8 @@ headerbar {
   margin-left: -1px;
   margin-right: -1px;
 
+  @extend %toolbar;
+
   > windowhandle > box {
     padding: 0 7px 1px 7px;
 
@@ -39,15 +41,7 @@ headerbar {
     }
 
     windowcontrols {
-      button,
-      menubutton {
-        min-height: 28px;
-        min-width: 28px;
-        margin: 0;
-        padding: 0;
-      }
-
-      menubutton button {
+      button {
         min-height: 22px;
         min-width: 22px;
         margin: 0;
@@ -80,27 +74,6 @@ headerbar {
       }
     }
   }
-
-  // add vertical margins to common widget on the headerbar to avoid them spanning the whole height
-  entry,
-  spinbutton,
-  separator:not(.sidebar),
-  button,
-  menubutton {
-    margin-top: 6px;
-    margin-bottom: 6px;
-  }
-
-  // Reset margins for buttons inside menubutton
-  menubutton > button {
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-
-  switch {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
 }
 
 .titlebar:not(headerbar) {
@@ -112,16 +85,30 @@ headerbar {
  *********************/
 
 windowcontrols {
-  border-spacing: 6px;
+  border-spacing: 3px;
 
   button {
-    @extend %button_basic_flat;
+    min-width: 24px;
+    padding: 5px;
+    margin: 0;
+    box-shadow: none;
 
-    border-radius: 9999px;
-    padding: 7px;
-    margin: 0 2px;
-    min-width: 0;
-    min-height: 0;
+    > image {
+      background-color: $button_color;
+      border-radius: 100%;
+      padding: 2px;
+      transition: $button_transition;
+      @if $contrast == 'high' {
+        box-shadow: inset 0 0 0 1px $borders_color;
+      }
+    }
+
+    &, &:hover, &:active {
+      background: none;
+    }
+
+    &:hover > image { background-color: $button_hover_color; }
+    &:hover:active > image { background-color: $button_active_color; }
   }
 }
 

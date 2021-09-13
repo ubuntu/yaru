@@ -16,6 +16,7 @@ viewswitcher {
         font-size: 0.75rem;
         padding-top: 7px;
         padding-bottom: 5px;
+        border-spacing: 4px;
 
         > stack > label {
           padding-left: 8px;
@@ -25,6 +26,7 @@ viewswitcher {
 
       &.wide {
         padding: 8px 12px;
+        border-spacing: 6px;
       }
 
       label.active {

@@ -3,25 +3,40 @@ windowcontrols {
     margin-left: 7px; // Fix windowcontrols misalignement caused by smaller windowcontrols
 
     button {
+        min-width: 20px;
+        min-height: 20px;
         padding: 2px;
         margin: 0 7px;
+
+        > image {
+            padding: 0;
+            background: transparent;
+        }
+
+        &:hover > image {
+            background: $view_hover_color;
+        }
+    
+        &:active > image {
+            background: $view_active_color;
+        }
+        
         &.close {
-            background: $orange_5;
-
-            &:hover {
-                background: lighten($orange_5, 5%);
-            }
-
-            &:active {
-                background: darken($orange_5, 5%);
-            }
-
-            &:backdrop {
-                background: desaturate($orange_5, 100%);
-            }
-
-            image {
+            > image {
                 color: $light_2;
+                background: $orange_5;
+
+                &:hover {
+                    background: lighten($orange_5, 5%);
+                }
+
+                &:active {
+                    background: darken($orange_5, 5%);
+                }
+
+                &:backdrop {
+                    background: desaturate($orange_5, 100%);
+                }
             }
         }
     }
@@ -89,6 +104,18 @@ button {
     &.flat {
         &.suggested-action {
             color: $suggested_color;
+        }
+    }
+}
+
+splitbutton {
+    &.suggested-action {
+        > button, > menubutton > button {
+            color: $suggested_fg_color;
+    
+            &, &:checked {
+                background-color: $suggested_bg_color;
+            }
         }
     }
 }
