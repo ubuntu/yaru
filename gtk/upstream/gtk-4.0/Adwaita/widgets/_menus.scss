@@ -53,6 +53,10 @@ popover.menu {
     margin: 6px 0;
   }
 
+  &.background list separator {
+    margin: 0;
+  }
+
   accelerator {
     color: gtkalpha(currentColor, 0.55);
 
