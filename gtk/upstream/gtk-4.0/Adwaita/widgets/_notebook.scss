@@ -126,29 +126,12 @@ notebook {
       color: $fg_color;
       font-weight: normal;
 
-      border-width: 1px;            // for reorderable tabs
-      border-color: transparent;    //
-      background-clip: padding-box; //
-
       &:hover {
-        background-color: transparentize($bg_color, 0.8);
-
-        &.reorderable-page {
-          border-color: $thin_borders_color;
-        }
+        background-color: $view_hover_color;
       }
 
       &:not(:checked) {
         outline-color: transparent;
-      }
-
-      &:checked {
-        &.reorderable-page {
-          border-color: $thin_borders_color;
-          background-color: transparentize($bg_color, 0.5);
-
-          &:hover { background-color: transparentize($bg_color, 0.3); }
-        }
       }
 
       // colors the button like the label, overridden otherwise
@@ -192,8 +175,6 @@ notebook {
         > tab {
           margin-left: 4px;
           margin-right: 4px;
-
-          &.reorderable-page { border-style: none solid; }
         }
       }
     }
@@ -215,8 +196,6 @@ notebook {
         > tab {
           margin-top: 4px;
           margin-bottom: 4px;
-
-          &.reorderable-page { border-style: solid none; }
         }
       }
     }

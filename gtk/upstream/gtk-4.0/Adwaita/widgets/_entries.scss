@@ -9,6 +9,7 @@ entry {
     border-spacing: 6px;
     background-clip: padding-box;
     transition: all 200ms $ease-out-quad;
+    caret-color: currentColor;
 
     @include entry(normal);
 
@@ -53,9 +54,9 @@ entry {
     }
 
     > image { // icons inside the entry
-      color: mix($fg_color, $base_color, 80%);
+      opacity: 0.6;
 
-      &:hover { color: $fg_color; }
+      &:hover { opacity: 1; }
 
       &:active { color: $accent_color; }
 
@@ -64,7 +65,7 @@ entry {
     }
 
     &.password image.caps-lock-indicator {
-      opacity: 0.5;
+      opacity: 0.3;
     }
 
     &:drop(active) {
@@ -78,8 +79,6 @@ entry {
       @include entry(osd);
 
       &:focus-within { @include entry(osd-focus); }
-
-      &:disabled { @include entry(osd-insensitive); }
     }
   }
 

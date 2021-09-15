@@ -1,5 +1,5 @@
 $tab_bg: $headerbar_bg_color;
-$tab_border: mix(opacify($headerbar_border_color, 1), $headerbar_bg_color, 100% * alpha($headerbar_border_color));
+$tab_border: gtkalpha($headerbar_border_color, $headerbar_border_opacity);
 
 @mixin undershoot-gradient($dir) {
   @if $variant == 'dark' {
@@ -24,7 +24,8 @@ $tab_border: mix(opacify($headerbar_border_color, 1), $headerbar_bg_color, 100% 
 tabbar {
   .box {
     min-height: 38px;
-    background: darken($tab_bg, 3%);
+    background: $headerbar_bg_color;
+    color: $headerbar_fg_color;
     border-bottom: 1px solid $tab_border;
   }
 
@@ -41,7 +42,7 @@ tabbar {
       border-right-width: 1px;
     }
 
-    tabbox {
+    tabbox > background {
       &:dir(ltr) {
         box-shadow: inset -1px 0 $tab_border;
       }
@@ -72,31 +73,37 @@ tabbar {
     @include need-attention-gradient("left");
   }
 
+  tabbox > background {
+    background: gtkshade($tab_bg, .97);
+  }
+
   tab {
     border-style: solid;
     border-color: $tab_border;
     border-width: 0 1px 0 1px;
     transition: background 150ms ease-in-out, $focus_transition;
     background-color: $tab_bg;
+    background-clip: padding-box;
 
     @include focus-ring();
 
     &:checked {
-      background-color: lighten($tab_bg, 6%);
+      background-color: gtkshade($tab_bg, 1.06);
 
       &:hover {
-        background-color: lighten($tab_bg, 9%);
+        background-color: gtkshade($tab_bg, 1.09);
       }
     }
 
     &:hover {
-      background-color: lighten($tab_bg, 3%);
+      background-color: gtkshade($tab_bg, 1.03);
     }
   }
 
   .start-action,
   .end-action {
-    background: $tab_bg;
+    background-color: $tab_bg;
+    background-clip: padding-box;
     border-color: $tab_border;
     border-style: solid;
     transition: background 150ms ease-in-out;
@@ -120,7 +127,8 @@ tabbar {
 
 dnd tab {
   min-height: 26px;
-  background-color: lighten($tab_bg, 9%);
+  background-color: gtkshade($tab_bg, 1.09);
+  color: $headerbar_fg_color;
 
   $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
 

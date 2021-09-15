@@ -25,21 +25,6 @@
   }
 }
 
-@mixin _shadows($list...) {
-//
-// Helper mixin to stack up to box-shadows;
-//
-  $shadows: null;
-
-  @each $shadow in $list {
-    @if $shadow!=none { $shadows: $shadows, $shadow; }
-  }
-
-  box-shadow: $shadows;
-}
-
-// entries
-
 @mixin entry($t, $fc:$focus_border_color) {
 //
 // Entries drawing function
@@ -58,9 +43,7 @@
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
   }
   @if $t==insensitive {
-    color: $insensitive_fg_color;
-    border-color: $borders_color;
-    background-color: $insensitive_bg_color;
+    filter: opacity(.5);
   }
   @if $t==osd {
     color: $osd_text_color;
@@ -75,23 +58,10 @@
     background-color: transparentize(black, 0.5);
     background-clip: padding-box;
   }
-  @if $t==osd-insensitive {
-    color: $osd_insensitive_fg_color;
-    border-color: $borders_color;
-    background-color: $osd_insensitive_bg_color;
-    background-clip: padding-box;
-  }
   @if $t==block_cursor {
     color: $base_color;
     background-color: $text_color;
   }
-}
-
-// buttons
-
-@function _border_color($c, $darker: false) {
-  @if $darker == true { @return darken($c, 20%); }
-  @else { @return darken($c, 15%); }
 }
 
 @mixin overshoot($p) {

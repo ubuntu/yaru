@@ -13,25 +13,11 @@
     }
   }
 
-  box.linked,
-  grid.linked {
-    button:not(.raised):not(.suggested-action):not(.destructive-action) {
-      &.arrow-button,
-      &.image-button,
-      &.image-text-button {
-        @extend %button_basic_raised;
-      }
-    }
-  }
-
-  .toggle-group,
-  stackswitcher {
-    button:not(.raised):not(.suggested-action):not(.destructive-action).toggle {
-      &.arrow-button,
-      &.image-button,
-      &.image-text-button {
-        @extend %toggle_group_button;
-      }
+  .linked button:not(.raised):not(.suggested-action):not(.destructive-action) {
+    &.arrow-button,
+    &.image-button,
+    &.image-text-button {
+      @extend %button_basic_raised;
     }
   }
 
@@ -80,17 +66,6 @@
     margin-bottom: 10px;
   }
 
-  .toggle-group,
-  stackswitcher {
-    margin-top: 6px;
-    margin-bottom: 6px;
-
-    > button {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-
   // Reset styles for popovers
   popover {
     button:not(.raised):not(.suggested-action):not(.destructive-action) {
@@ -113,9 +88,7 @@
     separator:not(.sidebar),
     button,
     menubutton,
-    switch,
-    .toggle-group,
-    stackswitcher {
+    switch {
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -139,7 +112,7 @@
 
   // stand-alone OSD toolbars
   &.osd {
-    padding: 14px;
+    padding: 8px 14px;
     border: none;
     border-radius: 5px;
     background-color: $osd_bg_color;

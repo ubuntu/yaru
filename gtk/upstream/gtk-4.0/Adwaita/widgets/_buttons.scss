@@ -1,3 +1,10 @@
+$button_color: gtkalpha(currentColor, .1);
+$button_hover_color: gtkalpha(currentColor, .15);
+$button_active_color: gtkalpha(currentColor, .25);
+$button_checked_color: gtkalpha(currentColor, .2);
+$button_checked_hover_color: gtkalpha(currentColor, .25);
+$button_checked_active_color: gtkalpha(currentColor, .35);
+
 %button,
 button {
   @at-root %button_basic, & {
@@ -102,7 +109,7 @@ button {
     transition: $button_transition;
 
     color: $osd_fg_color;
-    background-color: $osd_bg_color;
+    background-color: transparentize(black, .35);
 
     @if $contrast == 'high' {
       box-shadow: 0 0 0 1px currentColor;
@@ -110,25 +117,25 @@ button {
 
     &:hover {
       color: white;
-      background-color: lighten($osd_bg_color, 10%);
+      background-color: transparentize(black, .5);
     }
 
     &.keyboard-activating,
     &:active {
       color: white;
-      background-color: darken($osd_bg_color, 20%);
+      background-color: transparentize(black, .2);
     }
 
     &:checked {
-      background-color: darken($osd_bg_color, 15%);
+      background-color: transparentize(black, .25);
 
       &:hover {
-        background-color: darken($osd_bg_color, 5%);
+        background-color: transparentize(black, .35);
       }
 
       &.keyboard-activating,
       &:active {
-        background-color: darken($osd_bg_color, 30%);
+        background-color: transparentize(black, .1);
       }
     }
 
@@ -237,6 +244,27 @@ button {
     // Specificity bump
     &:drop(active) {
       @extend %button_basic_drop_active;
+    }
+  }
+
+  stackswitcher > & {
+    // to position the needs attention dot, padding is added to the button
+    // child, a label needs just lateral padding while an icon needs vertical
+    // padding added too.
+
+    > label {
+      padding: 0 6px;
+      margin: 0 -6px;
+    }
+
+    > image {
+      padding: 3px 6px;
+      margin: -3px -6px;
+    }
+
+    &.needs-attention {
+      > label,
+      > image { @extend %needs_attention; }
     }
   }
 

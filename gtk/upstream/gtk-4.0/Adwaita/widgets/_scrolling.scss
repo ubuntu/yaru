@@ -1,10 +1,12 @@
+$_scrollbar_bg_color: transparentize(black, .9);
+
 scrollbar {
   $_slider_min_length: 40px;
   $_slider_width: 8px;
   $_scrollbar_transition: all 300ms $ease-out-quad;
   $_fine-tune_slider_border: $_slider_width - 3; //#3672
 
-  background-color: $scrollbar_bg_color;
+  background-color: $_scrollbar_bg_color;
   transition: $_scrollbar_transition;
 
   // scrollbar border
@@ -20,12 +22,12 @@ scrollbar {
     border: 4px solid transparent;
     border-radius: 10px;
     background-clip: padding-box;
-    background-color: $scrollbar_slider_color;
+    background-color: gtkalpha(currentColor, .6);
     transition: $_scrollbar_transition;
 
-    &:hover { background-color: $scrollbar_slider_hover_color; }
+    &:hover { background-color: gtkalpha(currentColor, .8); }
 
-    &:hover:active { background-color: $scrollbar_slider_active_color; }
+    &:hover:active { background-color: $accent_bg_color; }
 
     &:disabled { background-color: transparent; }
   }
@@ -104,13 +106,13 @@ scrolledwindow {
     // the borders of the two scrollbars.
 
     background: $borders_color,
-                linear-gradient(to bottom, transparent 1px, $scrollbar_bg_color 1px),
-                linear-gradient(to right, transparent 1px, $scrollbar_bg_color 1px);
+                linear-gradient(to bottom, transparent 1px, $_scrollbar_bg_color 1px),
+                linear-gradient(to right, transparent 1px, $_scrollbar_bg_color 1px);
 
     &:dir(rtl) {
       background: $borders_color,
-                  linear-gradient(to bottom, transparent 1px, $scrollbar_bg_color 1px),
-                  linear-gradient(to left, transparent 1px, $scrollbar_bg_color 1px);
+                  linear-gradient(to bottom, transparent 1px, $_scrollbar_bg_color 1px),
+                  linear-gradient(to left, transparent 1px, $_scrollbar_bg_color 1px);
     }
   }
 }

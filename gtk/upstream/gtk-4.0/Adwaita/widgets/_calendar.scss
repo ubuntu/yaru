@@ -32,8 +32,6 @@ calendar {
 
           background-color: $accent_bg_color;
           color: $accent_fg_color;
-
-          &:disabled { color: gtkmix($accent_fg_color, $accent_bg_color, 50%); }
         }
       }
 
