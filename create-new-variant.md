@@ -16,9 +16,9 @@ Let's say we want a Blue Yaru variant from Default.
         index 4412c2f3..c1e84234 100644
         --- a/meson_options.txt
         +++ b/meson_options.txt
-        @@ -11,3 +11,6 @@ option('default', type: 'boolean', value: true, description:'build Yaru gtk defa
+        @@ -11,3 +11,6 @@
+        option('default', type: 'boolean', value: true, description:'build Yaru gtk default flavour')
         option('dark', type: 'boolean', value: true, description:'build Yaru gtk dark flavour')
-        option('light', type: 'boolean', value: true, description:'build Yaru gtk light flavour')
         option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
         +option('blue', type: 'boolean', value: true, description:'build Yaru gtk blue flavour')
         ```
