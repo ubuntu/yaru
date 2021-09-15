@@ -1,9 +1,12 @@
+$headerbar_border_opacity: if($contrast == 'high', .5, .15);
+
 headerbar {
   min-height: 47px;
   background-color: $headerbar_bg_color;
-  box-shadow: inset 0 -1px $headerbar_border_color,
-              inset  1px 0 $headerbar_border_color,
-              inset -1px 0 $headerbar_border_color;
+  color: $headerbar_fg_color;
+  box-shadow: inset 0 -1px gtkalpha($headerbar_border_color, $headerbar_border_opacity),
+              inset  1px 0 gtkalpha($headerbar_border_color, $headerbar_border_opacity),
+              inset -1px 0 gtkalpha($headerbar_border_color, $headerbar_border_opacity);
 
   margin-left: -1px;
   margin-right: -1px;
@@ -53,6 +56,7 @@ headerbar {
   &.flat {
     background: none;
     box-shadow: none;
+    color: inherit;
 
     min-height: 46px;
 
@@ -136,6 +140,8 @@ windowtitle {
 
 window.devel {
   headerbar > windowhandle {
-    background: cross-fade(8% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat;
+    background-image: cross-fade(5% -gtk-recolor(url("assets/devel-symbolic.svg")),
+                                 image(transparent));
+    background-repeat: repeat-x;
   }
 }

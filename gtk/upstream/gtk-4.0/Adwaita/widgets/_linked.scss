@@ -10,38 +10,35 @@ $_linked_widgets: ("%button",          ""),
                   ("%entry",           ""),
                   ("entry",            "");
 
-box,
-grid {
-  @each $widget, $child in $_linked_widgets {
-    &.linked:not(.vertical) > {
-      #{$widget} {
-        &:dir(ltr):not(:first-child) #{$child},
-        &:dir(rtl):not(:last-child) #{$child} {
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-          margin-left: -1px;
-        }
+@each $widget, $child in $_linked_widgets {
+  .linked:not(.vertical) > {
+    #{$widget} {
+      &:dir(ltr):not(:first-child) #{$child},
+      &:dir(rtl):not(:last-child) #{$child} {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin-left: -1px;
+      }
 
-        &:dir(ltr):not(:last-child) #{$child},
-        &:dir(rtl):not(:first-child) #{$child} {
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-        }
+      &:dir(ltr):not(:last-child) #{$child},
+      &:dir(rtl):not(:first-child) #{$child} {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
       }
     }
+  }
 
-    &.linked.vertical {
-      #{$widget} {
-        &:not(:first-child) #{$child} {
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
-          margin-top: -1px;
-        }
+  .linked.vertical {
+    #{$widget} {
+      &:not(:first-child) #{$child} {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        margin-top: -1px;
+      }
 
-        &:not(:last-child) #{$child} {
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-        }
+      &:not(:last-child) #{$child} {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
       }
     }
   }

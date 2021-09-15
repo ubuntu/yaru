@@ -1,7 +1,6 @@
 // To be used for opaque elements overlaid atop the selected row
-$treeview_selection_default: transparentize($text_color, .9);
-$treeview_selection_opaque: mix(opacify($treeview_selection_default, 1), $base_color, 100% * alpha($treeview_selection_default));
-$treeview_borders_opaque: mix($text_color, $base_color, if($contrast == 'high', 40%, 20%));
+$treeview_selection_opaque: gtkmix($text_color, $base_color, 10%);
+$treeview_borders_opaque: gtkmix($text_color, $base_color, if($contrast == 'high', 40%, 20%));
 
 treeview.view {
   border-left-color: $treeview_borders_opaque; // this is actually the tree lines color,
@@ -45,7 +44,7 @@ treeview.view {
 
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
-    color: transparentize($text_color, .3);
+    color: gtkalpha($text_color, .7);
 
     &:hover { color: $text_color; }
 
@@ -66,33 +65,34 @@ treeview.view {
   }
 
   &.trough { // progress bar trough in treeviews
-    background-color: transparentize($fg_color,0.9);
+    background-color: gtkalpha($fg_color, 0.1);
   }
 
   > header {
     > button {
-      $_column_header_color: mix($fg_color, $base_color, 50%);
+      @extend %undecorated_button;
+      padding: 0 6px;
+      border: 1px solid gtkalpha($text_color, .15);
+      border-width: 0 0 1px 1px;
+      border-radius: 0;
 
-      @extend %column_header_button;
+      &:disabled {
+        border-color: $bg_color;
+      }
 
-      color: $_column_header_color;
-      background-color: $base_color;
+      &:last-child { border-right-width: 0; }
+
+      color: gtkalpha($text_color, .4);
       font-weight: bold;
       box-shadow: none;
 
       &:hover {
-        @extend %column_header_button;
-
-        color: mix($_column_header_color, $fg_color, 50%);
+        color: gtkalpha($text_color, .7);
         box-shadow: none;
-        transition: none; //I shouldn't need this
       }
 
       &:active {
-        @extend %column_header_button;
-
-        color: $fg_color;
-        transition: none; //I shouldn't need this
+        color: $text_color;
       }
       sort-indicator {
         &.ascending {
@@ -126,22 +126,6 @@ treeview.view {
     // see tests/testaccel in GTK to test
     background-color: $treeview_selection_opaque;
   }
-}
-
-%column_header_button {
-  padding: 0 6px;
-  background-image: none;
-  border-style: solid;
-  border-width: 0 0 1px 1px;
-  border-color: $borders_color;
-  border-radius: 0;
-
-  &:disabled {
-    border-color: $bg_color;
-    background-image: none;
-  }
-
-  &:last-child { border-right-width: 0; }
 }
 
 /********************************************************
