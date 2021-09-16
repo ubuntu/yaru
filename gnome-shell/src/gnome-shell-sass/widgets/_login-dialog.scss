@@ -48,7 +48,7 @@
     }
     &:insensitive {
       @include button(insensitive);
-      border-color: darken($_gdm_bg, 5%);
+      border-color: darken($focus_border_color, 5%);
       background-color: darken($_gdm_bg, 5%);
       color: transparentize($fg_color, 0.3); // Yaru change: use $fg_color for dark/light theme
     }
