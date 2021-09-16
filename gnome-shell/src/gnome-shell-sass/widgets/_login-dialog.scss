@@ -48,9 +48,9 @@
     }
     &:insensitive {
       @include button(insensitive);
-      border-color: darken($focus_border_color, 5%);
-      background-color: darken($_gdm_bg, 5%);
-      color: transparentize($fg_color, 0.3); // Yaru change: use $fg_color for dark/light theme
+      border-color: $insensitive_bg_color; // Yaru: use same style as entries
+      // background-color: darken($_gdm_bg, 5%); // Yaru: use same style as entries
+      color: $insensitive_fg_color;  // Yaru: use same style as entries
     }
     &:default { // Yaru: our suggested action color is green
       @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
