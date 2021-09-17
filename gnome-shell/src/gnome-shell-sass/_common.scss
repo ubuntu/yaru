@@ -42,7 +42,7 @@ $bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
 // hover Yaru: we want the hover bg to be a visible gray for dark and light shell themes
 $hover_bg_color: transparentize($fg_color, 0.9);
 $hover_fg_color: $fg_color;
-$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 3%));
+$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 5%));
 
 // active Yaru: we want the active bg to be a visible gray for dark and light shell themes
 $active_bg_color: transparentize($fg_color, 0.8);

@@ -7,6 +7,7 @@ popover.background {
     $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
 
     background-color: $menu_color;
+    color: $text_color;
     background-clip: padding-box;
     border: 1px solid $_popover_border;
     box-shadow: 0 1px 2px transparentize(black, 0.7);
@@ -32,13 +33,6 @@ popover.background {
       border-style: none;
       background-color: transparent;
     }
-
-    separator {
-      background-color: mix($bg_color, $borders_color, 30%);
-      margin: 3px;
-    }
-
-    list separator { margin: 0; }
   }
 
   .osd &.background,

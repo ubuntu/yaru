@@ -16,8 +16,8 @@ progressbar {
 
   > text {
     @extend .dim-label;
+    @extend .numeric;
     font-size: smaller;
-    font-feature-settings: "tnum";
   }
 
   &:disabled {

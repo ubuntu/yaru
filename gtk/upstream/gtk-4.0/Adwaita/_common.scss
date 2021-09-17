@@ -9,8 +9,6 @@ $menu_padding: 12px; //inner menuitem padding
 $window_radius: $button_radius + 3;
 $popover_radius: $button_radius + 4;
 
-$treeview_borders_color: if($variant=='light',mix($borders_color, $base_color,80%),mix($fg_color, $base_color, 20%));
-
 .background {
   color: $fg_color;
   background-color: $bg_color;
@@ -79,6 +77,31 @@ expander-widget {
       1px 0 rgba(0,0,0,0.1),
       0 1px rgba(0,0,0,0.3),
       -1px 0 rgba(0,0,0,0.1);
+}
+
+@keyframes needs_attention {
+  from { background-image: radial-gradient(farthest-side, $accent_bg_color 0%, transparent 0%); }
+  to { background-image: radial-gradient(farthest-side, $accent_bg_color 95%, transparent); }
+}
+
+%needs_attention {
+  // the dot is drawn by using two radial gradient, the first one is the actual dot, the other
+  // simulates the shadow labels and icons normally have in buttons.
+  animation: needs_attention 150ms ease-in;
+
+  background-image: radial-gradient(farthest-side, $accent_bg_color 96%, transparent);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+
+  @if $variant == 'light' { background-position: right 3px, right 4px; }
+
+  @else { background-position: right 3px, right 2px; }
+
+  &:dir(rtl) {
+    @if $variant == 'light' { background-position: left 3px, left 4px; }
+
+    @else { background-position: left 3px, left 2px; }
+  }
 }
 
 @import 'widgets';

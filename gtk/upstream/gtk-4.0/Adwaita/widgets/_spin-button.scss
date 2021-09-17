@@ -1,22 +1,22 @@
 spinbutton {
   @extend %entry;
+  @extend .numeric;
 
   padding: 0;
   border-spacing: 0;
 
   /* :not here just to bump specificity above that of the list button styling */
-  > button.image-button.up:not(.flat),
-  > button.image-button.down:not(.flat) {
+  > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action),
+  > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action) {
     margin: 0;
     background: none;
     border-style: solid;
-    border-color: transparentize($borders_color, 0.7);
+    border-color: $thin_borders_color;
     border-radius: 0;
     box-shadow: none;
     color: inherit;
 
     &:hover {
-      color: $text_color;
       background-color: $view_hover_color;
     }
 
@@ -32,8 +32,8 @@ spinbutton {
     }
 
     /* :not here just to bump specificity above that of the list button styling */
-    > button.image-button.up:not(.flat),
-    > button.image-button.down:not(.flat) {
+    > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action),
+    > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action) {
       min-height: 16px;
       min-width: 22px;
       padding-bottom: 0;
@@ -55,8 +55,8 @@ spinbutton {
     }
 
     /* :not here just to bump specificity above that of the list button styling */
-    > button.image-button.up:not(.flat),
-    > button.image-button.down:not(.flat) {
+    > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action),
+    > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action) {
       &:last-child {
         border-width: 1px 0 0 0;
         border-radius: 0 0 $button_radius $button_radius;
@@ -80,6 +80,4 @@ spinbutton {
       padding: 1px 2px;
     }
   }
-
-  font-feature-settings: "tnum";
 }

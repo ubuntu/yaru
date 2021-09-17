@@ -4,7 +4,7 @@ expander {
   -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
   &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
-  &:disabled { color: $insensitive_fg_color; }
+  &:disabled { filter: opacity(.5); }
 
   &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
 }
@@ -16,8 +16,12 @@ expander-widget {
     transition: $focus_transition;
     border-radius: $button_radius;
 
+    > expander {
+      opacity: .7;
+    }
+
     &:hover > expander {
-      color: lighten($fg_color,30%); //only lightens the icon
+      opacity: 1;
     }
   }
 }

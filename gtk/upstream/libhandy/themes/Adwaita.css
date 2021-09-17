@@ -202,7 +202,7 @@ list.content list.nested > row:not(:active):not(:hover):not(:selected), list.con
 
 list.content list.nested > row.activatable:not(:active):hover:not(:selected) { background-color: mix(#2e3436, #ffffff, 0.95); }
 
-list.content > row:not(.expander):not(:active):not(:hover):not(:selected), list.content > row:not(.expander):not(:active):hover:not(.activatable):not(:selected), list.content > row.expander row.header:not(:active):not(:hover):not(:selected), list.content > row.expander row.header:not(:active):hover:not(.activatable):not(:selected) { background-color: #ffffff; }
+list.content > row:not(.expander):not(:active):not(:hover):not(:selected), list.content > row:not(.expander):hover:not(.activatable):not(:selected), list.content > row.expander row.header:not(:active):not(:hover):not(:selected), list.content > row.expander row.header:hover:not(.activatable):not(:selected) { background-color: #ffffff; }
 
 list.content > row.activatable:not(.expander):not(:active):hover:not(:selected), list.content > row.expander row.header.activatable:not(:active):hover:not(:selected) { background-color: mix(#2e3436, #ffffff, 0.95); }
 

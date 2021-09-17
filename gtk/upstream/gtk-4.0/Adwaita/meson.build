@@ -14,9 +14,9 @@ if not fs.exists('Adwaita-light.css')
     sassc_opts = [ '-a', '-M', '-t', 'compact' ]
 
     scss_files = files([
-      '_colors-public.scss',
       '_colors.scss',
       '_common.scss',
+      '_compat-colors.scss',
       '_defaults.scss',
       '_drawing.scss',
       '_functions.scss',
