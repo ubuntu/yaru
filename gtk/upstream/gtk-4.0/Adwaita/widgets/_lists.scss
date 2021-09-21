@@ -148,7 +148,7 @@ listview.inline {
 
 %boxed_list_row {
   transition: 200ms $ease-out-quad;
-    border-top: 1px solid $borders_color;
+  border-bottom: 1px solid $borders_color;
 
   &:not(:selected).activatable {
     &.has-open-popup,
@@ -240,15 +240,7 @@ listview.content {
       &, &.expander row.header {
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
-        border-top: none;
       }
-    }
-
-    // Bottom border
-    &:last-child,
-    &.checked-expander-row-previous-sibling,
-    &.expander:checked {
-      border-width: 1px;
     }
 
     // Rounded bottom
@@ -260,6 +252,7 @@ listview.content {
       &.expander:checked list.nested > row:last-child {
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
+        border-bottom-width: 0;
       }
     }
   }
