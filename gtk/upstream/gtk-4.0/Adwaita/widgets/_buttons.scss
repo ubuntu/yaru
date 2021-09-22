@@ -117,25 +117,25 @@ button {
 
     &:hover {
       color: white;
-      background-color: transparentize(black, .5);
+      background-color: gtkalpha(gtkmix(black, currentColor, 85%), .65);
     }
 
     &.keyboard-activating,
     &:active {
       color: white;
-      background-color: transparentize(black, .2);
+      background-color: gtkalpha(gtkmix(black, currentColor, 75%), .65);
     }
 
     &:checked {
-      background-color: transparentize(black, .25);
+      background-color: gtkalpha(gtkmix(black, currentColor, 8%), .65);
 
       &:hover {
-        background-color: transparentize(black, .35);
+        background-color: gtkalpha(gtkmix(black, currentColor, 75%), .65);
       }
 
       &.keyboard-activating,
       &:active {
-        background-color: transparentize(black, .1);
+        background-color: gtkalpha(gtkmix(black, currentColor, 65%), .65);
       }
     }
 
