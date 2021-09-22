@@ -4,8 +4,8 @@
   background-color: $base_color;
 
   &:disabled {
-    color: $insensitive_fg_color;
-    background-color: $insensitive_bg_color;
+    color: gtkalpha(currentColor, .5);
+    background-color: gtkmix($bg_color, $base_color, 60%);
   }
 
   &:selected {
@@ -18,6 +18,8 @@
 }
 
 textview {
+  caret-color: currentColor;
+
   > text {
     @extend %view;
   }
@@ -81,8 +83,4 @@ gridview {
       margin: 12px;
     }
   }
-}
-
-.content-view {
-  background-color: darken($bg_color,7%);
 }

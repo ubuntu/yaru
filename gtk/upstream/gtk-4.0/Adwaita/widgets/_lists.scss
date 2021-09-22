@@ -2,24 +2,32 @@ listview,
 list {
   color: $text_color;
   background-color: $base_color;
+  background-clip: padding-box;
   border-color: $borders_color;
 
-  > row { padding: 2px; }
+  > row {
+    padding: 2px;
+    background-clip: padding-box;
+  }
+
   > row.expander { padding: 0px; }
   > row.expander .row-header { padding: 2px; }
 
   &.horizontal row.separator,
   &.separators.horizontal > row:not(.separator) {
-    border-left: 1px solid $treeview_borders_color;
+    border-left: 1px solid $borders_color;
   }
+
   &:not(.horizontal) row.separator,
   &.separators:not(.horizontal) > row:not(.separator) {
-    border-bottom: 1px solid $treeview_borders_color;
+    border-bottom: 1px solid $borders_color;
   }
 }
 
 row {
-  @include focus-ring($focus-state: 'focus-visible:focus-within');
+  @include focus-ring();
+
+  background-clip: padding-box;
 
   &.activatable {
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
@@ -49,11 +57,11 @@ row {
  *******************************************************/
 
 .rich-list { /* rich lists usually containing other widgets than just labels/text */
-  & > row {
+  > row {
     padding: 8px 12px;
     min-height: 32px; /* should be tall even when only containing a label */
 
-    & > box {
+    > box {
       border-spacing: 12px;
     }
   }
@@ -93,10 +101,10 @@ popover.background.combo > contents {
     background-color: transparent;
     min-width: 200px;
 
-    & > row {
+    > row {
       padding: 0px 12px 0px 12px;
       min-height: 50px;
-      border-bottom: 1px solid transparentize($borders_color, 0.5);
+      border-bottom: 1px solid $borders_color;
 
       &:first-child {
         border-top-left-radius: $popover_radius - 2;
@@ -119,6 +127,9 @@ popover.background.combo > contents {
 
 listview.inline {
   background: none;
+  border: none;
+  box-shadow: none;
+  color: inherit;
 }
 
 /******************
@@ -135,17 +146,40 @@ listview.inline {
   }
 }
 
+%boxed_list_row {
+  transition: 200ms $ease-out-quad;
+    border-top: 1px solid $borders_color;
+
+  &:not(:selected).activatable {
+    &.has-open-popup,
+    &:hover {
+      background-color: gtkalpha(currentColor, .03);
+    }
+
+    &:active {
+      background-color: gtkalpha(currentColor, .08);
+    }
+  }
+}
+
 row.expander {
   // Drop transparent background on expander rows to let nested rows handle it,
   // avoiding double highlights.
-  background-color: transparent;
+  background: none;
   padding: 0px;
 
+  > box > list {
+    background: none;
+    color: inherit;
+  }
+
+  list.nested {
+    background-color: gtkalpha(currentColor, .03);
+    color: inherit;
+  }
+
   list.nested > row {
-    background-color: transparentize($bg_color, 0.5);
-    border-color: transparentize($borders_color, 0.3);
-    border-style: solid;
-    border-width: 1px 0px 0px 0px;
+    @extend %boxed_list_row;
   }
 
   // AdwExpanderRow arrow rotation
@@ -176,7 +210,7 @@ row.expander {
   }
 
   & image.expander-row-arrow:disabled {
-    color: $insensitive_fg_color;
+    filter: opacity(.5);
   }
 }
 
@@ -184,88 +218,30 @@ row.expander {
  * Content Lists *
  *****************/
 
-// Makes the corners of the given border rounded.
-// $border must be top, bottom, left, or right.
-@mixin rounded-border($border) {
-  // The floors (top, bottom) and walls (left, right) of the corners matching
-  // $border. This is needed to easily form floor-wall pairs regardless of
-  // whether $border is a floor or a wall.
-  $corners: (
-    'top': (('top'), ('left', 'right')),
-    'bottom': (('bottom'), ('left', 'right')),
-    'left': (('top', 'bottom'), ('left')),
-    'right': (('top', 'bottom'), ('right')),
-  );
-
-  @if not map-get($corners, $border) {
-    @error "Unknown border type: #{$border}";
-  }
-
-  // Loop through the floors and walls of the corners of $border.
-  @each $floor in nth(map-get($corners, $border), 1) {
-    @each $wall in nth(map-get($corners, $border), 2) {
-      border-#{$floor}-#{$wall}-radius: 8px;
-    }
-  }
-}
-
 list.content,
 listview.content {
-  &,
-  list {
-    background-color: transparent;
-  }
-
-  // Nested rows background
-  list.nested > row:not(:active) {
-    &:not(:hover):not(:selected),
-    &:hover:not(.activatable):not(:selected) {
-      background-color: mix($bg_color, $base_color, 50%);
-    }
-
-    &:hover.activatable:not(:selected) {
-      background-color: mix($fg_color, $base_color, 5%);
-    }
-  }
+  background-color: $base_color;
+  color: $text_color;
+  border: 1px solid $borders_color;
+  border-radius: 8px;
 
   > row {
     // Regular rows and expander header rows background
-    &:not(.expander):not(:active):not(:hover):not(:selected),
-    &:not(.expander):not(:active):hover:not(.activatable):not(:selected),
-    &.expander row.header:not(:active):not(:hover):not(:selected),
-    &.expander row.header:not(:active):hover:not(.activatable):not(:selected) {
-      background-color: $base_color;
+    &, &.expander row.header {
+      @extend %boxed_list_row;
     }
 
-    &:not(.expander):hover.activatable:not(:selected),
-    &.expander row.header:hover.activatable:not(:selected) {
-      background-color: mix($fg_color, $base_color, 5%);
-
-      &:active {
-        background-color: mix($fg_color, $base_color, 10%);
-      }
-    }
-
-    &,
-    list > row {
-      border-color: transparentize($borders_color, 0.3);
-      border-style: solid;
-      transition: 200ms $ease-out-quad;
-    }
-
-    // Top border
-    &:not(:last-child) {
-      border-width: 1px 1px 0px 1px;
+    &.expander {
+      border: none;
     }
 
     // Rounded top
-    &:first-child,
-    &.expander:first-child row.header,
-    &.expander:checked,
-    &.expander:checked row.header,
-    &.expander:checked + row,
-    &.expander:checked + row.expander row.header {
-      @include rounded-border(top);
+    &:first-child {
+      &, &.expander row.header {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-top: none;
+      }
     }
 
     // Bottom border
@@ -276,20 +252,15 @@ listview.content {
     }
 
     // Rounded bottom
-    &:last-child,
-    &.checked-expander-row-previous-sibling,
-    &.expander:checked,
-    &.expander:not(:checked):last-child row.header,
-    &.expander:not(:checked).checked-expander-row-previous-sibling row.header,
-    &.expander.empty:checked row.header,
-    &.expander list.nested > row:last-child {
-      @include rounded-border(bottom);
-    }
-
-    // Add space around expanded rows
-    &.expander:checked:not(:first-child),
-    &.expander:checked + row {
-      margin-top: 6px;
+    &:last-child {
+      &,
+      &.expander:not(:checked),
+      &.expander:not(:checked) row.header,
+      &.expander:checked list.nested,
+      &.expander:checked list.nested > row:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
     }
   }
 }

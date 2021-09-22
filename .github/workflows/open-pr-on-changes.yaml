@@ -16,7 +16,7 @@ jobs:
           {
             project: GNOME Shell,
             repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: gnome-shell,
             projectdir: gnome-shell,
             src: data/theme/,
@@ -25,7 +25,7 @@ jobs:
           {
             project: GNOME Shell Resources,
             repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: gnome-shell-resources,
             projectdir: gnome-shell,
             src: data/gnome-shell-theme.gresource.xml,

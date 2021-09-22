@@ -244,9 +244,9 @@ list.content {
   > row {
     // Regular rows and expander header rows background
     &:not(.expander):not(:active):not(:hover):not(:selected),
-    &:not(.expander):not(:active):hover:not(.activatable):not(:selected),
+    &:not(.expander):hover:not(.activatable):not(:selected),
     &.expander row.header:not(:active):not(:hover):not(:selected),
-    &.expander row.header:not(:active):hover:not(.activatable):not(:selected) {
+    &.expander row.header:hover:not(.activatable):not(:selected) {
       background-color: $base_color;
     }
 

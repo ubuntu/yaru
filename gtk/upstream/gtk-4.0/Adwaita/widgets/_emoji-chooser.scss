@@ -14,30 +14,12 @@ popover.background.emoji-picker > contents {
   border-top: 1px solid $borders_color;
 }
 
-button.emoji-section {
+button.emoji-section.image-button:not(.raised):not(.suggested-action):not(.destructive-action) {
+  @extend %circular_button;
+  @extend %button_basic_flat;
+
   min-width: 32px;
   min-height: 32px;
-  border-radius: 16px;
-
-  padding: 0;
-  background: none;
-  transition: none;
-
-  &:hover {
-    background: $view_hover_color;
-  }
-
-  &:checked {
-    background: $view_selected_color;
-
-    &:hover {
-      background: $view_selected_hover_color;
-    }
-  }
-
-  &:hover:active {
-    background: $view_active_color;
-  }
 }
 
 popover.emoji-picker emoji {

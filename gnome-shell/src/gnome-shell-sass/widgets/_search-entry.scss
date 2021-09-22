@@ -10,23 +10,28 @@ $search_entry_height: 36px;
   border-radius: $search_entry_height * 0.5; // half the height
   color: transparentize($fg_color,0.3);
   background-color: if($variant == 'light', $bg_color, $dash_background_color); // Yaru: use same background as dash for dark theme
-  border-color: $borders_color;
   margin-top: $base_spacing * 4; // Yaru change: increase margin-top due to fixed panel opacity
   margin-bottom: $base_spacing;
+  // Yaru: we want bordered entries
+  // border-width: 2px;
+  // border-color: transparent;
+  border-color: $borders_color;
 
   &:hover {
     // background-color: $hover_bg_color; Yaru: we can't use our hover color here otherwise it becomes transparent
-    border-color: $hover_borders_color;
+    border-color: $hover_borders_color; // Yaru: we want bordered entries
     color: $hover_fg_color;
   }
 
   &:focus {
-    padding: $base_padding $base_padding+2; // 1px less to account for wider border
-    border-width: 2px;
     border-style: solid;
     border-color: $focus_border_color; // Yaru: we detached focus from selected
     color: $fg_color;
     box-shadow: none; // Yaru: we want a flat search entry
+    
+    // Yaru: we want bordered entries
+    padding: $base_padding $base_padding+2; // 1px less to account for wider border
+    border-width: 2px; 
   }
 
   .search-entry-icon { 

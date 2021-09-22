@@ -99,7 +99,7 @@ button.titlebutton:not(.appmenu) {
   .titlebar &,
   headerbar.selection-mode &,
   & {
-    &.maximize, &.minimize {
+    &.maximize, &.minimize, &.close {
 
       &, &:backdrop {
         &:hover {
@@ -129,6 +129,20 @@ button.titlebutton:not(.appmenu) {
       &:backdrop {
         @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
         &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
+      }
+    }
+
+    window.toolbox &.close { // Special selector to target unified window (see #2980)
+      color: $fg_color;
+
+      &, &:backdrop {
+        &:hover {
+          @include draw_circle($_base_hover_color);
+        }
+
+        &:active {
+          @include draw_circle($_base_active_color);
+        }
       }
     }
   }

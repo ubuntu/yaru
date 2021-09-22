@@ -1,5 +1,6 @@
 .sidebar {
   background-color: mix($bg_color, $base_color, 50%);
+  background-clip: padding-box;
 
   &:not(separator) {
     &:dir(ltr),
