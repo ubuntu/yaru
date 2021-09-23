@@ -20,7 +20,25 @@ jobs:
             localbranch: adwaita-symbolics,
             projectdir: adwaita-icon-theme,
             src: Adwaita/scalable,
-            dest: icons/upstream/symbolics.list
+            dest: icons/upstream/adwaita-symbolics.list
+          },
+          {
+            project: Libhandy symbolics,
+            repo: "https://gitlab.gnome.org/GNOME/libhandy.git",
+            upstreambranch: master,
+            localbranch: libhandy-symbolics,
+            projectdir: libhandy,
+            src: src/icons/scalable,
+            dest: icons/upstream/libhandy-symbolics.list
+          },
+          {
+            project: Libadwaita symbolics,
+            repo: "https://gitlab.gnome.org/GNOME/libadwaita.git",
+            upstreambranch: main,
+            localbranch: libadwaita-symbolics,
+            projectdir: libadwaita,
+            src: src/icons/scalable,
+            dest: icons/upstream/libadwaita-symbolics.list
           },
       ]
     steps:

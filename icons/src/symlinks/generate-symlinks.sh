@@ -78,7 +78,7 @@ THEME="Suru"
 
 # echo $DIR
 # Icon sizes and contextthe s
-CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "status" "emblems")
+CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "status" "emblems" "ui")
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
 
 # Fullcolor icons
