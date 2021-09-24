@@ -420,6 +420,12 @@ list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
         button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
         background: $_backdrop_row_selection_bg;
       }
+
+      &:insensitive {
+        &, &:backdrop {
+          &, button, button image { color: $insensitive_fg_color; }
+        }
+      }
     }
   }
 }
