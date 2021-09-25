@@ -1,3 +1,246 @@
+yaru-theme (21.10.2) UNRELEASED; urgency=medium
+
+  [ Joshua Peisach ]
+  * Add desktop-logoff sound.
+    When the sounds were added, the logoff one wasn't. @madsrh says
+    this was because it'd be better to just log off immediately, and not
+    wait for a sound to play.
+    Session managers can handle this stuff, and play the sound
+    while logging off in the background. But if it doesn't work, the
+    sound can always be disabled.
+  * Fix desktop-logoff sound encoding (#2987)
+    Use Ogg Vorbis. Was previously Ogg FLAC.
+    Closes #2986
+
+  [ Paul Kepinski ]
+  * Fix dock and panel look (#2948)
+    - Make panel background static into the overview ;
+    - Use a 2% darken `jet` as panel background ;
+    - Define dock background as transparent (will render half dark transparent,
+      we need to understand why).
+  * Symlink _colors to upstream and add overwrite file (#2949)
+    * Symlink `_colors` to upstream ;
+    * Create a `_colors_yaru` file with only Yaru colors overwrite.
+  * Revert to lighten dash background (#2950)
+  * Add symlinked rtl variants for show-sidebar (#2961)
+  * Improve selected row look (#2955)
+    Use soft grey (based on transparent black/white) bg on selected/hover row
+  * Fix search entry margin-top (#2968)
+  * Fix selected row hover background (#2978)
+  * Fix G-software unvisible close button (#2996)
+  * Issue2980/fix software close button (#2997)
+    * Fix unwanted side effects
+  * Fix missing red button into some apps (#2998)
+  * Add crop-symbolic icon (#3000)
+  * Fix branch names (#3003)
+  * Sync GS with upstream (#3004)
+  * Remove old color vars (#3005)
+  * Update create-new-variant.md (#3011)
+    Remove old light GTK variant from documentation
+  * Add border and focus ring on GDM buttons (#3013)
+    * Add border and focus ring on GDM buttons
+    * Fix insensitive state
+    * Sync insensitive button state with entries
+  * Make cursor addition black (#3019)
+    * Make cursor addition black
+    * Add white outline
+  * Fix backdrop insensitive selected text color (#3027)
+  * Fix deprecated :insensitive pseudo-class (#3029)
+
+  [ ubuntujaggers ]
+  * centring pictogram on sound recorder icon (#2956)
+  * Proposed tweak for Wine Tricks icon (#2957)
+    * proposed altered design for winetricks
+    * making rainbow more saturated
+  * adding header bar to app windows in session-properties icon (#2959)
+  * Suggestion for new characters app icon (#2963)
+    * suggestion for new characters map icon
+    * darkening grey 'o'
+  * Suggested new icon for aisleriot (#2966)
+    * suggested new icon for aisleriot
+    * adding characters to largest sizes
+    * darkening borders
+  * Cabinet drawer-based file manager icon (#2965)
+    * drawer-based file manager icon
+    * tweak to 256px
+    * trying a square design
+    * brighter front of drawer
+  * correcting synaptic edging (#2975)
+  * making greys uniform on chars app icon (#2976)
+  * Adding new legacy full colour actions with proper template (#2673)
+    * adding new legacy full colour actions with proper template
+    * document-open full colour icon
+    * colour icon for document-open-recent
+    * full colour icon for document-print
+    * full colour document-print-preview
+    * fixing full colour document-print-preview
+    * adding full colour document-properties
+    * adding full colour mail-send
+    * adding full colour mail-message-send
+    * full colour cut, copy and paste actions, plus lots of tweaks
+    * full colour edit-find and edit-find-replace
+    * various full colour icons for sending e-mails
+    * full-colour junk mail icons, and redesigning reply icons to match
+      symbolics
+    * various tweaks to full colour actions
+    * fixing document-print-preview
+    * adding full colour mail-inbox, mail-outbox and numerous tweaks
+    * Add full-color document-page-setup icon
+    * Remove text line pictogram from document-page-setup
+    * Add full-color mail-mark-important icon
+    * Use big arrow for mail-outbox and mail-inbox icons
+    * Add fullcolor mail-unread and mail-read icons
+    * Symlink mail-mark-(un)read to mail-(un)read
+    * Revert in/outbox arrow changes
+    * Use dot instead of star for mail-unread (16px)
+    * removing broken symlink (mail-spam-symbolic) and also fixing error on
+      edit-find-replace
+    * making some larger size actions non-flat
+    * making larger sizes of document-open non flat
+    * fixing document-open
+    * adding non-flat details to larger sizes of mail-inbox and mail-outbox
+    * document-open
+    * making mail-mark-junk and mail-mark-notjunk more intuitive
+    * improving copy and paste icons at larger sizes
+    * pushing WIP to remote
+    * improved cut, copy, paste
+    * proper versions of edit-find and edit-find-replace
+    * work in progress for document-save
+    * adding more legacy colour actions
+    * adding full colour document-send
+    * adding full colour edit-select-all and symlinks
+    * adding full colour folder-new
+    * adding full colour help actions
+    * adding full colour indent and justify icons
+    * removing old document-new icon and adding symlinks for the new one
+    * adding go-first and go-last
+    * full colour format-text-bold
+    * full colour format-text-italic
+    * full colour format-text-underline
+    * full colour format-text-strikethrough
+    * adding various magnifying glass actions and symlinks
+
+  [ Muqtadir ]
+  * Update unity theme (#2953)
+    * Added separate unity assets for default and dark
+    * Sync default unity with Yaru
+    * Update index.theme
+    Modified /gtk/src/meson.build to show correct ThemeName for IconTheme and
+    CursorTheme
+    * added not-csd.scss from @ItzSwirlz cinnamon-PR
+    * Added unity-panel icons
+    - Created a separate unity-panel under /icons
+    - Modified meson.build to install unity-panel icons only when
+      ubuntu-unity=true
+    * Added missing categories-icons and symlinks
+    * Modified debian files and unity-panel icons
+    - Split icons into yaru-theme-icon.install and yaru-theme-unity.install
+      under debian
+    - Changed all arbitrary colors to white undet unity-panel icons
+  * add text-x-c++hdr mimetype (#2969)
+  * remove light from metacity (#2970)
+  * added synaptics-package manager-icon (#2972)
+  * update script to add more contexts (#2982)
+  * misc. changes to gnome-shell assets (#2981)
+    * Made the switches similiar to gtk-4 switches
+    - aligned gnome-shell/src/toggle-*.svg(s) to gtk4 toggles
+    - adjusted dimensions of toggles under
+      gnome-shell-sass/widgets/_switches.scss
+    * changed barlevel-border-width back to 1px
+    * removed files that are not part of upstream anymore
+    * remove static-files not present from meson
+    * Revert "changed barlevel-border-width back to 1px"
+    This reverts commit 4e73e5c8ae741853f94900b3a3097e2c8231adfe.
+    * yarufy the OSK svgs
+    * reduce SVG sizes under src
+    * removed transparent rect from checkboxes
+  * added symlink for multitasking-panel (#2990)
+  * Update debian/yaru-theme-icon.install (#2988)
+    - Added and removed few directories introduced in #2673
+  * change edit-clear-symbolic (#2989)
+    * change edit-clear-symbolic
+    * implement @Jupi007 and @madsrh suggestion: make less-pointed tip(45)
+  * add icons required by org.gnome.Software (#2992)
+    * added org.gnome.Software symbolics
+    * render symbolics under emblems
+    * add remainingsymbolic-icons
+    * refreshed org.gnome.Software fullcolor and symbolic
+    * completed fullcolor org.gnome.Software.* icons
+    * added few system-component icons
+    * added remaining system-addons fullcolor
+    * change adaptive-symbolic to be consistent with devices/phone-symbolic
+  * kde/plasma cursor support (#2958)
+    * symlink missing-cursors
+    * symlink cursors2
+    * added remaining symlinks
+    * added remaining symlinks
+    * Re-organized cursors directory to not use symlinks
+  * support yaru for xfce (#2971)
+    * add xfwm4 for default
+    * add button-padding
+    * Re-organize xfwm4 files
+    - Moved xfwm4 outside gtk directory
+    - Move all xfwm4 SVG-files into assets.svg
+    - Added assets.txt and render-xfwm4-assets.sh
+    - Added xfwm4 dark-assets
+    * Add xfmw4 to meson and render dark_assets
+    - Added xfwm4 option to meson.build and meson_options.txt
+    - Added meson files under xfwm4 directory
+    - Rendered .pngs for xfwm4-dark assets
+    - Added themerc for default and dark
+    * fixed title-active in xfwm4-dark
+    * added xfwm4 to debian/yaru-theme-gtk.install
+    * Convert assests.txt into symlink and darken headerbar-color
+    * added _xfce.scss
+    * make xfwm4 false by default
+    * made assets 35px in height based on @Jupi007 suggestion
+    * render *-inactive correctly
+    * render default *-inactive correctly
+    * render dark *-inactive correctly
+    * Don't use real path for inkscape and optipng
+    So allow usage of snap version
+    * Make Xfce assets 36px height and pixel perfect
+    * Make window controls 36px width
+    * Fix hide-inactive height
+    * made little touch to dark/hide-inactive and dark/hide-pressed to sharpen
+  * add missing action symbolics for shotwell (#3006)
+    * add few shotwell-symbolics
+    * add remaining symbolic icons and symlink system-run to document-properties
+    * fix typo in icon-filenames
+  * missing symbolic-icons for libhandy and libadwaita (#3024)
+    * add actions and status icons for libhandy and libadwaita
+    * Add Github action for handy and adwaita symbolics
+    * New upstream icons list for Libadwaita symbolics (#3025)
+    * New upstream icons list for Libhandy symbolics (#3026)
+    * Link expander-arrow to pan icon
+
+  [ benni3-1415 ]
+  * Fix cursor inconsistencies (#2944)
+    * set _additions_ line-join to miter
+    * make cursors pixel perfect
+    * make the default cursor symmetrical
+    * align all gradients globally
+    * optimize hotspot positions according to theory 2
+    * add color-picker cursor for KDE
+    * add wayland cursor and update x.org cursor
+    * build cursors
+    * change title to "Yaru Cursors"
+    * build new cursors
+
+  [ Cameron ]
+  * Fix code block formatting (#2993)
+    Fix code block formatting so markdown parser shows each section properly
+
+  [ Marco Trevisan (Treviño) ]
+  * debian/gbp.conf: Use ubuntu/impish branch
+  * Revert "Cabinet drawer-based file manager icon (#2965)"
+    We're past UI Freeze and this icon is showing in all the screenshots, so
+    it may be a bit late for it.
+    Better to wait next cycle.
+  * gnome-shell: Add a note on recent Yaru changes
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Sat, 25 Sep 2021 14:03:07 +0200
+
 yaru-theme (21.10.1) impish; urgency=medium
 
   [ Stuart Hayhurst ]
