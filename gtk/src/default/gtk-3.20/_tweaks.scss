@@ -421,7 +421,7 @@ list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
         background: $_backdrop_row_selection_bg;
       }
 
-      &:insensitive {
+      &:disabled {
         &, &:backdrop {
           &, button, button image { color: $insensitive_fg_color; }
         }
