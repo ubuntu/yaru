@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-light">
-    <file alias='gtk.css'>gtk-light.css</file>
-  </gresource>
-
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-dark">
-    <file alias='gtk.css'>gtk-dark.css</file>
-    <file alias='gtk-dark.css'>gtk-dark.css</file>
-  </gresource>
-
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-hc">
-    <file alias='gtk.css'>gtk-hc.css</file>
-  </gresource>
-
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-hc-dark">
-    <file alias='gtk.css'>gtk-hc-dark.css</file>
-    <file alias='gtk-dark.css'>gtk-hc-dark.css</file>
-  </gresource>
-
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita">
-    <file>gtk.css</file>
-    <file>gtk-light.css</file>
-    <file>gtk-hc.css</file>
-    <file>gtk-hc-dark.css</file>
-
+  <gresource prefix="/org/gnome/Adwaita/styles">
     <file>Adwaita-light.css</file>
     <file>Adwaita-dark.css</file>
     <file>Adwaita-hc.css</file>
