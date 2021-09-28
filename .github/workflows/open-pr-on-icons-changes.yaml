@@ -8,7 +8,7 @@ on:
 
 jobs:
   refresh-upstream:
-    name: Check for upstream icons changes
+    name: Check for upstream symbolic icons changes
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -53,7 +53,7 @@ jobs:
           popd
           rm -f ${DEST}
           cd /tmp/${PROJECT_DIR}/${SRC}
-          ls ./* > list.list
+          find . -name "*-symbolic.svg" > list.list
           cd ~/work/yaru/yaru
           cp /tmp/${PROJECT_DIR}/${SRC}/list.list ${DEST}
           MODIFIED=$(git status --porcelain)
@@ -71,9 +71,9 @@ jobs:
         if: steps.checknewupstream.outputs.modified == 'true'
         uses: peter-evans/create-pull-request@v3.10.1
         with:
-          commit-message: New upstream icons list for ${{ matrix.buildenv.project }}
-          title: Auto update new upstream  icons list for ${{ matrix.buildenv.project }}
+          commit-message: New upstream symbolic icons list for ${{ matrix.buildenv.project }}
+          title: Auto update new upstream symbolic icons list for ${{ matrix.buildenv.project }}
           labels: automated pr, new upstream
-          body: "[New upstream ${{ matrix.buildenv.project }} changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+icons+changes%22) by GitHub Action"
+          body: "[New upstream ${{ matrix.buildenv.project }} symbolic icons changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+symbolic+icons+changes%22) by GitHub Action"
           branch: upstream-${{ matrix.buildenv.localbranch }}-update
           token: ${{ secrets.GITHUB_TOKEN }}
