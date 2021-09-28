@@ -47,7 +47,7 @@ jobs:
             upstreambranch: master,
             localbranch: baobab-symbolics,
             projectdir: baobab,
-            src: src/icons/scalable,
+            src: data/icons/scalable,
             dest: icons/upstream/baobab-symbolics.list
           },
           {
@@ -56,35 +56,8 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-characters-symbolics,
             projectdir: gnome-characters,
-            src: src/icons/scalable,
+            src: data/icons/hicolor,
             dest: icons/upstream/gnome-characters-symbolics.list
-          },
-          {
-            project: cheese symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/cheese.git",
-            upstreambranch: master,
-            localbranch: cheese-symbolics,
-            projectdir: cheese,
-            src: src/icons/scalable,
-            dest: icons/upstream/cheese-symbolics.list
-          },
-          {
-            project: gnome-clocks symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-clocks.git",
-            upstreambranch: master,
-            localbranch: gnome-clocks-symbolics,
-            projectdir: gnome-clocks,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-clocks-symbolics.list
-          },
-          {
-            project: gnome-documents symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-documents.git",
-            upstreambranch: master,
-            localbranch: gnome-documents-symbolics,
-            projectdir: gnome-documents,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-documents-symbolics.list
           },
           {
             project: simple-scan symbolics,
@@ -92,7 +65,7 @@ jobs:
             upstreambranch: master,
             localbranch: simple-scan-symbolics,
             projectdir: simple-scan,
-            src: src/icons/scalable,
+            src: data/icons/scalable,
             dest: icons/upstream/simple-scan-symbolics.list
           },
           {
@@ -101,7 +74,7 @@ jobs:
             upstreambranch: master,
             localbranch: evince-symbolics,
             projectdir: evince,
-            src: src/icons/scalable,
+            src: data/icons/scalable,
             dest: icons/upstream/evince-symbolics.list
           },
           {
@@ -110,44 +83,8 @@ jobs:
             upstreambranch: master,
             localbranch: eog-symbolics,
             projectdir: eog,
-            src: src/icons/scalable,
+            src: data/icons/scalable,
             dest: icons/upstream/eog-symbolics.list
-          },
-          {
-            project: file-roller symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/file-roller.git",
-            upstreambranch: master,
-            localbranch: file-roller-symbolics,
-            projectdir: file-roller,
-            src: src/icons/scalable,
-            dest: icons/upstream/file-roller-symbolics.list
-          },
-          {
-            project: nautilus symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/nautilus.git",
-            upstreambranch: master,
-            localbranch: nautilus-symbolics,
-            projectdir: nautilus,
-            src: src/icons/scalable,
-            dest: icons/upstream/nautilus-symbolics.list
-          },
-          {
-            project: gedit symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gedit.git",
-            upstreambranch: master,
-            localbranch: gedit-symbolics,
-            projectdir: gedit,
-            src: src/icons/scalable,
-            dest: icons/upstream/gedit-symbolics.list
-          },
-          {
-            project: gnome-calculator symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-calculator.git",
-            upstreambranch: master,
-            localbranch: gnome-calculator-symbolics,
-            projectdir: gnome-calculator,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-calculator-symbolics.list
           },
           {
             project: gnome-calendar symbolics,
@@ -155,35 +92,8 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-calendar-symbolics,
             projectdir: gnome-calendar,
-            src: src/icons/scalable,
+            src: src/gui/icons,
             dest: icons/upstream/gnome-calendar-symbolics.list
-          },
-          {
-            project: gnome-font-viewer symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-font-viewer.git",
-            upstreambranch: master,
-            localbranch: gnome-font-viewer-symbolics,
-            projectdir: gnome-font-viewer,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-font-viewer-symbolics.list
-          },
-          {
-            project: gnome-logs symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-logs.git",
-            upstreambranch: master,
-            localbranch: gnome-logs-symbolics,
-            projectdir: gnome-logs,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-logs-symbolics.list
-          },
-          {
-            project: gnome-mines symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-mines.git",
-            upstreambranch: master,
-            localbranch: gnome-mines-symbolics,
-            projectdir: gnome-mines,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-mines-symbolics.list
           },
           {
             project: gnome-screenshot symbolics,
@@ -191,7 +101,7 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-screenshot-symbolics,
             projectdir: gnome-screenshot,
-            src: src/icons/scalable,
+            src: data/icons,
             dest: icons/upstream/gnome-screenshot-symbolics.list
           },
           {
@@ -200,7 +110,7 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-software-symbolics,
             projectdir: gnome-software,
-            src: src/icons/scalable,
+            src: data/icons,
             dest: icons/upstream/gnome-software-symbolics.list
           },
           {
@@ -209,17 +119,8 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-system-monitor-symbolics,
             projectdir: gnome-system-monitor,
-            src: src/icons/scalable,
+            src: data/icons/public/hicolor/symbolic/apps,
             dest: icons/upstream/gnome-system-monitor-symbolics.list
-          },
-          {
-            project: gnome-terminal symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-terminal.git",
-            upstreambranch: master,
-            localbranch: gnome-terminal-symbolics,
-            projectdir: gnome-terminal,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-terminal-symbolics.list
           },
           {
             project: gnome-todo symbolics,
@@ -227,7 +128,7 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-todo-symbolics,
             projectdir: gnome-todo,
-            src: src/icons/scalable,
+            src: data/icons/hicolor/symbolic/actions,
             dest: icons/upstream/gnome-todo-symbolics.list
           },
           {
@@ -236,35 +137,8 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-usage-symbolics,
             projectdir: gnome-usage,
-            src: src/icons/scalable,
+            src: data/icons/hicolor/scalable/status,
             dest: icons/upstream/gnome-usage-symbolics.list
-          },
-          {
-            project: gparted symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gparted.git",
-            upstreambranch: master,
-            localbranch: gparted-symbolics,
-            projectdir: gparted,
-            src: src/icons/scalable,
-            dest: icons/upstream/gparted-symbolics.list
-          },
-          {
-            project: rhythmbox symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/rhythmbox.git",
-            upstreambranch: master,
-            localbranch: rhythmbox-symbolics,
-            projectdir: rhythmbox,
-            src: src/icons/scalable,
-            dest: icons/upstream/rhythmbox-symbolics.list
-          },
-          {
-            project: gnome-mahjongg symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-mahjongg.git",
-            upstreambranch: master,
-            localbranch: gnome-mahjongg-symbolics,
-            projectdir: gnome-mahjongg,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-mahjongg-symbolics.list
           },
           {
             project: gnome-control-center symbolics,
@@ -272,17 +146,8 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-control-center-symbolics,
             projectdir: gnome-control-center,
-            src: src/icons/scalable,
+            src: panels,
             dest: icons/upstream/gnome-control-center-symbolics.list
-          },
-          {
-            project: seahorse symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/seahorse.git",
-            upstreambranch: master,
-            localbranch: seahorse-symbolics,
-            projectdir: seahorse,
-            src: src/icons/scalable,
-            dest: icons/upstream/seahorse-symbolics.list
           },
           {
             project: shotwell symbolics,
@@ -290,26 +155,8 @@ jobs:
             upstreambranch: master,
             localbranch: shotwell-symbolics,
             projectdir: shotwell,
-            src: src/icons/scalable,
+            src: data/icons/hicolor/scalable/actions,
             dest: icons/upstream/shotwell-symbolics.list
-          },
-          {
-            project: gnome-sudoku symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/gnome-sudoku.git",
-            upstreambranch: master,
-            localbranch: gnome-sudoku-symbolics,
-            projectdir: gnome-sudoku,
-            src: src/icons/scalable,
-            dest: icons/upstream/gnome-sudoku-symbolics.list
-          },
-          {
-            project: totem symbolics,
-            repo: "https://gitlab.gnome.org/GNOME/totem.git",
-            upstreambranch: master,
-            localbranch: totem-symbolics,
-            projectdir: totem,
-            src: src/icons/scalable,
-            dest: icons/upstream/totem-symbolics.list
           },
           {
             project: yelp symbolics,
@@ -317,7 +164,7 @@ jobs:
             upstreambranch: master,
             localbranch: yelp-symbolics,
             projectdir: yelp,
-            src: src/icons/scalable,
+            src: data/icons/hicolor/scalable/status,
             dest: icons/upstream/yelp-symbolics.list
           },
       ]
