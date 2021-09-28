@@ -46,8 +46,6 @@ row {
   &:selected {
     background-color: $view_selected_color;
   }
-
-  &:disabled { color: gtkalpha(currentColor, .55); }
 }
 
 /*******************************************************
@@ -81,6 +79,10 @@ row {
     margin-left: 12px;
     margin-right: 12px;
     min-height: 50px;
+
+    > .icon:disabled {
+      filter: opacity(.5);
+    }
 
     > box.title {
       margin-top: 8px;
@@ -125,11 +127,22 @@ popover.background.combo > contents {
   }
 }
 
-listview.inline {
-  background: none;
-  border: none;
-  box-shadow: none;
-  color: inherit;
+row.combo {
+  image.dropdown-arrow:disabled {
+    filter: opacity(.5);
+  }
+
+  listview.inline {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: inherit;
+
+    &, &:disabled {
+      background: none;
+      color: inherit;
+    }
+  }
 }
 
 /******************
@@ -209,7 +222,7 @@ row.expander {
     color: $accent_color;
   }
 
-  & image.expander-row-arrow:disabled {
+  image.expander-row-arrow:disabled {
     filter: opacity(.5);
   }
 }
