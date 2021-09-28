@@ -89,6 +89,10 @@ statuspage {
           color: gtkalpha(currentColor, 0.5);
         }
 
+        &:disabled {
+          opacity: .5;
+        }
+
         &:not(:last-child) {
           margin-bottom: 24px;
         }
