@@ -8,7 +8,7 @@ on:
 
 jobs:
   refresh-upstream:
-    name: Check for upstream icons changes
+    name: Check for upstream symbolic icons changes
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -47,7 +47,7 @@ jobs:
             upstreambranch: master,
             localbranch: baobab-symbolics,
             projectdir: baobab,
-            src: data/icons/scalable,
+            src: .,
             dest: icons/upstream/baobab-symbolics.list
           },
           {
@@ -56,7 +56,7 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-characters-symbolics,
             projectdir: gnome-characters,
-            src: data/icons/hicolor/scalable,
+            src: .,
             dest: icons/upstream/gnome-characters-symbolics.list
           },
           {
@@ -65,7 +65,7 @@ jobs:
             upstreambranch: master,
             localbranch: simple-scan-symbolics,
             projectdir: simple-scan,
-            src: data/icons/scalable,
+            src: .,
             dest: icons/upstream/simple-scan-symbolics.list
           },
           {
@@ -74,7 +74,7 @@ jobs:
             upstreambranch: master,
             localbranch: evince-symbolics,
             projectdir: evince,
-            src: data/icons/scalable,
+            src: .,
             dest: icons/upstream/evince-symbolics.list
           },
           {
@@ -83,7 +83,7 @@ jobs:
             upstreambranch: master,
             localbranch: eog-symbolics,
             projectdir: eog,
-            src: data/icons/scalable,
+            src: .,
             dest: icons/upstream/eog-symbolics.list
           },
           {
@@ -92,7 +92,7 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-calendar-symbolics,
             projectdir: gnome-calendar,
-            src: src/gui/icons,
+            src: .,
             dest: icons/upstream/gnome-calendar-symbolics.list
           },
           {
@@ -101,7 +101,7 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-screenshot-symbolics,
             projectdir: gnome-screenshot,
-            src: data/icons,
+            src: .,
             dest: icons/upstream/gnome-screenshot-symbolics.list
           },
           {
@@ -110,7 +110,7 @@ jobs:
             upstreambranch: main,
             localbranch: gnome-software-symbolics,
             projectdir: gnome-software,
-            src: data/icons,
+            src: .,
             dest: icons/upstream/gnome-software-symbolics.list
           },
           {
@@ -119,7 +119,7 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-system-monitor-symbolics,
             projectdir: gnome-system-monitor,
-            src: data/icons/public/hicolor/symbolic/apps,
+            src: .,
             dest: icons/upstream/gnome-system-monitor-symbolics.list
           },
           {
@@ -128,7 +128,7 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-todo-symbolics,
             projectdir: gnome-todo,
-            src: data/icons/hicolor/symbolic/actions,
+            src: .,
             dest: icons/upstream/gnome-todo-symbolics.list
           },
           {
@@ -137,8 +137,17 @@ jobs:
             upstreambranch: master,
             localbranch: gnome-usage-symbolics,
             projectdir: gnome-usage,
-            src: data/icons/hicolor/scalable/status,
+            src: .,
             dest: icons/upstream/gnome-usage-symbolics.list
+          },
+          {
+            project: gnome-control-center symbolics,
+            repo: "https://gitlab.gnome.org/GNOME/gnome-control-center.git",
+            upstreambranch: master,
+            localbranch: gnome-control-center-symbolics,
+            projectdir: gnome-control-center,
+            src: .,
+            dest: icons/upstream/gnome-control-center-symbolics.list
           },
           {
             project: shotwell symbolics,
@@ -146,7 +155,7 @@ jobs:
             upstreambranch: master,
             localbranch: shotwell-symbolics,
             projectdir: shotwell,
-            src: data/icons/hicolor/scalable/actions,
+            src: .,
             dest: icons/upstream/shotwell-symbolics.list
           },
           {
@@ -155,7 +164,7 @@ jobs:
             upstreambranch: master,
             localbranch: yelp-symbolics,
             projectdir: yelp,
-            src: data/icons/hicolor/scalable/status,
+            src: .,
             dest: icons/upstream/yelp-symbolics.list
           },
       ]
@@ -171,7 +180,7 @@ jobs:
           popd
           rm -f ${DEST}
           cd /tmp/${PROJECT_DIR}/${SRC}
-          ls ./* > list.list
+          find . -name "*-symbolic.svg" > list.list
           cd ~/work/yaru/yaru
           cp /tmp/${PROJECT_DIR}/${SRC}/list.list ${DEST}
           MODIFIED=$(git status --porcelain)
@@ -189,9 +198,9 @@ jobs:
         if: steps.checknewupstream.outputs.modified == 'true'
         uses: peter-evans/create-pull-request@v3.10.1
         with:
-          commit-message: New upstream icons list for ${{ matrix.buildenv.project }}
-          title: Auto update new upstream  icons list for ${{ matrix.buildenv.project }}
+          commit-message: New upstream symbolic icons list for ${{ matrix.buildenv.project }}
+          title: Auto update new upstream symbolic icons list for ${{ matrix.buildenv.project }}
           labels: automated pr, new upstream
-          body: "[New upstream ${{ matrix.buildenv.project }} changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+icons+changes%22) by GitHub Action"
+          body: "[New upstream ${{ matrix.buildenv.project }} symbolic icons changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+on+upstream+symbolic+icons+changes%22) by GitHub Action"
           branch: upstream-${{ matrix.buildenv.localbranch }}-update
           token: ${{ secrets.GITHUB_TOKEN }}
