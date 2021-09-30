@@ -18,4 +18,11 @@
     <file>assets/dash-symbolic.svg</file>
     <file>assets/devel-symbolic.svg</file>
   </gresource>
+
+  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-empty">
+    <file alias='gtk.css'>empty.css</file>
+    <file alias='gtk-dark.css'>empty.css</file>
+    <file alias='gtk-hc.css'>empty.css</file>
+    <file alias='gtk-hc-dark.css'>empty.css</file>
+  </gresource>
 </gresources>

@@ -97,4 +97,3 @@ libadwaita_stylesheet_resources = gnome.compile_resources(
   dependencies: stylesheet_deps,
   c_name: 'adw_stylesheet',
 )
-
