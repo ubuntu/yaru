@@ -429,3 +429,9 @@ list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
     }
   }
 }
+
+treeview.view:selected {
+  &.progressbar {
+    background-color: $progress_bg_color;
+  }
+}
