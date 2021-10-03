@@ -1,7 +1,5 @@
 # Ubuntu Yaru theme suite
 
-Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch=master)](https://travis-ci.org/ubuntu/yaru)
-
 Yaru is the default theme for Ubuntu, backed by the community.
 
 It contains:
