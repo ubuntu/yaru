@@ -1,7 +1,5 @@
 # Ubuntu Yaru theme suite
 
-Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch=master)](https://travis-ci.org/ubuntu/yaru)
-
 Yaru is the default theme for Ubuntu, backed by the community.
 
 It contains:
@@ -9,18 +7,14 @@ It contains:
  * a light and dark GTK theme (gtk2 and gtk3) based on the [upstream Adwaita Gtk theme](https://github.com/GNOME/gtk/tree/gtk-3-24/gtk/theme/Adwaita)
  * an icon & cursor theme, derived from the Unity8 Suru icons and [Suru icon](https://snwh.org/suru) theme
  * a sound theme, combining sounds from the [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix) sound themes.
- 
-![Files](.github/readme_pics/nautilus-def.png)
-
-![FilesDark](.github/readme_pics/nautilus-dark.png)
 
 ![FilesLight](.github/readme_pics/nautilus-light.png)
 
-![widgetfactory](.github/readme_pics/factory-def.png)
-
-![widgetfactorydark](.github/readme_pics/factory-dark.png)
+![FilesDark](.github/readme_pics/nautilus-dark.png)
 
 ![widgetfactorylight](.github/readme_pics/factory-light.png)
+
+![widgetfactorydark](.github/readme_pics/factory-dark.png)
 
 ![ShellPopups](.github/readme_pics/shell-light.png)
 
