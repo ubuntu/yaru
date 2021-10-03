@@ -76,7 +76,7 @@ window {
 
     &:backdrop {
       box-shadow: inset 0 0 0 5px $borders_color,
-                  inset 0 0 0 4px $bg_color,
+                  inset 0 0 0 4px $headerbar_backdrop_color,
                   inset 0 0 0 1px $_wm_border_backdrop;
     }
   }

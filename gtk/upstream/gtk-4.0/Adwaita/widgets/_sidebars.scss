@@ -1,26 +1,16 @@
 .sidebar {
-  background-color: mix($bg_color, $base_color, 50%);
-  background-clip: padding-box;
-
-  &:not(separator) {
-    &:dir(ltr),
-    &.left,
-    &.left:dir(rtl) {
-      border-right: 1px solid $borders_color;
-      border-left-style: none;
-    }
-
-    &:dir(rtl),
-    &.right {
-      border-left: 1px solid $borders_color;
-      border-right-style: none;
-    }
-  }
-
   listview.view,
   list { background-color: transparent; }
+}
 
-  paned & { &.left, &.right, &.left:dir(rtl), &:dir(rtl), &:dir(ltr), & { border-style: none; }}
+%sidebar_border {
+  &:dir(ltr) {
+    border-right: 1px solid $borders_color;
+  }
+
+  &:dir(rtl) {
+    border-left: 1px solid $borders_color;
+  }
 }
 
 stacksidebar row {
