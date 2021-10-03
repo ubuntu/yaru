@@ -40,14 +40,9 @@ popover.menu {
     }
   }
 
-  & > arrow,
   &.background > contents {
-    background-color: $menu_color;
-    color: $text_color;
     padding: 0;
-  }
 
-  &.background > contents {
     &, > scrolledwindow > viewport {
       > stack > box {
         padding: $menu-margin;

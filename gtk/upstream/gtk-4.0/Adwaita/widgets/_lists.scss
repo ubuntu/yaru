@@ -233,9 +233,9 @@ row.expander {
 
 list.content,
 listview.content {
-  background-color: $base_color;
-  color: $text_color;
-  border: 1px solid $borders_color;
+  background-color: $card_bg_color;
+  color: $card_fg_color;
+  border: 1px solid $card_border_color;
   border-radius: 8px;
 
   > row {

@@ -1,9 +1,7 @@
 // Yaru colors overwrite
 
-$light_fg: $dark_3;
-$dark_fg: $light_2;
-$light_bg: #FAFAFA;
-$dark_bg: lighten(#181818, 8%);
+$bg_color: if($variant=='light', #FAFAFA, lighten(#181818, 8%));
+$fg_color: if($variant=='light', $dark_3, $light_2);
 
 $fill_bg_color: gtkcolor(fill_bg_color);
 $fill_fg_color: gtkcolor(fill_fg_color);

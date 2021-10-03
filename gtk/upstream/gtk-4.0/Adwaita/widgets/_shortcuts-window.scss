@@ -19,13 +19,13 @@ shortcut {
     padding-left: 6px;
     padding-right: 6px;
 
-    color: $fg_color;
-    background-color: $base_color;
+    color: $card_fg_color;
+    background-color: $card_bg_color;
     background-clip: padding-box;
     border: 1px solid;
-    border-color: $borders_color;
+    border-color: $card_border_color;
     border-radius: 5px;
-    box-shadow: inset 0 -3px $thin_borders_color;
+    box-shadow: inset 0 -3px gtkalpha($card_border_color, .5);
     font-size: smaller;
   }
 }
