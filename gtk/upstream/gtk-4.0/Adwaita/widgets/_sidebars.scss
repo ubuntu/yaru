@@ -1,6 +1,9 @@
 .sidebar {
   listview.view,
-  list { background-color: transparent; }
+  list {
+    background-color: transparent;
+    color: inherit;
+  }
 }
 
 %sidebar_border {

@@ -129,8 +129,9 @@
  ****************/
 
 searchbar > revealer > box {
-  padding: 6px 6px 7px 6px;
+  padding: 0px 6px 1px 6px;
   border-spacing: 6px;
+  @extend %toolbar;
 
   background-color: $dark_fill;
   box-shadow: inset 0 -1px $borders_color;
