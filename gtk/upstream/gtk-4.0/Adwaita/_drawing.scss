@@ -86,11 +86,11 @@
   }
 
   $_small_gradient: radial-gradient(farthest-side at $p,
-                                    gtkalpha(currentColor, 0.2) 85%,
+                                    gtkalpha(currentColor, 0.12) 85%,
                                     gtkalpha(currentColor, 0));
 
   $_big_gradient: radial-gradient(farthest-side at $p,
-                                  gtkalpha(currentColor, 0.07),
+                                  gtkalpha(currentColor, 0.05),
                                   gtkalpha(currentColor, 0));
 
   background-image: $_small_gradient, $_big_gradient;
