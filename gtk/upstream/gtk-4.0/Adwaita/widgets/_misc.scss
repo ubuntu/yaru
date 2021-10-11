@@ -100,13 +100,22 @@ statuspage {
     }
   }
 
-  &.compact > scrolledwindow > viewport > box > clamp > box {
-    > .icon {
-      -gtk-icon-size: 96px;
-    }
+  &.compact > scrolledwindow > viewport > box {
+    margin: 24px 12px;
+    border-spacing: 24px;
 
-    > .title {
-      font-size: 18pt;
+    > clamp > box {
+      > .icon {
+        -gtk-icon-size: 96px;
+
+        &:not(:last-child) {
+          margin-bottom: 12px;
+        }
+      }
+
+      > .title {
+        font-size: 18pt;
+      }
     }
   }
 }
