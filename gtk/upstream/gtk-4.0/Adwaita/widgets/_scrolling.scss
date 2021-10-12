@@ -3,11 +3,10 @@ $_scrollbar_bg_color: transparentize(black, .9);
 scrollbar {
   $_slider_min_length: 40px;
   $_slider_width: 8px;
-  $_scrollbar_transition: all 300ms $ease-out-quad;
-  $_fine-tune_slider_border: $_slider_width - 3; //#3672
+  $_scrollbar_transition: all 200ms linear;
 
-  background-color: $_scrollbar_bg_color;
-  transition: $_scrollbar_transition;
+  background-color: $base_color;
+  color: $text_color;
 
   // scrollbar border
   &.top    { box-shadow: inset 0 -1px $borders_color; padding-bottom: 1px; }
@@ -15,69 +14,128 @@ scrollbar {
   &.left   { box-shadow: inset -1px 0 $borders_color; padding-right:  1px; }
   &.right  { box-shadow: inset  1px 0 $borders_color; padding-left:   1px; }
 
-  > range > trough > slider {
-    min-width: $_slider_width;
-    min-height: $_slider_width;
-    margin: -1px;
-    border: 4px solid transparent;
-    border-radius: 10px;
-    background-clip: padding-box;
-    background-color: gtkalpha(currentColor, .6);
+  > range > trough {
+    margin: 7px;
     transition: $_scrollbar_transition;
+    border-radius: 10px;
 
-    &:hover { background-color: gtkalpha(currentColor, .8); }
+    > slider {
+      min-width: $_slider_width;
+      min-height: $_slider_width;
+      margin: -6px;
+      border: 6px solid transparent;
+      border-radius: 10px;
+      background-clip: padding-box;
+      transition: $_scrollbar_transition;
 
-    &:hover:active { background-color: $accent_bg_color; }
+      @if $contrast == 'high' {
+        background-color: gtkalpha(currentColor, .4);
 
-    &:disabled { background-color: transparent; }
+        &:hover { background-color: gtkalpha(currentColor, .6); }
+
+        &:hover:active { background-color: currentColor; }
+      } @else {
+        background-color: gtkalpha(currentColor, .2);
+
+        &:hover { background-color: gtkalpha(currentColor, .4); }
+
+        &:hover:active { background-color: gtkalpha(currentColor, .6); }
+      }
+
+      &:disabled { opacity: 0; }
+    }
   }
 
-  > range.fine-tune {
-    > trough > slider {
-      transition: none;
-      min-width: $_fine-tune_slider_border+1;
-      min-height: $_fine-tune_slider_border+1;
-    }
+  &.horizontal > range > trough {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
 
-    &.horizontal > trough > slider { border-width: $_fine-tune_slider_border 4px; }
-    &.vertical > trough > slider { border-width: 4px $_fine-tune_slider_border; }
+  &.vertical > range > trough {
+    margin-left: 6px;
+    margin-right: 6px;
   }
 
   &.overlay-indicator {
-    &:not(.dragging):not(.hovering) {
-      box-shadow: none;
-      opacity: 0.4;
-      background-color: transparent;
+    background: none;
+    color: inherit;
+    box-shadow: none;
+    padding: 0;
 
-      > range > trough > slider {
-        margin: 0;
-        min-width: 3px;
-        min-height: 3px;
-        background-color: $fg_color;
-        border: 1px solid if($variant == 'light', white, black);
-      }
+    > range > trough {
+      outline: 1px solid transparent;
 
-      &.horizontal {
-        > range > trough > slider {
-          margin: 0 2px;
-          min-width: $_slider_min_length;
+      > slider {
+        @if $contrast == 'high' {
+          outline: 1px solid $scrollbar_outline_color;
+        } @else {
+          outline: 1px solid gtkalpha($scrollbar_outline_color, .4);
         }
-      }
 
-      &.vertical {
-        > range > trough > slider {
-          margin: 2px 0;
-          min-height: $_slider_min_length;
-        }
+        outline-offset: -6px;
       }
     }
 
-    &.dragging,
-    &.hovering { opacity: 0.8; }
+    &:not(.hovering) > range > trough > slider {
+      min-width: 3px;
+      min-height: 3px;
+
+      @if $contrast == 'high' {
+        outline-color: gtkalpha($scrollbar_outline_color, .6);
+      } @else {
+        outline-color: gtkalpha($scrollbar_outline_color, .35);
+      }
+    }
+
+    &.hovering > range > trough {
+      @if $contrast == 'high' {
+        outline-color: gtkalpha($scrollbar_outline_color, .6);
+        background-color: gtkalpha(currentColor, .25);
+      } @else {
+        outline-color: gtkalpha($scrollbar_outline_color, .35);
+        background-color: gtkalpha(currentColor, .1);
+      }
+    }
+
+    &.horizontal {
+      > range > trough > slider {
+        min-width: $_slider_min_length;
+      }
+
+      &.hovering > range > trough > slider {
+        min-height: $_slider_width;
+      }
+
+      &:not(.hovering) > range > trough {
+        margin-top: 3px;
+        margin-bottom: 3px;
+      }
+    }
+
+    &.vertical {
+      > range > trough > slider {
+        min-height: $_slider_min_length;
+      }
+
+      &.hovering > range > trough > slider {
+        min-width: $_slider_width;
+      }
+
+      &:not(.hovering) > range > trough {
+        margin-left: 3px;
+        margin-right: 3px;
+      }
+    }
   }
 
   &.horizontal > range > trough > slider { min-width: $_slider_min_length; }
   &.vertical > range > trough > slider { min-height: $_slider_min_length; }
+
+  > range.fine-tune > trough > slider {
+    &, &:hover, &:hover:active {
+      background-color: if($contrast == 'high', $accent_color, gtkalpha($accent_color, .6));
+    }
+  }
 }
 
 scrolledwindow {
@@ -105,14 +163,10 @@ scrolledwindow {
     // Only color the top-left (or top right in RTL) pixel, to visually connect
     // the borders of the two scrollbars.
 
-    background: $borders_color,
-                linear-gradient(to bottom, transparent 1px, $_scrollbar_bg_color 1px),
-                linear-gradient(to right, transparent 1px, $_scrollbar_bg_color 1px);
+    background: linear-gradient(to bottom right, $borders_color 1px, $base_color 1px);
 
     &:dir(rtl) {
-      background: $borders_color,
-                  linear-gradient(to bottom, transparent 1px, $_scrollbar_bg_color 1px),
-                  linear-gradient(to left, transparent 1px, $_scrollbar_bg_color 1px);
+      background: linear-gradient(to bottom left, $borders_color 1px, $base_color 1px);
     }
   }
 }
