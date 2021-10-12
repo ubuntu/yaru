@@ -31,6 +31,7 @@ $headerbar_backdrop_color: $bg_color;
 $card_bg_color: if($variant == 'light', #ffffff, transparentize(white, .945));
 $card_fg_color: $fg_color;
 $card_border_color: if($variant == 'light', gtkalpha(currentColor, .18), gtkalpha(currentColor, .18));
+$scrollbar_outline_color: if($variant == 'light', white, transparentize(black, .5));
 
 $popover_bg_color: if($variant == 'light', #ffffff, #383838);
 $popover_fg_color: $fg_color;
