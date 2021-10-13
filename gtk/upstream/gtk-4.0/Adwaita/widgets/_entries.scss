@@ -4,14 +4,14 @@ entry {
     min-height: 32px;
     padding-left: 8px;
     padding-right: 8px;
-    border: 1px solid;
+    border: 1px solid $borders_color;
     border-radius: $button_radius;
     border-spacing: 6px;
+    color: $text_color;
+    background-color: $base_color;
     background-clip: padding-box;
     transition: all 200ms $ease-out-quad;
     caret-color: currentColor;
-
-    @include entry(normal);
 
     @include focus-ring($focus-state: ':focus-within');
 
@@ -21,7 +21,8 @@ entry {
       }
 
       > block-cursor {
-        @include entry(block_cursor);
+        color: $base_color;
+        background-color: $text_color;
       }
     }
 
@@ -35,7 +36,7 @@ entry {
       }
     }
 
-    &:disabled { @include entry(insensitive); }
+    &:disabled { filter: opacity(.5); }
 
     // entry error and warning style
     @each $e_type, $e_color in (error, $error_color),
@@ -76,9 +77,8 @@ entry {
     }
 
     .osd & {
-      @include entry(osd);
-
-      &:focus-within { @include entry(osd-focus); }
+      color: $osd_text_color;
+      background-color: transparentize(black, 0.5);
     }
   }
 

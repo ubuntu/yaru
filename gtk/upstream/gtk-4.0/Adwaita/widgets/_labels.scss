@@ -84,5 +84,6 @@ label {
  *******************/
 
 editablelabel > stack > text {
-  @include entry(normal);
+  color: $text_color;
+  background-color: $base_color;
 }
