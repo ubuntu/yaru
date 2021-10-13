@@ -25,45 +25,6 @@
   }
 }
 
-@mixin entry($t, $fc:$focus_border_color) {
-//
-// Entries drawing function
-//
-// $t: entry type
-// $fc: focus color
-//
-// possible $t values:
-// normal, insensitive, osd, osd-focus, block_cursor;
-//
-
-  @if $t==normal {
-    color: $text_color;
-    border-color: $borders_color;
-    background-color: $base_color;
-    // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
-  }
-  @if $t==insensitive {
-    filter: opacity(.5);
-  }
-  @if $t==osd {
-    color: $osd_text_color;
-    border-color: $borders_color;
-    background-color: transparentize(black, 0.5);
-    background-clip: padding-box;
-    box-shadow: none;
-  }
-  @if $t==osd-focus {
-    color: $osd_text_color;
-    border-color: $borders_color;
-    background-color: transparentize(black, 0.5);
-    background-clip: padding-box;
-  }
-  @if $t==block_cursor {
-    color: $base_color;
-    background-color: $text_color;
-  }
-}
-
 @mixin overshoot($p) {
 //
 // overshoot
