@@ -170,7 +170,7 @@ jobs:
       ]
     steps:
       # Checkout code
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - name: Download from ${{ matrix.buildenv.repo }}, on branch ${{ matrix.buildenv.upstreambranch }}
         id: checknewupstream
         run: |
