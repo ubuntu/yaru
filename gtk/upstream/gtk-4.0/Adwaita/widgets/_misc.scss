@@ -7,7 +7,7 @@ frame,
 }
 
 frame {
-  border-radius: $window_radius;
+  border-radius: $card_radius;
 
   > label {
     margin: 4px;
@@ -40,7 +40,7 @@ separator {
 
   padding: 10px;
   border-spacing: 10px;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 $card_radius $card_radius;
   background-color: $osd_bg_color;
   background-image: linear-gradient(to bottom, transparentize(black, 0.8),
                                                transparent 2px);

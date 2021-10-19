@@ -1,5 +1,5 @@
 %scale_trough {
-  border-radius: 3px;
+  border-radius: 99px;
   background-color: $trough_color;
 
   @if $contrast == "high" {
@@ -8,7 +8,7 @@
 }
 
 %scale_highlight {
-  border-radius: 3px;
+  border-radius: 99px;
   background-color: $fill_color;
 }
 
@@ -98,12 +98,6 @@ scale {
     > trough {
       // to make the trough grow in fine-tune mode
       > slider { margin: -5px; }
-
-      > fill,
-      > highlight,
-      & {
-        border-radius: 5px;
-      }
     }
   }
 

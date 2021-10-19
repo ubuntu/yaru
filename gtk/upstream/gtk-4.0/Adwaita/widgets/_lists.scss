@@ -30,16 +30,19 @@ row {
   background-clip: padding-box;
 
   &.activatable {
-    &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
     &:hover { background-color: $view_hover_color; }
 
     &:active { background-color: $view_active_color; }
 
+    // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
+    &.has-open-popup { background-color: $view_hover_color; }
+
     &:selected {
-      &.has-open-popup,
       &:hover { background-color: $view_selected_hover_color; }
 
       &:active { background-color: $view_selected_active_color; }
+
+      &.has-open-popup { background-color: $view_selected_hover_color; }
     }
   }
 
@@ -95,38 +98,6 @@ row {
  * AdwComboRow *
  ***************/
 
-popover.background.combo > contents {
-  padding: 0px;
-
-  list, listview {
-    border-style: none;
-    background-color: transparent;
-    min-width: 200px;
-
-    > row {
-      padding: 0px 12px 0px 12px;
-      min-height: 50px;
-      border-bottom: 1px solid $borders_color;
-
-      &:first-child {
-        border-top-left-radius: $popover_radius - 2;
-        border-top-right-radius: $popover_radius - 2;
-      }
-
-      &:last-child {
-        border-bottom-left-radius: $popover_radius - 2;
-        border-bottom-right-radius: $popover_radius - 2;
-        border-bottom: none;
-      }
-    }
-  }
-
-  scrollbar.vertical {
-    padding-top: 2px;
-    padding-bottom: 2px;
-  }
-}
-
 row.combo {
   image.dropdown-arrow:disabled {
     filter: opacity(.5);
@@ -142,6 +113,10 @@ row.combo {
       background: none;
       color: inherit;
     }
+  }
+
+  popover > contents {
+    min-width: 120px;
   }
 }
 
@@ -166,13 +141,16 @@ row.combo {
   border-bottom: 1px solid $borders_color;
 
   &:not(:selected).activatable {
-    &.has-open-popup,
     &:hover {
       background-color: gtkalpha(currentColor, .03);
     }
 
     &:active {
       background-color: gtkalpha(currentColor, .08);
+    }
+
+    &.has-open-popup {
+      background-color: gtkalpha(currentColor, .03);
     }
   }
 }
@@ -238,7 +216,7 @@ listview.content {
   background-color: $card_bg_color;
   color: $card_fg_color;
   border: 1px solid $card_border_color;
-  border-radius: 8px;
+  border-radius: $card_radius;
 
   > row {
     // Regular rows and expander header rows background

@@ -28,16 +28,12 @@ combobox {
     button.combo { @extend %button_basic_drop_active; }
   }
 
-  // newstyle
   popover {
-    margin-top: 6px;
-    padding: 0;
+    padding-top: 6px;
 
     listview {
-      padding: 8px 0;
-
-      & > row {
-        padding: 8px;
+      > row {
+        min-width: 0;
       }
     }
 
