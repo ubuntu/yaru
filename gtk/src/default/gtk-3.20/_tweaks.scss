@@ -438,3 +438,12 @@ treeview.view {
     }
   }
 }
+
+@if $variant=='dark' {
+  scale,
+  switch {
+    slider:backdrop {
+      background-image: image(darken($warm_gray, 20%));
+    }
+  }
+}
