@@ -7,52 +7,50 @@ colorswatch {
 
   @include focus-ring($width: 4px, $offset: -2px);
 
-  $_colorswatch_radius: 5px;
-
   // base color corners rounding
   // to avoid the artifacts caused by rounded corner anti-aliasing the base color
   // sports a bigger radius.
   // nth-child is needed by the custom color strip.
 
   &.top {
-    border-top-left-radius: $_colorswatch_radius + 0.5px;
-    border-top-right-radius: $_colorswatch_radius + 0.5px;
+    border-top-left-radius: $button_radius + 0.5px;
+    border-top-right-radius: $button_radius + 0.5px;
 
     > overlay {
-      border-top-left-radius: $_colorswatch_radius;
-      border-top-right-radius: $_colorswatch_radius;
+      border-top-left-radius: $button_radius;
+      border-top-right-radius: $button_radius;
     }
   }
 
   &.bottom {
-    border-bottom-left-radius: $_colorswatch_radius + 0.5px;
-    border-bottom-right-radius: $_colorswatch_radius + 0.5px;
+    border-bottom-left-radius: $button_radius + 0.5px;
+    border-bottom-right-radius: $button_radius + 0.5px;
 
     > overlay {
-      border-bottom-left-radius: $_colorswatch_radius;
-      border-bottom-right-radius: $_colorswatch_radius;
+      border-bottom-left-radius: $button_radius;
+      border-bottom-right-radius: $button_radius;
     }
   }
 
   &.left,
   &:first-child:not(.top) {
-    border-top-left-radius: $_colorswatch_radius + 0.5px;
-    border-bottom-left-radius: $_colorswatch_radius + 0.5px;
+    border-top-left-radius: $button_radius + 0.5px;
+    border-bottom-left-radius: $button_radius + 0.5px;
 
     > overlay {
-      border-top-left-radius: $_colorswatch_radius;
-      border-bottom-left-radius: $_colorswatch_radius;
+      border-top-left-radius: $button_radius;
+      border-bottom-left-radius: $button_radius;
     }
   }
 
   &.right,
   &:last-child:not(.bottom) {
-    border-top-right-radius: $_colorswatch_radius + 0.5px;
-    border-bottom-right-radius: $_colorswatch_radius + 0.5px;
+    border-top-right-radius: $button_radius + 0.5px;
+    border-bottom-right-radius: $button_radius + 0.5px;
 
     > overlay {
-      border-top-right-radius: $_colorswatch_radius;
-      border-bottom-right-radius: $_colorswatch_radius;
+      border-top-right-radius: $button_radius;
+      border-bottom-right-radius: $button_radius;
     }
   }
 
@@ -88,10 +86,10 @@ colorswatch {
     > overlay {
       @extend %button_basic;
 
-      border-radius: $_colorswatch_radius 0 0 $_colorswatch_radius;
+      border-radius: $button_radius 0 0 $button_radius;
     }
 
-    &:only-child > overlay { border-radius: $_colorswatch_radius; }
+    &:only-child > overlay { border-radius: $button_radius; }
   }
 
   &:disabled {
@@ -99,9 +97,9 @@ colorswatch {
   }
 
   &#editor-color-sample {
-    border-radius: 4px;
+    border-radius: $button_radius;
 
-    > overlay { border-radius: 4.5px; }
+    > overlay { border-radius: $button_radius + 0.5px; }
   }
 }
 
@@ -112,4 +110,4 @@ plane {
 }
 
 // colorscale popup
-colorchooser .popover.osd { border-radius: 5px; }
+colorchooser .popover.osd { border-radius: $popover_radius; }

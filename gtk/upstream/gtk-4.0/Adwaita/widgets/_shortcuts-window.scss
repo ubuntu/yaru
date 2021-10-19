@@ -24,7 +24,7 @@ shortcut {
     background-clip: padding-box;
     border: 1px solid;
     border-color: $card_border_color;
-    border-radius: 5px;
+    border-radius: $button_radius;
     box-shadow: inset 0 -3px gtkalpha($card_border_color, .5);
     font-size: smaller;
   }

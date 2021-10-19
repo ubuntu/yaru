@@ -28,7 +28,7 @@ calendar {
         padding: 4px;
 
         &:selected {
-          border-radius: 3px;
+          border-radius: $button_radius;
 
           background-color: $accent_bg_color;
           color: $accent_fg_color;

@@ -45,7 +45,7 @@ popover.menu {
 
     &, > scrolledwindow > viewport {
       > stack > box {
-        padding: $menu-margin;
+        padding: $menu_margin;
       }
     }
   }
@@ -67,18 +67,29 @@ popover.menu {
 
   check,
   radio {
+    min-width: 14px;
+    min-height: 14px;
+    -gtk-icon-size: 14px;
+    padding: 2px;
+
     &, &:hover, &:hover:active, &:checked, &:disabled {
       background: none;
       color: inherit;
-
-      transform: scale(0.8);
     }
+  }
+
+  check {
+    &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-small-symbolic.symbolic.png")),
+                                              -gtk-recolor(url("assets/check-small@2-symbolic.symbolic.png"))); }
   }
 
   //only menu radios have a border
   radio {
-    padding: 0;
-    border: 1.2px solid gtkalpha(currentColor, if($contrast == "high", 1, 0.3));
+    padding: 1px;
+    border: 1px solid gtkalpha(currentColor, if($contrast == "high", 1, 0.3));
+
+    &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-small-symbolic.symbolic.png")),
+                                              -gtk-recolor(url("assets/bullet-small@2-symbolic.symbolic.png"))); }
   }
 
   check,
@@ -99,7 +110,7 @@ popover.menu {
     min-height: 30px;
     min-width: 40px;
     padding: 0 $menu_padding;
-    border-radius: $menu-margin;
+    border-radius: $menu_radius;
 
     @extend %undecorated_button;
 
@@ -135,6 +146,60 @@ popover.menu {
   label.title {
     font-weight: bold;
     padding: 4px ($menu_padding + 20px); //this will fall apart with font sizing
+  }
+
+  list, listview {
+    background: none;
+    color: inherit;
+
+    > row {
+      border-radius: $menu_radius;
+      padding: 0 $menu_padding;
+      min-height: 30px;
+      min-width: 40px;
+
+      &:selected {
+        background: none;
+      }
+
+      &:hover {
+        &, &:selected.activatable {
+          background-color: $view_selected_color;
+        }
+      }
+
+      &:active {
+        &, &:selected.activatable {
+          background-color: $view_selected_active_color;
+        }
+      }
+
+      &.has-open-popup {
+        &, &:selected.activatable {
+          background-color: $view_selected_color;
+        }
+      }
+
+      > box {
+        border-spacing: 6px;
+      }
+    }
+  }
+
+  // Standalone lists should have same margins as menu sections,
+  // but we don't want that on lists inside sections themselves
+  contents > list,
+  contents > listview,
+  scrolledwindow > viewport > list,
+  scrolledwindow > listview {
+    padding: $menu_margin 0; //only vertical padding. horizontal row size would clip
+
+    > row {
+      margin: 0 $menu_margin;
+
+      padding: 8px;
+      min-height: 0;
+    }
   }
 }
 

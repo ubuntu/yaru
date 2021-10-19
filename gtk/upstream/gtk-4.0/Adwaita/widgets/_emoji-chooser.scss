@@ -25,7 +25,7 @@ button.emoji-section.image-button:not(.raised):not(.suggested-action):not(.destr
 popover.emoji-picker emoji {
   font-size: x-large;
   padding: 6px;
-  border-radius: 6px;
+  border-radius: $button_radius;
 
   &:focus,
   &:hover {

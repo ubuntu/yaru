@@ -12,7 +12,7 @@
     &:focus, & {
       background-color: $view_selected_color;
 
-      border-radius: 3px;
+      border-radius: $button_radius;
     }
   }
 }
@@ -54,33 +54,15 @@ rubberband {
   background-color: gtkalpha($accent_bg_color, 0.2);
 }
 
-flowbox {
-  > flowboxchild {
-    padding: 3px;
-    transition: $focus_transition;
+flowbox > flowboxchild,
+gridview > child {
+  padding: 3px;
+  transition: $focus_transition;
+  border-radius: $button_radius;
 
-    @include focus-ring();
+  @include focus-ring();
 
-    &:selected {
-      background-color: $view_selected_color;
-    }
-  }
-}
-
-gridview {
-  > child {
-    padding: 3px;
-    transition: $focus_transition;
-
-    @include focus-ring();
-
-    &:selected {
-      background-color: $view_selected_color;
-    }
-
-    box { //cells
-      border-spacing: 8px; //label separation
-      margin: 12px;
-    }
+  &:selected {
+    background-color: $view_selected_color;
   }
 }

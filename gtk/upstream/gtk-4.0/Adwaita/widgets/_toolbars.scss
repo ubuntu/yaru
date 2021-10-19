@@ -114,7 +114,7 @@
   &.osd {
     padding: 8px 14px;
     border: none;
-    border-radius: 5px;
+    border-radius: $card_radius;
     background-color: $osd_bg_color;
 
     &.left,

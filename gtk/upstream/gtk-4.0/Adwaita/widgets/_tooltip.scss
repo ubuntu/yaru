@@ -10,13 +10,8 @@ tooltip {
     color: white;
   }
 
-  &.csd {
-    border-radius: 5px;
-    box-shadow: none;
-  }
-
   padding: 6px 10px;
-  border-radius: $window_radius;
+  border-radius: 9px;
   box-shadow: none; // otherwise it gets inherited by windowframe.csd
 
   > box {

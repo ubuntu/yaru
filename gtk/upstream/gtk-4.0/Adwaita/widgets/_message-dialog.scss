@@ -10,11 +10,11 @@ window.dialog.message {
   box.dialog-vbox.vertical {
     margin-top: 6px;
     border-spacing: 24px;
-  }
 
-  & label.title {
-    font-weight: 800;
-    font-size: 15pt;
+    > box > box > box > label.title {
+      font-weight: 800;
+      font-size: 15pt;
+    }
   }
 
   &.csd {

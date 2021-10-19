@@ -1,5 +1,5 @@
-$_levelbar_size: 11px;
-$_levelbar_border_radius: 6px;
+$_levelbar_size: 8px;
+$_levelbar_border_radius: 99px;
 
 levelbar {
   &:disabled {
@@ -11,14 +11,6 @@ levelbar {
       min-height: $_levelbar_size;
       border-radius: $_levelbar_border_radius;
 
-      &:dir(rtl) {
-        border-radius: 0 $_levelbar_border_radius $_levelbar_border_radius 0;
-      }
-
-      &:dir(ltr) {
-        border-radius: $_levelbar_border_radius 0 0 $_levelbar_border_radius;
-      }
-
       &.empty,
       &.full {
         border-radius: $_levelbar_border_radius;
@@ -27,17 +19,18 @@ levelbar {
 
     // segmented level bar
     &.discrete > trough > block {
-      min-height: $_levelbar_size - 7px;
-      margin: 1px;
+      min-height: $_levelbar_size;
+      margin-right: 2px;
       min-width: 26px;
       border-radius: 0;
 
       &:first-child {
-        border-radius: 2px 0 0 2px;
+        border-radius: $_levelbar_border_radius 0 0 $_levelbar_border_radius;
       }
 
       &:last-child {
-        border-radius: 0 2px 2px 0;
+        border-radius: 0 $_levelbar_border_radius $_levelbar_border_radius 0;
+        margin-right: 0;
       }
     }
   }
@@ -45,7 +38,7 @@ levelbar {
   &.vertical {
     trough > block {
       min-width: $_levelbar_size;
-      border-radius: $_levelbar_border_radius $_levelbar_border_radius 0 0;
+      border-radius: $_levelbar_border_radius;
 
       &.empty,
       &.full {
@@ -55,17 +48,18 @@ levelbar {
 
     // segmented level bar
     &.discrete > trough > block {
-      min-width: $_levelbar_size - 7px;
-      margin: 1px;
+      min-width: $_levelbar_size;
+      margin-bottom: 2px;
       min-height: 26px;
       border-radius: 0;
 
       &:first-child {
-        border-radius: 2px 2px 0 0;
+        border-radius: $_levelbar_border_radius $_levelbar_border_radius 0 0;
       }
 
       &:last-child {
-        border-radius: 0 0 2px 2px;
+        border-radius: 0 0 $_levelbar_border_radius $_levelbar_border_radius;
+        margin-bottom: 0;
       }
     }
   }

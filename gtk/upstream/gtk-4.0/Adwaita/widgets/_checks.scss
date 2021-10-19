@@ -13,10 +13,9 @@ checkbutton {
 
 check,
 radio {
-  min-height: 14px;
-  min-width: 14px;
-  padding: 1px;
-  -gtk-icon-size: 14px;
+  min-height: 20px;
+  min-width: 20px;
+  -gtk-icon-size: 20px;
   background-color: $trough_color;
 
   @if $contrast == "high" {
@@ -51,7 +50,7 @@ radio {
 }
 
 check {
-  border-radius: 3px;
+  border-radius: $button_radius;
 
   &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-symbolic.symbolic.png")),
                                             -gtk-recolor(url("assets/check@2-symbolic.symbolic.png"))); }
@@ -76,7 +75,7 @@ radio {
   margin: 4px;
   min-width: 32px;
   min-height: 32px;
-  border-radius: 5px;
+  border-radius: $button_radius;
 
   &:checked { -gtk-icon-source: -gtk-icontheme('object-select-symbolic'); }
 }
