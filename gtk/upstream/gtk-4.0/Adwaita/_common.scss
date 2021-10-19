@@ -2,9 +2,9 @@ $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
 $focus_transition: outline-width 200ms $ease-out-quad, outline-offset 200ms $ease-out-quad;
-$button_radius: 4px; // Yaru change: we want everything to be less round
+$button_radius: 6px;
 $card_radius: $button_radius + 6;
-$menu_radius: 4px; // Yaru change: we want everything to be less round
+$menu_radius: 6px;
 $menu_margin: 6px; //margin around menuitems & sidebar items
 $menu_padding: 12px; //inner menuitem padding
 $window_radius: $button_radius + 6;
