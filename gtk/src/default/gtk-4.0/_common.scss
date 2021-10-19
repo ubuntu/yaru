@@ -8,7 +8,7 @@ $menu_radius: 4px; // Yaru change: we want everything to be less round
 $menu_margin: 6px; //margin around menuitems & sidebar items
 $menu_padding: 12px; //inner menuitem padding
 $window_radius: $button_radius + 6;
-$popover_radius: $window_radius;
+$popover_radius: $button_radius;
 
 .background {
   color: $fg_color;
