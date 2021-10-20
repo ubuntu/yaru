@@ -1,8 +1,5 @@
 // Yaru colors overwrite
 
-$bg_color: if($variant=='light', #FAFAFA, lighten(#181818, 8%));
-$fg_color: if($variant=='light', $dark_3, $light_2);
-
 $fill_bg_color: gtkcolor(fill_bg_color);
 $fill_fg_color: gtkcolor(fill_fg_color);
 
@@ -15,7 +12,7 @@ $fill_text_color: $fill_fg_color;
 $fill_hover_color: gtkmix($fill_color, currentColor, 90%);
 $fill_active_color: gtkmix($fill_color, black, 80%);
 
-$slider_color: if($variant == 'light', mix(white, $base_color, 80%), #AEA79F);
+$slider_color: if($variant == 'light', gtkmix(white, $view_bg_color, 80%), #AEA79F);
 $slider_hover_color: if($variant == 'light', white, lighten(#AEA79F, 4%));
 
 $osd_fg_color: #eeeeec;
