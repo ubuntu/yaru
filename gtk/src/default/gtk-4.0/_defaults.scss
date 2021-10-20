@@ -3,7 +3,7 @@
    use responsibly! */
 
 // Sass thinks we're using the colors in the variables as strings and may shoot
-// warning, it's innocuous and can be defeated by using #{@var}.
+// warning, it's innocuous and can be defeated by using #{$var}.
 
 // These are the colors apps are can override. We define the defaults here and
 // define variables for them in _colors.scss
