@@ -9,7 +9,7 @@
 
 window.dialog.print {
   drawing {
-    color: $fg_color;
+    color: $window_fg_color;
     background: none;
     border: none;
     padding: 0;
@@ -18,7 +18,7 @@ window.dialog.print {
       background-color: white;
       color: transparentize(black, .2);
       background-clip: padding-box;
-      border: 1px solid $borders_color;
+      border: 1px solid $border_color;
     }
   }
 }

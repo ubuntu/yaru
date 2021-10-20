@@ -21,7 +21,7 @@ button {
       background-color: $button_color;
 
       @if $contrast == 'high' {
-        box-shadow: inset 0 0 0 1px $borders_color;
+        box-shadow: inset 0 0 0 1px $border_color;
       }
 
       &:hover {
@@ -207,7 +207,7 @@ button {
       &.keyboard-activating,
       &:active,
       &:checked {
-        box-shadow: inset 0 0 0 1px $borders_color;
+        box-shadow: inset 0 0 0 1px $border_color;
       }
     }
 
@@ -309,10 +309,8 @@ button.color {
       filter: none;
     }
 
-    @if $variant == 'light' {
-      &.light > overlay {
-        border-color: transparentize(black, .8);
-      }
+    &.light > overlay {
+      border-color: gtkalpha($view_fg_color, 0.1);
     }
   }
 }
@@ -324,7 +322,7 @@ button.outline {
   @extend %button_basic_flat;
 
   @if $contrast == 'high' {
-    box-shadow: inset 0 0 0 1px $borders_color;
+    box-shadow: inset 0 0 0 1px $border_color;
   }
   @else {
     box-shadow: inset 0 0 0 1px gtkalpha(currentColor, .15);

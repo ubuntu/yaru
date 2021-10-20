@@ -25,7 +25,7 @@ window.dialog.message {
     }
 
     .dialog-action-area {
-      border-top: 1px solid $borders_color;
+      border-top: 1px solid $border_color;
       margin: 0;
       border-spacing: 0;
 
@@ -35,7 +35,7 @@ window.dialog.message {
         border-radius: 0;
         border: none;
         background-clip: padding-box;
-        border-left: 1px solid $borders_color;
+        border-left: 1px solid $border_color;
 
         &:first-child {
           border-bottom-left-radius: $window_radius+1;

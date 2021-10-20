@@ -17,9 +17,9 @@ placesview {
 }
 
 filechooser {
-  box-shadow: 0 1px $borders_color;
+  box-shadow: 0 1px $border_color;
 
-  #pathbarbox { border-bottom: 1px solid $bg_color; }
+  #pathbarbox { border-bottom: 1px solid $window_bg_color; }
 
   pathbar > button {
     &.text-button, &.image-button, & {

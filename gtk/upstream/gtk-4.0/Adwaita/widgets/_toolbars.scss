@@ -103,7 +103,6 @@
 .toolbar {
   padding: 0 6px;
   border-spacing: 6px;
-  background-color: $bg_color;
 
   // on OSD
   .osd & { background-color: transparent; }
@@ -115,7 +114,6 @@
     padding: 8px 14px;
     border: none;
     border-radius: $card_radius;
-    background-color: $osd_bg_color;
 
     &.left,
     &.right,
@@ -128,20 +126,32 @@
  * GtkSearchBar *
  ****************/
 
-searchbar > revealer > box {
-  padding: 0px 6px 1px 6px;
-  border-spacing: 6px;
-  @extend %toolbar;
+searchbar {
+  &:not(.inline) > revealer > box {
+    background-color: $headerbar_bg_color;
+    color: $headerbar_fg_color;
+    box-shadow: inset 0 -1px $headerbar_border_color;
 
-  background-color: $dark_fill;
-  box-shadow: inset 0 -1px $borders_color;
+    &:backdrop {
+      background-color: $headerbar_backdrop_color;
+      transition: $backdrop_transition;
+    }
+  }
 
- .close {
-    min-width: 18px;
-    min-height: 18px;
-    padding: 4px;
-    border-radius: 50%;
-    @extend %button_basic_flat;
+  > revealer > box {
+    padding: 0px 6px 1px 6px;
+    border-spacing: 6px;
+    box-shadow: inset 0 -1px $border_color;
+
+    @extend %toolbar;
+
+   .close {
+      min-width: 18px;
+      min-height: 18px;
+      padding: 4px;
+      border-radius: 50%;
+      @extend %button_basic_flat;
+    }
   }
 }
 
@@ -151,7 +161,7 @@ searchbar > revealer > box {
 
 actionbar > revealer > box {
   padding: 1px 6px 0px 6px;
-  box-shadow: inset 0 1px $borders_color;
+  box-shadow: inset 0 1px $border_color;
   @extend %toolbar;
 
   &, > box.start, > box.end {
@@ -167,7 +177,7 @@ infobar {
   > revealer > box {
     padding: 8px 8px 9px 8px;
     border-spacing: 12px;
-    box-shadow: inset 0 -1px $borders_color;
+    box-shadow: inset 0 -1px $border_color;
   }
 
   &.action:hover > revealer > box {
@@ -183,7 +193,7 @@ infobar {
                              (warning, $warning_color),
                              (error, $error_color) {
     &.#{$i_type} > revealer > box {
-      background-color: gtkmix($i_color, $base_color, if($variant == 'dark', 30%, 15%));
+      background-color: gtkmix($i_color, $window_bg_color, 30%);
     }
   }
 

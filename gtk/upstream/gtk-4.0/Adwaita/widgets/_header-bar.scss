@@ -79,7 +79,7 @@ headerbar {
 }
 
 .titlebar:not(headerbar) {
-  separator { background-color: $borders_color; }  // FIXME: use darker border?
+  separator { background-color: $headerbar_border_color; }
 }
 
 /*********************
@@ -101,7 +101,7 @@ windowcontrols {
       padding: 2px;
       transition: $button_transition;
       @if $contrast == 'high' {
-        box-shadow: inset 0 0 0 1px $borders_color;
+        box-shadow: inset 0 0 0 1px $border_color;
       }
     }
 
