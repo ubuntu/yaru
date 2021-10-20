@@ -3,7 +3,7 @@
   background-color: $trough_color;
 
   @if $contrast == "high" {
-    box-shadow: inset 0 0 0 1px $borders_color;
+    box-shadow: inset 0 0 0 1px $border_color;
   }
 }
 
@@ -190,7 +190,7 @@ scale {
     min-width: 0;
 
     > trough {
-      background-image: image($borders_color);
+      background-image: image($border_color);
       background-repeat: no-repeat;
     }
 

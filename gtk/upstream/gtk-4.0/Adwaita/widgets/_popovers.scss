@@ -4,12 +4,10 @@ popover.background {
 
   > arrow,
   > contents {
-    $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
-
     background-color: $popover_bg_color;
     color: $popover_fg_color;
     background-clip: padding-box;
-    border: 1px solid $_popover_border;
+    border: 1px solid $window_border_color;
     box-shadow: 0 1px 2px transparentize(black, 0.7);
   }
 

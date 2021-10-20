@@ -4,11 +4,11 @@ entry {
     min-height: 32px;
     padding-left: 8px;
     padding-right: 8px;
-    border: 1px solid $borders_color;
+    border: 1px solid $border_color;
     border-radius: $button_radius;
     border-spacing: 6px;
-    color: $text_color;
-    background-color: $base_color;
+    color: $view_fg_color;
+    background-color: $view_bg_color;
     background-clip: padding-box;
     transition: all 200ms $ease-out-quad;
     caret-color: currentColor;
@@ -21,8 +21,8 @@ entry {
       }
 
       > block-cursor {
-        color: $base_color;
-        background-color: $text_color;
+        color: $view_bg_color;
+        background-color: $view_fg_color;
       }
     }
 
@@ -42,7 +42,7 @@ entry {
     @each $e_type, $e_color in (error, $error_color),
                                (warning, $warning_color) {
       &.#{$e_type} {
-        color: gtkmix($e_color, $text_color, 70%);
+        color: gtkmix($e_color, $view_fg_color, 70%);
 
         @include focus-ring($focus-state: ':focus-within', $fc: gtkalpha($e_color, 0.5));
 
@@ -100,7 +100,7 @@ entry {
 treeview entry {
   &:focus-within {
     &:dir(rtl), &:dir(ltr) { // specificity bump hack
-      background-color: $base_color;
+      background-color: $view_bg_color;
       transition-property: color, background;
     }
   }
@@ -108,7 +108,7 @@ treeview entry {
   &.flat, & {
     border-radius: 0;
     background-image: none;
-    background-color: $base_color;
+    background-color: $view_bg_color;
 
     &:focus-within { border-color: $accent_bg_color; }
   }

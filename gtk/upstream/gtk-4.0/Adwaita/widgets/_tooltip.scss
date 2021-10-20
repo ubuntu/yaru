@@ -4,7 +4,7 @@ tooltip {
     // see https://bugzilla.gnome.org/show_bug.cgi?id=736155 for details.
     background-color: transparentize(black, 0.2);
     background-clip: padding-box;
-    border: 1px solid $tooltip_borders_color; // this subtle border is meant to
+    border: 1px solid $tooltip_border_color; // this subtle border is meant to
                                               // not make the tooltip melt with
                                               // very dark backgrounds
     color: white;

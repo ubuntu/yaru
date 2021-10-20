@@ -3,7 +3,7 @@
  **********/
 frame,
 .frame {
-  border: 1px solid $borders_color;
+  border: 1px solid $border_color;
 }
 
 frame {
@@ -19,7 +19,7 @@ frame {
  **************/
 
 separator {
-  background: $borders_color;
+  background: $border_color;
   min-width: 1px;
   min-height: 1px;
 

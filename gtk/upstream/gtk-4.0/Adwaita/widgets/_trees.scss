@@ -1,6 +1,6 @@
 // To be used for opaque elements overlaid atop the selected row
-$treeview_selection_opaque: gtkmix($text_color, $base_color, 10%);
-$treeview_borders_opaque: gtkmix($text_color, $base_color, if($contrast == 'high', 40%, 20%));
+$treeview_selection_opaque: gtkmix($view_fg_color, $view_bg_color, 10%);
+$treeview_borders_opaque: gtkmix($view_fg_color, $view_bg_color, if($contrast == 'high', 40%, 20%));
 
 treeview.view {
   border-left-color: $treeview_borders_opaque; // this is actually the tree lines color,
@@ -19,7 +19,7 @@ treeview.view {
 
   &.separator {
     min-height: 2px;
-    color: $borders_color;
+    color: $border_color;
   }
 
   &:drop(active) {
@@ -44,9 +44,9 @@ treeview.view {
 
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
-    color: gtkalpha($text_color, .7);
+    color: gtkalpha($view_fg_color, .7);
 
-    &:hover { color: $text_color; }
+    &:hover { color: $view_fg_color; }
 
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
 
@@ -54,8 +54,6 @@ treeview.view {
   }
 
   &.progressbar { // progress bar in treeviews
-    @if $variant == light { color: $base_color; }
-
     &, &:selected {
       background-color: $accent_bg_color;
       color: $accent_fg_color;
@@ -65,34 +63,34 @@ treeview.view {
   }
 
   &.trough { // progress bar trough in treeviews
-    background-color: gtkalpha($fg_color, 0.1);
+    background-color: gtkalpha($window_fg_color, 0.1);
   }
 
   > header {
     > button {
       @extend %undecorated_button;
       padding: 0 6px;
-      border: 1px solid gtkalpha($text_color, .15);
+      border: 1px solid gtkalpha($view_fg_color, .15);
       border-width: 0 0 1px 1px;
       border-radius: 0;
 
       &:disabled {
-        border-color: $bg_color;
+        border-color: $window_bg_color;
       }
 
       &:last-child { border-right-width: 0; }
 
-      color: gtkalpha($text_color, .4);
+      color: gtkalpha($view_fg_color, .4);
       font-weight: bold;
       box-shadow: none;
 
       &:hover {
-        color: gtkalpha($text_color, .7);
+        color: gtkalpha($view_fg_color, .7);
         box-shadow: none;
       }
 
       &:active {
-        color: $text_color;
+        color: $view_fg_color;
       }
       sort-indicator {
         &.ascending {
@@ -112,12 +110,12 @@ treeview.view {
   header.button.dnd { // for treeview-like derive widgets
     &:active, &:selected, &:hover, & {
       padding: 0 6px;
-      color: $base_color;
+      color: $view_bg_color;
       background-image: none;
       background-color: $accent_bg_color;
       border-style: none;
       border-radius: 0;
-      box-shadow: inset 0 0 0 1px $base_color;
+      box-shadow: inset 0 0 0 1px $view_bg_color;
       transition: none;
     }
   }
@@ -151,7 +149,7 @@ columnview {
 
   // make column separators visible when :show-column-separators is true
   &.column-separators > listview > row > cell {
-    border-left-color: $borders_color;
+    border-left-color: $border_color;
   }
 
   // shrink vertically for .data-table

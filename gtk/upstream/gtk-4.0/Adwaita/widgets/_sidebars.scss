@@ -8,11 +8,11 @@
 
 %sidebar_border {
   &:dir(ltr) {
-    border-right: 1px solid $borders_color;
+    border-right: 1px solid $border_color;
   }
 
   &:dir(rtl) {
-    border-left: 1px solid $borders_color;
+    border-left: 1px solid $border_color;
   }
 }
 
@@ -32,7 +32,7 @@ stacksidebar row {
 }
 
 separator.sidebar {
-  background-color: $borders_color;
+  background-color: $border_color;
 }
 
 /**********************
