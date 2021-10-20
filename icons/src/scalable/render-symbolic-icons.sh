@@ -9,7 +9,7 @@
 ##     -f, --file <name>        Optimize only the icon in icons/src/<context>/<path> and save it under icons/Suru/<context>/<name> (needs --context)
 ##
 ## NOTE:
-## contexts are: actions, apps, camera, categories, devices, emblems, emotes, legacy, mimetypes, multimedia, places, status, ui.
+## contexts are: actions, apps, camera, categories, devices, emblems, emotes, generic-symbols, legacy, mimetypes, multimedia, places, status, ui.
 
 # CLInt GENERATED_CODE: start
 
@@ -57,7 +57,7 @@ fatal() {
   exit 1
 }
 
-contexts=( actions apps camera categories devices emblems emotes legacy mimetypes multimedia places status ui )
+contexts=( actions apps camera categories devices emblems emotes generic-symbols legacy mimetypes multimedia places status ui )
 
 ###################################################
 # CHECKS
