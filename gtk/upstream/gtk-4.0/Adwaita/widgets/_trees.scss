@@ -50,7 +50,7 @@ treeview.view {
 
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
 
-    &:disabled { color: gtkalpha(currentColor, 0.5); }
+    &:disabled { color: gtkalpha(currentColor, $disabled_opacity); }
   }
 
   &.progressbar { // progress bar in treeviews

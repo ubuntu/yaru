@@ -84,7 +84,7 @@ row {
     min-height: 50px;
 
     > .icon:disabled {
-      filter: opacity(.5);
+      filter: opacity($disabled_opacity);
     }
 
     > box.title {
@@ -100,7 +100,7 @@ row {
 
 row.combo {
   image.dropdown-arrow:disabled {
-    filter: opacity(.5);
+    filter: opacity($disabled_opacity);
   }
 
   listview.inline {
@@ -203,7 +203,7 @@ row.expander {
   }
 
   image.expander-row-arrow:disabled {
-    filter: opacity(.5);
+    filter: opacity($disabled_opacity);
   }
 }
 

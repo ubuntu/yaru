@@ -1,6 +1,7 @@
 $border_opacity: if($contrast == 'high', .5, .15);
 $thin_border_opacity: if($contrast == 'high', .25, .05);
 $card_border_opacity: if($contrast == 'high', .5, .18);
+$focus_border_opacity: if($contrast == 'high', 0.8, 0.5);
 $window_outline_opacity: if($contrast == 'high', .3, .1);
 
 // Colors from _defaults.scss
@@ -77,15 +78,17 @@ $shadow_color: transparentize(black, 0.9);
 $drop_target_color: $accent_bg_color;
 
 //special cased widget colors
-$focus_border_color:  gtkalpha($accent_bg_color, 0.5);
+$focus_border_color:  gtkalpha($accent_bg_color, $focus_border_opacity);
 $dim_label_opacity: 0.55;
+$dimmer_opacity: 0.3;
+$disabled_opacity: 0.5;
+$strong_disabled_opacity: 0.3;
 
 // High Contrast color overrides
 @if $contrast == 'high' {
-  //focus rings
-  $focus_border_color: gtkalpha($accent_bg_color, 0.8);
-
   $dim_label_opacity: 0.9;
+  $dimmer_opacity: 0.8;
+  $disabled_opacity: 0.4;
 
   $trough_color: gtkalpha(currentColor, .3);
   $trough_hover_color: gtkalpha(currentColor, .4);

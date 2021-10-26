@@ -15,7 +15,7 @@ link {
     color: $link_color;
   }
 
-  &:disabled { color: gtkalpha(currentColor, 0.5); }
+  &:disabled { color: gtkalpha(currentColor, $disabled_opacity); }
 }
 
 link {

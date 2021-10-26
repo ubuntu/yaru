@@ -3,7 +3,7 @@ $_levelbar_border_radius: 99px;
 
 levelbar {
   &:disabled {
-    filter: opacity(.5);
+    filter: opacity($disabled_opacity);
   }
 
   &.horizontal {

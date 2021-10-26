@@ -36,26 +36,34 @@ entry {
       }
     }
 
-    &:disabled { filter: opacity(.5); }
+    &:disabled { filter: opacity($disabled_opacity); }
 
     // entry error and warning style
     @each $e_type, $e_color in (error, $error_color),
                                (warning, $warning_color) {
       &.#{$e_type} {
-        color: gtkmix($e_color, $view_fg_color, 70%);
-
-        @include focus-ring($focus-state: ':focus-within', $fc: gtkalpha($e_color, 0.5));
+        @include focus-ring($focus-state: ':focus-within', $fc: gtkalpha($e_color, $focus_border_opacity));
 
         > text {
+          color: gtkmix($e_color, $view_fg_color, 70%);
+
           > selection:focus-within { background-color: gtkalpha($e_color, .2); }
 
           > cursor-handle > contents { background-color: $e_color; }
+        }
+
+        > image:active {
+          color: $e_color;
+        }
+
+        > progress > trough > progress {
+          border-color: $e_color;
         }
       }
     }
 
     > image { // icons inside the entry
-      opacity: 0.6;
+      opacity: $dim_label_opacity;
 
       &:hover { opacity: 1; }
 
@@ -66,7 +74,7 @@ entry {
     }
 
     &.password image.caps-lock-indicator {
-      opacity: 0.3;
+      opacity: $dimmer_opacity;
     }
 
     &:drop(active) {

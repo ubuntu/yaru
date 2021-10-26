@@ -14,7 +14,7 @@ popover.background.emoji-picker > contents {
   border-top: 1px solid $border_color;
 }
 
-button.emoji-section.image-button:not(.raised):not(.suggested-action):not(.destructive-action) {
+button.emoji-section.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
   @extend %circular_button;
   @extend %button_basic_flat;
 
