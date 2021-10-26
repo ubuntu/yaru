@@ -45,6 +45,14 @@ window.dialog.message {
         &:last-child {
           border-bottom-right-radius: $window_radius+1;
         }
+
+        &.suggested-action {
+          color: $accent_color;
+        }
+
+        &.destructive-action {
+          color: $destructive_color;
+        }
       }
     }
   }

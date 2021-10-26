@@ -5,6 +5,8 @@ $button_checked_color: gtkalpha(currentColor, .2);
 $button_checked_hover_color: gtkalpha(currentColor, .25);
 $button_checked_active_color: gtkalpha(currentColor, .35);
 
+$opaque_button_default_bg: gtkmix($window_bg_color, $window_fg_color, 85%);
+
 %button,
 button {
   @at-root %button_basic, & {
@@ -48,7 +50,7 @@ button {
     }
 
     &:disabled {
-      filter: opacity(.5);
+      filter: opacity($disabled_opacity);
 
       label {
         filter: none;
@@ -127,7 +129,7 @@ button {
     }
 
     &:checked {
-      background-color: gtkalpha(gtkmix(black, currentColor, 8%), .65);
+      background-color: gtkalpha(gtkmix(black, currentColor, 80%), .65);
 
       &:hover {
         background-color: gtkalpha(gtkmix(black, currentColor, 75%), .65);
@@ -145,7 +147,7 @@ button {
     }
   }
 
-  @at-root %filled_button {
+  @at-root %opaque_button {
     box-shadow: none;
 
     @include focus-ring($outer: true, $offset: 1px);
@@ -174,8 +176,15 @@ button {
     }
   }
 
+  &.opaque {
+    @extend %opaque_button;
+
+    background-color: $opaque_button_default_bg;
+    color: $window_fg_color;
+  }
+
   &.destructive-action {
-    @extend %filled_button;
+    @extend %opaque_button;
 
     color: $destructive_fg_color;
 
@@ -185,7 +194,7 @@ button {
   }
 
   &.suggested-action {
-    @extend %filled_button;
+    @extend %opaque_button;
 
     color: $accent_fg_color;
 
@@ -233,12 +242,8 @@ button {
       }
     }
 
-    &.suggested-action {
-      color: $accent_color;
-    }
-
-    &.destructive-action {
-      color: $destructive_color;
+    &:disabled:not(:checked) {
+      filter: opacity($strong_disabled_opacity);
     }
 
     // Specificity bump
@@ -285,9 +290,46 @@ button {
     label { padding: 0; }
   }
 
+  @at-root %pill_button,
   &.pill {
     padding: 10px 32px;
     border-radius: 9999px;
+  }
+
+  &.card {
+    background-color: $card_bg_color;
+    background-clip: padding-box;
+    font-weight: inherit;
+    box-shadow: none;
+    padding: 0;
+
+    transition: $button_transition;
+
+    &:hover {
+      background-image: image(gtkalpha(currentColor, .03));
+    }
+
+    &.keyboard-activating,
+    &:active {
+      background-image: image(gtkalpha(currentColor, .08));
+    }
+
+    &:checked {
+      background-color: $card_bg_color;
+      background-image: image($view_selected_color);
+
+      &:hover { background-image: image($view_selected_hover_color); }
+
+      &.keyboard-activating,
+      &:active { background-image: image($view_selected_active_color); }
+
+      &.has-open-popup { background-image: image($view_selected_hover_color); }
+    }
+
+    &:drop(active) {
+      color: $drop_target_color;
+      box-shadow: inset 0 0 0 1px $drop_target_color;
+    }
   }
 }
 
@@ -349,6 +391,41 @@ menubutton {
   &.circular > button { @extend %circular_button; }
   &.flat > button { @extend %button_basic_flat; }
   &.outline > button { @extend %outline_button; }
+  &.pill > button { @extend %pill_button; }
+
+  &.suggested-action {
+    background-color: $accent_bg_color;
+    color: $accent_fg_color;
+  }
+
+  &.destructive-action {
+    background-color: $destructive_bg_color;
+    color: $destructive_fg_color;
+  }
+
+  &.opaque {
+    background-color: $opaque_button_default_bg;
+    color: $window_fg_color;
+  }
+
+  &.suggested-action,
+  &.destructive-action,
+  &.opaque {
+    border-radius: $button_radius;
+
+    &.circular, &.pill {
+      border-radius: 9999px;
+    }
+
+    > button {
+      @extend %opaque_button;
+
+      &, &:checked {
+        background-color: transparent;
+        color: inherit;
+      }
+    }
+  }
 
   &.image-button > button {
     min-width: 24px;
@@ -432,16 +509,20 @@ splitbutton {
   @at-root %flat_split_button,
   &.flat {
     > separator {
-      background: gtkalpha(currentColor, .3);
+      background: gtkalpha(currentColor, $dimmer_opacity);
     }
 
     &:hover,
     &:active,
     &:checked {
-      background: gtkalpha(currentColor, .05);
+      background: $view_hover_color;
 
       > separator {
         background: none;
+      }
+
+      @if $contrast == 'high' {
+        box-shadow: inset 0 0 0 1px $thin_border_color;
       }
     }
 
@@ -465,32 +546,33 @@ splitbutton {
   }
 
   &.suggested-action {
-    > button, > menubutton > button {
-      @extend %filled_button;
-
-      color: $accent_fg_color;
-
-      &, &:checked {
-        background-color: $accent_bg_color;
-      }
-    }
+    background-color: $accent_bg_color;
+    color: $accent_fg_color;
   }
 
   &.destructive-action {
-    > button, > menubutton > button {
-      @extend %filled_button;
+    background-color: $destructive_bg_color;
+    color: $destructive_fg_color;
+  }
 
-      color: $destructive_fg_color;
-
-      &, &:checked {
-        background-color: $destructive_bg_color;
-      }
-    }
+  &.opaque {
+    background-color: $opaque_button_default_bg;
+    color: $window_fg_color;
   }
 
   &.suggested-action,
-  &.destructive-action {
-    $_separator_color: gtkalpha(currentColor, if($contrast == 'high', .6, .3));
+  &.destructive-action,
+  &.opaque {
+    > button, > menubutton > button {
+      @extend %opaque_button;
+
+      &, &:checked {
+        color: inherit;
+        background-color: transparent;
+      }
+    }
+
+    $_separator_color: gtkalpha(currentColor, $dimmer_opacity);
     > menubutton > button {
       &:dir(ltr) { box-shadow: inset 1px 0 $_separator_color; }
       &:dir(rtl) { box-shadow: inset -1px 0 $_separator_color; }

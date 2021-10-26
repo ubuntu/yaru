@@ -6,7 +6,7 @@ label {
   }
 
   &:disabled {
-    filter: opacity(0.5);
+    filter: opacity($disabled_opacity);
   }
 
   &.error {

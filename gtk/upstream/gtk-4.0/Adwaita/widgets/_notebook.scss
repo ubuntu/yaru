@@ -132,6 +132,14 @@ notebook {
         outline-color: transparent;
       }
 
+      &:disabled {
+        filter: opacity($disabled_opacity);
+
+        label, button {
+          filter: none;
+        }
+      }
+
       // colors the button like the label, overridden otherwise
       button.flat {
         color: gtkalpha(currentColor, 0.3);

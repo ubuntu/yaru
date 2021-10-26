@@ -85,12 +85,10 @@ statuspage {
       > .icon {
         -gtk-icon-size: 128px;
 
-        @if $contrast == 'normal' {
-          color: gtkalpha(currentColor, 0.5);
-        }
+        color: gtkalpha(currentColor, $dim_label_opacity);
 
         &:disabled {
-          opacity: .5;
+          opacity: $disabled_opacity;
         }
 
         &:not(:last-child) {
@@ -116,6 +114,30 @@ statuspage {
       > .title {
         font-size: 18pt;
       }
+    }
+  }
+}
+
+/* Cards */
+
+.card {
+  background-color: $card_bg_color;
+  background-clip: padding-box;
+  color: $card_fg_color;
+  border: 1px solid $card_border_color;
+  border-radius: $card_radius;
+
+  @include focus-ring($offset: -2px);
+
+  &.activatable {
+    transition: $button_transition;
+
+    &:hover {
+      background-image: image(gtkalpha(currentColor, .03));
+    }
+
+    &:active {
+      background-image: image(gtkalpha(currentColor, .08));
     }
   }
 }

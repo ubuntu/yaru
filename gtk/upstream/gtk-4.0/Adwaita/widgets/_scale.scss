@@ -67,19 +67,11 @@ scale {
   }
 
   &:disabled {
-    filter: opacity(.5);
+    filter: opacity($disabled_opacity);
 
     > trough > slider {
       box-shadow: 0 2px 4px transparent;
-      outline-color: transparentize(black, .8);
-    }
-  }
-
-  @if $contrast == "high" {
-    &, &:hover, &.dragging, &:disabled {
-      > trough > slider {
-        outline-color: transparentize(black, .5);
-      }
+      outline-color: transparentize(black, if($contrast == 'high', .5, .8));
     }
   }
 
@@ -114,12 +106,16 @@ scale {
       // Adjust box-shadow for the 45deg rotation, for 0px 2px we ideally want
       // 1/√2px 1/√2px, round that to 1px 1px
       box-shadow: 1px 1px 4px transparentize(black, .8);
+
+      &:disabled {
+        box-shadow: 1px 1px 4px transparent;
+      }
     }
   }
 
   &.horizontal {
     > marks {
-      color: gtkalpha(currentColor, 0.55);
+      color: gtkalpha(currentColor, $dim_label_opacity);
       &.top    { margin-bottom: $_marks_distance; }
       &.bottom { margin-top: $_marks_distance; }
 
@@ -155,7 +151,7 @@ scale {
 
   &.vertical {
     > marks {
-      color: gtkalpha(currentColor, 0.55);
+      color: gtkalpha(currentColor, $dim_label_opacity);
       &.top    { margin-right: $_marks_distance; }
       &.bottom { margin-left: $_marks_distance; }
 

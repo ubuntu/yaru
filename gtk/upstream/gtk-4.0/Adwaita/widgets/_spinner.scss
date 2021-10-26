@@ -11,6 +11,6 @@ spinner {
     opacity: 1;
     animation: spin 1s linear infinite;
 
-    &:disabled { opacity: 0.5; }
+    &:disabled { opacity: $disabled_opacity; }
   }
 }

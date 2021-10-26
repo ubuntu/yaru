@@ -31,7 +31,6 @@ window.assistant {
   .sidebar {
     padding: $menu-margin;
     background-clip: padding-box;
-    @extend %sidebar_border;
 
     > label {
       padding: 6px 12px;
