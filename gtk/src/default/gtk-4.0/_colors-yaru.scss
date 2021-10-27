@@ -9,8 +9,6 @@ $suggested_color: gtkcolor(suggested_color);
 
 $fill_color: $fill_bg_color;
 $fill_text_color: $fill_fg_color;
-$fill_hover_color: gtkmix($fill_color, currentColor, 90%);
-$fill_active_color: gtkmix($fill_color, black, 80%);
 
 $slider_color: if($variant == 'light', gtkmix(white, $view_bg_color, 80%), #AEA79F);
 $slider_hover_color: if($variant == 'light', white, lighten(#AEA79F, 4%));
