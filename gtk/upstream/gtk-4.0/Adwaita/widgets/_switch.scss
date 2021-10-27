@@ -5,9 +5,9 @@ switch {
 
   transition: $focus_transition;
 
-   background-color: $trough_color;
+  background-color: $trough_color;
 
-   &:hover {
+  &:hover:not(:checked) {
     background-color: $trough_hover_color;
 
     &:active { background-color: $trough_active_color; }
@@ -42,9 +42,9 @@ switch {
     background-color: $fill_color;
 
     &:hover {
-      background-color: $fill_hover_color;
+      background-image: image(gtkalpha(currentColor, .1));
 
-      &:active { background-color: $fill_active_color; }
+      &:active { background-image: image(transparentize(black, .8)); }
     }
 
     > slider {

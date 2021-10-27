@@ -10,6 +10,7 @@
 %scale_highlight {
   border-radius: 99px;
   background-color: $fill_color;
+  color: $fill_text_color;
 }
 
 scale {
@@ -57,7 +58,7 @@ scale {
       background-color: $trough_hover_color;
 
       > highlight {
-        background-color: $fill_hover_color;
+        background-image: image(gtkalpha(currentColor, .1));
       }
 
       > slider {

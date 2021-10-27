@@ -62,8 +62,6 @@ $trough_active_color: gtkalpha(currentColor, .25);
 
 $fill_color: $accent_bg_color;
 $fill_text_color: $accent_fg_color;
-$fill_hover_color: gtkmix($accent_bg_color, currentColor, 90%);
-$fill_active_color: gtkmix($accent_bg_color, black, 80%);
 
 $slider_color: gtkmix(white, $view_bg_color, 80%);
 $slider_hover_color: white;
