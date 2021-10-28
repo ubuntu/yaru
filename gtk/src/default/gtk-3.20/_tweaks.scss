@@ -376,18 +376,6 @@ popover.background {
   }
 }
 
-// Reduce hyper prominent dark theme check switch border in backdrop
-switch {
-  @if $variant=='dark' {
-    &:not(:checked):not(:backdrop):not(:disabled) { background-color: lighten($bg_color, 5%); }
-  }
-  &:backdrop {
-    &:checked:not(:disabled) {
-      &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
-    }
-  }
-}
-
 // Due to the ubuntu orange beeing quiet bright
 // we change the row selection from a full orange
 // row to a soft gray selection
@@ -439,11 +427,69 @@ treeview.view {
   }
 }
 
-@if $variant=='dark' {
-  scale,
-  switch {
-    slider:backdrop {
-      background-image: image(darken($warm_gray, 20%));
+// Mimic GTK4 slider
+
+$_slider_color: if($variant == 'light', darken(white, 1%), $warm_gray);
+$_slider_hover_color: if($variant == 'light', white, lighten($warm_gray, 4%));
+$_slider_disabled_color: if($variant == 'light', $_slider_color, darken($_slider_color, 20%));
+
+$_trough_color: if($variant == 'light', $silk, lighten($inkstone, 5%));
+$_trough_disabled_color: if($variant == 'light', lighten($_trough_color, 10%), $inkstone);
+
+switch {
+  &, &:backdrop {
+    border-color: $_trough_color;
+    background: $_trough_color;
+
+    &:checked {
+      border-color: $checkradio_bg_color;
+      background: $checkradio_bg_color;
+    }
+
+    &:disabled {
+      border-color: $_trough_disabled_color;
+      background: $_trough_disabled_color;
+    }
+  }
+
+  slider {
+    margin: 1px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    background-clip: border-box;
+  }
+
+  &:disabled {
+    &, &:backdrop {
+      &, &:checked {
+        > slider:disabled {
+          border-color: $_slider_disabled_color;
+          background: $_slider_disabled_color;
+        }
+      }
+    }
+  }
+
+  &:not(:disabled) {
+    &, &:backdrop {
+      &, &:checked {
+        > slider {
+          border-color: $_slider_color;
+          background: $_slider_color;
+          box-shadow: 0 2px 4px transparentize(black, .8);
+        }
+      }
+    }
+  }
+
+  &, &:hover {
+    &, &:checked {
+      > slider {
+        border-color: $_slider_hover_color;
+        background: $_slider_hover_color;
+      }
     }
   }
 }
