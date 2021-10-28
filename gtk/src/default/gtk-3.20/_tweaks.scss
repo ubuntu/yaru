@@ -525,9 +525,11 @@ scale:not(.marks-after) {
   }
 
   &:disabled, &:backdrop {
-    slider {
-      background: $_slider_disabled_color;
-      box-shadow: $box-shadow-border;
+    &, &:hover {
+      slider {
+        background: $_slider_disabled_color;
+        box-shadow: $box-shadow-border;
+      }
     }
   }
 }
