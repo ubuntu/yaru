@@ -464,24 +464,20 @@ switch {
     background-clip: border-box;
   }
 
-  &:disabled {
-    &, &:backdrop {
-      &, &:checked {
-        > slider:disabled {
-          border-color: $_slider_disabled_color;
-          background: $_slider_disabled_color;
-        }
-      }
+  &, &:checked {
+    > slider {
+      border-color: $_slider_color;
+      background: $_slider_color;
+      box-shadow: 0 2px 4px transparentize(black, .8);
     }
   }
 
-  &:not(:disabled) {
-    &, &:backdrop {
-      &, &:checked {
-        > slider {
-          border-color: $_slider_color;
-          background: $_slider_color;
-          box-shadow: 0 2px 4px transparentize(black, .8);
+  &:disabled, &:backdrop {
+    &, &:checked {
+      > slider {
+        &:disabled, &:backdrop {
+          border-color: $_slider_disabled_color;
+          background: $_slider_disabled_color;
         }
       }
     }
@@ -493,6 +489,42 @@ switch {
         border-color: $_slider_hover_color;
         background: $_slider_hover_color;
       }
+    }
+  }
+}
+
+scale:not(.marks-after) {
+  $box-shadow: 0 2px 2px transparentize(black, .9);
+  $box-shadow-border: inset 0 0 0 1px transparentize(black, if($variant == 'light', .8, 1));
+  $box-shadow-border-active: inset 0 0 0 1px $progress_border_color;
+
+  slider {
+    border: none;
+    min-height: 20px;
+    min-width: 20px;
+  }
+
+  &:not(:disabled) {
+    slider {
+      background: $_slider_color;
+      box-shadow: $box-shadow-border, $box-shadow;
+    }
+
+    &:hover {
+      slider {
+        background: $_slider_hover_color;
+      }
+    }
+
+    slider:active {
+      box-shadow: $box-shadow-border-active, $box-shadow;
+    }
+  }
+
+  &:disabled, &:backdrop {
+    slider {
+      background: $_slider_disabled_color;
+      box-shadow: $box-shadow-border;
     }
   }
 }
