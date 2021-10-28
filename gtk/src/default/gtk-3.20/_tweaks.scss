@@ -437,6 +437,9 @@ $_trough_color: if($variant == 'light', $silk, lighten($inkstone, 5%));
 $_trough_disabled_color: if($variant == 'light', lighten($_trough_color, 10%), $inkstone);
 
 switch {
+  transition: $button_transition;
+  transition-property: background, border;
+
   &, &:backdrop {
     border-color: $_trough_color;
     background: $_trough_color;
