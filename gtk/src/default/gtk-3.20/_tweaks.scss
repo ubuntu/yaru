@@ -437,6 +437,8 @@ $_trough_color: if($variant == 'light', $silk, lighten($inkstone, 5%));
 $_trough_disabled_color: if($variant == 'light', lighten($_trough_color, 10%), $inkstone);
 
 switch {
+  $box-shadow: 0 2px 2px transparentize(black, .9);
+
   transition: $button_transition;
   transition-property: background, border;
 
@@ -468,7 +470,7 @@ switch {
     > slider {
       border-color: $_slider_color;
       background: $_slider_color;
-      box-shadow: 0 2px 4px transparentize(black, .8);
+      box-shadow: $box-shadow;
     }
   }
 
@@ -488,6 +490,7 @@ switch {
       > slider {
         border-color: $_slider_hover_color;
         background: $_slider_hover_color;
+        box-shadow: $box-shadow;
       }
     }
   }
