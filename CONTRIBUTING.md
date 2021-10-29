@@ -14,7 +14,7 @@ This installation method is to try out the theme while developing it. If you're 
 
 # Needed packages to clone the repository and build the source files
 ```bash
-# apt install libgtk-3-dev git meson sassc
+sudo apt install libgtk-3-dev git meson sassc
 ```
 # Download the repository from github
 ```bash
@@ -46,12 +46,18 @@ If you reboot, select the Yaru session in GDM and you should be all right.
 
 ### Help to install Gtk4 and Libadwaita
 
-If you want to test the Gtk4 theme, you need to install both Gtk4 and Libadwaita.
+If you want to test the Gtk4 theme, you need to install Gtk4 (and eventually Libadwaita).
 
 #### Install Gtk4
 
-**Note:** If you don't want to install Gtk4 from source, just install `libgtk-4-dev` package (Ubuntu > 21.04 only).
+Just install `libgtk-4-dev` package (Ubuntu >= 21.10 only):
 
+```bash
+sudo apt install libgtk-4-dev
+```
+
+<details>
+<summary>Install from source (Ubuntu <= 21.04)</summary>
 Firstly clone the repository:
 ```console
 git clone https://gitlab.gnome.org/GNOME/gtk.git
@@ -70,10 +76,13 @@ cd _build
 ninja
 sudo ninja install
 ```
+</details>
 
 Now you can use the `gtk4-widget-factory` app.
 
 #### Install Libadwaita
+
+_Awaiting an official Ubuntu packaging, you need to install `libadwaita` from source._
 
 Firstly clone the repository:
 ```console
@@ -111,7 +120,7 @@ gsettings set org.gnome.desktop.sound theme-name Yaru
 gsettings set org.gnome.desktop.interface icon-theme Yaru
 ```
 
-The GTK2 and GTK3 files go into `/usr/local/share/themes/Yaru`. The shell files go into `/usr/local/share/gnome-shell/theme/Yaru`. You can edit the `gtk.css` and `gnome-shell.css` files in those folders directly for testing, or you can edit the SCSS files inside the folder you cloned from GitHub.
+The GTK2, GTK3 and GTK4 files go into `/usr/local/share/themes/Yaru`. The shell files go into `/usr/local/share/gnome-shell/theme/Yaru`. You can edit the `gtk.css` and `gnome-shell.css` files in those folders directly for testing, or you can edit the SCSS files inside the folder you cloned from GitHub.
 
 SCSS is the actual "source code" of the theme. This is compiled into the CSS files. Edit the SCSS if you want to contribute your changes back to us. SCSS is simple enough to get the hang of if you already know CSS. You can go through [this SCSS tutorial](http://marksheet.io/sass-scss-less.html) to learn more. After making your edits in the SCSS files, you can run `sudo ninja install` in the `yaru/build` folder. That’ll do all the compiling and installing.
 
