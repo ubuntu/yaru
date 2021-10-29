@@ -4,13 +4,13 @@ To add or modify a symbolic icon, edit its source SVG file, under `src/scalable/
 
 The subfolders **actions**, **apps**, **categories**, **devices**, **emblems**, **mimetypes**, **places**, **status**, containing all the symbolic icons, also represents the gnome icon `contexts`.
 
-To render the image and move it to the proper release folder, `Suru/scalable/<context>`, run the script `render-symbolic-icons.sh`. You will need to install [scour] to run the render script.
+To render the image and move it to the proper release folder, `Yaru/scalable/<context>`, run the script `render-symbolic-icons.sh`. You will need to install [scour] to run the render script.
 
 
 
 ## The render script
 
-The [render-symbolic-icons.sh](render-symbolic-icons.sh) script allows you to render (i.e. optimize) the SVG icon, as well as to move it to the proper destination folder under `Suru/scalable/<context>` directory, ready to be released.
+The [render-symbolic-icons.sh](render-symbolic-icons.sh) script allows you to render (i.e. optimize) the SVG icon, as well as to move it to the proper destination folder under `Yaru/scalable/<context>` directory, ready to be released.
 
 The script can render:
 - a single SVG file, using both `--file` and `--context` flag.

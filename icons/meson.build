@@ -1,6 +1,6 @@
 theme_dir = join_paths(get_option('prefix'), 'share/icons', meson.project_name())
 
-install_subdir('Suru',
+install_subdir('Yaru',
     install_dir: theme_dir,
     strip_directory: true,
     exclude_files: ['index.theme', 'cursor.theme'],
@@ -21,7 +21,7 @@ themes_f = [
 conf_data = configuration_data()
 conf_data.set('ThemeName', meson.project_name())
 foreach theme: themes_f
-  configure_file(input : 'Suru/@0@'.format(theme),
+  configure_file(input : 'Yaru/@0@'.format(theme),
                  output : '@0@'.format(theme),
                  configuration : conf_data,
                  install_dir: theme_dir)
