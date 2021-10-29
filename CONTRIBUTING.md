@@ -167,23 +167,23 @@ The most useful program to use with the inspector is the widget factory though. 
 
 Click the upper-left target button to select an object.
 
-![](./docs/widget-factory1.png)
+![](./.github/readme_pics/widget-factory1.png)
 
 Select something like a button and you’ll see the following.
 
-![](./docs/widget-factory2.png)
+![](./.github/readme_pics/widget-factory2.png)
 
 We don’t really care too much about that stuff so just click the dropdown button with “Miscellaneous” and select CSS nodes. Which shows you:
 
-![](./docs/widget-factory3.png)
+![](./.github/readme_pics/widget-factory3.png)
 
 The element you selected will be highlighted within a list of *all elements* in the window. In the left pane you can see the name of the widget you clicked on (button) and its different CSS classes (.text-button .toggle). The right pane shows all the element’s CSS properties and values and where to find it in the gtk.css file. You can see all supported CSS properties in the inspector, but for something more detailed look at the [Gnome CSS Properties reference](https://developer.gnome.org/gtk3/stable/chap-css-properties.html).
 
 Clicking the CSS tab will take you to a text entry window where you can type in CSS that will be applied.
 
-![](./docs/widget-factory4.png)
+![](./.github/readme_pics/widget-factory4.png)
 
-Putting button `{ background-color: red; }` will make all buttons have a red background. It’s exactly like the inspect element tool in a web browser.
+Putting button `{ background: orange; }` will make all buttons have a orange background. It’s exactly like the inspect element tool in a web browser.
 
 ## Why do we import from package content and not from upstream git repository?
 
