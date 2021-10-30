@@ -22,15 +22,11 @@ It contains:
 
 ![Appgrid](.github/readme_pics/appgrid.png)
 
-
-
 ## Using Yaru on Ubuntu
 
 The Yaru theme suite is installed with Ubuntu 18.10+ by default! No further steps are required to use it.
 
 _Installing from source is not recommended for average usage!_
-
-**⚠ Yaru gnome-shell theme from master require Gnome Shell 40+**
 
 ## Copying or Reusing
 
