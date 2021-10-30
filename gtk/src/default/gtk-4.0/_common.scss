@@ -3,12 +3,12 @@ $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
 $focus_transition: outline-width 200ms $ease-out-quad, outline-offset 200ms $ease-out-quad;
 $button_radius: 4px; // Yaru change: we want everything to be less round
-$card_radius: $button_radius + 6;
+$card_radius: $button_radius + 3; // Yaru change: we want everything to be less round
 $menu_radius: 4px; // Yaru change: we want everything to be less round
 $menu_margin: 6px; //margin around menuitems & sidebar items
 $menu_padding: 12px; //inner menuitem padding
-$window_radius: $button_radius + 6;
-$popover_radius: $button_radius;
+$window_radius: $button_radius + 3; // Yaru change: we want everything to be less round
+$popover_radius: $button_radius + 2; // Yaru change: we want everything to be less round
 
 .background {
   color: $window_fg_color;
