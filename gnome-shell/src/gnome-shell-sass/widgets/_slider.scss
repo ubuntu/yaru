@@ -18,8 +18,8 @@ $slider_size: 15px;
   -barlevel-overdrive-separator-width:1px;
   // slider handler
   -slider-handle-radius: $slider_size * 0.5; // half the size of the size
-  -slider-handle-border-width: 1px;
-  -slider-handle-border-color: if($variant=='light', darken($alt_borders_color, 3%), darken($warm_gray, 70%)); // Yaru: the handle border needs to be darker for the light theme
+  -slider-handle-border-width: if($variant=='light', 1px, 0); // Yaru: remove the border on dark theme
+  -slider-handle-border-color: darken($alt_borders_color, 3%); // Yaru: the handle border needs to be darker for the light theme
 
   color: if($variant=='light', white, $warm_gray); // Yaru: adapt knob to gtk
   &:hover { color: $hover_bg_color; }
