@@ -376,18 +376,6 @@ popover.background {
   }
 }
 
-// Reduce hyper prominent dark theme check switch border in backdrop
-switch {
-  @if $variant=='dark' {
-    &:not(:checked):not(:backdrop):not(:disabled) { background-color: lighten($bg_color, 5%); }
-  }
-  &:backdrop {
-    &:checked:not(:disabled) {
-      &, slider { border-color: if($variant=='light', $checkradio_borders_color, $backdrop_borders_color); }
-    }
-  }
-}
-
 // Due to the ubuntu orange beeing quiet bright
 // we change the row selection from a full orange
 // row to a soft gray selection
@@ -435,6 +423,113 @@ treeview.view {
   &:hover:not(:backdrop):not(:selected) {
     &.progressbar {
       background-color: $progress_bg_color;
+    }
+  }
+}
+
+// Mimic GTK4 slider
+
+$_slider_color: if($variant == 'light', darken(white, 1%), $warm_gray);
+$_slider_hover_color: if($variant == 'light', white, lighten($warm_gray, 4%));
+$_slider_disabled_color: if($variant == 'light', $_slider_color, darken($_slider_color, 20%));
+
+$_trough_color: if($variant == 'light', $silk, lighten($inkstone, 5%));
+$_trough_disabled_color: if($variant == 'light', lighten($_trough_color, 10%), $inkstone);
+
+switch {
+  $box-shadow: 0 2px 2px transparentize(black, .9);
+
+  transition: $button_transition;
+  transition-property: background, border;
+
+  &, &:backdrop {
+    border-color: $_trough_color;
+    background: $_trough_color;
+
+    &:checked {
+      border-color: $checkradio_bg_color;
+      background: $checkradio_bg_color;
+    }
+
+    &:disabled {
+      border-color: $_trough_disabled_color;
+      background: $_trough_disabled_color;
+    }
+  }
+
+  slider {
+    margin: 1px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    background-clip: border-box;
+  }
+
+  &, &:checked {
+    > slider {
+      border-color: $_slider_color;
+      background: $_slider_color;
+      box-shadow: $box-shadow;
+    }
+  }
+
+  &:disabled, &:backdrop {
+    &, &:checked {
+      > slider {
+        &:disabled, &:backdrop {
+          border-color: $_slider_disabled_color;
+          background: $_slider_disabled_color;
+        }
+      }
+    }
+  }
+
+  &, &:hover {
+    &, &:checked {
+      > slider {
+        border-color: $_slider_hover_color;
+        background: $_slider_hover_color;
+        box-shadow: $box-shadow;
+      }
+    }
+  }
+}
+
+scale:not(.marks-after) {
+  $box-shadow: 0 2px 2px transparentize(black, .9);
+  $box-shadow-border: inset 0 0 0 1px transparentize(black, if($variant == 'light', .8, 1));
+  $box-shadow-border-active: inset 0 0 0 1px $progress_border_color;
+
+  slider {
+    border: none;
+    min-height: 20px;
+    min-width: 20px;
+  }
+
+  &:not(:disabled) {
+    slider {
+      background: $_slider_color;
+      box-shadow: $box-shadow-border, $box-shadow;
+    }
+
+    &:hover {
+      slider {
+        background: $_slider_hover_color;
+      }
+    }
+
+    slider:active {
+      box-shadow: $box-shadow-border-active, $box-shadow;
+    }
+  }
+
+  &:disabled, &:backdrop {
+    &, &:hover {
+      slider {
+        background: $_slider_disabled_color;
+        box-shadow: $box-shadow-border;
+      }
     }
   }
 }

@@ -5,7 +5,7 @@ Yaru consists of one project with 4 distinct parts.
 - `gnome-shell` directory is the theme for GNOME Shell. This themes stuff like the calendar widget, the Ubuntu dock, the top panel, the login screen and more. It derives from upstream GNOME Shell theme.
 - `gtk` contains the themes GTK+2 and GTK+3. This specifies how applications like Files, Terminal, Ubuntu Software look. It derives from upstream Adwaita GTK+2 and GTK+3 themes.
 - `sound` contains all sound themes related information, combining both [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix).
-- `suru-icon-theme` contains all the icons, derives from the [Suru icon](https://snwh.org/suru) theme.
+- `icon-theme` contains all the icons, derives from the [Suru icon](https://snwh.org/suru) theme.
 
 
 ## Build and install themes from source
@@ -14,7 +14,7 @@ This installation method is to try out the theme while developing it. If you're 
 
 # Needed packages to clone the repository and build the source files
 ```bash
-# apt install libgtk-3-dev git meson sassc
+sudo apt install libgtk-3-dev git meson sassc
 ```
 # Download the repository from github
 ```bash
@@ -46,12 +46,18 @@ If you reboot, select the Yaru session in GDM and you should be all right.
 
 ### Help to install Gtk4 and Libadwaita
 
-If you want to test the Gtk4 theme, you need to install both Gtk4 and Libadwaita.
+If you want to test the Gtk4 theme, you need to install Gtk4 (and eventually Libadwaita).
 
 #### Install Gtk4
 
-**Note:** If you don't want to install Gtk4 from source, just install `libgtk-4-dev` package (Ubuntu > 21.04 only).
+Just install `libgtk-4-dev` package (Ubuntu >= 21.10 only):
 
+```bash
+sudo apt install libgtk-4-dev
+```
+
+<details>
+<summary>Install from source (Ubuntu <= 21.04)</summary>
 Firstly clone the repository:
 ```console
 git clone https://gitlab.gnome.org/GNOME/gtk.git
@@ -70,10 +76,13 @@ cd _build
 ninja
 sudo ninja install
 ```
+</details>
 
 Now you can use the `gtk4-widget-factory` app.
 
 #### Install Libadwaita
+
+_Awaiting an official Ubuntu packaging, you need to install `libadwaita` from source._
 
 Firstly clone the repository:
 ```console
@@ -111,7 +120,7 @@ gsettings set org.gnome.desktop.sound theme-name Yaru
 gsettings set org.gnome.desktop.interface icon-theme Yaru
 ```
 
-The GTK2 and GTK3 files go into `/usr/local/share/themes/Yaru`. The shell files go into `/usr/local/share/gnome-shell/theme/Yaru`. You can edit the `gtk.css` and `gnome-shell.css` files in those folders directly for testing, or you can edit the SCSS files inside the folder you cloned from GitHub.
+The GTK2, GTK3 and GTK4 files go into `/usr/local/share/themes/Yaru`. The shell files go into `/usr/local/share/gnome-shell/theme/Yaru`. You can edit the `gtk.css` and `gnome-shell.css` files in those folders directly for testing, or you can edit the SCSS files inside the folder you cloned from GitHub.
 
 SCSS is the actual "source code" of the theme. This is compiled into the CSS files. Edit the SCSS if you want to contribute your changes back to us. SCSS is simple enough to get the hang of if you already know CSS. You can go through [this SCSS tutorial](http://marksheet.io/sass-scss-less.html) to learn more. After making your edits in the SCSS files, you can run `sudo ninja install` in the `yaru/build` folder. That’ll do all the compiling and installing.
 
@@ -167,23 +176,23 @@ The most useful program to use with the inspector is the widget factory though. 
 
 Click the upper-left target button to select an object.
 
-![](./docs/widget-factory1.png)
+![](./.github/readme_pics/widget-factory1.png)
 
 Select something like a button and you’ll see the following.
 
-![](./docs/widget-factory2.png)
+![](./.github/readme_pics/widget-factory2.png)
 
 We don’t really care too much about that stuff so just click the dropdown button with “Miscellaneous” and select CSS nodes. Which shows you:
 
-![](./docs/widget-factory3.png)
+![](./.github/readme_pics/widget-factory3.png)
 
 The element you selected will be highlighted within a list of *all elements* in the window. In the left pane you can see the name of the widget you clicked on (button) and its different CSS classes (.text-button .toggle). The right pane shows all the element’s CSS properties and values and where to find it in the gtk.css file. You can see all supported CSS properties in the inspector, but for something more detailed look at the [Gnome CSS Properties reference](https://developer.gnome.org/gtk3/stable/chap-css-properties.html).
 
 Clicking the CSS tab will take you to a text entry window where you can type in CSS that will be applied.
 
-![](./docs/widget-factory4.png)
+![](./.github/readme_pics/widget-factory4.png)
 
-Putting button `{ background-color: red; }` will make all buttons have a red background. It’s exactly like the inspect element tool in a web browser.
+Putting button `{ background: orange; }` will make all buttons have a orange background. It’s exactly like the inspect element tool in a web browser.
 
 ## Why do we import from package content and not from upstream git repository?
 

@@ -6,12 +6,12 @@ spinbutton {
   border-spacing: 0;
 
   /* :not here just to bump specificity above that of the list button styling */
-  > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action),
-  > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action) {
+  > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+  > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
     margin: 0;
     background: none;
     border-style: solid;
-    border-color: $thin_borders_color;
+    border-color: $thin_border_color;
     border-radius: 0;
     box-shadow: none;
     color: inherit;
@@ -23,6 +23,10 @@ spinbutton {
     &:active {
       background-color: $view_active_color;
     }
+
+    &:disabled {
+      filter: none;
+    }
   }
 
   &:not(.vertical) {
@@ -32,8 +36,8 @@ spinbutton {
     }
 
     /* :not here just to bump specificity above that of the list button styling */
-    > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action),
-    > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action) {
+    > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+    > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
       min-height: 16px;
       min-width: 22px;
       padding-bottom: 0;
@@ -55,8 +59,8 @@ spinbutton {
     }
 
     /* :not here just to bump specificity above that of the list button styling */
-    > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action),
-    > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action) {
+    > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+    > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
       &:last-child {
         border-width: 1px 0 0 0;
         border-radius: 0 0 $button_radius $button_radius;

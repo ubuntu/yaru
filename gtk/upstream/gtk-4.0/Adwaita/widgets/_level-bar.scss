@@ -3,7 +3,7 @@ $_levelbar_border_radius: 99px;
 
 levelbar {
   &:disabled {
-    filter: opacity(.5);
+    filter: opacity($disabled_opacity);
   }
 
   &.horizontal {
@@ -86,7 +86,7 @@ levelbar {
         background-color: $trough_color;
 
         @if $contrast == "high" {
-          box-shadow: inset 0 0 0 1px $borders_color;
+          box-shadow: inset 0 0 0 1px $border_color;
         }
       }
     }

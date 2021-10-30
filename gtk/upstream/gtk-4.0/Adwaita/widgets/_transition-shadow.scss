@@ -1,34 +1,25 @@
-$leaflet_dimming: rgba(0, 0, 0, if($variant == 'light', 0.12, 0.24));
-$leaflet_border: rgba(0, 0, 0, if($variant == 'light', 0.05, 0.2));
-$leaflet_outline: rgba(255, 255, 255, if($variant == 'light', 0.2, 0.05));
-
-@if $contrast == 'high' {
-  $leaflet_border: $borders_color;
-  $leaflet_outline: transparent;
-}
-
 @mixin background-shadow($direction) {
   background-image:
     linear-gradient($direction,
-                    rgba(0, 0, 0, if($variant == 'light', 0.05, 0.1)),
-                    rgba(0, 0, 0, if($variant == 'light', 0.01, 0.02)) 40px,
-                    rgba(0, 0, 0, 0) 56px),
+                    gtkalpha($shade_color, 0.7),
+                    gtkalpha($shade_color, 0.14) 40px,
+                    gtkalpha($shade_color, 0) 56px),
     linear-gradient($direction,
-                    rgba(0, 0, 0, if($variant == 'light', 0.03, 0.06)),
-                    rgba(0, 0, 0, if($variant == 'light', 0.01, 0.02)) 7px,
-                    rgba(0, 0, 0, 0) 24px);
+                    gtkalpha($shade_color, 0.4),
+                    gtkalpha($shade_color, 0.14) 7px,
+                    gtkalpha($shade_color, 0) 24px);
 }
 
 flap,
 leaflet {
   > dimming {
-    background: $leaflet_dimming;
+    background: $shade_color;
   }
 
   > border {
     min-width: 1px;
     min-height: 1px;
-    background: $leaflet_border;
+    background: gtkalpha(currentColor, if($contrast == 'high', .5, .1));
   }
 
   > shadow {
@@ -39,11 +30,5 @@ leaflet {
     &.right { @include background-shadow(to left); }
     &.up    { @include background-shadow(to bottom); }
     &.down  { @include background-shadow(to top); }
-  }
-
-  > outline {
-    min-width: 1px;
-    min-height: 1px;
-    background: $leaflet_outline;
   }
 }

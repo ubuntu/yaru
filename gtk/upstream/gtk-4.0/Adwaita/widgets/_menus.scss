@@ -59,7 +59,7 @@ popover.menu {
   }
 
   accelerator {
-    color: gtkalpha(currentColor, 0.55);
+    color: gtkalpha(currentColor, $dim_label_opacity);
 
     &:dir(ltr) { margin-left: $menu_padding; }
     &:dir(rtl) { margin-right: $menu_padding; }
@@ -86,7 +86,8 @@ popover.menu {
   //only menu radios have a border
   radio {
     padding: 1px;
-    border: 1px solid gtkalpha(currentColor, if($contrast == "high", 1, 0.3));
+    border: 1px solid gtkalpha(currentColor, $dimmer_opacity);
+    box-shadow: none;
 
     &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-small-symbolic.symbolic.png")),
                                               -gtk-recolor(url("assets/bullet-small@2-symbolic.symbolic.png"))); }
@@ -127,14 +128,12 @@ popover.menu {
       background: none;
       min-width: 16px;
       min-height: 16px;
-      @if $contrast != "high" {
-        opacity: 0.3; // dim icon
-      }
+      opacity: $dimmer_opacity;
 
       &:hover { background: none; }
 
       &:disabled {
-        filter: opacity(0.5);
+        filter: opacity($disabled_opacity);
       }
 
       &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
@@ -205,7 +204,7 @@ popover.menu {
 
 menubar {
   padding: 0px;
-  box-shadow: inset 0 -1px $borders_color;
+  box-shadow: inset 0 -1px $border_color;
 
   > item {
     min-height: 16px;

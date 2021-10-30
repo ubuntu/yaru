@@ -76,7 +76,7 @@ stage {
 %osd_panel {
   color: $osd_fg_color;
   background-color: $osd_bg_color;
-  //border: 1px solid $osd_outer_borders_color;
+  border: 1px solid $borders_color_dark; // Yaru: add border
   border-radius: $base_border_radius * 2 + 4px;
   padding: $base_padding * 2;
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // Yaru: OSDs need to be visible on dark backgrounds

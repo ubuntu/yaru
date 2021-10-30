@@ -1,11 +1,11 @@
 .view,
 %view {
-  color: $text_color;
-  background-color: $base_color;
+  color: $view_fg_color;
+  background-color: $view_bg_color;
 
   &:disabled {
     color: gtkalpha(currentColor, .5);
-    background-color: gtkmix($bg_color, $base_color, 60%);
+    background-color: gtkmix($window_bg_color, $view_bg_color, 60%);
   }
 
   &:selected {
@@ -25,7 +25,7 @@ textview {
   }
 
   > border {
-    background-color: mix($bg_color, $base_color, 50%);
+    background-color: gtkmix($window_bg_color, $view_bg_color, 50%);
   }
 
   &:drop(active) {

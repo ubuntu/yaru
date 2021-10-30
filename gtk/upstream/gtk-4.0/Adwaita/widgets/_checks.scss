@@ -19,10 +19,10 @@ radio {
   background-color: $trough_color;
 
   @if $contrast == "high" {
-    box-shadow: inset 0 0 0 1px $borders_color;
+    box-shadow: inset 0 0 0 1px $border_color;
   }
 
-  &:hover {
+  &:hover:not(:checked):not(:indeterminate) {
     background-color: $trough_hover_color;
 
     &:active { background-color: $trough_active_color; }
@@ -38,14 +38,14 @@ radio {
     }
 
     &:hover {
-      background-color: $fill_hover_color;
+      background-image: image(gtkalpha(currentColor, .1));
 
-      &:active { background-color: $fill_active_color; }
+      &:active { background-image: image(transparentize(black, .8)); }
     }
   }
 
   &:disabled {
-    filter: opacity(.5);
+    filter: opacity($disabled_opacity);
   }
 }
 

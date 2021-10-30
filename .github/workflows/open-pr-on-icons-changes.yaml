@@ -71,7 +71,7 @@ jobs:
           {
             project: evince symbolics,
             repo: "https://gitlab.gnome.org/GNOME/evince.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: evince-symbolics,
             projectdir: evince,
             src: .,
@@ -170,7 +170,7 @@ jobs:
       ]
     steps:
       # Checkout code
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - name: Download from ${{ matrix.buildenv.repo }}, on branch ${{ matrix.buildenv.upstreambranch }}
         id: checknewupstream
         run: |

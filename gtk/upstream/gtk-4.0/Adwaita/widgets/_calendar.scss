@@ -1,10 +1,10 @@
 calendar {
-  color: $text_color;
+  color: $view_fg_color;
   background-clip: padding-box;
-  border: 1px solid $borders_color;
+  border: 1px solid $border_color;
 
   > header {
-    border-bottom: 1px solid $borders_color;
+    border-bottom: 1px solid $border_color;
 
     > button {
       @extend %button_basic_flat;
@@ -14,7 +14,7 @@ calendar {
 
   > grid {
     > label.today {
-      box-shadow: inset 0px -2px $borders_color;
+      box-shadow: inset 0px -2px $border_color;
 
       &:selected {
         box-shadow: none;
