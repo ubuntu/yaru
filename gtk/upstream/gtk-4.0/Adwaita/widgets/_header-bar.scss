@@ -42,11 +42,15 @@ headerbar {
     }
 
     windowcontrols {
-      button {
+      > button {
         min-height: 22px;
         min-width: 22px;
         margin: 0;
         padding: 4px;
+      }
+
+      > .icon {
+        margin: 7px;
       }
     }
   }
@@ -89,7 +93,7 @@ headerbar {
 windowcontrols {
   border-spacing: 3px;
 
-  button {
+  > button {
     min-width: 24px;
     padding: 5px;
     margin: 0;
@@ -111,6 +115,10 @@ windowcontrols {
 
     &:hover > image { background-color: $button_hover_color; }
     &:hover:active > image { background-color: $button_active_color; }
+  }
+
+  > .icon {
+    margin: 9px;
   }
 }
 

@@ -208,11 +208,12 @@ row.expander {
 }
 
 /*****************
- * Content Lists *
+ * Boxed Lists *
  *****************/
 
+// Deprecated: use .boxed-list instead
 list.content,
-listview.content {
+list.boxed-list {
   background-color: $card_bg_color;
   color: $card_fg_color;
   border: 1px solid $card_border_color;
