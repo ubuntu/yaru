@@ -48,8 +48,10 @@ separator.sidebar {
  **********************/
 
 .navigation-sidebar {
-  background-color: transparent;
-  color: inherit;
+  &, &.view {
+    background-color: transparent;
+    color: inherit;
+  }
 
   padding: $menu-margin 0; //only vertical padding. horizontal row size would clip
 
