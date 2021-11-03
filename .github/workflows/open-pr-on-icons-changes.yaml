@@ -180,7 +180,7 @@ jobs:
           popd
           rm -f ${DEST}
           cd /tmp/${PROJECT_DIR}/${SRC}
-          find . -name "*-symbolic.svg" > list.list
+          find . -name "*-symbolic.svg" | sort > list.list
           cd ~/work/yaru/yaru
           cp /tmp/${PROJECT_DIR}/${SRC}/list.list ${DEST}
           MODIFIED=$(git status --porcelain)
