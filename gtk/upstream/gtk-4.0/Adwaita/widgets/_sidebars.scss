@@ -53,6 +53,11 @@ separator.sidebar {
     color: inherit;
   }
 
+  &.background {
+    background-color: $window_bg_color;
+    color: $window_fg_color;
+  }
+
   padding: $menu-margin 0; //only vertical padding. horizontal row size would clip
 
   > separator {
