@@ -15,3 +15,8 @@
 @import 'apps/evolution';
 @import 'apps/unity7';
 @import 'apps/xfce';
+@import 'apps/mate'; // Have to be included before all other mate files due to vars
+@import 'apps/brisk-menu';
+@import 'apps/caja';
+@import 'apps/mate-multimedia-osd';
+@import 'apps/mate-terminal';
