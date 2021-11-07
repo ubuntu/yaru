@@ -5,7 +5,7 @@ $_base_fg_color:  if($variant=='light', $fg_color, $_panel_fg_color);
 $_backdrop_base_bg_color: lighten(if($variant=='light', $bg_color, $_panel_bg_color), 3%);
 $_backdrop_base_fg_color:  transparentize(if($variant=='light', $fg_color, $_panel_fg_color), 0.3);
 $_base_insensitive_fg_color: lighten($_panel_fg_color, 10%), if($variant=='light', $insensitive_fg_color, lighten($_panel_fg_color, 10%));
-$_base_border_color: if($variant=='light', $borders_color, $headerbar_border_color);
+$_base_border_color: if($variant=='light', $borders_color, lighten(#323030, 8%));
 $_base_hover_color: if($variant=='light', darken($bg_color, 4%), lighten($_panel_bg_color, 4%));
 $_base_active_color: if($variant=='light', darken($bg_color, 4%), darken($_panel_bg_color, 4%));
 $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
