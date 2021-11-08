@@ -175,24 +175,10 @@ statuspage > scrolledwindow > viewport > box {
 window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp,
 preferencespage > scrolledwindow > viewport > clamp {
   margin: 0 12px;
-
-  transition: margin-bottom 200ms ease;
+  margin-bottom: 24px;
 
   > list,
-  > box > preferencesgroup {
-    transition: margin-top 200ms ease;
-  }
-
-  $sizes: ("small": 18px, "medium": 24px, "large": 30px);
-
-  @each $name, $size in $sizes {
-    &.#{$name} {
-      margin-bottom: $size;
-
-      > list,
-      > box > preferencesgroup { margin-top: $size; }
-    }
-  }
+  > box > preferencesgroup { margin-top: 24px; }
 }
 
 preferencesgroup > box {

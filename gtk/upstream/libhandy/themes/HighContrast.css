@@ -83,21 +83,9 @@ statuspage > scrolledwindow > viewport > box > clamp > box > .icon:not(:last-chi
 
 statuspage > scrolledwindow > viewport > box > clamp > box > .title:not(:last-child) { margin-bottom: 12px; }
 
-window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp, preferencespage > scrolledwindow > viewport > clamp { margin: 0 12px; transition: margin-bottom 200ms ease; }
+window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp, preferencespage > scrolledwindow > viewport > clamp { margin: 0 12px; margin-bottom: 24px; }
 
-window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp > list, window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp > box > preferencesgroup, preferencespage > scrolledwindow > viewport > clamp > list, preferencespage > scrolledwindow > viewport > clamp > box > preferencesgroup { transition: margin-top 200ms ease; }
-
-window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.small, preferencespage > scrolledwindow > viewport > clamp.small { margin-bottom: 18px; }
-
-window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.small > list, window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.small > box > preferencesgroup, preferencespage > scrolledwindow > viewport > clamp.small > list, preferencespage > scrolledwindow > viewport > clamp.small > box > preferencesgroup { margin-top: 18px; }
-
-window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.medium, preferencespage > scrolledwindow > viewport > clamp.medium { margin-bottom: 24px; }
-
-window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.medium > list, window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.medium > box > preferencesgroup, preferencespage > scrolledwindow > viewport > clamp.medium > list, preferencespage > scrolledwindow > viewport > clamp.medium > box > preferencesgroup { margin-top: 24px; }
-
-window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.large, preferencespage > scrolledwindow > viewport > clamp.large { margin-bottom: 30px; }
-
-window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.large > list, window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp.large > box > preferencesgroup, preferencespage > scrolledwindow > viewport > clamp.large > list, preferencespage > scrolledwindow > viewport > clamp.large > box > preferencesgroup { margin-top: 30px; }
+window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp > list, window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp > box > preferencesgroup, preferencespage > scrolledwindow > viewport > clamp > list, preferencespage > scrolledwindow > viewport > clamp > box > preferencesgroup { margin-top: 24px; }
 
 preferencesgroup > box > label:not(:first-child) { margin-top: 6px; }
 
