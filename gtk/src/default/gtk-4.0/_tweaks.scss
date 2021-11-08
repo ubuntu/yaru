@@ -23,19 +23,19 @@ windowcontrols {
         
         &.close {
             > image {
-                color: $light_2;
-                background: $orange_5;
+                color: $accent_fg_color;
+                background: $accent_bg_color;
 
                 &:hover {
-                    background: lighten($orange_5, 5%);
+                    background: gtkmix($accent_bg_color, "#fff", 90%);
                 }
 
                 &:active {
-                    background: darken($orange_5, 5%);
+                    background: gtkmix($accent_bg_color, "#000", 90%);
                 }
 
                 &:backdrop {
-                    background: desaturate($orange_5, 100%);
+                    filter: saturate(0);
                 }
             }
         }
