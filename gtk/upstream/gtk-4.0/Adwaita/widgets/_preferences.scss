@@ -1,20 +1,7 @@
 window.preferences > contents > leaflet > box > stack > stack > scrolledwindow > viewport > clamp > list,
 preferencespage > scrolledwindow > viewport > clamp > box {
-  margin: 0 12px;
-
-  transition: margin-bottom 200ms ease,
-              margin-top 200ms ease,
-              border-spacing 200ms ease;
-
-  $sizes: ("small": 18px, "medium": 24px, "large": 30px);
-
-  @each $name, $size in $sizes {
-    &.#{$name} {
-      margin-top: $size;
-      margin-bottom: $size;
-      border-spacing: $size;
-    }
-  }
+  margin: 24px 12px;
+  border-spacing: 24px;
 }
 
 preferencesgroup > box {
