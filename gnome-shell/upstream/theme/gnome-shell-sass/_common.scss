@@ -116,7 +116,7 @@ stage {
   &:focus { @include button(focus);}
   &:hover { @include button(hover);}
   &:insensitive { @include button(insensitive);}
-  &:active { @include button(active);}
+  &:active, &:checked { @include button(active);}
 }
 
 // buttons in dialogs
