@@ -700,3 +700,12 @@ UnityPanelWidget, .unity-panel {
 }
 
 SheetStyleDialog.unity-force-quit { background-color: $bg_color; }
+
+/********
+* Guake *
+*********/
+
+// Fix bugged transparent headerbar background
+window#guake-terminal notebook header {
+    background: $bg-color;
+}
