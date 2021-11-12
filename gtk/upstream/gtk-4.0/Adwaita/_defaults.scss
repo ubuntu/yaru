@@ -39,9 +39,9 @@
 @define-color headerbar_shade_color #{if($variant == 'light', transparentize(black, .93), transparentize(black, .64))};
 
 // Cards, boxed lists
-@define-color card_bg_color #{if($variant == 'light', #ffffff, transparentize(white, .945))};
+@define-color card_bg_color #{if($variant == 'light', #ffffff, transparentize(white, .92))};
 @define-color card_fg_color #{if($variant == 'light', transparentize(black, .2), white)};
-@define-color card_border_color #{currentColor};
+@define-color card_shade_color #{if($variant == 'light', transparentize(black, .93), transparentize(black, .64))};
 
 // Popovers
 @define-color popover_bg_color #{if($variant == 'light', #ffffff, #383838)};

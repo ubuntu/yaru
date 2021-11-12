@@ -135,7 +135,7 @@ row.combo {
 }
 
 %boxed_list_row {
-  @include focus-ring($offset: -1px);
+  @include focus-ring($offset: -2px);
 
   transition: 200ms $ease-out-quad;
   border-bottom: 1px solid $border_color;
@@ -167,7 +167,7 @@ row.expander {
   }
 
   list.nested {
-    background-color: gtkalpha(currentColor, .03);
+    background-color: gtkalpha($card_shade_color, .5);
     color: inherit;
   }
 
@@ -214,10 +214,7 @@ row.expander {
 // Deprecated: use .boxed-list instead
 list.content,
 list.boxed-list {
-  background-color: $card_bg_color;
-  color: $card_fg_color;
-  border: 1px solid $card_border_color;
-  border-radius: $card_radius;
+  @extend %card;
 
   > row {
     // Regular rows and expander header rows background
@@ -232,8 +229,8 @@ list.boxed-list {
     // Rounded top
     &:first-child {
       &, &.expander row.header {
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        border-top-left-radius: $card_radius;
+        border-top-right-radius: $card_radius;
       }
     }
 
@@ -244,8 +241,8 @@ list.boxed-list {
       &.expander:not(:checked) row.header,
       &.expander:checked list.nested,
       &.expander:checked list.nested > row:last-child {
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: $card_radius;
+        border-bottom-right-radius: $card_radius;
         border-bottom-width: 0;
       }
     }
