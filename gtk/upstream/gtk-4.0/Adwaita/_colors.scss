@@ -1,6 +1,5 @@
 $border_opacity: if($contrast == 'high', .5, .15);
 $thin_border_opacity: if($contrast == 'high', .25, .05);
-$card_border_opacity: if($contrast == 'high', .5, .18);
 $focus_border_opacity: if($contrast == 'high', 0.8, 0.5);
 $window_outline_opacity: if($contrast == 'high', .3, .1);
 
@@ -32,7 +31,7 @@ $headerbar_shade_color: gtkcolor(headerbar_shade_color);
 
 $card_bg_color: gtkcolor(card_bg_color);
 $card_fg_color: gtkcolor(card_fg_color);
-$card_border_color: gtkalpha(gtkcolor(card_border_color), $card_border_opacity);
+$card_shade_color: gtkcolor(card_shade_color);
 
 $popover_bg_color: gtkcolor(popover_bg_color);
 $popover_fg_color: gtkcolor(popover_fg_color);

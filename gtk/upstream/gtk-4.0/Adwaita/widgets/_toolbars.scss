@@ -78,39 +78,39 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
+}
 
-  // Reset styles for popovers
-  popover {
-    button:not(.flat):not(.outline):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
-      &.arrow-button,
-      &.image-button,
-      &.image-text-button {
-        @extend %button_basic_raised;
-      }
+// Reset styles for popovers inside toolbars
+popover {
+  button:not(.flat):not(.outline):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
+    &.arrow-button,
+    &.image-button,
+    &.image-text-button {
+      @extend %button_basic_raised;
     }
+  }
 
-    menubutton:not(.flat):not(.outline):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
-      &.image-button > button {
-        @extend %button_basic_raised;
-      }
+  menubutton:not(.flat):not(.outline):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
+    &.image-button > button {
+      @extend %button_basic_raised;
     }
+  }
 
-    entry,
-    spinbutton,
-    splitbutton,
-    separator:not(.sidebar),
-    button,
-    menubutton,
-    scalebutton,
-    switch {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
+  entry,
+  spinbutton,
+  splitbutton,
+  separator:not(.sidebar),
+  button,
+  menubutton,
+  scalebutton,
+  switch {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 
-    &.menu separator:not(.sidebar) {
-      margin-top: 6px;
-      margin-bottom: 6px;
-    }
+  &.menu separator:not(.sidebar) {
+    margin-top: 6px;
+    margin-bottom: 6px;
   }
 }
 
