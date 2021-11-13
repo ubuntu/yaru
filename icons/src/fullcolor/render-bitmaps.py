@@ -37,6 +37,7 @@ SOURCES = (
     "status",
     "wip",
 )
+VARIANTS = ['default', 'mate']
 
 # DPI multipliers to render at
 DPIS = [1, 2]
@@ -238,6 +239,7 @@ parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
 parser.add_argument(
     '--variant',
     type=str,
+    choices=VARIANTS,
     default='default',
     help='Variant name to render. If not given, render the default variant'
 )
