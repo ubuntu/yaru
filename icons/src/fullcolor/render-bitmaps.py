@@ -25,7 +25,6 @@ import argparse
 
 
 OPTIPNG = "optipng"
-MAINDIR = "../../Yaru"
 SOURCES = (
     "actions",
     "apps",
@@ -43,7 +42,7 @@ SOURCES = (
 DPIS = [1, 2]
 
 
-def main(args, SRC):
+def main(args, SRC, DEST):
     def optimize_png(png_file):
         if os.path.exists(OPTIPNG):
             process = subprocess.Popen([OPTIPNG, "-quiet", "-o7", png_file])
@@ -184,7 +183,7 @@ def main(args, SRC):
                         if dpi_factor != 1:
                             size_str += "@%sx" % dpi_factor
 
-                        dir = os.path.join(MAINDIR, size_str, self.context)
+                        dir = os.path.join(DEST, size_str, self.context)
                         outfile = os.path.join(dir, self.icon_name + ".png")
                         if not os.path.exists(dir):
                             os.makedirs(dir)
@@ -209,8 +208,8 @@ def main(args, SRC):
 
     if not args.svg:
         print("Rendering all SVGs in", SRC)
-        if not os.path.exists(MAINDIR):
-            os.mkdir(MAINDIR)
+        if not os.path.exists(DEST):
+            os.mkdir(DEST)
 
         for file in os.listdir(SRC):
             if file[-4:] == ".svg":
@@ -237,6 +236,12 @@ def main(args, SRC):
 parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
 
 parser.add_argument(
+    '--variant',
+    type=str,
+    default='default',
+    help='Variant name to render. If not given, render the default variant'
+)
+parser.add_argument(
     "svg",
     type=str,
     nargs="?",
@@ -254,5 +259,6 @@ parser.add_argument(
 args = parser.parse_args()
 
 for source in SOURCES:
-    SRC = os.path.join(".", source)
-    main(args, SRC)
+    SRC = os.path.join(".", args.variant, source)
+    DEST = "../../Yaru" if args.variant == 'default' else "../../Yaru-" + args.variant
+    main(args, SRC, DEST)
