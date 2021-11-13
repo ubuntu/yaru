@@ -106,6 +106,7 @@ do
 							ln -sf $line
 						elif [ $VARIANT = "default" ]; then # But the default variant must have all icons availables
 							echo error $line symlink is invalid in $SIZE"/"$CONTEXT
+							exit 1
 						fi
 					else
 						dlog "[match only mode] skipping $line"
@@ -135,8 +136,14 @@ do
 		while read line;
 		do
 			if [[ $line == *"$needle"* ]]; then
-				echo linking $line in $SIZE"/"$CONTEXT
-				ln -sf $line
+				SOURCE_FILE=${line%% *}
+				if [ -f "$SOURCE_FILE" ]; then
+					echo linking $line in $SIZE"/"$CONTEXT
+					ln -sf $line
+				else [ $VARIANT = "default" ]; then
+					echo error $line symlink is invalid in $SIZE"/"$CONTEXT
+					exit 1
+				fi
 			else
 				dlog "[match only mode] line $line does not match with $needle"
 			fi
