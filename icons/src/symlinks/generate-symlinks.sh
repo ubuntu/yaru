@@ -138,10 +138,10 @@ do
 			if [[ $line == *"$needle"* ]]; then
 				SOURCE_FILE=${line%% *}
 				if [ -f "$SOURCE_FILE" ]; then
-					echo linking $line in $SIZE"/"$CONTEXT
+					echo linking $line in "scalable/"$CONTEXT
 					ln -sf $line
 				else
-					echo error $line symlink is invalid in $SIZE"/"$CONTEXT
+					echo error $line symlink is invalid in "scalable/"$CONTEXT
 					exit 1
 				fi
 			else
