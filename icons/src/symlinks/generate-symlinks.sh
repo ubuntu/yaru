@@ -140,7 +140,7 @@ do
 				if [ -f "$SOURCE_FILE" ]; then
 					echo linking $line in $SIZE"/"$CONTEXT
 					ln -sf $line
-				else [ $VARIANT = "default" ]; then
+				else
 					echo error $line symlink is invalid in $SIZE"/"$CONTEXT
 					exit 1
 				fi
