@@ -74,39 +74,49 @@ function dlog() {
 }
 
 DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-THEME="Yaru"
 
-# echo $DIR
-# Icon sizes and contextthe s
+# Icon sizes, contexts and variants
 CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "status" "emblems" "ui")
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
+VARIANTS=("default" "mate")
 
 # Fullcolor icons
 echo "Generating links for fullcolor icons..."
-# contexts for loop
-for CONTEXT in "${CONTEXTS[@]}"
+# variants for loop
+for VARIANT in "${VARIANTS[@]}"
 do
-	dlog " -- "${CONTEXT}
-	# Sizes Loop
-	for SIZE in "${SIZES[@]}"
+	[[ $VARIANT = "default" ]] && THEME="Yaru" || THEME="Yaru-${VARIANT}"
+	# contexts for loop
+	for CONTEXT in "${CONTEXTS[@]}"
 	do
-		LIST="$DIR/fullcolor/$CONTEXT.list"
-		# Check if directory exists
-		if [ -d "$DIR/../../$THEME/$SIZE/$CONTEXT" ]; then
-			cd $DIR/../../$THEME/$SIZE/$CONTEXT
-			while read line;
-			do
-				if [[ $line == *"$needle"* ]]; then
-					echo linking $line in $SIZE"/"$CONTEXT
-					ln -sf $line
-				else
-					dlog "[match only mode] skipping $line"
-				fi
-			done < $LIST
-			cd $DIR/../../$THEME
-		else
-			dlog "  -- skipping "$SIZE"/"$CONTEXT
-		fi
+		dlog " -- "${CONTEXT}
+		# Sizes Loop
+		for SIZE in "${SIZES[@]}"
+		do
+			LIST="$DIR/fullcolor/$CONTEXT.list"
+			# Check if directory exists
+			if [ -d "$DIR/../../$THEME/$SIZE/$CONTEXT" ]; then
+				cd $DIR/../../$THEME/$SIZE/$CONTEXT
+				while read line;
+				do
+					if [[ $line == *"$needle"* ]]; then
+						SOURCE_FILE=${line%% *}
+						if [ -f "$SOURCE_FILE" ]; then # Check if source file exist because variants can have missing ones
+							echo linking $line in $SIZE"/"$CONTEXT
+							ln -sf $line
+						elif [ $VARIANT = "default" ]; then # But the default variant must have all icons availables
+							echo error $line symlink is invalid in $SIZE"/"$CONTEXT
+							exit 1
+						fi
+					else
+						dlog "[match only mode] skipping $line"
+					fi
+				done < $LIST
+				cd $DIR/../../$THEME
+			else
+				dlog "  -- skipping "$SIZE"/"$CONTEXT
+			fi
+		done
 	done
 done
 echo "Done."
@@ -114,6 +124,7 @@ echo "Done."
 
 # Symbolic icons
 echo "Generating links for symbolic icons..."
+THEME="Yaru" # Symbolic icons doesn't have variant
 # contexts for loop
 for CONTEXT in "${CONTEXTS[@]}"
 do
@@ -125,8 +136,14 @@ do
 		while read line;
 		do
 			if [[ $line == *"$needle"* ]]; then
-				echo linking $line in $SIZE"/"$CONTEXT
-				ln -sf $line
+				SOURCE_FILE=${line%% *}
+				if [ -f "$SOURCE_FILE" ]; then
+					echo linking $line in "scalable/"$CONTEXT
+					ln -sf $line
+				else
+					echo error $line symlink is invalid in "scalable/"$CONTEXT
+					exit 1
+				fi
 			else
 				dlog "[match only mode] line $line does not match with $needle"
 			fi

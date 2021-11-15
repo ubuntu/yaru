@@ -8,7 +8,8 @@ NOTE: at the moment the render scripts do not work with the snap version of Inks
 
 **[render-bitmaps.py](./render-bitmaps.py) - the render script**
  - This script will render PNG icons, provided there are source changes, in both @1x and @2x (HiDPi) resolutions from the source files.
- - You can render a single icon by passing the icon name to this script: "./render-bitmaps.py <icon-name>"
+ - You can render a single icon by passing the icon name to this script: `./render-bitmaps.py <icon-name>`
+ - You can also use the optional `--variant` argument to render different variant of the icon. Ex: `./render-bitmaps.py <icon-name> --variant mate` will render the icon located in `mate` folder. By default, it renders the version located in the `default` folder.
 
 ### Templates
 
