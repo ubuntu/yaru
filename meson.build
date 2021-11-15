@@ -17,5 +17,3 @@ foreach component: components
   subdir(component)
 
 endforeach
-
-subdir('communitheme-compat')

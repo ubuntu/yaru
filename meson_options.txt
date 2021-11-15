@@ -6,7 +6,6 @@ option('gtksourceview', type: 'boolean', value: true, description:'build gtksour
 option('metacity', type: 'boolean', value: true, description:'build metacity component')
 option('sounds', type: 'boolean', value: true, description:'build sounds component')
 option('sessions', type: 'boolean', value: true, description:'build sessions component')
-option('communitheme_compat', type: 'boolean', value: false, description:'build communitheme-compact')
 
 option('default', type: 'boolean', value: true, description:'build Yaru default flavour')
 option('mate', type: 'boolean', value: false, description:'build Yaru mate flavour')

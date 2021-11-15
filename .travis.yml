@@ -1,7 +1,0 @@
-sudo: required
-language: bash
-services:
-  - docker
-
-script:
-  - build-helpers/prepare-build-snap
