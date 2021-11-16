@@ -1,9 +1,9 @@
 $button_color: gtkalpha(currentColor, .1);
 $button_hover_color: gtkalpha(currentColor, .15);
-$button_active_color: gtkalpha(currentColor, .25);
-$button_checked_color: gtkalpha(currentColor, .2);
-$button_checked_hover_color: gtkalpha(currentColor, .25);
-$button_checked_active_color: gtkalpha(currentColor, .35);
+$button_active_color: gtkalpha(currentColor, .3);
+$button_checked_color: gtkalpha(currentColor, .3);
+$button_checked_hover_color: gtkalpha(currentColor, .35);
+$button_checked_active_color: gtkalpha(currentColor, .4);
 
 $opaque_button_default_bg: gtkmix($window_bg_color, $window_fg_color, 85%);
 
@@ -356,29 +356,6 @@ button.color {
   }
 }
 
-/* list buttons */
-/* tone down as per new designs, see issue #1473 */
-%outline_button,
-button.outline {
-  @extend %button_basic_flat;
-
-  @if $contrast == 'high' {
-    box-shadow: inset 0 0 0 1px $border_color;
-  }
-  @else {
-    box-shadow: inset 0 0 0 1px gtkalpha(currentColor, .15);
-
-    &:hover, &:active, &:checked {
-      box-shadow: none;
-    }
-  }
-
-  // Specificity bump
-  &:drop(active) {
-    @extend %button_basic_drop_active;
-  }
-}
-
 menubutton {
   &.osd {
     background: none;
@@ -389,7 +366,6 @@ menubutton {
 
   &.circular > button { @extend %circular_button; }
   &.flat > button { @extend %button_basic_flat; }
-  &.outline > button { @extend %outline_button; }
   &.pill > button { @extend %pill_button; }
 
   &.suggested-action {
@@ -534,13 +510,6 @@ splitbutton {
       @extend %button_basic_flat;
 
       border-radius: $button_radius;
-    }
-  }
-
-  &.outline {
-    > button,
-    > menubutton > button {
-      @extend %outline_button;
     }
   }
 

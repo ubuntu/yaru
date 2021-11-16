@@ -135,7 +135,7 @@ row.combo {
 }
 
 %boxed_list_row {
-  @include focus-ring($offset: -2px);
+  @include focus-ring($offset: -1px);
 
   transition: 200ms $ease-out-quad;
   border-bottom: 1px solid $border_color;
