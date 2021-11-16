@@ -11,6 +11,16 @@ viewswitcher {
     font-size: 1rem;
     font-weight: inherit;
 
+    @if $contrast == 'high' {
+      &:hover,
+      &.keyboard-activating,
+      &:active,
+      &:checked {
+        box-shadow: inset  1px 0 $border_color,
+                    inset -1px 0 $border_color;
+      }
+    }
+
     > stack > box {
       &.narrow {
         font-size: 0.75rem;

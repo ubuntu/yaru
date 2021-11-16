@@ -1,6 +1,8 @@
-popover.background {
-  background-color: transparent;
-  font: initial; // Decouple the font of popovers from their entry/textview
+popover {
+  &.background {
+    background-color: transparent;
+    font: initial;
+  }
 
   > arrow,
   > contents {
@@ -8,7 +10,8 @@ popover.background {
     color: $popover_fg_color;
     background-clip: padding-box;
     border: 1px solid $window_border_color;
-    box-shadow: 0 1px 2px transparentize(black, 0.7);
+    box-shadow: 0 1px 3px 1px transparentize(black, .93),
+                0 2px 6px 2px transparentize(black, .97);
   }
 
   > contents {
@@ -23,7 +26,7 @@ popover.background {
     }
   }
 
-  .osd &.background,
+  .osd &,
   &.touch-selection,
   &.magnifier {
     background-color: transparent;

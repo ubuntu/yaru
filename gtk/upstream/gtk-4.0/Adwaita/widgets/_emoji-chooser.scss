@@ -1,4 +1,4 @@
-popover.background.emoji-picker > contents {
+popover.emoji-picker > contents {
   padding: 0;
 }
 
@@ -39,7 +39,7 @@ popover.emoji-picker emoji {
 
 // Emoji completion popover
 
-popover.background.emoji-completion > contents {
+popover.emoji-completion > contents {
   padding: $menu_margin;
   padding-bottom: $menu_margin - 2px;
 }

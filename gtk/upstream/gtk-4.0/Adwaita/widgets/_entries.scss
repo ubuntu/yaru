@@ -2,16 +2,18 @@
 entry {
   %entry_basic, & {
     min-height: 32px;
-    padding-left: 8px;
-    padding-right: 8px;
-    border: 1px solid $border_color;
+    padding-left: 9px;
+    padding-right: 9px;
     border-radius: $button_radius;
     border-spacing: 6px;
-    color: $view_fg_color;
-    background-color: $view_bg_color;
+    background-color: $button_color;
     background-clip: padding-box;
     transition: all 200ms $ease-out-quad;
     caret-color: currentColor;
+
+    @if $contrast == 'high' {
+      box-shadow: inset 0 0 0 1px $border_color;
+    }
 
     @include focus-ring($focus-state: ':focus-within');
 
@@ -31,7 +33,7 @@ entry {
         min-height: 0;
         padding: 2px;
         background-color: transparent;
-        border-color: transparent;
+        box-shadow: none;
         border-radius: 0;
       }
     }
@@ -43,6 +45,8 @@ entry {
                                (warning, $warning_color) {
       &.#{$e_type} {
         @include focus-ring($focus-state: ':focus-within', $fc: gtkalpha($e_color, $focus_border_opacity));
+
+        color: gtkmix($e_color, $view_fg_color, 70%);
 
         > text {
           color: gtkmix($e_color, $view_fg_color, 70%);
@@ -63,7 +67,7 @@ entry {
     }
 
     > image { // icons inside the entry
-      opacity: $dim_label_opacity;
+      opacity: if($contrast == 'high', .9, .75);
 
       &:hover { opacity: 1; }
 
@@ -83,15 +87,10 @@ entry {
         box-shadow: inset 0 0 0 1px $drop_target_color;
       }
     }
-
-    .osd & {
-      color: $osd_text_color;
-      background-color: transparentize(black, 0.5);
-    }
   }
 
   > progress {
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 
     > trough > progress {
       background-color: transparent;

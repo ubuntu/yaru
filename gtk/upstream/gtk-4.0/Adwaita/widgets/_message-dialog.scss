@@ -18,11 +18,9 @@ window.dialog.message {
   }
 
   &.csd {
-    &.background {
-      // bigger radius for better antialiasing
-      border-bottom-left-radius: $window_radius+1;
-      border-bottom-right-radius: $window_radius+1;
-    }
+    // bigger radius for better antialiasing
+    border-bottom-left-radius: $window_radius+1;
+    border-bottom-right-radius: $window_radius+1;
 
     .dialog-action-area {
       border-top: 1px solid $border_color;

@@ -26,12 +26,19 @@ popover.menu {
     padding: $menu_padding $menu_padding 6px;
 
     button.circular.image-button.model {
-      @extend %outline_button;
+      @extend %button_basic_flat;
 
       outline: none;
       padding: 11px;
+
+      box-shadow: inset 0 0 0 1px $border_color;
+
       &:selected {
-        background-color: $view_selected_color;
+        background-color: $view_selected_hover_color;
+
+        @if $contrast != 'high' {
+          box-shadow: none;
+        }
 
         &:active {
           background-color: $view_selected_active_color;
@@ -40,7 +47,7 @@ popover.menu {
     }
   }
 
-  &.background > contents {
+  > contents {
     padding: 0;
 
     &, > scrolledwindow > viewport {
@@ -50,11 +57,11 @@ popover.menu {
     }
   }
 
-  &.background separator {
+  separator {
     margin: 6px 0;
   }
 
-  &.background list separator {
+  list separator {
     margin: 0;
   }
 
@@ -220,7 +227,7 @@ menubar {
       padding: 0 0 4px 0;
     }
 
-    popover.menu.background popover.menu.background > contents {
+    popover.menu popover.menu > contents {
       margin: 0;
       border-radius: $popover_radius; //including top
     }
