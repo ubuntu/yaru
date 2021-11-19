@@ -8,7 +8,8 @@ option('sounds', type: 'boolean', value: true, description:'build sounds compone
 option('sessions', type: 'boolean', value: true, description:'build sessions component')
 
 option('default', type: 'boolean', value: true, description:'build Yaru default flavour')
-option('mate', type: 'boolean', value: false, description:'build Yaru mate flavour')
 option('dark', type: 'boolean', value: true, description:'build Yaru dark flavour')
+option('mate', type: 'boolean', value: false, description:'build Yaru mate flavour')
+option('mate-dark', type: 'boolean', value: false, description:'build Yaru mate-dark flavour')
 option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
 option('xfwm4', type: 'boolean', value: false, description:'build Yaru with xfwm4 assets')

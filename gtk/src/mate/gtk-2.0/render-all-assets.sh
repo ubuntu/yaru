@@ -1,0 +1,1 @@
+../../default/gtk-2.0/render-all-assets.sh
