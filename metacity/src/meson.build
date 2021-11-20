@@ -30,7 +30,7 @@ foreach flavour: flavours
     conf_data.set('border_unfocused', '#b8b8b8')
     conf_data.set('title_focused', '#3d3d3d')
     conf_data.set('title_unfocused', '#626262')
-  if flavour == 'mate-dark'
+  elif flavour == 'mate-dark'
     conf_data.set('titlebar', '#222222')
     conf_data.set('titlebar_unfocused', '#2c2c2c')
     conf_data.set('titlebar_border_focused', '#181818')
