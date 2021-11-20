@@ -8,7 +8,12 @@ foreach flavour: flavours
     conf_data = configuration_data()
     conf_data.set('ThemeName', meson.project_name())
     conf_data.set('FlavourThemeName', theme_name)
-    conf_data.set('PrimaryAccent', '#E95420')
+
+    if flavour == 'default' or flavour == 'dark'
+      conf_data.set('PrimaryAccent', '#E95420') # Ubunru Orange
+    elif flavour == 'mate' or flavour == 'mate-dark'
+      conf_data.set('PrimaryAccent', '#87A851') # Mate Green
+    endif
 
     configure_file(input: flavour + '.xml.in',
       output: theme_name + '.xml',
