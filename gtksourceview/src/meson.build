@@ -10,7 +10,7 @@ foreach flavour: flavours
     conf_data.set('FlavourThemeName', theme_name)
 
     if flavour == 'default' or flavour == 'dark'
-      conf_data.set('PrimaryAccent', '#E95420') # Ubunru Orange
+      conf_data.set('PrimaryAccent', '#E95420') # Ubuntu Orange
     elif flavour == 'mate' or flavour == 'mate-dark'
       conf_data.set('PrimaryAccent', '#87A851') # Mate Green
     endif
