@@ -13,4 +13,7 @@ jobs:
       run: sudo apt install meson sassc
 
     - name: Build and Install
-      run: meson build && cd build && sudo ninja install
+      run: |
+        meson build -Dgnome-shell-gresource=true -Dmate=true -Dmate-dark=true -Dubuntu-unity=true -Dxfwm4=true
+        cd build
+        sudo ninja install
