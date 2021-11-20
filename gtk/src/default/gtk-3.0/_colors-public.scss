@@ -66,6 +66,10 @@ text/foreground color of selections on backdrop windows */
 @define-color theme_unfocused_selected_fg_color #{"" + $selected_fg_color};
 
 /*
+insensitive color on backdrop windows*/
+@define-color unfocused_insensitive_color #{"" + $backdrop_insensitive_color};
+
+/*
 widgets main borders color */
 @define-color borders #{"" +$borders_color};
 
@@ -108,5 +112,8 @@ read if you used those and something break with a version upgrade you're on your
 
 //FIXME this is really an API
 
+/* content view background such as thumbnails view in Photos or Boxes */
 @define-color content_view_bg #{"" + $base_color};
 
+/* Very contrasty background for text views (@theme_text_color foreground) */
+@define-color text_view_bg #{"" + if($variant == 'light', $base_color, darken($base_color,6%))};

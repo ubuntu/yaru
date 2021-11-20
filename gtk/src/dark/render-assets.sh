@@ -1,9 +1,9 @@
 #! /bin/bash
 ## Render script for gtk assets.
 ## usage:
-##    render-assets.sh --dir gtk-3.20                # render all the assets, unless the png exists already
-##    render-assets.sh --dir gtk-3.20 --force        # render all the assets, overwriting the ones that exist already
-##    render-assets.sh --dir gtk-3.20 --asset slider # render only the assets whose name starts with "slider"
+##    render-assets.sh --dir gtk-3.0                # render all the assets, unless the png exists already
+##    render-assets.sh --dir gtk-3.0 --force        # render all the assets, overwriting the ones that exist already
+##    render-assets.sh --dir gtk-3.0 --asset slider # render only the assets whose name starts with "slider"
 ##
 ## options
 ##    -d, --dir <folder>    gtk folder
@@ -88,7 +88,7 @@ for i in `cat $INDEX`; do
     fi
   fi
 
-  if [ "$_dir" == "gtk-3.0" ] || [ "$_dir" == "gtk-3.20" ]; then
+  if [ "$_dir" == "gtk-3.0" ] || [ "$_dir" == "gtk-4.0" ]; then
     if [ -f $_dir/$ASSETS_DIR/$i.png ] && [ $_force == 0 ]; then
         echo $_dir/$ASSETS_DIR/$i.png exists.
     else
