@@ -43,4 +43,4 @@ Let's say we want a Blue Yaru variant from Default.
     $ meson install -C builddir
     ```
 
-Note that this process creates both the `gtk-3.20/gtk.css` and  `gtk-3.20/gtk-dark.css` files, the latter is needed for Applications that have "prefer dark" option set.
+Note that this process creates both the `gtk-3.0/gtk.css` and  `gtk-3.0/gtk-dark.css` files, the latter is needed for Applications that have "prefer dark" option set.
