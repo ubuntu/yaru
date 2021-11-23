@@ -8,53 +8,8 @@ foreach flavour: flavours
   conf_data.set('ThemeName', meson.project_name())
   conf_data.set('FlavourThemeName', theme_name)
 
-  if flavour == 'dark'
-    conf_data.set('titlebar', '#2c2c2c')
-    conf_data.set('titlebar_unfocused', '#3e3e3e')
-    conf_data.set('titlebar_border_focused', '#232323')
-    conf_data.set('titlebar_border_unfocused', '#222222')
-    conf_data.set('titlebar_highlight_focused', '#3a3a3a')
-    conf_data.set('titlebar_highlight_unfocused', '#4b4b4b')
-    conf_data.set('border_focused', '#232323')
-    conf_data.set('border_unfocused', '#222222')
-    conf_data.set('title_focused', '#f7f7f7')
-    conf_data.set('title_unfocused', '#d2d2d2')
-  elif flavour == 'default'
-    conf_data.set('titlebar', '#dedede')
-    conf_data.set('titlebar_unfocused', '#f7f7f7')
-    conf_data.set('titlebar_border_focused', '#919191')
-    conf_data.set('titlebar_border_unfocused', '#b8b8b8')
-    conf_data.set('titlebar_highlight_focused', '#f8f8f8')
-    conf_data.set('titlebar_highlight_unfocused', '#fdfdfd')
-    conf_data.set('border_focused', '#919191')
-    conf_data.set('border_unfocused', '#b8b8b8')
-    conf_data.set('title_focused', '#3d3d3d')
-    conf_data.set('title_unfocused', '#626262')
-  elif flavour == 'mate-dark'
-    conf_data.set('titlebar', '#222222')
-    conf_data.set('titlebar_unfocused', '#2c2c2c')
-    conf_data.set('titlebar_border_focused', '#181818')
-    conf_data.set('titlebar_border_unfocused', '#181818')
-    conf_data.set('titlebar_highlight_focused', '#313131')
-    conf_data.set('titlebar_highlight_unfocused', '#3a3a3a')
-    conf_data.set('border_focused', '#161516')
-    conf_data.set('border_unfocused', '#161516')
-    conf_data.set('title_focused', '#f7f7f7')
-    conf_data.set('title_unfocused', '#b5b5b5')
-  elif flavour == 'mate'
-    conf_data.set('titlebar', '#dedede')
-    conf_data.set('titlebar_unfocused', '#fafafa')
-    conf_data.set('titlebar_border_focused', '#848484')
-    conf_data.set('titlebar_border_unfocused', '#bbbbbb')
-    conf_data.set('titlebar_highlight_focused', '#f9f9f9')
-    conf_data.set('titlebar_highlight_unfocused', '#fefefe')
-    conf_data.set('border_focused', '#919191')
-    conf_data.set('border_unfocused', '#b8b8b8')
-    conf_data.set('title_focused', '#3d3d3d')
-    conf_data.set('title_unfocused', '#626262')
-  endif
-
-  configure_file(input: 'metacity-theme-1.xml.in',
+  configure_file(
+    input: join_paths(flavour, 'metacity-theme-1.xml.in'),
     output: '@0@-metacity-theme-1.xml'.format(flavour),
     configuration: conf_data,
     install_dir: metacity_dir
