@@ -1,17 +1,1 @@
-<svg version="1.1" viewBox="0 0 48 26" xmlns="http://www.w3.org/2000/svg">
- <defs>
-  <filter id="b" x="-.027" y="-.027" width="1.054" height="1.054" color-interpolation-filters="sRGB">
-   <feGaussianBlur stdDeviation="0.71999998"/>
-  </filter>
-  <filter id="a" x="-.048" y="-.048" width="1.096" height="1.096" color-interpolation-filters="sRGB">
-   <feGaussianBlur stdDeviation="1.28"/>
-  </filter>
- </defs>
- <g>
-  <rect x=".625" y=".63599" width="46.75" height="24.5" rx="11.688" ry="12.25" enable-background="new" fill="#d9d9d9"/>
-  <circle transform="matrix(.34152 0 0 .34277 26.407 21.005)" cx="-36.264" cy="-23.622" r="32" enable-background="new" filter="url(#a)" opacity=".2"/>
-  <circle transform="matrix(.34097 0 0 .34097 25.865 21.441)" cx="-36.264" cy="-23.622" r="32" enable-background="new" filter="url(#b)" opacity=".1"/>
-  <circle cx="13.25" cy="12.886" r="11" enable-background="new" fill="#fff"/>
-  <path d="m12 0c-6.648 0-12 5.7072-12 12.797v0.17898c0 7.0893 5.352 12.797 12 12.797h24c6.648 0 12-5.7072 12-12.797v-0.17898c0-7.0893-5.352-12.797-12-12.797zm0.33333 0.71589h23.333c6.4633 0 11.667 5.3901 11.667 12.086v0.16918c0 6.6954-5.2033 12.086-11.667 12.086h-23.333c-6.4633 0-11.667-5.3901-11.667-12.086v-0.16918c0-6.6954 5.2033-12.086 11.667-12.086z" enable-background="new" fill="#ccc"/>
- </g>
-</svg>
+<svg viewBox="0 0 48 26" xmlns="http://www.w3.org/2000/svg"><defs><filter id="b" x="-.027" y="-.027" width="1.054" height="1.054" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation=".72"/></filter><filter id="a" x="-.048" y="-.048" width="1.096" height="1.096" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="1.28"/></filter></defs><rect x=".625" y=".636" width="46.75" height="24.5" rx="11.688" ry="12.25" enable-background="new" fill="#d9d9d9"/><circle transform="matrix(.34152 0 0 .34277 26.407 21.005)" cx="-36.264" cy="-23.622" r="32" enable-background="new" filter="url(#a)" opacity=".2"/><circle transform="translate(25.865 21.441) scale(.34097)" cx="-36.264" cy="-23.622" r="32" enable-background="new" filter="url(#b)" opacity=".1"/><circle cx="13.25" cy="12.886" r="11" enable-background="new" fill="#fff"/><path d="M12 0C5.352 0 0 5.707 0 12.797v.179c0 7.09 5.352 12.797 12 12.797h24c6.648 0 12-5.707 12-12.797v-.179C48 5.707 42.648 0 36 0zm.333.716h23.333c6.464 0 11.667 5.39 11.667 12.086v.17c0 6.694-5.203 12.085-11.667 12.085H12.333C5.87 25.057.666 19.667.666 12.971v-.17C.666 6.107 5.87.717 12.333.717z" enable-background="new" fill="#ccc"/></svg>
