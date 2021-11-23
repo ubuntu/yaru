@@ -3,7 +3,7 @@
     <author>Martin Wimpress</author>
     <_description>A GtkSourceView style to match @FlavourThemeName@</_description>
     <!-- Primary Accent -->
-    <color name="primary" value="#E95420" />
+    <color name="primary" value="#87A851" />
 
     <!-- Blacks -->
     <color name="black" value="#000000" />
@@ -39,18 +39,18 @@
     <color name="darkblue" value="#335280" />
 
     <!-- UI -->
-    <style name="text" foreground="jet" background="white" />
+    <style name="text" foreground="chalk" background="inkstone" />
     <style name="selection" foreground="white" background="primary" />
     <style name="selection-unfocused" foreground="silk" background="primary" />
     <style name="cursor" foreground="orange" />
     <style name="secondary-cursor" foreground="satsuma" />
-    <style name="current-line" background="silk" />
-    <style name="line-numbers" foreground="jet" background="silk" bold="True" />
-    <style name="current-line-number" background="silk" />
-    <style name="bracket-match" foreground="green" background="porcelain" />
-    <style name="bracket-mismatch" foreground="red" background="porcelain" />
-    <style name="right-margin" foreground="slate" background="ash" />
-    <style name="draw-spaces" foreground="graphite" background="white" />
+    <style name="current-line" background="jet" />
+    <style name="line-numbers" foreground="silk" background="jet" bold="True" />
+    <style name="current-line-number" background="jet" />
+    <style name="bracket-match" foreground="green" background="inkstone" />
+    <style name="bracket-mismatch" foreground="red" background="inkstone" />
+    <style name="right-margin" foreground="ash" background="black" />
+    <style name="draw-spaces" foreground="ash" background="inkstone" />
     <style name="search-match" foreground="white" background="green" />
 
     <!-- Comments -->
@@ -58,7 +58,7 @@
     <style name="def:shebang" foreground="aubergine" bold="True" />
     <style name="def:doc-comment" foreground="aubergine" italic="True" />
     <style name="def:doc-comment-element" italic="True" />
-    <style name="def:net-address-in-comment" foreground="black" italic="False" underline="True" />
+    <style name="def:net-address-in-comment" foreground="white" italic="False" underline="True" />
 
     <!-- Constants and Variables-->
     <style name="def:constant" foreground="green" />
@@ -72,9 +72,9 @@
     <style name="def:keyword" foreground="green" />
     <style name="def:builtin" foreground="green" bold="True" />
     <style name="def:variable" foreground="purple"/>
-    <style name="def:preprocessor" foreground="black" bold="True" />
-    <style name="def:operator" foreground="black" bold="True" />
-    <style name="sh:variable-definition" foreground="black" bold="True" />
+    <style name="def:preprocessor" foreground="white" bold="True" />
+    <style name="def:operator" foreground="white" bold="True" />
+    <style name="sh:variable-definition" foreground="white" bold="True" />
 
     <!-- Identifiers -->
     <style name="def:identifier" foreground="light_aubergine" />
@@ -87,8 +87,8 @@
     <style name="def:type" foreground="linkblue" bold="True" />
 
     <!-- Annotations -->
-    <style name="def:error" foreground="red" background="porcelain" bold="True" underline="True" strikethrough="False" />
-    <style name="def:warning" foreground="orange" background="porcelain" bold="True" underline="True" strikethrough="False" />
+    <style name="def:error" foreground="red" background="jet" bold="True" underline="True" strikethrough="False" />
+    <style name="def:warning" foreground="orange" background="jet" bold="True" underline="True" strikethrough="False" />
     <style name="def:note" foreground="black" background="clementine" bold="True" italic="False" />
-    <style name="def:underlined" foreground="jet" underline="True" />
+    <style name="def:underlined" foreground="chalk" underline="True" />
 </style-scheme>
