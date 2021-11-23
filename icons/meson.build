@@ -29,10 +29,12 @@ foreach flavour: ['default', 'mate']
     conf_data.set('ThemeName', theme_name)
     foreach theme: themes_f
       if fs.is_file(join_paths(theme_name, theme))
-        configure_file(input : theme_name + '/@0@'.format(theme),
-                      output : '@0@'.format(theme),
-                      configuration : conf_data,
-                      install_dir: theme_dir)
+        file = configure_file(
+          input : join_paths(theme_name, theme),
+          output : flavour + '-@0@'.format(theme),
+          configuration : conf_data
+        )
+        install_data(file, install_dir: theme_dir, rename: theme)
       endif
     endforeach
 
