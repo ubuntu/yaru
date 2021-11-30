@@ -1,15 +1,13 @@
 viewswitcher {
-  &, & button.toggle {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+
+  &.wide {
+    border-spacing: 3px;
   }
 
-  button.toggle {
+  &.narrow button.toggle {
     border-radius: 0;
-    border-top: none;
-    border-bottom: none;
-    font-size: 1rem;
-    font-weight: inherit;
+    margin: 0;
 
     @if $contrast == 'high' {
       &:hover,
@@ -20,6 +18,11 @@ viewswitcher {
                     inset -1px 0 $border_color;
       }
     }
+  }
+
+  button.toggle {
+    font-weight: bold;
+    padding: 0;
 
     > stack > box {
       &.narrow {
@@ -35,12 +38,8 @@ viewswitcher {
       }
 
       &.wide {
-        padding: 8px 12px;
+        padding: 2px 12px;
         border-spacing: 6px;
-      }
-
-      label.active {
-        font-weight: bold;
       }
     }
   }
