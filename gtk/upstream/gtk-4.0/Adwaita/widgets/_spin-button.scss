@@ -8,25 +8,13 @@ spinbutton {
   /* :not here just to bump specificity above that of the list button styling */
   > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
   > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
-    margin: 0;
-    background: none;
-    border-style: solid;
-    border-color: $thin_border_color;
+    @extend %button_basic_flat;
+
     border-radius: 0;
     box-shadow: none;
-    color: inherit;
 
-    &:hover {
-      background-color: $view_hover_color;
-    }
-
-    &:active {
-      background-color: $view_active_color;
-    }
-
-    &:disabled {
-      filter: none;
-    }
+    border-style: solid;
+    border-color: gtkalpha(currentColor, if($contrast == 'high', .5, .1));
   }
 
   &:not(.vertical) {
@@ -42,13 +30,20 @@ spinbutton {
       min-width: 22px;
       padding-bottom: 0;
       padding-top: 0;
-      border-width: 0 0 0 1px;
+      border-left-width: 1px;
 
-      &:dir(rtl) { border-width: 0 1px 0 0; }
+      &:dir(rtl) {
+        border-left-width: 0;
+        border-right-width: 1px;
+      }
 
-      &:dir(ltr):last-child { border-radius: 0 $button_radius $button_radius 0; }
+      &:dir(ltr):last-child {
+        border-radius: 0 $button_radius $button_radius 0;
+      }
 
-      &:dir(rtl):first-child { border-radius: $button_radius 0 0 $button_radius; }
+      &:dir(rtl):first-child {
+        border-radius: $button_radius 0 0 $button_radius;
+      }
     }
   }
 
@@ -62,12 +57,12 @@ spinbutton {
     > button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
     > button.image-button.down:not(.flat):not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
       &:last-child {
-        border-width: 1px 0 0 0;
+        border-top-width: 1px;
         border-radius: 0 0 $button_radius $button_radius;
       }
 
       &:first-child {
-        border-width: 0 0 1px 0;
+        border-bottom-width: 1px;
         border-radius: $button_radius $button_radius 0 0;
       }
     }

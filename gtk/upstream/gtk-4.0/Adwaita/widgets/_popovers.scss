@@ -9,9 +9,9 @@ popover {
     background-color: $popover_bg_color;
     color: $popover_fg_color;
     background-clip: padding-box;
-    border: 1px solid $window_border_color;
-    box-shadow: 0 1px 3px 1px transparentize(black, .93),
-                0 2px 6px 2px transparentize(black, .97);
+    border: 1px solid if($contrast == 'high', $border_color, transparentize(black, .86));
+    box-shadow: 0 1px 5px 1px transparentize(black, .91),
+                0 2px 14px 3px transparentize(black, .95);
   }
 
   > contents {
