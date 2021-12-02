@@ -190,8 +190,9 @@ dnd tab {
     background-image: $tab_needs_attention_gradient;
   }
 
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.75),
-              0 0 0 1px $window_border_color;
+  box-shadow: 0 1px 5px 1px transparentize(black, .91),
+              0 2px 14px 3px transparentize(black, .95),
+              0 0 0 1px transparentize(black, if($contrast == 'high', .2, .95));
 
   outline: 1px solid $window_outline_color;
   outline-offset: -1px;

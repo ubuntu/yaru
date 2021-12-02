@@ -50,6 +50,3 @@
 // Miscellaneous
 @define-color shade_color #{if($variant == 'light', transparentize(black, .93), transparentize(black, .64))};
 @define-color scrollbar_outline_color #{if($variant == 'light', white, transparentize(black, .5))};
-@define-color window_outline_color #{if($variant == 'light', transparent, white)};
-@define-color window_border_color #{if($variant == 'light', transparentize(black, 0.77), transparentize(black, 0.25))};
-@define-color window_border_backdrop_color #{if($variant == 'light', transparentize(black, 0.82), transparentize(black, 0.25))};
