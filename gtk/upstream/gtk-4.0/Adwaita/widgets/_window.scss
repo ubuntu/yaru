@@ -7,7 +7,7 @@ window {
                 0 2px 8px 2px transparentize(black, 0.87),
                 0 3px 20px 10px transparentize(black, 0.91),
                 0 6px 32px 16px transparentize(black, 0.96),
-                0 0 0 1px $window_border_color; //doing borders with box-shadow
+                0 0 0 1px transparentize(black, if($contrast == 'high', .2, .95));
     margin: 0px;
     border-radius: $window_radius;
 
@@ -23,13 +23,15 @@ window {
                   0 2px 14px 5px transparentize(black, 0.95),
                   0 4px 28px 12px transparentize(black, 0.97),
                   0 6px 32px 16px transparent,
-                  0 0 0 1px $window_border_backdrop_color;
+                  0 0 0 1px transparentize(black, if($contrast == 'high', .2, .98));
       transition: $backdrop_transition;
     }
 
     &.dialog.message {
-      box-shadow: 0 1px 2px transparentize(black, 0.8),
-                  0 0 0 1px $window_border_color;
+      box-shadow: 0 2px 8px 2px transparentize(black, 0.93),
+                  0 3px 20px 10px transparentize(black, 0.95),
+                  0 6px 32px 16px transparentize(black, 0.98),
+                  0 0 0 1px transparentize(black, if($contrast == 'high', .2, .95));
     }
 
     &.tiled,
@@ -40,11 +42,11 @@ window {
       border-radius: 0;
       outline: none;
 
-      box-shadow: 0 0 0 1px $window_border_color,
+      box-shadow: 0 0 0 1px $border_color,
                   0 0 0 20px transparent; //transparent control workaround -- #3670
 
       &:backdrop {
-        box-shadow: 0 0 0 1px $window_border_backdrop_color,
+        box-shadow: 0 0 0 1px $border_color,
                     0 0 0 20px transparent;
       }
     }
@@ -64,15 +66,18 @@ window {
     border-radius: 0;
     box-shadow: inset 0 0 0 5px $border_color,
                 inset 0 0 0 4px $headerbar_bg_color,
-                inset 0 0 0 1px $window_border_color;
+                inset 0 0 0 1px $border_color;
 
     &:backdrop {
       box-shadow: inset 0 0 0 5px $border_color,
                   inset 0 0 0 4px $headerbar_backdrop_color,
-                  inset 0 0 0 1px $window_border_backdrop_color;
+                  inset 0 0 0 1px $border_color;
     }
   }
 
   // server-side decorations as used by mutter
-  &.ssd { box-shadow: 0 0 0 1px $window_border_color; } //just doing borders, wm draws actual shadows
+  &.ssd {
+    // just doing borders, wm draws actual shadows
+    box-shadow: 0 0 0 1px transparentize(black, if($contrast == 'high', .2, .95));
+  }
 }
