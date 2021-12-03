@@ -383,7 +383,7 @@ $_row_hover_bg: if($variant=='light', transparentize(black, 0.96), transparentiz
 $_row_selection_bg: if($variant=='light', transparentize(black, 0.91), transparentize(white, 0.91));
 $_backdrop_row_selection_bg: if($variant=='light', $_row_selection_bg, lighten($_row_selection_bg, 2%));
 
-list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
+list row, placessidebar row, sidebar row, .sidebar row {
   &:hover:not(:backdrop):not(:selected) {
     background: $_row_hover_bg;
   }
@@ -414,15 +414,6 @@ list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
           &, button, button image { color: $insensitive_fg_color; }
         }
       }
-    }
-  }
-}
-
-treeview.view {
-  &:selected,
-  &:hover:not(:backdrop):not(:selected) {
-    &.progressbar {
-      background-color: $progress_bg_color;
     }
   }
 }
