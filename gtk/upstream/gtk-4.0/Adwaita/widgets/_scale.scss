@@ -67,6 +67,17 @@ scale {
     }
   }
 
+  .osd & {
+    &:focus:focus-visible > trough {
+      outline-color: $osd_focus_color;
+    }
+
+    > trough > highlight {
+      background-color: $osd_fill_bg_color;
+      color: $osd_fill_fg_color;
+    }
+  }
+
   &:disabled {
     filter: opacity($disabled_opacity);
 

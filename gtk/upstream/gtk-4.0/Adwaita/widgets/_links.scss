@@ -1,14 +1,15 @@
-%link,
-link {
+link,
+button.link {
   color: $link_color;
   text-decoration: underline;
+  font-weight: inherit;
 
   &:visited {
     color: $link_visited_color;
   }
 
   &:hover {
-    color: gtkshade($link_color, 1.1);
+    color: gtkshade(currentColor, 1.1);
   }
 
   &:active {
@@ -16,15 +17,29 @@ link {
   }
 
   &:disabled { color: gtkalpha(currentColor, $disabled_opacity); }
+
+  .osd & {
+    color: $osd_link_color;
+
+    &:visited {
+      color: $osd_link_visited_color;
+    }
+
+    &:active {
+      color: $osd_link_color;
+    }
+  }
 }
 
 link {
   @include focus-ring();
+
+  .osd &:focus:focus-visible {
+    outline-color: $osd_focus_color;
+  }
 }
 
 button.link {
-  @extend %link;
-
   &,
   &:hover,
   &:active,

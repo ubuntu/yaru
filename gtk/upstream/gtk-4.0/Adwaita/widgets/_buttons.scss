@@ -19,6 +19,10 @@ button {
     @include focus-ring();
     transition: $button_transition;
 
+    .osd &:focus:focus-visible {
+      outline-color: $osd_focus_color;
+    }
+
     @at-root %button_basic_raised, & {
       background-color: $button_color;
 
@@ -107,7 +111,7 @@ button {
   &.osd {
     min-width: 32px;
     min-height: 32px;
-    @include focus-ring($outer: true, $offset: 1px);
+    @include focus-ring($outer: true, $offset: 1px, $fc: $osd_focus_color);
     transition: $button_transition;
 
     color: $osd_fg_color;
@@ -152,6 +156,10 @@ button {
 
     @include focus-ring($outer: true, $offset: 1px);
     transition: $button_transition;
+
+    .osd &:focus:focus-visible {
+      outline-color: $osd_focus_color;
+    }
 
     &:hover {
       background-image: image(gtkalpha(currentColor, .1));
@@ -208,6 +216,10 @@ button {
     background: transparent;
     @include focus-ring();
     transition: $button_transition;
+
+    .osd &:focus:focus-visible {
+      outline-color: $osd_focus_color;
+    }
 
     box-shadow: none;
 

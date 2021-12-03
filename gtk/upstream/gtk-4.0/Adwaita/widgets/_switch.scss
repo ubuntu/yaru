@@ -55,4 +55,15 @@ switch {
       > image {  color: inherit; }
     }
   }
+
+  .osd & {
+    &:focus:focus-visible {
+      outline-color: $osd_focus_color;
+    }
+
+    &:checked {
+      background-color: transparentize($osd_fill_bg_color, .15);
+      color: $osd_fill_fg_color;
+    }
+  }
 }

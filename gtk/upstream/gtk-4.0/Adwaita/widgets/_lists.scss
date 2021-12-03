@@ -27,6 +27,10 @@ list {
 row {
   @include focus-ring();
 
+  .osd &:focus:focus-visible {
+    outline-color: $osd_focus_color;
+  }
+
   background-clip: padding-box;
 
   &.activatable {
@@ -138,6 +142,10 @@ row.combo {
 %boxed_list_row {
   @include focus-ring($offset: -1px);
 
+  .osd &:focus:focus-visible {
+    outline-color: $osd_focus_color;
+  }
+
   transition: 200ms $ease-out-quad;
   border-bottom: 1px solid $border_color;
 
@@ -201,6 +209,10 @@ row.expander {
 
   &:checked image.expander-row-arrow:not(:disabled) {
     color: $accent_color;
+  }
+
+  .osd &:checked image.expander-row-arrow:not(:disabled) {
+    color: inherit;
   }
 
   image.expander-row-arrow:disabled {

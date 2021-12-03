@@ -17,6 +17,10 @@ entry {
 
     @include focus-ring($focus-state: ':focus-within');
 
+    .osd &:focus-within {
+      outline-color: $osd_focus_color;
+    }
+
     > text {
       > placeholder {
         @extend .dim-label;
@@ -101,6 +105,10 @@ entry {
       border-style: solid;
       box-shadow: none;
     }
+  }
+
+  .osd & > progress > trough > progress {
+    border-color: $osd_fill_bg_color;
   }
 }
 
