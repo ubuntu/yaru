@@ -7,6 +7,12 @@
     }
   }
 
+  &.osd button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
+    &:focus:focus-visible {
+      outline-color: $osd_focus_color;
+    }
+  }
+
   menubutton:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
     &.image-button > button {
       @extend %button_basic_flat;
