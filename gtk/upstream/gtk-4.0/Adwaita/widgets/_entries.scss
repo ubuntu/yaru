@@ -45,37 +45,32 @@ entry {
     &:disabled { filter: opacity($disabled_opacity); }
 
     // entry error and warning style
-    @each $e_type, $e_color in (error, $error_color),
-                               (warning, $warning_color) {
+    @each $e_type, $e_color in (error,   $error_color),
+                               (warning, $warning_color),
+                               (success, $success_color) {
       &.#{$e_type} {
-        @include focus-ring($focus-state: ':focus-within', $fc: gtkalpha($e_color, $focus_border_opacity));
-
-        color: gtkmix($e_color, $view_fg_color, 70%);
+        @include focus-ring($focus-state: ':focus-within', $fc: gtkalpha(currentColor, $focus_border_opacity));
 
         > text {
-          color: gtkmix($e_color, $view_fg_color, 70%);
-
           > selection:focus-within { background-color: gtkalpha($e_color, .2); }
 
-          > cursor-handle > contents { background-color: $e_color; }
-        }
-
-        > image:active {
-          color: $e_color;
+          > cursor-handle > contents { background-color: currentColor; }
         }
 
         > progress > trough > progress {
-          border-color: $e_color;
+          border-color: currentColor;
         }
       }
     }
 
     > image { // icons inside the entry
-      opacity: if($contrast == 'high', .9, .75);
+      opacity: if($contrast == 'high', .85, .7);
 
       &:hover { opacity: 1; }
 
-      &:active { color: $accent_color; }
+      &:active {
+        opacity: if($contrast == 'high', .9, .8);
+      }
 
       &.left { margin-right: 6px; }
       &.right { margin-left: 6px; }

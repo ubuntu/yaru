@@ -69,24 +69,26 @@ treeview.view {
   > header {
     > button {
       @extend %undecorated_button;
-      padding: 0 6px;
-      border: 0px solid $border_color;
-      border-bottom-width: 1px;
+      padding-top: 3px;
+      padding-bottom: 3px;
       border-radius: 0;
       box-shadow: none;
+      line-height: 100%;
 
       > box {
         color: gtkalpha(currentColor, if($contrast == 'high', .6, .4));
-        font-weight: bold;
+        font-weight: 700;
+        font-size: 9pt;
+        border-spacing: 6px;
+      }
 
-        &:hover {
-          color: gtkalpha(currentColor, if($contrast == 'high', .9, .7));
-          box-shadow: none;
-        }
+      &:hover > box {
+        color: gtkalpha(currentColor, if($contrast == 'high', .9, .7));
+        box-shadow: none;
+      }
 
-        &:active {
-          color: currentColor;
-        }
+      &:active > box {
+        color: currentColor;
       }
 
       sort-indicator {
@@ -106,13 +108,8 @@ treeview.view {
   button.dnd,
   header.button.dnd { // for treeview-like derive widgets
     &:active, &:selected, &:hover, & {
-      padding: 0 6px;
-      color: $view_bg_color;
-      background-image: none;
+      color: $accent_fg_color;
       background-color: $accent_bg_color;
-      border-style: none;
-      border-radius: 0;
-      box-shadow: inset 0 0 0 1px $view_bg_color;
       transition: none;
     }
   }
@@ -123,22 +120,10 @@ treeview.view {
   }
 }
 
-// Buttons slightly differ between treeviews and columnviews
 treeview.view > header > button {
-  border-right-width: 1px;
-
-  &:last-child:dir(ltr),
-  &:first-child:dir(rtl) {
-    border-right-width: 0;
-  }
-}
-
-columnview.view > header > button {
-  border-left-width: 1px;
-
-  &:first-child {
-    border-left-width: 0;
-  }
+  padding-left: 4px;
+  padding-right: 4px;
+  border-bottom: 1px solid $border_color;
 }
 
 /********************************************************
@@ -162,15 +147,37 @@ columnview {
     }
   }
 
+  > header > button {
+    padding-left: 6px;
+    padding-right: 6px;
+    border-left: 1px solid transparent;
+
+    &:first-child {
+      border-left-width: 0;
+    }
+  }
+
   // make column separators visible when :show-column-separators is true
-  &.column-separators > listview > row > cell {
-    border-left-color: $border_color;
+  &.column-separators {
+    > listview > row > cell,
+    > header > button {
+      border-left-color: $border_color;
+    }
+  }
+
+  > listview:not(.horizontal).separators > row:not(.separator) {
+    border-top: 1px solid $border_color;
+    border-bottom: none;
   }
 
   // shrink vertically for .data-table
   &.data-table > listview > row > cell {
     padding-top: 2px;
     padding-bottom: 2px;
+  }
+
+  ~ undershoot.top {
+    box-shadow: inset 0 1px $border_color;
   }
 }
 

@@ -8,10 +8,6 @@ label {
   &:disabled {
     filter: opacity($disabled_opacity);
   }
-
-  &.error {
-   color: $error_color;
-  }
 }
 
 .dim-label {
@@ -20,6 +16,18 @@ label {
 
 .accent {
   color: $accent_color;
+}
+
+.success {
+  color: $success_color;
+}
+
+.warning {
+  color: $warning_color;
+}
+
+.error {
+  color: $error_color;
 }
 
 /**********************
