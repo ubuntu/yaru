@@ -19,18 +19,21 @@
 @define-color destructive_color @red_4;
 
 // Levelbars, entries, labels and infobars. These don't need text colors
+@define-color success_bg_color @green_4;
+@define-color success_fg_color @light_1;
 @define-color success_color @green_4;
+
+@define-color warning_bg_color @yellow_5;
+@define-color warning_fg_color @light_1;
 @define-color warning_color @yellow_5;
+
+@define-color error_bg_color @red_4;
+@define-color error_fg_color @light_1;
 @define-color error_color @red_4;
 
 // The secondary accent color and the matching text value - Yaru change
 @define-color fill_bg_color @purple_3;
 @define-color fill_fg_color @light_1;
-
-// suggested-action buttons - Yaru change
-@define-color suggested_bg_color @green_4;
-@define-color suggested_fg_color @light_1;
-@define-color suggested_color @green_4;
 
 // Window
 @define-color window_bg_color #{if($variant == 'light', #fafafa, lighten(#181818, 8%))};
