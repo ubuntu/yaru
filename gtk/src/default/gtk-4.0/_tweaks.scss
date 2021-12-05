@@ -91,19 +91,19 @@ levelbar {
 %button,
 button {
     &.suggested-action {
-        color: $suggested_fg_color;
+        color: $success_fg_color;
 
         &,
         &:checked {
             &:not(.flat) {
-                background-color: $suggested_bg_color;
+                background-color: $success_bg_color;
             }
         }
     }
 
     &.flat {
         &.suggested-action {
-            color: $suggested_color;
+            color: $success_color;
         }
     }
 }
@@ -111,10 +111,10 @@ button {
 splitbutton {
     &.suggested-action {
         > button, > menubutton > button {
-            color: $suggested_fg_color;
+            color: $success_fg_color;
     
             &, &:checked {
-                background-color: $suggested_bg_color;
+                background-color: $success_bg_color;
             }
         }
     }
