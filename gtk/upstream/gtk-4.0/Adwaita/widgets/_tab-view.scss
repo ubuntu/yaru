@@ -1,7 +1,7 @@
 $tab_needs_attention_gradient: radial-gradient(ellipse at bottom,
                                                transparentize(white, .2),
-                                               gtkalpha($accent_bg_color, .2) 15%,
-                                               gtkalpha($accent_bg_color, 0) 15%);
+                                               gtkalpha($accent_color, .4) 10%,
+                                               gtkalpha($accent_color, 0) 30%);
 
 
 @mixin undershoot-gradient($dir, $color) {
@@ -12,9 +12,9 @@ $tab_needs_attention_gradient: radial-gradient(ellipse at bottom,
 
 @mixin need-attention-gradient($dir) {
   background: linear-gradient(to #{$dir},
-                              gtkalpha($accent_bg_color, .7),
-                              gtkalpha($accent_bg_color, .5) 1px,
-                              gtkalpha($accent_bg_color, 0) 20px);
+                              gtkalpha($accent_color, .5),
+                              gtkalpha($accent_color, .3) 1px,
+                              gtkalpha($accent_color, 0) 20px);
 }
 
 tabbar {
@@ -153,6 +153,14 @@ tabbar {
       &.right {
         @include undershoot-gradient("left", $headerbar_shade_color);
       }
+    }
+
+    .needs-attention-left undershoot.left {
+      @include need-attention-gradient("right");
+    }
+
+    .needs-attention-right undershoot.right {
+      @include need-attention-gradient("left");
     }
 
     tabbox > background {

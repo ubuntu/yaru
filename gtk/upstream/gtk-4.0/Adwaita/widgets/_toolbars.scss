@@ -201,10 +201,11 @@ infobar {
 
   @each $i_type, $i_color in (info, $accent_bg_color),
                              (question, $accent_bg_color),
-                             (warning, $warning_color),
-                             (error, $error_color) {
+                             (warning, $warning_bg_color),
+                             (error, $error_bg_color) {
     &.#{$i_type} > revealer > box {
       background-color: gtkmix($i_color, $window_bg_color, 30%);
+      color: $window_fg_color;
     }
   }
 

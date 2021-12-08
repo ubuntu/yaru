@@ -120,6 +120,6 @@ treeview entry {
     background-image: none;
     background-color: $view_bg_color;
 
-    &:focus-within { border-color: $accent_bg_color; }
+    &:focus-within { border-color: $accent_color; }
   }
 }

@@ -186,7 +186,7 @@ columnview row:not(:selected) cell editablelabel:not(.editing):focus-within {
 }
 
 columnview row:not(:selected) cell editablelabel.editing:focus-within {
-  outline: 2px solid $accent_bg_color;
+  outline: 2px solid $accent_color;
 }
 
 treeexpander {
