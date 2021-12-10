@@ -66,3 +66,15 @@ gridview > child {
     background-color: $view_selected_color;
   }
 }
+
+gridview > child.activatable {
+  &:hover { background-color: $view_hover_color; }
+
+  &:active { background-color: $view_active_color; }
+
+  &:selected {
+    &:hover { background-color: $view_selected_hover_color; }
+
+    &:active { background-color: $view_selected_active_color; }
+  }
+}
