@@ -9,7 +9,7 @@
 ##     -f, --file <name>        Optimize only the icon in icons/src/<context>/<path> and save it under icons/Yaru/<context>/<name> (needs --context)
 ##
 ## NOTE:
-## contexts are: actions, apps, camera, categories, devices, emblems, emotes, generic-symbols, legacy, mimetypes, multimedia, places, status, time, ui.
+## contexts are: actions, apps, camera, categories, devices, emblems, emotes, generic-symbols, legacy, mimetypes, multimedia, phosh, places, status, time, ui.
 
 # CLInt GENERATED_CODE: start
 
@@ -57,7 +57,7 @@ fatal() {
   exit 1
 }
 
-contexts=( actions apps camera categories devices emblems emotes generic-symbols legacy mimetypes multimedia places status time ui )
+contexts=( actions apps camera categories devices emblems emotes generic-symbols legacy mimetypes multimedia phosh places status time ui )
 
 ###################################################
 # CHECKS
