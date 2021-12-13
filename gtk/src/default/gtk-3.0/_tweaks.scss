@@ -1,5 +1,6 @@
 $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
+$_close_button_color: transparentize($fg_color, 0.9);
 $_titlebutton_height: 24px;
 
 @mixin draw_circle($c, $size:$_titlebutton_height) {
@@ -113,23 +114,7 @@ button.titlebutton:not(.appmenu) {
     }
 
     &.close {
-      color: $selected_fg_color;
-      @include draw_circle($selected_bg_color);
-
-      &:hover {
-        @include draw_circle($selected_bg_color);
-        @include draw_circle(lighten($selected_bg_color, 5%));
-      }
-
-      &:active {
-        @include draw_circle($selected_bg_color);
-        @include draw_circle(darken($selected_bg_color, 5%));
-      }
-
-      &:backdrop {
-        @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
-        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
-      }
+      @include draw_circle($_close_button_color);
     }
 
     window.toolbox &.close { // Special selector to target unified window (see #2980)
@@ -420,8 +405,8 @@ list row, placessidebar row, sidebar row, .sidebar row {
 
 // Mimic GTK4 slider
 
-$_slider_color: if($variant == 'light', darken(white, 1%), $warm_gray);
-$_slider_hover_color: if($variant == 'light', white, lighten($warm_gray, 4%));
+$_slider_color: darken(white, 1%);
+$_slider_hover_color: white;
 $_slider_disabled_color: if($variant == 'light', $_slider_color, darken($_slider_color, 20%));
 
 $_trough_color: if($variant == 'light', $silk, lighten($inkstone, 5%));
