@@ -18,10 +18,6 @@ windowcontrols {
         &.close {
             > image {
                 background: $button_color;
-
-                &:backdrop {
-                    filter: saturate(0);
-                }
             }
         }
     }
