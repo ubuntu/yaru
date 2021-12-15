@@ -1,7 +1,7 @@
 #! /bin/bash
 
-INKSCAPE="/usr/bin/inkscape"
-OPTIPNG="/usr/bin/optipng"
+INKSCAPE="inkscape"
+OPTIPNG="optipng"
 
 SRC_FILE="assets-external.svg"
 ASSETS_DIR="assets"
