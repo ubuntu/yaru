@@ -6,8 +6,8 @@ $fill_fg_color: gtkcolor(fill_fg_color);
 $fill_color: $fill_bg_color;
 $fill_text_color: $fill_fg_color;
 
-$slider_color: if($variant=='light', gtkmix(white, $view_bg_color, 80%), #AEA79F);
-$slider_hover_color: if($variant=='light', white, lighten(#AEA79F, 4%));
+$slider_color: gtkmix(white, $view_bg_color, 80%);
+$slider_hover_color: white;
 
 $osd_fg_color: #eeeeec;
 $osd_bg_color: transparentize(lighten($dark_4, 2%), 0.025);

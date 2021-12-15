@@ -8,7 +8,7 @@ Let's say we want a Blue Yaru variant from Default.
     ```
     $ cp -r gtk/src/default gtk/src/blue
     ```
-2. Adjust some colors to show a minimal difference from the Base variant used. As example change `$primary_accent_bg_color` and `$primary_accent_fg_color` to `$blue` and `$inkstone`
+2. Adjust some colors to show a minimal difference from the Base variant used. As example change `$accent_bg_color` and `$accent_fg_color` to `$blue` and `$inkstone`
 3. Configure the build
     1. Add a new option in `meson_options.txt`. If value is "true", it will be built automatically
         ```

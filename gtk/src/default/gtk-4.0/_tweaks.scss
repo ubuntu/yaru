@@ -1,15 +1,9 @@
 // Smaller windowcontrols and orange close button
-windowcontrols {
-    margin-left: 7px; // Fix windowcontrols misalignement caused by smaller windowcontrols
+windowcontrols {  
 
     button {
-        min-width: 20px;
-        min-height: 20px;
-        padding: 2px;
-        margin: 0 7px;
 
         > image {
-            padding: 0;
             background: transparent;
         }
 
@@ -23,20 +17,7 @@ windowcontrols {
         
         &.close {
             > image {
-                color: $accent_fg_color;
-                background: $accent_bg_color;
-
-                &:hover {
-                    background: gtkmix($accent_bg_color, "#fff", 90%);
-                }
-
-                &:active {
-                    background: gtkmix($accent_bg_color, "#000", 90%);
-                }
-
-                &:backdrop {
-                    filter: saturate(0);
-                }
+                background: $button_color;
             }
         }
     }

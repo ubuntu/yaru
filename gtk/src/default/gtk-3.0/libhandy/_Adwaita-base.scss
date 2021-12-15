@@ -198,7 +198,7 @@ viewswitcher {
 
       > stack > box label {
         animation: needs_attention 150ms ease-in;
-        background-image: -gtk-gradient(radial, center center, 0, center center, 0.5, to($primary_accent_bg_color), to(transparent)); // Yaru: use our own palette
+        background-image: -gtk-gradient(radial, center center, 0, center center, 0.5, to($accent_bg_color), to(transparent)); // Yaru: use our own palette
         background-size: 6px 6px, 6px 6px;
         background-repeat: no-repeat;
         background-position: right 0px, right 1px;
