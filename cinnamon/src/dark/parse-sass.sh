@@ -1,1 +1,0 @@
-../default/parse-sass.sh
