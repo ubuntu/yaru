@@ -1,6 +1,6 @@
 ## Source Files
 
-Do not edit icon assets directly (i.e. tweaking those in the "Suru" folder with a raster editor)! For ease of development and organization's sake, the sources for all the different icons and cursors are kept in various subfolders: 
+Do not edit icon assets directly (i.e. tweaking those in the "Yaru" folder with a raster editor)! For ease of development and organization's sake, the sources for all the different icons and cursors are kept in various subfolders: 
 
  - [fullcolor](./fullcolor) contains the source files and render scripts for all full-color icons.
  - [scalable](./scalable) contains the source files and render scripts for all symbolic icons.
@@ -9,5 +9,5 @@ Do not edit icon assets directly (i.e. tweaking those in the "Suru" folder with 
 
 ## Resources
 
-**[Suru.gpl](./Suru.gpl)**
-- The Inkscape colour palette for the Suru icons. You can copy it to `.config/inkscape/palettes` and restart Inkscape to able to choose it from the palette menu (in the lower right corner).
+**[Yaru.gpl](./Yaru.gpl)**
+- The Inkscape colour palette for the Yaru icons. You can copy it to `.config/inkscape/palettes` and restart Inkscape to able to choose it from the palette menu (in the lower right corner).

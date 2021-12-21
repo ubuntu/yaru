@@ -3,25 +3,25 @@ progressbar {
   &.horizontal {
     > trough {
       min-width: 150px;
-      &, > progress { min-height: 4px; }
+      &, > progress { min-height: 8px; }
     }
   }
 
   &.vertical {
     > trough {
       min-height: 80px;
-      &, > progress { min-width: 4px; }
+      &, > progress { min-width: 8px; }
     }
   }
 
   > text {
     @extend .dim-label;
+    @extend .numeric;
     font-size: smaller;
-    font-feature-settings: "tnum";
   }
 
   &:disabled {
-    filter: opacity(.5);
+    filter: opacity($disabled_opacity);
   }
 
   > trough {
@@ -30,9 +30,10 @@ progressbar {
     > progress {
       @extend %scale_highlight; /* share most of scales' */
 
-      border-radius: 1.5px;
+      $_progress-radius: 99px;
 
-      $_progress-radius: 5px;
+      border-radius: $_progress-radius;
+
       &.left {
         border-top-left-radius: $_progress-radius;
         border-bottom-left-radius: $_progress-radius;
@@ -56,8 +57,8 @@ progressbar {
   }
 
   &.osd { // progressbar.osd used for epiphany page loading progress
-    min-width: 3px;
-    min-height: 3px;
+    min-width: 2px;
+    min-height: 2px;
     background-color: transparent;
 
     > trough {
@@ -70,8 +71,21 @@ progressbar {
         border-style: none;
         border-radius: 0;
       }
+
+    }
+
+    &.horizontal {
+      > trough, > trough > progress { min-height: 2px; }
+    }
+
+    &.vertical {
+      > trough, > trough > progress { min-width: 2px; }
     }
   }
 
   > trough.empty > progress { all: unset; } // makes the progress indicator disappear, when the fraction is 0
+
+  .osd & > trough > progress {
+    background-color: $osd_fill_bg_color;
+  }
 }

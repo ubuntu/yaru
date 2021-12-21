@@ -1,0 +1,1 @@
+../../default/xfwm4/render-xfwm4-assets.sh

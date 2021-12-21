@@ -1,15 +1,16 @@
 %scale_trough {
-  border-radius: 3px;
+  border-radius: 99px;
   background-color: $trough_color;
 
   @if $contrast == "high" {
-    box-shadow: inset 0 0 0 1px $borders_color;
+    box-shadow: inset 0 0 0 1px $border_color;
   }
 }
 
 %scale_highlight {
-  border-radius: 3px;
+  border-radius: 99px;
   background-color: $fill_color;
+  color: $fill_text_color;
 }
 
 scale {
@@ -57,7 +58,7 @@ scale {
       background-color: $trough_hover_color;
 
       > highlight {
-        background-color: $fill_hover_color;
+        background-image: image(gtkalpha(currentColor, .1));
       }
 
       > slider {
@@ -66,20 +67,23 @@ scale {
     }
   }
 
-  &:disabled {
-    filter: opacity(.5);
+  .osd & {
+    &:focus:focus-visible > trough {
+      outline-color: $osd_focus_color;
+    }
 
-    > trough > slider {
-      box-shadow: 0 2px 4px transparent;
-      outline-color: transparentize(black, .8);
+    > trough > highlight {
+      background-color: $osd_fill_bg_color;
+      color: $osd_fill_fg_color;
     }
   }
 
-  @if $contrast == "high" {
-    &, &:hover, &.dragging, &:disabled {
-      > trough > slider {
-        outline-color: transparentize(black, .5);
-      }
+  &:disabled {
+    filter: opacity($disabled_opacity);
+
+    > trough > slider {
+      box-shadow: 0 2px 4px transparent;
+      outline-color: transparentize(black, if($contrast == 'high', .5, .8));
     }
   }
 
@@ -98,33 +102,32 @@ scale {
     > trough {
       // to make the trough grow in fine-tune mode
       > slider { margin: -5px; }
-
-      > fill,
-      > highlight,
-      & {
-        border-radius: 5px;
-      }
     }
   }
 
   > value {
-    color: gtkalpha(currentColor, 0.55);
-    font-feature-settings: "tnum";
+    @extend .dim-label;
+    @extend .numeric;
   }
 
-  &.marks-before, &.marks-after {
+  &.marks-before:not(.marks-after),
+  &.marks-after:not(.marks-before) {
     > trough > slider {
       transform: rotate(45deg);
 
       // Adjust box-shadow for the 45deg rotation, for 0px 2px we ideally want
       // 1/√2px 1/√2px, round that to 1px 1px
       box-shadow: 1px 1px 4px transparentize(black, .8);
+
+      &:disabled {
+        box-shadow: 1px 1px 4px transparent;
+      }
     }
   }
 
   &.horizontal {
     > marks {
-      color: gtkalpha(currentColor, 0.55);
+      color: gtkalpha(currentColor, $dim_label_opacity);
       &.top    { margin-bottom: $_marks_distance; }
       &.bottom { margin-top: $_marks_distance; }
 
@@ -152,11 +155,15 @@ scale {
     &.marks-after > trough > slider {
       border-bottom-right-radius: 0;
     }
+
+    &.marks-before.marks-after > trough > slider {
+      border-radius: 100%;
+    }
   }
 
   &.vertical {
     > marks {
-      color: gtkalpha(currentColor, 0.55);
+      color: gtkalpha(currentColor, $dim_label_opacity);
       &.top    { margin-right: $_marks_distance; }
       &.bottom { margin-left: $_marks_distance; }
 
@@ -191,7 +198,7 @@ scale {
     min-width: 0;
 
     > trough {
-      background-image: image($borders_color);
+      background-image: image($border_color);
       background-repeat: no-repeat;
     }
 

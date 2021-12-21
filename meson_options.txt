@@ -6,8 +6,10 @@ option('gtksourceview', type: 'boolean', value: true, description:'build gtksour
 option('metacity', type: 'boolean', value: true, description:'build metacity component')
 option('sounds', type: 'boolean', value: true, description:'build sounds component')
 option('sessions', type: 'boolean', value: true, description:'build sessions component')
-option('communitheme_compat', type: 'boolean', value: false, description:'build communitheme-compact')
 
-option('default', type: 'boolean', value: true, description:'build Yaru gtk default flavour')
-option('dark', type: 'boolean', value: true, description:'build Yaru gtk dark flavour')
+option('default', type: 'boolean', value: true, description:'build Yaru default flavour')
+option('dark', type: 'boolean', value: true, description:'build Yaru dark flavour')
+option('mate', type: 'boolean', value: false, description:'build Yaru mate flavour')
+option('mate-dark', type: 'boolean', value: false, description:'build Yaru mate-dark flavour')
 option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
+option('xfwm4', type: 'boolean', value: false, description:'build Yaru with xfwm4 assets')

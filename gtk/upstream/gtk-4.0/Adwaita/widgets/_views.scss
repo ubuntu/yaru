@@ -1,29 +1,31 @@
 .view,
 %view {
-  color: $text_color;
-  background-color: $base_color;
+  color: $view_fg_color;
+  background-color: $view_bg_color;
 
   &:disabled {
-    color: $insensitive_fg_color;
-    background-color: $insensitive_bg_color;
+    color: gtkalpha(currentColor, .5);
+    background-color: gtkmix($window_bg_color, $view_bg_color, 60%);
   }
 
   &:selected {
     &:focus, & {
       background-color: $view_selected_color;
 
-      border-radius: 3px;
+      border-radius: $button_radius;
     }
   }
 }
 
 textview {
+  caret-color: currentColor;
+
   > text {
     @extend %view;
   }
 
   > border {
-    background-color: mix($bg_color, $base_color, 50%);
+    background-color: gtkmix($window_bg_color, $view_bg_color, 50%);
   }
 
   &:drop(active) {
@@ -48,41 +50,31 @@ iconview {
 }
 
 rubberband {
-  border: 1px solid $accent_bg_color;
-  background-color: gtkalpha($accent_bg_color, 0.2);
+  border: 1px solid $accent_color;
+  background-color: gtkalpha($accent_color, 0.2);
 }
 
-flowbox {
-  > flowboxchild {
-    padding: 3px;
-    transition: $focus_transition;
+flowbox > flowboxchild,
+gridview > child {
+  padding: 3px;
+  transition: $focus_transition;
+  border-radius: $button_radius;
 
-    @include focus-ring();
+  @include focus-ring();
 
-    &:selected {
-      background-color: $view_selected_color;
-    }
+  &:selected {
+    background-color: $view_selected_color;
   }
 }
 
-gridview {
-  > child {
-    padding: 3px;
-    transition: $focus_transition;
+gridview > child.activatable {
+  &:hover { background-color: $view_hover_color; }
 
-    @include focus-ring();
+  &:active { background-color: $view_active_color; }
 
-    &:selected {
-      background-color: $view_selected_color;
-    }
+  &:selected {
+    &:hover { background-color: $view_selected_hover_color; }
 
-    box { //cells
-      border-spacing: 8px; //label separation
-      margin: 12px;
-    }
+    &:active { background-color: $view_selected_active_color; }
   }
-}
-
-.content-view {
-  background-color: darken($bg_color,7%);
 }

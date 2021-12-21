@@ -1,6 +1,6 @@
 ## Cursor Theme Source
 
-- Do not edit cursor assets directly (i.e. those in the "Suru" folder)! 
+- Do not edit cursor assets directly (i.e. those in the "Yaru" folder)! 
 - To modify the cursors, edit source SVG file found in this directory and render them with the appropriate script.
 - To edit the cursors you will need `inkscape` installed and to build and the render the cursor set you'll need `python-pil` and `x11-apps` installed.
 
@@ -11,9 +11,9 @@ For simplified development, has various scripts to render and build the cursor s
  - [**render-cursors.py**](./render-cursors.py) will render the cursor PNG assets into [bitmaps](./bitmaps) at the appropriate sizes; run by passing the source filename to it: `./render-cursors.py source-cursors.svg`
 Inside the Bitmaps folder you'll find folders containing the rendered `.png` files (24x24, 32x32,...). These must be removed, but the `.in` files are needed for the script to run.
 
- - [**x11-make.sh**](./x11-make.sh) builds the cursor assets into a Xcursor set and renders them to `/icons/Suru/cursors/`. These files have no extension.
+ - [**x11-make.sh**](./x11-make.sh) builds the cursor assets into a Xcursor set and renders them to `/icons/Yaru/cursors/`. These files have no extension.
  
- - [**w32-make.sh**](./w32-make.sh) builds the cursor assets into a Windows cursor set and renders them to `/icons/Suru/cursors/`. These files have the `.cur`extension.
+ - [**w32-make.sh**](./w32-make.sh) builds the cursor assets into a Windows cursor set and renders them to `/icons/Yaru/cursors/`. These files have the `.cur`extension.
 
 ## Cursor SVG source
 

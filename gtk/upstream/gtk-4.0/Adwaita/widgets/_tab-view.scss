@@ -1,35 +1,31 @@
-$tab_bg: $headerbar_bg_color;
+$tab_needs_attention_gradient: radial-gradient(ellipse at bottom,
+                                               transparentize(white, .2),
+                                               gtkalpha($accent_color, .4) 10%,
+                                               gtkalpha($accent_color, 0) 30%);
 
-@mixin undershoot-gradient($dir) {
-  @if $variant == 'dark' {
-    background: linear-gradient(to #{$dir},
-                                transparentize(black, .6),
-                                transparentize(black, 1) 20px);
-  }
-  @else {
-    background: linear-gradient(to #{$dir},
-                                transparentize(black, .93),
-                                transparentize(black, 1) 20px);
-  }
+
+@mixin undershoot-gradient($dir, $color) {
+  background: linear-gradient(to #{$dir},
+                              $color,
+                              transparentize(black, 1) 20px);
 }
 
 @mixin need-attention-gradient($dir) {
   background: linear-gradient(to #{$dir},
-                              gtkalpha($accent_bg_color, .7),
-                              gtkalpha($accent_bg_color, .5) 1px,
-                              gtkalpha($accent_bg_color, 0) 20px);
+                              gtkalpha($accent_color, .5),
+                              gtkalpha($accent_color, .3) 1px,
+                              gtkalpha($accent_color, 0) 20px);
 }
 
 tabbar {
   .box {
     min-height: 38px;
-    background: darken($tab_bg, 3%);
-    border-bottom: 1px solid $alt_borders_color;
+    border-bottom: 1px solid $border_color;
   }
 
   scrolledwindow.pinned {
     undershoot {
-      border: 0 solid $alt_borders_color;
+      border: 0 solid $border_color;
     }
 
     &:dir(rtl) undershoot.left {
@@ -40,13 +36,13 @@ tabbar {
       border-right-width: 1px;
     }
 
-    tabbox {
+    tabbox > background {
       &:dir(ltr) {
-        box-shadow: inset -1px 0 $alt_borders_color;
+        box-shadow: inset -1px 0 $border_color;
       }
 
       &:dir(rtl) {
-        box-shadow: inset 1px 0 $alt_borders_color;
+        box-shadow: inset 1px 0 $border_color;
       }
     }
   }
@@ -55,11 +51,11 @@ tabbar {
     transition: background 150ms ease-in-out;
 
     &.left {
-      @include undershoot-gradient("right");
+      @include undershoot-gradient("right", $shade_color);
     }
 
     &.right {
-      @include undershoot-gradient("left");
+      @include undershoot-gradient("left", $shade_color);
     }
   }
 
@@ -71,32 +67,42 @@ tabbar {
     @include need-attention-gradient("left");
   }
 
+  tabbox > background {
+    background-color: $shade_color;
+  }
+
   tab {
     border-style: solid;
-    border-color: $alt_borders_color;
+    border-color: $border_color;
     border-width: 0 1px 0 1px;
     transition: background 150ms ease-in-out, $focus_transition;
-    background-color: $tab_bg;
+    background-color: gtkalpha($shade_color, .6);
+    background-clip: padding-box;
 
     @include focus-ring();
 
     &:checked {
-      background-color: lighten($tab_bg, 6%);
-
-      &:hover {
-        background-color: lighten($tab_bg, 9%);
-      }
+      background-color: transparent;
     }
 
     &:hover {
-      background-color: lighten($tab_bg, 3%);
+      background-image: image(gtkalpha(currentColor, .03));
+    }
+
+    &.needs-attention {
+      background-image: $tab_needs_attention_gradient;
+
+      &:hover {
+        background-image: image(gtkalpha(currentColor, .03)), $tab_needs_attention_gradient;
+      }
     }
   }
 
   .start-action,
   .end-action {
-    background: $tab_bg;
-    border-color: $alt_borders_color;
+    background-color: gtkalpha($shade_color, .6);
+    background-clip: padding-box;
+    border-color: $border_color;
     border-style: solid;
     transition: background 150ms ease-in-out;
 
@@ -115,23 +121,89 @@ tabbar {
   .end-action:dir(ltr) {
     border-left-width: 1px;
   }
+
+  &:not(.inline) {
+    .box {
+      background-color: $headerbar_bg_color;
+      color: $headerbar_fg_color;
+      border-color: $headerbar_border_color;
+    }
+
+    scrolledwindow.pinned {
+      undershoot {
+        border-color: $headerbar_border_color;
+      }
+
+      tabbox > background {
+        &:dir(ltr) {
+          box-shadow: inset -1px 0 $headerbar_border_color;
+        }
+
+        &:dir(rtl) {
+          box-shadow: inset 1px 0 $headerbar_border_color;
+        }
+      }
+    }
+
+    undershoot {
+      &.left {
+        @include undershoot-gradient("right", $headerbar_shade_color);
+      }
+
+      &.right {
+        @include undershoot-gradient("left", $headerbar_shade_color);
+      }
+    }
+
+    .needs-attention-left undershoot.left {
+      @include need-attention-gradient("right");
+    }
+
+    .needs-attention-right undershoot.right {
+      @include need-attention-gradient("left");
+    }
+
+    tabbox > background {
+      background-color: $headerbar_shade_color;
+    }
+
+    tab {
+      border-color: $headerbar_border_color;
+      background-color: gtkalpha($headerbar_shade_color, .6);
+
+      &:checked {
+        background-color: transparent;
+      }
+    }
+
+    .start-action,
+    .end-action {
+      background-color: gtkalpha($headerbar_shade_color, .6);
+      border-color: $headerbar_border_color;
+    }
+
+    &:backdrop .box {
+      background-color: $headerbar_backdrop_color;
+      transition: $backdrop_transition;
+    }
+  }
 }
 
 dnd tab {
   min-height: 26px;
-  background-color: lighten($tab_bg, 9%);
+  background-color: $headerbar_bg_color;
+  color: $headerbar_fg_color;
 
-  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
-
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.75),
-              0 0 0 1px $_wm_border;
-
-  @if $variant == 'dark' {
-    $_wm_outline: if($contrast=='high', transparentize(white, .7), transparentize(white, .9));
-
-    outline: 1px solid $_wm_outline;
-    outline-offset: -1px;
+  &.needs-attention {
+    background-image: $tab_needs_attention_gradient;
   }
+
+  box-shadow: 0 1px 5px 1px transparentize(black, .91),
+              0 2px 14px 3px transparentize(black, .95),
+              0 0 0 1px transparentize(black, if($contrast == 'high', .2, .95));
+
+  outline: 1px solid $window_outline_color;
+  outline-offset: -1px;
 
   margin: 25px;
 }
@@ -140,14 +212,6 @@ tabbar,
 dnd {
   tab {
     padding: 6px;
-
-    &.needs-attention {
-      background-image:
-        radial-gradient(ellipse at bottom,
-                        transparentize(white, .2),
-                        gtkalpha($accent_bg_color, .2) 15%,
-                        gtkalpha($accent_bg_color, 0) 15%);
-    }
 
     button.image-button {
       padding: 0;

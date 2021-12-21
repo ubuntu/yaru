@@ -49,13 +49,9 @@ If you found a bug please consider to fill below information, this will help us 
 <!--
 Please report the Yaru version in your system using one of the following commands
 
-* If you just use the default Ubuntu session (since Ubuntu 18.10)
+* If you just use the default Ubuntu session
 
     `$ apt show yaru-theme-icon`
-
-* If you installed Yaru via Snap (Ubuntu 18.04 only)
-
-    `$ snap info communitheme`
 
 * If you installed from the sources, go the Yaru folder and copy the output of the following terminal command instead
 

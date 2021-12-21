@@ -1,27 +1,23 @@
 // Smaller windowcontrols and orange close button
-windowcontrols {
-    margin-left: 7px; // Fix windowcontrols misalignement caused by smaller windowcontrols
+windowcontrols {  
 
     button {
-        padding: 2px;
-        margin: 0 7px;
+
+        > image {
+            background: transparent;
+        }
+
+        &:hover > image {
+            background: $view_hover_color;
+        }
+    
+        &:active > image {
+            background: $view_active_color;
+        }
+        
         &.close {
-            background: $orange_5;
-
-            &:hover {
-                background: lighten($orange_5, 5%);
-            }
-
-            &:active {
-                background: darken($orange_5, 5%);
-            }
-
-            &:backdrop {
-                background: desaturate($orange_5, 100%);
-            }
-
-            image {
-                color: $light_2;
+            > image {
+                background: $button_color;
             }
         }
     }
@@ -29,7 +25,7 @@ windowcontrols {
 
 // Reducing the amount of the palette's background colors to two
 .sidebar {
-    background-color: $bg_color;
+    background-color: $window_bg_color;
 }
 
 // Entries drown if drawn on widgets with $base_color
@@ -37,7 +33,7 @@ windowcontrols {
 // Remove this when upstream makes entries have a light border in the dark theme
 @if $variant== "dark" {
     notebook entry {
-        background-color: darken($base_color, 2%);
+        background-color: gtkmix($view_bg_color, black, 98%);
     }
 }
 
@@ -76,19 +72,31 @@ levelbar {
 %button,
 button {
     &.suggested-action {
-        color: $suggested_fg_color;
+        color: $success_fg_color;
 
         &,
         &:checked {
             &:not(.flat) {
-                background-color: $suggested_bg_color;
+                background-color: $success_bg_color;
             }
         }
     }
 
     &.flat {
         &.suggested-action {
-            color: $suggested_color;
+            color: $success_color;
+        }
+    }
+}
+
+splitbutton {
+    &.suggested-action {
+        > button, > menubutton > button {
+            color: $success_fg_color;
+    
+            &, &:checked {
+                background-color: $success_bg_color;
+            }
         }
     }
 }

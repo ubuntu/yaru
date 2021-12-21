@@ -1,21 +1,35 @@
 viewswitcher {
-  &, & button.toggle {
+  margin: 0;
+
+  &.wide {
+    border-spacing: 3px;
+  }
+
+  &.narrow button.toggle {
+    border-radius: 0;
     margin: 0;
-    padding: 0;
+
+    @if $contrast == 'high' {
+      &:hover,
+      &.keyboard-activating,
+      &:active,
+      &:checked {
+        box-shadow: inset  1px 0 $border_color,
+                    inset -1px 0 $border_color;
+      }
+    }
   }
 
   button.toggle {
-    border-radius: 0;
-    border-top: none;
-    border-bottom: none;
-    font-size: 1rem;
-    font-weight: inherit;
+    font-weight: bold;
+    padding: 0;
 
     > stack > box {
       &.narrow {
         font-size: 0.75rem;
         padding-top: 7px;
         padding-bottom: 5px;
+        border-spacing: 4px;
 
         > stack > label {
           padding-left: 8px;
@@ -24,21 +38,8 @@ viewswitcher {
       }
 
       &.wide {
-        padding: 8px 12px;
-
-        > stack > label {
-          &:dir(ltr) {
-            padding-right: 7px;
-          }
-
-          &:dir(rtl) {
-            padding-left: 7px;
-          }
-        }
-      }
-
-      label.active {
-        font-weight: bold;
+        padding: 2px 12px;
+        border-spacing: 6px;
       }
     }
   }
@@ -81,7 +82,6 @@ indicatorbin {
       font-weight: bold;
       padding: 1px 4px;
       color: white;
-      font-feature-settings: "tnum";
     }
   }
 

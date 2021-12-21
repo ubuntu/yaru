@@ -1,33 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-light">
-    <file alias='gtk.css'>gtk-light.css</file>
-  </gresource>
-
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-dark">
-    <file alias='gtk.css'>gtk-dark.css</file>
-    <file alias='gtk-dark.css'>gtk-dark.css</file>
-  </gresource>
-
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-hc">
-    <file alias='gtk.css'>gtk-hc.css</file>
-  </gresource>
-
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-hc-dark">
-    <file alias='gtk.css'>gtk-hc-dark.css</file>
-    <file alias='gtk-dark.css'>gtk-hc-dark.css</file>
-  </gresource>
-
-  <gresource prefix="/org/gtk/libgtk/theme/Adwaita">
-    <file>gtk.css</file>
-    <file>gtk-light.css</file>
-    <file>gtk-hc.css</file>
-    <file>gtk-hc-dark.css</file>
-
-    <file>Adwaita-light.css</file>
-    <file>Adwaita-dark.css</file>
-    <file>Adwaita-hc.css</file>
-    <file>Adwaita-hc-dark.css</file>
+  <gresource prefix="/org/gnome/Adwaita/styles">
+    <file>base.css</file>
+    <file>base-hc.css</file>
+    <file>defaults-light.css</file>
+    <file>defaults-dark.css</file>
 
     <file>assets/bullet-symbolic.symbolic.png</file>
     <file>assets/bullet@2-symbolic.symbolic.png</file>
@@ -39,5 +16,14 @@
     <file>assets/bullet-symbolic.svg</file>
     <file>assets/check-symbolic.svg</file>
     <file>assets/dash-symbolic.svg</file>
+
+    <file>assets/devel-symbolic.svg</file>
+  </gresource>
+
+  <gresource prefix="/org/gtk/libgtk/theme/Adwaita-empty">
+    <file alias='gtk.css'>empty.css</file>
+    <file alias='gtk-dark.css'>empty.css</file>
+    <file alias='gtk-hc.css'>empty.css</file>
+    <file alias='gtk-hc-dark.css'>empty.css</file>
   </gresource>
 </gresources>

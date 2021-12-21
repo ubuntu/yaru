@@ -14,17 +14,11 @@ shortcut {
   > .keycap {
     min-width: 20px;
     min-height: 25px;
-    margin-top: 2px;
-    padding-bottom: 3px;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding: 2px 6px;
 
-    color: $fg_color;
-    background-color: $base_color;
-    border: 1px solid;
-    border-color: if($variant == 'light', mix($borders_color, $bg_color, 50%), $borders_color);
-    border-radius: 5px;
-    box-shadow: if($variant == 'light', inset 0 -3px mix($base_color, $bg_color, 20%), inset 0 -3px mix($borders_color, $base_color, 60%));
+    @extend %card;
+
+    border-radius: $button_radius;
     font-size: smaller;
   }
 }

@@ -1,8 +1,11 @@
-// stuff for .needs-attention
-@keyframes needs_attention {
-  from { background-image: radial-gradient(farthest-side, $accent_bg_color 0%, transparent 0%); }
-  to { background-image: radial-gradient(farthest-side, $accent_bg_color 95%, transparent); }
-}
+$button_color: gtkalpha(currentColor, .1);
+$button_hover_color: gtkalpha(currentColor, .15);
+$button_active_color: gtkalpha(currentColor, .3);
+$button_checked_color: gtkalpha(currentColor, .3);
+$button_checked_hover_color: gtkalpha(currentColor, .35);
+$button_checked_active_color: gtkalpha(currentColor, .4);
+
+$opaque_button_default_bg: gtkmix($window_bg_color, $window_fg_color, 85%);
 
 %button,
 button {
@@ -11,40 +14,47 @@ button {
     min-width: 16px;
     padding: 5px 10px;
     border-radius: $button_radius;
-    background-color: $button_color;
     font-weight: bold;
-
-    @if $contrast == 'high' {
-      box-shadow: inset 0 0 0 1px $borders_color;
-    }
 
     @include focus-ring();
     transition: $button_transition;
 
-    &:hover {
-      background-color: $button_hover_color;
+    .osd &:focus:focus-visible {
+      outline-color: $osd_focus_color;
     }
 
-    &.keyboard-activating,
-    &:active {
-      background-color: $button_active_color;
-    }
+    @at-root %button_basic_raised, & {
+      background-color: $button_color;
 
-    &:checked {
-      background-color: $button_checked_color;
+      @if $contrast == 'high' {
+        box-shadow: inset 0 0 0 1px $border_color;
+      }
 
       &:hover {
-        background-color: $button_checked_hover_color;
+        background-color: $button_hover_color;
       }
 
       &.keyboard-activating,
       &:active {
-        background-color: $button_checked_active_color;
+        background-color: $button_active_color;
+      }
+
+      &:checked {
+        background-color: $button_checked_color;
+
+        &:hover {
+          background-color: $button_checked_hover_color;
+        }
+
+        &.keyboard-activating,
+        &:active {
+          background-color: $button_checked_active_color;
+        }
       }
     }
 
     &:disabled {
-      filter: opacity(.5);
+      filter: opacity($disabled_opacity);
 
       label {
         filter: none;
@@ -53,8 +63,8 @@ button {
 
     &.image-button {
       min-width: 24px;
-      padding-left: 6px;
-      padding-right: 6px;
+      padding-left: 5px;
+      padding-right: 5px;
     }
 
     &.text-button {
@@ -62,13 +72,30 @@ button {
       padding-right: 17px;
     }
 
-    &.text-button.image-button {
+    &.text-button.image-button,
+    &.image-text-button {
       padding-left: 9px;
       padding-right: 9px;
 
-      label {
-        padding-left: 8px;
-        padding-right: 8px;
+      > box,
+      > box > box {
+        border-spacing: 4px;
+
+        > label {
+          padding-left: 2px;
+          padding-right: 2px;
+        }
+      }
+    }
+
+    &.arrow-button {
+      padding-left: 9px;
+      padding-right: 9px;
+
+      > box { border-spacing: 4px; }
+
+      &.text-button {
+        > box { border-spacing: 4px; }
       }
     }
 
@@ -84,11 +111,11 @@ button {
   &.osd {
     min-width: 32px;
     min-height: 32px;
-    @include focus-ring($outer: true, $offset: 1px);
+    @include focus-ring($outer: true, $offset: 1px, $fc: $osd_focus_color);
     transition: $button_transition;
 
     color: $osd_fg_color;
-    background-color: $osd_bg_color;
+    background-color: transparentize(black, .35);
 
     @if $contrast == 'high' {
       box-shadow: 0 0 0 1px currentColor;
@@ -96,25 +123,25 @@ button {
 
     &:hover {
       color: white;
-      background-color: lighten($osd_bg_color, 10%);
+      background-color: gtkalpha(gtkmix(black, currentColor, 85%), .65);
     }
 
     &.keyboard-activating,
     &:active {
       color: white;
-      background-color: darken($osd_bg_color, 20%);
+      background-color: gtkalpha(gtkmix(black, currentColor, 75%), .65);
     }
 
     &:checked {
-      background-color: darken($osd_bg_color, 15%);
+      background-color: gtkalpha(gtkmix(black, currentColor, 80%), .65);
 
       &:hover {
-        background-color: darken($osd_bg_color, 5%);
+        background-color: gtkalpha(gtkmix(black, currentColor, 75%), .65);
       }
 
       &.keyboard-activating,
       &:active {
-        background-color: darken($osd_bg_color, 30%);
+        background-color: gtkalpha(gtkmix(black, currentColor, 65%), .65);
       }
     }
 
@@ -124,11 +151,15 @@ button {
     }
   }
 
-  @at-root %filled_button {
+  @at-root %opaque_button {
     box-shadow: none;
 
     @include focus-ring($outer: true, $offset: 1px);
     transition: $button_transition;
+
+    .osd &:focus:focus-visible {
+      outline-color: $osd_focus_color;
+    }
 
     &:hover {
       background-image: image(gtkalpha(currentColor, .1));
@@ -153,8 +184,15 @@ button {
     }
   }
 
+  &.opaque {
+    @extend %opaque_button;
+
+    background-color: $opaque_button_default_bg;
+    color: $window_fg_color;
+  }
+
   &.destructive-action {
-    @extend %filled_button;
+    @extend %opaque_button;
 
     color: $destructive_fg_color;
 
@@ -164,7 +202,7 @@ button {
   }
 
   &.suggested-action {
-    @extend %filled_button;
+    @extend %opaque_button;
 
     color: $accent_fg_color;
 
@@ -179,6 +217,10 @@ button {
     @include focus-ring();
     transition: $button_transition;
 
+    .osd &:focus:focus-visible {
+      outline-color: $osd_focus_color;
+    }
+
     box-shadow: none;
 
     @if $contrast == 'high' {
@@ -186,7 +228,7 @@ button {
       &.keyboard-activating,
       &:active,
       &:checked {
-        box-shadow: inset 0 0 0 1px $borders_color;
+        box-shadow: inset 0 0 0 1px $border_color;
       }
     }
 
@@ -212,12 +254,8 @@ button {
       }
     }
 
-    &.suggested-action {
-      color: $accent_color;
-    }
-
-    &.destructive-action {
-      color: $destructive_color;
+    &:disabled:not(:checked) {
+      filter: opacity($strong_disabled_opacity);
     }
 
     // Specificity bump
@@ -263,25 +301,46 @@ button {
 
     label { padding: 0; }
   }
-}
 
-%needs_attention {
-  // the dot is drawn by using two radial gradient, the first one is the actual dot, the other
-  // simulates the shadow labels and icons normally have in buttons.
-  animation: needs_attention 150ms ease-in;
+  @at-root %pill_button,
+  &.pill {
+    padding: 10px 32px;
+    border-radius: 9999px;
+  }
 
-  background-image: radial-gradient(farthest-side, $accent_bg_color 96%, transparent);
-  background-size: 6px 6px, 6px 6px;
-  background-repeat: no-repeat;
+  &.card {
+    background-color: $card_bg_color;
+    background-clip: padding-box;
+    font-weight: inherit;
+    padding: 0;
 
-  @if $variant == 'light' { background-position: right 3px, right 4px; }
+    transition: $button_transition;
 
-  @else { background-position: right 3px, right 2px; }
+    &:hover {
+      background-image: image(gtkalpha(currentColor, .03));
+    }
 
-  &:dir(rtl) {
-    @if $variant == 'light' { background-position: left 3px, left 4px; }
+    &.keyboard-activating,
+    &:active {
+      background-image: image(gtkalpha(currentColor, .08));
+    }
 
-    @else { background-position: left 3px, left 2px; }
+    &:checked {
+      background-color: $card_bg_color;
+      background-image: image($view_selected_color);
+
+      &:hover { background-image: image($view_selected_hover_color); }
+
+      &.keyboard-activating,
+      &:active { background-image: image($view_selected_active_color); }
+
+      &.has-open-popup { background-image: image($view_selected_hover_color); }
+    }
+
+    &:drop(active) {
+      color: $drop_target_color;
+      box-shadow: inset 0 0 0 1px $drop_target_color;
+    }
   }
 }
 
@@ -303,46 +362,13 @@ button.color {
       filter: none;
     }
 
-    @if $variant == 'light' {
-      &.light > overlay {
-        border-color: transparentize(black, .8);
-      }
+    &.light > overlay {
+      border-color: gtkalpha($view_fg_color, 0.1);
     }
-  }
-}
-
-/* list buttons */
-/* tone down as per new designs, see issue #1473 */
-%outline_button,
-button.outline {
-  @extend %button_basic_flat;
-
-  @if $contrast == 'high' {
-    box-shadow: inset 0 0 0 1px $borders_color;
-  }
-  @else {
-    box-shadow: inset 0 0 0 1px gtkalpha(currentColor, .15);
-
-    &:hover, &:active, &:checked {
-      box-shadow: none;
-    }
-  }
-
-  // Specificity bump
-  &:drop(active) {
-    @extend %button_basic_drop_active;
   }
 }
 
 menubutton {
-  > button > box {
-    border-spacing: 6px;
-  }
-
-  > button.arrow-button > box {
-    border-spacing: 3px;
-  }
-
   &.osd {
     background: none;
     color: inherit;
@@ -352,7 +378,47 @@ menubutton {
 
   &.circular > button { @extend %circular_button; }
   &.flat > button { @extend %button_basic_flat; }
-  &.outline > button { @extend %outline_button; }
+  &.pill > button { @extend %pill_button; }
+
+  &.suggested-action {
+    background-color: $accent_bg_color;
+    color: $accent_fg_color;
+  }
+
+  &.destructive-action {
+    background-color: $destructive_bg_color;
+    color: $destructive_fg_color;
+  }
+
+  &.opaque {
+    background-color: $opaque_button_default_bg;
+    color: $window_fg_color;
+  }
+
+  &.suggested-action,
+  &.destructive-action,
+  &.opaque {
+    border-radius: $button_radius;
+
+    &.circular, &.pill {
+      border-radius: 9999px;
+    }
+
+    > button {
+      @extend %opaque_button;
+
+      &, &:checked {
+        background-color: transparent;
+        color: inherit;
+      }
+    }
+  }
+
+  &.image-button > button {
+    min-width: 24px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 
   arrow {
     min-height: 16px;
@@ -371,6 +437,148 @@ menubutton {
     }
     &.right {
       -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+    }
+  }
+}
+
+splitbutton {
+  border-radius: $button_radius;
+
+  &, & > separator {
+    transition: $button_transition;
+    transition-property: background;
+  }
+
+  > separator {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    background: none;
+  }
+
+  > menubutton > button {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  // Since the inner button doesn't have any style classes on it,
+  // we have to add them manually
+  &.image-button > button {
+    min-width: 24px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  &.text-button.image-button > button,
+  &.image-text-button > button {
+    padding-left: 9px;
+    padding-right: 9px;
+
+    > box {
+      border-spacing: 6px;
+    }
+  }
+
+  // Reimplementing linked so we don't blow up css
+  > button:dir(ltr),
+  > menubutton > button:dir(rtl) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: -1px;
+  }
+
+  > button:dir(rtl),
+  > menubutton > button:dir(ltr) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
+  }
+
+  @at-root %flat_split_button,
+  &.flat {
+    > separator {
+      background: gtkalpha(currentColor, $dimmer_opacity);
+    }
+
+    &:hover,
+    &:active,
+    &:checked {
+      background: $view_hover_color;
+
+      > separator {
+        background: none;
+      }
+
+      @if $contrast == 'high' {
+        box-shadow: inset 0 0 0 1px $thin_border_color;
+      }
+    }
+
+    &:focus-within:focus-visible > separator {
+      background: none;
+    }
+
+    > button,
+    > menubutton > button {
+      @extend %button_basic_flat;
+
+      border-radius: $button_radius;
+    }
+  }
+
+  &.suggested-action {
+    background-color: $accent_bg_color;
+    color: $accent_fg_color;
+  }
+
+  &.destructive-action {
+    background-color: $destructive_bg_color;
+    color: $destructive_fg_color;
+  }
+
+  &.opaque {
+    background-color: $opaque_button_default_bg;
+    color: $window_fg_color;
+  }
+
+  &.suggested-action,
+  &.destructive-action,
+  &.opaque {
+    > button, > menubutton > button {
+      @extend %opaque_button;
+
+      &, &:checked {
+        color: inherit;
+        background-color: transparent;
+      }
+    }
+
+    $_separator_color: gtkalpha(currentColor, $dimmer_opacity);
+    > menubutton > button {
+      &:dir(ltr) { box-shadow: inset 1px 0 $_separator_color; }
+      &:dir(rtl) { box-shadow: inset -1px 0 $_separator_color; }
+    }
+  }
+
+  > menubutton > button > arrow.none {
+    -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+  }
+}
+
+buttoncontent {
+  border-spacing: 6px;
+
+  > label {
+    font-weight: bold;
+
+    &:dir(ltr) { padding-right: 2px; }
+    &:dir(rtl) { padding-left: 2px; }
+  }
+
+  .arrow-button > box > &,
+  splitbutton > button > & {
+    > label {
+      &:dir(ltr) { padding-right: 0; }
+      &:dir(rtl) { padding-left: 0; }
     }
   }
 }

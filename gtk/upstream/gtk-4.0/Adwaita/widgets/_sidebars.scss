@@ -1,23 +1,25 @@
+// Deprecated: use .navigation-sidebar instead
 .sidebar {
-  background-color: mix($bg_color, $base_color, 50%);
-
   &:not(separator) {
     &:dir(ltr),
     &.left,
     &.left:dir(rtl) {
-      border-right: 1px solid $borders_color;
+      border-right: 1px solid $border_color;
       border-left-style: none;
     }
 
     &:dir(rtl),
     &.right {
-      border-left: 1px solid $borders_color;
+      border-left: 1px solid $border_color;
       border-right-style: none;
     }
   }
 
   listview.view,
-  list { background-color: transparent; }
+  list {
+    background-color: transparent;
+    color: inherit;
+  }
 
   paned & { &.left, &.right, &.left:dir(rtl), &:dir(rtl), &:dir(ltr), & { border-style: none; }}
 }
@@ -38,7 +40,7 @@ stacksidebar row {
 }
 
 separator.sidebar {
-  background-color: $borders_color;
+  background-color: $border_color;
 }
 
 /**********************
@@ -46,6 +48,16 @@ separator.sidebar {
  **********************/
 
 .navigation-sidebar {
+  &, &.view {
+    background-color: transparent;
+    color: inherit;
+  }
+
+  &.background {
+    background-color: $window_bg_color;
+    color: $window_fg_color;
+  }
+
   padding: $menu-margin 0; //only vertical padding. horizontal row size would clip
 
   > separator {

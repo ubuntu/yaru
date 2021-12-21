@@ -1,16 +1,12 @@
 label {
-  @include focus-ring();
+  caret-color: currentColor;
 
   &.separator {
     @extend .dim-label;
   }
 
   &:disabled {
-    filter: opacity(0.5);
-  }
-
-  &.error {
-   color: $error_color;
+    filter: opacity($disabled_opacity);
   }
 }
 
@@ -20,6 +16,18 @@ label {
 
 .accent {
   color: $accent_color;
+}
+
+.success {
+  color: $success_color;
+}
+
+.warning {
+  color: $warning_color;
+}
+
+.error {
+  color: $error_color;
 }
 
 /**********************
@@ -75,10 +83,15 @@ label {
   font-family: monospace;
 }
 
+.numeric {
+  font-feature-settings: "tnum";
+}
+
 /*******************
  * Editable Labels *
  *******************/
 
 editablelabel > stack > text {
-  @include entry(normal);
+  color: $view_fg_color;
+  background-color: $view_bg_color;
 }

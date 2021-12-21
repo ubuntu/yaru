@@ -5,11 +5,11 @@
 ##
 ## options:
 ##     -a, --all                Optimize ALL the icons in icons/src/<context> [default:0]
-##     -c, --context <name>     Optimize ALL the icons in icons/src/<context> and save them under icons/Suru/<context>
-##     -f, --file <name>        Optimize only the icon in icons/src/<context>/<path> and save it under icons/Suru/<context>/<name> (needs --context)
+##     -c, --context <name>     Optimize ALL the icons in icons/src/<context> and save them under icons/Yaru/<context>
+##     -f, --file <name>        Optimize only the icon in icons/src/<context>/<path> and save it under icons/Yaru/<context>/<name> (needs --context)
 ##
 ## NOTE:
-## contexts are: actions, apps, categories, devices, emblems, mimetypes, places, status.
+## contexts are: actions, apps, camera, categories, devices, emblems, emotes, generic-symbols, legacy, mimetypes, multimedia, phosh, places, status, time, ui.
 
 # CLInt GENERATED_CODE: start
 
@@ -57,7 +57,7 @@ fatal() {
   exit 1
 }
 
-contexts=( actions apps categories devices emblems mimetypes places status )
+contexts=( actions apps camera categories devices emblems emotes generic-symbols legacy mimetypes multimedia phosh places status time ui )
 
 ###################################################
 # CHECKS
@@ -86,8 +86,8 @@ optimize() {
   INPUT=${GROUP}/${NAME}
   [[ ! -f ${INPUT} ]] && fatal "could not find input file: ${INPUT}"
 
-  OUTDIR=../../Suru/scalable/${GROUP}/
-  OUTPUT=../../Suru/scalable/${GROUP}/${NAME}
+  OUTDIR=../../Yaru/scalable/${GROUP}/
+  OUTPUT=../../Yaru/scalable/${GROUP}/${NAME}
   [[ ! -d ${OUTDIR} ]] && fatal "could not find output directory: ${OUTDIR}"
 
   cmd="scour -i ${INPUT} -o ${OUTPUT} --enable-viewboxing --create-groups --shorten-ids --enable-id-stripping --enable-comment-stripping --disable-embed-rasters --remove-metadata --strip-xml-prolog"

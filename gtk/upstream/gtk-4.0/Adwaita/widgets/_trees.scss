@@ -1,12 +1,14 @@
 // To be used for opaque elements overlaid atop the selected row
-$treeview_selection_default: transparentize($text_color, .9);
-$treeview_selection_opaque: mix(opacify($treeview_selection_default, 1), $base_color, 100% * alpha($treeview_selection_default));
+$treeview_selection_opaque: gtkmix(currentColor, $view_bg_color, 10%);
+$treeview_borders_opaque: gtkmix(currentColor, $view_bg_color, if($contrast == 'high', 40%, 20%));
+
+treeview.view {
+  border-left-color: $treeview_borders_opaque; // this is actually the tree lines color,
+  border-top-color: $treeview_borders_opaque; // while this is the grid lines color, better then nothing
+}
 
 columnview.view,
 treeview.view {
-  border-left-color: $treeview_borders_color; // this is actually the tree lines color,
-  border-top-color: $treeview_borders_color; // while this is the grid lines color, better then nothing
-
   @include focus-ring();
 
   &:selected {
@@ -17,7 +19,7 @@ treeview.view {
 
   &.separator {
     min-height: 2px;
-    color: $treeview_borders_color;
+    color: $border_color;
   }
 
   &:drop(active) {
@@ -42,18 +44,16 @@ treeview.view {
 
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
-    color: transparentize($text_color, .3);
+    color: gtkalpha(currentColor, .7);
 
-    &:hover { color: $text_color; }
+    &:hover { color: currentColor; }
 
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
 
-    &:disabled { color: gtkalpha(currentColor, 0.5); }
+    &:disabled { color: gtkalpha(currentColor, $disabled_opacity); }
   }
 
   &.progressbar { // progress bar in treeviews
-    @if $variant == light { color: $base_color; }
-
     &, &:selected {
       background-color: $accent_bg_color;
       color: $accent_fg_color;
@@ -63,34 +63,34 @@ treeview.view {
   }
 
   &.trough { // progress bar trough in treeviews
-    background-color: transparentize($fg_color,0.9);
+    background-color: gtkalpha(currentColor, 0.1);
   }
 
   > header {
     > button {
-      $_column_header_color: mix($fg_color, $base_color, 50%);
-
-      @extend %column_header_button;
-
-      color: $_column_header_color;
-      background-color: $base_color;
-      font-weight: bold;
+      @extend %undecorated_button;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      border-radius: 0;
       box-shadow: none;
+      line-height: 100%;
 
-      &:hover {
-        @extend %column_header_button;
+      > box {
+        color: gtkalpha(currentColor, if($contrast == 'high', .6, .4));
+        font-weight: 700;
+        font-size: 9pt;
+        border-spacing: 6px;
+      }
 
-        color: mix($_column_header_color, $fg_color, 50%);
+      &:hover > box {
+        color: gtkalpha(currentColor, if($contrast == 'high', .9, .7));
         box-shadow: none;
-        transition: none; //I shouldn't need this
       }
 
-      &:active {
-        @extend %column_header_button;
-
-        color: $fg_color;
-        transition: none; //I shouldn't need this
+      &:active > box {
+        color: currentColor;
       }
+
       sort-indicator {
         &.ascending {
           -gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
@@ -108,13 +108,8 @@ treeview.view {
   button.dnd,
   header.button.dnd { // for treeview-like derive widgets
     &:active, &:selected, &:hover, & {
-      padding: 0 6px;
-      color: $base_color;
-      background-image: none;
+      color: $accent_fg_color;
       background-color: $accent_bg_color;
-      border-style: none;
-      border-radius: 0;
-      box-shadow: inset 0 0 0 1px $base_color;
       transition: none;
     }
   }
@@ -125,20 +120,10 @@ treeview.view {
   }
 }
 
-%column_header_button {
-  padding: 0 6px;
-  background-image: none;
-  border-style: solid;
-  border-width: 0 0 1px 1px;
-  border-color: $treeview_borders_color;
-  border-radius: 0;
-
-  &:disabled {
-    border-color: $bg_color;
-    background-image: none;
-  }
-
-  &:last-child { border-right-width: 0; }
+treeview.view > header > button {
+  padding-left: 4px;
+  padding-right: 4px;
+  border-bottom: 1px solid $border_color;
 }
 
 /********************************************************
@@ -162,15 +147,37 @@ columnview {
     }
   }
 
+  > header > button {
+    padding-left: 6px;
+    padding-right: 6px;
+    border-left: 1px solid transparent;
+
+    &:first-child {
+      border-left-width: 0;
+    }
+  }
+
   // make column separators visible when :show-column-separators is true
-  &.column-separators > listview > row > cell {
-    border-left-color: $treeview_borders_color;
+  &.column-separators {
+    > listview > row > cell,
+    > header > button {
+      border-left-color: $border_color;
+    }
+  }
+
+  > listview:not(.horizontal).separators > row:not(.separator) {
+    border-top: 1px solid $border_color;
+    border-bottom: none;
   }
 
   // shrink vertically for .data-table
   &.data-table > listview > row > cell {
     padding-top: 2px;
     padding-bottom: 2px;
+  }
+
+  ~ undershoot.top {
+    box-shadow: inset 0 1px $border_color;
   }
 }
 
@@ -179,7 +186,7 @@ columnview row:not(:selected) cell editablelabel:not(.editing):focus-within {
 }
 
 columnview row:not(:selected) cell editablelabel.editing:focus-within {
-  outline: 2px solid $accent_bg_color;
+  outline: 2px solid $accent_color;
 }
 
 treeexpander {

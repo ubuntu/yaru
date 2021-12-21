@@ -9,15 +9,16 @@
 
 window.dialog.print {
   drawing {
-    color: $fg_color;
+    color: $window_fg_color;
     background: none;
     border: none;
     padding: 0;
 
     paper {
-      background: white;
-      color: $light_fg;
-      border: 1px solid $borders_color;
+      background-color: white;
+      color: transparentize(black, .2);
+      background-clip: padding-box;
+      border: 1px solid $border_color;
     }
   }
 }
@@ -29,16 +30,16 @@ window.dialog.print {
 window.assistant {
   .sidebar {
     padding: $menu-margin;
-    border-top: 1px solid $borders_color;
-  }
+    background-clip: padding-box;
 
-  &.csd .sidebar { border-top-style: none; }
+    > label {
+      padding: 6px 12px;
+      border-radius: $menu_radius;
 
-  .sidebar > label { padding: 6px 12px; }
-
-  .sidebar > label.highlight {
-    background-color: $view_selected_color;
-    border-radius: $menu-margin;
+      &.highlight {
+        background-color: $view_selected_color;
+      }
+    }
   }
 }
 

@@ -1,10 +1,8 @@
-// When color definition differs for dark and light variant
-// it gets @if ed depending on $variant
+$border_opacity: if($contrast == 'high', .5, .15);
+$thin_border_opacity: if($contrast == 'high', .25, .05);
+$focus_border_opacity: if($contrast == 'high', 0.8, 0.5);
 
-$light_fg: #2e3436;
-$dark_fg: #eeeeec;
-$light_bg: $light_2;
-$dark_bg: darken(desaturate($dark_3, 100%), 4%);
+// Colors from _defaults.scss
 
 $accent_bg_color: gtkcolor(accent_bg_color);
 $accent_fg_color: gtkcolor(accent_fg_color);
@@ -14,23 +12,46 @@ $destructive_bg_color: gtkcolor(destructive_bg_color);
 $destructive_fg_color: gtkcolor(destructive_fg_color);
 $destructive_color: gtkcolor(destructive_color);
 
+$success_bg_color: gtkcolor(success_bg_color);
+$success_fg_color: gtkcolor(success_fg_color);
 $success_color: gtkcolor(success_color);
+
+$warning_bg_color: gtkcolor(warning_bg_color);
+$warning_fg_color: gtkcolor(warning_fg_color);
 $warning_color: gtkcolor(warning_color);
+
+$error_bg_color: gtkcolor(error_bg_color);
+$error_fg_color: gtkcolor(error_fg_color);
 $error_color: gtkcolor(error_color);
 
-$base_color: if($variant == 'light', $light_1, lighten(desaturate($dark_4, 100%), 2%));
-$text_color: if($variant == 'light', black, white);
-$bg_color: if($variant == 'light', $light_bg, $dark_bg);
-$fg_color: if($variant == 'light', $light_fg, $dark_fg);
+$window_bg_color: gtkcolor(window_bg_color);
+$window_fg_color: gtkcolor(window_fg_color);
 
-$borders_color: if($variant == 'light', darken($bg_color, 18%), darken($bg_color, 10%));
-$alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 18%));
-$borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
+$view_bg_color: gtkcolor(view_bg_color);
+$view_fg_color: gtkcolor(view_fg_color);
+
+$headerbar_bg_color: gtkcolor(headerbar_bg_color);
+$headerbar_fg_color: gtkcolor(headerbar_fg_color);
+$headerbar_border_color: gtkalpha(gtkcolor(headerbar_border_color), $border_opacity);
+$headerbar_backdrop_color: gtkcolor(headerbar_backdrop_color);
+$headerbar_shade_color: gtkcolor(headerbar_shade_color);
+
+$card_bg_color: gtkcolor(card_bg_color);
+$card_fg_color: gtkcolor(card_fg_color);
+$card_shade_color: gtkcolor(card_shade_color);
+
+$popover_bg_color: gtkcolor(popover_bg_color);
+$popover_fg_color: gtkcolor(popover_fg_color);
+
+$shade_color: gtkcolor(shade_color);
+$scrollbar_outline_color: gtkcolor(scrollbar_outline_color);
+
+// Other colors
+
+$border_color: gtkalpha(currentColor, $border_opacity);
+$thin_border_color: gtkalpha(currentColor, $thin_border_opacity);
 $link_color: $accent_color;
-$link_visited_color: gtkmix($accent_color, $text_color, 80%);
-$dark_fill: mix($borders_color, $bg_color, 50%);
-$headerbar_bg_color: darken($bg_color, if($variant == 'dark', 5%, 10%));
-$menu_color: $base_color;
+$link_visited_color: gtkmix($accent_color, $view_fg_color, 80%);
 
 $view_hover_color: gtkalpha(currentColor, .07);
 $view_active_color: gtkalpha(currentColor, .16);
@@ -42,67 +63,43 @@ $trough_color: gtkalpha(currentColor, .15);
 $trough_hover_color: gtkalpha(currentColor, .2);
 $trough_active_color: gtkalpha(currentColor, .25);
 
-$button_color: gtkalpha(currentColor, .1);
-$button_hover_color: gtkalpha(currentColor, .15);
-$button_active_color: gtkalpha(currentColor, .25);
-$button_checked_color: gtkalpha(currentColor, .2);
-$button_checked_hover_color: gtkalpha(currentColor, .25);
-$button_checked_active_color: gtkalpha(currentColor, .35);
-
 $fill_color: $accent_bg_color;
 $fill_text_color: $accent_fg_color;
-$fill_hover_color: gtkmix($accent_bg_color, currentColor, 90%);
-$fill_active_color: gtkmix($accent_bg_color, black, 80%);
 
-$slider_color: mix(white, $base_color, 80%);
+$slider_color: gtkmix(white, $view_bg_color, 80%);
 $slider_hover_color: white;
 
-$scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
-$scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
-$scrollbar_slider_hover_color: mix($fg_color, $bg_color, 80%);
-$scrollbar_slider_active_color: $accent_bg_color;
-
-$osd_fg_color: $dark_fg;
+$osd_fg_color: transparentize(white, .1);
 $osd_text_color: white;
-$osd_bg_color: if($variant == 'light', transparentize($dark_bg,0.3), transparentize(darken(desaturate($dark_3, 100%), 10%),0.3));
-$osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
-$osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
-$osd_borders_color: transparentize(black, 0.3);
+$osd_bg_color: transparentize(black, 0.3);
+$osd_fill_bg_color: transparentize(white, .25);
+$osd_fill_fg_color: transparentize(black, .25);
+$osd_focus_color: transparentize(white, .5);
+$osd_link_color: gtkmix($accent_bg_color, $osd_text_color, 50%);
+$osd_link_visited_color: gtkmix($accent_bg_color, $osd_text_color, 75%);
 
-$sidebar_bg_color: mix($bg_color, $base_color, 50%);
-
-$tooltip_borders_color: transparentize(white, 0.9);
+$tooltip_border_color: transparentize(white, 0.9);
 $shadow_color: transparentize(black, 0.9);
 
-$drop_target_color: if($variant == 'light', $green_4, $green_5);
+$drop_target_color: $accent_bg_color;
 
-//insensitive state derived colors
-$insensitive_fg_color: mix($fg_color, $bg_color, 50%);
-$insensitive_bg_color: mix($bg_color, $base_color, 60%);
-$insensitive_borders_color: mix($borders_color, $bg_color, 80%);
+$window_outline_color: transparentize(white, .9);
 
 //special cased widget colors
-$focus_border_color:  gtkalpha($accent_bg_color, 0.5);
-$alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), transparentize(white,0.7));
+$focus_border_color:  gtkalpha($accent_color, $focus_border_opacity);
 $dim_label_opacity: 0.55;
+$dimmer_opacity: 0.3;
+$disabled_opacity: 0.5;
+$strong_disabled_opacity: 0.3;
 
 // High Contrast color overrides
 @if $contrast == 'high' {
-
-  $fg_color: if($variant == 'light', darken($fg_color, 3%), lighten($fg_color, 2%));
-  $bg_color: if($variant == 'light', lighten($bg_color, 3%), darken($bg_color, 2%));
-  $borders_color: if($variant == 'light', darken($borders_color, 30%), lighten($borders_color, 30%));
-  $alt_borders_color: if($variant == 'light', darken($alt_borders_color, 33%), lighten($alt_borders_color, 28%));
-
-  //insensitive state derived colors
-  $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
-  $insensitive_bg_color: mix($bg_color, $base_color, 60%);
-  $insensitive_borders_color: mix($borders_color, $bg_color, 80%);
-
-  //focus rings
-  $focus_border_color: gtkalpha($accent_bg_color, 0.8);
-  $alt_focus_border_color: if($variant == 'light', white, transparentize(white,0.4));
-
   $dim_label_opacity: 0.9;
+  $dimmer_opacity: 0.8;
+  $disabled_opacity: 0.4;
 
+  $trough_color: gtkalpha(currentColor, .3);
+  $trough_hover_color: gtkalpha(currentColor, .4);
+  $trough_active_color: gtkalpha(currentColor, .5);
+  $window_outline_color: transparentize(white, .7);
 }

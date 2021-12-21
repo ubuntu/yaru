@@ -3,7 +3,7 @@ fs = import('fs')
 stylesheet_deps = []
 
 # For git checkouts, but not for tarballs...
-if not fs.exists('Adwaita-light.css')
+if not fs.exists('base.css')
   sassc = find_program('sassc', required: false)
   if not sassc.found()
     subproject('sassc')
@@ -13,10 +13,10 @@ if not fs.exists('Adwaita-light.css')
   if sassc.found()
     sassc_opts = [ '-a', '-M', '-t', 'compact' ]
 
-    scss_files = files([
-      '_colors-public.scss',
+    scss_deps = files([
       '_colors.scss',
       '_common.scss',
+      '_compat-colors.scss',
       '_defaults.scss',
       '_drawing.scss',
       '_functions.scss',
@@ -65,21 +65,21 @@ if not fs.exists('Adwaita-light.css')
       'widgets/_window.scss',
     ])
 
-    theme_variants = [
-      'light',
-      'dark',
-      'hc',
-      'hc-dark',
+    scss_files = [
+      'base',
+      'base-hc',
+      'defaults-light',
+      'defaults-dark',
     ]
 
-    foreach variant: theme_variants
-      stylesheet_deps += custom_target('Stylesheet variant: ' + variant,
-        input: 'Adwaita-@0@.scss'.format(variant),
-        output: 'Adwaita-@0@.css'.format(variant),
+    foreach scss: scss_files
+      stylesheet_deps += custom_target('@0@.scss'.format(scss),
+        input: '@0@.scss'.format(scss),
+        output: '@0@.css'.format(scss),
         command: [
           sassc, sassc_opts, '@INPUT@', '@OUTPUT@',
         ],
-        depend_files: scss_files,
+        depend_files: scss_deps,
       )
     endforeach
   endif
@@ -97,4 +97,3 @@ libadwaita_stylesheet_resources = gnome.compile_resources(
   dependencies: stylesheet_deps,
   c_name: 'adw_stylesheet',
 )
-

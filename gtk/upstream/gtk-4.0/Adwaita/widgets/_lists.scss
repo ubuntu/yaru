@@ -1,45 +1,58 @@
 listview,
 list {
-  color: $text_color;
-  background-color: $base_color;
-  border-color: $borders_color;
+  color: $view_fg_color;
+  background-color: $view_bg_color;
+  background-clip: padding-box;
+  border-color: $border_color;
 
-  > row { padding: 2px; }
+  > row {
+    padding: 2px;
+    background-clip: padding-box;
+  }
+
   > row.expander { padding: 0px; }
   > row.expander .row-header { padding: 2px; }
 
   &.horizontal row.separator,
   &.separators.horizontal > row:not(.separator) {
-    border-left: 1px solid $treeview_borders_color;
+    border-left: 1px solid $border_color;
   }
+
   &:not(.horizontal) row.separator,
   &.separators:not(.horizontal) > row:not(.separator) {
-    border-bottom: 1px solid $treeview_borders_color;
+    border-bottom: 1px solid $border_color;
   }
 }
 
 row {
-  @include focus-ring($focus-state: 'focus-visible:focus-within');
+  @include focus-ring();
+
+  .osd &:focus:focus-visible {
+    outline-color: $osd_focus_color;
+  }
+
+  background-clip: padding-box;
 
   &.activatable {
-    &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
     &:hover { background-color: $view_hover_color; }
 
     &:active { background-color: $view_active_color; }
 
+    // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
+    &.has-open-popup { background-color: $view_hover_color; }
+
     &:selected {
-      &.has-open-popup,
       &:hover { background-color: $view_selected_hover_color; }
 
       &:active { background-color: $view_selected_active_color; }
+
+      &.has-open-popup { background-color: $view_selected_hover_color; }
     }
   }
 
   &:selected {
     background-color: $view_selected_color;
   }
-
-  &:disabled { color: gtkalpha(currentColor, .55); }
 }
 
 /*******************************************************
@@ -49,11 +62,11 @@ row {
  *******************************************************/
 
 .rich-list { /* rich lists usually containing other widgets than just labels/text */
-  & > row {
+  > row {
     padding: 8px 12px;
     min-height: 32px; /* should be tall even when only containing a label */
 
-    & > box {
+    > box {
       border-spacing: 12px;
     }
   }
@@ -74,9 +87,14 @@ row {
     margin-right: 12px;
     min-height: 50px;
 
+    > .icon:disabled {
+      filter: opacity($disabled_opacity);
+    }
+
     > box.title {
-      margin-top: 8px;
-      margin-bottom: 8px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      border-spacing: 3px;
     }
   }
 }
@@ -85,40 +103,26 @@ row {
  * AdwComboRow *
  ***************/
 
-popover.background.combo > contents {
-  padding: 0px;
+row.combo {
+  image.dropdown-arrow:disabled {
+    filter: opacity($disabled_opacity);
+  }
 
-  list, listview {
-    border-style: none;
-    background-color: transparent;
-    min-width: 200px;
+  listview.inline {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: inherit;
 
-    & > row {
-      padding: 0px 12px 0px 12px;
-      min-height: 50px;
-      border-bottom: 1px solid transparentize($borders_color, 0.5);
-
-      &:first-child {
-        border-top-left-radius: $popover_radius - 2;
-        border-top-right-radius: $popover_radius - 2;
-      }
-
-      &:last-child {
-        border-bottom-left-radius: $popover_radius - 2;
-        border-bottom-right-radius: $popover_radius - 2;
-        border-bottom: none;
-      }
+    &, &:disabled {
+      background: none;
+      color: inherit;
     }
   }
 
-  scrollbar.vertical {
-    padding-top: 2px;
-    padding-bottom: 2px;
+  popover > contents {
+    min-width: 120px;
   }
-}
-
-listview.inline {
-  background: none;
 }
 
 /******************
@@ -135,17 +139,49 @@ listview.inline {
   }
 }
 
+%boxed_list_row {
+  @include focus-ring($offset: -1px);
+
+  .osd &:focus:focus-visible {
+    outline-color: $osd_focus_color;
+  }
+
+  transition: 200ms $ease-out-quad;
+  border-bottom: 1px solid $border_color;
+
+  &:not(:selected).activatable {
+    &:hover {
+      background-color: gtkalpha(currentColor, .03);
+    }
+
+    &:active {
+      background-color: gtkalpha(currentColor, .08);
+    }
+
+    &.has-open-popup {
+      background-color: gtkalpha(currentColor, .03);
+    }
+  }
+}
+
 row.expander {
   // Drop transparent background on expander rows to let nested rows handle it,
   // avoiding double highlights.
-  background-color: transparent;
+  background: none;
   padding: 0px;
 
+  > box > list {
+    background: none;
+    color: inherit;
+  }
+
+  list.nested {
+    background-color: gtkalpha($card_shade_color, .5);
+    color: inherit;
+  }
+
   list.nested > row {
-    background-color: transparentize($bg_color, 0.5);
-    border-color: transparentize($borders_color, 0.3);
-    border-style: solid;
-    border-width: 1px 0px 0px 0px;
+    @extend %boxed_list_row;
   }
 
   // AdwExpanderRow arrow rotation
@@ -175,121 +211,53 @@ row.expander {
     color: $accent_color;
   }
 
-  & image.expander-row-arrow:disabled {
-    color: $insensitive_fg_color;
+  .osd &:checked image.expander-row-arrow:not(:disabled) {
+    color: inherit;
+  }
+
+  image.expander-row-arrow:disabled {
+    filter: opacity($disabled_opacity);
   }
 }
 
 /*****************
- * Content Lists *
+ * Boxed Lists *
  *****************/
 
-// Makes the corners of the given border rounded.
-// $border must be top, bottom, left, or right.
-@mixin rounded-border($border) {
-  // The floors (top, bottom) and walls (left, right) of the corners matching
-  // $border. This is needed to easily form floor-wall pairs regardless of
-  // whether $border is a floor or a wall.
-  $corners: (
-    'top': (('top'), ('left', 'right')),
-    'bottom': (('bottom'), ('left', 'right')),
-    'left': (('top', 'bottom'), ('left')),
-    'right': (('top', 'bottom'), ('right')),
-  );
-
-  @if not map-get($corners, $border) {
-    @error "Unknown border type: #{$border}";
-  }
-
-  // Loop through the floors and walls of the corners of $border.
-  @each $floor in nth(map-get($corners, $border), 1) {
-    @each $wall in nth(map-get($corners, $border), 2) {
-      border-#{$floor}-#{$wall}-radius: 8px;
-    }
-  }
-}
-
+// Deprecated: use .boxed-list instead
 list.content,
-listview.content {
-  &,
-  list {
-    background-color: transparent;
-  }
-
-  // Nested rows background
-  list.nested > row:not(:active) {
-    &:not(:hover):not(:selected),
-    &:hover:not(.activatable):not(:selected) {
-      background-color: mix($bg_color, $base_color, 50%);
-    }
-
-    &:hover.activatable:not(:selected) {
-      background-color: mix($fg_color, $base_color, 5%);
-    }
-  }
+list.boxed-list {
+  @extend %card;
 
   > row {
     // Regular rows and expander header rows background
-    &:not(.expander):not(:active):not(:hover):not(:selected),
-    &:not(.expander):not(:active):hover:not(.activatable):not(:selected),
-    &.expander row.header:not(:active):not(:hover):not(:selected),
-    &.expander row.header:not(:active):hover:not(.activatable):not(:selected) {
-      background-color: $base_color;
+    &, &.expander row.header {
+      @extend %boxed_list_row;
     }
 
-    &:not(.expander):hover.activatable:not(:selected),
-    &.expander row.header:hover.activatable:not(:selected) {
-      background-color: mix($fg_color, $base_color, 5%);
-
-      &:active {
-        background-color: mix($fg_color, $base_color, 10%);
-      }
-    }
-
-    &,
-    list > row {
-      border-color: transparentize($borders_color, 0.3);
-      border-style: solid;
-      transition: 200ms $ease-out-quad;
-    }
-
-    // Top border
-    &:not(:last-child) {
-      border-width: 1px 1px 0px 1px;
+    &.expander {
+      border: none;
     }
 
     // Rounded top
-    &:first-child,
-    &.expander:first-child row.header,
-    &.expander:checked,
-    &.expander:checked row.header,
-    &.expander:checked + row,
-    &.expander:checked + row.expander row.header {
-      @include rounded-border(top);
-    }
-
-    // Bottom border
-    &:last-child,
-    &.checked-expander-row-previous-sibling,
-    &.expander:checked {
-      border-width: 1px;
+    &:first-child {
+      &, &.expander row.header {
+        border-top-left-radius: $card_radius;
+        border-top-right-radius: $card_radius;
+      }
     }
 
     // Rounded bottom
-    &:last-child,
-    &.checked-expander-row-previous-sibling,
-    &.expander:checked,
-    &.expander:not(:checked):last-child row.header,
-    &.expander:not(:checked).checked-expander-row-previous-sibling row.header,
-    &.expander.empty:checked row.header,
-    &.expander list.nested > row:last-child {
-      @include rounded-border(bottom);
-    }
-
-    // Add space around expanded rows
-    &.expander:checked:not(:first-child),
-    &.expander:checked + row {
-      margin-top: 6px;
+    &:last-child {
+      &,
+      &.expander:not(:checked),
+      &.expander:not(:checked) row.header,
+      &.expander:checked list.nested,
+      &.expander:checked list.nested > row:last-child {
+        border-bottom-left-radius: $card_radius;
+        border-bottom-right-radius: $card_radius;
+        border-bottom-width: 0;
+      }
     }
   }
 }

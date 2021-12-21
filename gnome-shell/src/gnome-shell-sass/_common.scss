@@ -42,7 +42,7 @@ $bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
 // hover Yaru: we want the hover bg to be a visible gray for dark and light shell themes
 $hover_bg_color: transparentize($fg_color, 0.9);
 $hover_fg_color: $fg_color;
-$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 3%));
+$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 5%));
 
 // active Yaru: we want the active bg to be a visible gray for dark and light shell themes
 $active_bg_color: transparentize($fg_color, 0.8);
@@ -76,7 +76,7 @@ stage {
 %osd_panel {
   color: $osd_fg_color;
   background-color: $osd_bg_color;
-  //border: 1px solid $osd_outer_borders_color;
+  border: 1px solid $borders_color_dark; // Yaru: add border
   border-radius: $base_border_radius * 2 + 4px;
   padding: $base_padding * 2;
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // Yaru: OSDs need to be visible on dark backgrounds
@@ -117,7 +117,7 @@ stage {
   &:focus { @include button(focus);}
   &:hover { @include button(hover);}
   &:insensitive { @include button(insensitive);}
-  &:active { @include button(active);}
+  &:active, &:checked { @include button(active);}
 }
 
 // buttons in dialogs

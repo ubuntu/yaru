@@ -1,14 +1,12 @@
 popover.menu {
-  padding: 0;
-
   box.inline-buttons {
     padding: 0 $menu_padding;
 
     button.image-button.model {
       @extend %button_basic_flat;
 
-      min-height: 30px;
-      min-width: 30px;
+      min-height: 32px;
+      min-width: 32px;
       padding: 0;
       border: none;
       outline: none;
@@ -28,12 +26,19 @@ popover.menu {
     padding: $menu_padding $menu_padding 6px;
 
     button.circular.image-button.model {
-      @extend %outline_button;
+      @extend %button_basic_flat;
 
       outline: none;
       padding: 11px;
+
+      box-shadow: inset 0 0 0 1px $border_color;
+
       &:selected {
-        background-color: $view_selected_color;
+        background-color: $view_selected_hover_color;
+
+        @if $contrast != 'high' {
+          box-shadow: none;
+        }
 
         &:active {
           background-color: $view_selected_active_color;
@@ -42,19 +47,26 @@ popover.menu {
     }
   }
 
-  & > arrow,
-  &.background > contents {
-    background-color: $menu_color;
-    color: $text_color;
-    padding: $menu-margin;
+  > contents {
+    padding: 0;
+
+    &, > scrolledwindow > viewport {
+      > stack > box {
+        padding: $menu_margin;
+      }
+    }
   }
 
-  &.background separator {
+  separator {
     margin: 6px 0;
   }
 
+  list separator {
+    margin: 0;
+  }
+
   accelerator {
-    color: gtkalpha(currentColor, 0.55);
+    color: gtkalpha(currentColor, $dim_label_opacity);
 
     &:dir(ltr) { margin-left: $menu_padding; }
     &:dir(rtl) { margin-right: $menu_padding; }
@@ -62,18 +74,38 @@ popover.menu {
 
   check,
   radio {
-    &, &:hover, &:hover:active, &:checked, &:disabled {
+    min-width: 14px;
+    min-height: 14px;
+    -gtk-icon-size: 14px;
+    padding: 2px;
+
+    &,
+    &:hover:checked,
+    &:hover:indeterminate,
+    &:hover:not(:checked):not(:indeterminate) {
       background: none;
       color: inherit;
+    }
+  }
 
-      transform: scale(0.8);
+  .osd & {
+    check, radio {
+      background: none;
+      color: inherit;
+    }
+  }
+
+  check {
+    &, &:not(:checked):not(:indeterminate):hover {
+      box-shadow: none;
     }
   }
 
   //only menu radios have a border
   radio {
-    padding: 0;
-    border: 1.2px solid gtkalpha(currentColor, if($contrast == "high", 1, 0.3));
+    padding: 1px;
+    border: 1px solid gtkalpha(currentColor, $dimmer_opacity);
+    box-shadow: none;
   }
 
   check,
@@ -91,10 +123,10 @@ popover.menu {
   }
 
   modelbutton {
-    min-height: 30px;
+    min-height: 32px;
     min-width: 40px;
     padding: 0 $menu_padding;
-    border-radius: $menu-margin;
+    border-radius: $menu_radius;
 
     @extend %undecorated_button;
 
@@ -111,14 +143,12 @@ popover.menu {
       background: none;
       min-width: 16px;
       min-height: 16px;
-      @if $contrast != "high" {
-        opacity: 0.3; // dim icon
-      }
+      opacity: $dimmer_opacity;
 
       &:hover { background: none; }
 
       &:disabled {
-        filter: opacity(0.5);
+        filter: opacity($disabled_opacity);
       }
 
       &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
@@ -131,11 +161,65 @@ popover.menu {
     font-weight: bold;
     padding: 4px ($menu_padding + 20px); //this will fall apart with font sizing
   }
+
+  list, listview {
+    background: none;
+    color: inherit;
+
+    > row {
+      border-radius: $menu_radius;
+      padding: 0 $menu_padding;
+      min-height: 32px;
+      min-width: 40px;
+
+      &:selected {
+        background: none;
+      }
+
+      &:hover {
+        &, &:selected.activatable {
+          background-color: $view_selected_color;
+        }
+      }
+
+      &:active {
+        &, &:selected.activatable {
+          background-color: $view_selected_active_color;
+        }
+      }
+
+      &.has-open-popup {
+        &, &:selected.activatable {
+          background-color: $view_selected_color;
+        }
+      }
+
+      > box {
+        border-spacing: 6px;
+      }
+    }
+  }
+
+  // Standalone lists should have same margins as menu sections,
+  // but we don't want that on lists inside sections themselves
+  contents > list,
+  contents > listview,
+  scrolledwindow > viewport > list,
+  scrolledwindow > listview {
+    padding: $menu_margin 0; //only vertical padding. horizontal row size would clip
+
+    > row {
+      margin: 0 $menu_margin;
+
+      padding: 9px $menu_padding;
+      min-height: 0;
+    }
+  }
 }
 
 menubar {
   padding: 0px;
-  box-shadow: inset 0 -1px transparentize(black, 0.9);
+  box-shadow: inset 0 -1px $border_color;
 
   > item {
     min-height: 16px;
@@ -146,21 +230,12 @@ menubar {
       background-color: $view_selected_color;
     }
 
-    &:disabled {
-      color: $insensitive_fg_color;
-      box-shadow: none;
-    }
-
-    popover.menu.background > contents {
-      padding: $menu-margin;
-    }
-
     //nested submenus
     popover.menu popover.menu {
       padding: 0 0 4px 0;
     }
 
-    popover.menu.background popover.menu.background > contents {
+    popover.menu popover.menu > contents {
       margin: 0;
       border-radius: $popover_radius; //including top
     }
