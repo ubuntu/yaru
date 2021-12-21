@@ -6,6 +6,7 @@
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
+		-Dcinnamon=true \
 		-Dgnome-shell-gresource=true \
 		-Dubuntu-unity=true \
 		-Dxfwm4=true
