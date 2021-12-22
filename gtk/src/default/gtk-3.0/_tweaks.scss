@@ -101,7 +101,7 @@ button.titlebutton:not(.appmenu) {
   headerbar.selection-mode &,
   & {
     &.maximize, &.minimize, &.close {
-
+      @include draw_circle($_close_button_color);
       &, &:backdrop {
         &:hover {
           @include draw_circle($_base_hover_color);
@@ -111,10 +111,6 @@ button.titlebutton:not(.appmenu) {
           @include draw_circle($_base_active_color);
         }
       }
-    }
-
-    &.close {
-      @include draw_circle($_close_button_color);
     }
 
     window.toolbox &.close { // Special selector to target unified window (see #2980)
