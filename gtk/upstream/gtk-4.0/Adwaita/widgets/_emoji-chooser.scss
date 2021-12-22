@@ -4,14 +4,12 @@ popover.emoji-picker > contents {
 
 .emoji-searchbar {
   padding: 6px;
-  border-bottom: 1px solid $border_color;
 }
 
 .emoji-toolbar {
   // flowbox children already have 3px padding, so we only need 3px more to
   // get the regular 6px. We also don't need spacing, for the same reason.
   padding: 3px;
-  border-top: 1px solid $border_color;
 }
 
 button.emoji-section.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
@@ -34,6 +32,19 @@ popover.emoji-picker emoji {
     &:active {
       background: $view_active_color;
     }
+  }
+}
+
+popover.emoji-picker scrolledwindow.view {
+  background: none;
+  color: inherit;
+
+  > undershoot.top {
+    box-shadow: inset 0 1px $border_color;
+  }
+
+  > undershoot.bottom {
+    box-shadow: inset 0 -1px $border_color;
   }
 }
 

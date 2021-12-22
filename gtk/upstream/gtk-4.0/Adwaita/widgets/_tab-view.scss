@@ -20,7 +20,6 @@ $tab_needs_attention_gradient: radial-gradient(ellipse at bottom,
 tabbar {
   .box {
     min-height: 38px;
-    border-bottom: 1px solid $border_color;
   }
 
   scrolledwindow.pinned {
@@ -126,7 +125,7 @@ tabbar {
     .box {
       background-color: $headerbar_bg_color;
       color: $headerbar_fg_color;
-      border-color: $headerbar_border_color;
+      border-bottom: 1px solid $headerbar_border_color;
     }
 
     scrolledwindow.pinned {
