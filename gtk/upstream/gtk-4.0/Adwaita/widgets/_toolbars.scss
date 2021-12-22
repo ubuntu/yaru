@@ -142,6 +142,7 @@ searchbar {
     background-color: $headerbar_bg_color;
     color: $headerbar_fg_color;
     box-shadow: inset 0 -1px $headerbar_border_color;
+    padding-bottom: 1px;
 
     &:backdrop {
       background-color: $headerbar_backdrop_color;
@@ -150,9 +151,8 @@ searchbar {
   }
 
   > revealer > box {
-    padding: 0px 6px 1px 6px;
+    padding: 0px 6px;
     border-spacing: 6px;
-    box-shadow: inset 0 -1px $border_color;
 
     @extend %toolbar;
 
