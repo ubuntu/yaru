@@ -1,28 +1,3 @@
-// Smaller windowcontrols and orange close button
-windowcontrols {  
-
-    button {
-
-        > image {
-            background: transparent;
-        }
-
-        &:hover > image {
-            background: $view_hover_color;
-        }
-    
-        &:active > image {
-            background: $view_active_color;
-        }
-        
-        &.close {
-            > image {
-                background: $button_color;
-            }
-        }
-    }
-}
-
 // Reducing the amount of the palette's background colors to two
 .sidebar {
     background-color: $window_bg_color;
