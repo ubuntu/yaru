@@ -66,19 +66,23 @@ tabbar {
     @include need-attention-gradient("left");
   }
 
-  tabbox > background {
-    background-color: $shade_color;
+  tabbox {
+    > background {
+      background-color: $shade_color;
+    }
+
+    > widget {
+      @include focus-ring();
+    }
   }
 
   tab {
     border-style: solid;
     border-color: $border_color;
     border-width: 0 1px 0 1px;
-    transition: background 150ms ease-in-out, $focus_transition;
+    transition: background 150ms ease-in-out;
     background-color: gtkalpha($shade_color, .6);
     background-clip: padding-box;
-
-    @include focus-ring();
 
     &:checked {
       background-color: transparent;
