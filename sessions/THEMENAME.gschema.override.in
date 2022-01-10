@@ -7,9 +7,15 @@ cursor-theme = "@ThemeName@"
 icon-theme = "@ThemeName@"
 gtk-theme = "@ThemeName@"
 
+[org.gnome.gedit.preferences.editor:@ThemeName@]
+scheme = "@ThemeName@"
+
 [org.gnome.desktop.sound:@ThemeName@]
 theme-name = "@ThemeName@"
 input-feedback-sounds = true
 
 [org.gnome.mutter:@ThemeName@]
 center-new-windows = true
+
+[org.gnome.desktop.wm.preferences:@ThemeName@]
+button-layout = ':minimize,maximize,close'
