@@ -1,6 +1,7 @@
 $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
-$_titlebutton_height: 24px;
+$_close_button_color: transparentize($fg_color, 0.9);
+$_titlebutton_height: 20px;
 
 @mixin draw_circle($c, $size:$_titlebutton_height) {
   $button_size: $size + 2px * 2;
@@ -93,14 +94,14 @@ button.titlebutton:not(.appmenu) {
   // Important - otherwise the circle size is wrong
   min-height: $_titlebutton_height;
   min-width: $_titlebutton_height;
-  padding: 2px;
+  padding: 4px;
 
   headerbar &,
   .titlebar &,
   headerbar.selection-mode &,
   & {
     &.maximize, &.minimize, &.close {
-
+      @include draw_circle($_close_button_color);
       &, &:backdrop {
         &:hover {
           @include draw_circle($_base_hover_color);
@@ -109,26 +110,6 @@ button.titlebutton:not(.appmenu) {
         &:active {
           @include draw_circle($_base_active_color);
         }
-      }
-    }
-
-    &.close {
-      color: $selected_fg_color;
-      @include draw_circle($selected_bg_color);
-
-      &:hover {
-        @include draw_circle($selected_bg_color);
-        @include draw_circle(lighten($selected_bg_color, 5%));
-      }
-
-      &:active {
-        @include draw_circle($selected_bg_color);
-        @include draw_circle(darken($selected_bg_color, 5%));
-      }
-
-      &:backdrop {
-        @include draw_circle(lighten($inkstone, if($variant=='light', 40%, 10%)));
-        &:hover { @include draw_circle(lighten($inkstone, if($variant=='light', 45%, 15%))); }
       }
     }
 
@@ -376,61 +357,10 @@ popover.background {
   }
 }
 
-// Due to the ubuntu orange beeing quiet bright
-// we change the row selection from a full orange
-// row to a soft gray selection
-$_row_hover_bg: if($variant=='light', transparentize(black, 0.96), transparentize(white, 0.96));
-$_row_selection_bg: if($variant=='light', transparentize(black, 0.91), transparentize(white, 0.91));
-$_backdrop_row_selection_bg: if($variant=='light', $_row_selection_bg, lighten($_row_selection_bg, 2%));
-
-list row, placessidebar row, sidebar row, .sidebar row, treeview.view {
-  &:hover:not(:backdrop):not(:selected) {
-    background: $_row_hover_bg;
-  }
-
-  &:selected {
-    &.activatable, & {
-      &:focus, &:hover, &:disabled, & {
-        background: $_row_selection_bg;
-      }
-
-      &:disabled {
-        &, button, button image { color: $insensitive_fg_color; }
-      }
-
-      &:focus, &:hover, & {
-        &, button, button image { color: $text_color; }
-        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }  
-      }
-
-      &:backdrop {
-        &, button, button image { color: $backdrop_fg_color; }
-        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
-        background: $_backdrop_row_selection_bg;
-      }
-
-      &:disabled {
-        &, &:backdrop {
-          &, button, button image { color: $insensitive_fg_color; }
-        }
-      }
-    }
-  }
-}
-
-treeview.view {
-  &:selected,
-  &:hover:not(:backdrop):not(:selected) {
-    &.progressbar {
-      background-color: $progress_bg_color;
-    }
-  }
-}
-
 // Mimic GTK4 slider
 
-$_slider_color: if($variant == 'light', darken(white, 1%), $warm_gray);
-$_slider_hover_color: if($variant == 'light', white, lighten($warm_gray, 4%));
+$_slider_color: darken(white, 1%);
+$_slider_hover_color: white;
 $_slider_disabled_color: if($variant == 'light', $_slider_color, darken($_slider_color, 20%));
 
 $_trough_color: if($variant == 'light', $silk, lighten($inkstone, 5%));

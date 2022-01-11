@@ -7,6 +7,12 @@
     }
   }
 
+  &.osd button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
+    &:focus:focus-visible {
+      outline-color: $osd_focus_color;
+    }
+  }
+
   menubutton:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque) {
     &.image-button > button {
       @extend %button_basic_flat;
@@ -136,6 +142,7 @@ searchbar {
     background-color: $headerbar_bg_color;
     color: $headerbar_fg_color;
     box-shadow: inset 0 -1px $headerbar_border_color;
+    padding-bottom: 1px;
 
     &:backdrop {
       background-color: $headerbar_backdrop_color;
@@ -144,9 +151,8 @@ searchbar {
   }
 
   > revealer > box {
-    padding: 0px 6px 1px 6px;
+    padding: 0px 6px;
     border-spacing: 6px;
-    box-shadow: inset 0 -1px $border_color;
 
     @extend %toolbar;
 
@@ -195,10 +201,11 @@ infobar {
 
   @each $i_type, $i_color in (info, $accent_bg_color),
                              (question, $accent_bg_color),
-                             (warning, $warning_color),
-                             (error, $error_color) {
+                             (warning, $warning_bg_color),
+                             (error, $error_bg_color) {
     &.#{$i_type} > revealer > box {
       background-color: gtkmix($i_color, $window_bg_color, 30%);
+      color: $window_fg_color;
     }
   }
 

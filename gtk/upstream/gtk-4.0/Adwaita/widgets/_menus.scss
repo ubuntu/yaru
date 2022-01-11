@@ -5,8 +5,8 @@ popover.menu {
     button.image-button.model {
       @extend %button_basic_flat;
 
-      min-height: 30px;
-      min-width: 30px;
+      min-height: 32px;
+      min-width: 32px;
       padding: 0;
       border: none;
       outline: none;
@@ -79,15 +79,26 @@ popover.menu {
     -gtk-icon-size: 14px;
     padding: 2px;
 
-    &, &:hover, &:hover:active, &:checked, &:disabled {
+    &,
+    &:hover:checked,
+    &:hover:indeterminate,
+    &:hover:not(:checked):not(:indeterminate) {
+      background: none;
+      color: inherit;
+    }
+  }
+
+  .osd & {
+    check, radio {
       background: none;
       color: inherit;
     }
   }
 
   check {
-    &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-small-symbolic.symbolic.png")),
-                                              -gtk-recolor(url("assets/check-small@2-symbolic.symbolic.png"))); }
+    &, &:not(:checked):not(:indeterminate):hover {
+      box-shadow: none;
+    }
   }
 
   //only menu radios have a border
@@ -95,9 +106,6 @@ popover.menu {
     padding: 1px;
     border: 1px solid gtkalpha(currentColor, $dimmer_opacity);
     box-shadow: none;
-
-    &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-small-symbolic.symbolic.png")),
-                                              -gtk-recolor(url("assets/bullet-small@2-symbolic.symbolic.png"))); }
   }
 
   check,
@@ -115,7 +123,7 @@ popover.menu {
   }
 
   modelbutton {
-    min-height: 30px;
+    min-height: 32px;
     min-width: 40px;
     padding: 0 $menu_padding;
     border-radius: $menu_radius;
@@ -161,7 +169,7 @@ popover.menu {
     > row {
       border-radius: $menu_radius;
       padding: 0 $menu_padding;
-      min-height: 30px;
+      min-height: 32px;
       min-width: 40px;
 
       &:selected {
@@ -203,7 +211,7 @@ popover.menu {
     > row {
       margin: 0 $menu_margin;
 
-      padding: 8px;
+      padding: 9px $menu_padding;
       min-height: 0;
     }
   }

@@ -50,8 +50,8 @@ iconview {
 }
 
 rubberband {
-  border: 1px solid $accent_bg_color;
-  background-color: gtkalpha($accent_bg_color, 0.2);
+  border: 1px solid $accent_color;
+  background-color: gtkalpha($accent_color, 0.2);
 }
 
 flowbox > flowboxchild,
@@ -64,5 +64,17 @@ gridview > child {
 
   &:selected {
     background-color: $view_selected_color;
+  }
+}
+
+gridview > child.activatable {
+  &:hover { background-color: $view_hover_color; }
+
+  &:active { background-color: $view_active_color; }
+
+  &:selected {
+    &:hover { background-color: $view_selected_hover_color; }
+
+    &:active { background-color: $view_selected_active_color; }
   }
 }

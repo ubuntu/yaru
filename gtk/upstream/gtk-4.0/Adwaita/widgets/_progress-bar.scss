@@ -84,4 +84,8 @@ progressbar {
   }
 
   > trough.empty > progress { all: unset; } // makes the progress indicator disappear, when the fraction is 0
+
+  .osd & > trough > progress {
+    background-color: $osd_fill_bg_color;
+  }
 }

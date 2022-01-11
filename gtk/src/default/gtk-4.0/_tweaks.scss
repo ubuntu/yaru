@@ -1,47 +1,3 @@
-// Smaller windowcontrols and orange close button
-windowcontrols {
-    margin-left: 7px; // Fix windowcontrols misalignement caused by smaller windowcontrols
-
-    button {
-        min-width: 20px;
-        min-height: 20px;
-        padding: 2px;
-        margin: 0 7px;
-
-        > image {
-            padding: 0;
-            background: transparent;
-        }
-
-        &:hover > image {
-            background: $view_hover_color;
-        }
-    
-        &:active > image {
-            background: $view_active_color;
-        }
-        
-        &.close {
-            > image {
-                color: $accent_fg_color;
-                background: $accent_bg_color;
-
-                &:hover {
-                    background: gtkmix($accent_bg_color, "#fff", 90%);
-                }
-
-                &:active {
-                    background: gtkmix($accent_bg_color, "#000", 90%);
-                }
-
-                &:backdrop {
-                    filter: saturate(0);
-                }
-            }
-        }
-    }
-}
-
 // Reducing the amount of the palette's background colors to two
 .sidebar {
     background-color: $window_bg_color;
@@ -91,19 +47,19 @@ levelbar {
 %button,
 button {
     &.suggested-action {
-        color: $suggested_fg_color;
+        color: $success_fg_color;
 
         &,
         &:checked {
             &:not(.flat) {
-                background-color: $suggested_bg_color;
+                background-color: $success_bg_color;
             }
         }
     }
 
     &.flat {
         &.suggested-action {
-            color: $suggested_color;
+            color: $success_color;
         }
     }
 }
@@ -111,10 +67,10 @@ button {
 splitbutton {
     &.suggested-action {
         > button, > menubutton > button {
-            color: $suggested_fg_color;
+            color: $success_fg_color;
     
             &, &:checked {
-                background-color: $suggested_bg_color;
+                background-color: $success_bg_color;
             }
         }
     }
