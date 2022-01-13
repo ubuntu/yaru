@@ -11,14 +11,13 @@ foreach flavour: flavours
     'find', flavour, '-name', '_*.scss'
   ).stdout().strip().split('\n')
 
-  generated_css = custom_target(theme_name,
+  custom_target(theme_name,
     input: join_paths(flavour, 'cinnamon.scss'),
-    output: '@0@-generated.css'.format(theme_name),
+    output: '@0@.css'.format(theme_name),
     depend_files: files(scss_dependencies),
     command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
     install: true,
     install_dir: theme_dir,
-    rename: '@0@.css'.format(theme_name)
   )
 
   # Install assets
@@ -41,3 +40,5 @@ foreach flavour: flavours
     install_dir: theme_dir
   )
 endforeach
+
+meson.add_install_script('post_install.py', get_option('datadir'), meson.project_name(), flavours)
