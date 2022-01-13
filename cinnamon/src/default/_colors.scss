@@ -2,29 +2,29 @@
 // it gets @if ed depending on $variant
 @import 'palette';
 
-$base_color: if($variant == 'light', #ffffff, lighten($jet, 4%));
-$bg_color: if($variant == 'light', #fafafa, lighten($jet, 6%));
-$fg_color: if($variant == 'light', $inkstone, $porcelain);
+$base_color: if($variant=='light', #ffffff, lighten($jet, 4%));
+$bg_color: if($variant=='light', #fafafa, lighten($jet, 6%));
+$fg_color: if($variant=='light', $inkstone, $porcelain);
 
-$selected_fg_color: $primary_accent_fg_color;
-$selected_bg_color: if($variant == 'light', $primary_accent_bg_color, darken($primary_accent_bg_color, 4%));
-$selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+$selected_fg_color: $accent_fg_color;
+$selected_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 4%));
+$selected_borders_color: if($variant=='light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 $borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%); // Yaru: used for dash and other dark elements on light theme
-$borders_color: if($variant == 'light', darken($bg_color, 20%), $borders_color_dark);
-$alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 10%));
-$borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
-$link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
-$link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+$borders_color: if($variant=='light', darken($bg_color, 20%), $borders_color_dark);
+$alt_borders_color: if($variant=='light', darken($bg_color, 24%), darken($bg_color, 10%));
+$borders_edge: if($variant=='light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
+$link_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
+$link_visited_color: if($variant=='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 $top_hilight: $borders_edge;
 
 $warning_color: $yellow;
 $error_color: $red;
 $success_color: lighten($green, 5%);
-$destructive_color: if($variant == 'light', $red, darken($red, 10%));
+$destructive_color: if($variant=='light', $red, darken($red, 10%));
 
 $osd_fg_color: #eeeeec;
 $osd_text_color: white;
-$osd_bg_color: transparentize(lighten($jet, 2%),0.025);
+$osd_bg_color: transparentize(lighten($jet, 2%), 0.025);
 $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
 $osd_borders_color: transparentize(black, 0.3);
@@ -39,12 +39,12 @@ $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: $borders_color;
 
 //colors for the backdrop state, derived from the main colors.
-$backdrop_base_color: if($variant =='light', darken($base_color,1%), lighten($base_color,1%));
+$backdrop_base_color: if($variant=='light', darken($base_color, 1%), lighten($base_color, 1%));
 $backdrop_bg_color: $bg_color;
 $backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 80%);
-$backdrop_insensitive_color: if($variant =='light', darken($backdrop_bg_color,15%), lighten($backdrop_bg_color,15%));
+$backdrop_insensitive_color: if($variant=='light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 15%));
 $backdrop_borders_color: mix($borders_color, $bg_color, 90%);
-$backdrop_dark_fill: mix($backdrop_borders_color,$backdrop_bg_color, 35%);
+$backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
 
 $base_hover_color: transparentize(white, 0.8);
 $base_active_color: transparentize(white, 0.75);
@@ -61,15 +61,15 @@ $dash-alpha-value: 0.6;
 $dash-opaque-alpha-value: 0.0;
 
 //special cased widget colors
-$suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
+$suggested_bg_color: if($variant=='light', lighten($green, 5%), darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
-$progress_bg_color: if($variant== 'light', lighten($secondary_accent_bg_color, 10%), lighten($secondary_accent_bg_color, 5%));
-$progress_border_color: if($variant== 'light', darken($progress_bg_color, 5%), darken($borders_color, 5%));
-$checkradio_bg_color: if($variant=='light', $secondary_accent_bg_color, darken($secondary_accent_bg_color, 8%));
-$checkradio_fg_color: $secondary_accent_fg_color;
-$switch_bg_color: if($variant=='light', $secondary_accent_bg_color, darken($secondary_accent_bg_color, 8%));
-$switch_border_color: if($variant=='light', darken($secondary_accent_bg_color, 15%), darken($borders_color, 5%));
-$focus_border_color: lighten($primary_accent_bg_color, 14%);
+$progress_bg_color: if($variant=='light', lighten($accent_bg_color, 10%), lighten($accent_bg_color, 5%));
+$progress_border_color: if($variant=='light', darken($progress_bg_color, 5%), darken($borders_color, 5%));
+$checkradio_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 8%));
+$checkradio_fg_color: $accent_fg_color;
+$switch_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 8%));
+$switch_border_color: if($variant=='light', darken($accent_bg_color, 15%), darken($borders_color, 5%));
+$focus_border_color: lighten($accent_bg_color, 14%);
 
 // Yaru: color variables imported from Mint's cinnamon theme
 // which are not in gnome-shell but are necessary to generate
@@ -80,7 +80,7 @@ $focus_border_color: lighten($primary_accent_bg_color, 14%);
 // $text_color: if($variant == 'light', #202020, #D3D3D3);
 $text_color: $fg_color;
 
-$separator_color: if($variant == 'light', darken($bg_color, 15%), darken($bg_color, 6%));
+$separator_color: if($variant=='light', darken($bg_color, 15%), darken($bg_color, 6%));
 
 $tooltip_bg_color: #fbeaa0;
 $tooltip_fg_color: #4a4a4a;
@@ -103,7 +103,7 @@ $panel_fg: $panel_fg_color;
 // $panel_fg: $fg_color;
 
 $entry_bg: if($variant=='light', $base_color, lighten($base_color, 0%));
-$entry_border: if($variant == 'light', #cfd6e6, darken($borders_color, 0%));
+$entry_border: if($variant=='light', #cfd6e6, darken($borders_color, 0%));
 
-$button_bg: if($variant == 'light', lighten($bg_color, 2%), lighten($base_color, 2%));
+$button_bg: if($variant=='light', lighten($bg_color, 2%), lighten($base_color, 2%));
 $button_border: $entry_border;

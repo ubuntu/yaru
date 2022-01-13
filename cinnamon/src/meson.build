@@ -1,61 +1,43 @@
 sassc = find_program('sassc')
+fs = import('fs')
 
-variants = [
-  'light',
-  'dark'
-]
+foreach flavour: flavours
+  suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
+  theme_name = meson.project_name() + suffix
+  theme_dir = join_paths(get_option('datadir'), 'themes', theme_name, 'cinnamon')
 
-styles = ['cinnamon']
-
-theme_sources = files(
-  run_command(
-    'find', meson.current_source_dir(), '-name', '*.scss'
+  # Install CSS
+  scss_dependencies = run_command(
+    'find', flavour, '-name', '_*.scss'
   ).stdout().strip().split('\n')
-)
-assert(theme_sources.length() > 0, 'No theme sources find')
 
-foreach variant: variants
-  is_variant = variant != 'dark'
-  variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
-
-  install_dir = join_paths(
-    cinnamon_theme_dir,
-    meson.project_name() + variant_suffix,
-    'cinnamon'
+  generated_css = custom_target(theme_name,
+    input: join_paths(flavour, 'cinnamon.scss'),
+    output: '@0@-generated.css'.format(theme_name),
+    depend_files: files(scss_dependencies),
+    command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
+    install: true,
+    install_dir: theme_dir,
+    rename: '@0@.css'.format(theme_name)
   )
 
-  style_css = []
-  output_styles = []
-
-  foreach style: styles
-    stylename = style + variant_suffix
-    output_styles += '@0@.css'.format(style)
-
-    style_css += custom_target(
-      'style-@0@'.format(stylename),
-      input: style == 'cinnamon' ? theme_main_file : '@0@.scss'.format(style),
-      output: '@0@.css'.format(stylename),
-      command: [
-        sassc, '-a', '@INPUT@', '@OUTPUT@',
-        '-I', css_sources_path,
-      ],
-      install: not is_variant,
-      install_dir: install_dir,
-      depends: source_deps,
-      depend_files: theme_sources,
-    )
+  # Install assets
+  assets_folders = [
+    'common-assets',
+    'light-assets',
+    'dark-assets'
+  ]
+  foreach asset_folder: assets_folders
+    if fs.is_dir(join_paths(flavour, asset_folder))
+      install_subdir(join_paths(flavour, asset_folder),
+        install_dir: join_paths(theme_dir, asset_folder),
+        strip_directory: true,
+      )
+    endif
   endforeach
 
-  theme_css += style_css
-
-  ignore_variants = []
-  if not is_variant
-    foreach v: variants
-      if v != variant
-        ignore_variants += ['--filter', '*.@0@.svg'.format(v)]
-      endif
-    endforeach
-  endif
-
-  install_data(theme_sources, install_dir: install_dir)
+  # Install thumbnail image
+  install_data(join_paths(flavour, 'thumbnail.png'),
+    install_dir: theme_dir
+  )
 endforeach
