@@ -108,6 +108,32 @@
   }
 }
 
+.login-dialog-auth-list-view { -st-vfade-offset: 1em; }
+.login-dialog-auth-list {
+  spacing: 6px;
+  margin-left: 2em;
+}
+
+.login-dialog-auth-list-title {
+  margin-left: 2em;
+}
+
+.login-dialog-auth-list-item {
+  border-radius: $base_border_radius + 4px;
+  padding: 6px;
+  color: darken($osd_fg_color,30%);
+  &:focus, &:selected { background-color: $selected_bg_color; color: $selected_fg_color; }
+}
+
+.login-dialog-auth-list-label {
+  @include fontsize($base_font_size + 2);
+  font-weight: bold;
+  padding-left: 15px;
+
+  &:ltr { padding-left: 14px; text-align: left; }
+  &:rtl { padding-right: 14px; text-align: right; }
+}
+
 .login-dialog-not-listed-label {
   @include fontsize($base_font_size - 1);
   font-weight: bold;
