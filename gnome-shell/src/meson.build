@@ -120,8 +120,6 @@ foreach variant: variants
   data_sources += files([
     'pad-osd.css',
     'running-indicator.svg',
-    'toggle-off-intl.svg',
-    'toggle-on-intl.svg',
   ])
 
   # install static data files
