@@ -11,11 +11,9 @@
   // This should be equal to #searchResultsContent spacing
   spacing: $base_margin * 2;
 
-  // separator
+  // separator (unstyled)
   .search-section-separator { 
-    // height: 1px;
-    // background-color: $osd_outer_borders_color;
-    height: 0;
+    height: $base_margin*2; // use it as a spacer
     background-color: transparent;
   }
 }
@@ -23,18 +21,22 @@
 // content
 .search-section-content {
   background-color: $dash_background_color; // Yaru: use same background as dash
-  border-radius: $modal_radius+3;
+  border-radius: $modal_radius*1.5;
   border: 1px solid $borders_color_dark; // Yaru: use same border-color as dash
-  box-shadow: 0 2px 4px 0 $shadow_color;
-  text-shadow: 0 1px if($variant == 'light', rgba(255,255,255,0.2), rgba(0,0,0,0.2));
+  box-shadow: none;
+  text-shadow: none;
   color: $osd_fg_color;
   padding: $base_padding * 3;
+  margin: $base_margin;
   // This is the space between the provider icon and the results container
-  spacing: $base_margin * 2;
 }
 
-%search-section-content-item {
+%search_section_content_item {
   @extend %icon_tile;
+
+  border-radius: $base_border_radius;
+
+  color: $osd_fg_color;
 
   &:focus,
   &:hover,
@@ -60,12 +62,12 @@
 
 // Search results with icons
 .grid-search-result {
-  @extend %app-well-app;
+  @extend %app_well_app;
 }
 
 // search result provider
 .search-provider-icon {
-  @extend %search-section-content-item;
+  @extend %search_section_content_item;
 
   // content
   .list-search-provider-content {
@@ -74,9 +76,7 @@
     // provider labels
     .list-search-provider-details {
       width: 120px;
-      margin-top: 0;
-      color: darken($osd_fg_color, 8%);
-      // font-weight: bold;
+      color: $osd_fg_color;
     }
   }
 }
@@ -88,7 +88,7 @@
 
 // search result listitem
 .list-search-result {
-  @extend %search-section-content-item;
+  @extend %search_section_content_item;
 
   // content
   .list-search-result-content {
@@ -103,6 +103,6 @@
 
   // list item description
   .list-search-result-description {
-    color: darken($osd_fg_color, 30%);
+    color: $osd_insensitive_fg_color;
   }
 }

@@ -5,7 +5,6 @@
 }
 
 .modal-dialog {
-  border-radius: $modal_radius;
   @extend %bubble_panel;
 
   .modal-dialog-content-box {

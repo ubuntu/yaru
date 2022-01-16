@@ -136,37 +136,37 @@
   @if $t==normal {
     color: $tc;
     background-color: lighten($c, 3%);
-    border-color: draw_border_color($c);
+    border-color: lighten($c, 3%);
     @include draw_shadows($button_shadow);
     // box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
-    text-shadow: 0 1px $text_shadow_color;
-    icon-shadow: 0 1px $text_shadow_color;
+    text-shadow: none;
+    icon-shadow: none;
   }
 
   // focused button
   @if $t==focus {
     color: $tc;
-    text-shadow: 0 1px $text_shadow_color;
-    icon-shadow: 0 1px $text_shadow_color;
+    background-color: mix(lighten($c, 3%), $selected_bg_color, 90%);
     box-shadow: inset 0 0 0 2px $focus_border_color; // Yaru: we detached focus from selected
-    //border-color: $selected_bg_color;
+    text-shadow: none;
+    icon-shadow: none;
   }
 
   // hover button
   @else if $t==hover {
     color: $tc;
     background-color: lighten($c, if($variant == 'light', 8%, 5%));
-    border-color: if($variant == 'light', draw_border_color(lighten($c, 7%)), draw_border_color($c));
+    border-color: lighten($c, if($variant == 'light', 8%, 5%));
     @include draw_shadows(0 1px opacify($shadow_color, 0.05)); // Yaru: adapt shell to gtk buttons (paper effect)
-    text-shadow: 0 1px $text_shadow_color;
-    icon-shadow: 0 1px $text_shadow_color;
+    text-shadow: none;
+    icon-shadow: none;
   }
 
   // active button
   @else if $t==active {
     color: $tc;
     background-color: darken($c,3%);
-    border-color: draw_border_color(if($variant == 'light', $c, darken($c,7%)));
+    border-color: darken($c,3%);
     text-shadow: none;
     icon-shadow: none;
     box-shadow: none;
@@ -175,7 +175,7 @@
   // insensitive button
   @else if $t==insensitive {
     color: $insensitive_fg_color;
-    border-color: if($variant=='light', $insensitive_borders_color, darken($c, 5%)); // Yaru change: dark buttons need a dark border
+    border-color: if($variant=='light', $insensitive_bg_color, darken($c, 5%)); // Yaru change: dark buttons need a dark border
     background-color: $insensitive_bg_color;
     box-shadow: none;
     text-shadow: none;
@@ -194,7 +194,7 @@
 }
 
 // overview icons
-@mixin overview-icon($color) {
+@mixin overview_icon($color) {
   .overview-icon {
     @extend %icon_tile;
     color: $color;
@@ -221,6 +221,7 @@
     }
   }
 
+  &:focus,
   &:active,
   &:checked {
     .overview-icon {

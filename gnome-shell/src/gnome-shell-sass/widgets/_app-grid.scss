@@ -20,7 +20,7 @@ $app_grid_fg_color: #fff;
 
 // Icon tiles in the app grid
 .app-well-app,
-%app-well-app {
+%app_well_app {
   @include overview-icon($app_grid_fg_color);
 
   .overview-icon.overview-icon-with-label {
@@ -52,7 +52,7 @@ $app_grid_fg_color: #fff;
     & .folder-name-label,
     & .folder-name-entry {
       font-size: 18pt;
-      font-weight: 800;
+      font-weight: 1000;
       color: $osd_fg_color; // Yaru change: needed for light theme, otherwise invisible text
     }
     // Yaru change: needed for the light theme, otherwise dark text in orange selection, can't set selected-color here
@@ -62,14 +62,17 @@ $app_grid_fg_color: #fff;
     & .folder-name-label { padding: 5px 7px; color: $osd_fg_color; }
 
     & .edit-folder-button {
-      @extend %button;
-
+      @include button(undecorated, $shadow: none);
       padding: 0;
       width: 36px;
       height: 36px;
       border-radius: 18px;
 
-      & > StIcon { icon-size: 16px }
+      &:focus {@include button(focus);}
+      &:hover {@include button(hover);}
+      &:active {@include button(active);}
+
+      & > StIcon { icon-size: $base_icon_size }
     }
   }
 
@@ -86,8 +89,9 @@ $app_grid_fg_color: #fff;
     margin-bottom: 18px;
   }
 }
+
 .app-folder-dialog-container {
-  padding: 12px;
+  padding: $base_padding*2;
   width: 620px;
   height: 620px;
 }
@@ -98,7 +102,7 @@ $app_grid_fg_color: #fff;
   width: 5px;
   border-radius:5px;
   background-color: $selected_bg_color; // Yaru: we want an orange dot
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 }
 
 // Rename popup for app folders
