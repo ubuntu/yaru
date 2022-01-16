@@ -20,7 +20,7 @@ $app_grid_fg_color: #fff;
 
 // Icon tiles in the app grid
 .app-well-app,
-%app-well-app {
+%app_well_app {
   @include overview-icon($app_grid_fg_color);
 
   .overview-icon.overview-icon-with-label {
@@ -35,12 +35,12 @@ $app_grid_fg_color: #fff;
 /* App Folders */
 .app-well-app.app-folder {
   background-color: $dash_background_color;
-  border-radius: $base_border_radius + 4px; // same as %icon_tile
+  border-radius: $base_border_radius * 2; // same as %icon_tile
 }
 
 // expanded folder
 .app-folder-dialog { //style like the dash
-  border-radius: $modal_radius * 1.5;
+  border-radius: 48px;
   background-color: $dash_background_color;
   padding: 12px 0px 12px 0px;
 
@@ -51,7 +51,7 @@ $app_grid_fg_color: #fff;
     & .folder-name-label,
     & .folder-name-entry {
       font-size: 18pt;
-      font-weight: 800;
+      font-weight: 1000;
     }
 
     & .folder-name-entry { width: 300px }
@@ -60,14 +60,17 @@ $app_grid_fg_color: #fff;
     & .folder-name-label { padding: 5px 7px; color: $osd_fg_color; }
 
     & .edit-folder-button {
-      @extend %button;
-
+      @include button(undecorated, $shadow: none);
       padding: 0;
       width: 36px;
       height: 36px;
       border-radius: 18px;
 
-      & > StIcon { icon-size: 16px }
+      &:focus {@include button(focus);}
+      &:hover {@include button(hover);}
+      &:active {@include button(active);}
+
+      & > StIcon { icon-size: $base_icon_size }
     }
   }
 
@@ -84,8 +87,9 @@ $app_grid_fg_color: #fff;
     margin-bottom: 18px;
   }
 }
+
 .app-folder-dialog-container {
-  padding: 12px;
+  padding: $base_padding*2;
   width: 620px;
   height: 620px;
 }
@@ -96,7 +100,7 @@ $app_grid_fg_color: #fff;
   width: 5px;
   border-radius:5px;
   background-color: $osd_fg_color;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 }
 
 // Rename popup for app folders
@@ -148,7 +152,7 @@ $app_grid_fg_color: #fff;
     background-gradient-start: rgba(255, 255, 255, 0.05);
     background-gradient-end: transparent;
     background-gradient-direction: horizontal;
-    border-radius: 15px 0px 0px 15px;
+    border-radius: $modal_radius*1.5 0px 0px $modal_radius*1.5;
   }
 
   &.previous:ltr,
@@ -156,7 +160,7 @@ $app_grid_fg_color: #fff;
     background-gradient-start: transparent;
     background-gradient-end: rgba(255, 255, 255, 0.05);
     background-gradient-direction: horizontal;
-    border-radius: 0px 15px 15px 0px;
+    border-radius: 0px $modal_radius*1.5 $modal_radius*1.5 0px;
   }
 }
 

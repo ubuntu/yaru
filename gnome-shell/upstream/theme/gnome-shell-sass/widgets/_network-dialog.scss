@@ -23,27 +23,50 @@
 .nm-dialog-header {
   font-weight: bold;
 }
+.nm-dialog-subheader {
+  color: $insensitive_fg_color;
+}
+
 .nm-dialog-header-icon {
   icon-size: $base_icon_size * 2;
 }
 .nm-dialog-header-hbox { spacing: 10px; }
 
+// airplane mode
+.nm-dialog-airplane-headline {
+  font-weight: bold;
+}
+
+.nm-dialog-airplane-text {
+  color: $insensitive_fg_color;
+}
+
 // list of networks
 .nm-dialog-scroll-view {
-  border: 1px solid $borders_color;
-  padding:0;
+  border: none;
+  padding:$base_padding;
+  border-radius: $base_border_radius;
   background-color: darken($bg_color, 3%);
 }
 
 // list item
 .nm-dialog-item {
   @include fontsize($base_font_size);
-  border-bottom: 1px solid $borders_color;
+  border: none;
   padding: $base_padding * 2;
   spacing: 0px;
+  text-shadow: none;
+  icon-shadow: none;
+
   &:selected {
     background-color: $selected_bg_color;
     color: $selected_fg_color;
+
+    border-radius: $base_border_radius - 3px;
+  }
+
+  &:hover {
+    background-color:$hover_bg_color;
   }
 }
 

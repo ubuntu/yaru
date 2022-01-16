@@ -1,14 +1,5 @@
 /* Date/Time Menu */
 
-.clock-display-box {
-  spacing: 2px;
-
-  .clock {
-    padding-left: $base_padding * 2;
-    padding-right: $base_padding * 2;
-  }
-}
-
 // overall menu
 #calendarArea {
   padding:0;
@@ -17,11 +8,13 @@
 // Calendar menu side column
 .datemenu-calendar-column {
   spacing: $base_spacing;
-  border: 0 solid $bubble_borders_color;
-  padding: 0 $base_padding * 2;
+  border: none;
+  border-style: solid;
+  border-color: $borders_color;
+  padding: 0;
 
-  &:ltr {margin-right: $base_margin * 2; border-left-width: 1px; }
-  &:rtl {margin-left: $base_margin * 2; border-right-width: 1px; }
+  &:ltr {margin-right: 0; margin-left: $base_margin; padding-left: $base_padding; border-left-width: 1px; }
+  &:rtl {margin-left: 0; margin-right: $base_margin; padding-right: $base_padding; border-right-width: 1px; }
 
   .datemenu-displays-section {
   }
@@ -33,7 +26,7 @@
 
 .events-section-title {
   @include notification_bubble($flat: true);
-  color: desaturate(darken($fg_color,40%), 10%);
+  color: $insensitive_fg_color;
   font-weight: bold;
   padding: .4em;
 }
@@ -46,6 +39,7 @@
   // weekday label
   .day-label {
     @include fontsize($base_font_size+1);
+    color: $insensitive_fg_color;
     font-weight: bold;
   }
 
@@ -66,7 +60,6 @@
     color: lighten($fg_color,5%);
     font-weight: bold;
     padding: 8px 0;
-    &:focus {}
   }
 
   // prev/next month icons
@@ -79,24 +72,24 @@
     background-color: transparent;
     height: 32px;
     width: 32px;
-    border-radius: $base_border_radius;
-    &:hover, &:focus { background-color: lighten($hover_bg_color, 5%); }
+    border-radius: $base_border_radius - 2px;
+    &:hover, &:focus { background-color: $hover_bg_color; }
     &:active { background-color: $active_bg_color; }
   }
-
 
   $calendar_day_size: 32px;
 
   .calendar-day-base {
     @include fontsize($base_font_size - 3);
     text-align: center;
-    width: $calendar_day_size;
-    height: $calendar_day_size;
     padding: 0;
     margin: 2px;
+    height: $calendar_day_size;
+    width: $calendar_day_size;
     border-radius: $calendar_day_size * 0.5 + 2px;
     border: 1px solid transparent; //avoid jumparound due to today
     font-feature-settings: "tnum";
+    
     &:hover, &:focus { background-color: $hover_bg_color; }
     &:active,&:selected {
       color: lighten($fg_color,10%);
@@ -105,9 +98,11 @@
 
     // day of week heading
     &.calendar-day-heading {
-      color: lighten($fg_color,10%);
-      margin-top: 1em;
-      @include fontsize($base_font_size - 4);
+      color: $insensitive_fg_color;
+      font-weight: 1000;
+      padding-top: $base_padding;
+      height: 16px !important; // force heading to be smaller height
+      @include fontsize($base_font_size - 2);
     }
   }
 
@@ -123,7 +118,8 @@
     border-left-width: 1px;
   }
 
-  .calendar-work-day {}
+  .calendar-work-day {
+  }
 
   .calendar-nonwork-day {
     color: $insensitive_fg_color;
@@ -131,37 +127,38 @@
 
   // Today
   .calendar-today {
-    font-weight: bold;
-    border: 1px solid transparent;
     background-color: $selected_bg_color;
-    color: $selected_fg_color;
+    border: 1px solid transparent;
+    font-weight: bold;
+    color: $selected_fg_color !important;
 
     &:hover,&:focus {
       background-color:lighten($selected_bg_color, 3%);
-      color: $selected_fg_color;
+      color: inherit;
     }
 
     &:active,&:selected {
       background-color: $selected_bg_color;
-      color: $selected_fg_color;
+      color: inherit;
 
       &:hover,&:focus {
         background-color:lighten($selected_bg_color, 3%);
-        color: $selected_fg_color;
+        color: inherit;
       }
     }
   }
 
   .calendar-day-with-events {
-    background-image: url("resource:///org/gnome/shell/theme/calendar-today.svg");
+    background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/calendar-today.svg"), url("resource:///org/gnome/shell/theme/calendar-today-dark.svg"));
+    background-size: contain;
     &.calendar-work-day {
-       color: lighten($fg_color,10%);
-       font-weight: bold;
+      color: lighten($fg_color,10%);
+      font-weight: bold;
     }
   }
 
   .calendar-other-month-day {
-    color: transparentize($fg_color ,0.5);
+    color: transparentize($fg_color ,0.5) !important;
   }
 
   .calendar-week-number {
@@ -190,13 +187,13 @@
   }
 
   .events-title {
-    color: desaturate(darken($fg_color,40%), 10%);
+    color: $insensitive_fg_color;
     font-weight: bold;
     margin-bottom: $base_margin;
   }
 
   .event-time {
-    color: darken($fg_color,20%);
+    color: $insensitive_fg_color;
     font-feature-settings: "tnum";
     @include fontsize($base_font_size - 1);
   }
@@ -214,7 +211,7 @@
 
   // title
   .world-clocks-header {
-    color: desaturate(darken($fg_color,40%), 10%);
+    color: $insensitive_fg_color;
     font-weight: bold;
   }
 
@@ -238,7 +235,7 @@
 
   // timezone offset label
   .world-clocks-timezone {
-    color: darken($fg_color,20%);
+    color: $insensitive_fg_color;
     font-feature-settings: "tnum";
     @include fontsize($base_font_size - 1);
   }
@@ -258,7 +255,7 @@
   }
 
   .weather-header {
-    color: desaturate(darken($fg_color,40%), 10%);
+    color: $insensitive_fg_color;
     font-weight: bold;
 
     &.location {
