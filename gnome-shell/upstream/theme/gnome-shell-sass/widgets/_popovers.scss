@@ -1,16 +1,15 @@
 /* Popovers/Menus */
 
-$popover_arrow_height: 12px;
-
-//.the popover itself
+// the popover itself
 .popup-menu-boxpointer {
-  -arrow-border-radius: $base_border_radius+4;
+  -arrow-border-radius: $modal_radius;
   -arrow-background-color: $bg_color;
-  -arrow-border-width: 1px;
   -arrow-border-color: $borders_color;
-  -arrow-base: $popover_arrow_height * 2;
-  -arrow-rise: $popover_arrow_height;
-  -arrow-box-shadow: 0 1px 3px rgba(0,0,0,0.5); // dreaming bugzilla #689995
+  -arrow-border-width: 1px;
+  -arrow-base: 24px;
+  -arrow-rise: 12px; 
+  -arrow-box-shadow: none; // dreaming bugzilla #689995
+  margin: $base_margin; // used as distance from the screen edge
 }
 
 // container of the popover menu
@@ -20,36 +19,74 @@ $popover_arrow_height: 12px;
 
   //.popup-status-menu-item { font-weight: normal;  color: pink; } //dunno what that is
   &.panel-menu {
-    -boxpointer-gap: $base_margin; // distance from the panel
-    margin-bottom: 1.75em;
+    -boxpointer-gap: $base_margin+2px; // distance from the panel
+    
+    // override popover styles for panel menus so
+    // we can draw a box shadow and no arrow
+    -arrow-border-radius: $modal_radius;
+    -arrow-background-color: transparent;
+    -arrow-border-color: transparent;
+    -arrow-border-width: 0;
+    -arrow-base: 0;
+    -arrow-rise: $base_margin; // use this as top margin
+    -arrow-box-shadow: none; // dreaming bugzilla #689995
+    
+    margin-bottom: 1.75em; // so it doesn't touch the bottom of the screen
+
+    // style the menu content instead
+    .popup-menu-content {
+      border-radius: $modal_radius;
+      border: 1px solid $borders_color; 
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+      background-color: $bg_color;
+      padding: $base_padding * 2;
+    }
+
+    .popup-menu-item {}
   }
 }
 
+// popover content;
 .popup-menu-content {
-  padding: $base_padding * 2 + $base_margin 0;
+  padding: $base_padding;
 }
 
 // menu items
 .popup-menu-item {
-  spacing: $base_padding;
-  padding: $base_padding;
+  spacing: $base_spacing;
+  padding: $base_padding*2;
+  margin: 2px 0;
+  border-radius: $base_border_radius;
+  transition: 0.2s all ease;
 
   &:ltr { padding-right:1.75em; padding-left: 0; }
   &:rtl { padding-right: 0; padding-left:1.75em; }
 
+  &:hover {
+    background-color: $hover_bg_color;
+  }
+
   &:checked {
-    background-color: lighten($bg_color, 2%);
-    box-shadow: none;
+    background-color: $hover_bg_color;
+    font-weight: bold;
+
+    margin-bottom: 0;
+    box-shadow: inset 0 -1px 0 0 darken($hover_bg_color, 5%);
+    border-radius: $base_border_radius $base_border_radius 0 0;
+    
+    &:hover {
+      background-color: darken($hover_bg_color, 4%);
+    }
   }
 
   &.selected {
-    background-color: transparentize(white, if($variant=='light', 0.2, 0.9));
+    background-color: transparentize($fg_color, if($variant=='light', 0.7, 0.9));
     color: $fg_color;
   }
 
   &:active { 
-    background-color: $selected_bg_color;
-    color: $selected_fg_color;
+    background-color: $active_bg_color;
+    color: $active_fg_color;
   }
 
   &:insensitive { color: transparentize($fg_color,0.5);}
@@ -59,27 +96,65 @@ $popover_arrow_height: 12px;
 .popup-inactive-menu-item {
   color: $fg_color;
 
-  &:insensitive { color: transparentize($fg_color,0.5); }
+  // "Open Windows" label
+  font-weight: bold;
+  font-size: smaller;
+
+  &:insensitive { color: $insensitive_fg_color; }
 }
 
 // symbolic icons in popover
 .popup-menu-arrow,
-.popup-menu-icon { icon-size: $base_icon_size; }
+.popup-menu-icon { 
+  margin: 0;
+  padding:0;
+  icon-size: 16px !important;
+}
+
+.popup-menu-arrow {
+  margin-right: $base_margin;
+}
 
 // popover submenus
 .popup-sub-menu {
-  background-color: darken($bg_color, 3%);
-  box-shadow: none;
-  border-top: 1px solid transparentize($borders_color, 0.2);
-  border-bottom: 1px solid transparentize($borders_color, 0.2);
+  background-color: $hover_bg_color;
+  border:none;
+  border-radius: 0 0 $base_border_radius $base_border_radius;
+  padding: 0;
+  margin-top: 0;
+  &:active {
+    background-color: transparent;
+  }
+
+  
+  
+  .popup-menu-ornament {
+    min-width: 14px !important;
+  }
+
+  .popup-menu-item {
+    margin: 0;
+    border-radius: 0;
+    padding: $base_padding*1.5 $base_padding*2;
+
+    &:last-child:hover{
+      border-radius: 0 0 $base_border_radius $base_border_radius;
+    }
+  }
+
+  .popup-separator-menu-item {
+    margin: 0;
+  }
 }
 
 // container for radio and check boxes
 .popup-menu-ornament {
   width: 1.2em;
+  font-weight: bold;
+  font-size: 1em;
 
-  &:ltr { text-align: right };
-  &:rtl { text-align: left };
+  &:ltr { text-align: right; };
+  &:rtl { text-align: left; };
 }
 
 // separator
@@ -89,13 +164,13 @@ $popover_arrow_height: 12px;
   .popup-separator-menu-item-separator {
     //-margin-horizontal: 24px;
     height: 1px; //not really the whole box
-    margin: 6px 64px;
+    margin: $base_margin 4em;
     background-color: lighten($borders_color, 2%);
+
     .popup-sub-menu & { //submenu separators
-      margin: 0 64px 0 32px;
-      @if $variant == 'dark' {
-        background-color: lighten($bg_color,10%);
-      }
+      margin: 0 4em 0 3em; // balance it in the middle
+      padding:0 !important;
+      background-color: darken($hover_bg_color, 5%);
     }
   }
 }
@@ -110,6 +185,14 @@ $popover_arrow_height: 12px;
 .aggregate-menu {
   min-width: 21em;
 
+  // this is unneeded in at the top-level this menu, hide it
+  .popup-menu-ornament {width:0;padding:0;spacing:0;margin:0;}
+
+  .popup-menu-item {
+    &:ltr { padding-left:$base_padding;padding-right:$base_padding*2; }
+    &:rtl { padding-right:$base_padding;padding-left:$base_padding*2; }
+  }
+
   // lock screen, shutdown, etc. buttons
   .popup-menu-icon { 
     padding:0;
@@ -120,11 +203,11 @@ $popover_arrow_height: 12px;
   .popup-sub-menu .popup-menu-item > :first-child {
     // account for icons in submenus with padding
     &:ltr {
-      padding-left: $base_padding + $base_margin * 2; 
+      padding-left: 0;
       margin-left: $base_icon_size;
     }
     &:rtl {
-      padding-right: $base_padding + $base_margin * 2; ;
+      padding-right: 0;
       margin-right: $base_icon_size;
     }
   }
