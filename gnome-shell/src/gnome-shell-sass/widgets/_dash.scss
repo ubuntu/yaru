@@ -34,7 +34,7 @@ $dash_border_radius: $modal_radius + 8px;
     height: 5px;
     width: 5px;
     border-radius:5px;
-    background-color: $osd_fg_color;
+    background-color: $selected_bg_color; // Yaru: we want an orange dot
     margin-bottom: 12px;
   }
 }
