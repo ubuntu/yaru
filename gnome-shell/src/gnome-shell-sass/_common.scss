@@ -151,7 +151,7 @@ $bubble_button_radius:$base_border_radius*1.25;
 
 // styling for elements within popovers that look like notifications
 @mixin notification_bubble($flat: false) {
-  border-width: 0px;
+  border-width: 1px; // Yaru: keep borders
   border-style: solid;
   border-radius: $base_border_radius;
   margin: $base_margin;

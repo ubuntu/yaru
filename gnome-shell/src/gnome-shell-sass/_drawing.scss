@@ -136,7 +136,7 @@
   @if $t==normal {
     color: $tc;
     background-color: lighten($c, 3%);
-    border-color: lighten($c, 3%);
+    border-color: draw_border_color($c); // Yaru: keep borders
     @include draw_shadows($button_shadow);
     // box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
     text-shadow: none;
@@ -156,7 +156,7 @@
   @else if $t==hover {
     color: $tc;
     background-color: lighten($c, if($variant == 'light', 8%, 5%));
-    border-color: lighten($c, if($variant == 'light', 8%, 5%));
+    border-color: if($variant == 'light', draw_border_color(lighten($c, 7%)), draw_border_color($c)); // Yaru: keep borders
     @include draw_shadows(0 1px opacify($shadow_color, 0.05)); // Yaru: adapt shell to gtk buttons (paper effect)
     text-shadow: none;
     icon-shadow: none;
@@ -166,7 +166,7 @@
   @else if $t==active {
     color: $tc;
     background-color: darken($c,3%);
-    border-color: darken($c,3%);
+    border-color: draw_border_color(if($variant == 'light', $c, darken($c,7%))); // Yaru: keep borders
     text-shadow: none;
     icon-shadow: none;
     box-shadow: none;
@@ -175,7 +175,7 @@
   // insensitive button
   @else if $t==insensitive {
     color: $insensitive_fg_color;
-    border-color: if($variant=='light', $insensitive_bg_color, darken($c, 5%)); // Yaru change: dark buttons need a dark border
+    border-color: if($variant=='light', $insensitive_borders_color, darken($c, 5%)); // Yaru change: dark buttons need a dark border
     background-color: $insensitive_bg_color;
     box-shadow: none;
     text-shadow: none;
