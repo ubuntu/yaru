@@ -146,7 +146,7 @@
   // focused button
   @if $t==focus {
     color: $tc;
-    background-color: mix(lighten($c, 3%), $selected_bg_color, 90%);
+    background-color: lighten($c, 3%); // Yaru: keep regular bg on focused buttons
     box-shadow: inset 0 0 0 2px $focus_border_color; // Yaru: we detached focus from selected
     text-shadow: none;
     icon-shadow: none;
