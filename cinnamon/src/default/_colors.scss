@@ -1,0 +1,109 @@
+// When color definition differs for dark and light variant,
+// it gets @if ed depending on $variant
+@import 'palette';
+
+$base_color: if($variant=='light', #ffffff, lighten($jet, 4%));
+$bg_color: if($variant=='light', #fafafa, lighten($jet, 6%));
+$fg_color: if($variant=='light', $inkstone, $porcelain);
+
+$selected_fg_color: $accent_fg_color;
+$selected_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 4%));
+$selected_borders_color: if($variant=='light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+$borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%); // Yaru: used for dash and other dark elements on light theme
+$borders_color: if($variant=='light', darken($bg_color, 20%), $borders_color_dark);
+$alt_borders_color: if($variant=='light', darken($bg_color, 24%), darken($bg_color, 10%));
+$borders_edge: if($variant=='light', transparentize(white, 0.2), transparentize($fg_color, 0.93));
+$link_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
+$link_visited_color: if($variant=='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+$top_hilight: $borders_edge;
+
+$warning_color: $yellow;
+$error_color: $red;
+$success_color: lighten($green, 5%);
+$destructive_color: if($variant=='light', $red, darken($red, 10%));
+
+$osd_fg_color: #eeeeec;
+$osd_text_color: white;
+$osd_bg_color: transparentize(lighten($jet, 2%), 0.025);
+$osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
+$osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
+$osd_borders_color: transparentize(black, 0.3);
+$osd_outer_borders_color: transparentize(white, 0.84);
+
+$shadow_color: transparentize(black, 0.9);
+$system_bg_color: lighten($jet, 4%); // Lighten than dash but darken than bg-color
+
+//insensitive state derived colors
+$insensitive_fg_color: mix($fg_color, $bg_color, 50%);
+$insensitive_bg_color: mix($bg_color, $base_color, 60%);
+$insensitive_borders_color: $borders_color;
+
+//colors for the backdrop state, derived from the main colors.
+$backdrop_base_color: if($variant=='light', darken($base_color, 1%), lighten($base_color, 1%));
+$backdrop_bg_color: $bg_color;
+$backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 80%);
+$backdrop_insensitive_color: if($variant=='light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 15%));
+$backdrop_borders_color: mix($borders_color, $bg_color, 90%);
+$backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
+
+$base_hover_color: transparentize(white, 0.8);
+$base_active_color: transparentize(white, 0.75);
+$hover_fg_color: lighten($selected_fg_color, .25);
+$active_fg_color: transparentize($selected_fg_color, .5);
+
+$panel_bg_color: darken($jet, 2%);
+$panel_fg_color: darken($porcelain, 2%);
+$dash_background_color: lighten($jet, 2%);
+$panel-alpha-value: 0.6;
+$panel_opaque_value: 0.0;
+
+$dash-alpha-value: 0.6;
+$dash-opaque-alpha-value: 0.0;
+
+//special cased widget colors
+$suggested_bg_color: if($variant=='light', lighten($green, 5%), darken($green, 5%));
+$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
+$progress_bg_color: if($variant=='light', lighten($accent_bg_color, 10%), lighten($accent_bg_color, 5%));
+$progress_border_color: if($variant=='light', darken($progress_bg_color, 5%), darken($borders_color, 5%));
+$checkradio_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 8%));
+$checkradio_fg_color: $accent_fg_color;
+$switch_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 8%));
+$switch_border_color: if($variant=='light', darken($accent_bg_color, 15%), darken($borders_color, 5%));
+$focus_border_color: lighten($accent_bg_color, 14%);
+
+// Yaru: color variables imported from Mint's cinnamon theme
+// which are not in gnome-shell but are necessary to generate
+// yaru cinnamon theme. We might modify/remove them later after
+// all the yaru specific styles have been included in _tweaks.scss
+
+// Yaru: we already have fg color defined in gnome-shell, we prefer to use them
+// $text_color: if($variant == 'light', #202020, #D3D3D3);
+$text_color: $fg_color;
+
+$separator_color: if($variant=='light', darken($bg_color, 15%), darken($bg_color, 6%));
+
+$tooltip_bg_color: #fbeaa0;
+$tooltip_fg_color: #4a4a4a;
+$tooltip_border_color: #d0d0d0;
+
+$osd_bg_color: #353535;
+
+$osd_button_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
+$osd_button_border: transparentize(darken($osd_bg_color, 20%), 0.6);
+
+$osd_entry_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
+$osd_entry_border: transparentize(darken($osd_bg_color, 12%), 0.6);
+
+// Yaru: we are imitating gnome-shell panel
+// which uses white-ish fg on dark bg
+// for both light and dark mode
+$panel_bg: $panel_bg_color;
+$panel_fg: $panel_fg_color;
+// $panel_bg: $bg_color;
+// $panel_fg: $fg_color;
+
+$entry_bg: if($variant=='light', $base_color, lighten($base_color, 0%));
+$entry_border: if($variant=='light', #cfd6e6, darken($borders_color, 0%));
+
+$button_bg: if($variant=='light', lighten($bg_color, 2%), lighten($base_color, 2%));
+$button_border: $entry_border;
