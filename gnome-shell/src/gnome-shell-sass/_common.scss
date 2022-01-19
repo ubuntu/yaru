@@ -33,25 +33,26 @@ $base_spacing: 6px;
 // border radii
 $base_border_radius: 4px; // Yaru: we want a smaller border-radius
 
-$modal_radius:$base_border_radius + 2; // Yaru: we want a smaller border-radius
+// radii of things that display over other things, e.g. popovers
+$modal_radius: $base_border_radius+2; // Yaru: we want a smaller border-radius
 
 // non-standard colors
 $bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
+$bubble_buttons_color: if($variant=='light', darken($bg_color, 12%), lighten($bg_color, 4%));
 // $bubble_borders_color: if($variant == 'light', rgba(255,255,255,0.1), rgba(0,0,0,0.3));
 
-// hover Yaru: we want the hover bg to be a visible gray for dark and light shell themes
+// derived hover colors - Yaru: we want the hover bg to be a visible gray for dark and light shell themes
 $hover_bg_color: transparentize($fg_color, 0.9);
 $hover_fg_color: $fg_color;
 $hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 5%));
 
-// active Yaru: we want the active bg to be a visible gray for dark and light shell themes
+// derived active colors - Yaru: we want the active bg to be a visible gray for dark and light shell themes
 $active_bg_color: transparentize($fg_color, 0.8);
-$active_fg_color: darken($fg_color,if($variant=='light', 5%, 3%));
-$active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
+$active_fg_color: darken($fg_color, if($variant=='light', 5%, 3%));
 
 // fonts
 $base_font_size: 11;
-$text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
+$text_shadow_color: if($variant=='light', rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
 
 // icons
 $base_icon_size: 1.09em;
@@ -76,8 +77,8 @@ stage {
 %osd_panel {
   color: $osd_fg_color;
   background-color: $osd_bg_color;
-  border: 1px solid $borders_color_dark; // Yaru: add border
-  border-radius: $base_border_radius * 2 + 4px;
+  border: 1px solid $borders_color_dark; // Yaru: use our border
+  border-radius: $modal_radius;
   padding: $base_padding * 2;
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // Yaru: OSDs need to be visible on dark backgrounds
 }
@@ -98,16 +99,9 @@ stage {
   text-align: center;
 }
 
-// dialogs
-%bubble_panel {
-  color: $fg_color;
-  background-color: $bg_color;
-  border: 1px solid if($variant=='light', rgba(0,0,0, 0.6), $borders_color);
-}
-
 // button styling
 %button {
-  border-radius: $base_border_radius;
+  border-radius: $base_border_radius; // Yaru: use our own border-radius
   border-style: solid;
   border-width: 1px;
   min-height: 22px;
@@ -120,41 +114,46 @@ stage {
   &:active, &:checked { @include button(active);}
 }
 
+// dialogs
+%bubble_panel {
+  color: $fg_color;
+  background-color: $bg_color;
+  border-radius: $base_border_radius*1.25 + 1px;
+  border: 1px solid $borders_edge;
+}
+
+// buttons in dialogs/notifications
+// styled to have no shadow and be lighter in color
+$bubble_button_radius:$base_border_radius*1.25;
+
 // buttons in dialogs
 %bubble_button {
-  @include button(normal, $shadow: none);
   padding: $base_padding * 2;
-  border-style: solid;
-  border-width: 1px;
-  border-left-width: 0;
-  border-bottom-width: 0;
+  border: 0 solid $bg_color !important; 
+  border-radius: 0;
+  border-right-width: 1px !important; 
 
+  @include button(normal, $bubble_buttons_color, $shadow: none);
   &:insensitive { @include button(insensitive, $shadow: none); }
   &:focus { @include button(focus, $shadow: none); }
   &:hover { background-color: $hover_bg_color; } // Yaru: notification buttons should work like dialog buttons ( gray hover ) 
   &:active { background-color: $active_bg_color; } // Yaru: notification buttons should work like dialog buttons ( dark gray active ) 
-
-  // radius is 2 pixel less to fit in bubble
+  
   &:first-child {
-    border-radius: 0 0 0 $modal_radius - 2px;
+    border-radius: 0 0 0 $bubble_button_radius; 
   }
 
   &:last-child {
-    border-right-width: 0;
-    border-radius: 0 0 $modal_radius - 2px 0;
-  }
-
-  &:first-child:last-child {
-    border-radius: 0 0 $modal_radius - 2px $modal_radius - 2px;
+    border-radius: 0 0 $bubble_button_radius 0;
+    border-right-width: 0 !important;
   }
 }
 
-
-// notification styling
+// styling for elements within popovers that look like notifications
 @mixin notification_bubble($flat: false) {
-  border-width: 1px;
+  border-width: 1px; // Yaru: keep borders
   border-style: solid;
-  border-radius: $base_border_radius + 2px;
+  border-radius: $base_border_radius;
   margin: $base_margin;
 
   @if $flat {
