@@ -33,6 +33,7 @@ $window_close_button_padding: 3px;
   width: $window_close_button_size;
   box-shadow: -1px 1px 5px 0px rgba(0,0,0,0.5);
   transition-duration: 300ms;
+  border: 1px solid $borders_color_dark; // Yaru: add border
 
   & StIcon { icon-size: 24px; }
 
