@@ -132,7 +132,7 @@ dpkg-buildpackage --build=binary -uc -us -tc
 ```
 
 
-- Installing `debian files:
+- Installing `deb(s)`:
 ```bash
 #Leaving yaru directory
 cd ..
