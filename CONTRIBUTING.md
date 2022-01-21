@@ -124,9 +124,10 @@ git clone https://github.com/ubuntu/yaru.git
 
 
 - Building binary `debian-packages` for testing:
-```
+```bash
 #Inside yaru directory
 cd yaru
+#Building binary debian files
 dpkg-buildpackage --build=binary -uc -us -tc
 ```
 
@@ -135,6 +136,7 @@ dpkg-buildpackage --build=binary -uc -us -tc
 ```bash
 #Leaving yaru directory
 cd ..
+#Installing all generated .deb(s)
 sudo dpkg -i yaru-theme-*.deb
 ```
 
