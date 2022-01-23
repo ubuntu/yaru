@@ -1,17 +1,23 @@
 /* Workspace Switcher */
+
+$ws_padding: $base_padding*2;
+$ws_border_radius: $modal_radius + 8px;
+
 .workspace-switcher-group {
   padding: $base_padding * 2;
 }
 
 .workspace-switcher-container {
   @extend %osd_panel;
+  padding: $ws_padding;
+  border-radius: $ws_border_radius;
+  box-shadow: 0 8px 8px 0 rgba(0,0,0,0.1);
 }
 
 .workspace-switcher {
   background: transparent;
   border: none;
   border-radius: 0;
-  padding: 0;
   spacing: $base_spacing * 2;
 }
 

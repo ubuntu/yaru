@@ -33,21 +33,21 @@ $base_spacing: 6px;
 // border radii
 $base_border_radius: 8px;
 
-$modal_radius:$base_border_radius * 2;
+// radii of things that display over other things, e.g. popovers
+$modal_radius: $base_border_radius*2; // 24px
 
 // non-standard colors
 $bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
+$bubble_buttons_color: if($variant == 'light', darken($bg_color, 12%), lighten($bg_color, 4%));
 // $bubble_borders_color: if($variant == 'light', rgba(255,255,255,0.1), rgba(0,0,0,0.3));
 
-// hover
-$hover_bg_color: if($variant=='light', darken($bg_color, 3%), lighten($bg_color, 5%));
-$hover_fg_color: if($variant=='light', darken($fg_color, 5%), lighten($fg_color, 5%));
-$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 3%));
+// derived hover colors
+$hover_bg_color: if($variant=='light', darken($bg_color, 3%), lighten($bg_color, 7%));
+$hover_fg_color: if($variant=='light', darken($fg_color, 5%), lighten($fg_color, 7%));
 
-// active
-$active_bg_color: if($variant == 'light', darken($bg_color, 7%), darken($bg_color, 9%));
+// derived active colors
+$active_bg_color: darken($bubble_buttons_color,if($variant=='light', 9%, 2%));
 $active_fg_color: darken($fg_color,if($variant=='light', 5%, 3%));
-$active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
 
 // fonts
 $base_font_size: 11;
@@ -76,9 +76,9 @@ stage {
 %osd_panel {
   color: $osd_fg_color;
   background-color: $osd_bg_color;
-  //border: 1px solid $osd_outer_borders_color;
-  border-radius: $base_border_radius * 2 + 4px;
-  padding: $base_padding * 2;
+  border: 1px solid $osd_outer_borders_color;
+  border-radius: $modal_radius;
+  padding: $base_padding*2;
 }
 
 // Overview panels
@@ -90,23 +90,16 @@ stage {
 
 // icon tiles
 %icon_tile {
-  border-radius: $base_border_radius + 4px;
+  border-radius: $base_border_radius * 2; // 16px
   padding: $base_padding;
   border: 2px solid transparent;
   transition-duration: 100ms;
   text-align: center;
 }
 
-// dialogs
-%bubble_panel {
-  color: $fg_color;
-  background-color: $bg_color;
-  border: 1px solid if($variant=='light', rgba(0,0,0, 0.6), $borders_color);
-}
-
 // button styling
 %button {
-  border-radius: $base_border_radius;
+  border-radius: $base_border_radius - 2px; // 6px
   border-style: solid;
   border-width: 1px;
   min-height: 22px;
@@ -119,41 +112,45 @@ stage {
   &:active, &:checked { @include button(active);}
 }
 
-// buttons in dialogs
-%bubble_button {
-  @include button(normal, $shadow: none);
-  padding: $base_padding * 2;
-  border-style: solid;
-  border-width: 1px;
-  border-left-width: 0;
-  border-bottom-width: 0;
+// dialogs
+%bubble_panel {
+  color: $fg_color;
+  background-color: $bg_color;
+  border-radius: $base_border_radius*1.25 + 1px;
+  border: 1px solid $borders_edge;
+}
 
+// buttons in dialogs/notifications
+// styled to have no shadow and be lighter in color
+$bubble_button_radius:$base_border_radius*1.25;
+
+%bubble_button {
+  padding: $base_padding * 2;
+  border: 0 solid $bg_color !important; 
+  border-radius: 0;
+  border-right-width: 1px !important; 
+
+  @include button(normal, $bubble_buttons_color, $shadow: none);
   &:insensitive { @include button(insensitive, $shadow: none); }
   &:focus { @include button(focus, $shadow: none); }
-  &:hover { @include button(hover, $shadow: none); }
-  &:active { @include button(active, $shadow: none); }
-
-  // radius is 2 pixel less to fit in bubble
+  &:hover { @include button(hover, $bubble_buttons_color, $shadow: none); }
+  &:active { @include button(active, $bubble_buttons_color, $shadow: none); }
+  
   &:first-child {
-    border-radius: 0 0 0 $modal_radius - 2px;
+    border-radius: 0 0 0 $bubble_button_radius; 
   }
 
   &:last-child {
-    border-right-width: 0;
-    border-radius: 0 0 $modal_radius - 2px 0;
-  }
-
-  &:first-child:last-child {
-    border-radius: 0 0 $modal_radius - 2px $modal_radius - 2px;
+    border-radius: 0 0 $bubble_button_radius 0;
+    border-right-width: 0 !important;
   }
 }
 
-
-// notification styling
+// styling for elements within popovers that look like notifications
 @mixin notification_bubble($flat: false) {
-  border-width: 1px;
+  border-width: 0px;
   border-style: solid;
-  border-radius: $base_border_radius + 2px;
+  border-radius: $base_border_radius;
   margin: $base_margin;
 
   @if $flat {

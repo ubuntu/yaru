@@ -1,7 +1,7 @@
 $_base_hover_color: transparentize($fg_color, 0.85);
 $_base_active_color: transparentize($fg_color, 0.75);
 $_close_button_color: transparentize($fg_color, 0.9);
-$_titlebutton_height: 24px;
+$_titlebutton_height: 20px;
 
 @mixin draw_circle($c, $size:$_titlebutton_height) {
   $button_size: $size + 2px * 2;
@@ -94,14 +94,14 @@ button.titlebutton:not(.appmenu) {
   // Important - otherwise the circle size is wrong
   min-height: $_titlebutton_height;
   min-width: $_titlebutton_height;
-  padding: 2px;
+  padding: 4px;
 
   headerbar &,
   .titlebar &,
   headerbar.selection-mode &,
   & {
     &.maximize, &.minimize, &.close {
-
+      @include draw_circle($_close_button_color);
       &, &:backdrop {
         &:hover {
           @include draw_circle($_base_hover_color);
@@ -111,10 +111,6 @@ button.titlebutton:not(.appmenu) {
           @include draw_circle($_base_active_color);
         }
       }
-    }
-
-    &.close {
-      @include draw_circle($_close_button_color);
     }
 
     window.toolbox &.close { // Special selector to target unified window (see #2980)
@@ -357,48 +353,6 @@ popover.background {
     &:backdrop {
       border-color: darken($_dark_theme_outer_menu_border, 5%);
       background-color: darken($_dark_theme_outer_menu_border, 5%);
-    }
-  }
-}
-
-// Due to the ubuntu orange beeing quiet bright
-// we change the row selection from a full orange
-// row to a soft gray selection
-$_row_hover_bg: if($variant=='light', transparentize(black, 0.96), transparentize(white, 0.96));
-$_row_selection_bg: if($variant=='light', transparentize(black, 0.91), transparentize(white, 0.91));
-$_backdrop_row_selection_bg: if($variant=='light', $_row_selection_bg, lighten($_row_selection_bg, 2%));
-
-list row, placessidebar row, sidebar row, .sidebar row {
-  &:hover:not(:backdrop):not(:selected) {
-    background: $_row_hover_bg;
-  }
-
-  &:selected {
-    &.activatable, & {
-      &:focus, &:hover, &:disabled, & {
-        background: $_row_selection_bg;
-      }
-
-      &:disabled {
-        &, button, button image { color: $insensitive_fg_color; }
-      }
-
-      &:focus, &:hover, & {
-        &, button, button image { color: $text_color; }
-        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }  
-      }
-
-      &:backdrop {
-        &, button, button image { color: $backdrop_fg_color; }
-        button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
-        background: $_backdrop_row_selection_bg;
-      }
-
-      &:disabled {
-        &, &:backdrop {
-          &, button, button image { color: $insensitive_fg_color; }
-        }
-      }
     }
   }
 }

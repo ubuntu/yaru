@@ -24,6 +24,8 @@ $osd_fg_color: #eeeeec;
 $osd_bg_color: #2e3436;
 $osd_borders_color: rgba(0,0,0, 0.7);
 $osd_outer_borders_color: rgba(255,255,255, 0.1);
+$osd_insensitive_bg_color: mix($osd_fg_color, $osd_bg_color, 10%);
+$osd_insensitive_fg_color: if($variant == 'light', mix($osd_fg_color, $osd_bg_color, 80%),  mix($osd_fg_color, $osd_bg_color, 70%));
 
 $shadow_color: rgba(0,0,0, 0.1);
 $system_bg_color: desaturate(#241f31,100%); //neutralize the HIG color

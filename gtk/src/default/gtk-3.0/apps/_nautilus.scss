@@ -1,5 +1,48 @@
 .nautilus-window {
 
+    // Due to the ubuntu orange being quiet bright
+    // we change the nautilus row selection from a full orange
+    // row to a soft gray selection
+    // until the nautilus gtk4 port lands in Ubuntu
+    $_row_hover_bg: if($variant=='light', transparentize(black, 0.96), transparentize(white, 0.96));
+    $_row_selection_bg: if($variant=='light', transparentize(black, 0.91), transparentize(white, 0.91));
+    $_backdrop_row_selection_bg: if($variant=='light', $_row_selection_bg, lighten($_row_selection_bg, 2%));
+
+    .sidebar-row {
+        &:hover:not(:backdrop):not(:selected) {
+            background: $_row_hover_bg;
+        }
+
+        &:selected {
+            &.activatable, & {
+                &:focus, &:hover, &:disabled, & {
+                    background: $_row_selection_bg;
+                }
+
+                &:disabled {
+                    &, button, button image { color: $insensitive_fg_color; }
+                }
+
+                &:focus, &:hover, & {
+                    &, button, button image { color: $text_color; }
+                    button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }  
+                }
+
+                &:backdrop {
+                    &, button, button image { color: $backdrop_fg_color; }
+                    button.suggested-action, button.destructive-action { &:not(.image-button) { &, & image { color: white; } } }
+                    background: $_backdrop_row_selection_bg;
+                }
+
+                &:disabled {
+                    &, &:backdrop {
+                        &, button, button image { color: $insensitive_fg_color; }
+                    }
+                }
+            }
+        }
+    }
+
     .nautilus-canvas-item.dim-label,
     .nautilus-list-dim-label {
         color: mix($text_color, $base_color);

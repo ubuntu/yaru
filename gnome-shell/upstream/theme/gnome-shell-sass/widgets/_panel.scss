@@ -3,7 +3,7 @@
 
 $panel_corner_radius: $base_border_radius+1;
 $panel_bg_color: #000;
-$panel_fg_color: #ddd;
+$panel_fg_color: if($variant == 'light', lighten($bg_color, 10%), darken($fg_color, 5%));
 $panel_height: 2.2em;
 $panel_transition_duration: 250ms; // same as the overview transition duration
 
@@ -53,8 +53,8 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
       }
     }
 
-    &:hover, &:active, &:overview, &:focus, &:checked {
-      box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.20);
+    &:active, &:overview, &:focus, &:checked {
+      box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.8);
 
       // The clock display needs to have the background on .clock because
       // we want to exclude the do-not-disturb indicator from the background
@@ -62,7 +62,27 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
         box-shadow: none;
 
         .clock {
-          box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.20);
+          box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.8);
+        }
+      }
+    }
+
+    &:hover {
+      box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.85);
+      &.clock-display {
+        box-shadow: none;
+        .clock {
+          box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.85);
+        }
+      }
+    }
+    
+    &:active:hover, &:overview:hover, &:focus:hover, &:checked:hover {
+      box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.75);
+      &.clock-display {
+        box-shadow: none;
+        .clock {
+          box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.75);
         }
       }
     }
@@ -94,14 +114,34 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
   &.login-screen,
   &:overview {
     .panel-button {
-      &:hover, &:active, &:overview, &:focus, &:checked {
-        box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.15);
+      &:active, &:overview, &:focus, &:checked {
+        box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.15);
 
         &.clock-display {
           box-shadow: none;
 
           .clock {
-            box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.15);
+          }
+        }
+      }
+
+      &:hover {
+        box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.10);
+        &.clock-display {
+          box-shadow: none;
+          .clock {
+            box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.10);
+          }
+        }
+      }
+      
+      &:active:hover, &:overview:hover, &:focus:hover, &:checked:hover {
+        box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.2);
+        &.clock-display {
+          box-shadow: none;
+          .clock {
+            box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.2);
           }
         }
       }
@@ -132,4 +172,16 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
 #appMenu .panel-status-menu-box {
   padding: 0 $base_padding;
   spacing: $base_spacing;
+}
+
+
+// Clock
+
+.clock-display-box {
+  spacing: 2px;
+
+  .clock {
+    padding-left: $base_padding * 2;
+    padding-right: $base_padding * 2;
+  }
 }

@@ -17,6 +17,7 @@
 ./actions/document-print-preview-symbolic.svg
 ./actions/document-print-symbolic.svg
 ./actions/document-properties-symbolic.svg
+./actions/document-revert-rtl-symbolic.svg
 ./actions/document-revert-symbolic.svg
 ./actions/document-save-as-symbolic.svg
 ./actions/document-save-symbolic.svg
@@ -45,6 +46,8 @@
 ./actions/format-justify-left-symbolic.svg
 ./actions/format-justify-right-symbolic.svg
 ./actions/format-text-bold-symbolic.svg
+./actions/format-text-direction-ltr-symbolic.svg
+./actions/format-text-direction-rtl-symbolic.svg
 ./actions/format-text-direction-symbolic.svg
 ./actions/format-text-italic-symbolic.svg
 ./actions/format-text-strikethrough-symbolic.svg
@@ -60,6 +63,7 @@
 ./actions/go-top-symbolic.svg
 ./actions/go-up-symbolic.svg
 ./actions/help-about-symbolic.svg
+./actions/insert object-symbolic.svg
 ./actions/insert-image-symbolic.svg
 ./actions/insert-link-symbolic.svg
 ./actions/insert-object-symbolic.svg
@@ -147,12 +151,14 @@
 ./apps/multimedia-volume-control-symbolic.svg
 ./apps/preferences-color-symbolic.svg
 ./apps/preferences-desktop-accessibility-symbolic.svg
+./apps/preferences-desktop-appearance-symbolic.svg
 ./apps/preferences-desktop-apps-symbolic.svg
 ./apps/preferences-desktop-display-symbolic.svg
 ./apps/preferences-desktop-font-symbolic.svg
 ./apps/preferences-desktop-keyboard-shortcuts-symbolic.svg
 ./apps/preferences-desktop-keyboard-symbolic.svg
 ./apps/preferences-desktop-locale-symbolic.svg
+./apps/preferences-desktop-multitasking-symbolic.svg
 ./apps/preferences-desktop-remote-desktop-symbolic.svg
 ./apps/preferences-desktop-screensaver-symbolic.svg
 ./apps/preferences-desktop-wallpaper-symbolic.svg
@@ -247,9 +253,11 @@
 ./devices/printer-network-symbolic.svg
 ./devices/printer-symbolic.svg
 ./devices/scanner-symbolic.svg
+./devices/tablet-symbolic.svg
 ./devices/thunderbolt-symbolic.svg
 ./devices/tv-symbolic.svg
 ./devices/uninterruptible-power-supply-symbolic.svg
+./devices/ups-symbolic.svg
 ./devices/video-display-symbolic.svg
 ./devices/video-joined-displays-symbolic.svg
 ./devices/video-single-display-symbolic.svg
@@ -330,6 +338,7 @@
 ./places/folder-symbolic.svg
 ./places/folder-templates-symbolic.svg
 ./places/folder-videos-symbolic.svg
+./places/inode-directory-symbolic.svg
 ./places/network-server-symbolic.svg
 ./places/network-workgroup-symbolic.svg
 ./places/start-here-symbolic.svg
@@ -372,6 +381,7 @@
 ./status/battery-level-90-charging-symbolic.svg
 ./status/battery-level-90-symbolic.svg
 ./status/battery-missing-symbolic.svg
+./status/bluetooth-acquiring-symbolic.svg
 ./status/bluetooth-active-symbolic.svg
 ./status/bluetooth-disabled-symbolic.svg
 ./status/bluetooth-disconnected-symbolic.svg
@@ -398,7 +408,9 @@
 ./status/folder-drag-accept-symbolic.svg
 ./status/folder-open-symbolic.svg
 ./status/folder-visiting-symbolic.svg
+./status/folder-visting-symbolic.svg
 ./status/image-loading-symbolic.svg
+./status/image-missing-symbolic.svg
 ./status/keyboard-brightness-symbolic.svg
 ./status/location-services-active-symbolic.svg
 ./status/location-services-disabled-symbolic.svg
@@ -442,6 +454,8 @@
 ./status/network-transmit-receive-symbolic.svg
 ./status/network-transmit-symbolic.svg
 ./status/network-vpn-acquiring-symbolic.svg
+./status/network-vpn-disabled-symbolic.svg
+./status/network-vpn-disconnected-symbolic.svg
 ./status/network-vpn-no-route-symbolic.svg
 ./status/network-vpn-symbolic.svg
 ./status/network-wired-acquiring-symbolic.svg
