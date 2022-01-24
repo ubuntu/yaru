@@ -31,10 +31,10 @@ $base_margin: 4px;
 $base_spacing: 6px;
 
 // border radii
-$base_border_radius: 4px; // Yaru: we want a smaller border-radius
+$base_border_radius: 8px;
 
 // radii of things that display over other things, e.g. popovers
-$modal_radius: $base_border_radius+2; // Yaru: we want a smaller border-radius
+$modal_radius: $base_border_radius*2; // 24px
 
 // non-standard colors
 $bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
@@ -92,7 +92,7 @@ stage {
 
 // icon tiles
 %icon_tile {
-  border-radius: $base_border_radius; // Yaru: tile radius is too big for our theme
+  border-radius: $base_border_radius * 2; // 16px
   padding: $base_padding;
   border: 2px solid transparent;
   transition-duration: 100ms;
@@ -101,7 +101,7 @@ stage {
 
 // button styling
 %button {
-  border-radius: $base_border_radius; // Yaru: use our own border-radius
+  border-radius: $base_border_radius - 2px; // 6px
   border-style: solid;
   border-width: 1px;
   min-height: 22px;

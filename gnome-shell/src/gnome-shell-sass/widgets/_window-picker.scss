@@ -18,7 +18,7 @@ $window_close_button_padding: 3px;
 .window-caption {
   color: $osd_fg_color;
   background-color: $osd_bg_color;
-  border-radius: $modal_radius; // Yaru: smaller border-radius
+  border-radius: 99px;
   padding: $base_padding $base_padding * 2;
   border: 1px solid $borders_color_dark; // Yaru: add border
 }

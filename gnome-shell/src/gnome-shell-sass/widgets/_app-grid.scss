@@ -35,12 +35,12 @@ $app_grid_fg_color: #fff;
 /* App Folders */
 .app-well-app.app-folder {
   background-color: $dash_background_color;
-  border-radius: $base_border_radius; // same as %icon_tile - Yaru: tile radius is too big for our theme
+  border-radius: $base_border_radius * 2; // same as %icon_tile
 }
 
 // expanded folder
-.app-folder-dialog { //style like the dash
-  border-radius: $dash_border_radius;  // Yaru: use same borser-radius as dash
+.app-folder-dialog {
+  border-radius: 48px;
   background-color: $dash_background_color;
   padding: 12px 0px 12px 0px;
   border: 1px solid $borders_color_dark; // Yaru: add border
@@ -154,7 +154,7 @@ $app_grid_fg_color: #fff;
     background-gradient-start: rgba(255, 255, 255, 0.05);
     background-gradient-end: transparent;
     background-gradient-direction: horizontal;
-    border-radius: $dash_border_radius 0px 0px $dash_border_radius; // Yaru: use same borser-radius as dash
+    border-radius: $modal_radius*1.5 0px 0px $modal_radius*1.5;
   }
 
   &.previous:ltr,
@@ -162,7 +162,7 @@ $app_grid_fg_color: #fff;
     background-gradient-start: transparent;
     background-gradient-end: rgba(255, 255, 255, 0.05);
     background-gradient-direction: horizontal;
-    border-radius: 0px $dash_border_radius $dash_border_radius 0px; // Yaru: use same borser-radius as dash
+    border-radius: 0px $modal_radius*1.5 $modal_radius*1.5 0px;
   }
 }
 
