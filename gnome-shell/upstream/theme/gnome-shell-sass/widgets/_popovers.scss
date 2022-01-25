@@ -39,7 +39,7 @@
       border: 1px solid $borders_color; 
       box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
       background-color: $bg_color;
-      padding: $base_padding * 2;
+      padding: $base_padding*1.5;
     }
 
     .popup-menu-item {}
@@ -54,7 +54,7 @@
 // menu items
 .popup-menu-item {
   spacing: $base_spacing;
-  padding: $base_padding*2;
+  padding: $base_padding*1.5;
   margin: 2px 0;
   border-radius: $base_border_radius;
   transition: 0.2s all ease;
@@ -125,8 +125,6 @@
   &:active {
     background-color: transparent;
   }
-
-  
   
   .popup-menu-ornament {
     min-width: 14px !important;
@@ -140,10 +138,6 @@
     &:last-child:hover{
       border-radius: 0 0 $base_border_radius $base_border_radius;
     }
-  }
-
-  .popup-separator-menu-item {
-    margin: 0;
   }
 }
 
@@ -161,16 +155,28 @@
 .popup-separator-menu-item {
   padding: 0;
 
-  .popup-separator-menu-item-separator {
-    //-margin-horizontal: 24px;
-    height: 1px; //not really the whole box
-    margin: $base_margin 4em;
-    background-color: lighten($borders_color, 2%);
+  &:ltr { padding-right:$base_padding; padding-left: 0; }
+  &:rtl { padding-right: 0; padding-left:$base_padding; }
 
-    .popup-sub-menu & { //submenu separators
-      margin: 0 4em 0 3em; // balance it in the middle
-      padding:0 !important;
-      background-color: darken($hover_bg_color, 5%);
+
+  .popup-separator-menu-item-separator {
+    height: 1px; //not really the whole box
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: $borders_color;
+  }
+
+  .popup-menu-ornament {
+    width: 0 !important;
+  }
+
+  .popup-sub-menu & {
+    padding: 0;
+    margin-right: 2.5em !important; // account for ornament
+    background-color: transparent;
+
+    .popup-separator-menu-item-separator {
+      background-color: lighten($borders_color, 7%);
     }
   }
 }
@@ -183,7 +189,7 @@
 
 // system status menu
 .aggregate-menu {
-  min-width: 21em;
+  min-width: 22em;
 
   // this is unneeded in at the top-level this menu, hide it
   .popup-menu-ornament {width:0;padding:0;spacing:0;margin:0;}
