@@ -3,12 +3,13 @@
 // Dialog
 #LookingGlassDialog {
   background-color: $osd_bg_color;
-  border-radius: 0 0 $base_border_radius $base_border_radius;
+  border-radius: 0 0 $modal_radius $modal_radius;
   border-top-width: 0;
   border: 1px solid $osd_outer_borders_color;
   color: $osd_fg_color;
   padding: $base_padding;
   spacing: $base_spacing;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
 
   & > #Toolbar {
     border: none;

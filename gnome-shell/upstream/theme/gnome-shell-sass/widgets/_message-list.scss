@@ -14,7 +14,8 @@
 
     // icon size and color
     > StIcon {
-      icon-size: $base_icon_size*4; // 32px
+      icon-size: $base_icon_size*3; // 48px
+      margin-bottom: $base_margin*3;
       -st-icon-style: symbolic;
     }
   }
@@ -119,8 +120,8 @@
     color: $fg_color;
     background-color: transparentize($fg_color, 0.9);
     border-radius: 99px;
-    padding: $base_padding;
-    margin: 0;
+    padding: $base_padding - 1px;
+    margin: 1px;
     &:hover { 
       background-color: transparentize($fg_color, 0.8);
     }

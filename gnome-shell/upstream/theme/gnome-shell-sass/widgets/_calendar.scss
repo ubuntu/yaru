@@ -87,7 +87,6 @@
     height: $calendar_day_size;
     width: $calendar_day_size;
     border-radius: $calendar_day_size * 0.5 + 2px;
-    border: 1px solid transparent; //avoid jumparound due to today
     font-feature-settings: "tnum";
     
     &:hover, &:focus { background-color: $hover_bg_color; }
@@ -128,8 +127,6 @@
   // Today
   .calendar-today {
     background-color: $selected_bg_color;
-    border: 1px solid transparent;
-    font-weight: bold;
     color: $selected_fg_color !important;
 
     &:hover,&:focus {
@@ -149,7 +146,7 @@
   }
 
   .calendar-day-with-events {
-    background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/calendar-today.svg"), url("resource:///org/gnome/shell/theme/calendar-today-dark.svg"));
+    background-image: if($variant == 'light', url("resource:///org/gnome/shell/theme/calendar-today-light.svg"), url("resource:///org/gnome/shell/theme/calendar-today.svg"));
     background-size: contain;
     &.calendar-work-day {
       color: lighten($fg_color,10%);
