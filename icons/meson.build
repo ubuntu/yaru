@@ -3,11 +3,10 @@ fs = import('fs')
 foreach flavour: ['default', 'mate']
   if get_option(flavour)
     suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
-    icon_dir = 'Yaru' + suffix
     theme_name = meson.project_name() + suffix
     theme_dir = join_paths(get_option('prefix'), 'share/icons', theme_name)
 
-    install_subdir(icon_dir,
+    install_subdir(theme_name,
       install_dir: theme_dir,
       strip_directory: true,
       exclude_files: ['index.theme', 'cursor.theme'],
