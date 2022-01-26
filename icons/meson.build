@@ -5,17 +5,17 @@ foreach flavour: ['default', 'mate']
     suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
     icon_dir = 'Yaru' + suffix
     theme_name = meson.project_name() + suffix
-    theme_dir = join_paths(get_option('prefix'), 'share/icons', theme_name)
+    theme_install_dir = join_paths(get_option('prefix'), 'share/icons', theme_name)
 
     install_subdir(icon_dir,
-      install_dir: theme_dir,
+      install_dir: theme_install_dir,
       strip_directory: true,
       exclude_files: ['index.theme', 'cursor.theme'],
     )
 
     # install unity and MATE panel-icons
     install_subdir('panel',
-      install_dir: theme_dir,
+      install_dir: theme_install_dir,
       strip_directory: true,
     )
     
@@ -33,7 +33,7 @@ foreach flavour: ['default', 'mate']
           output : flavour + '-@0@'.format(theme),
           configuration : conf_data
         )
-        install_data(file, install_dir: theme_dir, rename: theme)
+        install_data(file, install_dir: theme_install_dir, rename: theme)
       endif
     endforeach
 
