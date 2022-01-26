@@ -12,14 +12,12 @@ foreach flavour: ['default', 'mate']
       exclude_files: ['index.theme', 'cursor.theme'],
     )
 
-    # install unity-panel icons
-    if get_option('ubuntu-unity') and flavour == 'default'
-      install_subdir('unity-panel',
-        install_dir: theme_dir,
-        strip_directory: true,
-      )
-    endif
-
+    # install unity and MATE panel-icons
+    install_subdir('panel',
+      install_dir: theme_dir,
+      strip_directory: true,
+    )
+    
     themes_f = [
       'cursor.theme',
       'index.theme',
