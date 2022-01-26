@@ -27,9 +27,9 @@ foreach flavour: ['default', 'mate']
     conf_data.set('ProjectName', meson.project_name())
     conf_data.set('ThemeName', theme_name)
     foreach theme: themes_f
-      if fs.is_file(join_paths(theme_name, theme))
+      if fs.is_file(join_paths(icon_dir, theme))
         file = configure_file(
-          input : join_paths(theme_name, theme),
+          input : join_paths(icon_dir, theme),
           output : flavour + '-@0@'.format(theme),
           configuration : conf_data
         )
