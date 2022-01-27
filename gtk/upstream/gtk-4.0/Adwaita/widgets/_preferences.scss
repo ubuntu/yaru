@@ -4,13 +4,15 @@ preferencespage > scrolledwindow > viewport > clamp > box {
 }
 
 preferencesgroup > box {
-  // Add space between the description and the title.
-  > label:not(:first-child) {
-    margin-top: 6px;
+  &, .labels {
+    border-spacing: 6px;
   }
 
-  // Add space between the box and the labels.
-  > box:not(:first-child) {
-    margin-top: 12px;
+  > box.header:not(.single-line) {
+    margin-bottom: 6px;
+  }
+
+  > box.single-line {
+    min-height: 34px;
   }
 }
