@@ -8,7 +8,8 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 		-Dgnome-shell-gresource=true \
 		-Dubuntu-unity=true \
-		-Dxfwm4=true
+		-Dxfwm4=true \
+		-Dcinnamon=true
 
 override_dh_install:
 	# overrides and sessions files are shipped by ubuntu-session package.
