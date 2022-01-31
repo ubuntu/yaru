@@ -173,6 +173,16 @@ viewswitcher {
       &.wide {
         padding: 8px 12px;
 
+        image {
+          &:dir(ltr) {
+            padding-left: 7px;
+          }
+
+          &:dir(rtl) {
+            padding-right: 7px;
+          }
+        }
+
         label {
           &:dir(ltr) {
             padding-right: 7px;
