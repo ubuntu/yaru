@@ -58,6 +58,15 @@ jobs:
             src: src/themes/,
             dest: gtk/upstream/libhandy/themes
           },
+          {
+            project: Cinnamon,
+            repo: "https://github.com/linuxmint/mint-themes.git",
+            upstreambranch: master,
+            localbranch: cinnamon,
+            projectdir: mint-themes,
+            src: src/Mint-Y/cinnamon/,
+            dest: cinnamon/upstream
+          },
       ]
     steps:
       # Checkout code
