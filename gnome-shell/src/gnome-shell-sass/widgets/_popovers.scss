@@ -139,6 +139,13 @@
       border-radius: 0 0 $base_border_radius $base_border_radius;
     }
   }
+
+  .popup-menu-section {
+    .popup-menu-item:last-child:hover { border-radius: 0 }
+    &:last-child .popup-menu-item:last-child:hover {
+      border-radius: 0 0 $base_border_radius $base_border_radius;
+    }
+  }
 }
 
 // container for radio and check boxes
