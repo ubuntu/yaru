@@ -52,11 +52,20 @@ jobs:
           {
             project: Libhandy,
             repo: "https://gitlab.gnome.org/GNOME/libhandy.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: libhandy,
             projectdir: libhandy,
             src: src/themes/,
             dest: gtk/upstream/libhandy/themes
+          },
+          {
+            project: Cinnamon,
+            repo: "https://github.com/linuxmint/mint-themes.git",
+            upstreambranch: master,
+            localbranch: cinnamon,
+            projectdir: mint-themes,
+            src: src/Mint-Y/cinnamon/,
+            dest: cinnamon/upstream
           },
       ]
     steps:
