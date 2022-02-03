@@ -25,7 +25,7 @@ jobs:
           {
             project: Libhandy symbolics,
             repo: "https://gitlab.gnome.org/GNOME/libhandy.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: libhandy-symbolics,
             projectdir: libhandy,
             src: src/icons/scalable,
@@ -196,7 +196,7 @@ jobs:
           PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
       - name: Create or update Pull Request
         if: steps.checknewupstream.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v3.12.0
+        uses: peter-evans/create-pull-request@v3.12.1
         with:
           commit-message: New upstream symbolic icons list for ${{ matrix.buildenv.project }}
           title: Auto update new upstream symbolic icons list for ${{ matrix.buildenv.project }}

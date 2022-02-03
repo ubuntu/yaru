@@ -2,13 +2,15 @@
 <gresources>
   <gresource prefix="/org/gnome/shell/theme">
     <file>calendar-today.svg</file>
-    <file>calendar-today-dark.svg</file>
+    <file>calendar-today-light.svg</file>
     <file alias="icons/scalable/status/carousel-arrow-next-24-symbolic.svg">carousel-arrow-next-24-symbolic.svg</file>
     <file alias="icons/scalable/status/carousel-arrow-back-24-symbolic.svg">carousel-arrow-back-24-symbolic.svg</file>
-    <file>checkbox-focused.svg</file>
-    <file>checkbox-off-focused.svg</file>
-    <file>checkbox-off.svg</file>
     <file>checkbox.svg</file>
+    <file>checkbox-focused.svg</file>
+    <file>checkbox-off-focused-light.svg</file>
+    <file>checkbox-off-focused.svg</file>
+    <file>checkbox-off-light.svg</file>
+    <file>checkbox-off.svg</file>
     <file alias="icons/scalable/actions/color-pick.svg">color-pick.svg</file>
     <file>gnome-shell.css</file>
     <file>gnome-shell-high-contrast.css</file>
@@ -33,11 +35,15 @@
     <file alias="icons/scalable/status/screen-privacy-disabled-symbolic.svg">screen-privacy-disabled-symbolic.svg</file>
     <file alias="icons/scalable/status/screen-privacy-symbolic.svg">screen-privacy-symbolic.svg</file>
     <file>toggle-off.svg</file>
-    <file>toggle-off-dark.svg</file>
     <file>toggle-off-hc.svg</file>
+    <file>toggle-off-light.svg</file>
     <file>toggle-on.svg</file>
-    <file>toggle-on-dark.svg</file>
     <file>toggle-on-hc.svg</file>
+    <file>toggle-on-light.svg</file>
     <file>workspace-placeholder.svg</file>
+    <file alias="icons/scalable/status/screenshot-ui-area-symbolic.svg">screenshot-ui-area-symbolic.svg</file>
+    <file alias="icons/scalable/status/screenshot-ui-display-symbolic.svg">screenshot-ui-display-symbolic.svg</file>
+    <file alias="icons/scalable/status/screenshot-ui-window-symbolic.svg">screenshot-ui-window-symbolic.svg</file>
+    <file alias="icons/scalable/status/select-mode-symbolic.svg">select-mode-symbolic.svg</file>
   </gresource>
 </gresources>

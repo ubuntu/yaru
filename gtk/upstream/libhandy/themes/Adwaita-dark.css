@@ -168,6 +168,10 @@ viewswitcher button > stack > box.narrow image, viewswitcher button > stack > bo
 
 viewswitcher button > stack > box.wide { padding: 8px 12px; }
 
+viewswitcher button > stack > box.wide image:dir(ltr) { padding-left: 7px; }
+
+viewswitcher button > stack > box.wide image:dir(rtl) { padding-right: 7px; }
+
 viewswitcher button > stack > box.wide label:dir(ltr) { padding-right: 7px; }
 
 viewswitcher button > stack > box.wide label:dir(rtl) { padding-left: 7px; }

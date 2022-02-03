@@ -44,3 +44,25 @@ $active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
 	  border-radius: 10px;
 	}
 }
+
+// Fix for close assets 
+.workspace-close-button,
+.window-close {
+  background-image: url("#{$asset_path}/misc/close.svg");
+  background-size: 24px;
+  height: 24px;
+  width: 24px;
+
+  &:hover {
+    background-image: url("#{$asset_path}/misc/close-hover.svg");
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+  }
+  &:active {
+    background-image: url("#{$asset_path}/misc/close-active.svg");
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+  }
+}
