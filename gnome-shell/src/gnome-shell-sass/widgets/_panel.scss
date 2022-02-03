@@ -1,7 +1,6 @@
 /* Top Bar */
 // a.k.a. the panel
 
-$panel_corner_radius: 0; // Yaru: because of the dock we can't round the desktop corners
 // $panel_bg_color: #000; // Yaru: we define those colors in _colors.scss for _dock.scss to use it
 // $panel_fg_color: #ccc;
 $panel_height: 1.86em; // Yaru reduce panel height
@@ -19,20 +18,6 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
   &.login-screen {
   // &:overview { Yaru change: static background into overview
     background-color: transparent;
-
-    .panel-corner {
-      -panel-corner-opacity: 0;
-    }
-  }
-
-  // the rounded outset corners
-  .panel-corner {
-    -panel-corner-radius: $panel_corner_radius;
-    -panel-corner-background-color: $panel_bg_color;
-    -panel-corner-border-width: 2px;
-    -panel-corner-border-color: transparent;
-    -panel-corner-opacity: 1;
-    transition-duration: $panel_transition_duration;
   }
 
   // panel menus
