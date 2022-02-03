@@ -5,11 +5,11 @@ This project is a revitalization of the Suru icon set that was designed for Ubun
 
 ## Copying or Reusing
 
-This project has mixed licencing. You are free to copy, redistribute and/or modify aspects of this work under the terms of each licence accordingly (unless otherwise specified).
+This project has mixed licensing. You are free to copy, redistribute and/or modify aspects of this work under the terms of each licence accordingly (unless otherwise specified).
 
-The Yaru icon assets (any and all source `.svg` files or rendered `.png` files) are licenced under the terms of the [Creative Commons Attribution-ShareAlike 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/).
+The Yaru icon assets (any and all source `.svg` files or rendered `.png` files) are licensed under the terms of the [Creative Commons Attribution-ShareAlike 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/).
 
-Included scripts are free software licenced under the terms of the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt).
+Included scripts are free software licensed under the terms of the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.txt).
 
 ## Installing & Using
 
@@ -35,7 +35,7 @@ gsettings set org.gnome.desktop.interface cursor-theme "Yaru"
 
 ### Uninstalling Yaru
 
-To uninstall Yaru, simply run the following. (If you installed it without superuser priveleges just omit the  `sudo`.)
+To uninstall Yaru, simply run the following. (If you installed it without superuser privileges just omit the  `sudo`.)
 
 ```bash
 sudo ninja -C "build" uninstall
