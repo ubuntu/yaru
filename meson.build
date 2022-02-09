@@ -5,7 +5,7 @@ project('Yaru',
         default_options: ['prefix=/usr'])
 
 
-components = ['icons', 'metacity', 'gnome-shell', 'gtk', 'gtksourceview', 'sounds', 'sessions', 'xfwm4', 'cinnamon']
+components = ['icons', 'metacity', 'gnome-shell', 'gtk', 'gtksourceview', 'sounds', 'sessions', 'ubuntu-unity', 'xfwm4', 'cinnamon']
 
 foreach component: components
   if not get_option(component)
