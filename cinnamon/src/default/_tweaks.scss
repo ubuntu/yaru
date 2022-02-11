@@ -21,6 +21,17 @@ $active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
   border-radius: 999px;
 }
 
+//
+// Check Boxes: Yaru change, checkboxes are 24x24px
+//
+.check-box { 
+  StBin {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+
 // arrow back
 .calendar-change-month-back {
   &:hover, &:focus {
@@ -43,6 +54,14 @@ $active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
 	  background-color: $active_bg_color;
 	  border-radius: 10px;
 	}
+}
+
+//
+// Switches: Yaru change, toggle-switches are 48x26px
+//
+.toggle-switch {
+  width: 48px;
+  height: 26px;
 }
 
 // Fix for close assets 

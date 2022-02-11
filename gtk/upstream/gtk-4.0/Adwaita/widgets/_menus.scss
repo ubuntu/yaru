@@ -84,6 +84,7 @@ popover.menu {
     &:hover:indeterminate,
     &:hover:not(:checked):not(:indeterminate) {
       background: none;
+      box-shadow: none;
       color: inherit;
     }
   }
@@ -95,17 +96,10 @@ popover.menu {
     }
   }
 
-  check {
-    &, &:not(:checked):not(:indeterminate):hover {
-      box-shadow: none;
-    }
-  }
-
   //only menu radios have a border
   radio {
     padding: 1px;
     border: 1px solid gtkalpha(currentColor, $dimmer_opacity);
-    box-shadow: none;
   }
 
   check,

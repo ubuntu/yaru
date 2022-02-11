@@ -28,17 +28,26 @@ $screenshot_ui_button_red: #e01b24;
 
 .screenshot-ui-close-button {
   background-color: $osd_bg_color;
+  color: $osd_fg_color;
   border-radius: 99px;
-  width: 64px;
-  height: 64px;
-  margin: 64px;
+  padding: 6px;
+  height: 30px;
+  width: 30px;
+  box-shadow: -1px 1px 5px 0px rgba(0,0,0,0.5);
+  margin-top: 8px;
 
-  &:hover, &:focus { background-color: $hover_bg_color; }
-  &:active { background-color: $active_bg_color; }
-  &:checked { background-color: darken($osd_bg_color, 5%); }
+  &.left { margin-left: 8px; }
+  &.right { margin-right: 8px; }
 
-  StIcon {
-    icon-size: $base_icon_size * 2;
+  & StIcon { icon-size: 24px; }
+
+  &:hover {
+    background-color: lighten($osd_bg_color, 15%);
+  }
+
+  &:active {
+    color: transparentize($osd_fg_color, 0.2);
+    background-color: darken($osd_bg_color, 5%);
   }
 }
 
