@@ -109,7 +109,7 @@ foreach variant: variants
   gresource_xml = files('data/gnome-shell-theme.gresource.xml')[0]
   data_sources = run_command(
     gresources_xml_parser, [
-      join_paths(meson.source_root(), '@0@'.format(gresource_xml)),
+      join_paths(meson.project_source_root(), '@0@'.format(gresource_xml)),
       '--filter', '*.css',
     ] + ignore_variants,
   ).stdout().strip().split('\n')
