@@ -22,6 +22,8 @@ textview {
 
   > text {
     @extend %view;
+
+    background-color: transparent;
   }
 
   > border {
