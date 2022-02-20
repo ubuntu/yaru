@@ -200,7 +200,7 @@
     $button_fill: if($c == $bg_color, if($variant == 'light', image(lighten($c, 2%)), image(lighten($c, 4%))), image(lighten($c, 2%))) !global;
     background-image: $button_fill;
     @include _button_text_shadow($tc, $c);
-    @include _shadows(0 1px transparentize(black, 0.95)); // Yaru change: stronger shadows for flatter buttons
+    @include _shadows(none); // Yaru change: drop shadow
   }
 
   @else if $t==hover {
@@ -221,8 +221,8 @@
       @include _button_text_shadow($tc,lighten($c, 6%));
       @include _shadows(inset 0 1px _button_hilight_color(darken($c, 2%)), $_button_edge, $_button_shadow);
     }
-    box-shadow: 0 1px transparentize(black, if($variant=='light', 0.85, 0.9)); // Yaru change: stronger shadows for flatter buttons
-    background-image: if($c == $bg_color, if($variant == 'light', image(lighten($c, 4%)), image(lighten($c, 6%))), image(lighten($c, 4%)));
+    box-shadow: none; // Yaru change: remove shadow
+    background-image: if($c == $bg_color, if($variant == 'light', image(darken($c, 2%)), image(lighten($c, 6%))), image(lighten($c, 4%))); // Yaru change: darker bg on hover on light theme
   }
 
   @if $t==normal-alt {
@@ -243,7 +243,7 @@
       @include _shadows(inset 0 1px $_hilight_color,
                         $_button_edge, $_button_shadow);
     }
-    @include _shadows(0 1px transparentize(black, 0.95)); // Yaru change: stronger shadows for flatter buttons
+    @include _shadows(none); // Yaru change: remove shadow
     background-image: image(darken(white, 1%)); // Yaru change: brighter alt
     background-clip: padding-box; // Yaru change: fix background overflow
   }
@@ -266,7 +266,7 @@
                         $_button_edge, $_button_shadow);
     }
     background-image: image(white); // Yaru change: brighter alt hover
-    box-shadow: 0 1px transparentize(black, 0.85); // Yaru change: stronger shadows for flatter buttons
+    box-shadow: none; // Yaru change: remove shadow
   }
 
   @else if $t==active {
