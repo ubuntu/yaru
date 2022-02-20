@@ -344,7 +344,7 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
     &,
     > decoration,
     > decoration-overlay {
-      border-radius: 8px;
+      border-radius: $window_radius; // Yaru change: sync radius with Gtk4 (use Gtk3 vars instead of hardcode)
     }
   }
 }
