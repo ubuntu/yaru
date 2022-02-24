@@ -13,14 +13,6 @@
 
   $_gdm_bg: $base_color; // Yaru change: use $base_color for dark/light theme switch
 
-  /* StEntry { // Yaru change: don't overwrite entry style on dark theme
-    @if $variant=='dark' {
-      $_gdm_entry_bg: darken($system_bg_color, 3%);
-      background-color: $_gdm_entry_bg;
-      color: $fg_color;
-    }
-  } */
-
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
@@ -44,35 +36,10 @@
       $_active_c: if($variant == 'light', darken($_gdm_bg, 25%), darken($_gdm_bg, 5%)); // Yaru: adapt active color
       box-shadow: none;
       background-color: $_active_c;
-      border-color: $_active_c;
+      color: transparentize($osd_fg_color, 0.3);
     }
-    &:insensitive {
-      @include button(insensitive);
-      border-color: $insensitive_bg_color; // Yaru: use same style as entries
-      // background-color: darken($_gdm_bg, 5%); // Yaru: use same style as entries
-      color: $insensitive_fg_color;  // Yaru: use same style as entries
-    }
-    &:default { // Yaru: our suggested action color is green
-      @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
-      border-color: $suggested_bg_color;
-      &:hover, &:focus { 
-        @include button(hover,$c:$suggested_bg_color, $tc:$selected_fg_color);
-        $_def_hover_c: lighten($suggested_bg_color, 5%);
-        background-color: $_def_hover_c;
-        border-color: $_def_hover_c;
-      }
-      &:active {
-        @include button(active,$c:$suggested_bg_color, $tc:$selected_fg_color);
-        $_def_active_c: darken($suggested_bg_color, 5%);
-        background-color: $_def_active_c;
-        border-color: $_def_active_c;
-      }
-      &:insensitive {
-        @include button(insensitive);
-        border-color: darken($suggested_bg_color, 10%);
-        background-color: darken($suggested_bg_color, 10%);
-        color: transparentize($selected_fg_color, 0.3);
-      }
+    &:default {
+      @include button(default, $c:$suggested_bg_color, $tc:$selected_fg_color);
     }
   }
 
@@ -81,10 +48,10 @@
   .login-dialog-session-list-button {
     padding: 0;
     border-radius: 99px;
-    width: $base_icon_size * 2;
-    height: $base_icon_size * 2;
-    // border-color: $borders_color; // Yaru change: don't overwrite button look
-    // background-color: darken($_gdm_bg, 3%); // Yaru change: don't overwrite button look
+    width: $large_icon_size;
+    height: $large_icon_size;
+    // border-color: darken($system_bg_color, 3%);  // Yaru change: don't overwrite button look
+    // background-color: darken($system_bg_color, 3%);  // Yaru change: don't overwrite button look
 
     StIcon { icon-size: $base_icon_size; }
   }
@@ -109,7 +76,7 @@
 }
 
 .login-dialog-not-listed-label {
-  @include fontsize($base_font_size - 1);
+  @extend %caption;
   font-weight: bold;
   color: darken($osd_fg_color,30%);
   padding-top: 1em;
@@ -191,7 +158,7 @@
 .login-dialog-prompt-layout {
   padding-top: 24px;
   padding-bottom: 12px;
-  spacing: $base_spacing * 2;
+  spacing: $base_padding * 2;
   width: 23em;
 }
 
@@ -203,4 +170,35 @@
   color: darken($osd_fg_color, 20%);
   @include fontsize($base_font_size + 1);
   padding-top: 1em;
+}
+
+.login-dialog {
+  StEntry {
+    @if $variant=='dark' {
+      $_gdm_entry_bg: darken($system_bg_color, 3%);
+      background-color: $_gdm_entry_bg;
+      color: $fg_color;
+    }
+  }
+}
+
+// Custom styling for unlock entry
+.unlock-dialog {
+  StEntry {
+    border:none !important;
+    &:focus { 
+      background-color: transparentize($fg_color, 0.9);
+    }
+    &:insensitive { 
+      color: transparentize($fg_color, 0.5);
+      background-color: transparentize($fg_color, 0.95);
+    }
+  }
+
+  .cancel-button,
+  .switch-user-button,
+  .login-dialog-session-list-button {
+    border-color: transparent;
+    background-color: transparentize($fg_color, 0.9);
+  }
 }

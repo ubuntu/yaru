@@ -1,6 +1,8 @@
 /* Default Ubuntu Dock styling, append !important to any changed rules */
 
 // Stock
+$dash_spacing: $base_padding / 4;
+$dash_bottom_margin: $base_margin * 4;
 $dock_side_margin: $dash_bottom_margin / 4;
 $dock_fixed_inner_margin: $dock_side_margin;
 

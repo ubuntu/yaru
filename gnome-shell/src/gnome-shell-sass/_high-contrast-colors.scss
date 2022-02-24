@@ -1,7 +1,6 @@
 // When color definition differs for dark and light variant,
 // it gets @if ed depending on $variant
 
-
 $base_color: #222;
 $bg_color: #000;
 $fg_color: #fff;
@@ -13,7 +12,6 @@ $borders_color: darken($bg_color,12%);
 $borders_edge: transparentize($fg_color, 0.9);
 $link_color: lighten($selected_bg_color,20%);
 $link_visited_color: lighten($selected_bg_color,10%);
-$top_hilight: $borders_edge;
 
 $warning_color: #f57900;
 $error_color: #cc0000;
