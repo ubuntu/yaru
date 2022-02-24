@@ -6,6 +6,7 @@ option('gtksourceview', type: 'boolean', value: true, description:'build gtksour
 option('metacity', type: 'boolean', value: true, description:'build metacity component')
 option('sounds', type: 'boolean', value: true, description:'build sounds component')
 option('sessions', type: 'boolean', value: true, description:'build sessions component')
+option('cinnamon-shell', type: 'boolean', value: false, description:'build cinnamon component')
 
 option('default', type: 'boolean', value: true, description:'build Yaru default flavour')
 option('dark', type: 'boolean', value: true, description:'build Yaru dark flavour')
@@ -13,5 +14,5 @@ option('mate', type: 'boolean', value: false, description:'build Yaru mate flavo
 option('mate-dark', type: 'boolean', value: false, description:'build Yaru mate-dark flavour')
 option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
 option('xfwm4', type: 'boolean', value: false, description:'build Yaru with xfwm4 assets')
-option('cinnamon', type: 'boolean', value: false, description:'build Yaru with Cinnamon assets')
-option('cinnamon-dark', type: 'boolean', value: false, description:'build Yaru with Cinnamon dark assets')
+option('cinnamon', type: 'boolean', value: false, description:'build Yaru with Cinnamon flavour')
+option('cinnamon-dark', type: 'boolean', value: false, description:'build Yaru with Cinnamon dark flavour')
