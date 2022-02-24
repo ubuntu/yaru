@@ -44,6 +44,9 @@ if not gnomeshell_use_gresource
   endforeach
 endif
 
+theme_gresource_xml = files('data/gnome-shell-theme.gresource.xml')[0]
+icons_gresource_xml = files('data/gnome-shell-icons.gresource.xml')[0]
+
 foreach variant: variants
   is_variant = variant != 'dark'
   variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
@@ -106,10 +109,9 @@ foreach variant: variants
     endforeach
   endif
 
-  gresource_xml = files('data/gnome-shell-theme.gresource.xml')[0]
   data_sources = run_command(
     gresources_xml_parser, [
-      join_paths(project_source_root, '@0@'.format(gresource_xml)),
+      join_paths(project_source_root, '@0@'.format(theme_gresource_xml)),
       '--filter', '*.css',
     ] + ignore_variants,
   ).stdout().strip().split('\n')
@@ -129,12 +131,21 @@ endforeach
 if gnomeshell_use_gresource
   gnome.compile_resources(
     'gnome-shell-theme',
-    gresource_xml,
+    theme_gresource_xml,
     dependencies: theme_css,
     gresource_bundle: true,
     install: true,
     install_dir: gnomeshell_theme_dir,
-)
+  )
+
+  gnome.compile_resources(
+    'gnome-shell-icons',
+    icons_gresource_xml,
+    source_dir: 'data/icons',
+    gresource_bundle: true,
+    install: true,
+    install_dir: gnomeshell_theme_dir,
+  )
 else
   # Symlink variants
   foreach variant: variants
