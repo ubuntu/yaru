@@ -37,7 +37,6 @@ theme_sources = files([
   'gnome-shell-sass/widgets/_slider.scss',
   'gnome-shell-sass/widgets/_switcher-popup.scss',
   'gnome-shell-sass/widgets/_switches.scss',
-  'gnome-shell-sass/widgets/_tiled-previews.scss',
   'gnome-shell-sass/widgets/_window-picker.scss',
   'gnome-shell-sass/widgets/_workspace-switcher.scss',
   'gnome-shell-sass/widgets/_workspace-thumbnails.scss'
