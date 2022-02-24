@@ -39,6 +39,7 @@
   // weekday label
   .day-label {
     @include fontsize($base_font_size+1);
+    color: $insensitive_fg_color;
     font-weight: bold;
   }
 
@@ -83,11 +84,11 @@
     text-align: center;
     padding: 0;
     margin: 2px;
-    width: $calendar_day_size;
     height: $calendar_day_size;
+    width: $calendar_day_size;
     border-radius: $calendar_day_size * 0.5 + 2px;
     font-feature-settings: "tnum";
-
+    
     &:hover, &:focus { background-color: $hover_bg_color; }
     &:active,&:selected {
       color: lighten($fg_color,10%);
@@ -96,9 +97,11 @@
 
     // day of week heading
     &.calendar-day-heading {
-      color: lighten($fg_color,10%);
-      margin-top: 1em;
-      @include fontsize($base_font_size - 4);
+      color: $insensitive_fg_color;
+      font-weight: 1000;
+      padding-top: $base_padding;
+      height: 16px !important; // force heading to be smaller height
+      @include fontsize($base_font_size - 2);
     }
   }
 

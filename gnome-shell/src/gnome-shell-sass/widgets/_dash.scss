@@ -7,6 +7,7 @@ $dash_spacing: $base_padding / 4;
 $dash_bottom_margin: $base_margin * 4;
 $dash_border_radius: $modal_radius + 8px;
 
+// container for the dash
 #dash {
   @include fontsize($base_font_size - 2);
   margin-top: $base_margin * 3;
@@ -39,6 +40,7 @@ $dash_border_radius: $modal_radius + 8px;
   }
 }
 
+// background of the dash behind app icons
 .dash-background {
   background-color: $dash_background_color;
   border-radius: $dash_border_radius;
