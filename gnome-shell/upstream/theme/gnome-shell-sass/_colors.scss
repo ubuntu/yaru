@@ -1,20 +1,19 @@
 // When color definition differs for dark and light variant,
 // it gets @if-ed depending on $variant
 
-$base_color: if($variant == 'light', #fff, lighten(desaturate(#2a2a2a, 20%), 2%));
-$bg_color: if($variant == 'light', #f6f5f4, #2a2a2a);
+$base_color: if($variant == 'light', #fff, darken(desaturate(#241f31, 100%), 2%));
+$bg_color: if($variant == 'light', #f6f5f4, lighten($base_color, 5%));
 $fg_color: if($variant == 'light', transparentize(black, .2), white);
 
 $selected_fg_color: #fff;
-$selected_bg_color: if($variant == 'light', #3584e4, #1c71d8);
+$selected_bg_color: #3584e4;
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 
-$borders_color: if($variant == 'light', darken($bg_color, 12%), darken($bg_color, 4%));
-$borders_edge: if($variant == 'light', rgba(255,255,255,0.8), lighten($bg_color, 2%));
+$borders_color: if($variant == 'light', transparentize($fg_color, .5), transparentize($fg_color, .9));
+$borders_edge: if($variant == 'light', rgba(255,255,255,0.8), lighten($bg_color, 5%));
 
 $link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
 $link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
-$top_hilight: $borders_edge;
 
 $warning_color: if($variant == 'light', #e5a50a, #f5c211);;
 $error_color: if($variant == 'light', #e01b24, #c01c28);
@@ -31,7 +30,7 @@ $osd_outer_borders_color: transparentize($osd_fg_color, 0.98);
 $shadow_color: if($variant == 'light', rgba(0,0,0,0.1), rgba(0,0,0,0.2));
 
 // overview background color
-$system_bg_color: if($variant == 'light', darken(desaturate($bg_color, 100%), 35%), darken($bg_color, 2%)); 
+$system_bg_color: $base_color;
 
 //insensitive state derived colors
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
