@@ -14,7 +14,7 @@ $screenshot_ui_shot_cast_border_radius: 12px;
 $screenshot_ui_panel_border_radius: $screenshot_ui_shot_cast_border_radius + $screenshot_ui_shot_cast_margin;
 $screenshot_ui_shot_cast_spacing: 3px;
 
-$screenshot_ui_button_red: #e01b24;
+$screenshot_ui_button_red: $red; // Yaru: Use our palette's color
 
 .screenshot-ui-panel {
   background-color: $osd_bg_color;
