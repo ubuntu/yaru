@@ -1,220 +1,158 @@
-yaru-theme (22.04.1) jammy; urgency=medium
+yaru-theme (22.04.1) UNRELEASED; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
+  * New upstream release
+  * open-pr-on-changes: Include gnome-shell icons
+  * GNOME Shell 42 theme sync
+  * dock: Update CSS to support dash-to-dock 71+, and move most styling here
+    (LP: #1942702)
+  * debian/control: Set Breaks on older GNOME Shell versions
   * gnome-shell: Add a note on recent Yaru changes
 
-  [ github-actions[bot] ]
-  * New upstream snapshot for GTK4 (#3031)
-  * New upstream snapshot for GTK4 (#3032)
-  * New upstream symbolic icons list for gnome-screenshot symbolics (#3056)
-  * New upstream symbolic icons list for gnome-system-monitor symbolics (#3057)
-  * New upstream symbolic icons list for baobab symbolics (#3058)
-  * New upstream symbolic icons list for gnome-calendar symbolics (#3059)
-  * New upstream symbolic icons list for gnome-software symbolics (#3068)
-  * New upstream symbolic icons list for gnome-usage symbolics (#3066)
-  * New upstream snapshot for GTK4 (#3072)
-  * New upstream symbolic icons list for simple-scan symbolics (#3061)
-  * New upstream symbolic icons list for evince symbolics (#3060)
-  * New upstream symbolic icons list for yelp symbolics (#3062)
-  * New upstream symbolic icons list for shotwell symbolics (#3065)
-  * New upstream symbolic icons list for eog symbolics (#3064)
-  * New upstream symbolic icons list for gnome-control-center symbolics (#3063)
-  * New upstream symbolic icons list for gnome-todo symbolics (#3069)
-  * New upstream symbolic icons list for gnome-characters symbolics (#3067)
-  * Auto update new upstream snapshot for GTK4 (#3083)
-  * New upstream snapshot for GTK4 (#3086)
-  * New upstream snapshot for GTK4 (#3088)
-  * New upstream symbolic icons list for gnome-control-center symbolics (#3107)
-  * New upstream symbolic icons list for Adwaita symbolics (#3106)
-  * New upstream symbolic icons list for evince symbolics (#3105)
-  * New upstream symbolic icons list for shotwell symbolics (#3104)
-  * New upstream symbolic icons list for Libadwaita symbolics (#3103)
-  * New upstream symbolic icons list for simple-scan symbolics (#3102)
-  * New upstream symbolic icons list for gnome-screenshot symbolics (#3101)
-  * New upstream symbolic icons list for gnome-software symbolics (#3100)
-  * New upstream symbolic icons list for baobab symbolics (#3099)
-  * New upstream symbolic icons list for gnome-system-monitor symbolics (#3098)
-  * New upstream symbolic icons list for gnome-todo symbolics (#3097)
-  * New upstream symbolic icons list for gnome-characters symbolics (#3096)
-  * New upstream symbolic icons list for yelp symbolics (#3095)
-  * New upstream symbolic icons list for Libhandy symbolics (#3094)
-  * New upstream symbolic icons list for gnome-calendar symbolics (#3093)
-  * New upstream symbolic icons list for eog symbolics (#3092)
-  * New upstream snapshot for GTK4 (#3112)
-  * New upstream snapshot for GTK4 (#3118)
-  * New upstream snapshot for GNOME Shell (#3109)
-  * New upstream snapshot for GNOME Shell Resources (#3108)
-  * New upstream snapshot for GTK4 (#3122)
-  * New upstream snapshot for GNOME Shell (#3124)
-  * Auto update new upstream snapshot for GTK4 (#3127)
-  * New upstream snapshot for GTK4 (#3131)
-  * New upstream symbolic icons list for gnome-software symbolics (#3135)
-  * New upstream snapshot for GTK4 (#3140)
-  * New upstream snapshot for GTK4 (#3144)
-  * New upstream snapshot for GTK4 (#3146)
-  * New upstream symbolic icons list for Adwaita symbolics (#3155)
-  * New upstream snapshot for GTK4 (#3158)
-  * New upstream symbolic icons list for gnome-software symbolics (#3161)
-  * New upstream symbolic icons list for gnome-control-center symbolics (#3162)
-  * New upstream symbolic icons list for Adwaita symbolics (#3163)
-  * New upstream symbolic icons list for gnome-calendar symbolics (#3164)
-  * New upstream symbolic icons list for Libhandy symbolics (#3165)
-  * New upstream symbolic icons list for gnome-characters symbolics (#3166)
-  * New upstream symbolic icons list for simple-scan symbolics (#3167)
-  * New upstream symbolic icons list for gnome-todo symbolics (#3168)
-  * New upstream symbolic icons list for gnome-screenshot symbolics (#3169)
-  * New upstream symbolic icons list for eog symbolics (#3170)
-  * New upstream symbolic icons list for yelp symbolics (#3171)
-  * New upstream symbolic icons list for shotwell symbolics (#3172)
-  * New upstream symbolic icons list for evince symbolics (#3173)
-  * Auto update new upstream symbolic icons list for gnome-control-center symbolics (#3202)
-  * Auto update new upstream symbolic icons list for shotwell symbolics (#3201)
-  * Auto update new upstream symbolic icons list for gnome-system-monitor symbolics (#3200)
-  * Auto update new upstream symbolic icons list for Adwaita symbolics (#3199)
-  * Auto update new upstream symbolic icons list for Libhandy symbolics (#3198)
-  * Auto update new upstream symbolic icons list for gnome-calendar symbolics (#3197)
-  * Auto update new upstream symbolic icons list for yelp symbolics (#3196)
-  * Auto update new upstream symbolic icons list for gnome-screenshot symbolics (#3195)
-  * Auto update new upstream symbolic icons list for gnome-software symbolics (#3194)
-  * Auto update new upstream symbolic icons list for simple-scan symbolics (#3193)
-  * Auto update new upstream symbolic icons list for evince symbolics (#3192)
-  * Auto update new upstream symbolic icons list for gnome-todo symbolics (#3191)
-  * Auto update new upstream symbolic icons list for Libadwaita symbolics (#3190)
-  * Auto update new upstream symbolic icons list for gnome-characters symbolics (#3189)
-  * New upstream snapshot for GTK4 (#3204)
-  * New upstream snapshot for GTK4 (#3205)
-  * New upstream snapshot for GTK4 (#3211)
-  * New upstream snapshot for Libhandy (#3210)
-  * New upstream snapshot for GNOME Shell (#3213)
-  * New upstream snapshot for GTK4 (#3221)
-  * New upstream snapshot for GTK4 (#3228)
-  * New upstream snapshot for GTK4 (#3240)
-  * New upstream snapshot for GTK4 (#3246)
-  * New upstream snapshot for GTK4 (#3248)
-  * New upstream snapshot for GTK4 (#3251)
-  * New upstream snapshot for GTK4 (#3253)
-  * New upstream symbolic icons list for gnome-usage symbolics (#3250)
-  * New upstream snapshot for GTK4 (#3259)
-  * New upstream symbolic icons list for Adwaita symbolics (#3273)
-  * New upstream symbolic icons list for gnome-control-center symbolics (#3272)
-  * New upstream snapshot for GTK4 (#3275)
-  * New upstream symbolic icons list for Adwaita symbolics (#3281)
-  * New upstream snapshot for GTK4 (#3283)
-  * New upstream snapshot for GNOME Shell (#3289)
-  * New upstream symbolic icons list for Adwaita symbolics (#3290)
-
   [ Paul Kepinski ]
-  * Replace ls by find (#3052)
-  * Add missing Evince icons (#3074)
-  * Add missing yelp icons (#3075)
-  * Add missing eog icon (#3077)
-  * Add missing gcc symbolic icons (#3076)
-  * Add missing todo symbolics icons (#3078)
-  * Add missing characters icons (#3080)
-  * Gtk3 fix treeview progressbar (#3081)
-  * Add missing classes on power-profile-*-symbolic icons (#3082)
-  * Fix find-location-symbolic crooked path (#3084)
-  * Update README (#3085)
-  * Add dock styles to GS hc variant (#3089)
-  * Add new GS screen-privacy-icons (#3114)
-  * Fix notifications states look (#3120)
-  * Use $button_radius for popover
-  * Revert last commit
-  * Revert last commit
-  * Fix slider backdrop look (#3130)
-  * Fix evince branch name (#3134)
-  * Sync gtk4 with upstream (#3132)
-  * Drop depracated vars (#3145)
-  * Mimic Gtk3 switch with gtk4 ones (#3147)
-  * Add missing GTK3 render-assets script (#3148)
-  * Add border on OSD panels (#3150)
-  * Update CONTRIBUTING screenshots (#3151)
-  * Doc update (#3152)
-  * Rename Suru to Yaru (#3153)
-  * Add selection-mode-symbolic icon (#3156)
-  * Gnome shell sync slide handle (#3149)
-  * Add application-x-sms-rom fullcolor icon (#3157)
-  * Sort symbolic action listing (#3188)
-  * Include Mate apps styling in master (#3206)
-  * Get some icons from mate branch (#3207)
-  * Use exported accent for red close button (#3209)
-  * Fix broken duplicated config-users icon symlink (#3208)
-  * Remove adaptive margins for preferences (#3212)
-  * Provide :checked state for buttons (#3214)
-  * Gtk4 fix radius (#3215)
-  * Fix transparent guake notebook headerbar (#3218)
-  * Sync _defaults with upstream (#3222)
-  * Add icon theme variant support (#3225)
-  * Set mate flavour false by default (#3226)
-  * Drop outdated communitheme-snap files (#3154)
-  * Rework .window-caption (#3227)
-  * Fix applications-system icons (#3230)
-  * Add GTK mate and mate-dark variants into master (#3231)
-  * Force meson options to true in build CI (#3232)
-  * Rename Gtk-3.20 into Gtk-3.0 (#3236)
-  * Fix index.theme flavour overwriting (#3237)
-  * Add gtksourceview mate and mate-dark variants (#3234)
-  * Add metacity mate and mate-dark variants (#3235)
-  * Optimize assets (#3238)
-  * Drop treeview grey selected row tweak (#3247)
-  * Use $success instead of $suggested (#3252)
-  * Sync check assets with upstream (#3255)
-  * Add org.gnome.Usage-symbolic symlink symbolic icon (#3256)
-  * Replace aubergine by orange in some icons (#3265)
+  * Add Cinnamon theme upstream fetch
+  * Add GTK mate and mate-dark variants into master
+  * Add application-x-sms-rom fullcolor icon
+  * Add border on OSD panels
+  * Add cinnamon variants
+  * Add dock styles to GS hc variant
+  * Add folder-visting-symbolic icon
+  * Add gtksourceview mate and mate-dark variants
+  * Add icon theme variant support
+  * Add metacity mate and mate-dark variants
+  * Add missing Evince icons
+  * Add missing GTK3 render-assets script
+  * Add missing characters icons
+  * Add missing classes on power-profile-*-symbolic icons
+  * Add missing eog icon
+  * Add missing gcc symbolic icons
+  * Add missing todo symbolics icons
+  * Add missing yelp icons
+  * Add new GS screen-privacy-icons
+  * Add new upstream symbolics
+  * Add new upstream vpn symbolics
+  * Add org.gnome.Usage-symbolic symlink symbolic icon
+  * Add preferences-desktop-keyboard icon
+  * Add review-symbolic icon
+  * Add selection-mode-symbolic icon
+  * Add some symlinks
+  * Add support for GS42 - upstream sync
+  * Add system-* action fullcolor icons
+  * Doc update
+  * Drop GDM purple background
+  * Drop depracated vars
+  * Drop grey scale assets
+  * Drop grey selected rows
+  * Drop outdated communitheme-snap files
+  * Drop treeview grey selected row tweak
+  * Fix GH actions branches
+  * Fix Gnome Shell assets
+  * Fix Gtk3 headerbar radius
+  * Fix Gtk4 mate dark assets symlink
+  * Fix Yaru-dark gtk2 assets
+  * Fix applications-system icons
+  * Fix broken duplicated config-users icon symlink
+  * Fix evince branch name
+  * Fix find-location-symbolic crooked path
+  * Fix index.theme flavour overwriting
+  * Fix mate-dark gtk4 variant
+  * Fix meson warning
+  * Fix metacity mate variant
+  * Fix notifications states look
+  * Fix padlock-open-symbolic icon
   * Fix render assets script
-  * Render assets-external
-  * Render Gtk2 assets
-  * Render Gtk3 and Gtk4 assets
-  * Render Gtk2 dark assets
-  * Drop grey scale assets (#3268)
-  * Drop grey selected rows (#3271)
-  * Add new upstream symbolics (#3274)
+  * Fix slider backdrop look
+  * Fix transparent guake notebook headerbar
+  * Force meson options to true in build CI
+  * Get some icons from mate branch
+  * Gnome shell sync slide handle
+  * Gnome shell upstream sync 3328
+  * Gtk3 fix treeview progressbar
+  * Gtk4 fix radius
+  * Include Mate apps styling in master
   * Increase windowcontrols button size
-  * Add some symlinks (#3282)
-  * Sync Mate variants assets (#3269)
-  * Add preferences-desktop-keyboard icon (#3286)
-  * Add new upstream vpn symbolics (#3291)
-  * Drop GDM purple background (#2910)
+  * Make MATE panel dark
+  * Mimic Gtk3 switch with gtk4 ones
+  * Optimize assets
+  * Provide :checked state for buttons
+  * Remove Cinnamon orange close assets
+  * Remove adaptive margins for preferences
+  * Remove shadow on normal buttons
+  * Rename Gtk-3.20 into Gtk-3.0
+  * Rename Suru to Yaru
+  * Render Gtk2 assets
+  * Render Gtk2 dark assets
+  * Render Gtk3 and Gtk4 assets
+  * Render assets-external
+  * Replace aubergine by orange in some icons
+  * Replace ls by find
+  * Revert close button to upstream look
+  * Revert last commit
+  * Revert upstream border-radius
+  * Rework .window-caption
+  * Set mate flavour false by default
+  * Sort symbolic action listing
+  * Split cinnamon shell theme from variants
+  * Symlink ups to uninterruptible-power-supply (symbolic)
+  * Sync GS with upstream
+  * Sync Gnome Shell with upstream
+  * Sync Gtk3 + Libhandy + GS with Gtk4 radii
+  * Sync Gtk3 light headerbar bg with Gtk4
+  * Sync Gtk3 with upstream
+  * Sync Libadwaita with upstream
+  * Sync Mate variants assets
+  * Sync _defaults with upstream
+  * Sync check assets with upstream
+  * Sync filemanager-app icon
+  * Sync gtk4 with upstream
+  * Sync icon theme with upstream
+  * Sync image-missing-symbolic with upstream
+  * Sync symbolic icons with upstream
+  * Update CONTRIBUTING screenshots
+  * Update README
+  * Use $button_radius for popover
+  * Use $success instead of $suggested
+  * Use exported accent for red close button
 
   [ Muqtadir ]
-  * add pre-installed apps to list (#3034)
-  * sync symbolics for #3057 #3058 #3059 (#3070)
-  * add symlink app-remove-symbolic.svg (#3071)
-  * fix toggles for hc (#3091)
-  * added camera symbolics (#3117)
-  * missing-symbolics part2: multimedia (#3121)
-  * missing-symbolics part2: generic-symbols (#3125)
-  * update disabled-symbolics (#3137)
-  * fix screen-privacy-disabled-symbolic.svg (#3138)
-  * add missing-icons-symbolics-part2: time (#3139)
-  * add gnome-shell-start (#3217)
-  * improve OSK-symbolics (#3241)
-  * refine battery-symbolics: (#3243)
-  * fix classes in legacy-icons (#3244)
-  * phosh: auth_sim_icon  (#3258)
-  * phosh symbolics + missing symbolics (#3260)
-  * symlink org.gnome.Shell.Extensions-symbolic.svg (#3292)
-  * debian/changelog: (#3295)
-  * add 22x22/categories to yaru-theme-icon.install (#3296)
-  * update session overrides (#3294)
-  * update changelog (#3297)
+  * add pre-installed apps to list
+  * sync symbolics for #3057 #3058 #3059
+  * add symlink app-remove-symbolic.svg
+  * fix toggles for hc
+  * added camera symbolics
+  * missing-symbolics part2: multimedia
+  * missing-symbolics part2: generic-symbols
+  * update disabled-symbolics
+  * fix screen-privacy-disabled-symbolic.svg
+  * add missing-icons-symbolics-part2: time
+  * add gnome-shell-start
+  * improve OSK-symbolics
+  * refine battery-symbolics:
+  * fix classes in legacy-icons
+  * phosh: auth_sim_icon
+  * phosh symbolics + missing symbolics
+  * symlink org.gnome.Shell.Extensions-symbolic.svg
+  * debian/changelog:
+  * add 22x22/categories to yaru-theme-icon.install
+  * update session overrides
+  * update changelog
+  * sync GNOME-Shell resources
+  * issue no #3221 add instructions for debian files
+  * mate: add panel-icons
+  * icons: modify meson and deb files
+  * remove orange in window_controls assets
+  * cinnamon: make it true in rules and refine assets
+  * add symlink for model-obj
+  * separate unity from gtk
 
   [ benni3-1415 ]
-  * Revert cursor mimetype (#3115)
+  * Revert cursor mimetype
 
   [ ubuntujaggers ]
-  * Proposed change to application-x-executable icons (#2985)
-  * change symbolic for mail app (#3141)
-  * trying small folders with icons (#3142)
-  * adding reworked software-properties icon (#3280)
-
-  [ dependabot[bot] ]
-  * Bump actions/checkout from 2.3.4 to 2.3.5 (#3126)
-  * Bump actions/checkout from 2.3.5 to 2.4.0 (#3160)
-  * Bump peter-evans/create-pull-request from 3.10.1 to 3.11.0 (#3203)
-  * Bump actions/setup-python from 2.2.2 to 2.3.0 (#3229)
-  * Bump actions/setup-python from 2.3.0 to 2.3.1 (#3242)
-  * Bump peter-evans/create-pull-request from 3.11.0 to 3.12.0 (#3266)
+  * Proposed change to application-x-executable icons
+  * change symbolic for mail app
+  * trying small folders with icons
+  * adding reworked software-properties icon
 
   [ Feichtmeier ]
   * Remove aubergine from sliders, switches and checks
@@ -225,13 +163,16 @@ yaru-theme (22.04.1) jammy; urgency=medium
   * Revert "update gtk2 and gtk3 assets"
   * unify all titlebuttons to a soft gray
 
+  [ Joshua Peisach ]
+  * [WIP, needs testing] Cinnamon theme support
+
   [ Muqtxdir ]
   * remove aubergine from gnome-shell switches and checkboxes
 
   [ Frederik Feichtmeier ]
-  * Nautilus: keep gray rows until gtk4 port (#3278)
+  * Nautilus: keep gray rows until gtk4 port
 
- -- Muqtadir <muqtadir5555@gmail.com>  Tue, 11 Jan 2022 16:31:15 +0530
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 24 Feb 2022 21:49:14 +0100
 
 yaru-theme (21.10.2) impish; urgency=medium
 
