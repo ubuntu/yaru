@@ -32,6 +32,15 @@ jobs:
             dest: gnome-shell/upstream/data/gnome-shell-theme.gresource.xml
           },
           {
+            project: GNOME Shell Icons,
+            repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git",
+            upstreambranch: main,
+            localbranch: gnome-shell-icons,
+            projectdir: gnome-shell,
+            src: data/gnome-shell-icons.gresource.xml data/icons,
+            dest: gnome-shell/upstream/data/
+          },
+          {
             project: GTK3,
             repo: "https://gitlab.gnome.org/GNOME/gtk.git",
             upstreambranch: gtk-3-24,
@@ -78,8 +87,16 @@ jobs:
           pushd /tmp
           git clone --branch ${UPSTEAM_BRANCH} --depth 1 ${UPSTREAM_REPO_URL}
           popd
-          rm -rf ${DEST}
-          cp -a /tmp/${PROJECT_DIR}/${SRC} ${DEST}
+          if [ ${DEST: -1} == '/' ]; then
+            mkdir -p ${DEST}
+            for src in ${SRC}; do
+              rm -rf ${DEST}/src
+              cp -a /tmp/${PROJECT_DIR}/${src} ${DEST}
+            done
+          else
+            rm -rf ${DEST}
+            cp -a /tmp/${PROJECT_DIR}/${SRC} ${DEST}
+          fi
           MODIFIED=$(git status --porcelain)
           if [ -n "$MODIFIED" ]; then
             hasModif="true"
