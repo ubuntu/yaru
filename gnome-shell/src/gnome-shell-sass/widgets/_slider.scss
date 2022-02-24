@@ -3,7 +3,6 @@
 $slider_size: 16px;
 
 .slider {
-  height: if($variant=='light', $slider_size + 2px, $slider_size); // Yaru: fix height for handle border in light theme
   // slider trough
   -barlevel-height: 4px;
   -barlevel-background-color: if($variant == 'light', transparentize($fg_color, 0.6), transparentize($fg_color, 0.8)); //background of the trough
@@ -17,6 +16,8 @@ $slider_size: 16px;
   -barlevel-overdrive-border-color: transparent; //trough border when red;
   -barlevel-overdrive-separator-width:1px;
   // slider handler
+  -slider-handle-border-width: 0;
+  -slider-handle-border-color: transparent; // because 0 width
   -slider-handle-radius: $slider_size * 0.5; // half the size of the size
   -slider-handle-border-width: if($variant=='light', 1px, 0); // Yaru: add border on light theme
   -slider-handle-border-color: darken($alt_borders_color, 3%); // Yaru: the handle border needs to be darker for the light theme

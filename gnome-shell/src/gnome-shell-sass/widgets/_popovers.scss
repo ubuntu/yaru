@@ -2,13 +2,6 @@
 
 // the popover itself
 .popup-menu-boxpointer {
-  -arrow-border-radius: $modal_radius;
-  -arrow-background-color: $bg_color;
-  -arrow-border-color: if($variant=='light', transparentize(black, 0.65), $borders_color); // Yaru: we need a black-based border for the light theme
-  -arrow-border-width: 1px;
-  -arrow-base: 24px;
-  -arrow-rise: 12px; 
-  -arrow-box-shadow: none; // dreaming bugzilla #689995
   margin: $base_margin; // used as distance from the screen edge
 }
 
@@ -17,132 +10,103 @@
   min-width: 15em;
   color: $fg_color;
 
-  //.popup-status-menu-item { font-weight: normal;  color: pink; } //dunno what that is
+  //.popup-status-menu-item {font-weight: normal;  color: pink;} //dunno what that is
   &.panel-menu {
     -boxpointer-gap: $base_margin+2px; // distance from the panel
-    
-    // override popover styles for panel menus so
-    // we can draw a box shadow and no arrow
-    -arrow-border-radius: $modal_radius;
-    -arrow-background-color: transparent;
-    -arrow-border-color: transparent;
-    -arrow-border-width: 0;
-    -arrow-base: 0;
-    -arrow-rise: $base_margin; // use this as top margin
-    -arrow-box-shadow: none; // dreaming bugzilla #689995
-    
     margin-bottom: 1.75em; // so it doesn't touch the bottom of the screen
-
-    // style the menu content instead
-    .popup-menu-content {
-      border-radius: $modal_radius;
-      border: 1px solid $borders_color; 
-      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
-      background-color: $bg_color;
-      padding: $base_padding * 1.5;
-    }
-
-    .popup-menu-item {}
   }
 }
 
-// popover content;
+// popover content
 .popup-menu-content {
   padding: $base_padding;
+  // account for margin oddities
+  border-radius: $modal_radius - 2px;
+  border: 1px solid $borders_edge;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+  background-color: $bg_color;
 }
 
 // menu items
 .popup-menu-item {
-  spacing: $base_spacing;
-  padding: $base_padding*1.5;
-  margin: 2px 0;
+  padding: $base_padding*1.5 $base_padding*2;
   border-radius: $base_border_radius;
   transition: 0.2s all ease;
+  background-color: transparent;
 
-  &:ltr { padding-right:1.75em; padding-left: 0; }
-  &:rtl { padding-right: 0; padding-left:1.75em; }
+  &:focus, &:hover {
+   background-color: $hover_bg_color !important;
+   &:active { background-color: $active_bg_color !important;}
+ }
 
-  &:hover {
-    background-color: $hover_bg_color;
-  }
+  &:checked {background-color: $checked_bg_color !important;}
 
   &:checked {
-    background-color: $hover_bg_color;
-    font-weight: bold;
-
     margin-bottom: 0;
-    box-shadow: inset 0 -1px 0 0 darken($hover_bg_color, 5%);
+    box-shadow: inset 0 -1px 0 0 darken($checked_bg_color, 5%);
     border-radius: $base_border_radius $base_border_radius 0 0;
-    
-    &:hover {
-      background-color: darken($hover_bg_color, 4%);
-    }
+    &:focus,&:hover { background-color: lighten($checked_bg_color, 3%) !important;}
+    &:active { background-color: lighten($checked_bg_color, 5%) !important;}
   }
 
-  &.selected {
-    background-color: transparentize($fg_color, if($variant=='light', 0.7, 0.9));
-    color: $fg_color;
-  }
-
-  &:active { 
-    background-color: $active_bg_color;
+  &:active {
+    background-color: lighten($active_bg_color, 5%);
     color: $active_fg_color;
   }
 
-  &:insensitive { color: transparentize($fg_color,0.5);}
+  &:insensitive {color: transparentize($fg_color,0.5);}
 }
 
-// all icons and other graphical elements
+
+// all other graphical elements (sliders)
 .popup-inactive-menu-item {
   color: $fg_color;
-
-  // "Open Windows" label
-  font-weight: bold;
-  font-size: smaller;
-
   &:insensitive { color: $insensitive_fg_color; }
 }
 
 // symbolic icons in popover
 .popup-menu-arrow,
-.popup-menu-icon { 
-  margin: 0;
-  padding:0;
-  icon-size: 16px !important;
+.popup-menu-icon {
+  icon-size: 16px !important; // for some reason the variable doesn't work here
 }
 
 .popup-menu-arrow {
-  margin-right: $base_margin;
+  &:ltr {margin-right: $base_margin;}
+  &:rtl {margin-left: $base_margin;}
 }
+
 
 // popover submenus
 .popup-sub-menu {
-  background-color: $hover_bg_color;
-  border:none;
+  background-color: $checked_bg_color;
   border-radius: 0 0 $base_border_radius $base_border_radius;
-  padding: 0;
-  margin-top: 0;
-  &:active {
-    background-color: transparent;
-  }
-  
+
   .popup-menu-ornament {
-    min-width: 14px !important;
+    min-width: $base_icon_size !important;
   }
 
+  // submenu specific styles
   .popup-menu-item {
-    margin: 0;
     border-radius: 0;
-    padding: $base_padding*1.5 $base_padding*2;
+    margin: 0;
 
-    &:last-child:hover{
+    &:last-child {
       border-radius: 0 0 $base_border_radius $base_border_radius;
     }
+
+    &:focus,&:hover { background-color: lighten($hover_bg_color, 10%) !important;}
+    &:checked {
+      background-color: lighten($checked_bg_color, 10%) !important;
+      &:focus,&:hover { background-color: lighten($checked_bg_color, 8%) !important;}
+    }
+    &:active { background-color: lighten($active_bg_color, 10%) !important;}
   }
 
   .popup-menu-section {
-    .popup-menu-item:last-child:hover { border-radius: 0 }
-    &:last-child .popup-menu-item:last-child:hover {
+    .popup-menu-item:last-child {
+      &:hover,&:focus {border-radius: 0;}
+    }
+    &:last-child .popup-menu-item:last-child {
       border-radius: 0 0 $base_border_radius $base_border_radius;
     }
   }
@@ -150,25 +114,21 @@
 
 // container for radio and check boxes
 .popup-menu-ornament {
+  @extend %heading;
   width: 1.2em;
-  font-weight: bold;
-  font-size: 1em;
+  text-align: center !important;
 
-  &:ltr { text-align: right; };
-  &:rtl { text-align: left; };
+  &:ltr {text-align: right;};
+  &:rtl {text-align: left;};
 }
 
 // separator
 .popup-separator-menu-item {
-  padding: 0;
-
-  &:ltr { padding-right:$base_padding; padding-left: 0; }
-  &:rtl { padding-right: 0; padding-left:$base_padding; }
+  padding:0;
+  margin: 6px 0;
 
   .popup-separator-menu-item-separator {
     height: 1px; //not really the whole box
-    margin: 0 !important;
-    padding: 0 !important;
     background-color: $borders_color;
   }
 
@@ -197,30 +157,42 @@
 .aggregate-menu {
   min-width: 22em;
 
-  // this is unneeded in at the top-level this menu, hide it
-  .popup-menu-ornament {width:0;padding:0;spacing:0;margin:0;}
-
-  .popup-menu-item {
-    &:ltr { padding-left:$base_padding;padding-right:$base_padding*2; }
-    &:rtl { padding-right:$base_padding;padding-left:$base_padding*2; }
-  }
+  // this is unneeded at the top-level in this menu, hide it
+  .popup-menu-ornament { width: 0 !important; }
 
   // lock screen, shutdown, etc. buttons
-  .popup-menu-icon { 
-    padding:0;
-    margin: 0 $base_margin;
+  .popup-menu-icon {
     -st-icon-style: symbolic;
+    &:ltr {margin-right: $base_margin*2;}
+    &:rtl {margin-left: $base_margin*2;}
   }
 
+  // account for ornaments in submenus with padding
   .popup-sub-menu .popup-menu-item > :first-child {
-    // account for icons in submenus with padding
-    &:ltr {
-      padding-left: 0;
-      margin-left: $base_icon_size;
-    }
-    &:rtl {
-      padding-right: 0;
-      margin-right: $base_icon_size;
+    // this value is hardcoded for visual effect
+    &:ltr { margin-left: $base_margin*2;}
+    &:rtl { margin-right: $base_margin*2;}
+  }
+}
+
+// right-click (and panel) app menu
+.app-menu {
+  max-width: 27.25em;
+  .popup-menu-content { margin: $base_margin;}
+
+  &.panel-menu {
+    .popup-menu-content { margin: 0;} // avoid doubling up margin
+  }
+
+  // this is unneeded at the top-level in this menu, hide it
+  .popup-menu-ornament { width: 0 !important; }
+
+  .popup-inactive-menu-item:first-child {
+    // "Open Windows" label
+    > StLabel {
+      @extend %caption_heading;
+      &:ltr {margin-right: $base_margin*2;}
+      &:rtl {margin-left: $base_margin*2;}
     }
   }
 }

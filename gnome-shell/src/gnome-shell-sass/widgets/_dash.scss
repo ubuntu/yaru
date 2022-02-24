@@ -2,15 +2,13 @@
 
 //$dash_background_color: lighten($system_bg_color, 5%); // Yaru: we define those colors in _colors.scss for _dock.scss to use it
 $dash_placeholder_size: 32px;
-$dash_padding: $base_padding + 4px; // 10px
-$dash_spacing: $base_padding / 4;
-$dash_bottom_margin: $base_margin * 4;
-$dash_border_radius: $modal_radius + 8px;
+$dash_padding: $base_padding*2; // 12px
+$dash_border_radius: $modal_radius + $dash_padding;
 
+// container for the dash
 #dash {
-  @include fontsize($base_font_size - 2);
-  margin-top: $base_margin * 3;
-  padding: $dash_padding;
+  @extend %caption;
+  margin: 2em;
 
   .placeholder {
     // background-image: url("resource:///org/gnome/shell/theme/dash-placeholder.svg");
@@ -24,51 +22,38 @@ $dash_border_radius: $modal_radius + 8px;
     height: $dash_placeholder_size;
   }
 
-  // icon on the dash
-  .overview-icon {
-    padding: $base_padding+2px;
-  }
-
   // Running app indicator (also shown in app grid)
   .app-well-app-running-dot {
-    height: 5px;
-    width: 5px;
-    border-radius:5px;
+    margin-bottom: 15px; // hardcoded
     background-color: $selected_bg_color; // Yaru: we want an orange dot
-    margin-bottom: 12px;
   }
 }
 
+// background of the dash behind app icons
 .dash-background {
   background-color: $dash_background_color;
   border-radius: $dash_border_radius;
-  margin-bottom: 0; // this keeps things vertically centered
   padding: $dash_padding;
   border: 1px solid $borders_color_dark; // Yaru: add border
+  spacing: $base_padding;
 }
 
 // items on the dash
 .dash-item-container {
-
   // each app item on the dash
-  .app-well-app {
-    padding:0;
-    margin: 2px;
+  .app-well-app .overview-icon {
+    margin: 0 4px;
+    padding: $base_padding;
   }
 
   // show apps button
-  .show-apps {
-    @include overview_icon($osd_fg_color);
-    margin: 2px;
-    padding: 0;
-  }
+  .show-apps { @include overview_icon($osd_fg_color);}
 }
 
 // separator between favourites and running apps
 .dash-separator {
   width: 1px;
-  margin: 0 $base_margin*2;
-  background-color: transparentize($borders_color,0.5);
+  background-color: $borders_color;
 }
 
 // OSD Tooltip

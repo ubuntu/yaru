@@ -10,7 +10,7 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
   background-color: $panel_bg_color;
   font-weight: bold;
   height: $panel_height;
-  font-feature-settings: "tnum";
+  @extend %numeric;
   transition-duration: $panel_transition_duration;
 
   // transparent panel on lock & login screens
@@ -38,6 +38,18 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
       }
     }
 
+    &.screen-recording-indicator {
+      box-shadow: inset 0 0 0 100px $screenshot_ui_button_red;
+
+      StBoxLayout {
+        spacing: $base_padding;
+      }
+
+      StIcon {
+        icon-size: $base_icon_size;
+      }
+    }
+
     &:active, &:overview, &:focus, &:checked {
       box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.8);
 
@@ -50,6 +62,10 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
           box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.8);
         }
       }
+
+      &.screen-recording-indicator {
+        box-shadow: inset 0 0 0 100px transparentize($screenshot_ui_button_red, 0.15);
+      }
     }
 
     &:hover {
@@ -60,6 +76,10 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
           box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.85);
         }
       }
+
+      &.screen-recording-indicator {
+        box-shadow: inset 0 0 0 100px transparentize($screenshot_ui_button_red, 0.1);
+      }
     }
     
     &:active:hover, &:overview:hover, &:focus:hover, &:checked:hover {
@@ -69,6 +89,10 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
         .clock {
           box-shadow: inset 0 0 0 100px transparentize($panel_fg_color, 0.75);
         }
+      }
+
+      &.screen-recording-indicator {
+        box-shadow: inset 0 0 0 100px transparentize($screenshot_ui_button_red, 0.2);
       }
     }
 
@@ -109,6 +133,10 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
             box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.15);
           }
         }
+
+        &.screen-recording-indicator {
+          box-shadow: inset 0 0 0 100px transparentize($screenshot_ui_button_red, 0.15);
+        }
       }
 
       &:hover {
@@ -119,6 +147,10 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
             box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.10);
           }
         }
+
+        &.screen-recording-indicator {
+          box-shadow: inset 0 0 0 100px transparentize($screenshot_ui_button_red, 0.1);
+        }
       }
       
       &:active:hover, &:overview:hover, &:focus:hover, &:checked:hover {
@@ -128,6 +160,10 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
           .clock {
             box-shadow: inset 0 0 0 100px rgba(255,255,255, 0.2);
           }
+        }
+
+        &.screen-recording-indicator {
+          box-shadow: inset 0 0 0 100px transparentize($screenshot_ui_button_red, 0.2);
         }
       }
     }
@@ -150,13 +186,13 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
 
 // App Menu
 #appMenu {
-  spacing: $base_spacing;
+  spacing: $base_padding;
   .label-shadow { color: transparent; }
 }
 
 #appMenu .panel-status-menu-box {
   padding: 0 $base_padding;
-  spacing: $base_spacing;
+  spacing: $base_padding;
 }
 
 

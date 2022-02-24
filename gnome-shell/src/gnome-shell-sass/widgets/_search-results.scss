@@ -26,43 +26,29 @@
   box-shadow: none;
   text-shadow: none;
   color: $osd_fg_color;
-  padding: $base_padding * 3;
+  padding: $base_padding*2;
   margin: $base_margin;
   // This is the space between the provider icon and the results container
 }
 
 %search_section_content_item {
-  @extend %icon_tile;
-
-  border-radius: $base_border_radius;
-
-  color: $osd_fg_color;
-
-  &:focus,
-  &:hover,
-  &:selected {
-    background-color: transparentize($osd_fg_color, .9);
-    transition-duration: 200ms;
-  }
-
-  &:active,
-  &:checked {
-    background-color: transparentize(darken($osd_bg_color, 10%), .1);
-  }
+  @include tile_button($osd_fg_color);
+  margin: $base_margin;
+  border-radius: $base_border_radius !important;
 }
 
 // "no results" text
 .search-statustext {
-  @extend %status_text;
+  @extend %large_title;
 }
 
 .grid-search-results {
-  spacing: $base_spacing * 6;
+  spacing: $base_padding * 6;
 }
 
 // Search results with icons
 .grid-search-result {
-  @extend %app_well_app;
+  @extend .app-well-app;
 }
 
 // search result provider
@@ -71,7 +57,7 @@
 
   // content
   .list-search-provider-content {
-    spacing: $base_spacing * 2;
+    spacing: $base_padding * 2;
 
     // provider labels
     .list-search-provider-details {
@@ -83,7 +69,7 @@
 
 // search results list
 .list-search-results {
-  spacing: $base_spacing;
+  spacing: $base_padding;
 }
 
 // search result listitem
@@ -97,7 +83,7 @@
 
   // list item title (with leading icon)
   .list-search-result-title {
-    spacing: $base_spacing * 2;
+    spacing: $base_padding * 2;
     // font-weight: bold;
   }
 

@@ -4,9 +4,6 @@ $notification_banner_height: 64px;
 $notification_banner_width: 34em;
 $notification_banner_radius: $base_border_radius*1.5;
 
-// make radius of buttons fit in bubble corner (banner radius - width of focus ring)
-$notification_button_radius: ($notification_banner_radius - 2px);
-
 // Banner notifications
 .notification-banner {
   min-height: $notification_banner_height;

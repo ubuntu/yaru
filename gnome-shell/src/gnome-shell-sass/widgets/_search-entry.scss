@@ -11,30 +11,22 @@ $search_entry_height: 36px;
   // border-color: transparent;
   border-color: $borders_color;
   border-radius: $search_entry_height * 0.5; // half the height
-  color: transparentize($fg_color,0.3);
-  margin-top: $base_spacing * 4; // Yaru change: increase margin-top due to fixed panel opacity
-  margin-bottom: $base_spacing;
+
+  margin-top: $base_padding * 4; // Yaru change: increase margin-top due to fixed panel opacity
+  margin-bottom: $base_padding;
   padding: $base_padding+1 $base_padding+3;
   width: $search_entry_width;
-  
+
+  @include entry(normal);
   &:hover {
-    // background-color: $hover_bg_color; Yaru: we can't use our hover color here otherwise it becomes transparent
-    border-color: $hover_borders_color; // Yaru: we want bordered entries
-    color: lighten($hover_fg_color, 5%);
+    @include entry(hover);
   }
-
   &:focus {
-    border-style: solid;
-    border-color: $focus_border_color; // Yaru: we detached focus from selected
-    color: $fg_color;
-    box-shadow: none;
-    
-    // Yaru: we want bordered entries
-    padding: $base_padding $base_padding+2; // 1px less to account for wider border
-    border-width: 2px; 
+    @include entry(focus);
   }
+  &:insensitive { @include entry(insensitive);}
 
-  .search-entry-icon { 
+  .search-entry-icon {
     color: inherit;
     icon-size: $base_icon_size;
     margin-top: 2px; // center vertically
