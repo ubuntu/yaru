@@ -1,13 +1,43 @@
+$aqua_1: #89ffdd;
+$aqua_2: #43d6b5;
+$aqua_3: #28bca3; //Yaru aqua
+$aqua_4: #0e9a83;
+$aqua_5: #007367;
+$banana_1: #fff394;
+$banana_2: #ffe16b;
+$banana_3: #f9c440; // Yaru banana
+$banana_4: #d48e15; 
+$banana_5: #ad5f00;
 $blue_1: #75d3f4;
 $blue_2: #47c4f1;
 $blue_3: #19B6EE; // Yaru blue
 $blue_4: #007aa6; // Yaru linkblue
 $blue_5: #335280; // Yaru darkblue
+$blueberry_1: #8cd5ff;
+$blueberry_2: #64baff;
+$blueberry_3: #3689e6; // Yaru blueberry
+$blueberry_4: #0d52bf; 
+$blueberry_5: #002e99;
+$bubblegum_1: #fe9ab8;
+$bubblegum_2: #f4679d;
+$bubblegum_3: #de3e80; // Yaru bubblegum
+$bubblegum_4: #bc245d; 
+$bubblegum_5: #910e38;
+$grape_1: #e4c6fa;
+$grape_2: #cd9ef7;
+$grape_3: #a56de2; // Yaru grape
+$grape_4: #7239b3;
+$grape_5: #452981;
 $green_1: #5AED70;
 $green_2: #47D35C;
 $green_3: #34B948;
 $green_4: #219E34;
 $green_5: #0e8420; // Yaru green
+$lime_1: #d1ff82;
+$lime_2: #9bdb4d;
+$lime_3: #68b723; // Yaru lime
+$lime_4: #3a9104;
+$lime_5: #206b00;
 $yellow_1: #FCCD87;
 $yellow_2: #FBC16A;
 $yellow_3: #FBB44C;
@@ -28,6 +58,11 @@ $purple_2: #762572; // Yaru purple
 $purple_3: #77216F; // Yaru light aubergine
 $purple_4: #5E2750; // Yaru mid aubergine
 $purple_5: #2C001E; // Yaru dark aubergine
+$strawberry_1: #ff8c82;
+$strawberry_2: #ed5353;
+$strawberry_3: #c6262e; //Yaru strawberrry
+$strawberry_4: #a10705;
+$strawberry_5: #7a0000;
 $brown_1: #E1B289;
 $brown_2: #C5976E;
 $brown_3: #AA7B53;
@@ -47,16 +82,46 @@ $dark_5: #000000;
 // Sass thinks we're using the colors in the variables as strings and may shoot
 // warning, it's innocuous and can be defeated by using #{$var}.
 
+@define-color aqua_1 #{$aqua_1};
+@define-color aqua_2 #{$aqua_2};
+@define-color aqua_3 #{$aqua_3};
+@define-color aqua_4 #{$aqua_4};
+@define-color aqua_5 #{$aqua_5};
+@define-color banana_1 #{$banana_1};
+@define-color banana_2 #{$banana_2};
+@define-color banana_3 #{$banana_3};
+@define-color banana_4 #{$banana_4};
+@define-color banana_5 #{$banana_5};
 @define-color blue_1 #{$blue_1};
 @define-color blue_2 #{$blue_2};
 @define-color blue_3 #{$blue_3};
 @define-color blue_4 #{$blue_4};
 @define-color blue_5 #{$blue_5};
+@define-color blueberry_1 #{$blueberry_1};
+@define-color blueberry_2 #{$blueberry_2};
+@define-color blueberry_3 #{$blueberry_3};
+@define-color blueberry_4 #{$blueberry_4};
+@define-color blueberry_5 #{$blueberry_5};
+@define-color bubblegum_1 #{$bubblegum_1};
+@define-color bubblegum_2 #{$bubblegum_2};
+@define-color bubblegum_3 #{$bubblegum_3};
+@define-color bubblegum_4 #{$bubblegum_4};
+@define-color bubblegum_5 #{$bubblegum_5};
+@define-color grape_1 #{$grape_1};
+@define-color grape_2 #{$grape_2};
+@define-color grape_3 #{$grape_3};
+@define-color grape_4 #{$grape_4};
+@define-color grape_5 #{$grape_5};
 @define-color green_1 #{$green_1};
 @define-color green_2 #{$green_2};
 @define-color green_3 #{$green_3};
 @define-color green_4 #{$green_4};
 @define-color green_5 #{$green_5};
+@define-color lime_1 #{$lime_1};
+@define-color lime_2 #{$lime_2};
+@define-color lime_3 #{$lime_3};
+@define-color lime_4 #{$lime_4};
+@define-color lime_5 #{$lime_5};
 @define-color yellow_1 #{$yellow_1};
 @define-color yellow_2 #{$yellow_2};
 @define-color yellow_3 #{$yellow_3};
@@ -77,6 +142,11 @@ $dark_5: #000000;
 @define-color purple_3 #{$purple_3};
 @define-color purple_4 #{$purple_4};
 @define-color purple_5 #{$purple_5};
+@define-color strawberry_1 #{$strawberry_1};
+@define-color strawberry_2 #{$strawberry_2};
+@define-color strawberry_3 #{$strawberry_3};
+@define-color strawberry_4 #{$strawberry_4};
+@define-color strawberry_5 #{$strawberry_5};
 @define-color brown_1 #{$brown_1};
 @define-color brown_2 #{$brown_2};
 @define-color brown_3 #{$brown_3};
