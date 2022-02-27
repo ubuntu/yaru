@@ -1,5 +1,3 @@
-fs = import('fs')
-
 foreach flavour: ['default', 'mate']
   if get_option(flavour)
     suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
