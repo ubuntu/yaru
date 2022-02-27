@@ -6,6 +6,9 @@ project('Yaru',
 
 project_source_root = meson.current_source_dir()
 
+fs = import('fs')
+gnome = import('gnome')
+
 components = [
   'icons',
   'metacity',
