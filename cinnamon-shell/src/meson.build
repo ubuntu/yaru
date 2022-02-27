@@ -1,5 +1,4 @@
 sassc = find_program('sassc')
-fs = import('fs')
 
 foreach flavour: flavours
   suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
