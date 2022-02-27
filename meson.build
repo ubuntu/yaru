@@ -6,7 +6,18 @@ project('Yaru',
 
 project_source_root = meson.current_source_dir()
 
-components = ['icons', 'metacity', 'gnome-shell', 'gtk', 'gtksourceview', 'sounds', 'sessions', 'ubuntu-unity', 'xfwm4', 'cinnamon-shell']
+components = [
+  'icons',
+  'metacity',
+  'gnome-shell',
+  'gtk',
+  'gtksourceview',
+  'sounds',
+  'sessions',
+  'ubuntu-unity',
+  'xfwm4',
+  'cinnamon-shell',
+]
 
 foreach component: components
   if not get_option(component)
