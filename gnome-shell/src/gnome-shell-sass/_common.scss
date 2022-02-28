@@ -89,6 +89,7 @@ stage {
   border: 2px solid transparent;
   transition-duration: 100ms;
   text-align: center;
+  color: $osd_fg_color; // Yaru change: fix for light theme
 }
 
 // dialogs
