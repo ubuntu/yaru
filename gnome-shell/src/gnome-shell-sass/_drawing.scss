@@ -102,19 +102,19 @@
   // hover key
   @else if $t==hover {
     color: $tc;
-    background-color: lighten($c, 7%);
+    background-color: if($variant=="light", lighten($c, 1%), lighten($c, 7%)); // Yaru change: Make keyboard work on both variants
   }
 
   // active key
   @else if $t==active {
     color: $tc;
-    background-color: lighten($c, 10%);
+    background-color: if($variant=="light", darken($c, 2%), lighten($c, 10%)); // Yaru change: ↑↑↑
   }
 
   // checked key
   @else if $t==checked {
     color: $tc;
-    background-color: lighten($c, 15%);
+    background-color: if($variant=="light", darken($c, 5%), lighten($c, 15%)); // Yaru change: ↑↑↑
   }
 
   // insensitive key
