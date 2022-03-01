@@ -45,6 +45,16 @@ window#Main.background {
     border-bottom: 1px solid $_pull_down_terminal_border_color;
     entry { border-color: $_pull_down_terminal_border_color; }
   }
-  
-  
+}
+
+// Fix for invivible caret navigation in dark theme
+.caja-navigation-window widget.view widget.entry {
+  background: if($variant=="light", darken($bg_color, 5%), lighten($bg_color, 5%));
+  color: $fg_color;
+  border-color: $borders_color;
+
+  &:selected {
+    background: $selected_bg_color;
+    color: $selected_fg_color;
+  }
 }
