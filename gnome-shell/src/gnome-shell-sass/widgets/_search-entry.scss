@@ -5,25 +5,16 @@ $search_entry_height: 36px;
 
 %search_entry,
 .search-entry {
-  background-color: if($variant == 'light', lighten($bg_color, 5%), $dash_background_color); // Yaru: use same background as dash for dark theme
-  // Yaru: we want bordered entries
-  // border-width: 2px;
-  // border-color: transparent;
-  border-color: $borders_color;
   border-radius: $search_entry_height * 0.5; // half the height
 
-  margin-top: $base_padding * 4; // Yaru change: increase margin-top due to fixed panel opacity
-  margin-bottom: $base_padding;
+  margin-top: $base_padding * 4; // Yaru change: realign search entry due to fixed panel opacity
+  margin-bottom: 0; // Yaru change: realign search entry due to fixed panel opacity
   padding: $base_padding+1 $base_padding+3;
   width: $search_entry_width;
 
   @include entry(normal);
-  &:hover {
-    @include entry(hover);
-  }
-  &:focus {
-    @include entry(focus);
-  }
+  &:hover { @include entry(hover);}
+  &:focus { @include entry(focus);}
   &:insensitive { @include entry(insensitive);}
 
   .search-entry-icon {
