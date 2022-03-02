@@ -53,7 +53,7 @@ $dash_border_radius: $modal_radius + $dash_padding;
 // separator between favourites and running apps
 .dash-separator {
   width: 1px;
-  background-color: $borders_color;
+  background-color: $borders_color_dark; // Yaru change: fix light dash separator
 }
 
 // OSD Tooltip
