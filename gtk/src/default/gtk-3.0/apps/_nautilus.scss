@@ -15,8 +15,8 @@
 }
 
 // .nautilus-canvas-item.thumbnail {
-    // -gtk-icon-shadow: 0px 1px 2px $borders_color, 1px 0px 0px transparentize($borders_color, 0.25),
-    //     -1px 0px 0px transparentize($borders_color, 0.25), 0px 2px 0px transparentize($borders_color, 0.5);
+    // -gtk-icon-shadow: 0px 1px 2px $borders_color, 1px 0px 0px transparentize($borders_color, 0.75),
+    //     -1px 0px 0px transparentize($borders_color, 0.75), 0px 2px 0px transparentize($borders_color, 0.5);
 // }
 
 // .nautilus-canvas-item.dim-label {
@@ -81,10 +81,10 @@
 }
 .nautilus-path-bar scrolledwindow undershoot.left {
     border-radius: 5px 0px 0px 5px;
-    background: linear-gradient(to right, $bg_color 6px, transparentize($bg_color, 0) 24px);
+    background: linear-gradient(to right, $bg_color 6px, transparentize($bg_color, 1) 24px);
 }
 .nautilus-path-bar scrolledwindow undershoot.right {
-    background: linear-gradient(to left, $bg_color 6px, transparentize($bg_color, 0) 24px);
+    background: linear-gradient(to left, $bg_color 6px, transparentize($bg_color, 1) 24px);
 }
 
 .nautilus-path-bar > button,
@@ -101,7 +101,7 @@
 }
 
 .path-buttons-box button:not(.current-dir):not(:backdrop):hover {
-    background: transparentize($fg_color, 0.15);
+    background: transparentize($fg_color, 0.85);
     box-shadow: inset 0 0 0 2px $bg_color;
 }
 
@@ -209,8 +209,8 @@ $disk_space_free: #eeeeec;
 }
 
 .nautilus-list-view.thumbnail {
-    -gtk-icon-shadow: 0px 1px 2px $borders_color, 1px 0px 0px transparentize($borders_color, 0.25),
-        -1px 0px 0px transparentize($borders_color, 0.25), 0px 2px 0px transparentize($borders_color, 0.5);
+    -gtk-icon-shadow: 0px 1px 2px $borders_color, 1px 0px 0px transparentize($borders_color, 0.75),
+        -1px 0px 0px transparentize($borders_color, 0.75), 0px 2px 0px transparentize($borders_color, 0.5);
 }
 
 .search-information {
