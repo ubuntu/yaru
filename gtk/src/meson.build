@@ -1,4 +1,3 @@
-gnome = import('gnome')
 sassc = find_program('sassc')
 
 variants = [
@@ -6,11 +5,13 @@ variants = [
   'gtk-dark'
 ]
 gtk_versions = [
+  '2.0',
   '3.0',
   '4.0'
 ]
 
 foreach flavour: flavours
+  message('Configuring flavour ' + flavour)
   suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
   theme_name = meson.project_name() + suffix
   theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
@@ -24,53 +25,91 @@ foreach flavour: flavours
     install_dir: theme_dir
   )
 
-  # install gtk2 data
-  gtk2_sources_dir = join_paths(flavour, 'gtk-2.0')
-  gtk2_sources_data = run_command(
-    'find', gtk2_sources_dir, '-name', '*rc'
-    ).stdout().strip().split('\n')
-
-  gtk2_sources_dest = join_paths(theme_dir, 'gtk-2.0')
-  install_data(gtk2_sources_data, install_dir: gtk2_sources_dest)
-
-  gtk2_asset_dir = join_paths(gtk2_sources_dir, 'assets')
-  gtk2_asset_data = run_command(
-    'find', gtk2_asset_dir, '-name', '*.png'
-    ).stdout().strip().split('\n')
-
-  gtk2_assets_dest = join_paths(gtk2_sources_dest, 'assets')
-  install_data(gtk2_asset_data, install_dir: gtk2_assets_dest)
-
-  # build and install gtk3 data
+  # build and install gtk data
   foreach gtk_ver: gtk_versions
     gtk_dir = 'gtk-@0@'.format(gtk_ver)
-    sources_relative_path = join_paths(flavour, gtk_dir)
+    is_dark = flavour == 'dark' or flavour.endswith('-dark')
+    base_theme_name = is_dark ? flavour.split('-dark')[0] : flavour
+    base_path = (flavour.startswith('mate') ? base_theme_name : 'default') / gtk_dir
+    dark_path = is_dark ? 'dark' : base_path
+    default_path = 'default' / gtk_dir
+    upstream_path = '..' / 'upstream' / gtk_dir / 'Adwaita'
+    flavour_path = join_paths(flavour, gtk_dir)
+    install_path = theme_dir / gtk_dir
 
-    # install thumbnail (cinnamon only)
-    if get_option('cinnamon-shell')
-      if fs.is_file(join_paths(sources_relative_path, 'thumbnail.png'))
-        install_data(
-          join_paths(sources_relative_path, 'thumbnail.png'),
-          install_dir: join_paths(theme_dir, gtk_dir)
-        )
-      endif
-    endif
+    # Sort by most relevant for the theme flavour
+    sources_priority = [
+      flavour_path,
+      dark_path,
+      base_path,
+      default_path,
+      upstream_path,
+    ]
 
-    gtk3_scss_dependencies = run_command(
-        'find', sources_relative_path, '-name', '_*.scss'
+    if gtk_ver == '2.0'
+      rc_paths = []
+      foreach src: sources_priority
+        rc_paths = [ src ] + rc_paths
+      endforeach
+
+      gtk2_sources_data = run_command(
+        'find',
+        rc_paths,
+        '-name', '*rc'
         ).stdout().strip().split('\n')
+
+      install_data(gtk2_sources_data, install_dir: install_path)
+
+      assets_paths = []
+      foreach src: sources_priority
+        assets_paths = [ src / 'assets' ] + assets_paths
+      endforeach
+
+      gtk2_asset_data = run_command(
+        'find', assets_paths, '-name', '*.png'
+        ).stdout().strip().split('\n')
+
+      install_data(gtk2_asset_data, install_dir: install_path / 'assets')
+
+      continue
+    endif
 
     gtk_css = []
     generated_css = []
     foreach variant : variants
+      message('Configuring @0@ variant for @1@-@2@'.format(
+        theme_name, variant, gtk_ver))
       target_name = '@0@-@1@-@2@'.format(theme_name, variant, gtk_ver)
-      gtk_scss_path = join_paths(sources_relative_path, variant)
+      variant_file = is_dark ? variant.split('-dark')[0] + '-dark' : variant
+      gtk_scss_path = flavour_path / variant_file + '.scss'
+
+      if not fs.is_file(gtk_scss_path)
+        gtk_scss_path = base_path / variant_file + '.scss'
+      endif
+
+      # Look for scss files in the variant dir first, otherwise fallback to
+      # base, default or upstream paths, so using reversed order
+      scss_paths = []
+      gtk_scss_dependencies = []
+      foreach src: sources_priority
+        scss_paths += ['-I', meson.current_source_dir() / src ]
+
+        scss_deps = run_command(
+          'find', src, '-name', '_*.scss'
+          ).stdout().strip().split('\n')
+        if scss_deps.length() > 0 and scss_deps[0] != ''
+          gtk_scss_dependencies += scss_deps
+        endif
+      endforeach
 
       generated_css += custom_target(target_name,
-        input: '@0@.scss'.format(gtk_scss_path),
+        input: gtk_scss_path,
         output: '@0@-generated.css'.format(target_name),
-        depend_files: files(gtk3_scss_dependencies),
-        command: [sassc, '-a', '@INPUT@', '@OUTPUT@'],
+        depend_files: files(gtk_scss_dependencies),
+        command: [
+          sassc, '-a',
+          scss_paths,
+          '@INPUT@', '@OUTPUT@'],
       )
 
       conf_data = configuration_data()
@@ -82,11 +121,17 @@ foreach flavour: flavours
         configuration: conf_data
       )
     endforeach
-    install_data(gtk_css, install_dir: join_paths(theme_dir, gtk_dir))
+    install_data(gtk_css, install_dir: install_path)
 
-    assets_rel_dir = join_paths(sources_relative_path, 'assets')
+    foreach src: sources_priority
+      assets_rel_dir = src / 'assets'
+      if fs.is_dir(assets_rel_dir)
+        break
+      endif
+    endforeach
+
     assets = run_command(
-      'ls', assets_rel_dir
+      'ls', '-1', assets_rel_dir
     ).stdout().strip().split('\n')
 
     assets_xml = []
@@ -113,8 +158,16 @@ foreach flavour: flavours
       dependencies: generated_css,
       gresource_bundle: true,
       install: true,
-      install_dir: join_paths(theme_dir, gtk_dir),
+      install_dir: install_path,
     )
+
+    if get_option('cinnamon-shell') and fs.is_file(flavour_path / 'thumbnail.png')
+      # install thumbnail (cinnamon only)
+      install_data(
+        flavour_path / 'thumbnail.png',
+        install_dir: install_path,
+      )
+    endif
   endforeach
 endforeach
 

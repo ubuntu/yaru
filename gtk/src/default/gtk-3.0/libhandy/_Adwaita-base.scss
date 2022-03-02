@@ -206,6 +206,7 @@ viewswitcher {
         background-image: none;
       }
 
+      @debug("gradient dot color is " + $accent_bg_color);
       > stack > box label {
         animation: needs_attention 150ms ease-in;
         background-image: -gtk-gradient(radial, center center, 0, center center, 0.5, to($accent_bg_color), to(transparent)); // Yaru: use our own palette
