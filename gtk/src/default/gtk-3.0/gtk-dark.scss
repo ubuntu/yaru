@@ -1,1 +1,9 @@
-../../dark/gtk-3.0/gtk.scss
+$variant: 'dark';
+
+@import 'colors';
+@import 'drawing';
+@import 'common';
+@import 'apps';
+@import 'tweaks';
+@import 'colors-public';
+@import 'libhandy/Adwaita-base';
