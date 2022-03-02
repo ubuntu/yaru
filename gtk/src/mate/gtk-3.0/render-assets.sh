@@ -1,1 +1,0 @@
-../gtk-4.0/render-assets.sh
