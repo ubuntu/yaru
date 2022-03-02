@@ -163,11 +163,11 @@ $bubble_buttons_color: if($variant == 'light', darken($bg_color, 12%), lighten($
 // that are undecorated by default and use OSD colors
 %osd_button {
   @include button(undecorated);
-  &:insensitive { @include button(undecorated, $c:$osd_bg_color);}
-  &:focus { @include button(focus, $c:$osd_bg_color);}
-  &:hover { @include button(hover, $c:$osd_bg_color);}
-  &:active { @include button(active, $c:$osd_bg_color);}
-  &:outlined,&:checked { @include button(checked, $c:$osd_bg_color);}
+  &:insensitive { @include button(undecorated, $tc:$osd_fg_color, $c:$osd_bg_color);}
+  &:focus { @include button(focus, $tc:$osd_fg_color, $c:$osd_bg_color);}
+  &:hover { @include button(hover, $tc:$osd_fg_color, $c:$osd_bg_color);}
+  &:active { @include button(active, $tc:$osd_fg_color, $c:$osd_bg_color);}
+  &:outlined,&:checked { @include button(checked, $tc:$osd_fg_color, $c:$osd_bg_color);}
 }
 
 /* General Typography */
