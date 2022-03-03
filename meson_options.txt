@@ -17,24 +17,16 @@ option('xfwm4', type: 'boolean', value: false, description:'build Yaru with xfwm
 option('cinnamon', type: 'boolean', value: false, description:'build Yaru with Cinnamon flavour')
 option('cinnamon-dark', type: 'boolean', value: false, description:'build Yaru with Cinnamon dark flavour')
 
-#accent-color: aqua
-option('aqua', type: 'boolean', value: true, description:'build Yaru with aqua as an accent-color')
-option('aqua-dark', type: 'boolean', value: true, description:'build Yaru-dark with aqua as an accent-color')
-#accent-color: blue
-option('blue', type: 'boolean', value: true, description:'build Yaru with blue as an accent-color')
-option('blue-dark', type: 'boolean', value: true, description:'build Yaru-dark with blue as an accent-color')
-#accent-color: green
-option('green', type: 'boolean', value: true, description:'build Yaru with green as an accent-color')
-option('green-dark', type: 'boolean', value: true, description:'build Yaru-dark with green as an accent-color')
-#accent-color: pink
-option('pink', type: 'boolean', value: true, description:'build Yaru with pink as an accent-color')
-option('pink-dark', type: 'boolean', value: true, description:'build Yaru-dark with pink as an accent-color')
-#accent-color: purple
-option('purple', type: 'boolean', value: true, description:'build Yaru with purple as an accent-color')
-option('purple-dark', type: 'boolean', value: true, description:'build Yaru-dark with purple as an accent-color')
-#accent-color: red
-option('red', type: 'boolean', value: true, description:'build Yaru with red as an accent-color')
-option('red-dark', type: 'boolean', value: true, description:'build Yaru-dark with red as an accent-color')
-#accent-color: yellow
-option('yellow', type: 'boolean', value: true, description:'build Yaru with yellow as an accent-color')
-option('yellow-dark', type: 'boolean', value: true, description:'build Yaru-dark with yellow as an accent-color')
+# We use the dark flat above to do the dark variants of them
+option('accent-colors',
+    type: 'array',
+    choices: [
+        'aqua',
+        'blue',
+        'green',
+        'pink',
+        'purple',
+        'red',
+        'yellow',
+    ],
+)
