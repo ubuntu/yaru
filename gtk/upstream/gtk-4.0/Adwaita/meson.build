@@ -1,3 +1,5 @@
+fs = import('fs')
+
 stylesheet_deps = []
 
 # For git checkouts, but not for tarballs...
