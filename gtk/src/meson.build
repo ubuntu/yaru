@@ -87,6 +87,21 @@ foreach flavour: flavours
         gtk_scss_path = base_path / variant_file + '.scss'
       endif
 
+      if enabled_accent_colors.contains(base_theme_name)
+          accent = base_theme_name
+          gtk_accents_css = configure_file(
+            configuration: {
+              'yaru_dark_variant': is_dark ? 'true' : 'false',
+              'yaru_accent_color': accent,
+              'yaru_theme_entry_point': meson.current_source_dir() / gtk_scss_path,
+            },
+            input: meson.project_source_root() / 'common' / 'accent-colors.scss.in',
+            output: '@0@-@1@-@2@-accent-colors.scss'.format(theme_name, variant, gtk_ver),
+          )
+
+          gtk_scss_path = gtk_accents_css
+      endif
+
       # Look for scss files in the variant dir first, otherwise fallback to
       # base, default or upstream paths, so using reversed order
       scss_paths = []

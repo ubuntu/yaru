@@ -9,9 +9,9 @@
 // define variables for them in _colors.scss
 
 // The main accent color and the matching text value
-@define-color accent_bg_color @orange_5;
+@define-color accent_bg_color @yaru_accent_bg_color;
 @define-color accent_fg_color @light_1;
-@define-color accent_color @orange_5;
+@define-color accent_color @yaru_accent_bg_color;
 
 // destructive-action buttons
 @define-color destructive_bg_color @red_4;
@@ -32,7 +32,7 @@
 @define-color error_color @red_4;
 
 // The secondary accent color and the matching text value - Yaru change
-@define-color fill_bg_color @orange_5;
+@define-color fill_bg_color @yaru_accent_bg_color;
 @define-color fill_fg_color @light_1;
 
 // Window
