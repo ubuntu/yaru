@@ -27,6 +27,12 @@
   .date-label {
     @extend %title_2;
   }
+
+  &:insensitive { // Yaru change: fix insensitive state in light theme
+    .day-label, .date-label {
+      color: $insensitive_fg_color;
+    }
+  }
 }
 
 /* Calendar */
