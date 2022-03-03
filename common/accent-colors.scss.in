@@ -1,0 +1,51 @@
+@function get_accent_color($accent_color, $is_dark: false) {
+    $color: null;
+
+    @if $accent_color == 'default' {
+        $color: #E95420;
+    } @else if $accent_color == 'aqua' {
+        $color: #18B0B0;
+    } @else if $accent_color == 'blue' {
+        $color: #3584E4;
+    } @else if $accent_color == 'green' {
+        $color: #0E8420;
+    } @else if $accent_color == 'pink' {
+        $color: #C748BA;
+    } @else if $accent_color == 'purple' {
+        $color: #77216F;
+    } @else if $accent_color == 'red' {
+        $color: #C7162B;
+    } @else if $accent_color == 'yellow' {
+        $color: #F4A100;
+    } @else {
+        @error('No known accent color defined!');
+    }
+
+    @debug('Using accent color ' + $accent_color + ': ' + $color);
+
+    @return $color;
+}
+
+// Ubuntu Orange: #E95420;
+// Ubuntu Aubergine: #77216F;
+// Adwaita Blue: #3584E4;
+// Leaf Green: #0E8420;
+// Aqua Blue: #18B0B0;
+// Crimson Red: #C7162B;
+// Fuchsia Pink: #C748BA;
+// Sunny Yellow: #F4A100;
+
+// $background: #007AA6;
+// $background: #0E8420;
+// $background: #18B0B0;
+// $background: #666666;
+// $background: #77216F;
+// $background: #C7162B;
+// $background: #C748BA;
+// $background: #E95420;
+
+$yaru_accent_bg_color: get_accent_color('@yaru_accent_color@', @yaru_dark_variant@);
+$accent_bg_color: $yaru_accent_bg_color;
+@debug("Accent color is " + $yaru_accent_bg_color);
+
+@import '@yaru_theme_entry_point@'
