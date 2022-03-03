@@ -120,20 +120,19 @@ stage {
 // lighter in color and have a greater radius
 
 $bubble_button_radius:$base_border_radius*1.25;
-$bubble_buttons_color: if($variant == 'light', darken($bg_color, 12%), lighten($bg_color, 7%));
+$bubble_buttons_color: $bg_color; // Yaru change: use regular color
 
 // buttons in dialogs
 %bubble_button {
   padding: $base_padding * 2;
-  font-weight: bold !important;
+  // font-weight: bold !important; // Yaru change: use normal font weight
   margin-right: 1px;
 
   @include button(normal, $c:$bubble_buttons_color);
   &:insensitive { @include button(insensitive, $c:$bubble_buttons_color);}
   &:focus { @include button(focus, $c:$bubble_buttons_color);}
   &:hover { @include button(hover, $c:$bubble_buttons_color);}
-  &:hover { background-color: $hover_bg_color; } // Yaru: notification buttons should work like dialog buttons ( gray hover ) 
-  &:active { background-color: $active_bg_color; } // Yaru: notification buttons should work like dialog buttons ( dark gray active ) 
+  &:active { @include button(active, $c:$bubble_buttons_color);} // Yaru change: add missing active state
   
   &:first-child:ltr {
     border-radius: 0 0 0 $bubble_button_radius; 
