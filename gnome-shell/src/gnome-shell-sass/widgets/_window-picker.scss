@@ -38,7 +38,7 @@ $window_close_button_padding: 3px;
   & StIcon { icon-size: 24px; } // uses non standard icon size
 
   &:hover {
-    background-color: lighten($window_close_button_color, 15%); // Yaru: lighter close button because of our darker overview bg
+    background-color: lighten($window_close_button_color, 5%); // Yaru: lighter close button because of our darker overview bg
   }
 
   &:active {
