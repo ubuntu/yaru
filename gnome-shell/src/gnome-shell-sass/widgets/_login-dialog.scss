@@ -188,6 +188,7 @@
     border:none !important;
     &:focus { 
       background-color: transparentize($fg_color, 0.9);
+      box-shadow: none; // Yaru change: remove box-shadow because of ugly render
     }
     &:insensitive { 
       color: transparentize($fg_color, 0.5);
