@@ -25,8 +25,9 @@ $switcher_border_radius: $modal_radius + 8px;
 
   // each item in the list
   .item-box {
-
     @include tile_button($osd_fg_color);
+    // override over style so mouse doesn't steal focus
+    &:hover {background: none;}
   }
 
   .separator {

@@ -84,6 +84,7 @@ stage {
 %tile {
   border-radius: $base_border_radius * 2; // 16px
   padding: $base_padding;
+  spacing: $base_padding;
   border: 2px solid transparent;
   transition-duration: 100ms;
   text-align: center;
