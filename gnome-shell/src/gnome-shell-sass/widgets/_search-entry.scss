@@ -8,7 +8,7 @@ $search_entry_height: 36px;
   border-radius: $search_entry_height * 0.5; // half the height
 
   margin-top: $base_padding * 4; // Yaru change: realign search entry due to fixed panel opacity
-  margin-bottom: 0; // Yaru change: realign search entry due to fixed panel opacity
+  margin-bottom: $base_padding * 2; // Yaru change: realign search entry due to fixed panel opacity
   padding: $base_padding+1 $base_padding+3;
   width: $search_entry_width;
 
@@ -22,5 +22,9 @@ $search_entry_height: 36px;
     icon-size: $base_icon_size;
     margin-top: 2px; // center vertically
     padding: 0 4px;
+  }
+
+  &:selected {
+    color: red!important;
   }
 }
