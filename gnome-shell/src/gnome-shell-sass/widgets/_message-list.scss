@@ -67,11 +67,9 @@
   // icon container
   .message-icon-bin {
     padding: ($base_padding * 3);
-    padding-right:$base_padding;
 
-    &:rtl {
-      padding-right:$base_padding;
-    }
+    &:ltr {padding-right:$base_padding;}
+    &:rtl {padding-left:$base_padding;}
 
     // icon size and color
     > StIcon {
