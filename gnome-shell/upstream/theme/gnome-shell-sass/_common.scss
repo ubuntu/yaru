@@ -123,7 +123,9 @@ $bubble_buttons_color: if($variant == 'light', darken($bg_color, 12%), lighten($
 %bubble_button {
   padding: $base_padding * 2;
   font-weight: bold !important;
-  margin-right: 1px;
+
+  &:ltr {margin-right: 1px;}
+  &:rtl {margin-left: 1px;}
 
   @include button(normal, $c:$bubble_buttons_color);
   &:insensitive { @include button(insensitive, $c:$bubble_buttons_color);}
@@ -147,11 +149,12 @@ $bubble_buttons_color: if($variant == 'light', darken($bg_color, 12%), lighten($
 
   &:last-child:rtl {
     border-radius: 0 0 0 $bubble_button_radius;
-    margin-right: 0 !important;
+    margin-left: 0 !important;
   }
 
   &:first-child:last-child {
     border-radius: 0 0 $bubble_button_radius $bubble_button_radius !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
   }
 }
