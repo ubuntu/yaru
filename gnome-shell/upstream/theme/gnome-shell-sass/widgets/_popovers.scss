@@ -2,7 +2,7 @@
 
 // the popover itself
 .popup-menu-boxpointer {
-  margin: $base_margin; // used as distance from the screen edge
+  -arrow-rise: $base_margin+2px; // distance from the panel & screen edge
 }
 
 // container of the popover menu
@@ -12,7 +12,6 @@
 
   //.popup-status-menu-item {font-weight: normal;  color: pink;} //dunno what that is
   &.panel-menu {
-    -boxpointer-gap: $base_margin+2px; // distance from the panel
     margin-bottom: 1.75em; // so it doesn't touch the bottom of the screen
   }
 }
@@ -20,7 +19,6 @@
 // popover content
 .popup-menu-content {
   padding: $base_padding;
-  // account for margin oddities
   border-radius: $modal_radius - 2px;
   border: 1px solid $borders_edge;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
@@ -31,8 +29,12 @@
 .popup-menu-item {
   padding: $base_padding*1.5 $base_padding*2;
   border-radius: $base_border_radius;
+  spacing: $base_padding;
   transition: 0.2s all ease;
   background-color: transparent;
+
+  &:ltr {padding-left: $base_padding;}
+  &:rtl {padding-right: $base_padding;}
 
   &:focus, &:hover {
    background-color: $hover_bg_color !important;
@@ -55,6 +57,12 @@
   }
 
   &:insensitive {color: transparentize($fg_color,0.5);}
+
+  // add margin to switches in menu items
+  .toggle-switch {
+    &:ltr { margin-left: $base_margin;}
+    &:rtl { margin-right: $base_margin;}
+  }
 }
 
 
@@ -71,8 +79,6 @@
 }
 
 .popup-menu-arrow {
-  &:ltr {margin-right: $base_margin;}
-  &:rtl {margin-left: $base_margin;}
 }
 
 
@@ -104,7 +110,7 @@
 
   .popup-menu-section {
     .popup-menu-item:last-child {
-      &:hover,&:focus {border-radius: 0;}
+      &:hover,&:focus { border-radius: 0;}
     }
     &:last-child .popup-menu-item:last-child {
       border-radius: 0 0 $base_border_radius $base_border_radius;
@@ -118,14 +124,16 @@
   width: 1.2em;
   text-align: center !important;
 
-  &:ltr {text-align: right;};
-  &:rtl {text-align: left;};
+  &:ltr { text-align: right;}
+  &:rtl { text-align: left;}
 }
 
 // separator
 .popup-separator-menu-item {
-  padding:0;
   margin: 6px 0;
+  padding:0 !important;
+  &:ltr { margin-right: $base_margin;}
+  &:rtl { margin-left: $base_margin;}
 
   .popup-separator-menu-item-separator {
     height: 1px; //not really the whole box
@@ -136,10 +144,13 @@
     width: 0 !important;
   }
 
+  // separators in submenus
   .popup-sub-menu & {
-    padding: 0;
-    margin-right: 2.5em !important; // account for ornament
     background-color: transparent;
+
+    // account for ornament
+    &:ltr { margin-right: 2.5em;}
+    &:rtl { margin-left: 2.5em;}
 
     .popup-separator-menu-item-separator {
       background-color: lighten($borders_color, 7%);
@@ -149,7 +160,7 @@
 
 // desktop background menu
 .background-menu {
-  -boxpointer-gap: $base_margin;
+  -boxpointer-gap: 0px;
   -arrow-rise: 0px; // hide the beak on the menu
 }
 
@@ -170,19 +181,14 @@
   // account for ornaments in submenus with padding
   .popup-sub-menu .popup-menu-item > :first-child {
     // this value is hardcoded for visual effect
-    &:ltr { margin-left: $base_margin*2;}
-    &:rtl { margin-right: $base_margin*2;}
+    &:ltr { margin-left: 1em;}
+    &:rtl { margin-right: 1em;}
   }
 }
 
 // right-click (and panel) app menu
 .app-menu {
   max-width: 27.25em;
-  .popup-menu-content { margin: $base_margin;}
-
-  &.panel-menu {
-    .popup-menu-content { margin: 0;} // avoid doubling up margin
-  }
 
   // this is unneeded at the top-level in this menu, hide it
   .popup-menu-ornament { width: 0 !important; }
