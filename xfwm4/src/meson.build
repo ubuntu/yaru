@@ -1,5 +1,5 @@
 foreach flavour: flavours
-  foreach scale: ['', '-hdpi, 'xhdpi']
+  foreach scale: ['', '-hdpi, '-xhdpi']
     suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
     theme_name = meson.project_name() + suffix + scale
     theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
