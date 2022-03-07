@@ -46,6 +46,16 @@ foreach flavour: flavours
     gtk_dir = 'gtk-@0@'.format(gtk_ver)
     sources_relative_path = join_paths(flavour, gtk_dir)
 
+    # install thumbnail (cinnamon only)
+    if get_option('cinnamon-shell')
+      if fs.is_file(join_paths(sources_relative_path, 'thumbnail.png'))
+        install_data(
+          join_paths(sources_relative_path, 'thumbnail.png'),
+          install_dir: join_paths(theme_dir, gtk_dir)
+        )
+      endif
+    endif
+
     gtk3_scss_dependencies = run_command(
         'find', sources_relative_path, '-name', '_*.scss'
         ).stdout().strip().split('\n')
@@ -105,7 +115,6 @@ foreach flavour: flavours
       install: true,
       install_dir: join_paths(theme_dir, gtk_dir),
     )
-
   endforeach
 endforeach
 
