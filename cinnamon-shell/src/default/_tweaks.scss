@@ -85,3 +85,22 @@ $active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
     width: 24px;
   }
 }
+
+// Fix panel inset box-shadow (always dark so was bugged in light theme)
+.panel {
+  &-top {
+    box-shadow: 0 1px $borders_color_dark;
+  }
+
+  &-bottom {
+    box-shadow: 0 -1px $borders_color_dark;
+  }
+
+  &-left {
+    box-shadow: 1px 0 $borders_color_dark;
+  }
+
+  &-right {
+    box-shadow: -1px 0 $borders_color_dark;
+  }
+}
