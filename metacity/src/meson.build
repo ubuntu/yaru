@@ -1,3 +1,5 @@
+fs = import('fs')
+
 foreach flavour: flavours
   suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
   theme_name = meson.project_name() + suffix
@@ -14,6 +16,16 @@ foreach flavour: flavours
     configuration: conf_data,
     install_dir: metacity_dir
   )
+
+  # install thumbnail (cinnamon only)
+  if get_option('cinnamon-shell')
+    if fs.is_file(join_paths(flavour, 'thumbnail.png'))
+      install_data(
+        join_paths(flavour, 'thumbnail.png'),
+        install_dir: metacity_dir
+      )
+    endif
+  endif
 
   # install metacity assets
   metacity_asset_dir = join_paths(flavour, 'metacity-1')
