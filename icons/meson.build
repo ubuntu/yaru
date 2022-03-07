@@ -18,6 +18,14 @@ foreach flavour: ['default', 'mate']
       install_dir: theme_install_dir,
       strip_directory: true,
     )
+
+    # install cursor thumbnail (cinnamon only)
+    if get_option('cinnamon-shell') and flavour == 'default'
+      install_data(
+        join_paths('src', 'cursors', 'thumbnail.png'),
+        install_dir: join_paths(theme_install_dir, 'cursors')
+      )
+    endif
     
     themes_f = [
       'cursor.theme',
