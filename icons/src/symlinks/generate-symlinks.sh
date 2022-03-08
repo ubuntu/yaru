@@ -106,8 +106,10 @@ do
 							echo linking $line in $SIZE"/"$CONTEXT
 							ln -sf $line
 						elif [ $VARIANT = "default" ]; then # But the default variant must have all icons availables
-							echo error $line symlink is invalid in $SIZE"/"$CONTEXT
+							echo error symlinking \"$line\" for $SIZE"/"$CONTEXT: could not find source symlink file \"$SOURCE_FILE\" in $(pwd)
 							exit 1
+						else
+							echo skipping \"$line\": could not find source symlink file \"$SOURCE_FILE\" in $(pwd)
 						fi
 					else
 						dlog "[match only mode] skipping $line"
