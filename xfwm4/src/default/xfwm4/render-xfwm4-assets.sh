@@ -38,7 +38,7 @@ do
 
       $INKSCAPE --export-id=$asset \
           --export-id-only \
-          --export-dpi=$dpi
+          --export-dpi=$DPI \
           --export-filename=$ASSETS_DIR/$asset.png $SRC_FILE >/dev/null
       $OPTIPNG -o7 --quiet $ASSETS_DIR/$asset.png
     fi
