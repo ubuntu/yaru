@@ -186,7 +186,7 @@
 .unlock-dialog {
   StEntry {
     border:none !important;
-    &:focus { 
+    &, &:focus { // Yaru change: also style unfocused state
       background-color: transparentize($fg_color, 0.9);
       box-shadow: none; // Yaru change: remove box-shadow because of ugly render
     }
