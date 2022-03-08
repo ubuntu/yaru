@@ -81,9 +81,45 @@ CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "status" 
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
 VARIANTS=("default" "mate")
 
+
+linker () {
+	local icon_folder=$1
+	local icon_subfolder=$2
+
+	LIST="$DIR/${icon_folder}/$CONTEXT.list"
+	if [ ! -d "$DIR/../../$THEME/$icon_subfolder/$CONTEXT" ]; then
+		dlog "  -- no $icon_subfolder/$CONTEXT, skipping it"
+		return
+	fi
+
+	cd $DIR/../../$THEME/$icon_subfolder/$CONTEXT
+	while read line;
+	do
+		if [[ $line != *"$needle"* ]]; then
+			dlog "line $line does not match with $needle: skipping"
+			continue
+		fi
+
+		SOURCE_FILE=${line%% *}
+		if [ -f "$SOURCE_FILE" ]; then
+			echo "[$icon_subfolder/$CONTEXT] linking $line"
+			ln -sf $line
+		elif [ $VARIANT = "default" ]; then 
+			# The default variant must have all icons availables
+			echo "error symlinking \"$line\" for $icon_subfolder/$CONTEXT: could not find symlink file \"$SOURCE_FILE\" in $(pwd)"
+			exit 1
+		else
+			# The variants can ignore the missing icons
+			dlog "skipping \"$line\" for $VARIANT variant: could not find source symlink file \"$SOURCE_FILE\" in $(pwd)"
+		fi
+
+	done < $LIST
+	cd $DIR/../../$THEME
+	return $symlinks_counter
+}
+
 # Fullcolor icons
 echo "Generating links for fullcolor icons..."
-symlinks_counter=0
 for VARIANT in "${VARIANTS[@]}"
 do
 	[[ $VARIANT = "default" ]] && THEME="Yaru" || THEME="Yaru-${VARIANT}"
@@ -92,90 +128,24 @@ do
 		dlog " -- "${CONTEXT}
 		for SIZE in "${SIZES[@]}"
 		do
-			LIST="$DIR/fullcolor/$CONTEXT.list"
-			if [ ! -d "$DIR/../../$THEME/$SIZE/$CONTEXT" ]; then
-				dlog "  -- no $SIZE/$CONTEXT, skipping it"
-				continue
-			fi
-
-			cd $DIR/../../$THEME/$SIZE/$CONTEXT
-			while read line;
-			do
-				if [[ $line != *"$needle"* ]]; then
-					dlog "line $line does not match with $needle: skipping"
-					continue
-				fi
-
-				SOURCE_FILE=${line%% *}
-				if [ -f "$SOURCE_FILE" ]; then
-					dlog "linking $line in $SIZE/$CONTEXT"
-					ln -sf $line
-					let symlinks_counter=symlinks_counter+1
-				elif [ $VARIANT = "default" ]; then 
-					# The default variant must have all icons availables
-					echo "error symlinking \"$line\" for $SIZE/$CONTEXT: could not find symlink file \"$SOURCE_FILE\" in $(pwd)"
-					exit 1
-				else
-					# The variants can ignore the missing icons
-					dlog "skipping \"$line\" for $VARIANT variant: could not find source symlink file \"$SOURCE_FILE\" in $(pwd)"
-				fi
-
-			done < $LIST
-			cd $DIR/../../$THEME
+			linker "fullcolor" $SIZE
 		done
 	done
 done
-if [[ $symlinks_counter -eq 0 ]]; then
-	echo "Generated $symlinks_counter link(s). If this is unexpected, try with --verbose flag"
-else
-	echo "Generated $symlinks_counter link(s)"
-fi
+echo "Done"
 
 # Symbolic icons
 echo "Generating links for symbolic icons..."
-symlinks_counter=0
 for VARIANT in "${VARIANTS[@]}"
 do
 	[[ $VARIANT = "default" ]] && THEME="Yaru" || THEME="Yaru-${VARIANT}"
 	for CONTEXT in "${CONTEXTS[@]}"
 	do
 		dlog " -- "$CONTEXT
-		if [ ! -d "$DIR/../../$THEME/scalable/$CONTEXT" ]; then
-			dlog "  could not find scalable/"$CONTEXT folder: skipping it
-			continue
-		fi
-
-		LIST="$DIR/symbolic/$CONTEXT.list"
-		cd $DIR/../../$THEME/scalable/$CONTEXT
-		while read line;
-		do
-			if [[ $line != *"$needle"* ]]; then
-				dlog "line $line does not match with $needle: skipping it"
-				continue
-			fi
-
-			SOURCE_FILE=${line%% *}
-			if [ -f "$SOURCE_FILE" ]; then
-				dlog "linking $line in scalable/$CONTEXT"
-				ln -sf $line
-				let symlinks_counter=symlinks_counter+1
-			elif [ $VARIANT = "default" ]; then
-				# The default variant must have all icons availables
-				echo "error $line symlink is invalid in scalable/$CONTEXT"
-				exit 1
-			else
-				# The variants can ignore the missing icons
-				dlog "skipping \"$line\" for $VARIANT variant: could not find source symlink file \"$SOURCE_FILE\" in $(pwd)"
-			fi
-		done < $LIST
-		cd $DIR/../../$THEME
+		linker "symbolic" "scalable"
 	done
 done
-if [[ $symlinks_counter -eq 0 ]]; then
-	echo "Generated $symlinks_counter link(s). If this is unexpected, try with --verbose flag"
-else
-	echo "Generated $symlinks_counter link(s)"
-fi
+echo "Done"
 
 # Clear symlink errors
 if command -v symlinks 2>&1 >/dev/null; then
