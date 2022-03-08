@@ -83,84 +83,99 @@ VARIANTS=("default" "mate")
 
 # Fullcolor icons
 echo "Generating links for fullcolor icons..."
-# variants for loop
+symlinks_counter=0
 for VARIANT in "${VARIANTS[@]}"
 do
 	[[ $VARIANT = "default" ]] && THEME="Yaru" || THEME="Yaru-${VARIANT}"
-	# contexts for loop
 	for CONTEXT in "${CONTEXTS[@]}"
 	do
 		dlog " -- "${CONTEXT}
-		# Sizes Loop
 		for SIZE in "${SIZES[@]}"
 		do
 			LIST="$DIR/fullcolor/$CONTEXT.list"
-			# Check if directory exists
-			if [ -d "$DIR/../../$THEME/$SIZE/$CONTEXT" ]; then
-				cd $DIR/../../$THEME/$SIZE/$CONTEXT
-				while read line;
-				do
-					if [[ $line == *"$needle"* ]]; then
-						SOURCE_FILE=${line%% *}
-						if [ -f "$SOURCE_FILE" ]; then # Check if source file exist because variants can have missing ones
-							echo linking $line in $SIZE"/"$CONTEXT
-							ln -sf $line
-						elif [ $VARIANT = "default" ]; then # But the default variant must have all icons availables
-							echo error symlinking \"$line\" for $SIZE"/"$CONTEXT: could not find source symlink file \"$SOURCE_FILE\" in $(pwd)
-							exit 1
-						else
-							echo skipping \"$line\": could not find source symlink file \"$SOURCE_FILE\" in $(pwd)
-						fi
-					else
-						dlog "[match only mode] skipping $line"
-					fi
-				done < $LIST
-				cd $DIR/../../$THEME
-			else
-				dlog "  -- skipping "$SIZE"/"$CONTEXT
+			if [ ! -d "$DIR/../../$THEME/$SIZE/$CONTEXT" ]; then
+				dlog "  -- no $SIZE/$CONTEXT, skipping it"
+				continue
 			fi
+
+			cd $DIR/../../$THEME/$SIZE/$CONTEXT
+			while read line;
+			do
+				if [[ $line != *"$needle"* ]]; then
+					dlog "line $line does not match with $needle: skipping"
+					continue
+				fi
+
+				SOURCE_FILE=${line%% *}
+				if [ -f "$SOURCE_FILE" ]; then
+					dlog "linking $line in $SIZE/$CONTEXT"
+					ln -sf $line
+					let symlinks_counter=symlinks_counter+1
+				elif [ $VARIANT = "default" ]; then 
+					# The default variant must have all icons availables
+					echo "error symlinking \"$line\" for $SIZE/$CONTEXT: could not find symlink file \"$SOURCE_FILE\" in $(pwd)"
+					exit 1
+				else
+					# The variants can ignore the missing icons
+					dlog "skipping \"$line\" for $VARIANT variant: could not find source symlink file \"$SOURCE_FILE\" in $(pwd)"
+				fi
+
+			done < $LIST
+			cd $DIR/../../$THEME
 		done
 	done
 done
-echo "Done."
-
+if [[ $symlinks_counter -eq 0 ]]; then
+	echo "Generated $symlinks_counter link(s). If this is unexpected, try with --verbose flag"
+else
+	echo "Generated $symlinks_counter link(s)"
+fi
 
 # Symbolic icons
 echo "Generating links for symbolic icons..."
-# variants for loop
+symlinks_counter=0
 for VARIANT in "${VARIANTS[@]}"
 do
 	[[ $VARIANT = "default" ]] && THEME="Yaru" || THEME="Yaru-${VARIANT}"
-	# contexts for loop
 	for CONTEXT in "${CONTEXTS[@]}"
 	do
 		dlog " -- "$CONTEXT
-		LIST="$DIR/symbolic/$CONTEXT.list"
-		# Check if directory exists
-		if [ -d "$DIR/../../$THEME/scalable/$CONTEXT" ]; then
-			cd $DIR/../../$THEME/scalable/$CONTEXT
-			while read line;
-			do
-				if [[ $line == *"$needle"* ]]; then
-					SOURCE_FILE=${line%% *}
-					if [ -f "$SOURCE_FILE" ]; then # Check if source file exist because variants can have missing ones
-						echo linking $line in "scalable/"$CONTEXT
-						ln -sf $line
-					elif [ $VARIANT = "default" ]; then # But the default variant must have all icons availables
-						echo error $line symlink is invalid in "scalable/"$CONTEXT
-						exit 1
-					fi
-				else
-					dlog "[match only mode] line $line does not match with $needle"
-				fi
-			done < $LIST
-			cd $DIR/../../$THEME
-		else
-			echo "  -- skipping scalable/"$CONTEXT
+		if [ ! -d "$DIR/../../$THEME/scalable/$CONTEXT" ]; then
+			dlog "  could not find scalable/"$CONTEXT folder: skipping it
+			continue
 		fi
+
+		LIST="$DIR/symbolic/$CONTEXT.list"
+		cd $DIR/../../$THEME/scalable/$CONTEXT
+		while read line;
+		do
+			if [[ $line != *"$needle"* ]]; then
+				dlog "line $line does not match with $needle: skipping it"
+				continue
+			fi
+
+			SOURCE_FILE=${line%% *}
+			if [ -f "$SOURCE_FILE" ]; then
+				dlog "linking $line in scalable/$CONTEXT"
+				ln -sf $line
+				let symlinks_counter=symlinks_counter+1
+			elif [ $VARIANT = "default" ]; then
+				# The default variant must have all icons availables
+				echo "error $line symlink is invalid in scalable/$CONTEXT"
+				exit 1
+			else
+				# The variants can ignore the missing icons
+				dlog "skipping \"$line\" for $VARIANT variant: could not find source symlink file \"$SOURCE_FILE\" in $(pwd)"
+			fi
+		done < $LIST
+		cd $DIR/../../$THEME
 	done
 done
-echo "Done."
+if [[ $symlinks_counter -eq 0 ]]; then
+	echo "Generated $symlinks_counter link(s). If this is unexpected, try with --verbose flag"
+else
+	echo "Generated $symlinks_counter link(s)"
+fi
 
 # Clear symlink errors
 if command -v symlinks 2>&1 >/dev/null; then
