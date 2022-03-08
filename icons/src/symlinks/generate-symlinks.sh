@@ -124,34 +124,38 @@ echo "Done."
 
 # Symbolic icons
 echo "Generating links for symbolic icons..."
-THEME="Yaru" # Symbolic icons doesn't have variant
-# contexts for loop
-for CONTEXT in "${CONTEXTS[@]}"
+# variants for loop
+for VARIANT in "${VARIANTS[@]}"
 do
-	dlog " -- "$CONTEXT
-	LIST="$DIR/symbolic/$CONTEXT.list"
-	# Check if directory exists
-	if [ -d "$DIR/../../$THEME/scalable/$CONTEXT" ]; then
-		cd $DIR/../../$THEME/scalable/$CONTEXT
-		while read line;
-		do
-			if [[ $line == *"$needle"* ]]; then
-				SOURCE_FILE=${line%% *}
-				if [ -f "$SOURCE_FILE" ]; then
-					echo linking $line in "scalable/"$CONTEXT
-					ln -sf $line
+	[[ $VARIANT = "default" ]] && THEME="Yaru" || THEME="Yaru-${VARIANT}"
+	# contexts for loop
+	for CONTEXT in "${CONTEXTS[@]}"
+	do
+		dlog " -- "$CONTEXT
+		LIST="$DIR/symbolic/$CONTEXT.list"
+		# Check if directory exists
+		if [ -d "$DIR/../../$THEME/scalable/$CONTEXT" ]; then
+			cd $DIR/../../$THEME/scalable/$CONTEXT
+			while read line;
+			do
+				if [[ $line == *"$needle"* ]]; then
+					SOURCE_FILE=${line%% *}
+					if [ -f "$SOURCE_FILE" ]; then # Check if source file exist because variants can have missing ones
+						echo linking $line in "scalable/"$CONTEXT
+						ln -sf $line
+					elif [ $VARIANT = "default" ]; then # But the default variant must have all icons availables
+						echo error $line symlink is invalid in "scalable/"$CONTEXT
+						exit 1
+					fi
 				else
-					echo error $line symlink is invalid in "scalable/"$CONTEXT
-					exit 1
+					dlog "[match only mode] line $line does not match with $needle"
 				fi
-			else
-				dlog "[match only mode] line $line does not match with $needle"
-			fi
-		done < $LIST
-		cd $DIR/../../$THEME
-	else
-		echo "  -- skipping scalable/"$CONTEXT
-	fi
+			done < $LIST
+			cd $DIR/../../$THEME
+		else
+			echo "  -- skipping scalable/"$CONTEXT
+		fi
+	done
 done
 echo "Done."
 
