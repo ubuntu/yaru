@@ -71,7 +71,7 @@ done
 [ ! -z $_match ] && needle=$_match || needle=''
 
 function dlog() {
-    [ ! -z $_verbose ] && echo $*
+	[ ! -z $_verbose ] && echo $*
 }
 
 DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
