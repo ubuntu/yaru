@@ -24,13 +24,14 @@
 ##                           (warning: this might break manually generated symlinks)
 ##      -m, --match <string> Generates only the symlinks in .list files that matches
 ##                           the provided string
-##      -v, --verbose        More verbose output
+##      -v, --verbose        More verbose output (useful for debugging)
 ##
 ## example:
-##      $ generate-symlinks.sh -m inode-directory
+##      To generate only power-profile-* symlinks
 ##
-##      This generates only the link defined in ./symbolic/apps.list
-# GENERATED_CODE: start
+##      $ generate-symlinks.sh --match power-profile
+##
+# CLInt GENERATED_CODE: start
 
 # No-arguments is not allowed
 [ $# -eq 0 ] && sed -ne 's/^## \(.*\)/\1/p' $0 && exit 1
@@ -65,7 +66,7 @@ while getopts 'havm:' OPT; do
 			;;
 	esac
 done
-# GENERATED_CODE: end
+# CLInt GENERATED_CODE: end
 
 [ ! -z $_match ] && needle=$_match || needle=''
 
