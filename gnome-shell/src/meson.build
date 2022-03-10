@@ -7,10 +7,13 @@ styles = [
   'gnome-shell',
   'gnome-shell-high-contrast',
 ]
+
 variants = [
   'light',
   'dark',
 ]
+
+DEFAULT_VARIANT = 'dark'
 
 theme_css = []
 theme_sources = files(
@@ -33,8 +36,10 @@ if not gnomeshell_use_gresource
         'bash', '-c',
         ';'.join([
           'output="$1/$(realpath --relative-to="'+ meson.current_source_dir() + '" $0)"',
-          'mkdir -p $(dirname "$output")',
-          'sed "s,resource:///org/gnome/shell/theme/,,g" "$0" > "$output"',
+          'mkdir -p "$(dirname "$output")"',
+          # Can't use proper regex ("s,\(\b\)url\(\s*(\),\1yaru-url-handler\2,g") as per
+          # https://github.com/mesonbuild/meson/issues/1564
+          'sed "s,[[:space:]]*url[[:space:]]*(, yaru_url_handler(,g;" "$0" > "$output"',
         ]),
         '@INPUT@',
         '@OUTDIR@',
@@ -48,7 +53,7 @@ theme_gresource_xml = files('data/gnome-shell-theme.gresource.xml')[0]
 icons_gresource_xml = files('data/gnome-shell-icons.gresource.xml')[0]
 
 foreach variant: variants
-  is_variant = variant != 'dark'
+  is_variant = variant != DEFAULT_VARIANT
   variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
 
   if gnomeshell_use_gresource
@@ -62,6 +67,7 @@ foreach variant: variants
 
   conf_data = configuration_data()
   conf_data.set('ThemeVariant', variant)
+  conf_data.set('UseGResource', gnomeshell_use_gresource ? 'true' : 'false')
   theme_main_file = configure_file(
     input: 'gnome-shell.scss.in',
     output: 'gnome-shell@0@.scss'.format(variant_suffix),
