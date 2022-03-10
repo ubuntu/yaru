@@ -3,8 +3,10 @@
 @import 'palette';
 
 $base_color: if($variant=='light', #ffffff, lighten($jet, 4%));
-$bg_color: if($variant=='light', #FAFAFA, lighten($jet, 6%));
-$fg_color: if($variant=='light', $inkstone, $porcelain);
+$bg_color_dark: lighten($jet, 6%);
+$bg_color: if($variant=='light', #FAFAFA, $bg_color_dark);
+$fg_color_dark: $porcelain;
+$fg_color: if($variant=='light', $inkstone, $fg_color_dark);
 
 $selected_fg_color: $accent_fg_color;
 $selected_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 4%));

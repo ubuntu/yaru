@@ -55,7 +55,7 @@ $app_icon_size: 96px;
     & .folder-name-label { padding: 5px 7px; color: $osd_fg_color; }
 
     & .edit-folder-button {
-      @extend %button;
+      @extend %button_dark; // Yaru change: fix for light theme
       padding: 0;
       width: 36px;
       height: 36px;
