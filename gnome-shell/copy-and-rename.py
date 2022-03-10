@@ -17,7 +17,6 @@
 #       Marco Trevisan <marco.trevisan@canonical.com>
 
 import argparse
-import os
 from shutil import copyfile
 
 if __name__ == '__main__':
