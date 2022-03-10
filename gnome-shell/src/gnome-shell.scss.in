@@ -1,4 +1,22 @@
 $variant: '@ThemeVariant@';
+$use_gresource: @UseGResource@;
+
+@function yaru_url_handler($arg) {
+    $url: unquote($arg);
+
+    @if not $use_gresource {
+        $resource_prefix: "resource:///org/gnome/shell/theme/";
+        @if str-index($url, $resource_prefix) == 1 {
+            $url: str-slice($url, str-length($resource_prefix) + 1);
+        }
+    }
+
+    @if $url != $arg {
+        @debug($arg + " -> " + $url);
+    }
+
+    @return url(quote($url));
+}
 
 @import "gnome-shell-sass/_colors"; //use gtk colors
 @import "gnome-shell-sass/_drawing";
