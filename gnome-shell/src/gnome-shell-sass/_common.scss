@@ -117,6 +117,16 @@ stage {
   &:checked { @include button(checked);}
 }
 
+%button_dark { // Yaru change: add dark variant (for light theme)
+  @extend %button;
+  @include button(normal, $tc: $fg_color_dark, $c: $bg_color_dark);
+  &:focus { @include button(focus, $tc: $fg_color_dark, $c: $bg_color_dark);}
+  &:hover { @include button(hover, $tc: $fg_color_dark, $c: $bg_color_dark);}
+  &:insensitive { @include button(insensitive, $tc: $fg_color_dark, $c: $bg_color_dark);}
+  &:active { @include button(active, $tc: $fg_color_dark, $c: $bg_color_dark);}
+  &:checked { @include button(checked, $tc: $fg_color_dark, $c: $bg_color_dark);}
+}
+
 // buttons in dialogs/notifications
 // lighter in color and have a greater radius
 
