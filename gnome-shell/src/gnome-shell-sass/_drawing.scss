@@ -264,7 +264,7 @@ $button_bg_color: mix($tc, $c, 7%); // Yaru change: increase contrast
   @if $flat {
     .overview-icon { background-color: transparent;}
   } @else {
-    .overview-icon { background-color: transparentize($color, .81);}
+    .overview-icon { background-color: transparentize($color, .95);} // Yaru change: softer non-flat icon
   }
   &:hover .overview-icon { background-color: transparentize($color, .9);}
 
