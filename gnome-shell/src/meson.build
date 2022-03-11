@@ -117,7 +117,7 @@ foreach variant: variants
 
   data_sources = run_command(
     gresources_xml_parser, [
-      join_paths(meson.project_source_root(), '@0@'.format(theme_gresource_xml)),
+      join_paths(project_source_root, '@0@'.format(theme_gresource_xml)),
       '--filter', '*.css',
     ] + ignore_variants,
   ).stdout().strip().split('\n')

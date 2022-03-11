@@ -101,7 +101,7 @@ foreach flavour: flavours
               'yaru_accent_color': accent,
               'yaru_theme_entry_point': meson.current_source_dir() / gtk_scss_path,
             },
-            input: meson.project_source_root() / 'common' / 'accent-colors.scss.in',
+            input: project_source_root / 'common' / 'accent-colors.scss.in',
             output: '@0@-@1@-@2@-accent-colors.scss'.format(theme_name, variant, gtk_ver),
           )
 
