@@ -72,14 +72,6 @@ foreach flavour: flavours
       continue
     endif
 
-    gtk_scss_dependencies = run_command(
-        'find', flavour_path, '-name', '_*.scss'
-        ).stdout().strip().split('\n')
-
-    if gtk_scss_dependencies.length() == 1 and gtk_scss_dependencies[0] == ''
-      gtk_scss_dependencies = []
-    endif
-
     gtk_css = []
     generated_css = []
     foreach variant : variants
@@ -111,8 +103,16 @@ foreach flavour: flavours
       # Look for scss files in the variant dir first, otherwise fallback to
       # base, default or upstream paths, so using reversed order
       scss_paths = []
+      gtk_scss_dependencies = []
       foreach src: sources_priority
         scss_paths += ['-I', meson.current_source_dir() / src ]
+
+        scss_deps = run_command(
+          'find', src, '-name', '_*.scss'
+          ).stdout().strip().split('\n')
+        if scss_deps.length() > 0 and scss_deps[0] != ''
+          gtk_scss_dependencies += scss_deps
+        endif
       endforeach
 
       generated_css += custom_target(target_name,
