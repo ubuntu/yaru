@@ -29,7 +29,7 @@ foreach flavour: flavours
   foreach gtk_ver: gtk_versions
     gtk_dir = 'gtk-@0@'.format(gtk_ver)
     is_dark = flavour == 'dark' or flavour.endswith('-dark')
-    base_theme_name = is_dark ? flavour.substring(0, -5) : flavour
+    base_theme_name = is_dark ? flavour.split('-dark')[0] : flavour
     base_path = (flavour.startswith('mate') ? base_theme_name : 'default') / gtk_dir
     dark_path = is_dark ? 'dark' : base_path
     default_path = 'default' / gtk_dir
