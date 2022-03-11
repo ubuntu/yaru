@@ -28,8 +28,10 @@ foreach flavour: flavours
   # build and install gtk data
   foreach gtk_ver: gtk_versions
     gtk_dir = 'gtk-@0@'.format(gtk_ver)
-    base_path = (flavour.startswith('mate') ? 'mate' : 'default') / gtk_dir
-    dark_path = flavour.endswith('-dark') ? 'dark' : base_path
+    is_dark = flavour == 'dark' or flavour.endswith('-dark')
+    base_theme_name = is_dark ? flavour.substring(0, -5) : flavour
+    base_path = (flavour.startswith('mate') ? base_theme_name : 'default') / gtk_dir
+    dark_path = is_dark ? 'dark' : base_path
     default_path = 'default' / gtk_dir
     upstream_path = '..' / 'upstream' / gtk_dir / 'Adwaita'
     flavour_path = join_paths(flavour, gtk_dir)
@@ -77,12 +79,12 @@ foreach flavour: flavours
     foreach variant : variants
       message('Configuring @0@ variant for @1@-@2@'.format(
         theme_name, variant, gtk_ver))
-      is_dark = variant.endswith('-dark')
       target_name = '@0@-@1@-@2@'.format(theme_name, variant, gtk_ver)
-      gtk_scss_path = flavour_path / variant + '.scss'
+      variant_file = is_dark ? variant.split('-dark')[0] + '-dark' : variant
+      gtk_scss_path = flavour_path / variant_file + '.scss'
 
       if not fs.is_file(gtk_scss_path)
-        gtk_scss_path = base_path / variant + '.scss'
+        gtk_scss_path = base_path / variant_file + '.scss'
       endif
 
       if enabled_accent_colors.contains(flavour)
