@@ -17,7 +17,7 @@ endforeach
 
 foreach accent: enabled_accent_colors
   if enabled_accent_colors.contains(accent)
-    flavours += accent
+    flavours += [ accent, accent + '-dark']
   endif
 endforeach
 

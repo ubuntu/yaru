@@ -87,8 +87,8 @@ foreach flavour: flavours
         gtk_scss_path = base_path / variant_file + '.scss'
       endif
 
-      if enabled_accent_colors.contains(flavour)
-          accent = flavour
+      if enabled_accent_colors.contains(base_theme_name)
+          accent = base_theme_name
           gtk_accents_css = configure_file(
             configuration: {
               'yaru_dark_variant': is_dark ? 'true' : 'false',
