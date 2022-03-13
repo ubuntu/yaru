@@ -67,6 +67,9 @@
     min-height: 22px;
     selection-background-color: $selected_bg_color;
     selected-color: $selected_fg_color;
+    &, &:focus { // Yaru change: remove box-shadow because of ugly render
+      box-shadow: none;
+    }
   }
 
   .shell-link {
