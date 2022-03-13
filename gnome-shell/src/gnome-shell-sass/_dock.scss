@@ -398,9 +398,7 @@ $dock_color: $panel_bg_color;
 
         .dash-item-container {
             .show-apps, .app-well-app {
-                .overview-icon {
-                    border-radius: $base_border_radius;
-                }
+                border-radius: $dash_border_radius;
                 &:active, &:checked {
                     .overview-icon {
                         background-color: $base_active_color; box-shadow: none;
