@@ -74,5 +74,5 @@ $dash_border_radius: $modal_radius + $dash_padding;
   padding: $base_padding $base_padding * 2;
   text-align: center;
   -y-offset: $base_margin * 2; // distance from the dash edge
-  border: 1px solid $borders_color_dark;
+  border: 1px solid $borders_color_dark; // Yaru change: add border
 }
