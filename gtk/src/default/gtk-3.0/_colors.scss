@@ -174,7 +174,7 @@ $coloured_focus_border_color: null;
     $borders_color: $borders_color_dark;
     $alt_borders_color: darken($bg_color, 8%);
     $borders_edge: transparentize($fg_color, 0.93);
-    $link_color: lighten($selected_bg_color, 20%);
+    $link_color: $accent_fg_color;//lighten($selected_bg_color, 20%);
     $link_visited_color: lighten($selected_bg_color, 10%);
     $top_hilight: $borders_edge;
     $dark_fill: mix($borders_color, $bg_color, 50%);
