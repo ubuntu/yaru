@@ -24,7 +24,7 @@ $dash_border_radius: $modal_radius + $dash_padding;
 
   // Running app indicator (also shown in app grid)
   .app-well-app-running-dot {
-    margin-bottom: 8px; // hardcoded - Yaru change: move dot a bit down
+    margin-bottom: 13px; // hardcoded - Yaru change: move dot a bit down
     background-color: $selected_bg_color; // Yaru: we want an orange dot
   }
 }
