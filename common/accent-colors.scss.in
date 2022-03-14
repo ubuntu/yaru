@@ -1,25 +1,47 @@
 @function get_accent_color($accent_color, $is_dark: false) {
     $color: null;
-
-    @if $accent_color == 'default' {
-        $color: #E95420;
-    } @else if $accent_color == 'aqua' {
-        $color: #18B0B0;
-    } @else if $accent_color == 'blue' {
-        $color: #3584E4;
-    } @else if $accent_color == 'green' {
-        $color: #0E8420;
-    } @else if $accent_color == 'pink' {
-        $color: #C748BA;
-    } @else if $accent_color == 'purple' {
-        $color: #77216F;
-    } @else if $accent_color == 'red' {
-        $color: #C7162B;
-    } @else if $accent_color == 'yellow' {
-        $color: #F4A100;
+    @if($is_dark) {
+        @if $accent_color == 'default' {
+            $color: #E95420;
+        } @else if $accent_color == 'aqua' {
+            $color: #18B0B0;
+        } @else if $accent_color == 'blue' {
+            $color: #3097FF;
+        } @else if $accent_color == 'green' {
+            $color: #0E8420;
+        } @else if $accent_color == 'pink' {
+            $color: #C748BA;
+        } @else if $accent_color == 'purple' {
+            $color: #77216F;
+        } @else if $accent_color == 'red' {
+            $color: #C7162B;
+        } @else if $accent_color == 'yellow' {
+            $color: #F4A100;
+        } @else {
+            @error('No known accent color defined!');
+        }
     } @else {
-        @error('No known accent color defined!');
+        @if $accent_color == 'default' {
+            $color: #E95420;
+        } @else if $accent_color == 'aqua' {
+            $color: #18B0B0;
+        } @else if $accent_color == 'blue' {
+            $color: #06c;
+        } @else if $accent_color == 'green' {
+            $color: #0E8420;
+        } @else if $accent_color == 'pink' {
+            $color: #C748BA;
+        } @else if $accent_color == 'purple' {
+            $color: #77216F;
+        } @else if $accent_color == 'red' {
+            $color: #C7162B;
+        } @else if $accent_color == 'yellow' {
+            $color: #F4A100;
+        } @else {
+            @error('No known accent color defined!');
+        }
     }
+
 
     @debug('Using accent color ' + $accent_color + ': ' + $color);
 
