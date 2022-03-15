@@ -13,6 +13,8 @@ else
   project_source_root = meson.current_source_dir()
 endif
 
+subdir('common')
+
 components = [
   'icons',
   'metacity',

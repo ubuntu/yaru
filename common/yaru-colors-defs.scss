@@ -1,0 +1,23 @@
+// This file is used to define colors that are going to be used to replace
+// assets (dummy) colors via colorize-dummy-svg.py
+
+$variant: if($yaru_is_dark_variant, 'dark', 'light');
+
+@import 'colors';
+
+$yaru_accent_active_color: $progress_bg_color;
+$yaru_accent_border_color: lighten($yaru_accent_active_color, 17%);
+$yaru_border_color: $borders_color;
+$yaru_accent_focused_color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%));
+$yaru_bg_color: if($variant == 'dark', lighten($bg_color, 2%), $porcelain);
+$yaru_disabled_bg_color: mix($bg_color, $fg_color, 80%);
+$yaru_switch_bg_color: if($variant == 'dark', lighten($inkstone, 5%), lighten($ash, 20%));
+
+@define-color yaru_accent_bg_color #{"" + $yaru_accent_bg_color };
+@define-color yaru_accent_active_color #{"" + $yaru_accent_active_color };
+@define-color yaru_accent_border_color #{"" + $yaru_accent_border_color };
+@define-color yaru_border_color #{"" + $yaru_border_color };
+@define-color yaru_accent_focused_color #{"" + $yaru_accent_focused_color };
+@define-color yaru_bg_color #{"" + $yaru_bg_color };
+@define-color yaru_disabled_bg_color #{"" + $yaru_disabled_bg_color };
+@define-color yaru_switch_bg_color #{"" + $yaru_switch_bg_color };
