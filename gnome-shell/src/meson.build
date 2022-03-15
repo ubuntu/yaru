@@ -155,7 +155,7 @@ if gnomeshell_use_gresource
 else
   # Symlink variants
   foreach variant: variants
-    variant_suffix = (variant != 'dark') ? '-@0@'.format(variant)  : ''
+    variant_suffix = (variant != DEFAULT_VARIANT) ? '-@0@'.format(variant)  : ''
     meson.add_install_script('install-shell.sh', meson.project_name() + variant_suffix)
   endforeach
 endif
