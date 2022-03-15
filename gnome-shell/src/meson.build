@@ -23,6 +23,24 @@ theme_sources = files(
 )
 assert(theme_sources.length() > 0, 'No theme sources found')
 
+theme_assets = files(
+  run_command(
+    'find', meson.current_source_dir(), '-maxdepth', '1',
+    '-name', '*.svg',
+    '-or',
+    '-name', '*.css'
+  ).stdout().strip().split('\n')
+)
+
+colorizable_theme_assets = files(
+  run_command(
+    'find', meson.current_source_dir() / 'colorizable-assets', '-maxdepth', '1', '-name', '*.svg'
+  ).stdout().strip().split('\n')
+)
+
+theme_gresource_files = theme_assets
+theme_gresource_deps = []
+
 source_deps = []
 css_sources_path = meson.current_source_dir()
 if not gnomeshell_use_gresource
@@ -74,6 +92,57 @@ foreach variant: variants
     configuration: conf_data,
   )
 
+  # Prepare colorable assets
+  shell_yaru_colors_defs_scss = configure_file(
+    configuration: {
+      'yaru_dark_variant': variant == 'dark' ? 'true' : 'false',
+      'yaru_accent_color': 'default',
+      'yaru_theme_entry_point': yaru_colors_defs_scss,
+    },
+    input: accent_colors_definitions_scss,
+    output: 'gnome-shell-yaru-colors-defs-@0@.scss'.format(variant),
+  )
+
+  shell_yaru_colors_defs = custom_target(
+    'gnome-shell-yaru-color-definitions-@0@'.format(variant),
+    input: shell_yaru_colors_defs_scss,
+    output: '@BASENAME@.css'.format(variant),
+    command: [
+      sassc, '-a', '@INPUT@', '@OUTPUT@',
+      '-I', css_sources_path / 'gnome-shell-sass',
+    ],
+    depends: source_deps,
+    depend_files: [
+      yaru_colors_defs_scss,
+      theme_sources,
+    ]
+  )
+
+  foreach colorizable_asset: colorizable_theme_assets
+    basename = '@0@'.format(colorizable_asset).split('/')[-1]
+
+    if is_variant and basename.endswith('-hc.svg')
+      continue
+    endif
+
+    asset_target = custom_target(
+      is_variant ? '@0@-@1@.svg'.format(basename, variant) : basename,
+      input: colorizable_asset,
+      output: is_variant ? '@BASENAME@-@0@.svg'.format(variant) : '@PLAINNAME@',
+      command: [
+        colorize_dummy_svg,
+        shell_yaru_colors_defs,
+        '--input-file', '@INPUT@',
+        '--output-folder', '@OUTDIR@',
+        is_variant ? ['--variant', variant] : [],
+      ],
+      depends: shell_yaru_colors_defs,
+    )
+    theme_assets += asset_target.full_path()
+    theme_gresource_files += asset_target.full_path()
+    theme_gresource_deps += asset_target
+  endforeach
+
   # generate .css files
   style_css = []
   output_styles = []
@@ -95,9 +164,10 @@ foreach variant: variants
       depends: source_deps,
       depend_files: theme_sources,
     )
-  endforeach
 
-  theme_css += style_css
+    theme_gresource_files += style_css[-1].full_path()
+    theme_gresource_deps += style_css[-1]
+  endforeach
 
   # This is an hack we need to remove once meson fixes this issue:
   #  https://github.com/mesonbuild/meson/issues/2320
@@ -106,39 +176,41 @@ foreach variant: variants
     subdir(variant)
   endif
 
-  ignore_variants = []
-  if not is_variant
-    foreach v: variants
-      if v != variant
-        ignore_variants += ['--filter', '*.@0@.svg'.format(v) ]
-      endif
-    endforeach
-  endif
-
-  data_sources = run_command(
-    gresources_xml_parser, [
-      join_paths(project_source_root, '@0@'.format(theme_gresource_xml)),
-      '--filter', '*.css',
-    ] + ignore_variants,
-  ).stdout().strip().split('\n')
-
-  assert(data_sources.length() > 0 and data_sources[0] != '', 'No data sources found')
-
   # static files to copy
-  data_sources += files([
-    'pad-osd.css',
-    'running-indicator.svg',
-  ])
+  data_sources = gnomeshell_use_gresource ? [] : theme_assets
 
   # install static data files
   install_data(data_sources, install_dir: install_dir)
 endforeach
 
 if gnomeshell_use_gresource
+  theme_gresource_files_xml = []
+
+  foreach gfile: theme_gresource_files
+    filepath = '@0@'.format(gfile)
+    alias = filepath[0] == '/' ? '@0@'.format(gfile).split('/')[-1] : filepath
+    if alias == 'gnome-shell.css'
+      # Use Yaru files for ubuntu's special gdm
+      theme_gresource_files_xml += '<file alias="gdm.css">@0@</file>'.format(gfile)
+    endif
+
+    if alias.endswith('.css') and filepath.contains(meson.current_build_dir())
+      # This is kept for compatibility reasons, but we may drop it once shell is updated too
+      alias = 'Yaru' / alias
+    endif
+    theme_gresource_files_xml += '<file alias="@0@">@1@</file>'.format(alias, gfile)
+  endforeach
+
   gnome.compile_resources(
     'gnome-shell-theme',
-    theme_gresource_xml,
-    dependencies: theme_css,
+    configure_file(
+      input: theme_gresource_xml,
+      output: '@PLAINNAME@',
+      configuration: {
+        'YARU_SHELL_THEME_RESOURCES': '\n    '.join(theme_gresource_files_xml),
+      },
+    ),
+    dependencies: theme_gresource_deps,
     gresource_bundle: true,
     install: true,
     install_dir: gnomeshell_theme_dir,
