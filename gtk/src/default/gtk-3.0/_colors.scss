@@ -167,7 +167,7 @@ $coloured_focus_border_color: null;
     $fg_color: $porcelain;
 
     $selected_fg_color: $accent_fg_color;
-    $selected_bg_color: darken($accent_bg_color, 4%);
+    $selected_bg_color: $accent_bg_color;
     $selected_borders_color: darken($selected_bg_color, 30%);
     $borders_color_light: darken($bg_color, 20%);
     $borders_color_dark: darken($bg_color, 8%);
@@ -232,7 +232,7 @@ $coloured_focus_border_color: null;
     //special cased widget colors
     $suggested_bg_color:darken($green, 5%);
     $suggested_border_color: darken($suggested_bg_color, 10%);
-    $progress_bg_color: lighten($accent_bg_color, 5%);
+    $progress_bg_color: $accent_bg_color;
     $progress_border_color: $progress_bg_color;
     $checkradio_bg_color: $accent_bg_color;
     $checkradio_fg_color: $accent_fg_color;
