@@ -23,7 +23,8 @@
     @return $color;
 }
 
-$yaru_accent_bg_color: get_accent_color('@yaru_accent_color@', @yaru_dark_variant@);
+$yaru_is_dark_variant: @yaru_dark_variant@;
+$yaru_accent_bg_color: get_accent_color('@yaru_accent_color@', $yaru_is_dark_variant);
 $accent_bg_color: $yaru_accent_bg_color;
 @debug("Accent color is " + $yaru_accent_bg_color);
 
