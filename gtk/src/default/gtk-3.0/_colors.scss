@@ -10,6 +10,9 @@ $fg_color: if($variant == 'light', $inkstone, $porcelain);
 $selected_fg_color: $accent_fg_color;
 $selected_bg_color: if($variant == 'light', $accent_bg_color, darken($accent_bg_color, 4%));
 
+// Yaru: Ignore transformations when using dark accent colors
+$selected_bg_color: $accent_bg_color;
+
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 $borders_color_light: darken($bg_color, 20%);
 $borders_color_dark: darken($bg_color, 8%);
@@ -81,3 +84,7 @@ $checkradio_fg_color: $accent_fg_color;
 $checkradio_borders_color: if($variant == 'light', darken($checkradio_bg_color, 10%), darken($checkradio_bg_color,40%));
 $focus_border_color: transparentize(lighten($accent_bg_color, 14%), 0.3);
 $coloured_focus_border_color: transparentize(white, 0.3);
+
+// Yaru: Ignore transformations when using dark accent colors
+$progress_bg_color: $accent_bg_color;
+$checkradio_bg_color: $accent_bg_color;
