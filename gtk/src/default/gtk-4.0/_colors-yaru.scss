@@ -13,3 +13,8 @@ $osd_fg_color: #eeeeec;
 $osd_bg_color: transparentize(lighten($dark_4, 2%), 0.025);
 
 $drop_target_color: $success_color;
+
+// Ignore transformations when using dark accent colors
+$selected_bg_color: $accent_bg_color;
+$progress_bg_color: $accent_bg_color;
+$checkradio_bg_color: $accent_bg_color;
