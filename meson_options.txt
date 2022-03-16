@@ -21,12 +21,12 @@ option('cinnamon-dark', type: 'boolean', value: false, description:'build Yaru w
 option('accent-colors',
     type: 'array',
     choices: [
-        'aqua',
+        'bark',
+        'olive',
+        'viridian',
         'blue',
-        'green',
-        'pink',
         'purple',
+        'magenta',
         'red',
-        'yellow',
     ],
 )

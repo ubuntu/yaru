@@ -2,18 +2,18 @@
     $color: null;
     @if $accent_color == 'default' {
         $color: #E95420;
-    } @else if $accent_color == 'yellow' {
-        $color: #7b7b65;
-    } @else if $accent_color == 'green' {
-        $color: #03875B;
-    } @else if $accent_color == 'aqua' {
+    } @else if $accent_color == 'bark' {
+        $color: #787859;
+    } @else if $accent_color == 'olive' {
         $color: #4B8501;
+    } @else if $accent_color == 'viridian' {
+        $color: #03875B;
     } @else if $accent_color == 'blue' {
         $color: #0073E5;
     } @else if $accent_color == 'purple' {
         $color: #8856EB;
-    } @else if $accent_color == 'pink' {
-        $color: #BB2FDA;
+    } @else if $accent_color == 'magenta' {
+        $color: #BC33DB;
     } @else if $accent_color == 'red' {
         $color: #E61D34;
     } @else {
