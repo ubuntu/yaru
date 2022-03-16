@@ -146,10 +146,12 @@ foreach variant: variants
 
   # generate .css files
   style_css = []
+  variant_styles = []
   output_styles = []
 
   foreach style: styles
     stylename = style + variant_suffix
+    variant_styles += '@0@.css'.format(stylename)
     output_styles += '@0@.css'.format(style)
 
     style_css += custom_target(
@@ -160,7 +162,7 @@ foreach variant: variants
         sassc, '-a', '@INPUT@', '@OUTPUT@',
         '-I', css_sources_path,
       ],
-      install: not is_variant and not gnomeshell_use_gresource,
+      install: is_variant or not gnomeshell_use_gresource,
       install_dir: install_dir,
       depends: source_deps,
       depend_files: theme_sources,
@@ -174,7 +176,24 @@ foreach variant: variants
   #  https://github.com/mesonbuild/meson/issues/2320
   # by just making the style_css to have an output in the 'variant' subdir
   if is_variant
-    subdir(variant)
+    assert(output_styles.length() == variant_styles.length(), 'Output styles length mismatch')
+
+    if meson.version().version_compare('>= 0.58')
+      styles_range = range(output_styles.length())
+    else
+      styles_range = []
+      idx = 0
+      foreach o: output_styles
+        styles_range += idx
+        idx += 1
+      endforeach
+    endif
+
+    foreach i: styles_range
+      meson.add_install_script('bash', '-c',
+        'mv -v ${MESON_INSTALL_DESTDIR_PREFIX}/@0@ ${MESON_INSTALL_DESTDIR_PREFIX}/@1@'.format(
+          install_dir / variant_styles[i], install_dir / output_styles[i]))
+    endforeach
   endif
 
   # static files to copy
