@@ -1,13 +1,15 @@
 $variant: '@ThemeVariant@';
 $use_gresource: @UseGResource@;
 
+@import 'sass-utils';
+
 @function yaru_url_handler($arg) {
     $url: unquote($arg);
 
     @if not $use_gresource {
-        $resource_prefix: "resource:///org/gnome/shell/theme/";
-        @if str-index($url, $resource_prefix) == 1 {
-            $url: str-slice($url, str-length($resource_prefix) + 1);
+        $resource_prefix: "resource://";
+        @if str-starts-with($url, $resource_prefix) {
+            $url: str-basename($url);
         }
     }
 

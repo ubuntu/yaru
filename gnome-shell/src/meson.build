@@ -158,11 +158,12 @@ foreach variant: variants
       command: [
         sassc, '-a', '@INPUT@', '@OUTPUT@',
         '-I', css_sources_path,
+        '-I', project_source_root / 'common',
       ],
       install: is_variant or not gnomeshell_use_gresource,
       install_dir: install_dir,
       depends: source_deps,
-      depend_files: theme_sources,
+      depend_files: theme_sources + sass_utils_scss,
     )
 
     theme_gresource_files += style_css[-1].full_path()
