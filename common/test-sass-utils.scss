@@ -1,0 +1,98 @@
+// Copyright © 2022, Canonical Ltd
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library. If not, see <http://www.gnu.org/licenses/>.
+// Authors:
+//       Marco Trevisan <marco.trevisan@canonical.com>
+
+@import 'sass-utils';
+
+@function assert($result, $expected: true) {
+    @if $result != $expected {
+        $result: if($result == null, 'null', $result);
+        $expected: if($expected == null, 'null', $expected);
+        @error "Assertion failed, expected '" + $expected + "', got '" + $result + "'";
+    }
+
+    @return ''
+}
+
+@function test($name, $result, $expected: true) {
+    @return 'Running test '+$name + assert($result, $expected);
+}
+
+@function run-test($function, $expected, $args...) {
+    @return test($function, $function($args), $expected);
+}
+
+@debug test('str-contains Empty', str-contains('', ''));
+@debug test('str-contains Empty one', str-contains('', 'foo'), false);
+@debug test('str-contains Empty substring', str-contains('foo', ''), true);
+@debug test('str-contains Valid', str-contains('foo bar baz', 'bar'), true);
+@debug test('str-contains Missing', str-contains('foo bar', 'baz'), false);
+
+@debug test('str-starts-with Empty', str-starts-with('', ''));
+@debug test('str-starts-with Empty Both', str-starts-with('foo', ''));
+@debug test('str-starts-with Valid', str-starts-with('foobar', 'foo'));
+@debug test('str-starts-with Valid full', str-starts-with('foobar', 'foobar'));
+@debug test('str-starts-with Invalid', str-starts-with('barfoo', 'foo'), false);
+
+@debug test('str-ends-with Empty', str-ends-with('', ''));
+@debug test('str-ends-with Empty Both', str-ends-with('foo', ''), false);
+@debug test('str-ends-with Valid', str-ends-with('foobar', 'bar'));
+@debug test('str-ends-with Valid full', str-ends-with('foobar', 'foobar'));
+@debug test('str-ends-with Invalid', str-ends-with('foobar', 'foo'), false);
+
+@debug test('str-basename, Empty', str-basename(''), '');
+@debug test('str-basename, Named', str-basename('foo'), 'foo');
+@debug test('str-basename, Valid', str-basename('/foo/bar'), 'bar');
+@debug test('str-basename, Valid', str-basename('/foo/bar/baz'), 'baz');
+@debug test('str-basename, Valid', str-basename('proto:///foo/bar/baz'), 'baz');
+
+@debug test('str-extension, Empty', str-extension(''), null);
+@debug test('str-extension, Named', str-extension('foo'), null);
+@debug test('str-extension, Valid', str-extension('/foo.bar'), 'bar');
+@debug test('str-extension, Valid', str-extension('/foo/bar.baz'), 'baz');
+
+@debug test('str-dirname, Empty', str-dirname(''), '.');
+@debug test('str-dirname, Named', str-dirname('foo'), '.');
+@debug test('str-dirname, Valid', str-dirname('/foo/bar'), '/foo');
+@debug test('str-dirname, Valid', str-dirname('/foo/bar/baz'), '/foo/bar');
+@debug test('str-dirname, Valid', str-dirname('proto:///foo/bar/baz'), 'proto:///foo/bar');
+
+@debug test('list-length, Empty', list-length([]), 0);
+@debug test('list-length, One', list-length([1]), 1);
+@debug test('list-length, Two', list-length([1, '2']), 2);
+
+@debug test('list-nth, Empty', list-nth([], 0), null);
+@debug test('list-nth, Empty', list-nth([], 10), null);
+@debug test('list-nth, Empty', list-nth([], -10), null);
+@debug test('list-nth, One, valid', list-nth([1], 0), 1);
+@debug test('list-nth, One, valid negative', list-nth([1], -1), 1);
+@debug test('list-nth, One, invalid', list-nth([1], 3), null);
+@debug test('list-nth, One, invalid negative', list-nth([1], -3), null);
+@debug test('list-nth, Three, valid', list-nth([1, '2', false], 0), 1);
+@debug test('list-nth, Three, valid negative', list-nth([1, '2', false], -1), false);
+@debug test('list-nth, Three, valid', list-nth([1, '2', false], 1), '2');
+@debug test('list-nth, Three, valid negative', list-nth([1, '2', false], -2), '2');
+@debug test('list-nth, Three, valid', list-nth([1, '2', false], 2), false);
+@debug test('list-nth, Three, valid negative', list-nth([1, '2', false], -3), 1);
+
+@debug test('list-index, Empty', list-index([], 0), null);
+@debug test('list-index, Empty', list-index([], 10), null);
+@debug test('list-index, Empty', list-index([], -10), null);
+@debug test('list-index, One, valid', list-index([1], 1), 0);
+@debug test('list-index, One, invalid', list-index([1], 3), null);
+@debug test('list-index, Three, valid', list-index([1, '2', false], 1), 0);
+@debug test('list-index, Three, valid', list-index([1, '2', false], '2'), 1);
+@debug test('list-index, Three, valid', list-index([1, '2', false], false), 2);
