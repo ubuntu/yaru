@@ -12,6 +12,13 @@ variants = [
 ]
 
 DEFAULT_VARIANT = 'light'
+INCLUDE_HIGH_CONTRAST_VARIANTS = false
+
+foreach accent: enabled_accent_colors
+  if enabled_accent_colors.contains(accent)
+    variants += [ accent, accent + '-dark']
+  endif
+endforeach
 
 theme_css = []
 theme_sources = files(
@@ -73,8 +80,11 @@ theme_gresource_xml = files('data/gnome-shell-theme.gresource.xml')[0]
 icons_gresource_xml = files('data/gnome-shell-icons.gresource.xml')[0]
 
 foreach variant: variants
+  is_dark = variant == 'dark' or variant.endswith('-dark')
   is_variant = variant != DEFAULT_VARIANT
+  variant_base_name = is_dark ? variant.split('-dark')[0] : variant
   variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
+  is_custom_accent = enabled_accent_colors.contains(variant_base_name)
 
   if gnomeshell_use_gresource
     install_dir = join_paths(
@@ -85,22 +95,15 @@ foreach variant: variants
     install_dir = gnomeshell_theme_dir + variant_suffix
   endif
 
-  conf_data = configuration_data()
-  conf_data.set('ThemeVariant', variant)
-  conf_data.set('UseGResource', gnomeshell_use_gresource ? 'true' : 'false')
-  conf_data.set('ColorableAssets', '@0@'.format(colorable_assets_names))
-  theme_main_file = configure_file(
-    input: 'gnome-shell.scss.in',
-    output: 'gnome-shell@0@.scss'.format(variant_suffix),
-    configuration: conf_data,
-  )
+  accent_configuration = {
+    'yaru_dark_variant': is_dark ? 'true' : 'false',
+    'yaru_accent_color': is_custom_accent ? variant_base_name : 'default',
+  }
 
   # Prepare colorable assets
   shell_yaru_colors_defs_scss = configure_file(
-    configuration: {
-      'yaru_dark_variant': variant == 'dark' ? 'true' : 'false',
-      'yaru_accent_color': 'default',
-      'yaru_theme_entry_point': yaru_colors_defs_scss,
+    configuration: accent_configuration + {
+      'yaru_theme_entry_point': yaru_colors_defs_scss
     },
     input: accent_colors_definitions_scss,
     output: 'gnome-shell-yaru-colors-defs-@0@.scss'.format(variant),
@@ -124,7 +127,8 @@ foreach variant: variants
   foreach colorable_asset: colorable_theme_assets
     basename = '@0@'.format(colorable_asset).split('/')[-1]
 
-    if is_variant and basename.endswith('-hc.svg')
+    # We don't support other variants here...
+    if is_variant and basename.endswith('-hc.svg') and not INCLUDE_HIGH_CONTRAST_VARIANTS
       continue
     endif
 
@@ -153,12 +157,42 @@ foreach variant: variants
 
   foreach style: styles
     stylename = style + variant_suffix
+    high_contrast = style.endswith('high-contrast')
+
+    if (is_variant and high_contrast and not INCLUDE_HIGH_CONTRAST_VARIANTS)
+      continue
+    endif
+
     variant_styles += '@0@.css'.format(stylename)
     output_styles += '@0@.css'.format(style)
 
+    theme_main_file = configure_file(
+      input: 'gnome-shell.scss.in',
+      output: '@0@.scss'.format(stylename),
+      configuration: {
+        'DarkVariant': is_dark ? 'true' : 'false',
+        'YaruVariant': variant,
+        'UseGResource': gnomeshell_use_gresource ? 'true' : 'false',
+        'HighContrast': high_contrast ? 'true' : 'false',
+        'Colors': (high_contrast ? 'high-contrast-' : '') + 'colors',
+        'ColorableAssets': '@0@'.format(colorable_assets_names),
+      },
+    )
+
+    if is_custom_accent and (not high_contrast or INCLUDE_HIGH_CONTRAST_VARIANTS)
+      theme_sources += theme_main_file
+      theme_main_file = configure_file(
+        configuration: accent_configuration + {
+          'yaru_theme_entry_point': meson.build_root() / '@0@'.format(theme_main_file),
+        },
+        input: accent_colors_definitions_scss,
+        output: '@0@-accent-colors.scss'.format(stylename),
+      )
+    endif
+
     style_css += custom_target(
       'style-@0@'.format(stylename),
-      input: style == 'gnome-shell' ? theme_main_file : '@0@.scss'.format(style),
+      input: theme_main_file,
       output: '@0@.css'.format(stylename),
       command: [
         sassc, '-a', '@INPUT@', '@OUTPUT@',

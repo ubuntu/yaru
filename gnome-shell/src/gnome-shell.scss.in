@@ -1,5 +1,7 @@
-$variant: '@ThemeVariant@';
+$variant: if(@DarkVariant@, 'dark', 'light');
+$yaru_variant: '@YaruVariant@';
 $use_gresource: @UseGResource@;
+$high_contrast: @HighContrast@;
 $UPSTREAM_VARIANTS: ['dark', 'light'];
 
 @import 'sass-utils';
@@ -26,7 +28,7 @@ $UPSTREAM_VARIANTS: ['dark', 'light'];
     }
 
     @if is-asset-colorable($asset) {
-        $url: $path + str-insert($asset, '-' + $variant, str-index($asset, $extension));
+        $url: $path + str-insert($asset, '-' + $yaru_variant, str-index($asset, $extension));
     }
 
     @return $url;
@@ -51,8 +53,25 @@ $UPSTREAM_VARIANTS: ['dark', 'light'];
     @return url(quote($url));
 }
 
-@import "gnome-shell-sass/_colors"; //use gtk colors
+@debug 'Generating GNOME Shell ' + $yaru_variant + ' theme (' + $variant +' variant, hc: '+ $high_contrast+')';
+
+@import "gnome-shell-sass/_@Colors@";
 @import "gnome-shell-sass/_drawing";
 @import "gnome-shell-sass/_common";
 @import "gnome-shell-sass/_widgets";
 @import "gnome-shell-sass/_dock";
+
+@if $high_contrast {
+    //force symbolic icons
+    stage {
+        -st-icon-style: symbolic;
+    }
+
+    .toggle-switch {
+        width: 48px;
+        background-image: yaru-url-handler("resource:///org/gnome/shell/theme/toggle-off-hc.svg");
+        &:checked {
+            background-image: yaru-url-handler("resource:///org/gnome/shell/theme/toggle-on-hc.svg");
+        }
+    }
+}
