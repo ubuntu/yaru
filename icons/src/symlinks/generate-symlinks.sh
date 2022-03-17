@@ -17,14 +17,15 @@
 # this program; if not, see <https://www.gnu.org/licenses/gpl-3.0.txt>
 ##
 ## usage:
-##      generate-symlinks.sh [--all|--match <string>] [--verbose]
+##      generate-symlinks.sh [--all|--match <string>] --variant <variant> [--verbose]
 ##
 ## options:
-##      -a, --all            Generates all the symlinks defined in .list files
-##                           (warning: this might break manually generated symlinks)
-##      -m, --match <string> Generates only the symlinks in .list files that matches
-##                           the provided string
-##      -v, --verbose        More verbose output (useful for debugging)
+##      -a, --all              Generates all the symlinks defined in .list files
+##                             (warning: this might break manually generated symlinks)
+##      -m, --match <string>   Generates only the symlinks in .list files that matches
+##                             the provided string
+##      -t, --variant <string> Generates only the symlinks for the specified variant
+##      -v, --verbose          More verbose output (useful for debugging)
 ##
 ## example:
 ##      To generate only power-profile-* symlinks
@@ -42,6 +43,7 @@ for arg in "$@"; do
 	case "$arg" in
 		"--all") set -- "$@" "-a";;
 		"--match") set -- "$@" "-m";;
+		"--variant") set -- "$@" "-t";;
 		"--verbose") set -- "$@" "-v";;
 		*) set -- "$@" "$arg"
 	esac
@@ -52,13 +54,14 @@ function print_illegal() {
 }
 
 # Parsing flags and arguments
-while getopts 'havm:' OPT; do
+while getopts 'havmt:' OPT; do
 	case $OPT in
 		h) sed -ne 's/^## \(.*\)/\1/p' $0
 			exit 1 ;;
 		a) _all=1 ;;
 		v) _verbose=1 ;;
 		m) _match=$OPTARG ;;
+		t) _variant=$OPTARG ;;
 		\?) print_illegal $@ >&2;
 			echo "---"
 			sed -ne 's/^## \(.*\)/\1/p' $0
@@ -80,6 +83,14 @@ DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "status" "emblems" "ui")
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
 VARIANTS=("default" "mate")
+
+if [ -n "$_variant" ]; then
+	if [[ ! " ${VARIANTS[*]} " =~ " ${_variant} " ]]; then
+		echo "WARNING: Requested $variant is not known"
+	fi
+
+	VARIANTS=($_variant)
+fi
 
 
 linker () {
