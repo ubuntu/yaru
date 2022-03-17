@@ -1,12 +1,28 @@
+icon_flavors = [
+  'default',
+  'mate',
+]
+
+icon_flavors += enabled_accent_colors
+
 fullcolor_path = 'src' / 'fullcolor'
 render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py')
 generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh')
+generate_index_theme = find_program('src' / 'generate-index-theme.py')
+accent_color_gtk_version_reference = '3.0'
 render_targets = []
+render_accented_targets = []
 render_and_symlink_targets = []
 symlink_targets = []
 
-foreach flavour: ['default', 'mate']
-  if get_option(flavour)
+foreach flavour: icon_flavors
+  is_accent = enabled_accent_colors.contains(flavour)
+  if is_accent and not get_option('gtk')
+    warning('GTK is not enabled, so we won\'t be able to generate accent colors')
+    continue
+  endif
+
+  if is_accent or get_option(flavour)
     suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
     icon_dir = 'Yaru' + suffix
     theme_name = meson.project_name() + suffix
@@ -17,6 +33,42 @@ foreach flavour: ['default', 'mate']
       '--variant', flavour,
       '--dest-path', meson.current_source_dir(),
     ]
+
+    if is_accent
+      accent_svgs = files(
+        run_command(
+          'find', meson.current_source_dir() / fullcolor_path / 'accented',
+          '-name', '*.svg',
+        ).stdout().strip().split('\n')
+      )
+
+      colors_definitions = gtk_yaru_colors_defs['@0@-gtk-@1@'.format(
+        icon_dir, accent_color_gtk_version_reference)]
+
+      foreach accent_svg: accent_svgs
+        path = '@0@'.format(accent_svg)
+        basename = path.split('/')[-1]
+        category = path.split('/')[-2]
+        accented_svg = custom_target(
+          '-'.join([icon_dir, basename]),
+          input: accent_svg,
+          output: '@BASENAME@-@0@.svg'.format(flavour),
+          command: [
+            colorize_dummy_svg,
+            colors_definitions,
+            '--input-file', '@INPUT@',
+            '--output-folder', '@OUTDIR@' / flavour / category,
+            '--variant', flavour,
+          ],
+          depends: colors_definitions,
+        )
+        rendering_deps += accented_svg
+      endforeach
+
+      rendering_args += [
+        '--source-path', meson.current_build_dir(),
+      ]
+    endif
 
     render_bitmaps_command = [
       render_bitmaps,
@@ -35,6 +87,23 @@ foreach flavour: ['default', 'mate']
     )
     render_targets += render_bitmaps_run_target
 
+    if is_accent
+      render_bitmaps_target = custom_target(
+        '-'.join([icon_dir, 'index.theme']),
+        input: 'meson.build', # Dummy file, just because we need one
+        output: '@0@-index.theme'.format(flavour),
+        command: [
+          generate_index_theme,
+          icon_dir,
+          '--source-dir', meson.current_source_dir() / icon_dir,
+          '--output-dir', meson.current_source_dir() / icon_dir,
+          '--inherits', meson.project_name(),
+        ],
+        depends: render_bitmaps_target,
+      )
+      render_accented_targets += render_bitmaps_target
+    endif
+
     generate_symlinks_command = [
       generate_symlinks,
       '--variant', flavour,
@@ -51,6 +120,16 @@ foreach flavour: ['default', 'mate']
     render_and_symlink_targets += render_and_symlinks_target
 
     alias_target('render+symlink-icons-' + flavour, render_and_symlinks_target)
+
+    if is_accent
+      render_accented_targets += render_and_symlinks_target
+
+      if not fs.is_dir(icon_dir)
+        warning('@0@ does not exists, ensure you generated it with `ninja -C @1@ render-icons-@2@,`'.format(
+          icon_dir, meson.project_build_root(), flavour))
+        continue
+      endif
+    endif
 
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
@@ -97,3 +176,7 @@ endforeach
 alias_target('render-icons', render_targets)
 alias_target('render+symlink-icons', render_and_symlink_targets)
 alias_target('symlink-icons', symlink_targets)
+
+if render_accented_targets.length() > 0
+  alias_target('render-accented-icons', render_accented_targets)
+endif

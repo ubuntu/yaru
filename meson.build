@@ -12,10 +12,10 @@ sassc = find_program('sassc')
 subdir('common')
 
 components = [
-  'icons',
   'metacity',
   'gnome-shell',
   'gtk',
+  'icons',
   'gtksourceview',
   'sounds',
   'sessions',
