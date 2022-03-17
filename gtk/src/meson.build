@@ -8,15 +8,21 @@ gtk_versions = [
   '4.0'
 ]
 
+gtk_yaru_colors_defs = {}
+
 foreach flavour: flavours
   message('Configuring flavour ' + flavour)
   suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
   theme_name = meson.project_name() + suffix
+  is_dark = flavour == 'dark' or flavour.endswith('-dark')
+  base_theme_name = is_dark ? flavour.split('-dark')[0] : flavour
+  is_accent = enabled_accent_colors.contains(base_theme_name)
   theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
 
   conf_data = configuration_data()
   conf_data.set('ThemeName', meson.project_name())
   conf_data.set('FlavourThemeName', theme_name)
+  conf_data.set('IconThemeName', is_accent ? '-'.join(meson.project_name(), base_theme_name) : meson.project_name())
   configure_file(input: 'index.theme.in',
     output: '@0@-index.theme'.format(theme_name),
     configuration: conf_data,
@@ -26,8 +32,6 @@ foreach flavour: flavours
   # build and install gtk data
   foreach gtk_ver: gtk_versions
     gtk_dir = 'gtk-@0@'.format(gtk_ver)
-    is_dark = flavour == 'dark' or flavour.endswith('-dark')
-    base_theme_name = is_dark ? flavour.split('-dark')[0] : flavour
     base_path = (flavour.startswith('mate') ? base_theme_name : 'default') / gtk_dir
     dark_path = is_dark ? 'dark' : base_path
     default_path = 'default' / gtk_dir
@@ -85,19 +89,47 @@ foreach flavour: flavours
         gtk_scss_path = base_path / variant_file + '.scss'
       endif
 
-      if enabled_accent_colors.contains(base_theme_name)
+      if is_accent
           accent = base_theme_name
+          accent_configuration = {
+            'yaru_dark_variant': is_dark ? 'true' : 'false',
+            'yaru_accent_color': accent,
+          }
+
           gtk_accents_css = configure_file(
-            configuration: {
-              'yaru_dark_variant': is_dark ? 'true' : 'false',
-              'yaru_accent_color': accent,
+            configuration: accent_configuration + {
               'yaru_theme_entry_point': meson.current_source_dir() / gtk_scss_path,
             },
             input: accent_colors_definitions_scss,
-            output: '@0@-@1@-@2@-accent-colors.scss'.format(theme_name, variant, gtk_ver),
+            output: '@0@-accent-colors.scss'.format(target_name),
           )
 
           gtk_scss_path = gtk_accents_css
+
+          gtk_yaru_colors_defs_scss = configure_file(
+            configuration: accent_configuration + {
+              'yaru_theme_entry_point': yaru_colors_defs_scss,
+            },
+            input: accent_colors_definitions_scss,
+            output: '@0@-yaru-colors-defs.scss'.format(target_name),
+          )
+
+          gtk_yaru_colors_defs += {
+            target_name: custom_target(
+              '@0@-yaru-colors-definitions'.format(target_name),
+              input: gtk_yaru_colors_defs_scss,
+              output: '@BASENAME@.css'.format(variant),
+              command: [
+                sassc, '-a', '@INPUT@', '@OUTPUT@',
+                '-I', css_sources_path / 'gnome-shell-sass',
+              ],
+              depends: source_deps,
+              depend_files: [
+                yaru_colors_defs_scss,
+                theme_sources,
+              ]
+            )
+          }
       endif
 
       # Look for scss files in the variant dir first, otherwise fallback to

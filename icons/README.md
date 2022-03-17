@@ -53,3 +53,19 @@ gsettings reset org.gnome.desktop.interface cursor-theme
 ## Contributing
 
 Contributions are obviously welcome! If you would like to contribute to this project, please have [read this](/CONTRIBUTING.md) regarding contributions.
+
+## Generating accent color icons
+
+Assets must be provided in the fullcolor `accented` subfolder, using colors that can be replaced via `colorize-dummy-svg.py`
+(that generates the colors from gtk themes using `yaru-colors-defs.scss·`)
+
+To generate the icons you need to use meson:
+```bash
+# On the project root
+meson build
+ninja -C build render-accented-icons
+
+# You can also render just one accent with
+ninja -C build render-icons-[variant] # build-render-icons-blue
+
+```
