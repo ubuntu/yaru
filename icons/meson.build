@@ -23,7 +23,8 @@ foreach flavour: icon_flavors
   endif
 
   if is_accent or get_option(flavour)
-    suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
+    is_flavour = flavour != 'default'
+    suffix = is_flavour ? '-@0@'.format(flavour) : ''
     icon_dir = 'Yaru' + suffix
     theme_name = meson.project_name() + suffix
     theme_install_dir = join_paths(get_option('prefix'), 'share/icons', theme_name)
@@ -88,19 +89,6 @@ foreach flavour: icon_flavors
     render_targets += render_bitmaps_run_target
 
     if is_accent
-      render_bitmaps_target = custom_target(
-        '-'.join([icon_dir, 'index.theme']),
-        input: 'meson.build', # Dummy file, just because we need one
-        output: '@0@-index.theme'.format(flavour),
-        command: [
-          generate_index_theme,
-          icon_dir,
-          '--source-dir', meson.current_source_dir() / icon_dir,
-          '--output-dir', meson.current_source_dir() / icon_dir,
-          '--inherits', meson.project_name(),
-        ],
-        depends: render_bitmaps_target,
-      )
       render_accented_targets += render_bitmaps_target
     endif
 
@@ -159,16 +147,34 @@ foreach flavour: icon_flavors
     conf_data.set('ProjectName', meson.project_name())
     conf_data.set('ThemeName', theme_name)
     foreach theme: themes_f
+      have_file = false
+      tmp_name = flavour + '-@0@'.format(theme)
       if fs.is_file(join_paths(icon_dir, theme))
         file = configure_file(
           input : join_paths(icon_dir, theme),
-          output : flavour + '-@0@'.format(theme),
+          output : tmp_name,
           configuration : conf_data
         )
+        have_file = true
+      elif theme == 'index.theme'
+        file = configure_file(
+          output: tmp_name,
+          command: [
+            generate_index_theme,
+            icon_dir,
+            '--source-dir', meson.current_source_dir() / icon_dir,
+            '--output-dir', '@OUTDIR@',
+            '--output-name', '@OUTPUT@',
+            is_flavour ? ['--inherits', meson.project_name()] : [],
+          ],
+        )
+        have_file = true
+      endif
+
+      if have_file
         install_data(file, install_dir: theme_install_dir, rename: theme)
       endif
     endforeach
-
     meson.add_install_script('meson/post_install.py', theme_name)
   endif
 endforeach
