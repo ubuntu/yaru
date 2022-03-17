@@ -37,7 +37,6 @@ SOURCES = (
     "status",
     "wip",
 )
-VARIANTS = ['default', 'mate']
 
 # DPI multipliers to render at
 DPIS = [1, 2]
@@ -237,9 +236,20 @@ def main(args, SRC, DEST):
 parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
 
 parser.add_argument(
+    '--source-path',
+    type=str,
+    default=None,
+    help='Path where to look for source svg files. Script path by default'
+)
+parser.add_argument(
+    '--dest-path',
+    type=str,
+    default=None,
+    help='Path where to save generated svg files. Script path by default'
+)
+parser.add_argument(
     '--variant',
     type=str,
-    choices=VARIANTS,
     default='default',
     help='Variant name to render. If not given, render the default variant'
 )
@@ -261,9 +271,12 @@ parser.add_argument(
 args = parser.parse_args()
 
 script_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+source_path = args.source_path if args.source_path else script_path
+dest_path = args.dest_path if args.dest_path else os.path.join(script_path, '../../')
 
 for source in SOURCES:
-    SRC = os.path.join(script_path, args.variant, source)
-    DEST = os.path.abspath(os.path.join(script_path, '../../', "Yaru" if args.variant ==
+    SRC = os.path.join(source_path, args.variant, source)
+    DEST = os.path.abspath(os.path.join(dest_path, "Yaru" if args.variant ==
                                         'default' else "Yaru-" + args.variant))
-    main(args, SRC, DEST)
+    if os.path.exists(SRC):
+        main(args, SRC, DEST)
