@@ -36,6 +36,7 @@ if __name__ == '__main__':
         '--comment', default='A desktop adaptation of the Ubuntu mobile icons.')
     parser.add_argument('--source-dir', default=None)
     parser.add_argument('--output-dir', default='.')
+    parser.add_argument('--output-name', default='index.theme')
     parser.add_argument('--filter', action='append', default=[])
     parser.add_argument('--exclude', action='append', default=[])
 
@@ -98,5 +99,7 @@ if __name__ == '__main__':
 
         theme[dir] = data
 
-    with open(os.path.join(args.output_dir, 'index.theme'), 'w') as f:
+    output_file = os.path.join(args.output_dir, args.output_name)
+    print('Writing theme index at', output_file)
+    with open(output_file, 'w') as f:
         theme.write(f, space_around_delimiters=False)
