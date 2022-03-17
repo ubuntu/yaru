@@ -1,5 +1,3 @@
-sassc = find_program('sassc')
-
 variants = [
   'gtk',
   'gtk-dark'
