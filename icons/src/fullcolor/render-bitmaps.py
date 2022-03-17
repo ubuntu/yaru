@@ -260,7 +260,10 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+script_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+
 for source in SOURCES:
-    SRC = os.path.join(".", args.variant, source)
-    DEST = "../../Yaru" if args.variant == 'default' else "../../Yaru-" + args.variant
+    SRC = os.path.join(script_path, args.variant, source)
+    DEST = os.path.abspath(os.path.join(script_path, '../../', "Yaru" if args.variant ==
+                                        'default' else "Yaru-" + args.variant))
     main(args, SRC, DEST)
