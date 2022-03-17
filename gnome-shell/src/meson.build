@@ -11,7 +11,7 @@ variants = [
   'dark',
 ]
 
-DEFAULT_VARIANT = 'dark'
+DEFAULT_VARIANT = 'light'
 
 theme_css = []
 theme_sources = files(
