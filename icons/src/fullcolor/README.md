@@ -11,6 +11,14 @@ NOTE: at the moment the render scripts do not work with the snap version of Inks
  - You can render a single icon by passing the icon name to this script: `./render-bitmaps.py <icon-name>`
  - You can also use the optional `--variant` argument to render different variant of the icon. Ex: `./render-bitmaps.py <icon-name> --variant mate` will render the icon located in `mate` folder. By default, it renders the version located in the `default` folder.
 
+To generate all the icons using a meson build folder just use:
+
+        ninja -C _build render-icons
+
+It's also possible to render a specific flavor by using:
+
+        ninja -C _build render-icons-mate
+
 ### Templates
 
 There's a few provided templates that make creating a new icon simple (as an alternative to deriving an icon from one of the pre-existing icons).
