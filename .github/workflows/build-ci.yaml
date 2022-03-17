@@ -10,7 +10,9 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install dependencies
-      run: sudo apt install meson sassc
+      run: |
+        sudo apt install sassc python3-pip
+        sudo pip3 install meson ninja
 
     - name: Build, Test and Install
       run: |
