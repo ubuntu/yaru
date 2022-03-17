@@ -4,10 +4,14 @@
         $color: #E95420;
     } @else if $accent_color == 'bark' {
         $color: #787859;
+    } @else if $accent_color == 'sage' {
+        $color: #657B69;
     } @else if $accent_color == 'olive' {
         $color: #4B8501;
     } @else if $accent_color == 'viridian' {
         $color: #03875B;
+    } @else if $accent_color == 'prussiangreen' {
+        $color: #308280;
     } @else if $accent_color == 'blue' {
         $color: #0073E5;
     } @else if $accent_color == 'purple' {
