@@ -36,34 +36,38 @@ colorable_theme_assets = files(
   ).stdout().strip().split('\n')
 )
 
+colorable_assets_names = []
+foreach asset: colorable_theme_assets
+  basename = '@0@'.format(asset).split('/')[-1]
+  colorable_assets_names += basename
+endforeach
+
 theme_gresource_files = theme_assets
 theme_gresource_deps = []
 
 source_deps = []
-css_sources_path = meson.current_source_dir()
-if not gnomeshell_use_gresource
-  css_sources_path = meson.current_build_dir()
-  foreach src: theme_sources
-    out_name = '___'.join('@0@'.format(src).split('/'))
-    source_deps += custom_target(out_name,
-      input: src,
-      output: out_name,
-      command: [
-        'bash', '-c',
-        ';'.join([
-          'output="$1/$(realpath --relative-to="'+ meson.current_source_dir() + '" $0)"',
-          'mkdir -p "$(dirname "$output")"',
-          # Can't use proper regex ("s,\(\b\)url\(\s*(\),\1yaru-url-handler\2,g") as per
-          # https://github.com/mesonbuild/meson/issues/1564
-          'sed "s,[[:space:]]*url[[:space:]]*(, yaru_url_handler(,g;" "$0" > "$output"',
-        ]),
-        '@INPUT@',
-        '@OUTDIR@',
-      ],
-      install: false,
-    )
-  endforeach
-endif
+
+css_sources_path = meson.current_build_dir()
+foreach src: theme_sources
+  out_name = '___'.join('@0@'.format(src).split('/'))
+  source_deps += custom_target(out_name,
+    input: src,
+    output: out_name,
+    command: [
+      'bash', '-c',
+      ';'.join([
+        'output="$1/$(realpath --relative-to="'+ meson.current_source_dir() + '" $0)"',
+        'mkdir -p "$(dirname "$output")"',
+        # Can't use proper regex ("s,\(\b\)url\(\s*(\),\1yaru-url-handler\2,g") as per
+        # https://github.com/mesonbuild/meson/issues/1564
+        'sed "s,[[:space:]]*url[[:space:]]*(, yaru_url_handler(,g;" "$0" > "$output"',
+      ]),
+      '@INPUT@',
+      '@OUTDIR@',
+    ],
+    install: false,
+  )
+endforeach
 
 theme_gresource_xml = files('data/gnome-shell-theme.gresource.xml')[0]
 icons_gresource_xml = files('data/gnome-shell-icons.gresource.xml')[0]
@@ -84,6 +88,7 @@ foreach variant: variants
   conf_data = configuration_data()
   conf_data.set('ThemeVariant', variant)
   conf_data.set('UseGResource', gnomeshell_use_gresource ? 'true' : 'false')
+  conf_data.set('ColorableAssets', '@0@'.format(colorable_assets_names))
   theme_main_file = configure_file(
     input: 'gnome-shell.scss.in',
     output: 'gnome-shell@0@.scss'.format(variant_suffix),
@@ -124,15 +129,15 @@ foreach variant: variants
     endif
 
     asset_target = custom_target(
-      basename + variant_suffix,
+      basename + '-' + variant,
       input: colorable_asset,
-      output: '@BASENAME@@0@.svg'.format(variant_suffix),
+      output: '@BASENAME@-@0@.svg'.format(variant),
       command: [
         colorize_dummy_svg,
         shell_yaru_colors_defs,
         '--input-file', '@INPUT@',
         '--output-folder', '@OUTDIR@',
-        is_variant ? ['--variant', variant] : [],
+        '--variant', variant,
       ],
       depends: shell_yaru_colors_defs,
       install: not gnomeshell_use_gresource,
