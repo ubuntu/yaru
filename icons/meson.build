@@ -1,6 +1,9 @@
 fullcolor_path = 'src' / 'fullcolor'
 render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py')
+generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh')
 render_targets = []
+render_and_symlink_targets = []
+symlink_targets = []
 
 foreach flavour: ['default', 'mate']
   if get_option(flavour)
@@ -15,16 +18,39 @@ foreach flavour: ['default', 'mate']
       '--dest-path', meson.current_source_dir(),
     ]
 
-    render_bitmaps_target = run_target(icon_dir,
-      command: [
-        render_bitmaps,
-        rendering_args,
-      ],
+    render_bitmaps_command = [
+      render_bitmaps,
+      rendering_args,
+    ]
+    render_bitmaps_target = custom_target(icon_dir + '-render',
+      output: icon_dir + '-render',
+      command: render_bitmaps_command,
       depends: rendering_deps,
     )
 
-    alias_target('render-icons-' + flavour, render_bitmaps_target)
-    render_targets += render_bitmaps_target
+    # Sadly we can't use a run target as dependncy, thus the duplication
+    render_bitmaps_run_target = run_target('render-icons-' + flavour,
+      command: render_bitmaps_command,
+      depends: rendering_deps,
+    )
+    render_targets += render_bitmaps_run_target
+
+    generate_symlinks_command = [
+      generate_symlinks,
+      '--variant', flavour,
+    ]
+    generate_symlinks_target = run_target('symlink-icons-' + flavour,
+      command: generate_symlinks_command,
+    )
+    symlink_targets += generate_symlinks_target
+
+    render_and_symlinks_target = run_target('render+symlink-' + flavour,
+      command: generate_symlinks_command,
+      depends: render_bitmaps_target,
+    )
+    render_and_symlink_targets += render_and_symlinks_target
+
+    alias_target('render+symlink-icons-' + flavour, render_and_symlinks_target)
 
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
@@ -69,3 +95,5 @@ foreach flavour: ['default', 'mate']
 endforeach
 
 alias_target('render-icons', render_targets)
+alias_target('render+symlink-icons', render_and_symlink_targets)
+alias_target('symlink-icons', symlink_targets)
