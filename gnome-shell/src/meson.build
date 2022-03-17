@@ -1,5 +1,3 @@
-sassc = find_program('sassc')
-
 gnomeshell_theme_dir = join_paths(gnomeshell_default_theme_dir,
   meson.project_name())
 

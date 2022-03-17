@@ -1,5 +1,3 @@
-sassc = find_program('sassc')
-
 foreach flavour: flavours
   suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
   theme_name = meson.project_name() + suffix
