@@ -15,11 +15,11 @@
     } @else if $accent_color == 'blue' {
         $color: #0073E5;
     } @else if $accent_color == 'purple' {
-        $color: #8856EB;
+        $color: #7764D8;
     } @else if $accent_color == 'magenta' {
-        $color: #BC33DB;
+        $color: #A15AAF;
     } @else if $accent_color == 'red' {
-        $color: #E61D34;
+        $color: #BA4F97;
     } @else {
         @error('No known accent color defined!');
     }
