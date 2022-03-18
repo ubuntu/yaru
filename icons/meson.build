@@ -85,6 +85,7 @@ foreach flavour: icon_flavors
         command: [
           render_bitmaps,
           rendering_args,
+          '--categories', category,
           basename,
         ],
         depends: is_accent ? rendering_deps[i] : [],
