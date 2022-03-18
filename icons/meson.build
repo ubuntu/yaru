@@ -15,6 +15,7 @@ render_accented_targets = []
 render_and_symlink_targets = []
 render_and_symlink_accented_targets = []
 symlink_targets = []
+render_by_icon_targets = {}
 
 foreach flavour: icon_flavors
   is_accent = enabled_accent_colors.contains(flavour)
@@ -90,6 +91,10 @@ foreach flavour: icon_flavors
       )
       render_flavour_targets += render_bitmap_target
       render_targets += render_bitmap_target
+
+      icon_targets = render_by_icon_targets.get(basename, [])
+      icon_targets += render_bitmap_target
+      render_by_icon_targets += { basename: icon_targets }
     endforeach
 
     render_bitmaps_command = [
@@ -204,3 +209,7 @@ if render_accented_targets.length() > 0
   alias_target('render-icons-accented', render_accented_targets)
   alias_target('render+symlink-icons-accented', render_and_symlink_accented_targets)
 endif
+
+foreach icon, targets: render_by_icon_targets
+  alias_target('icon-render-' + icon, targets)
+endforeach
