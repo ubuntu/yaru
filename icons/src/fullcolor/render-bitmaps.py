@@ -259,6 +259,12 @@ parser.add_argument(
     help='Variant name to render. If not given, render the default variant'
 )
 parser.add_argument(
+    '--categories',
+    type=str,
+    default=None,
+    help='Only look for icons in a specified categories'
+)
+parser.add_argument(
     "svg",
     type=str,
     nargs="?",
@@ -281,6 +287,9 @@ dest_path = args.dest_path if args.dest_path else os.path.join(script_path, '../
 rendered_icons = 0
 
 for source in SOURCES:
+    if args.categories and source not in args.categories:
+        continue
+
     SRC = os.path.join(source_path, args.variant, source)
     DEST = os.path.abspath(os.path.join(dest_path, "Yaru" if args.variant ==
                                         'default' else "Yaru-" + args.variant))
