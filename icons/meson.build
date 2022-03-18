@@ -13,6 +13,7 @@ accent_color_gtk_version_reference = '3.0'
 render_targets = []
 render_accented_targets = []
 render_and_symlink_targets = []
+render_and_symlink_accented_targets = []
 symlink_targets = []
 
 foreach flavour: icon_flavors
@@ -88,10 +89,6 @@ foreach flavour: icon_flavors
     )
     render_targets += render_bitmaps_run_target
 
-    if is_accent
-      render_accented_targets += render_bitmaps_target
-    endif
-
     generate_symlinks_command = [
       generate_symlinks,
       '--variant', flavour,
@@ -110,7 +107,8 @@ foreach flavour: icon_flavors
     alias_target('render+symlink-icons-' + flavour, render_and_symlinks_target)
 
     if is_accent
-      render_accented_targets += render_and_symlinks_target
+      render_accented_targets += render_bitmaps_target
+      render_and_symlink_accented_targets += render_and_symlinks_target
 
       if not fs.is_dir(icon_dir)
         warning('@0@ does not exists, ensure you generated it with `ninja -C @1@ render-icons-@2@,`'.format(
@@ -184,5 +182,6 @@ alias_target('render+symlink-icons', render_and_symlink_targets)
 alias_target('symlink-icons', symlink_targets)
 
 if render_accented_targets.length() > 0
-  alias_target('render-accented-icons', render_accented_targets)
+  alias_target('render-icons-accented', render_accented_targets)
+  alias_target('render+symlink-icons-accented', render_and_symlink_accented_targets)
 endif
