@@ -1,3 +1,219 @@
+yaru-theme (22.04.2) UNRELEASED; urgency=medium
+
+  [ Paul Kepinski ]
+  * Generate missing mate symlinks
+  * Fix Yaru-mate-dark symlinks
+  * Fix dialog border-radius
+  * Add icon theme symbolic variant support
+    * Move default symbolics to subfolder
+    * Adapt render bash script to support variants
+  * Add start-here-symbolic mate icon
+  * Move dash running dot a bit down
+  * Fix apps_label color in light theme
+  * Fix keyboard in light and dark theme
+  * Fix foo-scroll-area visual glitch
+  * Fix invisible caret in caja
+  * Fix OSD light buttons
+  * Fix light dash separator
+  * Fix search entry look
+  * Add missing gnome-shell app icons (fullcolor and symbolic)
+  * Fix close button hover bg
+  * Fix slider in light theme
+  * Fixe buttons look
+  * Fix calendar insensitive label
+  * Fix popovers menu item states
+  * Sync Gnome Shell with upstream
+  * Fix search entry alignement
+  * Fix focused unlock-dialog entry
+  * Sync Gnome Shell with upstream
+  * Sync icon theme with upstream
+  * Cinnamon: fix panel inset box-shadow
+  * Cinnamon add thumbnails
+  * Style login dialog entry unfocused state
+  * Fix page navigation arrow
+  * Fix notification look
+    * Fix notification look
+    * Fix missing border
+  * Add support for icon theme variants symbolic symlinks
+  * Softer app folder background
+  * Fix app folder edit button
+  * Update Gtk3 thumbnails
+    Update Gtk3 thumbnails (images provided by @Initu-Castilhos)
+  * Add missing explore2 icon
+  * Fix looking glass entry look
+  * Fix dock item border-radius
+  * Gs dash label border and app-dot realign
+    * Add border to dash label
+    * Align app-running-dot with dock (LP: #1965003)
+  * Add ding styling
+
+  [ Muqtadir ]
+  * refine gtk4 radiobutton assets
+  * update default and dark gtksourceview styles
+  * update upstream nautilus-css for gnome-42
+    * update upstream nautilus-css for gnome-42
+    * update from upstream
+    - copied upstream css to the top to make it easier next time to keep track
+    - renamed all css vars to scss vars
+    - commented out what we don't need or does not fit with our styling
+    * Invert transparentize functions
+    * Move all nautius css styling below .nautilus-window
+    Co-authored-by: Paul Kepinski <paul.kepinski@orange.fr>
+    Co-authored-by: Feichtmeier <frederik.feichtmeier@gmail.com>
+  * added symlink to timeshift
+
+  [ ubuntujaggers ]
+  * adding missing gnome-shell symbolics
+    * adding missing gnome-shell symbolics
+    * unfilling small cameras
+
+  [ Jake ]
+  * Add HiDPI variants to XFWM4 theme
+    * Modify scripts to render HiDPi assets=
+    * Add HiDPI variants to Debian packaging info
+    * Add HiDPI assets
+  * Fix casing typo and new line seperator
+
+  [ KuroeHanako ]
+  * Add HWP Mimetype icon
+    * Added HWP Mimetype icon
+    * Update and rename applications-x-hwp.svg to application-x-hwp.svg
+    * touch-up @kuroehanako provided mimetype:
+    - corrected the baseplate  and rendered the .png(s)
+    - symlinked application-x-hwp to application-vnd.haansoft-hwp.png
+    Co-authored-by: Muqtxdir <muqtadir5555@gmail.com>
+
+  [ Carlo Lobrano ]
+  * icons: fix typo in generate-symlinks.sh example in documentation
+  * icons:generate-symlinks: reword error messages.
+    Specify why the script is not able, or it is going to skip, a symlink
+    command.
+  * icons:generate-symlinks.sh: fix tabs format
+  * icons:generate-symlinks.sh: improve readability and outcome report
+    - spare some indentation level
+    - count the number of symlinks generated. If zero, suggest to repeat
+      with higher verbosity to show any misbehavior
+  * icons:generate-symlinks: refactor common code in linker function.
+    After the last commits in master branch, the only differences left
+    between the process of symlink fullcolor and symbolic icons are the
+    folder in which looking for the files.
+    This commit factorize all the common code into the "linker" function,
+    reformatting also the output logs to help debugging.
+
+  [ Muqtxdir ]
+  * add accent-color names to meson
+  * use elementary-OS palette colors as placeholder colors.
+    - added various colors from elementary's stylesheet as placeholder.
+  * add gtk-3.0  and gtk-4.0 color variants
+  * use deafult's gtk-2.0 for build to pass
+  * update debian/yaru-theme-gtk.install
+  * add color-variant for folders and user-desktop
+  * Added color-variant for filemanager-app
+    - Also improved the 2-shade gradient by making it a 12-shade gradient of
+      black and white for folders and user-desktop.
+  * added remaining accented full-color icons
+
+  [ Marco Trevisan (Treviño) ]
+  * meson: keep component lists in vertical order.
+    It makes it easier to maintain and handle in diffs
+  * Revert "use elementary-OS palette colors as placeholder colors."
+    This reverts commit 0d5afaf3d4a785f16d27d0b4607f83ae96ba73f6.
+  * meson: Import modules once
+  * Revert commit that adds color flawors...
+  * Revert "use deafult's gtk-2.0 for build to pass"
+    This reverts commit 0e5162f5c73b1e6fb915e2968e0e42ec6047f830.
+  * meson: Remove uneeded symlinks and use build system to pick files
+    Make meson to re-use default theme thdefinitions and assets when a theme
+    doesn't provide a specific version for it.
+    As per this we can avoid having multiple symlinks but just ensuring
+    that we always prefer theme-specific files, and in case they don't exist
+    we fallback to the same theme variant or to the default theme.
+    As per this, we can avoid lots of duplication and symlinks that are not
+    easiest to maintain.
+    One note on sassc: it will now include multiple paths from where to pick
+    a specific included resource.
+    Note that if "@include 'fooo'" is used in a sym-linked resource it will
+    try to load that from the parent folder of the sym-link target resides.
+    So, we still need to preserve some symlinks otherwise sassc will just
+    try to load everything from the target folder.
+    In case a file needs to be overridden by a theme, ensure that it's going
+    to be loaded (`strace` is your friend).
+  * gtk/meson: Auto-generate gtk-themes for accent colors.
+    Use some scss magic to create accent color themes without having us to
+    re-create or re-define all the themes.
+    We use an accent-colors scss file as entry point that may define the
+    yaru variables for accent colors and then we load the standard themes.
+    In case such variables are defined, the accents are set.
+  * gnome-shell: Use SCSS to compute the final icon URI.
+    Depending on the theme we want to use we may need to load different
+    assets, so replace the "url" function so that we can dynamically update
+    the returned value depending on the theme.
+  * gtksourceview: Generate theme files just once without overwriting
+  * gnome-shell: Generate colored assets based on accent color.
+    Make some "dummy" assets that can be used to generate svg with replaced
+    colors, and use them for the GNOME Shell theme.
+  * gnome-shell: sync checkradio bg color with other themes
+  * gnome-shell: Do not use sub-folder hacks to install renamed generated files.
+    From an hack to another, but at least it only uses almost only meson and
+    it doesn't require to modify the file system for further variants.
+  * meson: Look for sassc just once.
+    No need to repeat the same operation for all the components
+  * common: Add some sass string utils to a common place, and use it for shell
+  * gnome-shell: Always use variant-named assets in all the variants.
+    Since we now may have multiple variants of the same assets, we need to
+    be sure of what is what and do not assume that the dark theme variant is
+    the default one.
+    So let's wrap our 'url' function override so that it always include the
+    theme variant suffix on the colorable assets, and add it when generating
+    the theme.
+    This will make easier to switch from light to dark as default variant.
+  * gnome-shell: Ensure that the default variant is light (in sync with gtk)
+    GNOME shell will be now capable of switching theme variant, so we can
+    safely use dark/light variants accordingly.
+  * gnome-shell: Add support for generating themes with accent colors
+  * CI: Also run tests during build.
+    Now that we have it...
+  * debian/rules: Disable sessions installation using configure options
+  * meson: Bump dependency on meson 0.58.
+    Keeping compatibility with such old version doesn't make sense, given
+    that newer meson can always installed from pip
+  * render-bitmaps: Support running from other CWD's
+  * icons: Add meson targets to automatically render bitmaps.
+    Instead of going through the manual scripts now it's possible to just
+    use meson to render the icons.
+    A new target called `render-icons` is provided, plus more for each
+    variant (such as `render-icons-default`) that can be run just using
+    `ninja` or `meson compile`.
+    In order to support this, now render-bitmaps supports input/output
+    folders as parameters.
+  * icons: Generate symlinks as part of icon rendering target.
+    We can generate symlinks as well once the rendering is done, to have
+    all in one step
+  * icons: Regenerate symlinks for Yaru default theme
+  * icons: Add support for generating icons with accent colors.
+    We use the accent-colors computed through the GTK logic to re-color our
+    SVG.
+    Add targets to easily generate the icons, so that we don't have to
+    handle the complex generation manually.
+  * icons: Generate index.theme files at configure stage if not any.
+    The update operation is quick enough that there's no need to define an
+    extra step for it during icons rendering
+  * icons: Generate assets for Yaru accent colors.
+    All thanks to ninja -C _build -v render-accented-icons
+  * icons: Generate icons for sage and prussian green variants
+  * gnome-shell: Expose default gdm and shell variants on configure options.
+    And also default on dark variant on gdm, while we use light for the
+    shell.
+
+  [ Lyubomir Popov ]
+  * separate accents colors by theme, update blue accent
+  * updated colours for the light theme
+  * more vivid colours; remove css transformations on accent colours
+  * update color names
+  * add two more greens
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 18 Mar 2022 03:52:55 +0100
+
 yaru-theme (22.04.1) jammy; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
