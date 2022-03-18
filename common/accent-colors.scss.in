@@ -19,7 +19,7 @@
     } @else if $accent_color == 'magenta' {
         $color: #A15AAF;
     } @else if $accent_color == 'red' {
-        $color: #BA4F97;
+        $color: #DA3450;
     } @else {
         @error('No known accent color defined!');
     }
