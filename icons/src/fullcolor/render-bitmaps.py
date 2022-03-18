@@ -206,6 +206,7 @@ def main(args, SRC, DEST):
         def characters(self, chars):
             self.chars += chars.strip()
 
+    rendered_icons = 0
     if not args.svg:
         print("Rendering all SVGs in", SRC)
         if not os.path.exists(DEST):
@@ -216,6 +217,7 @@ def main(args, SRC, DEST):
                 file = os.path.join(SRC, file)
                 handler = ContentHandler(file)
                 xml.sax.parse(open(file), handler)
+                rendered_icons += 1
         print("")
     else:
         svg = args.svg + ".svg"
@@ -225,12 +227,15 @@ def main(args, SRC, DEST):
             print('Rendering SVG "%s" in %s' % (svg, SRC))
             handler = ContentHandler(file, True, filter=args.filter)
             xml.sax.parse(open(file), handler)
+            rendered_icons += 1
         else:
             print(
                 'Could not find SVG "%s" in %s, looking into the next one' % (svg, SRC)
             )
             # icon not in this directory, try the next one
             pass
+
+    return rendered_icons
 
 
 parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
@@ -273,10 +278,15 @@ args = parser.parse_args()
 script_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 source_path = args.source_path if args.source_path else script_path
 dest_path = args.dest_path if args.dest_path else os.path.join(script_path, '../../')
+rendered_icons = 0
 
 for source in SOURCES:
     SRC = os.path.join(source_path, args.variant, source)
     DEST = os.path.abspath(os.path.join(dest_path, "Yaru" if args.variant ==
                                         'default' else "Yaru-" + args.variant))
     if os.path.exists(SRC):
-        main(args, SRC, DEST)
+        rendered_icons += main(args, SRC, DEST)
+
+if rendered_icons == 0:
+    print('No SVG found to render')
+    sys.exit(1)
