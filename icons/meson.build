@@ -36,18 +36,19 @@ foreach flavour: icon_flavors
       '--dest-path', meson.current_source_dir(),
     ]
 
-    if is_accent
-      accent_svgs = files(
-        run_command(
-          'find', meson.current_source_dir() / fullcolor_path / 'accented',
-          '-name', '*.svg',
-        ).stdout().strip().split('\n')
-      )
+    source_svgs = files(
+      run_command(
+        'find',
+        meson.current_source_dir() / fullcolor_path / (is_accent ? 'accented' : flavour),
+        '-name', '*.svg',
+      ).stdout().strip().split('\n')
+    )
 
+    if is_accent
       colors_definitions = gtk_yaru_colors_defs['@0@-gtk-@1@'.format(
         icon_dir, accent_color_gtk_version_reference)]
 
-      foreach accent_svg: accent_svgs
+      foreach accent_svg: source_svgs
         path = '@0@'.format(accent_svg)
         basename = path.split('/')[-1]
         category = path.split('/')[-2]
@@ -60,7 +61,6 @@ foreach flavour: icon_flavors
             colors_definitions,
             '--input-file', '@INPUT@',
             '--output-folder', '@OUTDIR@' / flavour / category,
-            '--variant', flavour,
           ],
           depends: colors_definitions,
         )
@@ -71,6 +71,26 @@ foreach flavour: icon_flavors
         '--source-path', meson.current_build_dir(),
       ]
     endif
+
+    render_flavour_targets = []
+    foreach i: range(source_svgs.length())
+      svg = source_svgs[i]
+      path = '@0@'.format(svg)
+      basename = path.split('/')[-1].substring(0, -4)
+      category = path.split('/')[-2]
+      render_bitmap_target = custom_target('render-icon-' + '-'.join([category, basename, flavour]),
+        input: svg,
+        output: 'rendered-@BASENAME@-' + '-'.join([category, flavour]) + '.svg',
+        command: [
+          render_bitmaps,
+          rendering_args,
+          basename,
+        ],
+        depends: is_accent ? rendering_deps[i] : [],
+      )
+      render_flavour_targets += render_bitmap_target
+      render_targets += render_bitmap_target
+    endforeach
 
     render_bitmaps_command = [
       render_bitmaps,
@@ -83,12 +103,6 @@ foreach flavour: icon_flavors
     )
 
     # Sadly we can't use a run target as dependncy, thus the duplication
-    render_bitmaps_run_target = run_target('render-icons-' + flavour,
-      command: render_bitmaps_command,
-      depends: rendering_deps,
-    )
-    render_targets += render_bitmaps_run_target
-
     generate_symlinks_command = [
       generate_symlinks,
       '--variant', flavour,
@@ -98,17 +112,18 @@ foreach flavour: icon_flavors
     )
     symlink_targets += generate_symlinks_target
 
-    render_and_symlinks_target = run_target('render+symlink-' + flavour,
+    render_and_symlink_flavour = run_target('render+symlink-' + flavour,
       command: generate_symlinks_command,
-      depends: render_bitmaps_target,
+      depends: render_flavour_targets,
     )
-    render_and_symlink_targets += render_and_symlinks_target
+    render_and_symlink_targets += render_and_symlink_flavour
 
-    alias_target('render+symlink-icons-' + flavour, render_and_symlinks_target)
+    alias_target('render-icons-' + flavour, render_flavour_targets)
+    alias_target('render+symlink-icons-' + flavour, render_and_symlink_flavour)
 
     if is_accent
-      render_accented_targets += render_bitmaps_target
-      render_and_symlink_accented_targets += render_and_symlinks_target
+      render_accented_targets += render_flavour_targets
+      render_and_symlink_accented_targets += render_and_symlink_flavour
 
       if not fs.is_dir(icon_dir)
         warning('@0@ does not exists, ensure you generated it with `ninja -C @1@ render-icons-@2@,`'.format(
@@ -116,6 +131,9 @@ foreach flavour: icon_flavors
         continue
       endif
     endif
+
+    # The part above this line is meant to only contain "target definition"
+    # not to install or generate things. Put them below!
 
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
@@ -182,6 +200,7 @@ alias_target('render+symlink-icons', render_and_symlink_targets)
 alias_target('symlink-icons', symlink_targets)
 
 if render_accented_targets.length() > 0
+  alias_target('render-accented-icons', render_and_symlink_accented_targets)
   alias_target('render-icons-accented', render_accented_targets)
   alias_target('render+symlink-icons-accented', render_and_symlink_accented_targets)
 endif
