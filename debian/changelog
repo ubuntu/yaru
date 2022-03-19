@@ -1,3 +1,638 @@
+yaru-theme (22.04.2) jammy; urgency=medium
+
+  [ Paul Kepinski ]
+  * Generate missing mate symlinks
+  * Fix Yaru-mate-dark symlinks
+  * Fix dialog border-radius
+  * Add icon theme symbolic variant support
+    * Move default symbolics to subfolder
+    * Adapt render bash script to support variants
+  * Add start-here-symbolic mate icon
+  * Move dash running dot a bit down
+  * Fix apps_label color in light theme
+  * Fix keyboard in light and dark theme
+  * Fix foo-scroll-area visual glitch
+  * Fix invisible caret in caja
+  * Fix OSD light buttons
+  * Fix light dash separator
+  * Fix search entry look
+  * Add missing gnome-shell app icons (fullcolor and symbolic)
+  * Fix close button hover bg
+  * Fix slider in light theme
+  * Fixe buttons look
+  * Fix calendar insensitive label
+  * Fix popovers menu item states
+  * Sync Gnome Shell with upstream
+  * Fix search entry alignement
+  * Fix focused unlock-dialog entry
+  * Sync Gnome Shell with upstream
+  * Sync icon theme with upstream
+  * Cinnamon: fix panel inset box-shadow
+  * Cinnamon add thumbnails
+  * Style login dialog entry unfocused state
+  * Fix page navigation arrow
+  * Fix notification look
+    * Fix notification look
+    * Fix missing border
+  * Add support for icon theme variants symbolic symlinks
+  * Softer app folder background
+  * Fix app folder edit button
+  * Update Gtk3 thumbnails
+    Update Gtk3 thumbnails (images provided by @Initu-Castilhos)
+  * Add missing explore2 icon
+  * Fix looking glass entry look
+  * Fix dock item border-radius
+  * Gs dash label border and app-dot realign
+    * Add border to dash label
+    * Align app-running-dot with dock (LP: #1965003)
+  * Add ding styling
+
+  [ Muqtadir ]
+  * refine gtk4 radiobutton assets
+  * update default and dark gtksourceview styles
+  * update upstream nautilus-css for gnome-42
+    * update upstream nautilus-css for gnome-42
+    * update from upstream
+    - copied upstream css to the top to make it easier next time to keep track
+    - renamed all css vars to scss vars
+    - commented out what we don't need or does not fit with our styling
+    * Invert transparentize functions
+    * Move all nautius css styling below .nautilus-window
+    Co-authored-by: Paul Kepinski <paul.kepinski@orange.fr>
+    Co-authored-by: Feichtmeier <frederik.feichtmeier@gmail.com>
+  * added symlink to timeshift
+
+  [ ubuntujaggers ]
+  * adding missing gnome-shell symbolics
+    * adding missing gnome-shell symbolics
+    * unfilling small cameras
+
+  [ Jake ]
+  * Add HiDPI variants to XFWM4 theme
+    * Modify scripts to render HiDPi assets=
+    * Add HiDPI variants to Debian packaging info
+    * Add HiDPI assets
+  * Fix casing typo and new line seperator
+
+  [ KuroeHanako ]
+  * Add HWP Mimetype icon
+    * Added HWP Mimetype icon
+    * Update and rename applications-x-hwp.svg to application-x-hwp.svg
+    * touch-up @kuroehanako provided mimetype:
+    - corrected the baseplate  and rendered the .png(s)
+    - symlinked application-x-hwp to application-vnd.haansoft-hwp.png
+    Co-authored-by: Muqtxdir <muqtadir5555@gmail.com>
+
+  [ Carlo Lobrano ]
+  * icons: fix typo in generate-symlinks.sh example in documentation
+  * icons:generate-symlinks: reword error messages.
+    Specify why the script is not able, or it is going to skip, a symlink
+    command.
+  * icons:generate-symlinks.sh: fix tabs format
+  * icons:generate-symlinks.sh: improve readability and outcome report
+    - spare some indentation level
+    - count the number of symlinks generated. If zero, suggest to repeat
+      with higher verbosity to show any misbehavior
+  * icons:generate-symlinks: refactor common code in linker function.
+    After the last commits in master branch, the only differences left
+    between the process of symlink fullcolor and symbolic icons are the
+    folder in which looking for the files.
+    This commit factorize all the common code into the "linker" function,
+    reformatting also the output logs to help debugging.
+
+  [ Muqtxdir ]
+  * add accent-color names to meson
+  * use elementary-OS palette colors as placeholder colors.
+    - added various colors from elementary's stylesheet as placeholder.
+  * add gtk-3.0  and gtk-4.0 color variants
+  * use deafult's gtk-2.0 for build to pass
+  * update debian/yaru-theme-gtk.install
+  * add color-variant for folders and user-desktop
+  * Added color-variant for filemanager-app
+    - Also improved the 2-shade gradient by making it a 12-shade gradient of
+      black and white for folders and user-desktop.
+  * added remaining accented full-color icons
+
+  [ Marco Trevisan (Treviño) ]
+  * meson: keep component lists in vertical order.
+    It makes it easier to maintain and handle in diffs
+  * Revert "use elementary-OS palette colors as placeholder colors."
+    This reverts commit 0d5afaf3d4a785f16d27d0b4607f83ae96ba73f6.
+  * meson: Import modules once
+  * Revert commit that adds color flawors...
+  * Revert "use deafult's gtk-2.0 for build to pass"
+    This reverts commit 0e5162f5c73b1e6fb915e2968e0e42ec6047f830.
+  * meson: Remove uneeded symlinks and use build system to pick files
+    Make meson to re-use default theme thdefinitions and assets when a theme
+    doesn't provide a specific version for it.
+    As per this we can avoid having multiple symlinks but just ensuring
+    that we always prefer theme-specific files, and in case they don't exist
+    we fallback to the same theme variant or to the default theme.
+    As per this, we can avoid lots of duplication and symlinks that are not
+    easiest to maintain.
+    One note on sassc: it will now include multiple paths from where to pick
+    a specific included resource.
+    Note that if "@include 'fooo'" is used in a sym-linked resource it will
+    try to load that from the parent folder of the sym-link target resides.
+    So, we still need to preserve some symlinks otherwise sassc will just
+    try to load everything from the target folder.
+    In case a file needs to be overridden by a theme, ensure that it's going
+    to be loaded (`strace` is your friend).
+  * gtk/meson: Auto-generate gtk-themes for accent colors.
+    Use some scss magic to create accent color themes without having us to
+    re-create or re-define all the themes.
+    We use an accent-colors scss file as entry point that may define the
+    yaru variables for accent colors and then we load the standard themes.
+    In case such variables are defined, the accents are set.
+  * gnome-shell: Use SCSS to compute the final icon URI.
+    Depending on the theme we want to use we may need to load different
+    assets, so replace the "url" function so that we can dynamically update
+    the returned value depending on the theme.
+  * gtksourceview: Generate theme files just once without overwriting
+  * gnome-shell: Generate colored assets based on accent color.
+    Make some "dummy" assets that can be used to generate svg with replaced
+    colors, and use them for the GNOME Shell theme.
+  * gnome-shell: sync checkradio bg color with other themes
+  * gnome-shell: Do not use sub-folder hacks to install renamed generated files.
+    From an hack to another, but at least it only uses almost only meson and
+    it doesn't require to modify the file system for further variants.
+  * meson: Look for sassc just once.
+    No need to repeat the same operation for all the components
+  * common: Add some sass string utils to a common place, and use it for shell
+  * gnome-shell: Always use variant-named assets in all the variants.
+    Since we now may have multiple variants of the same assets, we need to
+    be sure of what is what and do not assume that the dark theme variant is
+    the default one.
+    So let's wrap our 'url' function override so that it always include the
+    theme variant suffix on the colorable assets, and add it when generating
+    the theme.
+    This will make easier to switch from light to dark as default variant.
+  * gnome-shell: Ensure that the default variant is light (in sync with gtk)
+    GNOME shell will be now capable of switching theme variant, so we can
+    safely use dark/light variants accordingly.
+  * gnome-shell: Add support for generating themes with accent colors
+  * CI: Also run tests during build.
+    Now that we have it...
+  * debian/rules: Disable sessions installation using configure options
+  * meson: Bump dependency on meson 0.58.
+    Keeping compatibility with such old version doesn't make sense, given
+    that newer meson can always installed from pip
+  * render-bitmaps: Support running from other CWD's
+  * icons: Add meson targets to automatically render bitmaps.
+    Instead of going through the manual scripts now it's possible to just
+    use meson to render the icons.
+    A new target called `render-icons` is provided, plus more for each
+    variant (such as `render-icons-default`) that can be run just using
+    `ninja` or `meson compile`.
+    In order to support this, now render-bitmaps supports input/output
+    folders as parameters.
+  * icons: Generate symlinks as part of icon rendering target.
+    We can generate symlinks as well once the rendering is done, to have
+    all in one step
+  * icons: Regenerate symlinks for Yaru default theme
+  * icons: Add support for generating icons with accent colors.
+    We use the accent-colors computed through the GTK logic to re-color our
+    SVG.
+    Add targets to easily generate the icons, so that we don't have to
+    handle the complex generation manually.
+  * icons: Generate index.theme files at configure stage if not any.
+    The update operation is quick enough that there's no need to define an
+    extra step for it during icons rendering
+  * icons: Generate assets for Yaru accent colors.
+    All thanks to ninja -C _build -v render-accented-icons
+  * icons: Generate icons for sage and prussian green variants
+  * gnome-shell: Expose default gdm and shell variants on configure options.
+    And also default on dark variant on gdm, while we use light for the
+    shell.
+
+  [ Lyubomir Popov ]
+  * separate accents colors by theme, update blue accent
+  * updated colours for the light theme
+  * more vivid colours; remove css transformations on accent colours
+  * update color names
+  * add two more greens
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 18 Mar 2022 04:04:13 +0100
+
+yaru-theme (22.04.1) jammy; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * New upstream release
+  * open-pr-on-changes: Include gnome-shell icons
+  * GNOME Shell 42 theme sync
+  * dock: Update CSS to support dash-to-dock 71+, and move most styling here
+    (LP: #1942702)
+  * debian/control: Set Breaks on older GNOME Shell versions
+  * gnome-shell: Add a note on recent Yaru changes
+
+  [ Paul Kepinski ]
+  * Add Cinnamon theme upstream fetch
+  * Add GTK mate and mate-dark variants into master
+  * Add application-x-sms-rom fullcolor icon
+  * Add border on OSD panels
+  * Add cinnamon variants
+  * Add dock styles to GS hc variant
+  * Add folder-visting-symbolic icon
+  * Add gtksourceview mate and mate-dark variants
+  * Add icon theme variant support
+  * Add metacity mate and mate-dark variants
+  * Add missing Evince icons
+  * Add missing GTK3 render-assets script
+  * Add missing characters icons
+  * Add missing classes on power-profile-*-symbolic icons
+  * Add missing eog icon
+  * Add missing gcc symbolic icons
+  * Add missing todo symbolics icons
+  * Add missing yelp icons
+  * Add new GS screen-privacy-icons
+  * Add new upstream symbolics
+  * Add new upstream vpn symbolics
+  * Add org.gnome.Usage-symbolic symlink symbolic icon
+  * Add preferences-desktop-keyboard icon
+  * Add review-symbolic icon
+  * Add selection-mode-symbolic icon
+  * Add some symlinks
+  * Add support for GS42 - upstream sync
+  * Add system-* action fullcolor icons
+  * Doc update
+  * Drop GDM purple background
+  * Drop depracated vars
+  * Drop grey scale assets
+  * Drop grey selected rows
+  * Drop outdated communitheme-snap files
+  * Drop treeview grey selected row tweak
+  * Fix GH actions branches
+  * Fix Gnome Shell assets
+  * Fix Gtk3 headerbar radius
+  * Fix Gtk4 mate dark assets symlink
+  * Fix Yaru-dark gtk2 assets
+  * Fix applications-system icons
+  * Fix broken duplicated config-users icon symlink
+  * Fix evince branch name
+  * Fix find-location-symbolic crooked path
+  * Fix index.theme flavour overwriting
+  * Fix mate-dark gtk4 variant
+  * Fix meson warning
+  * Fix metacity mate variant
+  * Fix notifications states look
+  * Fix padlock-open-symbolic icon
+  * Fix render assets script
+  * Fix slider backdrop look
+  * Fix transparent guake notebook headerbar
+  * Force meson options to true in build CI
+  * Get some icons from mate branch
+  * Gnome shell sync slide handle
+  * Gnome shell upstream sync 3328
+  * Gtk3 fix treeview progressbar
+  * Gtk4 fix radius
+  * Include Mate apps styling in master
+  * Increase windowcontrols button size
+  * Make MATE panel dark
+  * Mimic Gtk3 switch with gtk4 ones
+  * Optimize assets
+  * Provide :checked state for buttons
+  * Remove Cinnamon orange close assets
+  * Remove adaptive margins for preferences
+  * Remove shadow on normal buttons
+  * Rename Gtk-3.20 into Gtk-3.0
+  * Rename Suru to Yaru
+  * Render Gtk2 assets
+  * Render Gtk2 dark assets
+  * Render Gtk3 and Gtk4 assets
+  * Render assets-external
+  * Replace aubergine by orange in some icons
+  * Replace ls by find
+  * Revert close button to upstream look
+  * Revert last commit
+  * Revert upstream border-radius
+  * Rework .window-caption
+  * Set mate flavour false by default
+  * Sort symbolic action listing
+  * Split cinnamon shell theme from variants
+  * Symlink ups to uninterruptible-power-supply (symbolic)
+  * Sync GS with upstream
+  * Sync Gnome Shell with upstream
+  * Sync Gtk3 + Libhandy + GS with Gtk4 radii
+  * Sync Gtk3 light headerbar bg with Gtk4
+  * Sync Gtk3 with upstream
+  * Sync Libadwaita with upstream
+  * Sync Mate variants assets
+  * Sync _defaults with upstream
+  * Sync check assets with upstream
+  * Sync filemanager-app icon
+  * Sync gtk4 with upstream
+  * Sync icon theme with upstream
+  * Sync image-missing-symbolic with upstream
+  * Sync symbolic icons with upstream
+  * Update CONTRIBUTING screenshots
+  * Update README
+  * Use $button_radius for popover
+  * Use $success instead of $suggested
+  * Use exported accent for red close button
+
+  [ Muqtadir ]
+  * add pre-installed apps to list
+  * sync symbolics for #3057 #3058 #3059
+  * add symlink app-remove-symbolic.svg
+  * fix toggles for hc
+  * added camera symbolics
+  * missing-symbolics part2: multimedia
+  * missing-symbolics part2: generic-symbols
+  * update disabled-symbolics
+  * fix screen-privacy-disabled-symbolic.svg
+  * add missing-icons-symbolics-part2: time
+  * add gnome-shell-start
+  * improve OSK-symbolics
+  * refine battery-symbolics:
+  * fix classes in legacy-icons
+  * phosh: auth_sim_icon
+  * phosh symbolics + missing symbolics
+  * symlink org.gnome.Shell.Extensions-symbolic.svg
+  * debian/changelog:
+  * add 22x22/categories to yaru-theme-icon.install
+  * update session overrides
+  * update changelog
+  * sync GNOME-Shell resources
+  * issue no #3221 add instructions for debian files
+  * mate: add panel-icons
+  * icons: modify meson and deb files
+  * remove orange in window_controls assets
+  * cinnamon: make it true in rules and refine assets
+  * add symlink for model-obj
+  * separate unity from gtk
+
+  [ benni3-1415 ]
+  * Revert cursor mimetype
+
+  [ ubuntujaggers ]
+  * Proposed change to application-x-executable icons
+  * change symbolic for mail app
+  * trying small folders with icons
+  * adding reworked software-properties icon
+
+  [ Feichtmeier ]
+  * Remove aubergine from sliders, switches and checks
+  * Adapt gtk4 sliders and close button
+  * remove useless backdrop styling
+  * remove secondary accent bg color, rename primary
+  * update gtk2 and gtk3 assets
+  * Revert "update gtk2 and gtk3 assets"
+  * unify all titlebuttons to a soft gray
+
+  [ Joshua Peisach ]
+  * [WIP, needs testing] Cinnamon theme support
+
+  [ Muqtxdir ]
+  * remove aubergine from gnome-shell switches and checkboxes
+
+  [ Frederik Feichtmeier ]
+  * Nautilus: keep gray rows until gtk4 port
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 24 Feb 2022 21:59:07 +0100
+
+yaru-theme (21.10.2) impish; urgency=medium
+
+  [ Joshua Peisach ]
+  * Add desktop-logoff sound.
+    When the sounds were added, the logoff one wasn't. @madsrh says
+    this was because it'd be better to just log off immediately, and not
+    wait for a sound to play.
+    Session managers can handle this stuff, and play the sound
+    while logging off in the background. But if it doesn't work, the
+    sound can always be disabled.
+  * Fix desktop-logoff sound encoding (#2987)
+    Use Ogg Vorbis. Was previously Ogg FLAC.
+    Closes #2986
+
+  [ Paul Kepinski ]
+  * Fix dock and panel look (#2948)
+    - Make panel background static into the overview ;
+    - Use a 2% darken `jet` as panel background ;
+    - Define dock background as transparent (will render half dark transparent,
+      we need to understand why).
+  * Symlink _colors to upstream and add overwrite file (#2949)
+    * Symlink `_colors` to upstream ;
+    * Create a `_colors_yaru` file with only Yaru colors overwrite.
+  * Revert to lighten dash background (#2950)
+  * Add symlinked rtl variants for show-sidebar (#2961)
+  * Improve selected row look (#2955)
+    Use soft grey (based on transparent black/white) bg on selected/hover row
+  * Fix search entry margin-top (#2968)
+  * Fix selected row hover background (#2978)
+  * Fix G-software unvisible close button (#2996)
+  * Issue2980/fix software close button (#2997)
+    * Fix unwanted side effects
+  * Fix missing red button into some apps (#2998)
+  * Add crop-symbolic icon (#3000)
+  * Fix branch names (#3003)
+  * Sync GS with upstream (#3004)
+  * Remove old color vars (#3005)
+  * Update create-new-variant.md (#3011)
+    Remove old light GTK variant from documentation
+  * Add border and focus ring on GDM buttons (#3013)
+    * Add border and focus ring on GDM buttons
+    * Fix insensitive state
+    * Sync insensitive button state with entries
+  * Make cursor addition black (#3019)
+    * Make cursor addition black
+    * Add white outline
+  * Fix backdrop insensitive selected text color (#3027)
+  * Fix deprecated :insensitive pseudo-class (#3029)
+
+  [ ubuntujaggers ]
+  * centring pictogram on sound recorder icon (#2956)
+  * Proposed tweak for Wine Tricks icon (#2957)
+    * proposed altered design for winetricks
+    * making rainbow more saturated
+  * adding header bar to app windows in session-properties icon (#2959)
+  * Suggestion for new characters app icon (#2963)
+    * suggestion for new characters map icon
+    * darkening grey 'o'
+  * Suggested new icon for aisleriot (#2966)
+    * suggested new icon for aisleriot
+    * adding characters to largest sizes
+    * darkening borders
+  * Cabinet drawer-based file manager icon (#2965)
+    * drawer-based file manager icon
+    * tweak to 256px
+    * trying a square design
+    * brighter front of drawer
+  * correcting synaptic edging (#2975)
+  * making greys uniform on chars app icon (#2976)
+  * Adding new legacy full colour actions with proper template (#2673)
+    * adding new legacy full colour actions with proper template
+    * document-open full colour icon
+    * colour icon for document-open-recent
+    * full colour icon for document-print
+    * full colour document-print-preview
+    * fixing full colour document-print-preview
+    * adding full colour document-properties
+    * adding full colour mail-send
+    * adding full colour mail-message-send
+    * full colour cut, copy and paste actions, plus lots of tweaks
+    * full colour edit-find and edit-find-replace
+    * various full colour icons for sending e-mails
+    * full-colour junk mail icons, and redesigning reply icons to match
+      symbolics
+    * various tweaks to full colour actions
+    * fixing document-print-preview
+    * adding full colour mail-inbox, mail-outbox and numerous tweaks
+    * Add full-color document-page-setup icon
+    * Remove text line pictogram from document-page-setup
+    * Add full-color mail-mark-important icon
+    * Use big arrow for mail-outbox and mail-inbox icons
+    * Add fullcolor mail-unread and mail-read icons
+    * Symlink mail-mark-(un)read to mail-(un)read
+    * Revert in/outbox arrow changes
+    * Use dot instead of star for mail-unread (16px)
+    * removing broken symlink (mail-spam-symbolic) and also fixing error on
+      edit-find-replace
+    * making some larger size actions non-flat
+    * making larger sizes of document-open non flat
+    * fixing document-open
+    * adding non-flat details to larger sizes of mail-inbox and mail-outbox
+    * document-open
+    * making mail-mark-junk and mail-mark-notjunk more intuitive
+    * improving copy and paste icons at larger sizes
+    * pushing WIP to remote
+    * improved cut, copy, paste
+    * proper versions of edit-find and edit-find-replace
+    * work in progress for document-save
+    * adding more legacy colour actions
+    * adding full colour document-send
+    * adding full colour edit-select-all and symlinks
+    * adding full colour folder-new
+    * adding full colour help actions
+    * adding full colour indent and justify icons
+    * removing old document-new icon and adding symlinks for the new one
+    * adding go-first and go-last
+    * full colour format-text-bold
+    * full colour format-text-italic
+    * full colour format-text-underline
+    * full colour format-text-strikethrough
+    * adding various magnifying glass actions and symlinks
+
+  [ Muqtadir ]
+  * Update unity theme (#2953)
+    * Added separate unity assets for default and dark
+    * Sync default unity with Yaru
+    * Update index.theme
+    Modified /gtk/src/meson.build to show correct ThemeName for IconTheme and
+    CursorTheme
+    * added not-csd.scss from @ItzSwirlz cinnamon-PR
+    * Added unity-panel icons
+    - Created a separate unity-panel under /icons
+    - Modified meson.build to install unity-panel icons only when
+      ubuntu-unity=true
+    * Added missing categories-icons and symlinks
+    * Modified debian files and unity-panel icons
+    - Split icons into yaru-theme-icon.install and yaru-theme-unity.install
+      under debian
+    - Changed all arbitrary colors to white undet unity-panel icons
+  * add text-x-c++hdr mimetype (#2969)
+  * remove light from metacity (#2970)
+  * added synaptics-package manager-icon (#2972)
+  * update script to add more contexts (#2982)
+  * misc. changes to gnome-shell assets (#2981)
+    * Made the switches similiar to gtk-4 switches
+    - aligned gnome-shell/src/toggle-*.svg(s) to gtk4 toggles
+    - adjusted dimensions of toggles under
+      gnome-shell-sass/widgets/_switches.scss
+    * changed barlevel-border-width back to 1px
+    * removed files that are not part of upstream anymore
+    * remove static-files not present from meson
+    * Revert "changed barlevel-border-width back to 1px"
+    This reverts commit 4e73e5c8ae741853f94900b3a3097e2c8231adfe.
+    * yarufy the OSK svgs
+    * reduce SVG sizes under src
+    * removed transparent rect from checkboxes
+  * added symlink for multitasking-panel (#2990)
+  * Update debian/yaru-theme-icon.install (#2988)
+    - Added and removed few directories introduced in #2673
+  * change edit-clear-symbolic (#2989)
+    * change edit-clear-symbolic
+    * implement @Jupi007 and @madsrh suggestion: make less-pointed tip(45)
+  * add icons required by org.gnome.Software (#2992)
+    * added org.gnome.Software symbolics
+    * render symbolics under emblems
+    * add remainingsymbolic-icons
+    * refreshed org.gnome.Software fullcolor and symbolic
+    * completed fullcolor org.gnome.Software.* icons
+    * added few system-component icons
+    * added remaining system-addons fullcolor
+    * change adaptive-symbolic to be consistent with devices/phone-symbolic
+  * kde/plasma cursor support (#2958)
+    * symlink missing-cursors
+    * symlink cursors2
+    * added remaining symlinks
+    * added remaining symlinks
+    * Re-organized cursors directory to not use symlinks
+  * support yaru for xfce (#2971)
+    * add xfwm4 for default
+    * add button-padding
+    * Re-organize xfwm4 files
+    - Moved xfwm4 outside gtk directory
+    - Move all xfwm4 SVG-files into assets.svg
+    - Added assets.txt and render-xfwm4-assets.sh
+    - Added xfwm4 dark-assets
+    * Add xfmw4 to meson and render dark_assets
+    - Added xfwm4 option to meson.build and meson_options.txt
+    - Added meson files under xfwm4 directory
+    - Rendered .pngs for xfwm4-dark assets
+    - Added themerc for default and dark
+    * fixed title-active in xfwm4-dark
+    * added xfwm4 to debian/yaru-theme-gtk.install
+    * Convert assests.txt into symlink and darken headerbar-color
+    * added _xfce.scss
+    * make xfwm4 false by default
+    * made assets 35px in height based on @Jupi007 suggestion
+    * render *-inactive correctly
+    * render default *-inactive correctly
+    * render dark *-inactive correctly
+    * Don't use real path for inkscape and optipng
+    So allow usage of snap version
+    * Make Xfce assets 36px height and pixel perfect
+    * Make window controls 36px width
+    * Fix hide-inactive height
+    * made little touch to dark/hide-inactive and dark/hide-pressed to sharpen
+  * add missing action symbolics for shotwell (#3006)
+    * add few shotwell-symbolics
+    * add remaining symbolic icons and symlink system-run to document-properties
+    * fix typo in icon-filenames
+  * missing symbolic-icons for libhandy and libadwaita (#3024)
+    * add actions and status icons for libhandy and libadwaita
+    * Add Github action for handy and adwaita symbolics
+    * New upstream icons list for Libadwaita symbolics (#3025)
+    * New upstream icons list for Libhandy symbolics (#3026)
+    * Link expander-arrow to pan icon
+
+  [ benni3-1415 ]
+  * Fix cursor inconsistencies (#2944)
+    * set _additions_ line-join to miter
+    * make cursors pixel perfect
+    * make the default cursor symmetrical
+    * align all gradients globally
+    * optimize hotspot positions according to theory 2
+    * add color-picker cursor for KDE
+    * add wayland cursor and update x.org cursor
+    * build cursors
+    * change title to "Yaru Cursors"
+    * build new cursors
+
+  [ Cameron ]
+  * Fix code block formatting (#2993)
+    Fix code block formatting so markdown parser shows each section properly
+
+  [ Marco Trevisan (Treviño) ]
+  * debian/gbp.conf: Use ubuntu/impish branch
+  * Revert "Cabinet drawer-based file manager icon (#2965)"
+    We're past UI Freeze and this icon is showing in all the screenshots, so
+    it may be a bit late for it.
+    Better to wait next cycle.
+  * gnome-shell: Add a note on recent Yaru changes
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Sat, 25 Sep 2021 14:45:02 +0200
+
 yaru-theme (21.10.1) impish; urgency=medium
 
   [ Stuart Hayhurst ]

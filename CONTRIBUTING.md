@@ -7,7 +7,6 @@ Yaru consists of one project with 4 distinct parts.
 - `sound` contains all sound themes related information, combining both [WoodenBeaver](https://github.com/madsrh/WoodenBeaver) and [Touch-Remix](https://github.com/madsrh/TouchRemix).
 - `icon-theme` contains all the icons, derives from the [Suru icon](https://snwh.org/suru) theme.
 
-
 ## Build and install themes from source
 
 This installation method is to try out the theme while developing it. If you're not a developer, follow the instructions in the [README.md](./README.md).
@@ -110,6 +109,36 @@ adwaita-1-demo
 ```
 
 **Note:** regardless of your current gtk theme, `adwaita-1-demo` use **Adwaita** by default. You must switch to **Yaru** using the gtk inspector.
+
+## Build .deb files from source
+- Install `debian-packaging-tools` packages:
+```bash
+sudo apt install debhelper dh-migrations libgtk-3-dev git meson sassc
+```
+
+
+- Download this repository from github:
+```bash
+git clone https://github.com/ubuntu/yaru.git
+```
+
+
+- Building binary `debian-packages` for testing:
+```bash
+#Inside yaru directory
+cd yaru
+#Building binary debian files
+dpkg-buildpackage --build=binary -uc -us -tc
+```
+
+
+- Installing `deb(s)`:
+```bash
+#Leaving yaru directory
+cd ..
+#Installing all generated .deb(s)
+sudo dpkg -i yaru-theme-*.deb
+```
 
 ### More granular changes
 

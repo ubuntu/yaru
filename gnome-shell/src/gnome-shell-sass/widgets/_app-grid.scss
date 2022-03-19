@@ -4,45 +4,39 @@ $app_icon_size: 96px;
 
 // app icons
 .icon-grid {
-  row-spacing: $base_spacing * 2;
-  column-spacing: $base_spacing * 2;
-  max-row-spacing: $base_spacing * 12;
-  max-column-spacing: $base_spacing * 12;
+  row-spacing: $base_padding * 2;
+  column-spacing: $base_padding * 2;
+  max-row-spacing: $base_padding * 7;
+  max-column-spacing: $base_padding * 7;
   page-padding-top: $base_padding * 4;
   page-padding-bottom: $base_padding * 4;
-  page-padding-left: $base_padding * 2;
-  page-padding-right: $base_padding * 2;
+  page-padding-left: $base_padding * 3;
+  page-padding-right: $base_padding * 3;
 }
 
 /* App Icons */
 
-$app_grid_fg_color: #fff;
-
 // Icon tiles in the app grid
-.app-well-app,
-%app-well-app {
-  @include overview-icon($app_grid_fg_color);
+.app-well-app {
+  @include overview_icon($osd_fg_color);
 
+  .overview-icon { padding: $base_padding*2;}
   .overview-icon.overview-icon-with-label {
-    padding: 10px 8px 5px 8px;
-
     > StBoxLayout {
-      spacing: $base_spacing;
+      spacing: $base_padding;
     }
   }
 }
 
-/* App Folders */
+// app folders
 .app-well-app.app-folder {
-  background-color: $dash_background_color;
-  border-radius: $base_border_radius; // same as %icon_tile - Yaru: tile radius is too big for our theme
+  @include overview_icon($osd_fg_color, $flat: false);
 }
 
 // expanded folder
-.app-folder-dialog { //style like the dash
-  border-radius: $dash_border_radius;  // Yaru: use same borser-radius as dash
+.app-folder-dialog {
+  border-radius: $modal_radius*2;
   background-color: $dash_background_color;
-  padding: 12px 0px 12px 0px;
   border: 1px solid $borders_color_dark; // Yaru: add border
 
   & .folder-name-container {
@@ -51,8 +45,7 @@ $app_grid_fg_color: #fff;
 
     & .folder-name-label,
     & .folder-name-entry {
-      font-size: 18pt;
-      font-weight: 800;
+      @extend %title_1;
       color: $osd_fg_color; // Yaru change: needed for light theme, otherwise invisible text
     }
     // Yaru change: needed for the light theme, otherwise dark text in orange selection, can't set selected-color here
@@ -62,20 +55,19 @@ $app_grid_fg_color: #fff;
     & .folder-name-label { padding: 5px 7px; color: $osd_fg_color; }
 
     & .edit-folder-button {
-      @extend %button;
-
+      @extend %button_dark; // Yaru change: fix for light theme
       padding: 0;
       width: 36px;
       height: 36px;
-      border-radius: 18px;
+      border-radius: 99px;
 
-      & > StIcon { icon-size: 16px }
+      & > StIcon { icon-size: $base_icon_size }
     }
   }
 
   & .icon-grid {
-    row-spacing: $base_spacing * 2;
-    column-spacing: $base_spacing * 5;
+    row-spacing: $base_padding * 2;
+    column-spacing: $base_padding * 5;
     page-padding-top: 0;
     page-padding-bottom: 0;
     page-padding-left: 0;
@@ -86,10 +78,11 @@ $app_grid_fg_color: #fff;
     margin-bottom: 18px;
   }
 }
+
 .app-folder-dialog-container {
-  padding: 12px;
-  width: 620px;
-  height: 620px;
+  padding: $base_padding*2;
+  width: 640px;
+  height: 640px;
 }
 
 // Running app indicator (also shown in dash)
@@ -97,21 +90,16 @@ $app_grid_fg_color: #fff;
   height: 5px;
   width: 5px;
   border-radius:5px;
+  margin-bottom: 8px;
   background-color: $selected_bg_color; // Yaru: we want an orange dot
-  margin-bottom: 1px;
 }
 
 // Rename popup for app folders
 .rename-folder-popup {
   .rename-folder-popup-item {
-    spacing: $base_spacing;
+    spacing: $base_padding;
     &:ltr, &:rtl { padding: 0 $base_padding * 2; }
   }
-}
-
-// right-click app menu
-.app-menu {
-  max-width: 27.25em;
 }
 
 // App Grid pagination indicators
@@ -150,7 +138,7 @@ $app_grid_fg_color: #fff;
     background-gradient-start: rgba(255, 255, 255, 0.05);
     background-gradient-end: transparent;
     background-gradient-direction: horizontal;
-    border-radius: $dash_border_radius 0px 0px $dash_border_radius; // Yaru: use same borser-radius as dash
+    border-radius: $modal_radius*1.5 0px 0px $modal_radius*1.5;
   }
 
   &.previous:ltr,
@@ -158,7 +146,7 @@ $app_grid_fg_color: #fff;
     background-gradient-start: transparent;
     background-gradient-end: rgba(255, 255, 255, 0.05);
     background-gradient-direction: horizontal;
-    border-radius: 0px $dash_border_radius $dash_border_radius 0px; // Yaru: use same borser-radius as dash
+    border-radius: 0px $modal_radius*1.5 $modal_radius*1.5 0px;
   }
 }
 
@@ -166,4 +154,5 @@ $app_grid_fg_color: #fff;
   margin: 6px;
   width: 24px;
   height: 24px;
+  color: $osd_fg_color; // Yaru change: light theme support
 }

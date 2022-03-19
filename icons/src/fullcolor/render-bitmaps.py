@@ -37,7 +37,6 @@ SOURCES = (
     "status",
     "wip",
 )
-VARIANTS = ['default', 'mate']
 
 # DPI multipliers to render at
 DPIS = [1, 2]
@@ -207,6 +206,7 @@ def main(args, SRC, DEST):
         def characters(self, chars):
             self.chars += chars.strip()
 
+    rendered_icons = 0
     if not args.svg:
         print("Rendering all SVGs in", SRC)
         if not os.path.exists(DEST):
@@ -217,6 +217,7 @@ def main(args, SRC, DEST):
                 file = os.path.join(SRC, file)
                 handler = ContentHandler(file)
                 xml.sax.parse(open(file), handler)
+                rendered_icons += 1
         print("")
     else:
         svg = args.svg + ".svg"
@@ -226,6 +227,7 @@ def main(args, SRC, DEST):
             print('Rendering SVG "%s" in %s' % (svg, SRC))
             handler = ContentHandler(file, True, filter=args.filter)
             xml.sax.parse(open(file), handler)
+            rendered_icons += 1
         else:
             print(
                 'Could not find SVG "%s" in %s, looking into the next one' % (svg, SRC)
@@ -233,15 +235,34 @@ def main(args, SRC, DEST):
             # icon not in this directory, try the next one
             pass
 
+    return rendered_icons
+
 
 parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
 
 parser.add_argument(
+    '--source-path',
+    type=str,
+    default=None,
+    help='Path where to look for source svg files. Script path by default'
+)
+parser.add_argument(
+    '--dest-path',
+    type=str,
+    default=None,
+    help='Path where to save generated svg files. Script path by default'
+)
+parser.add_argument(
     '--variant',
     type=str,
-    choices=VARIANTS,
     default='default',
     help='Variant name to render. If not given, render the default variant'
+)
+parser.add_argument(
+    '--categories',
+    type=str,
+    default=None,
+    help='Only look for icons in a specified categories'
 )
 parser.add_argument(
     "svg",
@@ -260,7 +281,21 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+script_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+source_path = args.source_path if args.source_path else script_path
+dest_path = args.dest_path if args.dest_path else os.path.join(script_path, '../../')
+rendered_icons = 0
+
 for source in SOURCES:
-    SRC = os.path.join(".", args.variant, source)
-    DEST = "../../Yaru" if args.variant == 'default' else "../../Yaru-" + args.variant
-    main(args, SRC, DEST)
+    if args.categories and source not in args.categories:
+        continue
+
+    SRC = os.path.join(source_path, args.variant, source)
+    DEST = os.path.abspath(os.path.join(dest_path, "Yaru" if args.variant ==
+                                        'default' else "Yaru-" + args.variant))
+    if os.path.exists(SRC):
+        rendered_icons += main(args, SRC, DEST)
+
+if rendered_icons == 0:
+    print('No SVG found to render')
+    sys.exit(1)

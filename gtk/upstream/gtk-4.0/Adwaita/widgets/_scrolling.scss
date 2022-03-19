@@ -1,4 +1,4 @@
-$_scrollbar_bg_color: transparentize(black, .9);
+$osd_scrollbar_outline_color: transparentize(black, .5);
 
 scrollbar {
   $_slider_min_length: 40px;
@@ -72,6 +72,14 @@ scrollbar {
           outline: 1px solid gtkalpha($scrollbar_outline_color, .4);
         }
 
+        .osd & {
+          @if $contrast == 'high' {
+            outline: 1px solid $osd_scrollbar_outline_color;
+          } @else {
+            outline: 1px solid gtkalpha($osd_scrollbar_outline_color, .4);
+          }
+        }
+
         outline-offset: -6px;
       }
     }
@@ -85,6 +93,14 @@ scrollbar {
       } @else {
         outline-color: gtkalpha($scrollbar_outline_color, .35);
       }
+
+      .osd & {
+        @if $contrast == 'high' {
+          outline-color: gtkalpha($osd_scrollbar_outline_color, .6);
+        } @else {
+          outline-color: gtkalpha($osd_scrollbar_outline_color, .35);
+        }
+      }
     }
 
     &.hovering > range > trough {
@@ -94,6 +110,14 @@ scrollbar {
       } @else {
         outline-color: gtkalpha($scrollbar_outline_color, .35);
         background-color: gtkalpha(currentColor, .1);
+      }
+
+      .osd & {
+        @if $contrast == 'high' {
+          outline-color: gtkalpha($osd_scrollbar_outline_color, .6);
+        } @else {
+          outline-color: gtkalpha($osd_scrollbar_outline_color, .35);
+        }
       }
     }
 

@@ -6,10 +6,10 @@ $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 200ms $ease-out-quad;
-$button_radius: 4px; // Yaru change: we want everything to be less round
-$menu_radius: 4px; // Yaru change: we want everything to be less round
-$window_radius: $button_radius + 3;
-$popover_radius: $button_radius + 2; // Yaru change: we want everything to be less round
+$button_radius: 6px; // Yaru change: sync radius with Gtk4
+$menu_radius: 6px; // Yaru change: ↑↑↑
+$window_radius: $button_radius + 6; // Yaru change: ↑↑↑
+$popover_radius: $window_radius; // Yaru change: ↑↑↑
 
 // Optional compact sizes for buttons, headerbar and headerbar widgets
 $_sizevariant: 'default'; //compact otherwise
@@ -559,6 +559,7 @@ treeview entry {
 // stuff for .needs-attention
 $_dot_color: if($variant=='light', $selected_bg_color,
                                    lighten($selected_bg_color,15%));
+@debug("Selected dot color is " + $_dot_color + ", BG color " + $selected_bg_color);
 @keyframes needs_attention {
   from {
     background-image: -gtk-gradient(radial,
@@ -1576,7 +1577,7 @@ headerbar {
   border-color: $alt_borders_color;
   border-radius: 0;
 
-  @include headerbar_fill(darken($bg_color, 10%));
+  @include headerbar_fill(if($variant == 'light', darken($bg_color, 6%), darken($bg_color, 10%))); // Yaru change: sync light headerbar bg color with Gtk4 (a bit lighten)
 
   &:backdrop {
     border-color: $backdrop_borders_color;
@@ -1834,14 +1835,14 @@ headerbar {
 headerbar { // headerbar border rounding
 
   window separator:first-child + &,
-  window &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
-  window &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
+  window &:first-child { &:backdrop, & { border-top-left-radius: $window_radius + 1px; }} // Yaru change: sync window radius with Gtk4
+  window &:last-child { &:backdrop, & { border-top-right-radius: $window_radius + 1px; }} // Yaru change: sync window radius with Gtk4
 
   window stack & { // tackles the stacked headerbars case
     &:first-child, &:last-child {
       &:backdrop, & {
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
+        border-top-left-radius: $window_radius + 1px; // Yaru change: sync window radius with Gtk4
+        border-top-right-radius: $window_radius + 1px; // Yaru change: sync window radius with Gtk4
       }
     }
   }
@@ -3968,8 +3969,8 @@ messagedialog { // Message Dialog styling
     background-image: none;
     background-color: $bg_color;
     border-style: none;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+    border-top-left-radius: $window_radius+1; // Yaru change: sync radii with Gtk4
+    border-top-right-radius: $window_radius+1; // Yaru change: sync radii with Gtk4
   }
 
   &.csd { // rounded bottom border styling for csd version
@@ -3988,13 +3989,13 @@ messagedialog { // Message Dialog styling
 
       &:first-child {
         border-left-style: none;
-        border-bottom-left-radius: $button_radius + 2;
-        -gtk-outline-bottom-left-radius: $button_radius + 2;
+        border-bottom-left-radius: $window_radius+1; // Yaru change: sync radii with Gtk4
+        -gtk-outline-bottom-left-radius: $window_radius+1; // Yaru change: sync radii with Gtk4
       }
 
       &:last-child {
-        border-bottom-right-radius: $button_radius + 2;
-        -gtk-outline-bottom-right-radius: $button_radius + 2;
+        border-bottom-right-radius: $window_radius+1; // Yaru change: sync radii with Gtk4
+        -gtk-outline-bottom-right-radius: $window_radius+1; // Yaru change: sync radii with Gtk4
       }
     }
   }
@@ -4549,8 +4550,8 @@ decoration {
 
   // this needs to be transparent
   // see bug #722563
-  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
-  $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.82), transparentize($borders_color, 0.1));
+  $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize(black, 0.25));
+  $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.82), transparentize(black, 0.25));
 
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
               0 0 0 1px $_wm_border; //doing borders with box-shadow
@@ -4572,17 +4573,28 @@ decoration {
   }
 
   .maximized &,
-  .fullscreen &,
+  .fullscreen & { border-radius: 0; box-shadow: none; }
+
   .tiled &,
   .tiled-top &,
   .tiled-right &,
   .tiled-bottom &,
-  .tiled-left & { border-radius: 0; }
+  .tiled-left & {
+    border-radius: 0;
+    box-shadow: 0 0 0 1px $_wm_border_backdrop,
+                0 0 0 20px transparent; //transparent control workaround -- #3670
+
+    &:backdrop { box-shadow: 0 0 0 1px $_wm_border_backdrop,
+                             0 0 0 20px transparent; // #3670
+    }
+   }
 
   .popup & { box-shadow: none; }
 
   // server-side decorations as used by mutter
-  .ssd & { box-shadow: 0 0 0 1px $_wm_border; } //just doing borders, wm draws actual shadows
+  // just doing borders, wm draws actual shadows
+  .ssd & { box-shadow: 0 0 0 1px $_wm_border; }
+  .ssd &:backdrop { box-shadow: 0 0 0 1px $_wm_border_backdrop; }
 
   .csd.popup & {
     border-radius: $menu_radius;

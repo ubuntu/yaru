@@ -32,6 +32,15 @@ jobs:
             dest: gnome-shell/upstream/data/gnome-shell-theme.gresource.xml
           },
           {
+            project: GNOME Shell Icons,
+            repo: "https://gitlab.gnome.org/GNOME/gnome-shell.git",
+            upstreambranch: main,
+            localbranch: gnome-shell-icons,
+            projectdir: gnome-shell,
+            src: data/gnome-shell-icons.gresource.xml data/icons,
+            dest: gnome-shell/upstream/data/
+          },
+          {
             project: GTK3,
             repo: "https://gitlab.gnome.org/GNOME/gtk.git",
             upstreambranch: gtk-3-24,
@@ -52,16 +61,25 @@ jobs:
           {
             project: Libhandy,
             repo: "https://gitlab.gnome.org/GNOME/libhandy.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: libhandy,
             projectdir: libhandy,
             src: src/themes/,
             dest: gtk/upstream/libhandy/themes
           },
+          {
+            project: Cinnamon,
+            repo: "https://github.com/linuxmint/mint-themes.git",
+            upstreambranch: master,
+            localbranch: cinnamon,
+            projectdir: mint-themes,
+            src: src/Mint-Y/cinnamon/,
+            dest: cinnamon-shell/upstream
+          },
       ]
     steps:
       # Checkout code
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3
       - name: Download from ${{ matrix.buildenv.repo }}, on branch ${{ matrix.buildenv.upstreambranch }}
         id: checknewupstream
         run: |
@@ -69,8 +87,16 @@ jobs:
           pushd /tmp
           git clone --branch ${UPSTEAM_BRANCH} --depth 1 ${UPSTREAM_REPO_URL}
           popd
-          rm -rf ${DEST}
-          cp -a /tmp/${PROJECT_DIR}/${SRC} ${DEST}
+          if [ ${DEST: -1} == '/' ]; then
+            mkdir -p ${DEST}
+            for src in ${SRC}; do
+              rm -rf ${DEST}/src
+              cp -a /tmp/${PROJECT_DIR}/${src} ${DEST}
+            done
+          else
+            rm -rf ${DEST}
+            cp -a /tmp/${PROJECT_DIR}/${SRC} ${DEST}
+          fi
           MODIFIED=$(git status --porcelain)
           if [ -n "$MODIFIED" ]; then
             hasModif="true"
@@ -84,7 +110,7 @@ jobs:
           PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
       - name: Create or update Pull Request
         if: steps.checknewupstream.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v3.12.0
+        uses: peter-evans/create-pull-request@v3.14.0
         with:
           commit-message: New upstream snapshot for ${{ matrix.buildenv.project }}
           title: Auto update new upstream snapshot for ${{ matrix.buildenv.project }}

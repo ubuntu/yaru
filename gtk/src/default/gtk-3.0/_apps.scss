@@ -1,4 +1,3 @@
-@import "palette";
 @import 'apps/tweak-tool';
 @import 'apps/nautilus';
 @import 'apps/gnome-terminal';
@@ -19,5 +18,7 @@
 @import 'apps/mate'; // Have to be included before all other mate files due to vars
 @import 'apps/brisk-menu';
 @import 'apps/caja';
+@import 'apps/mate-control-center';
 @import 'apps/mate-multimedia-osd';
 @import 'apps/mate-terminal';
+@import 'apps/ding';

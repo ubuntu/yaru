@@ -1,0 +1,71 @@
+name: Open/Update PR when symbolic icons needs to be optimized
+on:
+  push:
+    paths:
+      - '.github/workflows/open-pr-on-optimized-symbolic-icons-changes.yaml'
+      - 'icons/src/scalable/**'
+  schedule:
+    - cron: '8 0 * * *'
+
+jobs:
+  refresh-upstream:
+    name: Check for optimized SVG icons changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Yaru code
+        uses: actions/checkout@v3
+
+      - name: Setup common variables
+        id: env
+        run: |
+          echo "::set-output name=push-branch::auto-optimized-symbolic-icons"
+
+      - name: Install dependencies
+        run: |
+          sudo apt install scour
+
+      - name: Check Source changes
+        uses: dorny/paths-filter@v2
+        id: check-changed
+        with:
+          base: ${{ steps.env.outputs.push-branch }}
+          filters: |
+            default:
+              - icons/src/scalable/default/**
+              - icons/src/scalable/render-symbolic-icons.sh
+            mate:
+              - icons/src/scalable/mate/**
+              - icons/src/scalable/render-symbolic-icons.sh
+
+      - name: Optimize default SVGs
+        if: steps.check-changed.outputs.default == 'true'
+        run: |
+          cd icons/src/scalable
+          ./render-symbolic-icons.sh --variant default
+
+      - name: Optimize mate SVGs
+        if: steps.check-changed.outputs.mate == 'true'
+        run: |
+          cd icons/src/scalable
+          ./render-symbolic-icons.sh --variant mate
+
+      - name: Check Optimization changes
+        id: check_optimization_changes
+        run: |
+          if git diff --exit-code $GITHUB_BASE_REF; then
+            changed=false
+          else
+            changed=true
+          fi
+          echo "::set-output name=modified::${changed}"
+
+      - name: Create or update Pull Request
+        if: steps.check_optimization_changes.outputs.modified == 'true'
+        uses: peter-evans/create-pull-request@v3.14.0
+        with:
+          commit-message: "icons: Optimize symbolic icons"
+          title: Auto optimized symbolic icons updates
+          labels: automated pr
+          body: "[New rendered icons / symlinks changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+when+symbolic+icons+needs+to+be+optimized%22) by GitHub Action"
+          branch: ${{ steps.env.outputs.push-branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}

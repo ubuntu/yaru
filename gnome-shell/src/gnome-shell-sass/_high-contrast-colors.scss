@@ -1,7 +1,6 @@
 // When color definition differs for dark and light variant,
 // it gets @if ed depending on $variant
 
-
 $base_color: #222;
 $bg_color: #000;
 $fg_color: #fff;
@@ -13,7 +12,6 @@ $borders_color: darken($bg_color,12%);
 $borders_edge: transparentize($fg_color, 0.9);
 $link_color: lighten($selected_bg_color,20%);
 $link_visited_color: lighten($selected_bg_color,10%);
-$top_hilight: $borders_edge;
 
 $warning_color: #f57900;
 $error_color: #cc0000;
@@ -24,6 +22,8 @@ $osd_fg_color: #eeeeec;
 $osd_bg_color: #2e3436;
 $osd_borders_color: rgba(0,0,0, 0.7);
 $osd_outer_borders_color: rgba(255,255,255, 0.1);
+$osd_insensitive_bg_color: mix($osd_fg_color, $osd_bg_color, 10%);
+$osd_insensitive_fg_color: if($variant == 'light', mix($osd_fg_color, $osd_bg_color, 80%),  mix($osd_fg_color, $osd_bg_color, 70%));
 
 $shadow_color: rgba(0,0,0, 0.1);
 $system_bg_color: desaturate(#241f31,100%); //neutralize the HIG color

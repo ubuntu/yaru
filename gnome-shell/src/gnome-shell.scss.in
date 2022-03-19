@@ -1,7 +1,77 @@
-$variant: '@ThemeVariant@';
+$variant: if(@DarkVariant@, 'dark', 'light');
+$yaru_variant: '@YaruVariant@';
+$use_gresource: @UseGResource@;
+$high_contrast: @HighContrast@;
+$UPSTREAM_VARIANTS: ['dark', 'light'];
 
-@import "gnome-shell-sass/_colors"; //use gtk colors
+@import 'sass-utils';
+
+@function is-asset-colorable($asset) {
+    $COLORABLE_ASSETS: @ColorableAssets@; // This is going to be a list.
+
+    @return list-index($COLORABLE_ASSETS, $asset) != null;
+}
+
+@function maybe-add-variant-to-colorable-asset($url) {
+    $path: str-dirname($url);
+    $path: if($path == '.', '', $path + '/');
+    $asset: str-basename($url);
+    $extension: str-extension($asset);
+    $extension: if($extension, '.' + $extension, '');
+
+    /* First remove the upstream variant (if any) from the asset */
+    @each $v in $UPSTREAM_VARIANTS {
+        $suffix: '-' + $v + $extension;
+        @if str-ends-with($asset, $suffix) {
+            $asset: str-slice($asset, 1, - (str-length($suffix) + 1)) + $extension;
+        }
+    }
+
+    @if is-asset-colorable($asset) {
+        $url: $path + str-insert($asset, '-' + $yaru_variant, str-index($asset, $extension));
+    }
+
+    @return $url;
+}
+
+@function yaru_url_handler($arg) {
+    $url: unquote($arg);
+
+    @if not $use_gresource {
+        $resource_prefix: "resource://";
+        @if str-starts-with($url, $resource_prefix) {
+            $url: str-basename($url);
+        }
+    }
+
+    $url: maybe-add-variant-to-colorable-asset($url);
+
+    @if $url != $arg {
+        @debug($arg + " -> " + $url);
+    }
+
+    @return url(quote($url));
+}
+
+@debug 'Generating GNOME Shell ' + $yaru_variant + ' theme (' + $variant +' variant, hc: '+ $high_contrast+')';
+
+@import "gnome-shell-sass/_@Colors@";
 @import "gnome-shell-sass/_drawing";
 @import "gnome-shell-sass/_common";
 @import "gnome-shell-sass/_widgets";
 @import "gnome-shell-sass/_dock";
+
+@if $high_contrast {
+    //force symbolic icons
+    stage {
+        -st-icon-style: symbolic;
+    }
+
+    .toggle-switch {
+        width: 48px;
+        background-image: yaru-url-handler("resource:///org/gnome/shell/theme/toggle-off-hc.svg");
+        &:checked {
+            background-image: yaru-url-handler("resource:///org/gnome/shell/theme/toggle-on-hc.svg");
+        }
+    }
+}

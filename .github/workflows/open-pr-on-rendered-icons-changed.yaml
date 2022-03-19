@@ -1,0 +1,100 @@
+name: Open/Update PR when rendered icons have changed
+on:
+  push:
+    paths:
+      - '.github/workflows/open-pr-on-rendered-icons-changed.yaml'
+      - 'common/accent-colors.scss.in'
+      - 'icons/src/fullcolor/**'
+      - 'icons/src/symlinks/**'
+  schedule:
+    - cron: '8 0 * * *'
+
+jobs:
+  refresh-upstream:
+    name: Check rendered icon changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Yaru code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+
+      - name: Setup common variables
+        id: env
+        run: |
+          echo "::set-output name=push-branch::auto-rendered-icons"
+
+      - name: Check Source changes
+        uses: dorny/paths-filter@v2
+        id: check-changed
+        with:
+          base: ${{ steps.env.outputs.push-branch }}
+          filters: |
+            default:
+              - icons/src/fullcolor/default/**
+              - icons/src/fullcolor/render-bitmaps.py
+            mate:
+              - icons/src/fullcolor/mate/**
+              - icons/src/fullcolor/render-bitmaps.py
+            accented:
+              - common/accent-colors.scss.in
+              - icons/src/fullcolor/accented/**
+              - icons/src/fullcolor/render-bitmaps.py
+            symlinks:
+              - icons/src/symlinks
+
+      - name: Install dependencies
+        if: ${{ steps.check-changed.outputs.changes != '[]' }}
+        run: |
+          sudo apt install software-properties-common
+          sudo add-apt-repository ppa:inkscape.dev/stable
+          sudo apt update
+          sudo apt install sassc python3-pip xvfb inkscape optipng scour
+          sudo pip3 install meson ninja
+
+      - name: Configure project
+        if: ${{ steps.check-changed.outputs.changes != '[]' }}
+        run: |
+          meson _build -Dmate=true
+
+      - name: Render default icons and generate symlinks
+        if: steps.check-changed.outputs.default == 'true'
+        run: |
+          xvfb-run -a -- ninja -C _build -v render+symlink-icons-default
+
+      - name: Render mate icons and generate symlinks
+        if: steps.check-changed.outputs.mate == 'true'
+        run: |
+          xvfb-run -a -- ninja -C _build -v render+symlink-icons-mate
+
+      - name: Render accented icons and generate symlinks
+        if: steps.check-changed.outputs.accented == 'true'
+        run: |
+          xvfb-run -a -- ninja -C _build -v render+symlink-icons-accented
+
+      - name: Symlink all icons
+        if: steps.check-changed.outputs.symlinks == 'true'
+        run: |
+          xvfb-run -a -- ninja -C _build -v symlink-icons
+
+      - name: Check Rendering changes
+        if: ${{ steps.check-changed.outputs.changes != '[]' }}
+        id: check-rendering
+        run: |
+          if git diff --exit-code $GITHUB_BASE_REF; then
+            changed=false
+          else
+            changed=true
+          fi
+          echo "::set-output name=changed::${changed}"
+
+      - name: Create or update Pull Request
+        if: steps.check-rendering.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v3.14.0
+        with:
+          commit-message: "icons: Update rendered icons and symlinks"
+          title: Auto rendered icons updates
+          labels: automated pr, new upstream
+          body: "[New rendered icons / symlinks changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+when+icons+needs+to+be+re-rendered%22) by GitHub Action"
+          branch: ${{ steps.env.outputs.push-branch }}

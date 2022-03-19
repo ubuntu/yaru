@@ -1,0 +1,103 @@
+// Copyright © 2022, Canonical Ltd
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library. If not, see <http://www.gnu.org/licenses/>.
+// Authors:
+//       Marco Trevisan <marco.trevisan@canonical.com>
+
+@function str-contains($str, $substring) {
+    @return str-index($str, $substring) != null;
+}
+
+@function str-starts-with($str, $substring) {
+    @return str-index($str, $substring) == 1;
+}
+
+@function str-ends-with($str, $substring) {
+    $index: str-index($str, $substring);
+    @if ($index == null) {
+        @return false;
+    }
+
+    @return ($index + str-length($substring) - 1) == str-length($str);
+}
+
+@function str-basename($str, $divider: '/') {
+    $index: str-index($str, $divider);
+
+    @while $index != null {
+        $str: str-slice($str, $index + 1);
+        $index: str-index($str, $divider);
+    }
+
+    @return $str;
+}
+
+@function str-extension($str) {
+    $extension: str-basename($str, '.');
+    @return if($extension == $str, null, $extension);
+}
+
+@function str-dirname($str, $divider: '/') {
+    $str_copy: $str;
+    $index: str-index($str, $divider);
+    $last_index: null;
+
+    @while $index != null {
+        $str: str-slice($str, $index + 1);
+        $last_index: if($last_index, $last_index, 0) + $index;
+        $index: str-index($str, $divider);
+    }
+
+    @return if($last_index, str-slice($str_copy, 1, $last_index - 1), '.');
+}
+
+@function list-length($list) {
+    $i: 0;
+    @each $e in $list {
+        $i: $i + 1;
+    }
+
+    @return $i;
+}
+
+@function list-nth($list, $nth) {
+    $i: 0;
+
+    @if $nth < 0 {
+        $nth: list-length($list) + $nth;
+    }
+
+    @each $e in $list {
+        @if ($i == $nth) {
+            @return $e;
+        }
+
+        $i: $i + 1;
+    }
+
+    @return null;
+}
+
+@function list-index($list, $item) {
+    $i: 0;
+    @each $e in $list {
+        @if ($e == $item) {
+            @return $i;
+        }
+
+        $i: $i + 1;
+    }
+
+    @return null;
+}

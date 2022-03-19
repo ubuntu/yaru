@@ -173,6 +173,16 @@ viewswitcher {
       &.wide {
         padding: 8px 12px;
 
+        image {
+          &:dir(ltr) {
+            padding-left: 7px;
+          }
+
+          &:dir(rtl) {
+            padding-right: 7px;
+          }
+        }
+
         label {
           &:dir(ltr) {
             padding-right: 7px;
@@ -196,6 +206,7 @@ viewswitcher {
         background-image: none;
       }
 
+      @debug("gradient dot color is " + $accent_bg_color);
       > stack > box label {
         animation: needs_attention 150ms ease-in;
         background-image: -gtk-gradient(radial, center center, 0, center center, 0.5, to($accent_bg_color), to(transparent)); // Yaru: use our own palette
@@ -334,7 +345,7 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
     &,
     > decoration,
     > decoration-overlay {
-      border-radius: 8px;
+      border-radius: $window_radius; // Yaru change: sync radius with Gtk4 (use Gtk3 vars instead of hardcode)
     }
   }
 }

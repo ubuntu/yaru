@@ -17,20 +17,22 @@
 # this program; if not, see <https://www.gnu.org/licenses/gpl-3.0.txt>
 ##
 ## usage:
-##      generate-symlinks.sh [--all|--match <string>] [--verbose]
+##      generate-symlinks.sh [--all|--match <string>] --variant <variant> [--verbose]
 ##
 ## options:
-##      -a, --all            Generates all the symlinks defined in .list files
-##                           (warning: this might break manually generated symlinks)
-##      -m, --match <string> Generates only the symlinks in .list files that matches
-##                           the provided string
-##      -v, --verbose        More verbose output
+##      -a, --all              Generates all the symlinks defined in .list files
+##                             (warning: this might break manually generated symlinks)
+##      -m, --match <string>   Generates only the symlinks in .list files that matches
+##                             the provided string
+##      -t, --variant <string> Generates only the symlinks for the specified variant
+##      -v, --verbose          More verbose output (useful for debugging)
 ##
 ## example:
-##      $ generate-symlinks.sh -m inode-directory
+##      To generate only power-profile-* symlinks
 ##
-##      This generates only the link defined in ./symbolic/apps.list
-# GENERATED_CODE: start
+##      $ generate-symlinks.sh --match power-profile
+##
+# CLInt GENERATED_CODE: start
 
 # No-arguments is not allowed
 [ $# -eq 0 ] && sed -ne 's/^## \(.*\)/\1/p' $0 && exit 1
@@ -41,6 +43,7 @@ for arg in "$@"; do
 	case "$arg" in
 		"--all") set -- "$@" "-a";;
 		"--match") set -- "$@" "-m";;
+		"--variant") set -- "$@" "-t";;
 		"--verbose") set -- "$@" "-v";;
 		*) set -- "$@" "$arg"
 	esac
@@ -51,13 +54,14 @@ function print_illegal() {
 }
 
 # Parsing flags and arguments
-while getopts 'havm:' OPT; do
+while getopts 'havmt:' OPT; do
 	case $OPT in
 		h) sed -ne 's/^## \(.*\)/\1/p' $0
 			exit 1 ;;
 		a) _all=1 ;;
 		v) _verbose=1 ;;
 		m) _match=$OPTARG ;;
+		t) _variant=$OPTARG ;;
 		\?) print_illegal $@ >&2;
 			echo "---"
 			sed -ne 's/^## \(.*\)/\1/p' $0
@@ -65,12 +69,12 @@ while getopts 'havm:' OPT; do
 			;;
 	esac
 done
-# GENERATED_CODE: end
+# CLInt GENERATED_CODE: end
 
 [ ! -z $_match ] && needle=$_match || needle=''
 
 function dlog() {
-    [ ! -z $_verbose ] && echo $*
+	[ ! -z $_verbose ] && echo $*
 }
 
 DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
@@ -80,80 +84,79 @@ CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "legacy" "places" 
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
 VARIANTS=("default" "mate")
 
+if [ -n "$_variant" ]; then
+	if [[ ! " ${VARIANTS[*]} " =~ " ${_variant} " ]]; then
+		echo "WARNING: Requested $variant is not known"
+	fi
+
+	VARIANTS=($_variant)
+fi
+
+
+linker () {
+	local icon_folder=$1
+	local icon_subfolder=$2
+
+	LIST="$DIR/${icon_folder}/$CONTEXT.list"
+	if [ ! -d "$DIR/../../$THEME/$icon_subfolder/$CONTEXT" ]; then
+		dlog "  -- no $icon_subfolder/$CONTEXT, skipping it"
+		return
+	fi
+
+	cd $DIR/../../$THEME/$icon_subfolder/$CONTEXT
+	while read line;
+	do
+		if [[ $line != *"$needle"* ]]; then
+			dlog "line $line does not match with $needle: skipping"
+			continue
+		fi
+
+		SOURCE_FILE=${line%% *}
+		if [ -f "$SOURCE_FILE" ]; then
+			echo "[$icon_subfolder/$CONTEXT] linking $line"
+			ln -sf $line
+		elif [ $VARIANT = "default" ]; then 
+			# The default variant must have all icons availables
+			echo "error symlinking \"$line\" for $icon_subfolder/$CONTEXT: could not find symlink file \"$SOURCE_FILE\" in $(pwd)"
+			exit 1
+		else
+			# The variants can ignore the missing icons
+			dlog "skipping \"$line\" for $VARIANT variant: could not find source symlink file \"$SOURCE_FILE\" in $(pwd)"
+		fi
+
+	done < $LIST
+	cd $DIR/../../$THEME
+	return $symlinks_counter
+}
+
 # Fullcolor icons
 echo "Generating links for fullcolor icons..."
-# variants for loop
 for VARIANT in "${VARIANTS[@]}"
 do
 	[[ $VARIANT = "default" ]] && THEME="Yaru" || THEME="Yaru-${VARIANT}"
-	# contexts for loop
 	for CONTEXT in "${CONTEXTS[@]}"
 	do
 		dlog " -- "${CONTEXT}
-		# Sizes Loop
 		for SIZE in "${SIZES[@]}"
 		do
-			LIST="$DIR/fullcolor/$CONTEXT.list"
-			# Check if directory exists
-			if [ -d "$DIR/../../$THEME/$SIZE/$CONTEXT" ]; then
-				cd $DIR/../../$THEME/$SIZE/$CONTEXT
-				while read line;
-				do
-					if [[ $line == *"$needle"* ]]; then
-						SOURCE_FILE=${line%% *}
-						if [ -f "$SOURCE_FILE" ]; then # Check if source file exist because variants can have missing ones
-							echo linking $line in $SIZE"/"$CONTEXT
-							ln -sf $line
-						elif [ $VARIANT = "default" ]; then # But the default variant must have all icons availables
-							echo error $line symlink is invalid in $SIZE"/"$CONTEXT
-							exit 1
-						fi
-					else
-						dlog "[match only mode] skipping $line"
-					fi
-				done < $LIST
-				cd $DIR/../../$THEME
-			else
-				dlog "  -- skipping "$SIZE"/"$CONTEXT
-			fi
+			linker "fullcolor" $SIZE
 		done
 	done
 done
-echo "Done."
-
+echo "Done"
 
 # Symbolic icons
 echo "Generating links for symbolic icons..."
-THEME="Yaru" # Symbolic icons doesn't have variant
-# contexts for loop
-for CONTEXT in "${CONTEXTS[@]}"
+for VARIANT in "${VARIANTS[@]}"
 do
-	dlog " -- "$CONTEXT
-	LIST="$DIR/symbolic/$CONTEXT.list"
-	# Check if directory exists
-	if [ -d "$DIR/../../$THEME/scalable/$CONTEXT" ]; then
-		cd $DIR/../../$THEME/scalable/$CONTEXT
-		while read line;
-		do
-			if [[ $line == *"$needle"* ]]; then
-				SOURCE_FILE=${line%% *}
-				if [ -f "$SOURCE_FILE" ]; then
-					echo linking $line in "scalable/"$CONTEXT
-					ln -sf $line
-				else
-					echo error $line symlink is invalid in "scalable/"$CONTEXT
-					exit 1
-				fi
-			else
-				dlog "[match only mode] line $line does not match with $needle"
-			fi
-		done < $LIST
-		cd $DIR/../../$THEME
-	else
-		echo "  -- skipping scalable/"$CONTEXT
-	fi
+	[[ $VARIANT = "default" ]] && THEME="Yaru" || THEME="Yaru-${VARIANT}"
+	for CONTEXT in "${CONTEXTS[@]}"
+	do
+		dlog " -- "$CONTEXT
+		linker "symbolic" "scalable"
+	done
 done
-echo "Done."
+echo "Done"
 
 # Clear symlink errors
 if command -v symlinks 2>&1 >/dev/null; then
