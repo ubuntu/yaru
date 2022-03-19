@@ -33,11 +33,14 @@ jobs:
           filters: |
             default:
               - icons/src/fullcolor/default/**
+              - icons/src/fullcolor/render-bitmaps.py
             mate:
               - icons/src/fullcolor/mate/**
+              - icons/src/fullcolor/render-bitmaps.py
             accented:
               - common/accent-colors.scss.in
               - icons/src/fullcolor/accented/**
+              - icons/src/fullcolor/render-bitmaps.py
             symlinks:
               - icons/src/symlinks
 
