@@ -187,19 +187,31 @@
   StEntry {
     border:none !important;
     &, &:focus { // Yaru change: also style unfocused state
-      background-color: transparentize($fg_color, 0.9);
+      color: $fg_color_dark; // Yaru change: fix for light theme
+      background-color: transparentize($fg_color_dark, 0.9); // Yaru change: ↑↑↑
       box-shadow: none; // Yaru change: remove box-shadow because of ugly render
     }
-    &:insensitive { 
-      color: transparentize($fg_color, 0.5);
-      background-color: transparentize($fg_color, 0.95);
+    
+    &:insensitive { // Yaru change: fix for light theme
+      color: transparentize($fg_color_dark, 0.5);
+      background-color: transparentize($fg_color_dark, 0.95);
     }
+
+    StLabel.hint-text { // Yaru change: fix for light theme
+      color: transparentize($fg_color_dark, 0.3);
+    }
+  }
+
+  .user-icon { // Yaru change: fix for light theme
+    background-color: transparentize($fg_color_dark,0.9);
+    color: $fg_color_dark;
   }
 
   .cancel-button,
   .switch-user-button,
   .login-dialog-session-list-button {
     border-color: transparent;
-    background-color: transparentize($fg_color, 0.9);
+    background-color: transparentize($fg_color_dark, 0.9); // Yaru change: fix for light theme
+    color: $fg_color_dark; // Yaru change: ↑↑↑
   }
 }
