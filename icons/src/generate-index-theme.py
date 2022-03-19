@@ -27,6 +27,13 @@ DEFAULT_MIN_SIZE = 16
 DEFAULT_BIG_MIN_SIZE = 64
 DEFAULT_MAX_SIZE = 256
 
+CONTEXT_MAPPING = {
+    'apps': 'Applications',
+    'mimetypes': 'MimeTypes',
+    'panel': 'Status',
+    'ui': 'UI',
+}
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('theme_name')
@@ -75,7 +82,7 @@ if __name__ == '__main__':
     for dir in directories:
         [sizes, context] = dir.split('/')
         data = {
-            'Context': context.title(),
+            'Context': CONTEXT_MAPPING.get(context, context.title()),
         }
 
         if '@' in sizes:
