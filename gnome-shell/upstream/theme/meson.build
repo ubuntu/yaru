@@ -49,6 +49,7 @@ stylesheets = [
 
 foreach stylesheet: stylesheets
   if not fs.exists(stylesheet)
+    sassc = find_program('sassc')
     theme_deps += custom_target(stylesheet,
                                 input: fs.replace_suffix(stylesheet, '.scss'),
                                 output: stylesheet,
