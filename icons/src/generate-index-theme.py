@@ -78,11 +78,25 @@ if __name__ == '__main__':
             'Context': context.title(),
         }
 
-        if '@' in dir:
+        if '@' in sizes:
             [sizes, scale] = sizes.split('@')
             data['Scale'] = scale[:-1]
 
-        if 'x' in sizes:
+        if sizes.startswith('scalable'):
+            data['Size'] = DEFAULT_MIN_SIZE
+            data['MinSize'] = DEFAULT_MIN_SIZE
+            data['MaxSize'] = DEFAULT_MAX_SIZE
+            data['Type'] = 'Scalable'
+
+            if 'max' in sizes:
+                data['MaxSize'] = sizes.rsplit('-', 1)[-1]
+                data['Size'] = min(int(data['Size']), int(data['MaxSize']))
+
+            if 'min' in sizes:
+                data['MinSize'] = sizes.rsplit('-', 1)[-1]
+                data['Size'] = max(int(data['Size']), int(data['MinSize']))
+
+        elif 'x' in sizes:
             [width, height] = sizes.split('x')
             assert width == height
             data['Size'] = width
@@ -93,12 +107,6 @@ if __name__ == '__main__':
                 data['Type'] = 'Scalable'
             else:
                 data['Type'] = 'Fixed'
-        else:
-            assert sizes == 'scalable'
-            data['Size'] = DEFAULT_MAX_SIZE
-            data['MinSize'] = DEFAULT_MIN_SIZE
-            data['MaxSize'] = DEFAULT_MAX_SIZE
-            data['Type'] = 'Scalable'
 
         theme[dir] = data
 
