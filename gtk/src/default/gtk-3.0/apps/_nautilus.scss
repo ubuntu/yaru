@@ -272,10 +272,10 @@
     }
 
     infobar {
-        background-color: if($variant=="light", lighten($silk, 10%), $slate);
-
+        background-color: transparentize($fg_color, if($variant == 'light', .93, .95));
+      
         &:backdrop {
-            background-color: $backdrop_bg_color;
+          background-color: transparentize($fg_color, if($variant == 'light', .96, .98));
         }
     }
 
