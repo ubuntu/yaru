@@ -5,7 +5,9 @@
     }
     
     .nautilus-canvas-item {
-        border-radius: 5px;
+        &, &:focus { // Yaru change: force focus state
+            border-radius: 5px;
+        }
     }
     
     @keyframes needs_attention_keyframes {
