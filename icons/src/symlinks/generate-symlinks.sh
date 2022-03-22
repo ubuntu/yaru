@@ -106,6 +106,11 @@ linker () {
 	cd $DIR/../../$THEME/$icon_subfolder/$CONTEXT
 	while read line;
 	do
+		if [[ "$line" =~ ^[[:space:]]*$ ]]; then
+			dlog "Ignoring empty line in $LIST"
+			continue
+		fi
+
 		if [[ $line != *"$needle"* ]]; then
 			dlog "line $line does not match with $needle: skipping"
 			continue
