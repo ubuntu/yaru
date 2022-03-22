@@ -50,11 +50,9 @@ foreach flavour: icon_flavors
         icon_dir, accent_color_gtk_version_reference)]
 
       foreach accent_svg: source_svgs
-        path = '@0@'.format(accent_svg)
-        basename = path.split('/')[-1]
-        category = path.split('/')[-2]
+        category = fs.name(fs.parent(accent_svg))
         accented_svg = custom_target(
-          '-'.join([icon_dir, basename]),
+          '-'.join([icon_dir, fs.name(accent_svg)]),
           input: accent_svg,
           output: '@BASENAME@-@0@.svg'.format(flavour),
           command: [
@@ -76,9 +74,8 @@ foreach flavour: icon_flavors
     render_flavour_targets = []
     foreach i: range(source_svgs.length())
       svg = source_svgs[i]
-      path = '@0@'.format(svg)
-      basename = path.split('/')[-1].substring(0, -4)
-      category = path.split('/')[-2]
+      basename = fs.stem(fs.name(svg))
+      category = fs.name(fs.parent(svg))
       render_bitmap_target = custom_target('render-icon-' + '-'.join([category, basename, flavour]),
         input: svg,
         output: 'rendered-@BASENAME@-' + '-'.join([category, flavour]) + '.svg',

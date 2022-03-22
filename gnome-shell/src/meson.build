@@ -54,7 +54,7 @@ colorable_theme_assets = files(
 
 colorable_assets_names = []
 foreach asset: colorable_theme_assets
-  basename = '@0@'.format(asset).split('/')[-1]
+  basename = fs.name(asset)
   colorable_assets_names += basename
 endforeach
 
@@ -134,7 +134,7 @@ foreach variant: variants
   )
 
   foreach colorable_asset: colorable_theme_assets
-    basename = '@0@'.format(colorable_asset).split('/')[-1]
+    basename = fs.name(colorable_asset)
 
     # We don't support other variants here...
     if is_variant and basename.endswith('-hc.svg') and not INCLUDE_HIGH_CONTRAST_VARIANTS
