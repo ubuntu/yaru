@@ -9,6 +9,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Check sources structure
+      run: |
+        # No symlinks should be in icons sources, they should be handled through lists
+        test -n "$(find icons/src/{fullcolor,scalable} -type l)"
+
     - name: Install dependencies
       run: |
         sudo apt install sassc python3-pip
