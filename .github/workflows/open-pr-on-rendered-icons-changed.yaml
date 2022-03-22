@@ -61,16 +61,19 @@ jobs:
       - name: Render default icons and generate symlinks
         if: steps.check-changed.outputs.default == 'true'
         run: |
+          ninja -C _build cleanup-rendered-icons-default
           xvfb-run -a -- ninja -C _build -v render+symlink-icons-default
 
       - name: Render mate icons and generate symlinks
         if: steps.check-changed.outputs.mate == 'true'
         run: |
+          ninja -C _build cleanup-rendered-icons-mate
           xvfb-run -a -- ninja -C _build -v render+symlink-icons-mate
 
       - name: Render accented icons and generate symlinks
         if: steps.check-changed.outputs.accented == 'true'
         run: |
+          ninja -C _build cleanup-rendered-icons-accented
           xvfb-run -a -- ninja -C _build -v render+symlink-icons-accented
 
       - name: Symlink all icons

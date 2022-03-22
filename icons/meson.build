@@ -16,6 +16,8 @@ render_and_symlink_targets = []
 render_and_symlink_accented_targets = []
 symlink_targets = []
 render_by_icon_targets = {}
+cleanup_rendered_icons_targets = []
+cleanup_rendered_icons_accented_targets = []
 
 foreach flavour: icon_flavors
   is_accent = enabled_accent_colors.contains(flavour)
@@ -121,12 +123,23 @@ foreach flavour: icon_flavors
     )
     render_and_symlink_targets += render_and_symlink_flavour
 
+    cleanup_rendered_flavour = run_target('cleanup-rendered-' + flavour,
+      command: [
+        'bash', '-c', 'rm -rfv "$0"/$1',
+        meson.project_source_root() / meson.current_source_dir() / icon_dir,
+        '[0-9]*x[0-9]*',
+      ]
+    )
+    cleanup_rendered_icons_targets += cleanup_rendered_flavour
+
     alias_target('render-icons-' + flavour, render_flavour_targets)
     alias_target('render+symlink-icons-' + flavour, render_and_symlink_flavour)
+    alias_target('cleanup-rendered-icons-' + flavour, cleanup_rendered_flavour)
 
     if is_accent
       render_accented_targets += render_flavour_targets
       render_and_symlink_accented_targets += render_and_symlink_flavour
+      cleanup_rendered_icons_accented_targets += cleanup_rendered_flavour
 
       if not fs.is_dir(icon_dir)
         warning('@0@ does not exists, ensure you generated it with `ninja -C @1@ render-icons-@2@,`'.format(
@@ -214,11 +227,13 @@ endforeach
 alias_target('render-icons', render_targets)
 alias_target('render+symlink-icons', render_and_symlink_targets)
 alias_target('symlink-icons', symlink_targets)
+alias_target('cleanup-rendered-icons', cleanup_rendered_icons_targets)
 
 if render_accented_targets.length() > 0
   alias_target('render-accented-icons', render_and_symlink_accented_targets)
   alias_target('render-icons-accented', render_accented_targets)
   alias_target('render+symlink-icons-accented', render_and_symlink_accented_targets)
+  alias_target('cleanup-rendered-icons-accented', cleanup_rendered_icons_accented_targets)
 endif
 
 foreach icon, targets: render_by_icon_targets
