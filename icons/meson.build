@@ -144,11 +144,13 @@ foreach flavour: icon_flavors
       exclude_files: ['index.theme', 'cursor.theme'],
     )
 
-    # install unity and MATE panel-icons
-    install_subdir('panel',
-      install_dir: theme_install_dir,
-      strip_directory: true,
-    )
+    if flavour == 'default' and (get_option('ubuntu-unity') or get_option('mate'))
+      # install unity and MATE panel-icons
+      install_subdir('panel',
+        install_dir: theme_install_dir,
+        strip_directory: true,
+      )
+    endif
 
     # install cursor thumbnail (cinnamon only)
     if get_option('cinnamon-shell') and flavour == 'default'
