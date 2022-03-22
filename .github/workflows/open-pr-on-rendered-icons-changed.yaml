@@ -42,7 +42,7 @@ jobs:
               - icons/src/fullcolor/accented/**
               - icons/src/fullcolor/render-bitmaps.py
             symlinks:
-              - icons/src/symlinks
+              - icons/src/symlinks/**
 
       - name: Install dependencies
         if: ${{ steps.check-changed.outputs.changes != '[]' }}
