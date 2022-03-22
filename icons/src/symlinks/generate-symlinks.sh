@@ -25,6 +25,7 @@
 ##      -m, --match <string>   Generates only the symlinks in .list files that matches
 ##                             the provided string
 ##      -t, --variant <string> Generates only the symlinks for the specified variant
+##      -n, --dry-run          Do not generate symlinks, simulate only
 ##      -v, --verbose          More verbose output (useful for debugging)
 ##
 ## example:
@@ -45,6 +46,7 @@ for arg in "$@"; do
 		"--match") set -- "$@" "-m";;
 		"--variant") set -- "$@" "-t";;
 		"--verbose") set -- "$@" "-v";;
+		"--dry-run") set -- "$@" "-n";;
 		*) set -- "$@" "$arg"
 	esac
 done
@@ -54,11 +56,12 @@ function print_illegal() {
 }
 
 # Parsing flags and arguments
-while getopts 'havmt:' OPT; do
+while getopts 'hanvmt:' OPT; do
 	case $OPT in
 		h) sed -ne 's/^## \(.*\)/\1/p' $0
 			exit 1 ;;
 		a) _all=1 ;;
+		n) _dry_run=1 ;;
 		v) _verbose=1 ;;
 		m) _match=$OPTARG ;;
 		t) _variant=$OPTARG ;;
@@ -119,8 +122,10 @@ linker () {
 		SOURCE_FILE=${line%% *}
 		if [ -f "$SOURCE_FILE" ]; then
 			echo "[$icon_subfolder/$CONTEXT] linking $line"
-			ln -sf $line
-		elif [ $VARIANT = "default" ]; then 
+			if [ -z "$_dry_run" ]; then
+				ln -sf $line;
+			fi
+		elif [ $VARIANT = "default" ]; then
 			# The default variant must have all icons availables
 			echo "error symlinking \"$line\" for $icon_subfolder/$CONTEXT: could not find symlink file \"$SOURCE_FILE\" in $(pwd)"
 			exit 1

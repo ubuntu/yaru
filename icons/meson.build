@@ -6,9 +6,9 @@ icon_flavors = [
 icon_flavors += enabled_accent_colors
 
 fullcolor_path = 'src' / 'fullcolor'
-render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py')
-generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh')
-generate_index_theme = find_program('src' / 'generate-index-theme.py')
+render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py', required: true)
+generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh', required: true)
+generate_index_theme = find_program('src' / 'generate-index-theme.py', required: true)
 accent_color_gtk_version_reference = '3.0'
 render_targets = []
 render_accented_targets = []
@@ -198,6 +198,17 @@ foreach flavour: icon_flavors
       endif
     endforeach
     meson.add_install_script('meson/post_install.py', theme_name)
+
+
+    test('generate-symlinks' + suffix,
+      generate_symlinks,
+      args: [
+        '--variant', flavour,
+        '--dry-run',
+        '--verbose',
+      ],
+      suite: ['tools', 'generate-symlinks'],
+      workdir: fs.parent(generate_symlinks.full_path()))
   endif
 endforeach
 
