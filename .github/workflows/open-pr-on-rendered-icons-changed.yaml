@@ -76,6 +76,7 @@ jobs:
       - name: Symlink all icons
         if: steps.check-changed.outputs.symlinks == 'true'
         run: |
+          find icons/Yaru{,-*} -type l -delete
           xvfb-run -a -- ninja -C _build -v symlink-icons
 
       - name: Check Rendering changes
