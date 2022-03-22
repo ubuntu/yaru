@@ -96,5 +96,5 @@ jobs:
           commit-message: "icons: Update rendered icons and symlinks"
           title: Auto rendered icons updates
           labels: automated pr, new upstream
-          body: "[New rendered icons / symlinks changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+when+icons+needs+to+be+re-rendered%22) by GitHub Action"
+          body: "[New rendered icons / symlinks changes](https://github.com/ubuntu/yaru/actions/workflows/open-pr-on-rendered-icons-changed.yaml) by GitHub Action"
           branch: ${{ steps.env.outputs.push-branch }}

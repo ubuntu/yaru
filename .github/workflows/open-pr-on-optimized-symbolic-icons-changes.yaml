@@ -66,6 +66,6 @@ jobs:
           commit-message: "icons: Optimize symbolic icons"
           title: Auto optimized symbolic icons updates
           labels: automated pr
-          body: "[New rendered icons / symlinks changes](https://github.com/ubuntu/yaru/actions?query=workflow%3A%22Update+PR+when+symbolic+icons+needs+to+be+optimized%22) by GitHub Action"
+          body: "[New rendered icons / symlinks changes](https://github.com/ubuntu/yaru/actions/workflows/open-pr-on-optimized-symbolic-icons-changes.yaml) by GitHub Action"
           branch: ${{ steps.env.outputs.push-branch }}
           token: ${{ secrets.GITHUB_TOKEN }}
