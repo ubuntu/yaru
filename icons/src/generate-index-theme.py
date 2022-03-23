@@ -34,6 +34,13 @@ CONTEXT_MAPPING = {
     'ui': 'UI',
 }
 
+CUSTOM_PARAMETERS = {
+    'scalable/ui': {
+        'MinSize': 8,
+        'MaxSize': 512,
+    }
+}
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('theme_name')
@@ -117,6 +124,7 @@ if __name__ == '__main__':
             else:
                 data['Type'] = 'Fixed'
 
+        data.update(CUSTOM_PARAMETERS.get(dir, {}))
         theme[dir] = data
 
     output_file = os.path.join(args.output_dir, args.output_name)
