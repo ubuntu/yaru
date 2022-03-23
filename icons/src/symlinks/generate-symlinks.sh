@@ -85,8 +85,10 @@ DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 # Icon sizes, contexts and variants
 CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "phosh" "status" "emblems" "ui")
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
-OPTIONAL_SIZES=("8x8" "8x8@2x")
+OPTIONAL_SIZES=("8x8" "8x8@2x" "22x22")
 VARIANTS=("default" "mate")
+
+SIZES+=("${OPTIONAL_SIZES[@]}")
 
 if [ -n "$_variant" ]; then
 	if [[ ! " ${VARIANTS[*]} " =~ " ${_variant} " ]]; then
@@ -148,7 +150,7 @@ do
 	for CONTEXT in "${CONTEXTS[@]}"
 	do
 		dlog " -- "${CONTEXT}
-		for SIZE in "${SIZES[@]}" "${OPTIONAL_SIZES[@]}"
+		for SIZE in "${SIZES[@]}"
 		do
 			linker "fullcolor" $SIZE
 		done
