@@ -144,12 +144,33 @@ foreach flavour: icon_flavors
       exclude_files: ['index.theme', 'cursor.theme'],
     )
 
-    if flavour == 'default' and (get_option('ubuntu-unity') or get_option('mate'))
-      # install unity and MATE panel-icons
+    # install unity and MATE panel-icons
+    if get_option('ubuntu-unity') or get_option('mate')
+      # install light panel icons
       install_subdir('panel',
         install_dir: theme_install_dir,
         strip_directory: true,
       )
+    endif
+
+    # install dark panel icons (generate a new -dark variant)
+    if get_option('mate-dark')
+      dark_theme_name = theme_name + '-dark'
+      dark_theme_install_dir = theme_install_dir + '-dark'
+      install_subdir('panel-dark',
+        install_dir: dark_theme_install_dir,
+        strip_directory: true,
+        exclude_files: ['index.theme'],
+      )
+      conf_data = configuration_data()
+      conf_data.set('ThemeName', theme_name)
+      conf_data.set('DarkThemeName', dark_theme_name)
+      file = configure_file(
+        input : join_paths('panel-dark', 'index.theme'),
+        output : dark_theme_name + '-index.theme',
+        configuration : conf_data
+      )
+      install_data(file, install_dir: dark_theme_install_dir, rename: 'index.theme')
     endif
 
     # install cursor thumbnail (cinnamon only)
