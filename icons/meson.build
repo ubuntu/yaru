@@ -1,6 +1,8 @@
 icon_flavors = [
   'default',
+  'dark',
   'mate',
+  'mate-dark',
 ]
 
 icon_flavors += enabled_accent_colors
@@ -10,6 +12,7 @@ render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py', required: tr
 generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh', required: true)
 generate_index_theme = find_program('src' / 'generate-index-theme.py', required: true)
 accent_color_gtk_version_reference = '3.0'
+uses_panel_icons = get_option('ubuntu-unity') or get_option('mate')
 render_targets = []
 render_accented_targets = []
 render_and_symlink_targets = []
@@ -39,13 +42,18 @@ foreach flavour: icon_flavors
       '--dest-path', meson.current_source_dir(),
     ]
 
-    source_svgs = files(
-      run_command(
-        'find',
-        meson.current_source_dir() / fullcolor_path / (is_accent ? 'accented' : flavour),
-        '-name', '*.svg',
-      ).stdout().strip().split('\n')
-    )
+    source_svgs = []
+    fullcolor_svgs_path = fullcolor_path / (is_accent ? 'accented' : flavour)
+
+    if fs.is_dir(fullcolor_svgs_path)
+      source_svgs += files(
+        run_command(
+          'find',
+          meson.current_source_dir() / fullcolor_svgs_path,
+          '-name', '*.svg',
+        ).stdout().strip().split('\n')
+      )
+    endif
 
     if is_accent
       colors_definitions = gtk_yaru_colors_defs['@0@-gtk-@1@'.format(
@@ -132,9 +140,11 @@ foreach flavour: icon_flavors
     )
     cleanup_rendered_icons_targets += cleanup_rendered_flavour
 
-    alias_target('render-icons-' + flavour, render_flavour_targets)
-    alias_target('render+symlink-icons-' + flavour, render_and_symlink_flavour)
-    alias_target('cleanup-rendered-icons-' + flavour, cleanup_rendered_flavour)
+    if render_flavour_targets.length() > 0
+      alias_target('render-icons-' + flavour, render_flavour_targets)
+      alias_target('render+symlink-icons-' + flavour, render_and_symlink_flavour)
+      alias_target('cleanup-rendered-icons-' + flavour, cleanup_rendered_flavour)
+    endif
 
     if is_accent
       render_accented_targets += render_flavour_targets
@@ -151,40 +161,26 @@ foreach flavour: icon_flavors
     # The part above this line is meant to only contain "target definition"
     # not to install or generate things. Put them below!
 
+    excluded_folders = []
+
+    if not uses_panel_icons
+      excluded_folders += run_command('find', icon_dir,
+        '-type', 'd',
+        '(',
+          '-name', 'panel',
+          '-or',
+          '-name', 'animations',
+        ')',
+        '-printf', '%P\\n',
+      ).stdout().strip().split('\n')
+    endif
+
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
       strip_directory: true,
       exclude_files: ['index.theme', 'cursor.theme'],
+      exclude_directories: excluded_folders,
     )
-
-    # install unity and MATE panel-icons
-    if get_option('ubuntu-unity') or get_option('mate')
-      # install light panel icons
-      install_subdir('panel',
-        install_dir: theme_install_dir,
-        strip_directory: true,
-      )
-    endif
-
-    # install dark panel icons (generate a new -dark variant)
-    if get_option('mate-dark')
-      dark_theme_name = theme_name + '-dark'
-      dark_theme_install_dir = theme_install_dir + '-dark'
-      install_subdir('panel-dark',
-        install_dir: dark_theme_install_dir,
-        strip_directory: true,
-        exclude_files: ['index.theme'],
-      )
-      conf_data = configuration_data()
-      conf_data.set('ThemeName', theme_name)
-      conf_data.set('DarkThemeName', dark_theme_name)
-      file = configure_file(
-        input : join_paths('panel-dark', 'index.theme'),
-        output : dark_theme_name + '-index.theme',
-        configuration : conf_data
-      )
-      install_data(file, install_dir: dark_theme_install_dir, rename: 'index.theme')
-    endif
 
     # install cursor thumbnail (cinnamon only)
     if get_option('cinnamon-shell') and flavour == 'default'
@@ -212,6 +208,12 @@ foreach flavour: icon_flavors
         )
         have_file = true
       elif theme == 'index.theme'
+        generate_index_theme_args = []
+
+        foreach ef: excluded_folders
+          generate_index_theme_args += ['--exclude-directory', ef]
+        endforeach
+
         file = configure_file(
           output: tmp_name,
           command: [
@@ -221,7 +223,7 @@ foreach flavour: icon_flavors
             '--output-dir', '@OUTDIR@',
             '--output-name', '@OUTPUT@',
             is_flavour ? ['--inherits', meson.project_name()] : [],
-          ],
+          ] + generate_index_theme_args,
         )
         have_file = true
       endif

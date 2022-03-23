@@ -84,10 +84,12 @@ DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 # Icon sizes, contexts and variants
 CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "phosh" "status" "emblems" "ui")
+OPTIONAL_CONTEXTS=("panel" "animations")
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
 OPTIONAL_SIZES=("8x8" "8x8@2x" "22x22")
-VARIANTS=("default" "mate")
+VARIANTS=("default" "dark" "mate")
 
+CONTEXTS+=("${OPTIONAL_CONTEXTS[@]}")
 SIZES+=("${OPTIONAL_SIZES[@]}")
 
 if [ -n "$_variant" ]; then
@@ -128,7 +130,9 @@ linker () {
 			if [ -z "$_dry_run" ]; then
 				ln -sf $line;
 			fi
-		elif [ $VARIANT = "default" ] && [[ ! " ${OPTIONAL_SIZES[*]} " =~ " $icon_subfolder " ]]; then
+		elif [ $VARIANT = "default" ] &&
+			 [[ ! " ${OPTIONAL_SIZES[*]} " =~ " $icon_subfolder " ]] &&
+			 [[ ! " ${OPTIONAL_CONTEXTS[*]} " =~ " $CONTEXT " ]]; then
 			# The default variant must have all icons availables
 			echo "error symlinking \"$line\" for $icon_subfolder/$CONTEXT: could not find symlink file \"$SOURCE_FILE\" in $(pwd)"
 			exit 1
