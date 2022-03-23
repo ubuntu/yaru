@@ -47,6 +47,7 @@ if __name__ == '__main__':
     parser.add_argument('--filter', action='append', default=[])
     parser.add_argument('--exclude', action='append', default=[])
     parser.add_argument('--exclude-directory', action='append', default=[])
+    parser.add_argument('--exclude-context', action='append', default=[])
 
     args = parser.parse_args()
     src_dir = os.path.join(os.path.abspath(args.source_dir))
@@ -74,7 +75,8 @@ if __name__ == '__main__':
         rel_path = os.path.relpath(icon, src_dir)
         [directory, _] = rel_path.rsplit('/', 1)
 
-        if directory not in args.exclude_directory:
+        if (directory not in args.exclude_directory and
+            directory.split('/')[-1] not in args.exclude_context):
             directories.add(directory)
 
     theme['Icon Theme']['Directories'] = ','.join(directories)
