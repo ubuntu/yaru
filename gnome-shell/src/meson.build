@@ -40,9 +40,11 @@ assert(theme_sources.length() > 0, 'No theme sources found')
 theme_assets = files(
   run_command(
     'find', meson.current_source_dir(), '-maxdepth', '1',
-    '-name', '*.svg',
-    '-or',
-    '-name', '*.css'
+    '(',
+      '-name', '*.svg',
+      '-or',
+      '-name', '*.css',
+    ')',
   ).stdout().strip().split('\n')
 )
 
