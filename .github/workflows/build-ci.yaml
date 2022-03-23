@@ -34,3 +34,9 @@ jobs:
     - name: Install
       run: |
         ninja -C _build install
+
+    - name: Archiving meson logs
+      uses: actions/upload-artifact@v3
+      with:
+        name: meson-logs
+        path: _build/meson-logs
