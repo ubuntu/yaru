@@ -48,13 +48,16 @@ window#Main.background {
 }
 
 // Fix for invivible caret navigation in dark theme
-.caja-navigation-window widget.view widget.entry {
-  background: if($variant=="light", darken($bg_color, 5%), lighten($bg_color, 5%));
-  color: $fg_color;
-  border-color: $borders_color;
-
-  &:selected {
-    background: $selected_bg_color;
-    color: $selected_fg_color;
+.caja-navigation-window,
+.caja-desktop-window {
+  widget.view widget.entry {
+    background: if($variant=="light", darken($bg_color, 5%), lighten($bg_color, 5%));
+    color: $fg_color;
+    border-color: $borders_color;
+  
+    &:selected {
+      background: $selected_bg_color;
+      color: $selected_fg_color;
+    }
   }
 }
