@@ -44,7 +44,7 @@ jobs:
           {
             project: baobab symbolics,
             repo: "https://gitlab.gnome.org/GNOME/baobab.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: baobab-symbolics,
             projectdir: baobab,
             src: .,
@@ -53,7 +53,7 @@ jobs:
           {
             project: gnome-characters symbolics,
             repo: "https://gitlab.gnome.org/GNOME/gnome-characters.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: gnome-characters-symbolics,
             projectdir: gnome-characters,
             src: .,
