@@ -3,8 +3,8 @@
 	<info>
 		<name>@FlavourThemeName@</name>
 		<author>Martin Wimpress</author>
-		<copyright>Martin Wimpress, 2021</copyright>
-		<date>January 20, 2021</date>
+		<copyright>Martin Wimpress, 2021-2022</copyright>
+		<date>March 24, 2022</date>
 		<description>@FlavourThemeName@ Metacity (Marco) Theme</description>
 	</info>
 
@@ -785,7 +785,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="modal_dialog_focused" geometry="nobuttons">
+	<frame_style name="modal_dialog_focused" geometry="normal">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
@@ -818,7 +818,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="modal_dialog_unfocused" geometry="nobuttons">
+	<frame_style name="modal_dialog_unfocused" geometry="normal">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
@@ -851,7 +851,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="modal_dialog_shaded_focused" geometry="nobuttons_shaded">
+	<frame_style name="modal_dialog_shaded_focused" geometry="normal_shaded">
 		<piece position="entire_background" draw_ops="entire_background_focused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_focused" />
 		<piece position="title" draw_ops="title_focused" />
@@ -884,7 +884,7 @@
 		<button function="unstick" state="pressed"><draw_ops></draw_ops></button>
 	</frame_style>
 
-	<frame_style name="modal_dialog_shaded_unfocused" geometry="nobuttons_shaded">
+	<frame_style name="modal_dialog_shaded_unfocused" geometry="normal_shaded">
 		<piece position="entire_background" draw_ops="entire_background_unfocused" />
 		<piece position="titlebar" draw_ops="titlebar_fill_unfocused" />
 		<piece position="title" draw_ops="title_unfocused" />
