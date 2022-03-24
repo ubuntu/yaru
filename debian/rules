@@ -8,5 +8,7 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 		-Dgnome-shell-gresource=true \
 		-Dubuntu-unity=true \
+		-Dpanel=true \
+		-Dpanel-dark=true \
 		-Dsessions=false \
 		-Dxfwm4=true

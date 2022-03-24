@@ -46,6 +46,7 @@ if __name__ == '__main__':
     parser.add_argument('theme_name')
     parser.add_argument('--inherits', action='append',
         default=['hicolor', 'Humanity'])
+    parser.add_argument('--no-inherits', action='store_true')
     parser.add_argument(
         '--comment', default='A desktop adaptation of the Ubuntu mobile icons.')
     parser.add_argument('--source-dir', default=None)
@@ -65,7 +66,7 @@ if __name__ == '__main__':
     theme['Icon Theme'] = {
         'Name': args.theme_name,
         'Comment': args.comment,
-        'Inherits': ','.join(args.inherits),
+        'Inherits': '' if args.no_inherits else ','.join(args.inherits),
         'Example': 'folder',
     }
 

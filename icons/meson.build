@@ -1,10 +1,14 @@
 icon_flavors = [
   'default',
-  'dark',
   'mate',
-  'mate-dark',
 ]
 
+panel_flavors = [
+  'panel',
+  'panel-dark',
+]
+
+icon_flavors += panel_flavors
 icon_flavors += enabled_accent_colors
 
 fullcolor_path = 'src' / 'fullcolor'
@@ -12,7 +16,6 @@ render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py', required: tr
 generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh', required: true)
 generate_index_theme = find_program('src' / 'generate-index-theme.py', required: true)
 accent_color_gtk_version_reference = '3.0'
-uses_panel_icons = get_option('ubuntu-unity') or get_option('mate')
 render_targets = []
 render_accented_targets = []
 render_and_symlink_targets = []
@@ -23,6 +26,7 @@ cleanup_rendered_icons_targets = []
 cleanup_rendered_icons_accented_targets = []
 
 foreach flavour: icon_flavors
+  is_panel = panel_flavors.contains(flavour)
   is_accent = enabled_accent_colors.contains(flavour)
   if is_accent and not get_option('gtk')
     warning('GTK is not enabled, so we won\'t be able to generate accent colors')
@@ -161,25 +165,10 @@ foreach flavour: icon_flavors
     # The part above this line is meant to only contain "target definition"
     # not to install or generate things. Put them below!
 
-    excluded_folders = []
-
-    if not uses_panel_icons
-      excluded_folders += run_command('find', icon_dir,
-        '-type', 'd',
-        '(',
-          '-name', 'panel',
-          '-or',
-          '-name', 'animations',
-        ')',
-        '-printf', '%P\\n',
-      ).stdout().strip().split('\n')
-    endif
-
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
       strip_directory: true,
       exclude_files: ['index.theme', 'cursor.theme'],
-      exclude_directories: excluded_folders,
     )
 
     # install cursor thumbnail (cinnamon only)
@@ -188,6 +177,24 @@ foreach flavour: icon_flavors
         join_paths('src', 'cursors', 'thumbnail.png'),
         install_dir: join_paths(theme_install_dir, 'cursors')
       )
+    endif
+
+    # Generate a dark version of each theme
+    if not is_panel and get_option('panel-dark')
+      dark_theme_name = theme_name + '-dark'
+      dark_theme_install_dir = theme_install_dir + '-dark'
+      tmp_name = dark_theme_name + '-index.theme'
+
+      conf_data = configuration_data()
+      conf_data.set('DarkThemeName', dark_theme_name)
+      conf_data.set('PanelDarkThemeName', meson.project_name() + '-panel-dark')
+      conf_data.set('ThemeName', theme_name)
+      file = configure_file(
+        input : join_paths('src', 'panel', 'dark-index.theme'),
+        output : tmp_name,
+        configuration : conf_data
+      )
+      install_data(file, install_dir: dark_theme_install_dir, rename: 'index.theme')
     endif
 
     themes_f = [
@@ -210,9 +217,13 @@ foreach flavour: icon_flavors
       elif theme == 'index.theme'
         generate_index_theme_args = []
 
-        foreach ef: excluded_folders
-          generate_index_theme_args += ['--exclude-directory', ef]
-        endforeach
+        if is_panel
+          generate_index_theme_args += '--no-inherits'
+        elif is_flavour
+          generate_index_theme_args += ['--inherits', meson.project_name()]
+        elif get_option('panel')
+          generate_index_theme_args += ['--inherits', meson.project_name() + '-panel']
+        endif
 
         file = configure_file(
           output: tmp_name,
@@ -222,7 +233,6 @@ foreach flavour: icon_flavors
             '--source-dir', meson.current_source_dir() / icon_dir,
             '--output-dir', '@OUTDIR@',
             '--output-name', '@OUTPUT@',
-            is_flavour ? ['--inherits', meson.project_name()] : [],
           ] + generate_index_theme_args,
         )
         have_file = true

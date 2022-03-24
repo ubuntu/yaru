@@ -14,6 +14,8 @@ option('default', type: 'boolean', value: true, description:'build Yaru default 
 option('dark', type: 'boolean', value: true, description:'build Yaru dark flavour')
 option('mate', type: 'boolean', value: false, description:'build Yaru mate flavour')
 option('mate-dark', type: 'boolean', value: false, description:'build Yaru mate-dark flavour')
+option('panel', type: 'boolean', value: false, description:'build Yaru panel icons')
+option('panel-dark', type: 'boolean', value: false, description:'build Yaru panel-dark icons')
 option('ubuntu-unity', type: 'boolean', value: false, description:'build Yaru with Unity assets')
 option('xfwm4', type: 'boolean', value: false, description:'build Yaru with xfwm4 assets')
 option('cinnamon', type: 'boolean', value: false, description:'build Yaru with Cinnamon flavour')
