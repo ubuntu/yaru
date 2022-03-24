@@ -99,11 +99,16 @@ MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
 /* outlines */
 window.background, /* selector where outlines are writen on GtkTrayIcon */
 .mate-panel-menu-bar menubar,
-.mate-panel-menu-bar button,
+// .mate-panel-menu-bar button,
 .mate-panel-menu-bar PanelApplet {
     outline-style: solid;
     outline-offset: -2px;
     outline-color: $focus_border_color;
+}
+
+// Hide focus outline on menu-bar buttons
+.mate-panel-menu-bar button {
+  outline-color: transparent;
 }
 
 PanelApplet.wnck-applet .wnck-pager {
