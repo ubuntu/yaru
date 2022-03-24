@@ -162,6 +162,10 @@ foreach flavour: icon_flavors
     # not to install or generate things. Put them below!
 
     excluded_folders = []
+    excluded_files = [
+      'index.theme',
+      'cursor.theme',
+    ]
 
     if not uses_panel_icons
       excluded_folders += run_command('find', icon_dir,
@@ -175,12 +179,75 @@ foreach flavour: icon_flavors
       ).stdout().strip().split('\n')
     endif
 
+    symlinks = []
+    if meson.version().version_compare('>= 0.61') and fs.is_dir(icon_dir)
+      message('Looking for symlinks in ' + icon_dir)
+
+      find_args = []
+      foreach f: excluded_folders
+        find_args += ['(', '-not', '-path', icon_dir / f / '*', '-prune', ')' ]
+      endforeach
+
+      local_links = run_command(
+        'find',
+        icon_dir,
+        '-type', 'l',
+        find_args,
+        check: true,
+      ).stdout().strip().split('\n')
+
+      if local_links.length() == 1 and local_links[0] == ''
+        local_links = []
+      endif
+
+      if local_links.length() > 0
+        links_targets = run_command(
+          'realpath', '-e',
+          '--relative-to=' + meson.current_source_dir() / icon_dir,
+          local_links,
+          check: true,
+        ).stdout().strip().split('\n')
+        assert(local_links.length() == links_targets.length())
+      endif
+
+      foreach i: range(local_links.length())
+        link_paths = local_links[i].split('/')
+        link_subdirs = []
+        foreach j: range(link_paths.length() - 1)
+          link_subdirs += link_paths[j+1]
+        endforeach
+        sub_link = '/'.join(link_subdirs)
+        symlinks += sub_link
+      endforeach
+
+      excluded_files += symlinks
+    endif
+
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
       strip_directory: true,
-      exclude_files: ['index.theme', 'cursor.theme'],
+      exclude_files: excluded_files,
       exclude_directories: excluded_folders,
     )
+
+    if meson.version().version_compare('>= 0.61')
+      foreach i: range(symlinks.length())
+        link_path = fs.parent(symlinks[i])
+        symlink_dir = theme_install_dir / link_path
+        target = links_targets[i]
+
+        if link_path == fs.parent(target)
+          target = fs.name(target)
+        else
+          target = '..' / '..' / target
+        endif
+
+        install_symlink(fs.name(symlinks[i]),
+          install_dir: symlink_dir,
+          pointing_to: target,
+        )
+      endforeach
+    endif
 
     # install cursor thumbnail (cinnamon only)
     if get_option('cinnamon-shell') and flavour == 'default'
