@@ -1,0 +1,50 @@
+# Based on Bridge by ScionicSpectre
+# vim:set ts=2 sw=2 sts=2 ai et:
+#
+# This is the GTK+ 2 version of Adwaita. It's whole purpose is to look as the
+# GTK+ 3 version as much as possible until GTK+ 2 dies completely.
+#
+# Note: comments for explaining styles are on the bottom of each file beside the
+# widget matches.
+
+# Declare the colours used throughout the theme.
+# There shouldn't be any fiddling with them in the theme files themselves in
+# order to not mess up the dark theme.
+
+# Text/base
+gtk-color-scheme = "text_color:#5D5D5D\nbase_color:#FFFFFF"
+# Foreground/background
+gtk-color-scheme = "fg_color:#3D3D3D\nbg_color:#F5F6F7"
+# Selected foreground/background
+gtk-color-scheme = "selected_fg_color:#ffffff\nselected_bg_color:#308280"
+# Insensitive foreground/background
+gtk-color-scheme = "insensitive_fg_color:#8b8e8f\ninsensitive_bg_color:#f1f1f1"
+# Menus
+gtk-color-scheme = "menu_color:#fafafa\nmenubar_bg:#f5f6f7"
+gtk-color-scheme = "menubar_fg:#3d3d3d\nmenubar_insensitive_fg:#3d3d3d"
+# Links
+gtk-color-scheme = "link_color:#308280\nvisited_link_color:#307682"
+# Treeview headers
+gtk-color-scheme = "column_header_color:#979a9b\nhover_column_header_color:#636769"
+# Window decoration
+gtk-color-scheme = "menu_hover_color:#e2e2e2\nwindow_color:#f4f4f4"
+# Tooltips
+gtk-color-scheme = "tooltip_fg_color:#ffffff\ntooltip_bg_color:#343434"
+
+# Set GTK settings
+gtk-auto-mnemonics              = 1
+gtk-primary-button-warps-slider = 1
+gtk-icon-sizes="gtk-menu=16,16:
+gtk-button=16,16:
+gtk-small-toolbar=16,16:
+
+gtk-dnd=16,16:
+gtk-dialog=16,16"
+gtk-toolbar-style = GTK_TOOLBAR_ICONS
+gtk-menu-images = 0
+gtk-menu-popup-delay = 0
+
+# And hand over the control to the theme files
+include "main.rc"
+include "apps.rc"
+include "hacks.rc"
