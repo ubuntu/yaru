@@ -463,3 +463,11 @@ scale:not(.marks-after) {
     }
   }
 }
+
+// Fix for selected image
+// By default this use white, but as we use lighter bg_color
+// we need a darker selected background on light theme
+// and a lighter one on dark theme
+image:selected {
+  background: if($variant == 'light', darken($bg_color, 10%), lighten($bg_color, 10%));
+}
