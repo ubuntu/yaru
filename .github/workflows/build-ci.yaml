@@ -23,6 +23,7 @@ jobs:
     - name: Configure
       run: |
         meson _build \
+          -Dauto_features=enabled \
           -Dgnome-shell-gresource=true \
           -Dmate=true \
           -Dmate-dark=true \
