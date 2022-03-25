@@ -247,7 +247,11 @@ foreach variant: variants
         # We could use a simpler definition, but that breaks $DESTDIR usage
         # https://github.com/mesonbuild/meson/pull/10176
         #pointing_to: get_option('prefix') / install_dir`
-        pointing_to: '..' / '..' / '..' / install_dir,
+        pointing_to: run_command(python, '-c',
+          'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
+          install_dir,
+          gnomeshell_alt_themes_dir / theme_full_name
+        ).stdout().strip(),
       )
     else
       meson.add_install_script('install-shell.sh', theme_full_name)

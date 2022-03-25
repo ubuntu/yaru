@@ -248,7 +248,11 @@ foreach flavour: icon_flavors
         if link_path == fs.parent(target)
           target = fs.name(target)
         else
-          target = '..' / '..' / target
+          target = run_command(python, '-c',
+            'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
+            target,
+            link_path
+          ).stdout().strip()
         endif
 
         install_symlink(fs.name(symlinks[i]),
