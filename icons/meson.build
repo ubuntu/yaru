@@ -1,3 +1,8 @@
+PANEL_ONLY_ICONS_CATEGORIES = [
+  'animations',
+  'panel',
+]
+
 icon_flavors = [
   'default',
   'dark',
@@ -168,13 +173,17 @@ foreach flavour: icon_flavors
     ]
 
     if not uses_panel_icons
+      included_names = []
+      foreach i: range(PANEL_ONLY_ICONS_CATEGORIES.length())
+        included_names += ['-name', PANEL_ONLY_ICONS_CATEGORIES[i]]
+        if i < PANEL_ONLY_ICONS_CATEGORIES.length() - 1
+          included_names += '-or'
+        endif
+      endforeach
+
       excluded_folders += run_command('find', icon_dir,
         '-type', 'd',
-        '(',
-          '-name', 'panel',
-          '-or',
-          '-name', 'animations',
-        ')',
+        included_names.length() > 0 ? ['('] + included_names + [')'] : [],
         '-printf', '%P\\n',
       ).stdout().strip().split('\n')
     endif
