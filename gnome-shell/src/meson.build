@@ -95,12 +95,13 @@ foreach variant: variants
   is_variant = variant != DEFAULT_VARIANT
   variant_base_name = is_dark ? variant.split('-dark')[0] : variant
   variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
+  theme_full_name = meson.project_name() + variant_suffix
   is_custom_accent = enabled_accent_colors.contains(variant_base_name)
 
   if gnomeshell_use_gresource
     install_dir = join_paths(
       gnomeshell_alt_themes_dir,
-      meson.project_name() + variant_suffix,
+      theme_full_name,
       'gnome-shell')
   else
     install_dir = gnomeshell_theme_dir + variant_suffix
@@ -238,6 +239,20 @@ foreach variant: variants
 
   # install static data files
   install_data(data_sources, install_dir: install_dir)
+
+  if not gnomeshell_use_gresource
+    if meson.version().version_compare('>= 0.61')
+      install_symlink('gnome-shell',
+        install_dir: gnomeshell_alt_themes_dir / theme_full_name,
+        # We could use a simpler definition, but that breaks $DESTDIR usage
+        # https://github.com/mesonbuild/meson/pull/10176
+        #pointing_to: get_option('prefix') / install_dir`
+        pointing_to: '..' / '..' / '..' / install_dir,
+      )
+    else
+      meson.add_install_script('install-shell.sh', theme_full_name)
+    endif
+  endif
 endforeach
 
 if gnomeshell_use_gresource
@@ -282,10 +297,4 @@ if gnomeshell_use_gresource
     install: true,
     install_dir: gnomeshell_theme_dir,
   )
-else
-  # Symlink variants
-  foreach variant: variants
-    variant_suffix = (variant != DEFAULT_VARIANT) ? '-@0@'.format(variant)  : ''
-    meson.add_install_script('install-shell.sh', meson.project_name() + variant_suffix)
-  endforeach
 endif
