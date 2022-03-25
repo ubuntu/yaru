@@ -88,7 +88,7 @@ foreach flavour: icon_flavors
       category = fs.name(fs.parent(svg))
       render_bitmap_target = custom_target('render-icon-' + '-'.join([category, basename, flavour]),
         input: svg,
-        output: 'rendered-@BASENAME@-' + '-'.join([category, flavour]) + '.svg',
+        output: 'rendered-@0@-@BASENAME@-@1@.svg'.format(category, flavour),
         command: [
           render_bitmaps,
           rendering_args,
