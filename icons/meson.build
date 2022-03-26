@@ -28,13 +28,18 @@ cleanup_rendered_icons_targets = []
 cleanup_rendered_icons_accented_targets = []
 
 foreach flavour: icon_flavors
+  is_dark = flavour == 'dark'
+  is_dark_flavour = is_dark or flavour.endswith('-dark')
   is_accent = enabled_accent_colors.contains(flavour)
-  if is_accent and not get_option('gtk')
+  base_flavour = is_dark_flavour and not is_dark ? flavour.split('-dark')[0] : ''
+  is_dark_accent = is_dark_flavour and enabled_accent_colors.contains(base_flavour)
+
+  if (is_accent or is_dark_accent) and not get_option('gtk')
     warning('GTK is not enabled, so we won\'t be able to generate accent colors')
     continue
   endif
 
-  if is_accent or get_option(flavour)
+  if (is_accent or is_dark_accent) or get_option(flavour)
     is_flavour = flavour != 'default'
     suffix = is_flavour ? '-@0@'.format(flavour) : ''
     icon_dir = 'Yaru' + suffix
@@ -294,6 +299,35 @@ foreach flavour: icon_flavors
           generate_index_theme_args += ['--exclude-directory', ef]
         endforeach
 
+        if is_flavour
+          if is_dark_flavour and not is_dark
+            dark_theme = meson.project_name() + '-dark'
+            dark_folders = run_command(
+              'find',
+              dark_theme,
+              '!', '-path', dark_theme,
+              '-type', 'd',
+              '-maxdepth', '1',
+            ).stdout().strip().split('\n')
+
+            foreach folder: dark_folders
+              install_symlink(fs.name(folder),
+                install_dir: theme_install_dir,
+                pointing_to: '..' / folder,
+              )
+            endforeach
+            generate_index_theme_args += [
+              '--inherits', dark_theme
+            ]
+          endif
+
+          inherited_flavour = base_flavour != '' ? '-' + base_flavour : ''
+            generate_index_theme_args += [
+              '--inherits', meson.project_name() + inherited_flavour
+            ]
+          message(flavour, generate_index_theme_args)
+        endif
+
         file = configure_file(
           output: tmp_name,
           command: [
@@ -302,7 +336,6 @@ foreach flavour: icon_flavors
             '--source-dir', meson.current_source_dir() / icon_dir,
             '--output-dir', '@OUTDIR@',
             '--output-name', '@OUTPUT@',
-            is_flavour ? ['--inherits', meson.project_name()] : [],
           ] + generate_index_theme_args,
         )
         have_file = true
