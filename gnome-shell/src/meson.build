@@ -17,7 +17,7 @@ INCLUDE_HIGH_CONTRAST_VARIANTS = false
 
 foreach accent: enabled_accent_colors
   if enabled_accent_colors.contains(accent)
-    variants += [ accent, accent + '-dark']
+    variants += [ accent ] + (get_option('dark') ? [ accent + '-dark' ] : [])
   endif
 endforeach
 
