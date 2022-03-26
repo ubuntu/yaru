@@ -10,7 +10,9 @@ icon_flavors = [
   'mate-dark',
 ]
 
-icon_flavors += enabled_accent_colors
+foreach accent: enabled_accent_colors
+  icon_flavors += [accent] + (get_option('dark') ? [ accent + '-dark' ] : [])
+endforeach
 
 fullcolor_path = 'src' / 'fullcolor'
 render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py', required: true)
@@ -306,22 +308,40 @@ foreach flavour: icon_flavors
         if is_flavour
           if is_dark_flavour and not is_dark
             dark_theme = meson.project_name() + '-dark'
-            dark_folders = run_command(
-              'find',
-              dark_theme,
-              '!', '-path', dark_theme,
-              '-type', 'd',
-              '-maxdepth', '1',
-            ).stdout().strip().split('\n')
 
-            foreach folder: dark_folders
-              install_symlink(fs.name(folder),
-                install_dir: theme_install_dir,
-                pointing_to: '..' / folder,
-              )
-            endforeach
+            if not fs.is_dir(theme_dir)
+              # Since we don't have a specific dark theme, we are just re-using
+              # the default dark theme as fallback, while the base flavour theme
+              # is still inherited as primary.
+              dark_folders = run_command(
+                'find',
+                dark_theme,
+                '!', '-path', dark_theme,
+                '-type', 'd',
+                '-maxdepth', '1',
+              ).stdout().strip().split('\n')
+
+              foreach f: dark_folders
+                if meson.version().version_compare('>= 0.61')
+                  install_symlink(fs.name(f),
+                    install_dir: theme_install_dir,
+                    pointing_to: '..' / f,
+                  )
+                else
+                  meson.add_install_script('bash', '-c',
+                    'ln -svf @0@ ${DESTDIR}/@1@'.format(
+                      '..' / f, theme_install_dir))
+                endif
+              endforeach
+
+              foreach c: uses_panel_icons ? [] : PANEL_ONLY_ICONS_CATEGORIES
+                generate_index_theme_args += ['--exclude-context', c]
+              endforeach
+            endif
+
             generate_index_theme_args += [
-              '--inherits', dark_theme
+              '--inherits', dark_theme,
+              '--source-dir', meson.current_source_dir() / dark_theme,
             ]
           endif
 
@@ -329,7 +349,6 @@ foreach flavour: icon_flavors
             generate_index_theme_args += [
               '--inherits', meson.project_name() + inherited_flavour
             ]
-          message(flavour, generate_index_theme_args)
         endif
 
         file = configure_file(
