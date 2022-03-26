@@ -194,7 +194,7 @@ foreach flavour: icon_flavors
     endif
 
     symlinks = []
-    if meson.version().version_compare('>= 0.61') and fs.is_dir(icon_dir)
+    if fs.is_dir(icon_dir)
       message('Looking for symlinks in ' + icon_dir)
 
       find_args = []
@@ -244,28 +244,32 @@ foreach flavour: icon_flavors
       exclude_directories: excluded_folders,
     )
 
-    if meson.version().version_compare('>= 0.61')
-      foreach i: range(symlinks.length())
-        link_path = fs.parent(symlinks[i])
-        symlink_dir = theme_install_dir / link_path
-        target = links_targets[i]
+    foreach i: range(symlinks.length())
+      link_path = fs.parent(symlinks[i])
+      symlink_dir = theme_install_dir / link_path
+      target = links_targets[i]
 
-        if link_path == fs.parent(target)
-          target = fs.name(target)
-        else
-          target = run_command(python, '-c',
-            'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
-            target,
-            link_path
-          ).stdout().strip()
-        endif
+      if link_path == fs.parent(target)
+        target = fs.name(target)
+      else
+        target = run_command(python, '-c',
+          'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
+          target,
+          link_path
+        ).stdout().strip()
+      endif
 
+      if meson.version().version_compare('>= 0.61')
         install_symlink(fs.name(symlinks[i]),
           install_dir: symlink_dir,
           pointing_to: target,
         )
-      endforeach
-    endif
+      else
+        meson.add_install_script('bash', '-c',
+          'mkdir -p "${DESTDIR}/@1@" && ln -svf @2@ ${DESTDIR}/@1@/@0@'.format(
+            fs.name(symlinks[i]), symlink_dir, target))
+      endif
+    endforeach
 
     # install cursor thumbnail (cinnamon only)
     if get_option('cinnamon-shell') and flavour == 'default'
