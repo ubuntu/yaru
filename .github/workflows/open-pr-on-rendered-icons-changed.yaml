@@ -86,7 +86,7 @@ jobs:
         if: ${{ steps.check-changed.outputs.changes != '[]' }}
         id: check-rendering
         run: |
-          if [ -z "$(git status --porcelain --untracked-files=no | wc -l)" ]; then
+          if [ -z "$(git status --porcelain)" ]; then
             changed=false
           else
             changed=true
