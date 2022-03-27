@@ -139,7 +139,7 @@ foreach variant: variants
     endif
 
     asset_target = custom_target(
-      basename + '-' + variant,
+      fs.stem(basename) + '-' + variant + '.svg',
       input: colorable_asset,
       output: '@BASENAME@-@0@.svg'.format(variant),
       command: [
