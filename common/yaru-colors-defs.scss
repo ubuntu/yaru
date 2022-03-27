@@ -6,13 +6,14 @@ $variant: if($yaru_is_dark_variant, 'dark', 'light');
 @import 'colors';
 
 $yaru_colors: (
-    bg-color: if($variant == 'dark', lighten($bg_color, 2%), $porcelain),
+    bg-color: $bg_color,
     accent-bg-color: $yaru_accent_bg_color,
     accent-active-color: $progress_bg_color,
     accent-focused-color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%)),
     border-color: $borders_color,
     disabled-bg-color: mix($bg_color, $fg_color, 80%),
     switch-bg-color: if($variant == 'dark', lighten($inkstone, 5%), lighten($ash, 20%)),
+    check-bg-color: if($variant == 'dark', lighten($bg_color, 2%), $porcelain),
 );
 
 $yaru_colors: map-merge($yaru_colors, (

@@ -32,6 +32,7 @@ DUMMY_COLORS = {
     'border-color': '#ff00ff',
     'disabled-bg-color': '#ffff02',
     'switch-bg-color': '#ffff01',
+    'check-bg-color': '#ffff03',
 }
 
 def read_colors_replacements(css_file):
