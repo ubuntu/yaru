@@ -6,17 +6,17 @@ $variant: if($yaru_is_dark_variant, 'dark', 'light');
 @import 'colors';
 
 $yaru_colors: (
-    bg_color: if($variant == 'dark', lighten($bg_color, 2%), $porcelain),
-    accent_bg_color: $yaru_accent_bg_color,
-    accent_active_color: $progress_bg_color,
-    accent_focused_color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%)),
-    border_color: $borders_color,
-    disabled_bg_color: mix($bg_color, $fg_color, 80%),
-    switch_bg_color: if($variant == 'dark', lighten($inkstone, 5%), lighten($ash, 20%)),
+    bg-color: if($variant == 'dark', lighten($bg_color, 2%), $porcelain),
+    accent-bg-color: $yaru_accent_bg_color,
+    accent-active-color: $progress_bg_color,
+    accent-focused-color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%)),
+    border-color: $borders_color,
+    disabled-bg-color: mix($bg_color, $fg_color, 80%),
+    switch-bg-color: if($variant == 'dark', lighten($inkstone, 5%), lighten($ash, 20%)),
 );
 
 $yaru_colors: map-merge($yaru_colors, (
-    accent_border_color: lighten(map-get($yaru_colors, accent_active_color), 17%),
+    accent-border-color: lighten(map-get($yaru_colors, accent-active-color), 17%),
 ));
 
 @function opaque-color($color, $background: $bg_color) {
@@ -30,17 +30,13 @@ $yaru_colors: map-merge($yaru_colors, (
     @return $solid-color;
 }
 
-@function stringify-color($name, $color) {
-    @return 'yaru_' + $name + ' ' + $color;
-}
-
+* {
 @each $name, $color in $yaru_colors {
-    $opaque: opaque-color($color);
-    $defined: stringify-color($name, $color);
-    @define-color #{$defined};
+    -yaru-#{$name}: #{$color};
 
+    $opaque: opaque-color($color);
     @if $opaque != $color {
-        $defined: stringify-color($name + 'opaque_', $opaque);
-        @define-color #{$defined};
+        -yaru-#{$name}-opaque: $opaque;
     }
 }
+};
