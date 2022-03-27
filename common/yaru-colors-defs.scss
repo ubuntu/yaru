@@ -5,19 +5,25 @@ $variant: if($yaru_is_dark_variant, 'dark', 'light');
 
 @import 'colors';
 
-$yaru_accent_active_color: $progress_bg_color;
-$yaru_accent_border_color: lighten($yaru_accent_active_color, 17%);
-$yaru_border_color: $borders_color;
-$yaru_accent_focused_color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%));
-$yaru_bg_color: if($variant == 'dark', lighten($bg_color, 2%), $porcelain);
-$yaru_disabled_bg_color: mix($bg_color, $fg_color, 80%);
-$yaru_switch_bg_color: if($variant == 'dark', lighten($inkstone, 5%), lighten($ash, 20%));
+$yaru_colors: (
+    bg_color: if($variant == 'dark', lighten($bg_color, 2%), $porcelain),
+    accent_bg_color: $yaru_accent_bg_color,
+    accent_active_color: $progress_bg_color,
+    accent_focused_color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%)),
+    border_color: $borders_color,
+    disabled_bg_color: mix($bg_color, $fg_color, 80%),
+    switch_bg_color: if($variant == 'dark', lighten($inkstone, 5%), lighten($ash, 20%)),
+);
 
-@define-color yaru_accent_bg_color #{"" + $yaru_accent_bg_color };
-@define-color yaru_accent_active_color #{"" + $yaru_accent_active_color };
-@define-color yaru_accent_border_color #{"" + $yaru_accent_border_color };
-@define-color yaru_border_color #{"" + $yaru_border_color };
-@define-color yaru_accent_focused_color #{"" + $yaru_accent_focused_color };
-@define-color yaru_bg_color #{"" + $yaru_bg_color };
-@define-color yaru_disabled_bg_color #{"" + $yaru_disabled_bg_color };
-@define-color yaru_switch_bg_color #{"" + $yaru_switch_bg_color };
+$yaru_colors: map-merge($yaru_colors, (
+    accent_border_color: lighten(map-get($yaru_colors, accent_active_color), 17%),
+));
+
+@function stringify-color($name, $color) {
+    @return 'yaru_' + $name + ' ' + $color;
+}
+
+@each $name, $color in $yaru_colors {
+    $defined: stringify-color($name, $color);
+    @define-color #{$defined};
+}
