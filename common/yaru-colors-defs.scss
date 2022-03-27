@@ -19,11 +19,28 @@ $yaru_colors: map-merge($yaru_colors, (
     accent_border_color: lighten(map-get($yaru_colors, accent_active_color), 17%),
 ));
 
+@function opaque-color($color, $background: $bg_color) {
+    @if alpha($color) == 1 {
+        @return $color;
+    }
+
+    $percent: alpha($color) * 100%;
+    $opaque: opacify($color, 1);
+    $solid-color: mix($opaque, $background, $percent);
+    @return $solid-color;
+}
+
 @function stringify-color($name, $color) {
     @return 'yaru_' + $name + ' ' + $color;
 }
 
 @each $name, $color in $yaru_colors {
+    $opaque: opaque-color($color);
     $defined: stringify-color($name, $color);
     @define-color #{$defined};
+
+    @if $opaque != $color {
+        $defined: stringify-color($name + 'opaque_', $opaque);
+        @define-color #{$defined};
+    }
 }
