@@ -1,3 +1,120 @@
+yaru-theme (22.04.3.1) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * gtk: Do not use shell scss sources to define accent colors used by icons
+  * github: Generate rendered icons and symlinks automatically
+  * icons: Use more predicibile rendering target names
+  * meson: Render each icon separately to use multi-process rendering
+  * render-bitmaps: Fail in case no SVG is rendered
+  * meson: Allow to render one icon across all the flavours separately
+  * render-bitmaps: Support searching for icons by category
+  * github: Add automated workflow to optimize SVG
+  * github: Do a full icons rebuild if the renderer script changes
+  * icons/generate-symlinks.sh: Ignore empty lines on list file
+  * icons/phosh.list: Remove trailing empty line
+  * CI: Split build workflow in multiple steps
+  * icons: Add tests to try generating symlinks
+  * meson: Use more fs filename modifications functions
+  * Revert "icons: modify meson and deb files (LP: #1965649)
+  * github: Fix Links on generated PRs
+  * meson: Bump dependency to 0.59 as per fs.parent() usage
+  * icons: Install panel icons only if mate or unity are enabled
+  * icons: Ensure symlinks are all generated from symlink script
+  * icons/scalable: Remove icons that are already handled via symlinks
+  * icons: Remove all the links in source dirs, they should be handled via lists
+  * CI: Recreate symlinks removing old ones
+  * CI: Detect changes on all symlinks files
+  * CI: Ensure that no symlinks are used in icon sources
+  * CI: Use inverse logic, we don't want symlinks :)
+  * CI: Cleanup rendered icons before render them again
+  * icons/accented: Remove software store from accented icons
+  * gnome-shell: Use correct syntax for or'ed find
+  * CI: Archive meson logs
+  * generate-index-theme: Support excluding a specific icons directory
+  * icons: Also generate symlinks for 22x22 icons
+  * icons: Generate panel symlinks, and install them only when needed
+  * generate-index-theme: Handle the scalable min/max size cases
+  * generate-index-theme: Use proper context names when not computable
+  * icons: Auto-generate index.theme for default and mate icon themes
+  * generate-index-theme: Support excluding elements by context
+  * generate-index-theme: Support providing custom parameters for a folder
+  * icons: Replicate symlinks in installed folder when using meson >= 0.61
+  * icons: Use nicer way to compute find command for excluded folders
+  * gnome-shell: Use native meson symlink installer when possible
+  * icons, gnome-shell: Use python-computed relative paths
+  * CI: Make meson options more readable in full build
+  * gnome-shell: Add further option to toggle UserThemes support
+  * debian/rules: Enable user themes support in packages
+  * icons: Add more accented icons
+  * icons: Use better name for rendered icon target
+  * gtk, gnome-shell: Only generate Yaru-$accent-dark themes if `dark` is set
+  * icons: Generate dark variants of the icons theme
+  * CI: Also consider untracked changes on rendering/optimizing icons
+  * CI: Use proper syntax to check on rendered icons changes
+  * icons: Install icons symlinks as such also with older meson versions
+  * icons: Inherit dark accented variants from Yaru-dark as primary choice
+  * yaru-colors-defs: Use a map to define colors so we can avoid repetitions
+  * yaru-colors-defs: Ensure we always generate opaque colors
+  * yaru-colors-defs: Use more css-style generated definitions
+  * gnome-shell: Use proper name for generated target output name
+  * gnome-shell: Define custom checkbox bg color and expose bg-color as such
+  * icons/symlinks: avoid using symlinks to symlinks not to confuse generator
+  * icons: Add speaker icons for mate
+  * debian: Include new installed files to proper package
+
+  [ Martin Wimpress ]
+  * metacity: Correct Metacity theme contrast so they match GNOME/CSD windows
+  * gtk: Add MetacityThemeName to index.theme
+  * metacity: Correct titlebar contrast for default and dark themes
+  * mate: Restore MATE icons
+  * icons: Remove Humanity icons languishing in legacy
+  * mate: Drop unnecessary MATE variations of GtkSourceView and Metacity themes
+  * icons: Add ulauncher panel icons
+  * metacity: Add window buttons to modal windows (LP: #1917185)
+  * icons: Add symlinks for fullcolor printer and printers icons
+  * icons: Add symlinks for more MATE apps
+  * icons: Fix preferences-system.png collision and add more MATE symlinks
+  * icons: Add redshift and steam panel icons
+  * icons: Add symlink for preferences-desktop-default-applications.png
+  * gtk: Add gtk-2.0 themes for color accents (LP: #1965659)
+  * icons: Create dark theme subfolders and symlink categories
+  * icons: Add Dropbox, Remmina, Transmission & audacious panel icons
+    (LP: #964518, LP: #1949312)
+
+  [ Lyubomir Popov ]
+  * accent colours: subtler purple, magenta and red
+  * accent colours: adjust hue of the red color
+  * adjust hue of magenta so it corresponds better to the name magenta
+
+  [ Paul Kepinski ]
+  * Fix go-last-symbolic-rtl icon
+  * Mate icon theme add variants
+  * Remove typo in _search-entry
+  * Fix lock screen in light theme (LP: #1965627)
+  * Update Ubuntu logo
+  * Restyle nautilus infobar
+  * Fix process-working misaligned spinner (LP: #1965207)
+  * Sync Gnome Shell with upstream
+  * Remove square background from start-here-symbolic icon
+  * Force border-radius of nautilus-canvas-item in focus state
+  * Revert "Make MATE panel dark
+  * Add panel-dark icons support
+  * Makes Unity7 panel follow bg color
+  * Fix broken panel icons symlinks
+  * Fix invisible caret in caja desktop rename entry
+  * Clean up panel vars
+  * Fix upstream icons CI branch names
+  * Mate: Hide focus outline on menu-bar buttons
+  * GS: darker bg_color and lighter borders_edge (LP: #1965210)
+  * Gtk3: Fix selected image
+
+  [ Muqtadir ]
+  * add symbolic-icons used by gsconnet-extension
+  * minor-tweaks to accented
+  * add devices/ to variants using common
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Mon, 28 Mar 2022 21:36:15 +0200
+
 yaru-theme (22.04.2) jammy; urgency=medium
 
   [ Paul Kepinski ]
