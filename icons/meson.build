@@ -368,8 +368,11 @@ foreach flavour: icon_flavors
         install_data(file, install_dir: theme_install_dir, rename: theme)
       endif
     endforeach
-    meson.add_install_script('meson/post_install.py', theme_name)
 
+    # Cleanup empty directories, as per excluded files
+    meson.add_install_script('bash', '-c',
+      'find "${DESTDIR}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
+    meson.add_install_script('meson/post_install.py', theme_name)
 
     test('generate-symlinks' + suffix,
       generate_symlinks,
