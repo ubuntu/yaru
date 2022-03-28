@@ -9,8 +9,8 @@ audio-input-microphone-medium-panel.svg microphone-sensitivity-medium.svg
 audio-input-microphone-muted.svg microphone-sensitivity-muted.svg
 audio-input-microphone.svg xfce4-mixer-record.svg
 audio-volume-high-panel.svg audio-volume-high.svg
-audio-volume-low-panel.svg audio-volume-low.svg
 audio-volume-low-zero-panel.svg audio-volume-low-panel.svg
+audio-volume-low-zero-panel.svg audio-volume-low.svg
 audio-volume-medium-panel.svg audio-volume-medium.svg
 audio-volume-muted-panel.svg audio-volume-muted.svg
 audio-volume-muted-panel.svg xfce4-mixer-muted.svg
@@ -18,19 +18,6 @@ audio-volume-muted-panel.svg xfce4-mixer-voume-muted.svg
 bluetooth-active.svg blueman-active.svg
 bluetooth-active.svg blueman-tray.svg
 bluetooth-disabled.svg blueman-disabled.svg
-connect_no.svg nm-no-connection.svg
-connect_no.svg nm-signal-0.svg
-connect_no.svg nm-signal-00.svg
-empathy-available.svg tray-online.svg
-empathy-available.svg user-available-panel.svg
-empathy-away.svg tray-away.svg
-empathy-away.svg user-away-panel.svg
-empathy-busy.svg tray-busy.svg
-empathy-busy.svg user-busy-panel.svg
-empathy-extended-away.svg tray-extended-away.svg
-empathy-extended-away.svg user-indeterminate-panel.svg
-empathy-offline.svg tray-offline.svg
-empathy-offline.svg user-offline-panel.svg
 gnome-netstatus-0-24.svg nm-signal-25.svg
 gnome-netstatus-25-49.svg nm-signal-50.svg
 gnome-netstatus-50-74.svg nm-signal-75.svg
@@ -745,6 +732,8 @@ network-error.svg gnome-netstatus-error.svg
 network-offline.svg connect_no.svg
 network-offline.svg gnome-netstatus-disconn.svg
 network-offline.svg nm-no-connection.svg
+network-offline.svg nm-signal-0.svg
+network-offline.svg nm-signal-00.svg
 network-offline.svg stock_disconnect.svg
 network-receive.svg gnome-netstatus-rx.svg
 network-transmit-receive.svg connect_creating.svg
@@ -760,7 +749,6 @@ network-wired.svg nm-device-wired-autoip.svg
 network-wired.svg nm-device-wired.svg
 nm-secure-lock.svg nm-vpn-active-lock.svg
 nm-secure-lock.svg nm-vpn-lock.svg
-nm-signal-0.svg nm-signal-00.svg
 nm-signal-100.svg gnome-netstatus-75-100.svg
 nm-signal-25.svg gnome-netstatus-0-24.svg
 nm-signal-50.svg gnome-netstatus-25-49.svg
@@ -968,5 +956,7 @@ user-busy-panel.svg empathy-busy.svg
 user-busy-panel.svg tray-busy.svg
 user-idle-panel.svg empathy-extended-away.svg
 user-idle-panel.svg tray-extended-away.svg
+user-idle-panel.svg user-indeterminate-panel.svg
 user-offline-panel.svg empathy-offline.svg
 user-offline-panel.svg tray-offline.svg
+user-offline-panel.svg user-offline-panel.svg
