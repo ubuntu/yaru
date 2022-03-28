@@ -313,24 +313,32 @@ foreach flavour: icon_flavors
               # Since we don't have a specific dark theme, we are just re-using
               # the default dark theme as fallback, while the base flavour theme
               # is still inherited as primary.
-              dark_folders = run_command(
+              dark_categories = run_command(
                 'find',
                 dark_theme,
                 '!', '-path', dark_theme,
                 '-type', 'd',
-                '-maxdepth', '1',
+                '-mindepth', '2',
+                '-maxdepth', '2',
+                '-printf', '%P\\n',
               ).stdout().strip().split('\n')
 
-              foreach f: dark_folders
+              foreach c: dark_categories
+                target = run_command(python, '-c',
+                  'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
+                  dark_theme / c,
+                  icon_dir / fs.parent(c)
+                ).stdout().strip()
+
                 if meson.version().version_compare('>= 0.61')
-                  install_symlink(fs.name(f),
-                    install_dir: theme_install_dir,
-                    pointing_to: '..' / f,
+                  install_symlink(fs.name(c),
+                    install_dir: theme_install_dir / fs.parent(c),
+                    pointing_to: target,
                   )
                 else
                   meson.add_install_script('bash', '-c',
-                    'ln -svf @0@ ${DESTDIR}/@1@'.format(
-                      '..' / f, theme_install_dir))
+                    'mkdir -p "${DESTDIR}/@2@"; ln -svf @1@ ${DESTDIR}/@2@/@0@'.format(
+                       fs.name(c), target, theme_install_dir / fs.parent(c)))
                 endif
               endforeach
 
