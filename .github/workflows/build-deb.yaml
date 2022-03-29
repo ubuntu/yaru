@@ -1,0 +1,62 @@
+name: Build debian packages
+
+on: [push, pull_request]
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  check:
+    name: Ubuntu Devel
+    runs-on: ubuntu-latest
+
+    env:
+      UBUNTU_VERSION: devel
+      BUILD_CONTAINER: yaru-build-container
+      RUN_CMD: docker exec -t -w /src/yaru yaru-build-container
+      AS_USER: runuser -u builder --
+
+    steps:
+    - name: Checkout Yaru code
+      uses: actions/checkout@v3
+
+    - name: Prepare container
+      run: |
+        docker run --name $BUILD_CONTAINER \
+          --tty --security-opt apparmor:unconfined \
+          -v $(pwd):/src/yaru \
+          -e DEBIAN_FRONTEND \
+          -e DEBCONF_NONINTERACTIVE_SEEN=true \
+          -e TERM=dumb \
+          -e CONCURRENCY_LEVEL="$(getconf _NPROCESSORS_ONLN)" \
+          -d ubuntu:$UBUNTU_VERSION sleep infinity
+
+        $RUN_CMD sh -c "echo 'APT::Get::Assume-Yes \"true\";' > /etc/apt/apt.conf.d/90aptyes"
+
+    - name: Install dependencies
+      run: |
+        $RUN_CMD apt update
+        $RUN_CMD apt upgrade
+        $RUN_CMD apt install equivs devscripts
+        $RUN_CMD mk-build-deps -ir
+
+    - name: Setup build user
+      run: |
+        $RUN_CMD adduser --disabled-password --gecos "" builder
+        $RUN_CMD chown builder:builder /src -R
+
+    - name: Build packages
+      run: |
+        $RUN_CMD $AS_USER dpkg-buildpackage -b --jobs=$CONCURRENCY_LEVEL
+        $RUN_CMD sh -c 'mv -v ../*.deb .'
+        $RUN_CMD sh -c 'ls -lht *.deb'
+
+    - name: Archiving built debs
+      uses: actions/upload-artifact@v3
+      with:
+        name: debian packages
+        path: ./*.deb
+
+    - name: Install generated debs
+      run: |
+        $RUN_CMD sh -c 'apt install --simulate ./*.deb'
