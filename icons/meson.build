@@ -20,6 +20,9 @@ generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh', re
 generate_index_theme = find_program('src' / 'generate-index-theme.py', required: true)
 accent_color_gtk_version_reference = '3.0'
 uses_panel_icons = get_option('ubuntu-unity') or get_option('mate')
+dark_theme = meson.project_name() + '-dark'
+index_theme = 'index.theme'
+cursor_theme = 'cursor.theme'
 render_targets = []
 render_accented_targets = []
 render_and_symlink_targets = []
@@ -31,9 +34,9 @@ cleanup_rendered_icons_accented_targets = []
 
 foreach flavour: icon_flavors
   is_dark = flavour == 'dark'
-  is_dark_flavour = is_dark or flavour.endswith('-dark')
+  is_dark_flavour = not is_dark and flavour.endswith('-dark')
   is_accent = enabled_accent_colors.contains(flavour)
-  base_flavour = is_dark_flavour and not is_dark ? flavour.split('-dark')[0] : ''
+  base_flavour = is_dark_flavour ? flavour.split('-dark')[0] : ''
   is_dark_accent = is_dark_flavour and enabled_accent_colors.contains(base_flavour)
 
   if (is_accent or is_dark_accent) and not get_option('gtk')
@@ -175,8 +178,8 @@ foreach flavour: icon_flavors
 
     excluded_folders = []
     excluded_files = [
-      'index.theme',
-      'cursor.theme',
+      index_theme,
+      cursor_theme,
     ]
 
     if not uses_panel_icons
@@ -277,6 +280,51 @@ foreach flavour: icon_flavors
       endif
     endforeach
 
+    if is_dark_flavour
+      assert(get_option('dark'), 'Dark flavour @0@ enabled, but we have no dark parent'.format(flavour))
+      # Since we don't have a specific dark theme, we are just re-using
+      # the default dark theme as fallback, while the base flavour theme
+      # is still inherited as primary.
+      dark_categories = run_command(
+        'find',
+        dark_theme,
+        '!', '-path', dark_theme,
+        '-type', 'd',
+        '-mindepth', '2',
+        '-maxdepth', '2',
+        '-printf', '%P\\n',
+      ).stdout().strip()
+      dark_categories = dark_categories != '' ? dark_categories.split('\n') : []
+
+      foreach c: dark_categories
+        if fs.is_dir(icon_dir / c)
+          continue
+        endif
+
+        category = fs.name(c)
+        if not uses_panel_icons and PANEL_ONLY_ICONS_CATEGORIES.contains(category)
+          continue
+        endif
+
+        target = run_command(python, '-c',
+          'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
+          dark_theme / c,
+          icon_dir / fs.parent(c)
+        ).stdout().strip()
+
+        if meson.version().version_compare('>= 0.61')
+          install_symlink(category,
+            install_dir: theme_install_dir / fs.parent(c),
+            pointing_to: target,
+          )
+        else
+          meson.add_install_script('bash', '-c',
+            'mkdir -p "${DESTDIR}/@2@"; ln -svf @1@ ${DESTDIR}/@2@/@0@'.format(
+                category, target, theme_install_dir / fs.parent(c)))
+        endif
+      endforeach
+    endif
+
     # install cursor thumbnail (cinnamon only)
     if get_option('cinnamon-shell') and flavour == 'default'
       install_data(
@@ -285,108 +333,60 @@ foreach flavour: icon_flavors
       )
     endif
 
-    themes_f = [
-      'cursor.theme',
-      'index.theme',
-    ]
-    conf_data = configuration_data()
-    conf_data.set('ProjectName', meson.project_name())
-    conf_data.set('ThemeName', theme_name)
-    foreach theme: themes_f
-      have_file = false
-      tmp_name = flavour + '-@0@'.format(theme)
-      if fs.is_file(join_paths(icon_dir, theme))
-        file = configure_file(
-          input : join_paths(icon_dir, theme),
-          output : tmp_name,
-          configuration : conf_data
-        )
-        have_file = true
-      elif theme == 'index.theme'
-        generate_index_theme_args = []
+    generate_index_theme_args = []
+    foreach ef: excluded_folders
+      generate_index_theme_args += ['--exclude-directory', ef]
+    endforeach
 
-        foreach ef: excluded_folders
-          generate_index_theme_args += ['--exclude-directory', ef]
-        endforeach
-
-        if is_flavour
-          if is_dark_flavour and not is_dark
-            assert(get_option('dark'), 'Dark flavour @0@ enabled, but we have no dark parent'.format(flavour))
-            dark_theme = meson.project_name() + '-dark'
-
-            if not fs.is_dir(theme_dir)
-              # Since we don't have a specific dark theme, we are just re-using
-              # the default dark theme as fallback, while the base flavour theme
-              # is still inherited as primary.
-              dark_categories = run_command(
-                'find',
-                dark_theme,
-                '!', '-path', dark_theme,
-                '-type', 'd',
-                '-mindepth', '2',
-                '-maxdepth', '2',
-                '-printf', '%P\\n',
-              ).stdout().strip().split('\n')
-
-              foreach c: dark_categories
-                category = fs.name(c)
-
-                if not uses_panel_icons and PANEL_ONLY_ICONS_CATEGORIES.contains(category)
-                  continue
-                endif
-
-                target = run_command(python, '-c',
-                  'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
-                  dark_theme / c,
-                  icon_dir / fs.parent(c)
-                ).stdout().strip()
-
-                if meson.version().version_compare('>= 0.61')
-                  install_symlink(category,
-                    install_dir: theme_install_dir / fs.parent(c),
-                    pointing_to: target,
-                  )
-                else
-                  meson.add_install_script('bash', '-c',
-                    'mkdir -p "${DESTDIR}/@2@"; ln -svf @1@ ${DESTDIR}/@2@/@0@'.format(
-                       category, target, theme_install_dir / fs.parent(c)))
-                endif
-              endforeach
-
-              foreach c: uses_panel_icons ? [] : PANEL_ONLY_ICONS_CATEGORIES
-                generate_index_theme_args += ['--exclude-context', c]
-              endforeach
-            endif
-
-            generate_index_theme_args += [
-              '--inherits', dark_theme,
-              '--source-dir', meson.current_source_dir() / dark_theme,
-            ]
-          endif
-
-          inherited_flavour = base_flavour != '' ? '-' + base_flavour : ''
-            generate_index_theme_args += [
-              '--inherits', meson.project_name() + inherited_flavour
-            ]
+    if is_flavour
+      if is_dark_flavour
+        if not fs.is_dir(theme_dir)
+          foreach c: uses_panel_icons ? [] : PANEL_ONLY_ICONS_CATEGORIES
+            generate_index_theme_args += ['--exclude-context', c]
+          endforeach
         endif
 
-        file = configure_file(
-          output: tmp_name,
-          command: [
-            generate_index_theme,
-            icon_dir,
-            '--source-dir', meson.current_source_dir() / icon_dir,
-            '--output-dir', '@OUTDIR@',
-            '--output-name', '@OUTPUT@',
-          ] + generate_index_theme_args,
-        )
-        have_file = true
+        generate_index_theme_args += [
+          '--inherits', dark_theme,
+          '--source-dir', meson.current_source_dir() / dark_theme,
+        ]
       endif
 
-      if have_file
-        install_data(file, install_dir: theme_install_dir, rename: theme)
-      endif
-    endforeach
+      inherited_flavour = base_flavour != '' ? '-' + base_flavour : ''
+        generate_index_theme_args += [
+          '--inherits', meson.project_name() + inherited_flavour
+        ]
+    endif
+
+    install_data(
+      configure_file(
+        output: flavour + '-@0@'.format(index_theme),
+        command: [
+          generate_index_theme,
+          icon_dir,
+          '--source-dir', meson.current_source_dir() / icon_dir,
+          '--output-dir', '@OUTDIR@',
+          '--output-name', '@OUTPUT@',
+        ] + generate_index_theme_args,
+      ),
+      install_dir: theme_install_dir,
+      rename: index_theme,
+    )
+
+    if fs.is_file(icon_dir / cursor_theme)
+      install_data(
+        configure_file(
+          input: icon_dir / cursor_theme,
+          output: flavour + '-@0@'.format(cursor_theme),
+          configuration: {
+            'ProjectName': meson.project_name(),
+            'ThemeName': theme_name,
+          },
+        ),
+        install_dir: theme_install_dir,
+        rename: cursor_theme,
+      )
+    endif
 
     # Cleanup empty directories, as per excluded files
     meson.add_install_script('bash', '-c',
