@@ -193,6 +193,10 @@ foreach flavour: icon_flavors
         included_names.length() > 0 ? ['('] + included_names + [')'] : [],
         '-printf', '%P\\n',
       ).stdout().strip().split('\n')
+
+      if excluded_folders.length() == 1 and excluded_folders[0] == ''
+        excluded_folders = []
+      endif
     endif
 
     symlinks = []
