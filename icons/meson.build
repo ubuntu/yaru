@@ -311,6 +311,7 @@ foreach flavour: icon_flavors
 
         if is_flavour
           if is_dark_flavour and not is_dark
+            assert(get_option('dark'), 'Dark flavour @0@ enabled, but we have no dark parent'.format(flavour))
             dark_theme = meson.project_name() + '-dark'
 
             if not fs.is_dir(theme_dir)
@@ -328,6 +329,12 @@ foreach flavour: icon_flavors
               ).stdout().strip().split('\n')
 
               foreach c: dark_categories
+                category = fs.name(c)
+
+                if not uses_panel_icons and PANEL_ONLY_ICONS_CATEGORIES.contains(category)
+                  continue
+                endif
+
                 target = run_command(python, '-c',
                   'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
                   dark_theme / c,
@@ -335,14 +342,14 @@ foreach flavour: icon_flavors
                 ).stdout().strip()
 
                 if meson.version().version_compare('>= 0.61')
-                  install_symlink(fs.name(c),
+                  install_symlink(category,
                     install_dir: theme_install_dir / fs.parent(c),
                     pointing_to: target,
                   )
                 else
                   meson.add_install_script('bash', '-c',
                     'mkdir -p "${DESTDIR}/@2@"; ln -svf @1@ ${DESTDIR}/@2@/@0@'.format(
-                       fs.name(c), target, theme_install_dir / fs.parent(c)))
+                       category, target, theme_install_dir / fs.parent(c)))
                 endif
               endforeach
 
