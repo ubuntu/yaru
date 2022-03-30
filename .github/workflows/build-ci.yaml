@@ -5,6 +5,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        build-type: ['default', 'full']
 
     steps:
     - name: Pull Yaru
@@ -20,7 +23,13 @@ jobs:
         sudo apt install sassc python3-pip
         sudo pip3 install meson ninja
 
-    - name: Configure
+    - name: Configure Default
+      if: ${{ matrix.build-type == 'default' }}
+      run: |
+        meson _build
+
+    - name: Configure Full
+      if: ${{ matrix.build-type == 'full' }}
       run: |
         meson _build \
           -Dauto_features=enabled \
@@ -48,5 +57,5 @@ jobs:
     - name: Archiving meson logs
       uses: actions/upload-artifact@v3
       with:
-        name: meson-logs
+        name: meson-logs-${{ matrix.build-type }}
         path: _build/meson-logs
