@@ -16,10 +16,12 @@ leaflet {
     background: $shade_color;
   }
 
-  > border {
-    min-width: 1px;
-    min-height: 1px;
-    background: gtkalpha(currentColor, if($contrast == 'high', .5, .1));
+  @if $contrast == 'high' {
+    > border {
+      min-width: 1px;
+      min-height: 1px;
+      background: $border_color ;
+    }
   }
 
   > shadow {
