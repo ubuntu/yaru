@@ -45,7 +45,7 @@
   @if $t==focus {
     background-color: if($variant == 'light', lighten($bg_color, 5%), $dash_background_color); // Yaru: use same background as dash for dark theme
     border-color: $fc;
-    box-shadow: 0 0 0 1px $fc; // Yaru change: trick to get 2px border on focus without layout shifting
+    box-shadow: 0 0 0 1px $fc inset; // Yaru change: trick to get 2px border on focus without layout shifting
     color: $fg_color;
     &:hover {}
   }
