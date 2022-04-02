@@ -212,6 +212,22 @@
   .login-dialog-session-list-button {
     border-color: transparent;
     background-color: transparentize($fg_color_dark, 0.9); // Yaru change: fix for light theme
-    color: $fg_color_dark; // Yaru change: ↑↑↑
+    box-shadow: none; // Yaru change: remove shadow cause to transparent bg
+
+    &,
+    &:hover,
+    &:focus,
+    &:active { // Yaru change: fix for light theme
+      color: $fg_color_dark;
+    }
+
+    &:hover,
+    &:focus { // Yaru change: ↑↑↑
+      background-color: transparentize($fg_color_dark, 0.85);
+    }
+
+    &:active { // Yaru change: ↑↑↑
+      background-color: transparentize($fg_color_dark, 0.80);
+    }
   }
 }
