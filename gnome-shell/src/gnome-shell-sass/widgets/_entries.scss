@@ -1,9 +1,10 @@
 /* Entries */
 
 StEntry {
+  min-height: 22px; // Yaru change: fix for height shift
   border-radius: $base_border_radius;
   padding: 8px;
-  border-width: 1px; // Yaru: we want bordered entries
+  border-width: 1px; // Yaru change: we want bordered entries
   color: $fg_color;
 
   @include entry(normal);
