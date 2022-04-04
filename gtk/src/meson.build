@@ -24,6 +24,8 @@ foreach flavour: flavours
   conf_data.set('FlavourThemeName', theme_name)
   conf_data.set('IconThemeName', theme_name)
   conf_data.set('MetacityThemeName', is_dark ? '-'.join(meson.project_name(), 'dark') : meson.project_name())
+  conf_data.set('DarkTheme', is_dark ? 'true' : 'false')
+  conf_data.set('AccentName', is_accent ? base_theme_name : 'default')
   configure_file(input: 'index.theme.in',
     output: '@0@-index.theme'.format(theme_name),
     configuration: conf_data,
