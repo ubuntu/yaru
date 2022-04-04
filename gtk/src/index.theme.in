@@ -1,10 +1,14 @@
-[X-GNOME-Metatheme]
+[Desktop Entry]
 Name=@FlavourThemeName@
 Type=X-GNOME-Metatheme
 Comment=Ubuntu @FlavourThemeName@ theme
 Encoding=UTF-8
+
+[X-GNOME-Metatheme]
 GtkTheme=@FlavourThemeName@
 MetacityTheme=@MetacityThemeName@
 IconTheme=@IconThemeName@
 CursorTheme=@ThemeName@
 CursorSize=24
+X-Yaru-Accent-Name=@AccentName@
+X-Yaru-Accent-Color=@AccentColor@
