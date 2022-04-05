@@ -17,7 +17,8 @@ endforeach
 
 foreach accent: enabled_accent_colors
   if enabled_accent_colors.contains(accent)
-    flavours += [ accent ] + (get_option('dark') ? [ accent + '-dark' ] : [])
+    flavours += (get_option('default') ? [accent] : [])
+    flavours += (get_option('dark') ? [ accent + '-dark' ] : [])
   endif
 endforeach
 

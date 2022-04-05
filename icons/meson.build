@@ -11,7 +11,8 @@ icon_flavors = [
 ]
 
 foreach accent: enabled_accent_colors
-  icon_flavors += [accent] + (get_option('dark') ? [ accent + '-dark' ] : [])
+  icon_flavors += (get_option('default') ? [accent] : [])
+  icon_flavors += (get_option('dark') ? [ accent + '-dark' ] : [])
 endforeach
 
 fullcolor_path = 'src' / 'fullcolor'
