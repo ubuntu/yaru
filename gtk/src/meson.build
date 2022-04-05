@@ -18,6 +18,26 @@ foreach flavour: flavours
   base_theme_name = is_dark ? flavour.split('-dark')[0] : flavour
   is_accent = enabled_accent_colors.contains(base_theme_name)
   theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
+  accent = is_accent ? base_theme_name : ''
+
+  if is_accent
+    accent_configuration = {
+      'yaru_dark_variant': is_dark ? 'true' : 'false',
+      'yaru_accent_color': accent,
+    }
+
+    accent_info_css = configure_file(
+      configuration: accent_configuration + {
+        'yaru_theme_entry_point': '/dev/null',
+      },
+      input: accent_colors_definitions_scss,
+      output: '@0@-@1@-accent-color-info.scss'.format(theme_name, accent),
+    )
+
+    accent_color_code = run_command(sassc,
+      accent_info_css).stderr().split(' Accent color is ')[1].strip()
+    assert(accent_color_code.startswith('#'), 'No accent color code found')
+  endif
 
   conf_data = configuration_data()
   conf_data.set('ThemeName', meson.project_name())
@@ -26,6 +46,7 @@ foreach flavour: flavours
   conf_data.set('MetacityThemeName', is_dark ? '-'.join(meson.project_name(), 'dark') : meson.project_name())
   conf_data.set('DarkTheme', is_dark ? 'true' : 'false')
   conf_data.set('AccentName', is_accent ? base_theme_name : 'default')
+  conf_data.set('AccentColor', is_accent ? accent_color_code : '')
   configure_file(input: 'index.theme.in',
     output: '@0@-index.theme'.format(theme_name),
     configuration: conf_data,
@@ -108,12 +129,6 @@ foreach flavour: flavours
       endforeach
 
       if is_accent
-          accent = base_theme_name
-          accent_configuration = {
-            'yaru_dark_variant': is_dark ? 'true' : 'false',
-            'yaru_accent_color': accent,
-          }
-
           gtk_accents_css = configure_file(
             configuration: accent_configuration + {
               'yaru_theme_entry_point': meson.current_source_dir() / gtk_scss_path,
