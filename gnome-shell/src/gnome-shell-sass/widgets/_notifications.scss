@@ -31,7 +31,7 @@ $notification_banner_radius: $base_border_radius*1.5;
   
   // Yaru: make notifications more visible on different headerbars:
   &, &:hover, &:focus, &:active {
-    box-shadow: 0 2px 4px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 0 4px 2px rgba(0,0,0,0.1);
     border: 1px solid $borders_color;
   }
 }
