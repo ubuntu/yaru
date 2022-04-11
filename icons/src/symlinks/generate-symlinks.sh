@@ -144,6 +144,10 @@ linker () {
 				echo "  ERROR: Can't link a file with itself!"
 				exit 1
 			fi
+			if [ -L "$target" ]; then
+				echo "  ERROR: $target is already a symlink, please point it to a real file!"
+				exit 1
+			fi
 			if [ -z "$_dry_run" ]; then
 				ln -sf "$target" "$link_name"
 			fi
