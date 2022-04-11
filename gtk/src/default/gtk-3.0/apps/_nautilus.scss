@@ -4,9 +4,15 @@
         opacity: 0.5;
     }
     
+    // Yaru change: force focus state
     .nautilus-canvas-item {
-        &, &:focus { // Yaru change: force focus state
+        &, &:focus {
             border-radius: 5px;
+
+            // Drop border-radius for the image preview
+            &:not(:dir(ltr)):not(:dir(rtl)) {
+                border-radius: 0;
+            }
         }
     }
     
