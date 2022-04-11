@@ -56,7 +56,7 @@ function print_illegal() {
 }
 
 # Parsing flags and arguments
-while getopts 'hanvmt:' OPT; do
+while getopts 'hanvm:t:' OPT; do
 	case $OPT in
 		h) sed -ne 's/^## \(.*\)/\1/p' $0
 			exit 1 ;;
@@ -99,7 +99,7 @@ SIZES+=("${OPTIONAL_SIZES[@]}")
 
 if [ -n "$_variant" ]; then
 	if [[ ! " ${VARIANTS[*]} " =~ " ${_variant} " ]]; then
-		echo "WARNING: Requested $variant is not known"
+		echo "WARNING: Requested $_variant is not known"
 	fi
 
 	VARIANTS=($_variant)
