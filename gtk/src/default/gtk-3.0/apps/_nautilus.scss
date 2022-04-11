@@ -370,6 +370,7 @@
             color: $selected_fg_color;
         }
 
+        // Fix some broken image preview (was dark)
         &:not(:focus) {
             &:not(:dir(ltr)):not(:dir(rtl)) {
                 background: white;
