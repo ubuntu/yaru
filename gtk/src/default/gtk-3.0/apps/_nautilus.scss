@@ -358,15 +358,22 @@
     .nautilus-canvas-item {
         outline-width: 0;
         // First, remove the background
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: transparentize($fg_color, .95);
 
         // Then bring it back for when it receives a direction
         &:selected:not(:backdrop) {
-            &:dir(ltr) {
+            &:dir(ltr),
+            &:dir(rtl) {
                 background-color: $selected_bg_color;
             }
 
             color: $selected_fg_color;
+        }
+
+        &:not(:focus) {
+            &:not(:dir(ltr)):not(:dir(rtl)) {
+                background: white;
+            }
         }
 
         &:backdrop:selected {
