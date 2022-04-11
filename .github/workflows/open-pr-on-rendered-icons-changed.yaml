@@ -56,7 +56,7 @@ jobs:
       - name: Configure project
         if: ${{ steps.check-changed.outputs.changes != '[]' }}
         run: |
-          meson _build -Dmate=true
+          meson _build -Dmate=true -Dmate-dark=true
 
       - name: Render default icons and generate symlinks
         if: steps.check-changed.outputs.default == 'true'
