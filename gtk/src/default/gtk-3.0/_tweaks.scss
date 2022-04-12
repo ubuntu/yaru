@@ -102,28 +102,33 @@ button.titlebutton:not(.appmenu) {
   & {
     &.maximize, &.minimize, &.close {
       @include draw_circle($_close_button_color);
-      &, &:backdrop {
-        &:hover {
-          @include draw_circle($_base_hover_color);
-        }
 
-        &:active {
-          @include draw_circle($_base_active_color);
-        }
+      &:hover {
+        @include draw_circle($_base_hover_color);
+      }
+
+      &:active {
+        @include draw_circle($_base_active_color);
+      }
+
+      &:backdrop {
+        background: none;
       }
     }
 
     window.toolbox &.close { // Special selector to target unified window (see #2980)
       color: $fg_color;
 
-      &, &:backdrop {
-        &:hover {
-          @include draw_circle($_base_hover_color);
-        }
+      &:hover {
+        @include draw_circle($_base_hover_color);
+      }
 
-        &:active {
-          @include draw_circle($_base_active_color);
-        }
+      &:active {
+        @include draw_circle($_base_active_color);
+      }
+
+      &:backdrop {
+        background: none;
       }
     }
   }
