@@ -1,3 +1,72 @@
+yaru-theme (22.04.4) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * icons: Ensure symlinks are installed as such for all variants
+  * icons: Avoid adding symlink to parent dark variants if not enabled
+  * icons: Cleanup meson file, re-organizing logic
+  * CI: Add CI job that builds debian packages and builds them
+  * build-ci: Compile both default and full options
+  * gtk/index.theme: Follow the standard on index definition.
+    There's not a real standard definition but the latest one is still
+    defined at https://wiki.xfce.org/gnome-theme-package
+  * gtk: Include some X-Yaru parameters on index.theme
+  * accent-colors: Also override $accent_color variable.
+    It's used by libadwaita for now, but could be used more, so let's define
+    it too.
+  * gtk: Include accent color code in the index.theme.
+    It could be used to do easily figure out the color code so that we avoid
+    hard-coding it in places such as g-c-c
+  * meson: Only build default variant of accent colors if default is enabled
+  * CI: Also include mate-dark variant when rendering icons.
+    We don't want to avoid symlinks from being generated
+  * generate-symlinks: Ensure that we don't overwrite already generated symlinks
+    It means we're doing something wrong in our lists, so let's avoid it
+  * generate-symlinks: Fix handling of some arguments
+  * icons: Ensure we don't overwrite already created symlinks
+  * panel: Avoid using symlinks of symlinks as source.
+    This is causing errors as it depends on the symlinks .list files and we
+    don't want so.
+  * icons: Ensure symlinks are not pointing to other symlinks.
+    While this works, it may lead to troubles when a synlink is supposed to
+    be created by upcoming definitions, so let's avoid this
+  * build-ci: Also run on pull requests
+  * build-deb: Add git version to package
+  * debian: Ensure gnome-shell themes symlinks are preserved
+  * debian: Add pre-install script that removes dangling symlinks (LP: #1968405)
+  * icons: Update rendered icons and symlinks
+
+  [ Martin Wimpress ]
+  * icons: Add panel icons for MATE Optimus, Diodon, Caffiene & Variety
+  * icons: Make dropboxstatus-x.svg panel icons a red that is consistent with
+    other "alert" panel icons
+  * icons: Add symlinks for missing gaming input battery levels (LP: #1967854)
+  * icons: Add gaming-input symlink mapping to panel.list (LP: #1967854)
+  * metacity: Define the base button dimensions
+    This is used to determine whether the image needs to be re-scaled when
+    rendering on different DPI densities. (LP: #1967507)
+  * metacity: Add window buttons to dialog window
+  This ensures dialog windows will always have a close window button.
+
+  [ Paul Kepinski ]
+  * GS: fix fg_color of unfocused selected calendar day
+  * GS: fix lock screen switch user button in light theme
+  * GS: fix entries border radius (LP: #1967826)
+  * Sync Gtk popover/menu bg with GS
+  * GS: fix for entries height shift
+  * Fix notifications shadow (revert to upstream look)
+    * Move up notification shadow
+  * Add ubiquity 22x22 size
+  * Nautilus drop image preview border-radius
+  * Nautilus fix selected item
+  * Gtk: remove windowcontrols button background on backdrop (LP: #1967747)
+
+  [ github-actions[bot] ]
+  * New upstream snapshot for Cinnamon
+  * New upstream snapshot for GTK4
+  * New upstream snapshot for GTK4
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 13 Apr 2022 16:46:50 +0200
+
 yaru-theme (22.04.3.1) jammy; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
