@@ -89,7 +89,7 @@ jobs:
           {
             project: gnome-calendar symbolics,
             repo: "https://gitlab.gnome.org/GNOME/gnome-calendar.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: gnome-calendar-symbolics,
             projectdir: gnome-calendar,
             src: .,
@@ -143,7 +143,7 @@ jobs:
           {
             project: gnome-control-center symbolics,
             repo: "https://gitlab.gnome.org/GNOME/gnome-control-center.git",
-            upstreambranch: master,
+            upstreambranch: main,
             localbranch: gnome-control-center-symbolics,
             projectdir: gnome-control-center,
             src: .,
