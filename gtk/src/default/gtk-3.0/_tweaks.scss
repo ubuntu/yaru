@@ -377,18 +377,26 @@ switch {
   transition: $button_transition;
   transition-property: background, border;
 
-  &, &:backdrop {
-    border-color: $_trough_color;
-    background: $_trough_color;
+  &:not(:backdrop), :backdrop &:backdrop {
+    &, :selected & {
+      border-color: $_trough_color;
+      background: $_trough_color;
+    }
 
     &:checked {
       border-color: $checkradio_bg_color;
       background: $checkradio_bg_color;
+
+      :selected & {
+        border-color: transparentize(black, $amount: .75);
+      }
     }
 
-    &:disabled {
-      border-color: $_trough_disabled_color;
-      background: $_trough_disabled_color;
+    &, :selected & {
+      &:disabled {
+        border-color: $_trough_disabled_color;
+        background: $_trough_disabled_color;
+      }
     }
   }
 
@@ -401,11 +409,25 @@ switch {
     background-clip: border-box;
   }
 
-  &, &:checked {
-    > slider {
-      border-color: $_slider_color;
-      background: $_slider_color;
-      box-shadow: $box-shadow;
+  &:not(:backdrop) {
+    &, :selected & {
+      &, &:checked {
+        > slider {
+          border-color: $_slider_color;
+          background: $_slider_color;
+          box-shadow: $box-shadow;
+        }
+      }
+  
+      &:hover {
+        &, &:checked {
+          > slider {
+            border-color: $_slider_hover_color;
+            background: $_slider_hover_color;
+            box-shadow: $box-shadow;
+          }
+        }
+      }
     }
   }
 
@@ -416,16 +438,6 @@ switch {
           border-color: $_slider_disabled_color;
           background: $_slider_disabled_color;
         }
-      }
-    }
-  }
-
-  &, &:hover {
-    &, &:checked {
-      > slider {
-        border-color: $_slider_hover_color;
-        background: $_slider_hover_color;
-        box-shadow: $box-shadow;
       }
     }
   }
