@@ -443,7 +443,7 @@ switch {
   }
 }
 
-scale:not(.marks-after) {
+scale:not(.marks-after):not(.marks-before) {
   $box-shadow: 0 2px 2px transparentize(black, .9);
   $box-shadow-border: inset 0 0 0 1px transparentize(black, if($variant == 'light', .8, 1));
   $box-shadow-border-active: inset 0 0 0 1px $progress_border_color;
