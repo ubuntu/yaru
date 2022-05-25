@@ -488,3 +488,13 @@ scale:not(.marks-after):not(.marks-before) {
 image:selected {
   background: if($variant == 'light', darken($bg_color, 10%), lighten($bg_color, 10%));
 }
+
+// Fix invisible check and radio in selected row
+check,
+radio {
+  &:checked {
+    &:selected, row:selected & {
+      border-color: rgba(0,0,0,.2);
+    }
+  }
+}
