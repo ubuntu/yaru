@@ -53,7 +53,8 @@ $dark_5: #000000;
 
 $base_color: if($variant == 'light', #fff, #000);
 $bg_color: $base_color;
-$fg_color: if($variant == 'light', transparentize(black, .2), white);
+$fg_color_dark: white;
+$fg_color: if($variant == 'light', transparentize(black, .2), $fg_color_dark);
 
 $selected_fg_color: #ffffff;
 $selected_bg_color: $blue_3;
