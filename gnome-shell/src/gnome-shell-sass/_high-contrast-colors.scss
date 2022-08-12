@@ -1,7 +1,7 @@
 // When color definition differs for dark and light variant,
 // it gets @if ed depending on $variant
 
-@import '../../upstream/theme/gnome-shell-sass/palette'; // Yaru change: use upstream palette
+@import 'upstream-palette'; // Yaru change: use upstream palette (symlink)
 
 $base_color: if($variant == 'light', #fff, #000);
 $bg_color: $base_color;
