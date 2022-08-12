@@ -131,14 +131,6 @@
   }
 }
 
-
-// buttons
-// since buttons are all flat an borderless now the mixin is simpler
-
-@mixin button($t, $tc:$fg_color, $c:$bg_color) {
-
-$button_bg_color: mix($tc, $c, 7%); // Yaru change: increase contrast
-//
 // Button drawing function
 //
 // $t:    button type,
@@ -150,6 +142,12 @@ $button_bg_color: mix($tc, $c, 7%); // Yaru change: increase contrast
 // backdrop, backdrop-active, backdrop-insensitive, backdrop-insensitive-active,
 // osd, osd-hover, osd-active, osd-insensitive, osd-backdrop, undecorated
 //
+// since buttons are all flat an borderless now the mixin is simpler
+
+@mixin button($t, $tc:$fg_color, $c:$bg_color) {
+
+  $button_bg_color: mix($tc, $c, 7%); // Yaru change: increase contrast
+  transition-duration: 100ms;
 
   // normal button
   @if $t==normal {
@@ -203,7 +201,7 @@ $button_bg_color: mix($tc, $c, 7%); // Yaru change: increase contrast
     background-color: $selected_bg_color;
     color: $selected_fg_color;
     &:focus {
-      box-shadow: inset 0 0 0 2px transparentize($selected_bg_color, 0.4);
+      box-shadow: inset 0 0 0 2px lighten($selected_bg_color, 10%);
     }
     &:hover, &:focus { 
       background-color: lighten($selected_bg_color, 5%);
@@ -260,6 +258,7 @@ $button_bg_color: mix($tc, $c, 7%); // Yaru change: increase contrast
 
 // overview icon, dash, app grid
 @mixin overview_icon($color, $flat: true) {
+  transition-duration: 400ms;
   .overview-icon { @extend %tile; }
   @if $flat {
     .overview-icon { background-color: transparent;}
@@ -298,24 +297,24 @@ $button_bg_color: mix($tc, $c, 7%); // Yaru change: increase contrast
 @mixin card($flat: false) {
   border-radius: $base_border_radius;
   margin: $base_margin;
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+  box-shadow: 0 1px 1px 0 $shadow_color;
 
   @if $flat {
     @include button(undecorated);
     box-shadow: none !important;
   } @else {
-    @include button(normal);
+    @include button(normal, $c:$card_bg_color);
   }
 
   &:focus {
-    @include button(focus);
+    @include button(focus, $c:$card_bg_color);
   }
 
   &:hover {
-    @include button(hover);
+    @include button(hover, $c:$card_bg_color);
   }
 
   &:active {
-    @include button(active);
+    @include button(active, $c:$card_bg_color);
   }
 }
