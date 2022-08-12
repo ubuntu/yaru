@@ -57,7 +57,8 @@ $selected_fg_color: #ffffff;
 $selected_bg_color: $blue_3;
 
 $selected_borders_color: darken($selected_bg_color, 20%);
-$borders_color: lighten($bg_color,17%);
+$borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 18%); // Yaru: used for dash and other dark elements on light theme
+$borders_color: if($variant == 'light', lighten($bg_color,17%), $borders_color_dark);
 $borders_edge: $borders_color;
 $link_color: lighten($selected_bg_color,20%);
 $link_visited_color: lighten($selected_bg_color,10%);
