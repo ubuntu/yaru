@@ -1,6 +1,8 @@
 // When color definition differs for dark and light variant,
 // it gets @if ed depending on $variant
 
+@import 'palette';
+
 // Yaru change: hard include gnome palette because include and symlink doesn't work with Github CI
 //GNOME Color Palette
 $blue_1: #99c1f1;
