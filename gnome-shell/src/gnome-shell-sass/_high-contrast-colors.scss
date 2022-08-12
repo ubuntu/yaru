@@ -51,20 +51,15 @@ $dark_3: #3d3846;
 $dark_4: #241f31;
 $dark_5: #000000;
 
-$base_color_dark: #000;
-$base_color: if($variant == 'light', #fff, $base_color_dark);
-$bg_color_dark: $base_color_dark;
+$base_color: if($variant == 'light', #fff, #000);
 $bg_color: $base_color;
-$fg_color_dark: white;
-$fg_color: if($variant == 'light', transparentize(black, .2), $fg_color_dark);
+$fg_color: if($variant == 'light', transparentize(black, .2), white);
 
 $selected_fg_color: #ffffff;
 $selected_bg_color: $blue_3;
 
 $selected_borders_color: darken($selected_bg_color, 20%);
-$borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 18%); // Yaru: used for dash and other dark elements on light theme
-$borders_color: if($variant == 'light', lighten($bg_color,17%), $borders_color_dark);
-$focus_border_color: lighten($accent_bg_color, 14%);
+$borders_color: lighten($bg_color,17%);
 $borders_edge: $borders_color;
 $link_color: lighten($selected_bg_color,20%);
 $link_visited_color: lighten($selected_bg_color,10%);
@@ -116,3 +111,8 @@ $hover_fg_color: if($variant=='light', darken($fg_color, 10%), lighten($fg_color
 // derived active colors
 $active_bg_color: if($variant=='light', darken($bg_color, 10%), lighten($bg_color, 22%));
 $active_fg_color: if($variant=='light', darken($fg_color, 10%), lighten($fg_color, 22%));
+
+// Yaru: we need hc and imports to for our build to work:
+$variant: hc;
+@import "palette";
+@import "colors";

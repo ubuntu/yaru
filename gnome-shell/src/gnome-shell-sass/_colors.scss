@@ -60,7 +60,7 @@ $backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
 // derived hover colors - Yaru: we want the hover bg to be a visible gray for dark and light shell themes
 $hover_bg_color: transparentize($fg_color, 0.9);
 $hover_fg_color: $fg_color;
-$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 5%));
+$hover_borders_color: lighten($borders_color,5%);
 
 // derived active colors - Yaru: we want the active bg to be a visible gray for dark and light shell themes
 $active_bg_color: transparentize($fg_color, 0.8);
