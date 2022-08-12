@@ -51,7 +51,9 @@ $dark_3: #3d3846;
 $dark_4: #241f31;
 $dark_5: #000000;
 
-$base_color: if($variant == 'light', #fff, #000);
+$base_color_dark: #000;
+$base_color: if($variant == 'light', #fff, $base_color_dark);
+$bg_color_dark: $base_color_dark;
 $bg_color: $base_color;
 $fg_color_dark: white;
 $fg_color: if($variant == 'light', transparentize(black, .2), $fg_color_dark);
