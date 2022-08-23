@@ -1,17 +1,19 @@
 .quick-settings {
   padding: 4 * $base_padding;
+  border-radius: $modal_radius*2;
 }
 
 .quick-settings-grid {
-  spacing-rows: 3 * $base_padding;
-  spacing-columns: 2 * $base_padding;
+  spacing-rows: $base_padding*2;
+  spacing-columns: $base_padding*2;
 }
 
 .quick-toggle {
   border-radius: 99px;
   min-width: 11.5em;
   max-width: 11.5em;
-  min-height: 44px;
+  min-height: 48px;
+  border:none;
 
   &:checked { @include button(default); }
 
@@ -20,7 +22,9 @@
   /* Move padding into the box; this is to allow menu arrows
      to extend to the border */
   &.button { padding: 0; }
-  & > StBoxLayout { padding: 0 2 * $base_padding; }
+  & > StBoxLayout { padding: 0 $base_padding*2; }
+  &:ltr > StBoxLayout { padding-left: $base_padding*2.5; }
+  &:rtl > StBoxLayout { padding-right: $base_padding*2.5; }
 
   .quick-toggle-label { font-weight: bold; }
   .quick-toggle-icon, .quick-toggle-arrow { icon-size: $base_icon_size; }
@@ -32,7 +36,7 @@
 
   & .quick-toggle-arrow {
     background-color: transparentize($fg_color, 0.9);
-    padding: 8px;
+    padding: $base_padding $base_padding*1.75;
 
     &:ltr { border-radius: 0 99px 99px 0; }
     &:rtl { border-radius: 99px 0 0 99px; }
