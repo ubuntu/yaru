@@ -18,7 +18,12 @@
 @import 'sass-utils';
 
 @function assert($result, $expected: true) {
-    @if $result != $expected {
+    @if (type-of($result) == 'color' and type-of($expected) == 'color') {
+        $result: #{$result};
+        $expected: #{$expected};
+    }
+
+    @if ($result != $expected or type-of($result) != type-of($expected)) {
         $result: if($result == null, 'null', $result);
         $expected: if($expected == null, 'null', $expected);
         @error "Assertion failed, expected '" + $expected + "', got '" + $result + "'";
