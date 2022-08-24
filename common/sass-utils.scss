@@ -160,3 +160,40 @@
     $multiplier: pow(10, $decimals);
     @return floor($value * $multiplier) / $multiplier;
 }
+
+// Credits to https://css-tricks.com/snippets/sass/luminance-color-function/
+@function luminance($color) {
+    $colors: (
+        'red': red($color),
+        'green': green($color),
+        'blue': blue($color)
+    );
+
+    @each $name, $value in $colors {
+        $adjusted: 0;
+        $value: $value / 255;
+
+        @if $value < 0.03928 {
+            $value: $value / 12.92;
+        } @else {
+            $value: ($value + .055) / 1.055;
+            $value: pow($value, 12, 5);
+        }
+
+        $colors: map-merge($colors, ($name: $value));
+    }
+
+    @return ((map-get($colors, 'red') * .2126) +
+             (map-get($colors, 'green') * .7152) +
+             (map-get($colors, 'blue') * .0722));
+}
+
+@function color-contrast($color1, $color2) {
+    $c1-luminance: luminance($color1);
+    $c2-luminance: luminance($color2);
+
+    $lighter-luminance: max($c1-luminance, $c2-luminance);
+    $darker-luminance: min($c1-luminance, $c2-luminance);
+
+    @return ($lighter-luminance + 0.05) / ($darker-luminance + 0.05);
+}

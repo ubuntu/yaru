@@ -129,3 +129,12 @@
 @debug test('truncate 5 0.12345678901234', truncate(0.12345678901234, 1), 0.1);
 @debug test('truncate 5 5.12345678901234', truncate(5.12345678901234, 0), 5);
 
+@debug test('luminance white', luminance(white), 1);
+@debug test('luminance black', luminance(black), 0);
+@debug test('luminance red', luminance(#f00), 0.2126);
+@debug test('luminance green', luminance(#0f0), 0.7152);
+@debug test('luminance blue', luminance(#00f), 0.0722);
+@debug test('luminance Ubuntu orange', truncate(luminance(#dd4814), 6), 0.200573);
+
+@debug test('color contrast black/white', color-contrast(white, black), 21);
+@debug test('color contrast blue/blue', color-contrast(blue, blue), 1);
