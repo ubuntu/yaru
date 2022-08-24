@@ -102,6 +102,12 @@
 @debug test('list-index, Three, valid', list-index([1, '2', false], '2'), 1);
 @debug test('list-index, Three, valid', list-index([1, '2', false], false), 2);
 
+@debug test('nth-root 1-root of 0', nth-root(0, 1), 0);
+@debug test('nth-root 0-root of 0', nth-root(0, 20), 0);
+@debug test('nth-root 2-root of 4', nth-root(4, 2), 2);
+@debug test('nth-root 4-root of 256', nth-root(256, 4), 4);
+@debug test('nth-root 5-root of 4096', nth-root(4096.0, 5), 5.278031643091578);
+
 @debug test('pow 0^0', pow(0, 0), 1);
 @debug test('pow 1^0', pow(1, 0), 1);
 @debug test('pow 10^0', pow(10, 0), 1);
@@ -113,3 +119,13 @@
 
 @debug test('pow 2^-2', pow(2, -2), 1/4);
 @debug test('pow 3^-3', pow(3, -3), 1/27);
+
+@debug test('pow 2^(2/2)', pow(2, 2, 2), 2);
+@debug test('pow 2^(4/2)', pow(2, 4, 2), 4);
+@debug test('pow 2^(12/5)', pow(2, 12, 5), 5.278031643091582);
+
+@debug test('truncate 0.1234567890123456789', truncate(0.123456789123456789), 0.1234567891);
+@debug test('truncate 5 0.12345678901234', truncate(0.12345678901234, 5), 0.12345);
+@debug test('truncate 5 0.12345678901234', truncate(0.12345678901234, 1), 0.1);
+@debug test('truncate 5 5.12345678901234', truncate(5.12345678901234, 0), 5);
+

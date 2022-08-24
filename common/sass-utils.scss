@@ -92,13 +92,20 @@
     @return null;
 }
 
-@function pow($base, $exponent) {
+@function pow($base, $exponent, $root: 1) {
     @if ($exponent == 0) {
         @return 1;
     }
 
     @if ($base == 0) {
         @return 0;
+    }
+
+    @if ($root != 1) {
+        @if ($exponent == $root) {
+            @return $base;
+        }
+        $base: nth-root($base, $root);
     }
 
     @if $exponent < 0 {
@@ -117,4 +124,39 @@
     }
 
     @return $val;
+}
+
+@function nth-root($value, $n, $max_iterations: 100) {
+    @if ($n <= 0) {
+        @error "Not supported"
+    }
+
+    @if ($n == 1 or $value == 0) {
+        @return $value;
+    }
+
+    $i: 1;
+    $pre-val: 1;
+    @while ($i < $max_iterations) {
+        $val: (1.0 / $n) * ((($n - 1) * $pre-val) + $value / pow($pre-val, $n - 1));
+
+        @if ($pre-val == $val) {
+            @return $val;
+        }
+
+        $pre-val: $val;
+        $i: $i + 1;
+    }
+
+    @error ("Failed to compute " + $n + "th root of " + $value + " in " +
+            $max_iterations + " iterations");
+}
+
+@function truncate($value, $decimals: 10) {
+    @if ($decimals < 0) {
+        @error "Not supported"
+    }
+
+    $multiplier: pow(10, $decimals);
+    @return floor($value * $multiplier) / $multiplier;
 }
