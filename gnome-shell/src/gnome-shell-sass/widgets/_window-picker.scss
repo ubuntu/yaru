@@ -5,7 +5,7 @@ $window_picker_padding: $base_padding * 2; // 12px
 
 $window_thumbnail_label_color: transparentize($osd_bg_color, 0.4);
 
-$window_close_button_color: lighten($osd_bg_color, 10%); // Yaru: lighter close button because of our darker overview bg
+$window_close_button_color: transparentize(lighten($osd_bg_color, 7%), .02);
 $window_close_button_size: 30px;
 $window_close_button_padding: 3px;
 
@@ -18,7 +18,7 @@ $window_close_button_padding: 3px;
 // Window titles
 .window-caption {
   color: $osd_fg_color;
-  background-color: $osd_bg_color;
+  background-color: lighten($osd_bg_color, 5%);
   border-radius: 99px;
   padding: $base_padding $base_padding * 2;
   border: 1px solid $borders_color_dark; // Yaru: add border
@@ -29,26 +29,27 @@ $window_close_button_padding: 3px;
   background-color: $window_close_button_color;
   color: $osd_fg_color;
   border-radius: 99px;
+  box-shadow: 0 2px 4px 0 $shadow_color;
   padding: $window_close_button_padding;
   height: $window_close_button_size;
   width: $window_close_button_size;
-  transition-duration: 300ms;
+  transition-duration: 100ms;
   border: 1px solid $borders_color_dark; // Yaru: add border
 
   & StIcon { icon-size: 24px; } // uses non standard icon size
 
   &:hover {
-    background-color: lighten($window_close_button_color, 5%); // Yaru: lighter close button because of our darker overview bg
+    background-color: lighten($window_close_button_color, 7%);
   }
 
   &:active {
-    // color: transparentize($osd_fg_color, 0.2); // Yaru: don't change icon color when :active
-    background-color: darken($window_close_button_color, 5%);
+    background-color: lighten($window_close_button_color, 13%);
   }
 }
 
 .workspace-background {
   // keep in sync with BACKGROUND_CORNER_RADIUS_PIXELS in workspace.js
   border-radius: 30px;
+  background-color: $invisible_occluded_bg_color;
   box-shadow: 0 4px 16px 4px transparentize(darken($osd_bg_color, 30%), 0.7);
 }

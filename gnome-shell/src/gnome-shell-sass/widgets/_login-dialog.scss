@@ -16,7 +16,6 @@
   .modal-dialog-button-box { spacing: 3px; }
   .modal-dialog-button {
     padding: 4px 18px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     background-color: $_gdm_bg; // Yaru change: use $_gdm_bg
     border-color: $borders_color; // Yaru change: use $borders_color
     color: $fg_color; // Yaru change: use $fg_color for dark/light theme
@@ -34,7 +33,6 @@
     }
     &:active {
       $_active_c: if($variant == 'light', darken($_gdm_bg, 25%), darken($_gdm_bg, 5%)); // Yaru: adapt active color
-      box-shadow: none;
       background-color: $_active_c;
       color: transparentize($osd_fg_color, 0.3);
     }
@@ -103,7 +101,6 @@
   @include fontsize($base_font_size + 2);
   font-weight: bold;
   padding-left: 15px;
-
   &:ltr { padding-left: 14px; text-align: left; }
   &:rtl { padding-right: 14px; text-align: right; }
 }

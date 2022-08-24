@@ -1,32 +1,91 @@
 // When color definition differs for dark and light variant,
 // it gets @if ed depending on $variant
 
-$base_color: #222;
-$bg_color: #000;
-$fg_color: #fff;
+@import 'palette';
+
+// Yaru change: hard include gnome palette because include and symlink doesn't work with Github CI
+//GNOME Color Palette
+$blue_1: #99c1f1;
+$blue_2: #62a0ea;
+$blue_3: #3584e4;
+$blue_4: #1c71d8;
+$blue_5: #1a5fb4;
+$green_1: #8ff0a4;
+$green_2: #57e389;
+$green_3: #33d17a;
+$green_4: #2ec27e;
+$green_5: #26a269;
+$yellow_1: #f9f06b;
+$yellow_2: #f8e45c;
+$yellow_3: #f6d32d;
+$yellow_4: #f5c211;
+$yellow_5: #e5a50a;
+$orange_1: #ffbe6f;
+$orange_2: #ffa348;
+$orange_3: #ff7800;
+$orange_4: #e66100;
+$orange_5: #c64600;
+$red_1: #f66151;
+$red_2: #ed333b;
+$red_3: #e01b24;
+$red_4: #c01c28;
+$red_5: #a51d2d;
+$purple_1: #dc8add;
+$purple_2: #c061cb;
+$purple_3: #9141ac;
+$purple_4: #813d9c;
+$purple_5: #613583;
+$brown_1: #cdab8f;
+$brown_2: #b5835a;
+$brown_3: #986a44;
+$brown_4: #865e3c;
+$brown_5: #63452c;
+$light_1: #ffffff;
+$light_2: #f6f5f4;
+$light_3: #deddda;
+$light_4: #c0bfbc;
+$light_5: #9a9996;
+$dark_1: #77767b;
+$dark_2: #5e5c64;
+$dark_3: #3d3846;
+$dark_4: #241f31;
+$dark_5: #000000;
+
+$base_color: if($variant == 'light', #fff, #000);
+$bg_color: $base_color;
+$fg_color: if($variant == 'light', transparentize(black, .2), white);
 
 $selected_fg_color: #ffffff;
-$selected_bg_color: darken(#4a90d9,20%);
+$selected_bg_color: $blue_3;
+
 $selected_borders_color: darken($selected_bg_color, 20%);
-$borders_color: darken($bg_color,12%);
-$borders_edge: transparentize($fg_color, 0.9);
+$borders_color: lighten($bg_color,17%);
+$borders_edge: $borders_color;
 $link_color: lighten($selected_bg_color,20%);
 $link_visited_color: lighten($selected_bg_color,10%);
 
-$warning_color: #f57900;
-$error_color: #cc0000;
-$success_color: darken(#73d216,10%);
-$destructive_color: darken(#ef2929,10%);
+$warning_color: if($variant == 'light', $yellow_5, #cd9309);
+$error_color: if($variant == 'light', $red_3, $red_4);
+$success_color: if($variant == 'light', $green_4, $green_5);
+$destructive_color: $error_color;
 
-$osd_fg_color: #eeeeec;
-$osd_bg_color: #2e3436;
-$osd_borders_color: rgba(0,0,0, 0.7);
-$osd_outer_borders_color: rgba(255,255,255, 0.1);
-$osd_insensitive_bg_color: mix($osd_fg_color, $osd_bg_color, 10%);
+$osd_fg_color: white;
+$osd_bg_color: $base_color;
+$osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
 $osd_insensitive_fg_color: if($variant == 'light', mix($osd_fg_color, $osd_bg_color, 80%),  mix($osd_fg_color, $osd_bg_color, 70%));
+$osd_borders_color: $osd_bg_color;
+$osd_outer_borders_color: $osd_bg_color;
 
-$shadow_color: rgba(0,0,0, 0.1);
-$system_bg_color: desaturate(#241f31,100%); //neutralize the HIG color
+$shadow_color: transparent;
+
+// cards
+$card_bg_color: if($variant == 'light', darken($bg_color, 12%), lighten($bg_color, 12%));
+
+// notifications
+$bubble_buttons_color: if($variant == 'light', darken($bg_color, 22%), lighten($bg_color, 31%));
+
+// overview background color
+$system_bg_color: lighten($base_color, 17%);
 
 //insensitive state derived colors
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
@@ -40,6 +99,18 @@ $backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 80%);
 $backdrop_insensitive_color: lighten($backdrop_bg_color,15%);
 $backdrop_borders_color: mix($borders_color, $bg_color, 90%);
 $backdrop_dark_fill: mix($backdrop_borders_color,$backdrop_bg_color, 35%);
+
+// derived checked colors
+$checked_bg_color: if($variant=='light', darken($bg_color, 12%), lighten($bg_color, 18%));
+$checked_fg_color: if($variant=='light', darken($fg_color, 12%), lighten($fg_color, 18%));
+
+// derived hover colors
+$hover_bg_color: if($variant=='light', darken($bg_color, 8%), lighten($bg_color, 20%));
+$hover_fg_color: if($variant=='light', darken($fg_color, 10%), lighten($fg_color, 20%));
+
+// derived active colors
+$active_bg_color: if($variant=='light', darken($bg_color, 10%), lighten($bg_color, 22%));
+$active_fg_color: if($variant=='light', darken($fg_color, 10%), lighten($fg_color, 22%));
 
 // Yaru: we need hc and imports to for our build to work:
 $variant: hc;
