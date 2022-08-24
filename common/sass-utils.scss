@@ -63,30 +63,20 @@
 }
 
 @function list-length($list) {
-    $i: 0;
-    @each $e in $list {
-        $i: $i + 1;
-    }
-
-    @return $i;
+    @return length($list);
 }
 
 @function list-nth($list, $nth) {
-    $i: 0;
-
-    @if $nth < 0 {
-        $nth: list-length($list) + $nth;
+    $length: length($list);
+    @if ($length == 0 or abs($nth) > $length) {
+        @return null;
     }
 
-    @each $e in $list {
-        @if ($i == $nth) {
-            @return $e;
-        }
-
-        $i: $i + 1;
+    @if ($nth >= 0) {
+        $nth: $nth + 1;
     }
 
-    @return null;
+    @return nth($list, $nth);
 }
 
 @function list-index($list, $item) {
