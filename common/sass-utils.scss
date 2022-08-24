@@ -91,3 +91,30 @@
 
     @return null;
 }
+
+@function pow($base, $exponent) {
+    @if ($exponent == 0) {
+        @return 1;
+    }
+
+    @if ($base == 0) {
+        @return 0;
+    }
+
+    @if $exponent < 0 {
+        $base: 1 / $base;
+        $exponent: -$exponent;
+    } @else if ($exponent % 2 == 0) {
+        $half-pow: pow($base, $exponent / 2);
+        @return $half-pow * $half-pow;
+    }
+
+    $i: 1;
+    $val: $base;
+    @while ($i < $exponent) {
+        $val: $val * $base;
+        $i: $i + 1;
+    }
+
+    @return $val;
+}

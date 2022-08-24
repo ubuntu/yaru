@@ -101,3 +101,15 @@
 @debug test('list-index, Three, valid', list-index([1, '2', false], 1), 0);
 @debug test('list-index, Three, valid', list-index([1, '2', false], '2'), 1);
 @debug test('list-index, Three, valid', list-index([1, '2', false], false), 2);
+
+@debug test('pow 0^0', pow(0, 0), 1);
+@debug test('pow 1^0', pow(1, 0), 1);
+@debug test('pow 10^0', pow(10, 0), 1);
+
+@debug test('pow 0^10', pow(0, 10), 0);
+@debug test('pow 1^20', pow(1, 20), 1);
+@debug test('pow 2^8', pow(2, 8), 256);
+@debug test('pow 10^3', pow(10, 3), 1000);
+
+@debug test('pow 2^-2', pow(2, -2), 1/4);
+@debug test('pow 3^-3', pow(3, -3), 1/27);
