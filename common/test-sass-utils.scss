@@ -138,3 +138,6 @@
 
 @debug test('color contrast black/white', color-contrast(white, black), 21);
 @debug test('color contrast blue/blue', color-contrast(blue, blue), 1);
+
+@debug test('optimize-contrast black/blue', optimize-contrast(black, blue), #5e5eff);
+@debug test('optimize-contrast white/blue', optimize-contrast(white, lightgray), #767676);

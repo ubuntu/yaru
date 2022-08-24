@@ -197,3 +197,16 @@
 
     @return ($lighter-luminance + 0.05) / ($darker-luminance + 0.05);
 }
+
+@function optimize-contrast($bg, $fg, $large-text: false, $target: 4.5) {
+    @if ($large-text and $target == 4.5) {
+        $target: 3;
+    }
+
+    $dark-bg: luminance($bg) < luminance($fg);
+    @while (color-contrast($bg, $fg) < $target) {
+        $fg: if($dark-bg, lighten($fg, 0.1), darken($fg, 0.1));
+    }
+
+    @return $fg;
+}
