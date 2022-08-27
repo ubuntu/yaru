@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<style-scheme id="@FlavourThemeName@" _name="@ThemeName@" version="1.0">
+  <_description>A style scheme for @ThemeName@</_description>
+  <metadata>
+    <property name="variant">light</property>
+    <property name="dark-variant">@ThemeName@-dark</property>
+  </metadata>
+
+  <!-- Yaru palette -->
+  <color name="blue_1"                     value="#75d3f4"/>
+  <color name="blue_2"                     value="#47c4f1"/>
+  <color name="blue_3"                     value="#19B6EE"/>
+  <color name="blue_4"                     value="#007aa6"/>
+  <color name="blue_5"                     value="#335280"/>
+  
+  <color name="dark_1"                     value="#77767B"/>
+  <color name="dark_2"                     value="#5E5C64"/>
+  <color name="dark_3"                     value="#504E55"/>
+  <color name="dark_4"                     value="#3D3846"/>
+  <color name="dark_5"                     value="#241F31"/>
+  <color name="dark_6"                     value="#000000"/>
+  
+  <color name="green_1"                    value="#5AED70"/>
+  <color name="green_2"                    value="#47D35C"/>
+  <color name="green_3"                    value="#34B948"/>
+  <color name="green_4"                    value="#219E34"/>
+  <color name="green_5"                    value="#0e8420"/>
+    
+  <color name="light_1"                    value="#FFFFFF"/>
+  <color name="light_2"                    value="#FCFCFC"/>
+  <color name="light_3"                    value="#F6F5F4"/>
+  <color name="light_4"                    value="#DEDDDA"/>
+  <color name="light_5"                    value="#C0BFBC"/>
+  <color name="light_6"                    value="#B0AFAC"/>
+  <color name="light_7"                    value="#9A9996"/>
+  
+  <color name="orange_1"                   value="#F29879"/>
+  <color name="orange_2"                   value="#F08763"/>
+  <color name="orange_3"                   value="#ED764D"/>
+  <color name="orange_4"                   value="#EB6536"/>
+  <color name="orange_5"                   value="#E95420"/>
+  
+  <color name="purple_1"                   value="#924D8B"/>
+  <color name="purple_2"                   value="#762572"/>
+  <color name="purple_3"                   value="#77216F"/>
+  <color name="purple_4"                   value="#5E2750"/>
+  <color name="purple_5"                   value="#2C001E"/>
+  
+  <color name="red_1"                      value="#EA485C"/>
+  <color name="red_2"                      value="#DE374C"/>
+  <color name="red_3"                      value="#D3273B"/>
+  <color name="red_4"                      value="#c7162b"/>
+  <color name="red_5"                      value="#a91224"/>
+  
+  <color name="yellow_1"                   value="#FCCD87"/>
+  <color name="yellow_2"                   value="#FBC16A"/>
+  <color name="yellow_3"                   value="#FBB44C"/>
+  <color name="yellow_4"                   value="#FAA82F"/>
+  <color name="yellow_5"                   value="#F99B11"/>
+
+  <!-- Global Styles -->
+  <style name="background-pattern"         background="light_3"/>
+  <style name="bracket-match"              foreground="green_5" bold="true"/>
+  <style name="current-line"               background="light_3"/>
+  <style name="current-line-number"        background="light_3" foreground="light_7"/>
+  <style name="cursor"                     foreground="orange_5"/>
+  <style name="draw-spaces"                foreground="light_6"/>
+  <style name="line-numbers"               background="light_2" foreground="light_6"/>
+  <style name="map-overlay"                background="dark_1"/>
+  <style name="right-margin"               background="dark_1" foreground="dark_1"/>
+  <style name="search-match"               background="green_1" foreground="dark_4"/>
+  <style name="text"                       background="light_2" foreground="dark_3"/>
+
+  <!-- Defaults -->
+  <style name="def:base-n-integer"         foreground="purple_4"/>
+  <style name="def:boolean"                foreground="purple_4"/>
+  <style name="def:comment"                foreground="purple_1" italic="true"/>
+  <style name="def:constant"               foreground="purple_4"/>
+  <style name="def:decimal"                foreground="purple_4"/>
+  <style name="def:deletion"               strikethrough="true"/>
+  <style name="def:doc-comment-element"    foreground="dark_3"/>
+  <style name="def:floating-point"         foreground="purple_4"/>
+  <style name="def:function"               foreground="purple_3" bold="true"/>
+  <style name="def:heading"                foreground="purple_5" bold="true"/>
+  <style name="def:keyword"                foreground="green_5" bold="true"/>
+  <style name="def:link-destination"       foreground="blue_3" italic="true" underline="low"/>
+  <style name="def:link-text"              foreground="red_3"/>
+  <style name="def:list-marker"            foreground="orange_5" bold="true"/>
+  <style name="def:net-address"            foreground="blue_3" underline="low"/>
+  <style name="def:number"                 foreground="blue_3"/>
+  <style name="def:preformatted-section"   foreground="purple_4"/>
+  <style name="def:preprocessor"           foreground="dark_6" bold="true"/>
+  <style name="def:shebang"                foreground="purple_1" bold="true"/>
+  <style name="def:special-char"           foreground="red_2" bold="false"/>
+  <style name="def:string"                 foreground="yellow_5"/>
+  <style name="def:strong-emphasis"        bold="true"/>
+  <style name="def:type"                   foreground="blue_4" bold="true"/>
+  <style name="def:underlined"             underline="single"/>
+  <style name="def:warning"                underline="error" underline-color="yellow_4"/>
+
+  <!-- C# -->
+  <style name="c-sharp:format"             foreground="purple_4"/>
+  <style name="c-sharp:preprocessor"       foreground="dark_6" bold="true"/>
+
+  <!-- C -->
+  <style name="c:printf"                   foreground="purple_4"/>
+  <style name="c:signal-name"              foreground="red_4"/>
+  <style name="c:storage-class"            foreground="orange_5" bold="true"/>
+  <style name="c:type-keyword"             foreground="orange_5" bold="true"/>
+
+  <!-- CSS -->
+  <style name="css:id-selector"            foreground="dark_6" bold="true"/>
+  <style name="css:property-name"          foreground="dark_6" bold="true"/>
+  <style name="css:pseudo-selector"        foreground="purple_4" bold="true"/>
+  <style name="css:selector-symbol"        foreground="orange_5" bold="true"/>
+  <style name="css:type-selector"          foreground="dark_6" bold="true"/>
+  <style name="css:vendor-specific"        foreground="yellow_5"/>
+
+  <!-- Diff -->
+  <style name="diff:added-line"            foreground="green_5"/>
+  <style name="diff:changed-line"          foreground="orange_4"/>
+  <style name="diff:diff-file"             foreground="blue_4"/>
+  <style name="diff:location"              foreground="yellow_5"/>
+  <style name="diff:removed-line"          foreground="red_1"/>
+
+  <!-- Go -->
+  <style name="go:printf"                  foreground="purple_4"/>
+
+  <!-- Python 2 -->
+  <style name="python:builtin-function"    foreground="blue_4"/>
+  <style name="python:class-name"          foreground="dark_6" bold="true"/>
+  <style name="python:module-handler"      foreground="red_3"/>
+
+  <!-- Rust -->
+  <style name="rust:attribute"             foreground="purple_4"/>
+  <style name="rust:lifetime"              foreground="orange_5" bold="false" italic="false"/>
+  <style name="rust:macro"                 foreground="purple_4" bold="false"/>
+  <style name="rust:scope"                 foreground="orange_5"/>
+
+  <!-- Vala -->
+  <style name="vala:attributes"            foreground="dark_2" bold="false"/>
+
+  <!-- XML -->
+  <style name="xml:attribute-name"         foreground="blue_4" bold="true"/>
+  <style name="xml:attribute-value"        foreground="yellow_5"/>
+  <style name="xml:element-name"           foreground="purple_4"/>
+  <style name="xml:namespace"              foreground="yellow_5"/>
+  <style name="xml:processing-instruction" foreground="yellow_5" bold="true"/>
+
+</style-scheme>
