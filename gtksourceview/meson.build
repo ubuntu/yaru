@@ -8,4 +8,5 @@ foreach flavour: ['default', 'dark']
 endforeach
 
 
-subdir('src')
+subdir('gtksourceview')
+subdir('gtksourceview-5')
