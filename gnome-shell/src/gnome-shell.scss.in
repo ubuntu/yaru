@@ -1,7 +1,7 @@
 $variant: if(@DarkVariant@, 'dark', 'light');
 $yaru_variant: '@YaruVariant@';
 $use_gresource: @UseGResource@;
-$high_contrast: @HighContrast@;
+$is_highcontrast: @HighContrast@;
 $UPSTREAM_VARIANTS: ['dark', 'light'];
 
 @import 'sass-utils';
@@ -53,7 +53,7 @@ $UPSTREAM_VARIANTS: ['dark', 'light'];
     @return url(quote($url));
 }
 
-@debug 'Generating GNOME Shell ' + $yaru_variant + ' theme (' + $variant +' variant, hc: '+ $high_contrast+')';
+@debug 'Generating GNOME Shell ' + $yaru_variant + ' theme (' + $variant +' variant, hc: '+ $is_highcontrast+')';
 
 @import "gnome-shell-sass/_@Colors@";
 @import "gnome-shell-sass/_drawing";
@@ -61,7 +61,7 @@ $UPSTREAM_VARIANTS: ['dark', 'light'];
 @import "gnome-shell-sass/_widgets";
 @import "gnome-shell-sass/_dock";
 
-@if $high_contrast {
+@if $is_highcontrast {
     //force symbolic icons
     stage {
         -st-icon-style: symbolic;
