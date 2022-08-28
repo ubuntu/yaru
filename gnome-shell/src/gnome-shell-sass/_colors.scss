@@ -2,6 +2,8 @@
 // it gets @if-ed depending on $variant
 @import 'palette';
 
+// $is_highcontrast: "false"; - already defined in gnome-shell.scss.in
+
 $base_color: if($variant=='light', #ffffff, lighten($jet, 4%));
 $bg_color_dark: lighten($jet, 2%);
 $bg_color: if($variant=='light', #FAFAFA, $bg_color_dark);
@@ -35,11 +37,14 @@ $osd_outer_borders_color: transparentize(white, 0.84);
 
 $shadow_color: transparentize(black, 0.9);
 
+// button
+$button_mix_factor: 7%;
+
 // cards
-$card_bg_color: if($variant == 'light', darken($bg_color, 5%), lighten($bg_color, 2%));
+$card_bg_color: if($variant =='light', darken($bg_color, 5%), lighten($bg_color, 2%));
 
 // notifications
-$bubble_buttons_color: if($variant == 'light', darken($bg_color, 12%), lighten($bg_color, 10%));
+$bubble_buttons_color: if($variant =='light', darken($bg_color, 12%), lighten($bg_color, 10%));
 
 // overview background color
 $system_bg_color: lighten($jet, 4%); // Lighten than dash but darken than bg-color
@@ -60,7 +65,7 @@ $backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
 // derived hover colors - Yaru: we want the hover bg to be a visible gray for dark and light shell themes
 $hover_bg_color: transparentize($fg_color, 0.9);
 $hover_fg_color: $fg_color;
-$hover_borders_color: lighten($borders_color,5%);
+$hover_borders_color: lighten($borders_color, 5%);
 
 // derived active colors - Yaru: we want the active bg to be a visible gray for dark and light shell themes
 $active_bg_color: transparentize($fg_color, 0.8);

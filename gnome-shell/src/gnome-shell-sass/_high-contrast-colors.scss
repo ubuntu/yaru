@@ -3,6 +3,8 @@
 
 @import 'palette';
 
+// $is_highcontrast: 'true'; - already defined in gnome-shell.scss.in
+
 // Yaru change: hard include gnome palette because include and symlink doesn't work with Github CI
 //GNOME Color Palette
 $blue_1: #99c1f1;
@@ -77,6 +79,10 @@ $osd_borders_color: $osd_bg_color;
 $osd_outer_borders_color: $osd_bg_color;
 
 $shadow_color: transparent;
+
+// button
+$button_inset_color: transparentize($fg_color, 0.8);
+$button_mix_factor: 10%;
 
 // cards
 $card_bg_color: if($variant == 'light', darken($bg_color, 12%), lighten($bg_color, 12%));
