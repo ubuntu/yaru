@@ -75,7 +75,10 @@
       padding: 1.5 * $base_padding;
       background-color: lighten($bg_color, 10%);
 
-      &.active { background-color: $selected_bg_color; }
+      &.active {
+        background-color: $selected_bg_color;
+        color: $selected_fg_color; // Yaru change: fix for light theme
+      }
     }
 
     & .title {
@@ -85,6 +88,11 @@
     & .subtitle {
       @extend %caption_heading;
     }
+  }
+  
+  // Yaru change: fix for light theme
+  :active {
+    color: $fg_color !important;
   }
 }
 
