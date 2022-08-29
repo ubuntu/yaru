@@ -156,7 +156,9 @@ $app_icon_size: 96px;
     width: 24px;
     height: 24px;
     border-radius: 99px;
+    @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5)); // Yaru change: fix for light theme
   }
+
 
   &:insensitive > StIcon { @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
   &:hover > StIcon { @include button(hover, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
