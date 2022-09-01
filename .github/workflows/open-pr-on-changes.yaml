@@ -51,12 +51,12 @@ jobs:
           },
           {
             project: GTK4,
-            repo: "https://gitlab.gnome.org/GNOME/libadwaita.git",
+            repo: "https://gitlab.gnome.org/GNOME/gtk.git",
             upstreambranch: main,
             localbranch: gtk4,
-            projectdir: libadwaita,
-            src:  src/stylesheet/,
-            dest: gtk/upstream/gtk-4.0/Adwaita
+            projectdir: gtk,
+            src: gtk/theme/Default/,
+            dest: gtk/upstream/gtk-4.0/Default
           },
           {
             project: Libhandy,
