@@ -1,6 +1,10 @@
 .quick-settings {
-  padding: 4 * $base_padding;
-  border-radius: $modal_radius*2;
+  padding: $base_padding*3;
+  border-radius: $modal_radius*2.25;
+
+  .icon-button, .button {
+    padding: $base_padding*1.75;
+  }
 }
 
 .quick-settings-grid {
@@ -10,9 +14,9 @@
 
 .quick-toggle {
   border-radius: 99px;
-  min-width: 11.5em;
-  max-width: 11.5em;
-  min-height: 48px;
+  min-width: 12em;
+  max-width: 12em;
+  min-height: 40px;
   border:none;
 
   &:checked { @include button(default); }
@@ -60,9 +64,9 @@
 
 .quick-toggle-menu {
   background-color: $card_bg_color;
-  border-radius: $base_border_radius*2.75;
-  padding: $base_padding*2.75;
-  margin: 0 $base_padding*2.75;
+  border-radius: $base_border_radius*3;
+  padding: $base_padding*2;
+  margin: $base_padding*2 $base_padding*3 0;
 
   .popup-menu-item > StIcon { -st-icon-style: symbolic; }
 
@@ -91,8 +95,7 @@
 }
 
 .quick-toggle-menu-container {
-  padding: 2 * $base_padding $base_padding 0;
- }
+}
 
 .quick-settings-system-item {
   & > StBoxLayout { spacing: 2 * $base_padding; }
