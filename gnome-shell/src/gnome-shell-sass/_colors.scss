@@ -77,8 +77,8 @@ $checked_fg_color: if($variant=='light', darken($fg_color, 7%), lighten($fg_colo
 
 $base_hover_color: transparentize(white, 0.8);
 $base_active_color: transparentize(white, 0.75);
-$hover_fg_color: lighten($selected_fg_color, .25);
-$active_fg_color: transparentize($selected_fg_color, .5);
+// $hover_fg_color: lighten($selected_fg_color, .25);
+// $active_fg_color: transparentize($selected_fg_color, .5);
 
 $panel_bg_color: darken($jet, 2%);
 $panel_fg_color: darken($porcelain, 2%);
