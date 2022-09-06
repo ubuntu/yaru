@@ -209,16 +209,17 @@ def main(args, SRC, DEST):
     rendered_icons = 0
     if not args.svg:
         print("Rendering all SVGs in", SRC)
+        print('')
         if not os.path.exists(DEST):
             os.mkdir(DEST)
 
-        for file in os.listdir(SRC):
-            if file[-4:] == ".svg":
-                file = os.path.join(SRC, file)
-                handler = ContentHandler(file)
+        for svg in os.listdir(SRC):
+            file = os.path.join(SRC, svg)
+            if os.path.exists(file):
+                handler = ContentHandler(file, True, filter=args.filter)
                 xml.sax.parse(open(file), handler)
                 rendered_icons += 1
-        print("")
+                print('')
     else:
         svg = args.svg + ".svg"
         file = os.path.join(SRC, svg)
