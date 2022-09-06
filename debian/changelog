@@ -1,3 +1,36 @@
+yaru-theme (22.10.1) kinetic; urgency=medium
+
+  [ Paul Kepinski ]
+  * Sync with Libadwaita symbolics
+  * Fix some upstream branches (master -> main)
+  * Sync gnome-shell with upstream
+  * Fix slider states
+  * Gtk3: fix marks scale
+  * Gtk3: fix invisible check and radio in selected row
+  * Sync Gtk3 with upstream
+  * Add new auth-face-symbolic icon
+  * Sync symbolic icons with upstream
+  * Sync Cinnamon with upstream
+  * Sync icon theme with upstream
+  * Sync GS with upstream
+  * Metacity: add missing dialog window controls in dark theme
+  * Improve reproducibility of generate-index-theme.py
+  * Skip duplicated CI on push/PR
+  * Add kotlin fullcolor icon
+  * Add support of GS 43
+  * Add missing dark-mode-symbolic entry to gnome-shell-icons.gresource.xml
+
+  [ imageck ]
+  * xfwm4: Add maximized_offset
+
+  [ Jeremy Bicha ]
+  * gitattributes: Exclude .github from tarball releases
+
+  [ Marco Trevisan (Treviño) ]
+  * debian/control: Break on gnome-shell versions before 43
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 25 Aug 2022 01:42:10 +0200
+
 yaru-theme (22.04.4) jammy; urgency=medium
 
   [ Marco Trevisan (Treviño) ]

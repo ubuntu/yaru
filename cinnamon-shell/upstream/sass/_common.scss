@@ -125,6 +125,17 @@ StScrollBar {
 }
 
 //
+// Ripples
+//
+.ripple-pointer-location {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: transparentize($selected_bg_color, 0.7);
+  box-shadow: 0 0 2px 2px $selected_bg_color;
+}
+
+//
 // Slider
 //
 .popup-slider-menu-item,
@@ -189,14 +200,14 @@ StScrollBar {
   StBin {
     width: 16px;
     height: 16px;
-    background-image: url("#{$asset_path}/checkbox/checkbox-unchecked.svg");
+    background-image: url("#{$asset_path}/checkbox/radio-unchecked.svg");
   }
 
-  &:focus StBin { background-image: url("#{$asset_path}/checkbox/checkbox-unchecked-focused.svg"); }
+  &:focus StBin { background-image: url("#{$asset_path}/checkbox/radio-unchecked.svg"); }
 
-  &:checked StBin { background-image: url("#{$asset_path}/checkbox/checkbox-checked.svg"); }
+  &:checked StBin { background-image: url("#{$asset_path}/checkbox/radio-checked.svg"); }
 
-  &:focus:checked StBin { background-image: url("#{$asset_path}/checkbox/checkbox-checked-focused.svg"); }
+  &:focus:checked StBin { background-image: url("#{$asset_path}/checkbox/radio-checked.svg"); }
 }
 
 //
@@ -1430,7 +1441,7 @@ StScrollBar {
   &-categories-box { padding: 10px 30px 10px 30px; }
 
   &-applications-inner-box,
-  &-applications-outer-box { padding: 10px 10px 0 10px; }
+  &-applications-outer-box { margin: 10px 10px 0 10px; }
 
   &-application-button {
     padding: 7px;
@@ -1735,13 +1746,15 @@ StScrollBar {
   }
 
   &-number-label {
+    font-size: 0.8em;
     z-index: 99;
     color: $tooltip_border_color;
   }
 
   &-badge {
-    border-radius: 256px;
+    border-radius: 9999px;
     background-color: $tooltip_fg_color;
+    margin: 0;
   }
 
   &-button-label {

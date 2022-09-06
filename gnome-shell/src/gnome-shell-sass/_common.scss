@@ -35,18 +35,10 @@ $base_border_radius: 6px; // Yaru change: sync radius with Gtk4
 // radii of things that display over other things, e.g. popovers
 $modal_radius: $base_border_radius*2; // 24px
 
-// derived hover colors - Yaru: we want the hover bg to be a visible gray for dark and light shell themes
-$hover_bg_color: transparentize($fg_color, 0.9);
-$hover_fg_color: $fg_color;
-$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 5%));
-
-// derived active colors - Yaru: we want the active bg to be a visible gray for dark and light shell themes
-$active_bg_color: transparentize($fg_color, 0.8);
-$active_fg_color: darken($fg_color, if($variant=='light', 5%, 3%));
-
-// derived checked colors
-$checked_bg_color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 9%));
-$checked_fg_color: if($variant=='light', darken($fg_color, 7%), lighten($fg_color, 9%));
+// Chroma key to flag when a background-color is always occluded, not visible.
+// This allows any box-shadow behind it to be rendered more efficiently by
+// omitting the middle rectangle.
+$invisible_occluded_bg_color: rgba(3,2,1,0);
 
 // fonts
 $base_font_size: 11;
@@ -88,7 +80,7 @@ stage {
   padding: $base_padding;
   spacing: $base_padding;
   border: 2px solid transparent;
-  transition-duration: 100ms;
+  transition-duration: 200ms;
   text-align: center;
   color: $osd_fg_color; // Yaru change: fix for light theme
 }
@@ -125,6 +117,24 @@ stage {
   &:insensitive { @include button(insensitive, $tc: $fg_color_dark, $c: $bg_color_dark);}
   &:active { @include button(active, $tc: $fg_color_dark, $c: $bg_color_dark);}
   &:checked { @include button(checked, $tc: $fg_color_dark, $c: $bg_color_dark);}
+}
+
+// normal icon-only button
+%icon_button {
+  border-radius: 99px;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: bold;
+  padding: $base_padding*2;
+
+  @include button(normal);
+  &:focus { @include button(focus);}
+  &:hover { @include button(hover);}
+  &:insensitive { @include button(insensitive);}
+  &:active { @include button(active);}
+  &:checked { @include button(checked);}
+
+  & > StIcon { icon-size: $base_icon_size; }
 }
 
 // buttons in dialogs/notifications

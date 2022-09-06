@@ -69,6 +69,7 @@
     height: $calendar_day_size !important;
     width: $calendar_day_size !important;
     border-radius: 99px;
+    transition-duration: 100ms;
     @extend %numeric;
     @extend %smaller;
     

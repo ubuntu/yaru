@@ -86,6 +86,8 @@ if __name__ == '__main__':
             directory.split('/')[-1] not in args.exclude_context):
             directories.add(directory)
 
+    directories = sorted(directories)
+
     theme['Icon Theme']['Directories'] = ','.join(directories)
 
     for dir in directories:

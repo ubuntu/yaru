@@ -170,16 +170,16 @@ StScrollBar {
 .radiobutton StBin {
   width: 16px;
   height: 16px;
-  background-image: url("light-assets/checkbox/checkbox-unchecked.svg"); }
+  background-image: url("light-assets/checkbox/radio-unchecked.svg"); }
 
 .radiobutton:focus StBin {
-  background-image: url("light-assets/checkbox/checkbox-unchecked-focused.svg"); }
+  background-image: url("light-assets/checkbox/radio-unchecked.svg"); }
 
 .radiobutton:checked StBin {
-  background-image: url("light-assets/checkbox/checkbox-checked.svg"); }
+  background-image: url("light-assets/checkbox/radio-checked.svg"); }
 
 .radiobutton:focus:checked StBin {
-  background-image: url("light-assets/checkbox/checkbox-checked-focused.svg"); }
+  background-image: url("light-assets/checkbox/radio-checked.svg"); }
 
 .toggle-switch {
   width: 50px;
@@ -1345,12 +1345,14 @@ StScrollBar {
   padding-left: 4px; }
 
 .grouped-window-list-number-label {
+  font-size: 0.8em;
   z-index: 99;
   color: #d0d0d0; }
 
 .grouped-window-list-badge {
-  border-radius: 256px;
-  background-color: #4a4a4a; }
+  border-radius: 9999px;
+  background-color: #4a4a4a;
+  margin: 0; }
 
 .grouped-window-list-button-label {
   padding-left: 4px; }
