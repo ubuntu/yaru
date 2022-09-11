@@ -141,12 +141,17 @@ searchbar {
   &:not(.inline) > revealer > box {
     background-color: $headerbar_bg_color;
     color: $headerbar_fg_color;
-    box-shadow: inset 0 -1px $headerbar_border_color;
+    box-shadow: inset 0 -1px if($contrast == 'high', $headerbar_border_color, $headerbar_shade_color);
     padding-bottom: 1px;
 
     &:backdrop {
       background-color: $headerbar_backdrop_color;
-      transition: $backdrop_transition;
+      transition: background-color $backdrop_transition;
+
+      > * {
+        filter: opacity(.5);
+        transition: filter $backdrop_transition;
+      }
     }
   }
 
@@ -171,12 +176,25 @@ searchbar {
  ****************/
 
 actionbar > revealer > box {
+  background-color: $headerbar_bg_color;
+  color: $headerbar_fg_color;
+  box-shadow: inset 0 1px if($contrast == 'high', $headerbar_border_color, $headerbar_shade_color);
   padding: 1px 6px 0px 6px;
-  box-shadow: inset 0 1px $border_color;
+
   @extend %toolbar;
 
   &, > box.start, > box.end {
     border-spacing: 6px;
+  }
+
+  &:backdrop {
+    background-color: $headerbar_backdrop_color;
+    transition: background-color $backdrop_transition;
+
+    > * {
+      filter: opacity(.5);
+      transition: filter $backdrop_transition;
+    }
   }
 }
 
@@ -186,16 +204,21 @@ actionbar > revealer > box {
 
 infobar {
   > revealer > box {
-    padding: 8px 8px 9px 8px;
-    border-spacing: 12px;
-    box-shadow: inset 0 -1px $border_color;
+    padding: 6px;
+    padding-bottom: 7px;
+    border-spacing: 6px;
+    box-shadow: inset 0 -1px if($contrast == 'high', $border_color, $shade_color);
+
+    > box {
+      border-spacing: 6px;
+    }
   }
 
   &.action:hover > revealer > box {
     background-image: image(gtkalpha(currentColor, .05));
   }
 
-  &.action:hover:active > revealer > box {
+  &.action:active > revealer > box {
     background-image: image(gtkalpha(currentColor, .1));
   }
 

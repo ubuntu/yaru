@@ -1,3 +1,6 @@
+$row_transition: background-color 200ms $ease-out-quad,
+                 border-radius 200ms $ease-out-quad;
+
 listview,
 list {
   color: $view_fg_color;
@@ -85,6 +88,7 @@ row {
   > box.header {
     margin-left: 12px;
     margin-right: 12px;
+    border-spacing: 6px;
     min-height: 50px;
 
     > .icon:disabled {
@@ -95,6 +99,75 @@ row {
       margin-top: 6px;
       margin-bottom: 6px;
       border-spacing: 3px;
+      padding: 0;
+
+      // Specificity bump for header bar
+      &,
+      > .title,
+      > .subtitle {
+        padding: 0;
+        font-weight: inherit;
+      }
+    }
+
+    > .prefixes,
+    > .suffixes {
+      border-spacing: 6px;
+    }
+
+    > .icon,
+    > .prefixes {
+      &:dir(ltr) { margin-right: 6px; }
+      &:dir(rtl) { margin-left: 6px; }
+    }
+  }
+}
+
+/***************
+ * AdwEntryRow *
+ ***************/
+
+row.entry {
+  @include focus-ring($focus-state: '.focused', $offset: -1px, $transition: $row_transition);
+
+  &:not(:selected).activatable.focused:hover,
+  &:not(:selected).activatable.focused:active {
+    background-color: transparent;
+  }
+
+  .edit-icon, .indicator {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 5px;
+  }
+
+  .edit-icon:disabled {
+    opacity: $strong_disabled_opacity;
+  }
+
+  .indicator {
+    opacity: $dimmer_opacity;
+  }
+
+  &.monospace {
+    font-family: inherit;
+
+    text {
+      font-family: monospace;
+    }
+  }
+
+  @each $e_type, $e_color in (error,   $error_color),
+                             (warning, $warning_color),
+                             (success, $success_color) {
+    &.#{$e_type} {
+      @include focus-ring($focus-state: '.focused', $offset: -1px, $fc: gtkalpha(currentColor, $focus_border_opacity), $transition: $row_transition);
+
+      text {
+        > selection:focus-within { background-color: gtkalpha($e_color, .2); }
+
+        > cursor-handle > contents { background-color: currentColor; }
+      }
     }
   }
 }
@@ -140,14 +213,13 @@ row.combo {
 }
 
 %boxed_list_row {
-  @include focus-ring($offset: -1px);
+  @include focus-ring($offset: -1px, $transition: $row_transition);
 
   .osd &:focus:focus-visible {
     outline-color: $osd_focus_color;
   }
 
-  transition: 200ms $ease-out-quad;
-  border-bottom: 1px solid $border_color;
+  border-bottom: 1px solid if($contrast == 'high', $border_color, $card_shade_color);
 
   &:not(:selected).activatable {
     &:hover {
@@ -187,36 +259,35 @@ row.expander {
   // AdwExpanderRow arrow rotation
 
   image.expander-row-arrow {
-    transition: 200ms $ease-out-quad;
+    @extend .dim-label;
+
+    transition: -gtk-icon-transform 200ms $ease-out-quad;
     @include margin-start(6px);
+
+    &:dir(ltr) {
+      -gtk-icon-transform: rotate(0.5turn);
+    }
+
+    &:dir(rtl) {
+      -gtk-icon-transform: rotate(-0.5turn);
+    }
+
+    &:disabled {
+      filter: opacity($disabled_opacity);
+    }
   }
 
   &:checked image.expander-row-arrow {
     -gtk-icon-transform: rotate(0turn);
-  }
+    opacity: 1;
 
-  &:not(:checked) image.expander-row-arrow {
-    @extend .dim-label;
-
-    &:dir(ltr) {
-      -gtk-icon-transform: rotate(-0.25turn);
+    &:not(:disabled) {
+      color: $accent_color;
     }
-
-    &:dir(rtl) {
-      -gtk-icon-transform: rotate(0.25turn);
-    }
-  }
-
-  &:checked image.expander-row-arrow:not(:disabled) {
-    color: $accent_color;
   }
 
   .osd &:checked image.expander-row-arrow:not(:disabled) {
     color: inherit;
-  }
-
-  image.expander-row-arrow:disabled {
-    filter: opacity($disabled_opacity);
   }
 }
 

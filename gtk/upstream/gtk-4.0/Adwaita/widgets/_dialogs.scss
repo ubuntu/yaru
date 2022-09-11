@@ -38,6 +38,10 @@ window.assistant {
 
       &.highlight {
         background-color: $view_selected_color;
+
+        @if $contrast == 'high' {
+          box-shadow: inset 0 0 0 1px $border_color;
+        }
       }
     }
   }

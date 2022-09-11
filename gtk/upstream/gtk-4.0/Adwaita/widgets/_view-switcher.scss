@@ -51,6 +51,7 @@ viewswitcher {
 
 viewswitcherbar actionbar > revealer > box {
   padding: 0;
+  padding-top: 1px;
 }
 
 /************************
@@ -91,6 +92,10 @@ indicatorbin {
   }
 
   &.needs-attention > indicator {
+    background: $accent_color;
+  }
+
+  &.needs-attention.badge > indicator {
     background: $accent_bg_color;
 
     > label { color: $accent_fg_color; }

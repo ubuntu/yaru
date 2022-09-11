@@ -1,3 +1,7 @@
+/********************
+ * GtkMessageDialog *
+ ********************/
+
 window.dialog.message {
   .titlebar {
     min-height: 20px;
@@ -50,6 +54,81 @@ window.dialog.message {
 
         &.destructive-action {
           color: $destructive_color;
+        }
+      }
+    }
+  }
+}
+
+/********************
+ * AdwMessageDialog *
+ ********************/
+
+window.messagedialog {
+  background-color: $dialog_bg_color;
+  color: $dialog_fg_color;
+
+  @if $contrast != 'high' {
+    &.csd {
+      outline: none;
+    }
+  }
+
+  .message-area {
+    padding: 24px 30px;
+    border-spacing: 10px;
+  }
+
+  .response-area > box > button {
+    padding: 10px 14px;
+    border-radius: 0;
+
+    @if $contrast == 'high' {
+      &:hover,
+      &.keyboard-activating,
+      &:active,
+      &:checked {
+        box-shadow: none;
+      }
+    }
+
+    &.suggested {
+      color: $accent_color;
+    }
+
+    &.destructive {
+      color: $destructive_color;
+    }
+  }
+
+  &.csd:not(.solid-csd) {
+    border-radius: $window_radius+1;
+
+    .response-area {
+      > box.horizontal > button {
+        margin-top: -1px;
+        margin-right: -1px;
+        margin-left: -1px;
+
+        &:first-child {
+          border-bottom-left-radius: $window_radius+1;
+          margin-left: 0;
+        }
+
+        &:last-child {
+          border-bottom-right-radius: $window_radius+1;
+          margin-right: 0;
+        }
+      }
+
+      > box.vertical > button {
+          margin-top: -1px;
+          margin-bottom: -1px;
+
+        &:last-child {
+          border-bottom-left-radius: $window_radius+1;
+          border-bottom-right-radius: $window_radius+1;
+          margin-bottom: 0;
         }
       }
     }

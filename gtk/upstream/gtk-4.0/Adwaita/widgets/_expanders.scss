@@ -13,14 +13,14 @@ expander-widget {
   @include focus-ring("> box > title");
 
   > box > title {
-    transition: $focus_transition;
     border-radius: $button_radius;
 
     > expander {
       opacity: .7;
     }
 
-    &:hover > expander {
+    &:hover > expander,
+    &:active > expander {
       opacity: 1;
     }
   }

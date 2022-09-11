@@ -1,3 +1,5 @@
+$_slider_border_color: transparentize(black, if($contrast == 'high', .65, .9));
+
 %scale_trough {
   border-radius: 99px;
   background-color: $trough_color;
@@ -22,10 +24,9 @@ scale {
   min-width: 10px;
   padding: 12px;
 
-  @include focus-ring("> trough", $offset: 10px);
+  @include focus-ring("> trough > slider", $offset: 0);
 
   > trough {
-    transition: $focus_transition;
     @extend %scale_trough;
 
     // the colored part of the backing bit
@@ -39,12 +40,9 @@ scale {
 
     > slider {
       background-color: $slider_color;
-      box-shadow: 0 2px 4px transparentize(black, .8);
-      outline: 1px solid transparentize(black, .9);
+      box-shadow: 0 0 0 1px $_slider_border_color, 0 2px 4px transparentize(black, .8);
 
       border-radius: 100%;
-      transition: $button_transition;
-      transition-property: background, border, box-shadow;
 
       // the slider is inside the trough, so to have make it bigger there's a negative margin
       min-width: 20px;
@@ -53,7 +51,7 @@ scale {
     }
   }
 
-  &:hover {
+  &:hover, &:active {
     > trough {
       background-color: $trough_hover_color;
 
@@ -82,7 +80,7 @@ scale {
     filter: opacity($disabled_opacity);
 
     > trough > slider {
-      box-shadow: 0 2px 4px transparent;
+      box-shadow: 0 0 0 1px $_slider_border_color, 0 2px 4px transparent;
       outline-color: transparentize(black, if($contrast == 'high', .5, .8));
     }
   }
@@ -117,10 +115,10 @@ scale {
 
       // Adjust box-shadow for the 45deg rotation, for 0px 2px we ideally want
       // 1/√2px 1/√2px, round that to 1px 1px
-      box-shadow: 1px 1px 4px transparentize(black, .8);
+      box-shadow: 0 0 0 1px $_slider_border_color, 1px 1px 4px transparentize(black, .8);
 
       &:disabled {
-        box-shadow: 1px 1px 4px transparent;
+        box-shadow: 0 0 0 1px $_slider_border_color, 1px 1px 4px transparent;
       }
     }
   }
@@ -148,12 +146,20 @@ scale {
       indicator { min-height: ($_marks_length - 3px); }
     }
 
-    &.marks-before > trough > slider {
-      border-top-left-radius: 0;
+    &.marks-before {
+      padding-top: 0;
+
+       > trough > slider {
+        border-top-left-radius: 0;
+      }
     }
 
-    &.marks-after > trough > slider {
-      border-bottom-right-radius: 0;
+    &.marks-after {
+      padding-bottom: 0;
+
+      > trough > slider {
+        border-bottom-right-radius: 0;
+      }
     }
 
     &.marks-before.marks-after > trough > slider {
@@ -184,127 +190,42 @@ scale {
       indicator { min-height: ($_marks_length - 3px); }
     }
 
-    &.marks-before > trough > slider {
-      border-bottom-left-radius: 0;
+    &.marks-before {
+      padding-left: 0;
+
+      > trough > slider {
+        border-bottom-left-radius: 0;
+      }
     }
 
-    &.marks-after > trough > slider {
-      border-top-right-radius: 0;
+    &.marks-after {
+      padding-right: 0;
+
+      > trough > slider {
+        border-top-right-radius: 0;
+      }
     }
   }
 
   &.color {
-    min-height: 0;
-    min-width: 0;
+    padding: 0;
 
     > trough {
-      background-image: image($border_color);
-      background-repeat: no-repeat;
-    }
+      border: none;
+      background: none;
+      border-radius: 10px;
 
-    &.horizontal {
-      padding: 0 0 15px 0;
-
-      > trough {
-        padding-bottom: 4px;
-        background-position: 0 -3px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-
-        > slider {
-          &:dir(ltr), &:dir(rtl) { // specificity bump
-            &:hover, &:disabled, & {
-              margin-bottom: -15px;
-              margin-top: 6px;
-            }
-          }
-        }
-      }
-    }
-
-    &.vertical {
-      &:dir(ltr) {
-        padding: 0 0 0 15px;
-
-        > trough {
-          padding-left: 4px;
-          background-position: 3px 0;
-          border-bottom-right-radius: 0;
-          border-top-right-radius: 0;
-
-          > slider {
-            &:hover, &:disabled, & {
-              margin-left: -15px;
-              margin-right: 6px;
-            }
-          }
-        }
-      }
-
-      &:dir(rtl) {
-        padding: 0 15px 0 0;
-
-        > trough {
-          padding-right: 4px;
-          background-position: -3px 0;
-          border-bottom-left-radius: 0;
-          border-top-left-radius: 0;
-
-          > slider {
-            &:hover, &:disabled, & {
-              margin-right: -15px;
-              margin-left: 6px;
-            }
-          }
-        }
+      > slider {
+        margin: 0;
+        background-color: transparentize(white, .2);
       }
     }
 
     &.fine-tune {
-      &.horizontal {
-        &:dir(ltr), &:dir(rtl) { // specificity bump
-          padding: 0 0 12px 0;
+      padding: 2px;
 
-          > trough {
-            padding-bottom: 7px;
-            background-position: 0 -6px;
-
-            > slider {
-              margin-bottom: -15px;
-              margin-top: 6px;
-            }
-          }
-        }
-      }
-
-      &.vertical {
-        &:dir(ltr) {
-          padding: 0 0 0 12px;
-
-          > trough {
-            padding-left: 7px;
-            background-position: 6px 0;
-
-            > slider {
-              margin-left: -15px;
-              margin-right: 6px;
-            }
-          }
-        }
-
-        &:dir(rtl) {
-          padding: 0 12px 0 0;
-
-          > trough {
-            padding-right: 7px;
-            background-position: -6px 0;
-
-            > slider {
-              margin-right: -15px;
-              margin-left: 6px;
-            }
-          }
-        }
+      > trough > slider {
+        margin: -2px;
       }
     }
   }

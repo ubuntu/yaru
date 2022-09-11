@@ -26,7 +26,6 @@
 
 stacksidebar row {
   padding: 10px 4px;
-  @include focus-ring();
 
   > label {
     padding-left: 6px;
@@ -69,6 +68,15 @@ separator.sidebar {
     padding: 0 8px;
     border-radius: $menu_radius;
     margin: 0 $menu_margin 2px;
+
+    @if $contrast == 'high' {
+      &.activatable:hover,
+      &.activatable:active,
+      &.activatable.has-open-popup,
+      &:selected {
+        box-shadow: inset 0 0 0 1px $border_color;
+      }
+    }
   }
 }
 
@@ -76,11 +84,21 @@ separator.sidebar {
  * GtkPlacesSidebar *
  ********************/
 
-$_placesidebar_icons_opacity: 0.7;
+row {
+  image.sidebar-icon {
+    opacity: 0.7; // see bug #786613 for details on this oddity
+  }
 
-row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sidebar icons
-                                                                  // see bug #786613 for details
-                                                                  // on this oddity
+  .sidebar-button {
+    opacity: 0.7;
+
+    &:hover,
+    &:active,
+    &.keyboard-activating {
+      opacity: 1;
+    }
+  }
+}
 
 /* this should be more generic, only using .navigation-sidebar
    https://gitlab.gnome.org/GNOME/gtk/-/issues/2929

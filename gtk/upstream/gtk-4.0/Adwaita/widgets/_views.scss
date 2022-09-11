@@ -38,6 +38,12 @@ textview {
 iconview {
   @extend %view;
 
+  @if $contrast == 'high' {
+    &:selected {
+      box-shadow: inset 0 0 0 1px $border_color;
+    }
+  }
+
   @include focus-ring();
 
   &:drop(active) {
@@ -59,13 +65,16 @@ rubberband {
 flowbox > flowboxchild,
 gridview > child {
   padding: 3px;
-  transition: $focus_transition;
   border-radius: $button_radius;
 
   @include focus-ring();
 
   &:selected {
     background-color: $view_selected_color;
+
+    @if $contrast == 'high' {
+      box-shadow: inset 0 0 0 1px $border_color;
+    }
   }
 }
 
@@ -78,5 +87,11 @@ gridview > child.activatable {
     &:hover { background-color: $view_selected_hover_color; }
 
     &:active { background-color: $view_selected_active_color; }
+  }
+
+  @if $contrast == 'high' {
+    &:hover, &:active {
+      box-shadow: inset 0 0 0 1px $border_color;
+    }
   }
 }

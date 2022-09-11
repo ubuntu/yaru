@@ -3,8 +3,6 @@ colorswatch {
   // is colorswatch overlay {}, colorswatch has the programmatically set background, so most of the style is
   // applied to the overlay box.
 
-  transition: $focus_transition;
-
   @include focus-ring($width: 4px, $offset: -2px);
 
   // base color corners rounding
@@ -104,8 +102,6 @@ colorswatch {
 }
 
 plane {
-  transition: $focus_transition;
-
   @include focus-ring($offset: 2px, $outer: true);
 }
 

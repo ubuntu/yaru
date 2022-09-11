@@ -82,7 +82,10 @@ popover.menu {
     &,
     &:hover:checked,
     &:hover:indeterminate,
-    &:hover:not(:checked):not(:indeterminate) {
+    &:hover:not(:checked):not(:indeterminate),
+    &:active:checked,
+    &:active:indeterminate,
+    &:active:not(:checked):not(:indeterminate), {
       background: none;
       box-shadow: none;
       color: inherit;
@@ -127,9 +130,17 @@ popover.menu {
     &:hover,
     &:selected {
       background-color: $view_selected_color;
+    }
 
+    &:active {
+      background-color: $view_selected_active_color; // matching buttons
+    }
+
+    @if $contrast == 'high' {
+      &:hover,
+      &:selected,
       &:active {
-        background-color: $view_selected_active_color; // matching buttons
+        box-shadow: inset 0 0 0 1px $border_color;
       }
     }
 
@@ -188,6 +199,14 @@ popover.menu {
         }
       }
 
+      @if $contrast == 'high' {
+        &:hover,
+        &:active,
+        &.has-open-popup {
+          box-shadow: inset 0 0 0 1px $border_color;
+        }
+      }
+
       > box {
         border-spacing: 6px;
       }
@@ -222,6 +241,10 @@ menubar {
 
     &:selected { //Seems like it :hover even with keyboard focus
       background-color: $view_selected_color;
+
+      @if $contrast == 'high' {
+        box-shadow: inset 0 0 0 1px $border_color;
+      }
     }
 
     //nested submenus

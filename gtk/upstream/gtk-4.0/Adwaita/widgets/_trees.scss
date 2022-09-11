@@ -46,7 +46,7 @@ treeview.view {
 
     color: gtkalpha(currentColor, .7);
 
-    &:hover { color: currentColor; }
+    &:hover, &:active { color: currentColor; }
 
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
 
@@ -124,6 +124,10 @@ treeview.view > header > button {
   padding-left: 4px;
   padding-right: 4px;
   border-bottom: 1px solid $border_color;
+}
+
+treeview.navigation-sidebar {
+  padding: 0;
 }
 
 /********************************************************

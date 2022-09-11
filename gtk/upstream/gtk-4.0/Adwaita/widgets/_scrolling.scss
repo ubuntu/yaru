@@ -33,13 +33,13 @@ scrollbar {
 
         &:hover { background-color: gtkalpha(currentColor, .6); }
 
-        &:hover:active { background-color: currentColor; }
+        &:active { background-color: currentColor; }
       } @else {
         background-color: gtkalpha(currentColor, .2);
 
         &:hover { background-color: gtkalpha(currentColor, .4); }
 
-        &:hover:active { background-color: gtkalpha(currentColor, .6); }
+        &:active { background-color: gtkalpha(currentColor, .6); }
       }
 
       &:disabled { opacity: 0; }
@@ -156,7 +156,7 @@ scrollbar {
   &.vertical > range > trough > slider { min-height: $_slider_min_length; }
 
   > range.fine-tune > trough > slider {
-    &, &:hover, &:hover:active {
+    &, &:hover, &:active {
       background-color: if($contrast == 'high', $accent_color, gtkalpha($accent_color, .6));
     }
   }

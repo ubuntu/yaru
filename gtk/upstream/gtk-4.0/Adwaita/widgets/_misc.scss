@@ -96,6 +96,44 @@ statusbar {
   padding: 6px 10px 6px 10px;
 }
 
+/******************
+ * AdwAboutWindow *
+ ******************/
+
+window.about {
+  .main-page {
+    > viewport > clamp > box {
+      margin: 12px;
+      border-spacing: 6px;
+
+      > box {
+        margin-top: 18px;
+        border-spacing: 18px;
+        margin-bottom: 6px;
+      }
+    }
+
+    .app-version {
+      padding: 3px 18px;
+      color: $accent_color;
+      border-radius: 999px;
+      margin-top: 3px;
+    }
+  }
+
+  .subpage {
+    > viewport > clamp > box {
+      margin: 18px 12px;
+      border-spacing: 18px;
+    }
+
+    > clamp > textview {
+      background: none;
+      color: inherit;
+    }
+  }
+}
+
 /*****************
  * AdwStatusPage *
  *****************/
@@ -176,7 +214,7 @@ statuspage {
   }
 
   &.activatable {
-    transition: $button_transition;
+    transition: $focus_transition, $button_transition;
 
     &:hover {
       background-image: image(gtkalpha(currentColor, .03));

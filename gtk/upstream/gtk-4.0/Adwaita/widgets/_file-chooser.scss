@@ -1,17 +1,14 @@
 placesview {
   .server-list-button > image {
-    transition: 200ms $ease-out-quad;
+    transition: -gtk-icon-transform 200ms $ease-out-quad;
     -gtk-icon-transform: rotate(0turn);
   }
 
   .server-list-button:checked > image {
-    transition: 200ms $ease-out-quad;
     -gtk-icon-transform: rotate(-0.5turn);
   }
 
-  row.activatable:hover {  }
-
-  > actionbar > revealer > box  > box{
+  > actionbar > revealer > box > box{
     border-spacing: 6px;
   }
 }

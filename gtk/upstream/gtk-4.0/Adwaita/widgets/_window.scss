@@ -24,7 +24,7 @@ window {
                   0 4px 28px 12px transparentize(black, 0.97),
                   0 6px 32px 16px transparent,
                   0 0 0 1px transparentize(black, if($contrast == 'high', .2, .98));
-      transition: $backdrop_transition;
+      transition: box-shadow $backdrop_transition;
     }
 
     &.dialog.message {

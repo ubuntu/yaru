@@ -16,8 +16,7 @@ button {
     border-radius: $button_radius;
     font-weight: bold;
 
-    @include focus-ring();
-    transition: $button_transition;
+    @include focus-ring($transition: $button_transition);
 
     .osd &:focus:focus-visible {
       outline-color: $osd_focus_color;
@@ -111,8 +110,7 @@ button {
   &.osd {
     min-width: 32px;
     min-height: 32px;
-    @include focus-ring($outer: true, $offset: 1px, $fc: $osd_focus_color);
-    transition: $button_transition;
+    @include focus-ring($outer: true, $offset: 1px, $fc: $osd_focus_color, $transition: $button_transition);
 
     color: $osd_fg_color;
     background-color: transparentize(black, .35);
@@ -154,8 +152,7 @@ button {
   @at-root %opaque_button {
     box-shadow: none;
 
-    @include focus-ring($outer: true, $offset: 1px);
-    transition: $button_transition;
+    @include focus-ring($outer: true, $offset: 1px, $transition: $button_transition);
 
     .osd &:focus:focus-visible {
       outline-color: $osd_focus_color;
@@ -214,8 +211,7 @@ button {
   @at-root %button_basic_flat,
   &.flat {
     background: transparent;
-    @include focus-ring();
-    transition: $button_transition;
+    @include focus-ring($transition: $button_transition);
 
     .osd &:focus:focus-visible {
       outline-color: $osd_focus_color;
@@ -478,6 +474,14 @@ splitbutton {
     }
   }
 
+  &:disabled {
+    filter: opacity($disabled_opacity);
+
+    > button, > menubutton > button {
+      filter: none;
+    }
+  }
+
   // Reimplementing linked so we don't blow up css
   > button:dir(ltr),
   > menubutton > button:dir(rtl) {
@@ -510,6 +514,14 @@ splitbutton {
 
       @if $contrast == 'high' {
         box-shadow: inset 0 0 0 1px $thin_border_color;
+      }
+    }
+
+    &:disabled {
+      filter: opacity($strong_disabled_opacity);
+
+      > button:disabled, > menubutton > button:disabled {
+        filter: none;
       }
     }
 

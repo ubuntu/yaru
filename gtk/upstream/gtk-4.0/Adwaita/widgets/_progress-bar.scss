@@ -56,10 +56,12 @@ progressbar {
     }
   }
 
-  &.osd { // progressbar.osd used for epiphany page loading progress
+  &.osd {
+    // Thin progress bar with no trough, usually goes under the header bar
     min-width: 2px;
     min-height: 2px;
     background-color: transparent;
+    color: inherit;
 
     > trough {
       border-style: none;

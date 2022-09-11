@@ -1,7 +1,6 @@
 checkbutton {
   border-spacing: 4px;
   border-radius: $button_radius + 3px;
-  transition: $focus_transition;
   padding: 3px;
 
   @include focus-ring();
@@ -29,11 +28,13 @@ radio {
     box-shadow: inset 0 0 0 2px $trough_color;
   }
 
-  &:not(:checked):not(:indeterminate):hover {
-    @if $contrast == 'high' {
-      box-shadow: inset 0 0 0 2px gtkalpha(currentColor, .6);
-    } @else {
-      box-shadow: inset 0 0 0 2px $trough_hover_color;
+  &:not(:checked):not(:indeterminate) {
+    &:hover {
+      @if $contrast == 'high' {
+        box-shadow: inset 0 0 0 2px gtkalpha(currentColor, .6);
+      } @else {
+        box-shadow: inset 0 0 0 2px $trough_hover_color;
+      }
     }
 
     &:active {
@@ -52,11 +53,8 @@ radio {
     color: $fill_text_color;
     box-shadow: none;
 
-    &:hover {
-      background-image: image(gtkalpha(currentColor, .1));
-
-      &:active { background-image: image(transparentize(black, .8)); }
-    }
+    &:hover { background-image: image(gtkalpha(currentColor, .1)); }
+    &:active { background-image: image(transparentize(black, .8)); }
   }
 
   &:disabled {
