@@ -15,7 +15,13 @@
   min-height: 48px;
   border:none;
 
-  // &:checked { @include button(default); } // Yaru change: remove accented checked buttons
+  &:checked { // Yaru change: tone down accented checked buttons
+    // Interpolate accent color saturation: less saturated colors will receive higher opacity
+    $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($selected_bg_color) / 100%) * .15);
+    @include button(normal, $bg: $toggle-bg-color);
+    &:hover {@include button(hover, $bg: $toggle-bg-color);}
+    &:active {@include button(active, $bg: $toggle-bg-color);}
+  }
 
   & > StBoxLayout { spacing: $base_padding; }
 
