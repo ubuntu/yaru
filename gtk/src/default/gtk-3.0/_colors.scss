@@ -88,3 +88,8 @@ $coloured_focus_border_color: transparentize(white, 0.3);
 // Yaru: Ignore transformations when using dark accent colors
 $progress_bg_color: $accent_bg_color;
 $checkradio_bg_color: $accent_bg_color;
+
+// Optimize accent-color definition for default background colors
+@import 'sass-utils';
+$link_color: optimize-contrast($bg_color, $accent_bg_color);
+$link_visited_color: if($variant =='light', darken($link_color, 10%), lighten($link_color, 10%));

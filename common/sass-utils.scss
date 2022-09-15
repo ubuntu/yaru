@@ -63,30 +63,20 @@
 }
 
 @function list-length($list) {
-    $i: 0;
-    @each $e in $list {
-        $i: $i + 1;
-    }
-
-    @return $i;
+    @return length($list);
 }
 
 @function list-nth($list, $nth) {
-    $i: 0;
-
-    @if $nth < 0 {
-        $nth: list-length($list) + $nth;
+    $length: length($list);
+    @if ($length == 0 or abs($nth) > $length) {
+        @return null;
     }
 
-    @each $e in $list {
-        @if ($i == $nth) {
-            @return $e;
-        }
-
-        $i: $i + 1;
+    @if ($nth >= 0) {
+        $nth: $nth + 1;
     }
 
-    @return null;
+    @return nth($list, $nth);
 }
 
 @function list-index($list, $item) {
@@ -100,4 +90,123 @@
     }
 
     @return null;
+}
+
+@function pow($base, $exponent, $root: 1) {
+    @if ($exponent == 0) {
+        @return 1;
+    }
+
+    @if ($base == 0) {
+        @return 0;
+    }
+
+    @if ($root != 1) {
+        @if ($exponent == $root) {
+            @return $base;
+        }
+        $base: nth-root($base, $root);
+    }
+
+    @if $exponent < 0 {
+        $base: 1 / $base;
+        $exponent: -$exponent;
+    } @else if ($exponent % 2 == 0) {
+        $half-pow: pow($base, $exponent / 2);
+        @return $half-pow * $half-pow;
+    }
+
+    $i: 1;
+    $val: $base;
+    @while ($i < $exponent) {
+        $val: $val * $base;
+        $i: $i + 1;
+    }
+
+    @return $val;
+}
+
+@function nth-root($value, $n, $max_iterations: 100) {
+    @if ($n <= 0) {
+        @error "Not supported"
+    }
+
+    @if ($n == 1 or $value == 0) {
+        @return $value;
+    }
+
+    $i: 1;
+    $pre-val: 1;
+    @while ($i < $max_iterations) {
+        $val: (1.0 / $n) * ((($n - 1) * $pre-val) + $value / pow($pre-val, $n - 1));
+
+        @if ($pre-val == $val) {
+            @return $val;
+        }
+
+        $pre-val: $val;
+        $i: $i + 1;
+    }
+
+    @error ("Failed to compute " + $n + "th root of " + $value + " in " +
+            $max_iterations + " iterations");
+}
+
+@function truncate($value, $decimals: 10) {
+    @if ($decimals < 0) {
+        @error "Not supported"
+    }
+
+    $multiplier: pow(10, $decimals);
+    @return floor($value * $multiplier) / $multiplier;
+}
+
+// Credits to https://css-tricks.com/snippets/sass/luminance-color-function/
+@function luminance($color) {
+    $colors: (
+        'red': red($color),
+        'green': green($color),
+        'blue': blue($color)
+    );
+
+    @each $name, $value in $colors {
+        $adjusted: 0;
+        $value: $value / 255;
+
+        @if $value < 0.03928 {
+            $value: $value / 12.92;
+        } @else {
+            $value: ($value + .055) / 1.055;
+            $value: pow($value, 12, 5);
+        }
+
+        $colors: map-merge($colors, ($name: $value));
+    }
+
+    @return ((map-get($colors, 'red') * .2126) +
+             (map-get($colors, 'green') * .7152) +
+             (map-get($colors, 'blue') * .0722));
+}
+
+@function color-contrast($color1, $color2) {
+    $c1-luminance: luminance($color1);
+    $c2-luminance: luminance($color2);
+
+    $lighter-luminance: max($c1-luminance, $c2-luminance);
+    $darker-luminance: min($c1-luminance, $c2-luminance);
+
+    @return ($lighter-luminance + 0.05) / ($darker-luminance + 0.05);
+}
+
+@function optimize-contrast($bg, $fg, $large-text: false, $target: 4.5) {
+    @if ($large-text and $target == 4.5) {
+        $target: 3;
+    }
+
+    $dark-bg: luminance($bg) < luminance($fg);
+    @while (color-contrast($bg, $fg) < $target) {
+        $fg: if($dark-bg, lighten($fg, 0.1), darken($fg, 0.1));
+    }
+
+    @return $fg;
 }

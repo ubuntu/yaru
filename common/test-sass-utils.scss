@@ -18,7 +18,12 @@
 @import 'sass-utils';
 
 @function assert($result, $expected: true) {
-    @if $result != $expected {
+    @if (type-of($result) == 'color' and type-of($expected) == 'color') {
+        $result: #{$result};
+        $expected: #{$expected};
+    }
+
+    @if ($result != $expected or type-of($result) != type-of($expected)) {
         $result: if($result == null, 'null', $result);
         $expected: if($expected == null, 'null', $expected);
         @error "Assertion failed, expected '" + $expected + "', got '" + $result + "'";
@@ -96,3 +101,43 @@
 @debug test('list-index, Three, valid', list-index([1, '2', false], 1), 0);
 @debug test('list-index, Three, valid', list-index([1, '2', false], '2'), 1);
 @debug test('list-index, Three, valid', list-index([1, '2', false], false), 2);
+
+@debug test('nth-root 1-root of 0', nth-root(0, 1), 0);
+@debug test('nth-root 0-root of 0', nth-root(0, 20), 0);
+@debug test('nth-root 2-root of 4', nth-root(4, 2), 2);
+@debug test('nth-root 4-root of 256', nth-root(256, 4), 4);
+@debug test('nth-root 5-root of 4096', nth-root(4096.0, 5), 5.278031643091578);
+
+@debug test('pow 0^0', pow(0, 0), 1);
+@debug test('pow 1^0', pow(1, 0), 1);
+@debug test('pow 10^0', pow(10, 0), 1);
+
+@debug test('pow 0^10', pow(0, 10), 0);
+@debug test('pow 1^20', pow(1, 20), 1);
+@debug test('pow 2^8', pow(2, 8), 256);
+@debug test('pow 10^3', pow(10, 3), 1000);
+
+@debug test('pow 2^-2', pow(2, -2), 1/4);
+@debug test('pow 3^-3', pow(3, -3), 1/27);
+
+@debug test('pow 2^(2/2)', pow(2, 2, 2), 2);
+@debug test('pow 2^(4/2)', pow(2, 4, 2), 4);
+@debug test('pow 2^(12/5)', pow(2, 12, 5), 5.278031643091582);
+
+@debug test('truncate 0.1234567890123456789', truncate(0.123456789123456789), 0.1234567891);
+@debug test('truncate 5 0.12345678901234', truncate(0.12345678901234, 5), 0.12345);
+@debug test('truncate 5 0.12345678901234', truncate(0.12345678901234, 1), 0.1);
+@debug test('truncate 5 5.12345678901234', truncate(5.12345678901234, 0), 5);
+
+@debug test('luminance white', luminance(white), 1);
+@debug test('luminance black', luminance(black), 0);
+@debug test('luminance red', luminance(#f00), 0.2126);
+@debug test('luminance green', luminance(#0f0), 0.7152);
+@debug test('luminance blue', luminance(#00f), 0.0722);
+@debug test('luminance Ubuntu orange', truncate(luminance(#dd4814), 6), 0.200573);
+
+@debug test('color contrast black/white', color-contrast(white, black), 21);
+@debug test('color contrast blue/blue', color-contrast(blue, blue), 1);
+
+@debug test('optimize-contrast black/blue', optimize-contrast(black, blue), #5e5eff);
+@debug test('optimize-contrast white/blue', optimize-contrast(white, lightgray), #767676);

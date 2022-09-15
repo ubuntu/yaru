@@ -115,7 +115,7 @@ foreach flavour: flavours
 
       # Look for scss files in the variant dir first, otherwise fallback to
       # base, default or upstream paths, so using reversed order
-      scss_paths = []
+      scss_paths = ['-I', meson.project_source_root() / 'common']
       gtk_scss_dependencies = []
       foreach src: sources_priority
         scss_paths += ['-I', meson.current_source_dir() / src ]
