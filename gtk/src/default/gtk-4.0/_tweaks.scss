@@ -1,6 +1,6 @@
 // Reducing the amount of the palette's background colors to two
 .sidebar {
-    background-color: $window_bg_color;
+    background-color: $bg_color;
 }
 
 // Entries drown if drawn on widgets with $base_color
@@ -8,7 +8,7 @@
 // Remove this when upstream makes entries have a light border in the dark theme
 @if $variant== "dark" {
     notebook entry {
-        background-color: gtkmix($view_bg_color, black, 98%);
+        background-color: darken($base_color, 2%);
     }
 }
 
@@ -22,12 +22,31 @@ scale > trough > slider,
 scale > trough > highlight {
     transition: $button_transition;
 }
+%button,
+button {
+    &.suggested-action,
+    &.destructive-action {
+        transition: $button_transition;
+    }
+}
 
 // Fix popover wiggling effect (see #2903)
 popover.menu {
     check,
     radio {
         transition: none;
+    }
+}
+
+// Check/radios in menus do not need a border
+popover.menu {
+    check,
+    radio {
+        &, &:checked, &:indeterminate {
+            &, &:hover, &:disabled {
+              border-color: transparent;
+            }
+        }
     }
 }
 
@@ -38,47 +57,161 @@ levelbar {
             &.high,
             &:not(.empty) {
                 background-color: $success_color;
+                border: 1px solid $success_color;
             }
         }
     }
 }
 
-// Green suggested buttons
-%button,
-button {
-    &.suggested-action {
-        color: $success_fg_color;
-
-        &,
-        &:checked {
-            &:not(.flat) {
-                background-color: $success_bg_color;
-            }
-        }
-    }
-
-    &.flat {
-        &.suggested-action {
-            color: $success_color;
+// Remove spinbutton active inset shadow
+spinbutton:not(.vertical) {
+    > button.image-button.up:not(.flat),
+    > button.image-button.down:not(.flat) {
+        &:active {
+            box-shadow: none; 
         }
     }
 }
 
-splitbutton {
-    &.suggested-action {
-        > button, > menubutton > button {
-            color: $success_fg_color;
-    
-            &, &:checked {
-                background-color: $success_bg_color;
-            }
+// titlebutton
+windowcontrols {
+    button {
+        $_base_button_color: transparentize($fg_color, 0.9);
+        $_base_hover_color: transparentize($fg_color, 0.85);
+        $_base_active_color: transparentize($fg_color, 0.75);
+        
+        padding: 3px;
+        margin: 0 4px;
+
+        background: $_base_button_color;
+
+        &:hover {
+            background: $_base_hover_color;
+        }
+
+        &:active,
+        &:checked { 
+            background: $_base_active_color;
         }
     }
 }
 
-%button,
-button,
-%link,
-link {
-    font-weight: normal;
+
+// Mimic Libadwaita slider
+
+$_slider_color: darken(white, 1%);
+$_slider_hover_color: white;
+$_slider_disabled_color: if($variant == 'light', $_slider_color, darken($_slider_color, 20%));
+
+$_trough_color: if($variant == 'light', $silk, lighten($inkstone, 5%));
+$_trough_disabled_color: if($variant == 'light', lighten($_trough_color, 10%), $inkstone);
+
+switch {
+  $box-shadow: 0 2px 2px transparentize(black, .9);
+
+  transition: $button_transition;
+  transition-property: background, border;
+
+  &:not(:backdrop), :backdrop &:backdrop {
+    &, :selected & {
+      border-color: $_trough_color;
+      background: $_trough_color;
+    }
+
+    &:checked {
+      border-color: $checkradio_bg_color;
+      background: $checkradio_bg_color;
+
+      :selected & {
+        border-color: transparentize(black, $amount: .75);
+      }
+    }
+
+    &, :selected & {
+      &:disabled {
+        border-color: $_trough_disabled_color;
+        background: $_trough_disabled_color;
+      }
+    }
+  }
+
+  slider {
+    margin: 1px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    background-clip: border-box;
+  }
+
+  &:not(:backdrop) {
+    &, :selected & {
+      &, &:checked {
+        > slider {
+          border-color: $_slider_color;
+          background: $_slider_color;
+          box-shadow: $box-shadow;
+        }
+      }
+  
+      &:hover {
+        &, &:checked {
+          > slider {
+            border-color: $_slider_hover_color;
+            background: $_slider_hover_color;
+            box-shadow: $box-shadow;
+          }
+        }
+      }
+    }
+  }
+
+  &:disabled, &:backdrop {
+    &, &:checked {
+      > slider {
+        &:disabled, &:backdrop {
+          border-color: $_slider_disabled_color;
+          background: $_slider_disabled_color;
+        }
+      }
+    }
+  }
+}
+
+scale:not(.marks-after):not(.marks-before) {
+  $box-shadow: 0 1px 0 transparentize(black, .9);
+  $box-shadow-border: inset 0 0 0 1px transparentize(black, if($variant == 'light', .8, 1));
+  $box-shadow-border-active: inset 0 0 0 1px $progress_border_color;
+
+  slider {
+    border: none;
+    min-height: 20px;
+    min-width: 20px;
+  }
+
+  &:not(:disabled) {
+    slider {
+      background: $_slider_color;
+      box-shadow: $box-shadow-border, $box-shadow;
+    }
+
+    &:hover {
+      slider {
+        background: $_slider_hover_color;
+      }
+    }
+
+    slider:active {
+      box-shadow: $box-shadow-border-active, $box-shadow;
+    }
+  }
+
+  &:disabled, &:backdrop {
+    &, &:hover {
+      slider {
+        background: $_slider_disabled_color;
+        box-shadow: $box-shadow-border;
+      }
+    }
+  }
 }
