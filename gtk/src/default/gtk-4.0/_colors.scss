@@ -64,12 +64,12 @@ $backdrop_borders_color: mix($borders_color, $bg_color, 80%);
 $backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
 
 //special cased widget colors
-$suggested_bg_color: $selected_bg_color;
-$suggested_border_color: $selected_borders_color;
-$progress_bg_color: $selected_bg_color;
-$progress_border_color: $selected_borders_color;
-$checkradio_bg_color: $selected_bg_color;
-$checkradio_fg_color: $selected_fg_color;
+$suggested_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
+$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
+$progress_bg_color: if($variant== 'light', lighten($accent_bg_color, 10%), lighten($accent_bg_color, 5%));
+$progress_border_color: $progress_bg_color;
+$checkradio_bg_color: if($variant=='light', lighten($accent_bg_color, 5%), $accent_bg_color);
+$checkradio_fg_color: $accent_fg_color;
 $checkradio_borders_color: if($variant == 'light', darken($checkradio_bg_color, 10%), darken($checkradio_bg_color, 40%));
 $switch_bg_color: $selected_bg_color;
 $switch_borders_color: if($variant == 'light', darken($checkradio_bg_color, 10%), darken($checkradio_bg_color,40%));
