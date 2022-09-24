@@ -1,3 +1,30 @@
+yaru-theme (22.10.3) UNRELEASED; urgency=medium
+
+  * dock: Sync theme with upstream d2d fixes.
+    This includes fixes coming from:
+     - https://github.com/micheleg/dash-to-dock/pull/1826
+     - https://github.com/micheleg/dash-to-dock/pull/1827
+    And more importantly:
+     - Increase apps tooltips margins
+     - Set margin for default app-running dots
+     - Remove upstream defined dash-item-container's children margin
+       (LP: #1966167)
+     - Do not add edge padding to edge elements
+     - Fix definition for dash-separator in shrink mode
+     - Take in account side margin and opposite padding in separators
+     - Explicitly use border radius and spacing from upstream
+     - Simplify dash separator definition based on upstream one
+     - Use unique function to handle padding/margin on internal children
+     - avoid computing the shrunk dash padding multiple times
+     - Use generic style generator for shrink mode too
+     - Move mixins to the top of the file for easier re-usage
+     - Use dock-container-style to define the extended cases too
+     - Support shrink and position-based style for labels
+     - Move dock specific variables to dock namespace
+     - Sync global variable definitions with upstream
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Sat, 24 Sep 2022 11:08:41 +0200
+
 yaru-theme (22.10.2) kinetic; urgency=medium
 
   [ Muqtadir ]
