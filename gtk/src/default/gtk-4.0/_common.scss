@@ -1291,7 +1291,7 @@ combobox {
 
    listview {
 
-      margin: 8px 0;
+      margin: 8px;
 
       > row.activatable {
          padding: 8px;
@@ -1302,6 +1302,7 @@ combobox {
              color: $text-color;
              background-color: $menu_selected_color;
              box-shadow: none;
+             border-radius: $button_radius;
            }
          }
       }
