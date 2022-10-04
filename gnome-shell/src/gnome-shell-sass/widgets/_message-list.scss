@@ -12,7 +12,7 @@
 
   .message-list-placeholder { 
     @extend %title_2;
-    color: transparentize($insensitive_fg_color, .5);
+    color: transparentize($insensitive_fg_color, .25); // Yaru change: better contrast
 
     // icon size and color
     > StIcon {
