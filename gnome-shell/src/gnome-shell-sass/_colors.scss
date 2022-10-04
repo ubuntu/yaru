@@ -41,7 +41,7 @@ $shadow_color: transparentize(black, 0.9);
 $button_mix_factor: 7%;
 
 // cards
-$card_bg_color: if($variant =='light', darken($bg_color, 5%), lighten($bg_color, 2%));
+$card_bg_color: if($variant =='light', darken($bg_color, 2%), lighten($bg_color, 2%));
 
 // notifications
 $bubble_buttons_color: if($variant =='light', darken($bg_color, 12%), lighten($bg_color, 10%));
@@ -50,7 +50,7 @@ $bubble_buttons_color: if($variant =='light', darken($bg_color, 12%), lighten($b
 $system_bg_color: lighten($jet, 4%); // Lighten than dash but darken than bg-color
 
 //insensitive state derived colors
-$insensitive_fg_color: mix($fg_color, $bg_color, 50%);
+$insensitive_fg_color: mix($fg_color, $bg_color, 65%);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: $borders_color;
 
