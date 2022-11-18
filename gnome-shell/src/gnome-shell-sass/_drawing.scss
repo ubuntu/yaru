@@ -64,7 +64,7 @@
 }
 
 // On-screen Keyboard
-@mixin keyboard_key($t, $c:$osd_bg_color, $tc:$osd_fg_color) {
+@mixin keyboard_key($t, $c:$osd_bg_color, $tc:$osd_fg_color, $flat: false) {
 // Yaru: FIXME:?! Make keyboard work in both variants
 //
 // Keyboard key drawing function
@@ -83,6 +83,12 @@
   @if $t==normal {
     color: $tc;
     background-color: lighten($c, 3%);
+    @if $flat {
+      background-color: transparent;
+    }
+    @if $is_highcontrast == "true" {
+      box-shadow: inset 0 0 0 1px $button_inset_color;
+    }
   }
 
   // focused key
@@ -144,7 +150,7 @@
 //
 // since buttons are all flat an borderless now the mixin is simpler
 
-@mixin button($t, $tc:$fg_color, $c:$bg_color, $bg: null) { // Yaru change: allow forced bg-color
+@mixin button($t, $tc:$fg_color, $c:$bg_color, $bg: null, $flat: false) { // Yaru change: allow forced bg-color
 
   $button_bg_color: if($bg != null, $bg, mix($tc, $c, $button_mix_factor)); // Yaru change: allow forced bg-color
   transition-duration: 100ms;
@@ -153,6 +159,9 @@
   @if $t==normal {
     color: $tc;
     background-color: $button_bg_color;
+    @if $flat {
+      background-color: transparent;
+    }
     @if $is_highcontrast == "true" {
       box-shadow: inset 0 0 0 1px $button_inset_color;
     }
@@ -314,7 +323,7 @@
 @mixin card($flat: false) {
   border-radius: $base_border_radius;
   margin: $base_margin;
-  box-shadow: 0 1px 1px 0 $shadow_color;
+  box-shadow: inset 0 0 0 1px $card_outer_borders_color;
 
   @if $flat {
     @include button(undecorated);
