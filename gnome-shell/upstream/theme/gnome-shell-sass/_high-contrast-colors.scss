@@ -38,6 +38,7 @@ $button_mix_factor: 10%;
 
 // cards
 $card_bg_color: if($variant == 'light', darken($bg_color, 12%), lighten($bg_color, 12%));
+$card_outer_borders_color: $card_bg_color;
 
 // notifications
 $bubble_buttons_color: if($variant == 'light', darken($bg_color, 22%), lighten($bg_color, 31%));
