@@ -15,7 +15,7 @@
 
 /* today button (the date) */
 .datemenu-today-button {
-  @include card($flat: true);
+  @include card(flat);
   padding: $base_padding * 1.5;
 
   // weekday label

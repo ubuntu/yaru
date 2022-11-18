@@ -105,24 +105,15 @@ stage {
   &:insensitive { @include button(insensitive);}
   &:active { @include button(active);}
   &:checked { @include button(checked);}
-}
 
-// normal icon-only button
-%icon_button {
-  border-radius: 99px;
-  border-style: solid;
-  border-width: 1px;
-  font-weight: bold;
-  padding: $base_padding*2;
-
-  @include button(normal);
-  &:focus { @include button(focus);}
-  &:hover { @include button(hover);}
-  &:insensitive { @include button(insensitive);}
-  &:active { @include button(active);}
-  &:checked { @include button(checked);}
-
-  & > StIcon { icon-size: $base_icon_size; }
+  &.flat {
+    @include button(normal, $flat:true);
+    &:focus { @include button(focus, $flat:true);}
+    &:hover { @include button(hover, $flat:true);}
+    &:insensitive { @include button(insensitive, $flat:true);}
+    &:active { @include button(active, $flat:true);}
+    &:checked { @include button(checked, $flat:true);}
+  }
 }
 
 // buttons in dialogs/notifications
@@ -143,9 +134,9 @@ $bubble_button_radius:$base_border_radius*1.25;
   &:hover { @include button(hover, $c:$bubble_buttons_color);}
   &:active { @include button(active, $c:$bubble_buttons_color);}
   &:checked { @include button(checked, $c:$bubble_buttons_color);}
-  
+
   &:first-child:ltr {
-    border-radius: 0 0 0 $bubble_button_radius; 
+    border-radius: 0 0 0 $bubble_button_radius;
   }
 
   &:last-child:ltr {
