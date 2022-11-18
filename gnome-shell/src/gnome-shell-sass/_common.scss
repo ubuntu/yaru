@@ -107,6 +107,15 @@ stage {
   &:insensitive { @include button(insensitive);}
   &:active { @include button(active);}
   &:checked { @include button(checked);}
+
+  &.flat {
+    @include button(normal, $flat:true);
+    &:focus { @include button(focus, $flat:true);}
+    &:hover { @include button(hover, $flat:true);}
+    &:insensitive { @include button(insensitive, $flat:true);}
+    &:active { @include button(active, $flat:true);}
+    &:checked { @include button(checked, $flat:true);}
+  }
 }
 
 %button_dark { // Yaru change: add dark variant (for light theme)
@@ -117,24 +126,15 @@ stage {
   &:insensitive { @include button(insensitive, $tc: $fg_color_dark, $c: $bg_color_dark);}
   &:active { @include button(active, $tc: $fg_color_dark, $c: $bg_color_dark);}
   &:checked { @include button(checked, $tc: $fg_color_dark, $c: $bg_color_dark);}
-}
 
-// normal icon-only button
-%icon_button {
-  border-radius: 99px;
-  border-style: solid;
-  border-width: 1px;
-  font-weight: bold;
-  padding: $base_padding*2;
-
-  @include button(normal);
-  &:focus { @include button(focus);}
-  &:hover { @include button(hover);}
-  &:insensitive { @include button(insensitive);}
-  &:active { @include button(active);}
-  &:checked { @include button(checked);}
-
-  & > StIcon { icon-size: $base_icon_size; }
+  &.flat {
+    @include button(normal, $flat:true, $tc: $fg_color_dark, $c: $bg_color_dark);
+    &:focus { @include button(focus, $flat:true, $tc: $fg_color_dark, $c: $bg_color_dark);}
+    &:hover { @include button(hover, $flat:true, $tc: $fg_color_dark, $c: $bg_color_dark);}
+    &:insensitive { @include button(insensitive, $flat:true, $tc: $fg_color_dark, $c: $bg_color_dark);}
+    &:active { @include button(active, $flat:true, $tc: $fg_color_dark, $c: $bg_color_dark);}
+    &:checked { @include button(checked, $flat:true, $tc: $fg_color_dark, $c: $bg_color_dark);}
+  }
 }
 
 // buttons in dialogs/notifications
@@ -158,7 +158,7 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
   &:active { @include button(active, $c:$bubble_buttons_color);} // Yaru change: add missing active state
   
   &:first-child:ltr {
-    border-radius: 0 0 0 $bubble_button_radius; 
+    border-radius: 0 0 0 $bubble_button_radius;
   }
 
   &:last-child:ltr {
