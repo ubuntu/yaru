@@ -3,12 +3,12 @@
 
 // We need to set this first because we use it to tint many
 // of the remaining colors
-$selected_bg_color: if($variant == 'light', #92b372, #8fa876);
+$selected_bg_color: if($variant == 'light', #35a854, #35a854);
 
-$base_color: if($variant =='light', mix($selected_bg_color, #ffffff, 2%), mix($selected_bg_color, #404040, 2%));
-$text_color: if($variant == 'light', #202020, #D3D3D3);
-$bg_color: if($variant == 'light', mix($selected_bg_color, #f5f5f5, 2%), mix($selected_bg_color, #2f2f2f, 1.5%));
-$fg_color: if($variant =='light', transparentize(black, 0.13), transparentize(white, 0.13));
+$base_color: if($variant =='light', mix($selected_bg_color, #f4f4f4, 0%), mix($selected_bg_color, #404040, 0%));
+$text_color: if($variant == 'light', #303030, #D3D3D3);
+$bg_color: if($variant == 'light', mix($selected_bg_color, #e8e8e8, 0%), mix($selected_bg_color, #2f2f2f, 0%));
+$fg_color: if($variant =='light', #303030, transparentize(white, 0.13));
 
 $selected_fg_color: #ffffff;
 
@@ -48,3 +48,11 @@ $entry_border: if($variant == 'light', #cfd6e6, darken($borders_color, 0%));
 
 $button_bg: if($variant == 'light', lighten($bg_color, 2%), lighten($base_color, 2%));
 $button_border: $entry_border;
+
+// Colors used for highlights in places where we don't want to use accents
+$noaccent_light_bg_color: #c0c0c0;
+$noaccent_light_fg_color: $text_color;
+$noaccent_dark_bg_color: #525352;
+$noaccent_dark_fg_color: #ffffff;
+$noaccent_selected_bg_color: if($variant=='light', $noaccent_light_bg_color, $noaccent_dark_bg_color);
+$noaccent_selected_fg_color: if($variant=='light', $noaccent_light_fg_color, $noaccent_dark_fg_color);

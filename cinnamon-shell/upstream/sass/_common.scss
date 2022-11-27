@@ -309,9 +309,9 @@ StScrollBar {
   border-right-width: 0;
 
   &:active {
-    color: $selected_fg_color;
+    color: $noaccent_selected_fg_color;
     // border-color: transparentize($fg_color, 0.89);
-    background-color: $selected_bg_color;
+    background-color: $noaccent_selected_bg_color;
   }
   &:insensitive {
     color: transparentize($fg_color, 0.5);
@@ -1414,7 +1414,7 @@ StScrollBar {
   &-favorites-box {
     padding: 10px;
     transition-duration: 300;
-    background-color: $base_color;
+    background-color: darken($base_color, 5%);
     border: 1px solid $borders_color;
   }
 
@@ -1424,7 +1424,7 @@ StScrollBar {
     border-radius: 2px;
 
     &:hover {
-      background-color: $selected_bg_color;
+      background-color: $noaccent_selected_bg_color;
     }
   }
 
@@ -1452,8 +1452,8 @@ StScrollBar {
 
     &-selected {
       padding: 7px;
-      color: $selected_fg_color;
-      background-color: $selected_bg_color;
+      color: $noaccent_selected_fg_color;
+      background-color: $noaccent_selected_bg_color;
       border: 1px solid $borders_color;
 
       &:highlighted { font-weight: bold; }
@@ -1469,8 +1469,8 @@ StScrollBar {
 
     &-selected {
       padding: 7px;
-      color: $selected_fg_color;
-      background-color: $selected_bg_color;
+      color: $noaccent_selected_fg_color;
+      background-color: $noaccent_selected_bg_color;
       border: 1px solid $borders_color;
     }
     &-hover {
@@ -2026,8 +2026,7 @@ StScrollBar {
     padding-bottom: 2px;
     // border-bottom-width: 1px;
     transition-duration: 200;
-
-    &:hover { background-color: $selected_bg_color; }
+    &:hover { background-color: $noaccent_selected_bg_color; }
   }
 
   &.vertical {
@@ -2091,8 +2090,8 @@ StScrollBar {
 
     &:hover,
     &:checked {
-      color: $selected_fg_color;
-      background-color: $selected_bg_color;
+      color: $noaccent_selected_fg_color;
+      background-color: $noaccent_selected_bg_color;
     }
 
     &:highlight {
@@ -2110,20 +2109,20 @@ StScrollBar {
     &:checked,
     .applet-box:hover &,
     .applet-box:checked & {
-      color: $selected_fg_color;
+      color: $noaccent_selected_fg_color;
       text-shadow: none;
     }
   }
 
   &-icon {
-    color: $selected_fg_color;
+    color: $noaccent_selected_fg_color;
     icon-size: 22px;
 
     &:hover,
     &:checked,
     .applet-box:hover > &,
     .applet-box:checked > & {
-      color: $selected_fg_color;
+      color: $noaccent_selected_fg_color;
       text-shadow: none;
     }
   }
@@ -2146,6 +2145,26 @@ StScrollBar {
     font-size: 1em;
     font-weight: bold;
     margin: 0px;
+}
+
+//
+// Cornerbar Applet
+//
+.applet-cornerbar {
+  width: 8px;
+  background-color: transparentize(black, 0.8);
+
+  &-box {
+    padding: 4px 4px;
+
+    &:hover {
+      background-color: $noaccent_selected_bg_color;
+    }
+  }
+
+  &.vertical {
+    height: 8px;
+  }
 }
 
 //
