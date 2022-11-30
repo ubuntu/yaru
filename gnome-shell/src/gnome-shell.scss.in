@@ -62,11 +62,6 @@ $UPSTREAM_VARIANTS: ['dark', 'light'];
 @import "gnome-shell-sass/_dock";
 
 @if $is_highcontrast {
-    //force symbolic icons
-    stage {
-        -st-icon-style: symbolic;
-    }
-
     .toggle-switch {
         width: 48px;
         background-image: yaru-url-handler("resource:///org/gnome/shell/theme/toggle-off-hc.svg");

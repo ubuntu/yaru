@@ -53,16 +53,16 @@ $dark_3: #3d3846;
 $dark_4: #241f31;
 $dark_5: #000000;
 
-$base_color: if($variant == 'light', #fff, #000);
-$bg_color: $base_color;
+$base_color: if($variant == 'light', white, black);
+$bg_color: if($variant == 'light', darken($base_color, 10%), lighten($base_color, 10%));
 $fg_color: if($variant == 'light', transparentize(black, .2), white);
 
-$selected_fg_color: #ffffff;
+$selected_fg_color: white;
 $selected_bg_color: $blue_3;
 
 $selected_borders_color: darken($selected_bg_color, 20%);
-$borders_color: lighten($bg_color,17%);
-$borders_edge: $borders_color;
+$borders_color: if($variant == 'light', transparentize($fg_color, .5), transparentize($fg_color, .7));
+$outer_borders_color: $borders_color;
 $link_color: lighten($selected_bg_color,20%);
 $link_visited_color: lighten($selected_bg_color,10%);
 
@@ -75,24 +75,22 @@ $osd_fg_color: white;
 $osd_bg_color: $base_color;
 $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
 $osd_insensitive_fg_color: if($variant == 'light', mix($osd_fg_color, $osd_bg_color, 80%),  mix($osd_fg_color, $osd_bg_color, 70%));
-$osd_borders_color: $osd_bg_color;
-$osd_outer_borders_color: $osd_bg_color;
+$osd_borders_color: transparentize($osd_fg_color, 0.8);
+$osd_outer_borders_color: $osd_borders_color;
 
-$shadow_color: transparent;
+$shadow_color: rgba(0,0,0,0);
+
+// hc
+$hc_inset_color: transparentize($fg_color, 0.7);
 
 // button
-$button_inset_color: transparentize($fg_color, 0.8);
-$button_mix_factor: 10%;
-
-// cards
-$card_bg_color: if($variant == 'light', darken($bg_color, 12%), lighten($bg_color, 12%));
-$card_outer_borders_color: $card_bg_color;
+$button_mix_factor: 20%;
 
 // notifications
-$bubble_buttons_color: if($variant == 'light', darken($bg_color, 22%), lighten($bg_color, 31%));
+$bubble_buttons_color: if($variant == 'light', darken($bg_color, 7%), lighten($bg_color, 5%));
 
 // overview background color
-$system_bg_color: lighten($base_color, 17%);
+$system_bg_color: black;
 
 //insensitive state derived colors
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
