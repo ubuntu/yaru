@@ -19,7 +19,7 @@
   min-height: 40px;
   border:none;
 
-  &:checked { @include button(default); }
+  &:checked { @include button(default, $c:$selected_bg_color); }
 
   & > StBoxLayout { spacing: $base_padding; }
 
@@ -65,7 +65,7 @@
 }
 
 .quick-toggle-menu {
-  background-color: $card_bg_color;
+  @include card;
   border-radius: $base_border_radius*3;
   padding: $base_padding*2;
   margin: $base_padding*2 $base_padding*3 0;
@@ -81,9 +81,9 @@
       icon-size: $base_icon_size*1.5; // a non-standard symbolic size but ok
       border-radius: 999px;
       padding: 1.5 * $base_padding;
-      background-color: lighten($bg_color, 10%);
+      background-color: transparentize($fg_color, 0.8);
 
-      &.active { background-color: $selected_bg_color; }
+      &.active { background-color: $selected_bg_color;}
     }
 
     & .title {
