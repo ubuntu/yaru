@@ -115,3 +115,8 @@ $noaccent_dark_bg_color: transparentize(white, 0.91);
 $noaccent_dark_fg_color: $text_color;
 $noaccent_selected_bg_color: if($variant=='light', $noaccent_light_bg_color, $noaccent_dark_bg_color);
 $noaccent_selected_fg_color: if($variant=='light', $noaccent_light_fg_color, $noaccent_dark_fg_color);
+
+$applet_separator_color: if($variant == 'light', darken($bg_color, 15%), rgba(255,255,255, 0.12));
+
+$corner_bar_unhighlighted: $applet_separator_color;
+$corner_bar_highlighted: if($variant == 'light', darken($applet_separator_color, 10%), opacify($applet_separator_color, .1));
