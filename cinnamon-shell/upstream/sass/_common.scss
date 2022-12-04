@@ -2064,11 +2064,11 @@ StScrollBar {
 
   &-separator-line {
     width: 1px;
-    background: rgba(255,255,255, 0.12);
+    background: $applet_separator_color;
 
     &-vertical {
       height: 1px;
-      background: rgba(255,255,255, 0.12);
+      background: $applet_separator_color;
     }
   }
 
@@ -2152,13 +2152,13 @@ StScrollBar {
 //
 .applet-cornerbar {
   width: 8px;
-  background-color: transparentize(black, 0.8);
+  background-color: $corner_bar_unhighlighted;
 
   &-box {
     padding: 4px 4px;
 
-    &:hover {
-      background-color: $noaccent_selected_bg_color;
+    &:hover > .applet-cornerbar {
+      background-color: $corner_bar_highlighted;
     }
   }
 
