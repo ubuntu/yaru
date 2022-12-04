@@ -187,7 +187,7 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
   }
 
   &:first-child:last-child {
-    border-radius: 0 0 $modal_radius;
+    border-radius: 0 0 $modal_radius $modal_radius;
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
