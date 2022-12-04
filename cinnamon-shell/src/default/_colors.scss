@@ -4,7 +4,9 @@
 
 $base_color: if($variant=='light', #ffffff, lighten($jet, 4%));
 $bg_color: if($variant=='light', #fafafa, lighten($jet, 6%));
-$fg_color: if($variant=='light', $inkstone, $porcelain);
+$fg_color_light: $inkstone;
+$fg_color_dark: $porcelain;
+$fg_color: if($variant=='light', $fg_color_light, $fg_color_dark);
 
 $selected_fg_color: $accent_fg_color;
 $selected_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 4%));
@@ -110,9 +112,9 @@ $button_border: $entry_border;
 
 // Colors used for highlights in places where we don't want to use accents
 $noaccent_light_bg_color: transparentize(black, 0.91);
-$noaccent_light_fg_color: $text_color;
+$noaccent_light_fg_color: $fg_color_light;
 $noaccent_dark_bg_color: transparentize(white, 0.91);
-$noaccent_dark_fg_color: $text_color;
+$noaccent_dark_fg_color: $fg_color_dark;
 $noaccent_selected_bg_color: if($variant=='light', $noaccent_light_bg_color, $noaccent_dark_bg_color);
 $noaccent_selected_fg_color: if($variant=='light', $noaccent_light_fg_color, $noaccent_dark_fg_color);
 
