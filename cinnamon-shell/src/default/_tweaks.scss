@@ -112,3 +112,34 @@ $active_borders_color: darken($borders_color, if($variant=='light', 5%, 3%));
     box-shadow: -1px 0 $borders_color_dark;
   }
 }
+
+// Fix applet noaccent color (forced dark panel)
+.applet {
+  &-box {
+    &:hover,
+    &:checked {
+      color: $noaccent_dark_fg_color;
+      background-color: $noaccent_dark_bg_color;
+    }
+  }
+
+  &-label {
+    &:hover,
+    &:checked,
+    .applet-box:hover &,
+    .applet-box:checked & {
+      color: $noaccent_dark_fg_color;
+    }
+  }
+
+  &-icon {
+    color: $noaccent_dark_fg_color;
+
+    &:hover,
+    &:checked,
+    .applet-box:hover > &,
+    .applet-box:checked > & {
+      color: $noaccent_dark_fg_color;
+    }
+  }
+}
