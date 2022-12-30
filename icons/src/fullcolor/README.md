@@ -40,5 +40,8 @@ There's a few provided templates that make creating a new icon simple (as an alt
 
 **[Blank Template.svg](./Blank%20Template.svg) - a blank icon template**
  - a completely blank template file for the fullcolor Yaru icons (every icon follows this template)
+ 
+**[Blank Mimetype Template.svg](./Blank%20Mimetype%20Template.svg) - a blank mimetype icon template**
+ - a completely blank template file for the fullcolor Yaru mimetype icons
 
 All templates have a "Baseplate" layer which contain the necessary metadata for rendering an icon: the icon's **context** (such as "apps" or "status", etc.) and **icon-name** (the asset filename). This layer must also be hidden or it will appear in your render.
