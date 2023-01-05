@@ -8,10 +8,14 @@
   border-color: transparent; // Yaru: adapt the workspace osd border to the dock border
 
   .workspace-thumbnail {
-    @extend %overview_panel;
-    border-radius: 3px;
+    color: $osd_fg_color;
     background-color: $dash_background_color; // Yaru: use same background as dash
+    border-radius: $base_border_radius*0.5;
     border: 1px solid $borders_color_dark; // Yaru: use same border as dash
+
+    @if $is_highcontrast {
+      border-color: $hc_inset_color;
+    }
   }
 
   // drag and drop indicator
@@ -25,7 +29,5 @@
 // selected indicator
 .workspace-thumbnail-indicator {
   border: 2px solid $focus_border_color; // Yaru: we detached focus from selected
-  border-radius: 3px;
-  padding: 0px;
-  // background-color: transparentize($selected_bg_color, 0.9);
+  border-radius: $base_border_radius;
 }
