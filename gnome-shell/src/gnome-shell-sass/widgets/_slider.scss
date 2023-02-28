@@ -1,6 +1,6 @@
 /* Slider */
 
-$slider_size: 16px;
+$slider_size: 18px; // Yaru change: larger slider cause to border in light theme
 
 .slider {
   // slider trough
@@ -16,10 +16,10 @@ $slider_size: 16px;
   -barlevel-overdrive-border-color: transparent; //trough border when red;
   -barlevel-overdrive-separator-width:1px;
   // slider handler
-  -slider-handle-border-width: if($variant=='light', 1px, 0); // Yaru change: add border on light theme
+  -slider-handle-border-width: 1px; // Yaru change: add border
   -slider-handle-border-color: if($variant=='light', darken($alt_borders_color, 3%), transparent); // because 0 width - Yaru change: the handle border needs to be darker for the light theme
   -slider-handle-radius: $slider_size * 0.5; // half the size of the size
 
   color: darken(white, 1%); // Yaru change: adapt knob to gtk
-  height: if($variant == 'light', $slider_size + 2px, $slider_size); // Yaru change: increase height in light theme due to border
+  height: $slider_size; // Yaru change: increase height due to border
 }
