@@ -13,7 +13,7 @@ $fg_color: if($variant == 'light', transparentize(black, .2), white);
 
 $selected_fg_color: $light_1;
 $selected_bg_color: $blue_3;
-$selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+$selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 20%));
 
 $borders_color: if($variant == 'light', transparentize($fg_color, .5), transparentize($fg_color, .9));
 $outer_borders_color: if($variant == 'light', rgba(255,255,255,0.8), lighten($bg_color, 5%));
