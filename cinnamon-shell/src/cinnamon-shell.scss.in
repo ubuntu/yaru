@@ -1,0 +1,11 @@
+$variant: if(@DarkVariant@, 'dark', 'light');
+$yaru_variant: '@YaruVariant@';
+
+@import 'sass-utils';
+
+@debug 'Generating Cinnamon Shell ' + $yaru_variant + ' theme (' + $variant +' variant'+')';
+
+@import "@VariantDir@/_@Colors@";
+@import "@VariantDir@/_drawing";
+@import "@VariantDir@/_common";
+@import "@VariantDir@/_tweaks";
