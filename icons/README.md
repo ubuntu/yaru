@@ -54,12 +54,36 @@ gsettings reset org.gnome.desktop.interface cursor-theme
 
 Contributions are obviously welcome! If you would like to contribute to this project, please have [read this](/CONTRIBUTING.md) regarding contributions.
 
+### Rendering icons
+
+Icons can be rendered easily using meson provided scripts, inkscape is required for this operation.
+
+There are various commands that are exposed in `meson.build`, however main are:
+
+```bash
+# Removes the icons already rendered
+ninja -C build cleanup-rendered-icons
+
+# Render all icons
+ninja -C build render-icons
+
+# Render the icons and create symlinks for the alias names
+ninja -C build render+symlink-icons
+
+# Other ninja target for rendering specific icons can be found via tab-completion, such as
+ninja -C _build -v render- #<tab><tab> or
+ninja -C _build -v icon-render- # <tab><tab>
+# so for example:
+ninja -C _build -v icon-render-application-x-cd-image
+```
+
 ## Generating accent color icons
 
 Assets must be provided in the fullcolor `accented` subfolder, using colors that can be replaced via `colorize-dummy-svg.py`
 (that generates the colors from gtk themes using `yaru-colors-defs.scss·`)
 
 To generate the icons you need to use meson:
+
 ```bash
 # On the project root
 meson build
