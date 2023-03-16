@@ -62,25 +62,25 @@ jobs:
         if: steps.check-changed.outputs.default == 'true'
         run: |
           ninja -C _build cleanup-rendered-icons-default
-          xvfb-run -a -- ninja -C _build -v render+symlink-icons-default
+          ninja -C _build -v render+symlink-icons-default
 
       - name: Render mate icons and generate symlinks
         if: steps.check-changed.outputs.mate == 'true'
         run: |
           ninja -C _build cleanup-rendered-icons-mate
-          xvfb-run -a -- ninja -C _build -v render+symlink-icons-mate
+          ninja -C _build -v render+symlink-icons-mate
 
       - name: Render accented icons and generate symlinks
         if: steps.check-changed.outputs.accented == 'true'
         run: |
           ninja -C _build cleanup-rendered-icons-accented
-          xvfb-run -a -- ninja -C _build -v render+symlink-icons-accented
+          ninja -C _build -v render+symlink-icons-accented
 
       - name: Symlink all icons
         if: steps.check-changed.outputs.symlinks == 'true'
         run: |
           find icons/Yaru{,-*} -type l -delete
-          xvfb-run -a -- ninja -C _build -v symlink-icons
+          ninja -C _build -v symlink-icons
 
       - name: Check Rendering changes
         if: ${{ steps.check-changed.outputs.changes != '[]' }}

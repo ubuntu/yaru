@@ -16,6 +16,9 @@ foreach accent: enabled_accent_colors
 endforeach
 
 fullcolor_path = 'src' / 'fullcolor'
+xvfb_run = find_program('xvfb-run', required: false)
+dbus_run_session = find_program('dbus-run-session', required: false)
+inkscape = find_program('inkscape', required: false)
 render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py', required: true)
 generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh', required: true)
 generate_index_theme = find_program('src' / 'generate-index-theme.py', required: true)
@@ -32,6 +35,13 @@ symlink_targets = []
 render_by_icon_targets = {}
 cleanup_rendered_icons_targets = []
 cleanup_rendered_icons_accented_targets = []
+
+if not inkscape.found()
+  warning('Inkscape not found, bitmap rendering not supported')
+endif
+
+render_wrappers = xvfb_run.found() ? [xvfb_run, '-a', '--'] : []
+render_wrappers += dbus_run_session.found() ? [dbus_run_session, '--'] : []
 
 foreach flavour: icon_flavors
   is_dark = flavour == 'dark'
@@ -102,10 +112,15 @@ foreach flavour: icon_flavors
       svg = source_svgs[i]
       basename = fs.stem(fs.name(svg))
       category = fs.name(fs.parent(svg))
-      render_bitmap_target = custom_target('render-icon-' + '-'.join([category, basename, flavour]),
+      render_bitmap_target = custom_target(
+        'render-icon-' + '-'.join([category, basename, flavour]),
         input: svg,
         output: 'rendered-@0@-@BASENAME@-@1@.svg'.format(category, flavour),
+        env: [
+          'NO_AT_BRIDGE=1',
+        ],
         command: [
+          render_wrappers,
           render_bitmaps,
           rendering_args,
           '--categories', category,
