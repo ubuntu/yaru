@@ -46,9 +46,8 @@
 @import 'widgets/misc';
 @import 'widgets/keyboard';
 @import 'widgets/looking-glass';
-// Lock / login screens
-@import 'widgets/login-dialog';
-@import 'widgets/screen-shield';
+// Lock / login screen
+@import 'widgets/login-lock';
 
 // Yaru change: make font normal here to have less diff in the widgets
 * {

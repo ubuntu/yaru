@@ -322,7 +322,7 @@
   }
 }
 
-// styling for elements within popovers that look like notifications
+// styling for all menuitems in popovers
 @mixin card($flat: false) {
   border-radius: $base_border_radius*1.5;
   margin: $base_margin;
