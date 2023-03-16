@@ -127,9 +127,9 @@ $_gdm_dialog_width: 23em;
     }
 
     &:selected {
-      background-color: transparentize($fg_color, 0.9);
+      background-color: transparentize($fg_color, 0.9); // Yaru change: don't use selected color
       color: $selected_fg_color;
-      &:hover { background-color: transparentize($fg_color, 0.9); }
+      &:hover { background-color: transparentize($fg_color, 0.9); } // Yaru change: don't use selected color
     }
 
     &:logged-in {
