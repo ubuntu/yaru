@@ -4,6 +4,7 @@
 
 $base_color: if($variant == 'light', #ffffff, lighten($jet, 6%));
 $text_color: if($variant == 'light', black, white);
+$caret_color: if($variant == 'light', lighten($text_color, 5%), darken($text_color, 3%));
 $bg_color: if($variant == 'light', #FAFAFA, lighten($jet, 8%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
