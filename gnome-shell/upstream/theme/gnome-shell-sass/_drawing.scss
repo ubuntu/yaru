@@ -321,7 +321,7 @@
   &:focus {@include button(focus);}
 }
 
-// styling for elements within popovers that look like notifications
+// styling for all menuitems in popovers
 @mixin menuitem($bg, $flat: true) {
 
   // lighten the background color always
