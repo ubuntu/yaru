@@ -210,8 +210,7 @@ def main(args, SRC, DEST):
     if not args.svg:
         print("Rendering all SVGs in", SRC)
         print('')
-        if not os.path.exists(DEST):
-            os.mkdir(DEST)
+        os.makedirs(DEST, exist_ok=True)
 
         for svg in os.listdir(SRC):
             file = os.path.join(SRC, svg)
