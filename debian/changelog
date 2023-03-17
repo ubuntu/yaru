@@ -1,3 +1,55 @@
+yaru-theme (23.04.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * meson: Release 23.04.1
+  * icons: Set env variables and wrapper in meson itself
+  * render-bitmaps: Do not fail on FileExistsError errors
+  * icons/README: Explain better how icons can be rendered
+
+  [ Paul Kepinski ]
+  * Add libreoffice symbolic app icons
+  * Add missing "Yaru change" comment
+  * Add soft light border to libhandy apps
+  * Add text-x-dart mimetype
+  * Adjust LO mimetype icons
+  * Evince: darker view background
+  * Fix accented folders exessive shadow Fixes #3819
+  * Fix MATE gtk4 theme
+  * Fix noaccented panel colors
+  * Fix user-trash icon
+  * GS: calendar text not distinguishable in light style
+  * Quick settings changes spacing when toggling Dark Mode (LP: #1989844)
+  * Add icon for .aup3 Audacity mime type (LP: #1991461)
+  * Reduce Cinnamon controls size
+  * Refresh Libreoffice app icons
+  * Render fullcolor accented icons
+  * Rework list-remove icon
+  * Selection-checked still use old checkmark
+  * Suggested button green only in default variant
+  * Symlink preference-desktop to tweaks-app
+  * Sync Cinnamon theme with upsteam 3278
+  * Sync cinnamon with upstream #3786
+  * Sync Gnome Shell icons with upstream
+  * Sync gnome shell with upstream (GS 44 support)
+  * Sync Gtk4 with upstream
+  * Sync icon theme with upstream
+  * Sync symbolic icons with libadwaita upstream
+  * Sync upstream Adwaita icons foler
+  * Sync yaru with upstream
+  * Timeshift icons overridden with backups icon
+  * Use even checkmark  (gtk3/4, GS, cinnamon)
+
+  [ ubuntujaggers ]
+  * reducing edge highlight on full colour app icons in sizes 16-48px
+
+  [ Hitalo Souza ]
+  * Add vlang mimetype icons
+
+  [ Daniella Mesquita ]
+  * add Blank Mimetype Template.svg to icons/src/fullcolor/
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 17 Mar 2023 01:07:18 +0100
+
 yaru-theme (22.10.3) kinetic; urgency=medium
 
   * dock: Sync theme with upstream d2d fixes.
