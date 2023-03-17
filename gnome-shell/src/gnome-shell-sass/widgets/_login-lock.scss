@@ -283,3 +283,59 @@ $_gdm_dialog_width: 23em;
     }
   }
 }
+
+// Yaru change: style login dialog entry in dark theme
+@if $variant=='dark' {
+  login-dialog {
+    StEntry {
+      background-color: darken($system_bg_color, 3%);
+      color: $fg_color;
+      border-color: $borders_color_dark;
+    }
+  }
+}
+
+// Yaru change: style unlock dialog with half-transparent items
+.unlock-dialog {
+  StEntry {
+    border:none !important;
+    &, &:focus {
+      color: $fg_color_dark;
+      background-color: transparentize($fg_color_dark, 0.9);
+      box-shadow: none;
+    }
+
+    &:insensitive {
+      color: transparentize($fg_color_dark, 0.5);
+      background-color: transparentize($fg_color_dark, 0.95);
+    }
+
+    StLabel.hint-text {
+      color: transparentize($fg_color_dark, 0.3);
+    }
+  }
+
+  .cancel-button,
+  .switch-user-button,
+  .login-dialog-session-list-button {
+    border-color: transparent;
+    background-color: transparentize($fg_color_dark, 0.9);
+    box-shadow: none;
+
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $fg_color_dark;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: transparentize($fg_color_dark, 0.85);
+    }
+
+    &:active {
+      background-color: transparentize($fg_color_dark, 0.80);
+    }
+  }
+}
