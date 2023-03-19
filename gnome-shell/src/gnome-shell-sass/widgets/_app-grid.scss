@@ -33,13 +33,13 @@ $app_icon_size: 96px;
 
 // app folders
 .app-well-app.app-folder {
-  @include overview_icon($fg_color, $flat: false);
+  @include overview_icon($osd_fg_color, $flat: false); // Yaru change: use osd color for light/dark theme support
 }
 
 // expanded folder
 .app-folder-dialog {
   border-radius: $modal_radius*4;
-  background-color: $bg_color;
+  background-color: $osd_bg_color; // Yaru change: use osd color for light/dark theme support
   padding: $base_padding*2;
   // box-shadow:inset 0 0 0 1px $outer_borders_color; // Yaru: we use border
   border: 1px solid $borders_color_dark; // Yaru: add border
@@ -178,4 +178,8 @@ $app_icon_size: 96px;
   &:insensitive { @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
   &:hover { @include button(hover, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
   &:active { @include button(active, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
+
+  > StIcon {
+    color: $osd_fg_color;
+  }
 }
