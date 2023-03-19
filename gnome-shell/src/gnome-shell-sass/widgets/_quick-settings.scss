@@ -67,20 +67,21 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
     border-width: 0;
 
     &:checked {
-      // Yaru change: tone down accented checked buttons
-      @include button(normal, $bg: $toggle-bg-color);
-      &:hover {@include button(hover, $bg: $toggle-bg-color);}
-      &:active {@include button(active, $bg: $toggle-bg-color);}
-      border-color: adjust-color($color: $toggle-bg-color, $alpha: -0.1);
+      // Yaru change: different checked bg
+      $_bg: adjust-color($color: $toggle-bg-color, $alpha: if($variant == 'light', 0.15, 0.1));
+      @include button(normal, $bg: $_bg);
+      &:hover {@include button(hover, $bg: $_bg);}
+      &:active {@include button(active, $bg: $_bg);}
+      // border-color: $selected_borders_color; // Yaru change: drop border
     }
 
     &:ltr {
       border-radius: 0 99px 99px 0;
-      border-left-width: 1px;
+      // border-left-width: 1px; // Yaru change: drop border
     }
     &:rtl {
       border-radius: 99px 0 0 99px;
-      border-right-width: 1px;
+      // border-right-width: 1px; // Yaru change: drop border
     }
   }
 }
