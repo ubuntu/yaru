@@ -169,15 +169,15 @@ $app_icon_size: 96px;
   width: 24px;
   height: 24px;
   border-radius: 99px;
-  @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5)); // Yaru change: fix for light theme
+  @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark'); // Yaru change: fix for light theme
 
   @if $is_highcontrast {
-    @include button(normal, $osd_fg_color, transparentize($osd_bg_color, 0.5));
+    @include button(normal, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark');
   }
 
-  &:insensitive { @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
-  &:hover { @include button(hover, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
-  &:active { @include button(active, $osd_fg_color, transparentize($osd_bg_color, 0.5));}
+  &:insensitive { @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark');}
+  &:hover { @include button(hover, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark');}
+  &:active { @include button(active, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark');}
 
   > StIcon {
     color: $osd_fg_color;

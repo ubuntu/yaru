@@ -155,8 +155,9 @@
 //
 // since buttons are all flat an borderless now the mixin is simpler
 
-@mixin button($t, $tc:$fg_color, $c:$bg_color, $bg: null, $flat: false) { // Yaru change: allow forced bg-color
+@mixin button($t, $tc:$fg_color, $c:$bg_color, $bg: null, $flat: false, $brightness: null) { // Yaru change: allow forced bg-color, add brigthness parameter
 
+  $variant: if($brightness == null, $variant, $brightness); // Yaru change: add forced brightness support
   $button_bg_color: if($bg != null, $bg, mix($tc, $c, $button_mix_factor)); // Yaru change: allow forced bg-color
   transition-duration: 100ms;
 
