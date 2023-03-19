@@ -248,4 +248,5 @@ $screenshot_ui_button_red: $red; // Yaru: Use our palette's color
   padding: $base_padding $base_padding * 2;
   text-align: center;
   -y-offset: 24px;
+  border: 1px solid $borders_color_dark; // Yaru change: add border
 }
