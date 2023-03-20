@@ -17,7 +17,7 @@ $selected_borders_color: if($variant=='light', darken($selected_bg_color, 15%), 
 $borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%); // Yaru: used for dash and other dark elements on light theme
 $borders_color: if($variant=='light', darken($bg_color, 20%), $borders_color_dark);
 $alt_borders_color: if($variant=='light', darken($bg_color, 24%), darken($bg_color, 10%));
-$outer_borders_color: if($variant=='light', transparentize(white, 0.2), transparentize($fg_color, 0.85));
+$outer_borders_color: transparentize($fg_color, 0.85);
 
 $link_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
 $link_visited_color: if($variant=='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
