@@ -56,7 +56,9 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
     max-width: auto;
 
     &:ltr { border-radius: 99px 0 0 99px; }
+    &:ltr > StBoxLayout { padding-right: $base_padding*1.5; }
     &:rtl { border-radius: 0 99px 99px 0; }
+    &:rtr > StBoxLayout { padding-left: $base_padding*1.5; }
 
     &:ltr:last-child { border-radius: 99px; }
     &:rtl:last-child { border-radius: 99px; }
@@ -165,7 +167,7 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
   .popup-menu-icon { -st-icon-style: symbolic; }
 }
 
-.bt-menu-placeholder {
+.bt-menu-placeholder.popup-menu-item {
   @extend %title_4;
   text-align: center;
 
