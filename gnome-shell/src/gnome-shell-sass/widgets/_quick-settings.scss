@@ -67,9 +67,14 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
   & .quick-toggle-arrow {
     padding: $base_padding $base_padding*1.75;
     border-width: 0;
+    // Yaru change: different toggle arrow bg
+    $_bg: scale-color($color: $bg_color, $lightness: if($variant == 'light', -14%, 5%));
+    @include button(normal, $bg: $_bg);
+    &:hover {@include button(hover, $bg: $_bg);}
+    &:active {@include button(active, $bg: $_bg);}
 
     &:checked {
-      // Yaru change: different checked bg
+      // Yaru change: different toggle arrow checked bg
       $_bg: adjust-color($color: $toggle-bg-color, $alpha: if($variant == 'light', 0.15, 0.1));
       @include button(normal, $bg: $_bg);
       &:hover {@include button(hover, $bg: $_bg);}
