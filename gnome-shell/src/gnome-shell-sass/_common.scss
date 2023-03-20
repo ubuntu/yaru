@@ -33,7 +33,7 @@ $base_margin: 4px;
 $base_border_radius: 6px; // Yaru change: sync radius with Gtk4
 
 // radii of things that display over other things, e.g. popovers
-$modal_radius: $base_border_radius*2; // 24px
+$modal_radius: $base_border_radius; // 24px // Yaru change: reduce modal border-radius
 
 // Chroma key to flag when a background-color is always occluded, not visible.
 // This allows any box-shadow behind it to be rendered more efficiently by
