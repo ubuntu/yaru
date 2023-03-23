@@ -203,7 +203,7 @@
         $target: 3;
     }
 
-    $dark-bg: luminance($bg) < luminance($fg);
+    $dark-bg: luminance($fg) > luminance($bg);
     @while (color-contrast($bg, $fg) < $target) {
         $fg: if($dark-bg, lighten($fg, 0.1), darken($fg, 0.1));
     }
