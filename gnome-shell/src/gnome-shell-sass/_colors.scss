@@ -102,5 +102,7 @@ $progress_bg_color: $accent_bg_color;
 $checkradio_bg_color: $accent_bg_color;
 
 @import 'sass-utils';
-$link_color: optimize-contrast($bg_color, $accent_bg_color);
-$link_visited_color: darken($link_color, 10%);
+$contrast_target: if($variant=='light', 6, 5.5);
+$link_color: optimize-contrast($bg_color, $accent_bg_color, $target: $contrast_target);
+$link_visited_color: if($variant=='light', darken($link_color, 10%),
+                        optimize-contrast($bg_color, $accent_bg_color));
