@@ -68,11 +68,14 @@ def main(args, SRC, DEST):
             "inkscape",
             "--batch-process",
             "--export-dpi={}".format(str(dpi)),
-            "-i",
-            rect,
             "--export-filename={}".format(output_file),
-            icon_file,
         ]
+        if rect:
+            cmd += ["-i", rect ]
+
+        cmd.append(icon_file)
+
+        print('Running', ' '.join(cmd))
         ret = subprocess.run(cmd, capture_output=True)
         if ret.returncode != 0:
             print("execution of")
@@ -82,7 +85,7 @@ def main(args, SRC, DEST):
             print(ret.stdout.decode())
             print(5*"=", "stderr", 5*"=")
             print(ret.stderr.decode())
-            return
+            raise Exception('Failed to run inkscape')
 
         optimize_png(output_file)
 
