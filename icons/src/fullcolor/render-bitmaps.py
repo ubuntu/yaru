@@ -195,14 +195,14 @@ def main(args, SRC, DEST):
                         # Do a time based check!
                         if self.force or not os.path.exists(outfile):
                             inkscape_render_rect(self.path, id, dpi, outfile)
-                            self.self.rendered_icons += 1
+                            self.rendered_icons += 1
                             sys.stdout.write(".")
                         else:
                             stat_in = os.stat(self.path)
                             stat_out = os.stat(outfile)
                             if stat_in.st_mtime > stat_out.st_mtime:
                                 inkscape_render_rect(self.path, id, dpi, outfile)
-                                self.self.rendered_icons += 1
+                                self.rendered_icons += 1
                                 sys.stdout.write(".")
                             else:
                                 sys.stdout.write("-")
