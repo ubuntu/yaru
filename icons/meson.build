@@ -36,6 +36,7 @@ render_by_icon_targets = {}
 cleanup_rendered_icons_targets = []
 cleanup_rendered_icons_accented_targets = []
 cleanup_symlinks_targets = []
+cleanup_symlinks_accented_targets = []
 
 if not inkscape.found()
   warning('Inkscape not found, bitmap rendering not supported')
@@ -196,6 +197,7 @@ foreach flavour: icon_flavors
       render_accented_targets += render_flavour_targets
       render_and_symlink_accented_targets += render_and_symlink_flavour
       cleanup_rendered_icons_accented_targets += cleanup_rendered_flavour
+      cleanup_symlinks_accented_targets += cleanup_symlinks_flavour
 
       if not fs.is_dir(icon_dir)
         warning('@0@ does not exists, ensure you generated it with `ninja -C @1@ render-icons-@2@,`'.format(
@@ -447,6 +449,7 @@ if render_accented_targets.length() > 0
   alias_target('render-icons-accented', render_accented_targets)
   alias_target('render+symlink-icons-accented', render_and_symlink_accented_targets)
   alias_target('cleanup-rendered-icons-accented', cleanup_rendered_icons_accented_targets)
+  alias_target('cleanup-symlinks-accented', cleanup_symlinks_accented_targets)
 endif
 
 foreach icon, targets: render_by_icon_targets
