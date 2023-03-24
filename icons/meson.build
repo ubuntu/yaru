@@ -167,8 +167,11 @@ foreach flavour: icon_flavors
     cleanup_rendered_flavour = run_target('cleanup-rendered-' + flavour,
       command: [
         'bash', '-c',
-          'find "$0"/$1 -name \'*.png\' -print -delete;' +
-          'find "$0"/$1 -type d -empty -print -delete',
+          ';'.join([
+            'find "$0"/$1 -name "*.png" -print -delete',
+            is_accent ? 'find "$0"/$1 -name "*.svg" -print -delete' : 'true',
+            'find "$0"/$1 -type d -empty -print -delete'
+          ]),
         meson.project_source_root() / meson.current_source_dir() / icon_dir,
         '[0-9]*x[0-9]*',
       ]
