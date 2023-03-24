@@ -168,7 +168,6 @@ foreach flavour: icon_flavors
       command: [
         'bash', '-c',
           'find "$0"/$1 -name \'*.png\' -print -delete;' +
-          'find "$0"/$1 -type l -print -delete;' +
           'find "$0"/$1 -type d -empty -print -delete',
         meson.project_source_root() / meson.current_source_dir() / icon_dir,
         '[0-9]*x[0-9]*',
