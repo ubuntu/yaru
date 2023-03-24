@@ -63,7 +63,7 @@ jobs:
         run: |
           ninja -C _build -v \
             cleanup-rendered-icons-default \
-            cleanup-symlinks-default \
+            cleanup-symlinks-default
           ninja -C _build -v render+symlink-icons-default
 
       - name: Render mate icons and generate symlinks
@@ -71,7 +71,7 @@ jobs:
         run: |
           ninja -C _build -v \
             cleanup-rendered-icons-mate \
-            cleanup-symlinks-default \
+            cleanup-symlinks-default
           ninja -C _build -v render+symlink-icons-mate
 
       - name: Render accented icons and generate symlinks
@@ -79,7 +79,7 @@ jobs:
         run: |
           ninja -C _build -v \
             cleanup-rendered-icons-accented \
-            cleanup-symlinks-default \
+            cleanup-symlinks-default
           ninja -C _build -v render+symlink-icons-accented
 
       - name: Symlink all icons
