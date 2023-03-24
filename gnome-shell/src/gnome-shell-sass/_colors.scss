@@ -100,3 +100,7 @@ $focus_border_color: lighten($accent_bg_color, 14%);
 $selected_bg_color: $accent_bg_color;
 $progress_bg_color: $accent_bg_color;
 $checkradio_bg_color: $accent_bg_color;
+
+@import 'sass-utils';
+$link_color: optimize-contrast($bg_color, $accent_bg_color);
+$link_visited_color: darken($link_color, 10%);

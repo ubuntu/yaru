@@ -123,6 +123,7 @@ foreach variant: variants
     command: [
       sassc, '-a', '@INPUT@', '@OUTPUT@',
       '-I', css_sources_path / 'gnome-shell-sass',
+      '-I', meson.project_source_root() / 'common',
     ],
     depends: source_deps,
     depend_files: [
