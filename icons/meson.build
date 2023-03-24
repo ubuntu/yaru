@@ -35,6 +35,7 @@ symlink_targets = []
 render_by_icon_targets = {}
 cleanup_rendered_icons_targets = []
 cleanup_rendered_icons_accented_targets = []
+cleanup_symlinks_targets = []
 
 if not inkscape.found()
   warning('Inkscape not found, bitmap rendering not supported')
@@ -164,12 +165,26 @@ foreach flavour: icon_flavors
 
     cleanup_rendered_flavour = run_target('cleanup-rendered-' + flavour,
       command: [
-        'bash', '-c', 'rm -rfv "$0"/$1',
+        'bash', '-c',
+          'find "$0"/$1 -name \'*.png\' -print -delete;' +
+          'find "$0"/$1 -type l -print -delete;' +
+          'find "$0"/$1 -type d -empty -print -delete',
         meson.project_source_root() / meson.current_source_dir() / icon_dir,
         '[0-9]*x[0-9]*',
       ]
     )
     cleanup_rendered_icons_targets += cleanup_rendered_flavour
+
+    cleanup_symlinks_flavour = run_target('cleanup-symlinks-' + flavour,
+      command: [
+        'bash', '-c',
+          'find "$0"/$1 -type l -print -delete;' +
+          'find "$0"/$1 -type d -empty -print -delete',
+        meson.project_source_root() / meson.current_source_dir() / icon_dir,
+        '[0-9]*x[0-9]*',
+      ]
+    )
+    cleanup_symlinks_targets += cleanup_symlinks_flavour
 
     if render_flavour_targets.length() > 0
       alias_target('render-icons-' + flavour, render_flavour_targets)
@@ -424,6 +439,7 @@ endforeach
 alias_target('render-icons', render_targets)
 alias_target('render+symlink-icons', render_and_symlink_targets)
 alias_target('symlink-icons', symlink_targets)
+alias_target('cleanup-symlink-icons', cleanup_symlinks_targets)
 alias_target('cleanup-rendered-icons', cleanup_rendered_icons_targets)
 
 if render_accented_targets.length() > 0
