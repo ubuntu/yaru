@@ -21,7 +21,7 @@ $top_hilight: $borders_edge;
 $dark_fill: mix($borders_color, $bg_color, 50%);
 $headerbar_bg_color: if($variant == 'light', lighten($bg_color, 5%), darken($bg_color, 3%));
 $menu_color: if($variant == 'light', $bg_color, lighten($jet, 2%));
-$menu_selected_color: if($variant == 'light', darken($bg_color, 6%), darken($bg_color, 8%));
+$menu_selected_color: if($variant =='light', darken($bg_color, 6%), lighten($bg_color, 6%)); // Yaru change: use lighter color in dark theme (mimic Libadwaita)
 
 $scrollbar_bg_color: if($variant == 'light', mix($bg_color, $fg_color, 80%), mix($base_color, $bg_color, 50%));
 $scrollbar_slider_color: mix($fg_color, $bg_color, 60%);
