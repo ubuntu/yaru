@@ -3709,7 +3709,7 @@ stacksidebar {
       color: $fg_color;
     }
     &:selected:hover:dir(ltr), &:selected:hover:dir(rtl) {
-      background-color: darken($menu_selected_color,5%);
+      background-color: if($variant == 'light', darken($menu_selected_color, 5%), lighten($menu_selected_color, 5%)); // Yaru change: use lighter color in dark theme (mimic Libadwaita)
     }
     &.activatable:active, &.activatable:selected:active {
       box-shadow: none; // #3413
@@ -3740,7 +3740,7 @@ separator.sidebar {
     margin: 0 $menu-margin 2px;
     @include focus-ring($focus-state: 'focus-visible:focus-within');
     &:hover {
-      background-color: darken($menu_selected_color, 5%);
+      background-color: if($variant == 'light', darken($menu_selected_color, 5%), lighten($menu_selected_color, 5%)); // Yaru change: use lighter color in dark theme (mimic Libadwaita)
     }
 
     &:selected {
@@ -3753,7 +3753,7 @@ separator.sidebar {
 
 
       &:hover {
-        background-color: darken($menu_selected_color,5%);
+        background-color: if($variant == 'light', darken($menu_selected_color, 5%), lighten($menu_selected_color, 5%)); // Yaru change: use lighter color in dark theme (mimic Libadwaita)
       }
 
     }
