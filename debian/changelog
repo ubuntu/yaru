@@ -1,3 +1,40 @@
+yaru-theme (23.04.2-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * New upstream Release 23.04.2
+  * sass-util: Fix computation of dark bg
+  * icons/meson: Add specific targets to clean rendered icons and symlinks
+  * icons: add back removed devices accented icons
+  * render-bitmaps: Make possible to render a full bitmap
+  * render-bitmaps: Copy the SVG to the final directory if nothing rendered
+  * icons: Add back svg icons removed by rendered job
+  * render-bitmaps.py: Correctly update count of rendered icons
+  * meson/icons: Add cleanup-symlinks-accented target and use it in CI
+  * icons/meson: Do not remove symlinks during rendered icons cleanup
+  * icons/meson: Also cleanup accented svgs on cleanup-rendered-icons-accented
+  * gnome-shell: Use optimized contrast color for link items
+  * gtk, shell: Adjust color for hyperlinks
+  * common: Compute the accent-optimized variant globally
+  * gtk/meson: Include Default path not Adwaita in scss
+  * icons/meson: Do not fail deleting files if none is found
+  * icons: Update symbolic links for performance and powersave icons
+
+  [ Paul Kepinski ]
+  * Fix GDM 44 look
+  * Fix dash separator color
+  * Fix GS44 theme nitpicks
+  * Sync icon theme with upstream
+  * Sync Gtk4 theme with upstream
+  * Gtk4: use lighter $menu_selected_color in dark theme
+  * Fix and optimize GS symbolics
+
+  [ Muqtxdir ]
+  * remove style classes from power-* symbolics
+  * symlink it based on @Jupi007 review
+  * icons: Optimize symbolic icons
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Mon, 27 Mar 2023 21:27:51 +0200
+
 yaru-theme (23.04.1-0ubuntu1) lunar; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
