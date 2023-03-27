@@ -61,7 +61,7 @@ foreach flavour: flavours
     base_path = (flavour.startswith('mate') ? base_theme_name : 'default') / gtk_dir
     dark_path = is_dark ? 'dark' : base_path
     default_path = 'default' / gtk_dir
-    upstream_path = '..' / 'upstream' / gtk_dir / 'Adwaita'
+    upstream_path = '..' / 'upstream' / gtk_dir / 'Default'
     flavour_path = join_paths(flavour, gtk_dir)
     install_path = theme_dir / gtk_dir
 
