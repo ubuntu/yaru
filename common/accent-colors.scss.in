@@ -1,3 +1,5 @@
+@import 'sass-utils';
+
 @function get_accent_color($accent_color, $is_dark: false) {
     $color: null;
     @if $accent_color == 'default' {
@@ -28,9 +30,18 @@
 }
 
 $yaru_is_dark_variant: @yaru_dark_variant@;
+$jet: #181818;
+$yaru_bg_color: if($yaru_is_dark_variant, #FAFAFA, lighten($jet, 8%));
 $yaru_accent_bg_color: get_accent_color('@yaru_accent_color@', $yaru_is_dark_variant);
-$accent_bg_color: $yaru_accent_bg_color;
-$accent_color: $yaru_accent_bg_color;
+
+$contrast_target: if($yaru_is_dark_variant, 4.5, 4.8);
+$yaru_accent_color: optimize-contrast($yaru_bg_color,
+    $yaru_accent_bg_color, $target: $contrast_target);
+
 @debug("Accent color is " + $yaru_accent_bg_color);
+@debug("Contrast optimized accent is " + $yaru_accent_color);
+
+$accent_bg_color: $yaru_accent_bg_color;
+$accent_color: $yaru_accent_color;
 
 @import '@yaru_theme_entry_point@'

@@ -7,6 +7,7 @@ $variant: if($yaru_is_dark_variant, 'dark', 'light');
 
 $yaru_colors: (
     bg-color: $bg_color,
+    accent-color: $yaru_accent_color,
     accent-bg-color: $yaru_accent_bg_color,
     accent-active-color: $progress_bg_color,
     accent-focused-color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%)),

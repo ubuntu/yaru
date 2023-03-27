@@ -24,6 +24,7 @@ from glob import glob
 
 # Keep this in sync with yaru-colors-defs.scss, or the input CSS in use.
 DUMMY_COLORS = {
+    'accent-color': '#00ff03',
     'accent-bg-color': '#00ff01',
     'accent-active-color': '#00ff02',
     'accent-border-color': '#ff0001',
