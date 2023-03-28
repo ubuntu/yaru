@@ -261,12 +261,32 @@ foreach flavour: icon_flavors
       endif
 
       if local_links.length() > 0
-        links_targets = run_command(
+        relative_to = meson.current_source_dir() / icon_dir
+        links_paths_getter = run_command(
           'realpath', '-e',
-          '--relative-to=' + meson.current_source_dir() / icon_dir,
+          '--relative-to=' + relative_to,
           local_links,
-          check: true,
-        ).stdout().strip().split('\n')
+          check: false,
+        )
+
+        if links_paths_getter.returncode() != 0
+          failed_links = []
+          foreach link: local_links
+            if run_command(
+              'realpath', '-e',
+              '--relative-to=' + relative_to,
+              link,
+              check: false,
+            ).returncode() != 0
+              failed_links += link
+            endif
+          endforeach
+
+          error ('Symbolic links are pointing to invalid paths:\n  ' +
+            '\n  '.join(failed_links))
+        endif
+
+        links_targets = links_paths_getter.stdout().strip().split('\n')
         assert(local_links.length() == links_targets.length())
       endif
 
