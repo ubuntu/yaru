@@ -182,9 +182,11 @@ foreach flavour: icon_flavors
     cleanup_symlinks_flavour = run_target('cleanup-symlinks-' + flavour,
       command: [
         'bash', '-c',
-          '[ ! -e "$0"/$1 ] && exit 0',
-          'find "$0"/$1 -type l -print -delete;' +
-          'find "$0"/$1 -type d -empty -print -delete',
+          ';'.join([
+            '[ ! -e "$0"/$1 ] && exit 0',
+            'find "$0"/$1 -type l -print -delete',
+            'find "$0"/$1 -type d -empty -print -delete',
+          ]),
         meson.project_source_root() / meson.current_source_dir() / icon_dir,
         '[0-9]*x[0-9]*',
       ]
