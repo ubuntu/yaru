@@ -50,7 +50,7 @@
 }
 
 .lg-dialog {
-  color: $osd_fg_color; // Yaru: needed for the light theme
+  color: $fg_color; // Yaru change: fix for the light theme
   StEntry {
     min-height: 22px;
     @extend %entry;
@@ -74,20 +74,22 @@
 .lg-completions-text {
   @extend %caption;
   font-style: italic;
-  color: $osd_fg_color; // Yaru: needed for the light theme
+  color: $fg_color; // Yaru change: fix for the light theme
 }
 
 .lg-obj-inspector-title {
   spacing: $base_padding;
-  color: $osd_fg_color; // Yaru: needed for the light theme
+  color: $fg_color; // Yaru change: fix for the light theme
 }
 
 .lg-obj-inspector-button {
-  border: 1px solid $borders_color;
+  // border: 1px solid $borders_color; // Yaru change: fix button look
   padding: 4px;
   border-radius: $base_border_radius;
-  &:hover { border: 1px solid $fg_color; }
-  color: $osd_fg_color; // Yaru: needed for the light theme
+  // &:hover { border: 1px solid $fg_color; } // Yaru change: fix button look
+  // Yaru change: fix button look
+  @include button(normal);
+  &:hover { @include button(hover); }
 }
 
 // Extensions
@@ -117,6 +119,7 @@
   border: 1px solid $borders_color;
   border-radius: $base_border_radius;
   padding: $base_padding;
+  color: $fg_color; // Yaru change: fix for the light theme
 }
 
 .lg-debug-flag-button {

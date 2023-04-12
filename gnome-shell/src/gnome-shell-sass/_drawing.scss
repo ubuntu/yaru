@@ -350,6 +350,11 @@
   transition-duration: 100ms;
   padding: $base_padding*1.5 $base_padding*2;
 
+  // Yaru change: fix for the light theme
+  &:insensitive {
+    color: $insensitive_fg_color !important;
+  }
+
   &:ltr {padding-left: $base_padding;}
   &:rtl {padding-right: $base_padding;}
 
