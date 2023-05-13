@@ -1,3 +1,21 @@
+yaru-theme (22.04.5) UNRELEASED; urgency=medium
+
+  [ Paul Kepinski ]
+  * Add osd monitor labels theming (LP: #1979037)
+  * Fix slider states (LP: #2019475)
+  * Gtk3: fix marks scale visibilty on hover (LP: #2019477)
+  * Gtk3: fix invisible check and radio in selected row (LP: #2019476)
+  * Fix uncentered cursors (LP: #2019479)
+  * Sync Gtk3 with upstream (only reference code, see debian/README.source)
+
+  [ Marco Trevisan (Treviño) ]
+  * dock: Fix margins making the dock show-apps clickable (LP: #1966167)
+  * debian: Update references to ubuntu/jammy branch
+  * nautilus: Ensure disk-space-display items are themed (LP: #2008791)
+  * debian/README.sources: Explain better the role of the upstream folders
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Sat, 13 May 2023 16:53:25 +0200
+
 yaru-theme (22.04.4) jammy; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
