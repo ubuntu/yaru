@@ -99,42 +99,6 @@
         margin: 5px;
     }
     
-    $disk_space_unknown: #888a85;
-    $disk_space_used: #cf7272;
-    $disk_space_free: #eeeeec;
-    
-    .disk-space-display {
-        border-style: solid;
-        border-width: 2px;
-    }
-    
-    .disk-space-display.unknown {
-        background-color: $disk_space_unknown;
-        border-color: shade($disk_space_unknown, 0.7);
-        color: $disk_space_unknown;
-    }
-    .disk-space-display.unknown.border {
-        color: shade($disk_space_unknown, 0.7);
-    }
-    
-    .disk-space-display.used {
-        background-color: $disk_space_used;
-        border-color: shade($disk_space_used, 0.7);
-        color: $disk_space_used;
-    }
-    .disk-space-display.used.border {
-        color: shade($disk_space_used, 0.7);
-    }
-    
-    .disk-space-display.free {
-        background-color: $disk_space_free;
-        border-color: shade($disk_space_free, 0.7);
-        color: $disk_space_free;
-    }
-    .disk-space-display.free.border {
-        color: shade($disk_space_free, 0.7);
-    }
-    
     /* As a workaround for GtkTreeView showing thick border above first row when
      * horizontal grid lines are enabled, we add them using CSS instead. Exclude the
      * drop targets to let through the default feedback style. */
@@ -386,6 +350,49 @@
         &:backdrop:selected {
             background-color: $selected_bg_color;
             color: $backdrop_selected_fg_color;
+        }
+    }
+}
+
+// We can't use nautilus-specific classes here, so we try to be as specific
+// as possible in terms of widget trees, it should be enough to avoid applying
+// this style too other apps.
+
+notebook grid grid > widget > .disk-space-display {
+    $disk_space_unknown: darken($bg_color, 5%);
+    $disk_space_used: $accent_bg_color;
+    $disk_space_free: if($variant=='light', darken($bg_color, 10%), lighten($bg_color, 5%));
+
+    border-style: solid;
+    border-width: 2px;
+
+    &.unknown {
+        background-color: $disk_space_unknown;
+        border-color: shade($disk_space_unknown, 0.7);
+        color: $disk_space_unknown;
+
+        &.border {
+            color: shade($disk_space_unknown, 0.7);
+        }
+    }
+
+    &.used {
+        background-color: $disk_space_used;
+        border-color: shade($disk_space_used, 0.7);
+        color: $disk_space_used;
+
+        &.border {
+            color: shade($disk_space_used, 0.7);
+        }
+    }
+
+    &.free {
+        background-color: $disk_space_free;
+        border-color: shade($disk_space_free, 0.7);
+        color: $disk_space_free;
+
+        &.border {
+            color: shade($disk_space_free, 0.7);
         }
     }
 }
