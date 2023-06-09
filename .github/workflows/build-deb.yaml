@@ -7,11 +7,11 @@ env:
 
 jobs:
   check:
-    name: Ubuntu Devel
-    runs-on: ubuntu-latest
+    name: Ubuntu Jammy
+    runs-on: ubuntu-jammy
 
     env:
-      UBUNTU_VERSION: devel
+      UBUNTU_VERSION: jammy
       BUILD_CONTAINER: yaru-build-container
       RUN_CMD: docker exec -t -w /src/yaru yaru-build-container
       AS_USER: runuser -u builder --
