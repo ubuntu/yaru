@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-jammy
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         build-type: ['default', 'full']
