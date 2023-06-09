@@ -8,7 +8,7 @@ env:
 jobs:
   check:
     name: Ubuntu Jammy
-    runs-on: ubuntu-jammy
+    runs-on: ubuntu-latest
 
     env:
       UBUNTU_VERSION: jammy
