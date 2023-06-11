@@ -6,6 +6,10 @@ on:
   schedule:
     - cron: '8 0 * * *'
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   refresh-upstream:
     name: Check for upstream symbolic icons changes
@@ -196,7 +200,7 @@ jobs:
           PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
       - name: Create or update Pull Request
         if: steps.checknewupstream.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           commit-message: New upstream symbolic icons list for ${{ matrix.buildenv.project }}
           title: Auto update new upstream symbolic icons list for ${{ matrix.buildenv.project }}
