@@ -239,14 +239,15 @@ StScrollBar {
 // Tooltip
 //
 #Tooltip {
-  border: 1px solid $tooltip_border_color;
-  border-radius: 3px;
-  padding: 5px 12px;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 12px;
   background-color: $tooltip_bg_color;
   color: $tooltip_fg_color;
   font-size: 1em;
   font-weight: normal;
   text-align: center;
+  margin: 3px;
 }
 
 //
@@ -1046,15 +1047,15 @@ StScrollBar {
 // Notifications
 //
 #notification {
-  border: 1px solid $borders_color;
-  border-radius: 3px;
-  background-color: $bg_color;
+  border: none;
+  border-radius: 5px;
+  background-color: $selected_bg_color;
   padding: 13px;
   spacing-rows: 10px;
   spacing-columns: 10px;
   margin-from-right-edge-of-screen: 20px;
   width: 34em;
-  color: $fg_color;
+  color: $selected_fg_color;
 
   .popup-menu & {
     color: $fg_color;
@@ -1070,7 +1071,7 @@ StScrollBar {
 
   &.multi-line-notification {
     padding-bottom: 13px;
-    color: $fg_color;
+    color: $selected_fg_color;
   }
 
   &-scrollview {
@@ -1094,8 +1095,12 @@ StScrollBar {
   }
 
   &-button, &-icon-button {
-    @extend %button;
-    padding: 5px;
+    background-color: darken($selected_bg_color, 12%);
+    border-radius: 5px;
+    padding: 7px;
+    &:hover {
+      background-color: darken($selected_bg_color, 20%);
+    }
   }
 
   &-icon-button > StIcon { icon-size: 32px; }
@@ -1473,9 +1478,10 @@ StScrollBar {
       background-color: $noaccent_selected_bg_color;
       border: 1px solid $borders_color;
     }
-    &-hover {
-      background-color: red;
-      border-radius: 2px;
+    &:hover {
+      background-color: mix($noaccent_selected_bg_color, $bg_color, 40%);
+      border: 1px solid mix($borders_color, $bg_color, 40%);
+      border-radius: 0px;
     }
     &-greyed {
       padding: 7px;
@@ -1748,12 +1754,12 @@ StScrollBar {
   &-number-label {
     font-size: 0.8em;
     z-index: 99;
-    color: $tooltip_border_color;
+    color: $selected_fg_color;
   }
 
   &-badge {
     border-radius: 9999px;
-    background-color: $tooltip_fg_color;
+    background-color: $selected_bg_color;
     margin: 0;
   }
 
@@ -1884,7 +1890,7 @@ StScrollBar {
 
   &-overlay {
     width: 290px;
-    height: 70px;
+    height: 5.4em;
     padding: 15px;
     spacing: 0.5em;
     background: transparentize($bg_color, 0.1);
