@@ -951,6 +951,10 @@ modelbutton.flat arrow {
   margin: 1px;
 
    @extend %button_basic_flat;
+
+   &:hover { @include button(undecorated-hover, $c:darken($bg_color, 4%)); }
+   &:active,
+   &:checked { @include button(undecorated-active, $c:darken($bg_color, 4%)); }
 }
 
 button.color {
@@ -2478,7 +2482,9 @@ switch {
     transition: $button_transition;
   }
 
-  > image { color: transparent; } /* only show i / o for the accessible theme */
+  @if $contrast != 'high' {
+    > image { color: transparent; } /* only show i / o for the accessible theme */
+  }
 
   &:hover > slider {
     @include button(hover);
@@ -3371,13 +3377,21 @@ columnview row:not(:selected) cell editablelabel.editing text selection {
 
 
 .rich-list { /* rich lists usually containing other widgets than just labels/text */
-  & > row {
+  & > row, & > header {
     padding: 8px 12px;
     min-height: 32px; /* should be tall even when only containing a label */
 
     & > box {
       border-spacing: 12px;
     }
+  }
+  & > header {
+    @extend %osd;
+    background-color: $osd_bg_color;
+
+    border-bottom: 1px solid $borders-color;
+    border-top: 1px solid $borders-color;
+    font-weight: bold;
   }
 }
 
@@ -4290,6 +4304,8 @@ shortcuts-section {
 // shortcut window keys
 shortcut {
   border-spacing: 6px;
+  border-radius: 5px;
+  @include focus-ring();
 }
 
 shortcut > .keycap {
