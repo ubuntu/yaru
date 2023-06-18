@@ -239,14 +239,15 @@ StScrollBar {
 // Tooltip
 //
 #Tooltip {
-  border: 1px solid $tooltip_border_color;
-  border-radius: 3px;
-  padding: 5px 12px;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 12px;
   background-color: $tooltip_bg_color;
   color: $tooltip_fg_color;
   font-size: 1em;
   font-weight: normal;
   text-align: center;
+  margin: 3px;
 }
 
 //
@@ -1046,8 +1047,10 @@ StScrollBar {
 // Notifications
 //
 #notification {
-  border: 1px solid $borders_color;
-  border-radius: 3px;
+  box-shadow: 0 1px 15px 4px $borders_color;
+  border-top-color: $selected_bg_color;
+  border-top: 4px;
+  border-radius: 5px;
   background-color: $bg_color;
   padding: 13px;
   spacing-rows: 10px;
@@ -1473,9 +1476,10 @@ StScrollBar {
       background-color: $noaccent_selected_bg_color;
       border: 1px solid $borders_color;
     }
-    &-hover {
-      background-color: red;
-      border-radius: 2px;
+    &:hover {
+      background-color: mix($noaccent_selected_bg_color, $bg_color, 40%);
+      border: 1px solid mix($borders_color, $bg_color, 40%);
+      border-radius: 0px;
     }
     &-greyed {
       padding: 7px;
@@ -1748,12 +1752,12 @@ StScrollBar {
   &-number-label {
     font-size: 0.8em;
     z-index: 99;
-    color: $tooltip_border_color;
+    color: $selected_fg_color;
   }
 
   &-badge {
     border-radius: 9999px;
-    background-color: $tooltip_fg_color;
+    background-color: $selected_bg_color;
     margin: 0;
   }
 
@@ -1884,7 +1888,7 @@ StScrollBar {
 
   &-overlay {
     width: 290px;
-    height: 70px;
+    height: 5.4em;
     padding: 15px;
     spacing: 0.5em;
     background: transparentize($bg_color, 0.1);

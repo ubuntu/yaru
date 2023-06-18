@@ -84,8 +84,8 @@ $text_color: $fg_color;
 
 $separator_color: if($variant=='light', darken($bg_color, 15%), darken($bg_color, 6%));
 
-$tooltip_bg_color: #fbeaa0;
-$tooltip_fg_color: #4a4a4a;
+$tooltip_bg_color: transparentize(mix($selected_bg_color, black, 95%), 0.05);
+$tooltip_fg_color: $selected_fg_color;
 $tooltip_border_color: #d0d0d0;
 
 $osd_bg_color: #353535;
@@ -118,7 +118,7 @@ $noaccent_dark_fg_color: $fg_color_dark;
 $noaccent_selected_bg_color: if($variant=='light', $noaccent_light_bg_color, $noaccent_dark_bg_color);
 $noaccent_selected_fg_color: if($variant=='light', $noaccent_light_fg_color, $noaccent_dark_fg_color);
 
-$applet_separator_color: if($variant == 'light', darken($bg_color, 15%), rgba(255,255,255, 0.12));
+$applet_separator_color: if($variant =='light', darken($bg_color, 15%), rgba(255, 255, 255, 0.12));
 
 $corner_bar_unhighlighted: $applet_separator_color;
-$corner_bar_highlighted: if($variant == 'light', darken($applet_separator_color, 10%), opacify($applet_separator_color, .1));
+$corner_bar_highlighted: if($variant =='light', darken($applet_separator_color, 10%), opacify($applet_separator_color, .1));
