@@ -1,29 +1,4 @@
-// Yaru: any modifications to Mint's original cinnamon theme
-// may be added in this file. We will use this file override
-// any settings that are contradictory to project goals of yaru
-// except for the colours. Any modifications in colors should be added
-// to _colors.scss
-
-// hover: we want the hover bg to be a visible gray for dark and light shell themes
-$hover_bg_color: transparentize($fg_color, 0.9);
-$hover_fg_color: $fg_color;
-$hover_borders_color: lighten($borders_color, if($variant=='light', 5%, 3%));
-
-// active: we want the active bg to be a visible gray for dark and light shell themes
-$active_bg_color: transparentize($fg_color, 0.8);
-$active_fg_color: darken($fg_color, if($variant=='light', 5%, 3%));
-$active_borders_color: darken($borders_color, if($variant=='light', 5%, 3%));
-
-//
-// Calendar
-//
-.calendar-day-base {
-  border-radius: 999px;
-}
-
-//
 // Check Boxes: checkboxes and radios are 24x24px
-//
 .check-box,
 .radiobutton {
   StBin {
@@ -32,6 +7,16 @@ $active_borders_color: darken($borders_color, if($variant=='light', 5%, 3%));
   }
 }
 
+// Switches: toggle-switches are 48x26px
+.toggle-switch {
+  width: 48px;
+  height: 26px;
+}
+
+// Calendar
+.calendar-day-base {
+  border-radius: 999px;
+}
 
 // arrow back
 .calendar-change-month-back {
@@ -63,14 +48,6 @@ $active_borders_color: darken($borders_color, if($variant=='light', 5%, 3%));
   }
 }
 
-//
-// Switches: toggle-switches are 48x26px
-//
-.toggle-switch {
-  width: 48px;
-  height: 26px;
-}
-
 // Fix for close assets 
 .workspace-close-button,
 .window-close {
@@ -91,55 +68,5 @@ $active_borders_color: darken($borders_color, if($variant=='light', 5%, 3%));
     background-size: 24px;
     height: 24px;
     width: 24px;
-  }
-}
-
-// Fix panel inset box-shadow (always dark so was bugged in light theme)
-.panel {
-  &-top {
-    box-shadow: 0 1px $borders_color_dark;
-  }
-
-  &-bottom {
-    box-shadow: 0 -1px $borders_color_dark;
-  }
-
-  &-left {
-    box-shadow: 1px 0 $borders_color_dark;
-  }
-
-  &-right {
-    box-shadow: -1px 0 $borders_color_dark;
-  }
-}
-
-// Fix applet noaccent color (forced dark panel)
-.applet {
-  &-box {
-    &:hover,
-    &:checked {
-      color: $noaccent_dark_fg_color;
-      background-color: $noaccent_dark_bg_color;
-    }
-  }
-
-  &-label {
-    &:hover,
-    &:checked,
-    .applet-box:hover &,
-    .applet-box:checked & {
-      color: $noaccent_dark_fg_color;
-    }
-  }
-
-  &-icon {
-    color: $noaccent_dark_fg_color;
-
-    &:hover,
-    &:checked,
-    .applet-box:hover > &,
-    .applet-box:checked > & {
-      color: $noaccent_dark_fg_color;
-    }
   }
 }
