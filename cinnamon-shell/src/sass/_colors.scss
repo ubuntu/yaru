@@ -55,3 +55,6 @@ $applet_separator_color: if($variant =='light', darken($bg_color, 15%), rgba(255
 
 $corner_bar_unhighlighted: $applet_separator_color;
 $corner_bar_highlighted: if($variant =='light', darken($applet_separator_color, 10%), opacify($applet_separator_color, .1));
+
+// Needed for sass-utils
+$progress_bg_color: if($variant=='light', lighten($accent_bg_color, 10%), lighten($accent_bg_color, 5%));
