@@ -204,14 +204,15 @@ StScrollBar {
     color: #98deab; }
 
 #Tooltip {
-  border: 1px solid #d0d0d0;
-  border-radius: 3px;
-  padding: 5px 12px;
-  background-color: #fbeaa0;
-  color: #4a4a4a;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 12px;
+  background-color: rgba(50, 160, 80, 0.95);
+  color: #ffffff;
   font-size: 1em;
   font-weight: normal;
-  text-align: center; }
+  text-align: center;
+  margin: 3px; }
 
 #LookingGlassDialog {
   color: rgba(255, 255, 255, 0.87);
@@ -829,8 +830,10 @@ StScrollBar {
   margin-top: 0.8em; }
 
 #notification {
-  border: 1px solid #202020;
-  border-radius: 3px;
+  box-shadow: 0 1px 15px 4px #202020;
+  border-top-color: #35a854;
+  border-top: 4px;
+  border-radius: 5px;
   background-color: #2f2f2f;
   padding: 13px;
   spacing-rows: 10px;
@@ -1158,9 +1161,10 @@ StScrollBar {
     color: #ffffff;
     background-color: #525352;
     border: 1px solid #202020; }
-  .menu-category-button-hover {
-    background-color: red;
-    border-radius: 2px; }
+  .menu-category-button:hover {
+    background-color: #3d3d3d;
+    border: 1px solid #292929;
+    border-radius: 0px; }
   .menu-category-button-greyed {
     padding: 7px;
     color: rgba(255, 255, 255, 0.32);
@@ -1354,11 +1358,11 @@ StScrollBar {
 .grouped-window-list-number-label {
   font-size: 0.8em;
   z-index: 99;
-  color: #d0d0d0; }
+  color: #ffffff; }
 
 .grouped-window-list-badge {
   border-radius: 9999px;
-  background-color: #4a4a4a;
+  background-color: #35a854;
   margin: 0; }
 
 .grouped-window-list-button-label {
@@ -1462,7 +1466,7 @@ StScrollBar {
 
 .sound-player-overlay {
   width: 290px;
-  height: 70px;
+  height: 5.4em;
   padding: 15px;
   spacing: 0.5em;
   background: rgba(47, 47, 47, 0.9);

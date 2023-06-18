@@ -25,8 +25,8 @@ $destructive_color: #F04A50;
 
 $insensitive_fg_color: if($variant == 'light', transparentize($fg_color, 0.45), transparentize($fg_color, 0.55));
 
-$tooltip_bg_color: #fbeaa0;
-$tooltip_fg_color: #4a4a4a;
+$tooltip_bg_color: transparentize(mix($selected_bg_color, black, 95%), 0.05);
+$tooltip_fg_color: $selected_fg_color;
 $tooltip_border_color: #d0d0d0;
 
 $osd_fg_color: #c3c3c3;
