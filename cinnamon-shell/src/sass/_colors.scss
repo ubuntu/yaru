@@ -38,7 +38,7 @@ $osd_button_border: transparentize(darken($osd_bg_color, 20%), 0.6);
 $osd_entry_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
 $osd_entry_border: transparentize(darken($osd_bg_color, 12%), 0.6);
 
-$panel_bg: darken($bg_color, if($variant=='light', 6%, 10%));
+$panel_bg: darken($bg_color, if($variant=='light', 6%, 2%));
 $panel_fg: $fg_color;
 
 $entry_bg: if($variant=='light', $base_color, lighten($base_color, 0%));
