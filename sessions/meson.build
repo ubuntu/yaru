@@ -3,6 +3,8 @@ gnomeshell_mode_dir = join_paths(get_option('datadir'), 'gnome-shell', 'modes')
 conf_data = configuration_data()
 conf_data.set('ThemeName', meson.project_name())
 conf_data.set('LowerCaseThemeName', meson.project_name().to_lower())
+conf_data.set('DefaultVariant',
+    get_option('gnome-shell-default-variant').endswith('dark') ? 'dark' : 'light')
 
 resource_path = gnomeshell_use_gresource ? join_paths('theme', meson.project_name(), '') : ''
 conf_data.set('ThemeResourcePath', resource_path)
