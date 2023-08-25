@@ -13,7 +13,7 @@ $yaru_colors: (
     accent-focused-color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%)),
     border-color: $borders_color,
     disabled-bg-color: mix($bg_color, $fg_color, 80%),
-    switch-bg-color: if($variant == 'dark', lighten($inkstone, 5%), lighten($ash, 20%)),
+    switch-bg-color: if($variant == 'dark', lighten($inkstone, 10%), lighten($ash, 20%)),
     check-bg-color: if($variant == 'dark', lighten($bg_color, 2%), $porcelain),
 );
 
