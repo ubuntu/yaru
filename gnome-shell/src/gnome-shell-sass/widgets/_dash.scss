@@ -1,6 +1,8 @@
 /* Dash */
 
-//$dash_background_color: lighten($system_bg_color, 5%); // Yaru: we define those colors in _colors.scss for _dock.scss to use it
+// uses system colors
+$dash_background_color: $system_overlay_bg_color; // Yaru: we define those colors in _colors.scss for _dock.scss to use it
+
 $dash_placeholder_size: 32px;
 $dash_padding: $base_padding*2; // 12px
 $dash_border_radius: $modal_radius + $dash_padding;
@@ -57,10 +59,11 @@ $dash_border_radius: $modal_radius + $dash_padding;
   }
 
   // show apps button
-  .show-apps { @include overview_icon($osd_fg_color);}
+  .show-apps { @include overview_icon($system_fg_color);}
 
   .show-apps, .app-well-app {
     padding-bottom: $dash_padding;
+    color: $system_fg_color;
   }
 }
 

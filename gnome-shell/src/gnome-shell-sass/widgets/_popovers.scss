@@ -53,6 +53,10 @@ $submenu_bg_color: lighten($menu_bg_color, 7%);
   }
 }
 
+.popup-ornamented-menu-item {
+  &:ltr {padding-left: $base_padding;}
+  &:rtl {padding-right: $base_padding;}
+}
 
 // all other graphical elements (sliders)
 .popup-inactive-menu-item {
@@ -74,10 +78,6 @@ $submenu_bg_color: lighten($menu_bg_color, 7%);
 
   @if $is_highcontrast {
     border: 1px solid $hc_inset_color;
-  }
-
-  .popup-menu-ornament {
-    min-width: $base_icon_size !important;
   }
 
   // submenu specific styles
@@ -104,12 +104,8 @@ $submenu_bg_color: lighten($menu_bg_color, 7%);
 
 // container for radio and check boxes
 .popup-menu-ornament {
-  @extend %heading;
-  width: 1.2em;
-  text-align: center !important;
-
-  &:ltr { text-align: right;}
-  &:rtl { text-align: left;}
+  icon-size: $base_icon_size !important;
+  width: $base_icon_size;
 }
 
 // separator
@@ -121,10 +117,7 @@ $submenu_bg_color: lighten($menu_bg_color, 7%);
     background-color: $borders_color;
   }
 
-  .popup-menu-ornament {
-    width: 0 !important;
-  }
-
+  // separators in submenus
   .popup-sub-menu & {
     background-color: transparent;
 
@@ -138,12 +131,15 @@ $submenu_bg_color: lighten($menu_bg_color, 7%);
   }
 }
 
+// desktop background menu
+.background-menu {
+  -boxpointer-gap: 0px;
+  -arrow-rise: 0px; // hide the beak on the menu
+}
+
 // right-click (and panel) app menu
 .app-menu {
   max-width: 27.25em;
-
-  // this is unneeded at the top-level in this menu, hide it
-  .popup-menu-ornament { width: 0 !important; }
 
   .popup-inactive-menu-item:first-child {
     // "Open Windows" label

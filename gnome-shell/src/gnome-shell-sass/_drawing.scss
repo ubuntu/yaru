@@ -23,23 +23,25 @@
   @else { box-shadow: $shadow1; }
 }
 
-// entries
 
-@mixin entry($t, $fc:$focus_border_color) { // Yaru: we detached focus from selected
+// Text entries
+@mixin entry($t, $c, $fc:$focus_border_color) { // Yaru: we detached focus from selected
 //
 // Entries drawing function
 //
 // $t: entry type
-// $fc: focus color
+// $c: text color, used to derive background color of entries
 //
-// possible $t values:
-// normal, focus, insensitive
+// possible $t values: normal, focus, insensitive
 //
   transition-duration: 100ms;
 
   @if $t==normal {
-    background-color: if($variant == 'light', lighten($bg_color, 5%), $dash_background_color); // Yaru: use same background as dash for dark theme
-    color: transparentize($fg_color,0.3);
+    background-color: transparentize($c, 0.85);
+    @if $variant != 'light' {
+      background-color: $dash_background_color; // Yaru: use same background as dash for dark theme
+    }
+    color: transparentize($c,0.3);
     border: 1px solid $borders_color; // Yaru change: use our own border-color
 
     @if $is_highcontrast {
@@ -48,29 +50,32 @@
   }
 
   @if $t==focus {
-    background-color: if($variant == 'light', lighten($bg_color, 5%), $dash_background_color); // Yaru: use same background as dash for dark theme
-    border-color: $fc;
+    background-color: mix(transparentize($c, 0.75), $fc, 95%);
+    @if $variant != 'light' {
+      background-color: $dash_background_color; // Yaru: use same background as dash for dark theme
+    }
+    border-color: $fc; // Yaru: Add border color
     box-shadow: 0 0 0 1px $fc inset; // Yaru change: trick to get 2px border on focus without layout shifting
-    color: $fg_color;
+    color: $c;
+
     &:hover {}
   }
 
   @if $t==hover {
-    background-color: if($variant == 'light', lighten($bg_color, 5%), $dash_background_color); // Yaru: use same background as dash for dark theme
-    border-color: $hover_borders_color; // Yaru change: don't change color on hover
-    color: $fg_color; // Yaru change: don't change color on hover
+    background-color: transparentize($c, 0.75);
+    @if $variant != 'light' {
+      background-color: $dash_background_color; // Yaru: use same background as dash for dark theme
+    }
   }
 
   @if $t==insensitive {
-    background-color:lighten($insensitive_bg_color, 5%);
-    border-color: lighten($insensitive_bg_color, 5%);
-    color: $insensitive_fg_color;
+    background-color:transparentize($c, 0.75);
+    color: transparentize($c, 0.5);
   }
 }
 
 // On-screen Keyboard
-@mixin keyboard_key($t, $c:$osd_bg_color, $tc:$osd_fg_color, $flat: false) {
-// Yaru: FIXME:?! Make keyboard work in both variants
+@mixin keyboard_key($t, $c:$osd_bg_color, $tc:$osd_fg_color) {
 //
 // Keyboard key drawing function
 //
@@ -88,12 +93,6 @@
   @if $t==normal {
     color: $tc;
     background-color: lighten($c, 3%);
-    @if $flat {
-      background-color: transparent;
-    }
-    @if $is_highcontrast == "true" {
-      box-shadow: inset 0 0 0 1px $button_inset_color;
-    }
   }
 
   // focused key
@@ -114,7 +113,7 @@
   // hover key
   @else if $t==hover {
     color: $tc;
-    background-color: if($variant=="light", lighten($c, 1%), lighten($c, 7%)); // Yaru change: Make keyboard work on both variants
+    background-color: if($variant=="light", darken($c, 1%), lighten($c, 7%)); // Yaru change: Make keyboard work on both variants
   }
 
   // active key
@@ -142,6 +141,7 @@
   }
 }
 
+//
 // Button drawing function
 //
 // $t:    button type,
@@ -155,11 +155,15 @@
 //
 // since buttons are all flat an borderless now the mixin is simpler
 
-@mixin button($t, $tc:$fg_color, $c:$bg_color, $bg: null, $flat: false, $brightness: null) { // Yaru change: allow forced bg-color, add brigthness parameter
+@mixin button($t, $tc:$fg_color, $c:$bg_color, $flat: false, $osd: false, $bg: null, $brightness: null) { // Yaru change: allow forced bg-color, add brigthness parameter
 
   $variant: if($brightness == null, $variant, $brightness); // Yaru change: add forced brightness support
   $button_bg_color: if($bg != null, $bg, mix($tc, $c, $button_mix_factor)); // Yaru change: allow forced bg-color
   transition-duration: 100ms;
+
+  @if $osd {
+    $button_bg_color: transparentize($tc, 0.9);
+  }
 
   // normal button
   @if $t==normal {
@@ -176,25 +180,34 @@
   // hover button
   @else if $t==hover {
     color: $tc;
-    background-color: if($variant == 'light', darken($button_bg_color, 3%), lighten($button_bg_color, 3%)); // Yaru change: adapt for light theme
+    background-color: if($variant == 'light', darken($button_bg_color, 3%), lighten($button_bg_color, 3%));
 
-    @if $is_highcontrast {
-      box-shadow: inset 0 0 0 1px $hc_inset_color !important;
+    @if $is_highcontrast == "true" {
+      box-shadow: inset 0 0 0 1px lighten($button_inset_color, 3%);
+      background-color: mix(lighten($button_bg_color, 3%), $button_inset_color, 10%);
     }
   }
 
   // active button
   @else if $t==active {
     color: $tc;
-    background-color: if($variant == 'light', darken($button_bg_color, 6%), lighten($button_bg_color, 6%)); // Yaru change: adapt for light theme
+    background-color: if($variant == 'light', darken($button_bg_color, 6%), lighten($button_bg_color, 6%));
+    @if $is_highcontrast == "true" {
+      box-shadow: inset 0 0 0 1px lighten($button_inset_color, 6%);
+      background-color: mix(lighten($button_bg_color, 6%), $button_inset_color, 10%);
+    }
   }
 
   // checked button
   @else if $t==checked {
     color: $tc;
-    background-color: if($variant == 'light', darken($button_bg_color, 9%), lighten($button_bg_color, 9%)); // Yaru change: adapt for light theme
-    &:hover { background-color: if($variant == 'light', darken($button_bg_color, 12%), lighten($button_bg_color, 12%));} // Yaru change: ↑↑↑
-    &:active { background-color: if($variant == 'light', darken($button_bg_color, 15%), lighten($button_bg_color, 15%));} // Yaru change: ↑↑↑
+    background-color: if($variant == 'light', darken($button_bg_color, 9%), lighten($button_bg_color, 9%));
+    @if $is_highcontrast == "true" {
+      box-shadow: inset 0 0 0 1px lighten($button_inset_color, 9%);
+      background-color: mix(lighten($button_bg_color, 9%), $button_inset_color, 10%);
+    }
+    &:hover { background-color: if($variant == 'light', darken($button_bg_color, 12%), lighten($button_bg_color, 12%));} // Yaru change: adapt for light theme
+    &:active { background-color: if($variant == 'light', darken($button_bg_color, 15%), lighten($button_bg_color, 15%));} // Yaru change: adapt for light theme
   }
 
   // focused button
@@ -214,14 +227,15 @@
 
   // insensitive button
   @else if $t==insensitive {
-    color: transparentize($tc, 0.5);
-    background-color: transparentize($tc, .95);
+    color: if($variant == 'light', transparentize($tc, .6), transparentize($tc, .5));
+    background-color: if($variant == 'light', transparentize($tc, .9), transparentize($tc, .95));
   }
 
   // default/suggested button
   @else if $t==default {
     background-color: $selected_bg_color;
     color: $selected_fg_color;
+
     &:focus {
       box-shadow: inset 0 0 0 2px transparentize($selected_fg_color, .4) !important;
     }
@@ -246,9 +260,7 @@
     background-color: none;
     box-shadow: none;
     &:insensitive {
-      @include button(insensitive);
       background-color: transparent;
-      color: transparentize($selected_fg_color, .5);
     }
   }
 }
@@ -295,7 +307,7 @@
       background-color: transparentize($color, .95); // Yaru change: softer non-flat icon
     }
   }
-  &:hover .overview-icon { background-color: transparentize($color, .9);}
+  &:hover .overview-icon { background-color: transparentize($color, .87);}
 
   &:selected .overview-icon,
   &:focus .overview-icon {
@@ -337,6 +349,12 @@
   &:hover {@include button(hover);}
   &:active {@include button(active);}
   &:focus {@include button(focus);}
+  &:insensitive {
+    @include button(insensitive);
+    @if $flat {
+     background-color: transparent;
+    }
+  }
 }
 
 // styling for elements within popovers that look like notifications
@@ -350,14 +368,6 @@
   transition-duration: 100ms;
   padding: $base_padding*1.5 $base_padding*2;
 
-  // Yaru change: fix for the light theme
-  &:insensitive {
-    color: $insensitive_fg_color !important;
-  }
-
-  &:ltr {padding-left: $base_padding;}
-  &:rtl {padding-right: $base_padding;}
-
   @if $flat {
     @include button(undecorated);
     box-shadow: none !important;
@@ -370,4 +380,90 @@
   }
   &:active {@include button(active, $c:$bg);}
   &:checked {@include button(checked, $c:$bg);}
+  &:insensitive {
+    // Yaru: Add insensitive case
+    color: $insensitive_fg_color !important;
+  }
+}
+
+//
+// Panel menu/button drawing function
+//
+// $bg: background color, derived from $panel_fg_color
+// $fg: foreground color, also derived from $panel_fg_color
+//
+// $flat:               if true, the button is filled instead of transparent
+// $highlighted_child:  if true, applies some special overrides for to a
+//                      child element, see _panel.scss for details
+// $child_class:        class name of the child element
+//
+
+@mixin panel_button($bg:$panel_fg_color, $fg:$panel_fg_color, $flat: true, $highlighted_child: false, $child_class:"") {
+
+  transition-duration: 150ms;
+  border: 3px solid transparent;
+  border-radius: 99px;
+
+  font-weight: bold;
+  background-color: transparent;
+  color: $fg;
+
+  @if $flat {
+    box-shadow: none;
+
+    &:active, &:focus, &:checked {
+      box-shadow: inset 0 0 0 100px transparentize($fg, 0.75);
+      &:hover {
+        box-shadow: inset 0 0 0 100px transparentize($fg, 0.65);
+      }
+    }
+
+    &:hover {
+      box-shadow: inset 0 0 0 100px transparentize($fg, 0.8);
+    }
+
+  } @else {
+    box-shadow: inset 0 0 0 100px transparentize($bg, 0.2);
+
+    &:active, &:focus, &:checked {
+      box-shadow: inset 0 0 0 100px $bg;
+      &:hover {
+        box-shadow: inset 0 0 0 100px transparentize($bg, 0.05);
+      }
+    }
+
+    &:hover {
+      box-shadow: inset 0 0 0 100px transparentize($bg, 0.1);
+    }
+  }
+
+  // some overrides to style a child element
+  @if $highlighted_child {
+    box-shadow: none !important;
+
+    #{$child_class} {
+      transition-duration: 150ms;
+      border: 3px solid transparent;
+      border-radius: 99px;
+    }
+
+    &:active, &:focus, &:checked {
+      box-shadow: none !important;
+
+      #{$child_class} {
+        box-shadow: inset 0 0 0 100px transparentize($fg, 0.75);
+
+        &:hover {
+          box-shadow: inset 0 0 0 100px transparentize($fg, 0.65) !important;
+        }
+      }
+    }
+
+    &:hover {
+      box-shadow: none !important;
+      #{$child_class} {
+        box-shadow: inset 0 0 0 100px transparentize($fg, 0.8);
+      }
+    }
+  }
 }

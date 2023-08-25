@@ -1,14 +1,20 @@
 // When color definition differs for dark and light variant,
 // it gets @if-ed depending on $variant
-@import 'palette';
 
-// $is_highcontrast: "false"; - already defined in gnome-shell.scss.in
+@import '_palette.scss';
 
-$base_color: if($variant=='light', #ffffff, lighten($jet, 4%));
+$is_highcontrast:false !default; // Yaru: already defined in gnome-shell.scss.in
+
+// base color for dark theme
+$_dark_base_color: lighten($jet, 4%);
+
 $bg_color_dark: lighten($jet, 2%);
 $bg_color: if($variant=='light', #FAFAFA, $bg_color_dark);
 $fg_color_dark: $porcelain;
+
+$base_color: if($variant =='light', #ffffff, $_dark_base_color);
 $fg_color: if($variant=='light', $inkstone, $fg_color_dark);
+$text_color: $fg_color;
 
 $selected_fg_color: $accent_fg_color;
 $selected_bg_color: $accent_bg_color;
@@ -19,17 +25,19 @@ $borders_color: if($variant=='light', darken($bg_color, 20%), $borders_color_dar
 $alt_borders_color: if($variant=='light', darken($bg_color, 24%), darken($bg_color, 10%));
 $outer_borders_color: transparentize($fg_color, 0.85);
 
-$link_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
-$link_visited_color: if($variant=='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
-$top_hilight: $outer_borders_color;
+$link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
+$link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 
 $warning_color: $yellow;
 $error_color: $red;
 $success_color: lighten($green, 5%);
 $destructive_color: if($variant=='light', $red, darken($red, 10%));
 
+// color definitions for OSD elements
 $osd_fg_color: #eeeeec;
 $osd_bg_color: transparentize(lighten($jet, 2%), 0.025);
+
+// derived osd colors
 $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
 $osd_borders_color: transparentize(black, 0.3);
@@ -37,72 +45,66 @@ $osd_outer_borders_color: transparentize(white, 0.84);
 
 $shadow_color: transparentize(black, 0.9);
 
-// button
-$button_mix_factor: 9%;
+// buttons
+$button_mix_factor: if($variant == 'light', 12%, 9%);
 
 // notifications
-$bubble_buttons_color: if($variant =='light', darken($bg_color, 7%), lighten($bg_color, 5%));
+$bubble_buttons_color: if($variant == 'light', darken($bg_color, 7%), lighten($bg_color, 5%));
 
-// overview background color
+// color definitions for system elements (e.g. the overview)
+$system_base_color: $_dark_base_color; // always dark
+$system_fg_color: darken($porcelain, 2%);
+
+// derived system colors
 $system_bg_color: lighten($jet, 4%); // Lighten than dash but darken than bg-color
+$system_borders_color: transparentize($system_fg_color, .9);
+$system_insensitive_fg_color: mix($system_fg_color, $system_bg_color, 50%);
+$system_overlay_bg_color: mix($system_base_color, $system_fg_color, 90%); // for non-transparent items, e.g. dash
 
-//insensitive state derived colors
-$insensitive_fg_color: mix($fg_color, $bg_color, 65%);
+// derived global colors
+// insensitive state
+$insensitive_fg_color: if($variant == 'light', mix($fg_color, $bg_color, 60%),  mix($fg_color, $bg_color, 50%));
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
-$insensitive_borders_color: $borders_color;
+$insensitive_borders_color: mix($borders_color, $base_color, 60%);
 
-//colors for the backdrop state, derived from the main colors.
-$backdrop_base_color: if($variant=='light', darken($base_color, 1%), lighten($base_color, 1%));
-$backdrop_bg_color: $bg_color;
-$backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 80%);
-$backdrop_insensitive_color: if($variant=='light', darken($backdrop_bg_color, 15%), lighten($backdrop_bg_color, 15%));
-$backdrop_borders_color: mix($borders_color, $bg_color, 90%);
-$backdrop_dark_fill: mix($backdrop_borders_color, $backdrop_bg_color, 35%);
+// checked state
+$checked_bg_color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 9%));
+$checked_fg_color: if($variant=='light', darken($fg_color, 7%), lighten($fg_color, 9%));
 
-// derived hover colors - Yaru: we want the hover bg to be a visible gray for dark and light shell themes
+// hover state
+// Yaru: we want the hover bg to be a visible gray for dark and light shell themes
 $hover_bg_color: transparentize($fg_color, 0.9);
 $hover_fg_color: $fg_color;
 $hover_borders_color: lighten($borders_color, 5%);
 
-// derived active colors - Yaru: we want the active bg to be a visible gray for dark and light shell themes
+// active state
 $active_bg_color: transparentize($fg_color, 0.8);
 $active_fg_color: darken($fg_color, if($variant=='light', 5%, 3%));
 
-// derived checked colors
-$checked_bg_color: if($variant=='light', darken($bg_color, 7%), lighten($bg_color, 9%));
-$checked_fg_color: if($variant=='light', darken($fg_color, 7%), lighten($fg_color, 9%));
-
+// Yaru custom definitions
 $base_hover_color: transparentize(white, 0.8);
 $base_active_color: transparentize(white, 0.75);
-// $hover_fg_color: lighten($selected_fg_color, .25);
-// $active_fg_color: transparentize($selected_fg_color, .5);
 
 $panel_bg_color: darken($jet, 2%);
 $panel_fg_color: darken($porcelain, 2%);
-$dash_background_color: lighten($jet, 2%);
+$panel_border_color: if($variant == 'light', darken($panel_bg_color, 2%), $panel_bg_color);
+
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
 
+$dash_background_color: lighten($jet, 2%);
 $dash-alpha-value: 0.6;
 $dash-opaque-alpha-value: 0.0;
 
-//special cased widget colors
 $suggested_bg_color: if($variant=='light', lighten($green, 5%), darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
+
 $progress_bg_color: if($variant=='light', lighten($accent_bg_color, 10%), lighten($accent_bg_color, 5%));
-$checkradio_bg_color: if($variant=='light', lighten($accent_bg_color, 5%), $accent_bg_color);
+
+$focus_border_color: lighten($accent_bg_color, 14%);
+
+// Assets colors
+$checkradio_bg_color: $accent_bg_color;
 $checkradio_fg_color: $accent_fg_color;
 $switch_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 8%));
 $switch_border_color: if($variant=='light', darken($accent_bg_color, 15%), darken($borders_color, 5%));
-$focus_border_color: lighten($accent_bg_color, 14%);
-
-// Yaru: Ignore transformations when using dark accent colors
-$selected_bg_color: $accent_bg_color;
-$progress_bg_color: $accent_bg_color;
-$checkradio_bg_color: $accent_bg_color;
-
-@import 'sass-utils';
-$contrast_target: if($variant=='light', 6, 5.5);
-$link_color: optimize-contrast($bg_color, $accent_bg_color, $target: $contrast_target);
-$link_visited_color: if($variant=='light', darken($link_color, 10%),
-                        optimize-contrast($bg_color, $accent_bg_color));

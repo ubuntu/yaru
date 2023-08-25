@@ -39,7 +39,7 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
   & > StBoxLayout { padding: 0 $base_padding*2; }
   &:ltr > StBoxLayout { padding-left: $base_padding*2.5; }
   &:rtl > StBoxLayout { padding-right: $base_padding*2.5; }
-  
+
   .quick-toggle-title { font-weight: bold; }
 
   & StBoxLayout > .quick-toggle-subtitle {
@@ -72,6 +72,7 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
     @include button(normal, $bg: $_bg);
     &:hover {@include button(hover, $bg: $_bg);}
     &:active {@include button(active, $bg: $_bg);}
+    border-color: transparentize($fg_color, .75);  // Yaru change: drop border
 
     &:checked {
       // Yaru change: different toggle arrow checked bg
@@ -108,6 +109,11 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
 
 .quick-toggle-menu {
   @include card;
+
+  // override some card styles
+  background-color: $bg_color !important;
+  color: $fg_color !important;
+
   border-radius: $base_border_radius*3;
   padding: $base_padding*2;
   margin: $base_padding*2 $base_padding*3 0;
@@ -124,10 +130,10 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
       border-radius: 999px;
       padding: 1.5 * $base_padding;
       background-color: transparentize($fg_color, 0.9); // Yaru change: adjust background
-      
       // Yaru change: remove active accent
       // &.active {
       //   background-color: $selected_bg_color;
+      //   color: $selected_fg_color;
       // }
     }
 
@@ -181,6 +187,22 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
 
 .device-subtitle { color: transparentize($fg_color, 0.5); }
 
+.keyboard-brightness-item .slider {
+  min-height: 16px;
+}
+
+.keyboard-brightness-level {
+  spacing: $base_padding;
+
+  // Yaru change: tone down accented checked buttons
+  // .button:checked { @include button(default, $c:$selected_bg_color); }
+  .button:checked {
+    @include button(normal, $c: $toggle-bg-color);
+      &:hover {@include button(hover, $c: $toggle-bg-color);}
+      &:active {@include button(active, $c: $toggle-bg-color);}
+  }
+}
+
 // background apps
 
 .background-apps-quick-toggle {
@@ -199,6 +221,9 @@ $toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($sel
   }
   & .close-button {
     @extend .icon-button;
+    padding: $base_padding;
+  }
+  & .spinner {
     padding: $base_padding;
   }
 

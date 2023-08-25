@@ -42,7 +42,7 @@ $invisible_occluded_bg_color: rgba(3,2,1,0);
 
 // fonts
 $base_font_size: 11;
-$text_shadow_color: if($variant=='light', rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+$text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
 
 // icons
 $base_icon_size: 1.09em;
@@ -57,19 +57,6 @@ stage {
 
 /* Common Stylings */
 
-// osd panels
-%osd_panel {
-  color: $osd_fg_color;
-  background-color: $osd_bg_color;
-  border: 1px solid $borders_color_dark; // Yaru: use our border
-  border-radius: 999px;
-  padding: $base_padding*2;
-  box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // Yaru: OSDs need to be visible on dark backgrounds
-  @if $is_highcontrast {
-    border: 2px solid $hc_inset_color;
-  }
-}
-
 // icon tiles
 %tile {
   border-radius: $base_border_radius * 2; // 16px
@@ -78,20 +65,24 @@ stage {
   border: 2px solid transparent;
   transition-duration: 200ms;
   text-align: center;
-  color: $osd_fg_color; // Yaru change: fix for light theme
+  color: inherit;
+
   @if $is_highcontrast {
     border-color: $hc_inset_color;
   }
 }
 
 // normal button styling
-%button {
+%button_common {
   border-radius: $base_border_radius;
   border-style: solid;
   border-width: 1px;
   font-weight: bold;
   padding: $base_padding*.5 $base_padding*4;
+}
 
+%button {
+  @extend %button_common;
   @include button(normal);
   &:focus { @include button(focus);}
   &:hover { @include button(hover);}
@@ -99,6 +90,7 @@ stage {
   &:selected,
   &:active { @include button(active);}
   &:checked { @include button(checked);}
+  &.default { @include button(default);}
 
   &.flat {
     @include button(normal, $flat:true);
@@ -108,6 +100,7 @@ stage {
     &:selected,
     &:active { @include button(active, $flat:true);}
     &:checked { @include button(checked, $flat:true);}
+    &.default { @include button(default, $flat:false);}
   }
 }
 
@@ -133,19 +126,25 @@ stage {
 }
 
 // normal entry style
-%entry {
+%entry_common {
   min-height: 22px; // Yaru change: fix for height shift
   border-radius: $base_border_radius;
   padding: $base_padding*1.5 $base_padding*1.5;
-  color: $fg_color;
   selection-background-color: $selected_bg_color;
   selected-color: $selected_fg_color;
   border-width: 1px; // Yaru change: we want bordered entries
+}
 
-  @include entry(normal);
-  &:hover { @include entry(hover);}
-  &:focus { @include entry(focus);}
-  &:insensitive { @include entry(insensitive);}
+%entry {
+  @extend %entry_common;
+  @include entry(normal, $c:$fg_color);
+  &:hover { @include entry(hover, $c:$fg_color);}
+  &:focus { @include entry(focus, $c:$fg_color);}
+  &:insensitive { @include entry(insensitive, $c:$fg_color);}
+
+  StLabel.hint-text {
+    color: transparentize($fg_color, 0.3);
+  }
 }
 
 // buttons in dialogs/notifications
@@ -165,8 +164,9 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
   &:insensitive { @include button(insensitive, $c:$bubble_buttons_color);}
   &:focus { @include button(focus, $c:$bubble_buttons_color);}
   &:hover { @include button(hover, $c:$bubble_buttons_color);}
-  &:active { @include button(active, $c:$bubble_buttons_color);} // Yaru change: add missing active state
-  
+  &:active { @include button(active, $c:$bubble_buttons_color);}
+  &:checked { @include button(checked, $c:$bubble_buttons_color);}
+
   &:first-child:ltr {
     border-radius: 0 0 0 $modal_radius;
   }
@@ -178,12 +178,11 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
 
   &:first-child:rtl {
     border-radius: 0 0 $modal_radius;
-    margin-left: 0 !important;
   }
 
   &:last-child:rtl {
     border-radius: 0 0 0 $modal_radius;
-    margin-right: 0 !important;
+    margin-left: 0 !important;
   }
 
   &:first-child:last-child {
@@ -193,36 +192,23 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
   }
 }
 
-// buttons on OSD elements
-// that are undecorated by default and use OSD colors
-// Yaru change: add light/dark theme support
-%osd_button {
-  @include button(undecorated, $tc:$osd_fg_color, $c:$osd_bg_color, $brightness: 'dark');
-  &:insensitive { @include button(undecorated, $tc:$osd_fg_color, $c:$osd_bg_color, $brightness: 'dark');}
-  &:focus { @include button(focus, $tc:$osd_fg_color, $c:$osd_bg_color, $brightness: 'dark');}
-  &:hover { @include button(hover, $tc:$osd_fg_color, $c:$osd_bg_color, $brightness: 'dark');}
-  &:active { @include button(active, $tc:$osd_fg_color, $c:$osd_bg_color, $brightness: 'dark');}
-  &:outlined,&:checked { @include button(checked, $tc:$osd_fg_color, $c:$osd_bg_color, $brightness: 'dark');}
-}
-
 // tooltip
 %tooltip {
-  background-color: $osd_bg_color;
-  color: $osd_fg_color;
-  border:1px solid $osd_outer_borders_color;
+  background-color: $osd_bg_color; // Yaru: Use yaru palette
+  border: 1px solid $borders_color_dark; // Yaru: use our border
+  color: $osd_fg_color; // Yaru: Use yaru palette
+
   border-radius: 99px;
   padding: $base_padding $base_padding * 2;
   text-align: center;
 
   @if $is_highcontrast {
-    background-color: $osd_bg_color;
-    color: $osd_fg_color;
-    border: 1px solid $hc_inset_color;
+    background-color: black;
+    border-color: $hc_inset_color;
   }
 }
 
 /* General Typography */
-
 %large_title {
   font-weight: 300;
   @include fontsize(24);
@@ -270,3 +256,70 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
 
 %monospace {font-family: monospace;}
 %numeric { font-feature-settings: "tnum";}
+
+
+/* OSD Elements */
+%osd_panel {
+  color: $osd_fg_color;
+  background-color: $osd_bg_color;
+  border: 1px solid $borders_color_dark; // Yaru: use our border
+  border-radius: 999px;
+  padding: $base_padding*2;
+  box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // Yaru: OSDs need to be visible on dark backgrounds
+
+  @if $is_highcontrast {
+    border: 2px solid $hc_inset_color;
+  }
+}
+
+// entries
+%osd_entry {
+  @extend %entry_common;
+  @include entry(normal, $c:$osd_fg_color,);
+  &:hover { @include entry(hover, $c:$osd_fg_color);}
+  &:focus { @include entry(focus, $c:$osd_fg_color);}
+  &:insensitive { @include entry(insensitive, $c:$osd_fg_color);}
+
+  StLabel.hint-text {color: transparentize($osd_fg_color, 0.3); }
+}
+
+// buttons on OSD elements
+%osd_button {
+  @extend %button_common;
+  @include button(normal, $tc:$osd_fg_color, $c:$osd_bg_color, $osd:true);
+  &:insensitive { @include button(insensitive, $tc:$osd_fg_color, $c:$osd_bg_color, $osd:true);}
+  &:focus { @include button(focus, $tc:$osd_fg_color, $c:$osd_bg_color, $osd:true);}
+  &:hover { @include button(hover, $tc:$osd_fg_color, $c:$osd_bg_color, $osd:true);}
+  &:active { @include button(active, $tc:$osd_fg_color, $c:$osd_bg_color, $osd:true);}
+  &:outlined,&:checked { @include button(checked, $tc:$osd_fg_color, $c:$osd_bg_color, $osd:true);}
+}
+
+%osd_button_flat {
+  @extend %osd_button;
+  @include button(undecorated, $osd:true);
+  &:insensitive { @include button(undecorated, $tc:$osd_fg_color, $c:$osd_bg_color, $osd:true);}
+}
+
+/* System Elements */
+
+// entries
+%system_entry {
+  @extend %entry_common;
+  @include entry(normal, $c:$system_fg_color,);
+  &:hover { @include entry(hover, $c:$system_fg_color);}
+  &:focus { @include entry(focus, $c:$system_fg_color, $fc:transparentize($system_fg_color, 0.5));}
+  &:insensitive { @include entry(insensitive, $c:$system_fg_color);}
+
+  StLabel.hint-text { color: transparentize($system_fg_color, 0.3);}
+}
+
+
+// buttons
+%system_button {
+  @include button(normal, $tc:$system_fg_color, $c:$system_bg_color);
+  &:insensitive { @include button(insensitive, $tc:$system_fg_color, $c:$system_bg_color);}
+  &:focus { @include button(focus, $tc:$system_fg_color, $c:$system_bg_color);}
+  &:hover { @include button(hover, $tc:$system_fg_color, $c:$system_bg_color);}
+  &:active { @include button(active, $tc:$system_fg_color, $c:$system_bg_color);}
+  &:outlined,&:checked { @include button(checked, $tc:$system_fg_color, $c:$system_bg_color);}
+}
