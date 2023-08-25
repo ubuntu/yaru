@@ -121,7 +121,16 @@ $active_fg_color: if($variant=='light', darken($fg_color, 10%), lighten($fg_colo
 // inset colour for high contrast
 $hc_inset_color: transparentize($fg_color, 0.7);
 
-// Yaru: we need hc and imports to for our build to work:
-$variant: hc;
-@import "palette";
-@import "colors";
+@import 'sass-utils';
+
+$accent_bg_color: optimize-contrast($base_color,
+    $accent_bg_color, $target: 5.5);
+
+$selected_fg_color: $accent_fg_color;
+$selected_bg_color: $accent_bg_color;
+
+$fg_color_dark: $porcelain;
+$bg_color_dark: lighten($jet, 2%);
+
+// Yaru custom definitions
+@import '_yaru-colors.scss';
