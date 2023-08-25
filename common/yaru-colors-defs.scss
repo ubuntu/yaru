@@ -2,6 +2,7 @@
 // assets (dummy) colors via colorize-dummy-svg.py
 
 $variant: if($yaru_is_dark_variant, 'dark', 'light');
+$hc_contrast_target: 5.5;
 
 @import 'colors';
 
@@ -39,6 +40,12 @@ $yaru_colors: map-merge($yaru_colors, (
     $opaque: opaque-color($color);
     @if $opaque != $color {
         -yaru-#{$name}-opaque: $opaque;
+    }
+
+    @if $name != "bg-color" and not map-has-key($yaru_colors, $name + "-hc") and
+        not str-ends-with($name, "-hc") {
+        -yaru-#{$name}-hc: optimize-contrast($bg_color,
+            $color, $target: $hc_contrast_target);
     }
 }
 };
