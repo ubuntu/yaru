@@ -1,0 +1,29 @@
+// Yaru custom definitions
+$base_hover_color: transparentize(white, 0.8);
+$base_active_color: transparentize(white, 0.75);
+
+$link_color: if($variant =='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
+$link_visited_color: if($variant =='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+
+$panel_bg_color: darken($jet, 2%);
+$panel_fg_color: darken($porcelain, 2%);
+$panel_border_color: if($variant == 'light', darken($panel_bg_color, 2%), $panel_bg_color);
+
+$panel-alpha-value: 0.6;
+$panel_opaque_value: 0.0;
+
+$dash_background_color: lighten($jet, 2%);
+$dash-alpha-value: 0.6;
+$dash-opaque-alpha-value: 0.0;
+
+$suggested_bg_color: if($variant=='light', lighten($green, 5%), darken($green, 5%));
+$suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
+
+$focus_border_color: lighten($accent_bg_color, 14%);
+
+// Assets colors
+$checkradio_bg_color: $accent_bg_color;
+$checkradio_fg_color: $accent_fg_color;
+$switch_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 8%));
+$switch_border_color: if($variant=='light', darken($accent_bg_color, 15%), darken($borders_color, 5%));
+$progress_bg_color: if($variant=='light', lighten($accent_bg_color, 10%), lighten($accent_bg_color, 5%));
