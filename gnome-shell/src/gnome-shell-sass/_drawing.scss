@@ -358,11 +358,11 @@
   }
 }
 
-// styling for elements within popovers that look like notifications
+// styling for all menuitems in popovers
 @mixin menuitem($bg, $flat: true) {
 
   // lighten the background color always
-  $bg: if($variant == 'light', darken($bg, 5%), lighten($bg, 5%)); // Yaru change: add light/dark theme support
+  $bg: lighten($bg,5%);
 
   font-weight: normal;
   spacing: $base_padding;
