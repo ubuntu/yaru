@@ -56,15 +56,10 @@ $app_icon_size: 96px;
     & .folder-name-label,
     & .folder-name-entry {
       @extend %title_1;
-      color: $osd_fg_color; // Yaru change: needed for light theme, otherwise invisible text
     }
     & .folder-name-entry {
       width: 12em;
       color: $system_fg_color !important;
-
-      // Yaru change: needed for the light theme, otherwise dark text in orange selection, can't set selected-color here
-      background-color: lighten($osd_bg_color, 4%);
-      border-color: $osd_outer_borders_color;
     }
 
     /* FIXME: this is to keep the label in sync with the entry */
@@ -107,7 +102,7 @@ $app_icon_size: 96px;
   width: 5px;
   border-radius:5px;
   margin-bottom: 8px;
-  background-color: $selected_bg_color; // Yaru: we want an orange dot
+  background-color: $selected_bg_color; // Yaru: we want an accented dot
 }
 
 // Rename popup for app folders

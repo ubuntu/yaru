@@ -71,7 +71,7 @@ $dash_border_radius: $modal_radius + $dash_padding;
 .dash-separator {
   width: 1px;
   margin: 0 $base_margin;
-  background-color: $borders_color_dark; // Yaru change: fix light dash separator
+  background-color: $system_borders_color;
   margin-bottom: $dash_padding;
   @if $is_highcontrast {
     width: 2px;
