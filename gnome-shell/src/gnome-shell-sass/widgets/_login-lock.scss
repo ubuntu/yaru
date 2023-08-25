@@ -292,7 +292,7 @@ $_gdm_dialog_width: 23em;
     StEntry {
       background-color: darken($system_bg_color, 3%);
       color: $fg_color;
-      border-color: $borders_color_dark;
+      border-color: $system_borders_color;
     }
   }
 }

@@ -42,8 +42,8 @@ $app_icon_size: 96px;
   border-radius: $modal_radius*4;
   background-color: $system_overlay_bg_color;
   padding: $base_padding*2;
-  // box-shadow:inset 0 0 0 1px $system_borders_color; // Yaru: we use border
-  border: 1px solid $borders_color_dark; // Yaru: add border
+  // box-shadow:inset 0 0 0 1px $system_borders_color; // Yaru: use border instead
+  border: 1px solid $system_borders_color; // Yaru: add border
 
   @if $is_highcontrast {
     box-shadow:inset 0 0 0 2px $hc_inset_color;
