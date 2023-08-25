@@ -18,11 +18,12 @@ $app_icon_size: 96px;
 
 // Icon tiles in the app grid
 .app-well-app {
-  @include overview_icon($osd_fg_color);
+  @include overview_icon($system_fg_color);
 
   .overview-icon {
     padding: $base_padding*2;
     border-radius: $base_border_radius*3;
+    color: $system_fg_color;
   }
   .overview-icon.overview-icon-with-label {
     > StBoxLayout {
@@ -39,9 +40,9 @@ $app_icon_size: 96px;
 // expanded folder
 .app-folder-dialog {
   border-radius: $modal_radius*4;
-  background-color: $osd_bg_color; // Yaru change: use osd color for light/dark theme support
+  background-color: $system_overlay_bg_color;
   padding: $base_padding*2;
-  // box-shadow:inset 0 0 0 1px $outer_borders_color; // Yaru: we use border
+  // box-shadow:inset 0 0 0 1px $system_borders_color; // Yaru: we use border
   border: 1px solid $borders_color_dark; // Yaru: add border
 
   @if $is_highcontrast {
@@ -58,15 +59,16 @@ $app_icon_size: 96px;
       color: $osd_fg_color; // Yaru change: needed for light theme, otherwise invisible text
     }
     & .folder-name-entry {
-      width: 300px;
-      border-radius: $base_border_radius*2;
+      width: 12em;
+      color: $system_fg_color !important;
+
       // Yaru change: needed for the light theme, otherwise dark text in orange selection, can't set selected-color here
       background-color: lighten($osd_bg_color, 4%);
       border-color: $osd_outer_borders_color;
     }
 
     /* FIXME: this is to keep the label in sync with the entry */
-    & .folder-name-label { padding: 5px 7px; color: $osd_fg_color; }
+    & .folder-name-label { padding: 5px 7px; color: $system_fg_color; }
 
     & .edit-folder-button {
       @extend %button_dark; // Yaru change: fix for light theme
@@ -126,6 +128,7 @@ $app_icon_size: 96px;
     height: 10px;
     border-radius: 10px; // the same as height&width
     background-color: white;
+    transition-duration: 400ms;
   }
 }
 
@@ -135,8 +138,8 @@ $app_icon_size: 96px;
 
 // shutdown and other actions in the grid
 .system-action-icon {
-  background-color: rgba(0,0,0,0.8);
-  color: white;
+  background-color: transparentize($system_fg_color,.9);
+  color: $system_fg_color;
   border-radius: 99px;
   icon-size: $app_icon_size * 0.5;
 }
@@ -169,17 +172,15 @@ $app_icon_size: 96px;
   width: 24px;
   height: 24px;
   border-radius: 99px;
-  @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark'); // Yaru change: fix for light theme
+  transition-duration: 100ms;
+
+  > StIcon { color: $system_fg_color;}
 
   @if $is_highcontrast {
-    @include button(normal, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark'); // Yaru change: fix for light theme
+    @include button(normal, $system_fg_color, transparentize($system_bg_color, 0.5));
   }
 
-  &:insensitive { @include button(undecorated, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark');} // Yaru change: fix for light theme
-  &:hover { @include button(hover, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark');} // Yaru change: fix for light theme
-  &:active { @include button(active, $osd_fg_color, transparentize($osd_bg_color, 0.5), $brightness: 'dark');} // Yaru change: fix for light theme
-
-  > StIcon {
-    color: $osd_fg_color;
-  }
+  &:insensitive { @include button(undecorated, $system_fg_color, transparentize($system_bg_color, 0.5));}
+  &:hover { @include button(hover, $system_fg_color, transparentize($system_bg_color, 0.5));}
+  &:active { @include button(active, $system_fg_color, transparentize($system_bg_color, 0.5));}
 }
