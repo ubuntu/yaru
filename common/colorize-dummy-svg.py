@@ -25,16 +25,27 @@ from glob import glob
 # Keep this in sync with yaru-colors-defs.scss, or the input CSS in use.
 DUMMY_COLORS = {
     'accent-color': '#00ff03',
+    'accent-color-hc': '#00ff04',
     'accent-bg-color': '#00ff01',
+    'accent-bg-color-hc': '#00ff05',
     'accent-active-color': '#00ff02',
+    'accent-active-color-hc': '#00ff06',
     'accent-border-color': '#ff0001',
+    'accent-border-color-hc': '#ff0002',
     'accent-focused-color': '#0101ff',
+    'accent-focused-color-hc': '#0101f1',
     'bg-color': '#ffff00',
     'border-color': '#ff00ff',
+    'border-color-hc': '#ff00f1',
     'disabled-bg-color': '#ffff02',
+    'disabled-bg-color-hc': '#ffff04',
     'switch-bg-color': '#ffff01',
+    'switch-bg-color-hc': '#ffff05',
     'check-bg-color': '#ffff03',
+    'check-bg-color-hc': '#ffff06',
 }
+
+assert len(set(DUMMY_COLORS.values())) == len(DUMMY_COLORS.values())
 
 def read_colors_replacements(css_file):
     colors_replacements = {}
