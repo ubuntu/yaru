@@ -13,6 +13,7 @@ variants = [
 
 DEFAULT_VARIANT = get_option('gnome-shell-default-variant')
 DEFAULT_GDM_VARIANT = get_option('gdm-default-variant')
+DEFAULT_HIGH_CONTRAST_VARIANT = get_option('gnome-shell-default-high-contrast-variant')
 INCLUDE_HIGH_CONTRAST_VARIANTS = false
 
 foreach accent: enabled_accent_colors
@@ -136,7 +137,8 @@ foreach variant: variants
     basename = fs.name(colorable_asset)
 
     # We don't support other variants here...
-    if is_variant and basename.endswith('-hc.svg') and not INCLUDE_HIGH_CONTRAST_VARIANTS
+    if (not INCLUDE_HIGH_CONTRAST_VARIANTS and
+        variant != DEFAULT_HIGH_CONTRAST_VARIANT and basename.endswith('-hc.svg'))
       continue
     endif
 
@@ -168,8 +170,12 @@ foreach variant: variants
     stylename = style + variant_suffix
     high_contrast = style.endswith('high-contrast')
 
-    if (is_variant and high_contrast and not INCLUDE_HIGH_CONTRAST_VARIANTS)
-      continue
+    if high_contrast
+      if variant == DEFAULT_HIGH_CONTRAST_VARIANT
+        stylename = style
+      elif not INCLUDE_HIGH_CONTRAST_VARIANTS
+        continue
+      endif
     endif
 
     variant_styles += '@0@.css'.format(stylename)
@@ -224,6 +230,9 @@ foreach variant: variants
   if install_theme_sources and is_variant
     assert(output_styles.length() == variant_styles.length(), 'Output styles length mismatch')
     foreach i: range(output_styles.length())
+      if variant_styles[i] == output_styles[i]
+        continue
+      endif
       meson.add_install_script('bash', '-c',
         'mv -v ${MESON_INSTALL_DESTDIR_PREFIX}/@0@ ${MESON_INSTALL_DESTDIR_PREFIX}/@1@'.format(
           install_dir / variant_styles[i], install_dir / output_styles[i]))
