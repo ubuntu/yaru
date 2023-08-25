@@ -38,7 +38,7 @@ $dash_border_radius: $modal_radius + $dash_padding;
   padding: $dash_padding;
   spacing: $base_padding;
   margin-bottom: $dash_padding;
-  border: 1px solid $borders_color_dark; // Yaru: add border
+  border: 1px solid $system_borders_color; // Yaru: add border
 
   @if $is_highcontrast {
     border: 2px solid $hc_inset_color;

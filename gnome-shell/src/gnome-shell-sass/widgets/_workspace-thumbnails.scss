@@ -11,7 +11,7 @@
     color: $system_fg_color;
     background-color: $dash_background_color; // Yaru: use same background as dash
     border-radius: $base_border_radius*0.5;
-    border: 1px solid $borders_color_dark; // Yaru: use same border as dash
+    border: 1px solid $system_borders_color; // Yaru: use same border as dash
 
     @if $is_highcontrast {
       border-color: $hc_inset_color;

@@ -198,5 +198,5 @@ $screenshot_ui_button_red: $red; // Yaru: Use our palette's color
   @extend %tooltip;
   text-align: center;
   -y-offset: 24px;
-  border: 1px solid $borders_color_dark; // Yaru change: add border
+  border: 1px solid $system_borders_color; // Yaru change: add border
 }

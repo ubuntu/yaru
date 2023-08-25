@@ -26,7 +26,7 @@
   background-color: $dash_background_color; // Yaru: use same background as dash
   color: $system_fg_color;
   border-radius: $modal_radius*1.5;
-  // border: 1px solid $borders_color_dark; // Yaru: use same border-color as dash
+  border: 1px solid $system_borders_color; // Yaru: use same border-color as dash
   padding: $base_padding*2;
   margin:0 $base_margin*3;
 }

@@ -194,9 +194,9 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
 
 // tooltip
 %tooltip {
-  background-color: $osd_bg_color; // Yaru: Use yaru palette
-  border: 1px solid $borders_color_dark; // Yaru: use our border
-  color: $osd_fg_color; // Yaru: Use yaru palette
+  background-color: $system_bg_color; // Yaru: Use yaru palette
+  border: 1px solid $system_borders_color; // Yaru: use our border
+  color: $system_fg_color; // Yaru: Use yaru palette
 
   border-radius: 99px;
   padding: $base_padding $base_padding * 2;
@@ -262,7 +262,7 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
 %osd_panel {
   color: $osd_fg_color;
   background-color: $osd_bg_color;
-  border: 1px solid $borders_color_dark; // Yaru: use our border
+  border: 1px solid $system_borders_color; // Yaru: use our border
   border-radius: 999px;
   padding: $base_padding*2;
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5); // Yaru: OSDs need to be visible on dark backgrounds
