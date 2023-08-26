@@ -1,6 +1,7 @@
 theme_sources = files([
   'gnome-shell-high-contrast.scss',
-  'gnome-shell.scss',
+  'gnome-shell-dark.scss',
+  'gnome-shell-light.scss',
   'gnome-shell-sass/_colors.scss',
   'gnome-shell-sass/_common.scss',
   'gnome-shell-sass/_drawing.scss',
@@ -43,7 +44,8 @@ theme_sources = files([
 
 stylesheets = [
   'gnome-shell-high-contrast.css',
-  'gnome-shell.css'
+  'gnome-shell-dark.css',
+  'gnome-shell-light.css',
 ]
 
 foreach stylesheet: stylesheets
