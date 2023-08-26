@@ -33,7 +33,7 @@ $screenshot_ui_button_red: $error_color;
 }
 
 .screenshot-ui-type-button {
-  @extend %osd_button;
+  @extend %osd_button_flat;
   min-width: 48px;
   padding: $base_padding * 2 $base_padding * 3 !important;
   border-radius: $screenshot_ui_panel_border_radius - $screenshot_ui_panel_padding;
@@ -83,7 +83,7 @@ $screenshot_ui_button_red: $error_color;
 }
 
 .screenshot-ui-shot-cast-container {
-  background-color: lighten($osd_bg_color,5%);
+  background-color: transparentize($osd_fg_color,0.9);
   border-radius: $modal_radius;
   padding: $screenshot_ui_shot_cast_spacing;
   spacing: $screenshot_ui_shot_cast_spacing;
@@ -95,9 +95,9 @@ $screenshot_ui_button_red: $error_color;
 .screenshot-ui-shot-cast-button {
   padding: $base_padding $base_padding*2;
   background-color: transparent;
-  &:hover, &:focus { background-color: lighten($osd_bg_color, 10%);}
-  &:active { background-color: lighten($active_bg_color,5%);}
-  &:checked { background-color: white;color: black;}
+  &:hover, &:focus { background-color: transparentize($osd_fg_color, 0.8);}
+  &:active { background-color: transparentize($osd_fg_color, .5);}
+  &:checked { background-color: $osd_fg_color; color: $osd_bg_color;}
   &:insensitive { color: transparentize($osd_fg_color, 0.5);}
 
   border-radius: $modal_radius - $screenshot_ui_shot_cast_spacing;
@@ -106,7 +106,7 @@ $screenshot_ui_button_red: $error_color;
 }
 
 .screenshot-ui-show-pointer-button {
-  @extend %osd_button;
+  @extend %osd_button_flat;
   border-radius: 99px;
   padding: $base_padding * 2 !important;
   StIcon { icon-size: $base_icon_size;}
@@ -129,7 +129,7 @@ $screenshot_ui_button_red: $error_color;
 .screenshot-ui-area-selector-handle {
   border-radius: 99px;
   background-color: white;
-  box-shadow: 0 1px 3px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px 2px $shadow_color;
   width: 24px;
   height: 24px;
 }
@@ -195,10 +195,7 @@ $screenshot_ui_button_red: $error_color;
 }
 
 .screenshot-ui-tooltip {
-  color: $osd_fg_color;
-  background-color: $osd_bg_color;
-  border-radius: 99px;
-  padding: $base_padding $base_padding * 2;
+  @extend %tooltip;
   text-align: center;
   -y-offset: 24px;
 }
