@@ -2,6 +2,16 @@
 $base_hover_color: transparentize(white, 0.8);
 $base_active_color: transparentize(white, 0.75);
 
+// Yaru: Use contrast-optimized color as background color
+@if $is_highcontrast {
+  $selected_bg_color: optimize-contrast($selected_fg_color, $selected_bg_color,
+    $target: 5.5);
+} @else {
+  $selected_bg_color: optimize-contrast($selected_fg_color, $selected_bg_color);
+}
+
+$selected_borders_color: if($variant=='light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+
 $link_color: if($variant =='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
 $link_visited_color: if($variant =='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
 
