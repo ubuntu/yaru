@@ -1,7 +1,7 @@
 option('icons', type: 'boolean', value: true, description:'build icons component')
 option('gnome-shell', type: 'boolean', value: true, description:'build gnome-shell component')
 option('gnome-shell-default-variant', type: 'string', value: 'light', description:'default variant to be used for gnome-shell')
-option('gnome-shell-default-high-contrast-variant', type: 'string', value: 'dark', description:'default variant to be used for gnome-shell high contrast')
+option('gnome-shell-default-high-contrast-variant', type: 'string', value: 'blue-dark', description:'default variant to be used for gnome-shell high contrast')
 option('gnome-shell-gresource', type: 'boolean', value: false, description: 'build gnome-shell component in gresources')
 option('gnome-shell-user-themes-support', type: 'feature', value: 'auto', description: 'install gnome-shell uncompressed CSS themes as User Themes expects')
 option('gdm-default-variant', type: 'string', value: 'dark', description:'default variant to be used in GDM')

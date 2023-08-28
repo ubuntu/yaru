@@ -194,7 +194,8 @@ foreach variant: variants
       },
     )
 
-    if is_custom_accent and (not high_contrast or INCLUDE_HIGH_CONTRAST_VARIANTS)
+    if is_custom_accent and (variant == DEFAULT_HIGH_CONTRAST_VARIANT or
+      INCLUDE_HIGH_CONTRAST_VARIANTS)
       theme_sources += theme_main_file
       theme_main_file = configure_file(
         configuration: accent_configuration + {
