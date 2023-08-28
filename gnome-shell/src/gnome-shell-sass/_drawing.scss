@@ -260,6 +260,7 @@
     background-color: none;
     box-shadow: none;
     &:insensitive {
+      @include button(insensitive);
       background-color: transparent;
     }
   }
@@ -380,10 +381,6 @@
   }
   &:active {@include button(active, $c:$bg);}
   &:checked {@include button(checked, $c:$bg);}
-  &:insensitive {
-    // Yaru: Add insensitive case
-    color: $insensitive_fg_color !important;
-  }
 }
 
 //

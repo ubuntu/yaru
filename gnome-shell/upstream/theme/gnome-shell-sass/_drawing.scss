@@ -247,6 +247,7 @@
     background-color: none;
     box-shadow: none;
     &:insensitive {
+      @include button(insensitive);
       background-color: transparent;
     }
   }
