@@ -1,3 +1,78 @@
+yaru-theme (23.10.0-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * meson: Bump version to 23.10.0
+  * debian/README.sources: Explain better the role of the upstream folders
+  * gnome-shell: Merge with GNOME 45 upstream changes
+  * gnome-shell, drawing: Use insensitive color for undecorated buttons
+  * common: Use focus border color for system entries focus ring
+  * sessions: Add variant preference depending on default shell variant
+  * gnome-shell: Remove some Yaru delta that is not needed anymore
+  * colors: Use system-borders-colors instead of our defined borders-color-dark
+  * gnome-shell: Update toggle-on/off high-contrast assets to match upstream
+  * yaru-color-defs: Increase switch bg contrast on dark
+  * colorize-dummy: Add support for high-contrast colors
+  * toggle-on-hc: Use high contrast accent color
+  * gnome-shell: Use shared definitions for yaru colors only
+  * gnome-shell: Use dark mode for high-contrast theme
+  * meson: Use blue-dark as default high-contrast variant
+  * quick-settings: Compute taggle-bg-color using optimize contrast function
+  * yaru-colors: Redefine selected-bg-color using contrast-optimized value
+  * gnome-shell, quick-settings: Use default upstream implementation
+  * debian/control: Set breaks on gnome-shell << 45~
+
+  [ Paul Kepinski ]
+  * Build(deps): bump peter-evans/create-pull-request from 4 to 5
+  * Sync Gtk4 with upstream
+  * Fix cinnamon build
+  * Sync cinnamon with upstream
+  * Sync Gnome Shell icons with upstream
+  * Sync icon theme with upstream
+  * Cinnamon: Drop inverted panel, fix accent and cleanups
+  * Cinnamon: Fix menu-favorites-box background
+  * Sync Gnome Shell with upstream
+  * Add start-here and view-app-grid fullcolor icons
+  * Add missing application-x-zerosize mimetype
+  * Fix panel icons size
+  * Add 22x22 size of address-book-app icon
+  * Sync Gtk4 with upstream
+  * Sync Gnome Shell icons with upstream
+  * Sync Cinnamon with upstream
+  * Fix keyboard brightness icons
+
+  [ github-actions[bot] ]
+  * New upstream snapshot for Cinnamon
+  * New upstream snapshot for GNOME Shell Icons
+  * New upstream snapshot for GNOME Shell Resources
+  * New upstream snapshot for GTK4
+  * New upstream symbolic icons list for Adwaita symbolics
+  * New upstream symbolic icons list for gnome-calendar symbolics
+  * New upstream symbolic icons list for gnome-usage symbolics
+  * icons: Update rendered icons and symlinks
+
+  [ Himadri Sekhar Basu ]
+  * Prepare cinnamon theme variants
+
+  [ Sebastien ]
+  * Remove the amazon store icons
+
+  [ KevinDuan ]
+  * Remove duplicated icons
+
+  [ Jupi007 ]
+  * icons: Update rendered icons and symlinks
+
+  [ Mike Gabriel ]
+  * debian/control: Remove empty lines at EOF.
+  * debian/control: Bump Standards-Version: to 4.6.1. No changes needed.
+  * debian/control: Add Rules-Requires-Root: field and set it to 'no'.
+  * debian/upstream/metadata: Add file. Comply with DEP-12.
+  * debian/copyright: remove CI configuration for Github
+  * debian/copyright: Improve copyright attributions.
+  * debian/control: Bump Standards-Version: to 4.6.2. No changes needed.
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Tue, 29 Aug 2023 00:29:07 +0200
+
 yaru-theme (23.04.4-0ubuntu1) lunar; urgency=medium
 
   [ Paul Kepinski ]
