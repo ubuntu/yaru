@@ -1,5 +1,12 @@
-// Interpolate accent color saturation: less saturated colors will receive higher opacity
-$toggle-bg-color: transparentize($selected_bg_color, 0.75 - (1 - saturation($selected_bg_color) / 100%) * .15);
+$toggle-bg-color: none;
+
+// Yaru: Use optimized contrast color as background color
+@if $is_highcontrast {
+  $toggle-bg-color: optimize-contrast($fg_color, $selected_bg_color,
+    $target: 5.5);
+} @else {
+  $toggle-bg-color: optimize-contrast($fg_color, $selected_bg_color);
+}
 
 .quick-settings {
   padding: $base_padding*3;
