@@ -1,13 +1,3 @@
-$toggle-bg-color: none;
-
-// Yaru: Use optimized contrast color as background color
-@if $is_highcontrast {
-  $toggle-bg-color: optimize-contrast($fg_color, $selected_bg_color,
-    $target: 5.5);
-} @else {
-  $toggle-bg-color: optimize-contrast($fg_color, $selected_bg_color);
-}
-
 .quick-settings {
   padding: $base_padding*3;
   border-radius: $modal_radius*2.25;
@@ -31,12 +21,7 @@ $toggle-bg-color: none;
 }
 
 .quick-toggle {
-  &:checked {
-    // Yaru change: tone down accented checked buttons
-    @include button(normal, $bg: $toggle-bg-color);
-    &:hover {@include button(hover, $bg: $toggle-bg-color);}
-    &:active {@include button(active, $bg: $toggle-bg-color);}
-  }
+  &:checked { @include button(default, $c:$selected_bg_color); }
 
   & > StBoxLayout { spacing: $base_padding*1.5; }
 
@@ -74,29 +59,20 @@ $toggle-bg-color: none;
   & .quick-toggle-arrow {
     padding: $base_padding $base_padding*1.75;
     border-width: 0;
-    // Yaru change: different toggle arrow bg
-    $_bg: scale-color($color: $bg_color, $lightness: if($variant == 'light', -14%, 5%));
-    @include button(normal, $bg: $_bg);
-    &:hover {@include button(hover, $bg: $_bg);}
-    &:active {@include button(active, $bg: $_bg);}
-    border-color: transparentize($fg_color, .75);  // Yaru change: drop border
+    border-color: transparentize($fg_color, .75);
 
     &:checked {
-      // Yaru change: different toggle arrow checked bg
-      $_bg: adjust-color($color: $toggle-bg-color, $alpha: if($variant == 'light', 0.15, 0.1));
-      @include button(normal, $bg: $_bg);
-      &:hover {@include button(hover, $bg: $_bg);}
-      &:active {@include button(active, $bg: $_bg);}
-      // border-color: $selected_borders_color; // Yaru change: drop border
+      @include button(default, $c:$selected_bg_color);
+      border-color: $selected_borders_color;
     }
 
     &:ltr {
       border-radius: 0 99px 99px 0;
-      // border-left-width: 1px; // Yaru change: drop border
+      border-left-width: 1px;
     }
     &:rtl {
       border-radius: 99px 0 0 99px;
-      // border-right-width: 1px; // Yaru change: drop border
+      border-right-width: 1px;
     }
   }
 }
@@ -136,12 +112,12 @@ $toggle-bg-color: none;
       icon-size: $base_icon_size*1.5; // a non-standard symbolic size but ok
       border-radius: 999px;
       padding: 1.5 * $base_padding;
-      background-color: transparentize($fg_color, 0.9); // Yaru change: adjust background
-      // Yaru change: remove active accent
-      // &.active {
-      //   background-color: $selected_bg_color;
-      //   color: $selected_fg_color;
-      // }
+      background-color: transparentize($fg_color, 0.8);
+
+      &.active {
+        background-color: $selected_bg_color;
+        color: $selected_fg_color;
+      }
     }
 
     & .title {
@@ -155,7 +131,6 @@ $toggle-bg-color: none;
 }
 
 .quick-toggle-menu-container {
-  padding: 2 * $base_padding $base_padding 0;
 }
 
 .quick-settings-system-item {
@@ -196,13 +171,7 @@ $toggle-bg-color: none;
 .keyboard-brightness-level {
   spacing: $base_padding;
 
-  // Yaru change: tone down accented checked buttons
-  // .button:checked { @include button(default, $c:$selected_bg_color); }
-  .button:checked {
-    @include button(normal, $c: $toggle-bg-color);
-      &:hover {@include button(hover, $c: $toggle-bg-color);}
-      &:active {@include button(active, $c: $toggle-bg-color);}
-  }
+  .button:checked { @include button(default, $c:$selected_bg_color); }
 }
 
 // background apps
