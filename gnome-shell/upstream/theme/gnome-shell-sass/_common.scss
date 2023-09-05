@@ -280,7 +280,7 @@ stage {
   @extend %entry_common;
   @include entry(normal, $c:$system_fg_color,);
   &:hover { @include entry(hover, $c:$system_fg_color);}
-  &:focus { @include entry(focus, $c:$system_fg_color, $fc:transparentize($system_fg_color, 0.5));}
+  &:focus { @include entry(focus, $c:$system_fg_color, $fc:$selected_bg_color);}
   &:insensitive { @include entry(insensitive, $c:$system_fg_color);}
 
   StLabel.hint-text { color: transparentize($system_fg_color, 0.3);}
