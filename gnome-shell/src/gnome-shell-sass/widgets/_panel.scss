@@ -10,7 +10,7 @@ $panel_fg_color: if($variant == 'light', $fg_color, darken($fg_color, 5%)) !defa
 $panel_border_color: if($variant == 'light', darken($panel_bg_color, 2%), $panel_bg_color) !default;
 
 $panel_system_fg_color: $system_fg_color; // always light for lockscreen, overview and other transparent panels
-$panel_height: 1.86em; // Yaru reduce panel height
+$panel_height: 2.2em;
 $panel_transition_duration: 250ms; // same as the overview transition duration
 
 #panel {
