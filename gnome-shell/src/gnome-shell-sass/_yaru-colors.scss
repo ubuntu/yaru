@@ -36,4 +36,4 @@ $checkradio_bg_color: $accent_bg_color;
 $checkradio_fg_color: $accent_fg_color;
 $switch_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 8%));
 $switch_border_color: if($variant=='light', darken($accent_bg_color, 15%), darken($borders_color, 5%));
-$progress_bg_color: if($variant=='light', lighten($accent_bg_color, 10%), lighten($accent_bg_color, 5%));
+$progress_bg_color: $accent_bg_color;
