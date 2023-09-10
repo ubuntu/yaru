@@ -137,10 +137,10 @@ stage {
 
 %entry {
   @extend %entry_common;
-  @include entry(normal, $c:$fg_color);
-  &:hover { @include entry(hover, $c:$fg_color);}
-  &:focus { @include entry(focus, $c:$fg_color);}
-  &:insensitive { @include entry(insensitive, $c:$fg_color);}
+  @include entry(normal); // Yaru: use default color definition
+  &:hover { @include entry(hover);} // Yaru: ↑↑↑
+  &:focus { @include entry(focus);} // Yaru: ↑↑↑
+  &:insensitive { @include entry(insensitive);} // Yaru: ↑↑↑
 
   StLabel.hint-text {
     color: transparentize($fg_color, 0.3);
@@ -275,10 +275,10 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
 // entries
 %osd_entry {
   @extend %entry_common;
-  @include entry(normal, $c:$osd_fg_color,);
-  &:hover { @include entry(hover, $c:$osd_fg_color);}
-  &:focus { @include entry(focus, $c:$osd_fg_color);}
-  &:insensitive { @include entry(insensitive, $c:$osd_fg_color);}
+  @include entry(normal, $tc:$osd_fg_color, $c:$osd_bg_color); // Yaru: use custom color definition
+  &:hover { @include entry(hover, $tc:$osd_fg_color, $c:$osd_bg_color);} // Yaru: ↑↑↑
+  &:focus { @include entry(focus, $tc:$osd_fg_color, $c:$osd_bg_color);} // Yaru: ↑↑↑
+  &:insensitive { @include entry(insensitive, $tc:$osd_fg_color, $c:$osd_bg_color);} // Yaru: ↑↑↑
 
   StLabel.hint-text {color: transparentize($osd_fg_color, 0.3); }
 }
@@ -305,12 +305,12 @@ $bubble_buttons_color: $bg_color; // Yaru change: use regular color
 // entries
 %system_entry {
   @extend %entry_common;
-  @include entry(normal, $c:$system_fg_color,);
-  &:hover { @include entry(hover, $c:$system_fg_color);}
-  &:focus { @include entry(focus, $c:$system_fg_color, $fc:$focus_border_color);} // Yaru: Use accented border color
-  &:insensitive { @include entry(insensitive, $c:$system_fg_color);}
+  @include entry(normal, $c:$bg_color, $tc: $fg_color,); // Yaru: add light theme support
+  &:hover { @include entry(hover, $c:$bg_color, $tc: $fg_color);} // Yaru: ↑↑↑
+  &:focus { @include entry(focus, $c:$bg_color, $tc: $fg_color);} // Yaru: ↑↑↑
+  &:insensitive { @include entry(insensitive, $c:$bg_color, $tc: $fg_color);} // Yaru: ↑↑↑
 
-  StLabel.hint-text { color: transparentize($system_fg_color, 0.3);}
+  StLabel.hint-text { color: transparentize($fg_color, 0.3);} // Yaru: ↑↑↑
 }
 
 
