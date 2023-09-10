@@ -25,7 +25,7 @@
 
 
 // Text entries
-@mixin entry($t, $c, $fc:$focus_border_color) { // Yaru: we detached focus from selected
+@mixin entry($t, $c:$bg_color, $tc:$fg_color, $bc:$borders_color, $fc:$focus_border_color) { // Yaru: add custom color definition
 //
 // Entries drawing function
 //
@@ -37,12 +37,9 @@
   transition-duration: 100ms;
 
   @if $t==normal {
-    background-color: transparentize($c, 0.85);
-    @if $variant != 'light' {
-      background-color: $dash_background_color; // Yaru: use same background as dash for dark theme
-    }
-    color: transparentize($c,0.3);
-    border: 1px solid $borders_color; // Yaru change: use our own border-color
+    background-color: $c; // Yaru: use custom color definition
+    color: $tc; // Yaru: ↑↑↑
+    border: 1px solid $bc; // Yaru: ↑↑↑
 
     @if $is_highcontrast {
       box-shadow: inset 0 0 0 1px $hc_inset_color;
@@ -50,27 +47,21 @@
   }
 
   @if $t==focus {
-    background-color: mix(transparentize($c, 0.75), $fc, 95%);
-    @if $variant != 'light' {
-      background-color: $dash_background_color; // Yaru: use same background as dash for dark theme
-    }
+    background-color: $c; // Yaru: use custom color definition
     border-color: $fc; // Yaru: Add border color
     box-shadow: 0 0 0 1px $fc inset; // Yaru change: trick to get 2px border on focus without layout shifting
-    color: $c;
+    color: $tc; // Yaru: use custom color definition
 
     &:hover {}
   }
 
   @if $t==hover {
-    background-color: transparentize($c, 0.75);
-    @if $variant != 'light' {
-      background-color: $dash_background_color; // Yaru: use same background as dash for dark theme
-    }
+    background-color: $c; // Yaru: use custom color definition
   }
 
   @if $t==insensitive {
     background-color:transparentize($c, 0.75);
-    color: transparentize($c, 0.5);
+    color: transparentize($tc, 0.5); // Yaru: use custom color definition
   }
 }
 
