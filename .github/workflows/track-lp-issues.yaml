@@ -15,7 +15,7 @@ jobs:
       # Checkout code
       - uses: actions/checkout@v4
       - name: Install Python 3
-        uses: actions/setup-python@v4.7.0
+        uses: actions/setup-python@v4.7.1
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
