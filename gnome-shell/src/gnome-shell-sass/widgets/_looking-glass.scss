@@ -103,7 +103,11 @@
 
 .lg-extension {
   padding: $base_padding*2;
-  @include card;
+  // Yaru: fix for light theme - mimic card look
+  // @include card;
+  background-color: transparentize($osd_fg_color, .9);
+  border-radius: $base_border_radius*1.5;
+  margin: $base_margin;
 }
 
 .lg-extension-name {
