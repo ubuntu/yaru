@@ -53,6 +53,11 @@ $UPSTREAM_VARIANTS: ['dark', 'light'];
     @return url(quote($url));
 }
 
+@if not list-index(["dark", "light"], $yaru_variant) and
+    not variable-exists("accent_bg_color") {
+    @error "Missing definition for accent color variable: $accent_bg_color";
+}
+
 @debug 'Generating GNOME Shell ' + $yaru_variant + ' theme (' + $variant +' variant, hc: '+ $is_highcontrast+')';
 
 @import "gnome-shell-sass/_@Colors@";

@@ -42,6 +42,7 @@ $yaru_accent_color: optimize-contrast($yaru_bg_color,
 @debug("Contrast optimized accent is " + $yaru_accent_color);
 
 $accent_bg_color: $yaru_accent_bg_color;
+$accent_fg_color: white;
 $accent_color: $yaru_accent_color;
 
 @import '@yaru_theme_entry_point@'
