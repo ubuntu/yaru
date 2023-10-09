@@ -1,3 +1,21 @@
+yaru-theme (23.10.0-0ubuntu2) mantic; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * debian: Prepare for ubuntu/mantic branching
+  * gnome-shell: Ensure accent color is used in shell variants (LP: #2033688)
+
+  [ Paul Kepinski ]
+  * GS: fix slider height (LP: #2038784)
+  * Revert progress color to pure accent (LP: #2038784)
+  * gnome-shell: Fix focus border color (LP: #2038785)
+  * GS: fix entries colors (LP: #2038786)
+  * Revert panel height to upstream (LP: #2038787)
+  * Sync icon theme with upstream (LP: #2038788)
+  * New upstream symbolic icons list for gnome-control-center symbolics
+    (LP: #2038788)
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Mon, 09 Oct 2023 05:58:59 +0200
+
 yaru-theme (23.10.0-0ubuntu1) mantic; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
