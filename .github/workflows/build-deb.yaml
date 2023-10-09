@@ -2,9 +2,9 @@ name: Build debian packages
 
 on:
   push:
-    branches: [master]
+    branches: [ubuntu/mantic]
   pull_request:
-    branches: [master]
+    branches: [ubuntu/mantic]
 
 env:
   DEBIAN_FRONTEND: noninteractive
