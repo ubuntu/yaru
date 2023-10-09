@@ -11,11 +11,11 @@ env:
 
 jobs:
   check:
-    name: Ubuntu Devel
+    name: Ubuntu Mantic
     runs-on: ubuntu-latest
 
     env:
-      UBUNTU_VERSION: devel
+      UBUNTU_VERSION: mantic
       BUILD_CONTAINER: yaru-build-container
       RUN_CMD: docker exec -t -w /src/yaru yaru-build-container
       AS_USER: runuser -u builder --
