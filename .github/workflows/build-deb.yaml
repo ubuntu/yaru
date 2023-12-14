@@ -59,7 +59,7 @@ jobs:
         $RUN_CMD sh -c 'ls -lht *.deb'
 
     - name: Archiving built debs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: debian packages
         path: ./*.deb
