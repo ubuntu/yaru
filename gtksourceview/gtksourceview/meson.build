@@ -8,9 +8,11 @@ foreach flavour: flavours
       'FlavourThemeName': theme_name,
     })
 
-  foreach version: ['2.0', '3.0', '4']
-    gtksourceview_dir = 'gtksourceview-' + version
-    style_dir = join_paths(get_option('datadir'), gtksourceview_dir, 'styles')
+  foreach version: ['gtksourceview-2.0',
+                    'gtksourceview-3.0',
+                    'gtksourceview-4',
+                    'libgedit-gtksourceview-300']
+    style_dir = get_option('datadir') / version / 'styles'
     install_data(theme_file, install_dir: style_dir)
   endforeach
 endforeach
