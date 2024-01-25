@@ -30,7 +30,7 @@ jobs:
           echo "::set-output name=push-branch::auto-rendered-icons"
 
       - name: Check Source changes
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@v3
         id: check-changed
         with:
           base: ${{ steps.env.outputs.push-branch }}
