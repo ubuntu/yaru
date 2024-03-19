@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/gnome/shell/icons">
-    <file>scalable/actions/color-pick.svg</file>
-    <file>scalable/actions/carousel-arrow-next-symbolic.svg</file>
-    <file>scalable/actions/carousel-arrow-previous-symbolic.svg</file>
-    <file>scalable/actions/dark-mode-symbolic.svg</file>
-    <file>scalable/actions/ornament-check-symbolic.svg</file>
-    <file>scalable/actions/ornament-dot-symbolic.svg</file>
-    <file>scalable/actions/pointer-double-click-symbolic.svg</file>
-    <file>scalable/actions/pointer-drag-symbolic.svg</file>
-    <file>scalable/actions/pointer-primary-click-symbolic.svg</file>
-    <file>scalable/actions/pointer-secondary-click-symbolic.svg</file>
-    <file>scalable/actions/preview-close-symbolic.svg</file>
-    <file>scalable/actions/record-screen-symbolic.svg</file>
-    <file>scalable/actions/screencast-recorded-symbolic.svg</file>
-    <file>scalable/actions/screencast-stop-symbolic.svg</file>
-    <file>scalable/actions/screenshooter-symbolic.svg</file>
-    <file>scalable/actions/screenshot-ui-area-symbolic.svg</file>
-    <file>scalable/actions/screenshot-ui-display-symbolic.svg</file>
-    <file>scalable/actions/screenshot-ui-show-pointer-symbolic.svg</file>
-    <file>scalable/actions/screenshot-ui-window-symbolic.svg</file>
-    <file>scalable/actions/screenshot-recorded-symbolic.svg</file>
-    <file>scalable/status/background-app-ghost-symbolic.svg</file>
-    <file>scalable/status/keyboard-brightness-high-symbolic.svg</file>
-    <file>scalable/status/keyboard-brightness-medium-symbolic.svg</file>
-    <file>scalable/status/keyboard-brightness-off-symbolic.svg</file>
-    <file>scalable/status/keyboard-caps-lock-symbolic.svg</file>
-    <file>scalable/status/keyboard-enter-symbolic.svg</file>
-    <file>scalable/status/keyboard-hide-symbolic.svg</file>
-    <file>scalable/status/keyboard-layout-symbolic.svg</file>
-    <file>scalable/status/keyboard-shift-symbolic.svg</file>
-    <file>scalable/status/message-indicator-symbolic.svg</file>
-    <file>scalable/status/no-events-symbolic.svg</file>
-    <file>scalable/status/no-notifications-symbolic.svg</file>
-    <file>scalable/status/screen-privacy-disabled-symbolic.svg</file>
-    <file>scalable/status/screen-privacy-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/color-pick.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/carousel-arrow-next-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/carousel-arrow-previous-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/dark-mode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/notification-expand-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/ornament-check-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/ornament-dot-checked-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/ornament-dot-unchecked-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/pointer-double-click-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/pointer-drag-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/pointer-primary-click-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/pointer-secondary-click-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/preview-close-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/record-screen-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/screencast-recorded-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/screencast-stop-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/screenshooter-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/screenshot-ui-area-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/screenshot-ui-display-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/screenshot-ui-show-pointer-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/screenshot-ui-window-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/screenshot-recorded-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-display-built-in-only-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-display-extend-all-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-display-external-only-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-display-mirror-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-app-grid-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-dash-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-dash-symbolic-rtl.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-desktop-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-desktop-symbolic-rtl.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-search-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-top-bar-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-top-bar-symbolic-rtl.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/shell-focus-windows-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/background-app-ghost-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/keyboard-brightness-high-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/keyboard-brightness-medium-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/keyboard-brightness-off-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/keyboard-caps-lock-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/keyboard-enter-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/keyboard-hide-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/keyboard-layout-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/keyboard-shift-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/message-indicator-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/no-notifications-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/screen-privacy-disabled-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/screen-privacy-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/switch-on-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/switch-off-symbolic.svg</file>
   </gresource>
 </gresources>
+
+
 
