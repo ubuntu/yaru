@@ -219,6 +219,9 @@
     $hover_button_bg_color: transparentize($tc, .87);
     $active_button_bg_color: transparentize($tc, .84);
     $active_hover_button_bg_color: transparentize($tc, .81);
+
+    // Yaru: fix insensitive background in light themes.
+    $insensitive_button_bg_color: transparentize($tc, .83);
   }
 
   // flat style overrides
