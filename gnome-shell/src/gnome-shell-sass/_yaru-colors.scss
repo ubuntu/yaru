@@ -2,22 +2,13 @@
 $base_hover_color: transparentize(white, 0.8);
 $base_active_color: transparentize(white, 0.75);
 
-// Yaru: Use contrast-optimized color as background color
-@if $is_highcontrast {
-  $selected_bg_color: optimize-contrast($selected_fg_color, $selected_bg_color,
-    $target: 5.5);
-} @else {
-  $selected_bg_color: optimize-contrast($selected_fg_color, $selected_bg_color);
-}
+$active_bg_color: transparentize($fg_color, 0.8);
+$active_fg_color: darken($fg_color, if($variant=='light', 5%, 3%));
 
 $selected_borders_color: if($variant=='light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 
-$link_color: if($variant =='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
-$link_visited_color: if($variant =='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
-
 $panel_bg_color: darken($jet, 2%);
 $panel_fg_color: darken($porcelain, 2%);
-$panel_border_color: if($variant == 'light', darken($panel_bg_color, 2%), $panel_bg_color);
 
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
@@ -30,6 +21,22 @@ $suggested_bg_color: if($variant=='light', lighten($green, 5%), darken($green, 5
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
 
 $focus_border_color: lighten($accent_bg_color, 14%);
+$alt_borders_color: if($variant=='light', darken($bg_color, 24%), darken($bg_color, 10%));
+
+$system_borders_color: $yaru_borders_color_dark; // Yaru: use our definition
+
+// card elements
+$card_bg_color: if($variant =='light', $light_1, lighten($bg_color, 7%));
+$card_shadow_color: if($variant =='light', transparentize($inkstone, .97), transparent);
+$card_shadow_border_color: if($variant =='light', transparentize($inkstone, .91), transparent);
+
+// Yaru overrides for osd colors
+$osd_fg_color: #eeeeec;
+$osd_bg_color: transparentize(lighten($jet, 2%), 0.025);
+$osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
+$osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
+$osd_borders_color: transparentize(black, 0.3);
+$osd_outer_borders_color: transparentize(white, 0.84);
 
 // Assets colors
 $checkradio_bg_color: $accent_bg_color;

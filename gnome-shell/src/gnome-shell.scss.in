@@ -3,6 +3,7 @@ $yaru_variant: '@YaruVariant@';
 $use_gresource: @UseGResource@;
 $is_highcontrast: @HighContrast@;
 $UPSTREAM_VARIANTS: ['dark', 'light'];
+$contrast: if($is_highcontrast, 'high', 'normal');
 
 @import 'sass-utils';
 
@@ -66,12 +67,3 @@ $UPSTREAM_VARIANTS: ['dark', 'light'];
 @import "gnome-shell-sass/_widgets";
 @import "gnome-shell-sass/_dock";
 
-@if $is_highcontrast {
-    .toggle-switch {
-        width: 48px;
-        background-image: yaru-url-handler("resource:///org/gnome/shell/theme/toggle-off-hc.svg");
-        &:checked {
-            background-image: yaru-url-handler("resource:///org/gnome/shell/theme/toggle-on-hc.svg");
-        }
-    }
-}
