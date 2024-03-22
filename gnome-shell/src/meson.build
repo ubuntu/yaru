@@ -271,6 +271,7 @@ if gnomeshell_use_gresource
 
   foreach gfile: theme_gresource_files
     filepath = '@0@'.format(gfile)
+    preprocess = ''
     alias = filepath[0] == '/' ? '@0@'.format(gfile).split('/')[-1] : filepath
     if alias == 'gnome-shell@0@.css'.format(DEFAULT_GDM_VARIANT != '' ? '-' + DEFAULT_GDM_VARIANT : '')
       # Use Yaru files for ubuntu's special gdm
@@ -282,7 +283,11 @@ if gnomeshell_use_gresource
       alias = 'Yaru' / alias
     endif
 
-    theme_gresource_files_xml += '<file alias="@0@">@1@</file>'.format(alias, gfile)
+    if alias.endswith('.svg')
+      preprocess = 'xml-stripblanks'
+    endif
+
+    theme_gresource_files_xml += '<file preprocess="@2@" alias="@0@">@1@</file>'.format(alias, gfile, preprocess)
   endforeach
 
   gnome.compile_resources(
