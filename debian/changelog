@@ -1,3 +1,53 @@
+yaru-theme (24.04.0-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Paul Kepinski ]
+  * Change upstream gnome-usage branch to main
+  * Sync icon theme with upstream
+  * Revert panel height to upstream
+  * Gnome Shell upstream sync
+  * GS: fix entries colors
+  * Revert progress color to pure accent
+  * GS: fix slider height
+  * Fix looking glass extensions cards
+  * yaru_icons.dart sync
+
+  [ Marco Trevisan (Treviño) ]
+  * New upstream snapshot for GNOME Shell
+  * gtk: Sync with upstream changes
+  * gnome-shell/data: Sync icons with gnome-shell 46
+  * gnome-shell/data: Strip blanks from icons svgs
+  * gnome-shell: Add dark/light variants for process-working icon
+  * gnome-shell/meson: add xml-stripblanks pre-process for svg icons
+  * gnome-shell: Merge with upstream changes for GNOME 46
+  * gnome-shell/dock: Merge with some remaining upstream changes
+  * gnome-shell/dock: Override the dash theming to use the dock color on items
+  * gnome-shell/search-entry: Fix invisible hint text in light themes
+  * gnome-shell/looking-glass: Drop unused changes
+  * debian/control: Mark as breaking gnome-shells earlier than 46
+  * gnome-shell/colorable-assets: Update with upstream assets
+  * gnome-shell: Include styles for multiple login system support
+  * gnome-shell: Fix insensitive button bg in lockscreen with light themes
+
+  [ Jeremy Bícha ]
+  * gtksourceview: Support gedit's forked library
+  * Update deb packaging for libgedit-gtksourceview
+
+  [ Daniel van Vugt ]
+  * gnome-shell: Don't give login-dialog another background-color
+
+  [ Sergio Costas ]
+  * Update Yaru to new Dash-to-Dock code
+  * Add extra changes from DashToDock
+  * Fix apps view
+
+  [ Feichtmeier ]
+  * New upstream symbolic icons list for gnome-usage symbolics
+
+  [ Jupi007 ]
+  * icons: Optimize symbolic icons
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 22 Mar 2024 09:58:14 +0100
+
 yaru-theme (23.10.0-0ubuntu1) mantic; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
