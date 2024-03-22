@@ -517,5 +517,41 @@ $dock_color: $panel_bg_color;
             border: 1px solid darken($success_color,10%);
             box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
         }
+
+        .dash-item-container {
+            // IMPORTANT: items on the dash need to extend to the edge to be adequate click targets
+            // as such the %tile style is overriden and button styles are applied to the child class .overview-icon
+            .show-apps,
+            .overview-tile {
+                // remove styles
+                @extend %reset;
+
+                margin: 0 $dash_spacing;
+                padding-bottom: $dash_edge_offset; // align with other items
+
+                $fg:$system_fg_color;
+                $normal_bg: transparent;
+                $bg: transparentize(lighten($dock_color, 15%), 0.25);
+
+                .overview-icon {
+                    @extend %tile;
+                    @include button(normal, $tc:$fg, $c:$normal_bg, $style: flat, $always_dark: true);
+                }
+
+                &:focus .overview-icon { @include button(focus, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
+                &:hover .overview-icon { @include button(hover, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
+                &:active .overview-icon { @include button(active, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
+                &:checked .overview-icon { @include button(checked, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
+            }
+
+            // running app dot
+            .app-grid-running-dot {
+                // manually position the dot within the dash item
+                margin-bottom: $dash_padding + $dash_edge_offset - 3px; // 3px = size of dot (5px) subtracted from its translationY from appDisplay.js
+
+                // margin-bottom: 13px; // hardcoded - Yaru change: move dot a bit down
+                background-color: $selected_bg_color; // Yaru: we want an accented dot
+            }
+        }
     }
 }
