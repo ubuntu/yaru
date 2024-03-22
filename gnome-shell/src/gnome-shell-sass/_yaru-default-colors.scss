@@ -1,0 +1,72 @@
+$is_highcontrast: false !default; // Yaru: already defined in gnome-shell.scss.in
+$contrast: if($is_highcontrast, 'normal', 'high') !default;
+
+// Named Colors
+
+// Redefine some GNOME colors we are ok with
+$light_1: white !default;
+$dark_5: black !default;
+
+// base colors
+$_base_color_dark: lighten($jet, 4%);
+$_base_color_light: $light_1;
+
+// colors for destructive elements
+$destructive_bg_color: if($variant=='light', $red, darken($red, 10%));
+$destructive_fg_color: $light_1;
+$destructive_color: $destructive_bg_color;
+
+// colors for levelbars, entries, labels and infobars
+$success_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
+$success_fg_color: $light_1;
+$success_color: $success_bg_color;
+
+$warning_bg_color: if($variant == 'light', darken($yellow, 1%), $yellow);
+$warning_fg_color: transparentize(black, .2);
+$warning_color: $warning_bg_color;
+
+$error_bg_color: $red;
+$error_fg_color: $light_1;
+$error_color: $error_bg_color;
+
+// colors for selected or default elements
+$selected_fg_color: $accent_fg_color;
+$selected_bg_color: $accent_bg_color;
+
+// Yaru: Use contrast-optimized color as background color
+@if $contrast =='high' {
+  $selected_bg_color: optimize-contrast($selected_fg_color, $selected_bg_color,
+    $target: 5.5);
+} @else {
+  $selected_bg_color: optimize-contrast($selected_fg_color, $selected_bg_color);
+}
+
+// link colors
+$link_color: if($variant =='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
+$link_visited_color: if($variant =='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+
+// special cased widget definitions
+$background_mix_factor: if($variant == 'light', 12%, 9%); // used to boost the color of backgrounds in different variants
+$border_opacity: if($variant == 'light', .85, .9); // change the border opacity in different variants
+
+// shadows
+$shadow_color: if($variant == 'light', rgba(0,0,0,.05), rgba(0,0,0,0.2));
+$text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
+
+// focus colors
+$focus_color: $selected_bg_color;
+$focus_border_color: transparentize($focus_color, 0.5);
+
+// Used for dash and other dark elements on light theme
+$yaru_borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%);
+
+// High Contrast overrides
+@if $contrast == 'high' {
+    // increase border opacity
+    $border_opacity: .5;
+    // remove shadows
+    $shadow_color: transparent;
+    $text_shadow_color: transparent;
+    // less transparent focus color
+    $focus_border_color: transparentize($focus_color, 0.2);
+}

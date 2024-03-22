@@ -1,9 +1,9 @@
-// When color definition differs for dark and light variant,
-// it gets @if ed depending on $variant
+//
+// High Contrast theme definitions
+//
+// this is an always dark theme, so no 'light' theme conditions
 
-@import 'palette';
-
-// $is_highcontrast: 'true'; - already defined in gnome-shell.scss.in
+@import '_palette.scss';
 
 // Yaru change: hard include gnome palette because include and symlink doesn't work with Github CI
 //GNOME Color Palette
@@ -53,74 +53,83 @@ $dark_3: #3d3846;
 $dark_4: #241f31;
 $dark_5: #000000;
 
-$base_color: if($variant == 'light', $light_1, $dark_5);
-$bg_color: if($variant == 'light', darken($base_color, 10%), lighten($base_color, 10%));
-$fg_color: if($variant == 'light', transparentize($dark_5, .2), $light_1);
+@import '_default-colors.scss';
 
-$selected_fg_color: $light_1;
-$selected_bg_color: $blue_3;
-$selected_borders_color: darken($selected_bg_color, 20%);
+// global colors
+$base_color: $dark_5;
+$bg_color: lighten($base_color, 10%);
+$fg_color: $light_1;
 
-$borders_color: if($variant == 'light', transparentize($fg_color, .5), transparentize($fg_color, .7));
-$outer_borders_color: $borders_color;
-
-$link_color: lighten($selected_bg_color,20%);
-$link_visited_color: lighten($selected_bg_color,10%);
-
-$warning_color: if($variant == 'light', $yellow_5, $yellow_3);
-$error_color: if($variant == 'light', $red_3, $red_4);
-$success_color: if($variant == 'light', $green_4, $green_5);
-$destructive_color: $error_color;
-
-// color definitions for OSD elements
+// OSD elements
 $osd_fg_color: $light_1;
 $osd_bg_color: $base_color;
 
-// derived osd colors
-$osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_color, 1), 10%), 0.5);
-$osd_insensitive_fg_color: mix($osd_fg_color, $osd_bg_color, 70%);
-$osd_borders_color: transparentize($osd_fg_color, 0.8);
-$osd_outer_borders_color: $osd_borders_color;
-
-$shadow_color: rgba(0,0,0,0);
-
-// button
-$button_mix_factor: 20%;
-
-// notifications
-$bubble_buttons_color: if($variant == 'light', darken($bg_color, 7%), lighten($bg_color, 5%));
-
-// color definitions for system elements
+// system elements
 $system_base_color: $dark_5;
 $system_fg_color: $light_1;
 
-// derived system colors
+// panel colors
+$panel_bg_color: $dark_5;
+$panel_fg_color: $light_1;
+
+// card elements
+$card_bg_color: $bg_color;
+$card_shadow_color: transparent;
+$card_shadow_border_color: $card_bg_color;
+
+//
+// Derived Colors
+//
+// colors based on the global defines above
+
+// borders
+$borders_color: transparentize($fg_color, $border_opacity);
+$outer_borders_color: $borders_color;
+
+// osd colors
+$osd_borders_color: transparentize($osd_fg_color, 0.8);
+$osd_outer_borders_color: $osd_borders_color;
+
+// system colors
 $system_bg_color: lighten($system_base_color, 5%);
 $system_borders_color: transparentize($system_fg_color, .9);
 $system_insensitive_fg_color: mix($system_fg_color, $system_bg_color, 50%);
 $system_overlay_bg_color: mix($system_bg_color, $system_fg_color, 90%);
 
-// derived global colors
 // insensitive state
-$insensitive_fg_color: mix($fg_color, $bg_color, 50%);
+$insensitive_fg_color: $fg_color;
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: $borders_color;
 
 // checked state
-$checked_bg_color: if($variant=='light', darken($bg_color, 12%), lighten($bg_color, 18%));
-$checked_fg_color: if($variant=='light', darken($fg_color, 12%), lighten($fg_color, 18%));
+$checked_bg_color: lighten($bg_color, 18%);
+$checked_fg_color: lighten($fg_color, 18%);
 
 // hover state
-$hover_bg_color: if($variant=='light', darken($bg_color, 8%), lighten($bg_color, 20%));
-$hover_fg_color: if($variant=='light', darken($fg_color, 10%), lighten($fg_color, 20%));
+$hover_bg_color: lighten($bg_color, 20%);
+$hover_fg_color: lighten($fg_color, 20%);
 
 // active state
-$active_bg_color: if($variant=='light', darken($bg_color, 10%), lighten($bg_color, 22%));
-$active_fg_color: if($variant=='light', darken($fg_color, 10%), lighten($fg_color, 22%));
+$active_bg_color: lighten($bg_color, 22%);
+$active_fg_color: lighten($fg_color, 22%);
 
-// inset colour for high contrast
-$hc_inset_color: transparentize($fg_color, 0.7);
+// selection colors
+$selected_borders_color: lighten($selected_bg_color, 30%);
 
+//
+// High Contrast specific definitions
+//
+
+// color for outline drawn onto all elements (may be a border or a box-shadow)
+$hc_inset_color: transparentize($fg_color, 0.6);
+
+// color used in a mixin in _drawing to boost a color's contrast
+$hc_mix_color: $light_1;
+
+// the mix factor used to boost contrast of a color in the above mixin
+$hc_mix_factor: 87%;
+
+// Yaru, Add accent also in high-contrast, but with higher contrast ratio.
 @import 'sass-utils';
 
 $accent_bg_color: optimize-contrast($base_color,
@@ -133,4 +142,5 @@ $fg_color_dark: $porcelain;
 $bg_color_dark: lighten($jet, 2%);
 
 // Yaru custom definitions
+@import '_yaru-default-colors';
 @import '_yaru-colors.scss';

@@ -1,7 +1,7 @@
 // Search entry
 
 .search-entry {
-  border-radius: 99px;
+  border-radius: $forced_circular_radius;
   margin-top: $base_padding * 4; // Yaru change: realign search entry due to fixed panel opacity
   margin-bottom: $base_padding * 2; // Yaru change: realign search entry due to fixed panel opacity
   width: 24em;
@@ -10,8 +10,8 @@
   @extend %system_entry;
 
   .search-entry-icon {
-    icon-size: $base_icon_size;
+    icon-size: $scalable_icon_size;
     margin-top: 2px; // center vertically
-    padding: 0 4px;
+    padding: 0 $base_margin;
   }
 }
