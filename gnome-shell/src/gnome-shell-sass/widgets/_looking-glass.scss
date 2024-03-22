@@ -51,7 +51,6 @@
 }
 
 .lg-dialog {
-  // color: $fg_color; // Yaru change: fix for the light theme
   StEntry {
     @extend %osd_entry;
     min-height: to_em(22px);
@@ -75,12 +74,10 @@
 .lg-completions-text {
   @extend %caption;
   font-style: italic;
-  // color: $fg_color; // Yaru change: fix for the light theme
 }
 
 .lg-obj-inspector-title {
   spacing: $base_padding;
-  // color: $fg_color; // Yaru change: fix for the light theme
 }
 
 .lg-obj-inspector-button {
