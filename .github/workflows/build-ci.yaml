@@ -24,7 +24,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt install sassc python3-pip
+        sudo apt install sassc libxml2-utils python3-pip
         sudo pip3 install meson ninja
 
     - name: Configure Default
