@@ -31,9 +31,7 @@ $_gdm_dialog_width: 25em;
 
   &.cancel-button,
   &.switch-user-button,
-  &.login-dialog-auth-menu-button,
-  &.login-dialog-session-list-button,
-  &.web-login-intro-button {
+  &.login-dialog-session-list-button {
     @extend .icon-button;
     @extend %system_button;
   }
@@ -41,25 +39,6 @@ $_gdm_dialog_width: 25em;
   &.cancel-button {
     padding: $base_padding * 1.5;
   }
-}
-
-.login-dialog-auth-menu-button-title {
-  @include fontsize($base_font_size - 1);
-  color: darken($_gdm_fg,40%);
-  font-weight: bold;
-  padding-top: $base_padding;
-  padding-bottom: $base_padding * 2;
-  padding-left: $base_padding * 2;
-  padding-right: $base_padding * 2;
-}
-
-.login-dialog-auth-menu-button-popup-menu-box {
-  padding: $base_padding * 3;
-}
-
-.login-dialog-auth-menu-button-item {
-  padding-left: $base_padding * 2;
-  padding-right: $base_padding * 2;
 }
 
 .login-dialog-button-box {
@@ -83,13 +62,6 @@ $_gdm_dialog_width: 25em;
     text-align: center;
     color: $warning_color;
   }
-}
-
-.login-dialog-menu-button-box {
-  spacing: $base_padding * 2;
-  padding-left: $base_padding * 2;
-  padding-right: $base_padding * 2;
-  padding-bottom: $base_padding * 2;
 }
 
 .login-dialog-logo-bin {
@@ -208,79 +180,8 @@ $_gdm_dialog_width: 25em;
   }
 }
 
-.login-dialog-prompt-layout {
-  spacing: $base_padding * 2;
-  min-width: 30em;
-}
-
-.login-dialog-prompt-entry {
-  @extend %system_entry;
-}
-
-.web-login-dialog-content-overlay {
-  background-color: transparentize($bg_color, 0.3);
-  border-radius: $modal_radius;
-  margin-bottom: 3em;
-}
-
-.web-login-spinner {
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 5px rgba(0, 0, 0, 0.0);
-  border-radius: 50px;
-}
-
-.web-login-title-label {
-  @include fontsize($base_font_size);
-  color: darken($_gdm_fg,30%);
-}
-
-.web-login-url-label {
-  @include fontsize($base_font_size);
-  @extend %monospace;
-  color: $_gdm_fg;
-  text-align: center;
-}
-
-.web-login-code-title-label {
-  @include fontsize($base_font_size);
-  @include fontsize($base_font_size);
-  color: $_gdm_fg;
-}
-
-.web-login-code-label {
-  @include fontsize($base_font_size);
-  color: $_gdm_fg;
-  font-weight: bold;
-}
-
-.web-login-prompt {
-  padding-top: $base_padding;
-  padding-bottom: $base_padding;
-  padding-left: $base_padding * 4.5;
-  padding-right: $base_padding * 4.5;
-  spacing: 1.75em;
-  border-radius: $base_border_radius * 2;
-}
-
-.web-login-intro-button-label {
-  @include fontsize($base_font_size + 5);
-  color: $_gdm_fg;
-  height: 3em;
-  text-align: center;
-  font-weight: bold;
-}
-
-.web-login-intro-button {
-  @include fontsize($base_font_size);
-  color: $_gdm_fg;
-  height: 3em;
-  text-align: center;
-  border-radius: $base_border_radius * 4;
-}
-
 // Screen Shield
 // a.k.a. the lockscreen, uses transparent styles
-
 .unlock-dialog {
   background-color: transparent;
 
@@ -377,6 +278,7 @@ $_gdm_dialog_width: 25em;
   border-radius: $forced_circular_radius;
 }
 
+
 .login-dialog,
 .unlock-dialog {
 
@@ -425,25 +327,4 @@ $_gdm_dialog_width: 25em;
       }
     }
   }
-}
-
-// Login Failed banner
-.auth-notification-banner {
-  .message-header {
-    width: 0px;
-    height: 0px;
-
-    .message-close-button {
-      border: none;
-      background-color: rgba(0, 0, 0, 0.0);
-    }
-  }
-}
-
-// QR Code
-.qr-code {
-  background: black;
-  border-radius: $base_border_radius * .5;
-  border-color: white;
-  border-width: 1em;
 }
