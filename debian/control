@@ -49,6 +49,7 @@ Package: yaru-theme-icon
 Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
+Breaks: gnome-shell-extension-ubuntu-dock (<< 90~)
 Description: Yaru icon theme from the Ubuntu Community
  This is the theme, better than a burrito, that is shaped by the community
  on the Ubuntu discourse.
