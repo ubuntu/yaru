@@ -531,7 +531,7 @@ $dock_color: $panel_bg_color;
 
                 $fg:$system_fg_color;
                 $normal_bg: transparent;
-                $bg: transparentize(lighten($dock_color, 15%), 0.25);
+                $bg: transparentize(lighten($dock_color, 10%), 0.1);
 
                 .overview-icon {
                     @extend %tile;
