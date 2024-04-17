@@ -1,3 +1,30 @@
+yaru-theme (24.04.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Muqtadir ]
+  * Sync with `org.gnome.Settings` symbolic icons changes
+  * add org.gnome.Nautilus* symbolic icons and revert app-grid icon
+    (LP: #2062046)
+
+  [ Muqtxdir ]
+  * add @ubuntujaggers refined app-center fullcolor icon (no visual changes)
+
+  [ Marco Trevisan (Treviño) ]
+  * gtk/common: Sync with upstream fixes
+  * icons: Remove start-here-symbolic symlink that was breaking view-app-grid.
+  * icons: Add view-app-grid-ubuntu-symbolic symlink to start-here
+    (LP: #2060816).
+  * gnome-shell/dock: Use more visible background on highlighted icons
+    (LP: #2061729)
+  * gnome-shell/dock: Draw focused icons with highlight background
+    (LP: #2062044)
+  * icons: Re-render icons and regenerate symlinks
+  * debian/control: Add Breaks on ubuntu-dock << 90~
+    It doesn't really break it but if we'd release this version of the icon
+    theme before of the new dock, we'd end up changing the dock's show-apps
+    icon, breaking the UI freeze (related to lp:2060816).
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 17 Apr 2024 21:14:40 +0200
+
 yaru-theme (24.04.0-0ubuntu1) noble; urgency=medium
 
   [ Paul Kepinski ]
