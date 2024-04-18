@@ -13,7 +13,7 @@
     border-radius: $base_border_radius * 0.5;
     border: 1px solid transparent;
 
-    background-color: $dash_background_color; // Yaru: use same background as dash
+    background-color: $system_overlay_bg_color; // Yaru: use same background as dash
     border: 1px solid $system_borders_color; // Yaru: use same border as dash
 
     @if $contrast == 'high' {
