@@ -531,7 +531,9 @@ $dock_color: $panel_bg_color;
 
                 $fg:$system_fg_color;
                 $normal_bg: transparent;
-                $bg: transparentize(lighten($dock_color, 10%), 0.1);
+                $focus_bg: transparentize($fg, .83);
+                $bg: transparentize($fg, .90);
+                $checked_bg: transparentize($fg, .75);
 
                 .overview-icon {
                     @extend %tile;
@@ -541,8 +543,8 @@ $dock_color: $panel_bg_color;
                 &:focus .overview-icon { @include button(focus, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
                 &:hover .overview-icon { @include button(hover, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
                 &:active .overview-icon { @include button(active, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
-                &:checked .overview-icon { @include button(checked, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
-                &.focused .overview-icon { @include button(active, $tc: $fg, $c:$bg, $style: flat, $always_dark: true);}
+                &:checked .overview-icon { @include button(checked, $tc:$fg, $c:$checked_bg, $style: flat, $always_dark: true);}
+                &.focused .overview-icon { @include button(active, $tc: $fg, $c:$focus_bg, $style: flat, $always_dark: true);}
             }
 
             // running app dot
