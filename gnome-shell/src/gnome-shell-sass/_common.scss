@@ -63,6 +63,9 @@ $large_scalable_icon_size: $scalable_icon_size * 2;
 // animation definition
 $ease_out_quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
+// Yaru menu radius
+$yaru_menu_border_radius: $modal_radius * 2.25;
+
 // Stage
 stage {
   @include fontsize($base_font_size);

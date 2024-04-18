@@ -27,6 +27,7 @@ $submenu_bg_color: lighten($menu_bg_color, 7%);
   padding: $base_padding;
   background-color: $bg_color;
   border-radius: $modal_radius * 1.25;
+  border-radius: $yaru_menu_border_radius;
   border: 1px solid $outer_borders_color;
   box-shadow: 0 2px 4px 0 $shadow_color;
 }
