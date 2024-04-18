@@ -57,7 +57,7 @@ $osd_outer_borders_color: transparentize($osd_fg_color, 0.98);
 
 // system colors
 $system_bg_color: lighten($system_base_color, 5%);
-$system_bg_color: lighten($jet, 4%); // Lighten than dash but darken than bg-color
+$system_bg_color: $_base_color_dark; // Yaru - use our definition our definition
 $system_borders_color: transparentize($system_fg_color, .9);
 $system_insensitive_fg_color: mix($system_fg_color, $system_bg_color, 50%);
 $system_overlay_bg_color: mix($system_base_color, $system_fg_color, 90%); // for non-transparent items, e.g. dash
