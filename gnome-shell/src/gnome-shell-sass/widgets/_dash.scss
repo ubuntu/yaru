@@ -1,7 +1,7 @@
 /* Dash */
 
 // uses system colors
-$dash_background_color: $system_overlay_bg_color !default; // Yaru: we define those colors in _colors.scss for _dock.scss to use it
+$dash_background_color: $system_overlay_bg_color;
 
 $dash_placeholder_size: 32px;
 $dash_padding: $base_padding * 2;
