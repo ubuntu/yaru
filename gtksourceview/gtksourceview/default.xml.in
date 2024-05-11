@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<style-scheme id="@FlavourThemeName@" _name="@FlavourThemeName@" version="1.0">
+<style-scheme id="@FlavourThemeName@" _name="@FlavourThemeName@" kind="light">
   <_description>A GtkSourceView style to match @FlavourThemeName@</_description>
 
   <!-- Yaru palette -->
@@ -92,7 +92,7 @@
   <style name="def:strong-emphasis"        bold="true"/>
   <style name="def:type"                   foreground="blue_4" bold="true"/>
   <style name="def:underlined"             underline="single"/>
-  <style name="def:warning"                underline="error" underline-color="yellow_4"/>
+  <style name="def:warning"                underline="error"/>
 
   <!-- C# -->
   <style name="c-sharp:format"             foreground="purple_4"/>
