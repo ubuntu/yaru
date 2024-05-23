@@ -376,11 +376,11 @@
   } @else {
     @include button(normal, $c:$bg);
   }
-  &:focus,
   &:hover {
     @include button(hover, $c:$bg);
   }
   &:active {@include button(active, $c:$bg);}
+  &:selected,
   &:checked {@include button(checked, $c:$bg);}
   &:insensitive {@include button(insensitive, $c:$bg);}
 }
