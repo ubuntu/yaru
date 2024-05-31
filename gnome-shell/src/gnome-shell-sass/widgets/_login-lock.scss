@@ -196,7 +196,6 @@ $_gdm_dialog_width: 25em;
       }
 
       &:logged-in {
-        // color border for logged-in user
         .user-icon {
           border-color: $selected_bg_color;
           StIcon {
@@ -503,8 +502,16 @@ $_gdm_dialog_width: 25em;
 
 // QR Code
 .qr-code {
-  background: black;
+  @if ($variant == 'light') {
+    $qrcode_bg_color: mix($fg_color, $bg_color, 8%);
+    background-color: $qrcode_bg_color;
+    border-color: $qrcode_bg_color;
+    color: $fg_color;
+  } @else {
+    background-color: $_gdm_fg;
+    border-color: $_gdm_fg;
+    color: $_gdm_bg;
+  }
   border-radius: $base_border_radius * .5;
-  border-color: white;
   border-width: 1em;
 }
