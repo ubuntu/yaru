@@ -1,3 +1,27 @@
+yaru-theme (24.04.3-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Thomas Staudinger ]
+  * gtksourceview: Add support for new libgedit-gtksourceview xml scheme
+    The `kind` attribute is now mandatory, `version` and `underline-color`
+    removed
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell/login-lock: Fix QRCode dialog colors when using light theme
+    (LP: #2067661)
+  * gnome-shell/login-lock: Use proper background qrcode colors in light mode
+    (LP: #2067661)
+  * gnome-shell: Use ubuntu mono for monospace
+  * gnome-shell: Sync fixes from gnome-46 branch:
+      https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/7488
+      https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/7400
+      https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/6024
+      https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/7628
+      https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/7511
+      https://gitlab.gnome.org/GNOME/gnome-shell-extensions/-/issues/507
+      https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/7620
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 05 Jun 2024 02:14:07 +0200
+
 yaru-theme (24.04.2-0ubuntu1) noble; urgency=medium
 
   * calendar: Use the same border radius we use for quicksettings
