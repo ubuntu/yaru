@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      UBUNTU_VERSION: devel
+      UBUNTU_VERSION: noble
       BUILD_CONTAINER: yaru-build-container
       RUN_CMD: docker exec -t -w /src/yaru yaru-build-container
       AS_USER: runuser -u builder --
