@@ -2,9 +2,9 @@ name: Build debian packages
 
 on:
   push:
-    branches: [master]
+    branches: [ubuntu/noble]
   pull_request:
-    branches: [master]
+    branches: [ubuntu/noble]
 
 env:
   DEBIAN_FRONTEND: noninteractive
