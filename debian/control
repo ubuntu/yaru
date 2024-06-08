@@ -14,6 +14,19 @@ Homepage: https://community.ubuntu.com/c/desktop/theme-refresh
 Vcs-Browser: https://github.com/ubuntu/yaru
 Vcs-Git: https://github.com/ubuntu/yaru.git
 
+Package: yaru-theme-cinnamon
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+Description: Yaru Cinnamon desktop theme from the Ubuntu Community
+ This is the theme, better than a burrito, that is shaped by the community
+ on the Ubuntu discourse.
+ .
+ This package contains the Cinnamon Desktop theme part
+ .
+ If you want to follow development, more information here:
+ https://community.ubuntu.com/c/desktop/theme-refresh.
+
 Package: yaru-theme-gnome-shell
 Architecture: all
 Depends: ${shlibs:Depends},
