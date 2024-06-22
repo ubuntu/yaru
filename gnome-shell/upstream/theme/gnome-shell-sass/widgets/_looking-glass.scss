@@ -59,8 +59,8 @@
 
   .shell-link {
     color: $link_color;
-    &:hover { color: lighten($link_color, 10%); }
-    &:active { color: darken($link_color, 10%); }
+    &:hover { color: st-lighten($link_color, 10%); }
+    &:active { color: st-darken($link_color, 10%); }
    }
 
   .actor-link {
