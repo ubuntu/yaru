@@ -1293,6 +1293,70 @@ StScrollBar {
   }
 }
 
+//
+// Polkit Dialog
+//
+.polkit-dialog {
+  width: 500px;
+
+  &-main-layout { spacing: 10px; }
+
+  &-headline {
+    color: $fg_color;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+  &-description {
+    color: $fg_color;
+    text-align: center;
+    font-size: 1em;
+  }
+
+  &-user-layout { spacing: 10px; }
+  &-user-layout:rtl { padding-right: 10px; }
+
+  &-user-root-label { color: $error_color; }
+
+  &-password-label:ltr {
+    padding-top: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  &-password-label:rtl {
+    padding-left: 0.5em;
+  }
+
+  &-password-entry {
+    width: 21em;
+    height: 1.2em;
+    padding: 7px;
+    border-radius: 3px;
+    caret-color: $osd_fg_color;
+    selected-color: $selected_fg_color;
+    selection-background-color: $selected_bg_color;
+
+    @include entry(osd);
+
+    &:focus { @include entry(focus); }
+
+    .caplocks-warning {
+      icon-size: 16px;
+      warning-color: $warning_color;
+      padding: 0 4px;
+    }
+  }
+
+  &-error-label {
+    color: $error_color;
+    text-align: center;
+    font-size: 1em;
+  }
+
+  &-info-label { font-size: 1em; }
+}
+
 /* CinnamonMountOperation Dialogs */
 .cinnamon-mount-operation-icon {
   icon-size: 48px;
@@ -2136,11 +2200,8 @@ StScrollBar {
 // User Applet
 //
 .user-icon {
-    width: 32px;
-    height: 32px;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
+    border: 1px solid transparentize($fg_color, 0.5);
+    border-radius: 99px;
 }
 
 .user-label {
