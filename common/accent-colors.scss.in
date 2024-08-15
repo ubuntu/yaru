@@ -22,6 +22,8 @@
         $color: #B34CB3;
     } @else if $accent_color == 'red' {
         $color: #DA3450;
+    } @else if $accent_color == 'yellow' {
+        $color: #C88800;
     } @else {
         @error('No known accent color defined!');
     }
