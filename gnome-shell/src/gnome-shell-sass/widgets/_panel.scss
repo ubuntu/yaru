@@ -136,17 +136,21 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
   }
 
   // use system text styles for overview panel
+  $button-system-panel-fg-color: $system_panel_fg_color;
+  @if $is_warty_nostalgia {
+    $button-system-panel-fg-color: lighten($panel_fg_color, 5%);
+  }
   &:overview {
     .panel-button {
-      @include panel_button($fg:$system_panel_fg_color);
+      @include panel_button($fg:$button-system-panel-fg-color);
 
       &#panelActivities .workspace-dot {
-        background-color: $system_panel_fg_color;
+        background-color: $button-system-panel-fg-color;
       }
 
       // clock
       &.clock-display {
-        @include panel_button($fg:$system_panel_fg_color, $highlighted_child: true, $child_class: '.clock');
+        @include panel_button($fg:$button-system-panel-fg-color, $highlighted_child: true, $child_class: '.clock');
       }
     }
   }
