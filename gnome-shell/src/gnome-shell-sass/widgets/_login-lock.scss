@@ -217,6 +217,11 @@ $_gdm_dialog_width: 25em;
   min-width: 30em;
 }
 
+// removed, causes missing entry selection border theming
+/*.login-dialog-prompt-entry {
+  @extend %system_entry;
+}*/
+
 .web-login-dialog-content-overlay {
   background-color: transparentize($bg_color, 0.3);
   border-radius: $modal_radius;
