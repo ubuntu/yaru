@@ -24,6 +24,8 @@
         $color: #DA3450;
     } @else if $accent_color == 'yellow' {
         $color: #C88800;
+    } @else if $accent_color == 'wartybrown' {
+        $color: #B39169;
     } @else {
         @error('No known accent color defined!');
     }

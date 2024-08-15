@@ -1,9 +1,12 @@
 $variant: if(@DarkVariant@, 'dark', 'light');
 $yaru_variant: '@YaruVariant@';
+$yaru_accent_color: '@YaruVariant@';
 $use_gresource: @UseGResource@;
 $is_highcontrast: @HighContrast@;
 $UPSTREAM_VARIANTS: ['dark', 'light'];
 $contrast: if($is_highcontrast, 'high', 'normal');
+
+$is_warty_nostalgia: $yaru_accent_color =='wartybrown' and $variant =='light';
 
 @import 'sass-utils';
 

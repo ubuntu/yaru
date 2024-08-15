@@ -18,6 +18,10 @@ $bg_color: if($variant=='light', #FAFAFA, $bg_color_dark);
 $fg_color_dark: $porcelain;
 $fg_color: if($variant=='light', $inkstone, $fg_color_dark);
 
+@if $is_warty_nostalgia {
+    $bg_color: lighten($silk, 12%);
+}
+
 // OSD elements
 $osd_fg_color: $light_1;
 $osd_bg_color: lighten($_base_color_dark, 5%);
