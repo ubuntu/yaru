@@ -1,3 +1,16 @@
+yaru-theme (24.10.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  * meson: Do not build bark and viridian by default anymore
+  * common/accent-colors: Add yellow accent color that follows upstream
+  * icons/Yaru-yellow: Render icons for the yellow accent
+  * icons/Yaru-yellow: Generate symlinks
+  * debian/migrations: Add migration script from theme names to accent colors
+  * accent-colors: Add warty-brown accent
+  * icons: Generate icons and symlinks for warty brown
+  * sounds: Add warty startup sonud
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 15 Aug 2024 09:48:02 -0400
+
 yaru-theme (24.04.3-0ubuntu1) oracular; urgency=medium
 
   [ Thomas Staudinger ]
