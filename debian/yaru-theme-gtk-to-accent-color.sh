@@ -29,9 +29,13 @@ case "$current_theme" in
         new_theme="Yaru"
         if [[ "$current_theme" == *"-dark'" ]]; then
             new_theme+="-dark"
+            gsettings set org.gnome.desktop.interface gtk-theme "$new_theme"
+            gsettings set org.gnome.desktop.interface icon-theme "$new_theme"
+        else
+            gsettings reset org.gnome.desktop.interface gtk-theme
+            gsettings reset org.gnome.desktop.interface icon-theme
         fi
         echo "Goodbye bark, we'll just use default '$new_theme'!"
-        gsettings set org.gnome.desktop.interface gtk-theme "$new_theme"
         ;;
     "'Yaru-default"*)
         accent_color="orange"
