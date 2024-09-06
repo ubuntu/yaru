@@ -11,7 +11,7 @@ $panel_bg_color: darken($jet, 2%);
 $panel_fg_color: darken($porcelain, 2%);
 
 @if $is_warty_nostalgia {
-    $panel_bg_color: $silk;
+    $panel_bg_color: darken($bg_color, 3%);
     $panel_fg_color: $_base_color_dark;
 }
 
