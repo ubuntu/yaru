@@ -20,7 +20,7 @@ $fg_color: if($variant=='light', $inkstone, $fg_color_dark);
 
 $is_warty_nostalgia: false !default;
 @if $is_warty_nostalgia {
-    $bg_color: lighten($silk, 12%);
+    $bg_color: $warty_nostalgia_bg;
 }
 
 // OSD elements
