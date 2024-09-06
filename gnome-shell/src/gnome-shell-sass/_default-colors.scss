@@ -40,7 +40,7 @@ $text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.
 
 // focus colors
 $focus_color: $selected_bg_color;
-$focus_border_color: transparentize($focus_color, 0.5);
+$focus_border_color: st-transparentize($focus_color, 0.5);
 
 // High Contrast overrides
 @if $contrast == 'high' {
@@ -50,5 +50,5 @@ $focus_border_color: transparentize($focus_color, 0.5);
     $shadow_color: transparent;
     $text_shadow_color: transparent;
     // less transparent focus color
-    $focus_border_color: transparentize($focus_color, 0.2);
+    $focus_border_color: st-transparentize($focus_color, 0.2);
 }

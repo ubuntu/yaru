@@ -319,7 +319,7 @@ $_gdm_dialog_width: 25em;
   .unlock-dialog-clock-time {
     @extend %numeric;
     @include fontsize(72pt);
-    font-weight: 200;
+    font-weight: 800;
   }
 
   .unlock-dialog-clock-date {
@@ -420,7 +420,8 @@ $_gdm_dialog_width: 25em;
       spacing: $base_padding * 4;
 
       .user-widget-label {
-        @extend %title_1;
+        font-weight: 400;
+        @include fontsize(20pt);
         text-align: center;
         margin-bottom: .75em;
       }
@@ -429,7 +430,7 @@ $_gdm_dialog_width: 25em;
         icon-size: $base_icon_size * 10;
 
         & StIcon {
-          padding: $base_padding * 4;
+          padding: $base_padding * 5;
           color: $_gdm_fg; // Yaru change: dark/light theme support
         }
       }

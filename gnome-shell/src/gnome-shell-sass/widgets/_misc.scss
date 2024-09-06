@@ -1,5 +1,9 @@
 // Rubberband for select-area screenshots
-.select-area-rubberband { // Yaru: orange is too colorful here, thus use grays
+.select-area-rubberband {
+  background-color: st-transparentize(-st-accent-color,0.7);
+  border: 1px solid -st-accent-color;
+
+  // Yaru: accents are too colorful here, thus use grays
   background-color: transparentize($ash, 0.8);
   border: 1px solid transparentize($silk, 0.2);
 }

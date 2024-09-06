@@ -41,6 +41,10 @@ $forced_circular_radius: 999px;
 $modal_radius: $base_border_radius * 2;
 $modal_radius: $base_border_radius; // Yaru change: reduce modal border-radius
 
+// radii of dialogs
+$alert_radius: 18px;
+$alert_radius: 8px; // Yaru change: reduce modal border-radius
+
 // Chroma key to flag when a background-color is always occluded, not visible.
 // This allows any box-shadow behind it to be rendered more efficiently by
 // omitting the middle rectangle.
@@ -189,8 +193,12 @@ stage {
   min-height: 22px; // Yaru change: fix for height shift
   border-radius: $base_border_radius;
   padding: $base_padding * 1.5 $base_padding * 1.5;
+  selection-background-color: st-transparentize(-st-accent-color, 0.7);
+  selected-color: $fg_color;
+  // Yaru: Use legacy accent color. TODO: drop.
   selection-background-color: $selected_bg_color;
   selected-color: $selected_fg_color;
+
   border-width: 1px; // Yaru change: we want bordered entries
 }
 
@@ -206,50 +214,33 @@ stage {
   }
 }
 
-// buttons in dialogs/notifications
-// lighter in color and have a greater radius
+// buttons in notifications
+// use a rounded style and have a lighter background
+%notification_button {
+  // font-weight: bold; // Yaru change: use normal font weight
+  padding: $base_padding $base_padding * 2;
+  border-radius: $base_border_radius;
+
+  @include button(normal, $style: notification);
+  &:focus { @include button(focus, $style: notification);}
+  &:hover { @include button(hover, $style: notification);}
+  &:active { @include button(active, $style: notification);}
+  &:checked { @include button(checked, $style: notification);}
+  &:insensitive { @include button(insensitive, $style: notification);}
+}
 
 // buttons in dialogs
-%bubble_button {
+%dialog_button {
+  // font-weight: bold; // Yaru change: use normal font weight
   padding: $base_padding * 2;
-  // font-weight: bold !important; // Yaru change: use normal font weight
+  border-radius: $base_border_radius * 1.5;
 
-  &:ltr {margin-right: 1px;}
-  &:rtl {margin-left: 1px;}
-
-  // needs a 1px adjustment to fit exactly into the outer radius
-  $bubble_button_radius: $modal_radius - 1px;
-
-  @include button(normal, $style: bubble);
-  &:focus { @include button(focus, $style: bubble);}
-  &:hover { @include button(hover, $style: bubble);}
-  &:active { @include button(active, $style: bubble);}
-  &:checked { @include button(checked, $style: bubble);}
-  &:insensitive { @include button(insensitive, $style: bubble);}
-
-  &:first-child:ltr {
-    border-radius: 0 0 0 $bubble_button_radius;
-  }
-
-  &:last-child:ltr {
-    border-radius: 0 0 $bubble_button_radius;
-    margin-right: 0 !important;
-  }
-
-  &:first-child:rtl {
-    border-radius: 0 0 $bubble_button_radius;
-  }
-
-  &:last-child:rtl {
-    border-radius: 0 0 0 $bubble_button_radius;
-    margin-left: 0 !important;
-  }
-
-  &:first-child:last-child {
-    border-radius: 0 0 $bubble_button_radius $bubble_button_radius;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
+  @include button(normal, $style: dialog);
+  &:focus { @include button(focus, $style: dialog);}
+  &:hover { @include button(hover, $style: dialog);}
+  &:active { @include button(active, $style: dialog);}
+  &:checked { @include button(checked, $style: dialog);}
+  &:insensitive { @include button(insensitive, $style: dialog);}
 }
 
 // tooltip
