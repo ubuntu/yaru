@@ -591,3 +591,14 @@ $dock_color: $panel_bg_color;
     border: 1px solid darken($success_color, 10%);
     box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
 }
+
+// Yaru: align the progress bar with the bottom edge of the icon
+#overview,
+.apps-scroll-view,
+#dashtodockContainer.dashtodock {
+    .progress-bar {
+        -progress-bar-height-multiplier: 0.95;
+        -progress-bar-valign: 1;
+        -progress-bar-vertical-padding: 0;
+    }
+}
