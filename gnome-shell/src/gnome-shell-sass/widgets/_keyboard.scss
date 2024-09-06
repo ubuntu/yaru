@@ -74,11 +74,23 @@ $default_key_bg_color: $key_bg_color; // Yaru: Make keyboard buttons work on bot
 
   // enter key is suggested-action
   &.enter-key {
-    // Yaru: use our suggested action color
+/*  Yaru: use our suggested action color
+    @include button(normal, $c:-st-accent-color, $tc:-st-accent-fg-color);
+    &:hover { @include button(hover, $c:-st-accent-color, $tc:-st-accent-fg-color);}
+    &:active { @include button(active, $c:-st-accent-color, $tc:-st-accent-fg-color);}
+    &:checked { @include button(checked, $c:-st-accent-color, $tc:-st-accent-fg-color);}
+*/
+    @include button(normal, $c:$suggested_bg_color, $tc:-st-accent-fg-color);
+    &:hover { @include button(hover, $c:$suggested_bg_color, $tc:-st-accent-fg-color);}
+    &:active { @include button(active, $c:$suggested_bg_color, $tc:-st-accent-fg-color);}
+    &:checked { @include button(checked, $c:$suggested_bg_color, $tc:-st-accent-fg-color);}
+
+    // Yaru: Use legacy accent color. TODO: drop!
     @include button(normal, $c:$suggested_bg_color, $tc:$selected_fg_color);
     &:hover { @include button(hover, $c:$suggested_bg_color, $tc:$selected_fg_color);}
     &:active { @include button(active, $c:$suggested_bg_color, $tc:$selected_fg_color);}
     &:checked { @include button(checked, $c:$suggested_bg_color, $tc:$selected_fg_color);}
+
     border-radius: $key_border_radius;
     color: $osd_fg_color;
   }

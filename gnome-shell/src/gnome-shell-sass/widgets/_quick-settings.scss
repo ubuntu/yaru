@@ -65,7 +65,7 @@
 
     &:checked {
       @extend %default_button;
-      border-color: $selected_borders_color;
+      border-color: $accent_borders_color;
     }
 
     &:ltr {

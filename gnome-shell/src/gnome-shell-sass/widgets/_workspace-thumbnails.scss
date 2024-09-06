@@ -31,6 +31,7 @@
 
 // selected indicator
 .workspace-thumbnail-indicator {
+  border: 3px solid -st-accent-color;
   border: 2px solid $focus_border_color; // Yaru: we detached focus from selected
   border-radius: $base_border_radius;
 }
