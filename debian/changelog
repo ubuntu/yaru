@@ -1,3 +1,44 @@
+yaru-theme (24.10.2-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * Upload to oracular
+  * gtk: Sync with upstream scale marks fixes
+  * gtk: Sync default wm colors with upstream
+  * build: Depend on meson 0.60
+  * debian/accent-color-migration: Actually reset the theme
+  * common: Generalize warty nostalgia theme detection
+  * accent-colors: Ensure accent color has the right contrast
+  * icons: Regenerate assets with proper contrasting colors
+  * accent-color: Define the warty bg color globally
+  * gtk: Use the warty bg color
+  * icons: Add GNOME shell captive portal symbolic icon
+  * gnome-shell: Use CSS-based checkbox mark
+  * gnome-shell: Sync upstream changes
+  * gnome-shell: Use CSS-based switches
+  * gnome-shell: Remove support for colorable assets
+  * gnome-shell: Merge with non-accent color related upstream changes
+  * gtk: Sync with upstream scale marks fixes
+  * gtk: Sync default wm colors with upstream
+  * debian/control: Depend on meson 0.60
+  * debian/accent-color-migration: Actually reset the theme
+  * common: Generalize warty nostalgia theme detection
+  * accent-colors: Ensure accent color has the right contrast
+  * icons: Regenerate assets with proper contrasting colors
+  * accent-color: Define the warty bg color globally
+  * gtk: Use the warty bg color
+  * icons: Add GNOME shell captive portal symbolic icon
+  * gnome-shell: Use CSS-based checkbox mark
+  * gnome-shell: Sync upstream changes
+  * gnome-shell: Use CSS-based switches
+  * gnome-shell: Remove support for colorable assets
+  * gnome-shell: Merge with non-accent color related upstream changes
+  * icons: Update rendered icons and symlinks
+
+  [ Bingo90 ]
+  * Remove an issue causing ".login-dialog-prompt-entry"
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 06 Sep 2024 09:57:51 +0200
+
 yaru-theme (24.10.1-0ubuntu1) oracular; urgency=medium
 
   * meson: Do not build bark and viridian by default anymore
