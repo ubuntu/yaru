@@ -5,7 +5,7 @@ Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: debhelper-compat (= 13),
                dh-migrations,
 Build-Depends-Indep: libglib2.0-dev,
-                     meson (>= 0.59),
+                     meson (>= 0.60),
                      libxml2-utils,
                      sassc,
 Standards-Version: 4.6.2
