@@ -1,6 +1,3 @@
-$is_highcontrast: false !default; // Yaru: already defined in gnome-shell.scss.in
-$contrast: if($is_highcontrast, 'normal', 'high') !default;
-
 // Named Colors
 
 // Redefine some GNOME colors we are ok with
@@ -29,21 +26,9 @@ $error_bg_color: $red;
 $error_fg_color: $light_1;
 $error_color: $error_bg_color;
 
-// colors for selected or default elements
-$selected_fg_color: $accent_fg_color;
-$selected_bg_color: $accent_bg_color;
-
-// Yaru: Use contrast-optimized color as background color
-@if $contrast =='high' {
-  $selected_bg_color: optimize-contrast($selected_fg_color, $selected_bg_color,
-    $target: 5.5);
-} @else {
-  $selected_bg_color: optimize-contrast($selected_fg_color, $selected_bg_color);
-}
-
 // link colors
-$link_color: if($variant =='light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
-$link_visited_color: if($variant =='light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));
+$link_color: if($variant =='light', st-darken(-st-accent-color, 10%), st-lighten(-st-accent-color, 20%));
+$link_visited_color: st-transparentize($link_color, .6);
 
 // special cased widget definitions
 $background_mix_factor: if($variant == 'light', 12%, 9%); // used to boost the color of backgrounds in different variants
@@ -54,8 +39,8 @@ $shadow_color: if($variant == 'light', rgba(0,0,0,.05), rgba(0,0,0,0.2));
 $text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
 
 // focus colors
-$focus_color: $selected_bg_color;
-$focus_border_color: transparentize($focus_color, 0.5);
+$focus_color: -st-accent-color;
+$focus_border_color: st-transparentize($focus_color, 0.5);
 
 // Used for dash and other dark elements on light theme
 $yaru_borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%);
@@ -68,5 +53,5 @@ $yaru_borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%);
     $shadow_color: transparent;
     $text_shadow_color: transparent;
     // less transparent focus color
-    $focus_border_color: transparentize($focus_color, 0.2);
+    $focus_border_color: st-transparentize($focus_color, 0.2);
 }
