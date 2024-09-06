@@ -50,12 +50,7 @@ theme_assets = files(
   ).stdout().strip().split('\n')
 )
 
-colorable_theme_assets = files(
-  run_command(
-    'find', meson.current_source_dir() / 'colorable-assets', '-maxdepth', '1', '-name', '*.svg'
-  ).stdout().strip().split('\n')
-)
-
+colorable_theme_assets = []
 colorable_assets_names = []
 foreach asset: colorable_theme_assets
   basename = fs.name(asset)
