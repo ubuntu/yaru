@@ -542,12 +542,6 @@ $dock_color: $panel_bg_color;
             }
         }
 
-        .notification-badge {
-            background-color: $success_color;
-            border: 1px solid darken($success_color,10%);
-            box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
-        }
-
         .dash-item-container {
             // IMPORTANT: items on the dash need to extend to the edge to be adequate click targets
             // as such the %tile style is overriden and button styles are applied to the child class .overview-icon
@@ -587,4 +581,13 @@ $dock_color: $panel_bg_color;
             }
         }
     }
+}
+
+// Use success color for the notification badges in the overview
+#dashtodockContainer .notification-badge,
+.overview-tile .notification-badge,
+.icon-grid .notification-badge {
+    background-color: $success_color;
+    border: 1px solid darken($success_color, 10%);
+    box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
 }
