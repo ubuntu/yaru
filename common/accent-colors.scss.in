@@ -50,4 +50,8 @@ $accent_bg_color: $yaru_accent_bg_color;
 $accent_fg_color: white;
 $accent_color: $yaru_accent_color;
 
+$yaru_accent_bg_color: optimize-contrast($accent_fg_color,
+    $yaru_accent_bg_color, $target: $contrast_target);
+$accent_bg_color: $yaru_accent_bg_color;
+
 @import '@yaru_theme_entry_point@'
