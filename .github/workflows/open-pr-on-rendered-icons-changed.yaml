@@ -60,7 +60,8 @@ jobs:
       - name: Configure project
         if: ${{ steps.check-changed.outputs.changes != '[]' }}
         run: |
-          meson _build -Dmate=true -Dmate-dark=true
+          meson setup _build -Dmate=true -Dmate-dark=true \
+            -Daccent-colors="bark, sage, olive, viridian, prussiangreen, blue, purple, magenta, red, yellow, wartybrown"
 
       - name: Render default icons and generate symlinks
         if: steps.check-changed.outputs.default == 'true'
