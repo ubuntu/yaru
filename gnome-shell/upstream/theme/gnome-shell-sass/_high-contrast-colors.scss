@@ -64,8 +64,8 @@ $hover_fg_color: lighten($fg_color, 20%);
 $active_bg_color: lighten($bg_color, 22%);
 $active_fg_color: lighten($fg_color, 22%);
 
-// selection colors
-$selected_borders_color: lighten($selected_bg_color, 30%);
+// accent colors
+$accent_borders_color: st-lighten(-st-accent-color, 30%);
 
 //
 // High Contrast specific definitions
