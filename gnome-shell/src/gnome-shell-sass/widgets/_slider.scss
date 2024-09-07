@@ -4,7 +4,8 @@ $slider_size: $scalable_icon_size;
 $slider_size: to_em(18px);; // Yaru change: larger slider cause to border in light theme
 
 .slider {
-  color: if($variant == 'light', $fg_color, darken($fg_color, 9%));
+  // Yaru: Use less invasive handle color on light theme
+  color: if($variant == 'light', lighten($fg_color, 15%), darken($fg_color, 9%));
 
   // slider trough
   -barlevel-height: 4px;
