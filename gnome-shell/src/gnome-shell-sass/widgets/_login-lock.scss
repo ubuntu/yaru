@@ -148,8 +148,10 @@ $_gdm_dialog_width: 25em;
 
 .login-dialog-auth-list-title {
   margin-left: 2em;
+  padding-bottom: $base_padding; // Yaru: add some bottom padding
 }
 
+/* Yaru: Use button styling
 .login-dialog-auth-list-item {
   border-radius: $base_border_radius * 2;
   padding: $base_margin;
@@ -158,6 +160,36 @@ $_gdm_dialog_width: 25em;
   &:focus, &:selected {
     background-color: $selected_bg_color;
     color: $selected_fg_color;
+  }
+}
+*/
+
+.login-dialog-auth-list-item {
+  min-width: 300px;
+}
+
+.login-dialog {
+  .login-dialog-auth-list-item {
+    // Yaru: use button styling
+    @extend %button_common;
+    @include button(normal, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);
+    &:selected,
+    &:focus { @include button(focus, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
+    &:hover { @include button(hover, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
+    &:active { @include button(active, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true)};
+
+    border-radius: $modal_radius;
+    padding: $base_padding * 1.2;
+  }
+}
+
+.unlock-dialog {
+  // Yaru: use button styling
+  .login-dialog-auth-list-item {
+    @extend %lockscreen_button;
+
+    border-radius: $modal_radius;
+    padding: $base_padding * 1.2;
   }
 }
 
