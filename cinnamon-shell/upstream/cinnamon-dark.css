@@ -1008,6 +1008,58 @@ StScrollBar {
     box-shadow: none;
     background: none; }
 
+.polkit-dialog {
+  width: 500px; }
+  .polkit-dialog-main-layout {
+    spacing: 10px; }
+  .polkit-dialog-headline {
+    color: rgba(255, 255, 255, 0.87);
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold; }
+  .polkit-dialog-description {
+    color: rgba(255, 255, 255, 0.87);
+    text-align: center;
+    font-size: 1em; }
+  .polkit-dialog-user-layout {
+    spacing: 10px; }
+  .polkit-dialog-user-layout:rtl {
+    padding-right: 10px; }
+  .polkit-dialog-user-root-label {
+    color: #FC4138; }
+  .polkit-dialog-password-label:ltr {
+    padding-top: 0.5em;
+    padding-right: 0.5em; }
+  .polkit-dialog-password-label:rtl {
+    padding-left: 0.5em; }
+  .polkit-dialog-password-entry {
+    width: 21em;
+    height: 1.2em;
+    padding: 7px;
+    border-radius: 3px;
+    caret-color: #c3c3c3;
+    selected-color: #ffffff;
+    selection-background-color: #35a854;
+    color: #c3c3c3;
+    background-color: rgba(109, 109, 109, 0.4);
+    border: 1px solid rgba(22, 22, 22, 0.4);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); }
+    .polkit-dialog-password-entry:focus {
+      color: rgba(255, 255, 255, 0.87);
+      background-color: #404040;
+      border: 1px solid #35a854;
+      box-shadow: inset 0 2px 4px rgba(64, 64, 64, 0.05); }
+    .polkit-dialog-password-entry .caplocks-warning {
+      icon-size: 16px;
+      warning-color: #F27835;
+      padding: 0 4px; }
+  .polkit-dialog-error-label {
+    color: #FC4138;
+    text-align: center;
+    font-size: 1em; }
+  .polkit-dialog-info-label {
+    font-size: 1em; }
+
 /* CinnamonMountOperation Dialogs */
 .cinnamon-mount-operation-icon {
   icon-size: 48px; }
@@ -1640,11 +1692,8 @@ StScrollBar {
     text-shadow: none; }
 
 .user-icon {
-  width: 32px;
-  height: 32px;
-  background-color: transparent;
-  border: none;
-  border-radius: 0; }
+  border: 1px solid rgba(255, 255, 255, 0.37);
+  border-radius: 99px; }
 
 .user-label {
   color: rgba(255, 255, 255, 0.87);
