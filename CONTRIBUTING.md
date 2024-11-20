@@ -238,7 +238,7 @@ We remove on new version import:
 
 ## Get your copy of Yaru and make a Pull Request (PR)
 
-On our GitHub page (where you are probably reading this), *fork* the Yaru repository, then clone your copy locally on your computer and build it for the first time to verify that everyting is in place.
+On our GitHub page (where you are probably reading this), *fork* the Yaru repository, then clone your copy locally on your computer and build it for the first time to verify that everything is in place.
 
 ```bash
 git clone https://github.com/yourusername/yaru.git
