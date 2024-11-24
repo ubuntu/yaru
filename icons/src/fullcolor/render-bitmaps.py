@@ -19,11 +19,14 @@
 
 import os
 import sys
+import threading
+import time
 import xml.sax
 import subprocess
 import shutil
 import argparse
-
+from os import popen
+from string import whitespace
 
 OPTIPNG = "optipng"
 SOURCES = (
@@ -65,6 +68,7 @@ def main(args, SRC, DEST):
             output = output[1:]
 
     def inkscape_render_rect(icon_file, rect, dpi, output_file):
+        spinner_running = True
         cmd = [
             "inkscape",
             "--batch-process",
@@ -76,17 +80,40 @@ def main(args, SRC, DEST):
 
         cmd.append(icon_file)
 
-        print('Running', ' '.join(cmd))
-        ret = subprocess.run(cmd, capture_output=True)
-        if ret.returncode != 0:
-            print("execution of")
-            print('  %s' % "".join(cmd))
-            print("returned with error %d" % ret.returncode)
-            print(5*"=", "stdout", 5*"=")
-            print(ret.stdout.decode())
-            print(5*"=", "stderr", 5*"=")
-            print(ret.stderr.decode())
-            raise Exception('Failed to run inkscape')
+        def spinner():
+            wheel = [ "/", "-", "\\", "|", "✔"]
+            frame = 0
+            while spinner_running:
+                sys.stdout.write(f"\r   [{wheel[frame]}] Rendering {rect:<9} scale={dpi//96}: {output_file}")
+                sys.stdout.flush()
+                frame += 1
+                if frame == len(wheel)-1: # reset before ✔
+                    frame = 0
+                time.sleep(0.2)
+
+            sys.stdout.write(f"\r   [\033[32m{wheel[-1]}\033[0m] {rect:<9} scale={dpi//96}: {output_file}")
+            sys.stdout.write("\n")
+            sys.stdout.flush()
+
+        spinner_thread = threading.Thread(target=spinner)
+        spinner_thread.start()
+
+        try:
+            with (subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1, stderr=subprocess.STDOUT,  universal_newlines=True) as ret):
+                stdout, stderr = ret.communicate()
+
+            if ret.returncode != 0:
+                print("execution of")
+                print('  %s' % "".join(cmd))
+                print("returned with error %d" % ret.returncode)
+                print(5*"=", "stdout", 5*"=")
+                print(stdout)
+                print(5*"=", "stderr", 5*"=")
+                print(stderr)
+                raise Exception('Failed to run inkscape')
+        finally:
+            spinner_running = False
+            spinner_thread.join()
 
         optimize_png(output_file)
 
@@ -176,7 +203,7 @@ def main(args, SRC, DEST):
                 if self.filter is not None and not self.icon_name in self.filter:
                     return
 
-                print(self.context, self.icon_name)
+                print(f"   \033[1mcontext:{self.context}  app-name:{self.icon_name}\033[0m")
                 for rect in self.rects:
                     for dpi_factor in DPIS:
                         width = int(float(rect["width"]))
@@ -242,7 +269,8 @@ def main(args, SRC, DEST):
         file = os.path.join(SRC, svg)
 
         if os.path.exists(file):
-            print('Rendering SVG "%s" in %s' % (svg, SRC))
+            print(f'\nFound {svg} in {SRC}')
+            print("INKSCAPE is working:")
             handler = ContentHandler(file, True, filter=args.filter)
             with open(file) as opened:
                 xml.sax.parse(opened, handler)
@@ -251,7 +279,7 @@ def main(args, SRC, DEST):
             rendered_icons += handler.rendered_icons
         else:
             print(
-                'Could not find SVG "%s" in %s, looking into the next one' % (svg, SRC)
+                '\033[33mCould not find "%s" in %s, looking into the next one\033[0m' % (svg, SRC)
             )
             # icon not in this directory, try the next one
             pass
