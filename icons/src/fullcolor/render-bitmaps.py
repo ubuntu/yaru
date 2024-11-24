@@ -102,13 +102,13 @@ def main(args, SRC, DEST):
                 stdout, stderr = ret.communicate()
 
             if ret.returncode != 0:
-                print("execution of")
+                print("\033[31mexecution of")
                 print('  %s' % "".join(cmd))
                 print("returned with error %d" % ret.returncode)
                 print(5*"=", "stdout", 5*"=")
                 print(stdout)
                 print(5*"=", "stderr", 5*"=")
-                print(stderr)
+                print(stderr,"\033[0m")
                 raise Exception('Failed to run inkscape')
         finally:
             spinner_running = False
@@ -247,6 +247,8 @@ def main(args, SRC, DEST):
             print(file, 'copied to', dest)
             return True
 
+    skip = None
+
     rendered_icons = 0
     if not args.svg:
         print("Rendering all SVGs in", SRC)
@@ -268,7 +270,7 @@ def main(args, SRC, DEST):
         file = os.path.join(SRC, svg)
 
         if os.path.exists(file):
-            print(f'\nFound {svg} in {SRC}')
+            print(f'\n\033[1mFound {svg}\033[0m in {SRC}')
             print("INKSCAPE is working:")
             handler = ContentHandler(file, True, filter=args.filter)
             with open(file) as opened:
@@ -277,13 +279,9 @@ def main(args, SRC, DEST):
                 rendered_icons += 1 if copy_scalable(file) else 0
             rendered_icons += handler.rendered_icons
         else:
-            print(
-                '\033[33mCould not find "%s" in %s, looking into the next one\033[0m' % (svg, SRC)
-            )
-            # icon not in this directory, try the next one
-            pass
+            skip = SRC
 
-    return rendered_icons
+    return rendered_icons, skip
 
 
 parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
@@ -333,6 +331,7 @@ script_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 source_path = args.source_path if args.source_path else script_path
 dest_path = args.dest_path if args.dest_path else os.path.join(script_path, '../../')
 rendered_icons = 0
+skips = []
 
 for source in SOURCES:
     if args.categories and source not in args.categories:
@@ -342,8 +341,18 @@ for source in SOURCES:
     DEST = os.path.abspath(os.path.join(dest_path, "Yaru" if args.variant ==
                                         'default' else "Yaru-" + args.variant))
     if os.path.exists(SRC):
-        rendered_icons += main(args, SRC, DEST)
+        main_res = main(args, SRC, DEST)
+        rendered_icons += main_res[0]
+        if main_res[1]:
+            skips.append(main_res[1])
+        
+if len(skips) != 0:
+    print(f"\033[33m{args.svg}.svg not found in the following sources (SKIPPED): \033[0m")
+    [print(f"   {skip}") for skip in skips]
 
 if rendered_icons == 0:
     print('No SVG found to render')
     sys.exit(1)
+
+
+
