@@ -90,8 +90,7 @@ def main(args, SRC, DEST):
                 if frame == len(wheel)-1: # reset before ✔
                     frame = 0
                 time.sleep(0.2)
-
-            sys.stdout.write(f"\r   [\033[32m{wheel[-1]}\033[0m] {rect:<9} scale={dpi//96}: {output_file}")
+            sys.stdout.write(f"\r   [\033[32m{wheel[-1]}\033[0m] {rect:<9} scale={dpi//96}: {output_file}{" "*len(" Rendering")}")
             sys.stdout.write("\n")
             sys.stdout.flush()
 
