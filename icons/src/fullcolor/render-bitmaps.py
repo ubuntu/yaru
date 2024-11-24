@@ -45,6 +45,8 @@ SOURCES = (
 # DPI multipliers to render at
 DPIS = [1, 2]
 
+skips = []
+
 
 def main(args, SRC, DEST):
     def optimize_png(png_file):
@@ -80,40 +82,19 @@ def main(args, SRC, DEST):
 
         cmd.append(icon_file)
 
-        def spinner():
-            wheel = [ "/", "-", "\\", "|", "✔"]
-            frame = 0
-            while spinner_running:
-                sys.stdout.write(f"\r   [{wheel[frame]}] Rendering {rect:<9} scale={dpi//96}: {output_file}")
-                sys.stdout.flush()
-                frame += 1
-                if frame == len(wheel)-1: # reset before ✔
-                    frame = 0
-                time.sleep(0.2)
-            sys.stdout.write(f"\r   [\033[32m{wheel[-1]}\033[0m] {rect:<9} scale={dpi//96}: {output_file}{" "*len(" Rendering")}")
-            sys.stdout.write("\n")
-            sys.stdout.flush()
 
-        spinner_thread = threading.Thread(target=spinner)
-        spinner_thread.start()
-
-        try:
-            with (subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1, stderr=subprocess.STDOUT,  universal_newlines=True) as ret):
-                stdout, stderr = ret.communicate()
-
-            if ret.returncode != 0:
-                print("\033[31mexecution of")
-                print('  %s' % "".join(cmd))
-                print("returned with error %d" % ret.returncode)
-                print(5*"=", "stdout", 5*"=")
-                print(stdout)
-                print(5*"=", "stderr", 5*"=")
-                print(stderr,"\033[0m")
-                raise Exception('Failed to run inkscape')
-        finally:
-            spinner_running = False
-            spinner_thread.join()
-
+        sys.stdout.write(f"\r   - Rendering {rect:<9} scale={dpi//96}: {output_file}")
+        ret = subprocess.run(cmd, capture_output=True)
+        if ret.returncode != 0:
+            print("execution of")
+            print('  %s' % "".join(cmd))
+            print("returned with error %d" % ret.returncode)
+            print(5*"=", "stdout", 5*"=")
+            print(ret.stdout.decode())
+            print(5*"=", "stderr", 5*"=")
+            print(ret.stderr.decode())
+            raise Exception('Failed to run inkscape')        
+        print(f"\r   \033[32m✔\033[0m {rect:<9} scale={dpi//96}: {output_file}{" "*len(" Rendering")}")
         optimize_png(output_file)
 
     class ContentHandler(xml.sax.ContentHandler):
@@ -247,8 +228,6 @@ def main(args, SRC, DEST):
             print(file, 'copied to', dest)
             return True
 
-    skip = None
-
     rendered_icons = 0
     if not args.svg:
         print("Rendering all SVGs in", SRC)
@@ -279,9 +258,10 @@ def main(args, SRC, DEST):
                 rendered_icons += 1 if copy_scalable(file) else 0
             rendered_icons += handler.rendered_icons
         else:
-            skip = SRC
+            skips.append(SRC)
+            pass
 
-    return rendered_icons, skip
+    return rendered_icons
 
 
 parser = argparse.ArgumentParser(description="Render icons from SVG to PNG")
@@ -331,8 +311,8 @@ script_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 source_path = args.source_path if args.source_path else script_path
 dest_path = args.dest_path if args.dest_path else os.path.join(script_path, '../../')
 rendered_icons = 0
-skips = []
 
+s = time.perf_counter()
 for source in SOURCES:
     if args.categories and source not in args.categories:
         continue
@@ -341,10 +321,9 @@ for source in SOURCES:
     DEST = os.path.abspath(os.path.join(dest_path, "Yaru" if args.variant ==
                                         'default' else "Yaru-" + args.variant))
     if os.path.exists(SRC):
-        main_res = main(args, SRC, DEST)
-        rendered_icons += main_res[0]
-        if main_res[1]:
-            skips.append(main_res[1])
+        rendered_icons += main(args, SRC, DEST)
+e = time.perf_counter()
+print(e-s)
         
 if len(skips) != 0:
     print(f"\033[33m{args.svg}.svg not found in the following sources (SKIPPED): \033[0m")
