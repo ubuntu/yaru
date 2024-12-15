@@ -45,7 +45,7 @@ MODE_SHADOWS = ["shadows"]
 MODE_SLICES = ["slices"]
 RENDERERS = []
 SCALE_PAIRS = [(1.25, "s1"), (1.50, "s2")]
-SIZES = [24, 32, 48, 64, 96]
+SIZES = [24, 30, 32, 36, 42, 48, 54, 60, 64, 66, 72, 78, 84, 90, 96]
 SVG_HOTSPOT_WORKING_COPY = "hotspot-working-copy.svg"
 SVG_WORKING_COPY = "working-copy.svg"
 
