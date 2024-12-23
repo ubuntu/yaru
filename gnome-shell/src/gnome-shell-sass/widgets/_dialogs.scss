@@ -1,5 +1,13 @@
 /* Modal Dialogs */
 
+// Yaru Custom Definition
+$dialog_padding: $base_padding * 4 $base_padding * 3 $base_padding * 3 $base_padding * 3;
+
+// Yaru Custom headline
+.headline {
+  @extend %title_4;
+}
+
 // style for all dialogs
 .modal-dialog {
   background-color: $bg_color;
@@ -50,6 +58,8 @@
 /* End Session Dialog */
 .end-session-dialog {
   width: 24em;
+  border-radius: $yaru_menu_border_radius; // Yaru Change: Override default radius
+  padding: $base_padding * 3; // Yaru Change: Override default padding
 
   // special style for session warnings
   .end-session-dialog-battery-warning,
@@ -81,6 +91,8 @@
 
 /* Run Dialog */
 .run-dialog {
+  padding: $base_padding * 3; // Yaru change: padding match to quick settings 
+  border-radius: $yaru_menu_border_radius; // Yaru change: match border-radius to quick settings
   width: 24em;
 
   // run dialog needs to override bottom padding
@@ -98,7 +110,9 @@
 
 /* Password or Authentication Dialog */
 .prompt-dialog {
-  width: 28em;
+  width: 26em; // Yaru Change: Decrease from 28 to 26 em
+  padding: $dialog_padding;  // Yaru change: padding match to quick settings
+  border-radius: $yaru_menu_border_radius; // Yaru change: match border-radius to quick settings 
 
   .prompt-dialog-password-grid {
     spacing-rows: $base_margin * 2;
