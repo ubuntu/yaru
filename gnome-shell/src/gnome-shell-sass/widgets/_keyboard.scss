@@ -67,8 +67,8 @@ $default_key_bg_color: $key_bg_color; // Yaru: Make keyboard buttons work on bot
 
     // keys that may be latched: ctrl/alt/shift
     &:latched {
-      border-color: lighten($selected_bg_color, 5%);
-      background-color: $selected_bg_color;
+      border-color: st-lighten(-st-accent-color, 5%);
+      background-color: -st-accent-color;
     }
   }
 
@@ -147,8 +147,8 @@ $default_key_bg_color: $key_bg_color; // Yaru: Make keyboard buttons work on bot
 
 .emoji-panel {
   .keyboard-key:latched {
-    border-color: lighten($selected_bg_color, 5%);
-    background-color: $selected_bg_color;
+    border-color: st-lighten(-st-accent-color, 5%);
+    background-color: -st-accent-color;
   }
 }
 
