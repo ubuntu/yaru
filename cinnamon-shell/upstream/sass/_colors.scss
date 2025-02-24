@@ -1,36 +1,47 @@
-// When color definition differs for dark and light variant,
-// it gets @if ed depending on $variant
 
-// We need to set this first because we use it to tint many
-// of the remaining colors
-$selected_bg_color: if($variant == 'light', #35a854, #35a854);
+// General
+$accent_color: if($variant == 'light', #35a854, #35a854);
+$radius: 6px;
 
-$base_color: if($variant =='light', mix($selected_bg_color, #f4f4f4, 0%), mix($selected_bg_color, #404040, 0%));
+// Panel
+$panel_bg: if($variant == 'light', #f0f0f0, #1a1a1a);
+$panel_fg: if($variant =='light', #303030, #e1e1e1);
+
+// Clutter background colors
+$bg_color: if($variant == 'light', #e8e8e8, #222222);
+$bg_color2: if($variant=='light', #d0d0d0, #303030);
+$bg_color3: if($variant == 'light', #b0b0b0, #454545);
+$bg_color4: if($variant == 'light', #c0c0c0, #393939);
+
+// Borders and separators
+$borders_color: if($variant =='light', darken($bg_color, 20%), $bg_color2);
+$menus_border_color: transparentize(black, 1.0);
+$shadow_color: rgba(0, 0, 0, 0.5);
+$separator_color: if($variant == 'light', darken($bg_color, 15%), lighten($bg_color, 2%));
+
+// Text
 $text_color: if($variant == 'light', #303030, #D3D3D3);
-$bg_color: if($variant == 'light', mix($selected_bg_color, #e8e8e8, 0%), mix($selected_bg_color, #2f2f2f, 0%));
-$fg_color: if($variant =='light', #303030, transparentize(white, 0.13));
-
+$fg_color: if($variant =='light', #303030, #e1e1e1);
+$noaccent_selected_fg_color: if($variant=='light', $text_color, #ffffff);
 $selected_fg_color: #ffffff;
 
-$borders_color: if($variant =='light', darken($bg_color, 20%), darken($bg_color, 6%));
 
-$separator_color: if($variant == 'light', darken($bg_color, 15%), darken($bg_color, 6%));
-
-$link_color: if($variant == 'light', darken($selected_bg_color,10%),
-                                     lighten($selected_bg_color,20%));
+$link_color: if($variant == 'light', darken($accent_color,10%),
+                                     lighten($accent_color,20%));
 
 $warning_color: #F27835;
 $error_color: #FC4138;
 $destructive_color: #F04A50;
+$osd_destructive_color: if($variant == 'light', #F04A50, #c01c28);
 
 $insensitive_fg_color: if($variant == 'light', transparentize($fg_color, 0.45), transparentize($fg_color, 0.55));
 
-$tooltip_bg_color: transparentize(mix($selected_bg_color, black, 95%), 0.05);
+$tooltip_bg_color: transparentize(mix($accent_color, black, 95%), 0.05);
 $tooltip_fg_color: $selected_fg_color;
 $tooltip_border_color: #d0d0d0;
 
 $osd_fg_color: #c3c3c3;
-$osd_bg_color: #353535;
+$osd_bg_color: #303030;
 
 $osd_button_bg: transparentize(lighten($osd_bg_color, 22%), 0.6);
 $osd_button_border: transparentize(darken($osd_bg_color, 20%), 0.6);
@@ -40,24 +51,13 @@ $osd_entry_border: transparentize(darken($osd_bg_color, 12%), 0.6);
 
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 30%);
 
-$panel_bg: $bg_color;
-$panel_fg: $fg_color;
+$entry_bg: if($variant=='light', $bg_color2, $bg_color2);
+$entry_border: if($variant == 'light', #cfd6e6, $borders_color);
 
-$entry_bg: if($variant=='light', $base_color, lighten($base_color, 0%));
-$entry_border: if($variant == 'light', #cfd6e6, darken($borders_color, 0%));
-
-$button_bg: if($variant == 'light', lighten($bg_color, 2%), lighten($base_color, 2%));
+$button_bg: if($variant == 'light', $bg_color3, $bg_color2);
 $button_border: $entry_border;
 
-// Colors used for highlights in places where we don't want to use accents
-$noaccent_light_bg_color: #c0c0c0;
-$noaccent_light_fg_color: $text_color;
-$noaccent_dark_bg_color: #525352;
-$noaccent_dark_fg_color: #ffffff;
-$noaccent_selected_bg_color: if($variant=='light', $noaccent_light_bg_color, $noaccent_dark_bg_color);
-$noaccent_selected_fg_color: if($variant=='light', $noaccent_light_fg_color, $noaccent_dark_fg_color);
-
-$applet_separator_color: if($variant == 'light', darken($bg_color, 15%), rgba(255,255,255, 0.12));
+$applet_separator_color: $borders_color;
 
 $corner_bar_unhighlighted: $applet_separator_color;
-$corner_bar_highlighted: if($variant == 'light', darken($applet_separator_color, 10%), opacify($applet_separator_color, .1));
+$corner_bar_highlighted: if($variant == 'light', darken($applet_separator_color, 10%), lighten($applet_separator_color, 10%));
