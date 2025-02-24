@@ -1,0 +1,18 @@
+<svg version="1.1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+ <filter id="a" x="0" y="0" width="1" height="1">
+  <feColorMatrix in="SourceGraphic" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+ </filter>
+ <mask id="b">
+  <g filter="url(#a)">
+   <rect width="16" height="16" fill-opacity=".17068"/>
+  </g>
+ </mask>
+ <clipPath id="c">
+  <rect width="192" height="152"/>
+ </clipPath>
+ <g transform="translate(-168 -16)" clip-path="url(#c)" mask="url(#b)">
+  <path d="m111.73 76.027-79.699-0.070313-0.14062 8.2109 80.16 12.031z"/>
+ </g>
+ <path d="m5 2c-0.75529 1.557-1 5-1 5h-2.5c-0.27734 0-0.5 0.22266-0.5 0.5s0.22266 0.5 0.5 0.5h13c0.27734 0 0.5-0.22266 0.5-0.5s-0.22266-0.5-0.5-0.5h-2.5s-0.41235-3.7265-1-5c-1.7044 0.41554-2 1.4534-3 1.4705s-1.359-1.0235-3-1.4705z" fill="#808080"/>
+ <path d="m4 8v4l-2-1v4h12v-4l-2 1v-4zm1 1h6c0 1.1046-0.67157 2-1.5 2-0.82843 0-1.5-0.89543-1.5-2 0 1.1046-0.67157 2-1.5 2s-1.5-0.89543-1.5-2z" fill="#808080" stroke-width="2" style="paint-order:stroke fill markers"/>
+</svg>
