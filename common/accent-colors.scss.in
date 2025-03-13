@@ -40,7 +40,7 @@ $yaru_accent_bg_color: get_accent_color('@yaru_accent_color@', $yaru_is_dark_var
 $is_warty_nostalgia: '@yaru_accent_color@' == 'wartybrown' and not $yaru_is_dark_variant;
 $warty_nostalgia_bg: #eeeeee;
 
-$contrast_target: if($yaru_is_dark_variant, 4.5, 4.8);
+$contrast_target: if($yaru_is_dark_variant, 4.8, 4.51);
 $yaru_accent_color: optimize-contrast($yaru_bg_color,
     $yaru_accent_bg_color, $target: $contrast_target);
 
