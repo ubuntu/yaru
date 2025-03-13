@@ -54,7 +54,15 @@ jobs:
           sudo apt install software-properties-common
           sudo add-apt-repository ppa:inkscape.dev/stable
           sudo apt update
-          sudo apt install sassc python3-pip xvfb inkscape optipng scour yaru-theme-icon
+          sudo apt install
+            inkscape \
+            libglib2.0-dev-bin \
+            optipng \
+            python3-pip \
+            sassc \
+            scour \
+            xvfb \
+            yaru-theme-icon
           sudo pip3 install meson ninja
 
       - name: Configure project
@@ -64,7 +72,7 @@ jobs:
             -Dmate=true \
             -Dmate-dark=true \
             -Dgnome-shell=false \
-            -Dgtk=false \
+            -Dgtk=true \
             -Dgtksourceview=false \
             -Dsessions=false \
             -Dsounds=false \
