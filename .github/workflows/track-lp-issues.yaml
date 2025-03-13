@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '.github/workflows/track-lp-issues.yaml'
+      - '.github/lpbugtracker.py'
   schedule:
     - cron: '0 20 * * *'
 
