@@ -5,24 +5,24 @@ $light_1: white !default;
 $dark_5: black !default;
 
 // base colors
-$_base_color_dark: lighten($jet, 4%);
-$_base_color_light: $light_1;
+$_base_color_dark: lighten($jet, 4%); // Yaru: use our colors
+$_base_color_light: $light_1; // Yaru: use our colors
 
 // colors for destructive elements
-$destructive_bg_color: if($variant=='light', $red, darken($red, 10%));
+$destructive_bg_color: if($variant=='light', $red, darken($red, 10%)); // Yaru: use our colors
 $destructive_fg_color: $light_1;
 $destructive_color: $destructive_bg_color;
 
 // colors for levelbars, entries, labels and infobars
-$success_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%));
+$success_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%)); // Yaru: use our colors
 $success_fg_color: $light_1;
 $success_color: $success_bg_color;
 
-$warning_bg_color: if($variant == 'light', darken($yellow, 1%), $yellow);
+$warning_bg_color: if($variant == 'light', darken($yellow, 1%), $yellow); // Yaru: use our colors
 $warning_fg_color: transparentize(black, .2);
 $warning_color: $warning_bg_color;
 
-$error_bg_color: $red;
+$error_bg_color: $red; // Yaru: use our colors
 $error_fg_color: $light_1;
 $error_color: $error_bg_color;
 
