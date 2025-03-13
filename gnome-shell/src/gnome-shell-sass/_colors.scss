@@ -4,7 +4,7 @@
 // When color definition differs for dark and light variant, it gets @if-ed depending on $variant
 
 @import '_palette.scss';
-//@import '_default-colors.scss';
+@import '_default-colors.scss';
 @import '_yaru-default-colors.scss';
 
 // global colors

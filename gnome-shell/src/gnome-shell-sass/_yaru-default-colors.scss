@@ -1,57 +1,6 @@
-// Named Colors
-
-// Redefine some GNOME colors we are ok with
-$light_1: white !default;
-$dark_5: black !default;
-
-// base colors
+// override base colors
 $_base_color_dark: lighten($jet, 4%); // Yaru: use our colors
 $_base_color_light: $light_1; // Yaru: use our colors
 
-// colors for destructive elements
-$destructive_bg_color: if($variant=='light', $red, darken($red, 10%)); // Yaru: use our colors
-$destructive_fg_color: $light_1;
-$destructive_color: $destructive_bg_color;
-
-// colors for levelbars, entries, labels and infobars
-$success_bg_color: if($variant == 'light', lighten($green, 5%), darken($green, 5%)); // Yaru: use our colors
-$success_fg_color: $light_1;
-$success_color: $success_bg_color;
-
-$warning_bg_color: if($variant == 'light', darken($yellow, 1%), $yellow); // Yaru: use our colors
-$warning_fg_color: transparentize(black, .2);
-$warning_color: $warning_bg_color;
-
-$error_bg_color: $red; // Yaru: use our colors
-$error_fg_color: $light_1;
-$error_color: $error_bg_color;
-
-// link colors
-$link_color: if($variant =='light', st-darken(-st-accent-color, 10%), st-lighten(-st-accent-color, 20%));
-$link_visited_color: st-transparentize($link_color, .6);
-
-// special cased widget definitions
-$background_mix_factor: if($variant == 'light', 12%, 9%); // used to boost the color of backgrounds in different variants
-$border_opacity: if($variant == 'light', .85, .9); // change the border opacity in different variants
-
-// shadows
-$shadow_color: if($variant == 'light', rgba(0,0,0,.05), rgba(0,0,0,0.2));
-$text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
-
-// focus colors
-$focus_color: -st-accent-color;
-$focus_border_color: st-transparentize($focus_color, 0.5);
-
 // Used for dash and other dark elements on light theme
 $yaru_borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%);
-
-// High Contrast overrides
-@if $contrast == 'high' {
-    // increase border opacity
-    $border_opacity: .5;
-    // remove shadows
-    $shadow_color: transparent;
-    $text_shadow_color: transparent;
-    // less transparent focus color
-    $focus_border_color: st-transparentize($focus_color, 0.2);
-}
