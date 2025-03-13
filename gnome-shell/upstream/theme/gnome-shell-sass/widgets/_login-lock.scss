@@ -31,9 +31,7 @@ $_gdm_dialog_width: 25em;
 
   &.cancel-button,
   &.switch-user-button,
-  &.login-dialog-auth-menu-button,
-  &.login-dialog-session-list-button,
-  &.web-login-intro-button {
+  &.login-dialog-session-list-button {
     @extend .icon-button;
     @extend %system_button;
   }
@@ -41,25 +39,6 @@ $_gdm_dialog_width: 25em;
   &.cancel-button {
     padding: $base_padding * 1.5;
   }
-}
-
-.login-dialog-auth-menu-button-title {
-  @include fontsize($base_font_size - 1);
-  color: darken($_gdm_fg,40%);
-  font-weight: bold;
-  padding-top: $base_padding;
-  padding-bottom: $base_padding * 2;
-  padding-left: $base_padding * 2;
-  padding-right: $base_padding * 2;
-}
-
-.login-dialog-auth-menu-button-popup-menu-box {
-  padding: $base_padding * 3;
-}
-
-.login-dialog-auth-menu-button-item {
-  padding-left: $base_padding * 2;
-  padding-right: $base_padding * 2;
 }
 
 .login-dialog-button-box {
@@ -83,13 +62,6 @@ $_gdm_dialog_width: 25em;
     text-align: center;
     color: $warning_color;
   }
-}
-
-.login-dialog-menu-button-box {
-  spacing: $base_padding * 2;
-  padding-left: $base_padding * 2;
-  padding-right: $base_padding * 2;
-  padding-bottom: $base_padding * 2;
 }
 
 .login-dialog-logo-bin {
@@ -148,16 +120,29 @@ $_gdm_dialog_width: 25em;
 
 .login-dialog-auth-list-title {
   margin-left: 2em;
+  padding-bottom: $base_padding;
 }
 
-.login-dialog-auth-list-item {
-  border-radius: $base_border_radius * 2;
-  padding: $base_margin;
-  color: darken($_gdm_fg,30%);
+.login-dialog {
+  .login-dialog-auth-list-item {
+    @extend %button_common;
+    @include button(normal, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);
+    &:selected,
+    &:focus { @include button(focus, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
+    &:hover { @include button(hover, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
+    &:active { @include button(active, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
 
-  &:focus, &:selected {
-    background-color: -st-accent-color;
-    color: -st-accent-fg-color;
+    border-radius: $modal_radius * 0.6;
+    padding: $base_padding * 1.2;
+  }
+}
+
+.unlock-dialog {
+  .login-dialog-auth-list-item {
+    @extend %lockscreen_button;
+
+    border-radius: $modal_radius * 0.6;
+    padding: $base_padding * 1.2;
   }
 }
 
@@ -211,77 +196,6 @@ $_gdm_dialog_width: 25em;
       }
     }
   }
-}
-
-.login-dialog-prompt-layout {
-  spacing: $base_padding * 2;
-  min-width: 30em;
-}
-
-.login-dialog-prompt-entry {
-  @extend %system_entry;
-}
-
-.web-login-dialog-content-overlay {
-  background-color: transparentize($bg_color, 0.3);
-  border-radius: $modal_radius;
-  margin-bottom: 3em;
-}
-
-.web-login-spinner {
-  color: $osd_fg_color;
-  background-color: transparentize($osd_bg_color, 0.5);
-  border: 5px transparent;
-  border-radius: 50px;
-}
-
-.web-login-title-label {
-  @include fontsize($base_font_size);
-  color: if($variant == 'dark', darken($fg_color,30%), lighten($fg_color,20%));
-}
-
-.web-login-url-label {
-  @include fontsize($base_font_size);
-  @extend %monospace;
-  color: $fg_color;
-  text-align: center;
-}
-
-.web-login-code-title-label {
-  @include fontsize($base_font_size);
-  @include fontsize($base_font_size);
-  color: $fg_color;
-}
-
-.web-login-code-label {
-  @include fontsize($base_font_size);
-  color: $fg_color;
-  font-weight: bold;
-}
-
-.web-login-prompt {
-  padding-top: $base_padding;
-  padding-bottom: $base_padding;
-  padding-left: $base_padding * 4.5;
-  padding-right: $base_padding * 4.5;
-  spacing: 1.75em;
-  border-radius: $base_border_radius * 2;
-}
-
-.web-login-intro-button-label {
-  @include fontsize($base_font_size + 5);
-  color: $fg_color;
-  height: 3em;
-  text-align: center;
-  font-weight: bold;
-}
-
-.web-login-intro-button {
-  @include fontsize($base_font_size);
-  color: $fg_color;
-  height: 3em;
-  text-align: center;
-  border-radius: $base_border_radius * 4;
 }
 
 // Screen Shield
@@ -432,33 +346,4 @@ $_gdm_dialog_width: 25em;
       }
     }
   }
-}
-
-// Login Failed banner
-.auth-notification-banner {
-  .message-header {
-    width: 0px;
-    height: 0px;
-
-    .message-close-button {
-      border: none;
-      background-color: rgba(0, 0, 0, 0.0);
-    }
-  }
-}
-
-// QR Code
-.qr-code {
-  @if ($variant == 'light') {
-    $qrcode_bg_color: mix($fg_color, $bg_color, 8%);
-    background-color: $qrcode_bg_color;
-    border-color: $qrcode_bg_color;
-    color: $fg_color;
-  } @else {
-    background-color: $_gdm_fg;
-    border-color: $_gdm_fg;
-    color: $_gdm_bg;
-  }
-  border-radius: $base_border_radius * .5;
-  border-width: 1em;
 }
