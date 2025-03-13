@@ -3,7 +3,6 @@
 
 $variant: if($yaru_is_dark_variant, 'dark', 'light');
 $hc_contrast_target: 5.5;
-$is_warty_nostalgia: $yaru_accent_color == 'wartybrown' and $variant =='light';
 
 @import 'colors';
 
