@@ -48,10 +48,13 @@ foreach flavour: yaru_flavours
   conf_data.set('DarkTheme', is_dark ? 'true' : 'false')
   conf_data.set('AccentName', is_accent ? base_theme_name : 'default')
   conf_data.set('AccentColor', is_accent ? accent_color_code : '')
-  configure_file(input: 'index.theme.in',
-    output: '@0@-index.theme'.format(theme_name),
-    configuration: conf_data,
-    install_dir: theme_dir
+  install_data(
+    configure_file(input: 'index.theme.in',
+      output: '@0@-index.theme'.format(theme_name),
+      configuration: conf_data,
+    ),
+    install_dir: theme_dir,
+    rename: 'index.theme',
   )
 
   # build and install gtk data
@@ -101,7 +104,6 @@ foreach flavour: yaru_flavours
       continue
     endif
 
-    gtk_css = []
     generated_css = []
     foreach variant : variants
       message('Configuring @0@ variant for @1@-@2@'.format(
@@ -179,13 +181,16 @@ foreach flavour: yaru_flavours
       conf_data = configuration_data()
       conf_data.set('THEME_NAME', theme_name)
       conf_data.set('GTK_VER', gtk_ver)
-      gtk_css += configure_file(
-        input: 'data/@0@.css.in'.format(variant),
-        output: '@0@.css'.format(target_name),
-        configuration: conf_data
+      install_data(
+        configure_file(
+          input: 'data/@0@.css.in'.format(variant),
+          output: '@0@.css'.format(target_name),
+          configuration: conf_data
+        ),
+        install_dir: install_path,
+        rename: '@0@.css'.format(variant),
       )
     endforeach
-    install_data(gtk_css, install_dir: install_path)
 
     foreach src: sources_priority
       assets_rel_dir = src / 'assets'
