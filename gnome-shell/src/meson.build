@@ -6,21 +6,23 @@ styles = [
   'gnome-shell-high-contrast',
 ]
 
-variants = [
-  'light',
-  'dark',
-]
-
 DEFAULT_VARIANT = get_option('gnome-shell-default-variant')
 DEFAULT_GDM_VARIANT = get_option('gdm-default-variant')
 DEFAULT_HIGH_CONTRAST_VARIANT = get_option('gnome-shell-default-high-contrast-variant')
 INCLUDE_HIGH_CONTRAST_VARIANTS = false
 
-foreach accent: enabled_accent_colors
-  if enabled_accent_colors.contains(accent)
-    variants += (get_option('default') ? [accent] : [])
-    variants += (get_option('dark') ? [ accent + '-dark' ] : [])
+variants = []
+foreach variant : yaru_flavours
+  if variant == 'default'
+    variants += DEFAULT_VARIANT
+    continue
   endif
+
+  if variant.startswith('mate')
+    continue
+  endif
+
+  variants += variant
 endforeach
 
 if not variants.contains(DEFAULT_VARIANT)

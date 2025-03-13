@@ -10,6 +10,7 @@ gnome = import('gnome')
 python = find_program('python3')
 sassc = find_program('sassc')
 
+enabled_accent_colors = get_option('accent-colors')
 subdir('common')
 
 components = [
@@ -24,8 +25,6 @@ components = [
   'xfwm4',
   'cinnamon-shell',
 ]
-
-enabled_accent_colors = get_option('accent-colors')
 
 foreach component: components
   if not get_option(component)

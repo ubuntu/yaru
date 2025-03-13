@@ -9,9 +9,8 @@ gtk_versions = [
 ]
 
 gtk_yaru_colors_defs = {}
-sass_global_paths = ['-I', meson.project_source_root() / 'common']
 
-foreach flavour: flavours
+foreach flavour: yaru_flavours
   message('Configuring flavour ' + flavour)
   suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
   theme_name = meson.project_name() + suffix
@@ -36,7 +35,7 @@ foreach flavour: flavours
     )
 
     accent_color_code = run_command(sassc,
-      sass_global_paths,
+      yaru_sass_global_paths,
       accent_info_css).stderr().split(' Accent color is ')[1].strip()
     assert(accent_color_code.startswith('#'), 'No accent color code found')
   endif
@@ -117,7 +116,7 @@ foreach flavour: flavours
 
       # Look for scss files in the variant dir first, otherwise fallback to
       # base, default or upstream paths, so using reversed order
-      scss_paths = sass_global_paths
+      scss_paths = yaru_sass_global_paths
       gtk_scss_dependencies = []
       foreach src: sources_priority
         scss_paths += ['-I', meson.current_source_dir() / src ]
@@ -236,4 +235,4 @@ foreach flavour: flavours
   endforeach
 endforeach
 
-meson.add_install_script('post_install.py', get_option('datadir'), meson.project_name(), flavours)
+meson.add_install_script('post_install.py', get_option('datadir'), meson.project_name(), yaru_flavours)
