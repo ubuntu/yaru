@@ -2,68 +2,39 @@ name: Build debian packages
 
 on:
   push:
-    branches: [master]
+    # branches: [master]
+    branches: "*"
   pull_request:
     branches: [master]
 
-env:
-  DEBIAN_FRONTEND: noninteractive
-
 jobs:
-  check:
+  build-deb-packages:
     name: Ubuntu Devel
     runs-on: ubuntu-latest
-
     env:
-      UBUNTU_VERSION: devel
-      BUILD_CONTAINER: yaru-build-container
-      RUN_CMD: docker exec -t -w /src/yaru yaru-build-container
-      AS_USER: runuser -u builder --
+      UBUNTU_VERSION: latest
 
     steps:
-    - name: Checkout Yaru code
-      uses: actions/checkout@v4
+      - name: Checkout Yaru code
+        uses: actions/checkout@v4
 
-    - name: Prepare container
-      run: |
-        docker run --name $BUILD_CONTAINER \
-          --tty --security-opt apparmor:unconfined \
-          -v $(pwd):/src/yaru \
-          -e DEBIAN_FRONTEND \
-          -e DEBEMAIL="$(git log -1 --format='%ae' HEAD)" \
-          -e DEBFULLNAME="$(git log -1 --format='%an' HEAD)" \
-          -e DEBCONF_NONINTERACTIVE_SEEN=true \
-          -e TERM=dumb \
-          -e CONCURRENCY_LEVEL="$(getconf _NPROCESSORS_ONLN)" \
-          -d ubuntu:$UBUNTU_VERSION sleep infinity
+      - name: Build debian packages and sources
+        uses: canonical/desktop-engineering/gh-actions/common/build-debian@main
+        with:
+          docker-image: ubuntu:${{ env.UBUNTU_VERSION }}
 
-        $RUN_CMD sh -c "echo 'APT::Get::Assume-Yes \"true\";' > /etc/apt/apt.conf.d/90aptyes"
-
-    - name: Install dependencies
-      run: |
-        $RUN_CMD apt update
-        $RUN_CMD apt upgrade
-        $RUN_CMD apt install equivs devscripts
-        $RUN_CMD mk-build-deps -ir
-
-    - name: Setup build user
-      run: |
-        $RUN_CMD adduser --disabled-password --gecos "" builder
-        $RUN_CMD chown builder:builder /src -R
-
-    - name: Build packages
-      run: |
-        $RUN_CMD $AS_USER sh -c 'dch --local "+git$0" "CI: Autoamtic build"' $(git rev-parse --short HEAD)
-        $RUN_CMD $AS_USER dpkg-buildpackage -b --jobs=$CONCURRENCY_LEVEL
-        $RUN_CMD sh -c 'mv -v ../*.deb .'
-        $RUN_CMD sh -c 'ls -lht *.deb'
-
-    - name: Archiving built debs
-      uses: actions/upload-artifact@v4
-      with:
-        name: debian packages
-        path: ./*.deb
-
-    - name: Install generated debs
-      run: |
-        $RUN_CMD sh -c 'apt install --simulate ./*.deb'
+      - name: Install generated debs
+        uses: kohlerdominik/docker-run-action@v2.0.0
+        with:
+          image: ubuntu:${{ env.UBUNTU_VERSION }}
+          environment: |
+            TERM=dumb
+            DEBIAN_FRONTEND=noninteractive
+            DEBCONF_NONINTERACTIVE_SEEN=true
+          volumes: |
+            ${{ env.BUILD_OUTPUT_DIR }}:${{ env.BUILD_OUTPUT_DIR }}
+          workdir: ${{ env.BUILD_OUTPUT_DIR }}
+          shell: bash
+          run: |
+            apt update -y
+            apt install -y --simulate ./*.deb
