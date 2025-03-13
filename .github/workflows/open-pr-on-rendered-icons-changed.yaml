@@ -54,7 +54,7 @@ jobs:
           sudo apt install software-properties-common
           sudo add-apt-repository ppa:inkscape.dev/stable
           sudo apt update
-          sudo apt install sassc python3-pip xvfb inkscape optipng scour
+          sudo apt install sassc python3-pip xvfb inkscape optipng scour adwaita-icon-theme
           sudo pip3 install meson ninja
 
       - name: Configure project
