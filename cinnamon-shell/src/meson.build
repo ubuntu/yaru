@@ -3,20 +3,8 @@ cinnamonshell_theme_dir = join_paths(cinnamonshell_default_theme_dir,
 
 message()
 
-variants = [
-  'light',
-  'dark',
-]
-
 DEFAULT_VARIANT = 'light'
 message(meson.project_build_root())
-
-foreach accent: enabled_accent_colors
-  if enabled_accent_colors.contains(accent)
-    variants += (get_option('default') ? [accent] : [])
-    variants += (get_option('dark') ? [ accent + '-dark' ] : [])
-  endif
-endforeach
 
 theme_css = []
 theme_sources = files(
@@ -81,7 +69,11 @@ endforeach
 # theme_gresource_xml = files('data/cinnamon-shell-theme.gresource.xml')[0]
 # icons_gresource_xml = files('data/cinnamon-shell-icons.gresource.xml')[0]
 
-foreach variant: variants
+foreach variant: yaru_flavours
+  if variant == 'default'
+    variant = DEFAULT_VARIANT
+  endif
+
   is_dark = variant == 'dark' or variant.endswith('-dark')
   is_variant = variant != DEFAULT_VARIANT
   variant_base_name = is_dark ? variant.split('-dark')[0] : variant
