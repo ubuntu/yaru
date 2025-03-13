@@ -8,11 +8,6 @@ $caret_color: if($variant == 'light', lighten($text_color, 5%), darken($text_col
 $bg_color: if($variant == 'light', #FAFAFA, lighten($jet, 8%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
-$is_warty_nostalgia: false !default;
-@if $is_warty_nostalgia and $variant == 'light' {
-    $bg_color: $warty_nostalgia_bg;
-}
-
 $selected_fg_color: $accent_fg_color;
 $selected_bg_color: if($variant == 'light', $accent_bg_color, darken($accent_bg_color, 4%));
 

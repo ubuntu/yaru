@@ -488,9 +488,6 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
 /* Yaru Dock styling */
 
 $dock_color: $panel_bg_color;
-@if $is_warty_nostalgia {
-    $dock_color: darken($jet, 2%);
-}
 
 @each $side in bottom, top, left, right {
     #dashtodockContainer.#{$side} {
