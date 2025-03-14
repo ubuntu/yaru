@@ -1,3 +1,71 @@
+yaru-theme (25.04.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell: Add missing keyboard-zwnj-symbolic icon
+  * ci: Use minimal configuration for rendering icons
+  * ci: Install base theme to make inkscape work
+  * icons/render-bitmaps: Do not fail if directory exists already
+  * ci: Enable GTK theme for rendering
+  * ci: Install hub from sources instead of using a precompiled binary
+  * ci: Run track-lp-issues job also on script changes
+  * ci: Drop the in-house action to build deb files, reusing desktop team one
+  * common: Generalize the yaru variants computation
+  * gtk: Use meson native features to rename configured files
+  * common/accent-colors: Use same contrast target as in libadwaita
+  * cleanup: Remove warty nostalgia special theming
+  * gnome-shell: Use upstream -st-accent-color
+  * gnome-shell-colors: Reduce the delta with upstream default values
+  * gnome-shell: Simplify colors code by just overriding what we need
+  * debian: Bump breaks on gnome-shell lower than 47
+  * icons: Add power saving icon symlink for control center
+  * gnome-shell: Merge with GNOME 48 changes (LP: #2102051)
+  * gnome-shell/keyboard: Simplify the logic to support light theme
+  * gnome-shell: Add new symbolic icons and adapt naming (LP: #2101836)
+  * debian/control: Bump breaks to gnome-shell 47
+  * gnome-shell: Drop the custom yaru spinner icon
+  * icons: Optimize symbolic icons
+  * icons: Update rendered icons and symlinks
+
+  [ walangpart2 ]
+  * Added redesigned org.gnome.Software icon
+  * Created org.gnome.Snapshot Link Targetting the camera-app icon.
+  * Proposal: Small Change to Zipper Styled Mimetypes
+  * Yarufy EarTag Icon
+
+  [ Paul Kepinski ]
+  * GnomeShell: Yaruify upstream icons
+
+  [ Muqtadir ]
+  * misc: tweak recent fullcolor icons
+  * ci: add missing deps for build sequence
+
+  [ Tobias Rapp ]
+  * icons: Add mimetype icon for Typst source files
+
+  [ ochi12 ]
+  * adjusted radius and on-click color for notification banner. Response to issue #4082
+  * included onclick color adjustment to light theme as well
+  * Added symlink for context:categories named org.gnome.Settings-screen-lock-symbolic.svg to suppliment icon falling back to hi color on gnome-control-center under 'Privacy & security'/'Screen Lock'
+  * Added symlink for context:categories named org.gnome.Settings-network-workgroup-symbolic.svg to suppliment icon falling back to hicolor on gnome-control-center under 'Privacy & security'/'Connectivity'
+  * added missing emblem icons for Nautilus
+  * Edited generate-symlinks.sh to include context . Added org.gnome.Nautilus.list. Linked nautilus-file-chooser-options-symbolic.svg -> nautilus-search-filters-symbolic.svg
+  * added missing document-admin-symbolic.svg for Text Editor
+  * added missing cameras-symbolic.svg for Gnome Snapshot
+  * added missing camera-timer-symbolic.svg for Gnome Snapshot
+  * Yarufy Sysprof app fullcolor and app symbolic with accent support.
+  * reworked Sysprof destop icon to fit on smaller sizes
+  * added missing symbolic icons for sysprof
+  * Added Epiphany's Missing Yaru Symbolics
+  * reworked the library icon for epiphany
+
+  [ ubuntujaggers ]
+  * Some smaller square icons
+
+  [ Alessandro Astone ]
+  * debian: Suggest humanity-icon-theme
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 14 Mar 2025 02:22:30 +0100
+
 yaru-theme (24.10.4-0ubuntu1) oracular; urgency=medium
 
   [ Paul Kepinski ]
