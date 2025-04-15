@@ -98,6 +98,23 @@ foreach flavour: yaru_flavours
 
       install_data(gtk2_sources_data, install_dir: install_path)
 
+      if accent == 'wartybrown'
+        # FIXME: Do proper wartybrown gtk2 theme.
+        bark_accent = '#787859'
+        meson.add_install_script('bash', '-c',
+          ('sed -i "s,selected_bg_color:#[A-Fa-f0-9]\+,selected_bg_color:@0@,g" ' +
+           '${MESON_INSTALL_DESTDIR_PREFIX}/@1@/gtkrc').format(
+            accent_color_code, install_path))
+        meson.add_install_script('bash', '-c',
+          ('sed -i "s,@0@,@1@,g" ' +
+           '${MESON_INSTALL_DESTDIR_PREFIX}/@2@/*rc').format(
+            bark_accent, accent_color_code, install_path))
+        meson.add_install_script('bash', '-c',
+          ('sed -i "s,link_color:#[A-Fa-f0-9]\+,link_color:@0@,g" ' +
+           '${MESON_INSTALL_DESTDIR_PREFIX}/@1@/gtkrc').format(
+            accent_color_optimized_code, install_path))
+      endif
+
       assets_paths = []
       foreach src: sources_priority
         assets_paths = [ src / 'assets' ] + assets_paths
