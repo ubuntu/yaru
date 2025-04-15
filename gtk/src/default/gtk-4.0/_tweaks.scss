@@ -75,11 +75,17 @@ spinbutton:not(.vertical) {
 
 // titlebutton
 windowcontrols {
+    button {
+      min-width: 24px;
+    }
+
     button > image {
         $_base_button_color: transparentize($fg_color, 0.9);
         $_base_hover_color: transparentize($fg_color, 0.85);
         $_base_active_color: transparentize($fg_color, 0.75);
 
+        min-height: 20px;
+        min-width: 20px;
         padding: 3px;
         margin: 0 4px;
 
@@ -100,6 +106,11 @@ windowcontrols {
 headerbar {
     &.default-decoration {
         windowcontrols {
+            button,
+            menubutton button {
+              min-width: 24px;
+            }
+
             button > image,
             menubutton > image {
                 min-height: 20px;
