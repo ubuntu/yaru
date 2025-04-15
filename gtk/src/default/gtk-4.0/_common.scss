@@ -1672,7 +1672,7 @@ pathbar scrolledwindow undershoot.right {
   border-right: solid 1px $borders_color;
 }
 
-pathbar > button {
+pathbar button {
   &.text-button, &.image-button, & {
     padding-left: 4px;
     padding-right: 4px;
@@ -2837,6 +2837,14 @@ scale {
         min-height: $_marks_length;
         min-width: 1px;
       }
+    }
+
+    &:not(.marks-before) {
+      > value.top { margin-bottom: $_marks_size; }
+    }
+
+    &:not(.marks-after) {
+      > value.bottom { margin-top: $_marks_size; }
     }
 
     > value.left  { margin-right: 9px; }
