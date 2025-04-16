@@ -1,3 +1,26 @@
+yaru-theme (25.04.2-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * gtk/common: Sync with window controls upstream changes (LP: #2107388)
+  * tweaks: Adapt to window controls adjustments the upstream changes
+    (LP: #2107388)
+  * tweaks: Set proper size for window controls buttons (LP: #2106784)
+  * gtk/tweaks: Use window controls padding and margins to be consistent with
+    libadwaita (LP: #2106784)
+  * gtk/meson: Fix parsing of accent and accent-optimized color codes
+    (LP: #2107420)
+  * gtk-2.0: Add wartybrown accented theme and assets (LP: #2107421)
+    We didn't generate these assets, so some elements of the theme were not
+    consistent with the actual accent, but more importantly when using the
+    dark mode, the applications were close to unusable.
+    Thus the huge diff, as we had to re-generate the theme assets for the
+    accent.
+    The assets and theme definitions are actually not new, so there's no UI
+    change involved, they are just the same assets we ship for all the other
+    accents, but rendered with the wartybrown color.
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 16 Apr 2025 03:34:34 +0200
+
 yaru-theme (25.04.1-0ubuntu1) plucky; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
