@@ -34,10 +34,17 @@ foreach flavour: yaru_flavours
       output: '@0@-@1@-accent-color-info.scss'.format(theme_name, accent),
     )
 
-    accent_color_code = run_command(sassc,
+    accent_parser = run_command(sassc,
       yaru_sass_global_paths,
-      accent_info_css).stderr().split(' Accent color is ')[1].strip()
+      accent_info_css).stderr().strip()
+
+    accent_color_code = accent_parser.split(' Accent color is ')[1].split('\n')[0]
     assert(accent_color_code.startswith('#'), 'No accent color code found')
+
+    accent_color_optimized_code = accent_parser.split(' Contrast optimized accent is ')[1].split('\n')[0]
+    assert(accent_color_optimized_code.startswith('#'), 'No accent color code found')
+    message('Accent color code is', accent_color_code)
+    message('Accent optimized color code is', accent_color_optimized_code)
   endif
 
   conf_data = configuration_data()
@@ -48,6 +55,7 @@ foreach flavour: yaru_flavours
   conf_data.set('DarkTheme', is_dark ? 'true' : 'false')
   conf_data.set('AccentName', is_accent ? base_theme_name : 'default')
   conf_data.set('AccentColor', is_accent ? accent_color_code : '')
+  conf_data.set('AccentColorOptimized', is_accent ? accent_color_optimized_code : '')
   install_data(
     configure_file(input: 'index.theme.in',
       output: '@0@-index.theme'.format(theme_name),

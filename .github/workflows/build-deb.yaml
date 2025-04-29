@@ -12,7 +12,7 @@ jobs:
     name: Ubuntu Devel
     runs-on: ubuntu-latest
     env:
-      UBUNTU_VERSION: latest
+      UBUNTU_VERSION: devel
 
     steps:
       - name: Checkout Yaru code
