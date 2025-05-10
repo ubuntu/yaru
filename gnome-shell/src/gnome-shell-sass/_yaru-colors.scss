@@ -5,17 +5,8 @@ $base_active_color: transparentize(white, 0.75);
 $active_bg_color: transparentize($fg_color, 0.8);
 $active_fg_color: darken($fg_color, if($variant=='light', 5%, 3%));
 
-// accent colors, using legacy accent color definition
-// TODO: Remove when using upstream only.
-$accent_borders_color: if($variant=='light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
-
 $panel_bg_color: darken($jet, 2%);
 $panel_fg_color: darken($porcelain, 2%);
-
-@if $is_warty_nostalgia {
-    $panel_bg_color: darken($bg_color, 3%);
-    $panel_fg_color: $_base_color_dark;
-}
 
 $panel-alpha-value: 0.6;
 $panel_opaque_value: 0.0;
@@ -27,7 +18,6 @@ $dash-opaque-alpha-value: 0.0;
 $suggested_bg_color: if($variant=='light', lighten($green, 5%), darken($green, 5%));
 $suggested_border_color: if($variant=='light', darken($suggested_bg_color, 5%), darken($suggested_bg_color, 10%));
 
-$focus_border_color: lighten($accent_bg_color, 14%);
 $alt_borders_color: if($variant=='light', darken($bg_color, 24%), darken($bg_color, 10%));
 
 $system_borders_color: $yaru_borders_color_dark; // Yaru: use our definition
@@ -45,10 +35,3 @@ $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_col
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
 $osd_borders_color: transparentize(black, 0.3);
 $osd_outer_borders_color: transparentize(white, 0.84);
-
-// Assets colors
-$checkradio_bg_color: $accent_bg_color;
-$checkradio_fg_color: $accent_fg_color;
-$switch_bg_color: if($variant=='light', $accent_bg_color, darken($accent_bg_color, 8%));
-$switch_border_color: if($variant=='light', darken($accent_bg_color, 15%), darken($borders_color, 5%));
-$progress_bg_color: $accent_bg_color;

@@ -113,8 +113,8 @@ $hover_fg_color: lighten($fg_color, 20%);
 $active_bg_color: lighten($bg_color, 22%);
 $active_fg_color: lighten($fg_color, 22%);
 
-// selection colors
-$selected_borders_color: lighten($selected_bg_color, 30%);
+// accent colors
+$accent_borders_color: st-lighten(-st-accent-color, 30%);
 
 //
 // High Contrast specific definitions
@@ -128,15 +128,6 @@ $hc_mix_color: $light_1;
 
 // the mix factor used to boost contrast of a color in the above mixin
 $hc_mix_factor: 87%;
-
-// Yaru, Add accent also in high-contrast, but with higher contrast ratio.
-@import 'sass-utils';
-
-$accent_bg_color: optimize-contrast($base_color,
-    $accent_bg_color, $target: 5.5);
-
-$selected_fg_color: $accent_fg_color;
-$selected_bg_color: $accent_bg_color;
 
 $fg_color_dark: $porcelain;
 $bg_color_dark: lighten($jet, 2%);

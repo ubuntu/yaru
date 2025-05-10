@@ -2,13 +2,14 @@
 
 $notification_banner_height: 64px;
 $notification_banner_width: 34em;
+$notification_banner_border_radius: 12px;  // similar to the implemented to yaru-gtk $window_radius: $button_radius + 6;
 
 // Banner notifications
 .notification-banner {
   min-height: $notification_banner_height;
   width: $notification_banner_width;
   box-shadow: 0 2px 4px 2px $shadow_color;
-  border-radius: $modal_radius;
+  border-radius: $notification_banner_border_radius; // Yaru: $modal_radius is too small (see issue #4082).
   margin: $base_margin;
   background-color: $bg_color; // Yaru change: use bg_color for better contrast with buttons
 
@@ -23,7 +24,10 @@ $notification_banner_width: 34em;
 
   &:active {
     // Yaru change: ↑↑↑
-    background-color: if($variant =='light', darken($bg_color, 4%), lighten($bg_color, 4%));
+    // Yaru notice: the original 4% for darken and lighten value was actually not working and is overwritten by upstream colors.
+    // increased value from 4% to 8%
+    // Fixed on click color problem by adding (!important) flag.
+    background-color: if($variant =='light', darken($bg_color, 8%), lighten($bg_color, 8%)) !important;
   }
 
   // Yaru: make notifications more visible on different headerbars:

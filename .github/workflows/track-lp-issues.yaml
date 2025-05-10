@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '.github/workflows/track-lp-issues.yaml'
+      - '.github/lpbugtracker.py'
   schedule:
     - cron: '0 20 * * *'
 
@@ -15,11 +16,12 @@ jobs:
       # Checkout code
       - uses: actions/checkout@v4
       - name: Install Python 3
-        uses: actions/setup-python@v5.3.0
+        uses: actions/setup-python@v5.4.0
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install launchpadlib
+          sudo apt install hub
       - name: Mirror Yaru bugs from Launchpad
         id: getlpbugs
         run: |

@@ -9,9 +9,8 @@ gtk_versions = [
 ]
 
 gtk_yaru_colors_defs = {}
-sass_global_paths = ['-I', meson.project_source_root() / 'common']
 
-foreach flavour: flavours
+foreach flavour: yaru_flavours
   message('Configuring flavour ' + flavour)
   suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
   theme_name = meson.project_name() + suffix
@@ -35,10 +34,17 @@ foreach flavour: flavours
       output: '@0@-@1@-accent-color-info.scss'.format(theme_name, accent),
     )
 
-    accent_color_code = run_command(sassc,
-      sass_global_paths,
-      accent_info_css).stderr().split(' Accent color is ')[1].strip()
+    accent_parser = run_command(sassc,
+      yaru_sass_global_paths,
+      accent_info_css).stderr().strip()
+
+    accent_color_code = accent_parser.split(' Accent color is ')[1].split('\n')[0]
     assert(accent_color_code.startswith('#'), 'No accent color code found')
+
+    accent_color_optimized_code = accent_parser.split(' Contrast optimized accent is ')[1].split('\n')[0]
+    assert(accent_color_optimized_code.startswith('#'), 'No accent color code found')
+    message('Accent color code is', accent_color_code)
+    message('Accent optimized color code is', accent_color_optimized_code)
   endif
 
   conf_data = configuration_data()
@@ -49,10 +55,14 @@ foreach flavour: flavours
   conf_data.set('DarkTheme', is_dark ? 'true' : 'false')
   conf_data.set('AccentName', is_accent ? base_theme_name : 'default')
   conf_data.set('AccentColor', is_accent ? accent_color_code : '')
-  configure_file(input: 'index.theme.in',
-    output: '@0@-index.theme'.format(theme_name),
-    configuration: conf_data,
-    install_dir: theme_dir
+  conf_data.set('AccentColorOptimized', is_accent ? accent_color_optimized_code : '')
+  install_data(
+    configure_file(input: 'index.theme.in',
+      output: '@0@-index.theme'.format(theme_name),
+      configuration: conf_data,
+    ),
+    install_dir: theme_dir,
+    rename: 'index.theme',
   )
 
   # build and install gtk data
@@ -102,7 +112,6 @@ foreach flavour: flavours
       continue
     endif
 
-    gtk_css = []
     generated_css = []
     foreach variant : variants
       message('Configuring @0@ variant for @1@-@2@'.format(
@@ -117,7 +126,7 @@ foreach flavour: flavours
 
       # Look for scss files in the variant dir first, otherwise fallback to
       # base, default or upstream paths, so using reversed order
-      scss_paths = sass_global_paths
+      scss_paths = yaru_sass_global_paths
       gtk_scss_dependencies = []
       foreach src: sources_priority
         scss_paths += ['-I', meson.current_source_dir() / src ]
@@ -180,13 +189,16 @@ foreach flavour: flavours
       conf_data = configuration_data()
       conf_data.set('THEME_NAME', theme_name)
       conf_data.set('GTK_VER', gtk_ver)
-      gtk_css += configure_file(
-        input: 'data/@0@.css.in'.format(variant),
-        output: '@0@.css'.format(target_name),
-        configuration: conf_data
+      install_data(
+        configure_file(
+          input: 'data/@0@.css.in'.format(variant),
+          output: '@0@.css'.format(target_name),
+          configuration: conf_data
+        ),
+        install_dir: install_path,
+        rename: '@0@.css'.format(variant),
       )
     endforeach
-    install_data(gtk_css, install_dir: install_path)
 
     foreach src: sources_priority
       assets_rel_dir = src / 'assets'
@@ -236,4 +248,4 @@ foreach flavour: flavours
   endforeach
 endforeach
 
-meson.add_install_script('post_install.py', get_option('datadir'), meson.project_name(), flavours)
+meson.add_install_script('post_install.py', get_option('datadir'), meson.project_name(), yaru_flavours)

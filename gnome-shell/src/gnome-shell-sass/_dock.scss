@@ -5,7 +5,7 @@
 
 // Dash to dock specifics
 $dash_padding: $base_padding + 4px; // 10px
-$dash_border_radius: $modal_radius * 1.5;
+$dash_border_radius: $modal_radius * 3;
 
 $dock_spacing: round($base_padding / 4);
 $dock_bottom_margin: $base_margin * 4;
@@ -488,9 +488,6 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
 /* Yaru Dock styling */
 
 $dock_color: $panel_bg_color;
-@if $is_warty_nostalgia {
-    $dock_color: darken($jet, 2%);
-}
 
 @each $side in bottom, top, left, right {
     #dashtodockContainer.#{$side} {
@@ -577,7 +574,7 @@ $dock_color: $panel_bg_color;
                 margin-bottom: $dash_padding + $dash_edge_offset - 3px; // 3px = size of dot (5px) subtracted from its translationY from appDisplay.js
 
                 // margin-bottom: 13px; // hardcoded - Yaru change: move dot a bit down
-                background-color: $selected_bg_color; // Yaru: we want an accented dot
+                background-color: -st-accent-color; // Yaru: we want an accented dot
             }
         }
     }

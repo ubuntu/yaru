@@ -12,7 +12,6 @@ $slider_size: to_em(18px);; // Yaru change: larger slider cause to border in lig
   -barlevel-background-color: transparentize($fg_color, 0.9);
   // fill style
   -barlevel-active-background-color: -st-accent-color;
-  -barlevel-active-background-color: $selected_bg_color; // Yaru: keep the accent as we may override it in CSS
   // overfill style (red in this case)
   -barlevel-overdrive-color: $destructive_color;
   -barlevel-overdrive-separator-width:1px;

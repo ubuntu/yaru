@@ -35,7 +35,18 @@ $blue: #19B6EE;
 $linkblue: #007aa6;
 $darkblue: #335280;
 
+// Redefine some GNOME colors we are ok with
+$light_1: white;
+$light_2: $porcelain;
 
-// Semantic colors
-$accent_bg_color: $orange !default;
-$accent_fg_color: $white !default;
+$dark_4: lighten($jet, 4%);
+$dark_5: black;
+
+$red_3: $red;
+$red_4: darken($red, 10%);
+
+$green_4: lighten($green, 5%);
+$green_5: darken($green, 5%);
+
+$yellow_4: darken($yellow, 1%);
+$yellow_5: $yellow;

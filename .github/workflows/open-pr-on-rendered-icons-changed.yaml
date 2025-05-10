@@ -54,13 +54,28 @@ jobs:
           sudo apt install software-properties-common
           sudo add-apt-repository ppa:inkscape.dev/stable
           sudo apt update
-          sudo apt install sassc python3-pip xvfb inkscape optipng scour
+          sudo apt install \
+            inkscape \
+            libglib2.0-dev-bin \
+            optipng \
+            python3-pip \
+            sassc \
+            scour \
+            xvfb \
+            yaru-theme-icon
           sudo pip3 install meson ninja
 
       - name: Configure project
         if: ${{ steps.check-changed.outputs.changes != '[]' }}
         run: |
-          meson setup _build -Dmate=true -Dmate-dark=true \
+          meson setup _build \
+            -Dmate=true \
+            -Dmate-dark=true \
+            -Dgnome-shell=false \
+            -Dgtk=true \
+            -Dgtksourceview=false \
+            -Dsessions=false \
+            -Dsounds=false \
             -Daccent-colors="bark, sage, olive, viridian, prussiangreen, blue, purple, magenta, red, yellow, wartybrown"
 
       - name: Render default icons and generate symlinks
