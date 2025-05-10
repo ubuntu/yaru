@@ -262,6 +262,7 @@ $_gdm_dialog_width: 25em;
 
 .login-dialog-prompt-entry {
   @extend %system_entry;
+  border-radius: $base_border_radius + 3; // Yaru Change: Match Upstream button radius 
 }
 
 .web-login-dialog-content-overlay {
