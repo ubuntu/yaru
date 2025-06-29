@@ -1472,22 +1472,30 @@ windowcontrols {
   }
 
   button {
-    @extend %button_basic;
-
     @extend %button_basic_flat;
 
+    box-shadow: none;
+    border: none;
+    min-width: 34px;
+    padding: 0;
 
-    border-radius: 9999px;
-    padding: 6px;
-    margin: 0 2px;
-    min-width: 0;
-    min-height: 0;
-    &:hover {
+    > image {
+        border-radius: 9999px;
+        min-height: 30px;
+        min-width: 30px;
+    }
+    &:hover > image {
       //special case hover colors inside a headerbar
       @include button(undecorated-hover,$c:darken($headerbar_bg_color,6%));
     }
+    &:active > image,
+    &:checked > image { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
+
+    &:hover,
     &:active,
-    &:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
+    &:checked {
+        background: none;
+    }
   }
 }
 
@@ -1609,6 +1617,27 @@ headerbar {
     margin-bottom: 6px;
   }
 
+  windowcontrols {
+    > button {
+      margin: 0;
+    }
+
+    &.start {
+      margin-left: -6px;
+
+      > button:first-child {
+        padding-left: 6px;
+      }
+    }
+    &.end {
+      margin-right: -6px;
+
+      > button:last-child {
+        padding-right: 6px;
+      }
+    }
+  }
+
   // Reset margins for buttons inside menubutton
   menubutton > button {
     margin-top: 0px;
@@ -1672,7 +1701,7 @@ pathbar scrolledwindow undershoot.right {
   border-right: solid 1px $borders_color;
 }
 
-pathbar > button {
+pathbar button {
   &.text-button, &.image-button, & {
     padding-left: 4px;
     padding-right: 4px;
@@ -2729,19 +2758,8 @@ scale {
 
   // click-and-hold the slider to activate
   &.fine-tune {
-    &.horizontal {
-      padding-top: 9px;
-      padding-bottom: 9px;
-      min-height: 16px;
-    }
-
-    &.vertical {
-      padding-left: 9px;
-      padding-right: 9px;
-      min-width: 16px;
-    }
-
     // to make the trough grow in fine-tune mode
+    > trough { margin: -3px; }
     > trough > slider { margin: -6px; }
 
     > trough > fill,
@@ -2839,6 +2857,14 @@ scale {
       }
     }
 
+    &:not(.marks-before) {
+      > value.top { margin-bottom: $_marks_size; }
+    }
+
+    &:not(.marks-after) {
+      > value.bottom { margin-top: $_marks_size; }
+    }
+
     > value.left  { margin-right: 9px; }
     > value.right { margin-left: 9px; }
 
@@ -2878,7 +2904,7 @@ scale {
       &.top { margin-left: 3px; }
       &.bottom { margin-right: 3px; }
 
-      indicator { min-height: ($_marks_length - 3px); }
+      indicator { min-width: ($_marks_length - 3px); }
     }
   }
 
@@ -2950,7 +2976,7 @@ scale {
           &.fine-tune > trough > slider {
             @if $dir_class == 'horizontal' {
               // bigger negative margins to make the trough grow here as well
-              margin: -7px -10px;
+              margin: -7px;
 
               @if $marks_infix == 'scale-has-marks-above' { margin-top: -11px; }
 
@@ -2958,7 +2984,7 @@ scale {
             }
 
             @else {
-              margin: -10px -7px;
+              margin: -7px;
 
               @if $marks_infix == 'scale-has-marks-above' { margin-left: -11px; }
 
@@ -3182,18 +3208,21 @@ levelbar {
  * Print dialog *
 *****************/
 window.dialog.print {
-  drawing {
+  page-thumbnail {
+    background: white;
+    color: #2e3436;
+    border: 1px solid $borders_color;
+
+    label {
+      color: #2e3436;
+    }
+  }
+
+  .drawing {
     color: $fg_color;
     background: none;
     border: none;
     padding: 0;
-
-    paper {
-      background: white;
-      color: #2e3436;
-      border: 1px solid $borders_color;
-    }
-
   }
 
   .dialog-action-box { margin: 12px; }
@@ -3321,6 +3350,10 @@ row {
 
     @extend %selected_items;
   }
+}
+
+listview:not(:focus-within) > row:selected {
+  background-color: $backdrop_selected_bg_color;
 }
 
 columnview {

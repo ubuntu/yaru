@@ -1,4 +1,27 @@
-yaru-theme (25.04.1-0ubuntu1) UNRELEASED; urgency=medium
+yaru-theme (25.04.2-0ubuntu1) plucky; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * gtk/common: Sync with window controls upstream changes (LP: #2107388)
+  * tweaks: Adapt to window controls adjustments the upstream changes
+    (LP: #2107388)
+  * tweaks: Set proper size for window controls buttons (LP: #2106784)
+  * gtk/tweaks: Use window controls padding and margins to be consistent with
+    libadwaita (LP: #2106784)
+  * gtk/meson: Fix parsing of accent and accent-optimized color codes
+    (LP: #2107420)
+  * gtk-2.0: Add wartybrown accented theme and assets (LP: #2107421)
+    We didn't generate these assets, so some elements of the theme were not
+    consistent with the actual accent, but more importantly when using the
+    dark mode, the applications were close to unusable.
+    Thus the huge diff, as we had to re-generate the theme assets for the
+    accent.
+    The assets and theme definitions are actually not new, so there's no UI
+    change involved, they are just the same assets we ship for all the other
+    accents, but rendered with the wartybrown color.
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 16 Apr 2025 03:47:08 +0200
+
+yaru-theme (25.04.1-0ubuntu1) plucky; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
   * gnome-shell: Add missing keyboard-zwnj-symbolic icon
@@ -64,7 +87,7 @@ yaru-theme (25.04.1-0ubuntu1) UNRELEASED; urgency=medium
   [ Alessandro Astone ]
   * debian: Suggest humanity-icon-theme
 
- -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 14 Mar 2025 02:22:30 +0100
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 14 Mar 2025 02:53:01 +0100
 
 yaru-theme (24.10.4-0ubuntu1) oracular; urgency=medium
 
