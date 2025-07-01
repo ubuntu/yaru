@@ -29,6 +29,7 @@ $_gdm_dialog_width: 25em;
 // buttons on login screen
 .login-dialog-button {
 
+  &.a11y-button,
   &.cancel-button,
   &.switch-user-button,
   &.login-dialog-session-list-button {
@@ -200,7 +201,6 @@ $_gdm_dialog_width: 25em;
 
 // Screen Shield
 // a.k.a. the lockscreen, uses transparent styles
-
 .unlock-dialog {
   background-color: transparent;
 
