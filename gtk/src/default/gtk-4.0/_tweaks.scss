@@ -76,28 +76,35 @@ spinbutton:not(.vertical) {
 // titlebutton
 windowcontrols {
     button {
-      min-width: 24px;
-    }
+        min-width: 24px;
 
-    button > image {
         $_base_button_color: transparentize($fg_color, 0.9);
         $_base_hover_color: transparentize($fg_color, 0.85);
         $_base_active_color: transparentize($fg_color, 0.75);
 
-        min-height: 20px;
-        min-width: 20px;
-        padding: 2px;
-        margin: 0 3px;
+        > image {
+          min-height: 20px;
+          min-width: 20px;
+          padding: 2px;
+          margin: 0 3px;
 
-        background: $_base_button_color;
-
-        &:hover {
-            background: $_base_hover_color;
+          background: $_base_button_color;
         }
 
+        &:hover > image {
+            //special case hover colors inside a headerbar
+            @include button(undecorated-hover,$c:$_base_hover_color);
+        }
+
+        &:active > image,
+        &:checked > image {
+            @include button(undecorated-active,$c:$_base_active_color);
+        }
+
+        &:hover,
         &:active,
         &:checked {
-            background: $_base_active_color;
+            background: none;
         }
     }
 }
