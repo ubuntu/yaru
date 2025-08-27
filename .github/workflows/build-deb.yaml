@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout Yaru code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build debian packages and sources
         uses: canonical/desktop-engineering/gh-actions/common/build-debian@main
