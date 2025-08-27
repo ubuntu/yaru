@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/gnome/shell/icons">
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-menu-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-high-contrast-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-keyboard-keys-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-large-text-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-mouse-keys-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-screen-reader-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-visual-alerts-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-zoom-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/color-pick.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/carousel-arrow-next-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/carousel-arrow-previous-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/cog-wheel-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/dark-mode-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/group-collapse-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">scalable/actions/high-contrast-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/notification-expand-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/ornament-check-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/ornament-dot-checked-symbolic.svg</file>
