@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/gnome/shell/icons">
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-menu-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-high-contrast-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-keyboard-keys-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-large-text-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-mouse-keys-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-screen-reader-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-visual-alerts-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/accessibility-zoom-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/color-pick.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/carousel-arrow-next-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/carousel-arrow-previous-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">scalable/actions/dark-mode-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/cog-wheel-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">scalable/actions/notification-expand-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/dark-mode-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/group-collapse-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">scalable/actions/high-contrast-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/actions/notification-expand-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/ornament-check-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/ornament-dot-checked-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/actions/ornament-dot-unchecked-symbolic.svg</file>
@@ -44,6 +51,8 @@
     <file preprocess="xml-stripblanks">scalable/status/keyboard-brightness-high-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/keyboard-brightness-medium-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/keyboard-brightness-off-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/message-indicator-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/no-notifications-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/osk-caps-lock-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/osk-delete-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/osk-emoji-picker-symbolic.svg</file>
@@ -52,11 +61,13 @@
     <file preprocess="xml-stripblanks">scalable/status/osk-layout-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/osk-shift-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/osk-zwnj-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">scalable/status/message-indicator-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">scalable/status/no-notifications-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/screen-privacy-disabled-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/screen-privacy-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">scalable/status/switch-on-symbolic.svg</file>
     <file preprocess="xml-stripblanks">scalable/status/switch-off-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/switch-on-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">scalable/status/wellbeing-symbolic.svg</file>
   </gresource>
 </gresources>
+
+
+
