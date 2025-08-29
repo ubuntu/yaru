@@ -1,0 +1,1 @@
+../../dark/gtk-2.0/render-assets-external.sh

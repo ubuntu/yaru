@@ -6,29 +6,22 @@ styles = [
   'gnome-shell-high-contrast',
 ]
 
+DEFAULT_GDM_VARIANT = get_option('gdm-default-variant')
+DEFAULT_HIGH_CONTRAST_VARIANT = get_option('gnome-shell-default-high-contrast-variant')
+
 variants = [
   'light',
   'dark',
 ]
 
-DEFAULT_VARIANT = get_option('gnome-shell-default-variant')
-DEFAULT_GDM_VARIANT = get_option('gdm-default-variant')
-DEFAULT_HIGH_CONTRAST_VARIANT = get_option('gnome-shell-default-high-contrast-variant')
-INCLUDE_HIGH_CONTRAST_VARIANTS = false
-
-foreach accent: enabled_accent_colors
-  if enabled_accent_colors.contains(accent)
-    variants += (get_option('default') ? [accent] : [])
-    variants += (get_option('dark') ? [ accent + '-dark' ] : [])
-  endif
-endforeach
-
-if not variants.contains(DEFAULT_VARIANT)
-  error('Invalid gnome-shell default variant selected')
+if not variants.contains(DEFAULT_GDM_VARIANT)
+  error('Invalid default gdm variant selected: @0@'.format(
+    DEFAULT_GDM_VARIANT))
 endif
 
-if not variants.contains(DEFAULT_GDM_VARIANT)
-  error('Invalid default gdm variant selected')
+if not variants.contains(DEFAULT_HIGH_CONTRAST_VARIANT)
+  error('Invalid gnome-shell default high-contrast variant selected: @0@'.format(
+    DEFAULT_HIGH_CONTRAST_VARIANT))
 endif
 
 theme_css = []
@@ -82,19 +75,12 @@ icons_gresource_xml = files('data/gnome-shell-icons.gresource.xml')[0]
 
 foreach variant: variants
   is_dark = variant == 'dark' or variant.endswith('-dark')
-  is_variant = variant != DEFAULT_VARIANT
-  variant_base_name = is_dark ? variant.split('-dark')[0] : variant
+  is_variant = is_dark
   variant_suffix = is_variant ? '-@0@'.format(variant)  : ''
   theme_full_name = meson.project_name() + variant_suffix
-  is_custom_accent = enabled_accent_colors.contains(variant_base_name)
 
   install_theme_sources = not gnomeshell_user_themes_suport.disabled()
   install_dir = gnomeshell_theme_dir + variant_suffix
-
-  accent_configuration = {
-    'yaru_dark_variant': is_dark ? 'true' : 'false',
-    'yaru_accent_color': is_custom_accent ? variant_base_name : 'default',
-  }
 
   # generate .css files
   style_css = []
@@ -108,7 +94,7 @@ foreach variant: variants
     if high_contrast
       if variant == DEFAULT_HIGH_CONTRAST_VARIANT
         stylename = style
-      elif not INCLUDE_HIGH_CONTRAST_VARIANTS
+      else
         continue
       endif
     endif
@@ -120,26 +106,13 @@ foreach variant: variants
       input: 'gnome-shell.scss.in',
       output: '@0@.scss'.format(stylename),
       configuration: {
-        'DarkVariant': is_dark ? 'true' : 'false',
+        'Variant': variant,
         'YaruVariant': variant,
         'UseGResource': gnomeshell_use_gresource ? 'true' : 'false',
-        'HighContrast': high_contrast ? 'true' : 'false',
+        'Contrast': high_contrast ? 'high' : 'normal',
         'Colors': (high_contrast ? 'high-contrast-' : '') + 'colors',
       },
     )
-
-    if is_custom_accent and (not high_contrast or
-      variant == DEFAULT_HIGH_CONTRAST_VARIANT or
-      INCLUDE_HIGH_CONTRAST_VARIANTS)
-      theme_sources += theme_main_file
-      theme_main_file = configure_file(
-        configuration: accent_configuration + {
-          'yaru_theme_entry_point': meson.project_build_root() / '@0@'.format(theme_main_file),
-        },
-        input: accent_colors_definitions_scss,
-        output: '@0@-accent-colors.scss'.format(stylename),
-      )
-    endif
 
     style_css += custom_target(
       'style-@0@'.format(stylename),

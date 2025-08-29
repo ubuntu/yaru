@@ -11,12 +11,13 @@ stored in the json file to show if any new issue was created since last check.
 import os
 import subprocess
 import logging
+import shutil
 from launchpadlib.launchpad import Launchpad
 
 log = logging.getLogger("lpbugtracker")
 log.setLevel(logging.DEBUG)
 
-HUB = ".github/hub"
+HUB = shutil.which("hub")
 HOME = os.path.expanduser("~")
 CACHEDIR = os.path.join(HOME, ".launchpadlib", "cache")
 

@@ -10,8 +10,6 @@
 
   // override link color since OSD style
   $lg_link_color: st-lighten(-st-accent-color, 20%);
-    // Yaru: keep the accent as we may override it in CSS
-  $lg_link_color: st-lighten($selected_bg_color, 20%);
   .shell-link {
     color: $lg_link_color;
     &:hover { color: st-lighten($lg_link_color, 10%); }
@@ -226,16 +224,9 @@
       &:checked {
         background: -st-accent-color;
         color: -st-accent-fg-color;
-
-        background-color: $selected_bg_color; // Yaru: keep the accent as we may override it in CSS
-        color: $selected_fg_color; // Yaru: keep the accent as we may override it in CSS
-
         &:hover {
           background-color: st-lighten(-st-accent-color, 5%);
           color: st-lighten(-st-accent-fg-color, 5%);
-
-          background-color: st-lighten($selected_bg_color, 5%); // Yaru: keep the accent as we may override it in CSS
-          color: st-lighten($selected_fg_color, 5%); // Yaru: keep the accent as we may override it in CSS
         }
       }
     }

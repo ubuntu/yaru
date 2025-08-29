@@ -190,8 +190,7 @@ def main(args, SRC, DEST):
 
                         dir = os.path.join(DEST, size_str, self.context)
                         outfile = os.path.join(dir, self.icon_name + ".png")
-                        if not os.path.exists(dir):
-                            os.makedirs(dir)
+                        os.makedirs(dir, exist_ok=True)
                         # Do a time based check!
                         if self.force or not os.path.exists(outfile):
                             inkscape_render_rect(self.path, id, dpi, outfile)

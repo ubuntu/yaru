@@ -8,11 +8,6 @@ $text_color: if($variant == 'light', black, white);
 $bg_color: if($variant == 'light', #FAFAFA, lighten($jet, 8%));
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
-$is_warty_nostalgia: false !default;
-@if $is_warty_nostalgia and $variant == 'light' {
-    $bg_color: $warty_nostalgia_bg;
-}
-
 $selected_fg_color: $accent_fg_color;
 $selected_bg_color: $accent_bg_color;
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));

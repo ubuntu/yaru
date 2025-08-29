@@ -1,10 +1,6 @@
-$variant: if(@DarkVariant@, 'dark', 'light');
-$yaru_variant: '@YaruVariant@';
-$yaru_accent_color: '@YaruVariant@';
+$variant: @Variant@;
 $use_gresource: @UseGResource@;
-$is_highcontrast: @HighContrast@;
-$UPSTREAM_VARIANTS: ['dark', 'light'];
-$contrast: if($is_highcontrast, 'high', 'normal');
+$contrast: @Contrast@;
 
 @import 'sass-utils';
 
@@ -25,12 +21,7 @@ $contrast: if($is_highcontrast, 'high', 'normal');
     @return url(quote($url));
 }
 
-@if not list-index(["dark", "light"], $yaru_variant) and
-    not variable-exists("accent_bg_color") {
-    @error "Missing definition for accent color variable: $accent_bg_color";
-}
-
-@debug 'Generating GNOME Shell ' + $yaru_variant + ' theme (' + $variant +' variant, hc: '+ $is_highcontrast+')';
+@debug 'Generating GNOME Shell ' + $variant + ' theme (contrast: '+ $contrast + ')';
 
 @import "gnome-shell-sass/_@Colors@";
 @import "gnome-shell-sass/_drawing";

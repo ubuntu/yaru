@@ -21,6 +21,11 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
   @extend %numeric;
   transition-duration: $panel_transition_duration;
 
+  @if $variant == 'light' {
+    // uses half a pixel to compensate for box-shadow weirdness
+    box-shadow: inset 0 -0.5px 0 0 $panel_border_color;
+  }
+
   // panel menus
   .panel-button {
     @include panel_button();
@@ -137,9 +142,6 @@ $panel_transition_duration: 250ms; // same as the overview transition duration
 
   // use system text styles for overview panel
   $button-system-panel-fg-color: $system_panel_fg_color;
-  @if $is_warty_nostalgia {
-    $button-system-panel-fg-color: lighten($panel_fg_color, 5%);
-  }
   &:overview {
     .panel-button {
       @include panel_button($fg:$button-system-panel-fg-color);
