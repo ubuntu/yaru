@@ -1,3 +1,55 @@
+yaru-theme (25.10.2) UNRELEASED; urgency=medium
+
+  [ Vincent Renzo Quilon ]
+  * Added missing cog-wheel-symbolic icon for gnome settings
+  * Added missing bluetooth-acquiring-symbolic icon
+  * Added revamped user trash icon
+  * Add Gnome Builder Icon
+  * Sync with upstream battery-level-*-plugged-in-symbolic.svg
+  * Chore: Improve and Sync Wi-Fi Encrypted Indicator Icons
+  * Added applications-other full color symlink files for cinnamon and mate
+  * Added symlink files named logout-symbolic and alacarte-symbolic
+  * Added preferences-desktop-screensaver fullcolor icons for mate and cinnamon
+  * Finalize Loupe fullcolor icon:
+    - replace symlink target to direct target named org.gnome.Loupe.png
+    - removed initially added source svg. -
+    - removed symlink entry
+  * Added Gnome Software Minor Fixes:
+    - Matched Pictogram Colors to Yaru Palette
+    - Improved string handle visibility of the paper bag template
+  * fixed 24-sized icons
+  * Ptyxis: Add Missing Full Color and Symbolic Icons
+  * Initial revamp watch standby and watch progress
+  * fixed jitter issue in watch.ani by correcting watch.in typo in last line
+  * generated watch and wait ani for x11 and w32 with no jitter issue
+  * updated left_ptr_watch: use solid spinner bg instead of gradient to reduce
+    noise small size
+  * gnome-shell: reworked prompt dialog padding and border-radius
+  * adjusted radii of login entry
+
+  [ Paul Kepinski ]
+  * fix(icons): fix workscape-switcher-* icon-name in source file
+  * Sync GTK3 with upstream
+  * feat(GnomeShell): Yaruify accessibility icons
+  * Sync icon theme with upstream
+
+  [ Daniel van Vugt ]
+  * Add gnome-shell 49.beta icons
+
+  [ Adrien Manlay ]
+  * add: toml, csv mimetype icons
+  * fix: yaml mimetype icon
+
+  [ ubuntujaggers ]
+  * new icon to be used for firmware-updater
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell/upstream: Sync with ubuntu branch
+  * gnome-shell: Sync with upstream changes
+  * build: Release yaru 25.10.2
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 04 Sep 2025 04:19:55 +0200
+
 yaru-theme (25.10.1-0ubuntu1) questing; urgency=medium
 
   [ walangpart2 ]
