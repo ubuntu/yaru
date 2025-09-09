@@ -19,7 +19,7 @@ $success_color: $success_bg_color;
 
 $warning_bg_color: if($variant == 'light', $yellow_5, #cd9309); // uses darker off-palette yellow
 $warning_fg_color: transparentize(black, .2);
-$warning_color: $warning_bg_color;
+$warning_color: if($variant == 'light', black, $warning_bg_color);
 
 $error_bg_color: if($variant == 'light', $red_3, $red_4);
 $error_fg_color: $light_1;
