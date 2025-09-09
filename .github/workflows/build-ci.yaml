@@ -22,6 +22,7 @@ jobs:
         # No symlinks should be in icons sources, they should be handled through lists
         test -z "$(find icons/src/{fullcolor,scalable} -type l)"
 
+    - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
     - name: Install dependencies
       run: |
         sudo apt install sassc libxml2-utils libglib2.0-dev python3-pip

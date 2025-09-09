@@ -24,6 +24,7 @@ jobs:
         run: |
           echo "::set-output name=push-branch::auto-optimized-symbolic-icons"
 
+      - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
         run: |
           sudo apt install scour
