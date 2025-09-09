@@ -17,6 +17,7 @@ jobs:
       - uses: actions/checkout@v5
       - name: Install Python 3
         uses: actions/setup-python@v5.6.0
+      - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip

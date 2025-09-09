@@ -48,6 +48,7 @@ jobs:
             symlinks:
               - icons/src/symlinks/**
 
+      - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
         if: ${{ steps.check-changed.outputs.changes != '[]' }}
         run: |
