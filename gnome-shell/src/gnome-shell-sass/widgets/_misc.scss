@@ -41,7 +41,7 @@
   text-align: center;
   padding-bottom: 8px;
   @extend %caption;
-  color: $warning_color;
+  color: if($variant == 'light', $fg_color, $warning_color);
 }
 
 /* Workspace animation */

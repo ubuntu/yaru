@@ -5,7 +5,7 @@ StEntry {
 
   StIcon.capslock-warning {
     icon-size: $scalable_icon_size;
-    warning-color: $warning_color;
+    warning-color: if($variant == 'light', $fg_color, $warning_color);
     padding: 0 $base_margin;
   }
 
