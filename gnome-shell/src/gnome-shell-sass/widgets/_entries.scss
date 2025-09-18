@@ -5,6 +5,9 @@ StEntry {
 
   StIcon.capslock-warning {
     icon-size: $scalable_icon_size;
+    // Yaru: in light themes, the PolKit popup is also light, so a
+    // darker color is required. In Gnome, the popup is dark in both
+    // themes.
     warning-color: if($variant == 'light', $fg_color, $warning_color);
     padding: 0 $base_margin;
   }

@@ -41,6 +41,9 @@
   text-align: center;
   padding-bottom: 8px;
   @extend %caption;
+  // Yaru: in light themes, the PolKit popup is also light, so a
+  // darker color is required. In Gnome, the popup is dark in both
+  // themes.
   color: if($variant == 'light', $fg_color, $warning_color);
 }
 
