@@ -64,8 +64,9 @@ $dialog_padding: $base_padding * 4 $base_padding * 3 $base_padding * 3 $base_pad
   // special style for session warnings
   .end-session-dialog-battery-warning,
   .dialog-list-title {
-    color: $warning_color;
-    background-color: transparentize($warning_color, 0.9);
+    // Yaru: use contrast-optimized color.
+    color: $warning_caption_color;
+    background-color: $warning_caption_bg_color;
     padding: $base_padding * 1.5;
     border-radius: $base_border_radius;
     margin: $base_margin 0;
@@ -148,10 +149,11 @@ $dialog_padding: $base_padding * 4 $base_padding * 3 $base_padding * 3 $base_pad
   }
 
   .prompt-dialog-error-label {
-    color: $warning_color;
+    // Yaru: use contrast-optimized color.
+    color: $warning_caption_color;
     // Yaru: Use uniform aspect on dialog messages.
     // See: https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/3897
-    background-color: transparentize($warning_color, 0.9);
+    background-color: $warning_caption_bg_color;
   }
 
   .prompt-dialog-info-label {
