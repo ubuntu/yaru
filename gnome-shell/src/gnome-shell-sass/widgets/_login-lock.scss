@@ -90,6 +90,12 @@ $_gdm_dialog_width: 25em;
   .conflicting-session-dialog-desc-warning {
     text-align: center;
     color: $warning_color;
+    // Yaru: Use uniform aspect on dialog messages.
+    // See: https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/3897
+    background-color: transparentize($warning_color, 0.9);
+    padding: $base_padding * 1.5;
+    border-radius: $base_border_radius;
+    margin: $base_margin 0;
   }
 }
 
