@@ -210,3 +210,16 @@
 
     @return $fg;
 }
+
+@function composite($bg, $fg) {
+    @if alpha($bg) < 1 {
+        @error "Cannot composite with a non-opaque background color" $bg;
+    }
+
+    $alpha: alpha($fg);
+    @return rgb(
+      round(red($fg) * $alpha + red($bg) * (1 - $alpha)),
+      round(green($fg) * $alpha + green($bg) * (1 - $alpha)),
+      round(blue($fg) * $alpha + blue($bg) * (1 - $alpha))
+    );
+  }
