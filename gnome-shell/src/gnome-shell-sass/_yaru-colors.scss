@@ -50,6 +50,8 @@ $success_color: optimize-contrast($bg_color, $green, $target: 6.0);
 
 $warning_bg_color: optimize-contrast($warning_fg_color, $yellow, $target: 5.5);
 $warning_color: optimize-contrast($bg_color, $yellow, $target: 6.0);
+$warning_fg_color: optimize-contrast($warning_bg_color,
+    composite($warning_bg_color, $warning_fg_color), $target: 5.5);
 
 $error_bg_color: optimize-contrast($error_fg_color, $red, $target: 5.5);
 $error_color: optimize-contrast($bg_color, $red, $target: 6.0);
