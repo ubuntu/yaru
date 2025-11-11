@@ -1,0 +1,519 @@
+$_base_hover_color: transparentize($fg_color, 0.85);
+$_base_active_color: transparentize($fg_color, 0.75);
+$_close_button_color: transparentize($fg_color, 0.9);
+$_titlebutton_height: 20px;
+
+@mixin draw_circle($c, $size:$_titlebutton_height) {
+  $button_size: $size + 2px * 2;
+  $circle_size: 20px / $button_size / 2;
+
+  background-image: -gtk-gradient(radial,
+                                  center center, 0,
+                                  center center, $circle_size,
+                                  to($c),
+                                  to(transparent));
+}
+
+@mixin undershoot($p) {
+  //
+  // undershoot
+  //
+  // $p: position
+  //
+  // possible $p values:
+  // top, bottom, right, left
+  //
+
+  $_us_shadow_color: if($variant=='light', $silk, $jet);
+  $_us_shadow_alpha: 0.8;
+
+  $_gradient_dir: left;
+  $_dash_bg_size: 10px 1px;
+  $_gradient_repeat: repeat-x;
+  $_bg_pos: center $p;
+
+  background-color: transparent; // shouldn't be needed, but better to be sure;
+
+  @if ($p == left) or ($p == right) {
+    $_gradient_dir: top;
+    $_dash_bg_size: 1px 10px;
+    $_gradient_repeat: repeat-y;
+    $_bg_pos: $p center;
+  }
+
+  padding-#{$p}: 1px;
+  background-size: $_dash_bg_size;
+  background-repeat: $_gradient_repeat;
+  background-origin: content-box;
+  background-position: $_bg_pos;
+  border: none;
+
+  @if ($p == left) {
+    box-shadow: inset 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == right) {
+    box-shadow: inset -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == top) {
+    box-shadow: inset 0 2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                inset 0 1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+  @else if ($p == bottom) {
+      box-shadow: inset 0 -2px 0 0 transparentize($_us_shadow_color, $_us_shadow_alpha),
+                  inset 0 -1px 0 0 transparentize(darken($_us_shadow_color, 20%), $_us_shadow_alpha);
+  }
+}
+
+// with a flatter headerbar and buttons, we dont need that heavy shadows, remove this when upstream agrees
+headerbar *, button * {
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+}
+
+// titlebutton
+button.titlebutton:not(.appmenu) {
+
+  &,
+  &:hover,
+  &:active {
+
+    headerbar &,
+    .titlebar &,
+    headerbar.selection-mode & {
+
+      // spec bump otherwise :backdrop  will still have a bg
+      &,
+      &:backdrop {
+        @extend %undecorated_button;
+      }
+    }
+  }
+
+  // Important - otherwise the circle size is wrong
+  min-height: $_titlebutton_height;
+  min-width: $_titlebutton_height;
+  padding: 4px;
+
+  headerbar &,
+  .titlebar &,
+  headerbar.selection-mode &,
+  & {
+    &.maximize, &.minimize, &.close {
+      @include draw_circle($_close_button_color);
+
+      &:hover {
+        @include draw_circle($_base_hover_color);
+      }
+
+      &:active {
+        @include draw_circle($_base_active_color);
+      }
+
+      &:backdrop {
+        background: none;
+      }
+    }
+
+    window.toolbox &.close { // Special selector to target unified window (see #2980)
+      color: $fg_color;
+
+      &:hover {
+        @include draw_circle($_base_hover_color);
+      }
+
+      &:active {
+        @include draw_circle($_base_active_color);
+      }
+
+      &:backdrop {
+        background: none;
+      }
+    }
+  }
+}
+
+// we prefered our gray hover for menus and popovers, orange is a very strong color
+menu,
+.menu,
+.context-menu {
+  menuitem {
+
+    &:hover {
+      color: $fg_color;
+      background-color: $popover_hover_color;
+    }
+  }
+}
+
+// We don't want menuitems to look like links, we should propose this upstream
+menubar,
+.menubar {
+  > menuitem {
+    &:hover {
+      color: $fg_color;
+      background-color: $popover_hover_color;
+    }
+  }
+}
+
+// 2 pixel transparentized focus rings
+// upstream is also interested in this
+
+*:not(button) {
+  outline-color: $focus_border_color;
+  outline-style: solid;
+  outline-offset: -2px;
+  outline-width: 2px;
+  -gtk-outline-radius: $button-radius;
+  :selected & { outline-color: $coloured_focus_border_color; }
+}
+
+button {
+  outline-color: $focus_border_color;
+  outline-style: solid;
+  outline-offset: -2px;
+  outline-width: 2px;
+  -gtk-outline-radius: $button-radius;
+  &.suggested-action, &.destructive-action{ &, &:hover, &:active { outline-color: $coloured_focus_border_color; } }
+}
+
+switch {
+  &, &:hover { slider { outline-color: transparent; } }
+  &:focus {
+    box-shadow: 0 0 0 3px if($variant=='light', lighten(opacify($focus_border_color, 1), 20%), $focus_border_color);
+  }
+}
+
+checkbutton,
+radiobutton {
+  outline-color: $focus_border_color;
+  outline-offset: 1px;
+  outline-width: 2px;
+  row:selected & , treeview:selected & { outline-color: $coloured_focus_border_color; }
+}
+
+treeview {
+  outline-color: $focus_border_color;
+  -gtk-outline-radius: 0px;
+
+  &:selected {
+    outline-color: $coloured_focus_border_color;
+  }
+}
+
+notebook > header {
+  &, &:backdrop { background: transparent; }
+  tabs {
+    &, &:hover, &:backdrop {
+      &, &.right, &.left, &.top, &.bottom {
+        background-color: transparent;
+        tab {
+          outline-width: 1px;
+          outline-offset: -2px;
+          &, &:dir(ltr), &:dir(rtl) {
+            &, &:backdrop {
+              &, &:checked {
+                &, &:hover, &:active {
+                  background-color: transparent;
+                  border-color: transparent;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// With the conservative tab styling scrolled windows need the undershoots
+
+scrolledwindow {
+  undershoot {
+    &.top { @include undershoot(top); }
+
+    &.bottom { @include undershoot(bottom); }
+
+    &.left { @include undershoot(left); }
+
+    &.right { @include undershoot(right); }
+  }
+}
+
+// Check/radios in menus do not need a border
+
+check,
+radio {
+  menu menuitem & {
+    &, &:checked, &:indeterminate {
+      &, &:hover, &:disabled {
+        border-color: transparent;
+      }
+    }
+  }
+}
+// Fixes selected disabled check/radios leaking selected_bg_color, should move to upstream
+treeview.view check,
+treeview.view radio {
+    &:selected {
+      &:focus, & {
+        &:disabled { color: $insensitive_fg_color; }
+    }
+  }
+}
+
+// Reducing the amount of the palette's background colors to two
+
+.sidebar { background-color: $bg_color; }
+
+scale {
+  slider {
+    .osd & {
+      @include button(osd);
+      background-image: image(darken($osd_fg_color, 2%));
+
+      &:hover {
+        background-image: image(darken($osd_fg_color, 10%));
+      }
+
+      &:active {
+        background-image: image(darken($osd_fg_color, 25%));
+      }
+    }
+  }
+}
+
+// Rubberband selection shall match with shell's tile-preview
+.rubberband,
+rubberband {
+  background-color: transparentize($ash, 0.8);
+  border: 1px solid if($variant == 'light', transparentize($silk, 0.2), transparentize(darken($silk, 10%), 0.4));
+}
+// Fix for color chose buttons, should be moved to upstream as it is variable
+// If the min-height is not set, it stretches compact headerbars
+button.color { min-height: $_headerbar_height / 2; }
+
+// Entries drown if drawn on widgets with $base_color
+// Fixing this at least for notebooks, since entries on tabs is a common pattern
+@if $variant=='dark' {
+  notebook entry { background-color: darken($base_color, 2%); }
+}
+
+// Make all :not:(.empty) level bars green - should be moved to upstream
+levelbar {
+  block {
+    &.high,
+    &:not(.empty) {
+      border-color: if($variant == 'light', darken($success_color, 20%), $success_color);
+      background-color: $success_color;
+      &:backdrop { border-color: $success_color; }
+    }
+  }
+}
+
+// Strengthen the menu shadows
+// And lighten up the dark shell menu/popover border to increase visibility
+$_dark_theme_outer_menu_border: lighten(desaturate($base_color, 100%), 14%);
+decoration {
+  .csd.popup & {
+    box-shadow: 0 1px 2px 1px transparentize(black, if($variant=='light', 0.7, 0.6)),
+                0 0 0 1px if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+  }
+}
+@if $variant=='dark' {
+  menu separator {
+    background-color: $_dark_theme_outer_menu_border;
+  }
+}
+popover.background {
+  .csd &, & {
+    border-color: if($variant=='light', transparentize(black, 0.77), $_dark_theme_outer_menu_border);
+    &:backdrop { border-color: $backdrop_borders_color; }
+  }
+  @if $variant=='dark' {
+    separator {
+      background-color: $_dark_theme_outer_menu_border;
+    }
+  }  
+}
+// Adapt dark gtk3 scale and levelbar troughs to the shell
+@if $variant=='dark' {
+  scale, progressbar {
+    trough {
+      border-color: $_dark_theme_outer_menu_border;
+      background-color: $_dark_theme_outer_menu_border;
+    }
+    &:backdrop {
+      trough {
+        border-color: darken($_dark_theme_outer_menu_border, 5%);
+        background-color: darken($_dark_theme_outer_menu_border, 5%);
+      }
+    }
+  }
+  levelbar block.empty {
+    border-color: $_dark_theme_outer_menu_border;
+    background-color: $_dark_theme_outer_menu_border;
+    &:backdrop {
+      border-color: darken($_dark_theme_outer_menu_border, 5%);
+      background-color: darken($_dark_theme_outer_menu_border, 5%);
+    }
+  }
+}
+
+// Mimic GTK4 slider
+
+$_slider_color: darken(white, 1%);
+$_slider_hover_color: white;
+$_slider_disabled_color: if($variant == 'light', $_slider_color, darken($_slider_color, 20%));
+
+$_trough_color: if($variant == 'light', $silk, lighten($inkstone, 5%));
+$_trough_disabled_color: if($variant == 'light', lighten($_trough_color, 10%), $inkstone);
+
+switch {
+  $box-shadow: 0 2px 2px transparentize(black, .9);
+
+  transition: $button_transition;
+  transition-property: background, border;
+
+  &:not(:backdrop), :backdrop &:backdrop {
+    &, :selected & {
+      border-color: $_trough_color;
+      background: $_trough_color;
+    }
+
+    &:checked {
+      border-color: $checkradio_bg_color;
+      background: $checkradio_bg_color;
+
+      :selected & {
+        border-color: transparentize(black, $amount: .75);
+      }
+    }
+
+    &, :selected & {
+      &:disabled {
+        border-color: $_trough_disabled_color;
+        background: $_trough_disabled_color;
+      }
+    }
+  }
+
+  slider {
+    margin: 1px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    background-clip: border-box;
+  }
+
+  &:not(:backdrop) {
+    &, :selected & {
+      &, &:checked {
+        > slider {
+          border-color: $_slider_color;
+          background: $_slider_color;
+          box-shadow: $box-shadow;
+        }
+      }
+  
+      &:hover {
+        &, &:checked {
+          > slider {
+            border-color: $_slider_hover_color;
+            background: $_slider_hover_color;
+            box-shadow: $box-shadow;
+          }
+        }
+      }
+    }
+  }
+
+  &:disabled, &:backdrop {
+    &, &:checked {
+      > slider {
+        &:disabled, &:backdrop {
+          border-color: $_slider_disabled_color;
+          background: $_slider_disabled_color;
+        }
+      }
+    }
+  }
+}
+
+scale:not(.marks-after):not(.marks-before) {
+  $box-shadow: 0 2px 2px transparentize(black, .9);
+  $box-shadow-border: inset 0 0 0 1px transparentize(black, if($variant == 'light', .8, 1));
+  $box-shadow-border-active: inset 0 0 0 1px $progress_border_color;
+
+  slider {
+    border: none;
+    min-height: 20px;
+    min-width: 20px;
+  }
+
+  &:not(:disabled) {
+    slider {
+      background: $_slider_color;
+      box-shadow: $box-shadow-border, $box-shadow;
+    }
+
+    &:hover {
+      slider {
+        background: $_slider_hover_color;
+      }
+    }
+
+    slider:active {
+      box-shadow: $box-shadow-border-active, $box-shadow;
+    }
+  }
+
+  &:disabled, &:backdrop {
+    &, &:hover {
+      slider {
+        background: $_slider_disabled_color;
+        box-shadow: $box-shadow-border;
+      }
+    }
+  }
+}
+
+// Fix for selected image
+// By default this use white, but as we use lighter bg_color
+// we need a darker selected background on light theme
+// and a lighter one on dark theme
+image:selected {
+  background: if($variant == 'light', darken($bg_color, 10%), lighten($bg_color, 10%));
+}
+
+// Fix invisible check and radio in selected row
+check,
+radio {
+  &:checked {
+    &:selected, row:selected & {
+      border-color: rgba(0,0,0,.2);
+    }
+  }
+}
+
+// Add dark theme soft border to libhandy windows
+@if $variant=='dark' {
+  // Same as Labadwaita
+  $window_outline_color: transparentize(white, .93);
+
+  window.csd.unified:not(.solid-csd):not(.fullscreen):not(.maximized) {
+    decoration-overlay {
+      box-shadow: inset 0 0 0 1px $window_outline_color;
+      
+      // Remove default headerbar highlight
+      // Special selector to select all headerbars which has a parent which is near a decoration-overlay,
+      // so we only remove it in Libhandy apps
+      & ~ * headerbar {
+        box-shadow:none
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import 'definitions';
+
+// HdyComboRow
+
+popover.combo list {
+  min-width: 200px;
+}
+
+window.csd.unified:not(.solid-csd) {
+  // Since corners are masked, there's no need for round corners anymore
+  headerbar {
+    border-radius: 0;
+  }
+}
+
+.windowhandle {
+  &, & * {
+    // This is the most reliable way to enable window dragging
+    -GtkWidget-window-dragging: true;
+  }
+}
