@@ -7,6 +7,9 @@
 $dash_padding: $base_padding + 4px; // 10px
 $dash_border_radius: $modal_radius * 3;
 
+// Custom Yaru definition
+$dock_item_border_radius: $base_border_radius * 1.5; // same as $menuitem_border_radius: $base_border_radius * 1.5;
+
 $dock_spacing: round($base_padding / 4);
 $dock_bottom_margin: $base_margin * 4;
 $dock_start_margin: $dock_bottom_margin;
@@ -78,12 +81,23 @@ $dock_remark_color: rgba(238, 238, 238, 0.2);
     }
 }
 
+
+/* Yaru change */
+// a border is applied for panel mode
+// we need to add a 1px offset padding
+// to compensate with 1px border since
+// the border is rendered on top of the last column
+// of the dock (assuming it is positioned to the left)
+// -------------------------------------------------------
+// NOTE: yaru changes are the one commented with 'Yaru change'
 @mixin padded-edge-child($chid, $side, $padding) {
     @if $chid == first {
         @if is_horizontal($side) {
             padding-left: $padding;
+            padding-#{opposite($side)}: 1px; // Yaru Change
         } @else {
             padding-top: $padding;
+            padding-#{opposite($side)}: 1px; // Yaru Change
         }
     } @else if $chid == last {
         @if is_horizontal($side) {
@@ -95,6 +109,7 @@ $dock_remark_color: rgba(238, 238, 238, 0.2);
         @error "Invalid rule";
     }
 }
+/**/
 
 // In extended mode we need to use the first and last .dash-item-container's
 // to apply the padding on the dock, to ensure that the actual first or last
@@ -274,7 +289,11 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
                     side_margin: /* not shrunk */ $dock_side_margin,
                     padding: shrink($dash_padding),
                     margin: shrink($base_margin),
-                    edge_items_padding: shrink_light($dock_edge_items_padding),
+                    /* Yaru Change */
+                    // $edge items_padding is changed to make padding consistent across extended 
+                    // and not extended.
+                    edge_items_padding: shrink($dash_padding), // shrink_light($dock_edge_items_padding),
+                    /**/
                     fixed_inner_margin: shrink($dock_fixed_inner_margin),
                 ));
             }
@@ -487,7 +506,7 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
 
 /* Yaru Dock styling */
 
-$dock_color: $panel_bg_color;
+$dock_color: $bg_color_dark;
 
 @each $side in bottom, top, left, right {
     #dashtodockContainer.#{$side} {
@@ -498,12 +517,31 @@ $dock_color: $panel_bg_color;
             padding: 0px;
 
             .dash-background {
-                background: transparentize($dock_color, 0.25);
-                transition-duration: $panel_transition_duration;
+                background: $dock_color; // Yaru: Drop translucent background
             }
 
             .dash-separator {
                 background: transparentize($osd_fg_color, 0.7);
+            }
+        }
+
+        #dash {
+            .dash-background {
+              // when not shrunk the padding used it $dash_padding;
+              // border radius will be the icon radius increased by dash padding;
+              // this is the correct way of making a consistent look instead of
+              // hard coding
+              border-radius: $dock_item_border_radius + $dash_padding;
+            }
+        }
+
+        &.shrink #dash {
+            .dash-background {
+              // when shrunk the padding used it shrink($dash_padding);
+              // border radius will be the icon radius increased by shrink($dash padding)
+              // this is the correct way of making a consistent look instead of
+              // hard coding
+              border-radius: $dock_item_border_radius + shrink($dash_padding);
             }
         }
 
@@ -524,13 +562,17 @@ $dock_color: $panel_bg_color;
                 .dash-background {
                     // Yaru: remove the border we apply to the upstream dock
                     border: none;
+                    // Yaru: then apply the border color to the side opposite to dock position,
+                    border-#{opposite($side)}: 1px;
+                    // Yaru: set a darker border;
+                    border-color: lighten($dock_color, 5%);
                 }
             }
         }
 
         .dash-item-container {
             .show-apps, .app-well-app {
-                border-radius: $dash_border_radius;
+                border-radius: $dock_item_border_radius; //Yaru: sync with pop-over
                 &:active, &:checked {
                     .overview-icon {
                         background-color: $base_active_color; box-shadow: none;
@@ -559,6 +601,7 @@ $dock_color: $panel_bg_color;
                 .overview-icon {
                     @extend %tile;
                     @include button(normal, $tc:$fg, $c:$normal_bg, $style: flat, $always_dark: true);
+                    border-radius: $dock_item_border_radius;
                 }
 
                 &:focus .overview-icon { @include button(focus, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
