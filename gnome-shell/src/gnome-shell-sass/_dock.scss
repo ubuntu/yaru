@@ -290,7 +290,7 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
                     padding: shrink($dash_padding),
                     margin: shrink($base_margin),
                     /* Yaru Change */
-                    // $edge items_padding is changed to make padding consistent across extended 
+                    // $edge items_padding is changed to make padding consistent across extended
                     // and not extended.
                     edge_items_padding: shrink($dash_padding), // shrink_light($dock_edge_items_padding),
                     /**/
@@ -506,7 +506,9 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
 
 /* Yaru Dock styling */
 
-$dock_color: $bg_color_dark;
+// Use dark color for dock in both light and dark themes
+// This matches our panel styling approach
+$dock_color: $dark_5;
 
 @each $side in bottom, top, left, right {
     #dashtodockContainer.#{$side} {
@@ -575,7 +577,7 @@ $dock_color: $bg_color_dark;
                 border-radius: $dock_item_border_radius; //Yaru: sync with pop-over
                 &:active, &:checked {
                     .overview-icon {
-                        background-color: $base_active_color; box-shadow: none;
+                        background-color: $active_bg_color; box-shadow: none;
                     }
                 }
             }
@@ -623,7 +625,7 @@ $dock_color: $bg_color_dark;
     }
 }
 
-// Use success color for the notification badges in the overview
+// Use Yaru's success color for the notification badges in the overview
 #dashtodockContainer .notification-badge,
 .overview-tile .notification-badge,
 .icon-grid .notification-badge {
