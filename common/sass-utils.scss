@@ -222,4 +222,21 @@
       round(green($fg) * $alpha + green($bg) * (1 - $alpha)),
       round(blue($fg) * $alpha + blue($bg) * (1 - $alpha))
     );
-  }
+}
+
+// Standalone accent color function (Libadwaita-style)
+// Adjusts color lightness for use on light or dark backgrounds
+// Approximates Oklab lightness thresholds using HSL
+@function standalone-accent($color, $dark: false) {
+    $L: lightness($color);
+
+    @if $dark {
+        // Dark mode: ensure minimum lightness of 85% (Oklab 0.85 ≈ HSL 85%)
+        $L: max($L, 85%);
+    } @else {
+        // Light mode: ensure maximum lightness of 50% (Oklab 0.5 ≈ HSL 50%)
+        $L: min($L, 50%);
+    }
+
+    @return hsl(hue($color), saturation($color), $L);
+}
