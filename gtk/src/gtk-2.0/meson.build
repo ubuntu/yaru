@@ -4,6 +4,9 @@
 gtk_ver = '2.0'
 gtk_dir = 'gtk-@0@'.format(gtk_ver)
 
+# Track previous flavour's assets target to enforce sequential builds
+gtk2_prev_assets_target = []
+
 foreach flavour: yaru_flavours
   message('Configuring flavour ' + flavour + ' for GTK-2.0')
   suffix = flavour == 'default' ? '' : '-@0@'.format(flavour)
@@ -94,6 +97,8 @@ foreach flavour: yaru_flavours
         '-e', 's/#c34113/@0@/gi'.format(accent_color_optimized_code),
         '-e', 's/#fea691/@0@/gi'.format(accent_color_optimized_code),
         '-e', 's/#f6b6a0/@0@/gi'.format(accent_color_optimized_code),
+        '-e', 's/#f1a78d/@0@/gi'.format(accent_color_optimized_code),
+        '-e', 's/#f85731/@0@/gi'.format(accent_color_code),
         '@INPUT@'
       ],
       capture: true,
@@ -107,6 +112,7 @@ foreach flavour: yaru_flavours
   gtk2_render_script_path = meson.current_source_dir() / gtk2_render_script
 
   # Create assets directory and run the render script directly
+  # Add dependency on previous flavour to enforce sequential building
   gtk2_assets_target = custom_target(
     '@0@-gtk2-assets'.format(theme_name),
     input: [gtk2_svg_to_use, gtk2_assets_txt],
@@ -118,8 +124,12 @@ foreach flavour: yaru_flavours
       '@PRIVATE_DIR@/assets',        # output directory
       '--clean'
     ],
+    depends: gtk2_prev_assets_target,
     build_by_default: true,
   )
+
+  # Update previous target for next iteration
+  gtk2_prev_assets_target = gtk2_assets_target
 
   # Install generated assets
   gtk2_assets_list = run_command(
