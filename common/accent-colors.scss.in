@@ -4,28 +4,24 @@
     $color: null;
     @if $accent_color == 'default' {
         $color: #E95420;
-    } @else if $accent_color == 'bark' {
-        $color: #787859;
-    } @else if $accent_color == 'sage' {
-        $color: #657B69;
-    } @else if $accent_color == 'olive' {
-        $color: #4B8501;
-    } @else if $accent_color == 'viridian' {
-        $color: #03875B;
-    } @else if $accent_color == 'prussiangreen' {
-        $color: #308280;
-    } @else if $accent_color == 'blue' {
-        $color: #0073E5;
-    } @else if $accent_color == 'purple' {
-        $color: #7764D8;
-    } @else if $accent_color == 'magenta' {
-        $color: #B34CB3;
-    } @else if $accent_color == 'red' {
-        $color: #DA3450;
+    }
+
+    @else if $accent_color == 'blue' {
+        $color: #3584e4; // ADW_ACCENT_COLOR_BLUE
+    } @else if $accent_color == 'teal' {
+        $color: #2190a4; // ADW_ACCENT_COLOR_TEAL
+    } @else if $accent_color == 'green' {
+        $color: #3a944a; // ADW_ACCENT_COLOR_GREEN
     } @else if $accent_color == 'yellow' {
-        $color: #C88800;
-    } @else if $accent_color == 'wartybrown' {
-        $color: #B39169;
+        $color: #c88800; // ADW_ACCENT_COLOR_YELLOW
+    } @else if $accent_color == 'red' {
+        $color: #e62d42; // ADW_ACCENT_COLOR_RED
+    } @else if $accent_color == 'pink' {
+        $color: #d56199; // ADW_ACCENT_COLOR_PINK
+    } @else if $accent_color == 'purple' {
+        $color: #9141ac; // ADW_ACCENT_COLOR_PURPLE
+    } @else if $accent_color == 'slate' {
+        $color: #6f8396; // ADW_ACCENT_COLOR_SLATE
     } @else {
         @error('No known accent color defined!');
     }
@@ -38,9 +34,10 @@ $jet: #181818;
 $yaru_bg_color: if($yaru_is_dark_variant, #FAFAFA, lighten($jet, 8%));
 $yaru_accent_bg_color: get_accent_color('@yaru_accent_color@', $yaru_is_dark_variant);
 
-$contrast_target: if($yaru_is_dark_variant, 4.8, 4.51);
-$yaru_accent_color: optimize-contrast($yaru_bg_color,
-    $yaru_accent_bg_color, $target: $contrast_target);
+// Use Libadwaita approach with HSL approximation (GTK3 doesn't support oklab)
+// accent_bg_color: Raw hex for backgrounds (with white foreground)
+// accent_color: Lightness-adjusted for standalone use (links, icons)
+$yaru_accent_color: standalone-accent($yaru_accent_bg_color, $yaru_is_dark_variant);
 
 @debug("Accent color is " + $yaru_accent_bg_color);
 @debug("Contrast optimized accent is " + $yaru_accent_color);
@@ -48,9 +45,5 @@ $yaru_accent_color: optimize-contrast($yaru_bg_color,
 $accent_bg_color: $yaru_accent_bg_color;
 $accent_fg_color: white;
 $accent_color: $yaru_accent_color;
-
-$yaru_accent_bg_color: optimize-contrast($accent_fg_color,
-    $yaru_accent_bg_color, $target: $contrast_target);
-$accent_bg_color: $yaru_accent_bg_color;
 
 @import '@yaru_theme_entry_point@'
