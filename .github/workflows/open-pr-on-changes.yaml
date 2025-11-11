@@ -105,7 +105,7 @@ jobs:
           if [ -n "$MODIFIED" ]; then
             hasModif="true"
           fi
-          echo "::set-output name=modified::${hasModif}"
+          echo "modified=${hasModif}" >> $GITHUB_OUTPUT
         env:
           UPSTREAM_REPO_URL: ${{ matrix.buildenv.repo }}
           UPSTEAM_BRANCH: ${{ matrix.buildenv.upstreambranch }}
