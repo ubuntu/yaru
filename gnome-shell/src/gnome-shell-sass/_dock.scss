@@ -487,7 +487,9 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
 
 /* Yaru Dock styling */
 
-$dock_color: $panel_bg_color;
+// Use dark color for dock in both light and dark themes
+// This matches our panel styling approach
+$dock_color: $dark_5;
 
 @each $side in bottom, top, left, right {
     #dashtodockContainer.#{$side} {
@@ -533,7 +535,7 @@ $dock_color: $panel_bg_color;
                 border-radius: $dash_border_radius;
                 &:active, &:checked {
                     .overview-icon {
-                        background-color: $base_active_color; box-shadow: none;
+                        background-color: $active_bg_color; box-shadow: none;
                     }
                 }
             }
@@ -580,12 +582,13 @@ $dock_color: $panel_bg_color;
     }
 }
 
-// Use success color for the notification badges in the overview
+// Use Yaru's success color for the notification badges in the overview
+$yaru_success_color: #0e8420;
 #dashtodockContainer .notification-badge,
 .overview-tile .notification-badge,
 .icon-grid .notification-badge {
-    background-color: $success_color;
-    border: 1px solid darken($success_color, 10%);
+    background-color: $yaru_success_color;
+    border: 1px solid darken($yaru_success_color, 10%);
     box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
 }
 
