@@ -60,7 +60,7 @@ jobs:
         ninja -C _build install
 
     - name: Archiving meson logs
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: meson-logs-${{ matrix.build-type }}
         path: _build/meson-logs
