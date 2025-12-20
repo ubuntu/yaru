@@ -583,12 +583,11 @@ $dock_color: $dark_5;
 }
 
 // Use Yaru's success color for the notification badges in the overview
-$yaru_success_color: #0e8420;
 #dashtodockContainer .notification-badge,
 .overview-tile .notification-badge,
 .icon-grid .notification-badge {
-    background-color: $yaru_success_color;
-    border: 1px solid darken($yaru_success_color, 10%);
+    background-color: $success_color;
+    border: 1px solid darken($success_color, 10%);
     box-shadow: -1px 1px 5px 0px transparentize(black, 0.5);
 }
 
