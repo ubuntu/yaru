@@ -1,6 +1,33 @@
 //
 // Color Overrides
 //
-// Override specific colors after all default colors are loaded
+// Minimal Yaru customizations - only essential overrides
 
-$success_bg_color: #0e8420;
+// Yaru hover - subtle neutral grey instead of upstream's colored shifts
+$hover_bg_color: transparentize($fg_color, 0.9);
+$hover_fg_color: $fg_color;
+
+// Yaru brand colors
+$yaru_red: #c7162b;
+$yaru_green: #0e8420;
+$yaru_yellow: #f99b11;
+
+// Destructive/error colors with Yaru red
+$destructive_bg_color: optimize-contrast($light_1, $yaru_red, $target: 5.5);
+$destructive_color: optimize-contrast($bg_color, $yaru_red, $target: 6.0);
+$error_bg_color: optimize-contrast($light_1, $yaru_red, $target: 5.5);
+$error_color: optimize-contrast($bg_color, $yaru_red, $target: 6.0);
+
+// Success colors with Yaru green
+$success_bg_color: optimize-contrast($light_1, $yaru_green, $target: 5.5);
+$success_color: optimize-contrast($bg_color, $yaru_green, $target: 6.0);
+
+// Warning colors with Yaru yellow
+$warning_bg_color: optimize-contrast(transparentize(black, .2), $yaru_yellow, $target: 5.5);
+$warning_color: optimize-contrast($bg_color, $yaru_yellow, $target: 6.0);
+$warning_fg_color: optimize-contrast($warning_bg_color,
+    composite($warning_bg_color, transparentize(black, .2)), $target: 5.5);
+
+$warning_caption_bg_color: composite($bg_color, transparentize($warning_color, 0.9));
+$warning_caption_color: optimize-contrast($warning_caption_bg_color,
+    $warning_color, $target: 6.0);

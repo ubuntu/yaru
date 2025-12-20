@@ -158,3 +158,23 @@
 .unlock-dialog-notification-count-text {
   font-weight: normal !important;
 }
+
+// ============================================================================
+// Hover Color Fix for Popovers and Menus
+// ============================================================================
+// Override upstream's accent-colored and calculated hovers with Yaru's neutral grey
+
+.popup-menu-item {
+  &:hover, &:selected {
+    background-color: transparentize($fg_color, 0.9) !important;
+  }
+}
+
+.quick-toggle:hover {
+  background-color: transparentize($fg_color, 0.9) !important;
+}
+
+.button.default:hover,
+.quick-toggle:hover:checked {
+  background-color: transparentize($fg_color, 0.85) !important;
+}
