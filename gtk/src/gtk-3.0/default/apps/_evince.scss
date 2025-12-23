@@ -1,0 +1,6 @@
+@if $variant == 'light' {
+    evview {
+        background: darken($bg_color, 5%);
+    }
+}
+  
