@@ -197,6 +197,11 @@ do
 done
 echo "Done"
 
+# Cursors
+echo "Generating links for cursors..."
+THEME="Yaru"
+linker "cursors" "cursors"
+
 # Clear symlink errors
 if command -v symlinks 2>&1 >/dev/null; then
 	echo "Deleting broken links..."
