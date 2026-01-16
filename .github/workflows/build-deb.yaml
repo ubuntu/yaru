@@ -22,6 +22,7 @@ jobs:
         uses: canonical/desktop-engineering/gh-actions/common/build-debian@main
         with:
           docker-image: ubuntu:${{ env.UBUNTU_VERSION }}
+          lrc: skip
 
       - name: Install generated debs
         uses: kohlerdominik/docker-run-action@v2.0.0
