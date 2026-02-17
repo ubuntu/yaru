@@ -3,7 +3,7 @@ Section: misc
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: debhelper-compat (= 13),
-               dh-migrations,
+               dh-sequence-user-session-migration,
 Build-Depends-Indep: libglib2.0-dev,
                      meson (>= 0.60),
                      libxml2-utils,
