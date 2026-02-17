@@ -1,19 +1,86 @@
-yaru-theme (25.10.3.2ubuntu) UNRELEASED; urgency=medium
+yaru-theme (26.04.1.1ubuntu) UNRELEASED; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
+  * New upstream release
+  * debian: Switch to user-session-migration
+  * debian/control: Bump meson dependency
+  * debian/yaru-theme-gnome-shell.alternatives: Add alternative for gdm-icons
+  * debian/copyright: Adjust to latest changes and add missing licenses
   * gnome-shell: Uniform the style of the dialog warnings
   * sass-utils: Add a composite function
   * gnome-shell/yaru-colors: Optimize the contrast of the warning fg color
   * gnome-shell: Optimize the contrast of the dialog warnings
   * debian/yaru-theme-gtk.migrations: Remove migration from Yaru-light
   * d/yaru-theme-gtk-to-accent-color.sh: Migrate bark users to brown
-  * debian: Switch to user-session-migration
   * Adjust the version number to respect native packages rule
+  * icons/build: Avoid glob expansion issue on test check
+  * icons/generate-symlinks: Use multi-line array elements (and fix wrong items)
+  * icons/scalable: Regenerate symbolic links as per the previous fix
+  * generate-symlinks: Quote variables and cleanup code
+  * icons/generate-symlinks: Avoid relying on the CWD
+  * generate-symlinks: Do not ignore not-existent paths for fullcolor themes
+  * icons: Generate symlinks for all (status) icons pointing to other paths
+  * gtk: Sync with upstream changes
+  * gtk/colors: Define accent color value
+  * common/yaru-colors-defs: Only optimize accent colors
+  * common/colorize-dummy: Allow to define the output file path
+  * accent-colors: Allow to define light and dark bg colors
+  * sass-utils: Do not hang forever if we cannot compute a proper color
+  * gtk: Treat mate as an accent
+  * gtk: Add support for generating accented assets
+  * gtk: Regenerate and render accented assets
+  * icons/calculator-app: Use accented icon
+  * icons: Render calculator app icons
+  * gnome-shell: Add somewhat yarufied new a11y icons
+  * gnome-shell: Sync with upstream
+  * gnome-shell/login-lock: Sync with ubuntu patches
+  * gnome-shell/meson: Use adjusted scss files from build dir if needed
+  * tweaks: Add dialog warning color overrides
+  * widgets/authd: Drop qr-code (went to another widget)
+  * gnome-shell: Load colors from yaru palette to define base colors
+  * colors-override: Use colors definition from the yaru palette
+  * gnome-shell/color-overrides: Redefine system colors based on palette
+  * gnome-shell/color-overrides: Use matching yaru colors for dock and panel
+  * yaru-palette: Override upstream colors with yaru ones
+  * gnome-shell/tweaks: Fix quick-settings on-hover color
+  * gnome-shell/tweaks: Add missing Yaru customization for lockscreen
+  * gnome-shell/tweaks: Use contrast-optimized colors for prompt dialogs
+  * gnome-shell/tweaks: Reduce the font weight on some items
+  * gnome-shell/tweaks: Add OSD fixes for yaru
+  * gnome-shell/tweaks: Reduce radius of pop-ups
+  * gnome-shell/tweaks: Use consistent radius in quick-settings
+  * build: Bump meson version and drop legacy workarounds
+  * gnome-shell: Use thinner key shape for accessibility icons
 
   [ Benjamin Drung ]
   * gtksourceview: add 'version' attribute (LP: #2084420)
 
- -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Tue, 17 Feb 2026 22:44:07 +0100
+  [ Adrian Dombeck ]
+  * debian/copyright: Remove trailing whitespace
+  * debian/copyright: Group file stanzas for files below icons/ together
+  * debian/copyright: Remove superfluous copyright
+  * debian/copyright: Fix issues reported by licenserecon
+  * debian/lrc.config: Exclude meson.build
+
+  [ Vincent Renzo Quilon ]
+  * Add improvements to nautilus icons and folder icons
+
+  [ Paul Kepinski ]
+  * Yaruify GS wellbeing
+  * Fix folder-drag-accept symlink
+
+  [ ochi12 ]
+  * Libreoffice Revamp: Add new libreoffice icons for the whole suite
+  * Yaru Gnome Shell Theme: Improve Ubuntu Dock look using opaque background
+
+  [ Muqtxdir ]
+  * New upstream snapshot for GTK4
+  * gnome-shell: Reuse upstream sass files
+  * gnome-shell: move yaru styling to tweaks as overrides
+  * gnome-shell: re-use optimize color fn with yaru colors
+  * gnome-shell: split out `authd` styling
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 13 Mar 2026 02:02:42 +0100
 
 yaru-theme (25.10.3-0ubuntu1) questing; urgency=medium
 
