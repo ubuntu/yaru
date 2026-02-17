@@ -1,5 +1,7 @@
 /* OSD */
 
+@import 'sass-utils';
+
 $osd_levelbar_height:6px;
 
 .osd-window {
@@ -27,7 +29,8 @@ $osd_levelbar_height:6px;
     -barlevel-height: $osd_levelbar_height;
     -barlevel-background-color: transparentize($osd_fg_color, if($variant=='light', 0.7, 0.9));
     -barlevel-active-background-color: $osd_fg_color;
-    -barlevel-overdrive-color: $destructive_color;
+    // Yaru: Optimize overdrive color for contrast
+    -barlevel-overdrive-color: optimize-contrast($osd_bg_color, $destructive_color, $target: 5.5);
     -barlevel-overdrive-separator-width: $base_padding * 0.5;
     &:ltr { margin-right: $base_padding; }
     &:rtl { margin-left: $base_padding; }

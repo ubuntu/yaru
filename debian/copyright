@@ -10,14 +10,34 @@ Copyright: 2017-2018, Canonical Ltd.
            2015, Руслан Ижбулатов <lrn1986@gmail.com>
 License: GPL-3.0+
 
-Files: gnome-shell/upstream/theme/gnome-shell-sass/_common.scss
+Files: gnome-shell/src/gnome-shell-sass/_common.scss
+       gnome-shell/upstream/theme/gnome-shell-sass/_common.scss
 Copyright: 2009-2015 Red Hat, Inc.
            2009 Intel Corporation
 License: LGPL-2.1
 
+Files: gnome-shell/src/data/icons/scalable/status/wellbeing-symbolic.svg
+       gnome-shell/upstream/data/icons/scalable/status/wellbeing-symbolic.svg
+Copyright: 2024 Jakub Steiner
+License: CC0-1.0
+
 Files: icons/*
 Copyright: 2018, Sam Hewitt <sam@snwh.org>
 License: CC-BY-SA-4.0
+
+Files: icons/src/cursors/anicursorgen.py
+Copyright: 2015 Руслан Ижбулатов <lrn1986@gmail.com>
+License: GPL-3+
+
+Files: icons/src/cursors/render-cursors.py
+License: GPL-2
+
+Files: icons/src/fullcolor/render-bitmaps.py
+       icons/src/scalable/extract-symbolic-icons.rb
+License: LGPL-3
+
+Files: icons/src/symlinks/generate-symlinks.sh
+License: GPL-3
 
 Files: common/colorize-dummy-svg.py
        common/sass-utils.scss
@@ -27,11 +47,6 @@ Files: common/colorize-dummy-svg.py
 Copyright: 2020, Canonical Ltd.
            2022, Canonical Ltd.
 License: LGPL-2.1+
-
-Files: icons/src/fullcolor/render-bitmaps.py
-       icons/src/scalable/extract-symbolic-icons.rb
-Copyright: 2018, Sam Hewitt <sam@snwh.org>
-License: LGPL-3.0
 
 Files: sounds/*
 Copyright: 2018, Mads Rosendahl <madsrh@gmail.com>
@@ -111,7 +126,7 @@ License: CC-BY-SA-4.0
       such as asking that all changes be marked or described.
       Although not required by our licenses, you are encouraged to
       respect those requests where reasonable. More_considerations
-      for the public: 
+      for the public:
       wiki.creativecommons.org/Considerations_for_licensees
  .
  =======================================================================

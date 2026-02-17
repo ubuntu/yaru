@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Yaru code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
@@ -27,7 +27,7 @@ jobs:
       - name: Setup common variables
         id: env
         run: |
-          echo "::set-output name=push-branch::auto-rendered-icons"
+          echo "push-branch=auto-rendered-icons" >> $GITHUB_OUTPUT
 
       - name: Check Source changes
         uses: dorny/paths-filter@v3
@@ -48,6 +48,7 @@ jobs:
             symlinks:
               - icons/src/symlinks/**
 
+      - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
         if: ${{ steps.check-changed.outputs.changes != '[]' }}
         run: |
@@ -117,7 +118,7 @@ jobs:
           else
             changed=true
           fi
-          echo "::set-output name=changed::${changed}"
+          echo "changed=${changed}" >> $GITHUB_OUTPUT
 
       - name: Create or update Pull Request
         if: steps.check-rendering.outputs.changed == 'true'

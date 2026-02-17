@@ -4,6 +4,3 @@ $_base_color_light: $light_1; // Yaru: use our colors
 
 // Used for dash and other dark elements on light theme
 $yaru_borders_color_dark: lighten(desaturate(lighten($jet, 4%), 100%), 14%);
-
-// Overrides default
-$warning_bg_color: if($variant =='light', darken($yellow, 1%), $yellow);

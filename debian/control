@@ -3,7 +3,7 @@ Section: misc
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: debhelper-compat (= 13),
-               dh-migrations,
+               dh-sequence-user-session-migration,
 Build-Depends-Indep: libglib2.0-dev,
                      meson (>= 0.60),
                      libxml2-utils,
@@ -40,7 +40,7 @@ Description: Yaru GTK theme from the Ubuntu Community
  This is the theme, better than a burrito, that is shaped by the community
  on the Ubuntu discourse.
  .
- This package contains the GTK+ 2 and 3 theme parts
+ This package contains the GTK+ 2, 3 and GTK 4 theme parts
  .
  If you want to follow development, more information here:
  https://community.ubuntu.com/c/desktop/theme-refresh.

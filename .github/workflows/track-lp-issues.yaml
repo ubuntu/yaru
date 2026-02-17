@@ -14,9 +14,10 @@ jobs:
 
     steps:
       # Checkout code
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Install Python 3
-        uses: actions/setup-python@v5.6.0
+        uses: actions/setup-python@v6.0.0
+      - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip

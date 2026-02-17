@@ -15,13 +15,14 @@ jobs:
 
     steps:
     - name: Pull Yaru
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Check sources structure
       run: |
         # No symlinks should be in icons sources, they should be handled through lists
         test -z "$(find icons/src/{fullcolor,scalable} -type l)"
 
+    - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
     - name: Install dependencies
       run: |
         sudo apt install sassc libxml2-utils libglib2.0-dev python3-pip
@@ -59,7 +60,7 @@ jobs:
         ninja -C _build install
 
     - name: Archiving meson logs
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: meson-logs-${{ matrix.build-type }}
         path: _build/meson-logs

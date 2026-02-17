@@ -1,5 +1,5 @@
 project('Yaru',
-        version: '25.10.2',
+        version: '25.10.3',
         meson_version: '>= 0.60',
         license : ['GPL3', 'CC BY-SA 4.0'],
         default_options: ['prefix=/usr'])

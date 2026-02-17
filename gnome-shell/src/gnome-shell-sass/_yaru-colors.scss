@@ -1,3 +1,5 @@
+@import 'sass-utils';
+
 // Yaru custom definitions
 $base_hover_color: transparentize(white, 0.8);
 $base_active_color: transparentize(white, 0.75);
@@ -35,3 +37,25 @@ $osd_insensitive_bg_color: transparentize(mix($osd_fg_color, opacify($osd_bg_col
 $osd_insensitive_fg_color: mix($osd_fg_color, opacify($osd_bg_color, 1), 50%);
 $osd_borders_color: transparentize(black, 0.3);
 $osd_outer_borders_color: transparentize(white, 0.84);
+
+// Overrides defaults for contrast optimized ones.
+
+// colors for destructive elements
+$destructive_bg_color: optimize-contrast($destructive_fg_color, $red, $target: 5.5);
+$destructive_color: optimize-contrast($bg_color, $red, $target: 6.0);
+
+// colors for levelbars, entries, labels and infobars
+$success_bg_color: optimize-contrast($success_fg_color, $green, $target: 5.5);
+$success_color: optimize-contrast($bg_color, $green, $target: 6.0);
+
+$warning_bg_color: optimize-contrast($warning_fg_color, $yellow, $target: 5.5);
+$warning_color: optimize-contrast($bg_color, $yellow, $target: 6.0);
+$warning_fg_color: optimize-contrast($warning_bg_color,
+    composite($warning_bg_color, $warning_fg_color), $target: 5.5);
+
+$warning_caption_bg_color: composite($bg_color, transparentize($warning_color, 0.9));
+$warning_caption_color: optimize-contrast($warning_caption_bg_color,
+    $warning_color, $target: 6.0);
+
+$error_bg_color: optimize-contrast($error_fg_color, $red, $target: 5.5);
+$error_color: optimize-contrast($bg_color, $red, $target: 6.0);

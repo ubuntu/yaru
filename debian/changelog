@@ -1,3 +1,33 @@
+yaru-theme (25.10.3.2ubuntu) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell: Uniform the style of the dialog warnings
+  * sass-utils: Add a composite function
+  * gnome-shell/yaru-colors: Optimize the contrast of the warning fg color
+  * gnome-shell: Optimize the contrast of the dialog warnings
+  * debian/yaru-theme-gtk.migrations: Remove migration from Yaru-light
+  * d/yaru-theme-gtk-to-accent-color.sh: Migrate bark users to brown
+  * debian: Switch to user-session-migration
+  * Adjust the version number to respect native packages rule
+
+  [ Benjamin Drung ]
+  * gtksourceview: add 'version' attribute (LP: #2084420)
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Tue, 17 Feb 2026 22:44:07 +0100
+
+yaru-theme (25.10.3-0ubuntu1) questing; urgency=medium
+
+  [ ochi12 ]
+  * Fix: Adjust 48×48px calculator-app pictogram thickness to match proportions
+    of other sizes (not visible change)
+
+  [ Marco Trevisan (Treviño) ]
+  * gnome-shell: Optimize contrast for warning, success and destructive texts
+    (LP: #2126731)
+  * debian/control: Fix gtk package description (LP: #2081059)
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 03 Oct 2025 06:05:14 +0200
+
 yaru-theme (25.10.2-0ubuntu1) questing; urgency=medium
 
   [ Vincent Renzo Quilon ]
