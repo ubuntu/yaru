@@ -1,33 +1,65 @@
-## Summary
+# Cinnamon Shell Theme – Source Module (`cinnamon-shell/src`)
 
-Do not edit the CSS directly, edit the source SCSS files and the CSS files
-will be generated automatically when building with meson + ninja and left
-inside the build directory (you'll need to have sassc installed).
+## 1. Module Identity
+This directory contains everything needed to **build and install the Cinnamon‑shell variant of the Yaru theme**:
+- **SCSS source files** (`_colors.scss`, `_common.scss`, `_drawing.scss`, `_palette.scss`, `_tweaks.scss`) that are compiled into CSS by the Meson + Ninja build chain.
+- **Asset collections** (SVGs) under `assets/colorable‑assets/` and `assets/common‑assets/` that are packaged into the theme’s gresource.
+- A **post‑install helper script** (`post_install.py`) that finalises the installation layout by renaming the generated CSS file to the name expected by Cinnamon.
 
-## How to tweak the theme
+The module does **not** contain runtime code for the desktop environment; it only prepares static theme resources.
 
-Yaru is a complex theme, so to keep it maintainable it's written and
-processed in SASS, the generated CSS is then transformed into a gresource
-file during gtk build and used at runtime in a non-legible or editable form.
+---
 
-It is very likely your change will happen in the [_tweaks.scss][tweaks] file.
-That's where all the applet selectors are defined. Here's a rundown of
-the "supporting" stylesheets, that are unlikely to be the right place
-for a drive by stylesheet fix:
+## 2. Interface Contract
+### `post_install.py` – Command‑line contract
+```text
+Usage: post_install.py <data_dir> <project_name> [flavour …]
+```
+| Parameter | Description |
+|-----------|-------------|
+| `data_dir` | Relative path inside the installation prefix where theme data are placed (e.g. `share` for `/usr/share`). |
+| `project_name` | Base name of the theme package (normally `yaru`). |
+| `flavour` (optional, repeatable) | Additional flavour identifiers (e.g. `dark`, `light`). The special value `default` maps to the base project name. |
 
-| File                     | Description       |
-| ------------------------ | ----------------- |
-| [_colors.scss][colors]   | global color definitions. We keep the number of defined colors to a necessary minimum,  most colors are derived from a handful of basics. It is an exact copy of the gtk+ counterpart. Light theme is used for the classic theme and dark is for GNOME3 shell default. |
-| [_drawing.scss][drawing] | drawing helper mixings/functions to allow easier definition of widget drawing under specific context. This is why Adwaita isn't 15000 LOC. |
-| [_common.scss][common]   | actual definitions of style for each applet. This is synced with upstream and left as is for cleaner build. |
-| [_tweaks.scss][tweaks]   | Any definition of style specific to yaru are to be included here and overrides upstream. |
+**Behaviour**
+1. Resolve the installation prefix from the environment variable `MESON_INSTALL_DESTDIR_PREFIX` (defaults to `/usr`).
+2. Build the absolute path to the themes directory: `<PREFIX>/<data_dir>/themes`.
+3. For each flavour:
+   - Determine the directory name: `project_name` for `default`, otherwise `<project_name>-<flavour>`.
+   - Construct the path `<themes_dir>/<flavour_dir>/cinnamon`.
+   - If a file named `<flavour_dir>.css` exists inside that directory, rename it to `cinnamon.css`.
+4. The script exits silently; any missing files are simply ignored.
 
-You can read about SASS on its [web page][sass-web]. Once you make your
-changes to the [_common.scss][common] file, you can run ninja to generate the
-final CSS files.
+**Exported symbols** – The script is executed as a module (`__main__`). No Python functions or classes are intended for import by other code.
 
-[common]: default/_common.scss
-[colors]: default/_colors.scss
-[drawing]: default/_drawing.scss
-[sass-web]: http://sass-lang.com/documentation/
-[tweaks]: default/_tweaks.scss
+---
+
+## 3. Logic Flow Within the Folder
+1. **SCSS compilation** (handled by Meson/Ninja, not part of the source code shown):
+   - The `_*.scss` files are concatenated and processed by `sassc` to produce `cinnamon.css` inside a temporary build directory.
+2. **Asset packaging**:
+   - All SVG files under `assets/` are copied into the theme’s directory structure and later compiled into a GResource binary by the build system.
+3. **Installation layout** (performed by `post_install.py` after `meson install`):
+   - The build system installs the generated CSS as `<flavour>.css` (e.g., `yaru.css`, `yaru-dark.css`).
+   - `post_install.py` renames each of those files to the canonical name `cinnamon.css` expected by the Cinnamon shell at runtime.
+4. **Result**:
+   - After the script runs, the final layout under `<PREFIX>/<data_dir>/themes/<theme‑name>/cinnamon/` contains:
+     - `cinnamon.css` (the compiled stylesheet)
+     - The full set of SVG assets referenced by the stylesheet.
+
+---
+
+## 4. Dependencies
+| Dependency | Reason / Role |
+|------------|---------------|
+| **Python 3 (standard library)** | Used by `post_install.py` for path manipulation (`os.path`), environment access (`os.environ`), and file moving (`shutil.move`). |
+| **MESON build system** | Drives the SCSS compilation, asset copying, and invokes `post_install.py` as a post‑install step. |
+| **sassc** | Compiles the SCSS source files into CSS. |
+| **Cinnamon shell** (runtime) | Consumes the generated `cinnamon.css` and the packaged SVG assets. |
+| **Filesystem layout** (`/usr` prefix by default) | The script relies on the conventional theme directory hierarchy (`share/themes/<name>/cinnamon`). |
+
+No external Python packages are required; the script is deliberately lightweight to run in any standard Ubuntu build environment.
+
+---
+
+*This README is generated automatically to keep documentation in sync with the actual implementation of the `cinnamon-shell/src` module.*
