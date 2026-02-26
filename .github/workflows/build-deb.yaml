@@ -24,7 +24,7 @@ jobs:
           docker-image: ubuntu:${{ env.UBUNTU_VERSION }}
 
       - name: Install generated debs
-        uses: kohlerdominik/docker-run-action@v2.0.0
+        uses: kohlerdominik/docker-run-action@v2.1.0
         with:
           image: ubuntu:${{ env.UBUNTU_VERSION }}
           environment: |
