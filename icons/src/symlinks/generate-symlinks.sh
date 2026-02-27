@@ -91,7 +91,7 @@ DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "phosh" "status" "emblems" "ui", "org.gnome.Nautilus", "time", "org.gnome.Settings")
 OPTIONAL_CONTEXTS=("panel" "animations")
 SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
-OPTIONAL_SIZES=("8x8" "8x8@2x" "22x22")
+OPTIONAL_SIZES=("8x8" "8x8@2x" "22x22", "cursors")
 VARIANTS=("default" "dark" "mate")
 
 CONTEXTS+=("${OPTIONAL_CONTEXTS[@]}")
@@ -196,6 +196,12 @@ do
 	done
 done
 echo "Done"
+
+# Cursors
+echo "Generating links for cursors..."
+CONTEXT="cursors"
+THEME="Yaru"
+linker "cursors" "" # we want empty sub_folder to avoid Yaru/cursors/cursors which do not exist
 
 # Clear symlink errors
 if command -v symlinks 2>&1 >/dev/null; then
