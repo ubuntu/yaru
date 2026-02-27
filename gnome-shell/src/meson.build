@@ -122,6 +122,8 @@ foreach variant: variants
         sassc, '-a', '@INPUT@', '@OUTPUT@',
         '-I', css_sources_path,
         '-I', meson.project_source_root() / 'common',
+        '-I', meson.project_source_root() / 'gnome-shell' / 'upstream' / 'theme',
+        '-I', meson.current_source_dir(),
       ],
       install: install_theme_sources,
       install_dir: install_dir,

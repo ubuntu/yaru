@@ -1,0 +1,180 @@
+/* Yaru Tweaks for GNOME Shell
+ *
+ * This file contains minimal style overrides to the upstream GNOME Shell theme.
+ */
+
+// ============================================================================
+// Typography Overrides
+// ============================================================================
+// Custom font weight definitions for titles and headings
+// Adjust these values as needed for Yaru's referencing the weights from Vanilla Framework
+
+%large_title {
+  font-weight: 300;
+  @include fontsize(24pt);
+}
+
+%title_1 {
+  font-weight: 650;
+  @include fontsize(20pt);
+}
+
+%title_2 {
+  font-weight: 650;
+  @include fontsize(15pt);
+}
+
+%title_3 {
+  font-weight: 550;
+  @include fontsize(15pt);
+}
+
+%title_4 {
+  font-weight: 550;
+  @include fontsize(13pt);
+}
+
+%heading {
+  font-weight: 550;
+  @include fontsize(11pt);
+}
+
+%caption_heading {
+  font-weight: 550;
+  @include fontsize(9pt);
+}
+
+%caption {
+  font-weight: 400;
+  @include fontsize(9pt);
+}
+
+%smaller {
+  font-weight: 400;
+  @include fontsize(9pt);
+}
+// ============================================================================
+// Looking Glass Tweaks
+// ============================================================================
+// Looking Glass dialog - ensure it's always dark with good contrast
+#LookingGlassDialog {
+  background-color: rgba(34, 34, 38, 0.98) !important;
+  color: $light_1 !important;
+  border-radius: 12px;
+
+  StLabel {
+    color: $light_1 !important;
+  }
+
+  StEntry {
+    color: $light_1 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+// ============================================================================
+// Panel Tweaks
+// ============================================================================
+// Always use dark panel appearance with white text (even in light theme)
+// This provides better visual hierarchy and modern look
+
+// Panel - dark background in all modes (desktop and overview)
+#panel {
+  background-color: $dark_5 !important;
+
+  // Keep panel dark in overview too
+  &:overview {
+    background-color: $dark_5 !important;
+  }
+
+  // Override all panel button styling to use white text and normal font weight
+  // This needs to be specific enough to override the panel_button mixin
+  .panel-button {
+    font-weight: normal !important;
+    color: $light_1 !important;
+
+    // All text and icons should be white
+    StIcon,
+    StLabel {
+      color: $light_1 !important;
+    }
+
+    // Activities button workspace dots should be white
+    &#panelActivities .workspace-dot {
+      background-color: $light_1 !important;
+    }
+  }
+
+  // Override overview-specific panel button colors
+  &:overview .panel-button {
+    color: $light_1 !important;
+
+    StIcon,
+    StLabel {
+      color: $light_1 !important;
+    }
+
+    // Activities button workspace dots in overview should also be white
+    &#panelActivities .workspace-dot {
+      background-color: $light_1 !important;
+    }
+  }
+
+  // Ensure system status indicators are white
+  .system-status-icon {
+    color: $light_1 !important;
+  }
+}
+
+// Lockscreen/login screen - transparent panel (override the above)
+// This must come AFTER the main panel rule to override it
+#panel.unlock-screen,
+#panel.login-screen {
+  background-color: transparent !important;
+}
+
+// ============================================================================
+// Lockscreen Tweaks
+// ============================================================================
+
+// Lockscreen clock - use normal font weight for all text
+// Apply to parent to override all children
+.unlock-dialog-clock {
+  font-weight: normal !important;
+
+  .unlock-dialog-clock-time,
+  .unlock-dialog-clock-date,
+  .unlock-dialog-clock-hint {
+    font-weight: normal !important;
+  }
+}
+
+// Also override the placeholder that includes these elements
+.unlock-dialog-clock .unlock-dialog-clock-date {
+  font-weight: normal !important;
+}
+
+// Lockscreen notification counter - use normal font weight
+.unlock-dialog-notification-count-text {
+  font-weight: normal !important;
+}
+
+// ============================================================================
+// Hover Color Fix for Popovers and Menus
+// ============================================================================
+// Override upstream's accent-colored and calculated hovers with Yaru's neutral grey
+
+.popup-menu-item {
+  &:hover, &:selected {
+    background-color: transparentize($fg_color, 0.9) !important;
+  }
+}
+
+.quick-toggle:hover {
+  background-color: transparentize($fg_color, 0.9) !important;
+}
+
+.button.default:hover,
+.quick-toggle:hover:checked {
+  background-color: transparentize($fg_color, 0.85) !important;
+}
