@@ -32,6 +32,7 @@ CONTEXT_MAPPING = {
     'mimetypes': 'MimeTypes',
     'panel': 'Status',
     'ui': 'UI',
+    'inkscape': 'Actions'
 }
 
 CUSTOM_PARAMETERS = {
