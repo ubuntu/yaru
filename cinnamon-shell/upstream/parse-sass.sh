@@ -1,4 +1,4 @@
 #! /bin/bash
 
-sassc ./sass/cinnamon.scss cinnamon.css
-sassc ./sass/cinnamon-dark.scss cinnamon-dark.css
+pysassc ./sass/cinnamon.scss cinnamon.css
+pysassc ./sass/cinnamon-dark.scss cinnamon-dark.css
