@@ -68,6 +68,12 @@ $active_fg_color: lighten($fg_color, 22%);
 $accent_borders_color: st-lighten(-st-accent-color, 30%);
 
 //
+// Special Case Colors
+//
+
+$card_insensitive_fg_color: $fg_color;
+
+//
 // High Contrast specific definitions
 //
 
