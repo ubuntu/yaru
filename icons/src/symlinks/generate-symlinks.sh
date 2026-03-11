@@ -133,6 +133,22 @@ in_array() {
     return 1
 }
 
+normalize_path() {
+    local -n _np_result=$1
+    local IFS='/'
+    local -a parts stack=()
+    read -ra parts <<< "$2"
+    local part
+    for part in "${parts[@]}"; do
+        case "$part" in
+            ..) [[ ${#stack[@]} -gt 0 ]] && unset 'stack[-1]' ;;
+            .|'') ;;
+            *) stack+=("$part") ;;
+        esac
+    done
+    _np_result="/${stack[*]}"
+}
+
 CONTEXTS+=("${OPTIONAL_CONTEXTS[@]}")
 SIZES+=("${OPTIONAL_SIZES[@]}")
 
@@ -157,9 +173,14 @@ linker() {
         return
     fi
 
+    if [ "$icon_folder" != "fullcolor" ] && [ ! -d "$base_dir" ]; then
+        dlog "  -- no $icon_subfolder/$CONTEXT, skipping it"
+        return 0
+    fi
+
     while IFS= read -r line; do
         if [[ "$line" =~ ^[[:space:]]*$ ]]; then
-            dlog "Ignoring empty line in $LIST"
+            dlog "Ignoring empty line in $list"
             continue
         fi
 
@@ -168,11 +189,21 @@ linker() {
             continue
         fi
 
-        SOURCE_FILE="${line%% *}"
-        if [ -f "$base_dir/$SOURCE_FILE" ]; then
-            read -r -a line_array <<< "$line"
-            target="${line_array[0]}"
-            link_name="${line_array[1]}"
+        read -r -a line_array <<< "$line"
+        target="${line_array[0]}"
+        link_name="${line_array[1]}"
+
+        if [ -z "$target" ] || [ -z "$link_name" ]; then
+            echo "  ERROR: invalid line '$line' in '$list' (expected '<target> <link_name>')"
+            exit 1
+        fi
+
+        # Using `realpath -m` or a subshell would decrease the performances a lot
+        # so let's use bash native string manipulation.
+        local source_file
+        normalize_path source_file "$base_dir/$target"
+
+        if [ -f "$source_file" ]; then
             echo "[$icon_subfolder/$CONTEXT] linking $link_name -> $target"
             if [ -n "${generated_links["$link_name"]}" ]; then
                 echo "  ERROR: \"$link_name\" is already linked to \"${generated_links["$link_name"]}\""
@@ -196,14 +227,14 @@ linker() {
              ! in_array "$icon_subfolder" "${OPTIONAL_SIZES[@]}" &&
              ! in_array "$CONTEXT" "${OPTIONAL_CONTEXTS[@]}"; then
             # The default variant must have all icons available
-            echo "  ERROR: could not find symlink file \"$SOURCE_FILE\" in \"$base_dir\""
+            echo "  ERROR: could not find symlink file \"$source_file\" in \"$base_dir\""
             exit 1
         else
             # The variants can ignore the missing icons
             dlog "skipping \"$line\" for \"$VARIANT\" variant: could not find source symlink file \"$SOURCE_FILE\" in \"$base_dir\""
         fi
 
-    done < "$LIST"
+    done < "$list"
 }
 
 # Fullcolor icons
