@@ -80,12 +80,17 @@ function dlog() {
     [ -n "$_verbose" ] && echo "$@"
 }
 
+if ! command -v realpath &>/dev/null; then
+    echo "realpath is required but not found" >&2
+    exit 1
+fi
+
 if [ "${BASH_VERSION%%.*}" -lt 4 ]; then
     echo "Too old bash version ${BASH_VERSION}!";
     exit 1
 fi
 
-DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1 ; pwd -P )
+DIR=$(realpath -m "$(dirname "${BASH_SOURCE[0]}")")
 
 # Icon sizes, contexts and variants
 CONTEXTS=(
@@ -145,15 +150,14 @@ linker() {
     local icon_subfolder="$2"
     declare -A generated_links
 
-    LIST="$DIR/${icon_folder}/${CONTEXT}.list"
-    if [ ! -d "$DIR/../../$THEME/$icon_subfolder/$CONTEXT" ]; then
-        dlog "  -- no $icon_subfolder/$CONTEXT, skipping it"
+    local base_dir="$DIR/../../$THEME/$icon_subfolder/$CONTEXT"
+    local list="$DIR/${icon_folder}/${CONTEXT}.list"
+    if [ ! -f "$list" ]; then
+        dlog "  -- no $list, skipping it"
         return
     fi
 
-    cd "$DIR/../../$THEME/$icon_subfolder/$CONTEXT" || return 1
-    while IFS= read -r line;
-    do
+    while IFS= read -r line; do
         if [[ "$line" =~ ^[[:space:]]*$ ]]; then
             dlog "Ignoring empty line in $LIST"
             continue
@@ -165,7 +169,7 @@ linker() {
         fi
 
         SOURCE_FILE="${line%% *}"
-        if [ -f "$SOURCE_FILE" ]; then
+        if [ -f "$base_dir/$SOURCE_FILE" ]; then
             read -r -a line_array <<< "$line"
             target="${line_array[0]}"
             link_name="${line_array[1]}"
@@ -178,27 +182,28 @@ linker() {
                 echo "  ERROR: Can't link a file with itself!"
                 exit 1
             fi
-            if [ -L "$target" ]; then
+            if [ -L "$base_dir/$target" ]; then
                 echo "  ERROR: \"$target\" is already a symlink, please point it to a real file!"
                 exit 1
             fi
             if [ -z "$_dry_run" ]; then
-                ln -sf "$target" "$link_name"
+                mkdir -p "$base_dir"
+                rel_target=$(realpath -m --relative-to="$base_dir" "$base_dir/$target")
+                ln -sf "$rel_target" "$base_dir/$link_name"
             fi
             generated_links["$link_name"]="$target"
         elif [ "$VARIANT" = "default" ] &&
              ! in_array "$icon_subfolder" "${OPTIONAL_SIZES[@]}" &&
              ! in_array "$CONTEXT" "${OPTIONAL_CONTEXTS[@]}"; then
             # The default variant must have all icons available
-            echo "  ERROR: could not find symlink file \"$SOURCE_FILE\" in \"$(pwd)\""
+            echo "  ERROR: could not find symlink file \"$SOURCE_FILE\" in \"$base_dir\""
             exit 1
         else
             # The variants can ignore the missing icons
-            dlog "skipping \"$line\" for \"$VARIANT\" variant: could not find source symlink file \"$SOURCE_FILE\" in \"$(pwd)\""
+            dlog "skipping \"$line\" for \"$VARIANT\" variant: could not find source symlink file \"$SOURCE_FILE\" in \"$base_dir\""
         fi
 
     done < "$LIST"
-    cd "$DIR/../../$THEME" || return 1
 }
 
 # Fullcolor icons
