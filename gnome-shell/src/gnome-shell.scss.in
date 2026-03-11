@@ -28,6 +28,7 @@ $contrast: @Contrast@;
 @import "gnome-shell-sass/_drawing";
 @import "gnome-shell-sass/_common";
 @import "gnome-shell-sass/_widgets";
+@import "gnome-shell-sass/widgets/_authd"; // Ubuntu authd (web login, QR code, auth menu)
 @import "gnome-shell-sass/_dock";
 @import "gnome-shell-sass/_tweaks"; // Yaru custom tweaks (loaded last to override upstream)
 
