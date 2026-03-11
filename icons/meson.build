@@ -156,9 +156,9 @@ foreach flavour: icon_flavors
 
     cleanup_rendered_flavour = run_target('cleanup-rendered-' + flavour,
       command: [
-        'bash', '-c',
+        'bash', '-xc',
           ';'.join([
-            '[ ! -e "$0"/$1 ] && exit 0',
+            'ls -d "$0"/$1 >/dev/null 2>&1 || exit 0',
             'find "$0"/$1 -name "*.png" -print -delete',
             is_accent ? 'find "$0"/$1 -name "*.svg" -print -delete' : 'true',
             'find "$0"/$1 -type d -empty -print -delete'
@@ -171,9 +171,9 @@ foreach flavour: icon_flavors
 
     cleanup_symlinks_flavour = run_target('cleanup-symlinks-' + flavour,
       command: [
-        'bash', '-c',
+        'bash', '-xc',
           ';'.join([
-            '[ ! -e "$0"/$1 ] && exit 0',
+            'ls -d "$0"/$1 >/dev/null 2>&1 || exit 0',
             'find "$0"/$1 -type l -print -delete',
             'find "$0"/$1 -type d -empty -print -delete',
           ]),
