@@ -42,7 +42,7 @@ foreach flavour: icon_flavors
   base_flavour = is_dark_flavour ? flavour.split('-dark')[0] : ''
   is_dark_accent = is_dark_flavour and enabled_accent_colors.contains(base_flavour)
 
-  if (is_accent or is_dark_accent) and not get_option('gtk')
+  if (is_accent or is_dark_accent) and not get_option('gtk-3')
     warning('GTK is not enabled, so we won\'t be able to generate accent colors')
     continue
   endif

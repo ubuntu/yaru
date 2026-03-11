@@ -13,10 +13,16 @@ sassc = find_program('sassc')
 enabled_accent_colors = get_option('accent-colors')
 subdir('common')
 
+# gtk must be processed before icons (icons/meson.build consumes gtk_yaru_colors_defs)
+gtk_yaru_colors_defs = {}
+if get_option('gtk-2') or get_option('gtk-3') or get_option('gtk-4')
+  message('build component gtk')
+  subdir('gtk')
+endif
+
 components = [
   'metacity',
   'gnome-shell',
-  'gtk',
   'icons',
   'gtksourceview',
   'sounds',
@@ -34,5 +40,4 @@ foreach component: components
 
   message('build component ' + component)
   subdir(component)
-
 endforeach

@@ -1,0 +1,1 @@
+../default/render-all-assets.sh
