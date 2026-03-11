@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout Yaru code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Build debian packages and sources
         uses: canonical/desktop-engineering/gh-actions/common/build-debian@main
@@ -24,7 +24,7 @@ jobs:
           docker-image: ubuntu:${{ env.UBUNTU_VERSION }}
 
       - name: Install generated debs
-        uses: kohlerdominik/docker-run-action@v2.0.0
+        uses: kohlerdominik/docker-run-action@v2.1.0
         with:
           image: ubuntu:${{ env.UBUNTU_VERSION }}
           environment: |

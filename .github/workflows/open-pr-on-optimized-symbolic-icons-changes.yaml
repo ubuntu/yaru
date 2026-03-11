@@ -17,12 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Yaru code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup common variables
         id: env
         run: |
-          echo "::set-output name=push-branch::auto-optimized-symbolic-icons"
+          echo "push-branch=auto-optimized-symbolic-icons" >> $GITHUB_OUTPUT
 
       - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
@@ -62,11 +62,11 @@ jobs:
           else
             changed=true
           fi
-          echo "::set-output name=modified::${changed}"
+          echo "modified=${changed}" >> $GITHUB_OUTPUT
 
       - name: Create or update Pull Request
         if: steps.check_optimization_changes.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "icons: Optimize symbolic icons"
           title: Auto optimized symbolic icons updates
