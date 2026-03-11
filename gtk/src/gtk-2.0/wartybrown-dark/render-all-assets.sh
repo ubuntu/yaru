@@ -1,0 +1,1 @@
+../dark/render-all-assets.sh

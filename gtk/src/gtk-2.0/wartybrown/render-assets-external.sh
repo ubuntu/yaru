@@ -1,0 +1,1 @@
+../default/render-assets-external.sh

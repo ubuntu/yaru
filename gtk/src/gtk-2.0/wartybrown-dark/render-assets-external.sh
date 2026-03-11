@@ -1,0 +1,1 @@
+../dark/render-assets-external.sh

@@ -1,8 +1,0 @@
-// Workaround for https://github.com/mate-desktop/mate-control-center/issues/273
-foo-scroll-area:selected {
-	&,
-    &:focus,
-    &:backdrop {
-        background-color: $selected_bg_color;
-    }
-}
