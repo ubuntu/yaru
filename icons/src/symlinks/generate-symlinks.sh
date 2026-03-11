@@ -88,9 +88,34 @@ fi
 DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 # Icon sizes, contexts and variants
-CONTEXTS=("actions" "apps" "devices" "categories" "mimetypes" "places" "phosh" "status" "emblems" "ui", "org.gnome.Nautilus", "time", "org.gnome.Settings")
+CONTEXTS=(
+    "actions"
+    "apps"
+    "categories"
+    "devices"
+    "emblems"
+    "mimetypes"
+    "phosh"
+    "places"
+    "status"
+    "time"
+    "ui"
+    "org.gnome.Nautilus"
+    "org.gnome.Settings"
+)
 OPTIONAL_CONTEXTS=("panel" "animations")
-SIZES=("16x16" "24x24" "32x32" "48x48" "256x256" "16x16@2x" "24x24@2x" "32x32@2x" "48x48@2x" "256x256@2x")
+SIZES=(
+    "16x16"
+    "16x16@2x"
+    "24x24"
+    "24x24@2x"
+    "32x32"
+    "32x32@2x"
+    "48x48"
+    "48x48@2x"
+    "256x256"
+    "256x256@2x"
+)
 OPTIONAL_SIZES=("8x8" "8x8@2x" "22x22")
 VARIANTS=("default" "dark" "mate")
 
