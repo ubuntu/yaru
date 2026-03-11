@@ -4,32 +4,39 @@ INKSCAPE="/usr/bin/inkscape"
 OPTIPNG="/usr/bin/optipng"
 
 INDEX="assets.txt"
-
 SRC_FILE="assets.svg"
 ASSETS_DIR="assets"
 
-for i in `cat $INDEX`
+for contrast in "" "hc-";
 do
-  if [ -f $ASSETS_DIR/$i.png ]; then
-    echo $ASSETS_DIR/$i.png exists.
-  else
-    echo
-    echo Rendering $ASSETS_DIR/$i.png
-    $INKSCAPE --export-id=$i \
-              --export-id-only \
-              --export-png=$ASSETS_DIR/$i.png $SRC_FILE >/dev/null #\
-    # && $OPTIPNG -o7 --quiet $ASSETS_DIR/$i.png 
-  fi
-  if [ -f $ASSETS_DIR/$i@2.png ]; then
-    echo $ASSETS_DIR/$i@2.png exists.
-  else
-    echo
-    echo Rendering $ASSETS_DIR/$i@2.png
-    $INKSCAPE --export-id=$i \
-              --export-dpi=180 \
-              --export-id-only \
-              --export-png=$ASSETS_DIR/$i@2.png $SRC_FILE >/dev/null #\
-    # && $OPTIPNG -o7 --quiet $ASSETS_DIR/$i@2.png 
-  fi
+
+  for i in `cat $INDEX`
+  do
+    if [ -f $ASSETS_DIR/$contrast$i.png ]; then
+      echo $ASSETS_DIR/$contrast$i.png exists.
+    else
+      echo
+      echo Rendering $contrast$i.png
+      $INKSCAPE --export-id=$contrast$i \
+                --export-id-only \
+                --export-type="png" \
+                --export-filename=$ASSETS_DIR/$contrast$i.png \
+                $SRC_FILE >/dev/null \
+       && $OPTIPNG -o7 --quiet $ASSETS_DIR/$contrast$i.png
+    fi
+    if [ -f $ASSETS_DIR/$contrast$i@2.png ]; then
+      echo $ASSETS_DIR/$contrast$i@2.png exists.
+    else
+      echo
+      echo Rendering $contrast$i@2.png
+      $INKSCAPE --export-id=$contrast$i \
+                --export-dpi=180 \
+                --export-id-only \
+                --export-type="png" \
+                --export-filename=$ASSETS_DIR/$contrast$i@2.png \
+                $SRC_FILE >/dev/null \
+       && $OPTIPNG -o7 --quiet $ASSETS_DIR/$contrast$i@2.png
+    fi
+  done
 done
 exit 0
