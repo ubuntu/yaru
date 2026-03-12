@@ -63,13 +63,14 @@ foreach src: theme_sources
     input: src,
     output: out_name,
     command: [
-      'bash', '-c',
+      'bash', '-xec',
       ';'.join([
         'output="$1/$(realpath --relative-to="'+ meson.current_source_dir() + '" $0)"',
         'mkdir -p "$(dirname "$output")"',
         # Can't use proper regex ("s,\(\b\)url\(\s*(\),\1yaru-url-handler\2,g") as per
         # https://github.com/mesonbuild/meson/issues/1564
         'sed "s,[[:space:]]*url[[:space:]]*(, yaru_url_handler(,g;" "$0" > "$output"',
+        'sed -i -E "s,[\'](_default-colors([.]scss)?)[\'],\'_yaru-default-colors.scss\',g" "$output"',
       ]),
       '@INPUT@',
       '@OUTDIR@',
@@ -130,8 +131,9 @@ foreach variant: variants
         sassc, '-a', '@INPUT@', '@OUTPUT@',
         '-I', css_sources_path,
         '-I', meson.project_source_root() / 'common',
-        '-I', css_sources_path / upstream_theme_dir,
         '-I', meson.current_source_dir(),
+        '-I', meson.current_source_dir() / 'gnome-shell-sass',
+        '-I', css_sources_path / upstream_theme_dir,
       ],
       install: install_theme_sources,
       install_dir: install_dir,

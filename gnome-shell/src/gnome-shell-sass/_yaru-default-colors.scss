@@ -1,0 +1,12 @@
+// Override for default colors.
+@import 'gnome-shell-sass/_default-colors.scss';
+@import '_yaru-palette.scss';
+
+// Named Colors
+
+// base colors
+// override base colors
+$_base_color_dark: lighten($jet, 4%); // Yaru: use our colors
+$_base_color_light: $light_1; // Yaru: use our colors
+
+$yaru_default_colors_overrides_done: true;
