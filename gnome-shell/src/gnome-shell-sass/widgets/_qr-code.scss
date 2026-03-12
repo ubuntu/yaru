@@ -1,0 +1,14 @@
+// QR Code
+.qr-code {
+  border-radius: $base_border_radius * .5;
+  border-width: 1em;
+  @if ($variant == 'light') {
+    $qrcode_bg_color: mix($fg_color, $bg_color, 8%);
+    background-color: $qrcode_bg_color;
+    border-color: $qrcode_bg_color;
+  } @else {
+    background-color: $system_fg_color;
+    border-color: $system_fg_color;
+    color: $system_bg_color;
+  }
+}
