@@ -282,6 +282,20 @@
   }
 }
 
+/* Border-radius overrides */
+$yaru_popup_radius: $modal_radius * 1.05;
+
+.datemenu-popover {
+  border-radius: $base_border_radius;
+}
+
+.popup-menu-content {
+  border-radius: $yaru_popup_radius;
+}
+
+.quick-toggle-menu {
+  border-radius: $yaru_popup_radius;
+}
 /* OSD fixes */
 .osd-window {
   .level {
