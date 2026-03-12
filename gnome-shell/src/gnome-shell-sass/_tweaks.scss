@@ -170,12 +170,7 @@
   }
 }
 
-.quick-toggle:hover {
-  background-color: transparentize($fg_color, 0.9) !important;
-}
-
-.button.default:hover,
-.quick-toggle:hover:checked {
+.button.default:hover {
   background-color: transparentize($fg_color, 0.85) !important;
 }
 
