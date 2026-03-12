@@ -296,6 +296,63 @@ $yaru_popup_radius: $modal_radius * 1.05;
 .quick-toggle-menu {
   border-radius: $yaru_popup_radius;
 }
+
+.quick-toggle {
+  border-radius: $yaru_popup_radius;
+}
+
+/* More squircles...
+.datemenu-popover {
+  .icon-button,
+  .button {
+    border-radius: $yaru_popup_radius;
+  }
+}
+
+.quick-settings {
+  border-radius: $yaru_popup_radius;
+
+  .icon-button,
+  .button {
+    border-radius: $yaru_popup_radius;
+  }
+}
+
+.quick-toggle-menu {
+  border-radius: $yaru_popup_radius;
+
+  & .header {
+    & .icon {
+      border-radius: $yaru_popup_radius;
+    }
+  }
+}
+*/
+
+.quick-toggle-has-menu {
+  & .quick-toggle {
+    &:ltr {
+      border-radius: $yaru_popup_radius 0 0 $yaru_popup_radius;
+    }
+
+    &:rtl {
+      border-radius: 0 $yaru_popup_radius $yaru_popup_radius 0;
+    }
+
+    &:ltr:last-child { border-radius: $yaru_popup_radius; }
+    &:rtl:last-child { border-radius: $yaru_popup_radius; }
+  }
+
+  & .quick-toggle-menu-button {
+    &:ltr {
+      border-radius: 0 $yaru_popup_radius $yaru_popup_radius 0;
+    }
+    &:rtl {
+      border-radius: $yaru_popup_radius 0 0 $yaru_popup_radius;
+    }
+  }
+}
+
 /* OSD fixes */
 .osd-window {
   .level {
