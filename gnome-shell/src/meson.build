@@ -24,10 +24,18 @@ if not variants.contains(DEFAULT_HIGH_CONTRAST_VARIANT)
     DEFAULT_HIGH_CONTRAST_VARIANT))
 endif
 
+upstream_theme_dir = '..' / 'upstream' / 'theme'
+upstream_theme_path = meson.current_source_dir() / upstream_theme_dir
+assert(fs.is_dir(upstream_theme_path), 'Upstream theme directory not found')
+
 theme_css = []
 theme_sources = files(
   run_command(
-    'find', meson.current_source_dir(), '-name', '*.scss'
+    'find',
+    meson.current_source_dir(),
+    upstream_theme_path,
+    '-name', '*.scss',
+    check: true,
   ).stdout().strip().split('\n')
 )
 assert(theme_sources.length() > 0, 'No theme sources found')
@@ -122,7 +130,7 @@ foreach variant: variants
         sassc, '-a', '@INPUT@', '@OUTPUT@',
         '-I', css_sources_path,
         '-I', meson.project_source_root() / 'common',
-        '-I', meson.current_source_dir() / '..' / 'upstream' / 'theme',
+        '-I', css_sources_path / upstream_theme_dir,
         '-I', meson.current_source_dir(),
       ],
       install: install_theme_sources,
