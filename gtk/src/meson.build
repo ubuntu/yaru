@@ -16,9 +16,11 @@ foreach flavour: yaru_flavours
   theme_name = meson.project_name() + suffix
   is_dark = flavour == 'dark' or flavour.endswith('-dark')
   base_theme_name = is_dark ? flavour.split('-dark')[0] : flavour
-  is_accent = enabled_accent_colors.contains(base_theme_name)
+  is_mate = flavour.startswith('mate')
+  is_accent = enabled_accent_colors.contains(base_theme_name) or is_mate
   theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
-  accent = is_accent ? base_theme_name : ''
+  default_accent = is_mate ? 'mate' : 'default'
+  accent = is_accent ? base_theme_name : default_accent
 
   if is_accent
     accent_configuration = {
@@ -68,7 +70,7 @@ foreach flavour: yaru_flavours
   # build and install gtk data
   foreach gtk_ver: gtk_versions
     gtk_dir = 'gtk-@0@'.format(gtk_ver)
-    base_path = (flavour.startswith('mate') ? base_theme_name : 'default') / gtk_dir
+    base_path = (is_mate ? base_theme_name : 'default') / gtk_dir
     dark_path = is_dark ? 'dark' : base_path
     default_path = 'default' / gtk_dir
     upstream_path = '..' / 'upstream' / gtk_dir / 'Default'
