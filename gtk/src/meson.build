@@ -40,7 +40,9 @@ foreach flavour: yaru_flavours
 
   accent_parser = run_command(sassc,
     yaru_sass_global_paths,
-    accent_info_css).stderr().strip()
+    accent_info_css,
+    check: true,
+  ).stderr().strip()
 
   accent_color_code = accent_parser.split(' Accent color is ')[1].split('\n')[0]
   assert(accent_color_code.startswith('#'), 'No accent color code found')
@@ -110,7 +112,8 @@ foreach flavour: yaru_flavours
       gtk2_sources_data = run_command(
         'find',
         rc_paths,
-        '-name', '*rc'
+        '-name', '*rc',
+        check: false,
         ).stdout().strip().split('\n')
 
       install_data(gtk2_sources_data, install_dir: install_path)
@@ -121,7 +124,8 @@ foreach flavour: yaru_flavours
       endforeach
 
       gtk2_asset_data = run_command(
-        'find', assets_paths, '-name', '*.png'
+        'find', assets_paths, '-name', '*.png',
+        check: false,
         ).stdout().strip().split('\n')
 
       install_data(gtk2_asset_data, install_dir: install_path / 'assets')
@@ -148,7 +152,8 @@ foreach flavour: yaru_flavours
         scss_paths += ['-I', meson.current_source_dir() / src ]
 
         scss_deps = run_command(
-          'find', src, '-name', '_*.scss'
+          'find', src, '-name', '_*.scss',
+          check: false,
           ).stdout().strip().split('\n')
         if scss_deps.length() > 0 and scss_deps[0] != ''
           gtk_scss_dependencies += scss_deps
@@ -329,7 +334,8 @@ foreach flavour: yaru_flavours
     endforeach
 
     assets = run_command(
-      'ls', '-1', assets_rel_dir
+      'ls', '-1', assets_rel_dir,
+      check: true,
     ).stdout().strip().split('\n')
 
     assets_xml = []

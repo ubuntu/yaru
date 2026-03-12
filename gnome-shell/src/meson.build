@@ -48,6 +48,7 @@ theme_assets = files(
       '-or',
       '-name', '*.css',
     ')',
+    check: true,
   ).stdout().strip().split('\n')
 )
 
@@ -58,7 +59,7 @@ source_deps = []
 
 css_sources_path = meson.current_build_dir()
 foreach src: theme_sources
-  out_name = '___'.join('@0@'.format(src).split('/'))
+  out_name = '___'.join(src.full_path().split('/'))
   source_deps += custom_target(out_name,
     input: src,
     output: out_name,
@@ -141,7 +142,7 @@ foreach variant: variants
       depend_files: theme_sources + sass_utils_scss,
     )
 
-    theme_gresource_files += style_css[-1].full_path()
+    theme_gresource_files += style_css[-1]
     theme_gresource_deps += style_css[-1]
   endforeach
 
@@ -176,7 +177,8 @@ foreach variant: variants
         pointing_to: run_command(python, '-c',
           'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
           install_dir,
-          gnomeshell_alt_themes_dir / theme_full_name
+          gnomeshell_alt_themes_dir / theme_full_name,
+          check: true,
         ).stdout().strip(),
       )
     else
@@ -189,15 +191,15 @@ if gnomeshell_use_gresource
   theme_gresource_files_xml = []
 
   foreach gfile: theme_gresource_files
-    filepath = '@0@'.format(gfile)
     preprocess = ''
-    alias = filepath[0] == '/' ? '@0@'.format(gfile).split('/')[-1] : filepath
+    file_path = gfile.full_path()
+    alias = fs.name(gfile)
     if alias == 'gnome-shell@0@.css'.format(DEFAULT_GDM_VARIANT != '' ? '-' + DEFAULT_GDM_VARIANT : '')
       # Use Yaru files for ubuntu's special gdm
-      theme_gresource_files_xml += '<file alias="gdm.css">@0@</file>'.format(gfile)
+      theme_gresource_files_xml += '<file alias="gdm.css">@0@</file>'.format(file_path)
     endif
 
-    if alias.endswith('.css') and filepath.contains(meson.current_build_dir())
+    if alias.endswith('.css') and file_path.startswith(meson.current_build_dir())
       # This is kept for compatibility reasons, but we may drop it once shell is updated too
       alias = 'Yaru' / alias
     endif
@@ -206,7 +208,8 @@ if gnomeshell_use_gresource
       preprocess = 'xml-stripblanks'
     endif
 
-    theme_gresource_files_xml += '<file preprocess="@2@" alias="@0@">@1@</file>'.format(alias, gfile, preprocess)
+    theme_gresource_files_xml += '<file preprocess="@2@" alias="@0@">@1@</file>'.format(
+      alias, file_path, preprocess)
   endforeach
 
   gnome.compile_resources(
