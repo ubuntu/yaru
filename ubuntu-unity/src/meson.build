@@ -6,7 +6,8 @@ foreach flavour: flavours
   # install unity assets
   unity_asset_dir = join_paths(flavour, 'unity')
   unity_asset_data = run_command(
-    'find', unity_asset_dir, '-name', '*.svg'
+    'find', unity_asset_dir, '-name', '*.svg',
+    check: true,
     ).stdout().strip().split('\n')
 
   unity_assets_dest = join_paths(theme_dir, 'unity')

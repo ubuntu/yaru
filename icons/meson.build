@@ -69,6 +69,7 @@ foreach flavour: icon_flavors
           'find',
           meson.current_source_dir() / fullcolor_svgs_path,
           '-name', '*.svg',
+          check: true,
         ).stdout().strip().split('\n')
       )
     endif
@@ -224,6 +225,7 @@ foreach flavour: icon_flavors
         '-type', 'd',
         included_names.length() > 0 ? ['('] + included_names + [')'] : [],
         '-printf', '%P\\n',
+        check: false,
       ).stdout().strip().split('\n')
 
       if excluded_folders.length() == 1 and excluded_folders[0] == ''
@@ -313,7 +315,8 @@ foreach flavour: icon_flavors
         target = run_command(python, '-c',
           'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
           target,
-          link_path
+          link_path,
+          check: true,
         ).stdout().strip()
       endif
 
@@ -342,6 +345,7 @@ foreach flavour: icon_flavors
         '-mindepth', '2',
         '-maxdepth', '2',
         '-printf', '%P\\n',
+        check: true,
       ).stdout().strip()
       dark_categories = dark_categories != '' ? dark_categories.split('\n') : []
 
@@ -358,7 +362,8 @@ foreach flavour: icon_flavors
         target = run_command(python, '-c',
           'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
           dark_theme / c,
-          icon_dir / fs.parent(c)
+          icon_dir / fs.parent(c),
+          check: true,
         ).stdout().strip()
 
         if meson.version().version_compare('>= 0.61')
