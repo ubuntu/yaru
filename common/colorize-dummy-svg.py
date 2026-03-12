@@ -35,6 +35,8 @@ DUMMY_COLORS = {
     'accent-focused-color': '#0101ff',
     'accent-focused-color-hc': '#0101f1',
     'bg-color': '#ffff00',
+    'light-bg-color': '#fffff1',
+    'dark-bg-color': '#000001',
     'border-color': '#ff00ff',
     'border-color-hc': '#ff00f1',
     'disabled-bg-color': '#ffff02',
