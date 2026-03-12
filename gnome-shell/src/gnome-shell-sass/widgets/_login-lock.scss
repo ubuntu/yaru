@@ -89,6 +89,8 @@ $_gdm_dialog_width: 25em;
 
   .conflicting-session-dialog-desc-warning {
     text-align: center;
+    color: $warning_color;
+    background-color: transparentize($warning_color, 0.9);
     // Yaru: use contrast-optimized color.
     color: $warning_caption_color;
     // Yaru: Use uniform aspect on dialog messages.
@@ -390,6 +392,31 @@ $_gdm_dialog_width: 25em;
     padding: $base_padding $base_padding * 3;
     border-radius: $base_border_radius * 2;
     font-weight: bold;
+  }
+}
+
+// Parental controls
+.parental-controls-shield {
+  spacing: 0.75em;
+
+  .parental-controls-shield-title {
+    margin-top: 0.6em;
+    @extend %title_4;
+    text-align: center;
+  }
+
+  .parental-controls-shield-description {
+    text-align: center;
+  }
+
+  .parental-controls-shield-button {
+    margin-top: 0.85em;
+    @extend %lockscreen_button;
+    @extend %title_4;
+    padding: $base_margin * 4 $base_margin * 11;
+    color: $_gdm_fg;
+    background-color: transparentize($_gdm_fg, .9);
+    border-radius: $forced_circular_radius;
   }
 }
 
