@@ -1,6 +1,7 @@
 name: Open/Update PR when symbolic icons needs to be optimized
 on:
   push:
+    branches: [master]
     paths:
       - '.github/workflows/open-pr-on-optimized-symbolic-icons-changes.yaml'
       - 'icons/src/scalable/**'

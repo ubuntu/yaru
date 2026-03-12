@@ -1,6 +1,7 @@
 name: Update PR on upstream changes once landed on ubuntu
 on:
   push:
+    branches: [master]
     paths:
       - '.github/workflows/open-pr-on-changes.yaml'
   schedule:
