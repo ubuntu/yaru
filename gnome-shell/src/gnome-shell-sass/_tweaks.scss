@@ -178,3 +178,24 @@
 .quick-toggle:hover:checked {
   background-color: transparentize($fg_color, 0.85) !important;
 }
+
+/* Dialogs overrides */
+.conflicting-session-dialog-content {
+  .conflicting-session-dialog-desc-warning {
+    // Yaru: use contrast-optimized color.
+    color: $warning_caption_color;
+    // Yaru: Use uniform aspect on dialog messages.
+    // See: https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/3897
+    background-color: $warning_caption_bg_color;
+  }
+}
+
+.end-session-dialog {
+  // special style for session warnings
+  .end-session-dialog-battery-warning,
+  .dialog-list-title {
+    // Yaru: use contrast-optimized color.
+    color: $warning_caption_color;
+    background-color: $warning_caption_bg_color;
+  }
+}
