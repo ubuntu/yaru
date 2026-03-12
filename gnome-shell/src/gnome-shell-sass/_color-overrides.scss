@@ -28,3 +28,9 @@ $warning_fg_color: optimize-contrast($warning_bg_color,
 $warning_caption_bg_color: composite($bg_color, transparentize($warning_color, 0.9));
 $warning_caption_color: optimize-contrast($warning_caption_bg_color,
     $warning_color, $target: 6.0);
+
+$system_fg_color: darken($porcelain, 2%);
+$system_bg_color: $_base_color_dark; // Yaru - use our definition our definition
+$system_borders_color: transparentize($system_fg_color, .9);
+$system_insensitive_fg_color: mix($system_bg_color, $system_fg_color, 37%);
+$system_overlay_bg_color: mix($system_base_color, $system_fg_color, 90%); // for non-transparent items, e.g. dash
