@@ -1,6 +1,7 @@
 name: Update PR on upstream icons changes
 on:
   push:
+    branches: [master]
     paths:
       - '.github/workflows/open-pr-on-icons-changes.yaml'
   schedule:

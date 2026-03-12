@@ -1,6 +1,7 @@
 name: Open/Update PR when rendered icons have changed
 on:
   push:
+    branches: [master]
     paths:
       - '.github/workflows/open-pr-on-rendered-icons-changed.yaml'
       - 'common/accent-colors.scss.in'
