@@ -191,33 +191,9 @@ $_gdm_dialog_width: 25em;
   }
 }
 
+// Yaru change: increase min width of auth list items.
 .login-dialog-auth-list-item {
   min-width: 300px;
-}
-
-.login-dialog {
-  .login-dialog-auth-list-item {
-    // Yaru: use button styling
-    @extend %button_common;
-    @include button(normal, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);
-    &:selected,
-    &:focus { @include button(focus, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
-    &:hover { @include button(hover, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
-    &:active { @include button(active, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true)};
-
-    border-radius: $modal_radius;
-    padding: $base_padding * 1.2;
-  }
-}
-
-.unlock-dialog {
-  // Yaru: use button styling
-  .login-dialog-auth-list-item {
-    @extend %lockscreen_button;
-
-    border-radius: $modal_radius;
-    padding: $base_padding * 1.2;
-  }
 }
 
 .login-dialog-auth-list-label {
@@ -279,7 +255,7 @@ $_gdm_dialog_width: 25em;
 
 .login-dialog-prompt-entry {
   @extend %system_entry;
-  border-radius: $base_border_radius + 3; // Yaru Change: Match Upstream button radius 
+  border-radius: $base_border_radius + 3; // Yaru Change: Match Upstream button radius
 }
 
 .web-login-dialog-content-overlay {
@@ -297,7 +273,7 @@ $_gdm_dialog_width: 25em;
 
 .web-login-title-label {
   @include fontsize($base_font_size);
-  color: if($variant =='dark', darken($fg_color, 30%), lighten($fg_color, 20%));
+  color: if($variant == 'dark', darken($fg_color,30%), lighten($fg_color,20%));
 }
 
 .web-login-url-label {
@@ -480,6 +456,7 @@ $_gdm_dialog_width: 25em;
   border-radius: $forced_circular_radius;
 }
 
+
 .login-dialog,
 .unlock-dialog {
 
@@ -543,22 +520,6 @@ $_gdm_dialog_width: 25em;
       background-color: rgba(0, 0, 0, 0.0);
     }
   }
-}
-
-// QR Code
-.qr-code {
-  @if ($variant == 'light') {
-    $qrcode_bg_color: mix($fg_color, $bg_color, 8%);
-    background-color: $qrcode_bg_color;
-    border-color: $qrcode_bg_color;
-    color: $fg_color;
-  } @else {
-    background-color: $_gdm_fg;
-    border-color: $_gdm_fg;
-    color: $_gdm_bg;
-  }
-  border-radius: $base_border_radius * .5;
-  border-width: 1em;
 }
 
 // Yaru change: style login dialog entry in dark theme
