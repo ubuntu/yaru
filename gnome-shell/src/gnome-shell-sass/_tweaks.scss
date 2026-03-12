@@ -281,3 +281,22 @@
     background-color: $warning_caption_bg_color;
   }
 }
+
+/* OSD fixes */
+.osd-window {
+  .level {
+    // Yaru: Optimize overdrive color for contrast
+    -barlevel-overdrive-color: optimize-contrast($osd_bg_color, $destructive_color, $target: 5.5);
+  }
+}
+
+// Yaru: Make pad OSD visible again in the light theme by using osd colors, should be ported to upstream
+.pad-osd-window {
+  background-color: $osd_bg_color;
+  color: $osd_fg_color;
+
+  .button {
+    @extend %button;
+    &:insensitive { color: $fg_color; }
+  }
+}
