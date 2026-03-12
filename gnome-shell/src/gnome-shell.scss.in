@@ -33,3 +33,6 @@ $contrast: @Contrast@;
 @import "gnome-shell-sass/widgets/_qr-code";
 @import "gnome-shell-sass/_tweaks"; // Yaru custom tweaks (loaded last to override upstream)
 
+@if not variable-exists(yaru_default_colors_overrides_done) {
+    @error "Yaru color overrides not applied. Please check the _yaru-default-colors.scss file.";
+}
