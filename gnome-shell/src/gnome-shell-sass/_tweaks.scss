@@ -273,3 +273,11 @@
     background-color: $warning_caption_bg_color;
   }
 }
+
+.prompt-dialog {
+  .prompt-dialog-error-label {
+    // Yaru: use contrast-optimized color.
+    color: $warning_caption_color;
+    background-color: $warning_caption_bg_color;
+  }
+}
