@@ -508,7 +508,7 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
 
 // Use dark color for dock in both light and dark themes
 // This matches our panel styling approach
-$dock_color: $dark_5;
+$dock_color: $yaru_panel_bg_color;
 
 @each $side in bottom, top, left, right {
     #dashtodockContainer.#{$side} {

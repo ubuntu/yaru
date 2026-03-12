@@ -80,49 +80,49 @@
 
 // Panel - dark background in all modes (desktop and overview)
 #panel {
-  background-color: $dark_5 !important;
+  background-color: $yaru_panel_bg_color !important;
 
   // Keep panel dark in overview too
   &:overview {
-    background-color: $dark_5 !important;
+    background-color: $yaru_panel_bg_color !important;
   }
 
   // Override all panel button styling to use white text and normal font weight
   // This needs to be specific enough to override the panel_button mixin
   .panel-button {
     font-weight: normal !important;
-    color: $light_1 !important;
+    color: $yaru_panel_fg_color !important;
 
     // All text and icons should be white
     StIcon,
     StLabel {
-      color: $light_1 !important;
+      color: $yaru_panel_fg_color !important;
     }
 
     // Activities button workspace dots should be white
     &#panelActivities .workspace-dot {
-      background-color: $light_1 !important;
+      background-color: $yaru_panel_fg_color !important;
     }
   }
 
   // Override overview-specific panel button colors
   &:overview .panel-button {
-    color: $light_1 !important;
+    color: $yaru_panel_fg_color !important;
 
     StIcon,
     StLabel {
-      color: $light_1 !important;
+      color: $yaru_panel_fg_color !important;
     }
 
     // Activities button workspace dots in overview should also be white
     &#panelActivities .workspace-dot {
-      background-color: $light_1 !important;
+      background-color: $yaru_panel_fg_color !important;
     }
   }
 
   // Ensure system status indicators are white
   .system-status-icon {
-    color: $light_1 !important;
+    color: $yaru_panel_fg_color !important;
   }
 }
 
