@@ -31,7 +31,7 @@ jobs:
           sudo apt install scour
 
       - name: Check Source changes
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         id: check-changed
         with:
           base: ${{ steps.env.outputs.push-branch }}
