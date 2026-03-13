@@ -35,11 +35,28 @@ endif
 render_wrappers = xvfb_run.found() ? [xvfb_run, '-a', '--'] : []
 render_wrappers += dbus_run_session.found() ? [dbus_run_session, '--'] : []
 
-all_accented_svgs = []
-all_accented_relnames = []
+accented_full_svgs = []
+accented_full_relnames = []
+accented_full_svgs_path = fullcolor_path / 'accented-full'
+if icon_flavors.length() > 0 and fs.is_dir(accented_full_svgs_path)
+  accented_full_svgs = files(
+    run_command(
+      'find',
+      meson.current_source_dir() / accented_full_svgs_path,
+      '-name', '*.svg',
+      check: true,
+    ).stdout().strip().split('\n')
+  )
+  foreach svg: accented_full_svgs
+    accented_full_relnames += fs.name(fs.parent(svg)) / fs.name(svg)
+  endforeach
+endif
+
+all_accented_svgs = accented_full_svgs
+all_accented_relnames = accented_full_relnames
 accented_svgs_path = fullcolor_path / 'accented'
 if icon_flavors.length() > 0 and fs.is_dir(accented_svgs_path)
-  all_accented_svgs = files(
+  foreach svg: files(
     run_command(
       'find',
       meson.current_source_dir() / accented_svgs_path,
@@ -47,8 +64,13 @@ if icon_flavors.length() > 0 and fs.is_dir(accented_svgs_path)
       check: true,
     ).stdout().strip().split('\n')
   )
-  foreach svg: all_accented_svgs
-    all_accented_relnames += fs.name(fs.parent(svg)) / fs.name(svg)
+    relname = fs.name(fs.parent(svg)) / fs.name(svg)
+    if relname in accented_full_relnames
+      error('Icon @0@ exists in both accented and accented-full, accented one is ignored'.format(
+        relname))
+    endif
+    all_accented_svgs += svg
+    all_accented_relnames += relname
   endforeach
 endif
 
@@ -82,8 +104,8 @@ foreach flavour: icon_flavors
     source_svgs = []
     specific_svg_count = 0
 
-    accented_svgs    = (is_dark or is_dark_flavour) ? [] : all_accented_svgs
-    accented_relnames = (is_dark or is_dark_flavour) ? [] : all_accented_relnames
+    accented_svgs    = (is_dark or is_dark_flavour) ? accented_full_svgs : all_accented_svgs
+    accented_relnames = (is_dark or is_dark_flavour) ? accented_full_relnames : all_accented_relnames
 
     # For non-accent flavours: include all flavour-specific SVGs not covered
     # by an accented counterpart.
