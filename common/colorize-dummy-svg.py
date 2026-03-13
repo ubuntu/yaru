@@ -24,6 +24,8 @@ from glob import glob
 
 # Keep this in sync with yaru-colors-defs.scss, or the input CSS in use.
 DUMMY_COLORS = {
+    'accent-color-base': '#00ff20',
+    'accent-color-base-hc': '#00ff21',
     'accent-color': '#00ff03',
     'accent-color-hc': '#00ff04',
     'accent-bg-color': '#00ff01',
@@ -58,6 +60,7 @@ def read_colors_replacements(css_file):
                 continue
 
             [named_color, color] = line.split('-yaru-', 1)[-1].split(': ')
+            assert named_color in DUMMY_COLORS, f'Unknown color {named_color} in {css_file.name}'
             colors_replacements[DUMMY_COLORS[named_color]] = color
             print(named_color, color, f'(replaces {DUMMY_COLORS[named_color]})')
 
