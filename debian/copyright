@@ -10,8 +10,7 @@ Copyright: 2017-2018, Canonical Ltd.
            2015, Руслан Ижбулатов <lrn1986@gmail.com>
 License: GPL-3.0+
 
-Files: gnome-shell/src/gnome-shell-sass/_common.scss
-       gnome-shell/upstream/theme/gnome-shell-sass/_common.scss
+Files: gnome-shell/upstream/theme/gnome-shell-sass/_common.scss
 Copyright: 2009-2015 Red Hat, Inc.
            2009 Intel Corporation
 License: LGPL-2.1
@@ -22,17 +21,18 @@ License: CC-BY-SA-4.0
 
 Files: icons/src/cursors/anicursorgen.py
 Copyright: 2015 Руслан Ижбулатов <lrn1986@gmail.com>
-License: GPL-3+
+License: GPL-3.0+
 
 Files: icons/src/cursors/render-cursors.py
-License: GPL-2
+Copyright: Copyright: Red Hat, Canonical Ltd and contributors
+License: GPL-2.0
 
 Files: icons/src/fullcolor/render-bitmaps.py
        icons/src/scalable/extract-symbolic-icons.rb
-License: LGPL-3
+License: LGPL-3.0
 
 Files: icons/src/symlinks/generate-symlinks.sh
-License: GPL-3
+License: GPL-3.0
 
 Files: common/colorize-dummy-svg.py
        common/sass-utils.scss
@@ -53,19 +53,6 @@ Copyright: 2017-2022, Canonical Ltd.
 License: GPL-3.0+
 
 License: GPL-3.0+
- This package is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 3 of the License, or
- (at your option) any later version.
- .
- This package is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- .
- You should have received a copy of the GNU General Public License
- along with this program. If not, see <https://www.gnu.org/licenses/>
- .
  On Debian systems, the complete text of the GNU General
  Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 
@@ -532,18 +519,16 @@ License: LGPL-2.1+
  `/usr/share/common-licenses/LGPL-2.1'.
 
 License: LGPL-3.0
- This file is free software; you can redistribute it and/or modify it under
- the terms of the GNU Lesser General Public License as published by the Free Software
- Foundation; version 3.
- .
- This file is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
- details.
- .
- You should have received a copy of the GNU Lesser General Public License along with
- this program; if not, see <https://www.gnu.org/licenses/lgpl-3.0.txt>
- .
+ On Debian systems, the full text of the GNU Lesser General Public
+ License version 3 can be found in the file
+ `/usr/share/common-licenses/LGPL-3'.
+
+License: GPL-2.0
+ On Debian systems, the full text of the GNU Lesser General Public
+ License version 3 can be found in the file
+ `/usr/share/common-licenses/LGPL-2'.
+
+License: GPL-3.0
  On Debian systems, the full text of the GNU Lesser General Public
  License version 3 can be found in the file
  `/usr/share/common-licenses/LGPL-3'.
