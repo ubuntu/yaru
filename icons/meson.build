@@ -1,5 +1,6 @@
 PANEL_ONLY_ICONS_CATEGORIES = [
   'animations',
+  'legacy',
   'panel',
 ]
 
@@ -28,11 +29,17 @@ cleanup_rendered_icons_accented_targets = []
 cleanup_symlinks_targets = []
 cleanup_symlinks_accented_targets = []
 
+svg_source_categories_excludes = ''
+foreach c: PANEL_ONLY_ICONS_CATEGORIES
+  svg_source_categories_excludes += ' ! -path "*/@0@/*"'.format(c)
+endforeach
+
 if not inkscape.found()
   warning('Inkscape not found, bitmap rendering not supported')
 endif
 
-render_wrappers = xvfb_run.found() ? [xvfb_run, '-a', '--'] : []
+# render_wrappers = xvfb_run.found() ? [xvfb_run, '-a', '--'] : []
+render_wrappers = []
 render_wrappers += dbus_run_session.found() ? [dbus_run_session, '--'] : []
 
 accented_full_svgs = []
@@ -236,7 +243,9 @@ foreach flavour: icon_flavors
           ';'.join([
             'ls -d "$0"/$1 >/dev/null 2>&1 || exit 0',
             'find "$0"/$1 -name "*.png" -print -delete',
-            rendering_deps.length() > 0 ? 'find "$0"/$1 -name "*.svg" -print -delete' : 'true',
+            (rendering_deps.length() > 0 ?
+            'find "$0"/$1 -name "*.svg" @0@ -print -delete'.format(svg_source_categories_excludes) :
+            'true'),
             'find "$0"/$1 -type d -empty -print -delete'
           ]),
         meson.project_source_root() / meson.current_source_dir() / icon_dir,
