@@ -1,3 +1,22 @@
+yaru-theme (26.04.2.1ubuntu) UNRELEASED; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * common/accent-colors: Fix computation of optimized accent color variants
+  * common/accent-colors: Add definition for the base accent without changes
+  * common/accent-colors: Define accents for dark on light and vice-versa
+  * icons/accented: Use non-modified original accent color for accented apps
+  * icons/build: Support rendering accented icons for default accent too
+  * icons/fullcolor: Remove the duplicated default SVGs
+  * icons/accented/tweaks: Use the same icon we use for default
+  * icons/tweaks-app: Remove the default override
+  * icons/accented/{sysprof, software-updater}: Use accent for light backgrounds
+  * icons/fullcolor/accented: Use a more contrast-aware color for non-app icons
+  * icons/build: Support rendering icons for both the dark and light theme
+  * icons/fullcolor/accented: Render them for both dark and light variants
+  * icons/build: Do not drop legacy/panel icons on cleanup
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Sat, 14 Mar 2026 05:19:46 +0100
+
 yaru-theme (26.04.1.1ubuntu) resolute; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
