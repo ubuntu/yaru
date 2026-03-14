@@ -38,8 +38,7 @@ if not inkscape.found()
   warning('Inkscape not found, bitmap rendering not supported')
 endif
 
-# render_wrappers = xvfb_run.found() ? [xvfb_run, '-a', '--'] : []
-render_wrappers = []
+render_wrappers = xvfb_run.found() ? [xvfb_run, '-a', '--'] : []
 render_wrappers += dbus_run_session.found() ? [dbus_run_session, '--'] : []
 
 accented_full_svgs = []
