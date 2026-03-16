@@ -17,6 +17,7 @@ $yaru_colors: (
     accent-bg-color: $yaru_accent_bg_color,
     accent-active-color: $progress_bg_color,
     accent-focused-color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%)),
+    accent-color-on-accent-color: $yaru_accent_color_on_accent_color,
     border-color: $borders_color,
     disabled-bg-color: mix($bg_color, $fg_color, 80%),
     switch-bg-color: if($variant == 'dark', lighten($inkstone, 10%), lighten($ash, 20%)),

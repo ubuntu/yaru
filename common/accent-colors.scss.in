@@ -66,4 +66,7 @@ $accent-color-dark-bg: if($yaru_is_dark_variant, $accent_color,
     optimize-contrast($yaru_dark_bg, $yaru_accent_color_base,
         $target: $contrast_target));
 
+$yaru_accent_color_on_accent_color: optimize-contrast($accent_color,
+    $accent_color, $target: 3.5);
+
 @import '@yaru_theme_entry_point@'
