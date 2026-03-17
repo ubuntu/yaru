@@ -72,6 +72,15 @@
   }
 }
 
+@mixin yaru_panel_button($bg: $yaru_panel_bg_color, $fg: $yaru_panel_fg_color, $style: null, $highlighted_child: false, $child_class: "") {
+  $yaru_old_variant: $variant;
+  $variant: 'dark'; // Force dark variant for panel buttons
+  @include panel_button($bg, $fg, $style, $highlighted_child, $child_class);
+  $variant: $yaru_old_variant;
+
+  font-weight: normal !important;
+}
+
 // ============================================================================
 // Panel Tweaks
 // ============================================================================
@@ -82,6 +91,10 @@
 #panel {
   background-color: $yaru_panel_bg_color !important;
 
+  @if $variant =='light' {
+    box-shadow: none !important;
+  }
+
   // Keep panel dark in overview too
   &:overview {
     background-color: $yaru_panel_bg_color !important;
@@ -90,33 +103,23 @@
   // Override all panel button styling to use white text and normal font weight
   // This needs to be specific enough to override the panel_button mixin
   .panel-button {
-    font-weight: normal !important;
-    color: $yaru_panel_fg_color !important;
-
-    // All text and icons should be white
-    StIcon,
-    StLabel {
-      color: $yaru_panel_fg_color !important;
-    }
+    @include yaru_panel_button();
 
     // Activities button workspace dots should be white
     &#panelActivities .workspace-dot {
       background-color: $yaru_panel_fg_color !important;
     }
-  }
 
-  // Override overview-specific panel button colors
-  &:overview .panel-button {
-    color: $yaru_panel_fg_color !important;
-
-    StIcon,
-    StLabel {
-      color: $yaru_panel_fg_color !important;
+    &.screen-recording-indicator {
+      @include yaru_panel_button($bg: $recording_indicator_color, $fg: $_base_color_light, $style: filled);
     }
 
-    // Activities button workspace dots in overview should also be white
-    &#panelActivities .workspace-dot {
-      background-color: $yaru_panel_fg_color !important;
+    &.screen-sharing-indicator {
+      @include yaru_panel_button($bg: $privacy_indicator_color, $fg: $_base_color_light, $style: filled);
+    }
+
+    &.clock-display {
+      @include yaru_panel_button($highlighted_child: true, $child_class: '.clock');
     }
   }
 
