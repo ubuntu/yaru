@@ -25,6 +25,7 @@ jobs:
     - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
     - name: Install dependencies
       run: |
+        sudo apt update
         sudo apt install sassc libxml2-utils libglib2.0-dev python3-pip
         sudo pip3 install meson ninja
 

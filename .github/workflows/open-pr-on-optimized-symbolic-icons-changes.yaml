@@ -28,6 +28,7 @@ jobs:
       - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
         run: |
+          sudo apt update
           sudo apt install scour
 
       - name: Check Source changes
