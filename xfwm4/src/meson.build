@@ -7,7 +7,8 @@ foreach flavour: flavours
     # install xfwm4 assets and themerc
     xfwm4_sources_dir = join_paths(flavour, 'xfwm4')
     xfwm4_sources_data = run_command(
-      'find', xfwm4_sources_dir, '-name', '*rc'
+      'find', xfwm4_sources_dir, '-name', '*rc',
+      check: false,
       ).stdout().strip().split('\n')
 
     xfwm4_sources_dest = join_paths(theme_dir, 'xfwm4')

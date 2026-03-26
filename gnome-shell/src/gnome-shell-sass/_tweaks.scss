@@ -1,0 +1,376 @@
+/* Yaru Tweaks for GNOME Shell
+ *
+ * This file contains minimal style overrides to the upstream GNOME Shell theme.
+ */
+
+// ============================================================================
+// Typography Overrides
+// ============================================================================
+// Custom font weight definitions for titles and headings
+// Adjust these values as needed for Yaru's referencing the weights from Vanilla Framework
+
+%large_title {
+  font-weight: 300;
+  @include fontsize(24pt);
+}
+
+%title_1 {
+  font-weight: 550;
+  @include fontsize(20pt);
+}
+
+%title_2 {
+  font-weight: 550;
+  @include fontsize(15pt);
+}
+
+%title_3 {
+  font-weight: 500;
+  @include fontsize(15pt);
+}
+
+%title_4 {
+  font-weight: 500;
+  @include fontsize(13pt);
+}
+
+%heading {
+  font-weight: 500;
+  @include fontsize(11pt);
+}
+
+%caption_heading {
+  font-weight: 500;
+  @include fontsize(9pt);
+}
+
+%caption {
+  font-weight: 400;
+  @include fontsize(9pt);
+}
+
+%smaller {
+  font-weight: 400;
+  @include fontsize(9pt);
+}
+// ============================================================================
+// Looking Glass Tweaks
+// ============================================================================
+// Looking Glass dialog - ensure it's always dark with good contrast
+#LookingGlassDialog {
+  background-color: rgba(34, 34, 38, 0.98) !important;
+  color: $light_1 !important;
+  border-radius: 12px;
+
+  StLabel {
+    color: $light_1 !important;
+  }
+
+  StEntry {
+    color: $light_1 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+@mixin yaru_panel_button($bg: $yaru_panel_bg_color, $fg: $yaru_panel_fg_color, $style: null, $highlighted_child: false, $child_class: "") {
+  $yaru_old_variant: $variant;
+  $variant: 'dark'; // Force dark variant for panel buttons
+  @include panel_button($bg, $fg, $style, $highlighted_child, $child_class);
+  $variant: $yaru_old_variant;
+
+  font-weight: normal !important;
+}
+
+// ============================================================================
+// Panel Tweaks
+// ============================================================================
+// Always use dark panel appearance with white text (even in light theme)
+// This provides better visual hierarchy and modern look
+
+// Panel - dark background in all modes (desktop and overview)
+#panel {
+  background-color: $yaru_panel_bg_color !important;
+
+  @if $variant =='light' {
+    box-shadow: none !important;
+  }
+
+  // Keep panel dark in overview too
+  &:overview {
+    background-color: $yaru_panel_bg_color !important;
+  }
+
+  // Override all panel button styling to use white text and normal font weight
+  // This needs to be specific enough to override the panel_button mixin
+  .panel-button {
+    @include yaru_panel_button();
+
+    // Activities button workspace dots should be white
+    &#panelActivities .workspace-dot {
+      background-color: $yaru_panel_fg_color !important;
+    }
+
+    &.screen-recording-indicator {
+      @include yaru_panel_button($bg: $recording_indicator_color, $fg: $_base_color_light, $style: filled);
+    }
+
+    &.screen-sharing-indicator {
+      @include yaru_panel_button($bg: $privacy_indicator_color, $fg: $_base_color_light, $style: filled);
+    }
+
+    &.clock-display {
+      @include yaru_panel_button($highlighted_child: true, $child_class: '.clock');
+    }
+  }
+
+  // Ensure system status indicators are white
+  .system-status-icon {
+    color: $yaru_panel_fg_color !important;
+  }
+}
+
+// Lockscreen/login screen - transparent panel (override the above)
+// This must come AFTER the main panel rule to override it
+#panel.unlock-screen,
+#panel.login-screen {
+  background-color: transparent !important;
+}
+
+// ============================================================================
+// Lockscreen Tweaks
+// ============================================================================
+
+// Lockscreen clock - use normal font weight for all text
+// Apply to parent to override all children
+.unlock-dialog-clock {
+  font-weight: normal !important;
+
+  .unlock-dialog-clock-time,
+  .unlock-dialog-clock-date,
+  .unlock-dialog-clock-hint {
+    font-weight: normal !important;
+  }
+}
+
+// Also override the placeholder that includes these elements
+.unlock-dialog-clock .unlock-dialog-clock-date {
+  font-weight: normal !important;
+}
+
+// Lockscreen notification counter - use normal font weight
+.unlock-dialog-notification-count-text {
+  font-weight: normal !important;
+}
+
+// Remove focus border from lockscreen entry fields.
+.unlock-dialog {
+  .login-dialog-prompt-entry {
+    &:focus {
+      // Yaru change: remove focus border
+      box-shadow: none !important;
+    }
+  }
+}
+
+// dark/light theme support
+.login-dialog,
+.unlock-dialog {
+  .user-widget {
+    &.vertical {
+      .user-icon {
+        & StIcon {
+          color: $_gdm_fg;
+        }
+      }
+    }
+  }
+}
+
+// Yaru change: style login dialog entry in dark theme
+@if $variant=='dark' {
+  login-dialog {
+    StEntry {
+      background-color: darken($system_bg_color, 3%) !important;
+      color: $fg_color !important;
+      border-color: $system_borders_color !important;
+    }
+  }
+}
+
+// Yaru change: style unlock dialog with half-transparent items
+.unlock-dialog {
+  StEntry {
+    border:none !important;
+    &, &:focus {
+      color: $system_fg_color !important;
+      background-color: transparentize($system_fg_color, 0.9) !important;
+      box-shadow: none !important;
+    }
+
+    &:insensitive {
+      color: transparentize($system_fg_color, 0.5) !important;
+      background-color: transparentize($system_fg_color, 0.95) !important;
+    }
+
+    StLabel.hint-text {
+      color: transparentize($system_fg_color, 0.3) !important;
+    }
+  }
+
+  .cancel-button,
+  .switch-user-button,
+  .login-dialog-session-list-button {
+    border-color: transparent !important;
+    background-color: transparentize($system_fg_color, 0.9) !important;
+    box-shadow: none !important;
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $system_fg_color !important;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: transparentize($system_fg_color, 0.85) !important;
+    }
+
+    &:active {
+      background-color: transparentize($system_fg_color, 0.80) !important;
+    }
+  }
+}
+
+// ============================================================================
+// Hover Color Fix for Popovers and Menus
+// ============================================================================
+// Override upstream's accent-colored and calculated hovers with Yaru's neutral grey
+
+.popup-menu-item {
+  &:hover, &:selected {
+    background-color: transparentize($fg_color, 0.9) !important;
+  }
+}
+
+.button.default:hover {
+  background-color: transparentize($fg_color, 0.85) !important;
+}
+
+/* Dialogs overrides */
+.conflicting-session-dialog-content {
+  .conflicting-session-dialog-desc-warning {
+    // Yaru: use contrast-optimized color.
+    color: $warning_caption_color;
+    // Yaru: Use uniform aspect on dialog messages.
+    // See: https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/3897
+    background-color: $warning_caption_bg_color;
+  }
+}
+
+.end-session-dialog {
+  // special style for session warnings
+  .end-session-dialog-battery-warning,
+  .dialog-list-title {
+    // Yaru: use contrast-optimized color.
+    color: $warning_caption_color;
+    background-color: $warning_caption_bg_color;
+  }
+}
+
+.prompt-dialog {
+  .prompt-dialog-error-label {
+    // Yaru: use contrast-optimized color.
+    color: $warning_caption_color;
+    background-color: $warning_caption_bg_color;
+  }
+}
+
+/* Border-radius overrides */
+$yaru_popup_radius: $modal_radius * 1.05;
+
+.datemenu-popover {
+  border-radius: $base_border_radius;
+}
+
+.popup-menu-content {
+  border-radius: $yaru_popup_radius;
+}
+
+.quick-toggle-menu {
+  border-radius: $yaru_popup_radius;
+}
+
+.quick-toggle {
+  border-radius: $yaru_popup_radius;
+}
+
+/* More squircles...
+.datemenu-popover {
+  .icon-button,
+  .button {
+    border-radius: $yaru_popup_radius;
+  }
+}
+
+.quick-settings {
+  border-radius: $yaru_popup_radius;
+
+  .icon-button,
+  .button {
+    border-radius: $yaru_popup_radius;
+  }
+}
+
+.quick-toggle-menu {
+  border-radius: $yaru_popup_radius;
+
+  & .header {
+    & .icon {
+      border-radius: $yaru_popup_radius;
+    }
+  }
+}
+*/
+
+.quick-toggle-has-menu {
+  & .quick-toggle {
+    &:ltr {
+      border-radius: $yaru_popup_radius 0 0 $yaru_popup_radius;
+    }
+
+    &:rtl {
+      border-radius: 0 $yaru_popup_radius $yaru_popup_radius 0;
+    }
+
+    &:ltr:last-child { border-radius: $yaru_popup_radius; }
+    &:rtl:last-child { border-radius: $yaru_popup_radius; }
+  }
+
+  & .quick-toggle-menu-button {
+    &:ltr {
+      border-radius: 0 $yaru_popup_radius $yaru_popup_radius 0;
+    }
+    &:rtl {
+      border-radius: $yaru_popup_radius 0 0 $yaru_popup_radius;
+    }
+  }
+}
+
+/* OSD fixes */
+.osd-window {
+  .level {
+    // Yaru: Optimize overdrive color for contrast
+    -barlevel-overdrive-color: optimize-contrast($osd_bg_color, $destructive_color, $target: 5.5);
+  }
+}
+
+// Yaru: Make pad OSD visible again in the light theme by using osd colors, should be ported to upstream
+.pad-osd-window {
+  background-color: $osd_bg_color;
+  color: $osd_fg_color;
+
+  .button {
+    @extend %button;
+    &:insensitive { color: $fg_color; }
+  }
+}

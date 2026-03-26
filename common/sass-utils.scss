@@ -203,9 +203,20 @@
         $target: 3;
     }
 
+    $iterations: 0;
+    $initial-fg: $fg;
+
     $dark-bg: luminance($fg) > luminance($bg);
     @while (color-contrast($bg, $fg) < $target) {
         $fg: if($dark-bg, lighten($fg, 0.1), darken($fg, 0.1));
+
+        $iterations: $iterations + 1;
+        @if ($iterations > 1000) {
+            @error "Failed to optimize contrast in 5000 iterations for " +
+                $initial-fg + " on " + $bg + " with target " + $target +
+                " dark-bg: " + $dark-bg + ". Current fg: " + $fg +
+                ", contrast: "+ color-contrast($bg, $fg);
+        }
     }
 
     @return $fg;

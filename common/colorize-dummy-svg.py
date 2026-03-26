@@ -24,7 +24,13 @@ from glob import glob
 
 # Keep this in sync with yaru-colors-defs.scss, or the input CSS in use.
 DUMMY_COLORS = {
+    'accent-color-base': '#00ff20',
+    'accent-color-base-hc': '#00ff21',
     'accent-color': '#00ff03',
+    'accent-color-dark-bg': '#00ff07',
+    'accent-color-dark-bg-hc': '#00ff08',
+    'accent-color-light-bg': '#00ff09',
+    'accent-color-light-bg-hc': '#00ff10',
     'accent-color-hc': '#00ff04',
     'accent-bg-color': '#00ff01',
     'accent-bg-color-hc': '#00ff05',
@@ -34,7 +40,11 @@ DUMMY_COLORS = {
     'accent-border-color-hc': '#ff0002',
     'accent-focused-color': '#0101ff',
     'accent-focused-color-hc': '#0101f1',
+    'accent-color-on-accent-color': "#008502",
+    'accent-color-on-accent-color-hc': '#008503',
     'bg-color': '#ffff00',
+    'light-bg-color': '#fffff1',
+    'dark-bg-color': '#000001',
     'border-color': '#ff00ff',
     'border-color-hc': '#ff00f1',
     'disabled-bg-color': '#ffff02',
@@ -56,12 +66,13 @@ def read_colors_replacements(css_file):
                 continue
 
             [named_color, color] = line.split('-yaru-', 1)[-1].split(': ')
+            assert named_color in DUMMY_COLORS, f'Unknown color {named_color} in {css_file.name}'
             colors_replacements[DUMMY_COLORS[named_color]] = color
             print(named_color, color, f'(replaces {DUMMY_COLORS[named_color]})')
 
     return colors_replacements
 
-def replace_colors(svg, replacements, output_folder, variant):
+def replace_colors(svg, replacements, output_folder, output_name, variant):
     with open(svg, 'r') as f:
         contents = f.read()
         for dummy, color in replacements.items():
@@ -69,8 +80,10 @@ def replace_colors(svg, replacements, output_folder, variant):
 
     output_folder = os.path.abspath(output_folder)
     basename = os.path.basename(svg).rsplit('.', 1)[0]
-    finalname = f'{basename}-{variant}.svg' if variant else f'{basename}.svg'
-    output_path = os.path.join(output_folder, finalname)
+    if not output_name:
+        output_name = f'{basename}-{variant}.svg' if variant else f'{basename}.svg'
+
+    output_path = os.path.join(output_folder, output_name)
     print(f'Processing {os.path.basename(svg)} => {output_path}')
 
     os.makedirs(output_folder, exist_ok=True)
@@ -83,6 +96,7 @@ if __name__ == '__main__':
     parser.add_argument('--input-file', default=None)
     parser.add_argument('--assets-path', default='.')
     parser.add_argument('--output-folder', default='.')
+    parser.add_argument('--output-name', default=None)
     parser.add_argument('--variant', default=None)
     parser.add_argument('--filter', action='append', default=[])
     parser.add_argument('--exclude', action='append', default=[])
@@ -93,7 +107,9 @@ if __name__ == '__main__':
 
     if args.input_file:
         replace_colors(args.input_file, replacements,
-                       args.output_folder, variant)
+                       args.output_folder,
+                       args.output_name,
+                       variant)
     else:
         for svg in glob(os.path.join(os.path.abspath(args.assets_path), '*.svg')):
             if [fl for fl in args.exclude if fnmatch.fnmatch(svg, fl)]:

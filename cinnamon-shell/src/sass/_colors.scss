@@ -2,8 +2,11 @@
 // it gets @if ed depending on $variant
 @import 'palette';
 
+$light_bg_color: #FAFAFA;
+$dark_bg_color: lighten($jet, 6%);
+
 $base_color: if($variant=='light', #ffffff, lighten($jet, 4%));
-$bg_color: if($variant=='light', #fafafa, lighten($jet, 6%));
+$bg_color: if($variant =='light', $light_bg_color, $dark_bg_color);
 $fg_color: if($variant=='light', $inkstone, $porcelain);
 $text_color: $fg_color;
 

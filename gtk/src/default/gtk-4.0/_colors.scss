@@ -3,9 +3,12 @@
 
 @import 'palette';
 
+$light_bg_color: #FAFAFA;
+$dark_bg_color: lighten($jet, 8%);
+
 $base_color: if($variant == 'light', #ffffff, lighten($jet, 6%));
 $text_color: if($variant == 'light', black, white);
-$bg_color: if($variant == 'light', #FAFAFA, lighten($jet, 8%));
+$bg_color: if($variant == 'light', $light_bg_color, $dark_bg_color);
 $fg_color: if($variant == 'light', $inkstone, $porcelain);
 
 $selected_fg_color: $accent_fg_color;
@@ -83,3 +86,6 @@ $contrast_target: if($variant=='light', 6, 5.5);
 $link_color: optimize-contrast($bg_color, $accent_bg_color, $target: $contrast_target);
 $link_visited_color: if($variant=='light', darken($link_color, 10%),
                         optimize-contrast($bg_color, $accent_bg_color));
+
+// Yaru: Used by upstream scss code.
+$accent_color: $accent_bg_color;

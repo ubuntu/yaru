@@ -8,10 +8,16 @@ $hc_contrast_target: 5.5;
 
 $yaru_colors: (
     bg-color: $bg_color,
+    light-bg-color: $light_bg_color,
+    dark-bg-color: $dark_bg_color,
+    accent-color-base: $yaru_accent_color_base,
     accent-color: $yaru_accent_color,
+    accent-color-light-bg: $accent-color-light-bg,
+    accent-color-dark-bg: $accent-color-dark-bg,
     accent-bg-color: $yaru_accent_bg_color,
     accent-active-color: $progress_bg_color,
     accent-focused-color: if($variant == 'dark', darken($accent_bg_color, 7%), darken($accent_bg_color, 3%)),
+    accent-color-on-accent-color: $yaru_accent_color_on_accent_color,
     border-color: $borders_color,
     disabled-bg-color: mix($bg_color, $fg_color, 80%),
     switch-bg-color: if($variant == 'dark', lighten($inkstone, 10%), lighten($ash, 20%)),
@@ -42,7 +48,8 @@ $yaru_colors: map-merge($yaru_colors, (
         -yaru-#{$name}-opaque: $opaque;
     }
 
-    @if $name != "bg-color" and not map-has-key($yaru_colors, $name + "-hc") and
+    @if str-starts-with($name, "accent") and
+        not map-has-key($yaru_colors, $name + "-hc") and
         not str-ends-with($name, "-hc") {
         -yaru-#{$name}-hc: optimize-contrast($bg_color,
             $color, $target: $hc_contrast_target);

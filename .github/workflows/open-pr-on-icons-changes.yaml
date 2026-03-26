@@ -1,6 +1,7 @@
 name: Update PR on upstream icons changes
 on:
   push:
+    branches: [master]
     paths:
       - '.github/workflows/open-pr-on-icons-changes.yaml'
   schedule:
@@ -200,7 +201,7 @@ jobs:
           PROJECT_DIR: ${{ matrix.buildenv.projectdir }}
       - name: Create or update Pull Request
         if: steps.checknewupstream.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: New upstream symbolic icons list for ${{ matrix.buildenv.project }}
           title: Auto update new upstream symbolic icons list for ${{ matrix.buildenv.project }}

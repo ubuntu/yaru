@@ -30,7 +30,8 @@ foreach flavour: flavours
   # install metacity assets
   metacity_asset_dir = join_paths(flavour, 'metacity-1')
   metacity_svg_data = run_command(
-    'find', metacity_asset_dir, '-name', '*.svg'
+    'find', metacity_asset_dir, '-name', '*.svg',
+    check: true,
     ).stdout().strip().split('\n')
 
   metacity_assets_dest = join_paths(theme_dir, 'metacity-1')

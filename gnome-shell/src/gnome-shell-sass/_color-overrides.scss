@@ -1,0 +1,39 @@
+//
+// Color Overrides
+//
+// Minimal Yaru customizations - only essential overrides
+
+@import '_yaru-palette';
+
+// Yaru hover - subtle neutral grey instead of upstream's colored shifts
+$hover_bg_color: transparentize($fg_color, 0.9);
+$hover_fg_color: $fg_color;
+
+// Destructive/error colors with Yaru red
+$destructive_bg_color: optimize-contrast($light_1, $red, $target: 5.5);
+$destructive_color: optimize-contrast($bg_color, $red, $target: 6.0);
+$error_bg_color: optimize-contrast($light_1, $red, $target: 5.5);
+$error_color: optimize-contrast($bg_color, $red, $target: 6.0);
+
+// Success colors with Yaru green
+$success_bg_color: optimize-contrast($light_1, $green, $target: 5.5);
+$success_color: optimize-contrast($bg_color, $green, $target: 6.0);
+
+// Warning colors with Yaru yellow
+$warning_bg_color: optimize-contrast(transparentize(black, .2), $yellow, $target: 5.5);
+$warning_color: optimize-contrast($bg_color, $yellow, $target: 6.0);
+$warning_fg_color: optimize-contrast($warning_bg_color,
+    composite($warning_bg_color, transparentize(black, .2)), $target: 5.5);
+
+$warning_caption_bg_color: composite($bg_color, transparentize($warning_color, 0.9));
+$warning_caption_color: optimize-contrast($warning_caption_bg_color,
+    $warning_color, $target: 6.0);
+
+$system_fg_color: darken($porcelain, 2%);
+$system_bg_color: $_base_color_dark; // Yaru - use our definition our definition
+$system_borders_color: transparentize($system_fg_color, .9);
+$system_insensitive_fg_color: mix($system_bg_color, $system_fg_color, 37%);
+$system_overlay_bg_color: mix($system_base_color, $system_fg_color, 90%); // for non-transparent items, e.g. dash
+
+$yaru_panel_bg_color: darken($jet, 2%);
+$yaru_panel_fg_color: darken($porcelain, 2%);

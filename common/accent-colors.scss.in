@@ -20,6 +20,8 @@
         $color: #7764D8;
     } @else if $accent_color == 'magenta' {
         $color: #B34CB3;
+    } @else if $accent_color == 'mate' {
+        $color: #87a556;
     } @else if $accent_color == 'red' {
         $color: #DA3450;
     } @else if $accent_color == 'yellow' {
@@ -35,8 +37,12 @@
 
 $yaru_is_dark_variant: @yaru_dark_variant@;
 $jet: #181818;
-$yaru_bg_color: if($yaru_is_dark_variant, #FAFAFA, lighten($jet, 8%));
+$yaru_dark_bg: lighten($jet, 8%);
+$yaru_light_bg: #FAFAFA;
+
+$yaru_bg_color: if($yaru_is_dark_variant, $yaru_dark_bg, $yaru_light_bg);
 $yaru_accent_bg_color: get_accent_color('@yaru_accent_color@', $yaru_is_dark_variant);
+$yaru_accent_color_base: $yaru_accent_bg_color;
 
 $contrast_target: if($yaru_is_dark_variant, 4.8, 4.51);
 $yaru_accent_color: optimize-contrast($yaru_bg_color,
@@ -52,5 +58,15 @@ $accent_color: $yaru_accent_color;
 $yaru_accent_bg_color: optimize-contrast($accent_fg_color,
     $yaru_accent_bg_color, $target: $contrast_target);
 $accent_bg_color: $yaru_accent_bg_color;
+
+$accent-color-light-bg: if($yaru_is_dark_variant, optimize-contrast(
+    $yaru_light_bg, $yaru_accent_color_base, $target: $contrast_target),
+    $accent_color);
+$accent-color-dark-bg: if($yaru_is_dark_variant, $accent_color,
+    optimize-contrast($yaru_dark_bg, $yaru_accent_color_base,
+        $target: $contrast_target));
+
+$yaru_accent_color_on_accent_color: optimize-contrast($accent_color,
+    $accent_color, $target: 3.5);
 
 @import '@yaru_theme_entry_point@'

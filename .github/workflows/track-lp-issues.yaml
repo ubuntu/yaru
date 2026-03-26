@@ -1,6 +1,7 @@
 name: Report LP issue on GitHub
 on:
   push:
+    branches: [master]
     paths:
       - '.github/workflows/track-lp-issues.yaml'
       - '.github/lpbugtracker.py'
@@ -16,12 +17,13 @@ jobs:
       # Checkout code
       - uses: actions/checkout@v6
       - name: Install Python 3
-        uses: actions/setup-python@v6.0.0
+        uses: actions/setup-python@v6.2.0
       - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install launchpadlib
+          sudo apt update
           sudo apt install hub
       - name: Mirror Yaru bugs from Launchpad
         id: getlpbugs

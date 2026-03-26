@@ -1,6 +1,7 @@
 name: Open/Update PR when symbolic icons needs to be optimized
 on:
   push:
+    branches: [master]
     paths:
       - '.github/workflows/open-pr-on-optimized-symbolic-icons-changes.yaml'
       - 'icons/src/scalable/**'
@@ -27,10 +28,11 @@ jobs:
       - uses: canonical/desktop-engineering/gh-actions/common/dpkg-install-speedup@main
       - name: Install dependencies
         run: |
+          sudo apt update
           sudo apt install scour
 
       - name: Check Source changes
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         id: check-changed
         with:
           base: ${{ steps.env.outputs.push-branch }}
@@ -66,7 +68,7 @@ jobs:
 
       - name: Create or update Pull Request
         if: steps.check_optimization_changes.outputs.modified == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "icons: Optimize symbolic icons"
           title: Auto optimized symbolic icons updates

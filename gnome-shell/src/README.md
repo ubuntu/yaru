@@ -5,28 +5,48 @@ will be generated automatically when building with meson + ninja and left
 inside the build directory to be incorporated into the gresource XML (you'll
 need to have sassc installed).
 
-## How to tweak the theme
+## Architecture
 
-Yaru is a complex theme, so to keep it maintainable it's written and
-processed in SASS, the generated CSS is then transformed into a gresource
-file during gtk build and used at runtime in a non-legible or editable form.
+Yaru's GNOME Shell theme is built on top of upstream GNOME Shell (Adwaita)
+by **symlinking upstream SCSS files** and layering minimal Yaru overrides on
+top. This approach minimizes maintenance burden across GNOME releases while
+preserving Yaru's distinct visual identity.
 
-It is very likely your change will happen in the [_common.scss][common] file.
-That's where all the widget selectors are defined. Here's a rundown of
-the "supporting" stylesheets, that are unlikely to be the right place
-for a drive by stylesheet fix:
+### Import order (`gnome-shell.scss.in`)
 
-| File                     | Description       |
-| ------------------------ | ----------------- |
-| [_colors.scss][colors]   | global color definitions. We keep the number of defined colors to a necessary minimum,  most colors are derived from a handful of basics. It is an exact copy of the gtk+ counterpart. Light theme is used for the classic theme and dark is for GNOME3 shell default. |
-| [_drawing.scss][drawing] | drawing helper mixings/functions to allow easier definition of widget drawing under specific context. This is why Adwaita isn't 15000 LOC. |
-| [_common.scss][common]   | actual definitions of style for each widget. This is where you are likely to add/remove your changes. |
+| Import                     | Description                                                        |
+| -------------------------- | ------------------------------------------------------------------ |
+| `_color-overrides`         | **Yaru** color overrides (accent, success, warning, contrast etc.) |
+| `widgets/_authd`           | **Yaru/Ubuntu** authd styles (web login, QR code, auth menu)       |
+| `_dock`                    | **Yaru** Ubuntu Dock / Dash-to-Dock styling                        |
+| `_tweaks`                  | **Yaru** final overrides (loaded last)                             |
 
-You can read about SASS on its [web page][sass-web]. Once you make your
-changes to the [_common.scss][common] file, you can run ninja to generate the
+### Where to make changes
+
+- **Yaru colors**: Edit `_color-overrides.scss`
+- **Yaru visual tweaks**: Edit `_tweaks.scss` (typography, panel, lockscreen, menus)
+- **Ubuntu Dock**: Edit `_dock.scss`
+- **Ubuntu authd** (web login, QR code): Edit `widgets/_authd.scss`
+
+## Design principles
+
+Yaru is different from Adwaita in that it is **sharper and more elegant**:
+thinner text, sharper corners, and distinct color choices. The theme should
+maintain a good balance between inheriting upstream improvements for reduced
+maintenance and preserving Yaru's visual identity.
+
+Key distinctions from Adwaita:
+- **Contrast optimization**: Yaru adjusts warning/error/success colors for
+  better contrast against their backgrounds
+- **Typography**: Thinner font weights referencing Ubuntu/Vanilla Framework
+- **Dark panel**: Top panel uses a consistent dark appearance
+- **Accent-colored running dots**: App running indicators use the system
+  accent color
+
+## Building
+
+You can read about SASS on its [web page][sass-web]. Edit the relevant
+`.scss` file, then run `ninja` in your build directory to generate the
 final CSS files.
 
-[common]: data/theme/gnome-shell-sass/_common.scss
-[colors]: data/theme/gnome-shell-sass/_colors.scss
-[drawing]: data/theme/gnome-shell-sass/_drawing.scss
 [sass-web]: http://sass-lang.com/documentation/
