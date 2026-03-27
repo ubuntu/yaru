@@ -161,31 +161,34 @@
     @return floor($value * $multiplier) / $multiplier;
 }
 
-// Credits to https://css-tricks.com/snippets/sass/luminance-color-function/
-@function luminance($color) {
-    $colors: (
-        'red': red($color),
-        'green': green($color),
-        'blue': blue($color)
-    );
-
-    @each $name, $value in $colors {
-        $adjusted: 0;
-        $value: $value / 255;
-
-        @if $value < 0.03928 {
-            $value: $value / 12.92;
-        } @else {
-            $value: ($value + .055) / 1.055;
-            $value: pow($value, 12, 5);
-        }
-
-        $colors: map-merge($colors, ($name: $value));
+// Linearize a single sRGB channel (0 - 255 -> 0 - 1)
+@function srgb-channel-to-linear($value) {
+    $value: $value / 255;
+    @if $value < 0.03928 {
+        @return $value / 12.92;
+    } @else {
+        @return pow(($value + 0.055) / 1.055, 12, 5);
     }
+}
 
-    @return ((map-get($colors, 'red') * .2126) +
-             (map-get($colors, 'green') * .7152) +
-             (map-get($colors, 'blue') * .0722));
+// Gamma-encode a linear value (0 - 1 -> 0 - 1)
+@function linear-to-srgb-channel($value) {
+    $value: max(0, min(1, $value));
+    @if $value <= 0.0031308 {
+        @return $value * 12.92;
+    } @else {
+        @return 1.055 * pow($value, 5, 12) - 0.055;
+    }
+}
+
+@import 'oklab';
+
+// WCAG 2.x relative luminance (linear sRGB, 0 - 1)
+@function luminance($color) {
+    $r: srgb-channel-to-linear(red($color));
+    $g: srgb-channel-to-linear(green($color));
+    $b: srgb-channel-to-linear(blue($color));
+    @return $r * 0.2126 + $g * 0.7152 + $b * 0.0722;
 }
 
 @function color-contrast($color1, $color2) {
@@ -205,14 +208,23 @@
 
     $iterations: 0;
     $initial-fg: $fg;
+    $fg-oklab: srgb-to-oklab($fg);
+    $fg-L: nth($fg-oklab, 1);
+    $fg-a: nth($fg-oklab, 2);
+    $fg-b: nth($fg-oklab, 3);
 
+    // Direction determined by WCAG relative luminance
     $dark-bg: luminance($fg) > luminance($bg);
+    $step: if($dark-bg, 0.001, -0.001);
+
     @while (color-contrast($bg, $fg) < $target) {
-        $fg: if($dark-bg, lighten($fg, 0.1), darken($fg, 0.1));
+        $fg-L: $fg-L + $step;
+        $fg-L: max(0, min(1, $fg-L));
+        $fg: oklab-to-srgb($fg-L, $fg-a, $fg-b);
 
         $iterations: $iterations + 1;
         @if ($iterations > 1000) {
-            @error "Failed to optimize contrast in 5000 iterations for " +
+            @error "Failed to optimize contrast in 1000 iterations for " +
                 $initial-fg + " on " + $bg + " with target " + $target +
                 " dark-bg: " + $dark-bg + ". Current fg: " + $fg +
                 ", contrast: "+ color-contrast($bg, $fg);
