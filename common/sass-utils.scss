@@ -206,28 +206,80 @@
         $target: 3;
     }
 
-    $iterations: 0;
-    $initial-fg: $fg;
     $fg-oklab: srgb-to-oklab($fg);
-    $fg-L: nth($fg-oklab, 1);
-    $fg-a: nth($fg-oklab, 2);
-    $fg-b: nth($fg-oklab, 3);
+    // Snap a,b to 0 for achromatic inputs (grays) to avoid float noise breaking grays
+    $achromatic: red($fg) == green($fg) and green($fg) == blue($fg);
+    $fg-a: if($achromatic, 0, nth($fg-oklab, 2));
+    $fg-b: if($achromatic, 0, nth($fg-oklab, 3));
 
-    // Direction determined by WCAG relative luminance
+    // Binary search Oklab lightness between the original L and the
+    // boundary (0 or 1) to find the value closest to the original
+    // that still meets the contrast target.
     $dark-bg: luminance($fg) > luminance($bg);
-    $step: if($dark-bg, 0.001, -0.001);
+    $lo: if($dark-bg, nth($fg-oklab, 1), 0);
+    $hi: if($dark-bg, 1, nth($fg-oklab, 1));
 
-    @while (color-contrast($bg, $fg) < $target) {
-        $fg-L: $fg-L + $step;
-        $fg-L: max(0, min(1, $fg-L));
-        $fg: oklab-to-srgb($fg-L, $fg-a, $fg-b);
+    // Verify the boundary can actually reach the target
+    $boundary-fg: oklab-to-srgb(if($dark-bg, $hi, $lo), $fg-a, $fg-b);
+    @if (color-contrast($bg, $boundary-fg) < $target) {
+        @error "Cannot reach contrast target " + $target + " for " +
+            $fg + " on " + $bg;
+    }
 
-        $iterations: $iterations + 1;
-        @if ($iterations > 1000) {
-            @error "Failed to optimize contrast in 1000 iterations for " +
-                $initial-fg + " on " + $bg + " with target " + $target +
-                " dark-bg: " + $dark-bg + ". Current fg: " + $fg +
-                ", contrast: "+ color-contrast($bg, $fg);
+    @for $i from 1 through 24 {
+        $mid: ($lo + $hi) / 2;
+        $mid-fg: oklab-to-srgb($mid, $fg-a, $fg-b);
+        @if (color-contrast($bg, $mid-fg) >= $target) {
+            @if ($dark-bg) { $hi: $mid; }
+            @else { $lo: $mid; }
+            $fg: $mid-fg;
+        } @else {
+            @if ($dark-bg) { $lo: $mid; }
+            @else { $hi: $mid; }
+        }
+    }
+
+    // Relax toward original in Oklab L, preserving hue.
+    $current-L: nth(srgb-to-oklab($fg), 1);
+    $orig-L: nth($fg-oklab, 1);
+    @if ($current-L != $orig-L) {
+        $L-step: if($orig-L > $current-L, 0.001, -0.001);
+        $try-L: $current-L + $L-step;
+        $relaxing: true;
+        @while ($relaxing) {
+            @if (($L-step > 0 and $try-L > $orig-L) or ($L-step < 0 and $try-L < $orig-L)) {
+                $relaxing: false;
+            } @else {
+                $try: oklab-to-srgb($try-L, $fg-a, $fg-b);
+                @if (color-contrast($bg, $try) >= $target) {
+                    $fg: $try;
+                    $try-L: $try-L + $L-step;
+                } @else {
+                    $relaxing: false;
+                }
+            }
+        }
+    }
+
+    // For chromatic colors, nudge RGB channels toward original to
+    // close the quantization gap the Oklab L walk can't reach.
+    @if (not $achromatic) {
+        $initial-fg: oklab-to-srgb(nth($fg-oklab, 1), $fg-a, $fg-b);
+        $changed: true;
+        @while ($changed) {
+            $changed: false;
+            @if (red($fg) != red($initial-fg)) {
+                $try: change-color($fg, $red: red($fg) + if(red($initial-fg) > red($fg), 1, -1));
+                @if (color-contrast($bg, $try) >= $target) { $fg: $try; $changed: true; }
+            }
+            @if (green($fg) != green($initial-fg)) {
+                $try: change-color($fg, $green: green($fg) + if(green($initial-fg) > green($fg), 1, -1));
+                @if (color-contrast($bg, $try) >= $target) { $fg: $try; $changed: true; }
+            }
+            @if (blue($fg) != blue($initial-fg)) {
+                $try: change-color($fg, $blue: blue($fg) + if(blue($initial-fg) > blue($fg), 1, -1));
+                @if (color-contrast($bg, $try) >= $target) { $fg: $try; $changed: true; }
+            }
         }
     }
 
