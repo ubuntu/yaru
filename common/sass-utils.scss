@@ -181,55 +181,7 @@
     }
 }
 
-// Convert sRGB color to Oklab, returns (L, a, b)
-// Reference: https://bottosson.github.io/posts/oklab/
-@function srgb-to-oklab($color) {
-    $r: srgb-channel-to-linear(red($color));
-    $g: srgb-channel-to-linear(green($color));
-    $b: srgb-channel-to-linear(blue($color));
-
-    // Linear sRGB → LMS
-    $l: 0.4122214708 * $r + 0.5363325363 * $g + 0.0514459929 * $b;
-    $m: 0.2119034982 * $r + 0.6806995451 * $g + 0.1073969566 * $b;
-    $s: 0.0883024619 * $r + 0.2817188376 * $g + 0.6299787005 * $b;
-
-    // Cube root
-    $l_: nth-root($l, 3);
-    $m_: nth-root($m, 3);
-    $s_: nth-root($s, 3);
-
-    // LMS → Oklab
-    $L:  0.2104542553 * $l_ + 0.7936177850 * $m_ - 0.0040720468 * $s_;
-    $oa: 1.9779984951 * $l_ - 2.4285922050 * $m_ + 0.4505937099 * $s_;
-    $ob: 0.0259040371 * $l_ + 0.7827717662 * $m_ - 0.8086757660 * $s_;
-
-    @return ($L, $oa, $ob);
-}
-
-// Convert Oklab (L, a, b) back to sRGB color
-// Reference: https://bottosson.github.io/posts/oklab/
-@function oklab-to-srgb($L, $a, $b) {
-    // Oklab → LMS (cube root space)
-    $l_: $L + 0.3963377774 * $a + 0.2158037573 * $b;
-    $m_: $L - 0.1055613458 * $a - 0.0638541728 * $b;
-    $s_: $L - 0.0894841775 * $a - 1.2914855480 * $b;
-
-    // Cube
-    $l: $l_ * $l_ * $l_;
-    $m: $m_ * $m_ * $m_;
-    $s: $s_ * $s_ * $s_;
-
-    // LMS → linear sRGB
-    $sr:  4.0767416621 * $l - 3.3077115913 * $m + 0.2309699292 * $s;
-    $sg: -1.2684380046 * $l + 2.6097574011 * $m - 0.3413193965 * $s;
-    $sb: -0.0041960863 * $l - 0.7034186147 * $m + 1.7076147010 * $s;
-
-    @return change-color(#000000,
-        $red: round(linear-to-srgb-channel($sr) * 255),
-        $green: round(linear-to-srgb-channel($sg) * 255),
-        $blue: round(linear-to-srgb-channel($sb) * 255)
-    );
-}
+@import 'oklab';
 
 // WCAG 2.x relative luminance (linear sRGB, 0–1)
 @function luminance($color) {
