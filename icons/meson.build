@@ -403,16 +403,10 @@ foreach flavour: icon_flavors
         ).stdout().strip()
       endif
 
-      if meson.version().version_compare('>= 0.61')
-        install_symlink(fs.name(symlinks[i]),
-          install_dir: symlink_dir,
-          pointing_to: target,
-        )
-      else
-        meson.add_install_script('bash', '-c',
-          'mkdir -p "${DESTDIR}/@1@" && ln -svf @2@ ${DESTDIR}/@1@/@0@'.format(
-            fs.name(symlinks[i]), symlink_dir, target))
-      endif
+      install_symlink(fs.name(symlinks[i]),
+        install_dir: symlink_dir,
+        pointing_to: target,
+      )
     endforeach
 
     if is_dark_flavour
@@ -449,16 +443,10 @@ foreach flavour: icon_flavors
           check: true,
         ).stdout().strip()
 
-        if meson.version().version_compare('>= 0.61')
-          install_symlink(category,
-            install_dir: theme_install_dir / fs.parent(c),
-            pointing_to: target,
-          )
-        else
-          meson.add_install_script('bash', '-c',
-            'mkdir -p "${DESTDIR}/@2@"; ln -svf @1@ ${DESTDIR}/@2@/@0@'.format(
-                category, target, theme_install_dir / fs.parent(c)))
-        endif
+        install_symlink(category,
+          install_dir: theme_install_dir / fs.parent(c),
+          pointing_to: target,
+        )
       endforeach
     endif
 
