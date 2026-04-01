@@ -1,3 +1,31 @@
+yaru-theme (26.04.4.1ubuntu) UNRELEASED; urgency=medium
+
+  [ ochi12 ]
+  * Icon/resources: Add source file (LP: #2147030)
+  * Icon/showtime: Added source file (LP: #2147030)
+
+  [ Marco Trevisan (Treviño) ]
+  * build: Release 26.04.4
+  * icons/generate-symlinks: Do not try to use an undefined variable
+  * icons/generate-symlinks: Error out on using unbound variables
+  * icons/showtime: Use more upstream-inspired colors and style (LP: #2147030)
+  * build: Drop unused meson codepaths
+    We depend on newer meson now, so all such code is dead
+  * ci/render-icons: Install ubuntu fonts in CI.
+    We need these fonts to render various assets where text is used and not
+    embedded into the SVGs themselves, so adjust CI job to ensure icons are
+    properly rendered.
+    An example of badly rendered icons are the disk ones, where strings such
+    as "SSD" are not centered, as they are using a fallback font
+  * d/copyright: Add copyright for the oklab scss tools
+  * icons: Re-render rendered icons as per accent color updates
+
+  [ Juan Ruitiña ]
+  * Compute optimized color contrast using OKLCH
+  * Add test for Ubuntu orange
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 01 Apr 2026 22:09:41 +0200
+
 yaru-theme (26.04.3.1ubuntu) resolute; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
