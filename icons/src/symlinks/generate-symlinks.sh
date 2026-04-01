@@ -35,6 +35,8 @@
 ##
 # CLInt GENERATED_CODE: start
 
+set -u
+
 # No-arguments is not allowed
 [ $# -eq 0 ] && sed -ne 's/^## \(.*\)/\1/p' "$0" && exit 1
 
@@ -74,10 +76,10 @@ while getopts 'hanvm:t:' OPT; do
 done
 # CLInt GENERATED_CODE: end
 
-[ -n "$_match" ] && needle="$_match" || needle=''
+[ -n "${_match:-}" ] && needle="$_match" || needle=''
 
 function dlog() {
-    [ -n "$_verbose" ] && echo "$@"
+    [ -n "${_verbose:-}" ] && echo "$@"
 }
 
 if ! command -v realpath &>/dev/null; then
@@ -152,7 +154,7 @@ normalize_path() {
 CONTEXTS+=("${OPTIONAL_CONTEXTS[@]}")
 SIZES+=("${OPTIONAL_SIZES[@]}")
 
-if [ -n "$_variant" ]; then
+if [ -n "${_variant:-}" ]; then
     if ! in_array "$_variant" "${VARIANTS[@]}"; then
         echo "WARNING: Requested \"$_variant\" is not known"
     fi
@@ -205,7 +207,7 @@ linker() {
 
         if [ -f "$source_file" ]; then
             echo "[$icon_subfolder/$CONTEXT] linking $link_name -> $target"
-            if [ -n "${generated_links["$link_name"]}" ]; then
+            if [ -n "${generated_links["$link_name"]:-}" ]; then
                 echo "  ERROR: \"$link_name\" is already linked to \"${generated_links["$link_name"]}\""
                 exit 1
             fi
@@ -217,7 +219,7 @@ linker() {
                 echo "  ERROR: \"$target\" is already a symlink, please point it to a real file!"
                 exit 1
             fi
-            if [ -z "$_dry_run" ]; then
+            if [ -z "${_dry_run:-}" ]; then
                 mkdir -p "$base_dir"
                 rel_target=$(realpath -m --relative-to="$base_dir" "$base_dir/$target")
                 ln -sf "$rel_target" "$base_dir/$link_name"
