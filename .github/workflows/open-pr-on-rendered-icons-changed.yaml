@@ -46,6 +46,8 @@ jobs:
               - icons/src/fullcolor/render-bitmaps.py
             accented:
               - common/accent-colors.scss.in
+              - common/oklab.scss
+              - common/sass-utils.scss
               - icons/src/fullcolor/accented/**
               - icons/src/fullcolor/render-bitmaps.py
             symlinks:
