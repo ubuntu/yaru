@@ -231,7 +231,7 @@ linker() {
             exit 1
         else
             # The variants can ignore the missing icons
-            dlog "skipping \"$line\" for \"$VARIANT\" variant: could not find source symlink file \"$SOURCE_FILE\" in \"$base_dir\""
+            dlog "skipping \"$line\" for \"$VARIANT\" variant: could not find source symlink file \"$source_file\" in \"$base_dir\""
         fi
 
     done < "$list"
