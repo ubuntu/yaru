@@ -111,6 +111,7 @@ CONTEXTS=(
     "org.gnome.Settings"
 )
 OPTIONAL_CONTEXTS=("panel" "animations")
+OPTIONAL_SIZES=("8x8" "8x8@2x" "22x22", "cursors")
 SIZES=(
     "16x16"
     "16x16@2x"
@@ -123,7 +124,6 @@ SIZES=(
     "256x256"
     "256x256@2x"
 )
-OPTIONAL_SIZES=("8x8" "8x8@2x" "22x22")
 VARIANTS=("default" "dark" "mate")
 
 in_array() {
@@ -267,6 +267,12 @@ do
     done
 done
 echo "Done"
+
+# Cursors
+echo "Generating links for cursors..."
+CONTEXT="cursors"
+THEME="Yaru"
+linker "cursors" "" # we want empty sub_folder to avoid Yaru/cursors/cursors which do not exist
 
 # Clear symlink errors
 if command -v symlinks &>/dev/null; then
