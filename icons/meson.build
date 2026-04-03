@@ -516,7 +516,7 @@ foreach flavour: icon_flavors
 
     # Cleanup empty directories, as per excluded files
     meson.add_install_script('bash', '-c',
-      'find "${DESTDIR}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
+      'find "${MESON_INSTALL_DESTDIR_PREFIX}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
     if gtk_update_icon_cache.found()
       meson.add_install_script(
         gtk_update_icon_cache, '-qtf',
