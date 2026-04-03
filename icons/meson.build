@@ -452,8 +452,10 @@ foreach flavour: icon_flavors
 
     if gtk_update_icon_cache.found()
       meson.add_install_script(
-        gtk_update_icon_cache, '-qtf',
-        get_option('datadir') / 'icons' / theme_name,
+        'bash', '-c',
+        '"@0@" -qtf "${MESON_INSTALL_PREFIX}/@1@"'.format(
+          gtk_update_icon_cache.full_path(),
+          get_option('datadir') / 'icons' / theme_name),
         skip_if_destdir: true,
       )
     endif
