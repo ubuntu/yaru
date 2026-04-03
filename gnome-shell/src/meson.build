@@ -1,5 +1,4 @@
-gnomeshell_theme_dir = join_paths(gnomeshell_default_theme_dir,
-  meson.project_name())
+gnomeshell_theme_dir = gnomeshell_default_theme_dir / meson.project_name()
 
 styles = [
   'gnome-shell',
