@@ -10,6 +10,7 @@ fullcolor_path = 'src' / 'fullcolor'
 xvfb_run = find_program('xvfb-run', required: false)
 dbus_run_session = find_program('dbus-run-session', required: false)
 inkscape = find_program('inkscape', required: false)
+gtk_update_icon_cache = find_program('gtk-update-icon-cache', required: false)
 render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py', required: true)
 generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh', required: true)
 generate_index_theme = find_program('src' / 'generate-index-theme.py', required: true)
@@ -516,7 +517,13 @@ foreach flavour: icon_flavors
     # Cleanup empty directories, as per excluded files
     meson.add_install_script('bash', '-c',
       'find "${DESTDIR}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
-    gnome.post_install(gtk_update_icon_cache: get_option('datadir') / 'icons' / theme_name)
+    if gtk_update_icon_cache.found()
+      meson.add_install_script(
+        gtk_update_icon_cache, '-qtf',
+        get_option('datadir') / 'icons' / theme_name,
+        skip_if_destdir: true,
+      )
+    endif
 
     test('generate-symlinks' + suffix,
       generate_symlinks,
