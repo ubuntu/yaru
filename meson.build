@@ -37,3 +37,5 @@ foreach component: components
   subdir(component)
 
 endforeach
+
+gnome.post_install(glib_compile_schemas: true)
