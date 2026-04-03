@@ -1,5 +1,4 @@
-cinnamonshell_theme_dir = join_paths(cinnamonshell_default_theme_dir,
-  meson.project_name())
+cinnamonshell_theme_dir = cinnamonshell_default_theme_dir / meson.project_name()
 
 message()
 
@@ -181,7 +180,7 @@ foreach variant: yaru_flavours
   # install common assets
   foreach common_asset: common_theme_assets
     asset_dir = '@0@'.format(common_asset).replace(common_asset_dir, '').replace(fs.name(common_asset), '')
-    basename = join_paths(asset_dir, fs.name(common_asset))
+    basename = asset_dir / fs.name(common_asset)
     
     install_data(common_asset, install_dir: install_dir+'/common-assets'+asset_dir)
   endforeach
@@ -200,7 +199,7 @@ foreach variant: yaru_flavours
         asset_rel_dir = '/light-assets'+asset_rel_dir
       endif
     endif
-    basename = join_paths(asset_rel_dir, fs.name(colorable_asset))
+    basename = asset_rel_dir / fs.name(colorable_asset)
     target_name = fs.stem(basename) + '-' + variant + '.svg'
 
     asset_target = custom_target(
