@@ -98,7 +98,7 @@ foreach flavour: icon_flavors
     suffix = is_flavour ? '-@0@'.format(flavour) : ''
     icon_dir = 'Yaru' + suffix
     theme_name = meson.project_name() + suffix
-    theme_install_dir = join_paths(get_option('prefix'), 'share/icons', theme_name)
+    theme_install_dir = get_option('datadir') / 'icons' / theme_name
 
     rendering_deps = []
     rendering_args = [
@@ -453,8 +453,8 @@ foreach flavour: icon_flavors
     # install cursor thumbnail (cinnamon only)
     if get_option('cinnamon-shell') and flavour == 'default'
       install_data(
-        join_paths('src', 'cursors', 'thumbnail.png'),
-        install_dir: join_paths(theme_install_dir, 'cursors')
+        'src' / 'cursors' / 'thumbnail.png',
+        install_dir: theme_install_dir / 'cursors',
       )
     endif
 
@@ -516,7 +516,7 @@ foreach flavour: icon_flavors
     # Cleanup empty directories, as per excluded files
     meson.add_install_script('bash', '-c',
       'find "${DESTDIR}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
-    meson.add_install_script('meson/post_install.py', theme_name)
+    gnome.post_install(gtk_update_icon_cache: get_option('datadir') / 'icons' / theme_name)
 
     test('generate-symlinks' + suffix,
       generate_symlinks,
