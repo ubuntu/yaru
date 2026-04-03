@@ -9,6 +9,6 @@ foreach flavour: flavours
     })
 
   gtksourceview_dir = 'gtksourceview-5'
-  style_dir = join_paths(get_option('datadir'), gtksourceview_dir, 'styles')
+  style_dir = get_option('datadir') / gtksourceview_dir / 'styles'
   install_data(theme_file, install_dir: style_dir)
 endforeach
