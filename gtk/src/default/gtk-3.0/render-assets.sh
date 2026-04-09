@@ -32,4 +32,18 @@ do
     # && $OPTIPNG -o7 --quiet $ASSETS_DIR/$i@2.png 
   fi
 done
-exit 0
+
+for i in "$ASSETS_DIR"/*-symbolic.svg; do
+  name=$(basename "$i" .svg)
+  png=$ASSETS_DIR/$name.symbolic.png
+
+  if [ -f $png ]; then
+    echo "$png exists."
+  else
+    echo
+    echo Rendering "$png"
+    $INKSCAPE --export-png="$png" \
+              --export-background-opacity=0.0 "$i" >/dev/null #\
+    # && $OPTIPNG -o7 --quiet "$png"
+  fi
+done
