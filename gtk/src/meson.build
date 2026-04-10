@@ -116,7 +116,9 @@ foreach flavour: yaru_flavours
         check: false,
         ).stdout().strip().split('\n')
 
-      install_data(gtk2_sources_data, install_dir: install_path)
+      install_data(gtk2_sources_data,
+        install_dir: install_path,
+        follow_symlinks: true)
 
       assets_paths = []
       foreach src: sources_priority
