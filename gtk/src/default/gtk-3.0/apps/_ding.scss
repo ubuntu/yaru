@@ -1,13 +1,65 @@
 // Style DING (Desktop Icons NG) menus like GS ones
 
+// These definitions match the gnome shell ones.
+$base_border_radius: 8px;
+$modal_radius: $base_border_radius * 2;
+$menuitem_border_radius: $base_border_radius * 1.5;
+$shell_menu_radius: $modal_radius * 1.25;
+
+$outer_borders_color: if($variant == 'light', darken($bg_color, 7%), lighten($bg_color, 5%));
+$shadow_color: if($variant == 'light', rgba(0,0,0,.05), rgba(0,0,0,0.2));
+
 menu.desktopmenu {
-    menuitem {
-        margin: 0 .25rem;
-        padding: .5rem;
-        border-radius: $menu_radius - 1px;
+    .csd & {
+        border: 1px solid $outer_borders_color;
+        border-radius: $shell_menu_radius;
     }
-    
+
+    menuitem {
+        margin: 0 6px;
+        &:first-child {
+            margin-top: 2px;
+        }
+        &:last-child {
+            margin-bottom: 2px;
+        }
+
+        padding: 10px 0;
+
+        &:dir(ltr) {
+            padding-left: 5px;
+            padding-right: 10px;
+        }
+        &:dir(rtl) {
+            padding-left: 10px;
+            padding-right: 5px;
+        }
+
+        border-radius: $menuitem_border_radius;
+    }
+
     separator {
         margin: .25rem 1rem;
+        margin-left: 2.5em;
+    }
+
+    > arrow {
+        &.top {
+            border-top-right-radius: $menuitem_border_radius;
+            border-top-left-radius: $menuitem_border_radius;
+    }
+
+        &.bottom {
+            border-bottom-right-radius: $menuitem_border_radius;
+            border-bottom-left-radius: $menuitem_border_radius;
+        }
+    }
+}
+
+decoration {
+    .desktopmenu.csd.popup & {
+        border-radius: $shell_menu_radius;
+        box-shadow: 0 1px 2px transparentize(black, 0.8),
+                    0 2px 4px 0 $shadow_color;
     }
 }
