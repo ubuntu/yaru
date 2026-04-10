@@ -21,7 +21,7 @@ foreach flavour: yaru_flavours
   base_theme_name = is_dark ? flavour.split('-dark')[0] : flavour
   is_mate = flavour.startswith('mate')
   is_accent = enabled_accent_colors.contains(base_theme_name) or is_mate
-  theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
+  theme_dir = get_option('datadir') / 'themes' / theme_name
   default_accent = is_mate ? 'mate' : 'default'
   accent = is_accent ? base_theme_name : default_accent
 
@@ -77,7 +77,7 @@ foreach flavour: yaru_flavours
     dark_path = is_dark ? 'dark' : base_path
     default_path = 'default' / gtk_dir
     upstream_path = '..' / 'upstream' / gtk_dir / 'Default'
-    flavour_path = join_paths(flavour, gtk_dir)
+    flavour_path = flavour / gtk_dir
     install_path = theme_dir / gtk_dir
 
     if not assets_renderers.has_key(gtk_ver)

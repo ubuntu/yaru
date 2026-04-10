@@ -10,6 +10,7 @@ fullcolor_path = 'src' / 'fullcolor'
 xvfb_run = find_program('xvfb-run', required: false)
 dbus_run_session = find_program('dbus-run-session', required: false)
 inkscape = find_program('inkscape', required: false)
+gtk_update_icon_cache = find_program('gtk-update-icon-cache', required: false)
 render_bitmaps = find_program(fullcolor_path / 'render-bitmaps.py', required: true)
 generate_symlinks = find_program('src' / 'symlinks' / 'generate-symlinks.sh', required: true)
 generate_index_theme = find_program('src' / 'generate-index-theme.py', required: true)
@@ -98,7 +99,7 @@ foreach flavour: icon_flavors
     suffix = is_flavour ? '-@0@'.format(flavour) : ''
     icon_dir = 'Yaru' + suffix
     theme_name = meson.project_name() + suffix
-    theme_install_dir = join_paths(get_option('prefix'), 'share/icons', theme_name)
+    theme_install_dir = get_option('datadir') / 'icons' / theme_name
 
     rendering_deps = []
     rendering_args = [
@@ -453,8 +454,8 @@ foreach flavour: icon_flavors
     # install cursor thumbnail (cinnamon only)
     if get_option('cinnamon-shell') and flavour == 'default'
       install_data(
-        join_paths('src', 'cursors', 'thumbnail.png'),
-        install_dir: join_paths(theme_install_dir, 'cursors')
+        'src' / 'cursors' / 'thumbnail.png',
+        install_dir: theme_install_dir / 'cursors',
       )
     endif
 
@@ -515,8 +516,16 @@ foreach flavour: icon_flavors
 
     # Cleanup empty directories, as per excluded files
     meson.add_install_script('bash', '-c',
-      'find "${DESTDIR}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
-    meson.add_install_script('meson/post_install.py', theme_name)
+      'find "${MESON_INSTALL_DESTDIR_PREFIX}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
+    if gtk_update_icon_cache.found()
+      meson.add_install_script(
+        'bash', '-c',
+        '"@0@" -qtf "${MESON_INSTALL_PREFIX}/@1@"'.format(
+          gtk_update_icon_cache.full_path(),
+          get_option('datadir') / 'icons' / theme_name),
+        skip_if_destdir: true,
+      )
+    endif
 
     test('generate-symlinks' + suffix,
       generate_symlinks,

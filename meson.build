@@ -1,8 +1,8 @@
 project('Yaru',
   version: '26.04.4',
   meson_version: '>= 1.4.0',
-  license : ['GPL3', 'CC BY-SA 4.0'],
-  default_options: ['prefix=/usr'],
+  license: ['GPL3', 'CC BY-SA 4.0'],
+  default_options: {'prefix': '/usr'},
 )
 
 fs = import('fs')
@@ -29,11 +29,12 @@ components = [
 
 foreach component: components
   if not get_option(component)
-    message('skip component ' + component)
+    message('skip component @0@'.format(component))
     continue
   endif
 
-  message('build component ' + component)
+  message('build component @0@'.format(component))
   subdir(component)
-
 endforeach
+
+gnome.post_install(glib_compile_schemas: true)

@@ -1,4 +1,4 @@
-cinnamonshell_default_theme_dir = join_paths(get_option('datadir'), 'themes')
+cinnamonshell_default_theme_dir = get_option('datadir') / 'themes'
 cinnamonshell_alt_themes_dir = cinnamonshell_default_theme_dir
 flavours = []
 foreach flavour: ['default', 'dark']
