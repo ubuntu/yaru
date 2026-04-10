@@ -317,74 +317,13 @@ foreach flavour: icon_flavors
     endif
 
     symlinks = []
-    if fs.is_dir(icon_dir)
-      message('Looking for symlinks in ' + icon_dir)
-
-      find_args = []
-      foreach f: excluded_folders
-        find_args += ['(', '-not', '-path', icon_dir / f / '*', '-prune', ')' ]
-      endforeach
-
-      local_links = run_command(
-        'find',
-        icon_dir,
-        '-type', 'l',
-        find_args,
-        check: true,
-      ).stdout().strip().split('\n')
-
-      if local_links.length() == 1 and local_links[0] == ''
-        local_links = []
-      endif
-
-      if local_links.length() > 0
-        relative_to = meson.current_source_dir() / icon_dir
-        links_paths_getter = run_command(
-          'realpath', '-e',
-          '--relative-to=' + relative_to,
-          local_links,
-          check: false,
-        )
-
-        if links_paths_getter.returncode() != 0
-          failed_links = []
-          foreach link: local_links
-            if run_command(
-              'realpath', '-e',
-              '--relative-to=' + relative_to,
-              link,
-              check: false,
-            ).returncode() != 0
-              failed_links += link
-            endif
-          endforeach
-
-          error ('Symbolic links are pointing to invalid paths:\n  ' +
-            '\n  '.join(failed_links))
-        endif
-
-        links_targets = links_paths_getter.stdout().strip().split('\n')
-        assert(local_links.length() == links_targets.length())
-      endif
-
-      foreach i: range(local_links.length())
-        link_paths = local_links[i].split('/')
-        link_subdirs = []
-        foreach j: range(link_paths.length() - 1)
-          link_subdirs += link_paths[j+1]
-        endforeach
-        sub_link = '/'.join(link_subdirs)
-        symlinks += sub_link
-      endforeach
-
-      excluded_files += symlinks
-    endif
 
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
       strip_directory: true,
       exclude_files: excluded_files,
       exclude_directories: excluded_folders,
+      follow_symlinks: false,
     )
 
     foreach i: range(symlinks.length())
@@ -517,6 +456,8 @@ foreach flavour: icon_flavors
     meson.add_install_script('bash', '-c',
       'find "${DESTDIR}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
     meson.add_install_script('meson/dedup-icons.py', theme_name)
+    meson.add_install_script('bash', '-xc',
+      '[ -z "$(find "${DESTDIR}/@0@" -xtype l)" ]'.format(theme_install_dir))
     meson.add_install_script('meson/post_install.py', theme_name)
 
     test('generate-symlinks' + suffix,
