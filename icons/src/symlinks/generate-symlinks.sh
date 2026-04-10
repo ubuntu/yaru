@@ -101,7 +101,10 @@ CONTEXTS=(
     "categories"
     "devices"
     "emblems"
+    "emotes"
+    "generic-symbols"
     "mimetypes"
+    "multimedia"
     "phosh"
     "places"
     "status"
@@ -110,7 +113,7 @@ CONTEXTS=(
     "org.gnome.Nautilus"
     "org.gnome.Settings"
 )
-OPTIONAL_CONTEXTS=("panel" "animations")
+OPTIONAL_CONTEXTS=("panel" "animations" "legacy")
 SIZES=(
     "16x16"
     "16x16@2x"
