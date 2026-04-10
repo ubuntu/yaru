@@ -39,8 +39,14 @@ menu.desktopmenu {
     }
 
     separator {
-        margin: .25rem 1rem;
-        margin-left: 2.5em;
+        margin: 8px 1rem;
+
+        &:dir(ltr) {
+            margin-left: 2.5em;
+        }
+        &:dir(rtl) {
+            margin-right: 2.5em;
+        }
     }
 
     > arrow {
