@@ -3,3 +3,7 @@ $variant: 'light';
 @import "_colors"; //use gtk colors
 @import "_drawing";
 @import "_common";
+@import "_dialogs"; // new in Cinnamon 6.4
+@import "_keyboard"; // new in Cinnamon 6.6
+@import "_ibus-popup"; // 6.6
+@import "_deprecated";
