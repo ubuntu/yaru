@@ -29,6 +29,13 @@ cleanup_rendered_icons_accented_targets = []
 cleanup_symlinks_targets = []
 cleanup_symlinks_accented_targets = []
 
+# FIXME: Remove this when we can make yaru-theme-unity depend on
+# yaru-theme-icons, for now let's just duplicate them.
+duplicate_legacy_icons = uses_panel_icons and run_command(
+  'sh', '-eu', '-c', '[ -n "${DEB_HOST_ARCH}" ]',
+  check: false,
+).returncode() == 0
+
 svg_source_categories_excludes = ''
 foreach c: PANEL_ONLY_ICONS_CATEGORIES
   svg_source_categories_excludes += ' ! -path "*/@0@/*"'.format(c)
@@ -316,6 +323,8 @@ foreach flavour: icon_flavors
       endif
     endif
 
+    # FIXME: Meson does not fail if the directory does not exist!
+    assert(fs.is_dir(icon_dir))
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
       strip_directory: true,
@@ -323,7 +332,6 @@ foreach flavour: icon_flavors
       exclude_directories: excluded_folders,
       follow_symlinks: false,
     )
-
 
     if is_dark_flavour
       assert(get_option('dark'), 'Dark flavour @0@ enabled, but we have no dark parent'.format(flavour))
@@ -436,6 +444,7 @@ foreach flavour: icon_flavors
       'meson/dedup-icons.py', theme_name,
       '--deprioritize-categories',
       PANEL_ONLY_ICONS_CATEGORIES + ['categories'],
+      duplicate_legacy_icons ? ['--skip-categories'] + PANEL_ONLY_ICONS_CATEGORIES : [],
     )
     meson.add_install_script('bash', '-xc',
       '[ -z "$(find "${DESTDIR}/@0@" -xtype l)" ]'.format(theme_install_dir))
