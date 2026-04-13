@@ -52,10 +52,12 @@ def deduplicate_icons(theme_dir: Path, deprioritized_categories: list[str] = [],
                  if not any(part in skip_categories
                             for part in f.relative_to(theme_dir).parts)]
 
-    def sort_key(p: Path) -> tuple[bool, str]:
+    def sort_key(p: Path) -> tuple[bool, bool, str]:
         is_deprioritized = any(part in deprioritized_categories
                                for part in p.relative_to(theme_dir).parts)
-        return (is_deprioritized, str(p))
+        return (is_deprioritized,
+                any(c.isdigit() for c in p.stem) and '-' not in p.stem,
+                str(p))
 
     for candidates in group_by_size(files).values():
         if len(candidates) < 2:
