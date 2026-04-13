@@ -316,8 +316,6 @@ foreach flavour: icon_flavors
       endif
     endif
 
-    symlinks = []
-
     install_subdir(icon_dir,
       install_dir: theme_install_dir,
       strip_directory: true,
@@ -326,27 +324,6 @@ foreach flavour: icon_flavors
       follow_symlinks: false,
     )
 
-    foreach i: range(symlinks.length())
-      link_path = fs.parent(symlinks[i])
-      symlink_dir = theme_install_dir / link_path
-      target = links_targets[i]
-
-      if link_path == fs.parent(target)
-        target = fs.name(target)
-      else
-        target = run_command(python, '-c',
-          'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))',
-          target,
-          link_path,
-          check: true,
-        ).stdout().strip()
-      endif
-
-      install_symlink(fs.name(symlinks[i]),
-        install_dir: symlink_dir,
-        pointing_to: target,
-      )
-    endforeach
 
     if is_dark_flavour
       assert(get_option('dark'), 'Dark flavour @0@ enabled, but we have no dark parent'.format(flavour))
