@@ -168,9 +168,10 @@ foreach variant: variants
   install_data(data_sources, install_dir: install_dir)
 
   if install_theme_sources
+    theme_sources_path = gnomeshell_alt_themes_dir / theme_full_name
     install_symlink('gnome-shell',
-      install_dir: gnomeshell_alt_themes_dir / theme_full_name,
-      pointing_to: get_option('prefix') / install_dir,
+      install_dir: theme_sources_path,
+      pointing_to: fs.relative_to(install_dir, theme_sources_path),
     )
   endif
 endforeach
