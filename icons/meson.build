@@ -455,7 +455,11 @@ foreach flavour: icon_flavors
     # Cleanup empty directories, as per excluded files
     meson.add_install_script('bash', '-c',
       'find "${DESTDIR}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
-    meson.add_install_script('meson/dedup-icons.py', theme_name)
+    meson.add_install_script(
+      'meson/dedup-icons.py', theme_name,
+      '--deprioritize-categories',
+      PANEL_ONLY_ICONS_CATEGORIES + ['categories'],
+    )
     meson.add_install_script('bash', '-xc',
       '[ -z "$(find "${DESTDIR}/@0@" -xtype l)" ]'.format(theme_install_dir))
     meson.add_install_script('meson/post_install.py', theme_name)
