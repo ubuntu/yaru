@@ -43,8 +43,14 @@ def group_by_size(files: list[Path]) -> dict[int, list[Path]]:
     return by_size
 
 
-def deduplicate_icons(theme_dir: Path, deprioritized_categories: list[str] = []) -> None:
+def deduplicate_icons(theme_dir: Path, deprioritized_categories: list[str] = [],
+                      skip_categories: list[str] = []) -> None:
     files = find_regular_files(theme_dir)
+
+    if skip_categories:
+        files = [f for f in files
+                 if not any(part in skip_categories
+                            for part in f.relative_to(theme_dir).parts)]
 
     def sort_key(p: Path) -> tuple[bool, str]:
         is_deprioritized = any(part in deprioritized_categories
@@ -78,6 +84,10 @@ def main() -> None:
         '--deprioritize-categories', nargs='+', dest='deprioritized_categories',
         default=[], metavar='CATEGORY',
         help='Icon categories that should never be used as a symlink source')
+    parser.add_argument(
+        '--skip-categories', nargs='+', dest='skip_categories',
+        default=[], metavar='CATEGORY',
+        help='Icon categories to exclude entirely from deduplication')
     args = parser.parse_args()
 
     destdir = os.environ.get('DESTDIR', '')
@@ -89,7 +99,7 @@ def main() -> None:
         print(f'Theme directory not found: {theme_dir}', file=sys.stderr)
         sys.exit(1)
 
-    deduplicate_icons(theme_dir, args.deprioritized_categories)
+    deduplicate_icons(theme_dir, args.deprioritized_categories, args.skip_categories)
 
 
 if __name__ == '__main__':

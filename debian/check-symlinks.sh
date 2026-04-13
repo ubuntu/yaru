@@ -11,6 +11,6 @@ check_package() {
     fi
 }
 
-for pkg in $(dh_listpackages | grep -v yaru-theme-unity); do
+for pkg in $(dh_listpackages); do
     check_package "$pkg"
 done
