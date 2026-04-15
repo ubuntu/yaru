@@ -9,6 +9,7 @@ execute_after_dh_link:
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
+		-Dcinnamon-shell=true \
 		-Dgnome-shell-gresource=true \
 		-Dgnome-shell-user-themes-support=enabled \
 		-Dubuntu-unity=true \
