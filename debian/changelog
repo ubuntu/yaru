@@ -1,3 +1,32 @@
+yaru-theme (26.04.5.1ubuntu) resolute; urgency=medium
+
+  [ Marco Trevisan (Treviño) ]
+  * gtk3/render-assets: Also render the fallback symbolic assets (LP: #2147544)
+  * gtk3: Adjust fallback assets colors and avoid recoloring them (LP: #2147544)
+  * gtk: Re-render the fallback png assets (LP: #2147544)
+  * gtk: Sync with upstream changes
+  * icons/symlinks: Symlink distributor-logo with start-here (LP: #2147664)
+  * icons: Generate distributor-logo symlinks (LP: #2147664)
+  * gtk: Uniform window and menus border radius with libadwaita / shell
+    (LP: #2147928)
+  * gtk3/apps/ding: Adjust borders and paddings to match gnome-shell
+    (LP: #2147938)
+  * gtk3/apps/ding: Adjust separator margins to match gnome-shell
+  * gtk: Ignore a warning on installing gtk2 symlinks
+  * icons: Replace duplicated icons with symlinks at install time (LP: #2018772)
+  * icons: Use meson native installation of symlinks and check for them
+    (LP: #2018772)
+  * icons/symlinks: Remove more duplicates using symlink lists (excluding the
+    unity ones not to create a package dependency on icon theme) (LP: #2018772)
+  * icons/symlinks/fullcolor: Symlink other duplicated icons (LP: #2018772)
+  * icons: Regenerate symlinks (LP: #2018772)
+  * debian/rules: Check that installed files only include valid symlinks
+    We use quite a bit of symlinks, so let's ensure that each one is self-
+    contained in each package and may not be split between different debian
+    binaries (Related to LP: #2018772)
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Mon, 13 Apr 2026 20:39:15 +0200
+
 yaru-theme (26.04.4.1ubuntu) resolute; urgency=medium
 
   [ ochi12 ]
