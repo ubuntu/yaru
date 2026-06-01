@@ -120,14 +120,19 @@ $app_folder_size: 720px;
 $page_indicator_size: 10px;
 .page-indicator {
   padding: $base_padding $base_padding * 2 0;
-  transition-duration:400ms;
+  transition-duration: 400ms;
 
   .page-indicator-icon {
-    width: $page_indicator_size;
-    height: $page_indicator_size;
-    border-radius: $forced_circular_radius;
-    background-color: $system_fg_color;
+    width: 16px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.3);
     transition-duration: 400ms;
+
+    &:checked, &:active {
+      width: 32px;
+      background-color: #E95420;
+    }
   }
 }
 
