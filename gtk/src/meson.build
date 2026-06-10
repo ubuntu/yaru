@@ -3,7 +3,6 @@ variants = [
   'gtk-dark'
 ]
 gtk_versions = [
-  '2.0',
   '3.0',
   '4.0'
 ]
@@ -102,38 +101,6 @@ foreach flavour: yaru_flavours
       default_path,
       upstream_path,
     ]
-
-    if gtk_ver == '2.0'
-      rc_paths = []
-      foreach src: sources_priority
-        rc_paths = [ src ] + rc_paths
-      endforeach
-
-      gtk2_sources_data = run_command(
-        'find',
-        rc_paths,
-        '-name', '*rc',
-        check: false,
-        ).stdout().strip().split('\n')
-
-      install_data(gtk2_sources_data,
-        install_dir: install_path,
-        follow_symlinks: true)
-
-      assets_paths = []
-      foreach src: sources_priority
-        assets_paths = [ src / 'assets' ] + assets_paths
-      endforeach
-
-      gtk2_asset_data = run_command(
-        'find', assets_paths, '-name', '*.png',
-        check: false,
-        ).stdout().strip().split('\n')
-
-      install_data(gtk2_asset_data, install_dir: install_path / 'assets')
-
-      continue
-    endif
 
     generated_css = []
     foreach variant : variants
