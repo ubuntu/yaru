@@ -1,3 +1,20 @@
+yaru-theme (26.10.1ubuntu) UNRELEASED; urgency=medium
+
+  [ Tejas Shinde ]
+  * readme: update screenshots using 26.04 VM
+
+  [ Marco Trevisan (Treviño) ]
+  * gtk: Remove gtk-2.0 theme.
+    There are basically no gtk 2.0 apps out there anymore and debian wants
+    to remove it from the archive, so let's drop any support for it from
+    yaru too.
+  * debian/control: Remove gtk2-engines dependencies (LP: #1787629)
+  * icons/generate-index-theme: Do not Inherit from Humanity.
+    The theme is deprecated and we don't want to rely on it
+  * debian/control: Do not Suggests humanity icon theme
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 10 Jun 2026 13:23:31 +0200
+
 yaru-theme (26.04.5.1ubuntu) resolute; urgency=medium
 
   [ Marco Trevisan (Treviño) ]
