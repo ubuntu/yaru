@@ -171,8 +171,8 @@ foreach variant: yaru_flavours
   if is_variant
     assert(output_styles.length() == variant_styles.length(), 'Output styles length mismatch')
     foreach i: range(output_styles.length())
-      meson.add_install_script('bash', '-c',
-        'mv -uv ${DESTDIR}${MESON_INSTALL_PREFIX}/@0@ ${DESTDIR}${MESON_INSTALL_PREFIX}/@1@'.format(
+      meson.add_install_script('bash', '-euxc',
+        'mv -uv ${MESON_INSTALL_DESTDIR_PREFIX}/@0@ ${MESON_INSTALL_DESTDIR_PREFIX}/@1@'.format(
           install_dir / variant_styles[i], install_dir / output_styles[i]))
     endforeach
   endif

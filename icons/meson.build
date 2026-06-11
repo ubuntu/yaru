@@ -439,16 +439,16 @@ foreach flavour: icon_flavors
     endif
 
     # Cleanup empty directories, as per excluded files
-    meson.add_install_script('bash', '-c',
-      'find "${DESTDIR}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
+    meson.add_install_script('sh', '-euxc',
+      'find "${MESON_INSTALL_DESTDIR_PREFIX}/@0@" -type d -empty -print -delete'.format(theme_install_dir))
     meson.add_install_script(
       'meson/dedup-icons.py', theme_name,
       '--deprioritize-categories',
       PANEL_ONLY_ICONS_CATEGORIES + ['categories'],
       duplicate_legacy_icons ? ['--skip-categories'] + PANEL_ONLY_ICONS_CATEGORIES : [],
     )
-    meson.add_install_script('bash', '-xc',
-      '[ -z "$(find "${DESTDIR}/@0@" -xtype l)" ]'.format(theme_install_dir))
+    meson.add_install_script('bash', '-euxc',
+      '[ -z "$(find "${MESON_INSTALL_DESTDIR_PREFIX}/@0@" -xtype l)" ]'.format(theme_install_dir))
 
     if gtk_update_icon_cache.found()
       meson.add_install_script(
