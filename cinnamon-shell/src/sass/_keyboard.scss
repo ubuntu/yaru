@@ -1,0 +1,84 @@
+/*
+On-Screen Keyboard (>= Cinnamon 6.6)
+*/
+
+$key_border_radius: $radius;
+$default_key_bg_color: $bg_color2;
+$non_alpha_key_color: $bg_color4;
+$shifted_key_color: if($variant == 'light', darken($bg_color, 30%), lighten($bg_color, 25%));
+
+#virtual-keyboard {
+  background-color: $panel_bg;
+  box-shadow: inset 0 1px 0 0 $borders_color;
+}
+
+// the container for individual keys
+.vkeyboard-key-container {
+  padding: $base_margin;
+  spacing: $base_margin;
+}
+
+// the keys
+.vkeyboard-key {
+
+  @include button(normal);
+
+  &:focus { @include button(focus);}
+  &:hover, &:checked { @include button(hover);}
+  &:active { @include button(active); }
+
+  @include fontsize(20px);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $key_border_radius;
+
+  background-color: $default_key_bg_color;
+
+  &.shift-key-uppercase { background-color: $shifted_key_color }
+  &.enter-key {
+    @if $variant == 'light' {
+      border-color: $accent_color;
+      background-color: $non_alpha_key_color;
+      border-width: 3px;
+    } @else {
+      background-color: $accent_color;
+    }
+  }
+
+  &.shift-key-lowercase, &.escape-key, &.hide-key, &.non-alpha-key {
+    background-color: $non_alpha_key_color;
+    &:focus { @include button(focus);}
+    &:hover, &:checked { @include button(hover);}
+    &:active { @include button(active); }
+  }
+
+  &.modifier-key {
+    background-color: $non_alpha_key_color;
+
+    &:hover, &:checked { @include button(hover); }
+    &:latched {
+      background-color: $shifted_key_color;
+    }
+  }
+
+  StIcon { icon-size: 1.125em; }
+}
+
+// long press on a key popup
+.vkeyboard-subkeys {
+  color: $fg_color;
+  -arrow-border-radius: $radius + 2px;
+  -arrow-background-color: $bg_color;
+  -arrow-border-width: 1px;
+  -arrow-border-color: lighten($bg_color, 9%);
+  -arrow-base: 20px;
+  -arrow-rise: 10px;
+  -boxpointer-gap: $base_padding;
+}
+
+// suggestions
+.word-suggestions {
+  @include fontsize(18px);
+  spacing: 20px;
+  min-height: 20pt;
+}
