@@ -3,7 +3,6 @@ variants = [
   'gtk-dark'
 ]
 gtk_versions = [
-  '2.0',
   '3.0',
   '4.0'
 ]
@@ -21,7 +20,7 @@ foreach flavour: yaru_flavours
   base_theme_name = is_dark ? flavour.split('-dark')[0] : flavour
   is_mate = flavour.startswith('mate')
   is_accent = enabled_accent_colors.contains(base_theme_name) or is_mate
-  theme_dir = join_paths(get_option('datadir'), 'themes', theme_name)
+  theme_dir = get_option('datadir') / 'themes' / theme_name
   default_accent = is_mate ? 'mate' : 'default'
   accent = is_accent ? base_theme_name : default_accent
 
@@ -77,7 +76,7 @@ foreach flavour: yaru_flavours
     dark_path = is_dark ? 'dark' : base_path
     default_path = 'default' / gtk_dir
     upstream_path = '..' / 'upstream' / gtk_dir / 'Default'
-    flavour_path = join_paths(flavour, gtk_dir)
+    flavour_path = flavour / gtk_dir
     install_path = theme_dir / gtk_dir
 
     if not assets_renderers.has_key(gtk_ver)
@@ -102,38 +101,6 @@ foreach flavour: yaru_flavours
       default_path,
       upstream_path,
     ]
-
-    if gtk_ver == '2.0'
-      rc_paths = []
-      foreach src: sources_priority
-        rc_paths = [ src ] + rc_paths
-      endforeach
-
-      gtk2_sources_data = run_command(
-        'find',
-        rc_paths,
-        '-name', '*rc',
-        check: false,
-        ).stdout().strip().split('\n')
-
-      install_data(gtk2_sources_data,
-        install_dir: install_path,
-        follow_symlinks: true)
-
-      assets_paths = []
-      foreach src: sources_priority
-        assets_paths = [ src / 'assets' ] + assets_paths
-      endforeach
-
-      gtk2_asset_data = run_command(
-        'find', assets_paths, '-name', '*.png',
-        check: false,
-        ).stdout().strip().split('\n')
-
-      install_data(gtk2_asset_data, install_dir: install_path / 'assets')
-
-      continue
-    endif
 
     generated_css = []
     foreach variant : variants
