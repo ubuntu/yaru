@@ -103,6 +103,7 @@ CONTEXTS=(
     "emblems"
     "emotes"
     "generic-symbols"
+    "libadwaita"
     "mimetypes"
     "multimedia"
     "phosh"
