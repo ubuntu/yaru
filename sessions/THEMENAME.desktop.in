@@ -5,4 +5,6 @@ Exec=env GNOME_SHELL_SESSION_MODE=@LowerCaseThemeName@ gnome-session
 TryExec=gnome-session
 Type=Application
 DesktopNames=@ThemeName@:ubuntu:GNOME
-X-Ubuntu-Gettext-Domain=gnome-session-3.0
+X-GDM-SessionRegisters=true
+X-GDM-CanRunHeadless=true
+X-Ubuntu-Gettext-Domain=gnome-session
