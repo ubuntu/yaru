@@ -1649,28 +1649,28 @@ StScrollBar {
   font-weight: 700;
   font-size: 1em; }
 
-.audio-device-selection-dialog .audio-selection-box .audio-selection-device, .polkit-dialog-user-combo {
+.polkit-dialog-user-combo {
   border: 1px solid #222226;
   color: #e1e1e1;
   background-color: #222226; }
-  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:focus, .polkit-dialog-user-combo:focus {
+  .polkit-dialog-user-combo:focus {
     border: 1px solid #222226;
     color: #e1e1e1;
     background-color: #222226;
     border: 1px solid #6a6a77; }
-  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:hover, .polkit-dialog-user-combo:hover {
+  .polkit-dialog-user-combo:hover {
     border: 1px solid #222226;
     color: #e1e1e1;
     background-color: #3a3a41; }
-  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:insensitive, .polkit-dialog-user-combo:insensitive {
+  .polkit-dialog-user-combo:insensitive {
     border: 1px solid #222226;
     color: rgba(225, 225, 225, 0.5);
     background-color: #222226; }
-  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:selected, .polkit-dialog-user-combo:selected, .audio-device-selection-dialog .audio-selection-box .audio-selection-device:active, .polkit-dialog-user-combo:active {
+  .polkit-dialog-user-combo:selected, .polkit-dialog-user-combo:active {
     border: 1px solid #222226;
     color: #e1e1e1;
     background-color: #2e2e33; }
-  .audio-device-selection-dialog .audio-selection-box .audio-selection-device:checked, .polkit-dialog-user-combo:checked {
+  .polkit-dialog-user-combo:checked {
     border: 1px solid #222226;
     color: #e1e1e1;
     background-color: #2e2e33; }
@@ -1848,18 +1848,6 @@ StScrollBar {
   padding: 6px 36px; }
   .polkit-dialog-user-combo:insensitive {
     color: #e1e1e1; }
-
-.audio-device-selection-dialog {
-  min-width: 24em; }
-  .audio-device-selection-dialog .audio-selection-box {
-    spacing: 12px; }
-    .audio-device-selection-dialog .audio-selection-box .audio-selection-device {
-      border-radius: 20px; }
-      .audio-device-selection-dialog .audio-selection-box .audio-selection-device .audio-selection-device-box {
-        padding: 12px;
-        spacing: 12px; }
-      .audio-device-selection-dialog .audio-selection-box .audio-selection-device .audio-selection-device-icon {
-        icon-size: 64px; }
 
 .workspace-switch-osd, .info-osd, .media-keys-osd {
   background-color: #222226;

@@ -344,28 +344,6 @@ $osd_radius: 20px;
   }
 }
 
-// Audio selection dialog
-
-.audio-device-selection-dialog {
-  min-width: 24em;
-
-  .audio-selection-box {
-    spacing: $base_padding *2;
-
-    .audio-selection-device {
-      @extend %flat_styled_button;
-      border-radius: $osd_radius;
-
-      .audio-selection-device-box {
-        padding: $base_padding * 2;
-        spacing: $base_padding * 2;
-      }
-
-      .audio-selection-device-icon { icon-size: 64px;}
-    }
-  }
-}
-
 // various on screen popups
 
 %osd_base {
@@ -464,4 +442,8 @@ $osd_radius: 20px;
   background-color: $bg_color;
   border-radius: $radius;
   padding: $base_padding * 2;
+}
+
+// Popup dialog (non-modal, draggable).
+.popup-dialog {
 }
