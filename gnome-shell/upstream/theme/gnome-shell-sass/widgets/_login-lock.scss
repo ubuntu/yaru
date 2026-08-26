@@ -406,6 +406,21 @@ $_gdm_dialog_width: 25em;
   spacing: 1.75em;
 }
 
+.unlock-dialog {
+  .web-login-title-label,
+  .web-login-url-label,
+  .web-login-url-label-long,
+  .web-login-code-title-label,
+  .web-login-code-label,
+  .web-login-prompt {
+    color: $system_fg_color !important;
+  }
+
+  .web-login-prompt {
+    background-color: transparentize($system_fg_color, .98) !important;
+  }
+}
+
 @mixin login-buttons($context){
   .login-button,
   .web-login-prompt-button {
