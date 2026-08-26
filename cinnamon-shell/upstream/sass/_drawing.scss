@@ -9,15 +9,15 @@
 
   @if $t==normal {
     color: $text_color;
-    background-color: $base_color;
+    background-color: $entry_bg;
     border: 1px solid $entry_border;
     box-shadow: inset 0 2px 4px transparentize($entry_bg, 0.95);
   }
 
   @if $t==focus {
     color: $fg_color;
-    background-color: $base_color;
-    border: 1px solid $selected_bg_color;
+    background-color: $entry_bg;
+    border: 1px solid $accent_color;
     box-shadow: inset 0 2px 4px transparentize($entry_bg, 0.95);
   }
 
@@ -37,8 +37,8 @@
 
   @if $t==osd-focus {
     color: $selected_fg_color;
-    background-color: $selected_bg_color;
-    border: 1px solid $selected_bg_color;
+    background-color: $accent_color;
+    border: 1px solid $accent_color;
     box-shadow: inset 0 2px 4px transparentize(black, 0.95);
   }
 
@@ -73,7 +73,7 @@
   //
     color: $fg_color;
     background-color: $button_bg;
-    border: 1px solid $selected_bg_color;
+    border: 1px solid $accent_color;
     box-shadow: inset 0 2px 4px transparentize($button_bg, 0.95);
   }
 
@@ -83,7 +83,7 @@
   //
     color: $fg_color;
     background-color: lighten($button_bg, 5%);
-    border: 1px solid $selected_bg_color;
+    border: 1px solid $accent_color;
     box-shadow: inset 0 2px 4px transparentize($button_bg, 0.95);
   }
 
@@ -102,9 +102,9 @@
   // pushed button
   //
     color: $selected_fg_color;
-    background-color: $selected_bg_color;
-    border: 1px solid $selected_bg_color;
-    box-shadow: inset 0 2px 4px $selected_bg_color;
+    background-color: $accent_color;
+    border: 1px solid $accent_color;
+    box-shadow: inset 0 2px 4px $accent_color;
   }
 
   @else if $t==insensitive {
@@ -140,8 +140,8 @@
   // active osd button
   //
     color: $selected_fg_color;
-    border: 1px solid $selected_bg_color;
-    background-color: $selected_bg_color;
+    border: 1px solid $accent_color;
+    background-color: $accent_color;
   }
 
   @else if $t==osd-insensitive {
