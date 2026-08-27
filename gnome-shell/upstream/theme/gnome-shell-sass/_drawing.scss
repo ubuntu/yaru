@@ -219,6 +219,7 @@
     $hover_button_bg_color: transparentize($tc, .87);
     $active_button_bg_color: transparentize($tc, .84);
     $active_hover_button_bg_color: transparentize($tc, .81);
+    $insensitive_button_bg_color: transparentize($tc, .9);
   }
 
   // background color overrides for notification style

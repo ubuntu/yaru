@@ -1,9 +1,10 @@
 /* Message List */
 // a.k.a. notifications in the menu
+$_message_list_width: 29em;
 
 // main list
 .message-list {
-  width: 29em;
+  width: $_message_list_width;
   border: solid $borders_color;
 
   // padding and margins to account for scrollbar
@@ -130,8 +131,7 @@
         // Add bottom padding to align the app name with the time horizontally
         padding-bottom: to_em(1px);
 
-        &:ltr { text-align: right; }
-        &:rtl { text-align: left; }
+        text-align: end;
       }
     }
 
