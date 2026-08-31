@@ -1,3 +1,44 @@
+yaru-theme (26.10.2ubuntu) UNRELEASED; urgency=medium
+
+  [ Muqtxdir ]
+  * chore: drop `x11` and post install scripts
+  * chore: align the session attributes with ubuntu-desktop
+  * chore: update session configuration and resource paths in meson.build
+  * chore: update theme installation paths and remove post_install script
+  * chore: use `get_option`
+  * chore: replace `join_paths` with `/` for paths in cinnamon
+  * chore: replace `join_paths` with `/` for in gnome-shell
+  * chore: replace `join_paths` with `/` for path in gtk, gtksourceview, sounds
+  * chore: update message formatting for component skipping and building in
+    meson.build
+  * fix: add `gtk-update-icon-cache`program lookup in meson.build
+  * chore: update `colorScheme` to use 'default' in mode.json.in
+  * fix: update gtk-update-icon-cache invocation
+  * chore: organize under `libadwaita/` to better tack
+  * chore: remove `adw-*` symbolic icon mappings and add new `libadwaita.list`
+  * chore: update symlinks
+  * feat: add caps-lock-symbolic
+
+  [ Marco Trevisan (Treviño) ]
+  * build: Use $MESON_INSTALL_DESTDIR_PREFIX in install scripts
+  * New upstream snapshot for GNOME Shell (LP: #2165080)
+  * New upstream snapshot for GTK4
+  * New upstream snapshot for GNOME Shell Icons
+  * gtk: Sync with upstream changes
+  * gnome-shell/icons: Yarufy new shell icons
+  * gnome-shell: Sync with upstream changes
+  * gnome-shell/login-lock: Fix theming for list title and items
+  * gnome-shell/login-lock: Adjust unlock dialog color to light theme
+  * icons: Optimize symbolic icons
+
+  [ Joshua Peisach ]
+  * Update upstream cinnamon theme
+  * Update Yaru cinnamon shell theming
+  * Update upstream cinnamon theme
+  * cinnamon-shell: add popup-dialog to match upstream changes
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Tue, 01 Sep 2026 00:17:41 +0200
+
 yaru-theme (26.10.1ubuntu) stonking; urgency=medium
 
   [ Tejas Shinde ]
