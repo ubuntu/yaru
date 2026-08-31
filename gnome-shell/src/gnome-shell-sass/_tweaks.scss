@@ -364,6 +364,18 @@ $yaru_popup_radius: $modal_radius * 1.05;
   }
 }
 
+/* App switcher fixes */
+.switcher-list .item-box {
+  // Yaru: Keep the border in every state so items dont shift when selected.
+  border: 1px solid transparent;
+
+  &:selected {
+    // Yaru: Outline the selection, upstream's background alpha alone is too faint.
+    // See: https://github.com/ubuntu/yaru/issues/4477
+    border-color: $osd_fg_color;
+  }
+}
+
 // Yaru: Make pad OSD visible again in the light theme by using osd colors, should be ported to upstream
 .pad-osd-window {
   background-color: $osd_bg_color;
