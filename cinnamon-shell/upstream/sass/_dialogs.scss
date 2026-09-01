@@ -104,8 +104,18 @@ $osd_radius: 20px;
   @include fontsize(9pt);
 }
 
+%title_1 {
+  font-weight: 800;
+  @include fontsize(20pt);
+}
+
 %title_2 {
   font-weight: 800;
+  @include fontsize(15pt);
+}
+
+%title_3 {
+  font-weight: 700;
   @include fontsize(15pt);
 }
 
