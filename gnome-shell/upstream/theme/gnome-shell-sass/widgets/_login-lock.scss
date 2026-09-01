@@ -247,25 +247,21 @@ $_gdm_dialog_width: 25em;
 }
 
 .unlock-dialog {
-  .login-dialog-auth-list-item,
-  .login-dialog-auth-list-title {
+  .login-dialog-auth-list-item {
     @extend %lockscreen_button;
     border-radius: $base_border_radius * 1.5;
     min-height: 3em;
     padding: $base_padding * 1.5;
     margin-bottom: $base_margin;
     margin-right: $base_margin;
-
-    &.compact {
-      min-height: 1.3em;
-    }
   }
 
   .login-dialog-auth-list-title {
-    background-color: transparentize($system_fg_color, .85) !important;
+    @extend %lockscreen_button;
+    background-color: transparent !important;
     color: $system_fg_color !important;
-    margin: 0.5em $base_margin * 5;
     padding: 0;
+    margin: 0;
   }
 }
 
@@ -404,21 +400,6 @@ $_gdm_dialog_width: 25em;
   padding-left: $base_padding * 4.5;
   padding-right: $base_padding * 4.5;
   spacing: 1.75em;
-}
-
-.unlock-dialog {
-  .web-login-title-label,
-  .web-login-url-label,
-  .web-login-url-label-long,
-  .web-login-code-title-label,
-  .web-login-code-label,
-  .web-login-prompt {
-    color: $system_fg_color !important;
-  }
-
-  .web-login-prompt {
-    background-color: transparentize($system_fg_color, .98) !important;
-  }
 }
 
 @mixin login-buttons($context){
