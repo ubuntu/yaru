@@ -356,23 +356,25 @@ $yaru_popup_radius: $modal_radius * 1.05;
   }
 }
 
+/* App switcher fixes */
+.switcher-list .item-box {
+  &:selected {
+    // Yaru: Ring the selection like .overview-tile:drop, white in high-contrast, accented otherwise
+    // upstream's item-box:focus sets box-shadow !important, so this needs !important too to win
+    // See: https://github.com/ubuntu/yaru/issues/4477
+    @if $contrast == 'high' {
+      box-shadow: inset 0 0 0 2px white !important;
+    } @else {
+      box-shadow: inset 0 0 0 2px -st-accent-color !important;
+    }
+  }
+}
+
 /* OSD fixes */
 .osd-window {
   .level {
     // Yaru: Optimize overdrive color for contrast
     -barlevel-overdrive-color: optimize-contrast($osd_bg_color, $destructive_color, $target: 5.5);
-  }
-}
-
-/* App switcher fixes */
-.switcher-list .item-box {
-  // Yaru: Keep the border in every state so items dont shift when selected.
-  border: 1px solid transparent;
-
-  &:selected {
-    // Yaru: Outline the selection, upstream's background alpha alone is too faint.
-    // See: https://github.com/ubuntu/yaru/issues/4477
-    border-color: $osd_fg_color;
   }
 }
 
