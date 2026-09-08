@@ -224,8 +224,7 @@
       @extend %numeric;
       font-weight: bold;
 
-      &:ltr {text-align: right;}
-      &:rtl {text-align: left;}
+      text-align: end;
     }
 
     // timezone offset label

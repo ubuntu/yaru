@@ -6,10 +6,10 @@
     $qrcode_bg_color: mix($fg_color, $bg_color, 8%);
     background-color: $qrcode_bg_color;
     border-color: $qrcode_bg_color;
+    color: $fg_color;
   } @else {
     background-color: $system_fg_color;
     border-color: $system_fg_color;
     color: $system_bg_color;
   }
 }
-
