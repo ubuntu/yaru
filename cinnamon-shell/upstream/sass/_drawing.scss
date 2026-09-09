@@ -1,5 +1,12 @@
 // Drawing mixins
 
+// function to convert px to em
+@function to_em($input, $base: 16px) {
+  // multiplied and divided by 1000 to make up for round() shortcoming
+  $em_value: ($input / $base) * 1.091 * 1000;
+  @return round($em_value) / 1000 * 1em;
+}
+
 // Entries
 
 @mixin entry($t, $dark:false) {

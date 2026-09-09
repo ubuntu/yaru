@@ -1535,7 +1535,7 @@ $base_padding: 7px;
     &:hover,
     &:groupFocus {
       color: $panel_fg;
-      background-color: transparentize($panel_fg, 0.8);
+      background-color: $panel_active_bg;
     }
 
     &:active,
@@ -1544,7 +1544,7 @@ $base_padding: 7px;
     &:running {
       color: $panel_fg;
       border-color: $accent_color;
-      background-color: transparentize($panel_fg, 0.8);
+      background-color: $panel_active_bg;
     }
 
     & .progress {
@@ -1693,6 +1693,57 @@ $base_padding: 7px;
     .separator {
       width: 1px;
       background: rgba(255,255,255,0.2);
+    }
+  }
+
+  &-scrollbox {
+    &-scrollview {
+      &.vfade {
+        -st-vfade-offset: 68px;
+        -st-hfade-offset: 0;
+      }
+      &.hfade {
+        -st-hfade-offset: 68px;
+        -st-vfade-offset: 0;
+      }
+    }
+
+    &-button {
+      transition-duration: 100ms;
+      color: transparentize($panel_fg, 0.2);
+
+      &-icon {
+        icon-size: to_em(16px);
+        color: inherit;
+      }
+
+      &-start {
+        margin-right: 1px;
+
+        &.vertical {
+          margin-right: 0;
+          margin-bottom: 1px;
+        }
+      }
+
+      &-end {
+        margin-left: 1px;
+
+        &.vertical {
+          margin-left: 0;
+          margin-top: 1px;
+        }
+      }
+
+      &:hover {
+        background-color: $panel_active_bg;
+        color: $panel_fg;
+      }
+
+      &:active {
+        background-color: $bg_color3;
+        color: $panel_fg;
+      }
     }
   }
 }
@@ -1900,8 +1951,8 @@ $workspace_window_color: if($variant == 'light', black, white);
     padding-bottom: 2px;
     // border-bottom-width: 1px;
     transition-duration: 200;
-    &:hover { 
-      background-color: $bg_color2;
+    &:hover {
+      background-color: $panel_active_bg;
     }
   }
 
