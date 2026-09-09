@@ -1,0 +1,203 @@
+// Screensaver / Lock Screen
+// The shield background is always black, so widget colors are fixed
+// (light-on-dark) in both theme variants.
+
+.screen-shield {
+  background-color: black;
+  color: white;
+
+  .screen-shield-background {
+    background-color: black;
+  }
+
+  .icon-button {
+    border-radius: 9999px;
+    min-height: 16px;
+    padding: to_em(16px);
+    color: white;
+    border: 1px solid transparentize(white, 0.9);
+    background-color: transparentize(white, 0.85);
+    margin-left: $base_padding;
+    margin-right: $base_padding;
+
+    StIcon { icon-size: 16px; }
+
+    &:hover,
+    &:focus { background-color: transparentize(white, 0.78); }
+    &:active { background-color: transparentize(white, 0.7); }
+  }
+
+  .prompt-dialog {
+    width: 34em;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    spacing: $base_padding * 4;
+
+    .user-widget-label {
+      font-weight: 400;
+      @include fontsize(20pt);
+      margin-bottom: .75em;
+      color: white;
+    }
+
+    .user-icon {
+      icon-size: 128px;
+      border: 2px solid transparentize(white, 0.8);
+
+      & StIcon { padding: $base_padding * 5; }
+    }
+
+    &-password-entry {
+      width: 20em;
+      padding: 7px;
+      border-radius: $radius;
+      caret-size: 1px;
+      caret-color: white;
+      color: white;
+      background-color: transparentize(white, 0.8);
+      border: 1px solid transparentize(white, 0.6);
+      selection-background-color: $accent_color;
+      selected-color: $selected_fg_color;
+      transition-duration: 300ms;
+
+      &:focus { border-color: $accent_color; }
+
+      StIcon.capslock-warning {
+        icon-size: 16px;
+        warning-color: $warning_color;
+        padding: 0 4px;
+      }
+
+      StLabel.hint-text { color: transparentize(white, 0.5); }
+
+      StIcon.peek-password {
+        icon-size: 16px;
+        color: white;
+      }
+    }
+  }
+
+  // Clock widget
+
+  .clock-widget {
+    padding: $base_padding;
+    spacing: $base_padding;
+
+    .clock-time-label {
+      @include fontsize(72pt);
+
+      color: white;
+    }
+
+    .clock-date-label {
+      @extend %title_1;
+
+      color: white;
+    }
+
+    .clock-message-label {
+      font-size: 14pt;
+      color: #cccccc;
+      margin-top: $base_margin;
+    }
+
+    .clock-message-author {
+      font-size: 12pt;
+      color: #acacac;
+      text-align: center;
+    }
+  }
+
+  // Album art widget
+
+  .albumart-widget {
+    padding: $base_padding * 2;
+    spacing: $base_padding * 2;
+    min-width: 400px;
+    color: white;
+    background-color: transparentize(white, 0.85);
+    border: 1px solid transparentize(white, 0.9);
+    border-radius: $dialog_radius;
+
+    .albumart-track-info-box {
+      spacing: $base_padding / 2;
+      max-width: 300px;
+
+      .albumart-title {
+        @extend %title_3;
+
+        font-weight: bold;
+      }
+
+      .albumart-artist {
+        @extend %title_4;
+      }
+
+      .albumart-album {
+        @extend %heading;
+      }
+
+      .albumart-controls {
+        spacing: $base_padding;
+        padding-top: $base_padding;
+
+        .icon-button {
+          padding: to_em(8px);
+        }
+      }
+
+      .albumart-volume-box {
+        spacing: $base_padding;
+
+        .albumart-volume-icon {
+          icon-size: 16px;
+        }
+
+        .albumart-volume-slider {
+          height: 20px;
+          min-width: 280px;
+          -slider-height: 4px;
+          -slider-background-color: transparentize(white, 0.8);
+          -slider-border-color: transparent;
+          -slider-active-background-color: $accent_color;
+          -slider-active-border-color: transparent;
+          -slider-border-width: 0;
+          -slider-handle-radius: 8px;
+        }
+      }
+    }
+  }
+
+  // Info panel (notification count + battery indicator)
+
+  .info-panel {
+    padding: 8px;
+    spacing: 12px;
+
+    .notification-widget {
+      spacing: 4px;
+
+      .notification-widget-label {
+        color: white;
+        font-size: 12pt;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      }
+
+      .notification-widget-icon {
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    .power-widget-icon {
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+
+      &-critical {
+        color: $error_color;
+      }
+    }
+  }
+}
