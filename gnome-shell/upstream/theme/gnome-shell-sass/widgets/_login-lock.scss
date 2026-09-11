@@ -262,8 +262,8 @@ $_gdm_dialog_width: 25em;
   }
 
   .login-dialog-auth-list-title {
-    background-color: transparentize($system_fg_color, .85) !important;
-    color: $system_fg_color !important;
+    background-color: transparentize($_gdm_fg, .85) !important;
+    color: $_gdm_fg !important;
     margin: 0.5em $base_margin * 5;
     padding: 0;
   }
@@ -413,11 +413,7 @@ $_gdm_dialog_width: 25em;
   .web-login-code-title-label,
   .web-login-code-label,
   .web-login-prompt {
-    color: $system_fg_color !important;
-  }
-
-  .web-login-prompt {
-    background-color: transparentize($system_fg_color, .98) !important;
+    color: $_gdm_fg !important;
   }
 }
 
@@ -442,7 +438,7 @@ $_gdm_dialog_width: 25em;
   .web-login-prompt-button {
     padding: $base_padding * 2.5 $base_padding * 4;
     margin: $base_margin * 6 $base_margin * 2;
-    width: 8em;
+    min-width: 8em;
   }
 }
 
