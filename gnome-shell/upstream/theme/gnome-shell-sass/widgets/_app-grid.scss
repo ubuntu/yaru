@@ -123,17 +123,13 @@ $page_indicator_size: 10px;
   transition-duration: 400ms;
 
   .page-indicator-icon {
-    width: 16px;
-    height: 6px;
-    border-radius: 3px;
-    background-color: rgba(255, 255, 255, 0.3);
+    width: $page_indicator_size;
+    height: $page_indicator_size;
+    border-radius: $forced_circular_radius;
+    background-color: $system_fg_color;
     transition-duration: 400ms;
-
-    &:checked, &:active {
-      width: 32px;
-      background-color: $orange;
-    }
   }
+}     
 }
 
 .apps-scroll-view {
