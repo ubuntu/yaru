@@ -14,16 +14,11 @@ $_gdm_dialog_width: 25em;
 
   .login-dialog-prompt-layout {
     width: $_gdm_dialog_width * 1.2;
-    margin-top: 80px;
-
-    &.web-login-active {
-      width: $_gdm_dialog_width * 1.5;
-      margin-top: 0;
-    }
+    height: 550px;
   }
 
   .login-dialog-input-well {
-    spacing: $base_padding * 1.5;
+    margin: $base_padding * 1.5 0;
   }
 
   .login-dialog-prompt-entry-area {
@@ -172,7 +167,7 @@ $_gdm_dialog_width: 25em;
 }
 
 .login-dialog-banner-view {
-  max-width: $_gdm_dialog_width;
+  max-width: $_gdm_dialog_width * 1.2;
 
   .login-dialog-banner {
     color: darken($_gdm_fg,10%);
@@ -181,6 +176,7 @@ $_gdm_dialog_width: 25em;
 
 .login-dialog-message {
   text-align: center;
+  margin-top: 2em;
 }
 
 .login-dialog-message-hint, .login-dialog-message {
@@ -214,11 +210,11 @@ $_gdm_dialog_width: 25em;
 // Authentication methods list
 .login-dialog-auth-list-view {
   -st-vfade-offset: 3em;
-  max-height: 13em;
 }
 
 .login-dialog-auth-list {
   spacing: $base_padding * 1.5;
+  margin-top: 0.5em;
 }
 
 .login-dialog {
@@ -437,7 +433,7 @@ $_gdm_dialog_width: 25em;
 
   .web-login-prompt-button {
     padding: $base_padding * 2.5 $base_padding * 4;
-    margin: $base_margin * 6 $base_margin * 2;
+    margin: $base_margin * 6 $base_margin * 2 0;
     min-width: 8em;
   }
 }
@@ -478,7 +474,6 @@ $_gdm_dialog_width: 25em;
 .unlock-dialog-clock {
   color: $_gdm_fg;
   spacing: 2em;
-  margin-top: 150px;
 
   .unlock-dialog-clock-time {
     @extend %numeric;
