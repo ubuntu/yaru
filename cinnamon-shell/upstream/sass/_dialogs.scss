@@ -104,8 +104,18 @@ $osd_radius: 20px;
   @include fontsize(9pt);
 }
 
+%title_1 {
+  font-weight: 800;
+  @include fontsize(20pt);
+}
+
 %title_2 {
   font-weight: 800;
+  @include fontsize(15pt);
+}
+
+%title_3 {
+  font-weight: 700;
   @include fontsize(15pt);
 }
 
@@ -446,4 +456,71 @@ $osd_radius: 20px;
 
 // Popup dialog (non-modal, draggable).
 .popup-dialog {
+}
+
+// Hover click palette
+.hover-click-dialog {
+  padding: $base_padding;
+  border-radius: $radius + $base_padding;
+
+  .dialog-content-box {
+    margin: 0;
+    spacing: 0;
+    max-width: auto;
+  }
+}
+
+.hover-click-header {
+  height: 20px;
+}
+
+.hover-click-box,
+.hover-click-actions {
+  spacing: $base_margin;
+}
+
+.hover-click-button {
+  @extend %flat_styled_button;
+
+  background-color: transparent;
+  border-radius: $radius;
+  padding: $base_padding;
+
+  &:checked {
+    @include styled_button(normal, $c: $accent_color, $style: default);
+  }
+
+  &:checked:hover {
+    @include styled_button(hover, $c: $accent_color, $style: default);
+  }
+}
+
+.hover-click-button-box {
+  spacing: $base_margin;
+}
+
+.hover-click-button-label {
+  text-align: center;
+}
+
+.hover-click-separator {
+  background-color: $borders_color;
+}
+
+.hover-click-box.vertical .hover-click-separator {
+  height: 1px;
+  margin: $base_margin 0;
+}
+
+.hover-click-box.horizontal .hover-click-separator {
+  width: 1px;
+  margin: 0 $base_margin;
+}
+
+.hover-click-lock-button {
+  @extend %flat_styled_button;
+
+  background-color: transparent;
+  border-radius: $radius;
+  padding: $base_padding;
 }
