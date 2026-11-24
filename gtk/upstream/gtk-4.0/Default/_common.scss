@@ -4271,6 +4271,16 @@ window {
   &.maximized,
   &.fullscreen { border-radius: 0; box-shadow: none; }
 
+  &.solid-csd {
+    &.maximized,
+    &.fullscreen {
+      margin: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+    }
+  }
+
   &.tiled,
   &.tiled-top,
   &.tiled-left,
@@ -4466,8 +4476,10 @@ button.emoji-section {
   &:checked { border-color: $selected_bg_color; }
 }
 
-popover.emoji-picker emoji {
+popover.emoji-picker .emoji {
   font-size: x-large;
+  min-width: 1.5em;
+  min-height: 1.6em;
   padding: 6px;
   border-radius: 6px;
 
