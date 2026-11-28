@@ -3,6 +3,8 @@
 StEntry {
   @extend %entry;
 
+  caret-size: 1px;
+
   StIcon.capslock-warning {
     icon-size: $scalable_icon_size;
     warning-color: $warning_color;
@@ -15,6 +17,6 @@ StEntry {
   }
 
   StLabel.hint-text {
-    margin-left: $base_margin * 2;
+    margin-left: 2px; /* 1px caret + 1px gap #9484 */
   }
 }
