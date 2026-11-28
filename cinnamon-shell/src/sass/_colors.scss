@@ -24,7 +24,7 @@ $link_color: if($variant=='light', darken($selected_bg_color, 10%), lighten($sel
 $warning_color: $yellow;
 $error_color: $red;
 $success_color: lighten($green, 5%);
-$destructive_color: if($variant=='light', $red, darken($red, 10%));
+$destructive_color: $red;
 $osd_destructive_color: $destructive_color;
 
 $osd_fg_color: #eeeeec;
